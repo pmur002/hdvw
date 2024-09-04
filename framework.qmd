@@ -1,0 +1,101 @@
+---
+title: A Framework for Effective Data Visualisations
+subtitle: With Examples in R
+author: Paul Murrell
+format: html
+---
+
+```{r}
+#| echo: false
+
+library(knitr)
+library(reshape2)
+library(ggplot2)
+library(ggsci)
+```
+
+```{r, include=FALSE}
+figbg <- "#F2F2F2"
+knitr::opts_chunk$set(dev='svg', 
+                      dev.args=list(bg=figbg),
+                      fig.width=8, fig.height=4,
+                      out.width="100%")
+## Set default colour palettes
+scale_colour_discrete <- function(...) {
+    scale_colour_npg(...)
+}
+options(ggplot2.continuous.colour="npg")
+## Set default line width
+update_geom_defaults("line", list(linewidth=1))
+## Set default theme
+theme_set(theme_bw())
+## Match the table odd row fill
+theme_update(plot.background=element_rect(colour=NA, 
+                                          fill=figbg),
+             panel.background=element_blank(),
+             panel.grid.minor=element_blank(),
+             panel.grid.major=element_blank(),
+             legend.background=element_blank())
+```
+
+```{r}
+#| echo: false
+crimeAge <- read.csv("Data/YouthCrime/crime-age.csv")
+crimeAgeSimple <- subset(crimeAge, age %in% c("14", "15", "16"))
+```
+
+# Introduction
+
+A data visualisation presents data values in a visual
+format.  In an effective data visualisation, this allows
+features of the data to be perceived very rapidly and without 
+conscious effort.
+For example, @tbl-crime shows data on the crime rate for
+youth offenders in New Zealand, for the ages 14 to 16, for 
+each year from 2011 to 2021.  With this purely text-based, tabular
+presentation of the data, it is difficult to answer the following 
+questions:
+
+> Does the crime rate decrease monotonically for all ages?
+
+> Is the crime rate for 15-year-olds
+  always greater than the rate for 14-year-olds and less than the rate 
+  for 16-year-olds?
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-crime
+#| tbl-cap: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021.
+
+crimeTable <- dcast(crimeAgeSimple[c("age", "year", "rate")],
+                    age ~ year)
+kable(crimeTable, digits=0)
+```
+
+By contrast, with a simple line 
+plot data visualisation like @fig-crime we can answer the questions
+easily and immediately.
+
+```{r}
+#| echo: false
+#| label: fig-crime
+#| fig-cap: A line plot of the number of youth offenders aged 14 to 16 from 2011 to 2021.
+ggplot(crimeAgeSimple) +
+    geom_line(aes(year, rate, colour=age)) +
+    theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
+          aspect.ratio=1)
+```
+
+# Scope
+
+
+# Sources of ideas
+
+`fosFiles/Courses/Warwick2024/warwick-masterclass/`
+
+`Files/Research/Leave/2024/Warwick/MasterClass/Session/README`
+
+`Files/Research/DataVis/Mappings/README`
+
+
