@@ -8,7 +8,7 @@
 
 <meta name="author" content="Paul Murrell">
 
-<title>A Framework for Effective Data Visualisations</title>
+<title>How to Decide What to Draw</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="framework_files/libs/clipboard/clipboard.min.js"></script>
@@ -38,15 +58,30 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope">Scope</a></li>
+  <li><a href="#technology" id="toc-technology" class="nav-link" data-scroll-target="#technology">Technology</a></li>
+  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology">Terminology</a></li>
+  <li><a href="#mappings" id="toc-mappings" class="nav-link" data-scroll-target="#mappings">Mappings</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">A Framework for Effective Data Visualisations</h1>
+<h1 class="title">How to Decide What to Draw</h1>
 <p class="subtitle lead">With Examples in R</p>
 </div>
 
@@ -72,25 +107,19 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>A data visualisation presents data values in a visual format. In an effective data visualisation, this allows features of the data to be perceived very rapidly and without conscious effort. For example, <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1</a> shows data on the crime rate for youth offenders in New Zealand, for the ages 14 to 16, for each year from 2011 to 2021. With this purely text-based, tabular presentation of the data, it is difficult to answer the following questions:</p>
-<blockquote class="blockquote">
-<p>Does the crime rate decrease monotonically for all ages?</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Is the crime rate for 15-year-olds always greater than the rate for 14-year-olds and less than the rate for 16-year-olds?</p>
-</blockquote>
+<p>A data visualisation presents data values in a visual format. In an effective data visualisation, this allows features of the data to be perceived very rapidly and without conscious effort. For example, <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1</a> shows data on the crime rate for youth offenders in New Zealand, for the ages 14 to 16, for each year from 2011 to 2021. With this purely text-based, tabular presentation of the data, it requires considerable effort and time to determine any trends in crime rates over time.</p>
 <div class="cell">
 <div id="tbl-crime" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-crime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021.
+Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021. It is difficult to perceive trends in the crime rates from this purely text-based, tabular presentation of the data.
 </figcaption>
 <div aria-describedby="tbl-crime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th style="text-align: left;">age</th>
+<th style="text-align: right;">age</th>
 <th style="text-align: right;">2011</th>
 <th style="text-align: right;">2012</th>
 <th style="text-align: right;">2013</th>
@@ -106,7 +135,7 @@ Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 t
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">14</td>
+<td style="text-align: right;">14</td>
 <td style="text-align: right;">583</td>
 <td style="text-align: right;">524</td>
 <td style="text-align: right;">446</td>
@@ -120,7 +149,7 @@ Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 t
 <td style="text-align: right;">219</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">15</td>
+<td style="text-align: right;">15</td>
 <td style="text-align: right;">712</td>
 <td style="text-align: right;">619</td>
 <td style="text-align: right;">528</td>
@@ -134,7 +163,7 @@ Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 t
 <td style="text-align: right;">246</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">16</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">810</td>
 <td style="text-align: right;">723</td>
 <td style="text-align: right;">615</td>
@@ -154,7 +183,7 @@ Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 t
 </figure>
 </div>
 </div>
-<p>By contrast, with a simple line plot data visualisation like <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a> we can answer the questions easily and immediately.</p>
+<p>By contrast, with a simple line plot data visualisation like <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a> we can perceive the trends in crime rates easily and immediately. It is also easy to perceive more detailed features like the fact that the trend in crime rates for 16-year-olds is not completely monotonic and the fact that the crime rate for 15-year-olds (the blue line) is always greater than the crime rate for 14-year-olds (the red line) and less than the crime rate for 16-year-olds (the green line).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-crime" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -163,24 +192,207 @@ Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 t
 <img src="framework_files/figure-html/fig-crime-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: A line plot of the number of youth offenders aged 14 to 16 from 2011 to 2021.
+Figure&nbsp;1: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. Detecting trends in the crime rates is very fast and easy with this data visualisation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>On the other hand, if we use a data visualisation like <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a>, detecting overall trends becomes more difficult and perceiving detailed changes in the crime rates is a lot harder. Not all data visualisations are equally effective.</p>
+<p>Furthermore, <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a> is far less effective if we are interested in a different question, for example, whether the <em>total</em> crime rate is completely monotonic. Does the <em>sum</em> of the red, blue, and green lines always decrease year on year? A single data visualisation cannot be effective for all possible questions.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-crime-heatmap" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-crime-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="framework_files/figure-html/fig-crime-heatmap-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Data visualisations, when used well, can be incredibly effective. The question is, how do we design a data visualisation and know that it is going to be effective? If we have designed a data visualisation that is not effective, how do we change it to make it more effective? This document describes a framework that allows us to make deliberate choices about how to present data visually.</p>
+<section id="scope" class="level2">
+<h2 class="anchored" data-anchor-id="scope">Scope</h2>
+<p>The focus of this document is <strong>static</strong> data visualisations for <strong>presentation</strong>. The assumption is that we have data values that contain some sort of structure and we want to produce a display that makes it easy and efficient for viewers to perceive that structure. Some of the information that we cover will also apply to interactive graphics and to exploratory graphics, but the specific requirements of those types of data visualisation will not be addressed here.</p>
+<p><strong>TODO:</strong> link to interactive graphics books like Cook &amp; Swayne and Theus and Unwin.</p>
+<p>This document is also focused on what the <strong>science of perception</strong> has to tell us about effective data visualisation. We will consider factors that influence how rapidly and how accurately information can be extracted from a data visualisation. We will not cover issues of ethics beyond a basic assumption that we want to faithfully represent the structure of the data.</p>
+<p><strong>TODO:</strong> link to Alberto Cairo at least. For resources on this important topic, see …</p>
+</section>
+<section id="technology" class="level2">
+<h2 class="anchored" data-anchor-id="technology">Technology</h2>
+<p>In order to produce a data visualisation, we must decide <strong>what</strong> to draw and we must know <strong>how</strong> to draw it. This document is focused on <strong>what</strong> to draw, and the framework that we describe is not tied to any particular technology. However, in order to make the information more useful and applicable, this document will provide demonstrations of <strong>how</strong> to draw data visualisations using the R language for statistical computing and graphics.</p>
+</section>
+<section id="terminology" class="level2">
+<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<p>Data visualisations come in a wide variety of forms (see <a href="#fig-3-plots" class="quarto-xref">Figure&nbsp;3</a>), with each form having its own name: scatter plots, line plots, bar plots, histograms, etc. There are also many different names for the different components of a data visualisation: lines, bars, points, axes, scales, legends, keys, titles, sub-titles, etc.</p>
+<div id="fig-3-plots" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/line-plot.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/bar-plot.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/donut-plot.svg" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Three examples of data visualisations: a line plot, a bar plot, and a donut chart.
+</figcaption>
+</figure>
+</div>
+<p>In this framework, we will reduce that complexity in two ways. First of all, we will not distinguish between different forms of data visualisation; scatter plots, bar plots, line plots, and histograms are all just <strong>data visualisations</strong>. Secondly, we will distinguish between only three core components of a data visualisation: <strong>data symbols</strong>, <strong>guides</strong>, and <strong>labels</strong>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<dl>
+<dt>Data symbols</dt>
+<dd>
+Data symbols are the geometric shapes that represent data values, for example, the lines in a line plot, the bars in a bar plot, and the segments of an annulus in a donut plot (see <a href="#fig-data-symbols" class="quarto-xref">Figure&nbsp;4</a>).
+</dd>
+</dl>
+<div id="fig-data-symbols" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-symbols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/line-plot-geom.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/bar-plot-geom.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/donut-plot-geom.svg" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-symbols-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Three examples of data symbols: a line, some bars, and segments of an annulus.
+</figcaption>
+</figure>
+</div>
+<dl>
+<dt>Guides</dt>
+<dd>
+The guides are the elements of a data visualisation that explain how data values are represented, for examples the axes on a line plot or bar plot and the legend on a donut plot (see <a href="#fig-guides" class="quarto-xref">Figure&nbsp;5</a>).
+</dd>
+</dl>
+<div id="fig-guides" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-guides-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/line-plot-guide.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/bar-plot-guide.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/donut-plot-guide.svg" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-guides-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Three examples of guides: axes, grid lines, and a legend.
+</figcaption>
+</figure>
+</div>
+<dl>
+<dt>Labels</dt>
+<dd>
+The labels are the text elements that provide context and background information about a data visualisation (e.g., titles and captions). Notice that <strong>not all text is a label</strong>.
+</dd>
+</dl>
+<div id="fig-labels" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/line-plot-label.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/bar-plot-label.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="Figures/donut-plot-label.svg" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Examples of labels: the titles and sub-titles on all three plots; the axis titles on the line plot and the bar plot; and the legend title on the donut plot.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="mappings" class="level2">
+<h2 class="anchored" data-anchor-id="mappings">Mappings</h2>
+<p>The process of creating a data visualisation may appear to be a complex process that involves many different decisions: What form of data visualisation should we use? How should we label the axes? What colours should we use? However, as much as possible, we are going to reduce the process of creating a data visualisation to a single main decision: What <strong>mappings</strong> should we use?</p>
+<p>Creating a data visualisation involves <strong>mapping</strong> data values to visual representations.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> For example, <a href="#fig-crime-2" class="quarto-xref">Figure&nbsp;7</a> shows the line plot of crime rates for different ages in New Zealand (this is a reproduction of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>). In this plot, the data values are <code>year</code>, crime <code>rate</code>, and <code>age</code> (see <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1</a>) and the visual representation is a set of coloured lines.</p>
+<p>We can describe the transformation from data values to visual representations in terms of a set of mappings:</p>
+<ul>
+<li><p>The <code>year</code> and <code>rate</code> values are mapped to the <strong>position</strong> of the lines (the x/y locations that the lines pass through). For example, the <code>year</code> 2011 and the <code>rate</code> 810 map to a position near the top-left corner of the plot; the start of the green line.</p></li>
+<li><p>The <code>age</code> values are mapped to the <strong>colour</strong> of the lines. For example, the <code>age</code> 16 maps to the colour green.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-crime-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-crime-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="framework_files/figure-html/fig-crime-2-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. This is a reproduction of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-crime-heatmap-2" class="quarto-xref">Figure&nbsp;8</a> shows a heatmap of the same data (a reproduction of <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a>). This data visualisation provides a different visual representation because it involves a different set of mappings:</p>
+<ul>
+<li><p>The <code>year</code> and <code>age</code> values are mapped to the <strong>position</strong> of the rectangles. For example, the <code>year</code> 2011 and the <code>age</code> 16 map to a position in the top-left corner of the plot; the white rectangle.</p></li>
+<li><p>The <code>rate</code> values are mapped to the <strong>colour</strong> of the rectangles. For example, the <code>rate</code> 810 maps to white, while lower <code>rate</code> values map to progressively darker shades of purple.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-crime-heatmap-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-crime-heatmap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="framework_files/figure-html/fig-crime-heatmap-2-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-heatmap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. This is a reproduction of <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a>.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="scope" class="level1">
-<h1>Scope</h1>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Data visualisations can be incredibly effective for presenting structure in data values. However, a data visualisation can only be effective for certain data values and for certain data structures.</p>
+<p>The goal of this document is to describe a framework that helps us to create <strong>effective data visualisations</strong>.</p>
+<p>The main decision that we have to address is what <strong>mappings</strong> we should use to transform data values into visual representations.</p>
+
 </section>
-<section id="sources-of-ideas" class="level1">
-<h1>Sources of ideas</h1>
-<p><code>fosFiles/Courses/Warwick2024/warwick-masterclass/</code></p>
-<p><code>Files/Research/Leave/2024/Warwick/MasterClass/Session/README</code></p>
-<p><code>Files/Research/DataVis/Mappings/README</code></p>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wilkinson2005" class="csl-entry" role="listitem">
+Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Second edition. New York: Springer.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Gathering axes and legends together under the generic label of “guides” comes from the Grammar of Graphics <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The idea of ``mapping’’ data values to visual representations also comes from the Grammar of Graphics <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

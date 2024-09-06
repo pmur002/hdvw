@@ -1,20 +1,26 @@
 ---
-title: A Framework for Effective Data Visualisations
+title: How to Decide What to Draw
 subtitle: With Examples in R
 author: Paul Murrell
+toc: true
+bibliography: framework.bib
 format: html
 ---
 
 ```{r}
 #| echo: false
-
+#| message: false
+library(dplyr)
 library(knitr)
 library(reshape2)
 library(ggplot2)
+library(scales)
+library(colorspace)
 library(ggsci)
 ```
 
-```{r, include=FALSE}
+```{r}
+#| echo: false
 figbg <- "#F2F2F2"
 knitr::opts_chunk$set(dev='svg', 
                       dev.args=list(bg=figbg),
@@ -24,7 +30,15 @@ knitr::opts_chunk$set(dev='svg',
 scale_colour_discrete <- function(...) {
     scale_colour_npg(...)
 }
-options(ggplot2.continuous.colour="npg")
+scale_fill_discrete <- function(...) {
+    scale_fill_npg(...)
+}
+scale_fill_ordinal <- function(...) {
+    scale_fill_brewer(palette="Purples", ...)
+}
+scale_fill_continuous <- function(...) {
+    scale_fill_distiller(palette="Purples", ...)
+}
 ## Set default line width
 update_geom_defaults("line", list(linewidth=1))
 ## Set default theme
@@ -40,7 +54,7 @@ theme_update(plot.background=element_rect(colour=NA,
 
 ```{r}
 #| echo: false
-crimeAge <- read.csv("Data/YouthCrime/crime-age.csv")
+source("youth-crime.R")
 crimeAgeSimple <- subset(crimeAge, age %in% c("14", "15", "16"))
 ```
 
@@ -53,20 +67,14 @@ conscious effort.
 For example, @tbl-crime shows data on the crime rate for
 youth offenders in New Zealand, for the ages 14 to 16, for 
 each year from 2011 to 2021.  With this purely text-based, tabular
-presentation of the data, it is difficult to answer the following 
-questions:
-
-> Does the crime rate decrease monotonically for all ages?
-
-> Is the crime rate for 15-year-olds
-  always greater than the rate for 14-year-olds and less than the rate 
-  for 16-year-olds?
+presentation of the data, it requires considerable effort
+and time to determine any trends in crime rates over time.
 
 ```{r}
 #| echo: false
 #| message: false
 #| label: tbl-crime
-#| tbl-cap: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021.
+#| tbl-cap: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021.  It is difficult to perceive trends in the crime rates from this purely text-based, tabular presentation of the data.
 
 crimeTable <- dcast(crimeAgeSimple[c("age", "year", "rate")],
                     age ~ year)
@@ -74,28 +82,446 @@ kable(crimeTable, digits=0)
 ```
 
 By contrast, with a simple line 
-plot data visualisation like @fig-crime we can answer the questions
-easily and immediately.
+plot data visualisation like @fig-crime we can perceive the trends
+in crime rates easily and immediately.
+It is also easy to perceive more detailed features like the fact that
+the trend in crime rates for 16-year-olds is not completely monotonic
+and the fact that
+the crime rate for 15-year-olds (the blue line) is always greater than
+the crime rate for 14-year-olds (the red line) 
+and less than the crime rate for 16-year-olds (the green line).
 
 ```{r}
 #| echo: false
 #| label: fig-crime
-#| fig-cap: A line plot of the number of youth offenders aged 14 to 16 from 2011 to 2021.
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  Detecting trends in the crime rates is very fast and easy with this data visualisation.
 ggplot(crimeAgeSimple) +
-    geom_line(aes(year, rate, colour=age)) +
+    geom_line(aes(year, rate, colour=ageFactor)) +
+    scale_colour_discrete(name="age") +
     theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
 ```
 
-# Scope
+On the other hand, if we use a data visualisation
+like @fig-crime-heatmap, detecting overall trends becomes more difficult and
+perceiving detailed changes in the crime rates is a lot harder.
+Not all data visualisations are equally effective.
 
+Furthermore, @fig-crime is far less effective if we are interested
+in a different question, for example, whether the *total* crime
+rate is completely monotonic.  Does the *sum* of the red, blue, and green
+lines always decrease year on year?
+A single data visualisation cannot be effective for all possible questions.
 
-# Sources of ideas
+```{r}
+#| echo: false
+#| label: fig-crime-heatmap
+#| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.
+ggplot(crimeAgeSimple) +
+    geom_tile(aes(year, age, fill=rate), colour=NA) +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_continuous(expand=expansion(0), breaks=14:16) +
+    theme(aspect.ratio=1)
+```
 
-`fosFiles/Courses/Warwick2024/warwick-masterclass/`
+Data visualisations, when used well, can be incredibly effective.
+The question is, how do we design a data visualisation and know that
+it is going to be effective?  If we have designed a data visualisation
+that is not effective, how do we change it to make it more effective?
+This document describes a framework that allows us to 
+make deliberate choices about how to present data visually.
 
-`Files/Research/Leave/2024/Warwick/MasterClass/Session/README`
+## Scope
 
-`Files/Research/DataVis/Mappings/README`
+The focus of this document is **static** data visualisations for
+**presentation**.  The assumption is that we have data values that
+contain some sort of structure and we want to produce a display
+that makes it easy and efficient for viewers to perceive that structure.
+Some of the information that we cover will also
+apply to interactive graphics and to exploratory graphics, but the
+specific requirements of those types of data visualisation will not be 
+addressed here.
 
+**TODO:** 
+link to interactive graphics books like Cook & Swayne and 
+Theus and Unwin.
 
+This document is also focused on what the **science of perception**
+has to tell us about effective data visualisation.
+We will consider factors that influence how rapidly and how
+accurately information can be extracted from a data visualisation.
+We will not cover issues of ethics
+beyond a basic assumption that we want to faithfully represent
+the structure of the data.
+
+**TODO:** 
+link to Alberto Cairo at least.
+For resources on this important topic, see ...
+
+## Technology
+
+In order to produce a data visualisation, we must decide **what** to draw
+and we must know **how** to draw it.
+This document is focused on **what** to draw, and the framework that
+we describe is not tied to any particular technology.
+However, in order to make the information more useful and applicable,
+this document will provide demonstrations of **how** to draw
+data visualisations using the R language for statistical computing
+and graphics.
+
+## Terminology
+
+Data visualisations come in a wide variety of forms (see @fig-3-plots),
+with each form having its own name:  scatter plots, line plots, bar plots,
+histograms, etc.
+There are also many different names for the different components 
+of a data visualisation:  lines, bars, points, 
+axes, scales, legends, keys, titles, sub-titles, etc.
+
+```{r}
+#| echo: false
+title <- "Crime per Year"
+subtitle <- "Children aged 14-16"
+scatter <- ggplot(crimeYear) + 
+    geom_line(aes(yearDate, total), linewidth=.5) +
+    labs(title=title, subtitle=subtitle) +
+    scale_x_date(name="year") +
+    theme(plot.subtitle=element_text(size=8))
+bar <- ggplot(crimeYear) + 
+    geom_col(aes(yearDate, total), width=200) +
+    labs(title=title, subtitle=subtitle) +
+    scale_x_date(name="year") +
+    theme(plot.subtitle=element_text(size=8))
+title2 <- "Crime by Severity"
+n <- nrow(crimeLevelTotal)
+crimeLevelTotal$xmin <- c(0, cumsum(crimeLevelTotal$total)[-n])
+crimeLevelTotal$xmax <- cumsum(crimeLevelTotal$total)
+crimeLevelTotal$ymin <- .5
+crimeLevelTotal$ymax <- 1
+pie <- ggplot(crimeLevelTotal) + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax, fill=level), 
+              colour="black", linewidth=.1) +
+    coord_polar() +
+    scale_y_continuous(limits=c(0, 1)) +
+    scale_fill_grey() +
+    labs(title=title2, subtitle=subtitle) +
+    theme(panel.border=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          plot.subtitle=element_text(size=8))
+```
+
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot.svg", bg=figbg, width=3, height=3)
+print(scatter, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot.svg", bg=figbg, width=3, height=3)
+print(bar, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot.svg", bg=figbg, width=3, height=3)
+print(pie, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-3-plots layout-ncol=3}
+
+![](Figures/line-plot.svg)
+
+![](Figures/bar-plot.svg)
+
+![](Figures/donut-plot.svg)
+
+Three examples of data visualisations: a
+line plot, a bar plot, and a donut chart.
+:::
+
+In this framework, we will reduce that complexity in two ways.
+First of all, we will not distinguish between different forms
+of data visualisation;  scatter plots, bar plots, line plots, and
+histograms are all just **data visualisations**.
+Secondly, we will distinguish
+between only three 
+core components of a data visualisation: **data symbols**,
+**guides**, and **labels**.[^terminology]
+
+[^terminology]:  
+  Gathering axes and legends together under the 
+  generic label of "guides" comes from the Grammar of Graphics [@wilkinson2005].
+
+Data symbols
+: Data symbols are the geometric shapes that represent data values,
+for example, the lines in a line plot, the bars in a bar plot, and the
+segments of an annulus in a donut plot (see @fig-data-symbols).
+
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+highlight <- "purple"
+scatterGeom <- scatter +
+    geom_line(aes(yearDate, total), linewidth=1, colour=highlight) +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"))
+barGeom <- bar + 
+    geom_col(aes(yearDate, total), fill=highlight, width=250) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.y=element_line(colour="grey80"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"))
+pieGeom <- pie + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
+              fill=highlight, colour="black", linewidth=.1) +
+    scale_fill_manual(values=grey(.6 + .4*1:n/(n + 1))) +
+    theme(plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          legend.text=element_text(colour="grey"),
+          legend.title=element_text(colour="grey"))
+```
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot-geom.svg", bg=figbg, width=3, height=3)
+print(scatterGeom, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot-geom.svg", bg=figbg, width=3, height=3)
+print(barGeom, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot-geom.svg", bg=figbg, width=3, height=3)
+print(pieGeom, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-data-symbols layout-ncol=3}
+
+![](Figures/line-plot-geom.svg)
+
+![](Figures/bar-plot-geom.svg)
+
+![](Figures/donut-plot-geom.svg)
+
+Three examples of data symbols: a line, some bars, and segments of an annulus.
+:::
+
+Guides
+: The guides are the elements of a data visualisation that explain
+how data values are represented, for examples the axes on a line plot
+or bar plot and the legend on a donut plot (see @fig-guides).
+
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+scatterGuide <- scatter +
+    geom_line(aes(yearDate, total), linewidth=1, colour="grey90") +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.line=element_line(colour=highlight),
+          axis.ticks=element_line(colour=highlight),
+          axis.text=element_text(colour=highlight),          
+          axis.title=element_text(colour="grey"))
+barGuide <- bar + 
+    geom_col(aes(yearDate, total), fill="grey90", col="grey90", width=200) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.y=element_line(colour=highlight),
+          axis.line=element_line(colour=highlight),
+          axis.ticks=element_line(colour=highlight),
+          axis.text=element_text(colour=highlight),          
+          axis.title=element_text(colour="grey"))
+pieGuide <- pie + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
+              fill="grey90", colour="grey", linewidth=.1) +
+    scale_fill_manual(values=colorRampPalette(c(highlight, lighten(highlight, .5)))(n)) +
+    theme(plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          legend.text=element_text(colour=highlight),
+          legend.title=element_text(colour="grey"))
+```
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot-guide.svg", bg=figbg, width=3, height=3)
+print(scatterGuide, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot-guide.svg", bg=figbg, width=3, height=3)
+print(barGuide, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot-guide.svg", bg=figbg, width=3, height=3)
+print(pieGuide, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-guides layout-ncol=3}
+
+![](Figures/line-plot-guide.svg)
+
+![](Figures/bar-plot-guide.svg)
+
+![](Figures/donut-plot-guide.svg)
+
+Three examples of guides: axes, grid lines, and a legend.
+:::
+
+Labels
+: The labels are the 
+text elements that provide context and background information
+about a data visualisation (e.g., titles and captions).
+Notice that **not all text is a label**.
+
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+scatterLabel <- scatter +
+    geom_line(aes(yearDate, total), linewidth=1, colour="grey90") +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),          
+          axis.title=element_text(colour=highlight, face="bold"))
+barLabel <- bar + 
+    geom_col(aes(yearDate, total), fill="grey90", col="grey90", width=200) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          panel.grid.major.y=element_line(colour="grey80"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),          
+          axis.title=element_text(colour=highlight, face="bold"))
+pieLabel <- pie + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
+              fill="grey90", colour="grey", linewidth=.1) +
+    scale_fill_manual(values=grey(.6 + .4*1:n/(n + 1))) +
+    theme(plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          legend.text=element_text(colour="grey"),
+          legend.title=element_text(colour=highlight, face="bold"))
+```
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot-label.svg", bg=figbg, width=3, height=3)
+print(scatterLabel, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot-label.svg", bg=figbg, width=3, height=3)
+print(barLabel, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot-label.svg", bg=figbg, width=3, height=3)
+print(pieLabel, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-labels layout-ncol=3}
+
+![](Figures/line-plot-label.svg)
+
+![](Figures/bar-plot-label.svg)
+
+![](Figures/donut-plot-label.svg)
+
+Examples of labels: the titles and sub-titles on all three plots;
+the axis titles on the line plot and the bar plot; and the legend
+title on the donut plot.
+:::
+
+## Mappings
+
+The process of creating a data visualisation may appear to be
+a complex process that involves many different decisions: 
+What form of data visualisation should we use?  How should we label
+the axes?  What colours should we use?
+However, as much as possible, we are going to reduce the process 
+of creating a data visualisation to a single
+main decision:  What **mappings** should we use?
+
+Creating a data visualisation involves **mapping** data values
+to visual representations.[^mappings]
+For example, @fig-crime-2 shows the line plot of crime rates for
+different ages in New Zealand (this is a reproduction of @fig-crime).
+In this plot, the data values are `year`, crime `rate`, and `age` 
+(see @tbl-crime) and
+the visual representation is a set of coloured lines.
+
+[^mappings]: 
+  The idea of ``mapping'' data values to visual representations
+  also comes from the Grammar of Graphics [@wilkinson2005].
+
+We can describe the transformation from data values to visual
+representations in terms of a set of mappings:
+
+* The `year` and `rate` values are mapped to the **position** of the
+  lines (the x/y locations that the lines pass through).
+  For example, the `year` 2011 and the `rate` 810 map to a position
+  near the top-left corner of the plot; the start
+  of the green line.
+
+* The `age` values are mapped to the **colour** of the lines.
+  For example, the `age` 16 maps to the colour green.
+
+```{r}
+#| echo: false
+#| label: fig-crime-2
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime.
+<<fig-crime>>
+```
+
+@fig-crime-heatmap-2 shows a heatmap of the same data (a reproduction
+of @fig-crime-heatmap).  This data visualisation provides a different
+visual representation because it involves a different
+set of mappings:
+
+* The `year` and `age` values are mapped to the **position** of the rectangles.
+  For example, the `year` 2011 and the `age` 16 map to a position
+  in the top-left corner of the plot;  the white rectangle.
+
+* The `rate` values are mapped to the **colour** of the rectangles.
+  For example, the `rate` 810 maps to white, while lower `rate` values
+  map to progressively darker shades of purple.
+
+```{r}
+#| echo: false
+#| label: fig-crime-heatmap-2
+#| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime-heatmap.
+<<fig-crime-heatmap>>
+```
+
+## Summary 
+
+Data visualisations can be incredibly effective for presenting
+structure in data values.  However, a data visualisation
+can only be effective for certain data values and for certain data structures.
+
+The goal of this document is to describe a framework that helps
+us to create **effective data visualisations**.  
+
+The main decision that we have to address is what **mappings**
+we should use to transform data values into visual 
+representations.
