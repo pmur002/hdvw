@@ -13,10 +13,6 @@ library(ggsci)
 ## -----------------------------------------------------------------------------
 #| echo: false
 figbg <- "#F2F2F2"
-knitr::opts_chunk$set(dev='svg', 
-                      dev.args=list(bg=figbg),
-                      fig.width=8, fig.height=4,
-                      out.width="100%")
 ## Set default colour palettes
 scale_colour_discrete <- function(...) {
     scale_colour_npg(...)
@@ -47,6 +43,8 @@ theme_update(plot.background=element_rect(colour=NA,
 #| echo: false
 source("youth-crime.R")
 crimeAgeSimple <- subset(crimeAge, age %in% c("14", "15", "16"))
+
+
 
 
 ## -----------------------------------------------------------------------------
