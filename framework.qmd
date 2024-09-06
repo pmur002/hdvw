@@ -98,10 +98,18 @@ and less than the crime rate for 16-year-olds (the green line).
 
 ```{r}
 #| echo: false
+#| label: crime-age-line
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor))
+```
+
+```{r}
+#| echo: false
 #| label: fig-crime
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  Detecting trends in the crime rates is very fast and easy with this data visualisation.
-ggplot(crimeAgeSimple) +
-    geom_line(aes(year, rate, colour=ageFactor)) +
+gg <- 
+<<crime-age-line>>
+gg +
     scale_colour_discrete(name="age") +
     theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
@@ -162,17 +170,6 @@ the structure of the data.
 **TODO:** 
 link to Alberto Cairo at least.
 For resources on this important topic, see ...
-
-## Technology
-
-In order to produce a data visualisation, we must decide **what** to draw
-and we must know **how** to draw it.
-This document is focused on **what** to draw, and the framework that
-we describe is not tied to any particular technology.
-However, in order to make the information more useful and applicable,
-this document will provide demonstrations of **how** to draw
-data visualisations using the R language for statistical computing
-and graphics.
 
 ## Terminology
 
@@ -517,6 +514,39 @@ set of mappings:
 #| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime-heatmap.
 <<fig-crime-heatmap>>
 ```
+
+## Technology
+
+In order to produce a data visualisation, we must decide **what** to draw
+and we must know **how** to draw it.
+This document is focused on **what** to draw, and the framework that
+we describe is not tied to any particular technology.
+However, in order to make the information more useful and applicable,
+this document will provide demonstrations of **how** to draw
+data visualisations using the R language for statistical computing
+and graphics and, in particular, the {ggplot2} package for R.
+
+For example, the line plot in @fig-crime-2 was created from an
+R data frame called `crimeAgeSimple`, which is shown below.
+
+```{r}
+head(crimeAgeSimple)
+```
+
+The following code creates the line plot;  we can see the mapping
+of `year` to `x` positions, `rate` to `y` positions, and 
+`age` to `colour`.
+
+```{r}
+<<crime-age-line>>
+```
+
+In order to keep the code simple and easier to follow,
+the code above does not produce exactly the same result as
+@fig-crime.  This approach will be taken for many of the code
+examples that are shown throughout this document.
+However, the complete code behind all of the figures and diagrams in
+this document is also available in the file [`"framework.R"`](framework.R).
 
 ## Summary 
 

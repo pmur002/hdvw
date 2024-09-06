@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -69,9 +103,9 @@ div.csl-indent {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope">Scope</a></li>
-  <li><a href="#technology" id="toc-technology" class="nav-link" data-scroll-target="#technology">Technology</a></li>
   <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology">Terminology</a></li>
   <li><a href="#mappings" id="toc-mappings" class="nav-link" data-scroll-target="#mappings">Mappings</a></li>
+  <li><a href="#technology" id="toc-technology" class="nav-link" data-scroll-target="#technology">Technology</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
   </ul>
@@ -186,6 +220,15 @@ Table&nbsp;1: A table of the number of youth offenders aged 14 to 16 from 2011 t
 <p>By contrast, with a simple line plot data visualisation like <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a> we can perceive the trends in crime rates easily and immediately. It is also easy to perceive more detailed features like the fact that the trend in crime rates for 16-year-olds is not completely monotonic and the fact that the crime rate for 15-year-olds (the blue line) is always greater than the crime rate for 14-year-olds (the red line) and less than the crime rate for 16-year-olds (the green line).</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="framework_files/figure-html/crime-age-line-1.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
 <div id="fig-crime" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-crime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -221,10 +264,6 @@ Figure&nbsp;2: A heatmap of the crime rate amongst youth offenders aged 14 to 16
 <p><strong>TODO:</strong> link to interactive graphics books like Cook &amp; Swayne and Theus and Unwin.</p>
 <p>This document is also focused on what the <strong>science of perception</strong> has to tell us about effective data visualisation. We will consider factors that influence how rapidly and how accurately information can be extracted from a data visualisation. We will not cover issues of ethics beyond a basic assumption that we want to faithfully represent the structure of the data.</p>
 <p><strong>TODO:</strong> link to Alberto Cairo at least. For resources on this important topic, see …</p>
-</section>
-<section id="technology" class="level2">
-<h2 class="anchored" data-anchor-id="technology">Technology</h2>
-<p>In order to produce a data visualisation, we must decide <strong>what</strong> to draw and we must know <strong>how</strong> to draw it. This document is focused on <strong>what</strong> to draw, and the framework that we describe is not tied to any particular technology. However, in order to make the information more useful and applicable, this document will provide demonstrations of <strong>how</strong> to draw data visualisations using the R language for statistical computing and graphics.</p>
 </section>
 <section id="terminology" class="level2">
 <h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
@@ -371,6 +410,36 @@ Figure&nbsp;8: A heatmap of the crime rate amongst youth offenders aged 14 to 16
 </div>
 </div>
 </div>
+</section>
+<section id="technology" class="level2">
+<h2 class="anchored" data-anchor-id="technology">Technology</h2>
+<p>In order to produce a data visualisation, we must decide <strong>what</strong> to draw and we must know <strong>how</strong> to draw it. This document is focused on <strong>what</strong> to draw, and the framework that we describe is not tied to any particular technology. However, in order to make the information more useful and applicable, this document will provide demonstrations of <strong>how</strong> to draw data visualisations using the R language for statistical computing and graphics and, in particular, the {ggplot2} package for R.</p>
+<p>For example, the line plot in <a href="#fig-crime-2" class="quarto-xref">Figure&nbsp;7</a> was created from an R data frame called <code>crimeAgeSimple</code>, which is shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crimeAgeSimple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age year count   pop     rate ageFactor   yearDate
+1  14 2011  3571 61300 582.5449        14 2011-06-30
+2  15 2011  4442 62350 712.4298        15 2011-06-30
+3  16 2011  5005 61800 809.8706        16 2011-06-30
+6  14 2012  3190 60880 523.9816        14 2012-06-30
+7  15 2012  3813 61640 618.5918        15 2012-06-30
+8  16 2012  4542 62780 723.4788        16 2012-06-30</code></pre>
+</div>
+</div>
+<p>The following code creates the line plot; we can see the mapping of <code>year</code> to <code>x</code> positions, <code>rate</code> to <code>y</code> positions, and <code>age</code> to <code>colour</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(crimeAgeSimple) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>rate, <span class="at">colour=</span>ageFactor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="framework_files/figure-html/unnamed-chunk-20-1.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to keep the code simple and easier to follow, the code above does not produce exactly the same result as <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>. This approach will be taken for many of the code examples that are shown throughout this document. However, the complete code behind all of the figures and diagrams in this document is also available in the file <a href="framework.R"><code>"framework.R"</code></a>.</p>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>

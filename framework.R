@@ -60,10 +60,19 @@ kable(crimeTable, digits=0)
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: crime-age-line
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-crime
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  Detecting trends in the crime rates is very fast and easy with this data visualisation.
+gg <- 
 ggplot(crimeAgeSimple) +
-    geom_line(aes(year, rate, colour=ageFactor)) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor))
+gg +
     scale_colour_discrete(name="age") +
     theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
@@ -282,8 +291,10 @@ dev.off()
 #| echo: false
 #| label: fig-crime-2
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime.
+gg <- 
 ggplot(crimeAgeSimple) +
-    geom_line(aes(year, rate, colour=ageFactor)) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor))
+gg +
     scale_colour_discrete(name="age") +
     theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
@@ -298,4 +309,13 @@ ggplot(crimeAgeSimple) +
     scale_x_continuous(expand=expansion(0)) +
     scale_y_continuous(expand=expansion(0), breaks=14:16) +
     theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+head(crimeAgeSimple)
+
+
+## -----------------------------------------------------------------------------
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor))
 
