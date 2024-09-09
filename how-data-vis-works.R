@@ -61,6 +61,7 @@ kable(crimeTable, digits=0)
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: crime-age-line
+#| output: false
 ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor))
 
@@ -141,7 +142,7 @@ dev.off()
 #| echo: false
 #| results: hide
 #| message: false
-highlight <- "purple"
+highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 scatterGeom <- scatter +
     geom_line(aes(yearDate, total), linewidth=1, colour=highlight) +
     theme(panel.border=element_rect(colour="grey"),
@@ -312,10 +313,66 @@ ggplot(crimeAgeSimple) +
 
 
 ## -----------------------------------------------------------------------------
-head(crimeAgeSimple)
+#| echo: false
+#| label: fig-bar
+#| fig-cap: A bar plot of number of crimes for different levels of crime. The data symbols in this plot are the bars (highlighted in purple).
+ggplot(crimeLevelTotal) + 
+    geom_col(aes(x=total, y=level), fill=highlight) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.x=element_line(colour="grey80"),
+          panel.grid.minor.x=element_blank(),
+          panel.grid.major.y=element_blank(),
+          panel.grid.minor.y=element_blank(),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
-ggplot(crimeAgeSimple) +
-    geom_line(aes(x=year, y=rate, colour=ageFactor))
+#| echo: false
+#| label: fig-length
+#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+ggplot(crimeLevelTotal) + 
+    geom_col(aes(x=total, y=level), fill="grey") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    geom_segment(aes(xend=total, y=level, yend=level), x=0, 
+                 color=highlight, linewidth=1,
+                 arrow=arrow(angle=15, length=unit(3, "mm"), ends="both")) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.x=element_line(colour="grey80"),
+          panel.grid.minor.x=element_blank(),
+          panel.grid.major.y=element_blank(),
+          panel.grid.minor.y=element_blank(),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-position
+#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `level`s of crime, have been mapped to the **positions** of the bars (the purple dots).
+ggplot(crimeLevelTotal) + 
+    geom_col(aes(x=total, y=level), fill="grey") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    geom_point(aes(y=level), x=0, color=highlight, size=3) +
+    coord_cartesian(clip="off") +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.x=element_line(colour="grey80"),
+          panel.grid.minor.x=element_blank(),
+          panel.grid.major.y=element_blank(),
+          panel.grid.minor.y=element_blank(),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
 

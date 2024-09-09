@@ -66,13 +66,13 @@ knitr::opts_chunk$set(dev='svg',
 
 A data visualisation presents data values in a visual
 format.  In an effective data visualisation, this allows
-features of the data to be perceived very rapidly and without 
+properties of the data to be perceived very rapidly and without 
 conscious effort.
 For example, @tbl-crime shows data on the crime rate for
 youth offenders in New Zealand, for the ages 14 to 16, for 
 each year from 2011 to 2021.  With this purely text-based, tabular
 presentation of the data, it requires considerable effort
-and time to determine any trends in crime rates over time.
+and time to determine any trends in the crime rates.
 
 ```{r}
 #| echo: false
@@ -98,6 +98,7 @@ and less than the crime rate for 16-year-olds (the green line).
 ```{r}
 #| echo: false
 #| label: crime-age-line
+#| output: false
 ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor))
 ```
@@ -116,14 +117,8 @@ gg +
 
 On the other hand, if we use a data visualisation
 like @fig-crime-heatmap, detecting overall trends becomes more difficult and
-perceiving detailed changes in the crime rates is a lot harder.
+perceiving detailed changes in the crime rates is very much harder.
 Not all data visualisations are equally effective.
-
-Furthermore, @fig-crime is far less effective if we are interested
-in a different question, for example, whether the *total* crime
-rate is completely monotonic.  Does the *sum* of the red, blue, and green
-lines always decrease year on year?
-A single data visualisation cannot be effective for all possible questions.
 
 ```{r}
 #| echo: false
@@ -136,35 +131,56 @@ ggplot(crimeAgeSimple) +
     theme(aspect.ratio=1)
 ```
 
-Data visualisations, when used well, can be incredibly effective.
-The question is, how do we design a data visualisation and know that
-it is going to be effective?  If we have designed a data visualisation
-that is not effective, how do we change it to make it more effective?
-This document describes a framework that allows us to 
-make deliberate choices about how to present data visually.
+Furthermore, although @fig-crime is very effective for the questions
+that we have considered so far, it is far less effective if we are interested
+in a different question, for example, whether the *total* crime
+rate is completely monotonic.  Does the *sum* of the red, blue, and green
+lines always decrease year on year?
+A single data visualisation cannot be effective for all possible questions.
+
+Now suppose we are interested in what the *exact* crime rate was 
+for 16-year-olds in 2011.  Neither @fig-crime nor @fig-crime-heatmap is
+the best option for answering this quesion.  The best option in this
+case is actually @tbl-crime. 
+
+What makes a data visualisation effective?
+Why are some data visualisations more effective than others?
+The purpose of this document is to provide explanations for
+why, when, and how data visualisation works.  
+
+Understanding how data visualisation works will enable us to:
+
+* Critically analyse data visualisations.
+* Decide which data visualisations to use.
+* Justify our choice of data visualisation.
+* Improve the effectiveness of our data visualisations.
 
 ## Scope
 
 The focus of this document is **static** data visualisations for
-**presentation**.  The assumption is that we have data values that
-contain some sort of structure and we want to produce a display
-that makes it easy and efficient for viewers to perceive that structure.
+**presentation**.  The assumption is that our data values have 
+an interesting property and we want to produce a display
+that makes it easy and efficient for viewers to perceive that property.
 Some of the information that we cover will also
 apply to interactive graphics and to exploratory graphics, but the
 specific requirements of those types of data visualisation will not be 
-addressed here.
+addressed.
 
 **TODO:** 
 link to interactive graphics books like Cook & Swayne and 
 Theus and Unwin.
 
-This document is also focused on what the **science of perception**
+This document is also focused on what **vision science**
 has to tell us about effective data visualisation.
 We will consider factors that influence how rapidly and how
 accurately information can be extracted from a data visualisation.
-We will not cover issues of ethics
+This will include findings from a broad range of research, encompassing
+Statistics, Computer Science, and Psychology.
+However, this document does not cover all fields of research
+that impact on data visualisation.
+We will not, for example, go into the ethical use of data visualisation,
 beyond a basic assumption that we want to faithfully represent
-the structure of the data.
+the properties of the data.
 
 **TODO:** 
 link to Alberto Cairo at least.
@@ -239,7 +255,7 @@ Three examples of data visualisations: a
 line plot, a bar plot, and a donut chart.
 :::
 
-In this framework, we will reduce that complexity in two ways.
+In this document, we will reduce that complexity in two ways.
 First of all, we will not distinguish between different forms
 of data visualisation;  scatter plots, bar plots, line plots, and
 histograms are all just **data visualisations**.
@@ -256,12 +272,13 @@ Data symbols
 : Data symbols are the geometric shapes that represent data values,
 for example, the lines in a line plot, the bars in a bar plot, and the
 segments of an annulus in a donut plot (see @fig-data-symbols).
+We will spend a lot of time looking at how data symbols work.
 
 ```{r}
 #| echo: false
 #| results: hide
 #| message: false
-highlight <- "purple"
+highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 scatterGeom <- scatter +
     geom_line(aes(yearDate, total), linewidth=1, colour=highlight) +
     theme(panel.border=element_rect(colour="grey"),
@@ -319,9 +336,10 @@ Three examples of data symbols: a line, some bars, and segments of an annulus.
 :::
 
 Guides
-: The guides are the elements of a data visualisation that explain
+: Guides are the elements of a data visualisation that explain
 how data values are represented, for examples the axes on a line plot
 or bar plot and the legend on a donut plot (see @fig-guides).
+We will see later that guides have a lot in common with data symbols.
 
 ```{r}
 #| echo: false
@@ -386,10 +404,12 @@ Three examples of guides: axes, grid lines, and a legend.
 :::
 
 Labels
-: The labels are the 
+: Labels are the 
 text elements that provide context and background information
 about a data visualisation (e.g., titles and captions).
-Notice that **not all text is a label**.
+Labels may also guide the viewer to the important properties of 
+the data.
+Notice that **not all text elements are labels**.
 
 ```{r}
 #| echo: false
@@ -455,16 +475,14 @@ title on the donut plot.
 
 ## Mappings
 
-The process of creating a data visualisation may appear to be
-a complex process that involves many different decisions: 
-What form of data visualisation should we use?  How should we label
-the axes?  What colours should we use?
-However, as much as possible, we are going to reduce the process 
-of creating a data visualisation to a single
-main decision:  What **mappings** should we use?
+Although we have reduced a data visualisation to just a set of data symbols, 
+guides, and labels, there are still many possible variations.
+Which data symbols have been used?  How have 
+the axes been labelled?  What colours have been used?
+As much as possible, we are going to further reduce the design
+of a data visualisation to a single question:
+What **mappings** have been used?[^mappings]
 
-Creating a data visualisation involves **mapping** data values
-to visual representations.[^mappings]
 For example, @fig-crime-2 shows the line plot of crime rates for
 different ages in New Zealand (this is a reproduction of @fig-crime).
 In this plot, the data values are `year`, crime `rate`, and `age` 
@@ -481,8 +499,8 @@ representations in terms of a set of mappings:
 * The `year` and `rate` values are mapped to the **position** of the
   lines (the x/y locations that the lines pass through).
   For example, the `year` 2011 and the `rate` 810 map to a position
-  near the top-left corner of the plot; the start
-  of the green line.
+  near the top-left corner of the plot, which provides the starting
+  point for the green line.
 
 * The `age` values are mapped to the **colour** of the lines.
   For example, the `age` 16 maps to the colour green.
@@ -501,7 +519,8 @@ set of mappings:
 
 * The `year` and `age` values are mapped to the **position** of the rectangles.
   For example, the `year` 2011 and the `age` 16 map to a position
-  in the top-left corner of the plot;  the white rectangle.
+  in the top-left corner of the plot, which provides the location
+  of the white rectangle.
 
 * The `rate` values are mapped to the **colour** of the rectangles.
   For example, the `rate` 810 maps to white, while lower `rate` values
@@ -514,48 +533,164 @@ set of mappings:
 <<fig-crime-heatmap>>
 ```
 
-## Technology
+We will spend a lot of time looking at different mappings from data values
+to data symbols (@fig-mappings).  Understanding why some
+mappings work better than others will help us to understand why
+some data visualisations are more effective than others.
 
-In order to produce a data visualisation, we must decide **what** to draw
-and we must know **how** to draw it.
-This document is focused on **what** to draw, and the framework that
-we describe is not tied to any particular technology.
-However, in order to make the information more useful and applicable,
-this document will provide demonstrations of **how** to draw
-data visualisations using the R language for statistical computing
-and graphics and, in particular, the {ggplot2} package for R.
+::: {#fig-mappings}
 
-For example, the line plot in @fig-crime-2 was created from an
-R data frame called `crimeAgeSimple`, which is shown below.
+![](Diagrams/data-sym.png)
 
-```{r}
-head(crimeAgeSimple)
-```
-
-The following code creates the line plot;  we can see the mapping
-of `year` to `x` positions, `rate` to `y` positions, and 
-`age` to `colour`.
-
-```{r}
-<<crime-age-line>>
-```
-
-In order to keep the code simple and easier to follow,
-the code above does not produce exactly the same result as
-@fig-crime.  This approach will be taken for many of the code
-examples that are shown throughout this document.
-However, the complete code behind all of the figures and diagrams in
-this document is also available in the file [`"framework.R"`](framework.R).
+A data visualisation is largely defined by the **mappings** that it uses
+to transform **data values** into **data symbols**.
+:::
 
 ## Summary 
 
 Data visualisations can be incredibly effective for presenting
-structure in data values.  However, a data visualisation
+important properties of data values.  However, any one data visualisation
 can only be effective for certain data values and for certain data structures.
 
-The goal of this document is to describe a framework that helps
-us to create **effective data visualisations**.  
+The goal of this document is to explain why some data visualisations
+are more effective than others;  how data visualisation works. 
 
-The main decision that we have to address is what **mappings**
-we should use to transform data values into visual 
-representations.
+The important elements of a data visualisation are **data symbols**,
+which are visual representations of the data values, **guides**, 
+which explain how data values
+are transformed to data symbols, and **labels**, which provide
+context and guidance.
+
+We can characterise a data visualisation in terms of the **mappings**
+that it uses to transform data values into data symbols.
+
+# Mapping Data Values to Visual Features
+
+We will begin by considering data visualisations with
+the simplest sort of mapping:
+each data value is mapped to a **visual feature** of a data symbol
+(@fig-visual-feature).
+
+::: {#fig-visual-feature layout-ncol=2}
+
+![](Diagrams/data-vis.png)
+
+![](Mappings/mapping-1-1-1-1.png)
+
+A simple data visualisation maps each data value to a **visual feature**
+of a data symbol.  Each data value (`a`) is mapped to a visual
+feature (`x`) of a single data symbol.
+:::
+
+## Visual features
+
+Consider the bar plot in @fig-bar, which shows the `total` number of
+crimes for different `level`s of crime.  The data symbols in this plot
+are a set of rectangles or bars (highlighted in purple).
+However, the important visual feature of the rectangles is their
+**length**;  the thickness of the bars does not relate to the data 
+values at all (see @fig-length).
+The `total` number of crimes for each level of crime
+is represented by the length of a rectangle.  Each data value
+is mapped to the length of one rectangle.
+
+```{r}
+#| echo: false
+#| label: fig-bar
+#| fig-cap: A bar plot of number of crimes for different levels of crime. The data symbols in this plot are the bars (highlighted in purple).
+ggplot(crimeLevelTotal) + 
+    geom_col(aes(x=total, y=level), fill=highlight) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.x=element_line(colour="grey80"),
+          panel.grid.minor.x=element_blank(),
+          panel.grid.major.y=element_blank(),
+          panel.grid.minor.y=element_blank(),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
+```
+
+```{r}
+#| echo: false
+#| label: fig-length
+#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+ggplot(crimeLevelTotal) + 
+    geom_col(aes(x=total, y=level), fill="grey") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    geom_segment(aes(xend=total, y=level, yend=level), x=0, 
+                 color=highlight, linewidth=1,
+                 arrow=arrow(angle=15, length=unit(3, "mm"), ends="both")) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.x=element_line(colour="grey80"),
+          panel.grid.minor.x=element_blank(),
+          panel.grid.major.y=element_blank(),
+          panel.grid.minor.y=element_blank(),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
+```
+
+There is another mapping being used in @fig-bar:
+The crime `level` is mapped to the vertical **positions** of the bars
+(see @fig-position).  Each `level` value is mapped to the 
+vertical position of one rectangle.
+
+```{r}
+#| echo: false
+#| label: fig-position
+#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `level`s of crime, have been mapped to the **positions** of the bars (the purple dots).
+ggplot(crimeLevelTotal) + 
+    geom_col(aes(x=total, y=level), fill="grey") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    geom_point(aes(y=level), x=0, color=highlight, size=3) +
+    coord_cartesian(clip="off") +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.x=element_line(colour="grey80"),
+          panel.grid.minor.x=element_blank(),
+          panel.grid.major.y=element_blank(),
+          panel.grid.minor.y=element_blank(),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
+```
+
+## The visual system
+
+**Length** and **position** are examples of basic visual features.
+A bar plot is effective because basic visual features are 
+identified rapidly and without conscious effort by our visual system.
+
+## Quantitative visual features
+
+## Qualitative visual features
+
+## Decoding visual features
+
+::: {#fig-visual-feature-decode}
+
+![](Diagrams/data-vis-decode.png)
+
+A simple data visualisation maps each data value to a visual feature
+of a data symbol.  The effectiveness of the mapping depends on how well
+the viewer can **decode** the visual feature, by mapping back to the
+original data values.
+:::
+
+## Accuracy
+
+## Capacity
+
+
+
+&nbsp;
+**Length** and **position** are 

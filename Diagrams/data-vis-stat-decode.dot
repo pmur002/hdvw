@@ -1,0 +1,12 @@
+digraph {
+  graph [ rankdir=LR; margin=.2; nodesep=.5 ];
+  node [ fontsize=20; fontname="sans bold"; margin=.2 ];
+  data [ label="data\nvalues"; shape=box; style=filled; fillcolor=gray ]
+  stat [ label="data\nstatistics"; shape=box; style=filled; fillcolor=gray ]
+  vis [ label="visual\nfeatures"; shape=box;
+        style=filled; fillcolor="#444444"; fontcolor=white ]
+  data -> vis
+  vis:sw -> data:se [ style="dashed" ]
+  vis:s -> stat:se [ style="dashed" ]
+{ rank=same; data, stat }
+}
