@@ -16,6 +16,7 @@ library(ggplot2)
 library(scales)
 library(colorspace)
 library(ggsci)
+library(grid)
 ```
 
 ```{r}
@@ -564,16 +565,208 @@ context and guidance.
 We can characterise a data visualisation in terms of the **mappings**
 that it uses to transform data values into data symbols.
 
+# The visual system
+
+Understanding why some mappings are more effective than others will
+depend upon an understanding of how the human visual system works.
+The effectiveness of a mapping from data values to data symbols
+will depend on how well we can map *back* from the data symbols
+to the properties of the data (@fig-decode).
+
+::: {#fig-decode}
+
+![](Diagrams/data-sym-decode.png)
+
+The effectiveness of a data visualisation will depend on how
+well our visual system can map from data symbols back to
+properties of the data.
+:::
+
+In this section we will establish a very simple model of the visual system 
+that we can refer to as we discuss different mappings.[^simple-visual-models]
+We will add some more detail about the visual system as we
+need to in later sections.
+
+[^simple-visual-models]:
+  Simple models the human visual system can be found in many books on
+  data visualisation, for example, @cairo2012functional.
+  See @ware2021information for a more in-depth,
+  but still very accessible description.
+
+## The eye
+
+In order for us to perceive a data visualisation, light from the
+data visualisation must enter the eye.  Light passes through the pupil, 
+is focused by the lens, and is projected onto the retina at the back of
+the eye.  The retina contains around 100 million light-sensitive
+nerve cells and signals from those are combined into about 1 million
+nerve fibres in the optic nerve, which passes signals on to the brain
+(see @fig-eye).
+A large amount of visual information is gathered by the 
+eye and passed on to the brain.
+
+There are two types of light-sensitive nerve cells in the retina:
+cones are colour-sensitive and very dense at the fovea, where the
+centre of view is projected;  rods are monochromatic,
+only sensing the amount of light,
+and are less densely spread at the edges of the retina, which
+corresponds to peripheral vision.
+
+```{r}
+#| echo: false
+#| eval: false
+#| label: eye-basic
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+grid.text("lens", x=unit(.25, "npc") + unit(2, "mm"), just="left")
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("retina", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, -.2, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("optic\nnerve", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+```
+
+```{r}
+#| echo: false
+#| eval: false
+#| label: eye-basic-2
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("cones", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .65, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.65, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .3, -.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.35, just="right")
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("brain\nthis\nway", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+```
+
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/eye-basic.svg", bg=figbg, width=4, height=3)
+<<eye-basic>>
+dev.off()
+svg("Figures/eye-basic-2.svg", bg=figbg, width=4, height=3)
+<<eye-basic-2>>
+dev.off()
+```
+
+::: {#fig-eye layout-ncol=2}
+
+![](Figures/eye-basic.svg)
+
+![](Figures/eye-basic-2.svg)
+
+A very simple diagram of the human eye.  Light enters via the pupil and
+is focused by the lens onto retina.  Light-sensitive neurons pass 
+signals via the optic nerve to the brain.
+:::
+
+## Visual processing
+
+The processing of the 
+signals from the optic nerve occurs in several areas of the brain.
+Very basic **visual features** are extracted first, such as 
+**position** (spatial arrangements), **angle** (orientations), **colour**,
+and simple **patterns** (spatial frequencies).
+This low-level information is passed on and built upon
+to produce higher-level representations, such as regions and **shapes**.
+Information is then also integrated from prior knowledge to assist with
+the identification of **objects**, things like trees, animals, and faces.
+
+::: {#fig-visual-processing}
+
+![](Diagrams/visual-processing.png)
+
+A very simple model of visual processing. 
+:::
+
+Lower-level processing occurs subconsciously and more rapidly than higher-level
+processing, which can require cognitive effort
+(see @fig-visual-model).  Furthermore, lower-level
+processing occurs in parallel and can involve many instances of visual 
+features at once, whereas higher-level processing will only focus on one
+or a few items.  On the other hand, lower-level visual features are rapidly
+discarded as our attention shifts, while higher-level visual objects are more
+persistent and may become part of long-term memories.  
+
+::: {#fig-visual-model}
+
+![](Model/model.png)
+
+Some of the properties of visual processing. 
+:::
+
 # Mapping Data Values to Visual Features
 
 We will begin by considering data visualisations with
 the simplest sort of mapping:
 each data value is mapped to a **visual feature** of a data symbol
+and the interesting properties of the data are the raw data values
+themselves
 (@fig-visual-feature).
 
 ::: {#fig-visual-feature layout-ncol=2}
 
-![](Diagrams/data-vis.png)
+![](Diagrams/data-vis-decode.png)
 
 ![](Mappings/mapping-1-1-1-1.png)
 
@@ -664,8 +857,6 @@ ggplot(crimeLevelTotal) +
           aspect.ratio=1)
 ```
 
-## The visual system
-
 **Length** and **position** are examples of basic visual features.
 A bar plot is effective because basic visual features are 
 identified rapidly and without conscious effort by our visual system.
@@ -693,4 +884,3 @@ original data values.
 
 
 &nbsp;
-**Length** and **position** are 

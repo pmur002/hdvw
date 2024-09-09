@@ -8,6 +8,7 @@ library(ggplot2)
 library(scales)
 library(colorspace)
 library(ggsci)
+library(grid)
 
 
 ## -----------------------------------------------------------------------------
@@ -310,6 +311,175 @@ ggplot(crimeAgeSimple) +
     scale_x_continuous(expand=expansion(0)) +
     scale_y_continuous(expand=expansion(0), breaks=14:16) +
     theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| eval: false
+#| label: eye-basic
+## ## grid.newpage()
+## eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+## eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+## pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+##                       gp=gpar(lineheight=.9, fill=NA)))
+## grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+## grid.segments(0, .5,
+##               unit(.17, "npc") - unit(2, "mm"), .5,
+##               gp=gpar(lwd=3, fill="black"),
+##               arrow=arrow(type="closed", length=unit(3, "mm")))
+## grid.draw(eyeball)
+## grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+## grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+## pushViewport(viewport(clip=eyeballNot))
+## pushViewport(viewport(x=.22, width=.5))
+## grid.use("cornea")
+## popViewport(2)
+## pushViewport(viewport(x=.22, width=.5))
+## grid.use("lens")
+## popViewport()
+## grid.text("lens", x=unit(.25, "npc") + unit(2, "mm"), just="left")
+## pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+## grid.circle(r=.28, gp=gpar(lwd=3))
+## popViewport()
+## grid.text("retina", x=.75, just="right")
+## pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, -.2, 1.2))))
+## grid.circle(r=.28, gp=gpar(lwd=3))
+## popViewport()
+## pushViewport(viewport(clip=eyeballNot))
+## grid.segments(.5, .5, 1, .35,
+##               gp=gpar(lwd=3, fill="black"),
+##               arrow=arrow(type="closed", length=unit(3, "mm")))
+## popViewport()
+## grid.text("optic\nnerve", y=.35,
+##           x=unit(1, "npc") + unit(2, "mm"), just="left")
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| eval: false
+#| label: eye-basic-2
+## ## grid.newpage()
+## eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+## eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+## pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+##                       gp=gpar(lineheight=.9, fill=NA)))
+## grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+## grid.segments(0, .5,
+##               unit(.17, "npc") - unit(2, "mm"), .5,
+##               gp=gpar(lwd=3, fill="black"),
+##               arrow=arrow(type="closed", length=unit(3, "mm")))
+## grid.draw(eyeball)
+## grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+## grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+## pushViewport(viewport(clip=eyeballNot))
+## pushViewport(viewport(x=.22, width=.5))
+## grid.use("cornea")
+## popViewport(2)
+## pushViewport(viewport(x=.22, width=.5))
+## grid.use("lens")
+## popViewport()
+## pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+## grid.circle(r=.28, gp=gpar(lwd=3))
+## popViewport()
+## grid.text("cones", x=.75, just="right")
+## pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .65, 1.2))))
+## grid.circle(r=.28, gp=gpar(lwd=3))
+## popViewport()
+## grid.text("rods", x=.7, y=.65, just="right")
+## pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .3, -.2))))
+## grid.circle(r=.28, gp=gpar(lwd=3))
+## popViewport()
+## grid.text("rods", x=.7, y=.35, just="right")
+## pushViewport(viewport(clip=eyeballNot))
+## grid.segments(.5, .5, 1, .35,
+##               gp=gpar(lwd=3, fill="black"),
+##               arrow=arrow(type="closed", length=unit(3, "mm")))
+## popViewport()
+## grid.text("brain\nthis\nway", y=.35,
+##           x=unit(1, "npc") + unit(2, "mm"), just="left")
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| results: hide
+svg("Figures/eye-basic.svg", bg=figbg, width=4, height=3)
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+grid.text("lens", x=unit(.25, "npc") + unit(2, "mm"), just="left")
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("retina", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, -.2, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("optic\nnerve", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+dev.off()
+svg("Figures/eye-basic-2.svg", bg=figbg, width=4, height=3)
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("cones", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .65, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.65, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .3, -.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.35, just="right")
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("brain\nthis\nway", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+dev.off()
 
 
 ## -----------------------------------------------------------------------------

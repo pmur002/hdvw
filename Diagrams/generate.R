@@ -19,6 +19,13 @@ ggplotNode <- function(name, label=name) {
            ' [ label="', label, '"; shape=ellipse; ]')
 }
 
+modelNode <- visualNode
+
+textNode <- function(name, label=name) {
+    paste0("  ", name,
+           ' [ label="', label, '"; shape=none; ]')
+}
+
 ## data to visual
 mapEdge <- function(from, to) {
     paste0("  ", from, ' -> ', to)
@@ -39,6 +46,11 @@ backEdge <- function(from, to) {
     paste0("  ", from, ' -> ', to, ' [ style="dashed" ]')
 }
 
+## Edges between model nodes
+modelEdge <- function(from, to) {
+    paste0("  ", from, ' -> ', to)
+}
+    
 invis <- function(edge) {
     paste0(edge, ' [ style="invis" ]')
 }
@@ -82,6 +94,12 @@ geom <- ggplotNode("geom", "geoms")
 scale <- ggplotNode("scale", "scales")
 ggstat <- ggplotNode("ggstat", "stats")
 
+## Model nodes
+eye <- textNode("eye")
+basic <- modelNode("basic", "visual\\nfeatures")
+shapes <- modelNode("shapes", "visual\\nshapes")
+objects <- modelNode("objects", "visual\\nobjects")
+
 ## Edges from data
 dataSymEdge <- mapEdge("data", "sym")
 dataVisEdge <- mapEdge("data", "vis")
@@ -123,6 +141,11 @@ scaleAesEdge <- mapEdge("scale", "aes")
 aesGeomEdge <- mapEdge("aes", "geom")
 geomSymEdge <- mapEdge("geom", "sym")
 geomVisEdge <- mapEdge("geom", "vis")
+
+## Edges for models
+eyeBasicEdge <- modelEdge("eye", "basic")
+basicShapeEdge <- modelEdge("basic", "shapes")
+shapeObjectEdge <- modelEdge("shapes", "objects")
 
 graph(data,
       sym,
@@ -334,3 +357,11 @@ graph(data,
       dataStatSame,
       file="data-stat-label.dot")
 
+graph(eye,
+      basic,
+      shapes,
+      objects,
+      eyeBasicEdge,
+      basicShapeEdge,
+      shapeObjectEdge,
+      file="visual-processing.dot")

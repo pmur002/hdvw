@@ -73,10 +73,14 @@ div.csl-indent {
   <li><a href="#mappings" id="toc-mappings" class="nav-link" data-scroll-target="#mappings">Mappings</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
+  <li><a href="#the-visual-system" id="toc-the-visual-system" class="nav-link" data-scroll-target="#the-visual-system">The visual system</a>
+  <ul class="collapse">
+  <li><a href="#the-eye" id="toc-the-eye" class="nav-link" data-scroll-target="#the-eye">The eye</a></li>
+  <li><a href="#visual-processing" id="toc-visual-processing" class="nav-link" data-scroll-target="#visual-processing">Visual processing</a></li>
+  </ul></li>
   <li><a href="#mapping-data-values-to-visual-features" id="toc-mapping-data-values-to-visual-features" class="nav-link" data-scroll-target="#mapping-data-values-to-visual-features">Mapping Data Values to Visual Features</a>
   <ul class="collapse">
   <li><a href="#visual-features" id="toc-visual-features" class="nav-link" data-scroll-target="#visual-features">Visual features</a></li>
-  <li><a href="#the-visual-system" id="toc-the-visual-system" class="nav-link" data-scroll-target="#the-visual-system">The visual system</a></li>
   <li><a href="#quantitative-visual-features" id="toc-quantitative-visual-features" class="nav-link" data-scroll-target="#quantitative-visual-features">Quantitative visual features</a></li>
   <li><a href="#qualitative-visual-features" id="toc-qualitative-visual-features" class="nav-link" data-scroll-target="#qualitative-visual-features">Qualitative visual features</a></li>
   <li><a href="#decoding-visual-features" id="toc-decoding-visual-features" class="nav-link" data-scroll-target="#decoding-visual-features">Decoding visual features</a></li>
@@ -403,15 +407,77 @@ Figure&nbsp;9: A data visualisation is largely defined by the <strong>mappings</
 <p>We can characterise a data visualisation in terms of the <strong>mappings</strong> that it uses to transform data values into data symbols.</p>
 </section>
 </section>
+<section id="the-visual-system" class="level1">
+<h1>The visual system</h1>
+<p>Understanding why some mappings are more effective than others will depend upon an understanding of how the human visual system works. The effectiveness of a mapping from data values to data symbols will depend on how well we can map <em>back</em> from the data symbols to the properties of the data (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;10</a>).</p>
+<div id="fig-decode" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Diagrams/data-sym-decode.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: The effectiveness of a data visualisation will depend on how well our visual system can map from data symbols back to properties of the data.
+</figcaption>
+</figure>
+</div>
+<p>In this section we will establish a very simple model of the visual system that we can refer to as we discuss different mappings.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> We will add some more detail about the visual system as we need to in later sections.</p>
+<section id="the-eye" class="level2">
+<h2 class="anchored" data-anchor-id="the-eye">The eye</h2>
+<p>In order for us to perceive a data visualisation, light from the data visualisation must enter the eye. Light passes through the pupil, is focused by the lens, and is projected onto the retina at the back of the eye. The retina contains around 100 million light-sensitive nerve cells and signals from those are combined into about 1 million nerve fibres in the optic nerve, which passes signals on to the brain (see <a href="#fig-eye" class="quarto-xref">Figure&nbsp;11</a>). A large amount of visual information is gathered by the eye and passed on to the brain.</p>
+<p>There are two types of light-sensitive nerve cells in the retina: cones are colour-sensitive and very dense at the fovea, where the centre of view is projected; rods are monochromatic, only sensing the amount of light, and are less densely spread at the edges of the retina, which corresponds to peripheral vision.</p>
+<div id="fig-eye" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-eye-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Figures/eye-basic.svg" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Figures/eye-basic-2.svg" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eye-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: A very simple diagram of the human eye. Light enters via the pupil and is focused by the lens onto retina. Light-sensitive neurons pass signals via the optic nerve to the brain.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="visual-processing" class="level2">
+<h2 class="anchored" data-anchor-id="visual-processing">Visual processing</h2>
+<p>The processing of the signals from the optic nerve occurs in several areas of the brain. Very basic <strong>visual features</strong> are extracted first, such as <strong>position</strong> (spatial arrangements), <strong>angle</strong> (orientations), <strong>colour</strong>, and simple <strong>patterns</strong> (spatial frequencies). This low-level information is passed on and built upon to produce higher-level representations, such as regions and <strong>shapes</strong>. Information is then also integrated from prior knowledge to assist with the identification of <strong>objects</strong>, things like trees, animals, and faces.</p>
+<div id="fig-visual-processing" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-visual-processing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Diagrams/visual-processing.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-processing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: A very simple model of visual processing.
+</figcaption>
+</figure>
+</div>
+<p>Lower-level processing occurs subconsciously and more rapidly than higher-level processing, which can require cognitive effort (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;13</a>). Furthermore, lower-level processing occurs in parallel and can involve many instances of visual features at once, whereas higher-level processing will only focus on one or a few items. On the other hand, lower-level visual features are rapidly discarded as our attention shifts, while higher-level visual objects are more persistent and may become part of long-term memories.</p>
+<div id="fig-visual-model" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-visual-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Model/model.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Some of the properties of visual processing.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
 <section id="mapping-data-values-to-visual-features" class="level1">
 <h1>Mapping Data Values to Visual Features</h1>
-<p>We will begin by considering data visualisations with the simplest sort of mapping: each data value is mapped to a <strong>visual feature</strong> of a data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;10</a>).</p>
+<p>We will begin by considering data visualisations with the simplest sort of mapping: each data value is mapped to a <strong>visual feature</strong> of a data symbol and the interesting properties of the data are the raw data values themselves (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;14</a>).</p>
 <div id="fig-visual-feature" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="Diagrams/data-vis.png" class="img-fluid figure-img"></p>
+<p><img src="Diagrams/data-vis-decode.png" class="img-fluid figure-img"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="Mappings/mapping-1-1-1-1.png" class="img-fluid figure-img"></p>
@@ -419,13 +485,13 @@ Figure&nbsp;9: A data visualisation is largely defined by the <strong>mappings</
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10: A simple data visualisation maps each data value to a <strong>visual feature</strong> of a data symbol. Each data value (<code>a</code>) is mapped to a visual feature (<code>x</code>) of a single data symbol.
+Figure&nbsp;14: A simple data visualisation maps each data value to a <strong>visual feature</strong> of a data symbol. Each data value (<code>a</code>) is mapped to a visual feature (<code>x</code>) of a single data symbol.
 </figcaption>
 </figure>
 </div>
 <section id="visual-features" class="level2">
 <h2 class="anchored" data-anchor-id="visual-features">Visual features</h2>
-<p>Consider the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;11</a>, which shows the <code>total</code> number of crimes for different <code>level</code>s of crime. The data symbols in this plot are a set of rectangles or bars (highlighted in purple). However, the important visual feature of the rectangles is their <strong>length</strong>; the thickness of the bars does not relate to the data values at all (see <a href="#fig-length" class="quarto-xref">Figure&nbsp;12</a>). The <code>total</code> number of crimes for each level of crime is represented by the length of a rectangle. Each data value is mapped to the length of one rectangle.</p>
+<p>Consider the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a>, which shows the <code>total</code> number of crimes for different <code>level</code>s of crime. The data symbols in this plot are a set of rectangles or bars (highlighted in purple). However, the important visual feature of the rectangles is their <strong>length</strong>; the thickness of the bars does not relate to the data values at all (see <a href="#fig-length" class="quarto-xref">Figure&nbsp;16</a>). The <code>total</code> number of crimes for each level of crime is represented by the length of a rectangle. Each data value is mapped to the length of one rectangle.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -434,7 +500,7 @@ Figure&nbsp;10: A simple data visualisation maps each data value to a <strong>vi
 <img src="how-data-vis-works_files/figure-html/fig-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11: A bar plot of number of crimes for different levels of crime. The data symbols in this plot are the bars (highlighted in purple).
+Figure&nbsp;15: A bar plot of number of crimes for different levels of crime. The data symbols in this plot are the bars (highlighted in purple).
 </figcaption>
 </figure>
 </div>
@@ -448,13 +514,13 @@ Figure&nbsp;11: A bar plot of number of crimes for different levels of crime. Th
 <img src="how-data-vis-works_files/figure-html/fig-length-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12: A bar plot of number of crimes for different levels of crime. The data values, the <code>total</code> number of crimes, have been mapped to the <strong>lengths</strong> of the bars (the purple lines).
+Figure&nbsp;16: A bar plot of number of crimes for different levels of crime. The data values, the <code>total</code> number of crimes, have been mapped to the <strong>lengths</strong> of the bars (the purple lines).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>There is another mapping being used in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;11</a>: The crime <code>level</code> is mapped to the vertical <strong>positions</strong> of the bars (see <a href="#fig-position" class="quarto-xref">Figure&nbsp;13</a>). Each <code>level</code> value is mapped to the vertical position of one rectangle.</p>
+<p>There is another mapping being used in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a>: The crime <code>level</code> is mapped to the vertical <strong>positions</strong> of the bars (see <a href="#fig-position" class="quarto-xref">Figure&nbsp;17</a>). Each <code>level</code> value is mapped to the vertical position of one rectangle.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-position" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -463,15 +529,12 @@ Figure&nbsp;12: A bar plot of number of crimes for different levels of crime. Th
 <img src="how-data-vis-works_files/figure-html/fig-position-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13: A bar plot of number of crimes for different levels of crime. The data values, the <code>level</code>s of crime, have been mapped to the <strong>positions</strong> of the bars (the purple dots).
+Figure&nbsp;17: A bar plot of number of crimes for different levels of crime. The data values, the <code>level</code>s of crime, have been mapped to the <strong>positions</strong> of the bars (the purple dots).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="the-visual-system" class="level2">
-<h2 class="anchored" data-anchor-id="the-visual-system">The visual system</h2>
 <p><strong>Length</strong> and <strong>position</strong> are examples of basic visual features. A bar plot is effective because basic visual features are identified rapidly and without conscious effort by our visual system.</p>
 </section>
 <section id="quantitative-visual-features" class="level2">
@@ -488,7 +551,7 @@ Figure&nbsp;13: A bar plot of number of crimes for different levels of crime. Th
 <img src="Diagrams/data-vis-decode.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-feature-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14: A simple data visualisation maps each data value to a visual feature of a data symbol. The effectiveness of the mapping depends on how well the viewer can <strong>decode</strong> the visual feature, by mapping back to the original data values.
+Figure&nbsp;18: A simple data visualisation maps each data value to a visual feature of a data symbol. The effectiveness of the mapping depends on how well the viewer can <strong>decode</strong> the visual feature, by mapping back to the original data values.
 </figcaption>
 </figure>
 </div>
@@ -498,13 +561,19 @@ Figure&nbsp;14: A simple data visualisation maps each data value to a visual fea
 </section>
 <section id="capacity" class="level2">
 <h2 class="anchored" data-anchor-id="capacity">Capacity</h2>
-<p>&nbsp; <strong>Length</strong> and <strong>position</strong> are</p>
+<p>&nbsp;</p>
 
 </section>
 </section>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-cairo2012functional" class="csl-entry" role="listitem">
+Cairo, Alberto. 2012. <em>The Functional Art: An Introduction to Information Graphics and Visualization</em>. New Riders.
+</div>
+<div id="ref-ware2021information" class="csl-entry" role="listitem">
+Ware, Colin. 2021. <em>Information Visualization: Perception for Design</em>. 4th ed. Morgan Kaufmann.
+</div>
 <div id="ref-wilkinson2005" class="csl-entry" role="listitem">
 Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Second edition. New York: Springer.
 </div>
@@ -513,6 +582,7 @@ Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Second edition. New Y
 <ol>
 <li id="fn1"><p>Gathering axes and legends together under the generic label of “guides” comes from the Grammar of Graphics <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>The idea of ``mapping’’ data values to visual representations also comes from the Grammar of Graphics <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Simple models the human visual system can be found in many books on data visualisation, for example, <span class="citation" data-cites="cairo2012functional">Cairo (<a href="#ref-cairo2012functional" role="doc-biblioref">2012</a>)</span>. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more in-depth, but still very accessible description.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
