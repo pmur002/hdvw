@@ -237,10 +237,11 @@ Figure&nbsp;2: A heatmap of the crime rate amongst youth offenders aged 14 to 16
 <p>What makes a data visualisation effective? Why are some data visualisations more effective than others? The purpose of this document is to provide explanations for why, when, and how data visualisation works.</p>
 <p>Understanding how data visualisation works will enable us to:</p>
 <ul>
-<li>Critically analyse data visualisations.</li>
-<li>Decide which data visualisations to use.</li>
+<li>Decide which data visualisations we should use.</li>
 <li>Justify our choice of data visualisation.</li>
-<li>Improve the effectiveness of our data visualisations.</li>
+<li>Critically analyse data visualisations created by others.</li>
+<li>Reason about how to improve the effectiveness of a data visualisation.</li>
+<li>Reason about whether a novel visualisation will be effective.</li>
 </ul>
 <section id="scope" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="scope"><span class="header-section-number">1.1</span> Scope</h2>
@@ -302,7 +303,7 @@ Figure&nbsp;4: Three examples of data symbols: a line, some bars, and segments o
 <dl>
 <dt>Guides</dt>
 <dd>
-Guides are the elements of a data visualisation that explain how data values are represented, for examples the axes on a line plot or bar plot and the legend on a donut plot (see <a href="#fig-guides" class="quarto-xref">Figure&nbsp;5</a>). We will see later that guides have a lot in common with data symbols.
+Guides are the elements of a data visualisation that explain how data values are represented, for examples the axes on a line plot or bar plot and the legend on a donut plot (see <a href="#fig-guides" class="quarto-xref">Figure&nbsp;5</a>). We will see later that <strong>guides have a lot in common with data symbols</strong>.
 </dd>
 </dl>
 <div id="fig-guides" class="quarto-layout-panel">
@@ -354,45 +355,37 @@ Figure&nbsp;6: Examples of labels: the titles and sub-titles on all three plots;
 </section>
 <section id="mappings" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="mappings"><span class="header-section-number">1.3</span> Mappings</h2>
-<p>Although we have reduced a data visualisation to just a set of data symbols, guides, and labels, there are still many possible variations. Which data symbols have been used? How have the axes been labelled? What colours have been used? As much as possible, we are going to further reduce the design of a data visualisation to a single question: What <strong>mappings</strong> have been used?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>For example, <a href="#fig-crime-2" class="quarto-xref">Figure&nbsp;7</a> shows the line plot of crime rates for different ages in New Zealand (this is a reproduction of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>). In this plot, the data values are <code>year</code>, crime <code>rate</code>, and <code>age</code> (see <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1</a>) and the visual representation is a set of coloured lines.</p>
-<p>We can describe the transformation from data values to visual representations in terms of a set of mappings:</p>
+<p>Although we have reduced a data visualisation to just three components, data symbols, guides, and labels, there are still many possible variations. Which data symbols are being used? How are the axes labelled? What colours are being used? As much as possible, we are going to further reduce the design of a data visualisation to a single question: What <strong>mappings</strong> are being used?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>For example, in the line plot of crime rates for different ages in New Zealand in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>, the data values are <code>year</code>, crime <code>rate</code>, and <code>age</code> (see <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1</a>) and the visual representation is a set of coloured lines.</p>
+<p>We can describe this data visualisation in terms of a set of mappings (see <a href="#fig-mappings-1" class="quarto-xref">Figure&nbsp;7</a>):</p>
 <ul>
 <li><p>The <code>year</code> and <code>rate</code> values are mapped to the <strong>position</strong> of the lines (the x/y locations that the lines pass through). For example, the <code>year</code> 2011 and the <code>rate</code> 810 map to a position near the top-left corner of the plot, which provides the starting point for the green line.</p></li>
 <li><p>The <code>age</code> values are mapped to the <strong>colour</strong> of the lines. For example, the <code>age</code> 16 maps to the colour green.</p></li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-crime-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-mappings-1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-crime-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="how-data-vis-works_files/figure-html/fig-crime-2-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<div aria-describedby="fig-mappings-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Mappings/mappings-1.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. This is a reproduction of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mappings-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: The data visualisation in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a> can be described as a mapping of <code>year</code>, <code>rate</code>, and <code>age</code> to <code>x</code> and <code>y</code> positions and <code>colour</code>.
 </figcaption>
 </figure>
 </div>
-</div>
-</div>
-<p><a href="#fig-crime-heatmap-2" class="quarto-xref">Figure&nbsp;8</a> shows a heatmap of the same data (a reproduction of <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a>). This data visualisation provides a different visual representation because it involves a different set of mappings:</p>
+<p>The heatmap of the same data (see <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a>) provides a different visual representation because it involves a different set of mappings (see <a href="#fig-mappings-2" class="quarto-xref">Figure&nbsp;8</a>):</p>
 <ul>
 <li><p>The <code>year</code> and <code>age</code> values are mapped to the <strong>position</strong> of the rectangles. For example, the <code>year</code> 2011 and the <code>age</code> 16 map to a position in the top-left corner of the plot, which provides the location of the white rectangle.</p></li>
 <li><p>The <code>rate</code> values are mapped to the <strong>colour</strong> of the rectangles. For example, the <code>rate</code> 810 maps to white, while lower <code>rate</code> values map to progressively darker shades of purple.</p></li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-crime-heatmap-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-mappings-2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-crime-heatmap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="how-data-vis-works_files/figure-html/fig-crime-heatmap-2-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<div aria-describedby="fig-mappings-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Mappings/mappings-2.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crime-heatmap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. This is a reproduction of <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a>.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mappings-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: The data visualisation in <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a> can be described as a mapping of <code>year</code>, <code>rate</code>, and <code>age</code> to <code>x</code> position, <code>colour</code>, and <code>y</code> position.
 </figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>We will spend a lot of time looking at different mappings from data values to data symbols (<a href="#fig-mappings" class="quarto-xref">Figure&nbsp;9</a>). Understanding why some mappings work better than others will help us to understand why some data visualisations are more effective than others.</p>
 <div id="fig-mappings" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -408,7 +401,7 @@ Figure&nbsp;9: A data visualisation is largely defined by the <strong>mappings</
 </section>
 <section id="summary" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.4</span> Summary</h2>
-<p>Data visualisations can be incredibly effective for presenting important properties of data values. However, any one data visualisation can only be effective for certain data values and for certain data structures.</p>
+<p>Data visualisations can be incredibly effective for presenting important properties of data values. However, any one data visualisation can only be effective for certain data values and for certain data properties.</p>
 <p>The goal of this document is to explain why some data visualisations are more effective than others; how data visualisation works.</p>
 <p>The important elements of a data visualisation are <strong>data symbols</strong>, which are visual representations of the data values, <strong>guides</strong>, which explain how data values are transformed to data symbols, and <strong>labels</strong>, which provide context and guidance.</p>
 <p>We can characterise a data visualisation in terms of the <strong>mappings</strong> that it uses to transform data values into data symbols.</p>
@@ -494,43 +487,39 @@ Figure&nbsp;14: A simple data visualisation maps each data value to a <strong>vi
 </div>
 <section id="visual-features" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="visual-features"><span class="header-section-number">3.1</span> Visual features</h2>
-<p>In order to demonstrate this sort of mapping, we will work with a data visualisation of the <code>total</code> number of crimes for different <code>level</code>s of crime. The data values are shown in <a href="#tbl-crime-level-total" class="quarto-xref">Table&nbsp;2</a>.</p>
+<p>In order to demonstrate this sort of mapping, we will work with a data visualisation of the <code>total</code> number of crimes for different ethnic <code>group</code>s. The data values are shown in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;2</a>.</p>
 <div class="cell" data-tbl-colwidths="[20,20]">
-<div id="tbl-crime-level-total" class="cell quarto-float anchored">
+<div id="tbl-crime-group-total" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-crime-level-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different levels of crime.
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-crime-group-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.
 </figcaption>
-<div aria-describedby="tbl-crime-level-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-crime-group-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div>
 <table class="table table-hover do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true" data-tbl-colwidths="[20,20]">
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">level</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">group</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Low</td>
-<td style="text-align: right;">24242</td>
+<td style="text-align: left;">European/Other</td>
+<td style="text-align: right;">31274</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Low-Medium</td>
-<td style="text-align: right;">21513</td>
+<td style="text-align: left;">Māori</td>
+<td style="text-align: right;">41787</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Medium</td>
-<td style="text-align: right;">13823</td>
+<td style="text-align: left;">Pasifika</td>
+<td style="text-align: right;">6993</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Medium-High</td>
-<td style="text-align: right;">18315</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">High</td>
-<td style="text-align: right;">7793</td>
+<td style="text-align: left;">Unknown</td>
+<td style="text-align: right;">5632</td>
 </tr>
 </tbody>
 </table>
@@ -544,9 +533,9 @@ Table&nbsp;2: A table of the total number of offenders aged 14 to 16 from 2011 t
 </div>
 <p>A bar plot of these data is shown in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a>. This is a very effective way to visualise the total values, particularly if we are interested in comparing the raw totals. With this data visualisation, it is very easy to answer questions like the following:</p>
 <ul>
-<li>Which crime level has the largest total number of offenders?</li>
-<li>Is the total number of offenders higher for <code>Low</code>-level crimes of <code>High</code>-level crimes?</li>
-<li>Is the total number of offenders for <code>High</code>-level crimes more or less than half the total for <code>Medium-High</code>-level crimes?</li>
+<li>Which ethnic group has the largest total number of offenders?</li>
+<li>Is the total number of offenders higher for <code>Māori</code> or <code>Pasifika</code>?</li>
+<li>Is the total number of offenders for <code>European/Other</code> more or less than half the total for <code>Māori</code>?</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -556,7 +545,7 @@ Table&nbsp;2: A table of the total number of offenders aged 14 to 16 from 2011 t
 <img src="how-data-vis-works_files/figure-html/fig-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15: A bar plot of number of crimes for different levels of crime. The data symbols in this plot are the horizontal bars.
+Figure&nbsp;15: A bar plot of number of crimes for different ethnic groups. The data symbols in this plot are the horizontal bars.
 </figcaption>
 </figure>
 </div>
@@ -566,7 +555,7 @@ Figure&nbsp;15: A bar plot of number of crimes for different levels of crime. Th
 <blockquote class="blockquote">
 <p>One reason why a bar plot is an effective data visualisation is that is involves a <strong>mapping</strong> from <strong>data values</strong> to basic <strong>visual features</strong>, which are processed rapidly and subconsciously by our visual system.</p>
 </blockquote>
-<p>The data symbols in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a> are a set of rectangles or bars. However, the important visual feature of the rectangles is their <strong>length</strong>; the thickness of the bars does not relate to the data values at all (see <a href="#fig-length" class="quarto-xref">Figure&nbsp;16</a>). The <code>total</code> number of crimes for each level of crime is represented by the length of a rectangle. Each data value is mapped to the length of one rectangle.</p>
+<p>The data symbols in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a> are a set of rectangles or bars. However, the important visual feature of the rectangles is their <strong>length</strong>; the thickness of the bars does not relate to the data values at all (see <a href="#fig-length" class="quarto-xref">Figure&nbsp;16</a>). The <code>total</code> number of crimes for each ethnic group is represented by the length of a rectangle. Each data value is mapped to the length of one rectangle.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-length" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -575,13 +564,13 @@ Figure&nbsp;15: A bar plot of number of crimes for different levels of crime. Th
 <img src="how-data-vis-works_files/figure-html/fig-length-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16: A bar plot of number of crimes for different levels of crime. The data values, the <code>total</code> number of crimes, have been mapped to the <strong>lengths</strong> of the bars (the purple lines).
+Figure&nbsp;16: A bar plot of number of crimes for different ethnic groups. The data values, the <code>total</code> number of crimes, have been mapped to the <strong>lengths</strong> of the bars (the purple lines).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>There is another mapping being used in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a>: The crime <code>level</code> is mapped to the vertical <strong>positions</strong> of the bars (see <a href="#fig-position" class="quarto-xref">Figure&nbsp;17</a>). Each <code>level</code> value is mapped to the vertical position of one rectangle.</p>
+<p>There is another mapping being used in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a>: The crime <code>group</code> is mapped to the vertical <strong>positions</strong> of the bars (see <a href="#fig-position" class="quarto-xref">Figure&nbsp;17</a>). Each <code>group</code> value is mapped to the vertical position of one rectangle.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-position" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -590,7 +579,7 @@ Figure&nbsp;16: A bar plot of number of crimes for different levels of crime. Th
 <img src="how-data-vis-works_files/figure-html/fig-position-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17: A bar plot of number of crimes for different levels of crime. The data values, the <code>level</code>s of crime, have been mapped to the <strong>positions</strong> of the bars (the purple dots).
+Figure&nbsp;17: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic <code>group</code>s, have been mapped to the <strong>positions</strong> of the bars (the purple dots).
 </figcaption>
 </figure>
 </div>
@@ -628,7 +617,7 @@ Figure&nbsp;19: When we map data values to visual features, we want to map to a 
 <p>One issue to consider is whether a visual feature is able to represent all of the information in the data values.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Some types of data contain more information than others:</p>
 <ul>
 <li><p><strong>Quantitative</strong> data consists of numeric values, which naturally possess not only an ordering, but information about the size of differences between values. For example, the <code>year</code> 2020 comes after the year 2010 and there is a gap of 10 years in between. <strong>Ratio</strong> data also contains a “zero” reference value, so there is also information about absolute size and ratios of differences. For example, 200 offenders is twice as many as 100 offenders.</p></li>
-<li><p><strong>Qualitative</strong> data consists of categorical values that are typically character values. <strong>Ordinal</strong> data consists of categories that are ordered, but there is no information about the size of differences. For example, a “high” crime <code>level</code> is more severe than a “medium” crime level, which is more severe than a “low” crime level, but we cannot measure the size of the differences. <strong>Nominal</strong> data consists of just group labels, e.g., country names, and the only information we have is that the categories are different from each other.</p></li>
+<li><p><strong>Qualitative</strong> data consists of categorical values that are typically character values. <strong>Ordinal</strong> data consists of categories that are ordered, but there is no information about the size of differences. For example, a “high” crime level is more severe than a “medium” crime level, which is more severe than a “low” crime level, but we cannot measure the size of the differences. <strong>Nominal</strong> data consists of just group labels, e.g., ethnic groups, and the only information we have is that the categories are different from each other.</p></li>
 </ul>
 <p><a href="#fig-quant-features" class="quarto-xref">Figure&nbsp;20</a> shows that <strong>position</strong>, <strong>length</strong>, <strong>angle</strong>, and <strong>area</strong> are visual features that are capable of representing <strong>quantitative</strong> data values. For example, a bar that is twice as high as another bar comfortably represents a data value that is twice as much as another data value. All but <strong>position</strong> also possess a natural representation of zero.</p>
 <div class="cell">
@@ -697,7 +686,7 @@ Figure&nbsp;23: The visual features <strong>length</strong>, <strong>area</stron
 </div>
 </div>
 </div>
-<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a> maps the <code>level</code> of offending, which are qualitative data values, to the <strong>position</strong> of bars, which is a qualitative visual feature.</p>
+<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a> maps the ethnic <code>group</code>s, which are qualitative data values, to the <strong>position</strong> of bars, which is a qualitative visual feature.</p>
 <blockquote class="blockquote">
 <p>One reason why a bar plot is effective for visualising <strong>qualitative data values</strong> is because the qualitative data values, the groups, are mapped to a <strong>qualitative visual feature</strong>, the positions of the bars.</p>
 </blockquote>
@@ -759,7 +748,7 @@ Figure&nbsp;26: Mapping qualitative data values to position works well for both 
 </div>
 </div>
 </div>
-<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a> maps the <code>level</code> of offending to the <strong>position</strong> of bars, which makes it easy to differentiate between the different crime levels.</p>
+<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;15</a> maps the ethnic <code>group</code> to the <strong>position</strong> of bars, which makes it easy to differentiate between the different ethnic groups.</p>
 <blockquote class="blockquote">
 <p>One reason why a bar plot is effective for visualising <strong>qualitative data values</strong> is because the qualitative data values, the groups, are mapped to a visual feature that has excellent <strong>capacity</strong>, the positions of the bars.</p>
 </blockquote>
@@ -774,7 +763,7 @@ Figure&nbsp;26: Mapping qualitative data values to position works well for both 
 <img src="how-data-vis-works_files/figure-html/fig-dot-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27: A dot plot of the number of crimes for different levels of crime. The data symbols in this plot are the data points.
+Figure&nbsp;27: A dot plot of the number of crimes for different ethnic groups. The data symbols in this plot are the data points.
 </figcaption>
 </figure>
 </div>
@@ -791,7 +780,7 @@ Figure&nbsp;27: A dot plot of the number of crimes for different levels of crime
 <img src="how-data-vis-works_files/figure-html/fig-pie-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;28: A pie chart of the number of crimes for different levels of crime. The data symbols in this plot are the pie wedges.
+Figure&nbsp;28: A pie chart of the number of crimes for different ethnic groups. The data symbols in this plot are the pie wedges.
 </figcaption>
 </figure>
 </div>

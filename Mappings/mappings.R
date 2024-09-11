@@ -8,7 +8,10 @@ gap <- unit(2, "mm")
 
 dataframe <- function(nr=4, nc=3, 
                       rownames=1:nr, colnames=rev(letters)[nc:1],
-                      hl=NULL, hlcol=NULL) {
+                      hl=NULL, hlcol=NULL,
+                      colrot=rep(0, nc),
+                      coljust=rep("centre", nc),
+                      basecol="grey") {
     pushViewport(viewport(layout=grid.layout(nr, nc, respect=TRUE,
                                              widths=usize, heights=usize)))
     for (i in 1:nr) {
@@ -17,10 +20,10 @@ dataframe <- function(nr=4, nc=3,
         popViewport()
         for (j in 1:nc) {
             pushViewport(viewport(layout.pos.row=i, layout.pos.col=j))
-            grid.rect(gp=gpar(col="grey"))
+            grid.rect(gp=gpar(col=basecol))
             if (i == 1) {
                 grid.text(colnames[j], y=unit(1, "npc") + unit(.5, "lines"),
-                          gp=gpar(col="grey"))
+                          rot=colrot[j], just=coljust[j], gp=gpar(col=basecol))
             }
             popViewport()
         }
@@ -68,7 +71,10 @@ dataframe <- function(nr=4, nc=3,
 
 symbols <- function(nr=4, nc=3, 
                     rownames=1:nr, colnames=rev(letters)[nc:1],
-                    hl=NULL, hlcol=NULL) {
+                    hl=NULL, hlcol=NULL,
+                    colrot=rep(0, nc),
+                    coljust=rep("centre", nc),
+                    basecol="grey") {
     if (!is.null(hl)) {
         ## ASSUME hl only length 1
         ## (or if not, the components are identical in structure)
@@ -80,6 +86,8 @@ symbols <- function(nr=4, nc=3,
                                       length.out=nhr + (nhr - 1)),
                                   gap), length.out=nr + (nr - 1))
         }
+    } else {
+        heights <- rep(unit.c(usize, unit(0, "mm")), length.out=nr + (nr - 1))
     }
     pushViewport(viewport(layout=grid.layout(nr + (nr - 1), nc, respect=TRUE,
                                              widths=usize,
@@ -91,10 +99,10 @@ symbols <- function(nr=4, nc=3,
         for (j in 1:nc) {
             pushViewport(viewport(layout.pos.row=(i - 1)*2 + 1,
                                   layout.pos.col=j))
-            grid.rect(gp=gpar(col="grey"))
+            grid.rect(gp=gpar(col=basecol))
             if (i == 1) {
                 grid.text(colnames[j], y=unit(1, "npc") + unit(.5, "lines"),
-                          gp=gpar(col="grey"))
+                          rot=colrot[j], just=coljust[j], gp=gpar(col=basecol))
             }
             popViewport()
         }
@@ -230,7 +238,154 @@ draw("mapping-1-n-1-n",
      list(list(hr=1, hc=1:3)), ## , list(hr=2, hc=1:3)),
      cnSymbol=rep("x", 3))
 
-     
+
+png("mappings-1.png", width=800, height=200, res=200)
+grid.rect(gp=gpar(col=NA, fill="grey95"))
+pushViewport(viewport(layout=grid.layout(1, 3, widths=c(5, 1, 5))))
+pushViewport(viewport(layout.pos.col=1))
+pushViewport(viewport(x=.5, y=.45))
+frame("data")
+w <- stringWidth("year") + unit(4, "mm")
+pushViewport(viewport(layout=grid.layout(1, 3, widths=w,
+                                         height=unit(1, "lines"))))
+pushViewport(viewport(layout.pos.col=1))
+grid.text("year", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(2011,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+grid.text("rate", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(810,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+grid.text("age", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(16,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+popViewport()
+popViewport()
+popViewport()
+
+pushViewport(viewport(layout.pos.col=2))
+grid.segments(.2, .5, .8, .5, 
+              arrow=arrow(angle=20, length=unit(3, "mm"), type="closed"),
+              gp=gpar(fill="black"))
+popViewport()
+
+pushViewport(viewport(layout.pos.col=3))
+pushViewport(viewport(x=.5, y=.45))
+frame("symbols")
+w <- unit.c(rep(stringWidth("2011") + unit(4, "mm"), 2),
+            stringWidth("colour") + unit(4, "mm"))
+pushViewport(viewport(layout=grid.layout(1, 3, widths=w,
+                                         height=unit(1, "lines"))))
+pushViewport(viewport(layout.pos.col=1))
+grid.text("x", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(2011,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+grid.text("y", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(810,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+grid.text("colour", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text("green",
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+popViewport()
+popViewport()
+popViewport()
+dev.off()
+
+png("mappings-2.png", width=800, height=200, res=200)
+grid.rect(gp=gpar(col=NA, fill="grey95"))
+pushViewport(viewport(layout=grid.layout(1, 3, widths=c(5, 1, 5))))
+pushViewport(viewport(layout.pos.col=1))
+pushViewport(viewport(x=.5, y=.45))
+frame("data")
+w <- stringWidth("year") + unit(4, "mm")
+pushViewport(viewport(layout=grid.layout(1, 3, widths=w,
+                                         height=unit(1, "lines"))))
+pushViewport(viewport(layout.pos.col=1))
+grid.text("year", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(2011,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+grid.text("rate", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(810,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+grid.text("age", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(16,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+popViewport()
+popViewport()
+popViewport()
+
+pushViewport(viewport(layout.pos.col=2))
+grid.segments(.2, .5, .8, .5, 
+              arrow=arrow(angle=20, length=unit(3, "mm"), type="closed"),
+              gp=gpar(fill="black"))
+popViewport()
+
+pushViewport(viewport(layout.pos.col=3))
+pushViewport(viewport(x=.5, y=.45))
+frame("symbols")
+w <- unit.c(stringWidth("2011") + unit(4, "mm"),
+            stringWidth("colour") + unit(4, "mm"),
+            stringWidth("2011") + unit(4, "mm"))
+pushViewport(viewport(layout=grid.layout(1, 3, widths=w,
+                                         height=unit(1, "lines"))))
+pushViewport(viewport(layout.pos.col=1))
+grid.text("x", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text(2011,
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+grid.text("colour", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text("white",
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+grid.text("y", y=unit(1, "npc") + unit(.5, "lines"),
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+grid.rect(gp=gpar(fill="white"))
+grid.text("16",
+          x=unit(1, "npc") - unit(1, "mm"), just="right")
+popViewport()
+popViewport()
+popViewport()
+popViewport()
+dev.off()
+
 png("mapping-nested.png", width=1200, height=400, res=200)
 ## grid.newpage()
 grid.rect(gp=gpar(col=NA, fill="grey95"))

@@ -74,7 +74,8 @@ crimeDistrictTotal <- select(crimeDistrict, -rate) |>
 
 crimeGroup <- read.csv("Data/YouthCrime/crime-group.csv")
 crimeGroup <- subset(crimeGroup,
-                     group %in% c("Māori","Pasifika", "European/Other"))
+                     group %in%
+                     c("Māori","Pasifika", "European/Other", "Unknown"))
 crimeGroup$yearDate <- as.Date(paste0(crimeGroup$year, "-06-30"))
 crimeGroupTotal <- group_by(crimeGroup, group) |>
     summarise(total = sum(count))

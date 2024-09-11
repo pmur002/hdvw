@@ -292,30 +292,6 @@ dev.off()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-crime-2
-#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime.
-gg <- 
-ggplot(crimeAgeSimple) +
-    geom_line(aes(x=year, y=rate, colour=ageFactor))
-gg +
-    scale_colour_discrete(name="age") +
-    theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
-          aspect.ratio=1)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-crime-heatmap-2
-#| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime-heatmap.
-ggplot(crimeAgeSimple) +
-    geom_tile(aes(year, age, fill=rate), colour=NA) +
-    scale_x_continuous(expand=expansion(0)) +
-    scale_y_continuous(expand=expansion(0), breaks=14:16) +
-    theme(aspect.ratio=1)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| eval: false
 #| label: eye-basic
 ## ## grid.newpage()
@@ -486,11 +462,11 @@ dev.off()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| message: false
-#| label: tbl-crime-level-total
+#| label: tbl-crime-group-total
 #| tbl-colwidths: [20,20]
-#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different levels of crime.
-crimeLevelTotalTable <- subset(crimeLevelTotal, select=c("level", "total"))
-kable_styling(kable(crimeLevelTotalTable, 
+#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.
+crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
+kable_styling(kable(crimeGroupTotalTable, 
                     table.attr='data-quarto-disable-processing="true"'),
               bootstrap_options=c("basic", "hover"), 
               full_width=FALSE)
@@ -499,9 +475,9 @@ kable_styling(kable(crimeLevelTotalTable,
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-bar
-#| fig-cap: A bar plot of number of crimes for different levels of crime. The data symbols in this plot are the horizontal bars.
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y=level)) +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data symbols in this plot are the horizontal bars.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
     theme(aspect.ratio=1)
 
@@ -509,11 +485,11 @@ ggplot(crimeLevelTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-length
-#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y=level), fill="grey") +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    geom_segment(aes(xend=total, y=level, yend=level), x=0, 
+    geom_segment(aes(xend=total, y=group, yend=group), x=0, 
                  color=highlight, linewidth=1,
                  arrow=arrow(angle=15, length=unit(3, "mm"), ends="both")) +
     theme(panel.border=element_rect(colour="grey", fill=NA),
@@ -528,11 +504,11 @@ ggplot(crimeLevelTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-position
-#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `level`s of crime, have been mapped to the **positions** of the bars (the purple dots).
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y=level), fill="grey") +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic `group`s, have been mapped to the **positions** of the bars (the purple dots).
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    geom_point(aes(y=level), x=0, color=highlight, size=3) +
+    geom_point(aes(y=group), x=0, color=highlight, size=3) +
     coord_cartesian(clip="off") +
     theme(panel.border=element_rect(colour="grey", fill=NA),
           plot.title=element_text(colour="grey"),
@@ -866,20 +842,20 @@ popViewport()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-dot
-#| fig-cap: A dot plot of the number of crimes for different levels of crime. The data symbols in this plot are the data points.
-ggplot(crimeLevelTotal) + 
-    geom_segment(aes(x=-Inf, xend=Inf, y=level, yend=level), 
+#| fig-cap: A dot plot of the number of crimes for different ethnic groups. The data symbols in this plot are the data points.
+ggplot(crimeGroupTotal) + 
+    geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
                  linetype="dotted") +
-    geom_point(aes(x=total, y=level)) +
+    geom_point(aes(x=total, y=group)) +
     theme(aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-pie
-#| fig-cap: A pie chart of the number of crimes for different levels of crime. The data symbols in this plot are the pie wedges.
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y="", fill=level), colour="black") +
+#| fig-cap: A pie chart of the number of crimes for different ethnic groups. The data symbols in this plot are the pie wedges.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y="", fill=group), colour="black") +
     coord_polar() +
     theme(aspect.ratio=1,
           axis.title.y=element_blank(),

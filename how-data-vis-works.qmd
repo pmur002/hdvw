@@ -155,10 +155,11 @@ why, when, and how data visualisation works.
 
 Understanding how data visualisation works will enable us to:
 
-* Critically analyse data visualisations.
-* Decide which data visualisations to use.
+* Decide which data visualisations we should use.
 * Justify our choice of data visualisation.
-* Improve the effectiveness of our data visualisations.
+* Critically analyse data visualisations created by others.
+* Reason about how to improve the effectiveness of a data visualisation.
+* Reason about whether a novel visualisation will be effective.
 
 ## Scope
 
@@ -344,7 +345,7 @@ Guides
 : Guides are the elements of a data visualisation that explain
 how data values are represented, for examples the axes on a line plot
 or bar plot and the legend on a donut plot (see @fig-guides).
-We will see later that guides have a lot in common with data symbols.
+We will see later that **guides have a lot in common with data symbols**.
 
 ```{r}
 #| echo: false
@@ -480,17 +481,18 @@ title on the donut plot.
 
 ## Mappings
 
-Although we have reduced a data visualisation to just a set of data symbols, 
+Although we have reduced a data visualisation to just three components,
+data symbols, 
 guides, and labels, there are still many possible variations.
-Which data symbols have been used?  How have 
-the axes been labelled?  What colours have been used?
+Which data symbols are being used?  How are
+the axes labelled?  What colours are being used?
 As much as possible, we are going to further reduce the design
 of a data visualisation to a single question:
-What **mappings** have been used?[^mappings]
+What **mappings** are being used?[^mappings]
 
-For example, @fig-crime-2 shows the line plot of crime rates for
-different ages in New Zealand (this is a reproduction of @fig-crime).
-In this plot, the data values are `year`, crime `rate`, and `age` 
+For example, in the line plot of crime rates for
+different ages in New Zealand in @fig-crime,
+the data values are `year`, crime `rate`, and `age` 
 (see @tbl-crime) and
 the visual representation is a set of coloured lines.
 
@@ -498,8 +500,8 @@ the visual representation is a set of coloured lines.
   The idea of "mapping" data values to visual representations is
   also from the Grammar of Graphics [@wilkinson2005].
 
-We can describe the transformation from data values to visual
-representations in terms of a set of mappings:
+We can describe this data visualisation in terms of a set of mappings
+(see @fig-mappings-1):
 
 * The `year` and `rate` values are mapped to the **position** of the
   lines (the x/y locations that the lines pass through).
@@ -510,17 +512,17 @@ representations in terms of a set of mappings:
 * The `age` values are mapped to the **colour** of the lines.
   For example, the `age` 16 maps to the colour green.
 
-```{r}
-#| echo: false
-#| label: fig-crime-2
-#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime.
-<<fig-crime>>
-```
+::: {#fig-mappings-1}
 
-@fig-crime-heatmap-2 shows a heatmap of the same data (a reproduction
-of @fig-crime-heatmap).  This data visualisation provides a different
+![](Mappings/mappings-1.png)
+
+The data visualisation in @fig-crime can be described as a mapping
+of `year`, `rate`, and `age` to `x` and `y` positions and `colour`.
+:::
+
+The heatmap of the same data (see @fig-crime-heatmap) provides a different
 visual representation because it involves a different
-set of mappings:
+set of mappings (see @fig-mappings-2):
 
 * The `year` and `age` values are mapped to the **position** of the rectangles.
   For example, the `year` 2011 and the `age` 16 map to a position
@@ -531,12 +533,13 @@ set of mappings:
   For example, the `rate` 810 maps to white, while lower `rate` values
   map to progressively darker shades of purple.
 
-```{r}
-#| echo: false
-#| label: fig-crime-heatmap-2
-#| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  This is a reproduction of @fig-crime-heatmap.
-<<fig-crime-heatmap>>
-```
+::: {#fig-mappings-2}
+
+![](Mappings/mappings-2.png)
+
+The data visualisation in @fig-crime-heatmap can be described as a mapping
+of `year`, `rate`, and `age` to `x` position, `colour`, and `y` position.
+:::
 
 We will spend a lot of time looking at different mappings from data values
 to data symbols (@fig-mappings).  Understanding why some
@@ -555,7 +558,8 @@ to transform **data values** into **data symbols**.
 
 Data visualisations can be incredibly effective for presenting
 important properties of data values.  However, any one data visualisation
-can only be effective for certain data values and for certain data structures.
+can only be effective for certain data values and for certain data 
+properties.
 
 The goal of this document is to explain why some data visualisations
 are more effective than others;  how data visualisation works. 
@@ -785,17 +789,17 @@ feature (`x`) of a single data symbol.
 In order to demonstrate this sort of mapping,
 we will work with a data visualisation of
 the `total` number of
-crimes for different `level`s of crime.  The data values are shown
-in @tbl-crime-level-total.
+crimes for different ethnic `group`s.  The data values are shown
+in @tbl-crime-group-total.
 
 ```{r}
 #| echo: false
 #| message: false
-#| label: tbl-crime-level-total
+#| label: tbl-crime-group-total
 #| tbl-colwidths: [20,20]
-#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different levels of crime.  
-crimeLevelTotalTable <- subset(crimeLevelTotal, select=c("level", "total"))
-kable_styling(kable(crimeLevelTotalTable, 
+#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.  
+crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
+kable_styling(kable(crimeGroupTotalTable, 
                     table.attr='data-quarto-disable-processing="true"'),
               bootstrap_options=c("basic", "hover"), 
               full_width=FALSE)
@@ -807,18 +811,17 @@ particularly if we are interested in comparing the raw totals.
 With this data visualisation, it is very easy to answer 
 questions like the following:
 
-* Which crime level has the largest total number of offenders?
-* Is the total number of offenders higher for `Low`-level crimes
-  of `High`-level crimes?
-* Is the total number of offenders for `High`-level crimes more or less
-  than half the total for `Medium-High`-level crimes?
+* Which ethnic group has the largest total number of offenders?
+* Is the total number of offenders higher for `Māori` or `Pasifika`?
+* Is the total number of offenders for `European/Other` more or less
+  than half the total for `Māori`?
 
 ```{r}
 #| echo: false
 #| label: fig-bar
-#| fig-cap: A bar plot of number of crimes for different levels of crime. The data symbols in this plot are the horizontal bars.
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y=level)) +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data symbols in this plot are the horizontal bars.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
     theme(aspect.ratio=1)
 ```
@@ -835,18 +838,18 @@ are a set of rectangles or bars.
 However, the important visual feature of the rectangles is their
 **length**;  the thickness of the bars does not relate to the data 
 values at all (see @fig-length).
-The `total` number of crimes for each level of crime
+The `total` number of crimes for each ethnic group 
 is represented by the length of a rectangle.  Each data value
 is mapped to the length of one rectangle.
 
 ```{r}
 #| echo: false
 #| label: fig-length
-#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y=level), fill="grey") +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    geom_segment(aes(xend=total, y=level, yend=level), x=0, 
+    geom_segment(aes(xend=total, y=group, yend=group), x=0, 
                  color=highlight, linewidth=1,
                  arrow=arrow(angle=15, length=unit(3, "mm"), ends="both")) +
     theme(panel.border=element_rect(colour="grey", fill=NA),
@@ -859,18 +862,18 @@ ggplot(crimeLevelTotal) +
 ```
 
 There is another mapping being used in @fig-bar:
-The crime `level` is mapped to the vertical **positions** of the bars
-(see @fig-position).  Each `level` value is mapped to the 
+The crime `group` is mapped to the vertical **positions** of the bars
+(see @fig-position).  Each `group` value is mapped to the 
 vertical position of one rectangle.
 
 ```{r}
 #| echo: false
 #| label: fig-position
-#| fig-cap: A bar plot of number of crimes for different levels of crime. The data values, the `level`s of crime, have been mapped to the **positions** of the bars (the purple dots).
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y=level), fill="grey") +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic `group`s, have been mapped to the **positions** of the bars (the purple dots).
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    geom_point(aes(y=level), x=0, color=highlight, size=3) +
+    geom_point(aes(y=group), x=0, color=highlight, size=3) +
     coord_cartesian(clip="off") +
     theme(panel.border=element_rect(colour="grey", fill=NA),
           plot.title=element_text(colour="grey"),
@@ -970,11 +973,11 @@ Some types of data contain more information than others:
 * **Qualitative** data consists of categorical values that are typically
   character values.  **Ordinal** data consists of categories that
   are ordered, but there is no information about the size of differences.
-  For example, a "high" crime `level` is more severe than a "medium"
+  For example, a "high" crime level is more severe than a "medium"
   crime level, which is more severe than a "low" crime level, but 
   we cannot measure the size of the differences.
   **Nominal** data consists of just group labels,
-  e.g., country names, and the only information we have is that the
+  e.g., ethnic groups, and the only information we have is that the
   categories are different from each other.
 
 @fig-quant-features shows that **position**, **length**, **angle**,
@@ -1187,7 +1190,7 @@ grid.text("angle", y=unit(-1, "lines"))
 popViewport(2)
 ```
 
-The bar plot in @fig-bar maps the `level` of offending, which are
+The bar plot in @fig-bar maps the ethnic `group`s, which are
 qualitative data values, to the **position** of bars, which is
 a qualitative visual feature.
 
@@ -1345,9 +1348,9 @@ bars(11)
 popViewport()
 ```
 
-The bar plot in @fig-bar maps the `level` of offending to the
+The bar plot in @fig-bar maps the ethnic `group` to the
 **position** of bars, which makes it easy to differentiate between
-the different crime levels.
+the different ethnic groups.
 
 > One reason why a bar plot is effective for visualising
   **qualitative data values** is because the qualitative data values,
@@ -1360,11 +1363,11 @@ the different crime levels.
 ```{r}
 #| echo: false
 #| label: fig-dot
-#| fig-cap: A dot plot of the number of crimes for different levels of crime. The data symbols in this plot are the data points.
-ggplot(crimeLevelTotal) + 
-    geom_segment(aes(x=-Inf, xend=Inf, y=level, yend=level), 
+#| fig-cap: A dot plot of the number of crimes for different ethnic groups. The data symbols in this plot are the data points.
+ggplot(crimeGroupTotal) + 
+    geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
                  linetype="dotted") +
-    geom_point(aes(x=total, y=level)) +
+    geom_point(aes(x=total, y=group)) +
     theme(aspect.ratio=1)
 ```
 
@@ -1373,9 +1376,9 @@ ggplot(crimeLevelTotal) +
 ```{r}
 #| echo: false
 #| label: fig-pie
-#| fig-cap: A pie chart of the number of crimes for different levels of crime. The data symbols in this plot are the pie wedges.
-ggplot(crimeLevelTotal) + 
-    geom_col(aes(x=total, y="", fill=level), colour="black") +
+#| fig-cap: A pie chart of the number of crimes for different ethnic groups. The data symbols in this plot are the pie wedges.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y="", fill=group), colour="black") +
     coord_polar() +
     theme(aspect.ratio=1,
           axis.title.y=element_blank(),
