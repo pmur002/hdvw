@@ -15,6 +15,7 @@ library(grid)
 ## -----------------------------------------------------------------------------
 #| echo: false
 figbg <- "#F2F2F2"
+highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 ## Set default colour palettes
 scale_colour_discrete <- function(...) {
     scale_colour_npg(...)
@@ -144,7 +145,6 @@ dev.off()
 #| echo: false
 #| results: hide
 #| message: false
-highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 scatterGeom <- scatter +
     geom_line(aes(yearDate, total), linewidth=1, colour=highlight) +
     theme(panel.border=element_rect(colour="grey"),

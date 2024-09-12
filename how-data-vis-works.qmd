@@ -26,6 +26,7 @@ library(grid)
 ```{r}
 #| echo: false
 figbg <- "#F2F2F2"
+highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 ## Set default colour palettes
 scale_colour_discrete <- function(...) {
     scale_colour_npg(...)
@@ -284,7 +285,6 @@ We will spend a lot of time looking at how data symbols work.
 #| echo: false
 #| results: hide
 #| message: false
-highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 scatterGeom <- scatter +
     geom_line(aes(yearDate, total), linewidth=1, colour=highlight) +
     theme(panel.border=element_rect(colour="grey"),
@@ -512,12 +512,17 @@ We can describe this data visualisation in terms of a set of mappings
 * The `age` values are mapped to the **colour** of the lines.
   For example, the `age` 16 maps to the colour green.
 
-::: {#fig-mappings-1}
+::: {#fig-mappings-1 layout="[[1, -1], [1]]"}
 
 ![](Mappings/mappings-1.png)
 
+![](Animation/mappings-1.svg)
+
 The data visualisation in @fig-crime can be described as a mapping
 of `year`, `rate`, and `age` to `x` and `y` positions and `colour`.
+The bottom image is an animation;  try refreshing the page or
+viewing the image it in its own tab to rerun the
+animation.
 :::
 
 The heatmap of the same data (see @fig-crime-heatmap) provides a different
@@ -533,12 +538,17 @@ set of mappings (see @fig-mappings-2):
   For example, the `rate` 810 maps to white, while lower `rate` values
   map to progressively darker shades of purple.
 
-::: {#fig-mappings-2}
+::: {#fig-mappings-2 layout="[[1, -1], [1]]"}
 
 ![](Mappings/mappings-2.png)
 
+![](Animation/mappings-2.svg)
+
 The data visualisation in @fig-crime-heatmap can be described as a mapping
 of `year`, `rate`, and `age` to `x` position, `colour`, and `y` position.
+The bottom image is an animation;  try refreshing the page or
+viewing the image it in its own tab to rerun the
+animation.
 :::
 
 We will spend a lot of time looking at different mappings from data values
