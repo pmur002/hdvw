@@ -96,8 +96,9 @@ popViewport()
 
 grid.force()
 grid.add("bar.3-2-3-2", grep=TRUE,
-         segmentsGrob(0, 1, 1, 1, gp=gpar(col=rgb(1,1,1,0), lwd=2),
-                      name="rate.line"))
+         rectGrob(y=1, height=unit(1, "mm"),
+                  gp=gpar(col=rgb(0,0,0,0), lwd=.5),
+                  name="rate.line"))
 grid.add("bar.3-2-3-2", grep=TRUE,
          textGrob("", x=unit(-1, "lines"), y=1, name="rate.end"))
 yearCopy <- editGrob(grid.get("core-fg.4-1-4-1::text", grep=TRUE),
@@ -117,7 +118,7 @@ dev.off()
 
 library(animaker)
 
-moveYear <- atomic(dur=1.5, label="moveYear")
+moveYear <- atomic(start=1, dur=1.5, label="moveYear")
 showYear <- atomic(dur=0, label="showYear")
 year <- vec(moveYear, showYear, label="year")
 moveRate <- atomic(dur=2, label="moveRate")
@@ -156,6 +157,7 @@ xml_add_child(yearStartGroup,
                           " C0,", yearDiff[2]/2,
                           " ", yearDiff[1]/2, ",", yearDiff[2],
                           " ", yearDiff[1], ",", yearDiff[2]),
+              begin=paste0(timings$moveYear$start, "s"),
               dur=paste0(timings$moveYear$durn, "s"),
               fill="freeze",
               restart="always")
@@ -201,9 +203,9 @@ xml_add_child(ageLine,
 rateStartGroup <-
     xml_find_first(svg, '//svg:g[@id = "core-fg.4-2-4-2.1"]/svg:g[2]/svg:g', ns)
 rateEndGroup <- xml_find_first(svg, '//svg:g[@id = "rate.end.1.1"]', ns)
-rateLine <- xml_find_first(svg, '//svg:polyline[@id = "rate.line.1.1"]', ns)
+rateLine <- xml_find_first(svg, '//svg:rect[@id = "rate.line.1.1"]', ns)
 xml_set_attr(rateStartGroup, "style",
-             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.4)")
+             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.6)")
 rateStart <- as.numeric(strsplit(gsub("[^0-9. ]", "",
                                       xml_attr(rateStartGroup, "transform")),
                                  " ")[[1]])
@@ -214,8 +216,8 @@ rateDiff <- rateEnd - rateStart
 xml_add_child(rateStartGroup,
               "animateMotion",
               path=paste0("M0,0",
-                          " C0,", rateDiff[2],
-                          " ", rateDiff[1]/2, ",", rateDiff[2],
+                          " C", rateDiff[1]/2, ",0", 
+                          " ", rateDiff[1]/2, ",0",
                           " ", rateDiff[1], ",", rateDiff[2]),
               begin=paste0(timings$moveRate$start, "s"),
               dur=paste0(timings$moveRate$durn, "s"),
@@ -231,7 +233,7 @@ xml_add_child(rateLine,
 xml_add_child(rateLine,
               "set",
               attributeName="filter",
-              to="drop-shadow(3px -3px 2px rgba(0,0,0,.4)",
+              to="drop-shadow(3px -3px 2px rgba(0,0,0,1)",
               begin=paste0(timings$showRate$start, "s"),
               dur="indefinite",
               restart="always")

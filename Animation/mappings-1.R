@@ -113,7 +113,7 @@ dev.off()
 
 library(animaker)
 
-moveYear <- atomic(dur=1.5, label="moveYear")
+moveYear <- atomic(start=1, dur=1.5, label="moveYear")
 showYear <- atomic(dur=0, label="showYear")
 year <- vec(moveYear, showYear, label="year")
 moveRate <- atomic(dur=1, label="moveRate")
@@ -152,6 +152,7 @@ xml_add_child(yearStartGroup,
                           " C0,", yearDiff[2]/2,
                           " ", yearDiff[1]/2, ",", yearDiff[2],
                           " ", yearDiff[1], ",", yearDiff[2]),
+              begin=paste0(timings$moveYear$start, "s"),
               dur=paste0(timings$moveYear$durn, "s"),
               fill="freeze",
               restart="always")
