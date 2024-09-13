@@ -356,11 +356,11 @@ Figure&nbsp;6: Examples of labels: the titles and sub-titles on all three plots;
 <section id="mappings" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="mappings"><span class="header-section-number">1.3</span> Mappings</h2>
 <p>Although we have reduced a data visualisation to just three components, data symbols, guides, and labels, there are still many possible variations. Which data symbols are being used? How are the axes labelled? What colours are being used? As much as possible, we are going to further reduce the design of a data visualisation to a single question: What <strong>mappings</strong> are being used?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>For example, in the line plot of crime rates for different ages in New Zealand in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>, the data values are <code>year</code>, crime <code>rate</code>, and <code>age</code> (see <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1</a>) and the visual representation is a set of coloured lines.</p>
+<p>Much of this document is focused on considering how data values are being converted, or <strong>mapped</strong>, into a visual representation. For example, in the line plot of crime rates for different ages in New Zealand in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1</a>, the data values are <code>year</code>, crime <code>rate</code>, and <code>age</code> (see <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1</a>) and the visual representation is a set of coloured lines.</p>
 <p>We can describe this data visualisation in terms of a set of mappings (see <a href="#fig-mappings-1" class="quarto-xref">Figure&nbsp;7</a>):</p>
 <ul>
-<li><p>The <code>year</code> and <code>rate</code> values are mapped to the <strong>position</strong> of the lines (the x/y locations that the lines pass through). For example, the <code>year</code> 2011 and the <code>rate</code> 810 map to a position near the top-left corner of the plot, which provides the starting point for the green line.</p></li>
-<li><p>The <code>age</code> values are mapped to the <strong>colour</strong> of the lines. For example, the <code>age</code> 16 maps to the colour green.</p></li>
+<li><p>Each <code>year</code> value is mapped to a horizontal <strong>position</strong> along the x-axis and each <code>rate</code> value is mapped to a vertical <strong>position</strong> along the y-axis. For example, the <code>year</code> 2011 maps to a location near the left edge of the plot and the <code>rate</code> 810 maps to a position near the top edge of the plot. The combined location provides the starting point for the green line.</p></li>
+<li><p>Each <code>age</code> value is mapped to a <strong>colour</strong>. For example, the <code>age</code> 16 maps to a green colour.</p></li>
 </ul>
 <div id="fig-mappings-1" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -386,8 +386,8 @@ Figure&nbsp;7: The data visualisation in <a href="#fig-crime" class="quarto-xref
 </div>
 <p>The heatmap of the same data (see <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2</a>) provides a different visual representation because it involves a different set of mappings (see <a href="#fig-mappings-2" class="quarto-xref">Figure&nbsp;8</a>):</p>
 <ul>
-<li><p>The <code>year</code> and <code>age</code> values are mapped to the <strong>position</strong> of the rectangles. For example, the <code>year</code> 2011 and the <code>age</code> 16 map to a position in the top-left corner of the plot, which provides the location of the white rectangle.</p></li>
-<li><p>The <code>rate</code> values are mapped to the <strong>colour</strong> of the rectangles. For example, the <code>rate</code> 810 maps to white, while lower <code>rate</code> values map to progressively darker shades of purple.</p></li>
+<li><p>Each <code>year</code> value is mapped to a horizontal <strong>position</strong> along the x-axis and each <code>age</code> value is mapped to a vertical <strong>position</strong> along the y-axis. For example, the <code>year</code> 2011 maps to a location near the left edge of the plot and the <code>age</code> 16 maps to a position near the top edge of the plot. The combined location provides the position for the white rectangle.</p></li>
+<li><p>Each <code>rate</code> value is mapped to a <strong>colour</strong>. For example, the <code>rate</code> 810 maps to white, while lower <code>rate</code> values map to progressively darker shades of purple.</p></li>
 </ul>
 <div id="fig-mappings-2" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -411,7 +411,7 @@ Figure&nbsp;8: The data visualisation in <a href="#fig-crime-heatmap" class="qua
 </figcaption>
 </figure>
 </div>
-<p>We will spend a lot of time looking at different mappings from data values to data symbols (<a href="#fig-mappings" class="quarto-xref">Figure&nbsp;9</a>). Understanding why some mappings work better than others will help us to understand why some data visualisations are more effective than others.</p>
+<p>We will look at a variety of different mappings from data values to data symbols (<a href="#fig-mappings" class="quarto-xref">Figure&nbsp;9</a>). Understanding why some mappings work better than others will help us to understand why some data visualisations are more effective than others.</p>
 <div id="fig-mappings" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mappings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -428,7 +428,7 @@ Figure&nbsp;9: A data visualisation is largely defined by the <strong>mappings</
 <p>Data visualisations can be incredibly effective for presenting important properties of data values. However, any one data visualisation can only be effective for certain data values and for certain data properties.</p>
 <p>The goal of this document is to explain why some data visualisations are more effective than others; how data visualisation works.</p>
 <p>The important elements of a data visualisation are <strong>data symbols</strong>, which are visual representations of the data values, <strong>guides</strong>, which explain how data values are transformed to data symbols, and <strong>labels</strong>, which provide context and guidance.</p>
-<p>We can characterise a data visualisation in terms of the <strong>mappings</strong> that it uses to transform data values into data symbols.</p>
+<p>We can characterise a data visualisation in terms of the <strong>mappings</strong> that it uses to convert data values into data symbols.</p>
 </section>
 </section>
 <section id="sec-visual-system" class="level1" data-number="2">
@@ -830,11 +830,12 @@ Figure&nbsp;28: A pie chart of the number of crimes for different ethnic groups.
 <section id="todo" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> TODO</h1>
 <ul>
-<li>colour (hue, chroma, luminance)</li>
-<li>ordinal visual features (chroma and luminance)</li>
-<li>CVD</li>
-<li>distance effect</li>
-<li>visual illusions</li>
+<li><p>colour (hue, chroma, luminance)</p></li>
+<li><p>ordinal visual features (chroma and luminance)</p></li>
+<li><p>CVD</p></li>
+<li><p>distance effect</p></li>
+<li><p>visual illusions</p></li>
+<li><p>Things that do not change are not salient (e.g., the widths of bars in bar plot), BUT things that DO change are salient (so only do this to represent changes in the data). This should be cited to something.</p></li>
 </ul>
 <p>&nbsp;</p>
 

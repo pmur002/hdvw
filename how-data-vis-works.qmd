@@ -492,6 +492,8 @@ As much as possible, we are going to further reduce the design
 of a data visualisation to a single question:
 What **mappings** are being used?[^mappings]
 
+Much of this document is focused on considering how data values are being
+converted, or **mapped**, into a visual representation.
 For example, in the line plot of crime rates for
 different ages in New Zealand in @fig-crime,
 the data values are `year`, crime `rate`, and `age` 
@@ -506,14 +508,16 @@ the visual representation is a set of coloured lines.
 We can describe this data visualisation in terms of a set of mappings
 (see @fig-mappings-1):
 
-* The `year` and `rate` values are mapped to the **position** of the
-  lines (the x/y locations that the lines pass through).
-  For example, the `year` 2011 and the `rate` 810 map to a position
-  near the top-left corner of the plot, which provides the starting
+* Each `year` value is mapped to a horizontal **position** along the
+  x-axis and each `rate` value is mapped to a vertical **position** 
+  along the y-axis.
+  For example, the `year` 2011 maps to a location near the left edge
+  of the plot and the `rate` 810 maps to a position 
+  near the top edge of the plot.  The combined location provides the starting
   point for the green line.
 
-* The `age` values are mapped to the **colour** of the lines.
-  For example, the `age` 16 maps to the colour green.
+* Each `age` value is mapped to a **colour**.
+  For example, the `age` 16 maps to a green colour.
 
 ::: {#fig-mappings-1 layout="[[1, -1], [1]]"}
 
@@ -532,12 +536,15 @@ The heatmap of the same data (see @fig-crime-heatmap) provides a different
 visual representation because it involves a different
 set of mappings (see @fig-mappings-2):
 
-* The `year` and `age` values are mapped to the **position** of the rectangles.
-  For example, the `year` 2011 and the `age` 16 map to a position
-  in the top-left corner of the plot, which provides the location
-  of the white rectangle.
+* Each `year` value is mapped to a horizontal **position** along the
+  x-axis and each `age` value is mapped to a vertical **position** 
+  along the y-axis.
+  For example, the `year` 2011 maps to a location near the left edge
+  of the plot and the `age` 16 maps to a position 
+  near the top edge of the plot.  The combined location provides the 
+  position for the white rectangle.
 
-* The `rate` values are mapped to the **colour** of the rectangles.
+* Each `rate` value is mapped to a **colour**.
   For example, the `rate` 810 maps to white, while lower `rate` values
   map to progressively darker shades of purple.
 
@@ -554,7 +561,7 @@ viewing the image it in its own tab to rerun the
 animation.
 :::
 
-We will spend a lot of time looking at different mappings from data values
+We will look at a variety of different mappings from data values
 to data symbols (@fig-mappings).  Understanding why some
 mappings work better than others will help us to understand why
 some data visualisations are more effective than others.
@@ -584,7 +591,7 @@ are transformed to data symbols, and **labels**, which provide
 context and guidance.
 
 We can characterise a data visualisation in terms of the **mappings**
-that it uses to transform data values into data symbols.
+that it uses to convert data values into data symbols.
 
 # The visual system {#sec-visual-system}
 
@@ -1432,5 +1439,9 @@ Pie charts by comparison have some weaknesses:
 * CVD
 * distance effect
 * visual illusions
+
+* Things that do not change are not salient (e.g., the widths of bars in
+  bar plot), BUT things that DO change are salient (so only do this to
+  represent changes in the data).  This should be cited to something.
 
 &nbsp;

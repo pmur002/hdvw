@@ -57,6 +57,7 @@ rateShow <- function(data, coords) {
 
 gg <- ggplot(crime) +
     geom_line(aes(year, rate, colour=age), linewidth=.5) +
+    scale_colour_npg() +
     theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1) +
     coord_cartesian(clip="off") +
