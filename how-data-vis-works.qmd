@@ -94,7 +94,7 @@ kable(crimeTable, digits=0)
 By contrast, with a simple line 
 plot data visualisation like @fig-crime we can perceive the trends
 in crime rates easily and immediately.
-It is also easy to perceive more detailed features like the fact that
+It is also easy to perceive more detailed properties like the fact that
 the trend in crime rates for 16-year-olds is not completely monotonic
 and the fact that
 the crime rate for 15-year-olds (the blue line) is always greater than
@@ -121,7 +121,9 @@ gg +
           aspect.ratio=1)
 ```
 
-On the other hand, if we use a data visualisation
+@fig-crime-heatmap shows a different data visualisation of the same data,
+this time a heatmap.
+If we use a data visualisation
 like @fig-crime-heatmap, detecting overall trends becomes more difficult and
 perceiving detailed changes in the crime rates is very much harder.
 Not all data visualisations are equally effective.
@@ -137,14 +139,14 @@ ggplot(crimeAgeSimple) +
     theme(aspect.ratio=1)
 ```
 
-Furthermore, although @fig-crime is very effective for the questions
+Although @fig-crime is very effective for the questions
 that we have considered so far, it is far less effective if we are interested
 in a different question, for example, whether the *total* crime
 rate is completely monotonic.  Does the *sum* of the red, blue, and green
 lines always decrease year on year?
 A single data visualisation cannot be effective for all possible questions.
 
-Now suppose we are interested in what the *exact* crime rate was 
+Suppose that we are interested in what the *exact* crime rate was 
 for 16-year-olds in 2011.  Neither @fig-crime nor @fig-crime-heatmap is
 the best option for answering this quesion.  The best option in this
 case is actually @tbl-crime. 
@@ -343,7 +345,7 @@ Three examples of data symbols: a line, some bars, and segments of an annulus.
 
 Guides
 : Guides are the elements of a data visualisation that explain
-how data values are represented, for examples the axes on a line plot
+how data values are represented, for example the axes on a line plot
 or bar plot and the legend on a donut plot (see @fig-guides).
 We will see later that **guides have a lot in common with data symbols**.
 
@@ -497,7 +499,8 @@ the data values are `year`, crime `rate`, and `age`
 the visual representation is a set of coloured lines.
 
 [^mappings]: 
-  The idea of "mapping" data values to visual representations is
+  The idea of characterising a data visualisation as a set
+  of "mappings" from data values to visual representations is
   also from the Grammar of Graphics [@wilkinson2005].
 
 We can describe this data visualisation in terms of a set of mappings

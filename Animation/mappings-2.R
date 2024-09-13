@@ -19,6 +19,10 @@ crime$rate <- round(crime$rate)
 figbg <- "#F2F2F2"
 highlight <- "#7D12BA" 
 
+scale_fill_continuous <- function(...) {
+    scale_fill_distiller(palette="Purples", ...)
+}
+
 theme_set(theme_bw())
 theme_update(plot.background=element_rect(colour=NA, 
                                           fill=figbg),
@@ -31,12 +35,12 @@ yearShow <- function(data, coords) {
     x <- coords$x[data$x == 2011][1]
     tg <- textGrob("",
                    x=x,
-                   y=unit(0, "npc") - unit(1, "lines"),
+                   y=unit(0, "npc") - unit(.5, "lines"),
                    gp=gpar(col=NA),
                    name="year.end")
-    sg <- segmentsGrob(x, 0, x, 1,
+    sg <- segmentsGrob(x, unit(-2, "mm"), x, unit(1, "npc") + unit(2, "mm"),
                        gp=gpar(col=adjustcolor(highlight, alpha=0),
-                               lty="dashed", lwd=2),
+                               lty="22", lwd=2),
                        name="year.line")
     grobTree(tg, sg)
 }
@@ -47,9 +51,9 @@ ageShow <- function(data, coords) {
                    x=unit(0, "npc") - unit(1, "lines"),
                    gp=gpar(col=NA),
                    name="age.end")
-    sg <- segmentsGrob(0, y, 1, y,
+    sg <- segmentsGrob(unit(-2, "mm"), y, unit(1, "npc") + unit(2, "mm"), y,
                        gp=gpar(col=adjustcolor(highlight, alpha=0),
-                               lty="dashed", lwd=2),
+                               lty="22", lwd=2),
                        name="age.line")
     grobTree(tg, sg)
 }
@@ -58,17 +62,7 @@ gg <- ggplot(crime) +
     geom_tile(aes(year, age, fill=rate), colour=NA) +
     scale_x_continuous(expand=expansion(0)) +
     scale_y_continuous(expand=expansion(0), breaks=14:16) +
-    scale_fill_gradient(high="white", low="grey") +
-    theme(panel.border=element_rect(colour="grey"),
-          panel.grid.major.y=element_line(colour="grey"),
-          plot.title=element_text(colour="grey"),
-          plot.subtitle=element_text(colour="grey"),
-          axis.ticks=element_line(colour="grey"),
-          axis.text=element_text(colour="grey"),
-          axis.title=element_text(colour="grey"),
-          legend.text=element_text(colour="grey"),
-          legend.title=element_text(colour="grey"),
-          aspect.ratio=1) +
+    theme(aspect.ratio=1) +
     coord_cartesian(clip="off") +
     grid_panel(yearShow, aes(x=year)) +
     grid_panel(ageShow, aes(y=age))
@@ -89,6 +83,7 @@ grid.newpage()
 grid.rect(gp=gpar(col=NA, fill=figbg))
 pushViewport(viewport(x=1/3, width=2/3, just="left"))
 print(gg, newpage=FALSE)
+grid.rect(gp=gpar(col=NA, fill=rgb(1,1,1,.7)))
 popViewport()
 pushViewport(viewport(x=0, width=1/3, just="left"))
 grid.draw(gt)
@@ -97,7 +92,7 @@ popViewport()
 grid.force()
 grid.add("bar.3-2-3-2", grep=TRUE,
          rectGrob(y=1, height=unit(1, "mm"),
-                  gp=gpar(col=rgb(0,0,0,0), lwd=.5),
+                  gp=gpar(col=rgb(0,0,0,0), fill="white", lwd=.5),
                   name="rate.line"))
 grid.add("bar.3-2-3-2", grep=TRUE,
          textGrob("", x=unit(-1, "lines"), y=1, name="rate.end"))
@@ -141,9 +136,9 @@ yearStartGroup <-
 yearEndGroup <- xml_find_first(svg, '//svg:g[@id = "year.end.1.1"]', ns)
 yearLine <- xml_find_first(svg, '//svg:polyline[@id = "year.line.1.1"]', ns)
 xml_set_attr(yearStartGroup, "style",
-             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.4)")
+             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.6)")
 xml_set_attr(yearLine, "style",
-             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.4)")
+             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,1)")
 yearStart <- as.numeric(strsplit(gsub("[^0-9. ]", "",
                                       xml_attr(yearStartGroup, "transform")),
                                  " ")[[1]])
@@ -168,14 +163,16 @@ xml_add_child(yearLine,
               begin=paste0(timings$showYear$start, "s"),
               dur="indefinite",
               restart="always")              
+xml_remove(yearLine)
+xml_add_child(xml_find_first(svg, "svg:g", ns), yearLine)
 ageStartGroup <-
     xml_find_first(svg, '//svg:g[@id = "core-fg.4-3-4-3.1"]/svg:g[2]/svg:g', ns)
 ageEndGroup <- xml_find_first(svg, '//svg:g[@id = "age.end.1.1"]', ns)
 ageLine <- xml_find_first(svg, '//svg:polyline[@id = "age.line.1.1"]', ns)
 xml_set_attr(ageStartGroup, "style",
-             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.4)")
+             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.6)")
 xml_set_attr(ageLine, "style",
-             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,.4)")
+             "filter: drop-shadow(3px -3px 2px rgba(0,0,0,1)")
 ageStart <- as.numeric(strsplit(gsub("[^0-9. ]", "",
                                       xml_attr(ageStartGroup, "transform")),
                                  " ")[[1]])
@@ -200,6 +197,8 @@ xml_add_child(ageLine,
               begin=paste0(timings$showAge$start, "s"),
               dur="indefinite",
               restart="always")              
+xml_remove(ageLine)
+xml_add_child(xml_find_first(svg, "svg:g", ns), ageLine)
 rateStartGroup <-
     xml_find_first(svg, '//svg:g[@id = "core-fg.4-2-4-2.1"]/svg:g[2]/svg:g', ns)
 rateEndGroup <- xml_find_first(svg, '//svg:g[@id = "rate.end.1.1"]', ns)
@@ -237,6 +236,8 @@ xml_add_child(rateLine,
               begin=paste0(timings$showRate$start, "s"),
               dur="indefinite",
               restart="always")
+xml_remove(rateLine)
+xml_add_child(xml_find_first(svg, "svg:g", ns), rateLine)
 ## Remove clipping regions (otherwise translations hide elements)              
 clipRegions <- xml_find_all(svg, '//svg:g[@clip-path]', ns)
 xml_set_attr(clipRegions, "clip-path", "none")
