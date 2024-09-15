@@ -1,0 +1,232 @@
+
+# The visual system {#sec-visual-system}
+
+Understanding why some mappings are more effective than others will
+depend upon an understanding of how the human visual system works.
+The effectiveness of a mapping from data values to data symbols
+will depend on how well we can map *back* from the data symbols
+to the properties of the data (@fig-decode).
+
+::: {#fig-decode}
+
+![](Diagrams/data-sym-decode.png)
+
+The effectiveness of a data visualisation will depend on how
+well our visual system can map from data symbols back to
+properties of the data.
+:::
+
+In this section we will establish a very simple model of the visual system 
+that we can refer to as we discuss different mappings.[^simple-visual-models]
+We will add some more detail about the visual system as we
+need to in later sections.
+
+[^simple-visual-models]:
+  Simple models the human visual system can be found in many books on
+  data visualisation, for example, @cairo2012functional.
+  See @ware2021information for a more in-depth,
+  but still very accessible description.
+
+## The eye
+
+In order for us to perceive a data visualisation, light from the
+data visualisation must enter the eye.  Light passes through the pupil, 
+is focused by the lens, and is projected onto the retina at the back of
+the eye.  The retina contains around 100 million light-sensitive
+nerve cells and signals from those are combined into about 1 million
+nerve fibres in the optic nerve, which passes signals on to the brain
+(see @fig-eye).
+A very large amount of visual information is gathered by the 
+eye and passed on to the brain.
+
+```{r}
+#| echo: false
+#| eval: false
+#| label: eye-basic
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+grid.text("lens", x=unit(.25, "npc") + unit(2, "mm"), just="left")
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("retina", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, -.2, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("optic\nnerve", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+```
+
+```{r}
+#| echo: false
+#| eval: false
+#| label: eye-basic-2
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("cones", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .65, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.65, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .3, -.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.35, just="right")
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("brain\nthis\nway", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+```
+
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/eye-basic.svg", bg=figbg, width=4, height=3)
+<<eye-basic>>
+dev.off()
+svg("Figures/eye-basic-2.svg", bg=figbg, width=4, height=3)
+<<eye-basic-2>>
+dev.off()
+```
+
+::: {#fig-eye}
+
+![](Figures/eye-basic.svg)
+
+A very simple diagram of the human eye.  Light enters via the pupil and
+is focused by the lens onto retina.  Light-sensitive neurons pass 
+signals via the optic nerve to the brain.
+:::
+
+## Visual processing
+
+The processing of the 
+signals from the optic nerve occurs in several areas of the brain.
+Very basic **visual features** are extracted first, such as 
+**position** (spatial arrangements), **angle** (orientations), **colour**,
+and simple **patterns** (spatial frequencies).
+This low-level information is passed on and built upon
+to produce higher-level representations, such as regions and **shapes**.
+Information is then also integrated from prior knowledge to assist with
+the identification of **objects**---things like trees, animals, and faces.
+
+::: {#fig-visual-processing}
+
+![](Diagrams/visual-processing.png)
+
+A very simple model of visual processing. 
+:::
+
+Lower-level processing occurs subconsciously and more rapidly than higher-level
+processing, which can require cognitive effort
+(see @fig-visual-model).  Furthermore, lower-level
+processing occurs in parallel and can involve many instances of visual 
+features at once, whereas higher-level processing will only focus on one
+or a few items.  On the other hand, lower-level visual features are rapidly
+discarded as our attention shifts, while higher-level visual objects are more
+persistent and may become part of long-term memories.  
+
+::: {#fig-visual-model}
+
+![](Model/model.png)
+
+Some of the properties of visual processing. 
+:::
+
+@fig-visual-model-demo shows an image that is made up of
+many small elements:  tiny triangles with different **lengths**,
+orientations (**angles**), and **colours**.
+The orientations of the triangles represents wind direction and the 
+length of the triangles represents wind strength;  blue triangles
+are over the sea and green triangles are over land.[^NOMADS]
+The visual system can very quickly
+perceive many small elements like this at once.
+There is no need to concentrate separately
+on every individual triangle in the image.
+At a higher level of processing, darker and lighter **regions** are
+identified as well as regions of different colours.
+For example, a band of lighter wind forms a line from the top-left
+corner at a roughly 45-degree angle.
+At a higher level of processing again, at least for the denizens of Oceania,
+the green regions are recognised as a very familiar **object**: the
+outline of New Zealand.
+
+The small lines convey a lot of simple pieces of information;
+what is the wind strength and direction at each location.
+The darker and lighter regions convey several more complex ideas like
+regions of stronger and lighter winds.
+The green regions combine to convey the single complex and abstract
+concept of New Zealand.
+
+[^NOMADS]:
+  @fig-visual-model-demo is based on wind data from the
+  National Oceanic and Atmospheric Administration's Operational Model Archive 
+  and Distribution System ([NOMADS](https://nomads.ncep.noaa.gov/).  
+  The data were accessed and processed using 
+  the {rNOMADS} pacakge @rNOMADS, with raw data interpolated to a finer
+  grid.
+
+::: {#fig-visual-model-demo}
+
+![](Data/Weather/NOMADS.png)
+
+A visualisation of wind strength and wind direction 
+that is made up of lots of small lines of different
+lengths and different angles and different colours.
+:::
+
+
+## Summary
+
+The human visual system captures a large amount of information from the
+visual field.  Large numbers of simple features are rapidly extracted,
+while more complex visual elements take longer and require more 
+congnitive effort, but persist for longer.
+

@@ -1,0 +1,12 @@
+
++ Trying out StormGlass
+
+  API key
+
+  47f811c8-717e-11ef-95ed-0242ac130004-47f8122c-717e-11ef-95ed-0242ac130004
+
+  ## v2 (only at point)
+  curl -H "Authorization: 47f811c8-717e-11ef-95ed-0242ac130004-47f8122c-717e-11ef-95ed-0242ac130004" "https://api.stormglass.io/v2/weather/point?lat=36.8509&lng=174.7645&params=windDirection,windSpeed&end=2024-09-13T00:00:00&source=noaa" > temp.txt
+
+  ## v1 (box) BUT uses up (more than) entire day worth of request quota
+  curl -H "Authorization: 47f811c8-717e-11ef-95ed-0242ac130004-47f8122c-717e-11ef-95ed-0242ac130004" "https://api.stormglass.io/v1/weather/area?box=-34.5,166.5:-47.5,178.5&params=windDirection,windSpeed&date=2024-09-13&step_size=0.25" > temp-2.txt
