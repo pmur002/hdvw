@@ -1,14 +1,20 @@
 
-# Mapping to Visual Features
+# Mapping Data to Visual Features
 
 We have established that the mappings from data values to data symbols
 are fundamental to a data visualisation.  However, there are many 
+possible ways to convert data values into visual representations;
+there are many
 possible mappings to choose from.
-In this section, we begin with
-the simplest sort of mapping:
-each data value is mapped to a basic **visual feature** of a data symbol
-and the interesting properties of the data are the raw data values
-themselves
+
+We have also begun to explore the visual system and we have identified
+three levels of visual processing:  visual features, visual shapes,
+and visual objects.
+
+In this section, we begin to explore different sorts of mappings,
+starting with 
+the simplest sort of mapping, where
+each **data value** is **mapped** to a basic **visual feature** of a data symbol
 (@fig-visual-feature).  
 
 ::: {#fig-visual-feature layout-ncol=2}
@@ -24,7 +30,7 @@ feature (`x`) of a single data symbol.
 
 ## Visual features
 
-In order to demonstrate this sort of mapping,
+In order to demonstrate mapping data values to visual features,
 we will work with a data visualisation of
 the `total` number of
 crimes for different ethnic `group`s.  The data values are shown
@@ -44,12 +50,13 @@ kable_styling(kable(crimeGroupTotalTable,
 ```
 
 A bar plot of these data is shown in @fig-bar.
-This is a very effective way to visualise the total values,
+This is a very effective way to visualise the `total` values,
 particularly if we are interested in comparing the raw totals.
 With this data visualisation, it is very easy to answer 
 questions like the following:
 
 * Which ethnic group has the largest total number of offenders?
+* Which ethnic group has the smallest total number of offenders?
 * Is the total number of offenders higher for `Māori` or `Pasifika`?
 * Is the total number of offenders for `European/Other` more or less
   than half the total for `Māori`?
@@ -65,11 +72,8 @@ ggplot(crimeGroupTotal) +
 ```
 
 Why is the data visualisation in @fig-bar so effective?
-
-> One reason why a bar plot is an effective data visualisation is 
-  that is involves a **mapping** from **data values** 
-  to basic **visual features**,
-  which are processed rapidly and subconsciously by our visual system.
+To help answer that question, we need to look at how the data values
+are being mapped to data symbols.
   
 The data symbols in @fig-bar 
 are a set of rectangles or bars.
@@ -123,10 +127,11 @@ ggplot(crimeGroupTotal) +
 ```
 
 **Length** and **position** are examples of basic visual features.
-@fig-visual-features shows some other examples of basic visual features.
-Part of the reason why a
-bar plot is effective is because basic visual features are 
+One way to make an effective data visualisation is to map
+data values to the basic visual features of a data symbol.
+This is effective because basic visual features are 
 identified rapidly and without conscious effort by our visual system.
+@fig-visual-features shows some other examples of basic visual features.
 
 ```{r}
 #| echo: false
@@ -172,6 +177,12 @@ grid.text("shape", x=0, just="right")
 grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), pch=3:4, gp=gpar(lwd=2))
 popViewport()
 ```
+
+> One reason why a bar plot is an effective data visualisation is 
+  because it involves a mapping from data values
+  to the basic visual features of data symbols---the
+  the positions and lengths of bars---and basic visual features 
+  are processed rapidly and subconsciously by our visual system.
 
 ## Quantitative features
 
