@@ -28,7 +28,7 @@ of a data symbol.  Each data value (`a`) is mapped to a visual
 feature (`x`) of a single data symbol.
 :::
 
-## Visual features
+## A bar chart
 
 In order to demonstrate mapping data values to visual features,
 we will work with a data visualisation of
@@ -75,6 +75,8 @@ Why is the data visualisation in @fig-bar so effective?
 To help answer that question, we need to look at how the data values
 are being mapped to data symbols.
   
+## Visual features
+
 The data symbols in @fig-bar 
 are a set of rectangles or bars.
 However, the important visual feature of the rectangles is their
@@ -295,7 +297,7 @@ By contrast, @fig-not-quant shows that **colour** and **shape** are
 *not* capable of representing quantitative values.  For example,
 the colour blue is not twice the colour green and
 a plus sign is not 10 more than a triangle.
-In effect, the visual representation *loses* information.
+In effect, these visual representations *lose* information.
 
 ```{r}
 #| echo: false
@@ -332,9 +334,11 @@ grid.text("shape", y=unit(-1, "lines"))
 popViewport(2)
 ```
 
-The bar plot in @fig-bar uses maps the `total` number of offenders,
-which are quantitative data values, to the
-**length** of bars, which is a quantitative visual feature.
+The bar plot in @fig-bar visualises the `total` number of offenders, 
+which are quantitative data values.  These quantitative values are
+mapped to the
+**lengths** of bars, which is a visual feature that is capable of
+conveying all of the information in quantitative values.
 
 > One reason why a bar plot is effective for visualising
   **quantitative data values** is because the quantitative data values,
@@ -343,9 +347,12 @@ which are quantitative data values, to the
 
 ## Qualitative features
 
-If we have **qualitative** data, 
+If we have **qualitative** data, then we are primarily concerned with
+conveying differences between data values.
 @fig-qual-features shows that **position**, **colour**, and **shape**
-are capable of representing categorical data values.
+are capable of representing qualitative data values.  For example,
+blue is clearly different from green, which is clearly different from 
+brown.
 
 ```{r}
 #| echo: false
@@ -461,10 +468,63 @@ difference between the length of two bars?[^accuracy-research]
   for statistical graphics was carried out by @cleveland1984graphical.
   Their results have been supported several times in subsequent 
   studies, including @heer2010crowdsourcing.
+  An argument for ranking the accuracy of visual features can also be
+  made from Steven's Law [@stevens1957psychophysics], which states that
+  the perception
+  of the magnitude of different stimuli follows a power law.
+  For example, the 
+  perception of length has a power of approximately one (linear), which
+  suggests that we accurately perceive the magnitude of lengths,
+  while area has a power less than one, which
+  suggests that we underestimate the magnitude of areas.
 
+It is easy to demonstrate that judgements of this sort are harder
+for some visual features than others.
+For example, @fig-accuracy-demo presents sets of three bars, which differ
+by **length**, circles, which differ by **area**, and polygons, which
+differ by **shape** (number of sides).
+Judging the relative sizes of the bars is easier than judging the
+relative sizes of the circles and comparing the polygons is 
+extremely difficult.
+
+```{r}
+#| echo: false
+#| label: fig-accuracy-demo
+#| fig-cap: A demonstration of differences in accuracy between basic visual features. For each set of symbols, how much larger (or brighter) are the larger (or brighter) symbols?
+colWidth <- .2
+pushViewport(viewport(layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.25, .5, .75), 0, width=colWidth, height=c(.3, .6, .9), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2), 
+             viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+grid.circle(c(.1, .5, .9), y=c(.1, .5, .9), 
+            r=sqrt(c(.0125, .025, .0375)), gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3), 
+             viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+regpoly <- function(x, y, n, offset=0) {
+    t <- seq(0, 2*pi, length.out=n+1)[-(n+1)] + offset
+    x <- x + .125*cos(t)
+    y <- y + .125*sin(t)
+    grid.polygon(x, y, gp=gpar(fill="black"))
+}
+regpoly(.1, .1, 3, pi/2)
+regpoly(.5, .5, 6, pi/2)
+regpoly(.9, .9, 9, pi/2)
+popViewport(2)
+```
+
+This issue has been studied experimentally and 
 @fig-accuracy shows the established ordering of the accuracy
 of basic visual features,
 with more accurate visual features at the top.
+A data visualisation that maps 
+data values to visual features near the top of this
+ranking will be more effective than one that maps data values
+to visual features near the bottom.
 
 ```{r}
 #| echo: false
@@ -514,20 +574,20 @@ popViewport()
 ```
 
 The bar plot in @fig-bar maps the `total` number of offenders,
-quantitative values, to the **length** of bars, which is an
+quantitative values, to the **lengths** of bars, which is an
 **accurate** visual feature.  This means that viewers can make
 accurate comparisons between
 the lengths of the bars.
 
 > One reason why a bar plot is effective for visualising
   **quantitative data values** is because the quantitative data values,
-  the counts,
+  counts or proportions,
   are mapped to a very **accurate visual feature**, the lengths of the bars.
 
 ## Capacity
 
 When we are visualising **qualitative** data values, we are no longer
-concerned with accurately perceiving the size of differences or ratios;
+concerned with accurately perceiving the size of differences;
 all we are concerned with is perceiving whether two values are 
 different.  For example, can we perceive a difference between two colours?
 
@@ -609,6 +669,12 @@ the different ethnic groups.
 
 ## Case study: Dot plots
 
+We have seen that, for several reasons,
+@fig-bar is an effective way to visualise
+the `total` number of offenders for different ethnic `group`s.
+@fig-dot shows an alternative representation of these data in the
+form of a dot plot [@cleveland1985graphical]. 
+
 ```{r}
 #| echo: false
 #| label: fig-dot
@@ -616,11 +682,37 @@ the different ethnic groups.
 ggplot(crimeGroupTotal) + 
     geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
                  linetype="dotted") +
-    geom_point(aes(x=total, y=group)) +
+    geom_point(aes(x=total, y=group), size=3) +
+    scale_x_continuous(name="total") +
     theme(aspect.ratio=1)
 ```
 
+Like the bar plot, 
+this is a very effective data visualisation, and for very similar 
+reasons.  This data visualisation uses a different data symbol, 
+data points instead of bars, but each data value is mapped to a
+basic visual feature of one data symbol.
+Furthermore, the quantitative data values (the totals)
+are mapped to the horizontal 
+**position** of the points, which is a very accurate
+visual feature, and the qualitative data values (the groups)
+are mapped to the vertical **position** of the points, which
+is a visual feature with a high capacity.
+
+It could be argued that the dot plot in @fig-dot is even *more* effective
+than the bar plot in @fig-bar for perceiving the differences 
+between `total`s because **position** ranks higher than **length**
+in @fig-accuracy.  On the other hand, if we want to compare 
+totals in terms of their ratios, @fig-bar is superior because it
+includes a representation of zero.
+
 ## Case study: Pie charts
+
+@fig-pie shows yet another visualisation of the `total` number of offenders
+for different ethnic `group`s, this time a pie chart.
+This is a less effective representation of the data than the
+bar plot in @fig-bar or the dot plot in @fig-dot and we can use
+familiar reasoning to see why.
 
 ```{r}
 #| echo: false
@@ -633,6 +725,18 @@ ggplot(crimeGroupTotal) +
           axis.title.y=element_blank(),
           axis.ticks.y=element_blank())
 ```
+
+The data symbols in @fig-pie are wedges or segments of a circle
+and, on the positive side, the data values are mapped to basic
+visual features of these symbols:
+The `total` values are mapped to the **angle** and/or **area** of the wedges
+and the `group` values are mapped to the **colour** of the wedges.
+Although **colour** is an appropriate visual feature to represent
+**qualitative** data, and it has sufficient capacity to differentiate
+between only four groups, the mapping of quantitative values to **angle**
+and/or **area** leads to less accurate perception of the differences
+between totals (compared to the lengths and positions employed in the
+bar plot and the dot plot).
 
 ## Summary
 
@@ -653,7 +757,7 @@ There are several reasons why bar plots work so well:
 
 Dot plots are also very effective for the same scenario for the same
 reasons, except that a dot plot uses **position** instead of length
-to represent the numeric values.
+to represent the quantitative values.
 
 Pie charts by comparison have some weaknesses:
 
