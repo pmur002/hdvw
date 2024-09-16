@@ -1,5 +1,5 @@
 
-# Mapping Data to Visual Features
+# Mapping Data to Visual Features {#sec-mapping-visual-features}
 
 We have established that the mappings from data values to data symbols
 are fundamental to a data visualisation.  However, there are many 
@@ -64,7 +64,7 @@ questions like the following:
 ```{r}
 #| echo: false
 #| label: fig-bar
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data symbols in this plot are the horizontal bars.
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot are the horizontal bars.
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
@@ -455,7 +455,7 @@ a qualitative visual feature.
   the groups, 
   are mapped to a **qualitative visual feature**, the positions of the bars.
 
-## Accuracy
+## Accuracy {#sec-accuracy}
 
 Another issue that impacts on how well we can map *back* from
 a visual feature to the data values (@fig-visual-feature-decode)

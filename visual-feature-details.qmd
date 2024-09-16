@@ -1,0 +1,188 @@
+
+# More About Visual Features {#sec-visual-details}
+
+@fig-bar-district shows a bar plot of the total number of offenders
+in each police district in New Zealand (for ages 14 to 16 and
+from 2011 to 2021).  For the reasons outlined in @sec-mapping-visual-features,
+this data visualisation is effective for
+comparing the number of offenders in different police districts.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.
+crimeTemp <- crimeDistrictTotal
+crimeTemp$district <- factor(crimeTemp$district,
+		             levels=rev(c("Northland", "Waitematā",
+			              "Auckland City",
+			              "Counties/Manukau", "Waikato",
+				      "Bay of Plenty",
+				      "Eastern", "Central",
+				      "Wellington",
+				      "Tasman", "Canterbury",
+				      "Southern")))
+ggplot(crimeTemp) +
+    geom_col(aes(x=total, y=district)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) 
+```
+
+@fig-bar-district-ordered shows a bar plot of the same data, but with the
+bars ordered from longest to shortest.  This data visualisation uses
+the same mappings as @fig-bar-district---police districts are mapped
+to the vertical positions of the bars and the total counts
+are mapped to the lengths of the bars---which means that it is also
+effective for comparing the total number of offenders between 
+police districts.
+
+However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
+for some comparisons.  For example, it is easier to compare the Northland
+district with the Tasman district in @fig-bar-district-ordered.
+The fact that two data visualisations with the same mappings
+can have a different effectiveness suggests that there is more to know about
+how different visual features work.
+
+This section covers some more details about how basic visual features work.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district-ordered
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from largest number of offenders to smallest.
+crimeDistrictTotal$districtOrdered <- 
+    with(crimeDistrictTotal, reorder(district, total))
+ggplot(crimeDistrictTotal) +
+    geom_col(aes(x=total, y=districtOrdered)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_discrete(name="district")
+```
+
+## The distance effect
+
+In @sec-accuracy, we saw that **position** and **length** were the most
+accurate visual features (see @fig-accuracy).  However, this accuracy
+decreases if the two visual features that are being compared are
+not in close proximity (see @fig-distance-effect).
+
+This helps to explain why @fig-bar-district-ordered is more effective
+than @fig-bar-district for some comparisons (e.g., Northland versus Tasman).
+
+```{r}
+#| echo: false
+#| label: fig-distance-effect
+#| fig-cap: Two bars are easier to compare if they are close to each other (top row).  If there is a distance between the bars and/or there are distractors (other bars) in between then comparisons are less accurate (bottom row).  On both the top and bottom row, the black bar on the left is slightly higher than the black bar on the right.
+pushViewport(viewport(width=.6, layout=grid.layout(2, 1)))
+pushViewport(viewport(layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.segments(0, .2, 1, .2, gp=gpar(col="grey"))
+grid.rect(.425, .2, .1, .6, just="bottom", gp=gpar(fill="black"))
+grid.rect(.575, .2, .1, .55, just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.segments(0, .2, 1, .2, gp=gpar(col="grey"))
+grid.rect(.125, .2, .1, .6, just="bottom", gp=gpar(fill="black"))
+grid.rect(seq(.275, .725, .150), .2, .1, runif(4, .2, .8), 
+          just="bottom", gp=gpar(col=NA, fill="grey"))
+grid.rect(.875, .2, .1, .55, just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+```
+
+> One reason for ordering the bars in a bar plot from longest to shortest 
+  is because, for some common comparisons, 
+  the ordering places the bars that are being
+  compared closer 
+  together, which improves the accuracy of the comparison.
+
+## Unaligned length and position
+
+@fig-unaligned-length shows that it is harder to accurately compare
+the **lengths** of two bars if they are **unaligned** and do not share a 
+common base.  This also applies to the accuracy of comparing **positions**.
+
+```{r}
+#| echo: false
+#| label: fig-unaligned-length
+#| fig-cap: It is easier to compare the lengths of the two bars on the left because they are **aligned**;  they share a common base.  The two bars on the right are harder to compare because they are **unaligned**.
+pushViewport(viewport(x=0, width=.5, just="left"))
+pushViewport(viewport(width=unit(.8, "snpc")))
+grid.segments(.2, .1, .2, .9, gp=gpar(col="grey"))
+grid.rect(.2, c(.3, .7), c(.5, .6), .2, just="left", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(x=.5, width=.5, just="left"))
+pushViewport(viewport(x=.4, width=unit(.8, "snpc")))
+grid.segments(.2, .1, .2, .5, gp=gpar(col="grey"))
+grid.segments(.4, .5, .4, .9, gp=gpar(col="grey"))
+grid.rect(c(.2, .4), c(.3, .7), c(.5, .6), .2, just="left",
+          gp=gpar(fill="black"))
+popViewport(2)
+```
+
+@fig-stacked-bar shows an alternative visualisation of the data on 
+the total number of offenders in different ethnic groups.
+The bar plot of these data in @fig-bar mapped ethnic groups
+to the **positions** of the bars so that the bars were arranged
+vertically with a common left-hand edge.
+In @fig-stacked-bar, the ethnic groups are 
+mapped to different **colours** and the bars are "stacked" horizontally.
+
+Although the total number of offenders has been mapped to the same
+visual feature in both @fig-stacked-bar and @fig-bar, the **lengths**
+of the bars, comparing those lengths is much harder in @fig-stacked-bar
+because the lengths are **unaligned**.
+
+```{r}
+#| echo: false
+#| label: fig-stacked-bar
+#| fig-cap: A stacked bar plot of the total number of offenders in each ethnic group.
+gg <- ggplot(crimeGroupTotal) +
+    geom_col(aes(total, y="", fill=group), position="stack") +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_discrete(name=NULL, expand=expansion(0)) +
+    theme(axis.ticks.y=element_blank())
+pushViewport(viewport(width=.8, height=.6))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+
+## Case study:  Bar plot with multiple groups
+
+Bars are closer together, but
+are unaligned.
+
+```{r}
+#| echo: false
+#| label: fig-stacked-bar-year
+#| fig-cap: A stacked bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(year, count, fill=group), position="stack") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+Bars are aligned, but further apart.
+
+```{r}
+#| echo: false
+#| label: fig-side-bar-year
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(year, count, fill=group), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+Bars are aligned and close together ... for certain comparisons
+(e.g., year to year within ethnic group),
+but now both unaligned and further apart for other comparisons
+(e.g., between ethnic groups for same year).
+
+```{r}
+#| echo: false
+#| label: fig-side-bar-group
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(group, count, fill=group, group=year), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+Conclusion:  probably one of side-by-side (or both!) 
+is the best option.
+Stacked bars are quite badly compromised.
