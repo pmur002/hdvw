@@ -107,12 +107,14 @@ div.csl-indent {
   <li><a href="#sec-colour" id="toc-sec-colour" class="nav-link" data-scroll-target="#sec-colour"><span class="header-section-number">5.1</span> Hue, chroma, and luminance</a></li>
   <li><a href="#ordinal-visual-features" id="toc-ordinal-visual-features" class="nav-link" data-scroll-target="#ordinal-visual-features"><span class="header-section-number">5.2</span> Ordinal visual features</a></li>
   <li><a href="#sec-colour-relative" id="toc-sec-colour-relative" class="nav-link" data-scroll-target="#sec-colour-relative"><span class="header-section-number">5.3</span> Perception is relative</a></li>
-  <li><a href="#case-study-heatmaps" id="toc-case-study-heatmaps" class="nav-link" data-scroll-target="#case-study-heatmaps"><span class="header-section-number">5.4</span> Case study: Heatmaps</a></li>
-  <li><a href="#gestalt-principles" id="toc-gestalt-principles" class="nav-link" data-scroll-target="#gestalt-principles"><span class="header-section-number">5.5</span> Gestalt principles</a></li>
-  <li><a href="#summary-4" id="toc-summary-4" class="nav-link" data-scroll-target="#summary-4"><span class="header-section-number">5.6</span> Summary</a></li>
+  <li><a href="#gestalt-principles" id="toc-gestalt-principles" class="nav-link" data-scroll-target="#gestalt-principles"><span class="header-section-number">5.4</span> Gestalt principles</a></li>
+  <li><a href="#summary-4" id="toc-summary-4" class="nav-link" data-scroll-target="#summary-4"><span class="header-section-number">5.5</span> Summary</a></li>
   </ul></li>
   <li><a href="#visual-congruence" id="toc-visual-congruence" class="nav-link" data-scroll-target="#visual-congruence"><span class="header-section-number">6</span> Visual Congruence</a></li>
-  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo"><span class="header-section-number">7</span> TODO</a></li>
+  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo"><span class="header-section-number">7</span> TODO</a>
+  <ul class="collapse">
+  <li><a href="#case-study-heatmaps" id="toc-case-study-heatmaps" class="nav-link" data-scroll-target="#case-study-heatmaps"><span class="header-section-number">7.1</span> Case study: Heatmaps</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -1091,43 +1093,42 @@ Figure&nbsp;4.11: A bar plot of the number of offenders for different police dis
 </section>
 <section id="qualitative-visual-features" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Qualitative Visual Features</h1>
-<p><a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a> shows a data visualisation of the number of offenders in different ethnic groups for each year from 2011 to 2021. The data values for this visualisation are: counts, which are quantitative values; ethnic groups, which are qualitative values; and years, which we are also treating as qualitative (if ordinal) values because they are discrete years. The visualisation consists of an array of rectangles, one for each combination of year and ethnic group, with the colour of each rectangle representing the number of offenders for that combination of year and ethnic group.</p>
+<p><a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;5.1</a> shows a pie chart of the number of offenders for different levels of crime seriousness (between 2011 and 2021). In this data visualisation, level, which is a <strong>qualitative</strong> variable, is mapped to <strong>colour</strong>, which is appropriate for representing qualitative values (see <a href="#sec-qual-features" class="quarto-xref">Section&nbsp;3.4</a>). It is easy to identify different crime levels because it is easy to perceive differences between the colours of the wedges in the pie chart.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-heatmap-hue" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-pie-hue" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-heatmap-hue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="how-data-vis-works_files/figure-html/fig-heatmap-hue-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<div aria-describedby="fig-pie-hue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-pie-hue-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-hue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.1: A data visualisation of the number of offenders in each ethnic group for each year from 2011 to 2021.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-hue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: A data visualisation of the number of offenders for different levels of crime seriousness.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a> is <em>not</em> an effective visualisation because it maps the <strong>quantitative</strong> counts to <strong>colour</strong>. We showed in <a href="#sec-quant-features" class="quarto-xref">Section&nbsp;3.3</a> and <a href="#sec-qual-features" class="quarto-xref">Section&nbsp;3.4</a> that colour is not appropriate for representing quantitative values. All we can see is that the counts are <em>different</em> for different combinations of year and ethnic group; we cannot see the sizes of differences or even the direction (larger or smaller). We produced several more effective visualisations of the same data in <a href="#sec-stacked-vs-side" class="quarto-xref">Section&nbsp;4.3</a> by mapping the quantitative counts to <strong>lengths</strong> in a bar plot (see <a href="#fig-stacked-bar-year" class="quarto-xref">Figure&nbsp;4.6</a>, <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;4.7</a>, and <a href="#fig-side-bar-group" class="quarto-xref">Figure&nbsp;4.8</a>).</p>
-<p><a href="#fig-heatmap-gradient" class="quarto-xref">Figure&nbsp;5.2</a> shows another data visualisation of the same data. This visualisation is recognisable as a heatmap, but it is really the same visualisation as <a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a>, just with a different colour scale. As for <a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a>, we have a rectangle for each combination of year and ethnic group and the <strong>colour</strong> of each rectangle reflects the number of offenders for each combination of year and ethnic group.</p>
-<p>Despite being essentially the same type of visualisation as <a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a>, <a href="#fig-heatmap-gradient" class="quarto-xref">Figure&nbsp;5.2</a> is more effective than <a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a>. Although we cannot see the sizes of differences between different years or between different ethnic groups, we can see some changes over time. For example, for both Māori and European/Other ethnic groups, we can see that the number of offenders has decreased over time; the rectangles transition from darker purple to lighter purple, from left to right, on the bottom two rows.</p>
+<p><a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;5.2</a> show another pie chart of the same data, again mapping the <strong>qualitative</strong> level to <strong>colour</strong>. It is again easy to differentiate between different crime levels because we can easily perceive differences between the colours of the wedges. However, <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;5.2</a> is <em>more</em> effective than <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;5.1</a> because we can <em>also</em> perceive an ordering of the wedges from more serious crimes, which are darker wedges, to less serious crimes, which are lighter wedges.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-heatmap-gradient" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-pie-ordinal" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-heatmap-gradient-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="how-data-vis-works_files/figure-html/fig-heatmap-gradient-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<div aria-describedby="fig-pie-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-pie-ordinal-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-gradient-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.2: A data visualisation of the number of offenders in each ethnic group for each year from 2011 to 2021.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: A data visualisation of the number of offenders for different levels of crime seriousness.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The fact that there can be two data visualisations, <a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a> and <a href="#fig-heatmap-gradient" class="quarto-xref">Figure&nbsp;5.2</a>, with the same mappings, the <strong>quantitative</strong> number of offenders maps to the visual feature <strong>colour</strong>, but the two data visualisations have different effectiveness suggests that there is still more to learn about how different visual features work.</p>
+<p>The fact that there can be two data visualisations, <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;5.1</a> and <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;5.2</a>, with the same mappings, the <strong>qualitative</strong> level of crime maps to the visual feature <strong>colour</strong>, but the two data visualisations have different effectiveness suggests that there is still more to learn about how different visual features work.</p>
 <p>This section covers some more details about how <strong>qualitative</strong> visual features work.</p>
 <section id="sec-colour" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-colour"><span class="header-section-number">5.1</span> Hue, chroma, and luminance</h2>
 <p>We have so far taken a very simplistic approach to <strong>colour</strong>, treating it as if it is a single <strong>qualitative</strong> visual feature (see <a href="#sec-qual-features" class="quarto-xref">Section&nbsp;3.4</a>). However, the perception of colour can be divided into three separate visual features: <strong>hue</strong>, <strong>chroma</strong>, and <strong>luminance</strong> (see <a href="#fig-hcl" class="quarto-xref">Figure&nbsp;5.3</a>).<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Hue describes what we normally refer to as the colour name: reds, oranges, yellows, greens, blues, and purples. Chroma describes the colourfulness, from bright to dull, and luminance describes the lightness, from dark to light. Our visual system is capable to perceiving changes in hue and changes in chroma and changes in luminance.</p>
+<p>We have described colour as a <strong>qualitative</strong> visual feature so far, but that really strictly only applies to <strong>hue</strong>. For example, <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;4.5</a> used different hues to represent different ethnic groups. Hue is excellent for the perception of differences.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-hcl" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -1142,12 +1143,11 @@ Figure&nbsp;5.3: The perception of colour can be divided into three components: 
 </div>
 </div>
 </div>
-<p>We have described colour as a qualitative visual feature so far, but that really strictly only applies to <strong>hue</strong>. For example, <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;4.5</a> used different hues to represent different ethnic groups. Hue is excellent for the perception of differences.</p>
 </section>
 <section id="ordinal-visual-features" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="ordinal-visual-features"><span class="header-section-number">5.2</span> Ordinal visual features</h2>
 <p><strong>Chroma</strong> and <strong>luminance</strong> are both <strong>qualitative</strong> visual features in that they can be used to visualise different groups, but they are also <strong>ordinal</strong> visual features because we can perceive an ordering from a set of colours that differ in terms of either chroma or luminance or both. A set of colours that transitions from darker to lighter and/or brighter to duller conveys an ordering from larger to smaller.</p>
-<p>This helps to explain why <a href="#fig-heatmap-gradient" class="quarto-xref">Figure&nbsp;5.2</a> is more effective than <a href="#fig-heatmap-hue" class="quarto-xref">Figure&nbsp;5.1</a>. In <a href="#fig-heatmap-gradient" class="quarto-xref">Figure&nbsp;5.2</a>, the colours differ mostly in terms of luminance and chroma so we are able to perceive changes from larger values to smaller values because the colours transition from darker to lighter.</p>
+<p>This helps to explain why <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;5.2</a> is more effective than <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;5.1</a>. In <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;5.2</a>, the colours differ mostly in terms of luminance and chroma so we are able to perceive changes from larger values to smaller values because the colours transition from darker to lighter.</p>
 <p>In this sense, <strong>chroma</strong> and <strong>luminance</strong> are able to convey more information than <strong>hue</strong> because they can represent <strong>nominal</strong> differences <em>and</em> <strong>ordinal</strong> differences, whereas hue can only represent nominal differences.</p>
 <p>On the other hand, <a href="#fig-lum-cap" class="quarto-xref">Figure&nbsp;5.4</a> shows that chroma and luminance are even more limited than hue in terms of <strong>capacity</strong>. We can only use chroma and/or luminance to represent <strong>nominal</strong> data when there are very few different groups to represent.</p>
 <div class="cell">
@@ -1199,7 +1199,7 @@ Figure&nbsp;5.6: This pie chart demonstrates that the perception of hues is rela
 </div>
 </div>
 <p>The pie chart in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;5.6</a> is <em>not</em> an effective data visualisation because it maps qualitative data values with lots of different groups to colour hue. This exceeds the <strong>capacity</strong> of the <strong>hue</strong> visual feature; it is difficult to clearly distinguish between all of the different hues (see <a href="#sec-capacity" class="quarto-xref">Section&nbsp;3.6</a>).</p>
-<p>For the purposes of demonstration, we can solve the colour perception problems in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;5.6</a> by adding a white border to all of the wedges (see <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;5.7</a>).</p>
+<p>Although it does not make the use of hue any more appropriate, for the purposes of demonstration, we can solve the colour perception problems in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;5.6</a> by adding a white border to all of the wedges (see <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;5.7</a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie-contrast-solved" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -1215,19 +1215,11 @@ Figure&nbsp;5.7: The hues in this pie chart are perceived more accurately than t
 </div>
 </div>
 </section>
-<section id="case-study-heatmaps" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="case-study-heatmaps"><span class="header-section-number">5.4</span> Case study: Heatmaps</h2>
-<p>Heatmaps, like the data visualisation in <a href="#fig-heatmap-gradient" class="quarto-xref">Figure&nbsp;5.2</a> are a common way of representing three-dimensional data where two of the data variables are either qualitative or have been measured on a regular grid. The latter two variables naturally map to horizontal and vertical <strong>position</strong> to produce an array of rectangles, while the third variable maps to <strong>colour</strong> (see <a href="#fig-mappings-2" class="quarto-xref">Figure&nbsp;1.8</a>).</p>
-<p>The mappings from data values to visual features for a heatmap are</p>
-<p>colour is not quant but can convey trends</p>
-<p>get contrast effect but again not typically trying to match cells</p>
-<p>TODO talk about colour palettes that have deliberate colour boundaries to emphasise structure - combination of order and category</p>
+<section id="gestalt-principles" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="gestalt-principles"><span class="header-section-number">5.4</span> Gestalt principles</h2>
 </section>
-<section id="gestalt-principles" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="gestalt-principles"><span class="header-section-number">5.5</span> Gestalt principles</h2>
-</section>
-<section id="summary-4" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="summary-4"><span class="header-section-number">5.6</span> Summary</h2>
+<section id="summary-4" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="summary-4"><span class="header-section-number">5.5</span> Summary</h2>
 <p><strong>Chroma</strong> and <strong>luminance* can be used to represent </strong>qualitative** data values, but they have a very limited capacity.</p>
 <p><strong>Chroma</strong> and <strong>luminance* can be used to represent </strong>quantitative<strong> data values, but they are very inaccurate and only really convey </strong>ordinal** information.</p>
 </section>
@@ -1265,8 +1257,17 @@ Figure&nbsp;5.7: The hues in this pie chart are perceived more accurately than t
 <li><p>Use reordering of <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;4.7</a> (so that they start tallest to smallest) THEN should see change in that pattern later on more easily? Use this as an example of “visual shape” in a bar plot. Revisit heatmaps - regions/shapes of colours?</p></li>
 <li><p>Need citation for contrast effect</p></li>
 </ul>
+<section id="case-study-heatmaps" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="case-study-heatmaps"><span class="header-section-number">7.1</span> Case study: Heatmaps</h2>
+<p>Heatmaps are a common way of representing three-dimensional data where two of the data variables are either qualitative or have been measured on a regular grid. The latter two variables naturally map to horizontal and vertical <strong>position</strong> to produce an array of rectangles, while the third variable maps to <strong>colour</strong> (see <a href="#fig-mappings-2" class="quarto-xref">Figure&nbsp;1.8</a>).</p>
+<p>The mappings from data values to visual features for a heatmap are</p>
+<p>colour is not quant but can convey trends</p>
+<p>get contrast effect but again not typically trying to match cells</p>
+<p>get regions/shapes of colour =&gt; higher-level structures</p>
+<p>talk about colour palettes that have deliberate colour boundaries to emphasise structure - combination of order and category</p>
 <p>&nbsp;</p>
 
+</section>
 </section>
 
 

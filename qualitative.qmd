@@ -1,86 +1,51 @@
 
 # Qualitative Visual Features
 
-@fig-heatmap-hue shows a data visualisation of the number of offenders
-in different ethnic groups for each year from 2011 to 2021.
-The data values for this visualisation are: 
-counts, which are quantitative values; ethnic groups,
-which are qualitative values; and years, which we are also treating as
-qualitative (if ordinal) values because they are discrete years.
-The visualisation consists of an array of rectangles, one for
-each combination of year and ethnic group, with the colour
-of each rectangle representing the number of offenders for that
-combination of year and ethnic group.
+@fig-pie-hue shows a pie chart of the number of offenders for different
+levels of crime seriousness (between 2011 and 2021).
+In this data visualisation, level, which is a **qualitative** variable,
+is mapped to **colour**, which is appropriate for representing
+qualitative values (see @sec-qual-features).  It is easy to identify
+different crime levels because it is easy to perceive differences between
+the colours of the wedges in the pie chart.
 
 ```{r}
 #| echo: false
-#| label: fig-heatmap-hue
-#| fig-cap: A data visualisation of the number of offenders in each ethnic group for each year from 2011 to 2021. 
-breaks <- seq(0, 6000, length.out=11)
-crimeGroupBinned <- crimeGroup
-crimeGroupBinned$bincount <- cut(crimeGroupBinned$count, 
-                                 breaks, 
-                                 labels=sprintf("%4d-%4d", 
-                                                breaks[-10], breaks[-1]))
-ggplot(crimeGroupBinned) +
-    geom_tile(aes(year, group, fill=bincount), colour="black", linewidth=.1) +
-    scale_x_continuous(expand=expansion(0)) +
-    scale_y_discrete(expand=expansion(0))
+#| label: fig-pie-hue
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level)) +
+    coord_polar() +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
 ```
 
-@fig-heatmap-hue is *not* an effective visualisation because it maps the 
-**quantitative** counts to **colour**.  We showed in
-@sec-quant-features and @sec-qual-features that colour is not
-appropriate for representing quantitative values.
-All we can see is that the counts are *different* for different
-combinations of year and ethnic group;  we cannot see the sizes
-of differences or even the direction (larger or smaller).
-We produced several more effective visualisations 
-of the same data in @sec-stacked-vs-side by mapping 
-the quantitative counts to **lengths** in a bar plot
-(see @fig-stacked-bar-year, @fig-side-bar-year, and @fig-side-bar-group).
-
-@fig-heatmap-gradient shows another data visualisation of the same data.
-This visualisation is recognisable as
-a heatmap, but it is really the same visualisation
-as @fig-heatmap-hue, just with a different colour scale.
-As for @fig-heatmap-hue, we have a rectangle for each combination of year
-and ethnic group and the **colour** of each
-rectangle reflects the number of offenders for each combination
-of year and ethnic group.
-
-Despite being essentially the same type of visualisation as @fig-heatmap-hue,
-@fig-heatmap-gradient is more effective than @fig-heatmap-hue.
-Although we cannot see the sizes of differences between different years
-or between different ethnic groups, we can see some changes over time.
-For example, for both 
-Māori and European/Other ethnic groups, we can see that
-the number of offenders has decreased 
-over time;  the rectangles transition from darker purple to lighter purple,
-from left to right, on the bottom two rows.
+@fig-pie-ordinal show another pie chart of the same data, again mapping
+the **qualitative** level to **colour**.
+It is again easy to differentiate between different crime levels because we
+can easily perceive differences between the colours of the wedges.
+However, @fig-pie-ordinal is *more* effective than @fig-pie-hue because
+we can *also* perceive an ordering of the wedges from more serious crimes,
+which are darker wedges, to less serious crimes, which are lighter wedges.
 
 ```{r}
 #| echo: false
-#| label: fig-heatmap-gradient
-#| fig-cap: A data visualisation of the number of offenders in each ethnic group for each year from 2011 to 2021. 
-breaks <- seq(0, 6000, length.out=11)
-crimeGroupBinned <- crimeGroup
-crimeGroupBinned$bincount <- cut(crimeGroupBinned$count, 
-                                 breaks, 
-                                 labels=sprintf("%4d-%4d", 
-                                                breaks[-10], breaks[-1]))
-ggplot(crimeGroupBinned) +
-    geom_tile(aes(year, group, fill=bincount), colour="black", linewidth=.1) +
-    scale_x_continuous(expand=expansion(0)) +
-    scale_y_discrete(expand=expansion(0)) +
-    scale_fill_discrete_sequential(palette="Purples")
+#| label: fig-pie-ordinal
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level), colour="black") +
+    coord_polar() +
+    scale_fill_ordinal(guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
 ```
 
 The fact that there can be two data visualisations,
-@fig-heatmap-hue and @fig-heatmap-gradient,
+@fig-pie-hue and @fig-pie-ordinal,
 with the same mappings,
-the **quantitative**
-number of offenders maps to the visual feature **colour**,
+the **qualitative**
+level of crime maps to the visual feature **colour**,
 but the two data visualisations 
 have different effectiveness suggests that there is still
 more to learn about how different visual features work.
@@ -118,6 +83,11 @@ chroma and changes in luminance.
   sum of L and M cones.
   For more information, see @ware2021information.
 
+We have described colour as a **qualitative** visual feature so far, but that 
+really strictly only applies to **hue**.  For example, 
+@fig-stacked-bar used different hues to represent different ethnic groups.
+Hue is excellent for the perception of differences.
+
 ```{r}
 #| echo: false
 #| label: fig-hcl
@@ -152,11 +122,6 @@ grid.text("luminance", y=unit(-2, "lines"))
 popViewport(2)
 ```
 
-We have described colour as a qualitative visual feature so far, but that 
-really strictly only applies to **hue**.  For example, 
-@fig-stacked-bar used different hues to represent different ethnic groups.
-Hue is excellent for the perception of differences.
-
 ## Ordinal visual features
 
 **Chroma** and **luminance** are both **qualitative** visual features
@@ -167,8 +132,8 @@ or luminance or both.  A set of colours that transitions from darker
 to lighter and/or brighter to duller conveys an ordering from larger
 to smaller.
 
-This helps to explain why @fig-heatmap-gradient is more effective
-than @fig-heatmap-hue.  In @fig-heatmap-gradient, the colours differ
+This helps to explain why @fig-pie-ordinal is more effective
+than @fig-pie-hue.  In @fig-pie-ordinal, the colours differ
 mostly in terms of luminance and chroma so we are able to perceive
 changes from larger values to smaller values because the
 colours transition from darker to lighter.
@@ -301,7 +266,8 @@ to colour hue.  This exceeds the **capacity** of the **hue** visual feature;
 it is difficult to clearly distinguish between all of the different hues
 (see @sec-capacity).
 
-For the purposes of demonstration,
+Although it does not make the use of hue any more appropriate,
+for the purposes of demonstration,
 we can solve the colour perception problems in @fig-pie-contrast
 by adding a white border to all of the wedges
 (see @fig-pie-contrast-solved).
@@ -318,27 +284,6 @@ ggplot(crimeDistrictTotal) +
           axis.title.y=element_blank(),
           axis.ticks.y=element_blank())
 ```
-
-## Case study: Heatmaps
-
-Heatmaps, like the data visualisation in @fig-heatmap-gradient
-are a common way of representing three-dimensional data where 
-two of the data variables are either qualitative 
-or have been measured on a regular grid.
-The latter two variables naturally map to horizontal and vertical
-**position** to produce an array of
-rectangles, while the third variable maps to **colour**
-(see @fig-mappings-2).
-
-The mappings from data values to visual features for a heatmap
-are 
-
-colour is not quant but can convey trends
-
-get contrast effect but again not typically trying to match cells
-
-TODO talk about colour palettes that have deliberate colour boundaries
-to emphasise structure - combination of order and category
 
 ## Gestalt principles
 
