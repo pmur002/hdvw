@@ -1,0 +1,355 @@
+
+# Qualitative Visual Features
+
+@fig-heatmap-hue shows a data visualisation of the number of offenders
+in different ethnic groups for each year from 2011 to 2021.
+The data values for this visualisation are: 
+counts, which are quantitative values; ethnic groups,
+which are qualitative values; and years, which we are also treating as
+qualitative (if ordinal) values because they are discrete years.
+The visualisation consists of an array of rectangles, one for
+each combination of year and ethnic group, with the colour
+of each rectangle representing the number of offenders for that
+combination of year and ethnic group.
+
+```{r}
+#| echo: false
+#| label: fig-heatmap-hue
+#| fig-cap: A data visualisation of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+breaks <- seq(0, 6000, length.out=11)
+crimeGroupBinned <- crimeGroup
+crimeGroupBinned$bincount <- cut(crimeGroupBinned$count, 
+                                 breaks, 
+                                 labels=sprintf("%4d-%4d", 
+                                                breaks[-10], breaks[-1]))
+ggplot(crimeGroupBinned) +
+    geom_tile(aes(year, group, fill=bincount), colour="black", linewidth=.1) +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_discrete(expand=expansion(0))
+```
+
+@fig-heatmap-hue is *not* an effective visualisation because it maps the 
+**quantitative** counts to **colour**.  We showed in
+@sec-quant-features and @sec-qual-features that colour is not
+appropriate for representing quantitative values.
+All we can see is that the counts are *different* for different
+combinations of year and ethnic group;  we cannot see the sizes
+of differences or even the direction (larger or smaller).
+We produced several more effective visualisations 
+of the same data in @sec-stacked-vs-side by mapping 
+the quantitative counts to **lengths** in a bar plot
+(see @fig-stacked-bar-year, @fig-side-bar-year, and @fig-side-bar-group).
+
+@fig-heatmap-gradient shows another data visualisation of the same data.
+This visualisation is recognisable as
+a heatmap, but it is really the same visualisation
+as @fig-heatmap-hue, just with a different colour scale.
+As for @fig-heatmap-hue, we have a rectangle for each combination of year
+and ethnic group and the **colour** of each
+rectangle reflects the number of offenders for each combination
+of year and ethnic group.
+
+Despite being essentially the same type of visualisation as @fig-heatmap-hue,
+@fig-heatmap-gradient is more effective than @fig-heatmap-hue.
+Although we cannot see the sizes of differences between different years
+or between different ethnic groups, we can see some changes over time.
+For example, for both 
+Māori and European/Other ethnic groups, we can see that
+the number of offenders has decreased 
+over time;  the rectangles transition from darker purple to lighter purple,
+from left to right, on the bottom two rows.
+
+```{r}
+#| echo: false
+#| label: fig-heatmap-gradient
+#| fig-cap: A data visualisation of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+breaks <- seq(0, 6000, length.out=11)
+crimeGroupBinned <- crimeGroup
+crimeGroupBinned$bincount <- cut(crimeGroupBinned$count, 
+                                 breaks, 
+                                 labels=sprintf("%4d-%4d", 
+                                                breaks[-10], breaks[-1]))
+ggplot(crimeGroupBinned) +
+    geom_tile(aes(year, group, fill=bincount), colour="black", linewidth=.1) +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_discrete(expand=expansion(0)) +
+    scale_fill_discrete_sequential(palette="Purples")
+```
+
+The fact that there can be two data visualisations,
+@fig-heatmap-hue and @fig-heatmap-gradient,
+with the same mappings,
+the **quantitative**
+number of offenders maps to the visual feature **colour**,
+but the two data visualisations 
+have different effectiveness suggests that there is still
+more to learn about how different visual features work.
+
+This section covers some more details about how **qualitative** visual
+features work.
+
+## Hue, chroma, and luminance {#sec-colour}
+
+We have so far taken a very simplistic approach to **colour**,
+treating it as if it is a single **qualitative** visual feature
+(see @sec-qual-features).
+However, the perception of colour can be divided into 
+three separate visual features:  **hue**, **chroma**, and **luminance**
+(see @fig-hcl).[^tricolour]
+Hue describes what we normally refer to as the colour name: reds, oranges,
+yellows, greens, blues, and purples.
+Chroma describes the colourfulness, from bright to dull,
+and luminance describes the lightness, from dark to light.
+Our visual system is capable to perceiving changes in hue and changes in
+chroma and changes in luminance.
+
+[^tricolour]:
+  The three-dimensional experience of colour arises from the fact that there
+  are three different sorts of cones in the retina (see @sec-eye),
+  each sensitive to a different range of light wavelengths:
+  The L cones respond to long wavelengths (reds); the M cones respond
+  to medium wavelengths (greens); and the S cones respond to short
+  wavelengths (blues).
+  The neural connections that combine the messages from the retina are also 
+  divided into three pathways: light-dark, which represents the sum of L, M, 
+  and S cones;
+  red-green, which represents the difference between L and M cones;
+  and blue-yellow, which represents the difference between S cones and the
+  sum of L and M cones.
+  For more information, see @ware2021information.
+
+```{r}
+#| echo: false
+#| label: fig-hcl
+#| fig-cap: "The perception of colour can be divided into three components: differences in **hue**, the colours of the rainbow; differences in **chroma**, from bright and colourful to dull and grey; and differences in **luminance**, from light to dark."
+vp2 <- viewport(width=.9, y=unit(3, "lines"),
+                height=unit(1, "npc") - unit(6, "lines"),
+                just="bottom")
+pushViewport(viewport(layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+n <- 7
+t <- seq(0, 2*pi, length.out=n+1)[-1]
+x <- .5 + .3*cos(t)
+y <- .5 + .3*sin(t)
+grid.circle(x, y, r=.1,
+            gp=gpar(col="black", fill=hcl(t/pi*180, 70, 70)))
+popViewport()
+grid.text("hue", y=unit(-2, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1, 
+            gp=gpar(col="black", fill=hcl(300, 100*1:5/6, 70))) 
+grid.text("chroma", y=unit(-2, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1, 
+            gp=gpar(col="black", fill=hcl(300, 70, 100*5:1/6))) 
+grid.text("luminance", y=unit(-2, "lines"))
+popViewport(2)
+```
+
+We have described colour as a qualitative visual feature so far, but that 
+really strictly only applies to **hue**.  For example, 
+@fig-stacked-bar used different hues to represent different ethnic groups.
+Hue is excellent for the perception of differences.
+
+## Ordinal visual features
+
+**Chroma** and **luminance** are both **qualitative** visual features
+in that they can be used to visualise different groups, but they
+are also **ordinal** visual features because we can perceive
+an ordering from a set of colours that differ in terms of either chroma
+or luminance or both.  A set of colours that transitions from darker
+to lighter and/or brighter to duller conveys an ordering from larger
+to smaller.
+
+This helps to explain why @fig-heatmap-gradient is more effective
+than @fig-heatmap-hue.  In @fig-heatmap-gradient, the colours differ
+mostly in terms of luminance and chroma so we are able to perceive
+changes from larger values to smaller values because the
+colours transition from darker to lighter.
+
+In this sense, **chroma** and **luminance** are able to convey
+more information than **hue** because they can represent **nominal**
+differences *and* **ordinal** differences, whereas hue can only
+represent nominal differences.  
+
+On the other hand, @fig-lum-cap shows that chroma and luminance are
+even more limited than hue in terms of **capacity**.  We can only use
+chroma and/or luminance to represent **nominal** data when there
+are very few different groups to represent.
+
+```{r}
+#| echo: false
+#| label: fig-lum-cap
+#| fig-height: 3
+#| fig-cap: Mapping qualitative values to luminance and chroma works well for representing nominal data values, but only for a very small number of values. The three values on the left are easily distringuishable, but it becomes difficult to clearly distinguish between adjacent colours in the middle and almost impossible for the colours on the right.  This figure can be compared with @fig-colour-cap, which demonstrates the capacity of hue for representing nominal data values.
+clpie <- function(n) {
+    t <- rev(seq(0, 2*pi, length.out=100*n) + pi/2)
+    cols <- hcl.colors(n+1, "Purples")[-(n+1)]
+    for (i in 1:n) {
+        index <- 1:100 + (i-1)*100
+        x <- cos(t[index])
+        y <- sin(t[index])
+        grid.polygon(c(.5, .5 + .3*x), c(.5, .5 + .3*y), 
+                     gp=gpar(col=figbg, lwd=4, fill=cols[i]))
+        grid.text(letters[i], .5 + mean(.25*x), .5 + mean(.25*y),
+                  gp=gpar(cex=1))
+    }
+}
+pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1))
+clpie(3)
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+clpie(7)
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+clpie(11)
+popViewport()
+```
+
+## Perception is relative {#sec-colour-relative}
+
+We saw in @sec-perception-relative that perception of **lengths** is 
+relative.  For example, smaller differences in length are easier
+to see when the lengths themselves are short (see @fig-relative).
+
+There is a similar rule for the perception of **colours**. 
+Our perception of a colour is affected by neighbouring 
+colours.[^contrast-effect]
+This effect is demonstrated in @fig-contrast-effect:
+the same colour when surrounded by a darker background appears lighter
+than it does when surrounded by a lighter background.
+
+[^contrast-effect]:
+  This relative perception of colours is useful for being able
+  to adapt to a wide range of lighting conditions.
+  See @ware2021information for a more detailed discussion.
+
+```{r}
+#| echo: false
+#| label: fig-contrast-effect
+#| fig-height: 3
+#| fig-cap: The perception of colours is relative. In the top row, the inner rectangles are exactly the same shade of grey on the left and exactly the same shade of purple on the right.  The perception of the inner rectangles is affected by the surrounding colour, so the same shade appears darker against a light background and darker against a light background.  The bottom row draws a line connecting the two inner rectangles to show that they really are the same shade.
+pushViewport(viewport(layout=grid.layout(2, 2, widths=2, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill="grey20"))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill="grey80"))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill="grey20"))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill="grey80"))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+grid.segments(.25, .5, .75, .5, gp=gpar(col="grey60", lwd=20))
+popViewport(2)
+purples <- pal_brewer(palette="Purples")(4)[-1]
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill=purples[1]))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill=purples[3]))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill=purples[1]))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill=purples[3]))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+grid.segments(.25, .5, .75, .5, gp=gpar(col=purples[2], lwd=20))
+popViewport(2)
+popViewport()
+```
+
+This effect also applies to the perception of hue.
+@fig-pie-contrast shows a pie chart of the number of offenders in each
+police district, with police district mapped to the **colour** of the
+wedges.  There are two issues with the perception of the wedge colours:
+each wedge is affected by its neighbour so that, for example, some of 
+the blue wedges look more green at the boundary with their more blue 
+neighbour and more blue at the boundary with their more green neighbour;
+furthermore, the colours in the legend are perceived differently from
+the corresponding colours in the wedges because the legend colours are
+surrounded by white.
+
+```{r}
+#| echo: false
+#| label: fig-pie-contrast
+#| fig-cap: This pie chart demonstrates that the perception of hues is relative. The colours within each wedge appear to have a subtle gradient within the wedge because the perception of the wedge colour is affected differently by the neighbouring wedge colours.
+ggplot(crimeDistrictTotal) + 
+    geom_col(aes(x=total, y="", fill=district)) +
+    coord_polar() +
+    scale_fill_hue() +
+    theme(aspect.ratio=1,
+          axis.title.y=element_blank(),
+          axis.ticks.y=element_blank())
+```
+
+The pie chart in @fig-pie-contrast is *not* an effective data visualisation
+because it maps qualitative data values with lots of different groups
+to colour hue.  This exceeds the **capacity** of the **hue** visual feature;
+it is difficult to clearly distinguish between all of the different hues
+(see @sec-capacity).
+
+For the purposes of demonstration,
+we can solve the colour perception problems in @fig-pie-contrast
+by adding a white border to all of the wedges
+(see @fig-pie-contrast-solved).
+
+```{r}
+#| echo: false
+#| label: fig-pie-contrast-solved
+#| fig-cap: The hues in this pie chart are perceived more accurately than those in @fig-pie-contrast because each wedge is surrounded by a white border.
+ggplot(crimeDistrictTotal) + 
+    geom_col(aes(x=total, y="", fill=district), colour="white", linewidth=1) +
+    coord_polar() +
+    scale_fill_hue() +
+    theme(aspect.ratio=1,
+          axis.title.y=element_blank(),
+          axis.ticks.y=element_blank())
+```
+
+## Case study: Heatmaps
+
+Heatmaps, like the data visualisation in @fig-heatmap-gradient
+are a common way of representing three-dimensional data where 
+two of the data variables are either qualitative 
+or have been measured on a regular grid.
+The latter two variables naturally map to horizontal and vertical
+**position** to produce an array of
+rectangles, while the third variable maps to **colour**
+(see @fig-mappings-2).
+
+The mappings from data values to visual features for a heatmap
+are 
+
+colour is not quant but can convey trends
+
+get contrast effect but again not typically trying to match cells
+
+TODO talk about colour palettes that have deliberate colour boundaries
+to emphasise structure - combination of order and category
+
+## Gestalt principles
+
+
+## Summary
+
+**Chroma** and **luminance* can be used to represent **qualitative**
+data values, but they have a very limited capacity.
+
+**Chroma** and **luminance* can be used to represent **quantitative**
+data values,
+but they are very inaccurate and only really convey **ordinal** information.
+
+

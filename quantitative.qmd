@@ -1,0 +1,354 @@
+
+# Quantitative Visual Features {#sec-quantitative}
+
+@fig-bar-district shows a bar plot of the total number of offenders
+in each police district in New Zealand (for ages 14 to 16 and
+from 2011 to 2021).  For the reasons outlined in @sec-mapping-visual-features,
+this data visualisation is effective for
+comparing the number of offenders in different police districts.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.
+crimeTemp <- crimeDistrictTotal
+crimeTemp$district <- factor(crimeTemp$district,
+		             levels=rev(c("Northland", "Waitematā",
+			              "Auckland City",
+			              "Counties/Manukau", "Waikato",
+				      "Bay of Plenty",
+				      "Eastern", "Central",
+				      "Wellington",
+				      "Tasman", "Canterbury",
+				      "Southern")))
+ggplot(crimeTemp) +
+    geom_col(aes(x=total, y=district), width=.8) +
+    scale_x_continuous(expand=expansion(c(0, .05))) 
+```
+
+@fig-bar-district-ordered shows a bar plot of the same data, but with the
+bars ordered from longest to shortest.  This data visualisation uses
+the same mappings as @fig-bar-district---police districts are mapped
+to the vertical positions of the bars and the total counts
+are mapped to the lengths of the bars---which means that it is also
+effective for comparing the total number of offenders between 
+police districts.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district-ordered
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from largest number of offenders to smallest.
+crimeDistrictTotal$districtOrdered <- 
+    with(crimeDistrictTotal, reorder(district, total))
+ggplot(crimeDistrictTotal) +
+    geom_col(aes(x=total, y=districtOrdered), width=.8) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_discrete(name="district")
+```
+
+However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
+for some comparisons.  For example, it is easier to compare the Northland
+district with the Tasman district in @fig-bar-district-ordered.
+The fact that two data visualisations with the same mappings
+can have a different effectiveness suggests that there is more to know about
+how different visual features work.
+
+This section covers some more details about how **quantitative**
+visual features work.
+
+## The distance effect {#sec-distance-effect}
+
+In @sec-accuracy, we saw that **position** and **length** were the most
+accurate visual features (see @fig-accuracy).  However, this accuracy
+decreases if the two visual features that are being compared are
+not in close proximity (see @fig-distance-effect).[^distance-effect]
+
+[^distance-effect]:
+  The first demonstration of the "distance effect" is attributed to 
+  @cleveland1984graphical.  It has since been replicated several times,
+  for example, by @talbot2014four.
+
+This helps to explain why @fig-bar-district-ordered is more effective
+than @fig-bar-district for some comparisons (e.g., Northland versus Tasman).
+
+```{r}
+#| echo: false
+#| label: fig-distance-effect
+#| fig-cap: Two bars are easier to compare if they are close to each other (top row).  If there is a distance between the bars and/or there are distractors (other bars) in between then comparisons are less accurate (bottom row).  On both the top and bottom row, the black bar on the left is slightly higher than the black bar on the right.
+pushViewport(viewport(width=.6, layout=grid.layout(2, 1)))
+pushViewport(viewport(layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.segments(0, .2, 1, .2, gp=gpar(col="grey"))
+grid.rect(.425, .2, .1, .6, just="bottom", gp=gpar(fill="black"))
+grid.rect(.575, .2, .1, .55, just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.segments(0, .2, 1, .2, gp=gpar(col="grey"))
+grid.rect(.125, .2, .1, .6, just="bottom", gp=gpar(fill="black"))
+grid.rect(seq(.275, .725, .150), .2, .1, runif(4, .2, .8), 
+          just="bottom", gp=gpar(col=NA, fill="grey"))
+grid.rect(.875, .2, .1, .55, just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+```
+
+> One reason for ordering the bars in a bar plot from longest to shortest 
+  is because, for some common comparisons, 
+  the ordering places the bars that are being
+  compared closer 
+  together, which improves the accuracy of the comparison.
+
+## Unaligned length and position
+
+@fig-unaligned-length shows that it is harder to accurately compare
+the **lengths** of two bars if they are **unaligned** and do not share a 
+common base.  This also applies to the accuracy of comparing **positions**.
+
+```{r}
+#| echo: false
+#| label: fig-unaligned-length
+#| fig-cap: It is easier to compare the lengths of the two bars on the left because they are **aligned**;  they share a common base.  The two bars on the right are harder to compare because they are **unaligned**.
+pushViewport(viewport(x=0, width=.5, just="left"))
+pushViewport(viewport(width=unit(.8, "snpc")))
+grid.segments(.2, .1, .2, .9, gp=gpar(col="grey"))
+grid.rect(.2, c(.3, .7), c(.5, .6), .2, just="left", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(x=.5, width=.5, just="left"))
+pushViewport(viewport(x=.4, width=unit(.8, "snpc")))
+grid.segments(.2, .1, .2, .5, gp=gpar(col="grey"))
+grid.segments(.4, .5, .4, .9, gp=gpar(col="grey"))
+grid.rect(c(.2, .4), c(.3, .7), c(.5, .6), .2, just="left",
+          gp=gpar(fill="black"))
+popViewport(2)
+```
+
+@fig-stacked-bar shows an alternative visualisation of the data on 
+the total number of offenders in different ethnic groups.
+The bar plot of these data that we saw in @fig-bar mapped ethnic groups
+to the **positions** of the bars so that the bars were arranged
+vertically with a common left-hand edge.
+In @fig-stacked-bar, the ethnic groups are 
+mapped to different **colours** and the bars are "stacked" horizontally.
+
+Although the total number of offenders has been mapped to the same
+visual feature in both @fig-stacked-bar and @fig-bar, the **lengths**
+of the bars, comparing those lengths is much harder in @fig-stacked-bar
+because the lengths are **unaligned**.
+
+```{r}
+#| echo: false
+#| label: fig-stacked-bar
+#| fig-cap: A stacked bar plot of the total number of offenders in each ethnic group.
+gg <- ggplot(crimeGroupTotal) +
+    geom_col(aes(total, y="", fill=group), position="stack") +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_discrete(name=NULL, expand=expansion(0)) +
+    theme(axis.ticks.y=element_blank())
+pushViewport(viewport(width=.8, height=.6))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+> One reason why stacked bar plots are less effective for some
+  comparisons is because we are forced to compare the unaligned lengths 
+  of the bars.
+
+## Case study:  Stacked versus side-by-side bar plots {#sec-stacked-vs-side}
+
+Stacking bars, which creates unaligned lengths, is something that
+arises when we use a bar plot to show a quantitative variable broken
+down by more than one qualitative variable.
+For example,
+@fig-stacked-bar-year shows the number of offenders (quantitative)
+for each ethnic group (qualitative) and
+for each year from 2011 to 2021 (qualitative, or at least discrete).
+In this data visualisation, the number of offenders is mapped to 
+the lengths of the bars, the years are mapped to the horizontal
+**position** of the bars, the ethnic groups are mapped to 
+the colours of the bars, and the bars are stacked vertically.
+
+The problem that we face in this situation is that there are 
+four bars to show for each year.  Stacking the bars is one solution, but 
+as we have just seen, this makes some comparisons more difficult.
+For example, we can easily see that the number of offenders in the 
+unknown group increased after 2016, but it is much harder to see what
+has happened to the European/Other group since 2016.
+
+```{r}
+#| echo: false
+#| label: fig-stacked-bar-year
+#| fig-cap: A stacked bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(year, count, fill=group), position="stack") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+An alternative visualisation is shown in @fig-side-bar-year.
+This has placed the four ethnic groups side-by-side for each year.
+It is now easier to see the changes over time for the European/Other 
+group because all bars are now aligned.  Unfortunately, as we saw in
+@sec-distance-effect, some comparisons are more difficult
+because the bars are now further apart
+and have distractors in between.
+
+```{r}
+#| echo: false
+#| label: fig-side-bar-year
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(year, count, fill=group), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+Yet another variation is shown in @fig-side-bar-group.
+This time we have placed all years side-by-side for each ethnic group.
+This provides the clearest view of the changes over time for each ethnic
+group because the relevant bars are close together and aligned.
+However, there are other comparisons that are considerably more difficult 
+because of the distance between the relevant bars, for example,
+comparing between ethnicities for a specific year.
+
+```{r}
+#| echo: false
+#| label: fig-side-bar-group
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(group, count, fill=group, group=year), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+There is no single best visualisation in general for this situation because
+different visualisations each have their strengths and weaknesses.
+If a particular sort of comparison is to be emphasised, then one 
+data visualisation might stand out, but there is also the option of
+providing more than one data visualisation in order to cover 
+more comparisons.
+
+## Perception is relative {#sec-perception-relative}
+
+@fig-relative shows that the perception of differences is relative;
+it is easier to detect smaller differences when the visual features
+that we are comparing are smaller.[^Weber]
+It is easier to see that the pair of bars on the left have different
+lengths and harder to see that the pair of bars on the right have 
+different lengths.  All three pairs of bars have different lengths,
+but the absolute size of the difference is the same, so the size
+of the difference relative to the bar lengths gets smaller as the bars
+get longer.
+
+[^Weber]:
+  The idea of perception of differences being relative is a very old result 
+  from Psychology 
+  known as Weber's Law [@weber1834tastsinn; @boring1942sensation].
+
+```{r}
+#| echo: false
+#| label: fig-relative
+#| fig-cap: A demonstration that perception of differences is relative. The pairs of bars all differ by the same absolute amount, but the difference is more easily perceived when comparing the shorter bars.  In the shorter bars, the absolute difference between the bars is a larger difference relative to the length of the bars.
+colWidth <- .2
+offset <- c(0, .05)
+pushViewport(viewport(height=.8, layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.1, .15), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.5, .55), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+```
+
+@fig-relative-ref shows that we can make it easier to judge
+the differences by providing reference marks.  Each pair
+of black bars is the same and each pair of bars differs in length
+by the same small amount.  The difference between the bars in each 
+pair is difficult to perceive because the difference is small relative
+to the lengths of the bars.  The
+reference marks in the middle and right-hand pair of bars
+provide shorter lengths to compare, so we are able
+to more easily perceive the small differences.  For example, for the
+pair of bars on the right, we can compare the lengths of the short white
+gaps rather than comparing the longer black bars.
+
+```{r}
+#| echo: false
+#| label: fig-relative-ref
+#| fig-cap: A demonstration that reference marks can make it easier to perceive small differences.  Each pair of black bars is the same and each pair differs by a small amount.  In the middle pair, grid lines make it easier to compare the distances from the ends of the bars to the nearest grid line and, in the right-hand pair, a border added to each bar, where the two borders are the same length, makes it easier to compare the white gaps rather than the bars themselves.
+pushViewport(viewport(height=.8, layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2), 
+             viewport(width=.8, height=.8))
+grid.segments(.2, seq(0, 1, .1), .8, seq(0, 1, .1), gp=gpar(col="black"))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=.95, 
+          just="bottom")
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+```
+
+@fig-bar-district-grid shows a bar plot of the number of offenders in each 
+police district (@fig-bar-district) with some grid lines added.
+Although it is difficult to compare the bars for Northland and Tasman
+because they are quite far apart and there are distractors in between
+(@sec-distance-effect), the addition of the grid lines makes it easier
+to perform the comparison because we are able to compare the distances
+from the ends of the bars to the nearest grid line.  Those distances are
+much shorter than the bars so it is easier to perceive the small
+difference.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district-grid
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.  This is very similar to @fig-bar-district, just with some grid lines added.
+crimeTemp <- crimeDistrictTotal
+crimeTemp$district <- factor(crimeTemp$district,
+		             levels=rev(c("Northland", "Waitematā",
+			              "Auckland City",
+			              "Counties/Manukau", "Waikato",
+				      "Bay of Plenty",
+				      "Eastern", "Central",
+				      "Wellington",
+				      "Tasman", "Canterbury",
+				      "Southern")))
+ggplot(crimeTemp) +
+    geom_col(aes(x=total, y=district), width=.8) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1))
+```
+
+> One reason why grid lines are effective is because they allow
+  comparisons of smaller lengths or distances, which means that
+  it is easier to perceive smaller changes.
+
+## Summary
+
+Bar plots are effective because they map **quantitative** values to **lengths**,
+which are accurate visual features.
+
+However, comparisons between the bars in a bar plot can be difficult if
+the bars are far apart, especially if there are distractors in between.
+
+Furthermore, **stacked bars** are more difficult to compare because
+they require comparing **unaligned** lengths.
+
+Finally, it is easier to perceive differences between shorter bars than
+between longer bars because the perception of differences is **relative**.
+
+**Grid lines** can help with comparisons because they make the distances
+being compared smaller, so smaller differences are easier to detect.
