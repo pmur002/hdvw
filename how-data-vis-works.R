@@ -1244,7 +1244,7 @@ kable(rwc, digits=1)
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-boxplot
-#| fig-cap: A boxplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+#| fig-cap: A box plot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
 gg <- ggplot(rwc) +
     geom_boxplot(aes(cleanbreaks, hemisphere), width=.5) +
     scale_x_continuous(name="clean breaks") 
@@ -1261,6 +1261,30 @@ gg <- ggplot(RWCperGame) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  linetype="dotted") +
     geom_dotplot(aes(cleanbreaks, hemisphere), binwidth=.3) +
+    scale_x_continuous(name="clean breaks") 
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-hist
+#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
+gg <- ggplot(rwc) +
+    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=1) +
+    scale_x_continuous(name="clean breaks") 
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-hist-thick
+#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
+gg <- ggplot(rwc) +
+    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=2) +
     scale_x_continuous(name="clean breaks") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)

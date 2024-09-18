@@ -2283,7 +2283,7 @@ In this section, we introduce the idea of **data statistics**,
 which are summaries of the data, and how some data visualisations
 rely on mappings that involde data statistics instead of raw data values.
 
-## Boxplots
+## Box Plots
 
 @tbl-rwc-cleanbreaks shows data from the 
 [2023 Rugby World Cup](https://www.rugbyworldcup.com/2023/).
@@ -2309,10 +2309,10 @@ rownames(rwc) <- NULL
 kable(rwc, digits=1)
 ```
 
-@fig-boxplot shows boxplots of the number of 
+@fig-boxplot shows box plots of the number of 
 clean breaks per game for each country, 
 with one
-boxplot for each hemisphere.
+box plot for each hemisphere.
 This is an effective data visualisation for
 comparing the distributions of clean breaks per game between countries from
 different hemispheres
@@ -2330,7 +2330,7 @@ upper quartile of all southern hemisphere teams.
 ```{r}
 #| echo: false
 #| label: fig-boxplot
-#| fig-cap: A boxplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+#| fig-cap: A box plot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
 gg <- ggplot(rwc) +
     geom_boxplot(aes(cleanbreaks, hemisphere), width=.5) +
     scale_x_continuous(name="clean breaks") 
@@ -2340,7 +2340,7 @@ popViewport()
 ```
 
 @fig-boxplot is effective for allowing us to compare statistics like the 
-median between different hemispheres because a boxplot maps those 
+median between different hemispheres because a box plot maps those 
 **data statistics** to visual features (@fig-stat-vis-decode).
 For example, the median values are mapped to the horizontal **positions** of 
 thick vertical lines and the interquartile ranges are mapped to the
@@ -2357,16 +2357,17 @@ This is effective for mapping back to the data statistics, but it
 is not effective for mapping back to the raw data.
 :::
 
-> A boxplot is effective at conveying data statistics, like the median
-  and interquartile range, because it maps these
-  *data statistics* to basic visual features.
+> A box plot is effective at conveying information about the
+  distribution of data values because it maps **data statistics**
+  about the distribution, like the median
+  and interquartile range, to basic visual features.
 
-On the other hand, because a boxplot maps data statistics, not raw
+On the other hand, because a box plot maps data statistics, not raw
 data values, to visual features,
-a boxplot is *not* effective for mapping *back* to the raw data values 
+a box plot is *not* effective for mapping *back* to the raw data values 
 (@fig-stat-vis-decode).
 
-> A boxplot is *not* effective at conveying raw data values because it
+> A box plot is *not* effective at conveying raw data values because it
   does not map raw data values to visual features.
 
 ## Mapping back to data statistics
@@ -2381,8 +2382,8 @@ a data point and the hemisphere of each country maps to the vertical
 
 Because this data visualisation maps raw data values to visual features, 
 it is possible to map *back* to raw data values (@fig-visual-feature-decode).
-For example, it is possible to see that *two* teams shared the
-highest number of clean breaks per game amongst northern-hemisphere teams.
+For example, it is possible to see that *two* teams made approximately 11
+clean breaks per game amongst northern-hemisphere teams.
 
 ```{r}
 #| echo: false
@@ -2439,13 +2440,96 @@ support good estimates of medians and interquartile ranges.
 
 In general, any data visualisation that maps data statistics 
 rather than raw data values will be weak if the data statistics are
-inappropriate.  For example, a boxplot will not be appropriate
+inappropriate.  For example, a box plot will not be appropriate
 if the distribution of the data values is not unimodal because
-a boxplot always tells a unimodal story.
+a box plot always tells a unimodal story.
 
-> A boxplot is *not* effective if a five-number summary is not a 
+> A box plot is *not* effective if a five-number summary is not a 
   sensible data statistic for the data values.
 
+## Case study: Histograms
+
+@fig-hist shows a histogram of the number of clean breaks per game for all
+teams at the 2023 Rugby World Cup.
+A histogram is similar to a box plot in two ways:
+a histogram is a data visualisation that can be used to convey the
+distribution of a variable; and
+a histogram is a data visualisation that maps data statistics,
+rather than raw values, to visual features (@fig-stat-vis-decode).
+
+However, the data statistics for a histogram are more complicated than
+those for a box plot.
+The raw data values in this histogram are the number of clean breaks
+per game for each country (see @tbl-rwc-cleanbreaks).
+To get the data statistics for the histogram, the raw data values are
+binned;  we break the range of the data into equal-sized intervals
+and count how many data values lie in each interval.
+The centre of each interval is then mapped to the horizontal **position**
+of a bar
+and the count of data values in each interval is mapped to the **length**
+of a bar.
+
+```{r}
+#| echo: false
+#| label: fig-hist
+#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
+gg <- ggplot(rwc) +
+    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=1) +
+    scale_x_continuous(name="clean breaks") 
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+As with a box plot, the mappings of data statistics to accurate
+visual features means that we can easily map *back* to
+the data statistics (though not to the raw data values).
+For a histogram, we can easily compare the lengths of the bars,
+which means we can easily compare the relative counts of data values
+within each interval.
+For example, the longest bars represent the intervals that contain a
+relatively large count of data values, which tells us about
+the mode of the data (or the number of modes in the data).
+In @fig-hist we can see that the 
+largest number of data values occur around 6 clean breaks per game
+and we can see that the number
+of data values in each interval drops more rapidly above the highest bar
+than below the highest bar.  The latter tells us about
+the spread and/or skewness of the data.
+
+> A histogram is effective at conveying information about the distribution
+  of data values because it maps data statistics to basic visual features
+  and those data statistics can be compared to provide indications about
+  the distribution of the data.
+
+A further complication arises with histograms because we have to
+*choose* the intervals that are used to calculate the data statistics
+and that choice can have a large influence on the data statistics.
+For example, @fig-hist-thick shows a histogram of the same data that
+we used for @fig-hist, but with fewer, wider intervals.
+Although 
+this data visualisation also suggest a single mode, it suggests more
+even spread of values to either side.
+
+```{r}
+#| echo: false
+#| label: fig-hist-thick
+#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
+gg <- ggplot(rwc) +
+    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=2) +
+    scale_x_continuous(name="clean breaks") 
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+**TODO:**
+
+* show the data stats for the boxplots (like a table of data)
+* show the data stats for the histogram(s) 
+* summary: histograms partly just tell us about the intervals that we chose!
+
+## Summary
 
 
 # Combining Visual Features
@@ -2539,6 +2623,9 @@ Angle is part-of-whole.
   provide the raw data and the lines provide the shapes
 
 * case study of density plots
+  (revisit histograms in terms of shape as well)
+
+* case study for spinograms
 
 ## Case study: Heatmaps
 
@@ -2564,6 +2651,8 @@ talk about colour palettes that have deliberate colour boundaries
 to emphasise structure - combination of order and category
 
 * citation for ensembles in statistics.qmd
+
+* model fits like lm straight line and ref Hadley's data-space vs model-space
 
 * An index that links to all of the places that different sorts of plots
   are discussed ?
