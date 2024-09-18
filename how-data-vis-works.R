@@ -1231,22 +1231,23 @@ ggplot(crimeDistrictTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| message: false
-#| label: tbl-rwc-points
-#| tbl-cap: A table of the points scored per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
-rwcPoints <- 
+#| label: tbl-rwc-cleanbreaks
+#| tbl-cap: A table of the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
+rwc <- 
     subset(RWCperGame, 
-           select=c("country", "hemisphere", "points"))
-rwcPoints <- rwcPoints[order(rwcPoints$country), ]
-rownames(rwcPoints) <- NULL
-kable(rwcPoints, digits=1)
+           select=c("country", "hemisphere", "cleanbreaks"))
+rwc <- rwc[order(rwc$country), ]
+rownames(rwc) <- NULL
+kable(rwc, digits=1)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-boxplot
-#| fig-cap: A boxplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(rwcPoints) +
-    geom_boxplot(aes(points, hemisphere), width=.5)
+#| fig-cap: A boxplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(rwc) +
+    geom_boxplot(aes(cleanbreaks, hemisphere), width=.5) +
+    scale_x_continuous(name="clean breaks") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
@@ -1255,12 +1256,12 @@ popViewport()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-rwc-dotplot
-#| fig-cap: A dotplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(rwcPoints) +
+#| fig-cap: A dotplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(RWCperGame) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  linetype="dotted") +
-    geom_dotplot(aes(points, hemisphere), binwidth=1) +
-    scale_x_continuous(name="points") 
+    geom_dotplot(aes(cleanbreaks, hemisphere), binwidth=.3) +
+    scale_x_continuous(name="clean breaks") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()

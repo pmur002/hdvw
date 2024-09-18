@@ -1236,123 +1236,123 @@ Figure&nbsp;5.7: The hues in this pie chart are perceived more accurately than t
 <p>In this section, we introduce the idea of <strong>data statistics</strong>, which are summaries of the data, and how some data visualisations rely on mappings that involde data statistics instead of raw data values.</p>
 <section id="boxplots" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">6.1</span> Boxplots</h2>
-<p><a href="#tbl-rwc-points" class="quarto-xref">Table&nbsp;6.1</a> shows data from the <a href="https://www.rugbyworldcup.com/2023/">2023 Rugby World Cup</a>. Thirty-two teams participated and we have calculated the average number of points that each team scored over the course of the tournament. We have also recorded which global hemisphere each team is from.</p>
+<p><a href="#tbl-rwc-cleanbreaks" class="quarto-xref">Table&nbsp;6.1</a> shows data from the <a href="https://www.rugbyworldcup.com/2023/">2023 Rugby World Cup</a>. Thirty-two teams participated and we have calculated the average number of clean breaks per game that each team achieved over the course of the tournament.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> We have also recorded which global hemisphere each team is from.</p>
 <div class="cell">
-<div id="tbl-rwc-points" class="cell quarto-float anchored">
+<div id="tbl-rwc-cleanbreaks" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;6.1: A table of the points scored per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-cleanbreaks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: A table of the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
 </figcaption>
-<div aria-describedby="tbl-rwc-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-rwc-cleanbreaks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">country</th>
 <th style="text-align: left;">hemisphere</th>
-<th style="text-align: right;">points</th>
+<th style="text-align: right;">cleanbreaks</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Argentina</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">26.4</td>
+<td style="text-align: right;">6.3</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Australia</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">5.2</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Chile</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">6.8</td>
+<td style="text-align: right;">3.8</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">England</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">31.6</td>
+<td style="text-align: right;">5.6</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Fiji</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">22.4</td>
+<td style="text-align: right;">5.6</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">France</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">47.6</td>
+<td style="text-align: right;">11.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Georgia</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">5.2</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Ireland</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">42.8</td>
+<td style="text-align: right;">8.8</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Italy</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">28.5</td>
+<td style="text-align: right;">6.8</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Japan</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">27.2</td>
+<td style="text-align: right;">6.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Namibia</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">2.5</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">New Zealand</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">48.0</td>
+<td style="text-align: right;">12.6</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Portugal</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">7.8</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Romania</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">2.8</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Samoa</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">23.0</td>
+<td style="text-align: right;">3.8</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Scotland</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">36.5</td>
+<td style="text-align: right;">11.2</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">South Africa</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">29.7</td>
+<td style="text-align: right;">5.4</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Tonga</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">24.0</td>
+<td style="text-align: right;">6.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Uruguay</td>
 <td style="text-align: left;">South</td>
-<td style="text-align: right;">16.2</td>
+<td style="text-align: right;">5.2</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Wales</td>
 <td style="text-align: left;">North</td>
-<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">5.6</td>
 </tr>
 </tbody>
 </table>
@@ -1361,7 +1361,7 @@ Table&nbsp;6.1: A table of the points scored per game by each country at the 202
 </figure>
 </div>
 </div>
-<p><a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> shows boxplots of the points per game for each country, with one boxplot for each hemisphere. This is an effective data visualisation for comparing the distributions of points per game between countries from different hemispheres because we are able to easily see differences between the median values of the two hemispheres and differences between the interquartile ranges of the two hemispheres. For example, we can see that the median points per game was higher for northern hemisphere teams and the interquartile range was also higher for northern hemisphere teams. We can also see that there is an outlier amongst southern hemisphere teams; this team scored more than 1.5 times the interquartile range <em>above</em> the upper quartile of all southern hemisphere teams.</p>
+<p><a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> shows boxplots of the number of clean breaks per game for each country, with one boxplot for each hemisphere. This is an effective data visualisation for comparing the distributions of clean breaks per game between countries from different hemispheres because we are able to easily see differences between the median values of the two hemispheres and differences between the interquartile ranges of the two hemispheres. For example, we can see that the median number of clean breaks per game was higher for northern hemisphere teams and the interquartile range was also higher for northern hemisphere teams. We can also see that there is an outlier amongst southern hemisphere teams; this team scored more than 1.5 times the interquartile range <em>above</em> the upper quartile of all southern hemisphere teams.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-boxplot" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -1370,7 +1370,7 @@ Table&nbsp;6.1: A table of the points scored per game by each country at the 202
 <img src="how-data-vis-works_files/figure-html/fig-boxplot-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: A boxplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+Figure&nbsp;6.1: A boxplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
@@ -1397,8 +1397,8 @@ Figure&nbsp;6.2: A data visualisation may map data statistics, rather than the r
 </section>
 <section id="mapping-back-to-data-statistics" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="mapping-back-to-data-statistics"><span class="header-section-number">6.2</span> Mapping back to data statistics</h2>
-<p><a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> shows dot plots of the points per game for each hemisphere. This data visualisation maps raw data values to visual features; the points per game for each country maps to the horizontal <strong>position</strong> of a data point and the hemishpere of each country maps to the vertical <strong>position</strong> of a data point.</p>
-<p>Because this data visualisation maps raw data values to visual features, it is possible to map <em>back</em> to raw data values (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;3.6</a>). For example, it is possible to see that the team with the second lowest points per game amongst southern-hemisphere teams scored just under 10 points per game.</p>
+<p><a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> shows dot plots of the number of clean breaks per game for each hemisphere. This data visualisation maps raw data values to visual features; the number of clean breaks per game for each country maps to the horizontal <strong>position</strong> of a data point and the hemisphere of each country maps to the vertical <strong>position</strong> of a data point.</p>
+<p>Because this data visualisation maps raw data values to visual features, it is possible to map <em>back</em> to raw data values (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;3.6</a>). For example, it is possible to see that <em>two</em> teams shared the highest number of clean breaks per game amongst northern-hemisphere teams.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rwc-dotplot" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -1407,15 +1407,15 @@ Figure&nbsp;6.2: A data visualisation may map data statistics, rather than the r
 <img src="how-data-vis-works_files/figure-html/fig-rwc-dotplot-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rwc-dotplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.3: A dotplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+Figure&nbsp;6.3: A dotplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>But in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> our visual system allows us to map back from visual features to more than just the raw data values. For example, we can see that there is one team amongst the southern-hemisphere teams that sits apart from the others; there is an outlier. This is an example where we have mapped raw data values to visual features, which has enabled us to map <em>back</em> to raw data values, but we are also able to map <em>back</em> to <strong>data statistics</strong> (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;6.4</a>).<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>But in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> our visual system allows us to map <em>back</em> from visual features to more than just the raw data values. For example, we can see that there is one team amongst the southern-hemisphere teams that sits apart from the others; we can see that most teams form a cluster and we can see that there is an outlier. This is an example where we have mapped raw data values to visual features, which has enabled us to map <em>back</em> to raw data values, but we are also able to map <em>back</em> to <strong>data statistics</strong> (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;6.4</a>).<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <blockquote class="blockquote">
-<p>A dot plot is effective not just for perceiving raw data values, but also for perceving data statistics like groups and outliers, and central tendency and spread.</p>
+<p>A dot plot is effective not just for perceiving raw data values, but also for perceving data statistics like clusters and outliers, and central tendency and spread.</p>
 </blockquote>
 <div id="fig-data-vis-stat-decode" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1551,7 +1551,8 @@ Zhang, Jiajie. 1996. <span>“A Representational Analysis of Relational Informat
 <li id="fn8"><p>The idea of perception of differences being relative is a very old result from Psychology known as Weber’s Law <span class="citation" data-cites="weber1834tastsinn boring1942sensation">(<a href="#ref-weber1834tastsinn" role="doc-biblioref">Weber 1846</a>; <a href="#ref-boring1942sensation" role="doc-biblioref">Boring 1942</a>)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p>The three-dimensional experience of colour arises from the fact that there are three different sorts of cones in the retina (see <a href="#sec-eye" class="quarto-xref">Section&nbsp;2.1</a>), each sensitive to a different range of light wavelengths: The L cones respond to long wavelengths (reds); the M cones respond to medium wavelengths (greens); and the S cones respond to short wavelengths (blues). The neural connections that combine the messages from the retina are also divided into three pathways: light-dark, which represents the sum of L, M, and S cones; red-green, which represents the difference between L and M cones; and blue-yellow, which represents the difference between S cones and the sum of L and M cones. For more information, see <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p>This relative perception of colours is useful for being able to adapt to a wide range of lighting conditions. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more detailed discussion.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>Need some references to articles about ensembles in data vis lit.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>A clean break in rugby is when the team with the ball manages to break through the opposition defence while carrying the ball. More is good.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Need some references to articles about ensembles in data vis lit.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

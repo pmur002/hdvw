@@ -22,33 +22,41 @@ rely on mappings that involde data statistics instead of raw data values.
 
 ## Boxplots
 
-@tbl-rwc-points shows data from the 
+@tbl-rwc-cleanbreaks shows data from the 
 [2023 Rugby World Cup](https://www.rugbyworldcup.com/2023/).
 Thirty-two teams participated and we have calculated the average number of
-points that each team scored over the course of the tournament.
+clean breaks per game that each team achieved over the course of the 
+tournament.[^cleanbreaks]
 We have also recorded which global hemisphere each team is from.
+
+[^cleanbreaks]:
+  A clean break in rugby is when the team with the ball manages to break
+  through the opposition defence while carrying the ball.  More is good.
 
 ```{r}
 #| echo: false
 #| message: false
-#| label: tbl-rwc-points
-#| tbl-cap: A table of the points scored per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
-rwcPoints <- 
+#| label: tbl-rwc-cleanbreaks
+#| tbl-cap: A table of the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
+rwc <- 
     subset(RWCperGame, 
-           select=c("country", "hemisphere", "points"))
-rwcPoints <- rwcPoints[order(rwcPoints$country), ]
-rownames(rwcPoints) <- NULL
-kable(rwcPoints, digits=1)
+           select=c("country", "hemisphere", "cleanbreaks"))
+rwc <- rwc[order(rwc$country), ]
+rownames(rwc) <- NULL
+kable(rwc, digits=1)
 ```
 
-@fig-boxplot shows boxplots of the points per game for each country, with one
+@fig-boxplot shows boxplots of the number of 
+clean breaks per game for each country, 
+with one
 boxplot for each hemisphere.
 This is an effective data visualisation for
-comparing the distributions of points per game between countries from
+comparing the distributions of clean breaks per game between countries from
 different hemispheres
 because we are able to easily see differences between the median values
 of the two hemispheres and differences between the interquartile ranges
-of the two hemispheres.  For example, we can see that the median points
+of the two hemispheres.  For example, we can see that the median 
+number of clean breaks
 per game was higher for northern hemisphere teams and the
 interquartile range was also higher for northern hemisphere teams.
 We can also see that there is an outlier amongst southern hemisphere teams;
@@ -59,9 +67,10 @@ upper quartile of all southern hemisphere teams.
 ```{r}
 #| echo: false
 #| label: fig-boxplot
-#| fig-cap: A boxplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(rwcPoints) +
-    geom_boxplot(aes(points, hemisphere), width=.5)
+#| fig-cap: A boxplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(rwc) +
+    geom_boxplot(aes(cleanbreaks, hemisphere), width=.5) +
+    scale_x_continuous(name="clean breaks") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
@@ -99,38 +108,40 @@ a boxplot is *not* effective for mapping *back* to the raw data values
 
 ## Mapping back to data statistics
 
-@fig-rwc-dotplot shows dot plots of the points per game for each hemisphere.
+@fig-rwc-dotplot shows dot plots of the number of
+clean breaks per game for each hemisphere.
 This data visualisation maps raw data values to visual features;  the
-points per game for each country maps to the horizontal **position** of
-a data point and the hemishpere of each country maps to the vertical
+number of 
+clean breaks per game for each country maps to the horizontal **position** of
+a data point and the hemisphere of each country maps to the vertical
 **position** of a data point.
 
 Because this data visualisation maps raw data values to visual features, 
 it is possible to map *back* to raw data values (@fig-visual-feature-decode).
-For example, it is possible to see that the team with the second lowest
-points per game amongst southern-hemisphere teams
-scored just under 10 points per game.
+For example, it is possible to see that *two* teams shared the
+highest number of clean breaks per game amongst northern-hemisphere teams.
 
 ```{r}
 #| echo: false
 #| label: fig-rwc-dotplot
-#| fig-cap: A dotplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(rwcPoints) +
+#| fig-cap: A dotplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(RWCperGame) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  linetype="dotted") +
-    geom_dotplot(aes(points, hemisphere), binwidth=1) +
-    scale_x_continuous(name="points") 
+    geom_dotplot(aes(cleanbreaks, hemisphere), binwidth=.3) +
+    scale_x_continuous(name="clean breaks") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
 But in @fig-rwc-dotplot
-our visual system allows us to map back from visual features 
+our visual system allows us to map *back* from visual features 
 to more than just the raw data values.
 For example, we can see that there is one team amongst the 
 southern-hemisphere teams that sits apart from
-the others; there is an outlier.
+the others; we can see that most teams form a cluster and we can
+see that there is an outlier.
 This is an example where we have mapped raw data values to visual
 features, which has enabled us to map *back* to raw data values,
 but we are also able to map *back* to **data statistics**
@@ -141,7 +152,7 @@ but we are also able to map *back* to **data statistics**
 
 > A dot plot is effective not just for perceiving raw data values, but
   also for perceving 
-  data statistics like groups and outliers, and central tendency
+  data statistics like clusters and outliers, and central tendency
   and spread.
 
 ::: {#fig-data-vis-stat-decode}
