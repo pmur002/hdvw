@@ -190,6 +190,14 @@ graph(data,
       vis,
       dataStatEdge,
       statVisEdge,
+      dataStatSame,
+      file="stat-vis.dot")
+
+graph(data,
+      stat,
+      vis,
+      dataStatEdge,
+      statVisEdge,
       visStatEdge,
       dataStatSame,
       file="stat-vis-decode.dot")

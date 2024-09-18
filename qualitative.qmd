@@ -1,5 +1,5 @@
 
-# Qualitative Visual Features
+# Colour
 
 @fig-pie-hue shows a pie chart of the number of offenders for different
 levels of crime seriousness (between 2011 and 2021).
@@ -95,7 +95,7 @@ Hue is excellent for the perception of differences.
 vp2 <- viewport(width=.9, y=unit(3, "lines"),
                 height=unit(1, "npc") - unit(6, "lines"),
                 just="bottom")
-pushViewport(viewport(layout=grid.layout(1, 3)))
+pushViewport(viewport(width=.8, height=.8, layout=grid.layout(1, 3)))
 pushViewport(viewport(layout.pos.col=1),
              vp2)
 pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
@@ -285,16 +285,15 @@ ggplot(crimeDistrictTotal) +
           axis.ticks.y=element_blank())
 ```
 
-## Gestalt principles
-
-
 ## Summary
 
-**Chroma** and **luminance* can be used to represent **qualitative**
+**Colour** is really three visual features:  **hue**, **chroma**, 
+and **luminance**.
+
+**Hue** is excellent for representing **nominal** data values.
+
+**Chroma** and **luminance** can be used to represent **ordinal**
 data values, but they have a very limited capacity.
 
-**Chroma** and **luminance* can be used to represent **quantitative**
-data values,
-but they are very inaccurate and only really convey **ordinal** information.
 
 

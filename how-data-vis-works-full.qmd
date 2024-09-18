@@ -1,0 +1,2560 @@
+---
+title: How Data Visualisation Works
+author: Paul Murrell
+toc: true
+number-sections: true
+crossref:
+  chapters: true
+  sec-prefix: Section
+bibliography: how-data-vis-works.bib
+format: 
+  html:    
+    css: style.css
+---
+
+```{r}
+#| echo: false
+#| message: false
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(reshape2)
+library(ggplot2)
+library(scales)
+library(colorspace)
+library(ggsci)
+library(grid)
+```
+
+```{r}
+#| echo: false
+figbg <- "#F2F2F2"
+highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
+## Set default colour palettes
+scale_colour_discrete <- function(...) {
+    scale_colour_npg(...)
+}
+scale_fill_discrete <- function(...) {
+    scale_fill_npg(...)
+}
+scale_fill_ordinal <- function(...) {
+    scale_fill_brewer(palette="Purples", ...)
+}
+scale_fill_continuous <- function(...) {
+    scale_fill_distiller(palette="Purples", ...)
+}
+## Set default line width
+update_geom_defaults("line", list(linewidth=1))
+## Set default theme
+theme_set(theme_bw())
+## Match the table odd row fill
+theme_update(plot.background=element_rect(colour=NA, 
+                                          fill=figbg),
+             panel.background=element_blank(),
+             panel.grid.minor=element_blank(),
+             panel.grid.major=element_blank(),
+             legend.background=element_blank())
+```
+
+```{r}
+#| echo: false
+source("rwc.R")
+source("youth-crime.R")
+crimeAgeSimple <- subset(crimeAge, age %in% c("14", "15", "16"))
+```
+
+```{r}
+#| echo: false
+#| purl: false
+knitr::opts_chunk$set(dev='svg', 
+                      dev.args=list(bg=figbg),
+                      fig.width=8, fig.height=4,
+                      out.width="100%")
+```
+
+
+# Introduction
+
+A data visualisation presents data values in a visual
+format.  In an effective data visualisation, this allows
+properties of the data to be perceived very rapidly and without 
+conscious effort.
+For example, @tbl-crime shows data on the crime rate for
+youth offenders in New Zealand, for the ages 14 to 16, for 
+each year from 2011 to 2021.  With this purely text-based, tabular
+presentation of the data, it requires considerable effort
+and time to determine any trends in the crime rates.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-crime
+#| tbl-cap: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021.  It is difficult to perceive trends in the crime rates from this purely text-based, tabular presentation of the data.
+
+crimeTable <- dcast(crimeAgeSimple[c("age", "year", "rate")],
+                    age ~ year)
+kable(crimeTable, digits=0)
+```
+
+By contrast, with a simple line 
+plot data visualisation like @fig-crime we can perceive the trends
+in crime rates easily and immediately.
+It is also easy to perceive more detailed properties like the fact that
+the trend in crime rates for 16-year-olds is not completely monotonic
+and the fact that
+the crime rate for 15-year-olds (the blue line) is always greater than
+the crime rate for 14-year-olds (the red line) 
+and less than the crime rate for 16-year-olds (the green line).
+
+```{r}
+#| echo: false
+#| label: crime-age-line
+#| output: false
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor))
+```
+
+```{r}
+#| echo: false
+#| label: fig-crime
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  Detecting trends in the crime rates is very fast and easy with this data visualisation.
+gg <- 
+<<crime-age-line>>
+gg +
+    scale_colour_discrete(name="age") +
+    theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
+          aspect.ratio=1)
+```
+
+@fig-crime-heatmap shows a different data visualisation of the same data,
+this time a heatmap.
+If we use a data visualisation
+like @fig-crime-heatmap, detecting overall trends becomes more difficult and
+perceiving detailed changes in the crime rates is very much harder.
+Not all data visualisations are equally effective.
+
+```{r}
+#| echo: false
+#| label: fig-crime-heatmap
+#| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.
+ggplot(crimeAgeSimple) +
+    geom_tile(aes(year, age, fill=rate), colour=NA) +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_continuous(expand=expansion(0), breaks=14:16) +
+    theme(aspect.ratio=1)
+```
+
+Although @fig-crime is very effective for the questions
+that we have considered so far, it is far less effective if we are interested
+in a different question, for example, whether the *total* crime
+rate is completely monotonic.  Does the *sum* of the red, blue, and green
+lines always decrease year on year?
+A single data visualisation cannot be effective for all possible questions.
+
+Suppose that we are interested in what the *exact* crime rate was 
+for 16-year-olds in 2011.  Neither @fig-crime nor @fig-crime-heatmap is
+the best option for answering this quesion.  The best option in this
+case is actually @tbl-crime. 
+
+What makes a data visualisation effective?
+Why are some data visualisations more effective than others?
+The purpose of this document is to provide explanations for
+why, when, and how data visualisation works.  
+
+Understanding how data visualisation works will enable us to:
+
+* Decide which data visualisations we should use.
+* Justify our choice of data visualisation.
+* Critically analyse data visualisations created by others.
+* Reason about how to improve the effectiveness of a data visualisation.
+* Reason about whether a novel visualisation will be effective.
+
+## Scope
+
+The focus of this document is **static** data visualisations for
+**presentation**.  The assumption is that our data values have 
+an interesting property and we want to produce a display
+that makes it easy and efficient for viewers to perceive that property.
+Some of the information that we cover will also
+apply to interactive graphics and to exploratory graphics, but the
+specific requirements of those types of data visualisation will not be 
+addressed.
+
+**TODO:** 
+link to interactive graphics books like Cook & Swayne and 
+Theus and Unwin.
+
+This document is also focused on what **vision science**
+has to tell us about effective data visualisation.
+We will consider factors that influence how rapidly and how
+accurately information can be extracted from a data visualisation.
+This will include findings from a broad range of research, encompassing
+Statistics, Computer Science, and Psychology.
+However, this document does not cover all fields of research
+that impact on data visualisation.
+We will not, for example, go into the ethical use of data visualisation,
+beyond a basic assumption that we want to faithfully represent
+the properties of the data.
+
+**TODO:** 
+link to Alberto Cairo at least.
+For resources on this important topic, see ...
+
+## Terminology
+
+Data visualisations come in a wide variety of forms (see @fig-3-plots),
+with each form having its own name:  scatter plots, line plots, bar plots,
+histograms, etc.
+There are also many different names for the different components 
+of a data visualisation:  lines, bars, points, 
+axes, scales, legends, keys, titles, sub-titles, etc.
+
+```{r}
+#| echo: false
+title <- "Crime per Year"
+subtitle <- "Children aged 14-16"
+scatter <- ggplot(crimeYear) + 
+    geom_line(aes(yearDate, total), linewidth=.5) +
+    labs(title=title, subtitle=subtitle) +
+    scale_x_date(name="year") +
+    theme(plot.subtitle=element_text(size=8))
+bar <- ggplot(crimeYear) + 
+    geom_col(aes(yearDate, total), width=200) +
+    labs(title=title, subtitle=subtitle) +
+    scale_x_date(name="year") +
+    theme(plot.subtitle=element_text(size=8))
+title2 <- "Crime by Severity"
+n <- nrow(crimeLevelTotal)
+crimeLevelTotal$xmin <- c(0, cumsum(crimeLevelTotal$total)[-n])
+crimeLevelTotal$xmax <- cumsum(crimeLevelTotal$total)
+crimeLevelTotal$ymin <- .5
+crimeLevelTotal$ymax <- 1
+pie <- ggplot(crimeLevelTotal) + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax, fill=level), 
+              colour="black", linewidth=.1) +
+    coord_polar() +
+    scale_y_continuous(limits=c(0, 1)) +
+    scale_fill_grey() +
+    labs(title=title2, subtitle=subtitle) +
+    theme(panel.border=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          plot.subtitle=element_text(size=8))
+```
+
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot.svg", bg=figbg, width=3, height=3)
+print(scatter, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot.svg", bg=figbg, width=3, height=3)
+print(bar, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot.svg", bg=figbg, width=3, height=3)
+print(pie, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-3-plots layout-ncol=3}
+
+![](Figures/line-plot.svg)
+
+![](Figures/bar-plot.svg)
+
+![](Figures/donut-plot.svg)
+
+Three examples of data visualisations: a
+line plot, a bar plot, and a donut chart.
+:::
+
+In this document, we will reduce that complexity in two ways.
+First of all, we will not distinguish between different forms
+of data visualisation;  scatter plots, bar plots, line plots, and
+histograms are all just **data visualisations**.
+Secondly, we will distinguish
+between only three 
+core components of a data visualisation: **data symbols**,
+**guides**, and **labels**.[^terminology]
+
+[^terminology]:  
+  Gathering axes and legends together under the 
+  generic label of "guides" is from the Grammar of Graphics [@wilkinson2005].
+
+Data symbols
+: Data symbols are the geometric shapes that represent data values,
+for example, the lines in a line plot, the bars in a bar plot, and the
+segments of an annulus in a donut plot (see @fig-data-symbols).
+We will spend a lot of time looking at how data symbols work.
+
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+scatterGeom <- scatter +
+    geom_line(aes(yearDate, total), linewidth=1, colour=highlight) +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"))
+barGeom <- bar + 
+    geom_col(aes(yearDate, total), fill=highlight, width=250) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.y=element_line(colour="grey80"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"))
+pieGeom <- pie + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
+              fill=highlight, colour="black", linewidth=.1) +
+    scale_fill_manual(values=grey(.6 + .4*1:n/(n + 1))) +
+    theme(plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          legend.text=element_text(colour="grey"),
+          legend.title=element_text(colour="grey"))
+```
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot-geom.svg", bg=figbg, width=3, height=3)
+print(scatterGeom, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot-geom.svg", bg=figbg, width=3, height=3)
+print(barGeom, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot-geom.svg", bg=figbg, width=3, height=3)
+print(pieGeom, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-data-symbols layout-ncol=3}
+
+![](Figures/line-plot-geom.svg)
+
+![](Figures/bar-plot-geom.svg)
+
+![](Figures/donut-plot-geom.svg)
+
+Three examples of data symbols: a line, some bars, and segments of an annulus.
+:::
+
+Guides
+: Guides are the elements of a data visualisation that explain
+how data values are represented, for example the axes on a line plot
+or bar plot and the legend on a donut plot (see @fig-guides).
+We will see later that **guides have a lot in common with data symbols**.
+
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+scatterGuide <- scatter +
+    geom_line(aes(yearDate, total), linewidth=1, colour="grey90") +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.line=element_line(colour=highlight),
+          axis.ticks=element_line(colour=highlight),
+          axis.text=element_text(colour=highlight),          
+          axis.title=element_text(colour="grey"))
+barGuide <- bar + 
+    geom_col(aes(yearDate, total), fill="grey90", col="grey90", width=200) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.y=element_line(colour=highlight),
+          axis.line=element_line(colour=highlight),
+          axis.ticks=element_line(colour=highlight),
+          axis.text=element_text(colour=highlight),          
+          axis.title=element_text(colour="grey"))
+pieGuide <- pie + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
+              fill="grey90", colour="grey", linewidth=.1) +
+    scale_fill_manual(values=colorRampPalette(c(highlight, lighten(highlight, .5)))(n)) +
+    theme(plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          legend.text=element_text(colour=highlight),
+          legend.title=element_text(colour="grey"))
+```
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot-guide.svg", bg=figbg, width=3, height=3)
+print(scatterGuide, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot-guide.svg", bg=figbg, width=3, height=3)
+print(barGuide, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot-guide.svg", bg=figbg, width=3, height=3)
+print(pieGuide, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-guides layout-ncol=3}
+
+![](Figures/line-plot-guide.svg)
+
+![](Figures/bar-plot-guide.svg)
+
+![](Figures/donut-plot-guide.svg)
+
+Three examples of guides: axes, grid lines, and a legend.
+:::
+
+Labels
+: Labels are the 
+text elements that provide context and background information
+about a data visualisation (e.g., titles and captions).
+Labels may also guide the viewer to the important properties of 
+the data.
+Notice that **not all text elements are labels**.
+
+```{r}
+#| echo: false
+#| results: hide
+#| message: false
+scatterLabel <- scatter +
+    geom_line(aes(yearDate, total), linewidth=1, colour="grey90") +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),          
+          axis.title=element_text(colour=highlight, face="bold"))
+barLabel <- bar + 
+    geom_col(aes(yearDate, total), fill="grey90", col="grey90", width=200) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          panel.grid.major.y=element_line(colour="grey80"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),          
+          axis.title=element_text(colour=highlight, face="bold"))
+pieLabel <- pie + 
+    geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
+              fill="grey90", colour="grey", linewidth=.1) +
+    scale_fill_manual(values=grey(.6 + .4*1:n/(n + 1))) +
+    theme(plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          axis.ticks.y=element_blank(),
+          axis.text.y=element_blank(),
+          legend.text=element_text(colour="grey"),
+          legend.title=element_text(colour=highlight, face="bold"))
+```
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/line-plot-label.svg", bg=figbg, width=3, height=3)
+print(scatterLabel, newpage=FALSE)
+dev.off()
+svg("Figures/bar-plot-label.svg", bg=figbg, width=3, height=3)
+print(barLabel, newpage=FALSE)
+dev.off()
+svg("Figures/donut-plot-label.svg", bg=figbg, width=3, height=3)
+print(pieLabel, newpage=FALSE)
+dev.off()
+```
+
+::: {#fig-labels layout-ncol=3}
+
+![](Figures/line-plot-label.svg)
+
+![](Figures/bar-plot-label.svg)
+
+![](Figures/donut-plot-label.svg)
+
+Examples of labels: the titles and sub-titles on all three plots;
+the axis titles on the line plot and the bar plot; and the legend
+title on the donut plot.
+:::
+
+## Mappings
+
+Although we have reduced a data visualisation to just three components,
+data symbols, 
+guides, and labels, there are still many possible variations.
+Which data symbols are being used?  How are
+the axes labelled?  What colours are being used?
+As much as possible, we are going to further reduce the design
+of a data visualisation to a single question:
+What **mappings** are being used?[^mappings]
+
+Much of this document is focused on considering how data values are being
+converted, or **mapped**, into a visual representation.
+For example, in the line plot of crime rates for
+different ages in New Zealand in @fig-crime,
+the data values are `year`, crime `rate`, and `age` 
+(see @tbl-crime) and
+the visual representation is a set of coloured lines.
+
+[^mappings]: 
+  The idea of characterising a data visualisation as a set
+  of "mappings" from data values to visual representations is
+  also from the Grammar of Graphics [@wilkinson2005].
+
+We can describe this data visualisation in terms of a set of mappings
+(see @fig-mappings-1):
+
+* Each `year` value is mapped to a horizontal **position** along the
+  x-axis and each `rate` value is mapped to a vertical **position** 
+  along the y-axis.
+  For example, the `year` 2011 maps to a location near the left edge
+  of the plot and the `rate` 810 maps to a position 
+  near the top edge of the plot.  
+  The combined values of
+  `year` and `rate` 
+  are mapped to the locations through which we draw
+  the coloured lines.
+
+* Each `age` value is mapped to a **colour**.
+  For example, the `age` 16 maps to a green colour.
+  The `age` values are mapped to the colours of the lines.
+
+::: {#fig-mappings-1 layout="[[1, -1], [1]]"}
+
+![](Mappings/mappings-1.png)
+
+![](Animation/mappings-1.svg)
+
+The data visualisation in @fig-crime can be described as a mapping
+of `year`, `rate`, and `age` to `x` and `y` positions and `colour`.
+The bottom image is an animation;  try refreshing the page or
+viewing the image it in its own tab to rerun the
+animation.
+:::
+
+The heatmap of the same data (see @fig-crime-heatmap) provides a different
+visual representation because it involves a different
+set of mappings (see @fig-mappings-2):
+
+* Each `year` value is mapped to a horizontal **position** along the
+  x-axis and each `age` value is mapped to a vertical **position** 
+  along the y-axis.
+  For example, the `year` 2011 maps to a location near the left edge
+  of the plot and the `age` 16 maps to a position 
+  near the top edge of the plot.  
+  The combined values of
+  `year` and `rate` 
+  are mapped to the locations at which we draw
+  the coloured rectangles.
+
+* Each `rate` value is mapped to a **colour**.
+  For example, the `rate` 810 maps to white, while lower `rate` values
+  map to progressively darker shades of purple.
+  The `rate` values are mapped to the colours of the rectangles.  
+
+::: {#fig-mappings-2 layout="[[1, -1], [1]]"}
+
+![](Mappings/mappings-2.png)
+
+![](Animation/mappings-2.svg)
+
+The data visualisation in @fig-crime-heatmap can be described as a mapping
+of `year`, `rate`, and `age` to `x` position, `colour`, and `y` position.
+The bottom image is an animation;  try refreshing the page or
+viewing the image it in its own tab to rerun the
+animation.
+:::
+
+We will look at a variety of different mappings from data values
+to data symbols (@fig-mappings).  Understanding why some
+mappings work better than others will help us to understand why
+some data visualisations are more effective than others.
+
+::: {#fig-mappings}
+
+![](Diagrams/data-sym.png)
+
+A data visualisation is largely defined by the **mappings** that it uses
+to transform **data values** into **data symbols**.
+:::
+
+## Summary 
+
+Data visualisations can be incredibly effective for presenting
+important properties of data values.  However, any one data visualisation
+can only be effective for certain data values and for certain data 
+properties.
+
+The goal of this document is to explain why some data visualisations
+are more effective than others;  how data visualisation works. 
+
+The important elements of a data visualisation are **data symbols**,
+which are visual representations of the data values, **guides**, 
+which explain how data values
+are transformed to data symbols, and **labels**, which provide
+context and guidance.
+
+We can characterise a data visualisation in terms of the **mappings**
+that it uses to convert data values into data symbols.
+
+
+# The Visual System {#sec-visual-system}
+
+Understanding why some mappings are more effective than others will
+depend upon an understanding of how the human visual system works.
+The effectiveness of a mapping from data values to data symbols
+will depend on how well we can map *back* from the data symbols
+to the properties of the data (@fig-decode).
+
+::: {#fig-decode}
+
+![](Diagrams/data-sym-decode.png)
+
+The effectiveness of a data visualisation will depend on how
+well our visual system can map from data symbols back to
+properties of the data.
+:::
+
+In this section we will establish a very simple model of the visual system 
+that we can refer to as we discuss different mappings.[^simple-visual-models]
+We will add some more detail about the visual system as we
+need to in later sections.
+
+[^simple-visual-models]:
+  Simple descriptions of the human visual system can be found in many books on
+  data visualisation, for example, @cairo2012functional.
+  See @ware2021information for a more in-depth,
+  but still very accessible description.
+
+## The eye {#sec-eye}
+
+In order for us to perceive a data visualisation, light from the
+data visualisation must enter the eye.  Light passes through the pupil, 
+is focused by the lens, and is projected onto the retina at the back of
+the eye.  The retina contains around 100 million light-sensitive
+nerve cells and signals from those are combined into about 1 million
+nerve fibres in the optic nerve, which passes signals on to the brain
+(see @fig-eye).
+A very large amount of visual information is gathered by the 
+eye and passed on to the brain.
+
+```{r}
+#| echo: false
+#| eval: false
+#| label: eye-basic
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+grid.text("lens", x=unit(.25, "npc") + unit(2, "mm"), just="left")
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("retina", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, -.2, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("optic\nnerve", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+```
+
+```{r}
+#| echo: false
+#| eval: false
+#| label: eye-basic-2
+## grid.newpage()
+eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(lineheight=.9, fill=NA)))
+grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+grid.segments(0, .5,
+              unit(.17, "npc") - unit(2, "mm"), .5,
+              gp=gpar(lwd=3, fill="black"), 
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+grid.draw(eyeball)
+grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+pushViewport(viewport(clip=eyeballNot))
+pushViewport(viewport(x=.22, width=.5))
+grid.use("cornea")
+popViewport(2)
+pushViewport(viewport(x=.22, width=.5))
+grid.use("lens")
+popViewport()
+pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("cones", x=.75, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .65, 1.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.65, just="right")
+pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .3, -.2))))
+grid.circle(r=.28, gp=gpar(lwd=3))
+popViewport()
+grid.text("rods", x=.7, y=.35, just="right")
+pushViewport(viewport(clip=eyeballNot))
+grid.segments(.5, .5, 1, .35, 
+              gp=gpar(lwd=3, fill="black"),
+              arrow=arrow(type="closed", length=unit(3, "mm")))
+popViewport()
+grid.text("brain\nthis\nway", y=.35, 
+          x=unit(1, "npc") + unit(2, "mm"), just="left")
+```
+
+```{r}
+#| echo: false
+#| results: hide
+svg("Figures/eye-basic.svg", bg=figbg, width=4, height=3)
+<<eye-basic>>
+dev.off()
+svg("Figures/eye-basic-2.svg", bg=figbg, width=4, height=3)
+<<eye-basic-2>>
+dev.off()
+```
+
+::: {#fig-eye}
+
+![](Figures/eye-basic.svg)
+
+A very simple diagram of the human eye.  Light enters via the pupil and
+is focused by the lens onto retina.  Light-sensitive neurons pass 
+signals via the optic nerve to the brain.
+:::
+
+## Visual processing
+
+The processing of the 
+signals from the optic nerve occurs in several areas of the brain.
+Very basic **visual features** are extracted first, such as 
+**position** (spatial arrangements), **angle** (orientations), **colour**,
+and simple **patterns** (spatial frequencies).
+This low-level information is passed on and built upon
+to produce higher-level representations, such as regions and **shapes**.
+Information is then also integrated from prior knowledge to assist with
+the identification of **objects**---things like trees, animals, and faces.
+
+::: {#fig-visual-processing}
+
+![](Diagrams/visual-processing.png)
+
+A very simple model of visual processing. 
+:::
+
+Lower-level processing occurs subconsciously and more rapidly than higher-level
+processing, which can require cognitive effort
+(see @fig-visual-model).  Furthermore, lower-level
+processing occurs in parallel and can involve many instances of visual 
+features at once, whereas higher-level processing will only focus on one
+or a few items.  On the other hand, lower-level visual features are rapidly
+discarded as our attention shifts, while higher-level visual objects are more
+persistent and may become part of long-term memories.  
+
+::: {#fig-visual-model}
+
+![](Model/model.png)
+
+Some of the properties of visual processing. 
+:::
+
+@fig-visual-model-demo shows an image that is made up of
+many small elements:  tiny triangles with different **lengths**,
+orientations (**angles**), and **colours**.
+The orientations of the triangles represents wind direction and the 
+length of the triangles represents wind strength;  blue triangles
+are over the sea and green triangles are over land.[^NOMADS]
+The visual system can very quickly
+perceive many small elements like this at once.
+There is no need to concentrate separately
+on every individual triangle in the image.
+At a higher level of processing, darker and lighter **regions** are
+identified as well as regions of different colours.
+For example, a band of lighter wind forms a line from the top-left
+corner at a roughly 45-degree angle.
+At a higher level of processing again, at least for the denizens of Oceania,
+the green regions are recognised as a very familiar **object**: the
+outline of New Zealand.
+
+The small lines convey a lot of simple pieces of information;
+what is the wind strength and direction at each location.
+The darker and lighter regions convey several more complex ideas like
+regions of stronger and lighter winds.
+The green regions combine to convey the single complex and abstract
+concept of New Zealand.
+
+[^NOMADS]:
+  @fig-visual-model-demo is based on wind data from the
+  National Oceanic and Atmospheric Administration's Operational Model Archive 
+  and Distribution System ([NOMADS](https://nomads.ncep.noaa.gov/)).
+  The data were accessed and processed using 
+  the {rNOMADS} package [@rNOMADS], with raw data interpolated to a finer
+  grid.
+
+::: {#fig-visual-model-demo}
+
+![](Data/Weather/NOMADS.png)
+
+A visualisation of wind strength and wind direction 
+that is made up of lots of small lines of different
+lengths and different angles and different colours.
+:::
+
+
+## Summary
+
+The human visual system captures a large amount of information from the
+visual field.  Large numbers of simple features are rapidly extracted,
+while more complex visual elements take longer and require more 
+congnitive effort, but persist for longer.
+
+
+# Visual Features {#sec-mapping-visual-features}
+
+We have established that the mappings from data values to data symbols
+are fundamental to a data visualisation.  However, there are many 
+possible ways to convert data values into visual representations;
+there are many
+possible mappings to choose from.
+
+We have also begun to explore the visual system and we have identified
+three levels of visual processing:  visual features, visual shapes,
+and visual objects.
+
+In this section, we begin to explore different sorts of mappings,
+starting with 
+the simplest sort of mapping, where
+each **data value** is **mapped** to a basic **visual feature** of a data symbol
+(@fig-visual-feature).  
+
+::: {#fig-visual-feature layout-ncol=2}
+
+![](Diagrams/data-vis.png)
+
+![](Mappings/mapping-1-1-1-1.png)
+
+A simple data visualisation maps each data value to a **visual feature**
+of a data symbol.  Each data value (`a`) is mapped to a visual
+feature (`x`) of a single data symbol.
+:::
+
+## Bar charts
+
+In order to demonstrate mapping data values to visual features,
+we will work with a data visualisation of
+the `total` number of
+crimes for different ethnic `group`s.  The data values are shown
+in @tbl-crime-group-total.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-crime-group-total
+#| tbl-colwidths: [20,20]
+#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.  
+crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
+kable_styling(kable(crimeGroupTotalTable, 
+                    table.attr='data-quarto-disable-processing="true"'),
+              bootstrap_options=c("basic", "hover"), 
+              full_width=FALSE)
+```
+
+A bar plot of these data is shown in @fig-bar.
+This is a very effective way to visualise the `total` values,
+particularly if we are interested in comparing the raw totals.
+With this data visualisation, it is very easy to answer 
+questions like the following:
+
+* Which ethnic group has the largest total number of offenders?
+* Which ethnic group has the smallest total number of offenders?
+* Is the total number of offenders higher for `Māori` or `Pasifika`?
+* Is the total number of offenders for `European/Other` more or less
+  than half the total for `Māori`?
+
+```{r}
+#| echo: false
+#| label: fig-bar
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot are the horizontal bars.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+```
+
+Why is the data visualisation in @fig-bar so effective?
+To help answer that question, we need to look at how the data values
+are being mapped to data symbols.
+  
+## Visual features
+
+The data symbols in @fig-bar 
+are a set of rectangles or bars.
+However, the important visual feature of the rectangles is their
+**length**;  the thickness of the bars does not relate to the data 
+values at all (see @fig-length).
+The `total` number of crimes for each ethnic group 
+is represented by the length of a rectangle.  Each data value
+is mapped to the length of one rectangle.
+
+```{r}
+#| echo: false
+#| label: fig-length
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group), fill="grey") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    geom_segment(aes(xend=total, y=group, yend=group), x=0, 
+                 color=highlight, linewidth=1,
+                 arrow=arrow(angle=15, length=unit(3, "mm"), ends="both")) +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
+```
+
+There is another mapping being used in @fig-bar:
+The crime `group` is mapped to the vertical **positions** of the bars
+(see @fig-position).  Each `group` value is mapped to the 
+vertical position of one rectangle.
+
+```{r}
+#| echo: false
+#| label: fig-position
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic `group`s, have been mapped to the **positions** of the bars (the purple dots).
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group), fill="grey") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    geom_point(aes(y=group), x=0, color=highlight, size=3) +
+    coord_cartesian(clip="off") +
+    theme(panel.border=element_rect(colour="grey", fill=NA),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour="grey"),
+          aspect.ratio=1)
+```
+
+**Length** and **position** are examples of basic visual features.
+One way to make an effective data visualisation is to map
+data values to the basic visual features of a data symbol.
+This is effective because basic visual features are 
+identified rapidly and without conscious effort by our visual system.
+@fig-visual-features shows some other examples of basic visual features.
+
+```{r}
+#| echo: false
+#| label: fig-visual-features
+#| fig-cap: Some examples of basic visual features are **position**, **length**, **angle**, **area**, **colour**, and **shape**.
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
+pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
+grid.text("position", x=0, just="right")
+grid.segments(.2, .5, .8, .5, gp=gpar(lwd=2))
+grid.segments(.2, .4, .2, .6, gp=gpar(lwd=2))
+grid.segments(.8, .4, .8, .6, gp=gpar(lwd=2))
+grid.circle(c(.3, .6), .7, r=unit(1, "mm"), gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.row=2))
+grid.rect(gp=gpar(col=NA, fill="grey90"))
+popViewport()
+pushViewport(viewport(layout.pos.row=2, layout.pos.col=2))
+grid.text("length", x=0, just="right")
+grid.rect(.2, c(.3, .7), c(.1, .4), .2, just="left", gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.row=3, layout.pos.col=2))
+grid.text("angle", x=0, just="right")
+grid.lines(c(.55, .45, .55) - .2, c(.6, .4, .4), gp=gpar(lwd=2))
+grid.lines(c(.55, .45, .55) + .2, c(.8, .4, .4), gp=gpar(lwd=2))
+popViewport()
+pushViewport(viewport(layout.pos.row=4))
+grid.rect(gp=gpar(col=NA, fill="grey90"))
+popViewport()
+pushViewport(viewport(layout.pos.row=4, layout.pos.col=2))
+grid.text("area", x=0, just="right")
+grid.circle(c(.3, .7), .5, r=unit(c(1, 3), "mm"), gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.row=5, layout.pos.col=2))
+grid.text("colour", x=0, just="right")
+grid.circle(c(.3, .7), .5, r=unit(2, "mm"), gp=gpar(fill=2:3))
+popViewport()
+pushViewport(viewport(layout.pos.row=6))
+grid.rect(gp=gpar(col=NA, fill="grey90"))
+popViewport()
+pushViewport(viewport(layout.pos.row=6, layout.pos.col=2))
+grid.text("shape", x=0, just="right")
+grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), pch=3:4, gp=gpar(lwd=2))
+popViewport()
+```
+
+> One reason why a bar plot is an effective data visualisation is 
+  because it involves a mapping from data values
+  to the basic visual features of data symbols---the
+  the positions and lengths of bars---and basic visual features 
+  are processed rapidly and subconsciously by our visual system.
+
+## Quantitative features {#sec-quant-features}
+
+As we discussed in @sec-visual-system, the real purpose of mapping
+data values to data symbols is to make use of the visual system
+to map *back* to the data values.  In this section, we are considering
+mappings from data values to basic visual features, so we
+need to consider how well we are able to map back **from 
+visual features** to **data values** (@fig-visual-feature-decode).
+
+::: {#fig-visual-feature-decode}
+
+![](Diagrams/data-vis-decode.png)
+
+When we map data values to visual features, we want to map 
+to a visual feature that allows us to map back to the data values.
+:::
+
+One issue to consider is whether a visual feature is able to
+represent all of the information in the data values.[^matching-data-type]
+Some types of data contain more information than others:
+
+[^matching-data-type]:
+  The idea of matching the type of data---nominal, ordinal, interval, or
+  ratio---as well as the categorisation of visual feature types
+  is from @zhang1996representational.
+
+* **Quantitative** data consists of numeric values, which naturally
+  possess not only an ordering, but information about the size
+  of differences between values.  For example, 
+  the `year` 2020 comes after the year 2010 and there is a gap
+  of 10 years in between.  This is also referred to as **interval** data.
+  **Ratio** data is quantitative data that also contains a 
+  "zero" reference value, so there is also information
+  about absolute size and ratios of differences.
+  For example, 200 offenders is twice as many as 100 offenders.
+
+* **Qualitative** data consists of categorical values that are typically
+  character values.  **Ordinal** data consists of categories that
+  are ordered, but there is no information about the size of differences.
+  For example, a "high" crime level is more severe than a "medium"
+  crime level, which is more severe than a "low" crime level, but 
+  we cannot measure the size of the differences.
+  **Nominal** data consists of just group labels,
+  e.g., ethnic groups, and the only information we have is that the
+  categories are different from each other.
+
+@fig-quant-features shows that **position**, **length**, **angle**,
+and **area** are visual features that are capable of representing
+**quantitative** data values.
+For example, a bar that is twice as high as another bar 
+comfortably represents a data value that is twice as much as another
+data value.
+All but **position** also possess
+a natural representation of zero.  
+
+```{r}
+#| echo: false
+#| label: fig-quant-features
+#| fig-height: 3
+#| fig-cap: The visual features position, length, area, and angle are all appropriate visual features for visualising quantitative data values.
+## grid.newpage()
+vp2 <- viewport(width=.9, y=unit(3, "lines"), 
+                height=unit(1, "npc") - unit(6, "lines"), 
+                just="bottom")
+pushViewport(viewport(layout=grid.layout(1, 5)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+## grid.segments(1, 0, 1, 1)
+grid.segments(unit(1, "npc") - unit(2, "mm"), c(0, .5, 1), 
+              unit(1, "npc") + unit(2, "mm"), c(0, .5, 1),
+              arrow=arrow(type="closed", angle=15, length=unit(2, "mm")), 
+              gp=gpar(fill="black"))
+grid.text(c("(zero) 0", "(amount) 10", "(twice) 20"),
+          unit(1, "npc") - unit(4, "mm"), c(0, .5, 1),
+          just="right")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+grid.segments(.5, 0, .5, 1, gp=gpar(lty="dotted"))
+grid.points(rep(.5, 3), c(0, .5, 1), pch=16, size=unit(4, "mm"))
+grid.text("position", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.rect(1:3/4, 0, .2, c(0, .5, 1), gp=gpar(fill="black"), just="bottom")
+grid.text("length", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=4),
+             vp2)
+grid.circle(.5, c(0, .5, 1), r=unit(sqrt(.5*c(0.001, .5, 1)), "cm"),
+            gp=gpar(fill="black"))
+grid.text("area", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=5),
+             vp2)
+grid.lines(unit(.5, "npc") + unit(c(-4, -4, 4), "mm"),
+           unit(1, "npc") + unit(c(4, -4, -4), "mm"),
+           gp=gpar(lwd=3))
+grid.lines(unit(.5, "npc") + unit(c(2, -4, 4), "mm"),
+           unit(.5, "npc") + unit(c(2, -4, -4), "mm"),
+           gp=gpar(lwd=3))
+grid.segments(unit(.5, "npc") + unit(-4, "mm"), 0,
+              unit(.5, "npc") + unit(4, "mm"), 0,
+              gp=gpar(lwd=3))
+grid.text("angle", y=unit(-1, "lines"))
+popViewport(2)
+```
+
+By contrast, @fig-not-quant shows that **colour** and **shape** are
+*not* capable of representing quantitative values.  For example,
+the colour blue is not twice the colour green and
+a plus sign is not 10 more than a triangle.
+In effect, these visual representations *lose* information.
+
+```{r}
+#| echo: false
+#| label: fig-not-quant
+#| fig-height: 3
+#| fig-cap: The visual features **colour** and **shape** are not capable of visualising quantitative data values.
+vp2 <- viewport(width=.9, y=unit(3, "lines"), 
+                height=unit(1, "npc") - unit(6, "lines"), 
+                just="bottom")
+pushViewport(viewport(layout=grid.layout(1, 5)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+## grid.segments(1, 0, 1, 1)
+grid.segments(unit(1, "npc") - unit(2, "mm"), c(0, .5, 1), 
+              unit(1, "npc") + unit(2, "mm"), c(0, .5, 1),
+              arrow=arrow(type="closed", angle=15, length=unit(2, "mm")), 
+              gp=gpar(fill="black"))
+grid.text(c("(zero) 0", "(amount) 10", "(twice) 20"),
+          unit(1, "npc") - unit(4, "mm"), c(0, .5, 1),
+          just="right")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+cols <- hcl.colors(3, "harmonic")
+grid.points(rep(.5, 3), c(0, .5, 1), pch=21, size=unit(7, "mm"),
+            gp=gpar(col="black", fill=cols))
+grid.text("colour", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.points(rep(.5, 3), c(0, .5, 1), pch=2:4, size=unit(5, "mm"),
+            gp=gpar(lwd=2))
+grid.text("shape", y=unit(-1, "lines"))
+popViewport(2)
+```
+
+The bar plot in @fig-bar visualises the `total` number of offenders, 
+which are quantitative data values.  These quantitative values are
+mapped to the
+**lengths** of bars, which is a visual feature that is capable of
+conveying all of the information in quantitative values.
+
+> One reason why a bar plot is effective for visualising
+  **quantitative data values** is because the quantitative data values,
+  the counts,
+  are mapped to a **quantitative visual feature**, the lengths of the bars.
+
+## Qualitative features {#sec-qual-features}
+
+If we have **qualitative** data, then we are primarily concerned with
+conveying differences between data values.
+@fig-qual-features shows that **position**, **colour**, and **shape**
+are capable of representing qualitative data values.  For example,
+blue is clearly different from green, which is clearly different from 
+brown.
+
+```{r}
+#| echo: false
+#| label: fig-qual-features
+#| fig-height: 3
+#| fig-cap: The visual features **colour**, **shape**, and **position** are capable of representing different groups.
+vp2 <- viewport(width=.9, y=unit(3, "lines"), 
+                height=unit(1, "npc") - unit(6, "lines"), 
+                just="bottom")
+pushViewport(viewport(layout=grid.layout(1, 5)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+## grid.segments(1, 0, 1, 1)
+grid.segments(unit(1, "npc") - unit(2, "mm"), c(.2, .5, .8), 
+              unit(1, "npc") + unit(2, "mm"), c(.2, .5, .8),
+              arrow=arrow(type="closed", angle=15, length=unit(2, "mm")), 
+              gp=gpar(fill="black"))
+grid.text(c("Group A", "Group B", "Group C"),
+          unit(1, "npc") - unit(4, "mm"), c(.2, .5, .8),
+          just="right")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+cols <- hcl.colors(3, "harmonic")
+grid.points(rep(.5, 3), c(.2, .5, .8), pch=21, size=unit(5, "mm"),
+            gp=gpar(col="black", fill=cols))
+grid.text("colour", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.points(rep(.5, 3), c(.2, .5, .8), pch=2:4, size=unit(5, "mm"),
+            gp=gpar(lwd=2))
+grid.text("shape", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=4),
+             vp2)
+grid.rect(rep(.2, 3), c(.2, .5, .8), width=c(.6, .6, .6), height=.1,
+          just="left", gp=gpar(fill="black"))
+grid.text("position", y=unit(-1, "lines"))
+popViewport(2)
+```
+
+By contrast, @fig-not-qual shows that **length**, **area**, and **angle**
+are not appropriate for representing qualitative data values.  In this
+case, the visual features imply an inherent order, which is misleading
+because that *adds* information that is not present in the data values.
+
+```{r}
+#| echo: false
+#| label: fig-not-qual
+#| fig-height: 3
+#| fig-cap: The visual features **length**, **area**, and **angle** are not appropriate for representing qualitative data values because they imply an ordering of data values that have no inherent order.
+vp2 <- viewport(width=.9, y=unit(3, "lines"), 
+                height=unit(1, "npc") - unit(6, "lines"), 
+                just="bottom")
+pushViewport(viewport(layout=grid.layout(1, 5)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+## grid.segments(1, 0, 1, 1)
+grid.segments(unit(1, "npc") - unit(2, "mm"), c(.2, .5, .8), 
+              unit(1, "npc") + unit(2, "mm"), c(.2, .5, .8),
+              arrow=arrow(type="closed", angle=15, length=unit(2, "mm")), 
+              gp=gpar(fill="black"))
+grid.text(c("Group A", "Group B", "Group C"),
+          unit(1, "npc") - unit(4, "mm"), c(.2, .5, .8),
+          just="right")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+grid.rect(1:3/4, 0, .2, c(.2, .5, .8), just="bottom", gp=gpar(fill="black")) 
+grid.text("length", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(.5, c(.2, .5, .8), r=unit(sqrt(.5*c(.2, .5, .8)), "cm"),
+            gp=gpar(fill="black"))
+grid.text("area", y=unit(-1, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=4),
+             vp2)
+grid.lines(unit(.5, "npc") + unit(c(0, 0), "mm"),
+           unit(.8, "npc") + unit(c(4, -4), "mm"),
+           gp=gpar(lwd=3))
+grid.lines(unit(.5, "npc") + unit(c(-4, 4), "mm"),
+           unit(.5, "npc") + unit(c(-4, 4), "mm"),
+           gp=gpar(lwd=3))
+grid.segments(unit(.5, "npc") + unit(-4, "mm"), .2,
+              unit(.5, "npc") + unit(4, "mm"), .2,
+              gp=gpar(lwd=3))
+grid.text("angle", y=unit(-1, "lines"))
+popViewport(2)
+```
+
+The bar plot in @fig-bar maps the ethnic `group`s, which are
+qualitative data values, to the **position** of bars, which is
+a qualitative visual feature.
+
+> One reason why a bar plot is effective for visualising
+  **qualitative data values** is because the qualitative data values,
+  the groups, 
+  are mapped to a **qualitative visual feature**, the positions of the bars.
+
+## Accuracy {#sec-accuracy}
+
+Another issue that impacts on how well we can map *back* from
+a visual feature to the data values (@fig-visual-feature-decode)
+is the **accuracy** with which we can perceive quantitative values
+from visual features.  For example, how well can we perceive the size of the
+difference between the length of two bars?[^accuracy-research]
+
+[^accuracy-research]:
+  The pioneering work on the accuracy of different visual features
+  for statistical graphics was carried out by @cleveland1984graphical.
+  Their results have been supported several times in subsequent 
+  studies, including @heer2010crowdsourcing.
+  The rankings were extended to a larger set of visual features
+  by @mackinlay1986automatic, although somewhat only by inference from other
+  psychophyscial results, rather than by direct experiment.
+  An argument for ranking the accuracy of visual features can also be
+  made from Steven's Law [@stevens1957psychophysics], which states that
+  the perception
+  of the magnitude of different stimuli follows a power law.
+  For example, the 
+  perception of length has a power of approximately one (linear), which
+  suggests that we accurately perceive the magnitude of lengths,
+  while area has a power less than one, which
+  suggests that we underestimate the magnitude of areas.
+
+It is easy to demonstrate that judgements of this sort are harder
+for some visual features than others.
+For example, @fig-accuracy-demo presents sets of three bars, which differ
+by **length**, circles, which differ by **area**, and polygons, which
+differ by **shape** (number of sides).
+Judging the relative sizes of the bars is easier than judging the
+relative sizes of the circles and comparing the polygons is 
+extremely difficult.
+
+```{r}
+#| echo: false
+#| label: fig-accuracy-demo
+#| fig-cap: A demonstration of differences in accuracy between basic visual features. For each set of symbols, how much larger (or brighter) are the larger (or brighter) symbols?
+colWidth <- .2
+pushViewport(viewport(layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.25, .5, .75), 0, width=colWidth, height=c(.3, .6, .9), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2), 
+             viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+grid.circle(c(.1, .5, .9), y=c(.1, .5, .9), 
+            r=sqrt(c(.0125, .025, .0375)), gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3), 
+             viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+regpoly <- function(x, y, n, offset=0) {
+    t <- seq(0, 2*pi, length.out=n+1)[-(n+1)] + offset
+    x <- x + .125*cos(t)
+    y <- y + .125*sin(t)
+    grid.polygon(x, y, gp=gpar(fill="black"))
+}
+regpoly(.1, .1, 3, pi/2)
+regpoly(.5, .5, 6, pi/2)
+regpoly(.9, .9, 9, pi/2)
+popViewport(2)
+```
+
+This issue has been studied experimentally and 
+@fig-accuracy shows the established ordering of the accuracy
+of basic visual features,
+with more accurate visual features at the top.
+A data visualisation that maps 
+data values to visual features near the top of this
+ranking will be more effective than one that maps data values
+to visual features near the bottom.
+
+```{r}
+#| echo: false
+#| label: fig-accuracy
+#| fig-cap: An ordering of basic visual features in terms of their accuracy, with more accurate at the top.
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
+pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
+grid.text("position", x=0, just="right")
+grid.segments(.2, .5, .8, .5, gp=gpar(lwd=2))
+grid.segments(.2, .4, .2, .6, gp=gpar(lwd=2))
+grid.segments(.8, .4, .8, .6, gp=gpar(lwd=2))
+grid.circle(c(.3, .6), .7, r=unit(1, "mm"), gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.row=2))
+grid.rect(gp=gpar(col=NA, fill="grey90"))
+popViewport()
+pushViewport(viewport(layout.pos.row=2, layout.pos.col=2))
+grid.text("length", x=0, just="right")
+grid.rect(.2, c(.3, .7), c(.1, .4), .2, just="left", gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.row=3, layout.pos.col=2))
+grid.text("angle", x=0, just="right")
+grid.lines(c(.55, .45, .55) - .2, c(.6, .4, .4), gp=gpar(lwd=2))
+grid.lines(c(.55, .45, .55) + .2, c(.8, .4, .4), gp=gpar(lwd=2))
+popViewport()
+pushViewport(viewport(layout.pos.row=4))
+grid.rect(gp=gpar(col=NA, fill="grey90"))
+popViewport()
+pushViewport(viewport(layout.pos.row=4, layout.pos.col=2))
+grid.text("area", x=0, just="right")
+grid.circle(c(.3, .7), .5, r=unit(c(1, 3), "mm"), gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.row=5, layout.pos.col=2))
+grid.text("colour", x=0, just="right")
+grid.circle(c(.3, .7), .5, r=unit(2, "mm"), 
+            gp=gpar(fill=hcl(240, c(40, 70), c(40, 70))))
+popViewport()
+pushViewport(viewport(layout.pos.row=6))
+grid.rect(gp=gpar(col=NA, fill="grey90"))
+popViewport()
+pushViewport(viewport(layout.pos.row=6, layout.pos.col=2))
+grid.text("shape", x=0, just="right")
+grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), 
+            pch=c(4, 8), gp=gpar(lwd=2))
+popViewport()
+```
+
+The bar plot in @fig-bar maps the `total` number of offenders,
+quantitative values, to the **lengths** of bars, which is an
+**accurate** visual feature.  This means that viewers can make
+accurate comparisons between
+the lengths of the bars.
+
+> One reason why a bar plot is effective for visualising
+  **quantitative data values** is because the quantitative data values,
+  counts or proportions,
+  are mapped to a very **accurate visual feature**, the lengths of the bars.
+
+## Capacity {#sec-capacity}
+
+When we are visualising **qualitative** data values, we are no longer
+concerned with accurately perceiving the size of differences;
+all we are concerned with is perceiving whether two values are 
+different.  For example, can we perceive a difference between two colours?
+
+The issue in this scenario is the **capacity** of a visual feature:
+how many different categories can be represented (and still perceived
+as clearly different from each other).
+
+@fig-colour-cap shows that **colour** has a limited capacity.
+A small number of different colours are very easy to differentiate,
+but the differences become harder to perceive with a greater number
+of colours.
+
+```{r}
+#| echo: false
+#| label: fig-colour-cap
+#| fig-height: 3
+#| fig-cap: Mapping qualitative data values to colour works well for a small number of colours, but less well for a large number of colours.  It is quite easy to distinguish between the three colours on the left and even between the seven colours in the middle, but it becomes harder for the eleven colours on the right.
+hpie <- function(n) {
+    t <- rev(seq(0, 2*pi, length.out=100*n) + pi/2)
+    cols <- scales::hue_pal()(n)
+    for (i in 1:n) {
+        index <- 1:100 + (i-1)*100
+        x <- cos(t[index])
+        y <- sin(t[index])
+        grid.polygon(c(.5, .5 + .3*x), c(.5, .5 + .3*y), 
+                     gp=gpar(col=figbg, lwd=4, fill=cols[i]))
+        grid.text(letters[i], .5 + mean(.25*x), .5 + mean(.25*y),
+                  gp=gpar(cex=1))
+    }
+}
+pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1))
+hpie(3)
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+hpie(7)
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+hpie(11)
+popViewport()
+```
+
+By contrast, @fig-pos-cap shows that **position** has a very large
+capacity.  We can easily differentiate between locations even as the
+number of locations becomes large.
+
+```{r}
+#| echo: false
+#| label: fig-pos-cap
+#| fig-height: 3
+#| fig-cap: Mapping qualitative data values to position works well for both a small number of positions and for a large number of positions.
+bars <- function(n) {
+    h <- 3
+    y <- unit(.5, "npc") + unit((h + 3)*(seq(1:n) - n/2), "mm")
+    grid.rect(.5, y, .3, unit(h, "mm"), gp=gpar(fill="grey"))
+    grid.text(rev(letters[1:n]), unit(.35, "npc") - unit(.5, "lines"), y)
+}
+pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1))
+bars(3)
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+bars(7)
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+bars(11)
+popViewport()
+```
+
+The bar plot in @fig-bar maps the ethnic `group` to the
+**position** of bars, which makes it easy to differentiate between
+the different ethnic groups.
+
+> One reason why a bar plot is effective for visualising
+  **qualitative data values** is because the qualitative data values,
+  the groups,
+  are mapped to a visual feature that has excellent **capacity**, 
+  the positions of the bars.
+
+## Case study: Dot plots
+
+We have seen that, for several reasons,
+@fig-bar is an effective way to visualise
+the `total` number of offenders for different ethnic `group`s.
+@fig-dot shows an alternative representation of these data in the
+form of a dot plot [@cleveland1985graphical]. 
+
+```{r}
+#| echo: false
+#| label: fig-dot
+#| fig-cap: A dot plot of the number of crimes for different ethnic groups. The data symbols in this plot are the data points.
+ggplot(crimeGroupTotal) + 
+    geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
+                 linetype="dotted") +
+    geom_point(aes(x=total, y=group), size=3) +
+    scale_x_continuous(name="total") +
+    theme(aspect.ratio=1)
+```
+
+Like the bar plot, 
+this is a very effective data visualisation, and for very similar 
+reasons.  This data visualisation uses a different data symbol, 
+data points instead of bars, but each data value is mapped to a
+basic visual feature of one data symbol.
+Furthermore, the quantitative data values (the totals)
+are mapped to the horizontal 
+**position** of the points, which is a very accurate
+visual feature, and the qualitative data values (the groups)
+are mapped to the vertical **position** of the points, which
+is a visual feature with a high capacity.
+
+It could be argued that the dot plot in @fig-dot is even *more* effective
+than the bar plot in @fig-bar for perceiving the differences 
+between `total`s because **position** ranks higher than **length**
+in @fig-accuracy.  On the other hand, if we want to compare 
+totals in terms of their ratios, @fig-bar is superior because it
+includes a representation of zero.
+
+## Case study: Pie charts
+
+@fig-pie shows yet another visualisation of the `total` number of offenders
+for different ethnic `group`s, this time a pie chart.
+This is a less effective representation of the data than the
+bar plot in @fig-bar or the dot plot in @fig-dot and we can use
+familiar reasoning to see why.
+
+```{r}
+#| echo: false
+#| label: fig-pie
+#| fig-cap: A pie chart of the number of crimes for different ethnic groups. The data symbols in this plot are the pie wedges.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y="", fill=group), colour="black") +
+    coord_polar() +
+    theme(aspect.ratio=1,
+          axis.title.y=element_blank(),
+          axis.ticks.y=element_blank())
+```
+
+The data symbols in @fig-pie are wedges or segments of a circle
+and, on the positive side, the data values are mapped to basic
+visual features of these symbols:
+The `total` values are mapped to the **angle** and/or **area** of the wedges
+and the `group` values are mapped to the **colour** of the wedges.
+Although **colour** is an appropriate visual feature to represent
+**qualitative** data, and it has sufficient capacity to differentiate
+between only four groups, the mapping of quantitative values to **angle**
+and/or **area** leads to less accurate perception of the differences
+between totals (compared to the lengths and positions employed in the
+bar plot and the dot plot).
+
+## Summary
+
+A bar plot is a very common data visualisation for representing 
+numeric values, particularly counts,
+for several different groups.
+There are several reasons why bar plots work so well:
+
+* A bar plot maps data values 
+  to basic visual features, which are perceived rapidly and
+  without cognitive effort.
+* A bar plot maps the quantitative counts to a quantitative visual feature
+  (length) and the qualitative groups to a qualitative visual feature
+  (position).
+* A bar plot maps the counts to a visual feature that is perceived
+  very accurately (length) and the groups to a visual feature
+  that has a high capacity (position).
+
+Dot plots are also very effective for the same scenario for the same
+reasons, except that a dot plot uses **position** instead of length
+to represent the quantitative values.
+
+Pie charts by comparison have some weaknesses:
+
+* A pie chart maps quantitative counts to **angle** and/or **area**, 
+  which is less accurate.
+* A pie chart maps qualitative groups to **colour**, which has a lower capacity.
+
+# Length {#sec-quantitative}
+
+@fig-bar-district shows a bar plot of the total number of offenders
+in each police district in New Zealand (for ages 14 to 16 and
+from 2011 to 2021).  For the reasons outlined in @sec-mapping-visual-features,
+this data visualisation is effective for
+comparing the number of offenders in different police districts.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.
+crimeTemp <- crimeDistrictTotal
+crimeTemp$district <- factor(crimeTemp$district,
+		             levels=rev(c("Northland", "Waitematā",
+			              "Auckland City",
+			              "Counties/Manukau", "Waikato",
+				      "Bay of Plenty",
+				      "Eastern", "Central",
+				      "Wellington",
+				      "Tasman", "Canterbury",
+				      "Southern")))
+ggplot(crimeTemp) +
+    geom_col(aes(x=total, y=district), width=.8) +
+    scale_x_continuous(expand=expansion(c(0, .05))) 
+```
+
+@fig-bar-district-ordered shows a bar plot of the same data, but with the
+bars ordered from longest to shortest.  This data visualisation uses
+the same mappings as @fig-bar-district---police districts are mapped
+to the vertical positions of the bars and the total counts
+are mapped to the lengths of the bars---which means that it is also
+effective for comparing the total number of offenders between 
+police districts.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district-ordered
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from largest number of offenders to smallest.
+crimeDistrictTotal$districtOrdered <- 
+    with(crimeDistrictTotal, reorder(district, total))
+ggplot(crimeDistrictTotal) +
+    geom_col(aes(x=total, y=districtOrdered), width=.8) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_discrete(name="district")
+```
+
+However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
+for some comparisons.  For example, it is easier to compare the Northland
+district with the Tasman district in @fig-bar-district-ordered.
+The fact that two data visualisations with the same mappings
+can have a different effectiveness suggests that there is more to know about
+how different visual features work.
+
+This section covers some more details about how **quantitative**
+visual features work.
+
+## The distance effect {#sec-distance-effect}
+
+In @sec-accuracy, we saw that **position** and **length** were the most
+accurate visual features (see @fig-accuracy).  However, this accuracy
+decreases if the two visual features that are being compared are
+not in close proximity (see @fig-distance-effect).[^distance-effect]
+
+[^distance-effect]:
+  The first demonstration of the "distance effect" is attributed to 
+  @cleveland1984graphical.  It has since been replicated several times,
+  for example, by @talbot2014four.
+
+This helps to explain why @fig-bar-district-ordered is more effective
+than @fig-bar-district for some comparisons (e.g., Northland versus Tasman).
+
+```{r}
+#| echo: false
+#| label: fig-distance-effect
+#| fig-cap: Two bars are easier to compare if they are close to each other (top row).  If there is a distance between the bars and/or there are distractors (other bars) in between then comparisons are less accurate (bottom row).  On both the top and bottom row, the black bar on the left is slightly higher than the black bar on the right.
+pushViewport(viewport(width=.6, layout=grid.layout(2, 1)))
+pushViewport(viewport(layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.segments(0, .2, 1, .2, gp=gpar(col="grey"))
+grid.rect(.425, .2, .1, .6, just="bottom", gp=gpar(fill="black"))
+grid.rect(.575, .2, .1, .55, just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.segments(0, .2, 1, .2, gp=gpar(col="grey"))
+grid.rect(.125, .2, .1, .6, just="bottom", gp=gpar(fill="black"))
+grid.rect(seq(.275, .725, .150), .2, .1, runif(4, .2, .8), 
+          just="bottom", gp=gpar(col=NA, fill="grey"))
+grid.rect(.875, .2, .1, .55, just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+```
+
+> One reason for ordering the bars in a bar plot from longest to shortest 
+  is because, for some common comparisons, 
+  the ordering places the bars that are being
+  compared closer 
+  together, which improves the accuracy of the comparison.
+
+## Unaligned length
+
+@fig-unaligned-length shows that it is harder to accurately compare
+the **lengths** of two bars if they are **unaligned** and do not share a 
+common base.  This also applies to the accuracy of comparing **positions**.
+
+```{r}
+#| echo: false
+#| label: fig-unaligned-length
+#| fig-cap: It is easier to compare the lengths of the two bars on the left because they are **aligned**;  they share a common base.  The two bars on the right are harder to compare because they are **unaligned**.
+pushViewport(viewport(x=0, width=.5, just="left"))
+pushViewport(viewport(width=unit(.8, "snpc")))
+grid.segments(.2, .1, .2, .9, gp=gpar(col="grey"))
+grid.rect(.2, c(.3, .7), c(.5, .6), .2, just="left", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(x=.5, width=.5, just="left"))
+pushViewport(viewport(x=.4, width=unit(.8, "snpc")))
+grid.segments(.2, .1, .2, .5, gp=gpar(col="grey"))
+grid.segments(.4, .5, .4, .9, gp=gpar(col="grey"))
+grid.rect(c(.2, .4), c(.3, .7), c(.5, .6), .2, just="left",
+          gp=gpar(fill="black"))
+popViewport(2)
+```
+
+@fig-stacked-bar shows an alternative visualisation of the data on 
+the total number of offenders in different ethnic groups.
+The bar plot of these data that we saw in @fig-bar mapped ethnic groups
+to the **positions** of the bars so that the bars were arranged
+vertically with a common left-hand edge.
+In @fig-stacked-bar, the ethnic groups are 
+mapped to different **colours** and the bars are "stacked" horizontally.
+
+Although the total number of offenders has been mapped to the same
+visual feature in both @fig-stacked-bar and @fig-bar, the **lengths**
+of the bars, comparing those lengths is much harder in @fig-stacked-bar
+because the lengths are **unaligned**.
+
+```{r}
+#| echo: false
+#| label: fig-stacked-bar
+#| fig-cap: A stacked bar plot of the total number of offenders in each ethnic group.
+gg <- ggplot(crimeGroupTotal) +
+    geom_col(aes(total, y="", fill=group), position="stack") +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_discrete(name=NULL, expand=expansion(0)) +
+    theme(axis.ticks.y=element_blank())
+pushViewport(viewport(width=.8, height=.6))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+> One reason why stacked bar plots are less effective for some
+  comparisons is because we are forced to compare the unaligned lengths 
+  of the bars.
+
+## Case study:  Stacked versus side-by-side bar plots {#sec-stacked-vs-side}
+
+Stacking bars, which creates unaligned lengths, is something that
+arises when we use a bar plot to show a quantitative variable broken
+down by more than one qualitative variable.
+For example,
+@fig-stacked-bar-year shows the number of offenders (quantitative)
+for each ethnic group (qualitative) and
+for each year from 2011 to 2021 (qualitative, or at least discrete).
+In this data visualisation, the number of offenders is mapped to 
+the lengths of the bars, the years are mapped to the horizontal
+**position** of the bars, the ethnic groups are mapped to 
+the colours of the bars, and the bars are stacked vertically.
+
+The problem that we face in this situation is that there are 
+four bars to show for each year.  Stacking the bars is one solution, but 
+as we have just seen, this makes some comparisons more difficult.
+For example, we can easily see that the number of offenders in the 
+unknown group increased after 2016, but it is much harder to see what
+has happened to the European/Other group since 2016.
+
+```{r}
+#| echo: false
+#| label: fig-stacked-bar-year
+#| fig-cap: A stacked bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(year, count, fill=group), position="stack") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+An alternative visualisation is shown in @fig-side-bar-year.
+This has placed the four ethnic groups side-by-side for each year.
+It is now easier to see the changes over time for the European/Other 
+group because all bars are now aligned.  Unfortunately, as we saw in
+@sec-distance-effect, some comparisons are more difficult
+because the bars are now further apart
+and have distractors in between.
+
+```{r}
+#| echo: false
+#| label: fig-side-bar-year
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(year, count, fill=group), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+Yet another variation is shown in @fig-side-bar-group.
+This time we have placed all years side-by-side for each ethnic group.
+This provides the clearest view of the changes over time for each ethnic
+group because the relevant bars are close together and aligned.
+However, there are other comparisons that are considerably more difficult 
+because of the distance between the relevant bars, for example,
+comparing between ethnicities for a specific year.
+
+```{r}
+#| echo: false
+#| label: fig-side-bar-group
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
+ggplot(crimeGroup) +
+    geom_col(aes(group, count, fill=group, group=year), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+```
+
+There is no single best visualisation in general for this situation because
+different visualisations each have their strengths and weaknesses.
+If a particular sort of comparison is to be emphasised, then one 
+data visualisation might stand out, but there is also the option of
+providing more than one data visualisation in order to cover 
+more comparisons.
+
+## Perception is relative {#sec-perception-relative}
+
+@fig-relative shows that the perception of differences is relative;
+it is easier to detect smaller differences when the visual features
+that we are comparing are smaller.[^Weber]
+It is easier to see that the pair of bars on the left have different
+lengths and harder to see that the pair of bars on the right have 
+different lengths.  All three pairs of bars have different lengths,
+but the absolute size of the difference is the same, so the size
+of the difference relative to the bar lengths gets smaller as the bars
+get longer.
+
+[^Weber]:
+  The idea of perception of differences being relative is a very old result 
+  from Psychology 
+  known as Weber's Law [@weber1834tastsinn; @boring1942sensation].
+
+```{r}
+#| echo: false
+#| label: fig-relative
+#| fig-cap: A demonstration that perception of differences is relative. The pairs of bars all differ by the same absolute amount, but the difference is more easily perceived when comparing the shorter bars.  In the shorter bars, the absolute difference between the bars is a larger difference relative to the length of the bars.
+colWidth <- .2
+offset <- c(0, .05)
+pushViewport(viewport(height=.8, layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.1, .15), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.5, .55), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+```
+
+@fig-relative-ref shows that we can make it easier to judge
+the differences by providing reference marks.  Each pair
+of black bars is the same and each pair of bars differs in length
+by the same small amount.  The difference between the bars in each 
+pair is difficult to perceive because the difference is small relative
+to the lengths of the bars.  The
+reference marks in the middle and right-hand pair of bars
+provide shorter lengths to compare, so we are able
+to more easily perceive the small differences.  For example, for the
+pair of bars on the right, we can compare the lengths of the short white
+gaps rather than comparing the longer black bars.
+
+```{r}
+#| echo: false
+#| label: fig-relative-ref
+#| fig-cap: A demonstration that reference marks can make it easier to perceive small differences.  Each pair of black bars is the same and each pair differs by a small amount.  In the middle pair, grid lines make it easier to compare the distances from the ends of the bars to the nearest grid line and, in the right-hand pair, a border added to each bar, where the two borders are the same length, makes it easier to compare the white gaps rather than the bars themselves.
+pushViewport(viewport(height=.8, layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2), 
+             viewport(width=.8, height=.8))
+grid.segments(.2, seq(0, 1, .1), .8, seq(0, 1, .1), gp=gpar(col="black"))
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3), 
+             viewport(width=.8, height=.8))
+grid.rect(c(.35, .65), offset, width=colWidth, height=.95, 
+          just="bottom")
+grid.rect(c(.35, .65), offset, width=colWidth, height=c(.8, .85), 
+          just="bottom", gp=gpar(fill="black"))
+popViewport(2)
+```
+
+@fig-bar-district-grid shows a bar plot of the number of offenders in each 
+police district (@fig-bar-district) with some grid lines added.
+Although it is difficult to compare the bars for Northland and Tasman
+because they are quite far apart and there are distractors in between
+(@sec-distance-effect), the addition of the grid lines makes it easier
+to perform the comparison because we are able to compare the distances
+from the ends of the bars to the nearest grid line.  Those distances are
+much shorter than the bars so it is easier to perceive the small
+difference.
+
+```{r}
+#| echo: false
+#| label: fig-bar-district-grid
+#| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.  This is very similar to @fig-bar-district, just with some grid lines added.
+crimeTemp <- crimeDistrictTotal
+crimeTemp$district <- factor(crimeTemp$district,
+		             levels=rev(c("Northland", "Waitematā",
+			              "Auckland City",
+			              "Counties/Manukau", "Waikato",
+				      "Bay of Plenty",
+				      "Eastern", "Central",
+				      "Wellington",
+				      "Tasman", "Canterbury",
+				      "Southern")))
+ggplot(crimeTemp) +
+    geom_col(aes(x=total, y=district), width=.8) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1))
+```
+
+> One reason why grid lines are effective is because they allow
+  comparisons of smaller lengths or distances, which means that
+  it is easier to perceive smaller changes.
+
+## Summary
+
+Bar plots are effective because they map **quantitative** values to **lengths**,
+which are accurate visual features.
+
+However, comparisons between the bars in a bar plot can be difficult if
+the bars are far apart, especially if there are distractors in between.
+
+Furthermore, **stacked bars** are more difficult to compare because
+they require comparing **unaligned** lengths.
+
+Finally, it is easier to perceive differences between shorter bars than
+between longer bars because the perception of differences is **relative**.
+
+**Grid lines** can help with comparisons because they make the distances
+being compared smaller, so smaller differences are easier to detect.
+
+# Colour
+
+@fig-pie-hue shows a pie chart of the number of offenders for different
+levels of crime seriousness (between 2011 and 2021).
+In this data visualisation, level, which is a **qualitative** variable,
+is mapped to **colour**, which is appropriate for representing
+qualitative values (see @sec-qual-features).  It is easy to identify
+different crime levels because it is easy to perceive differences between
+the colours of the wedges in the pie chart.
+
+```{r}
+#| echo: false
+#| label: fig-pie-hue
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level)) +
+    coord_polar() +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
+```
+
+@fig-pie-ordinal show another pie chart of the same data, again mapping
+the **qualitative** level to **colour**.
+It is again easy to differentiate between different crime levels because we
+can easily perceive differences between the colours of the wedges.
+However, @fig-pie-ordinal is *more* effective than @fig-pie-hue because
+we can *also* perceive an ordering of the wedges from more serious crimes,
+which are darker wedges, to less serious crimes, which are lighter wedges.
+
+```{r}
+#| echo: false
+#| label: fig-pie-ordinal
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level), colour="black") +
+    coord_polar() +
+    scale_fill_ordinal(guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
+```
+
+The fact that there can be two data visualisations,
+@fig-pie-hue and @fig-pie-ordinal,
+with the same mappings,
+the **qualitative**
+level of crime maps to the visual feature **colour**,
+but the two data visualisations 
+have different effectiveness suggests that there is still
+more to learn about how different visual features work.
+
+This section covers some more details about how **qualitative** visual
+features work.
+
+## Hue, chroma, and luminance {#sec-colour}
+
+We have so far taken a very simplistic approach to **colour**,
+treating it as if it is a single **qualitative** visual feature
+(see @sec-qual-features).
+However, the perception of colour can be divided into 
+three separate visual features:  **hue**, **chroma**, and **luminance**
+(see @fig-hcl).[^tricolour]
+Hue describes what we normally refer to as the colour name: reds, oranges,
+yellows, greens, blues, and purples.
+Chroma describes the colourfulness, from bright to dull,
+and luminance describes the lightness, from dark to light.
+Our visual system is capable to perceiving changes in hue and changes in
+chroma and changes in luminance.
+
+[^tricolour]:
+  The three-dimensional experience of colour arises from the fact that there
+  are three different sorts of cones in the retina (see @sec-eye),
+  each sensitive to a different range of light wavelengths:
+  The L cones respond to long wavelengths (reds); the M cones respond
+  to medium wavelengths (greens); and the S cones respond to short
+  wavelengths (blues).
+  The neural connections that combine the messages from the retina are also 
+  divided into three pathways: light-dark, which represents the sum of L, M, 
+  and S cones;
+  red-green, which represents the difference between L and M cones;
+  and blue-yellow, which represents the difference between S cones and the
+  sum of L and M cones.
+  For more information, see @ware2021information.
+
+We have described colour as a **qualitative** visual feature so far, but that 
+really strictly only applies to **hue**.  For example, 
+@fig-stacked-bar used different hues to represent different ethnic groups.
+Hue is excellent for the perception of differences.
+
+```{r}
+#| echo: false
+#| label: fig-hcl
+#| fig-cap: "The perception of colour can be divided into three components: differences in **hue**, the colours of the rainbow; differences in **chroma**, from bright and colourful to dull and grey; and differences in **luminance**, from light to dark."
+vp2 <- viewport(width=.9, y=unit(3, "lines"),
+                height=unit(1, "npc") - unit(6, "lines"),
+                just="bottom")
+pushViewport(viewport(width=.8, height=.8, layout=grid.layout(1, 3)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+n <- 7
+t <- seq(0, 2*pi, length.out=n+1)[-1]
+x <- .5 + .3*cos(t)
+y <- .5 + .3*sin(t)
+grid.circle(x, y, r=.1,
+            gp=gpar(col="black", fill=hcl(t/pi*180, 70, 70)))
+popViewport()
+grid.text("hue", y=unit(-2, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1, 
+            gp=gpar(col="black", fill=hcl(300, 100*1:5/6, 70))) 
+grid.text("chroma", y=unit(-2, "lines"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1, 
+            gp=gpar(col="black", fill=hcl(300, 70, 100*5:1/6))) 
+grid.text("luminance", y=unit(-2, "lines"))
+popViewport(2)
+```
+
+## Ordinal visual features
+
+**Chroma** and **luminance** are both **qualitative** visual features
+in that they can be used to visualise different groups, but they
+are also **ordinal** visual features because we can perceive
+an ordering from a set of colours that differ in terms of either chroma
+or luminance or both.  A set of colours that transitions from darker
+to lighter and/or brighter to duller conveys an ordering from larger
+to smaller.
+
+This helps to explain why @fig-pie-ordinal is more effective
+than @fig-pie-hue.  In @fig-pie-ordinal, the colours differ
+mostly in terms of luminance and chroma so we are able to perceive
+changes from larger values to smaller values because the
+colours transition from darker to lighter.
+
+In this sense, **chroma** and **luminance** are able to convey
+more information than **hue** because they can represent **nominal**
+differences *and* **ordinal** differences, whereas hue can only
+represent nominal differences.  
+
+On the other hand, @fig-lum-cap shows that chroma and luminance are
+even more limited than hue in terms of **capacity**.  We can only use
+chroma and/or luminance to represent **nominal** data when there
+are very few different groups to represent.
+
+```{r}
+#| echo: false
+#| label: fig-lum-cap
+#| fig-height: 3
+#| fig-cap: Mapping qualitative values to luminance and chroma works well for representing nominal data values, but only for a very small number of values. The three values on the left are easily distringuishable, but it becomes difficult to clearly distinguish between adjacent colours in the middle and almost impossible for the colours on the right.  This figure can be compared with @fig-colour-cap, which demonstrates the capacity of hue for representing nominal data values.
+clpie <- function(n) {
+    t <- rev(seq(0, 2*pi, length.out=100*n) + pi/2)
+    cols <- hcl.colors(n+1, "Purples")[-(n+1)]
+    for (i in 1:n) {
+        index <- 1:100 + (i-1)*100
+        x <- cos(t[index])
+        y <- sin(t[index])
+        grid.polygon(c(.5, .5 + .3*x), c(.5, .5 + .3*y), 
+                     gp=gpar(col=figbg, lwd=4, fill=cols[i]))
+        grid.text(letters[i], .5 + mean(.25*x), .5 + mean(.25*y),
+                  gp=gpar(cex=1))
+    }
+}
+pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1))
+clpie(3)
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+clpie(7)
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+clpie(11)
+popViewport()
+```
+
+## Perception is relative {#sec-colour-relative}
+
+We saw in @sec-perception-relative that perception of **lengths** is 
+relative.  For example, smaller differences in length are easier
+to see when the lengths themselves are short (see @fig-relative).
+
+There is a similar rule for the perception of **colours**. 
+Our perception of a colour is affected by neighbouring 
+colours.[^contrast-effect]
+This effect is demonstrated in @fig-contrast-effect:
+the same colour when surrounded by a darker background appears lighter
+than it does when surrounded by a lighter background.
+
+[^contrast-effect]:
+  This relative perception of colours is useful for being able
+  to adapt to a wide range of lighting conditions.
+  See @ware2021information for a more detailed discussion.
+
+```{r}
+#| echo: false
+#| label: fig-contrast-effect
+#| fig-height: 3
+#| fig-cap: The perception of colours is relative. In the top row, the inner rectangles are exactly the same shade of grey on the left and exactly the same shade of purple on the right.  The perception of the inner rectangles is affected by the surrounding colour, so the same shade appears darker against a light background and darker against a light background.  The bottom row draws a line connecting the two inner rectangles to show that they really are the same shade.
+pushViewport(viewport(layout=grid.layout(2, 2, widths=2, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill="grey20"))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill="grey80"))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill="grey20"))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill="grey80"))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill="grey60"))
+grid.segments(.25, .5, .75, .5, gp=gpar(col="grey60", lwd=20))
+popViewport(2)
+purples <- pal_brewer(palette="Purples")(4)[-1]
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill=purples[1]))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill=purples[3]))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.rect(x=.25, width=.5, gp=gpar(col=NA, fill=purples[1]))
+grid.rect(x=.25, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+grid.rect(x=.75, width=.5, gp=gpar(col=NA, fill=purples[3]))
+grid.rect(x=.75, width=.25, height=.5, gp=gpar(col=NA, fill=purples[2]))
+grid.segments(.25, .5, .75, .5, gp=gpar(col=purples[2], lwd=20))
+popViewport(2)
+popViewport()
+```
+
+This effect also applies to the perception of hue.
+@fig-pie-contrast shows a pie chart of the number of offenders in each
+police district, with police district mapped to the **colour** of the
+wedges.  There are two issues with the perception of the wedge colours:
+each wedge is affected by its neighbour so that, for example, some of 
+the blue wedges look more green at the boundary with their more blue 
+neighbour and more blue at the boundary with their more green neighbour;
+furthermore, the colours in the legend are perceived differently from
+the corresponding colours in the wedges because the legend colours are
+surrounded by white.
+
+```{r}
+#| echo: false
+#| label: fig-pie-contrast
+#| fig-cap: This pie chart demonstrates that the perception of hues is relative. The colours within each wedge appear to have a subtle gradient within the wedge because the perception of the wedge colour is affected differently by the neighbouring wedge colours.
+ggplot(crimeDistrictTotal) + 
+    geom_col(aes(x=total, y="", fill=district)) +
+    coord_polar() +
+    scale_fill_hue() +
+    theme(aspect.ratio=1,
+          axis.title.y=element_blank(),
+          axis.ticks.y=element_blank())
+```
+
+The pie chart in @fig-pie-contrast is *not* an effective data visualisation
+because it maps qualitative data values with lots of different groups
+to colour hue.  This exceeds the **capacity** of the **hue** visual feature;
+it is difficult to clearly distinguish between all of the different hues
+(see @sec-capacity).
+
+Although it does not make the use of hue any more appropriate,
+for the purposes of demonstration,
+we can solve the colour perception problems in @fig-pie-contrast
+by adding a white border to all of the wedges
+(see @fig-pie-contrast-solved).
+
+```{r}
+#| echo: false
+#| label: fig-pie-contrast-solved
+#| fig-cap: The hues in this pie chart are perceived more accurately than those in @fig-pie-contrast because each wedge is surrounded by a white border.
+ggplot(crimeDistrictTotal) + 
+    geom_col(aes(x=total, y="", fill=district), colour="white", linewidth=1) +
+    coord_polar() +
+    scale_fill_hue() +
+    theme(aspect.ratio=1,
+          axis.title.y=element_blank(),
+          axis.ticks.y=element_blank())
+```
+
+## Summary
+
+**Colour** is really three visual features:  **hue**, **chroma**, 
+and **luminance**.
+
+**Hue** is excellent for representing **nominal** data values.
+
+**Chroma** and **luminance** can be used to represent **ordinal**
+data values, but they have a very limited capacity.
+
+
+
+
+# Data statistics
+
+In @sec-mapping-visual-features we described a data visualisation as
+a mapping from data values to visual features (@fig-visual-feature).
+For example, a bar plot,
+like @fig-bar, maps the total number of youth offenders to the lengths
+of bars.
+
+We also emphasised the importance of the mapping *back* from the visual 
+features to the data values.  For example, the effectiveness of the bar plot
+in @fig-bar relies on our ability to accurately perceive the lengths
+of the bars, particularly relative to each other.
+
+In the simple scenario of a bar plot, the data values are total counts
+(@tbl-crime-group-total), which are mapped to the lengths of bars, which
+allow us to map back to the total counts (@fig-visual-feature-decode).
+
+In this section, we introduce the idea of **data statistics**,
+which are summaries of the data, and how some data visualisations
+rely on mappings that involde data statistics instead of raw data values.
+
+## Boxplots
+
+@tbl-rwc-points shows data from the 
+[2023 Rugby World Cup](https://www.rugbyworldcup.com/2023/).
+Thirty-two teams participated and we have calculated the average number of
+points that each team scored over the course of the tournament.
+We have also recorded which global hemisphere each team is from.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-points
+#| tbl-cap: A table of the points scored per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
+rwcPoints <- 
+    subset(RWCperGame, 
+           select=c("country", "hemisphere", "points"))
+rwcPoints <- rwcPoints[order(rwcPoints$country), ]
+rownames(rwcPoints) <- NULL
+kable(rwcPoints, digits=1)
+```
+
+@fig-boxplot shows boxplots of the points per game for each country, with one
+boxplot for each hemisphere.
+This is an effective data visualisation for
+comparing the distributions of points per game between countries from
+different hemispheres
+because we are able to easily see differences between the median values
+of the two hemispheres and differences between the interquartile ranges
+of the two hemispheres.  For example, we can see that the median points
+per game was higher for northern hemisphere teams and the
+interquartile range was also higher for northern hemisphere teams.
+We can also see that there is an outlier amongst southern hemisphere teams;
+this team scored more than 1.5 times
+the interquartile range *above* the 
+upper quartile of all southern hemisphere teams.
+
+```{r}
+#| echo: false
+#| label: fig-boxplot
+#| fig-cap: A boxplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(rwcPoints) +
+    geom_boxplot(aes(points, hemisphere), width=.5)
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+@fig-boxplot is effective for allowing us to compare statistics like the 
+median between different hemispheres because a boxplot maps those 
+**data statistics** to visual features (@fig-stat-vis-decode).
+For example, the median values are mapped to the horizontal **positions** of 
+thick vertical lines and the interquartile ranges are mapped to the
+**lengths** of horizontal rectangles.  We have already established that
+these visual features are effective for mapping *back* to the data statistics.
+
+::: {#fig-stat-vis-decode}
+
+![](Diagrams/stat-vis-decode.png)
+
+A data visualisation may map data statistics, 
+rather than the raw data, to visual features.
+This is effective for mapping back to the data statistics, but it
+is not effective for mapping back to the raw data.
+:::
+
+> A boxplot is effective at conveying data statistics, like the median
+  and interquartile range, because it maps these
+  *data statistics* to basic visual features.
+
+On the other hand, because a boxplot maps data statistics, not raw
+data values, to visual features,
+a boxplot is *not* effective for mapping *back* to the raw data values 
+(@fig-stat-vis-decode).
+
+> A boxplot is *not* effective at conveying raw data values because it
+  does not map raw data values to visual features.
+
+## Mapping back to data statistics
+
+@fig-rwc-dotplot shows dot plots of the points per game for each hemisphere.
+This data visualisation maps raw data values to visual features;  the
+points per game for each country maps to the horizontal **position** of
+a data point and the hemishpere of each country maps to the vertical
+**position** of a data point.
+
+Because this data visualisation maps raw data values to visual features, 
+it is possible to map *back* to raw data values (@fig-visual-feature-decode).
+For example, it is possible to see that the team with the second lowest
+points per game amongst southern-hemisphere teams
+scored just under 10 points per game.
+
+```{r}
+#| echo: false
+#| label: fig-rwc-dotplot
+#| fig-cap: A dotplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(rwcPoints) +
+    geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
+                 linetype="dotted") +
+    geom_dotplot(aes(points, hemisphere), binwidth=1) +
+    scale_x_continuous(name="points") 
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+But in @fig-rwc-dotplot
+our visual system allows us to map back from visual features 
+to more than just the raw data values.
+For example, we can see that there is one team amongst the 
+southern-hemisphere teams that sits apart from
+the others; there is an outlier.
+This is an example where we have mapped raw data values to visual
+features, which has enabled us to map *back* to raw data values,
+but we are also able to map *back* to **data statistics**
+(@fig-data-vis-stat-decode).[^ensembles]
+
+[^ensembles]:
+  Need some references to articles about ensembles in data vis lit.
+
+> A dot plot is effective not just for perceiving raw data values, but
+  also for perceving 
+  data statistics like groups and outliers, and central tendency
+  and spread.
+
+::: {#fig-data-vis-stat-decode}
+
+![](Diagrams/data-vis-stat-decode.png)
+
+A data visualisation that maps data values to visual features allows us
+to map *back* to data values, but it may *also* allow us to map back to
+statistics of the data, such as measures of central tendency or variability.
+:::
+
+Another conclusion that we can make from seeing the raw data values in
+@fig-rwc-dotplot is that the data statistics shown in @fig-boxplot
+do not provide a very good summary of the data.
+For example, for nothern-hemisphere teams,
+@fig-boxplot tells a simple story of a unimodal 
+group of values around a single centre with tails of less common values
+to either side, but @fig-rwc-dotplot does not tell the same story.
+In this case, the problem is that there are too few data values to
+support good estimates of medians and interquartile ranges.
+
+In general, any data visualisation that maps data statistics 
+rather than raw data values will be weak if the data statistics are
+inappropriate.  For example, a boxplot will not be appropriate
+if the distribution of the data values is not unimodal because
+a boxplot always tells a unimodal story.
+
+> A boxplot is *not* effective if a five-number summary is not a 
+  sensible data statistic for the data values.
+
+
+
+# Combining Visual Features
+
+Most data visualisations involve more than one data variable.
+For example, the bar plot in @fig-bar involves data on the ethnic
+group of offenders and the total number of
+offenders in each ethnic group.
+
+Each data value is mapped to a **visual feature** of a data symbol
+(see @fig-visual-feature).  For example, in the bar plot in @fig-bar,
+the ethnic group is mapped to the vertical **position** of the bars
+and the total number of offenders is mapped to the **length** of the bars.
+
+
+
+
+
+
+
+# Visual Shapes
+
+Mappings that produce data symbols that are shapes
+
+# Visual Congruence
+
+These are higher-level cognitive type things
+(or at least involve connections from higher-level, longer-term processing)
+
+Also related to familiarity of visual objects ...
+
+More is more for length and area esp.
+=> bars MUST start at zero
+
+Dark is more for colour.
+
+The above need citations
+
+Angle is part-of-whole.
+
+
+# TODO
+
+* CVD
+
+* visual illusions
+* gestalt
+
+* redundant encodings
+
+* Data statistics
+* computational statistics versus visual statistics
+* big data (or even medium data) 
+  => overlapping and summary plots like boxplots
+
+* congruence (reuse pie chart that nicely shows Maori at very close to 50%)
+* ensembles (use dot plot of district to demonstrate?   Revisit heatmaps?)
+* emergent features
+
+* text
+* annotations (labelling of teams in dotplot of points per game might work)
+
+* attention
+* pre-attentive pop out
+* labels (otp-down)
+
+* jittering
+  which is dodgy because it involves a visual change that is NOT related
+  to a change in the data.  The hope is that the randomness of the
+  visual change reduces the signal.
+
+* deliberately losing information (e.g., luminance scale for quant)
+
+* bubble plots (area not effective => something better?)
+
+* Things that do not change are not salient (e.g., the widths of bars in
+  bar plot), BUT things that DO change are salient (so only do this to
+  represent changes in the data).  This should be cited to something.
+  Principle of unambiguity ?
+
+* Add citation for distance effect
+
+* Use reordering of @fig-side-bar-year (so that they start tallest to smallest)
+  THEN should see change in that pattern later on more easily?
+  Use this as an example of "visual shape" in a bar plot.
+  Revisit heatmaps - regions/shapes of colours?
+
+* Need citation for contrast effect
+
+* A plot with BOTH points and lines is effective because the points
+  provide the raw data and the lines provide the shapes
+
+* case study of density plots
+
+## Case study: Heatmaps
+
+Heatmaps
+are a common way of representing three-dimensional data where 
+two of the data variables are either qualitative 
+or have been measured on a regular grid.
+The latter two variables naturally map to horizontal and vertical
+**position** to produce an array of
+rectangles, while the third variable maps to **colour**
+(see @fig-mappings-2).
+
+The mappings from data values to visual features for a heatmap
+are 
+
+colour is not quant but can convey trends
+
+get contrast effect but again not typically trying to match cells
+
+get regions/shapes of colour => higher-level structures
+
+talk about colour palettes that have deliberate colour boundaries
+to emphasise structure - combination of order and category
+
+* citation for ensembles in statistics.qmd
+
+* An index that links to all of the places that different sorts of plots
+  are discussed ?
+
+&nbsp;

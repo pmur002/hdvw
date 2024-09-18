@@ -58,6 +58,7 @@ theme_update(plot.background=element_rect(colour=NA,
 
 ```{r}
 #| echo: false
+source("rwc.R")
 source("youth-crime.R")
 crimeAgeSimple <- subset(crimeAge, age %in% c("14", "15", "16"))
 ```
@@ -81,29 +82,43 @@ knitr::opts_chunk$set(dev='svg',
 
 {{< include qualitative.qmd >}}
 
+{{< include statistics.qmd >}}
+
+{{< include combine.qmd >}}
+
+{{< include visual-shapes.qmd >}}
+
 {{< include congruence.qmd >}}
 
 # TODO
 
-* colour (hue, chroma, luminance)
-* ordinal visual features (chroma and luminance)
 * CVD
 
 * visual illusions
 * gestalt
 
-* big data (or even medium data) 
-  => overlapping and summary plots like boxplots
+* redundant encodings
+
 * Data statistics
 * computational statistics versus visual statistics
+* big data (or even medium data) 
+  => overlapping and summary plots like boxplots
 
 * congruence (reuse pie chart that nicely shows Maori at very close to 50%)
 * ensembles (use dot plot of district to demonstrate?   Revisit heatmaps?)
 * emergent features
 
+* text
+* annotations (labelling of teams in dotplot of points per game might work)
+
 * attention
 * pre-attentive pop out
-* labels
+* labels (otp-down)
+
+* jittering
+  which is dodgy because it involves a visual change that is NOT related
+  to a change in the data.  The hope is that the randomness of the
+  visual change reduces the signal.
 
 * deliberately losing information (e.g., luminance scale for quant)
 
@@ -122,6 +137,11 @@ knitr::opts_chunk$set(dev='svg',
   Revisit heatmaps - regions/shapes of colours?
 
 * Need citation for contrast effect
+
+* A plot with BOTH points and lines is effective because the points
+  provide the raw data and the lines provide the shapes
+
+* case study of density plots
 
 ## Case study: Heatmaps
 
@@ -146,5 +166,9 @@ get regions/shapes of colour => higher-level structures
 talk about colour palettes that have deliberate colour boundaries
 to emphasise structure - combination of order and category
 
+* citation for ensembles in statistics.qmd
+
+* An index that links to all of the places that different sorts of plots
+  are discussed ?
 
 &nbsp;

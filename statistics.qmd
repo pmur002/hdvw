@@ -1,0 +1,175 @@
+
+# Data statistics
+
+In @sec-mapping-visual-features we described a data visualisation as
+a mapping from data values to visual features (@fig-visual-feature).
+For example, a bar plot,
+like @fig-bar, maps the total number of youth offenders to the lengths
+of bars.
+
+We also emphasised the importance of the mapping *back* from the visual 
+features to the data values.  For example, the effectiveness of the bar plot
+in @fig-bar relies on our ability to accurately perceive the lengths
+of the bars, particularly relative to each other.
+
+In the simple scenario of a bar plot, the data values are total counts
+(@tbl-crime-group-total), which are mapped to the lengths of bars, which
+allow us to map back to the total counts (@fig-visual-feature-decode).
+
+In this section, we introduce the idea of **data statistics**,
+which are summaries of the data, and how some data visualisations
+rely on mappings that involde data statistics instead of raw data values.
+
+## Boxplots
+
+@tbl-rwc-points shows data from the 
+[2023 Rugby World Cup](https://www.rugbyworldcup.com/2023/).
+Thirty-two teams participated and we have calculated the average number of
+points that each team scored over the course of the tournament.
+We have also recorded which global hemisphere each team is from.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-points
+#| tbl-cap: A table of the points scored per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
+rwcPoints <- 
+    subset(RWCperGame, 
+           select=c("country", "hemisphere", "points"))
+rwcPoints <- rwcPoints[order(rwcPoints$country), ]
+rownames(rwcPoints) <- NULL
+kable(rwcPoints, digits=1)
+```
+
+@fig-boxplot shows boxplots of the points per game for each country, with one
+boxplot for each hemisphere.
+This is an effective data visualisation for
+comparing the distributions of points per game between countries from
+different hemispheres
+because we are able to easily see differences between the median values
+of the two hemispheres and differences between the interquartile ranges
+of the two hemispheres.  For example, we can see that the median points
+per game was higher for northern hemisphere teams and the
+interquartile range was also higher for northern hemisphere teams.
+We can also see that there is an outlier amongst southern hemisphere teams;
+this team scored more than 1.5 times
+the interquartile range *above* the 
+upper quartile of all southern hemisphere teams.
+
+```{r}
+#| echo: false
+#| label: fig-boxplot
+#| fig-cap: A boxplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(rwcPoints) +
+    geom_boxplot(aes(points, hemisphere), width=.5)
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+@fig-boxplot is effective for allowing us to compare statistics like the 
+median between different hemispheres because a boxplot maps those 
+**data statistics** to visual features (@fig-stat-vis-decode).
+For example, the median values are mapped to the horizontal **positions** of 
+thick vertical lines and the interquartile ranges are mapped to the
+**lengths** of horizontal rectangles.  We have already established that
+these visual features are effective for mapping *back* to the data statistics.
+
+::: {#fig-stat-vis-decode}
+
+![](Diagrams/stat-vis-decode.png)
+
+A data visualisation may map data statistics, 
+rather than the raw data, to visual features.
+This is effective for mapping back to the data statistics, but it
+is not effective for mapping back to the raw data.
+:::
+
+> A boxplot is effective at conveying data statistics, like the median
+  and interquartile range, because it maps these
+  *data statistics* to basic visual features.
+
+On the other hand, because a boxplot maps data statistics, not raw
+data values, to visual features,
+a boxplot is *not* effective for mapping *back* to the raw data values 
+(@fig-stat-vis-decode).
+
+> A boxplot is *not* effective at conveying raw data values because it
+  does not map raw data values to visual features.
+
+## Mapping back to data statistics
+
+@fig-rwc-dotplot shows dot plots of the points per game for each hemisphere.
+This data visualisation maps raw data values to visual features;  the
+points per game for each country maps to the horizontal **position** of
+a data point and the hemishpere of each country maps to the vertical
+**position** of a data point.
+
+Because this data visualisation maps raw data values to visual features, 
+it is possible to map *back* to raw data values (@fig-visual-feature-decode).
+For example, it is possible to see that the team with the second lowest
+points per game amongst southern-hemisphere teams
+scored just under 10 points per game.
+
+```{r}
+#| echo: false
+#| label: fig-rwc-dotplot
+#| fig-cap: A dotplot of the number of points per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
+gg <- ggplot(rwcPoints) +
+    geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
+                 linetype="dotted") +
+    geom_dotplot(aes(points, hemisphere), binwidth=1) +
+    scale_x_continuous(name="points") 
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+But in @fig-rwc-dotplot
+our visual system allows us to map back from visual features 
+to more than just the raw data values.
+For example, we can see that there is one team amongst the 
+southern-hemisphere teams that sits apart from
+the others; there is an outlier.
+This is an example where we have mapped raw data values to visual
+features, which has enabled us to map *back* to raw data values,
+but we are also able to map *back* to **data statistics**
+(@fig-data-vis-stat-decode).[^ensembles]
+
+[^ensembles]:
+  Need some references to articles about ensembles in data vis lit.
+
+> A dot plot is effective not just for perceiving raw data values, but
+  also for perceving 
+  data statistics like groups and outliers, and central tendency
+  and spread.
+
+::: {#fig-data-vis-stat-decode}
+
+![](Diagrams/data-vis-stat-decode.png)
+
+A data visualisation that maps data values to visual features allows us
+to map *back* to data values, but it may *also* allow us to map back to
+statistics of the data, such as measures of central tendency or variability.
+:::
+
+Another conclusion that we can make from seeing the raw data values in
+@fig-rwc-dotplot is that the data statistics shown in @fig-boxplot
+do not provide a very good summary of the data.
+For example, for nothern-hemisphere teams,
+@fig-boxplot tells a simple story of a unimodal 
+group of values around a single centre with tails of less common values
+to either side, but @fig-rwc-dotplot does not tell the same story.
+In this case, the problem is that there are too few data values to
+support good estimates of medians and interquartile ranges.
+
+In general, any data visualisation that maps data statistics 
+rather than raw data values will be weak if the data statistics are
+inappropriate.  For example, a boxplot will not be appropriate
+if the distribution of the data values is not unimodal because
+a boxplot always tells a unimodal story.
+
+> A boxplot is *not* effective if a five-number summary is not a 
+  sensible data statistic for the data values.
+
+
