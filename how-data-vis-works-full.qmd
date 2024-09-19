@@ -2281,61 +2281,51 @@ In the simple scenario of a bar plot, the data values are total counts
 allow us to map back to the total counts (@fig-visual-feature-decode).
 
 In this section, we introduce the idea of **data statistics**,
-which are summaries of the data, and how some data visualisations
+which are summaries of the data, and we show that some data visualisations
 rely on mappings that involve data statistics instead of raw data values.
 
 ## Box Plots
 
-@tbl-rwc-cleanbreaks shows data from the 
-[2023 Rugby World Cup](https://www.rugbyworldcup.com/2023/).
-Thirty-two teams participated and we have calculated the average number of
-clean breaks per game that each team achieved over the course of the 
-tournament.[^cleanbreaks]
-We have also recorded which global hemisphere each team is from.
+The Rugby World Cup is a competition held every four years, with the
+first event taking place in 1987.
+We have data on the number of points that were scored in World Cup matches
+for Tier One nations (the top 10 rugby-playing nations).
+@tbl-rwc-all shows a sample of these data.[^rwc]
 
-[^cleanbreaks]:
-  A clean break in rugby is when the team with the ball manages to break
-  through the opposition defence while carrying the ball.  More is better.
+[^rwc]:
+  Attribution to kaggle data set.
 
 ```{r}
 #| echo: false
 #| message: false
-#| label: tbl-rwc-cleanbreaks
-#| tbl-cap: A table of the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
-rwc <- 
-    subset(RWCperGame, 
-           select=c("country", "hemisphere", "cleanbreaks"))
-rwc <- rwc[order(rwc$country), ]
-rownames(rwc) <- NULL
-kable(rwc, digits=1)
+#| label: tbl-rwc-all
+#| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAll[,c(1, 6, 2, 3, 4, 5)]), digits=0)
 ```
 
 @fig-boxplot shows box plots of the number of 
-clean breaks per game for each country, 
-with one
+points scored for all games, 
+with a
 box plot for each hemisphere.
 This is an effective data visualisation for
-comparing the distributions of clean breaks per game between countries from
-different hemispheres
-because we are able to easily see differences between the median values
-of the two hemispheres and differences between the interquartile ranges
-of the two hemispheres.  For example, we can see that the median 
-number of clean breaks
-per game was higher for northern hemisphere teams and the
-interquartile range was also higher for northern hemisphere teams.
-We can also see that there is an outlier amongst southern hemisphere teams;
-this team scored more than 1.5 times
-the interquartile range *above* the 
-upper quartile of all southern hemisphere teams.
+comparing the distributions of points scored between hemispheres
+because
+we are able to easily see differences between the median values
+of the countries and differences between the interquartile ranges
+of the countries.  For example, we can see that the median points scored
+by southern hemisphere teams is larger than the median for northern
+hemisphere teams and the interquartile range of points scored 
+is also wider for southern hemisphere teams.
 
 ```{r}
 #| echo: false
 #| label: fig-boxplot
-#| fig-cap: A box plot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(rwc) +
-    geom_boxplot(aes(cleanbreaks, hemisphere), width=.5) +
-    scale_x_continuous(name="clean breaks") 
-pushViewport(viewport(height=.8, width=.8))
+#| fig-cap: Box plots of the number of points scored in all Rugby World Cup games by Tier One nations.
+gg <- ggplot(rwcAll) +
+    geom_boxplot(aes(scored, hemisphere)) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
@@ -2345,8 +2335,10 @@ median between different hemispheres because a box plot maps those
 **data statistics** to visual features (@fig-stat-vis-decode).
 For example, the median values are mapped to the horizontal **positions** of 
 thick vertical lines and the interquartile ranges are mapped to the
-**lengths** of horizontal rectangles.  We have already established that
-these visual features are effective for mapping *back* to the data statistics.
+**lengths** of horizontal rectangles.  We know from 
+@sec-mapping-visual-features that
+**position** and **length** 
+are effective for mapping *back* to the data statistics.
 
 ::: {#fig-stat-vis-decode}
 
@@ -2358,79 +2350,92 @@ This is effective for mapping back to the data statistics, but it
 is not effective for mapping back to the raw data.
 :::
 
+
 To be explicit, the data values that are being mapped to visual features in 
-@fig-boxplot are *not* the raw data values in @tbl-rwc-cleanbreaks;
+@fig-boxplot are *not* the raw data values in @tbl-rwc-all;
 the values that are being mapped to visual features in @fig-boxplot 
-are the **data statistics** shown in @tbl-rwc-cleanbreaks-stats.
+are the **data statistics** shown in @tbl-rwc-all-stats.
+These are the values that we can map *back* to from the boxplots
+in @fig-boxplot.
 
 ```{r}
 #| echo: false
 #| message: false
-#| label: tbl-rwc-cleanbreaks-stats
-#| tbl-cap: A table of the five-number summaries for the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.  These data statistics are the values that are mapped to visual features in @fig-boxplot.
+#| label: tbl-rwc-all-stats
+#| tbl-cap: A table of the five-number summaries for the number of points scored by Tier One nations in Rugby World Cup matches, along with the country name.  These data statistics are the values that are mapped to visual features to produce the box plots in @fig-boxplot.
 rwcStats <- do.call(rbind, 
-                    lapply(split(rwc, rwc$hemisphere), 
-                           function(x) fivenum(x$cleanbreaks)))
+                    lapply(split(rwcAll, rwcAll$hemisphere), 
+                           function(x) fivenum(x$scored)))
 colnames(rwcStats) <- c("minimum", "lower quartile", "median", 
                         "upper quartile", "maximum")
 kable(rwcStats, digits=1)
 ```
+
+Notice how, even though @tbl-rwc-all-stats contains very few values,
+the data visualisation in @fig-boxplot makes it *much* easier to
+perceive the differences between the two rows of values.
+Once again, we can see the power of mapping values to basic visual features.
+The only difference in this case is that we are mapping **data statistics**
+to basic visual features.
 
 > A box plot is effective at conveying information about the
   distribution of data values because it maps **data statistics**
   about the distribution, like the median
   and interquartile range, to basic visual features.
 
-On the other hand, because a box plot maps data statistics (not raw
-data values) to visual features,
-a box plot is *not* effective for mapping *back* to the raw data values 
-(@fig-stat-vis-decode).
+## Mapping back to data statistics {#sec-data-vis-decode}
 
-> A box plot is *not* effective at conveying raw data values because it
-  does not map raw data values to visual features.
-
-## Mapping back to data statistics
-
-@fig-rwc-dotplot shows dot plots of the number of
-clean breaks per game for each hemisphere.
-This data visualisation maps raw data values to visual features;  the
-number of 
-clean breaks per game for each country maps to the horizontal **position** of
-a data point and the hemisphere of each country maps to the vertical
+@fig-rwc-dotplot shows stacked dot plots of the number of points scored by 
+countries from the different hemispheres in Rugby World Cup matches.
+This data visualisation uses the same data as @fig-boxplot, but 
+this data visualisation maps raw data values to visual features;  the
+number of points scored maps to the horizontal **position** of
+a data point and the country name maps to the vertical
 **position** of a data point.
 
 Because this data visualisation maps raw data values to visual features, 
 it is possible to map *back* to raw data values (@fig-visual-feature-decode).
-For example, it is possible to see that *two* teams made approximately 11
-clean breaks per game amongst northern-hemisphere teams.
+For example, it is possible to see that the lowest score (zero points)
+for a northern
+hemisphere team ocurred twice.  It is also possible to see that
+there are scores that have never occurred in any matches:
+1, 2, 4, and 5.
+These features are not visible in the boxplots
+in @fig-boxplot.
 
 ```{r}
 #| echo: false
 #| label: fig-rwc-dotplot
-#| fig-cap: A dotplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(RWCperGame) +
+#| fig-cap: Stacked dotplots of the number of points scored by Tier One nations at Rugby World Cup matches.
+gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
-                 linetype="dotted") +
-    geom_dotplot(aes(cleanbreaks, hemisphere), binwidth=.3) +
-    scale_x_continuous(name="clean breaks") 
-pushViewport(viewport(height=.8, width=.8))
+                 colour="grey", linewidth=.1) +
+    geom_dotplot(aes(scored, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
 The fact that we can map *back* to raw data values from a dot plot is
-not news.  We have previously demonstrated this in @sec-dot-plots.
-However, @fig-rwc-dotplot does demonstrate that, in addition to mapping
+not news.  That is easy because we have mapped
+raw data values to accurate visual features
+(see @sec-dot-plots).
+However, @fig-rwc-dotplot also demonstrates that, in addition to mapping
 *back* from visual features to raw data values, 
 our visual system allows us to map *back* from visual features 
 to **data statistics**.
-For example, we can see that there is one team amongst the 
-southern-hemisphere teams that sits apart from
-the others; we can see that most teams form a cluster and we can
-see that there is an outlier.
+
+For example, we can see that the southern hemisphere teams score slightly
+more points on average than the northern hemisphere teams.
+In other words, we can visually perceive data statistics from 
+collections of visual features.
+We can visually average the **positions** of the data points.
+
 This is an example where we have mapped raw data values to visual
-features, which has enabled us to map *back* to raw data values,
-but we are also able to map *back* to **data statistics**
+features, which has enabled us to map *back* to raw data values 
+*and* it has enabled us to map *back* to **data statistics**
 (@fig-data-vis-stat-decode).[^ensembles]
 
 [^ensembles]:
@@ -2450,29 +2455,10 @@ statistics of the data, such as measures of central tendency or variability.
   data statistics like clusters and outliers, and central tendency
   and spread.
 
-Another conclusion that we can make from seeing the raw data values in
-@fig-rwc-dotplot is that the data statistics that we visualised in @fig-boxplot
-do *not* provide a very good summary of the data.
-For example, for nothern-hemisphere teams,
-@fig-boxplot tells a simple story of a unimodal 
-group of values around a single centre with tails of less common values
-to either side, but @fig-rwc-dotplot does not tell the same story.
-
-In this case, the problem is that there are too few data values to
-support good estimates of medians and interquartile ranges.
-In general, any data visualisation that maps data statistics 
-rather than raw data values will be weak if the data statistics are
-inappropriate.  For example, a box plot will not be appropriate
-if the distribution of the data values is not unimodal because
-a box plot always tells a unimodal story.
-
-> A box plot is *not* effective if a five-number summary is not a 
-  sensible data statistic for the data values.
-
 ## Case study: Histograms
 
-@fig-hist shows a histogram of the number of clean breaks per game for all
-teams at the 2023 Rugby World Cup.
+@fig-hist shows a histogram of the number of points scored in a game by all
+teams at the Rugby World Cups.
 A histogram is similar to a box plot in two ways:
 a histogram is a data visualisation that can be used to convey the
 distribution of a variable; and
@@ -2481,8 +2467,8 @@ rather than raw values, to visual features (@fig-stat-vis-decode).
 
 However, the data statistics for a histogram are more complicated than
 those for a box plot.
-The raw data values in this histogram are the number of clean breaks
-per game for each country (see @tbl-rwc-cleanbreaks).
+The raw data values in this histogram are the points scored in each game
+by each country (see @tbl-rwc-all).
 To get the data statistics for the histogram, the raw data values are
 binned;  we break the range of the data into equal-sized intervals
 and count how many data values lie in each interval.
@@ -2494,26 +2480,44 @@ of a bar.
 ```{r}
 #| echo: false
 #| label: fig-hist
-#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
-gg <- ggplot(RWCperGame) +
-    geom_histogram(aes(tries), colour="black", fill="grey", binwidth=1) +
-    scale_x_continuous(name="clean breaks") 
+#| fig-cap: A histogram of the points scored per game by Tier One nations at Rugby World Cups.
+breaks <- seq(0, 105, by=5)
+gg <- ggplot(rwcAll) +
+    geom_histogram(aes(scored), colour="black", fill="grey", breaks=breaks) +
+    scale_x_continuous(name="points scored") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
-As with a box plot, the mappings of data statistics to accurate
+To be explicit, the values that are being mapped to visual features
+are not raw data values, but data statistics---intervals and counts---as
+shown in @tbl-hist-stats.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-hist-stats
+#| tbl-cap: A table of intervals the cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval.  These data statistics are the values that are mapped to visual features to produce the histogram in @fig-boxplot.
+hist <- hist(rwcAll$scored, breaks=breaks, plot=FALSE)
+histStats <- rbind(interval=paste0(hist$breaks[-length(hist$breaks)], "-",
+                                   hist$breaks[-1]),
+                   count=hist$counts)
+kable(histStats, align="r")
+```
+
+As with a box plot, mapping data statistics to accurate
 visual features means that we can easily map *back* to
-the data statistics (though not to the raw data values).
-For a histogram, we can easily compare the lengths of the bars,
+the data statistics.
+For a histogram, this means that
+we can easily compare the lengths of the bars,
 which means we can easily compare the relative counts of data values
 within each interval.
 For example, the longest bars represent the intervals that contain a
 relatively large count of data values, which tells us about
 the mode of the data (or the number of modes in the data).
 In @fig-hist we can see that the 
-largest number of data values occur around 6 clean breaks per game
+largest number of data values occur around 15 to 20 points
 and we can see that the number
 of data values in each interval drops more rapidly above the highest bar
 than below the highest bar.  The latter tells us about
@@ -2521,8 +2525,84 @@ the spread and/or skewness of the data.
 
 > A histogram is effective at conveying information about the distribution
   of data values because it maps data statistics to basic visual features
-  and those data statistics can be compared to provide indications about
+  and those data statistics can be compared to provide information about
   the distribution of the data.
+
+## Caveats
+
+The benefit of a data visualisation that maps
+**data statistics** to visual features is that it allows us to perceive
+data statistics very easily.  For example, although we can perceive
+a general idea of central tendency from the dots in @fig-rwc-dotplot
+(see @sec-data-vis-decode),
+it is much easier and more accurate to perceive
+median values from the thick vertical lines in @fig-boxplot.
+
+The flipside is that a data visualisation that maps
+**data statistics** to visual features
+is *not* effective for mapping *back* to raw data values.
+For example, we cannot see from the box plot in
+@fig-boxplot that the scores 1, 2, 4, and 5 never occurred, while
+this is clear from @fig-rwc-dotplot because the dot plot does map
+the raw data values to data symbols.
+
+> Box plots and 
+  histogram are *not* effective at conveying raw data values because they
+  do not map raw data values to data symbols.
+
+Another point to consider with a data visualisation that is based on
+data statistics is
+whether the data statistics are reasonable summaries of the data.
+For example, @fig-boxplot-concede shows box plots of the number of 
+points *conceded* by each team in Rugby World Cup games.
+The box plot for southern hemisphere teams suggest a unimodal 
+distribution with a slight right skew.
+
+```{r}
+#| echo: false
+#| label: fig-boxplot-concede
+#| fig-cap: Box plots of the number of points conceded in all Rugby World Cup games by Tier One nations.
+gg <- ggplot(rwcAll) +
+    geom_boxplot(aes(conceded, hemisphere)) +
+    scale_x_continuous(name="points conceded") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+However, the dot plots in @fig-rwc-dotplot-concede tell a different story.
+This data visualisation shows some evidence that the number of points
+conceded may be bimodal, with some teams only conceding very few points
+(0, 3, or 6)
+in a number of games.
+The data statistics for a box plot assume a unimodal distribution,
+so a box plot will only ever tell a unimodal story, and that
+is only reasonable if the data are unimodal.
+
+```{r}
+#| echo: false
+#| label: fig-rwc-dotplot-concede
+#| fig-cap: Stacked dotplots of the number of points conceded by Tier One nations at Rugby World Cup matches.
+gg <- ggplot(rwcAll) +
+    geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
+                 colour="grey", linewidth=.1) +
+    geom_dotplot(aes(conceded, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
+    scale_x_continuous(name="points conceded") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+> A box plot is *not* effective if a five-number summary is not a 
+  sensible data statistic for the data values.
+
+> A data visualisation that is based on data statistics
+  can only be effective if the data statistics are sensible
+  summaries of the data.
+
+
 
 A further complication arises with histograms because we have to
 *choose* the intervals that are used to calculate the data statistics
@@ -2536,20 +2616,15 @@ even spread of values to either side.
 ```{r}
 #| echo: false
 #| label: fig-hist-thick
-#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
-gg <- ggplot(rwc) +
-    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=2) +
-    scale_x_continuous(name="clean breaks") 
+#| fig-cap: A histogram of the points scored per game by Tier One nations at Rugby World Cups.  This histogram uses the same data as @fig-hist, but bins the data using narrower intervals.
+gg <- ggplot(rwcAll) +
+    geom_histogram(aes(scored), colour="black", fill="grey", 
+                   binwidth=1, boundary=.5) +
+    scale_x_continuous(name="points scored") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
-
-**TODO:**
-
-* show the data stats for the boxplots (like a table of data)
-* show the data stats for the histogram(s) 
-* summary: histograms partly just tell us about the intervals that we chose!
 
 ## Summary
 
@@ -2645,7 +2720,9 @@ Angle is part-of-whole.
   provide the raw data and the lines provide the shapes
 
 * case study of density plots
-  (revisit histograms in terms of shape as well)
+  (revisit histograms in terms of shape as well; point out that 
+   density plots are preferred to histograms?
+   revisit boxplots too and talk about violin plots?)
 
 * case study for spinograms
 
@@ -2661,7 +2738,7 @@ rectangles, while the third variable maps to **colour**
 (see @fig-mappings-2).
 
 The mappings from data values to visual features for a heatmap
-are 
+are ...
 
 colour is not quant but can convey trends
 
@@ -2672,11 +2749,25 @@ get regions/shapes of colour => higher-level structures
 talk about colour palettes that have deliberate colour boundaries
 to emphasise structure - combination of order and category
 
+* citation for data statistics to GoG
+
 * citation for ensembles in statistics.qmd
+
+* citation for "stacked dot plot" in statistics.qmd
+  and/or use a different name
+
+* case study of plot with BOTH points and lines;  you get good
+  mapping back to raw data with points and you get good mapping
+  back to data statistics from the line (shape).
+
+* attributions for data sources
 
 * model fits like lm straight line and ref Hadley's data-space vs model-space
   "data models" to mirror "data statistics"
-  (revisit box plots as VERY simple models?)
+  (revisit box plots as VERY simple models? also talk about failing
+   assumptions of these models, like unimodal for boxplot)
+
+
 
 * An index that links to all of the places that different sorts of plots
   are discussed ?

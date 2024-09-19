@@ -7,6 +7,7 @@ dataPath <- "Data/RWC"
 hemi <- read.csv(file.path(dataPath, "rwc-2023-hemisphere.csv"))
 rwcAll <- merge(read.csv(file.path(dataPath, "rwc-all-time.csv")),
                 hemi, by.x="team", by.y="country")
+rwcAll$hemisphere <- factor(rwcAll$hemisphere, levels=c("South", "North"))
 
 ## Source:
 ## https://www.rugbyworldcup.com/2023/stats/

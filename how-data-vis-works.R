@@ -1231,24 +1231,20 @@ ggplot(crimeDistrictTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| message: false
-#| label: tbl-rwc-cleanbreaks
-#| tbl-cap: A table of the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.
-rwc <- 
-    subset(RWCperGame, 
-           select=c("country", "hemisphere", "cleanbreaks"))
-rwc <- rwc[order(rwc$country), ]
-rownames(rwc) <- NULL
-kable(rwc, digits=1)
+#| label: tbl-rwc-all
+#| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAll[,c(1, 6, 2, 3, 4, 5)]), digits=0)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-boxplot
-#| fig-cap: A box plot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(rwc) +
-    geom_boxplot(aes(cleanbreaks, hemisphere), width=.5) +
-    scale_x_continuous(name="clean breaks") 
-pushViewport(viewport(height=.8, width=.8))
+#| fig-cap: Box plots of the number of points scored in all Rugby World Cup games by Tier One nations.
+gg <- ggplot(rwcAll) +
+    geom_boxplot(aes(scored, hemisphere)) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 
@@ -1256,11 +1252,11 @@ popViewport()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| message: false
-#| label: tbl-rwc-cleanbreaks-stats
-#| tbl-cap: A table of the five-number summaries for the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.  These data statistics are the values that are mapped to visual features in @fig-boxplot.
+#| label: tbl-rwc-all-stats
+#| tbl-cap: A table of the five-number summaries for the number of points scored by Tier One nations in Rugby World Cup matches, along with the country name.  These data statistics are the values that are mapped to visual features to produce the box plots in @fig-boxplot.
 rwcStats <- do.call(rbind, 
-                    lapply(split(rwc, rwc$hemisphere), 
-                           function(x) fivenum(x$cleanbreaks)))
+                    lapply(split(rwcAll, rwcAll$hemisphere), 
+                           function(x) fivenum(x$scored)))
 colnames(rwcStats) <- c("minimum", "lower quartile", "median", 
                         "upper quartile", "maximum")
 kable(rwcStats, digits=1)
@@ -1269,13 +1265,14 @@ kable(rwcStats, digits=1)
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-rwc-dotplot
-#| fig-cap: A dotplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(RWCperGame) +
+#| fig-cap: Stacked dotplots of the number of points scored by Tier One nations at Rugby World Cup matches.
+gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
-                 linetype="dotted") +
-    geom_dotplot(aes(cleanbreaks, hemisphere), binwidth=.3) +
-    scale_x_continuous(name="clean breaks") 
-pushViewport(viewport(height=.8, width=.8))
+                 colour="grey", linewidth=.1) +
+    geom_dotplot(aes(scored, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 
@@ -1283,10 +1280,11 @@ popViewport()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-hist
-#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
-gg <- ggplot(RWCperGame) +
-    geom_histogram(aes(tries), colour="black", fill="grey", binwidth=1) +
-    scale_x_continuous(name="clean breaks") 
+#| fig-cap: A histogram of the points scored per game by Tier One nations at Rugby World Cups.
+breaks <- seq(0, 105, by=5)
+gg <- ggplot(rwcAll) +
+    geom_histogram(aes(scored), colour="black", fill="grey", breaks=breaks) +
+    scale_x_continuous(name="points scored") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
@@ -1294,11 +1292,52 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| message: false
+#| label: tbl-hist-stats
+#| tbl-cap: A table of intervals the cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval.  These data statistics are the values that are mapped to visual features to produce the histogram in @fig-boxplot.
+hist <- hist(rwcAll$scored, breaks=breaks, plot=FALSE)
+histStats <- rbind(interval=paste0(hist$breaks[-length(hist$breaks)], "-",
+                                   hist$breaks[-1]),
+                   count=hist$counts)
+kable(histStats, align="r")
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-boxplot-concede
+#| fig-cap: Box plots of the number of points conceded in all Rugby World Cup games by Tier One nations.
+gg <- ggplot(rwcAll) +
+    geom_boxplot(aes(conceded, hemisphere)) +
+    scale_x_continuous(name="points conceded") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rwc-dotplot-concede
+#| fig-cap: Stacked dotplots of the number of points conceded by Tier One nations at Rugby World Cup matches.
+gg <- ggplot(rwcAll) +
+    geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
+                 colour="grey", linewidth=.1) +
+    geom_dotplot(aes(conceded, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
+    scale_x_continuous(name="points conceded") +
+    theme(axis.title.y=element_blank())
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-hist-thick
-#| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
-gg <- ggplot(rwc) +
-    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=2) +
-    scale_x_continuous(name="clean breaks") 
+#| fig-cap: A histogram of the points scored per game by Tier One nations at Rugby World Cups.  This histogram uses the same data as @fig-hist, but bins the data using narrower intervals.
+gg <- ggplot(rwcAll) +
+    geom_histogram(aes(scored), colour="black", fill="grey", 
+                   binwidth=1, boundary=.5) +
+    scale_x_continuous(name="points scored") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
