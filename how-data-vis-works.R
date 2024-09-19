@@ -1255,6 +1255,19 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| message: false
+#| label: tbl-rwc-cleanbreaks-stats
+#| tbl-cap: A table of the five-number summaries for the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.  These data statistics are the values that are mapped to visual features in @fig-boxplot.
+rwcStats <- do.call(rbind, 
+                    lapply(split(rwc, rwc$hemisphere), 
+                           function(x) fivenum(x$cleanbreaks)))
+colnames(rwcStats) <- c("minimum", "lower quartile", "median", 
+                        "upper quartile", "maximum")
+kable(rwcStats, digits=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-rwc-dotplot
 #| fig-cap: A dotplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
 gg <- ggplot(RWCperGame) +
@@ -1271,8 +1284,8 @@ popViewport()
 #| echo: false
 #| label: fig-hist
 #| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
-gg <- ggplot(rwc) +
-    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=1) +
+gg <- ggplot(RWCperGame) +
+    geom_histogram(aes(tries), colour="black", fill="grey", binwidth=1) +
     scale_x_continuous(name="clean breaks") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)

@@ -90,7 +90,7 @@ div.csl-indent {
   <li><a href="#sec-qual-features" id="toc-sec-qual-features" class="nav-link" data-scroll-target="#sec-qual-features"><span class="header-section-number">3.4</span> Qualitative features</a></li>
   <li><a href="#sec-accuracy" id="toc-sec-accuracy" class="nav-link" data-scroll-target="#sec-accuracy"><span class="header-section-number">3.5</span> Accuracy</a></li>
   <li><a href="#sec-capacity" id="toc-sec-capacity" class="nav-link" data-scroll-target="#sec-capacity"><span class="header-section-number">3.6</span> Capacity</a></li>
-  <li><a href="#case-study-dot-plots" id="toc-case-study-dot-plots" class="nav-link" data-scroll-target="#case-study-dot-plots"><span class="header-section-number">3.7</span> Case study: Dot plots</a></li>
+  <li><a href="#sec-dot-plots" id="toc-sec-dot-plots" class="nav-link" data-scroll-target="#sec-dot-plots"><span class="header-section-number">3.7</span> Case study: Dot plots</a></li>
   <li><a href="#case-study-pie-charts" id="toc-case-study-pie-charts" class="nav-link" data-scroll-target="#case-study-pie-charts"><span class="header-section-number">3.8</span> Case study: Pie charts</a></li>
   <li><a href="#summary-2" id="toc-summary-2" class="nav-link" data-scroll-target="#summary-2"><span class="header-section-number">3.9</span> Summary</a></li>
   </ul></li>
@@ -841,8 +841,8 @@ Figure&nbsp;3.14: Mapping qualitative data values to position works well for bot
 <p>One reason why a bar plot is effective for visualising <strong>qualitative data values</strong> is because the qualitative data values, the groups, are mapped to a visual feature that has excellent <strong>capacity</strong>, the positions of the bars.</p>
 </blockquote>
 </section>
-<section id="case-study-dot-plots" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="case-study-dot-plots"><span class="header-section-number">3.7</span> Case study: Dot plots</h2>
+<section id="sec-dot-plots" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-dot-plots"><span class="header-section-number">3.7</span> Case study: Dot plots</h2>
 <p>We have seen that, for several reasons, <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a> is an effective way to visualise the <code>total</code> number of offenders for different ethnic <code>group</code>s. <a href="#fig-dot" class="quarto-xref">Figure&nbsp;3.15</a> shows an alternative representation of these data in the form of a dot plot <span class="citation" data-cites="cleveland1985graphical">(<a href="#ref-cleveland1985graphical" role="doc-biblioref">Cleveland 1985</a>)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1232,10 +1232,10 @@ Figure&nbsp;5.7: The hues in this pie chart are perceived more accurately than t
 </section>
 <section id="data-statistics" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Data statistics</h1>
-<p>In <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a> we described a data visualisation as a mapping from data values to visual features (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;3.1</a>). For example, a bar plot, like <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>, maps the total number of youth offenders to the lengths of bars.</p>
+<p>In <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a> we described a data visualisation as a mapping from data values to visual features (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;3.1</a>). For example, a bar plot, like <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>, maps the total number of youth offenders to the <strong>lengths</strong> of bars.</p>
 <p>We also emphasised the importance of the mapping <em>back</em> from the visual features to the data values. For example, the effectiveness of the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a> relies on our ability to accurately perceive the lengths of the bars, particularly relative to each other.</p>
 <p>In the simple scenario of a bar plot, the data values are total counts (<a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;3.1</a>), which are mapped to the lengths of bars, which allow us to map back to the total counts (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;3.6</a>).</p>
-<p>In this section, we introduce the idea of <strong>data statistics</strong>, which are summaries of the data, and how some data visualisations rely on mappings that involde data statistics instead of raw data values.</p>
+<p>In this section, we introduce the idea of <strong>data statistics</strong>, which are summaries of the data, and how some data visualisations rely on mappings that involve data statistics instead of raw data values.</p>
 <section id="box-plots" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="box-plots"><span class="header-section-number">6.1</span> Box Plots</h2>
 <p><a href="#tbl-rwc-cleanbreaks" class="quarto-xref">Table&nbsp;6.1</a> shows data from the <a href="https://www.rugbyworldcup.com/2023/">2023 Rugby World Cup</a>. Thirty-two teams participated and we have calculated the average number of clean breaks per game that each team achieved over the course of the tournament.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> We have also recorded which global hemisphere each team is from.</p>
@@ -1389,10 +1389,54 @@ Figure&nbsp;6.2: A data visualisation may map data statistics, rather than the r
 </figcaption>
 </figure>
 </div>
+<p>To be explicit, the data values that are being mapped to visual features in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> are <em>not</em> the raw data values in <a href="#tbl-rwc-cleanbreaks" class="quarto-xref">Table&nbsp;6.1</a>; the values that are being mapped to visual features in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> are the <strong>data statistics</strong> shown in <a href="#tbl-rwc-cleanbreaks-stats" class="quarto-xref">Table&nbsp;6.2</a>.</p>
+<div class="cell">
+<div id="tbl-rwc-cleanbreaks-stats" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-cleanbreaks-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.2: A table of the five-number summaries for the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from. These data statistics are the values that are mapped to visual features in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a>.
+</figcaption>
+<div aria-describedby="tbl-rwc-cleanbreaks-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">minimum</th>
+<th style="text-align: right;">lower quartile</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">upper quartile</th>
+<th style="text-align: right;">maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">5.3</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">12.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">11.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 <blockquote class="blockquote">
 <p>A box plot is effective at conveying information about the distribution of data values because it maps <strong>data statistics</strong> about the distribution, like the median and interquartile range, to basic visual features.</p>
 </blockquote>
-<p>On the other hand, because a box plot maps data statistics, not raw data values, to visual features, a box plot is <em>not</em> effective for mapping <em>back</em> to the raw data values (<a href="#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;6.2</a>).</p>
+<p>On the other hand, because a box plot maps data statistics (not raw data values) to visual features, a box plot is <em>not</em> effective for mapping <em>back</em> to the raw data values (<a href="#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;6.2</a>).</p>
 <blockquote class="blockquote">
 <p>A box plot is <em>not</em> effective at conveying raw data values because it does not map raw data values to visual features.</p>
 </blockquote>
@@ -1415,10 +1459,7 @@ Figure&nbsp;6.3: A dotplot of the number of clean breaks per game for teams from
 </div>
 </div>
 </div>
-<p>But in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> our visual system allows us to map <em>back</em> from visual features to more than just the raw data values. For example, we can see that there is one team amongst the southern-hemisphere teams that sits apart from the others; we can see that most teams form a cluster and we can see that there is an outlier. This is an example where we have mapped raw data values to visual features, which has enabled us to map <em>back</em> to raw data values, but we are also able to map <em>back</em> to <strong>data statistics</strong> (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;6.4</a>).<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
-<blockquote class="blockquote">
-<p>A dot plot is effective not just for perceiving raw data values, but also for perceving data statistics like clusters and outliers, and central tendency and spread.</p>
-</blockquote>
+<p>The fact that we can map <em>back</em> to raw data values from a dot plot is not news. We have previously demonstrated this in <a href="#sec-dot-plots" class="quarto-xref">Section&nbsp;3.7</a>. However, <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> does demonstrate that, in addition to mapping <em>back</em> from visual features to raw data values, our visual system allows us to map <em>back</em> from visual features to <strong>data statistics</strong>. For example, we can see that there is one team amongst the southern-hemisphere teams that sits apart from the others; we can see that most teams form a cluster and we can see that there is an outlier. This is an example where we have mapped raw data values to visual features, which has enabled us to map <em>back</em> to raw data values, but we are also able to map <em>back</em> to <strong>data statistics</strong> (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;6.4</a>).<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <div id="fig-data-vis-stat-decode" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-stat-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1429,8 +1470,11 @@ Figure&nbsp;6.4: A data visualisation that maps data values to visual features a
 </figcaption>
 </figure>
 </div>
-<p>Another conclusion that we can make from seeing the raw data values in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> is that the data statistics shown in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> do not provide a very good summary of the data. For example, for nothern-hemisphere teams, <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> tells a simple story of a unimodal group of values around a single centre with tails of less common values to either side, but <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> does not tell the same story. In this case, the problem is that there are too few data values to support good estimates of medians and interquartile ranges.</p>
-<p>In general, any data visualisation that maps data statistics rather than raw data values will be weak if the data statistics are inappropriate. For example, a box plot will not be appropriate if the distribution of the data values is not unimodal because a box plot always tells a unimodal story.</p>
+<blockquote class="blockquote">
+<p>A dot plot is effective not just for perceiving raw data values, but also for perceving data statistics like clusters and outliers, and central tendency and spread.</p>
+</blockquote>
+<p>Another conclusion that we can make from seeing the raw data values in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> is that the data statistics that we visualised in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> do <em>not</em> provide a very good summary of the data. For example, for nothern-hemisphere teams, <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> tells a simple story of a unimodal group of values around a single centre with tails of less common values to either side, but <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> does not tell the same story.</p>
+<p>In this case, the problem is that there are too few data values to support good estimates of medians and interquartile ranges. In general, any data visualisation that maps data statistics rather than raw data values will be weak if the data statistics are inappropriate. For example, a box plot will not be appropriate if the distribution of the data values is not unimodal because a box plot always tells a unimodal story.</p>
 <blockquote class="blockquote">
 <p>A box plot is <em>not</em> effective if a five-number summary is not a sensible data statistic for the data values.</p>
 </blockquote>
@@ -1540,7 +1584,7 @@ Figure&nbsp;6.6: A histogram of the number of clean breaks per game for all team
 <p>talk about colour palettes that have deliberate colour boundaries to emphasise structure - combination of order and category</p>
 <ul>
 <li><p>citation for ensembles in statistics.qmd</p></li>
-<li><p>model fits like lm straight line and ref Hadley’s data-space vs model-space</p></li>
+<li><p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models?)</p></li>
 <li><p>An index that links to all of the places that different sorts of plots are discussed ?</p></li>
 </ul>
 <p>&nbsp;</p>
@@ -1602,7 +1646,7 @@ Zhang, Jiajie. 1996. <span>“A Representational Analysis of Relational Informat
 <li id="fn8"><p>The idea of perception of differences being relative is a very old result from Psychology known as Weber’s Law <span class="citation" data-cites="weber1834tastsinn boring1942sensation">(<a href="#ref-weber1834tastsinn" role="doc-biblioref">Weber 1846</a>; <a href="#ref-boring1942sensation" role="doc-biblioref">Boring 1942</a>)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p>The three-dimensional experience of colour arises from the fact that there are three different sorts of cones in the retina (see <a href="#sec-eye" class="quarto-xref">Section&nbsp;2.1</a>), each sensitive to a different range of light wavelengths: The L cones respond to long wavelengths (reds); the M cones respond to medium wavelengths (greens); and the S cones respond to short wavelengths (blues). The neural connections that combine the messages from the retina are also divided into three pathways: light-dark, which represents the sum of L, M, and S cones; red-green, which represents the difference between L and M cones; and blue-yellow, which represents the difference between S cones and the sum of L and M cones. For more information, see <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p>This relative perception of colours is useful for being able to adapt to a wide range of lighting conditions. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more detailed discussion.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>A clean break in rugby is when the team with the ball manages to break through the opposition defence while carrying the ball. More is good.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>A clean break in rugby is when the team with the ball manages to break through the opposition defence while carrying the ball. More is better.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12"><p>Need some references to articles about ensembles in data vis lit.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>

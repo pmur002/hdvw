@@ -4,7 +4,7 @@
 In @sec-mapping-visual-features we described a data visualisation as
 a mapping from data values to visual features (@fig-visual-feature).
 For example, a bar plot,
-like @fig-bar, maps the total number of youth offenders to the lengths
+like @fig-bar, maps the total number of youth offenders to the **lengths**
 of bars.
 
 We also emphasised the importance of the mapping *back* from the visual 
@@ -18,7 +18,7 @@ allow us to map back to the total counts (@fig-visual-feature-decode).
 
 In this section, we introduce the idea of **data statistics**,
 which are summaries of the data, and how some data visualisations
-rely on mappings that involde data statistics instead of raw data values.
+rely on mappings that involve data statistics instead of raw data values.
 
 ## Box Plots
 
@@ -31,7 +31,7 @@ We have also recorded which global hemisphere each team is from.
 
 [^cleanbreaks]:
   A clean break in rugby is when the team with the ball manages to break
-  through the opposition defence while carrying the ball.  More is good.
+  through the opposition defence while carrying the ball.  More is better.
 
 ```{r}
 #| echo: false
@@ -94,13 +94,31 @@ This is effective for mapping back to the data statistics, but it
 is not effective for mapping back to the raw data.
 :::
 
+To be explicit, the data values that are being mapped to visual features in 
+@fig-boxplot are *not* the raw data values in @tbl-rwc-cleanbreaks;
+the values that are being mapped to visual features in @fig-boxplot 
+are the **data statistics** shown in @tbl-rwc-cleanbreaks-stats.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-cleanbreaks-stats
+#| tbl-cap: A table of the five-number summaries for the number of clean breaks per game by each country at the 2023 Rugby World Cup, along with which global hemisphere each country is from.  These data statistics are the values that are mapped to visual features in @fig-boxplot.
+rwcStats <- do.call(rbind, 
+                    lapply(split(rwc, rwc$hemisphere), 
+                           function(x) fivenum(x$cleanbreaks)))
+colnames(rwcStats) <- c("minimum", "lower quartile", "median", 
+                        "upper quartile", "maximum")
+kable(rwcStats, digits=1)
+```
+
 > A box plot is effective at conveying information about the
   distribution of data values because it maps **data statistics**
   about the distribution, like the median
   and interquartile range, to basic visual features.
 
-On the other hand, because a box plot maps data statistics, not raw
-data values, to visual features,
+On the other hand, because a box plot maps data statistics (not raw
+data values) to visual features,
 a box plot is *not* effective for mapping *back* to the raw data values 
 (@fig-stat-vis-decode).
 
@@ -126,7 +144,7 @@ clean breaks per game amongst northern-hemisphere teams.
 #| echo: false
 #| label: fig-rwc-dotplot
 #| fig-cap: A dotplot of the number of clean breaks per game for teams from the Northern and Southern hemispheres in the 2023 Rugby World Cup.
-gg <- ggplot(RWCperGame) +
+gg <- ggplot(rwc) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  linetype="dotted") +
     geom_dotplot(aes(cleanbreaks, hemisphere), binwidth=.3) +
@@ -136,9 +154,12 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-But in @fig-rwc-dotplot
+The fact that we can map *back* to raw data values from a dot plot is
+not news.  We have previously demonstrated this in @sec-dot-plots.
+However, @fig-rwc-dotplot does demonstrate that, in addition to mapping
+*back* from visual features to raw data values, 
 our visual system allows us to map *back* from visual features 
-to more than just the raw data values.
+to **data statistics**.
 For example, we can see that there is one team amongst the 
 southern-hemisphere teams that sits apart from
 the others; we can see that most teams form a cluster and we can
@@ -151,11 +172,6 @@ but we are also able to map *back* to **data statistics**
 [^ensembles]:
   Need some references to articles about ensembles in data vis lit.
 
-> A dot plot is effective not just for perceiving raw data values, but
-  also for perceving 
-  data statistics like clusters and outliers, and central tendency
-  and spread.
-
 ::: {#fig-data-vis-stat-decode}
 
 ![](Diagrams/data-vis-stat-decode.png)
@@ -165,16 +181,21 @@ to map *back* to data values, but it may *also* allow us to map back to
 statistics of the data, such as measures of central tendency or variability.
 :::
 
+> A dot plot is effective not just for perceiving raw data values, but
+  also for perceving 
+  data statistics like clusters and outliers, and central tendency
+  and spread.
+
 Another conclusion that we can make from seeing the raw data values in
-@fig-rwc-dotplot is that the data statistics shown in @fig-boxplot
-do not provide a very good summary of the data.
+@fig-rwc-dotplot is that the data statistics that we visualised in @fig-boxplot
+do *not* provide a very good summary of the data.
 For example, for nothern-hemisphere teams,
 @fig-boxplot tells a simple story of a unimodal 
 group of values around a single centre with tails of less common values
 to either side, but @fig-rwc-dotplot does not tell the same story.
+
 In this case, the problem is that there are too few data values to
 support good estimates of medians and interquartile ranges.
-
 In general, any data visualisation that maps data statistics 
 rather than raw data values will be weak if the data statistics are
 inappropriate.  For example, a box plot will not be appropriate
@@ -185,6 +206,8 @@ a box plot always tells a unimodal story.
   sensible data statistic for the data values.
 
 ## Case study: Histograms
+
+**TODO:** change to tries ?
 
 @fig-hist shows a histogram of the number of clean breaks per game for all
 teams at the 2023 Rugby World Cup.
@@ -210,13 +233,19 @@ of a bar.
 #| echo: false
 #| label: fig-hist
 #| fig-cap: A histogram of the number of clean breaks per game for all teams in the 2023 Rugby World Cup.
-gg <- ggplot(rwc) +
-    geom_histogram(aes(cleanbreaks), colour="black", fill="grey", binwidth=1) +
+gg <- ggplot(RWCperGame) +
+    geom_histogram(aes(tries), colour="black", fill="grey", binwidth=1) +
     scale_x_continuous(name="clean breaks") 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+To be explicit, the values that are being mapped to visual features
+are not raw data values, but data statistics---intervals and counts---as
+shown in @tbl-hist-stat.
+
+
 
 As with a box plot, the mappings of data statistics to accurate
 visual features means that we can easily map *back* to

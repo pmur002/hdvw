@@ -1,8 +1,15 @@
 
+dataPath <- "Data/RWC"
+
+## https://www.kaggle.com/datasets/lylebegbie/international-rugby-union-results-from-18712022/data
+## CC BY-NC-SA 4.0
+
+hemi <- read.csv(file.path(dataPath, "rwc-2023-hemisphere.csv"))
+rwcAll <- merge(read.csv(file.path(dataPath, "rwc-all-time.csv")),
+                hemi, by.x="team", by.y="country")
+
 ## Source:
 ## https://www.rugbyworldcup.com/2023/stats/
-
-dataPath <- "Data/RWC"
 
 tables <- c("hemisphere", "yellowcards", "redcards",
             "cleanbreaks", "tackles",
