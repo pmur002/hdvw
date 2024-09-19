@@ -70,7 +70,7 @@ graph <- function(..., file) {
 
 ## Data nodes
 data <- dataNode("data", "data\\nvalues")
-stat <- dataNode("stat", "data\\nstatistics")
+stat <- dataNode("stat", "data\\nsummaries")
 meta <- dataNode("meta", "metadata\\n")
 dataStatSame <- sameRank("data", "stat")
 

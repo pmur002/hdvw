@@ -1253,7 +1253,7 @@ popViewport()
 #| echo: false
 #| message: false
 #| label: tbl-rwc-all-stats
-#| tbl-cap: A table of the five-number summaries for the number of points scored by Tier One nations in Rugby World Cup matches, along with the country name.  These data statistics are the values that are mapped to visual features to produce the box plots in @fig-boxplot.
+#| tbl-cap: A table of the five-number summaries for the number of points scored by Tier One nations in Rugby World Cup matches, along with the country name.  These data summaries are the values that are mapped to visual features to produce the box plots in @fig-boxplot.
 rwcStats <- do.call(rbind, 
                     lapply(split(rwcAll, rwcAll$hemisphere), 
                            function(x) fivenum(x$scored)))
@@ -1294,7 +1294,7 @@ popViewport()
 #| echo: false
 #| message: false
 #| label: tbl-hist-stats
-#| tbl-cap: A table of intervals the cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval.  These data statistics are the values that are mapped to visual features to produce the histogram in @fig-boxplot.
+#| tbl-cap: A table of intervals the cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval.  These data summaries are the values that are mapped to visual features to produce the histogram in @fig-boxplot.
 hist <- hist(rwcAll$scored, breaks=breaks, plot=FALSE)
 histStats <- rbind(interval=paste0(hist$breaks[-length(hist$breaks)], "-",
                                    hist$breaks[-1]),
@@ -1332,7 +1332,7 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-hist-thick
+#| label: fig-hist-thin
 #| fig-cap: A histogram of the points scored per game by Tier One nations at Rugby World Cups.  This histogram uses the same data as @fig-hist, but bins the data using narrower intervals.
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored), colour="black", fill="grey", 
