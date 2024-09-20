@@ -3,16 +3,201 @@
 
 Most data visualisations involve more than one data variable.
 For example, the bar plot in @fig-bar involves data on the ethnic
-group of offenders and the total number of
+group of offenders and data on the total number of
 offenders in each ethnic group.
 
-Each data value is mapped to a **visual feature** of a data symbol
-(see @fig-visual-feature).  For example, in the bar plot in @fig-bar,
+In @fig-bar, each data value is mapped to a **visual feature** of a data symbol
+(@fig-visual-feature).  For example, 
 the ethnic group is mapped to the vertical **position** of the bars
 and the total number of offenders is mapped to the **length** of the bars.
 
+We have so far only looked at mappings 
+in isolation.  For example, we know that the mapping from ethnic group to 
+position is effective because it uses a visual feature that is 
+appropriate for qualitative data and it uses a visual feature with
+a large capacity.  We also know that mapping the total number
+of offenders to length is effective because is uses a visual feature that
+is appropriate for quantitative data and a visual feature that is accurate 
+and the lengths are all aligned.
 
+In this section, we begin to consider what happens when mappings are
+used in combination.  For a start, we will just extend our 
+thinking to data visualisations that involve mapping **two** data variables
+to **two** visual features, where each pair of data values 
+maps to a single data symbols (@fig-two-visual-features).
 
+::: {#fig-two-visual-features layout-ncol=2}
 
+![](Diagrams/data-vis.png)
 
+![](Mappings/mapping-1-2-1-2.png)
 
+A simple data visualisation maps **two** data values to
+**two** visual features to create a data symbol.
+Each pair of data values (`a` and `b`) is mapped to two visual
+features (`x` and `y`) of a single data symbol.
+:::
+
+## Independent visual features
+
+A bar plot involves mapping a qualitative variable to **position**
+and a quantitative variable to **length** (e.g., @fig-bar).
+We know that each visual feature is effective on its own---we can map
+*back* from positions to qualitative values and we can map *back* from
+lengths to quantitative values---but another reason why the bar plot
+is effective overall is because the two visual features act
+independently.[^separable]
+Our perception of the horizontal **length** of the bars is not
+affected by the vertical **position** of the bars.[^independent-lie]
+
+[^separable]:
+  Refer to the literature that talks about separable and integral AND 
+  configural visual features.
+
+[^independent-lie]:
+  Technically, there is an interaction because lengths that are further apart
+  from each other vertically are harder to compare (see @sec-distance-effect).
+  However, compared to visual features that strongly interact, length
+  and position are reasonably independent.
+
+@fig-bar-colour demostrates that we can also add **colour** to the mix 
+without creating any interactions.  We can perceive the colour of the bars
+and the position of the bars and the lengths of the bars independently
+of each other.
+
+```{r}
+#| echo: false
+#| label: fig-bar-colour
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot come from mapping ethnic group to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group, fill=group)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+```
+
+> One reason why a bar plot is effective is because it maps data values
+  to visual features that can be perceived independently.
+
+## Visual features that interact
+
+@tbl-rwc-2023 shows data gathered on the performance of all twenty
+teams at the 2023 Rugby World Cup.  Most measures are positive, for example,
+more **points** is better, but more **tackles** may just mean that the
+team was weak and was always being attacked;  more disciplinary **cards**
+(either **y**ellow or **r**ed) is definitely a bad sign.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-2023
+#| tbl-cap: Performance measures for all twenty teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+kable(RWCperGame, digits=1, row.names=FALSE)
+```
+
+@fig-scatter shows a scatter plot of the number of "clean breaks" per game
+versus the number of "tries scored" 
+per game for each team.  A clean break means that a
+team has broken through the opposition defence and a "try scored" means 
+that the team has earned 5 points.  
+A clean break implies an opportunity to score a try,
+but does not guarantee that a try will be scored.
+
+```{r}
+#| echo: false
+#| label: fig-scatter
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages).
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+The data symbol in a scatter plot is a data point, in this case a circle.
+There are two mappings in the scatter plot in @fig-scatter:
+the **quantitative** number of clean breaks is mapped to the horizontal
+**position** of the data points and the **quantitative** number of tries 
+scored is mapped to the vertical **position** of the data points.
+
+We know from @sec-mapping-visual-features that using **position** means
+that we should be able to accurately map *back* to the original data values.
+For example, we can easily see that one team scored a little over 
+7.5 clean breaks per game and we can see that two teams scored about
+6 tries per game.
+
+However, there is something else going on in the scatter plot.
+The two explicit mappings to horizontal and vertical position
+**interact** to create an additional visual feature:[^integral]
+**position in space** (@fig-interact).[^emergent-features]
+For example, we can perceive not only horizontal and vertical
+distances between data points, but also euclidean distances between
+data points ("as the crow flies").
+
+[^emergent-features]:
+  Relate this to mentions in literature of "emergent features", e.g.,
+  @pomerantz1994emergent.
+
+[^integral]:
+  Need citations to literature that mention integral visual features.
+
+::: {#fig-interact layout-ncol=2}
+
+![](Diagrams/data-vis-vis.png)
+
+If we map data values to visual features and the visual features interact, 
+the result can be additional visual features.  It is possible for the 
+additional visual feature to be dominant relative to the original visual
+features or even to obscure the original visual features.
+:::
+
+> One reason why a scatter plot is effective at conveying relationships
+  between variables is because the mappings of data values to visual
+  features---horizontal 
+  position and vertical position---interact to produce an additional
+  visual feature: position in space.
+
+Furthermore, our visual system allows us to perceive **visual summaries**
+(see @sec-visual-summary) of **position in space**.[^ensemble-corr]
+For example, in @fig-scatter we can easily see a positive 
+**correlation** between the number of clean breaks and the number of
+tries scored.  We can also easily see **clusters** of data points;
+the four data points in the top-right corner of the plot appear separate 
+from the other data points.
+
+[^ensemble-corr]:
+  Citations to literature on ensembles again, this time specifically to
+  correlation in scatter plots.
+
+> One reason why a scatter plot is effective at conveying relationships
+  between variables is because we are able to perceive visual summaries from
+  a collection of positions in space.
+
+## Case study: Spine plots
+
+Data summaries
+
+width (length) and height (length) interact to produce area (and shape)
+
+area/shape dominate width and length ?
+
+```{r}
+#| echo: false
+#| label: fig-spine
+#| warning: false
+#| fig-cap: A spine plot
+gg <- ggplot(offenders) +
+    geom_mosaic(aes(x=product(Mop.Division, SEX))) +
+    coord_cartesian(expand=FALSE) +
+    theme(panel.border=element_blank(),
+          aspect.ratio=1)
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+## Summary
+
+A scatter plot is effective for 

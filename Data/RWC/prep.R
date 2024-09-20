@@ -15,12 +15,13 @@ results$date <- as.Date(results$date)
 resultsWC <- subset(results, world_cup == "True")
 
 teamsWC <- c(resultsWC$home_team, resultsWC$away_team)
+oppositionWC <- c(resultsWC$away_team, resultsWC$home_team)
 pointsWC <- c(resultsWC$home_score, resultsWC$away_score)
 againstWC <- c(resultsWC$away_score, resultsWC$home_score)
 yearWC <- c(resultsWC$year, resultsWC$year)
 matchWC <- rep(1:nrow(resultsWC), 2)
 
-write.csv(data.frame(year=yearWC, team=teamsWC,
+write.csv(data.frame(year=yearWC, team=teamsWC, opposition=oppositionWC,
                      scored=pointsWC, conceded=againstWC,
                      match=matchWC),
           row.names=FALSE,

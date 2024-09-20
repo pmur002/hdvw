@@ -35,7 +35,7 @@ for Tier One nations (the top 10 rugby-playing nations).
 #| message: false
 #| label: tbl-rwc-all
 #| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c(1, 6, 2, 3, 4, 5)]), digits=0)
+kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
 ```
 
 @fig-boxplot shows box plots of the number of 
@@ -121,7 +121,7 @@ to basic visual features.
   about the distribution, like the median
   and interquartile range, to basic visual features.
 
-## Visual summaries {#sec-data-vis-decode}
+## Visual summaries {#sec-visual-summary}
 
 @fig-rwc-dotplot shows stacked dot plots of the number of points scored by 
 countries from the different hemispheres in Rugby World Cup matches.
@@ -180,7 +180,9 @@ enable us to map *back* to **data summaries**
 (@fig-data-vis-stat-decode).[^ensembles]
 
 [^ensembles]:
-  Need some references to articles about ensembles in data vis lit.
+  Need some references to articles about ensembles in data vis lit
+  (ideally NOT the scatter plot one cos want to use that later for 
+   scatter plots).
 
 ::: {#fig-data-vis-stat-decode}
 
@@ -276,7 +278,7 @@ The benefit of a data visualisation that maps
 **data summaries** to visual features is that it allows us to perceive
 data summaries very easily.  For example, although we can perceive
 a general idea of central tendency from the dots in @fig-rwc-dotplot
-(see @sec-data-vis-decode),
+(see @sec-visual-summary),
 it is much easier and more accurate to perceive
 median values from the thick vertical lines in @fig-boxplot.
 
@@ -397,7 +399,7 @@ the data values.
 When we map raw data values to visual features, like in a dot plot,
 the perception of individual visual features allows us to 
 perceive and compare raw data values, but, in addition,
-**visual summaries** of collections of
+**visual summaries** of *collections* of
 visual features allow us to perceive and compare data summaries.
 
 A box plot that maps data summaries to visual features is more effective

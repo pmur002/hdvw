@@ -112,12 +112,18 @@ div.csl-indent {
   <li><a href="#data-summaries" id="toc-data-summaries" class="nav-link" data-scroll-target="#data-summaries"><span class="header-section-number">6</span> Data summaries</a>
   <ul class="collapse">
   <li><a href="#box-plots" id="toc-box-plots" class="nav-link" data-scroll-target="#box-plots"><span class="header-section-number">6.1</span> Box Plots</a></li>
-  <li><a href="#sec-data-vis-decode" id="toc-sec-data-vis-decode" class="nav-link" data-scroll-target="#sec-data-vis-decode"><span class="header-section-number">6.2</span> Visual summaries</a></li>
+  <li><a href="#sec-visual-summary" id="toc-sec-visual-summary" class="nav-link" data-scroll-target="#sec-visual-summary"><span class="header-section-number">6.2</span> Visual summaries</a></li>
   <li><a href="#case-study-histograms" id="toc-case-study-histograms" class="nav-link" data-scroll-target="#case-study-histograms"><span class="header-section-number">6.3</span> Case study: Histograms</a></li>
   <li><a href="#caveats" id="toc-caveats" class="nav-link" data-scroll-target="#caveats"><span class="header-section-number">6.4</span> Caveats</a></li>
   <li><a href="#summary-5" id="toc-summary-5" class="nav-link" data-scroll-target="#summary-5"><span class="header-section-number">6.5</span> Summary</a></li>
   </ul></li>
-  <li><a href="#combining-visual-features" id="toc-combining-visual-features" class="nav-link" data-scroll-target="#combining-visual-features"><span class="header-section-number">7</span> Combining Visual Features</a></li>
+  <li><a href="#combining-visual-features" id="toc-combining-visual-features" class="nav-link" data-scroll-target="#combining-visual-features"><span class="header-section-number">7</span> Combining Visual Features</a>
+  <ul class="collapse">
+  <li><a href="#independent-visual-features" id="toc-independent-visual-features" class="nav-link" data-scroll-target="#independent-visual-features"><span class="header-section-number">7.1</span> Independent visual features</a></li>
+  <li><a href="#visual-features-that-interact" id="toc-visual-features-that-interact" class="nav-link" data-scroll-target="#visual-features-that-interact"><span class="header-section-number">7.2</span> Visual features that interact</a></li>
+  <li><a href="#case-study-spine-plots" id="toc-case-study-spine-plots" class="nav-link" data-scroll-target="#case-study-spine-plots"><span class="header-section-number">7.3</span> Case study: Spine plots</a></li>
+  <li><a href="#summary-6" id="toc-summary-6" class="nav-link" data-scroll-target="#summary-6"><span class="header-section-number">7.4</span> Summary</a></li>
+  </ul></li>
   <li><a href="#visual-shapes" id="toc-visual-shapes" class="nav-link" data-scroll-target="#visual-shapes"><span class="header-section-number">8</span> Visual Shapes</a></li>
   <li><a href="#visual-congruence" id="toc-visual-congruence" class="nav-link" data-scroll-target="#visual-congruence"><span class="header-section-number">9</span> Visual Congruence</a></li>
   <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo"><span class="header-section-number">10</span> TODO</a>
@@ -1253,7 +1259,7 @@ Table&nbsp;6.1: A table of the number of points scored and conceded by Tier One 
 <thead>
 <tr class="header">
 <th style="text-align: left;">team</th>
-<th style="text-align: left;">hemisphere</th>
+<th style="text-align: left;">opposition</th>
 <th style="text-align: right;">year</th>
 <th style="text-align: right;">scored</th>
 <th style="text-align: right;">conceded</th>
@@ -1263,7 +1269,7 @@ Table&nbsp;6.1: A table of the number of points scored and conceded by Tier One 
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
+<td style="text-align: left;">Australia</td>
 <td style="text-align: right;">2003</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">24</td>
@@ -1271,7 +1277,7 @@ Table&nbsp;6.1: A table of the number of points scored and conceded by Tier One 
 </tr>
 <tr class="even">
 <td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
+<td style="text-align: left;">England</td>
 <td style="text-align: right;">1995</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: right;">24</td>
@@ -1279,7 +1285,7 @@ Table&nbsp;6.1: A table of the number of points scored and conceded by Tier One 
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
+<td style="text-align: left;">South Africa</td>
 <td style="text-align: right;">2007</td>
 <td style="text-align: right;">13</td>
 <td style="text-align: right;">37</td>
@@ -1287,7 +1293,7 @@ Table&nbsp;6.1: A table of the number of points scored and conceded by Tier One 
 </tr>
 <tr class="even">
 <td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
+<td style="text-align: left;">Ireland</td>
 <td style="text-align: right;">1999</td>
 <td style="text-align: right;">28</td>
 <td style="text-align: right;">24</td>
@@ -1295,7 +1301,7 @@ Table&nbsp;6.1: A table of the number of points scored and conceded by Tier One 
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
+<td style="text-align: left;">New Zealand</td>
 <td style="text-align: right;">2011</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">33</td>
@@ -1303,7 +1309,7 @@ Table&nbsp;6.1: A table of the number of points scored and conceded by Tier One 
 </tr>
 <tr class="even">
 <td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
+<td style="text-align: left;">Wales</td>
 <td style="text-align: right;">1991</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">16</td>
@@ -1392,8 +1398,8 @@ Table&nbsp;6.2: A table of the five-number summaries for the number of points sc
 <p>A box plot is effective at conveying information about the distribution of data values because it maps <strong>data summaries</strong> about the distribution, like the median and interquartile range, to basic visual features.</p>
 </blockquote>
 </section>
-<section id="sec-data-vis-decode" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="sec-data-vis-decode"><span class="header-section-number">6.2</span> Visual summaries</h2>
+<section id="sec-visual-summary" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-visual-summary"><span class="header-section-number">6.2</span> Visual summaries</h2>
 <p><a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> shows stacked dot plots of the number of points scored by countries from the different hemispheres in Rugby World Cup matches. This data visualisation uses the same data as <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a>, but this data visualisation maps raw data values to visual features; the number of points scored maps to the horizontal <strong>position</strong> of a data point and the hemisphere maps to the vertical <strong>position</strong> of a data point.</p>
 <p>Because this data visualisation maps raw data values to visual features, it is possible to map <em>back</em> to raw data values (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;3.6</a>). For example, it is possible to see that the lowest score (zero points) for a northern hemisphere team ocurred twice. It is also possible to see that there are scores that have never occurred in any matches: 1, 2, 4, and 5. These features are not visible in the boxplots in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a>.</p>
 <div class="cell">
@@ -1542,7 +1548,7 @@ Table&nbsp;6.3: A table of intervals the cover the range of the number of points
 </section>
 <section id="caveats" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="caveats"><span class="header-section-number">6.4</span> Caveats</h2>
-<p>The benefit of a data visualisation that maps <strong>data summaries</strong> to visual features is that it allows us to perceive data summaries very easily. For example, although we can perceive a general idea of central tendency from the dots in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> (see <a href="#sec-data-vis-decode" class="quarto-xref">Section&nbsp;6.2</a>), it is much easier and more accurate to perceive median values from the thick vertical lines in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a>.</p>
+<p>The benefit of a data visualisation that maps <strong>data summaries</strong> to visual features is that it allows us to perceive data summaries very easily. For example, although we can perceive a general idea of central tendency from the dots in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> (see <a href="#sec-visual-summary" class="quarto-xref">Section&nbsp;6.2</a>), it is much easier and more accurate to perceive median values from the thick vertical lines in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a>.</p>
 <p>The flipside is that a data visualisation that maps <strong>data summaries</strong> to visual features is <em>not</em> effective for mapping <em>back</em> to raw data values. For example, we cannot see from the box plot in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;6.1</a> that the scores 1, 2, 4, and 5 never occurred, while this is clear from <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;6.3</a> because the dot plot does map the raw data values to data symbols.</p>
 <blockquote class="blockquote">
 <p>Box plots and histograms are <em>not</em> effective at conveying raw data values because they do not map raw data values to data symbols.</p>
@@ -1606,14 +1612,428 @@ Figure&nbsp;6.8: A histogram of the points scored per game by Tier One nations a
 <p>Data summaries, such as measures of central tendency, measures of variability, and tables of counts, provide information about the distribution of a set of data values.</p>
 <p>Some data visualisations, like box plots and histograms, are effective because they map <strong>data summaries</strong> to visual features. This makes it easy to perceive and compare data summaries.</p>
 <p>Care must be taken to use data summaries that appropriately summarise the data values.</p>
-<p>When we map raw data values to visual features, like in a dot plot, the perception of individual visual features allows us to perceive and compare raw data values, but, in addition, <strong>visual summaries</strong> of collections of visual features allow us to perceive and compare data summaries.</p>
+<p>When we map raw data values to visual features, like in a dot plot, the perception of individual visual features allows us to perceive and compare raw data values, but, in addition, <strong>visual summaries</strong> of <em>collections</em> of visual features allow us to perceive and compare data summaries.</p>
 <p>A box plot that maps data summaries to visual features is more effective for perceiving data summaries than a dot plot that relies on visual summaries. However, a dot plot is more effective for perceiving raw data values.</p>
 </section>
 </section>
 <section id="combining-visual-features" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Combining Visual Features</h1>
-<p>Most data visualisations involve more than one data variable. For example, the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a> involves data on the ethnic group of offenders and the total number of offenders in each ethnic group.</p>
-<p>Each data value is mapped to a <strong>visual feature</strong> of a data symbol (see <a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;3.1</a>). For example, in the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>, the ethnic group is mapped to the vertical <strong>position</strong> of the bars and the total number of offenders is mapped to the <strong>length</strong> of the bars.</p>
+<p>Most data visualisations involve more than one data variable. For example, the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a> involves data on the ethnic group of offenders and data on the total number of offenders in each ethnic group.</p>
+<p>In <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>, each data value is mapped to a <strong>visual feature</strong> of a data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;3.1</a>). For example, the ethnic group is mapped to the vertical <strong>position</strong> of the bars and the total number of offenders is mapped to the <strong>length</strong> of the bars.</p>
+<p>We have so far only looked at mappings in isolation. For example, we know that the mapping from ethnic group to position is effective because it uses a visual feature that is appropriate for qualitative data and it uses a visual feature with a large capacity. We also know that mapping the total number of offenders to length is effective because is uses a visual feature that is appropriate for quantitative data and a visual feature that is accurate and the lengths are all aligned.</p>
+<p>In this section, we begin to consider what happens when mappings are used in combination. For a start, we will just extend our thinking to data visualisations that involve mapping <strong>two</strong> data variables to <strong>two</strong> visual features, where each pair of data values maps to a single data symbols (<a href="#fig-two-visual-features" class="quarto-xref">Figure&nbsp;7.1</a>).</p>
+<div id="fig-two-visual-features" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-two-visual-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Diagrams/data-vis.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Mappings/mapping-1-2-1-2.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-two-visual-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: A simple data visualisation maps <strong>two</strong> data values to <strong>two</strong> visual features to create a data symbol. Each pair of data values (<code>a</code> and <code>b</code>) is mapped to two visual features (<code>x</code> and <code>y</code>) of a single data symbol.
+</figcaption>
+</figure>
+</div>
+<section id="independent-visual-features" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="independent-visual-features"><span class="header-section-number">7.1</span> Independent visual features</h2>
+<p>A bar plot involves mapping a qualitative variable to <strong>position</strong> and a quantitative variable to <strong>length</strong> (e.g., <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>). We know that each visual feature is effective on its own—we can map <em>back</em> from positions to qualitative values and we can map <em>back</em> from lengths to quantitative values—but another reason why the bar plot is effective overall is because the two visual features act independently.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> Our perception of the horizontal <strong>length</strong> of the bars is not affected by the vertical <strong>position</strong> of the bars.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<p><a href="#fig-bar-colour" class="quarto-xref">Figure&nbsp;7.2</a> demostrates that we can also add <strong>colour</strong> to the mix without creating any interactions. We can perceive the colour of the bars and the position of the bars and the lengths of the bars independently of each other.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bar-colour" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bar-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-bar-colour-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot come from mapping ethnic group to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>One reason why a bar plot is effective is because it maps data values to visual features that can be perceived independently.</p>
+</blockquote>
+</section>
+<section id="visual-features-that-interact" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="visual-features-that-interact"><span class="header-section-number">7.2</span> Visual features that interact</h2>
+<p><a href="#tbl-rwc-2023" class="quarto-xref">Table&nbsp;7.1</a> shows data gathered on the performance of all twenty teams at the 2023 Rugby World Cup. Most measures are positive, for example, more <strong>points</strong> is better, but more <strong>tackles</strong> may just mean that the team was weak and was always being attacked; more disciplinary <strong>cards</strong> (either <strong>y</strong>ellow or <strong>r</strong>ed) is definitely a bad sign.</p>
+<div class="cell">
+<div id="tbl-rwc-2023" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-2023-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.1: Performance measures for all twenty teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+</figcaption>
+<div aria-describedby="tbl-rwc-2023-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: left;">sphere</th>
+<th style="text-align: right;">ycards</th>
+<th style="text-align: right;">rcards</th>
+<th style="text-align: right;">breaks</th>
+<th style="text-align: right;">tackles</th>
+<th style="text-align: right;">points</th>
+<th style="text-align: right;">converts</th>
+<th style="text-align: right;">offloads</th>
+<th style="text-align: right;">tries</th>
+<th style="text-align: right;">runs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Namibia</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">102.0</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">92.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Romania</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">142.5</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">81.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">132.2</td>
+<td style="text-align: right;">6.8</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">102.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Samoa</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">109.5</td>
+<td style="text-align: right;">23.0</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">102.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Australia</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">108.2</td>
+<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">110.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Georgia</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">149.8</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">114.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">126.8</td>
+<td style="text-align: right;">16.2</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">99.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.4</td>
+<td style="text-align: right;">139.1</td>
+<td style="text-align: right;">29.7</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">5.4</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">95.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">124.9</td>
+<td style="text-align: right;">31.6</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">100.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fiji</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">99.8</td>
+<td style="text-align: right;">22.4</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">138.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wales</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">167.4</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">7.6</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">109.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">166.2</td>
+<td style="text-align: right;">27.2</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">89.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tonga</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">141.2</td>
+<td style="text-align: right;">24.0</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">8.2</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">107.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">6.3</td>
+<td style="text-align: right;">111.7</td>
+<td style="text-align: right;">26.4</td>
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">131.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">6.8</td>
+<td style="text-align: right;">138.2</td>
+<td style="text-align: right;">28.5</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">116.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">148.0</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">118.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ireland</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">126.4</td>
+<td style="text-align: right;">42.8</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">9.4</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">137.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">115.2</td>
+<td style="text-align: right;">47.6</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">10.6</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">126.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scotland</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">11.2</td>
+<td style="text-align: right;">123.0</td>
+<td style="text-align: right;">36.5</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">13.8</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">151.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">New Zealand</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">12.6</td>
+<td style="text-align: right;">123.4</td>
+<td style="text-align: right;">48.0</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">8.3</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">139.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-scatter" class="quarto-xref">Figure&nbsp;7.3</a> shows a scatter plot of the number of “clean breaks” per game versus the number of “tries scored” per game for each team. A clean break means that a team has broken through the opposition defence and a “try scored” means that the team has earned 5 points.<br>
+A clean break implies an opportunity to score a try, but does not guarantee that a try will be scored.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-scatter" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-scatter-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The data symbol in a scatter plot is a data point, in this case a circle. There are two mappings in the scatter plot in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;7.3</a>: the <strong>quantitative</strong> number of clean breaks is mapped to the horizontal <strong>position</strong> of the data points and the <strong>quantitative</strong> number of tries scored is mapped to the vertical <strong>position</strong> of the data points.</p>
+<p>We know from <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a> that using <strong>position</strong> means that we should be able to accurately map <em>back</em> to the original data values. For example, we can easily see that one team scored a little over 7.5 clean breaks per game and we can see that two teams scored about 6 tries per game.</p>
+<p>However, there is something else going on in the scatter plot. The two explicit mappings to horizontal and vertical position <strong>interact</strong> to create an additional visual feature:<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> <strong>position in space</strong> (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;7.4</a>).<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> For example, we can perceive not only horizontal and vertical distances between data points, but also euclidean distances between data points (“as the crow flies”).</p>
+<div id="fig-interact" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-vis.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: If we map data values to visual features and the visual features interact, the result can be additional visual features. It is possible for the additional visual feature to be dominant relative to the original visual features or even to obscure the original visual features.
+</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>One reason why a scatter plot is effective at conveying relationships between variables is because the mappings of data values to visual features—horizontal position and vertical position—interact to produce an additional visual feature: position in space.</p>
+</blockquote>
+<p>Furthermore, our visual system allows us to perceive <strong>visual summaries</strong> (see <a href="#sec-visual-summary" class="quarto-xref">Section&nbsp;6.2</a>) of <strong>position in space</strong>.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;7.3</a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points.</p>
+<blockquote class="blockquote">
+<p>One reason why a scatter plot is effective at conveying relationships between variables is because we are able to perceive visual summaries from a collection of positions in space.</p>
+</blockquote>
+</section>
+<section id="case-study-spine-plots" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="case-study-spine-plots"><span class="header-section-number">7.3</span> Case study: Spine plots</h2>
+<p>Data summaries</p>
+<p>width (length) and height (length) interact to produce area (and shape)</p>
+<p>area/shape dominate width and length ?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-spine" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-spine-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.5: A spine plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-6" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="summary-6"><span class="header-section-number">7.4</span> Summary</h2>
+<p>A scatter plot is effective for</p>
+</section>
 </section>
 <section id="visual-shapes" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Visual Shapes</h1>
@@ -1631,6 +2051,7 @@ Figure&nbsp;6.8: A histogram of the points scored per game by Tier One nations a
 <section id="todo" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> TODO</h1>
 <ul>
+<li><p>mention differences in <em>data symbols</em> from bar plot to dot plot to histogram etc …</p></li>
 <li><p>CVD</p></li>
 <li><p>visual illusions</p></li>
 <li><p>gestalt</p></li>
@@ -1641,6 +2062,7 @@ Figure&nbsp;6.8: A histogram of the points scored per game by Tier One nations a
 <li><p>congruence (reuse pie chart that nicely shows Maori at very close to 50%)</p></li>
 <li><p>ensembles (use dot plot of district to demonstrate? Revisit heatmaps?)</p></li>
 <li><p>emergent features</p></li>
+<li><p>use of white space around points in scatter plot</p></li>
 <li><p>text</p></li>
 <li><p>annotations (labelling of teams in dotplot of points per game might work)</p></li>
 <li><p>attention</p></li>
@@ -1702,6 +2124,9 @@ Heer, Jeffrey, and Michael Bostock. 2010. <span>“Crowdsourcing Graphical Perce
 <div id="ref-mackinlay1986automatic" class="csl-entry" role="listitem">
 Mackinlay, Jock. 1986. <span>“Automatic Design of Graphical Presentations of Relational Information.”</span> <em>ACM Transactions on Graphics (TOG)</em> 5 (2): 110–41.
 </div>
+<div id="ref-pomerantz1994emergent" class="csl-entry" role="listitem">
+Pomerantz, James R., and Anna I. Cragin. 1994. <span>“Emergent Features and Feature Combination.”</span> <em>Attention, Perception, &amp; Psychophysics</em> 55 (1): 48–55.
+</div>
 <div id="ref-stevens1957psychophysics" class="csl-entry" role="listitem">
 Stevens, Stanley Smith. 1957. <span>“On the Psychophysical Law.”</span> <em>Psychological Review</em> 64 (3): 153–81.
 </div>
@@ -1734,7 +2159,12 @@ Zhang, Jiajie. 1996. <span>“A Representational Analysis of Relational Informat
 <li id="fn9"><p>The three-dimensional experience of colour arises from the fact that there are three different sorts of cones in the retina (see <a href="#sec-eye" class="quarto-xref">Section&nbsp;2.1</a>), each sensitive to a different range of light wavelengths: The L cones respond to long wavelengths (reds); the M cones respond to medium wavelengths (greens); and the S cones respond to short wavelengths (blues). The neural connections that combine the messages from the retina are also divided into three pathways: light-dark, which represents the sum of L, M, and S cones; red-green, which represents the difference between L and M cones; and blue-yellow, which represents the difference between S cones and the sum of L and M cones. For more information, see <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p>This relative perception of colours is useful for being able to adapt to a wide range of lighting conditions. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more detailed discussion.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>Attribution to kaggle data set.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12"><p>Need some references to articles about ensembles in data vis lit.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots).<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Refer to the literature that talks about separable and integral AND configural visual features.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>Technically, there is an interaction because lengths that are further apart from each other vertically are harder to compare (see <a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>). However, compared to visual features that strongly interact, length and position are reasonably independent.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Need citations to literature that mention integral visual features.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

@@ -1,3 +1,4 @@
+pdf(NULL)
 ---
 title: How Data Visualisation Works
 author: Paul Murrell
@@ -2302,7 +2303,7 @@ for Tier One nations (the top 10 rugby-playing nations).
 #| message: false
 #| label: tbl-rwc-all
 #| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c(1, 6, 2, 3, 4, 5)]), digits=0)
+kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
 ```
 
 @fig-boxplot shows box plots of the number of 
@@ -2664,7 +2665,7 @@ the data values.
 When we map raw data values to visual features, like in a dot plot,
 the perception of individual visual features allows us to 
 perceive and compare raw data values, but, in addition,
-**visual summaries** of collections of
+**visual summaries** of *collections* of
 visual features allow us to perceive and compare data summaries.
 
 A box plot that maps data summaries to visual features is more effective
@@ -2676,19 +2677,99 @@ However, a dot plot is more effective for perceiving raw data values.
 
 Most data visualisations involve more than one data variable.
 For example, the bar plot in @fig-bar involves data on the ethnic
-group of offenders and the total number of
+group of offenders and data on the total number of
 offenders in each ethnic group.
 
-Each data value is mapped to a **visual feature** of a data symbol
-(see @fig-visual-feature).  For example, in the bar plot in @fig-bar,
+In @fig-bar, each data value is mapped to a **visual feature** of a data symbol
+(@fig-visual-feature).  For example, 
 the ethnic group is mapped to the vertical **position** of the bars
 and the total number of offenders is mapped to the **length** of the bars.
 
+We have so far only looked at mappings 
+in isolation.  For example, we know that the mapping from ethnic group to 
+position is effective because it uses a visual feature that is 
+appropriate for qualitative data and it uses a visual feature with
+a large capacity.  We also know that mapping the total number
+of offenders to length is effective because is uses a visual feature that
+is appropriate for quantitative data and a visual feature that is accurate 
+and the lengths are all aligned.
 
+In this section, we begin to consider what happens when mappings are
+used in combination.  For a start, we will just extend our 
+thinking to data visualisations that involve mapping **two** data variables
+to **two** visual features, where each pair of data values 
+maps to a single data symbols (@fig-two-visual-features).
 
+::: {#fig-two-visual-features layout-ncol=2}
 
+![](Diagrams/data-vis.png)
 
+![](Mappings/mapping-1-2-1-2.png)
 
+A simple data visualisation maps **two** data values to
+**two** visual features to create a data symbol.
+Each pair of data values (`a` and `b`) is mapped to two visual
+features (`x` and `y`) of a single data symbol.
+:::
+
+## Independent visual features
+
+A bar plot involves mapping a qualitative variable to **position**
+and a quantitative variable to **length** (e.g., @fig-bar).
+We know that each visual feature is effective on its own---we can map
+*back* from positions to qualitative values and we can map *back* from
+lengths to quantitative values---but another reason why the bar plot
+is effective overall is because the two visual features act
+independently.[^separable]
+Our perception of the horizontal **length** of the bars is not
+affected by the vertical **position** of the bars.[^independent-lie]
+
+[^separable]:
+  Refer to the literature that talks about separable and integral AND 
+  configural visual features.
+
+[^independent-lie]:
+  Technically, there is an interaction because lengths that are further apart
+  from each other vertically are harder to compare (see @sec-distance-effect).
+  However, compared to visual features that strongly interact, length
+  and position are reasonably independent.
+
+@fig-bar-colour demostrates that we can also add **colour** to the mix 
+without creating any interactions.  We can perceive the colour of the bars
+and the position of the bars and the lengths of the bars independently
+of each other.
+
+```{r}
+#| echo: false
+#| label: fig-bar-colour
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot come from mapping ethnic group to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group, fill=group)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+```
+
+> One reason why a bar plot is effective is because it maps data values
+  to visual features that can be perceived independently.
+
+## Visual features that interact
+
+```{r}
+#| echo: false
+#| label: fig-scatter
+#| fig-cap: A scatter plot
+rwcMatches <- do.call(rbind, lapply(split(rwcAll, rwcAll$match), 
+                                    function(x) {
+                                        if (x$scored[1] > x$conceded[1]) {
+                                            y <- x[1, ]
+                                        } else {
+                                           y <- rev(x[2, ])
+                                        }
+                                        names(y) <- c("win", "lose")
+                                    }))
+ggplot(rwcMatches) +
+    geom_point(aes(win, lose))
+```
 
 # Visual Shapes
 
@@ -2816,3 +2897,4 @@ to emphasise structure - combination of order and category
   are discussed ?
 
 &nbsp;
+dev.off()

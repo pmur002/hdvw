@@ -32,6 +32,12 @@ RWC <- Reduce(function(x, y) {
               statsList)
 RWC[is.na(RWC)] <- 0
 RWC$hemisphere <- factor(RWC$hemisphere, levels=c("South", "North"))
+names(RWC) <- gsub("yellowcards", "ycards",
+                   gsub("redcards", "rcards",
+                        gsub("cleanbreaks", "breaks",
+                             gsub("hemisphere", "sphere",
+                                  gsub("conversions", "converts",
+                                       names(RWC))))))
 
 ## Make counts "per game"
 RWCperGame <- do.call(data.frame,
@@ -40,17 +46,17 @@ RWCperGame <- do.call(data.frame,
                                  x/n
                              },
                              RWC$matches))
-RWCperGame <- cbind(country=RWC$country, hemisphere=RWC$hemisphere,
+RWCperGame <- cbind(country=RWC$country, sphere=RWC$sphere,
                     RWCperGame)
 ## Order by 'cleanbreaks' (for qualitative.Rmd)
-RWCperGame <- RWCperGame[order(RWCperGame$cleanbreaks), ]
+RWCperGame <- RWCperGame[order(RWCperGame$breaks), ]
 ## Normalise all variables (0, max()) -> (0, 1)
 RWCnorm <- do.call(data.frame,
                    lapply(RWCperGame[-c(1:2, ncol(RWCperGame))],
                           function(x) {
                               x/max(x)
                           }))
-RWCnorm <- cbind(country=RWCperGame[[1]], hemisphere=RWCperGame[[2]],
+RWCnorm <- cbind(country=RWCperGame[[1]], sphere=RWCperGame[[2]],
                  RWCnorm)
 
 ## Work with just top 8 nations

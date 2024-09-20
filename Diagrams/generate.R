@@ -77,7 +77,7 @@ dataStatSame <- sameRank("data", "stat")
 ## Visual nodes
 sym <- visualNode("sym", "data\\nsymbols")
 vis <- visualNode("vis", "visual\\nfeatures")
-add <- visualNode("add", "additional\\nfeatures")
+add <- visualNode("add", "emergent\\nfeatures")
 sum <- visualNode("sum", "visual\\nsummaries")
 shape <- visualNode("shape", "visual\\nshapes")
 obj <- visualNode("obj", "visual\\nobjects")

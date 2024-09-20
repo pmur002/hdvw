@@ -14,6 +14,12 @@ modified <- c(master[1:(includes[1] - 1)],
               unlist(includesContent),
               master[(includes[length(includes)] + 1):length(master)])
 
-writeLines(modified, "how-data-vis-works-full.qmd")
+knitr::purl("how-data-vis-works-full.qmd", output="how-data-vis-works.R")
 
-knitr::purl("how-data-vis-works-full.qmd", "how-data-vis-works.R")
+## Add pdf(NULL) to avoid on-screen device popping up
+temp <- readLines("how-data-vis-works.R")
+writeLines(c("pdf(NULL)",
+             temp,
+             "dev.off()"),
+           "how-data-vis-works.R")
+

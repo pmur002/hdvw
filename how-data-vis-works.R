@@ -1,3 +1,4 @@
+pdf(NULL)
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| message: false
@@ -1233,7 +1234,7 @@ ggplot(crimeDistrictTotal) +
 #| message: false
 #| label: tbl-rwc-all
 #| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c(1, 6, 2, 3, 4, 5)]), digits=0)
+kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
 
 
 ## -----------------------------------------------------------------------------
@@ -1342,3 +1343,31 @@ pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-bar-colour
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot come from mapping ethnic group to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group, fill=group)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-scatter
+#| fig-cap: A scatter plot
+rwcMatches <- do.call(rbind, lapply(split(rwcAll, rwcAll$match), 
+                                    function(x) {
+                                        if (x$scored[1] > x$conceded[1]) {
+                                            y <- x[1, ]
+                                        } else {
+                                           y <- rev(x[2, ])
+                                        }
+                                        names(y) <- c("win", "lose")
+                                    }))
+ggplot(rwcMatches) +
+    geom_point(aes(win, lose))
+
+dev.off()
