@@ -28,7 +28,7 @@ of a data symbol.  Each data value (`a`) is mapped to a visual
 feature (`x`) of a single data symbol.
 :::
 
-## Bar charts
+## Bar plots
 
 In order to demonstrate mapping data values to visual features,
 we will work with a data visualisation of
@@ -467,7 +467,7 @@ difference between the length of two bars?[^accuracy-research]
 [^accuracy-research]:
   The pioneering work on the accuracy of different visual features
   for statistical graphics was carried out by @cleveland1984graphical.
-  Their results have been supported several times in subsequent 
+  Their results have been replicated several times in subsequent 
   studies, including @heer2010crowdsourcing.
   The rankings were extended to a larger set of visual features
   by @mackinlay1986automatic, although somewhat only by inference from other
@@ -524,11 +524,19 @@ popViewport(2)
 This issue has been studied experimentally and 
 @fig-accuracy shows the established ordering of the accuracy
 of basic visual features,
-with more accurate visual features at the top.
+with more accurate visual features at the top.[^candm]
 A data visualisation that maps 
 data values to visual features near the top of this
 ranking will be more effective than one that maps data values
 to visual features near the bottom.
+
+[^candm]:
+  In @cleveland1984graphical, 
+  comparisons of bars were treated as **position** judgements
+  rather than **length** judgements, unless the bars were unaligned
+  (see @sec-unaligned), so this table is a slightly fuzzy representation
+  of their results.  However, the general ordering of visual features
+  is basically consistent with @cleveland1984graphical.
 
 ```{r}
 #| echo: false

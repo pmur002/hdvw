@@ -2,7 +2,8 @@
 # Data summaries
 
 In @sec-mapping-visual-features we described a data visualisation as
-a mapping from data values to visual features (@fig-visual-feature).
+a mapping from data values to the visual features of a data symbol
+(@fig-visual-feature).
 For example, a bar plot,
 like @fig-bar, maps the total number of youth offenders to the **lengths**
 of bars.
@@ -21,7 +22,7 @@ because they rely on **data summaries** instead of raw data values.
 
 ## Box Plots
 
-The Rugby World Cup is a competition held every four years, with the
+The Rugby World Cup is a competition that is held every four years, with the
 first event taking place in 1987.
 We have data on the number of points that were scored in World Cup matches
 for Tier One nations (the top 10 rugby-playing nations).
@@ -48,7 +49,7 @@ because
 we are able to easily see differences between the median values
 of the countries (the thick vertical lines)
 and differences between the interquartile ranges
-of the countries (the horizontal rectangles).  
+of the countries (the horizontal rectangles).
 For example, we can see that the median points scored
 by southern hemisphere teams is larger than the median for northern
 hemisphere teams and the interquartile range of points scored 
@@ -67,15 +68,22 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-@fig-boxplot is effective for allowing us to compare summaries like the 
-median between different hemispheres because a box plot maps those 
-**data summaries** to visual features (@fig-stat-vis-decode).
+Box plots are quite different from bar plots and dot plots because
+the data symbol is a much more complicated shape:
+there is a vertical line to represent the median, a
+rectangle to represent the interquartile range (lower quartile
+to upper quartile), and horizontal lines to represent the extremes of
+the data values, from the the quartiles to the minimum and maximum 
+values.  Points are also included for "outliers" if data values
+lie further than 1.5 times the interquartile range beyond the 
+quartiles.  
+
+Another important difference with a box plot is that it maps
+**data summaries** to visual features of the data symbol
+(@fig-stat-vis-decode).
 For example, the median values are mapped to the horizontal **positions** of 
 thick vertical lines and the interquartile ranges are mapped to the
-**lengths** of horizontal rectangles.  We know from 
-@sec-mapping-visual-features that
-**position** and **length** 
-are effective for mapping *back* to the data summaries.
+**lengths** of horizontal rectangles.
 
 ::: {#fig-stat-vis-decode}
 
@@ -108,13 +116,24 @@ colnames(rwcStats) <- c("minimum", "lower quartile", "median",
 kable(rwcStats, digits=1)
 ```
 
+@fig-boxplot is effective for allowing us to compare summaries like the 
+medians between different hemispheres because, although the box plot data
+symbol is relatively complicated, a box plot still just maps the data
+summaries to visual features. 
+We know from 
+@sec-mapping-visual-features that
+**position** and **length** 
+are effective for mapping *back* to the data summaries
+(@fig-stat-vis-decode).
+
 Notice how, even though @tbl-rwc-all-stats contains very few values,
 the data visualisation in @fig-boxplot makes it *much* easier to
-perceive the differences between the two rows of values.
+perceive the differences between the two rows of values in @tbl-rwc-all-stats.
 Once again, we can see the power of mapping values to basic visual features.
-The only difference from previous sections
-is that we are mapping **data summaries**
-to basic visual features.
+The only differences from previous sections
+is that we are mapping **data summaries** rather than raw data values
+and we are mapping 
+to the visual features of a more complicated data symbol.
 
 > A box plot is effective at conveying information about the
   distribution of data values because it maps **data summaries**
@@ -125,10 +144,12 @@ to basic visual features.
 
 @fig-rwc-dotplot shows stacked dot plots of the number of points scored by 
 countries from the different hemispheres in Rugby World Cup matches.
-This data visualisation uses the same data as @fig-boxplot, but 
-this data visualisation maps raw data values to visual features;  the
+This data visualisation uses the same data as @fig-boxplot, but it
+maps raw data values rather than data summaries and it uses much simpler
+data symbols (data points).
+This data visualisation maps the
 number of points scored maps to the horizontal **position** of
-a data point and the hemisphere maps to the vertical
+a data point and it maps the hemisphere to the vertical
 **position** of a data point.
 
 Because this data visualisation maps raw data values to visual features, 
@@ -208,9 +229,14 @@ distribution of a variable; and
 a histogram is a data visualisation that maps data summaries,
 rather than raw values, to visual features (@fig-stat-vis-decode).
 
-However, the data summaries for a histogram are more complicated than
+However, a histogram differs from a box plot in two main ways:
+the data symbol for a histogram is simpler than a box plot
+(just rectangles or bars);
+and the data summaries for a histogram are more complicated than
 those for a box plot.
-The raw data values in this histogram are the points scored in each game
+
+The raw data values for the histogram in @fig-hist
+are the points scored in each game
 by each country (@tbl-rwc-all).
 To get the data summaries for the histogram, the raw data values are
 binned;  we break the range of the data into equal-sized intervals

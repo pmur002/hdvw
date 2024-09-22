@@ -11,20 +11,21 @@ In @fig-bar, each data value is mapped to a **visual feature** of a data symbol
 the ethnic group is mapped to the vertical **position** of the bars
 and the total number of offenders is mapped to the **length** of the bars.
 
-We have so far only looked at mappings 
+We have so far only looked at mappings from data values to visual features
 in isolation.  For example, we know that the mapping from ethnic group to 
 position is effective because it uses a visual feature that is 
 appropriate for qualitative data and it uses a visual feature with
 a large capacity.  We also know that mapping the total number
-of offenders to length is effective because is uses a visual feature that
-is appropriate for quantitative data and a visual feature that is accurate 
-and the lengths are all aligned.
+of offenders to length is effective because it uses a visual feature that
+is appropriate for quantitative data and a visual feature that is accurate.
+Furthermore, the lengths of the bars are all aligned (they
+have a common baseline).
 
 In this section, we begin to consider what happens when mappings are
 used in combination.  For a start, we will just extend our 
 thinking to data visualisations that involve mapping **two** data variables
 to **two** visual features, where each pair of data values 
-maps to a single data symbols (@fig-two-visual-features).
+maps to a single data symbol (@fig-two-visual-features).
 
 ::: {#fig-two-visual-features layout-ncol=2}
 
@@ -78,12 +79,13 @@ ggplot(crimeGroupTotal) +
 > One reason why a bar plot is effective is because it maps data values
   to visual features that can be perceived independently.
 
-## Visual features that interact
+## Scatter plots
 
 @tbl-rwc-2023 shows data gathered on the performance of all twenty
 teams at the 2023 Rugby World Cup.  Most measures are positive, for example,
-more **points** is better, but more **tackles** may just mean that the
-team was weak and was always being attacked;  more disciplinary **cards**
+more **points** is better, but there are also a couple of
+negative measures:  more **tackles** may just mean that the
+team was weak and was always being attacked;  and more disciplinary **cards**
 (either **y**ellow or **r**ed) is definitely a bad sign.
 
 ```{r}
@@ -98,7 +100,7 @@ kable(RWCperGame, digits=1, row.names=FALSE)
 versus the number of "tries scored" 
 per game for each team.  A clean break means that a
 team has broken through the opposition defence and a "try scored" means 
-that the team has earned 5 points.  
+that the team has earned 5 points.
 A clean break implies an opportunity to score a try,
 but does not guarantee that a try will be scored.
 
@@ -175,7 +177,7 @@ from the other data points.
   between variables is because we are able to perceive visual summaries from
   a collection of positions in space.
 
-## Case study: Spine plots
+## Case study: Mosaic plots
 
 Data summaries
 
