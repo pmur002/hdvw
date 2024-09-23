@@ -40,11 +40,9 @@ in @tbl-crime-group-total.
 #| echo: false
 #| message: false
 #| label: tbl-crime-group-total
-#| tbl-colwidths: [20,20]
 #| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.  
 crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
-kable_styling(kable(crimeGroupTotalTable, 
-                    table.attr='data-quarto-disable-processing="true"'),
+kable_styling(kable(crimeGroupTotalTable),
               bootstrap_options=c("basic", "hover"), 
               full_width=FALSE)
 ```

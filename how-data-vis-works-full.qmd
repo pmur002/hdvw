@@ -907,11 +907,9 @@ in @tbl-crime-group-total.
 #| echo: false
 #| message: false
 #| label: tbl-crime-group-total
-#| tbl-colwidths: [20,20]
 #| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.  
 crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
-kable_styling(kable(crimeGroupTotalTable, 
-                    table.attr='data-quarto-disable-processing="true"'),
+kable_styling(kable(crimeGroupTotalTable),
               bootstrap_options=c("basic", "hover"), 
               full_width=FALSE)
 ```
@@ -1803,7 +1801,19 @@ popViewport()
 Stacking bars, which creates unaligned lengths, is something that
 arises when we use a bar plot to show a quantitative variable broken
 down by more than one qualitative variable.
-For example,
+For example, @tbl-crime-group-year shows data on the number of offenders
+in different ethnic groups for individual years (from 2011 to 2021).
+This is a more detailed version of the data from @table-crime-group-total.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-crime-group-year
+#| tbl-cap: A table of the number of offenders per year aged 14 to 16 for different ethnic groups from 2011 to 2021.  
+crimeGroupTable <- subset(crimeGroup, select=c("group", "count", "year"))
+kable(head(crimeGroupTable, row.names=FALSE))
+```
+
 @fig-stacked-bar-year shows the number of offenders (quantitative)
 for each ethnic group (qualitative) and
 for each year from 2011 to 2021 (qualitative, or at least discrete).
@@ -2896,7 +2906,8 @@ features or even to obscure the original visual features.
   visual feature: position in space.
 
 Furthermore, our visual system allows us to perceive **visual summaries**
-(see @sec-visual-summary) of **position in space**.[^ensemble-corr]
+(see @sec-visual-summary) of **position in space** 
+(see @fig-visual-corr).[^ensemble-corr]
 For example, in @fig-scatter we can easily see a positive 
 **correlation** between the number of clean breaks and the number of
 tries scored.  We can also easily see **clusters** of data points;
@@ -2906,6 +2917,16 @@ from the other data points.
 [^ensemble-corr]:
   Citations to literature on ensembles again, this time specifically to
   correlation in scatter plots.
+
+::: {#fig-visual-corr layout-ncol=2}
+
+![](Diagrams/data-vis-vis-stat.png)
+
+If we map data values to visual features and the visual features interact, 
+the result can be emergent visual features.  The original visual features
+allow us to map back to the raw data values and the emergent features
+allow us to map back to data summaries.
+:::
 
 > One reason why a scatter plot is effective at conveying relationships
   between variables is because we are able to perceive visual summaries from
@@ -2954,6 +2975,7 @@ offenders$action <- factor(offenders$Mop.Division,
                            levels=rev(sort(unique(offenders$Mop.Division))))
 gg <- ggplot(offenders) +
     geom_mosaic(aes(x=product(action, SEX), fill=action)) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
     coord_cartesian(expand=FALSE) +
     theme(panel.border=element_blank(),
           axis.title=element_blank(),
@@ -3022,6 +3044,17 @@ comparisons of widths between
 categories or the comparisons of heights between categories.
 This weakness is greater if there are more categories and/or 
 larger differences between categories than we see in @fig-spine.
+For example, @fig-spine-weak shows a mosaic plot of the proportions
+of offenders in different age groups and, within age groups,
+the proportions of actions against the offender at a finer level of
+detail than in @fig-spine.  If we attempt to compare the proportion of 
+offences that result in "Formal Warnings" in younger age groups versus
+older age groups, we are hampered by the fact that the pink rectangles
+do not have a common vertical baseline.  As a side note, we are also
+hampered in that case by the distance and distractors between the rectangles
+(see @sec-distance-effect); the ordering of the variables and the
+ordering of categories can have an impact on the effectiveness of a mosaic
+plot just like ordering the bars of a bar plot.
 
 ```{r}
 #| echo: false
@@ -3057,11 +3090,83 @@ grid.edit("axis.1-2-1-2::titleGrob::text", grep=TRUE, vjust=c(.5, .5, 1, 0, .5, 
 grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
 ```
 
+These weaknesses are exacerbated for mosaic plots of more than two
+variables.  For example, the mosaic plot in @fig-mosaic shows 
+proportions of youth versus adult offenders, then within age levels
+proportions of male versus female offenders, then within combinations
+of age levels and sex proportions of different actions taken against the
+offender.  Even though there are only very few levels for each variable, 
+our ability to compare heights and widths of rectangles is impaired
+by distance and distractors.
+
+```{r}
+#| echo: false
+#| label: fig-mosaic
+#| warning: false
+#| fig-cap: A mosaic plot of three variables
+offenders$ageCat <- ifelse(offenders$youth, "Youth", "Adult")
+gg <- ggplot(offenders) +
+    geom_mosaic(aes(x=product(action, SEX, ageCat), fill=action),
+                divider=mosaic("v")) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    coord_cartesian(expand=FALSE) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          aspect.ratio=1)
+pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+
 ## Summary
 
-A scatter plot is effective for 
+The mappings in a bar plot---quantitative data values to lengths
+and qualitative values to position---are effective because we
+are able to perceive some combinations of visual features,
+such as length, position, and colour **independently**.
+
+A scatter plot is effective for perceiving relationships between
+variables because the mappings of quantitative data values to both
+horizontal and vertical positions **interact** to produce **position in space**
+and our visual system is capable of producing useful **visual summaries**
+of position in space, such as correlation.
+
+The effectiveness of a mosaic plot also depends upon the **interaction**
+of visual features:  marginal and conditional
+proportions are mapped to widths and heights,
+which produce **area** to represent overall proportions.
 
 # Visual Shapes
+
+All of the data visualisations that we have considered so far
+have mapped a **single data value** from one or more variables
+to a **single data symbol** (@fig-two-visual-features).
+For example, a bar plot like @fig-bar maps one category and one count to one
+bar.  A scatter plot like @fig-scatter maps one data value from a
+quantitative variable and one data value from another quantitative variable
+to one data point.
+
+In this section, we consider data visualisations that map **multiple
+data values** from one or more variables to a **single data symbol**
+(@fig-multivariate-symbol).
+
+::: {#fig-multivariate-symbol layout-ncol=2}
+
+![](Mappings/mapping-2-2-1-2.png)
+
+A data visualisation can map **multiple** data values from two variables
+to two visual features of a **single** data symbol.
+Multiple data values from `a` and `b` are mapped to the visual
+features, `x` and `y`, of a single data symbol.
+:::
+
+## Line plots
+
+@fig-line shows a ... refer back to @sec-stacked-vs-side
+
+
 
 Mappings that produce data symbols that are shapes
 
@@ -3081,6 +3186,16 @@ The above need citations
 
 Angle is part-of-whole.
 
+At least some of the ideas in "congruence" are similar to "expressiveness"
+cite tamarara munzner and jock mackinlay 
+(and Enrico Bertini? https://filwd.substack.com/p/beyond-precision-expressiveness-in)
+although tamara's expressiveness is more like the quant/qual distinction
+(or possibly capacity?).
+
+Looks like Barbara Tversky uses congruence more in the sense we are using
+it here.
+
+Need to name check "cognitive fit theory" ?
 
 # TODO
 
@@ -3089,7 +3204,7 @@ Angle is part-of-whole.
 
 * CVD
 
-* visual illusions
+* visual illusions (put in a section on "how mappings go wrong"?)
 * gestalt
 
 * redundant encodings
@@ -3104,10 +3219,13 @@ Angle is part-of-whole.
 * emergent features
 * use of white space around points in scatter plot
 
+* visual objects
+
 * text
 * annotations (labelling of teams in dotplot of points per game might work)
 
 * attention
+  Put foveal and saccades in here?
 * pre-attentive pop out
 * labels (otp-down)
 
@@ -3118,13 +3236,24 @@ Angle is part-of-whole.
 
 * deliberately losing information (e.g., luminance scale for quant)
 
+* clutter
+  Put foveal and saccades in here?
+
 * bubble plots (area not effective => something better?)
 
 * Things that do not change are not salient (e.g., the widths of bars in
   bar plot), BUT things that DO change are salient (so only do this to
   represent changes in the data).  This should be cited to something.
   Principle of unambiguity ?
-
+  Example is mosaic plot which changes *shape* as well as area so
+  two identical areas could end up looking different => BAD!
+  Put this in "same is same" within visual congruence?
+  (and put gestalt similarity here?  and just cite gestalt in footnotes?)
+  A simple example is the width of a bar plot - we manage to ignore that
+  because it does not change?
+  AND have "different is different"?
+  And just cite the relevant literature for these points in footnotes?
+  
 * Add citation for distance effect
 
 * Use reordering of @fig-side-bar-year (so that they start tallest to smallest)

@@ -125,7 +125,10 @@ div.csl-indent {
   <li><a href="#case-study-mosaic-plots" id="toc-case-study-mosaic-plots" class="nav-link" data-scroll-target="#case-study-mosaic-plots"><span class="header-section-number">7.3</span> Case study: Mosaic plots</a></li>
   <li><a href="#summary-6" id="toc-summary-6" class="nav-link" data-scroll-target="#summary-6"><span class="header-section-number">7.4</span> Summary</a></li>
   </ul></li>
-  <li><a href="#visual-shapes" id="toc-visual-shapes" class="nav-link" data-scroll-target="#visual-shapes"><span class="header-section-number">8</span> Visual Shapes</a></li>
+  <li><a href="#visual-shapes" id="toc-visual-shapes" class="nav-link" data-scroll-target="#visual-shapes"><span class="header-section-number">8</span> Visual Shapes</a>
+  <ul class="collapse">
+  <li><a href="#line-plots" id="toc-line-plots" class="nav-link" data-scroll-target="#line-plots"><span class="header-section-number">8.1</span> Line plots</a></li>
+  </ul></li>
   <li><a href="#visual-congruence" id="toc-visual-congruence" class="nav-link" data-scroll-target="#visual-congruence"><span class="header-section-number">9</span> Visual Congruence</a></li>
   <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo"><span class="header-section-number">10</span> TODO</a>
   <ul class="collapse">
@@ -572,7 +575,7 @@ Figure&nbsp;3.1: A simple data visualisation maps each data value to a <strong>v
 <section id="bar-plots" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="bar-plots"><span class="header-section-number">3.1</span> Bar plots</h2>
 <p>In order to demonstrate mapping data values to visual features, we will work with a data visualisation of the <code>total</code> number of crimes for different ethnic <code>group</code>s. The data values are shown in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;3.1</a>.</p>
-<div class="cell" data-tbl-colwidths="[20,20]">
+<div class="cell">
 <div id="tbl-crime-group-total" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-crime-group-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -581,7 +584,7 @@ Table&nbsp;3.1: A table of the total number of offenders aged 14 to 16 from 2011
 <div aria-describedby="tbl-crime-group-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div>
-<table class="table table-hover do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true" data-tbl-colwidths="[20,20]">
+<table class="table table-hover do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">group</th>
@@ -1006,7 +1009,69 @@ Figure&nbsp;4.5: A stacked bar plot of the total number of offenders in each eth
 </section>
 <section id="sec-stacked-vs-side" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec-stacked-vs-side"><span class="header-section-number">4.3</span> Case study: Stacked versus side-by-side bar plots</h2>
-<p>Stacking bars, which creates unaligned lengths, is something that arises when we use a bar plot to show a quantitative variable broken down by more than one qualitative variable. For example, <a href="#fig-stacked-bar-year" class="quarto-xref">Figure&nbsp;4.6</a> shows the number of offenders (quantitative) for each ethnic group (qualitative) and for each year from 2011 to 2021 (qualitative, or at least discrete). In this data visualisation, the number of offenders is mapped to the lengths of the bars, the years are mapped to the horizontal <strong>position</strong> of the bars, the ethnic groups are mapped to the colours of the bars, and the bars are stacked vertically.</p>
+<p>Stacking bars, which creates unaligned lengths, is something that arises when we use a bar plot to show a quantitative variable broken down by more than one qualitative variable. For example, <a href="#tbl-crime-group-year" class="quarto-xref">Table&nbsp;4.1</a> shows data on the number of offenders in different ethnic groups for individual years (from 2011 to 2021). This is a more detailed version of the data from <span class="citation" data-cites="table-crime-group-total">(<a href="#ref-table-crime-group-total" role="doc-biblioref"><strong>table-crime-group-total?</strong></a>)</span>.</p>
+<div class="cell">
+<div id="tbl-crime-group-year" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-crime-group-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.1: A table of the number of offenders per year aged 14 to 16 for different ethnic groups from 2011 to 2021.
+</figcaption>
+<div aria-describedby="tbl-crime-group-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">group</th>
+<th style="text-align: right;">count</th>
+<th style="text-align: right;">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Māori</td>
+<td style="text-align: right;">5957</td>
+<td style="text-align: right;">2011</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Pasifika</td>
+<td style="text-align: right;">1092</td>
+<td style="text-align: right;">2011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">European/Other</td>
+<td style="text-align: right;">5775</td>
+<td style="text-align: right;">2011</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Unknown</td>
+<td style="text-align: right;">194</td>
+<td style="text-align: right;">2011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Māori</td>
+<td style="text-align: right;">5458</td>
+<td style="text-align: right;">2012</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Pasifika</td>
+<td style="text-align: right;">1040</td>
+<td style="text-align: right;">2012</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-stacked-bar-year" class="quarto-xref">Figure&nbsp;4.6</a> shows the number of offenders (quantitative) for each ethnic group (qualitative) and for each year from 2011 to 2021 (qualitative, or at least discrete). In this data visualisation, the number of offenders is mapped to the lengths of the bars, the years are mapped to the horizontal <strong>position</strong> of the bars, the ethnic groups are mapped to the colours of the bars, and the bars are stacked vertically.</p>
 <p>The problem that we face in this situation is that there are four bars to show for each year. Stacking the bars is one solution, but as we have just seen, this makes some comparisons more difficult. For example, we can easily see that the number of offenders in the unknown group increased after 2016, but it is much harder to see what has happened to the European/Other group since 2016.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2013,7 +2078,21 @@ Figure&nbsp;7.4: If we map data values to visual features and the visual feature
 <blockquote class="blockquote">
 <p>One reason why a scatter plot is effective at conveying relationships between variables is because the mappings of data values to visual features—horizontal position and vertical position—interact to produce an additional visual feature: position in space.</p>
 </blockquote>
-<p>Furthermore, our visual system allows us to perceive <strong>visual summaries</strong> (see <a href="#sec-visual-summary" class="quarto-xref">Section&nbsp;6.2</a>) of <strong>position in space</strong>.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;7.3</a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points.</p>
+<p>Furthermore, our visual system allows us to perceive <strong>visual summaries</strong> (see <a href="#sec-visual-summary" class="quarto-xref">Section&nbsp;6.2</a>) of <strong>position in space</strong> (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;7.5</a>).<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;7.3</a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points.</p>
+<div id="fig-visual-corr" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-visual-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-vis-stat.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.5: If we map data values to visual features and the visual features interact, the result can be emergent visual features. The original visual features allow us to map back to the raw data values and the emergent features allow us to map back to data summaries.
+</figcaption>
+</figure>
+</div>
 <blockquote class="blockquote">
 <p>One reason why a scatter plot is effective at conveying relationships between variables is because we are able to perceive visual summaries from a collection of positions in space.</p>
 </blockquote>
@@ -2060,7 +2139,7 @@ Table&nbsp;7.2: Counts of offences committed in New Zealand in 2021 by the sex o
 </figure>
 </div>
 </div>
-<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.5</a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;7.2</a>.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> This is an effective data visualisation for making several comparisons: the proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
+<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.6</a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;7.2</a>.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> This is an effective data visualisation for making several comparisons: the proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
 <p>For example, we can see that there are more male offenders than female offenders, court action is more common than non-court action for both males and female offenders, court action is more common for male offenders than for female offenders, and the most common offences involve male offenders and result in court action.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2070,7 +2149,7 @@ Table&nbsp;7.2: Counts of offences committed in New Zealand in 2021 by the sex o
 <img src="how-data-vis-works_files/figure-html/fig-spine-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.5: A spine plot
+Figure&nbsp;7.6: A spine plot
 </figcaption>
 </figure>
 </div>
@@ -2081,7 +2160,7 @@ Figure&nbsp;7.5: A spine plot
 <div id="tbl-offenders-summary" class="cell quarto-float anchored" data-layout-nrows="2">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-offenders-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7.3: The data summaries calculated from <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;7.2</a> that are mapped to the widths and heights of the rectangles in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.5</a>.
+Table&nbsp;7.3: The data summaries calculated from <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;7.2</a> that are mapped to the widths and heights of the rectangles in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.6</a>.
 </figcaption>
 <div aria-describedby="tbl-offenders-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -2175,7 +2254,7 @@ Table&nbsp;7.3: The data summaries calculated from <a href="#tbl-offenders" clas
 to length and height interact to produce area, which represents overall proportions.</p>
 </blockquote>
 <p>One weakness of mosaic plots is that area is not the most accurate visual feature (<a href="#sec-accuracy" class="quarto-xref">Section&nbsp;3.5</a>), so we are not able to map back to overall proportions as well as we are able to map back to the proportions that are represented by the separate widths and heights of the rectangles.</p>
-<p>Another weakness is that the lengths and heights of the rectangles are unaligned (<a href="#sec-unaligned" class="quarto-xref">Section&nbsp;4.2</a>). This compromises the accuracy of comparisons of widths between categories or the comparisons of heights between categories. This weakness is greater if there are more categories and/or larger differences between categories than we see in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.5</a>.</p>
+<p>Another weakness is that the lengths and heights of the rectangles are unaligned (<a href="#sec-unaligned" class="quarto-xref">Section&nbsp;4.2</a>). This compromises the accuracy of comparisons of widths between categories or the comparisons of heights between categories. This weakness is greater if there are more categories and/or larger differences between categories than we see in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.6</a>. For example, <a href="#fig-spine-weak" class="quarto-xref">Figure&nbsp;7.7</a> shows a mosaic plot of the proportions of offenders in different age groups and, within age groups, the proportions of actions against the offender at a finer level of detail than in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.6</a>. If we attempt to compare the proportion of offences that result in “Formal Warnings” in younger age groups versus older age groups, we are hampered by the fact that the pink rectangles do not have a common vertical baseline. As a side note, we are also hampered in that case by the distance and distractors between the rectangles (see <a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>); the ordering of the variables and the ordering of categories can have an impact on the effectiveness of a mosaic plot just like ordering the bars of a bar plot.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-spine-weak" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -2184,7 +2263,22 @@ to length and height interact to produce area, which represents overall proporti
 <img src="how-data-vis-works_files/figure-html/fig-spine-weak-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.6: A spine plot with problems
+Figure&nbsp;7.7: A spine plot with problems
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>These weaknesses are exacerbated for mosaic plots of more than two variables. For example, the mosaic plot in <a href="#fig-mosaic" class="quarto-xref">Figure&nbsp;7.8</a> shows proportions of youth versus adult offenders, then within age levels proportions of male versus female offenders, then within combinations of age levels and sex proportions of different actions taken against the offender. Even though there are only very few levels for each variable, our ability to compare heights and widths of rectangles is impaired by distance and distractors.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-mosaic" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-mosaic-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.8: A mosaic plot of three variables
 </figcaption>
 </figure>
 </div>
@@ -2193,12 +2287,34 @@ Figure&nbsp;7.6: A spine plot with problems
 </section>
 <section id="summary-6" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="summary-6"><span class="header-section-number">7.4</span> Summary</h2>
-<p>A scatter plot is effective for</p>
+<p>The mappings in a bar plot—quantitative data values to lengths and qualitative values to position—are effective because we are able to perceive some combinations of visual features, such as length, position, and colour <strong>independently</strong>.</p>
+<p>A scatter plot is effective for perceiving relationships between variables because the mappings of quantitative data values to both horizontal and vertical positions <strong>interact</strong> to produce <strong>position in space</strong> and our visual system is capable of producing useful <strong>visual summaries</strong> of position in space, such as correlation.</p>
+<p>The effectiveness of a mosaic plot also depends upon the <strong>interaction</strong> of visual features: marginal and conditional proportions are mapped to widths and heights, which produce <strong>area</strong> to represent overall proportions.</p>
 </section>
 </section>
 <section id="visual-shapes" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Visual Shapes</h1>
+<p>All of the data visualisations that we have considered so far have mapped a <strong>single data value</strong> from one or more variables to a <strong>single data symbol</strong> (<a href="#fig-two-visual-features" class="quarto-xref">Figure&nbsp;7.1</a>). For example, a bar plot like <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a> maps one category and one count to one bar. A scatter plot like <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;7.3</a> maps one data value from a quantitative variable and one data value from another quantitative variable to one data point.</p>
+<p>In this section, we consider data visualisations that map <strong>multiple data values</strong> from one or more variables to a <strong>single data symbol</strong> (<a href="#fig-multivariate-symbol" class="quarto-xref">Figure&nbsp;8.1</a>).</p>
+<div id="fig-multivariate-symbol" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multivariate-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Mappings/mapping-2-2-1-2.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multivariate-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: A data visualisation can map <strong>multiple</strong> data values from two variables to two visual features of a <strong>single</strong> data symbol. Multiple data values from <code>a</code> and <code>b</code> are mapped to the visual features, <code>x</code> and <code>y</code>, of a single data symbol.
+</figcaption>
+</figure>
+</div>
+<section id="line-plots" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="line-plots"><span class="header-section-number">8.1</span> Line plots</h2>
+<p><strong>?@fig-line</strong> shows a … refer back to <a href="#sec-stacked-vs-side" class="quarto-xref">Section&nbsp;4.3</a></p>
 <p>Mappings that produce data symbols that are shapes</p>
+</section>
 </section>
 <section id="visual-congruence" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Visual Congruence</h1>
@@ -2208,13 +2324,16 @@ Figure&nbsp;7.6: A spine plot with problems
 <p>Dark is more for colour.</p>
 <p>The above need citations</p>
 <p>Angle is part-of-whole.</p>
+<p>At least some of the ideas in “congruence” are similar to “expressiveness” cite tamarara munzner and jock mackinlay (and Enrico Bertini? https://filwd.substack.com/p/beyond-precision-expressiveness-in) although tamara’s expressiveness is more like the quant/qual distinction (or possibly capacity?).</p>
+<p>Looks like Barbara Tversky uses congruence more in the sense we are using it here.</p>
+<p>Need to name check “cognitive fit theory” ?</p>
 </section>
 <section id="todo" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> TODO</h1>
 <ul>
 <li><p>mention differences in <em>data symbols</em> from bar plot to dot plot to histogram etc …</p></li>
 <li><p>CVD</p></li>
-<li><p>visual illusions</p></li>
+<li><p>visual illusions (put in a section on “how mappings go wrong”?)</p></li>
 <li><p>gestalt</p></li>
 <li><p>redundant encodings</p></li>
 <li><p>Data statistics</p></li>
@@ -2224,15 +2343,17 @@ Figure&nbsp;7.6: A spine plot with problems
 <li><p>ensembles (use dot plot of district to demonstrate? Revisit heatmaps?)</p></li>
 <li><p>emergent features</p></li>
 <li><p>use of white space around points in scatter plot</p></li>
+<li><p>visual objects</p></li>
 <li><p>text</p></li>
 <li><p>annotations (labelling of teams in dotplot of points per game might work)</p></li>
-<li><p>attention</p></li>
+<li><p>attention Put foveal and saccades in here?</p></li>
 <li><p>pre-attentive pop out</p></li>
 <li><p>labels (otp-down)</p></li>
 <li><p>jittering which is dodgy because it involves a visual change that is NOT related to a change in the data. The hope is that the randomness of the visual change reduces the signal.</p></li>
 <li><p>deliberately losing information (e.g., luminance scale for quant)</p></li>
+<li><p>clutter Put foveal and saccades in here?</p></li>
 <li><p>bubble plots (area not effective =&gt; something better?)</p></li>
-<li><p>Things that do not change are not salient (e.g., the widths of bars in bar plot), BUT things that DO change are salient (so only do this to represent changes in the data). This should be cited to something. Principle of unambiguity ?</p></li>
+<li><p>Things that do not change are not salient (e.g., the widths of bars in bar plot), BUT things that DO change are salient (so only do this to represent changes in the data). This should be cited to something. Principle of unambiguity ? Example is mosaic plot which changes <em>shape</em> as well as area so two identical areas could end up looking different =&gt; BAD! Put this in “same is same” within visual congruence? (and put gestalt similarity here? and just cite gestalt in footnotes?) A simple example is the width of a bar plot - we manage to ignore that because it does not change? AND have “different is different”? And just cite the relevant literature for these points in footnotes?</p></li>
 <li><p>Add citation for distance effect</p></li>
 <li><p>Use reordering of <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;4.7</a> (so that they start tallest to smallest) THEN should see change in that pattern later on more easily? Use this as an example of “visual shape” in a bar plot. Revisit heatmaps - regions/shapes of colours?</p></li>
 <li><p>Need citation for contrast effect</p></li>
@@ -2296,7 +2417,7 @@ Stevens, Stanley Smith. 1957. <span>“On the Psychophysical Law.”</span> <em>
 Talbot, Justin, Heidi Lam, Jock MacKinlay, and Jeffrey Heer. 2014. <span>“Four Experiments on the Perception of Bar Charts.”</span> In <em>IEEE Transactions on Visualization and Computer Graphics</em>, 20:2152–60. 12. IEEE.
 </div>
 <div id="ref-tufte1983visual" class="csl-entry" role="listitem">
-Tufte, Edward R. 1983. <em>The Visual Display of Quantitative Information</em>. 1st ed. Cheshire, Connecticut: Graphics Press.
+Tufte, Edward R. 1983. <em>The Visual Display of Quantitative Information</em>. Cheshire, Connecticut: Graphics Press.
 </div>
 <div id="ref-ware2021information" class="csl-entry" role="listitem">
 Ware, Colin. 2021. <em>Information Visualization: Perception for Design</em>. 4th ed. Morgan Kaufmann.

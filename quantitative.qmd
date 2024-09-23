@@ -158,7 +158,19 @@ popViewport()
 Stacking bars, which creates unaligned lengths, is something that
 arises when we use a bar plot to show a quantitative variable broken
 down by more than one qualitative variable.
-For example,
+For example, @tbl-crime-group-year shows data on the number of offenders
+in different ethnic groups for individual years (from 2011 to 2021).
+This is a more detailed version of the data from @table-crime-group-total.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-crime-group-year
+#| tbl-cap: A table of the number of offenders per year aged 14 to 16 for different ethnic groups from 2011 to 2021.  
+crimeGroupTable <- subset(crimeGroup, select=c("group", "count", "year"))
+kable(head(crimeGroupTable, row.names=FALSE))
+```
+
 @fig-stacked-bar-year shows the number of offenders (quantitative)
 for each ethnic group (qualitative) and
 for each year from 2011 to 2021 (qualitative, or at least discrete).

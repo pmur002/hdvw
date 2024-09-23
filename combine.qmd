@@ -164,7 +164,8 @@ features or even to obscure the original visual features.
   visual feature: position in space.
 
 Furthermore, our visual system allows us to perceive **visual summaries**
-(see @sec-visual-summary) of **position in space**.[^ensemble-corr]
+(see @sec-visual-summary) of **position in space** 
+(see @fig-visual-corr).[^ensemble-corr]
 For example, in @fig-scatter we can easily see a positive 
 **correlation** between the number of clean breaks and the number of
 tries scored.  We can also easily see **clusters** of data points;
@@ -174,6 +175,16 @@ from the other data points.
 [^ensemble-corr]:
   Citations to literature on ensembles again, this time specifically to
   correlation in scatter plots.
+
+::: {#fig-visual-corr layout-ncol=2}
+
+![](Diagrams/data-vis-vis-stat.png)
+
+If we map data values to visual features and the visual features interact, 
+the result can be emergent visual features.  The original visual features
+allow us to map back to the raw data values and the emergent features
+allow us to map back to data summaries.
+:::
 
 > One reason why a scatter plot is effective at conveying relationships
   between variables is because we are able to perceive visual summaries from
@@ -222,6 +233,7 @@ offenders$action <- factor(offenders$Mop.Division,
                            levels=rev(sort(unique(offenders$Mop.Division))))
 gg <- ggplot(offenders) +
     geom_mosaic(aes(x=product(action, SEX), fill=action)) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
     coord_cartesian(expand=FALSE) +
     theme(panel.border=element_blank(),
           axis.title=element_blank(),
@@ -290,6 +302,17 @@ comparisons of widths between
 categories or the comparisons of heights between categories.
 This weakness is greater if there are more categories and/or 
 larger differences between categories than we see in @fig-spine.
+For example, @fig-spine-weak shows a mosaic plot of the proportions
+of offenders in different age groups and, within age groups,
+the proportions of actions against the offender at a finer level of
+detail than in @fig-spine.  If we attempt to compare the proportion of 
+offences that result in "Formal Warnings" in younger age groups versus
+older age groups, we are hampered by the fact that the pink rectangles
+do not have a common vertical baseline.  As a side note, we are also
+hampered in that case by the distance and distractors between the rectangles
+(see @sec-distance-effect); the ordering of the variables and the
+ordering of categories can have an impact on the effectiveness of a mosaic
+plot just like ordering the bars of a bar plot.
 
 ```{r}
 #| echo: false
@@ -325,6 +348,50 @@ grid.edit("axis.1-2-1-2::titleGrob::text", grep=TRUE, vjust=c(.5, .5, 1, 0, .5, 
 grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
 ```
 
+These weaknesses are exacerbated for mosaic plots of more than two
+variables.  For example, the mosaic plot in @fig-mosaic shows 
+proportions of youth versus adult offenders, then within age levels
+proportions of male versus female offenders, then within combinations
+of age levels and sex proportions of different actions taken against the
+offender.  Even though there are only very few levels for each variable, 
+our ability to compare heights and widths of rectangles is impaired
+by distance and distractors.
+
+```{r}
+#| echo: false
+#| label: fig-mosaic
+#| warning: false
+#| fig-cap: A mosaic plot of three variables
+offenders$ageCat <- ifelse(offenders$youth, "Youth", "Adult")
+gg <- ggplot(offenders) +
+    geom_mosaic(aes(x=product(action, SEX, ageCat), fill=action),
+                divider=mosaic("v")) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    coord_cartesian(expand=FALSE) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          aspect.ratio=1)
+pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+
 ## Summary
 
-A scatter plot is effective for 
+The mappings in a bar plot---quantitative data values to lengths
+and qualitative values to position---are effective because we
+are able to perceive some combinations of visual features,
+such as length, position, and colour **independently**.
+
+A scatter plot is effective for perceiving relationships between
+variables because the mappings of quantitative data values to both
+horizontal and vertical positions **interact** to produce **position in space**
+and our visual system is capable of producing useful **visual summaries**
+of position in space, such as correlation.
+
+The effectiveness of a mosaic plot also depends upon the **interaction**
+of visual features:  marginal and conditional
+proportions are mapped to widths and heights,
+which produce **area** to represent overall proportions.

@@ -466,11 +466,9 @@ dev.off()
 #| echo: false
 #| message: false
 #| label: tbl-crime-group-total
-#| tbl-colwidths: [20,20]
 #| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.
 crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
-kable_styling(kable(crimeGroupTotalTable, 
-                    table.attr='data-quarto-disable-processing="true"'),
+kable_styling(kable(crimeGroupTotalTable),
               bootstrap_options=c("basic", "hover"), 
               full_width=FALSE)
 
@@ -982,6 +980,15 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| message: false
+#| label: tbl-crime-group-year
+#| tbl-cap: A table of the number of offenders per year aged 14 to 16 for different ethnic groups from 2011 to 2021.
+crimeGroupTable <- subset(crimeGroup, select=c("group", "count", "year"))
+kable(head(crimeGroupTable, row.names=FALSE))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-stacked-bar-year
 #| fig-cap: A stacked bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021.
 ggplot(crimeGroup) +
@@ -1394,6 +1401,7 @@ offenders$action <- factor(offenders$Mop.Division,
                            levels=rev(sort(unique(offenders$Mop.Division))))
 gg <- ggplot(offenders) +
     geom_mosaic(aes(x=product(action, SEX), fill=action)) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
     coord_cartesian(expand=FALSE) +
     theme(panel.border=element_blank(),
           axis.title=element_blank(),
@@ -1452,5 +1460,25 @@ popViewport()
 grid.force()
 grid.edit("axis.1-2-1-2::titleGrob::text", grep=TRUE, vjust=c(.5, .5, 1, 0, .5, .5))
 grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-mosaic
+#| warning: false
+#| fig-cap: A mosaic plot of three variables
+offenders$ageCat <- ifelse(offenders$youth, "Youth", "Adult")
+gg <- ggplot(offenders) +
+    geom_mosaic(aes(x=product(action, SEX, ageCat), fill=action),
+                divider=mosaic("v")) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    coord_cartesian(expand=FALSE) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          aspect.ratio=1)
+pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
 
 dev.off()
