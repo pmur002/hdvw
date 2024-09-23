@@ -2020,9 +2020,48 @@ Figure&nbsp;7.4: If we map data values to visual features and the visual feature
 </section>
 <section id="case-study-mosaic-plots" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="case-study-mosaic-plots"><span class="header-section-number">7.3</span> Case study: Mosaic plots</h2>
-<p>Data summaries</p>
-<p>width (length) and height (length) interact to produce area (and shape)</p>
-<p>area/shape dominate width and length ?</p>
+<p><a href="#tbl-offenders" class="quarto-xref">Table&nbsp;7.2</a> shows a table of counts for offences committed in New Zealand in 2021. For each offence, we know the sex of the offender and what action was taken against the offender.</p>
+<div class="cell">
+<div id="tbl-offenders" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-offenders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.2: Counts of offences committed in New Zealand in 2021 by the sex of the offender and the action taken against the offender.
+</figcaption>
+<div aria-describedby="tbl-offenders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Female</th>
+<th style="text-align: right;">Male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Court Action</td>
+<td style="text-align: right;">13950</td>
+<td style="text-align: right;">39526</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-Court Action</td>
+<td style="text-align: right;">8717</td>
+<td style="text-align: right;">19663</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Not Proceeded With</td>
+<td style="text-align: right;">381</td>
+<td style="text-align: right;">933</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.5</a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;7.2</a>.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> This is an effective data visualisation for making several comparisons: the proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
+<p>For example, we can see that there are more male offenders than female offenders, court action is more common than non-court action for both males and female offenders, court action is more common for male offenders than for female offenders, and the most common offences involve male offenders and result in court action.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-spine" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -2032,6 +2071,120 @@ Figure&nbsp;7.4: If we map data values to visual features and the visual feature
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7.5: A spine plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A mosaic plot is another example of a data visualisation that maps <strong>data summaries</strong> to data symbols rather than raw data. The data symbols are rectangles, the widths of the rectangles are mapped from the proportion of male versus female offenders and the heights of the rectangles are mapped from the proportions of actions taken within males and females (see <a href="#tbl-offenders-summary" class="quarto-xref">Table&nbsp;7.3</a>).</p>
+<div class="cell" data-layout-nrows="2">
+<div id="tbl-offenders-summary" class="cell quarto-float anchored" data-layout-nrows="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-offenders-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.3: The data summaries calculated from <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;7.2</a> that are mapped to the widths and heights of the rectangles in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.5</a>.
+</figcaption>
+<div aria-describedby="tbl-offenders-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="tbl-offenders-summary-1" class="do-not-create-environment quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-offenders-summary-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Widths
+</figcaption>
+<div aria-describedby="tbl-offenders-summary-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-offenders-summary-1" class="do-not-create-environment table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Female</th>
+<th style="text-align: right;">Male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Court Action</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-Court Action</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Not Proceeded With</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="tbl-offenders-summary-2" class="do-not-create-environment quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-offenders-summary-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Heights
+</figcaption>
+<div aria-describedby="tbl-offenders-summary-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-offenders-summary-2" class="do-not-create-environment table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Female</th>
+<th style="text-align: right;">Male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Court Action</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-Court Action</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Not Proceeded With</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>One reason why a mosaic plot is effective is because it maps proportions and conditional proportions, rather than raw counts, to the visual features of rectangles.</p>
+</blockquote>
+<p>A mosaic plot is also an example of a data visualisation that maps to visual features that <strong>interact</strong>. The explicit mappings involve proportions to the widths and heights of the rectangles and we know from <a href="#sec-quant-features" class="quarto-xref">Section&nbsp;3.3</a> that this will allow accurate mapping back from lengths to proportions.</p>
+<blockquote class="blockquote">
+<p>One reason why a mosaic plot is effective is because it maps proportions to lengths.</p>
+</blockquote>
+<p>However, the interaction of these mappings produces an <strong>emergent feature</strong>, which is the <strong>area</strong> of the rectangles (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;7.4</a>). Importantly, these areas correspond to additional data summaries, in this case, the overall proportion of offences in each combination of sex and action taken.</p>
+<blockquote class="blockquote">
+<p>One reason why a mosaic plot is effective is because the mappings<br>
+to length and height interact to produce area, which represents overall proportions.</p>
+</blockquote>
+<p>One weakness of mosaic plots is that area is not the most accurate visual feature (<a href="#sec-accuracy" class="quarto-xref">Section&nbsp;3.5</a>), so we are not able to map back to overall proportions as well as we are able to map back to the proportions that are represented by the separate widths and heights of the rectangles.</p>
+<p>Another weakness is that the lengths and heights of the rectangles are unaligned (<a href="#sec-unaligned" class="quarto-xref">Section&nbsp;4.2</a>). This compromises the accuracy of comparisons of widths between categories or the comparisons of heights between categories. This weakness is greater if there are more categories and/or larger differences between categories than we see in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;7.5</a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-spine-weak" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spine-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-spine-weak-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.6: A spine plot with problems
 </figcaption>
 </figure>
 </div>
@@ -2101,6 +2254,7 @@ Figure&nbsp;7.5: A spine plot
 <li><p>citation for “stacked dot plot” in statistics.qmd and/or use a different name</p></li>
 <li><p>case study of plot with BOTH points and lines; you get good mapping back to raw data with points and you get good mapping back to data statistics from the line (shape).</p></li>
 <li><p>attributions for data sources</p></li>
+<li><p>add example (section?) to combine.qmd where either separable is NOT appropriate or integral is NOT appropriate. In the mosaic plot case, the interaction is beneficial.</p></li>
 <li><p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models? also talk about failing assumptions of these models, like unimodal for boxplot)</p></li>
 <li><p>An index that links to all of the places that different sorts of plots are discussed ?</p></li>
 </ul>
@@ -2176,8 +2330,9 @@ Zhang, Jiajie. 1996. <span>“A Representational Analysis of Relational Informat
 <li id="fn15"><p>Refer to the literature that talks about separable and integral AND configural visual features.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn16"><p>Technically, there is an interaction because lengths that are further apart from each other vertically are harder to compare (see <a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>). However, compared to visual features that strongly interact, length and position are reasonably independent.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17"><p>Need citations to literature that mention integral visual features.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn18"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>. Acknowledge that my use is a little loose because the use in the literature is really about separate data symbols combining to create emergent features (like clusters?).<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn19"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>This two-dimensional mosaic plot could also be called a spine plot. Mosaic plot is the more general term that includes plots of more than two qualitative variables.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

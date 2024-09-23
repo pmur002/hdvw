@@ -11,6 +11,7 @@ library(scales)
 library(colorspace)
 library(ggsci)
 library(grid)
+library(ggmosaic)
 
 
 ## -----------------------------------------------------------------------------
@@ -1356,18 +1357,100 @@ ggplot(crimeGroupTotal) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| message: false
+#| label: tbl-rwc-2023
+#| tbl-cap: Performance measures for all twenty teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+kable(RWCperGame, digits=1, row.names=FALSE)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-scatter
-#| fig-cap: A scatter plot
-rwcMatches <- do.call(rbind, lapply(split(rwcAll, rwcAll$match), 
-                                    function(x) {
-                                        if (x$scored[1] > x$conceded[1]) {
-                                            y <- x[1, ]
-                                        } else {
-                                           y <- rev(x[2, ])
-                                        }
-                                        names(y) <- c("win", "lose")
-                                    }))
-ggplot(rwcMatches) +
-    geom_point(aes(win, lose))
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages).
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: tbl-offenders
+#| tbl-cap: Counts of offences committed in New Zealand in 2021 by the sex of the offender and the action taken against the offender.
+offenderTable <- with(offenders, table(Mop.Division, SEX))
+kable(offenderTable)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-spine
+#| warning: false
+#| fig-cap: A spine plot
+offenders$action <- factor(offenders$Mop.Division, 
+                           levels=rev(sort(unique(offenders$Mop.Division))))
+gg <- ggplot(offenders) +
+    geom_mosaic(aes(x=product(action, SEX), fill=action)) +
+    coord_cartesian(expand=FALSE) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          aspect.ratio=1)
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: tbl-offenders-summary
+#| tbl-cap: The data summaries calculated from @tbl-offenders that are mapped to the widths and heights of the rectangles in @fig-spine.
+#| tbl-subcap:
+#|   - Widths
+#|   - Heights
+#| layout-nrows: 2
+widths <- proportions(t(marginSums(offenderTable, 2)), 1)
+heights <- proportions(offenderTable, 2)
+props <- cbind(matrix(rep(widths, 3), nrow=3, byrow=TRUE), heights)
+colnames(props) <- rep(colnames(props)[3:4], 2)
+kable(props[,1:2], digits=2)
+kable(props[,3:4], digits=2)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-spine-weak
+#| warning: false
+#| fig-cap: A spine plot with problems
+#| fig-keep: last
+actions <- c("Prosecution", "Formal Warning", "Informal Warning",
+             "Community Justice Panel", "Alternative Action Plan",
+             "No Further Action")
+offendersMain <- subset(offenders, 
+                        !(Age.Group %in% 
+                          c("0-4", "5-9", "80yearsorover", "NotSpecified")) &
+                        (Mop.Group %in% actions),
+                        drop=TRUE)
+offendersMain$Age.Group <- gsub("([0-9]+).+", "\\1", offendersMain$Age.Group)
+offendersMain$Age.Group <- factor(offendersMain$Age.Group)
+offendersMain$Mop.Group <- factor(offendersMain$Mop.Group, levels=rev(actions))
+gg <- ggplot(offendersMain) +
+    geom_mosaic(aes(x=product(Mop.Group, Age.Group), fill=Mop.Group)) +
+    coord_cartesian(expand=FALSE) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          axis.text.x=element_text(size=6),
+          aspect.ratio=.8)
+pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+grid.edit("axis.1-2-1-2::titleGrob::text", grep=TRUE, vjust=c(.5, .5, 1, 0, .5, .5))
+grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
 
 dev.off()

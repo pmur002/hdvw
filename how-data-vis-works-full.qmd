@@ -1,4 +1,3 @@
-pdf(NULL)
 ---
 title: How Data Visualisation Works
 author: Paul Murrell
@@ -26,6 +25,7 @@ library(scales)
 library(colorspace)
 library(ggsci)
 library(grid)
+library(ggmosaic)
 ```
 
 ```{r}
@@ -163,6 +163,21 @@ Why are some data visualisations more effective than others?
 The purpose of this document is to provide explanations for
 why, when, and how data visualisation works.  
 
+## How will it help?
+
+You may have heard that statisticians hate pie charts.[^pie-chart-hate]
+But do you know why?  Do pie charts have any redeeming features?
+
+Conversely, bar plots are extremely popular, but why are they so good?
+Knowing more about why different plots work for different situations
+will help us to make better decisions about when to use what sort of
+data visualisation.
+
+[^pie-chart-hate]:
+  @tufte1983visual [p178]:
+  "the only worse design than a pie chart is several of them ... pie charts
+  should never be used." 
+
 Understanding how data visualisation works will enable us to:
 
 * Decide which data visualisations we should use.
@@ -194,7 +209,7 @@ This will include findings from a broad range of research, encompassing
 Statistics, Computer Science, and Psychology.
 However, this document does not cover all fields of research
 that impact on data visualisation.
-We will not, for example, go into the ethical use of data visualisation,
+We will not, for example, address the ethical use of data visualisation,
 beyond a basic assumption that we want to faithfully represent
 the properties of the data.
 
@@ -203,7 +218,13 @@ link to Alberto Cairo at least.
 For resources on this important topic, see ...
 
 **TODO**
-also mention "story-telling" or "narratives" ?
+also mention "story-telling" or "narratives" ?  or "task taxonomies" ?
+
+It is also important to acknowledge that vision science cannot yet tell us
+everything about how data visualisation works.
+However, what is known will help us to have some understanding of 
+why some data visualisations are so effective and others are less 
+effective.
 
 ## Terminology
 
@@ -508,7 +529,7 @@ For example, in the line plot of crime rates for
 different ages in New Zealand in @fig-crime,
 the data values are `year`, crime `rate`, and `age` 
 (see @tbl-crime) and
-the visual representation is a set of coloured lines.
+the data symbols are a set of coloured lines.
 
 [^mappings]: 
   The idea of characterising a data visualisation as a set
@@ -547,7 +568,8 @@ animation.
 :::
 
 The heatmap of the same data (see @fig-crime-heatmap) provides a different
-visual representation because it involves a different
+visual representation because it involves different data symbols,
+rectangles this time, and a different 
 set of mappings (see @fig-mappings-2):
 
 * Each `year` value is mapped to a horizontal **position** along the
@@ -873,7 +895,7 @@ of a data symbol.  Each data value (`a`) is mapped to a visual
 feature (`x`) of a single data symbol.
 :::
 
-## Bar charts
+## Bar plots
 
 In order to demonstrate mapping data values to visual features,
 we will work with a data visualisation of
@@ -1312,7 +1334,7 @@ difference between the length of two bars?[^accuracy-research]
 [^accuracy-research]:
   The pioneering work on the accuracy of different visual features
   for statistical graphics was carried out by @cleveland1984graphical.
-  Their results have been supported several times in subsequent 
+  Their results have been replicated several times in subsequent 
   studies, including @heer2010crowdsourcing.
   The rankings were extended to a larger set of visual features
   by @mackinlay1986automatic, although somewhat only by inference from other
@@ -1369,11 +1391,19 @@ popViewport(2)
 This issue has been studied experimentally and 
 @fig-accuracy shows the established ordering of the accuracy
 of basic visual features,
-with more accurate visual features at the top.
+with more accurate visual features at the top.[^candm]
 A data visualisation that maps 
 data values to visual features near the top of this
 ranking will be more effective than one that maps data values
 to visual features near the bottom.
+
+[^candm]:
+  In @cleveland1984graphical, 
+  comparisons of bars were treated as **position** judgements
+  rather than **length** judgements, unless the bars were unaligned
+  (see @sec-unaligned), so this table is a slightly fuzzy representation
+  of their results.  However, the general ordering of visual features
+  is basically consistent with @cleveland1984graphical.
 
 ```{r}
 #| echo: false
@@ -1713,7 +1743,7 @@ popViewport(2)
   compared closer 
   together, which improves the accuracy of the comparison.
 
-## Unaligned length
+## Unaligned length {#sec-unaligned}
 
 @fig-unaligned-length shows that it is harder to accurately compare
 the **lengths** of two bars if they are **unaligned** and do not share a 
@@ -2270,7 +2300,8 @@ data values, but they have a very limited capacity.
 # Data summaries
 
 In @sec-mapping-visual-features we described a data visualisation as
-a mapping from data values to visual features (@fig-visual-feature).
+a mapping from data values to the visual features of a data symbol
+(@fig-visual-feature).
 For example, a bar plot,
 like @fig-bar, maps the total number of youth offenders to the **lengths**
 of bars.
@@ -2289,7 +2320,7 @@ because they rely on **data summaries** instead of raw data values.
 
 ## Box Plots
 
-The Rugby World Cup is a competition held every four years, with the
+The Rugby World Cup is a competition that is held every four years, with the
 first event taking place in 1987.
 We have data on the number of points that were scored in World Cup matches
 for Tier One nations (the top 10 rugby-playing nations).
@@ -2316,7 +2347,7 @@ because
 we are able to easily see differences between the median values
 of the countries (the thick vertical lines)
 and differences between the interquartile ranges
-of the countries (the horizontal rectangles).  
+of the countries (the horizontal rectangles).
 For example, we can see that the median points scored
 by southern hemisphere teams is larger than the median for northern
 hemisphere teams and the interquartile range of points scored 
@@ -2335,15 +2366,22 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-@fig-boxplot is effective for allowing us to compare summaries like the 
-median between different hemispheres because a box plot maps those 
-**data summaries** to visual features (@fig-stat-vis-decode).
+Box plots are quite different from bar plots and dot plots because
+the data symbol is a much more complicated shape:
+there is a vertical line to represent the median, a
+rectangle to represent the interquartile range (lower quartile
+to upper quartile), and horizontal lines to represent the extremes of
+the data values, from the the quartiles to the minimum and maximum 
+values.  Points are also included for "outliers" if data values
+lie further than 1.5 times the interquartile range beyond the 
+quartiles.  
+
+Another important difference with a box plot is that it maps
+**data summaries** to visual features of the data symbol
+(@fig-stat-vis-decode).
 For example, the median values are mapped to the horizontal **positions** of 
 thick vertical lines and the interquartile ranges are mapped to the
-**lengths** of horizontal rectangles.  We know from 
-@sec-mapping-visual-features that
-**position** and **length** 
-are effective for mapping *back* to the data summaries.
+**lengths** of horizontal rectangles.
 
 ::: {#fig-stat-vis-decode}
 
@@ -2376,27 +2414,40 @@ colnames(rwcStats) <- c("minimum", "lower quartile", "median",
 kable(rwcStats, digits=1)
 ```
 
+@fig-boxplot is effective for allowing us to compare summaries like the 
+medians between different hemispheres because, although the box plot data
+symbol is relatively complicated, a box plot still just maps the data
+summaries to visual features. 
+We know from 
+@sec-mapping-visual-features that
+**position** and **length** 
+are effective for mapping *back* to the data summaries
+(@fig-stat-vis-decode).
+
 Notice how, even though @tbl-rwc-all-stats contains very few values,
 the data visualisation in @fig-boxplot makes it *much* easier to
-perceive the differences between the two rows of values.
+perceive the differences between the two rows of values in @tbl-rwc-all-stats.
 Once again, we can see the power of mapping values to basic visual features.
-The only difference from previous sections
-is that we are mapping **data summaries**
-to basic visual features.
+The only differences from previous sections
+is that we are mapping **data summaries** rather than raw data values
+and we are mapping 
+to the visual features of a more complicated data symbol.
 
 > A box plot is effective at conveying information about the
   distribution of data values because it maps **data summaries**
   about the distribution, like the median
   and interquartile range, to basic visual features.
 
-## Visual summaries {#sec-data-vis-decode}
+## Visual summaries {#sec-visual-summary}
 
 @fig-rwc-dotplot shows stacked dot plots of the number of points scored by 
 countries from the different hemispheres in Rugby World Cup matches.
-This data visualisation uses the same data as @fig-boxplot, but 
-this data visualisation maps raw data values to visual features;  the
+This data visualisation uses the same data as @fig-boxplot, but it
+maps raw data values rather than data summaries and it uses much simpler
+data symbols (data points).
+This data visualisation maps the
 number of points scored maps to the horizontal **position** of
-a data point and the hemisphere maps to the vertical
+a data point and it maps the hemisphere to the vertical
 **position** of a data point.
 
 Because this data visualisation maps raw data values to visual features, 
@@ -2448,7 +2499,9 @@ enable us to map *back* to **data summaries**
 (@fig-data-vis-stat-decode).[^ensembles]
 
 [^ensembles]:
-  Need some references to articles about ensembles in data vis lit.
+  Need some references to articles about ensembles in data vis lit
+  (ideally NOT the scatter plot one cos want to use that later for 
+   scatter plots).
 
 ::: {#fig-data-vis-stat-decode}
 
@@ -2474,9 +2527,14 @@ distribution of a variable; and
 a histogram is a data visualisation that maps data summaries,
 rather than raw values, to visual features (@fig-stat-vis-decode).
 
-However, the data summaries for a histogram are more complicated than
+However, a histogram differs from a box plot in two main ways:
+the data symbol for a histogram is simpler than a box plot
+(just rectangles or bars);
+and the data summaries for a histogram are more complicated than
 those for a box plot.
-The raw data values in this histogram are the points scored in each game
+
+The raw data values for the histogram in @fig-hist
+are the points scored in each game
 by each country (@tbl-rwc-all).
 To get the data summaries for the histogram, the raw data values are
 binned;  we break the range of the data into equal-sized intervals
@@ -2544,7 +2602,7 @@ The benefit of a data visualisation that maps
 **data summaries** to visual features is that it allows us to perceive
 data summaries very easily.  For example, although we can perceive
 a general idea of central tendency from the dots in @fig-rwc-dotplot
-(see @sec-data-vis-decode),
+(see @sec-visual-summary),
 it is much easier and more accurate to perceive
 median values from the thick vertical lines in @fig-boxplot.
 
@@ -2685,20 +2743,21 @@ In @fig-bar, each data value is mapped to a **visual feature** of a data symbol
 the ethnic group is mapped to the vertical **position** of the bars
 and the total number of offenders is mapped to the **length** of the bars.
 
-We have so far only looked at mappings 
+We have so far only looked at mappings from data values to visual features
 in isolation.  For example, we know that the mapping from ethnic group to 
 position is effective because it uses a visual feature that is 
 appropriate for qualitative data and it uses a visual feature with
 a large capacity.  We also know that mapping the total number
-of offenders to length is effective because is uses a visual feature that
-is appropriate for quantitative data and a visual feature that is accurate 
-and the lengths are all aligned.
+of offenders to length is effective because it uses a visual feature that
+is appropriate for quantitative data and a visual feature that is accurate.
+Furthermore, the lengths of the bars are all aligned (they
+have a common baseline).
 
 In this section, we begin to consider what happens when mappings are
 used in combination.  For a start, we will just extend our 
 thinking to data visualisations that involve mapping **two** data variables
 to **two** visual features, where each pair of data values 
-maps to a single data symbols (@fig-two-visual-features).
+maps to a single data symbol (@fig-two-visual-features).
 
 ::: {#fig-two-visual-features layout-ncol=2}
 
@@ -2752,24 +2811,255 @@ ggplot(crimeGroupTotal) +
 > One reason why a bar plot is effective is because it maps data values
   to visual features that can be perceived independently.
 
-## Visual features that interact
+## Scatter plots
+
+@tbl-rwc-2023 shows data gathered on the performance of all twenty
+teams at the 2023 Rugby World Cup.  Most measures are positive, for example,
+more **points** is better, but there are also a couple of
+negative measures:  more **tackles** may just mean that the
+team was weak and was always being attacked;  and more disciplinary **cards**
+(either **y**ellow or **r**ed) is definitely a bad sign.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-2023
+#| tbl-cap: Performance measures for all twenty teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+kable(RWCperGame, digits=1, row.names=FALSE)
+```
+
+@fig-scatter shows a scatter plot of the number of "clean breaks" per game
+versus the number of "tries scored" 
+per game for each team.  A clean break means that a
+team has broken through the opposition defence and a "try scored" means 
+that the team has earned 5 points.
+A clean break implies an opportunity to score a try,
+but does not guarantee that a try will be scored.
 
 ```{r}
 #| echo: false
 #| label: fig-scatter
-#| fig-cap: A scatter plot
-rwcMatches <- do.call(rbind, lapply(split(rwcAll, rwcAll$match), 
-                                    function(x) {
-                                        if (x$scored[1] > x$conceded[1]) {
-                                            y <- x[1, ]
-                                        } else {
-                                           y <- rev(x[2, ])
-                                        }
-                                        names(y) <- c("win", "lose")
-                                    }))
-ggplot(rwcMatches) +
-    geom_point(aes(win, lose))
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages).
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
 ```
+
+The data symbol in a scatter plot is a data point, in this case a circle.
+There are two mappings in the scatter plot in @fig-scatter:
+the **quantitative** number of clean breaks is mapped to the horizontal
+**position** of the data points and the **quantitative** number of tries 
+scored is mapped to the vertical **position** of the data points.
+
+We know from @sec-mapping-visual-features that using **position** means
+that we should be able to accurately map *back* to the original data values.
+For example, we can easily see that one team scored a little over 
+7.5 clean breaks per game and we can see that two teams scored about
+6 tries per game.
+
+However, there is something else going on in the scatter plot.
+The two explicit mappings to horizontal and vertical position
+**interact** to create an additional visual feature:[^integral]
+**position in space** (@fig-interact).[^emergent-features]
+For example, we can perceive not only horizontal and vertical
+distances between data points, but also euclidean distances between
+data points ("as the crow flies").
+
+[^emergent-features]:
+  Relate this to mentions in literature of "emergent features", e.g.,
+  @pomerantz1994emergent.  Acknowledge that my use is a little loose
+  because the use in the literature is really about separate data symbols
+  combining to create emergent features (like clusters?).
+
+[^integral]:
+  Need citations to literature that mention integral visual features.
+
+::: {#fig-interact layout-ncol=2}
+
+![](Diagrams/data-vis-vis.png)
+
+If we map data values to visual features and the visual features interact, 
+the result can be additional visual features.  It is possible for the 
+additional visual feature to be dominant relative to the original visual
+features or even to obscure the original visual features.
+:::
+
+> One reason why a scatter plot is effective at conveying relationships
+  between variables is because the mappings of data values to visual
+  features---horizontal 
+  position and vertical position---interact to produce an additional
+  visual feature: position in space.
+
+Furthermore, our visual system allows us to perceive **visual summaries**
+(see @sec-visual-summary) of **position in space**.[^ensemble-corr]
+For example, in @fig-scatter we can easily see a positive 
+**correlation** between the number of clean breaks and the number of
+tries scored.  We can also easily see **clusters** of data points;
+the four data points in the top-right corner of the plot appear separate 
+from the other data points.
+
+[^ensemble-corr]:
+  Citations to literature on ensembles again, this time specifically to
+  correlation in scatter plots.
+
+> One reason why a scatter plot is effective at conveying relationships
+  between variables is because we are able to perceive visual summaries from
+  a collection of positions in space.
+
+## Case study: Mosaic plots
+
+@tbl-offenders shows a table of counts for offences committed
+in New Zealand in 2021.
+For each offence, we know the sex of the offender and what action was 
+taken against the offender.
+
+```{r}
+#| echo: false
+#| label: tbl-offenders
+#| tbl-cap: Counts of offences committed in New Zealand in 2021 by the sex of the offender and the action taken against the offender. 
+offenderTable <- with(offenders, table(Mop.Division, SEX))
+kable(offenderTable)
+```
+
+@fig-spine shows a mosaic plot of the data in @tbl-offenders.[^mosaic]
+This is an effective data visualisation for making several comparisons:
+the proportion of male versus female offenders; 
+within each sex, the proportion of different actions against offenders;
+between sexes, the distribution of different actions;
+and the overall proportions of combinations of sex and action against
+offenders.
+
+[^mosaic]:
+  This two-dimensional mosaic plot could also be called a spine plot.
+  Mosaic plot is the more general term that includes plots of more than
+  two qualitative variables.
+
+For example, we can see that there are more male offenders than female
+offenders, court action is more common than non-court action for both males and
+female offenders, court action is more common for male offenders than
+for female offenders, and the most common offences involve male offenders
+and result in court action.
+
+```{r}
+#| echo: false
+#| label: fig-spine
+#| warning: false
+#| fig-cap: A spine plot
+offenders$action <- factor(offenders$Mop.Division, 
+                           levels=rev(sort(unique(offenders$Mop.Division))))
+gg <- ggplot(offenders) +
+    geom_mosaic(aes(x=product(action, SEX), fill=action)) +
+    coord_cartesian(expand=FALSE) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          aspect.ratio=1)
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+A mosaic plot is another example of a data visualisation that 
+maps **data summaries** to data symbols rather than raw data.
+The data symbols are rectangles, the widths of the rectangles are
+mapped from the proportion of male versus female offenders and
+the heights of the rectangles are mapped from the proportions of actions
+taken within males and females (see @tbl-offenders-summary).
+
+```{r}
+#| echo: false
+#| label: tbl-offenders-summary
+#| tbl-cap: The data summaries calculated from @tbl-offenders that are mapped to the widths and heights of the rectangles in @fig-spine.
+#| tbl-subcap:
+#|   - Widths
+#|   - Heights
+#| layout-nrows: 2
+widths <- proportions(t(marginSums(offenderTable, 2)), 1)
+heights <- proportions(offenderTable, 2)
+props <- cbind(matrix(rep(widths, 3), nrow=3, byrow=TRUE), heights)
+colnames(props) <- rep(colnames(props)[3:4], 2)
+kable(props[,1:2], digits=2)
+kable(props[,3:4], digits=2)
+```
+
+> One reason why a mosaic plot is effective is because it maps proportions
+  and conditional proportions, rather than raw counts,
+  to the visual features of rectangles.
+
+A mosaic plot is also an example of a data visualisation 
+that maps to visual features that **interact**.
+The explicit mappings involve proportions to the widths and heights
+of the rectangles and we know from @sec-quant-features that 
+this will allow accurate mapping back from lengths to proportions.
+
+> One reason why a mosaic plot is effective is because it maps 
+  proportions to lengths.
+
+However, the interaction of these mappings produces
+an **emergent feature**, which is the **area** of the rectangles
+(@fig-interact).  Importantly, these areas correspond to 
+additional data summaries, in this case, the overall proportion of offences in
+each combination of sex and action taken.
+
+> One reason why a mosaic plot is effective is because the mappings     
+  to length and height interact to produce area, which represents
+  overall proportions.
+
+One weakness of mosaic plots is that area is not the most
+accurate visual feature (@sec-accuracy), so we are not able to map
+back to overall proportions as well as we are able to map back to
+the proportions that are represented by the separate widths and heights
+of the rectangles.
+
+Another weakness is that the lengths and heights of the rectangles are
+unaligned (@sec-unaligned).  This compromises the accuracy of
+comparisons of widths between
+categories or the comparisons of heights between categories.
+This weakness is greater if there are more categories and/or 
+larger differences between categories than we see in @fig-spine.
+
+```{r}
+#| echo: false
+#| label: fig-spine-weak
+#| warning: false
+#| fig-cap: A spine plot with problems
+#| fig-keep: last
+actions <- c("Prosecution", "Formal Warning", "Informal Warning",
+             "Community Justice Panel", "Alternative Action Plan",
+             "No Further Action")
+offendersMain <- subset(offenders, 
+                        !(Age.Group %in% 
+                          c("0-4", "5-9", "80yearsorover", "NotSpecified")) &
+                        (Mop.Group %in% actions),
+                        drop=TRUE)
+offendersMain$Age.Group <- gsub("([0-9]+).+", "\\1", offendersMain$Age.Group)
+offendersMain$Age.Group <- factor(offendersMain$Age.Group)
+offendersMain$Mop.Group <- factor(offendersMain$Mop.Group, levels=rev(actions))
+gg <- ggplot(offendersMain) +
+    geom_mosaic(aes(x=product(Mop.Group, Age.Group), fill=Mop.Group)) +
+    coord_cartesian(expand=FALSE) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          axis.text.x=element_text(size=6),
+          aspect.ratio=.8)
+pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+grid.edit("axis.1-2-1-2::titleGrob::text", grep=TRUE, vjust=c(.5, .5, 1, 0, .5, .5))
+grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
+```
+
+## Summary
+
+A scatter plot is effective for 
 
 # Visual Shapes
 
@@ -2794,6 +3084,9 @@ Angle is part-of-whole.
 
 # TODO
 
+* mention differences in *data symbols* from bar plot to dot plot to histogram
+  etc ...
+
 * CVD
 
 * visual illusions
@@ -2809,6 +3102,7 @@ Angle is part-of-whole.
 * congruence (reuse pie chart that nicely shows Maori at very close to 50%)
 * ensembles (use dot plot of district to demonstrate?   Revisit heatmaps?)
 * emergent features
+* use of white space around points in scatter plot
 
 * text
 * annotations (labelling of teams in dotplot of points per game might work)
@@ -2886,6 +3180,11 @@ to emphasise structure - combination of order and category
 
 * attributions for data sources
 
+* add example (section?) to combine.qmd 
+  where either separable is NOT appropriate
+  or integral is NOT appropriate.  In the mosaic plot case, the interaction
+  is beneficial.
+
 * model fits like lm straight line and ref Hadley's data-space vs model-space
   "data models" to mirror "data statistics"
   (revisit box plots as VERY simple models? also talk about failing
@@ -2897,4 +3196,3 @@ to emphasise structure - combination of order and category
   are discussed ?
 
 &nbsp;
-dev.off()

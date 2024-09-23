@@ -140,7 +140,9 @@ data points ("as the crow flies").
 
 [^emergent-features]:
   Relate this to mentions in literature of "emergent features", e.g.,
-  @pomerantz1994emergent.
+  @pomerantz1994emergent.  Acknowledge that my use is a little loose
+  because the use in the literature is really about separate data symbols
+  combining to create emergent features (like clusters?).
 
 [^integral]:
   Need citations to literature that mention integral visual features.
@@ -179,25 +181,148 @@ from the other data points.
 
 ## Case study: Mosaic plots
 
-Data summaries
+@tbl-offenders shows a table of counts for offences committed
+in New Zealand in 2021.
+For each offence, we know the sex of the offender and what action was 
+taken against the offender.
 
-width (length) and height (length) interact to produce area (and shape)
+```{r}
+#| echo: false
+#| label: tbl-offenders
+#| tbl-cap: Counts of offences committed in New Zealand in 2021 by the sex of the offender and the action taken against the offender. 
+offenderTable <- with(offenders, table(Mop.Division, SEX))
+kable(offenderTable)
+```
 
-area/shape dominate width and length ?
+@fig-spine shows a mosaic plot of the data in @tbl-offenders.[^mosaic]
+This is an effective data visualisation for making several comparisons:
+the proportion of male versus female offenders; 
+within each sex, the proportion of different actions against offenders;
+between sexes, the distribution of different actions;
+and the overall proportions of combinations of sex and action against
+offenders.
+
+[^mosaic]:
+  This two-dimensional mosaic plot could also be called a spine plot.
+  Mosaic plot is the more general term that includes plots of more than
+  two qualitative variables.
+
+For example, we can see that there are more male offenders than female
+offenders, court action is more common than non-court action for both males and
+female offenders, court action is more common for male offenders than
+for female offenders, and the most common offences involve male offenders
+and result in court action.
 
 ```{r}
 #| echo: false
 #| label: fig-spine
 #| warning: false
 #| fig-cap: A spine plot
+offenders$action <- factor(offenders$Mop.Division, 
+                           levels=rev(sort(unique(offenders$Mop.Division))))
 gg <- ggplot(offenders) +
-    geom_mosaic(aes(x=product(Mop.Division, SEX))) +
+    geom_mosaic(aes(x=product(action, SEX), fill=action)) +
     coord_cartesian(expand=FALSE) +
     theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
           aspect.ratio=1)
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
+```
+
+A mosaic plot is another example of a data visualisation that 
+maps **data summaries** to data symbols rather than raw data.
+The data symbols are rectangles, the widths of the rectangles are
+mapped from the proportion of male versus female offenders and
+the heights of the rectangles are mapped from the proportions of actions
+taken within males and females (see @tbl-offenders-summary).
+
+```{r}
+#| echo: false
+#| label: tbl-offenders-summary
+#| tbl-cap: The data summaries calculated from @tbl-offenders that are mapped to the widths and heights of the rectangles in @fig-spine.
+#| tbl-subcap:
+#|   - Widths
+#|   - Heights
+#| layout-nrows: 2
+widths <- proportions(t(marginSums(offenderTable, 2)), 1)
+heights <- proportions(offenderTable, 2)
+props <- cbind(matrix(rep(widths, 3), nrow=3, byrow=TRUE), heights)
+colnames(props) <- rep(colnames(props)[3:4], 2)
+kable(props[,1:2], digits=2)
+kable(props[,3:4], digits=2)
+```
+
+> One reason why a mosaic plot is effective is because it maps proportions
+  and conditional proportions, rather than raw counts,
+  to the visual features of rectangles.
+
+A mosaic plot is also an example of a data visualisation 
+that maps to visual features that **interact**.
+The explicit mappings involve proportions to the widths and heights
+of the rectangles and we know from @sec-quant-features that 
+this will allow accurate mapping back from lengths to proportions.
+
+> One reason why a mosaic plot is effective is because it maps 
+  proportions to lengths.
+
+However, the interaction of these mappings produces
+an **emergent feature**, which is the **area** of the rectangles
+(@fig-interact).  Importantly, these areas correspond to 
+additional data summaries, in this case, the overall proportion of offences in
+each combination of sex and action taken.
+
+> One reason why a mosaic plot is effective is because the mappings     
+  to length and height interact to produce area, which represents
+  overall proportions.
+
+One weakness of mosaic plots is that area is not the most
+accurate visual feature (@sec-accuracy), so we are not able to map
+back to overall proportions as well as we are able to map back to
+the proportions that are represented by the separate widths and heights
+of the rectangles.
+
+Another weakness is that the lengths and heights of the rectangles are
+unaligned (@sec-unaligned).  This compromises the accuracy of
+comparisons of widths between
+categories or the comparisons of heights between categories.
+This weakness is greater if there are more categories and/or 
+larger differences between categories than we see in @fig-spine.
+
+```{r}
+#| echo: false
+#| label: fig-spine-weak
+#| warning: false
+#| fig-cap: A spine plot with problems
+#| fig-keep: last
+actions <- c("Prosecution", "Formal Warning", "Informal Warning",
+             "Community Justice Panel", "Alternative Action Plan",
+             "No Further Action")
+offendersMain <- subset(offenders, 
+                        !(Age.Group %in% 
+                          c("0-4", "5-9", "80yearsorover", "NotSpecified")) &
+                        (Mop.Group %in% actions),
+                        drop=TRUE)
+offendersMain$Age.Group <- gsub("([0-9]+).+", "\\1", offendersMain$Age.Group)
+offendersMain$Age.Group <- factor(offendersMain$Age.Group)
+offendersMain$Mop.Group <- factor(offendersMain$Mop.Group, levels=rev(actions))
+gg <- ggplot(offendersMain) +
+    geom_mosaic(aes(x=product(Mop.Group, Age.Group), fill=Mop.Group)) +
+    coord_cartesian(expand=FALSE) +
+    scale_fill_npg(guide=guide_legend(reverse=TRUE)) +
+    theme(panel.border=element_blank(),
+          axis.title=element_blank(),
+          legend.title=element_blank(),
+          axis.text.x=element_text(size=6),
+          aspect.ratio=.8)
+pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+grid.edit("axis.1-2-1-2::titleGrob::text", grep=TRUE, vjust=c(.5, .5, 1, 0, .5, .5))
+grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
 ```
 
 ## Summary
