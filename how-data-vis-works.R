@@ -982,7 +982,7 @@ popViewport()
 #| echo: false
 #| message: false
 #| label: tbl-crime-group-year
-#| tbl-cap: A table of the number of offenders per year aged 14 to 16 for different ethnic groups from 2011 to 2021.
+#| tbl-cap: A table of the number of offenders per year aged 14 to 16 for different ethnic groups from 2011 to 2021.  There are 44 rows of data, but just the first 6 rows are shown here.
 crimeGroupTable <- subset(crimeGroup, select=c("group", "count", "year"))
 kable(head(crimeGroupTable, row.names=FALSE))
 
@@ -1478,6 +1478,108 @@ gg <- ggplot(offenders) +
           legend.title=element_blank(),
           aspect.ratio=1)
 pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-line
+#| fig-cap: A line plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
+gg <- ggplot(crimeGroup) +
+    geom_line(aes(year, count, colour=group)) +
+    scale_x_continuous(name=NULL) +
+    scale_colour_npg(name="ethnic group") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-line-points
+#| fig-cap: A plot of the number of offenders per year in different ethnic groups from 2011 to 2021 with both lines and points.
+gg <- ggplot(crimeGroup) +
+    geom_line(aes(year, count, colour=group)) +
+    geom_point(aes(year, count, colour=group), 
+               pch=21, fill=figbg, stroke=1) +
+    scale_x_continuous(name=NULL) +
+    scale_colour_npg(name="ethnic group") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-density
+#| fig-cap: A density plot of the points scored per game by Tier One nations at Rugby World Cups.
+breaks <- seq(0, 105, by=5)
+gg <- ggplot(rwcAll) +
+    geom_density(aes(scored), colour="black", linewidth=1) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| message: false
+#| label: tbl-density-stats
+#| tbl-cap: A table of density estimates at a sample of values over the range of the number of points scored by Tier One nations in Rugby World Cup matches.  These data summaries are the values that are mapped to visual features to produce the density plot in @fig-density.  There are 512 rows of values, but only the first 6 are shown here.
+d <- density(rwcAll$scored, from=min(rwcAll$scored), to=max(rwcAll$scored))
+dStats <- cbind(scored=d$x, density=d$y)
+kable(head(dStats), digits=c(2, 4))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-prop
+#| fig.width: 4
+#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.
+#| fig-subcap:
+#|   - A pie chart.
+#|   - A bar plot.
+#| layout-ncol: 2
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y="", fill=group), colour="black") +
+    coord_polar() +
+    labs(title="Proportions of Youth Offenders 2011 to 2021") +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.y=element_blank())
+
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+grid.newpage()
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-bar-part
+#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=1, y=group), colour="black", fill=NA) +
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(0)) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 

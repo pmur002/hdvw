@@ -71,8 +71,10 @@ graph <- function(..., file) {
 ## Data nodes
 data <- dataNode("data", "data\\nvalues")
 stat <- dataNode("stat", "data\\nsummaries")
+stat2 <- dataNode("stat2", "summary\\nsummaries")
 meta <- dataNode("meta", "metadata\\n")
 dataStatSame <- sameRank("data", "stat")
+dataStat2Same <- sameRank("data", "stat2")
 
 ## Visual nodes
 sym <- visualNode("sym", "data\\nsymbols")
@@ -126,6 +128,7 @@ shapeObjEdge <- procEdge("shape", "obj")
 visObjEdge <- procEdge("vis", "obj")
 sumStatEdge <- backEdge("sum:s", "stat:se")
 shapeStatEdge <- backEdge("shape:s", "stat:se")
+shapeStat2Edge <- backEdge("shape:s", "stat2:se")
 objDataEdge <- backEdge("obj:s", "data:se")
 objStatEdge <- backEdge("obj:s", "stat:se")
 labelMetaEdge <- backEdge("label:s", "meta:se")
@@ -364,6 +367,20 @@ graph(data,
       labelStatEdge,
       dataStatSame,
       file="data-stat-label.dot")
+
+graph(data,
+      stat,
+      stat2,
+      vis,
+      shape,
+      dataStatEdge,
+      statVisEdge,
+      visShapeEdge,
+      shapeStat2Edge,
+      dataStatSame,
+      dataStat2Same,
+      visShapeSame,
+      file="data-stat-vis-shape-stat.dot")
 
 graph(eye,
       basic,

@@ -1,8 +1,115 @@
 
 # Visual Congruence
 
-These are higher-level cognitive type things
-(or at least involve connections from higher-level, longer-term processing)
+@fig-prop shows a pie chart of the proportions of total youth 
+offenders between 2011 and 2021 in 
+different ethnic groups and a bar plot of the same data.
+We learned in @sec-mapping-visual-features that mapping 
+**quantitative** proportions to **lengths**, like in the
+bar plot, is more appropriate
+and more accurate than mapping the proportions to **angles**
+or **areas**, like in the pie chart.
+
+However, which data visualisation is superior at conveying the
+fact that Māori offenders make up approximately 50% of the total?
+Which visualisation is better at conveying 
+the proportion of offenders that are European/Other?
+
+Although it is easy to perceive that the bar for Māori is just below 0.5
+in length from the bar plot, it is even easier to see that the light blue
+wedge in the pie chart is just under half a circle.
+It is also easy to see that the red wedge is close to a third of a circle.
+
+```{r}
+#| echo: false
+#| label: fig-prop
+#| fig.width: 4
+#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.  
+#| fig-subcap:
+#|   - A pie chart.
+#|   - A bar plot.
+#| layout-ncol: 2
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y="", fill=group), colour="black") +
+    coord_polar() +
+    labs(title="Proportions of Youth Offenders 2011 to 2021") +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.y=element_blank())
+
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+grid.newpage()
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+The purpose of this section is to show that the effectiveness
+of a data visualisation does not just 
+depend on the accuracy with which we can
+map back from basic visual features 
+to raw data values.
+
+In terms of our simple model of visual processing (@sec-visual-processing),
+this section deals with higher levels of processing where connections
+can be made between existing knowledge and the visual features that
+arise from the perception of basic visual features
+(see @fig-visual-model).
+
+## Part-to-whole
+
+The reason why the pie chart in @fig-prop is more effective
+than a bar plot for conveying proportions is because 
+the wedges in a pie chart are **congruent** with fractions of a whole.
+A semi-circle has a strong visual association with *half* of a circle
+and thirds and quarters are similarly evocative.
+
+> One reason why a pie chart can be effective is because 
+  segments of a pie vividly convey fractions of a whole.
+
+@fig-bar-part shows that if we place a bar representing a proportion bar 
+within a reference rectangle that corresponds to a proportion of 1,
+then we can also create a part-to-whole congruence with bars, though the effect
+is not as strong as it is for pie wedges.
+
+```{r}
+#| echo: false
+#| label: fig-bar-part
+#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.  
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=1, y=group), colour="black", fill=NA) +
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(0)) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+## Dark is more
+
+## More is more
+
+Representing negative values.
+
+## Same is same
+
+## Visual dissonance
+
+Pie chart of crime level - larger bars have lighter colour so the messages
+are a bit mixed.  To do with interaction of visual features ?
+Can you make a plot that does not create the visual dissonance
+(e.g., darker colours with different positions?)
+
+## TODO
 
 Also related to familiarity of visual objects ...
 
@@ -14,6 +121,9 @@ Dark is more for colour.
 The above need citations
 
 Angle is part-of-whole.
+
+Lines with peaks and valleys have a natural correspondence with 
+mountain ranges.
 
 At least some of the ideas in "congruence" are similar to "expressiveness"
 cite tamarara munzner and jock mackinlay 
