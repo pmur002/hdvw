@@ -83,7 +83,7 @@ is not as strong as it is for pie wedges.
 #| label: fig-bar-part
 #| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.  
 gg <- ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=1, y=group), colour="black", fill=NA) +
+    geom_col(aes(x=1, y=group), colour="black", fill="grey80") +
     geom_col(aes(x=total/sum(total), y=group), colour="black") +
     scale_x_continuous(expand=expansion(0)) +
     theme(aspect.ratio=1,

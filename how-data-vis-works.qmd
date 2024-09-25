@@ -17,6 +17,8 @@ format:
 #| echo: false
 #| message: false
 library(dplyr)
+library(reshape2)
+library(tidyr)
 library(knitr)
 library(kableExtra)
 library(reshape2)
@@ -26,6 +28,7 @@ library(colorspace)
 library(ggsci)
 library(grid)
 library(ggmosaic)
+library(GGally)
 ```
 
 ```{r}
@@ -36,6 +39,12 @@ highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 scale_colour_discrete <- function(...) {
     scale_colour_npg(...)
 }
+scale_colour_ordinal <- function(...) {
+    scale_colour_brewer(palette="Purples", ...)
+}
+scale_colour_continuous <- function(...) {
+    scale_colour_distiller(palette="Purples", direction=1, ...)
+}
 scale_fill_discrete <- function(...) {
     scale_fill_npg(...)
 }
@@ -43,7 +52,7 @@ scale_fill_ordinal <- function(...) {
     scale_fill_brewer(palette="Purples", ...)
 }
 scale_fill_continuous <- function(...) {
-    scale_fill_distiller(palette="Purples", ...)
+    scale_fill_distiller(palette="Purples", direction=1, ...)
 }
 ## Set default line width
 update_geom_defaults("line", list(linewidth=1))
@@ -90,11 +99,38 @@ knitr::opts_chunk$set(dev='svg',
 
 {{< include visual-shapes.qmd >}}
 
+{{< include multiple.qmd >}}
+
 {{< include congruence.qmd >}}
 
 # TODO
 
+* add gestalt to visual-model.qmd ?
+  => get to call on it when discussing scatter plots for identifying
+     clusters (and in other places too) ?
+  pre-attentive pop out too ?
+
 * Need some citations to the literature in visual-shapes.qmd
+
+  Link to "emergent features" and "gestalts" in, e.g.,  
+  Pomerantz and Cragin (2014) ?
+
+  Also link to "configural displays" (David Peebles (2008)) and
+  "display proximity" (Barnett & Wickens, 1988; Carswell & Wickens, 1987;
+  Wickens & Andre, 1990)
+  "According to the proximity compatibility principle (Wickens &
+  Carswell, 1995), representations with high display proximity fa-
+  cilitate high mental proximity tasks requiring the integration of
+  information from multiple sources. The relationship between dis-
+  play and mental proximity has been revealed in several studies
+  (e.g., Barnett & Wickens, 1988; Bennett & Flach, 1992; Bennett,
+  Toms, & Woods, 1993; Carswell & Wickens, 1987; Wickens &
+  Andre, 1990; Wickens & Carswell, 1995) and it is argued that the
+  advantage comes when emergent features (Pomerantz & Pristach,
+  1989) of the representation indicate additional information about
+  the domain."
+  He also mentions line plots as being in between separable bar plots
+  and configural radar plots.
 
 * how mappings can go wrong?  
   As an umbrella for some topics below, e.g., visual illusions?
@@ -106,18 +142,25 @@ knitr::opts_chunk$set(dev='svg',
 
 * redundant encodings
 
-* big data (or even medium data) 
-  => overlapping and summary plots like boxplots
+* non-linear scales
+  separate "position" section?
+
+* big data (or even medium data) - need better name
+  => overlapping and summary plots like boxplots (then violin plots)
 
 * use of white space around points in scatter plot
 
 * visual objects
+  icons 
+  chernoff faces
 
 * text
 * annotations (labelling of teams in dotplot of points per game might work)
 
 * attention
   Put foveal and saccades in here?
+  Put (CRAP) contrast in here?
+
 * pre-attentive pop out
 * labels (top-down)
 
@@ -134,6 +177,10 @@ knitr::opts_chunk$set(dev='svg',
 
 * clutter
   Put foveal and saccades in here?
+
+* guides
+
+* labels (text)
 
 * bubble plots (area not effective => something better?)
 
@@ -158,9 +205,6 @@ knitr::opts_chunk$set(dev='svg',
   Revisit heatmaps - regions/shapes of colours?
 
 * Need citation for contrast effect
-
-* A plot with BOTH points and lines is effective because the points
-  provide the raw data and the lines provide the shapes
 
 * case study of density plots
   (revisit histograms in terms of shape as well; point out that 
@@ -199,9 +243,7 @@ to emphasise structure - combination of order and category
 * citation for "stacked dot plot" in statistics.qmd
   and/or use a different name
 
-* case study of plot with BOTH points and lines;  you get good
-  mapping back to raw data with points and you get good mapping
-  back to data statistics from the line (shape).
+* case study: barycentric plots (ternary plots)
 
 * attributions for data sources
 
@@ -215,9 +257,17 @@ to emphasise structure - combination of order and category
   (revisit box plots as VERY simple models? also talk about failing
    assumptions of these models, like unimodal for boxplot)
 
+* kiviat plots or radar plots or spider plots
+  (David Peebles (2008))
 
 * do the side-by-side pie chart idea as an example of reasoning your
   way to a new visualisation.
+
+* Another possible application of data vis knowledge:
+  Analyse one of the weird boxplot variations that look a bit like a ziggurat?
+
+* citations to stuff on pictographs and glyphs and icon-based plots
+  (in clutter section?)
 
 * An index that links to all of the places that different sorts of plots
   are discussed ?

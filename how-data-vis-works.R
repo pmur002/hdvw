@@ -3,6 +3,8 @@ pdf(NULL)
 #| echo: false
 #| message: false
 library(dplyr)
+library(reshape2)
+library(tidyr)
 library(knitr)
 library(kableExtra)
 library(reshape2)
@@ -12,6 +14,7 @@ library(colorspace)
 library(ggsci)
 library(grid)
 library(ggmosaic)
+library(GGally)
 
 
 ## -----------------------------------------------------------------------------
@@ -22,6 +25,12 @@ highlight <- "#7D12BA" ## Match text code colour (more precise than "purple")
 scale_colour_discrete <- function(...) {
     scale_colour_npg(...)
 }
+scale_colour_ordinal <- function(...) {
+    scale_colour_brewer(palette="Purples", ...)
+}
+scale_colour_continuous <- function(...) {
+    scale_colour_distiller(palette="Purples", direction=1, ...)
+}
 scale_fill_discrete <- function(...) {
     scale_fill_npg(...)
 }
@@ -29,7 +38,7 @@ scale_fill_ordinal <- function(...) {
     scale_fill_brewer(palette="Purples", ...)
 }
 scale_fill_continuous <- function(...) {
-    scale_fill_distiller(palette="Purples", ...)
+    scale_fill_distiller(palette="Purples", direction=1, ...)
 }
 ## Set default line width
 update_geom_defaults("line", list(linewidth=1))
@@ -523,7 +532,7 @@ ggplot(crimeGroupTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-visual-features
-#| fig-cap: Some examples of basic visual features are **position**, **length**, **angle**, **area**, **colour**, and **shape**.
+#| fig-cap: Some examples of basic visual features are **position**, **length**, **angle**, **area**, **colour**, and **shape**.[^list-of-features]
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
@@ -1540,6 +1549,114 @@ kable(head(dStats), digits=c(2, 4))
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-multiple
+#| fig-cap: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
+ggplot(RWCperGame) + 
+    geom_point(aes(x=breaks, y=tries, 
+               shape=sphere, size=points, fill=runs)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    scale_shape_manual(values=c(21, 24)) +
+    scale_size_continuous(guide=guide_legend(position="top")) +
+    theme(aspect.ratio=1,
+          legend.frame=element_rect(colour="black", linewidth=.2))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-parallel
+#| fig-cap: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
+gg <- ggparcoord(RWCperGame, 
+           columns=c(11, 5, 10, 7), groupColumn="sphere",
+           scale="uniminmax", alpha=.5) +
+    scale_x_discrete(expand=expansion(.02)) +
+    scale_colour_discrete(guide=guide_legend(reverse=TRUE))
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| message: false
+#| label: tbl-parallel-stats
+#| tbl-cap: The data summaries that are mapped to visual features in @fig-parallel.
+vars <- subset(RWCperGame, 
+               select=c("country", "sphere", 
+                        "runs", "breaks", "tries", "points"))
+vars[3:6] <- apply(vars[3:6], 2, 
+                   function(x) {
+                       (x - min(x))/diff(range(x))
+                   })
+vars$country <- reorder(vars$country, vars$points)
+long <- melt(vars, id.vars=1:2)
+kable(head(long), digits=2)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-profile
+#| fig-cap: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
+gg <- ggplot(long) +
+    geom_area(aes(as.numeric(variable), value, fill=sphere)) +
+    scale_x_continuous(expand=expansion(0)) +
+    scale_y_continuous(expand=expansion(0)) +
+    coord_cartesian(clip="off") +
+    facet_wrap(vars(country), strip.position="bottom") +
+    theme(panel.border=element_blank(),
+          strip.background=element_blank(),
+          axis.title=element_blank(),
+          axis.text=element_blank(),
+          axis.ticks=element_blank(),
+          aspect.ratio=1)
+pushViewport(viewport(width=1, height=1))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-splom
+#| fig-cap: A scatter plot matrix of the quantitative performance measures for teams in the 2023 Rugby World Cup.
+quants <- c("runs", "breaks", "tries", "points")
+mat <- subset(RWCperGame, 
+              select=c(quants, "sphere"))
+## https://stackoverflow.com/questions/3735286/create-a-matrix-of-scatterplots-pairs-equivalent-in-ggplot2
+mat <- mutate(mat, id = rownames(mat)) 
+
+## Prepare data to be plotted on the x axis
+x_vars <- pivot_longer(data = mat,
+             cols = 1:4,
+             names_to = "variable_x",
+             values_to = "x")
+
+## Prepare data to be plotted on the y axis  
+y_vars <- pivot_longer(data = mat,
+                       cols = 1:4,
+                       names_to = "variable_y",
+                       values_to = "y") 
+
+## Join data for x and y axes and make plot
+all <- full_join(x_vars, y_vars, 
+          by = c("id", "sphere"),
+          relationship = "many-to-many")
+all$variable_x <- factor(all$variable_x, levels=quants)
+all$variable_y <- factor(all$variable_y, levels=quants)
+all <- subset(all, 
+              variable_x != variable_y &
+              variable_x != "points" &
+              variable_y != "runs" &
+              !(variable_x == "tries" & variable_y == "breaks"))
+ggplot(all) + 
+    aes(x = x, y = y, color = sphere) +
+    geom_point() +
+    facet_grid(variable_y ~ variable_x, scales="free") +
+    theme(axis.title=element_blank(),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-prop
 #| fig.width: 4
 #| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.
@@ -1573,7 +1690,7 @@ popViewport()
 #| label: fig-bar-part
 #| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.
 gg <- ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=1, y=group), colour="black", fill=NA) +
+    geom_col(aes(x=1, y=group), colour="black", fill="grey80") +
     geom_col(aes(x=total/sum(total), y=group), colour="black") +
     scale_x_continuous(expand=expansion(0)) +
     theme(aspect.ratio=1,
