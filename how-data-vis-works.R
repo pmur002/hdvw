@@ -11,6 +11,7 @@ library(reshape2)
 library(ggplot2)
 library(scales)
 library(colorspace)
+library(rcartocolor)
 library(ggsci)
 library(grid)
 library(ggmosaic)
@@ -1612,6 +1613,33 @@ gg <- ggplot(long) +
 pushViewport(viewport(width=1, height=1))
 print(gg, newpage=FALSE)
 popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-facet-before
+#| fig-cap: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+ggplot(crimeDistrict) +
+    geom_line(aes(year, count, colour=district)) +
+    scale_colour_manual(values=carto_pal(12, "Safe")) +
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-facet-after
+#| fig-cap: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+crimeDistrict$district <- 
+    reorder(crimeDistrict$district, crimeDistrict$count, max)
+crime2 <- crimeDistrict
+crime2$district2 <- crime2$district
+crime2$district <- NULL
+ggplot(crimeDistrict) +
+    geom_line(aes(year, count, group=district2), data=crime2, 
+              col="grey", linewidth=.2) +
+    geom_line(aes(year, count)) +
+    facet_wrap(vars(district)) +
+    theme(aspect.ratio=.8)
 
 
 ## -----------------------------------------------------------------------------

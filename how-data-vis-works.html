@@ -137,7 +137,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#parallel-coordinates-plots" id="toc-parallel-coordinates-plots" class="nav-link" data-scroll-target="#parallel-coordinates-plots"><span class="header-section-number">9.1</span> Parallel coordinates plots</a></li>
   <li><a href="#small-multiplessmall-multiples" id="toc-small-multiplessmall-multiples" class="nav-link" data-scroll-target="#small-multiplessmall-multiples"><span class="header-section-number">9.2</span> Small multiples</a></li>
-  <li><a href="#facetting" id="toc-facetting" class="nav-link" data-scroll-target="#facetting"><span class="header-section-number">9.3</span> Facetting</a></li>
+  <li><a href="#facettingfacetting" id="toc-facettingfacetting" class="nav-link" data-scroll-target="#facettingfacetting"><span class="header-section-number">9.3</span> Facetting</a></li>
   <li><a href="#case-study-scatterplot-matrices" id="toc-case-study-scatterplot-matrices" class="nav-link" data-scroll-target="#case-study-scatterplot-matrices"><span class="header-section-number">9.4</span> Case study: Scatterplot matrices</a></li>
   <li><a href="#summary-8" id="toc-summary-8" class="nav-link" data-scroll-target="#summary-8"><span class="header-section-number">9.5</span> Summary</a></li>
   </ul></li>
@@ -2634,8 +2634,9 @@ Table&nbsp;9.1: The data summaries that are mapped to visual features in <a href
 </section>
 <section id="small-multiplessmall-multiples" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">9.2</span> Small multiples<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></h2>
-<p>One difficulty with <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;9.2</a> is that many of the lines overlap each other, which makes it difficult to separately perceive individual visual shapes.</p>
+<p>One difficulty with <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;9.2</a> is that many of the lines overlap each other, which makes it difficult to separately perceive individual visual shapes. <a href="#fig-profile" class="quarto-xref">Figure&nbsp;9.3</a> shows an alternative approach to visualising the same data, a profile plot, where a shape is drawn for each country. The shape in this case is a filled in polygon, effectively the lines in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;9.2</a> with the area below them (down to zero) filled in.</p>
 <p><strong>TODO</strong> relate to over-plotting section (wherever that ends up)</p>
+<p>Again, this can be effective because of the overall shapes. For example, we can see a group of four shapes that are larger than the others. We can also see that Argentina and Fiji appear very similar, which was not apparent in previous plots.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-profile" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -2650,16 +2651,54 @@ Figure&nbsp;9.3: A data visualisation of the performance measures for teams in t
 </div>
 </div>
 </div>
-<p>profile plots</p>
-<p>star plots</p>
+<p><a href="#fig-profile" class="quarto-xref">Figure&nbsp;9.3</a> uses the same data summaries as <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;9.2</a> (<a href="#tbl-parallel-stats" class="quarto-xref">Table&nbsp;9.1</a>), and similar mappings: each variable is mapped to a different horizontal <strong>position</strong> and the values within each variable are mapped to vertical <strong>position</strong> and hemisphere is mapped to <strong>colour</strong>. The data symbol is also similar: multiple data values are mapped to a single data symbol, either a line or a polygon.</p>
+<p>The difference in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;9.3</a> is that, rather than having all of the data symbols on the same plot, each data symbol is drawn in its own <strong>position in space</strong>. This makes it easy to view each distinct data symbol.</p>
+<p>The group of large shapes in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;9.3</a> is easier to see because the countries have been ordered by the number of points scored (the right-hand height of the shape). As we have seen before, ordering data symbols can make a big difference (<a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>).</p>
 </section>
-<section id="facetting" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="facetting"><span class="header-section-number">9.3</span> Facetting</h2>
-<p>Start again with new multivariate plot of crime data</p>
+<section id="facettingfacetting" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="facettingfacetting"><span class="header-section-number">9.3</span> Facetting<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></h2>
+<p><a href="#fig-facet-before" class="quarto-xref">Figure&nbsp;9.4</a> shows a line plot of the number of youth offenders per year in different Police Districts of New Zealand. This visualisation has some good mappings—we map year to horizontal <strong>position</strong> and count to vertical <strong>position</strong>—but also a weaker mapping: the Police District. We map districts to <strong>colour</strong>, but because there are 12 different districts, we are exceeding the capacity of colour (<a href="#sec-capacity" class="quarto-xref">Section&nbsp;3.6</a>). It is not easy to differentiate all of the different colours (not helped by overplotting of the lines).</p>
+<p>A better mapping for Police District would be <strong>position</strong>, which has a much higher capacity, but position has already been taken by year and count.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-facet-before" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-facet-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-facet-before-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.4: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-facet-after" class="quarto-xref">Figure&nbsp;9.5</a> shows one solution: a facetted plot. Each district has been mapped to a <strong>position in space</strong> and we draw a separate plot for each district. This makes it very easy to distinguish the individual districts.</p>
+<p>One downside is that comparisons between districts are more difficult because of counts and/or years are <strong>unaligned</strong> (<a href="#sec-unaligned" class="quarto-xref">Section&nbsp;4.2</a>). In this case, we have mitigated that problem by drawing a grey line for all districts in each plot. Similar to grid lines, this makes it easier to compare the line for each district to other districts (<a href="#sec-perception-relative" class="quarto-xref">Section&nbsp;4.4</a>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-facet-after" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-facet-after-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-facet-after-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-after-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.5: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We have again ordered the panels so that districts are near to other districts with a similar starting count of offenders (<a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>).</p>
 </section>
 <section id="case-study-scatterplot-matrices" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="case-study-scatterplot-matrices"><span class="header-section-number">9.4</span> Case study: Scatterplot matrices</h2>
 <p>A form of facetting - get to see the correlation between all four variables like in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;9.2</a>.</p>
+<p>This tells a nice story …</p>
+<ul>
+<li><p>Going down the diagonal: the number of runs is correlated loosely with the number of clean breaks; the number of clean breaks is more strongly correlated with the number of tries; and the number of tries is very strongly correlated with the number of points.</p></li>
+<li><p>Going down the columns: the number of runs is correlated loosely with the number of clean breaks, a little more loosely with the number of tries and a little more loosely still with the number of points; the number of clean breaks is reasonably correlated with the number of tries and a little more loosely with the number of points.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-splom" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -2668,7 +2707,7 @@ Figure&nbsp;9.3: A data visualisation of the performance measures for teams in t
 <img src="how-data-vis-works_files/figure-html/fig-splom-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-splom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.4: A scatter plot matrix of the quantitative performance measures for teams in the 2023 Rugby World Cup.
+Figure&nbsp;9.6: A scatter plot matrix of the quantitative performance measures for teams in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
@@ -2909,7 +2948,8 @@ Zhang, Jiajie. 1996. <span>“A Representational Analysis of Relational Informat
 <li id="fn19"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>. Acknowledge that my use is a little loose because the use in the literature is really about separate data symbols combining to create emergent features (like clusters?).<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn20"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn21"><p>This two-dimensional mosaic plot could also be called a spine plot. Mosaic plot is the more general term that includes plots of more than two qualitative variables.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn22"><p>Tufte’s small multiples, Trellis multi-panel plots, facetting.<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p>Tufte’s small multiples<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
