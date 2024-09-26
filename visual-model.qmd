@@ -234,19 +234,19 @@ is further supplemented by rapid visual processing that combines and
 summarises the information.  These subconscious, or **pre-attentive**,
 processes extract properties from an image without any mental effort.
 
-For example, in @fig-pop-1 we can detect the one teal point amongst the
-19 orange points without effort. @fig-pop-2 shows that this task remains
+For example, in @fig-pop-colour-1 we can detect the one teal dot amongst the
+19 orange dots without effort. @fig-pop-colour-2 shows that this task remains
 effortless even if the number of distractors is much larger.
 
 ```{r}
 #| echo: false
-#| label: fig-pop
+#| label: fig-pop-colour
 #| layout-ncol: 2
-#| fig-cap: Some properties pop out.
+#| fig-cap: Some properties pop out.  Find the teal dot.
 #| fig-subcap:
 #|   - low n
 #|   - high n
-spread <- function(n, shift=1/n, seed=12345) {
+spread <- function(n, shift=1/n, seed=1234567) {
     set.seed(seed)
     x <- rep(seq(0, 1, length.out=n), n)
     y <- rep(seq(0, 1, length.out=n), each=n)
@@ -255,11 +255,14 @@ spread <- function(n, shift=1/n, seed=12345) {
     list(x=x + shift*xd, y=y + shift*yd)
 }
 cols2 <- pal_npg()(2)
-dots <- function(n) {
+resample <- function(x, ...) x[sample.int(length(x), ...)]
+dots <- function(n, different=1) {
     n2 <- n^2
     xy <- spread(n)
     cols <- rep(cols2[1], n2)
-    cols[sample(1:n2, 1)] <- cols2[2]
+    sub <- TRUE ## xy$x < xy$y
+    i <- resample((1:n2)[sub], different)
+    cols[i] <- cols2[2]
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
     pushViewport(viewport(width=.9, height=.9,
@@ -276,7 +279,53 @@ grid.newpage()
 dots(10)
 ```
 
-A feature of @fig-pop is that only one basic feature is changing: **colour**.
+This ability to detect an odd-one-out in a field of distractors also
+applies to other basic features like angle.
+
+```{r}
+#| echo: false
+#| label: fig-pop-angle
+#| layout-ncol: 2
+#| fig-cap: Some properties pop out.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+mult2 <- c(1, -1)
+lines <- function(n, col=FALSE, diffm=1, diffc=1) {
+    n2 <- n^2
+    xy <- spread(n)
+    mult <- rep(mult2[1], n2)
+    sub <- TRUE ## xy$x < xy$y
+    i <- resample((1:n2)[sub], diffm)
+    mult[i] <- mult2[2]
+    pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+    grid.rect()
+    pushViewport(viewport(width=.9, height=.9,
+                          xscale=range(xy$x), yscale=range(xy$y)))
+    if (col) {
+        cols <- rep(cols2[1], n2)
+        i <- c(resample(i, 1), resample((1:n2)[-i], diffc))
+        cols[i] <- cols2[2]
+    } else {
+        cols <- "black"
+    }
+    grid.segments(unit(xy$x, "native") + unit(2, "mm"), 
+                  unit(xy$y, "native") + mult*unit(2, "mm"), 
+                  unit(xy$x, "native") - unit(2, "mm"), 
+                  unit(xy$y, "native") - mult*unit(2, "mm"),
+                  gp=gpar(col=cols, lwd=2))
+    popViewport(2)
+}
+
+grid.newpage()
+lines(5)
+
+grid.newpage()
+lines(10)
+```
+
+A feature of @fig-pop-colour is that only one basic feature is changing: 
+**colour**.
 Differences are very obvious, even impossible to ignore,
 if everything else remains the same.
 
@@ -284,7 +333,62 @@ if everything else remains the same.
 mention same-same terminology so can refer to it later in 
 congruence ?
 
-Grouping
+If multiple items are different, we automatically perceive groups of items.
+The teal dots are a separate group from the orange dots.
+
+```{r}
+#| echo: false
+#| label: fig-group-colour
+#| layout-ncol: 2
+#| fig-cap: Some groups appear automatically.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+grid.newpage()
+dots(5, 5)
+
+grid.newpage()
+dots(10, 25)
+```
+
+This also works for angle, though less strongly.
+
+```{r}
+#| echo: false
+#| label: fig-group-angle
+#| layout-ncol: 2
+#| fig-cap: Some groups appear automatically 
+#| fig-subcap:
+#|   - low n
+#|   - high n
+grid.newpage()
+lines(5, diffm=5)
+
+grid.newpage()
+lines(10, diffm=50)
+```
+
+If we change more than one feature, the ability to spot the odd one
+out disappears.
+
+```{r}
+#| echo: false
+#| label: fig-group-colour-angle
+#| layout-ncol: 2
+#| fig-cap: If more than one thing changes at once, pop out stops. Find the blue line that slopes to the left.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+grid.newpage()
+lines(5, col=TRUE, diffm=5, diffc=5)
+
+grid.newpage()
+lines(10, col=TRUE, diffm=50, diffc=20)
+```
+
+The ability to identify groups is based on other things besides 
+having the same feature.  That is called similarity, but 
+groups also formed based on proximity and connectivity.
 
 ```{r}
 #| echo: false
@@ -343,6 +447,8 @@ grid.text("connectivity", y=unit(-2, "lines"), just="top")
 popViewport(2)
 ```
 
+Some features are stronger than others.
+
 ```{r}
 #| echo: false
 #| label: fig-gestalt-order
@@ -355,9 +461,9 @@ vp2 <- viewport(width=.9, y=unit(2, "lines"),
 pushViewport(viewport(layout=grid.layout(16, 4)))
 pushViewport(viewport(layout.pos.col=1),
              vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
-grid.roundrect(.5, .2, .5, .2, 
+grid.roundrect(.5, .2, .6, .3, 
                gp=gpar(col=NA, fill="grey"))
-grid.roundrect(.5, .8, .5, .2, 
+grid.roundrect(.5, .8, .6, .3, 
                gp=gpar(col=NA, fill="grey"))
 grid.segments(c(.4, .6), .2, c(.4, .6), .8,
               gp=gpar(lwd=3))
@@ -392,9 +498,6 @@ grid.circle(c(.4, .4, .6, .6), c(.4, .6, .4, .6),
 grid.text("similarity", y=0, just="top")
 popViewport(3)
 ```
-
-complex difference hard to detect (orange circle within blue and orange
-triangles and circles)
 
 Ensembles (but only with reference to @fig-visual-model-demo at this point) ?
 

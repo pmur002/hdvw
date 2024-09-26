@@ -474,13 +474,13 @@ dev.off()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-pop
+#| label: fig-pop-colour
 #| layout-ncol: 2
-#| fig-cap: Some properties pop out.
+#| fig-cap: Some properties pop out.  Find the teal dot.
 #| fig-subcap:
 #|   - low n
 #|   - high n
-spread <- function(n, shift=1/n, seed=12345) {
+spread <- function(n, shift=1/n, seed=1234567) {
     set.seed(seed)
     x <- rep(seq(0, 1, length.out=n), n)
     y <- rep(seq(0, 1, length.out=n), each=n)
@@ -489,11 +489,14 @@ spread <- function(n, shift=1/n, seed=12345) {
     list(x=x + shift*xd, y=y + shift*yd)
 }
 cols2 <- pal_npg()(2)
-dots <- function(n) {
+resample <- function(x, ...) x[sample.int(length(x), ...)]
+dots <- function(n, different=1) {
     n2 <- n^2
     xy <- spread(n)
     cols <- rep(cols2[1], n2)
-    cols[sample(1:n2, 1)] <- cols2[2]
+    sub <- TRUE ## xy$x < xy$y
+    i <- resample((1:n2)[sub], different)
+    cols[i] <- cols2[2]
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
     pushViewport(viewport(width=.9, height=.9,
@@ -508,6 +511,93 @@ dots(5)
 
 grid.newpage()
 dots(10)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-pop-angle
+#| layout-ncol: 2
+#| fig-cap: Some properties pop out.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+mult2 <- c(1, -1)
+lines <- function(n, col=FALSE, diffm=1, diffc=1) {
+    n2 <- n^2
+    xy <- spread(n)
+    mult <- rep(mult2[1], n2)
+    sub <- TRUE ## xy$x < xy$y
+    i <- resample((1:n2)[sub], diffm)
+    mult[i] <- mult2[2]
+    pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+    grid.rect()
+    pushViewport(viewport(width=.9, height=.9,
+                          xscale=range(xy$x), yscale=range(xy$y)))
+    if (col) {
+        cols <- rep(cols2[1], n2)
+        i <- c(resample(i, 1), resample((1:n2)[-i], diffc))
+        cols[i] <- cols2[2]
+    } else {
+        cols <- "black"
+    }
+    grid.segments(unit(xy$x, "native") + unit(2, "mm"), 
+                  unit(xy$y, "native") + mult*unit(2, "mm"), 
+                  unit(xy$x, "native") - unit(2, "mm"), 
+                  unit(xy$y, "native") - mult*unit(2, "mm"),
+                  gp=gpar(col=cols, lwd=2))
+    popViewport(2)
+}
+
+grid.newpage()
+lines(5)
+
+grid.newpage()
+lines(10)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-group-colour
+#| layout-ncol: 2
+#| fig-cap: Some groups appear automatically.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+grid.newpage()
+dots(5, 5)
+
+grid.newpage()
+dots(10, 25)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-group-angle
+#| layout-ncol: 2
+#| fig-cap: Some groups appear automatically
+#| fig-subcap:
+#|   - low n
+#|   - high n
+grid.newpage()
+lines(5, diffm=5)
+
+grid.newpage()
+lines(10, diffm=50)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-group-colour-angle
+#| layout-ncol: 2
+#| fig-cap: If more than one thing changes at once, pop out stops. Find the blue line that slopes to the left.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+grid.newpage()
+lines(5, col=TRUE, diffm=5, diffc=5)
+
+grid.newpage()
+lines(10, col=TRUE, diffm=50, diffc=20)
 
 
 ## -----------------------------------------------------------------------------
@@ -579,9 +669,9 @@ vp2 <- viewport(width=.9, y=unit(2, "lines"),
 pushViewport(viewport(layout=grid.layout(16, 4)))
 pushViewport(viewport(layout.pos.col=1),
              vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
-grid.roundrect(.5, .2, .5, .2, 
+grid.roundrect(.5, .2, .6, .3, 
                gp=gpar(col=NA, fill="grey"))
-grid.roundrect(.5, .8, .5, .2, 
+grid.roundrect(.5, .8, .6, .3, 
                gp=gpar(col=NA, fill="grey"))
 grid.segments(c(.4, .6), .2, c(.4, .6), .8,
               gp=gpar(lwd=3))
