@@ -225,6 +225,7 @@ the properties of the data.
 
 **TODO:** 
 link to Alberto Cairo at least.
+franconeri et al 2021 has some Cairo refs
 For resources on this important topic, see ...
 
 **TODO**
@@ -865,6 +866,270 @@ concept of New Zealand.
 A visualisation of wind strength and wind direction 
 that is made up of lots of small lines of different
 lengths and different angles and different colours.
+:::
+
+## Gestalt[^gestalt]
+
+[^gestalt]:
+  Mention the Gestalt "school" or whatever.  This section could also cover
+  ensembles, though not by that name ... yet ?
+
+The ability to gather large amounts of basic information from an image
+very quickly
+is further supplemented by rapid visual processing that combines and 
+summarises the information.  These subconscious, or **pre-attentive**,
+processes extract properties from an image without any mental effort.
+
+For example, in @fig-pop-1 we can detect the one teal point amongst the
+19 orange points without effort. @fig-pop-2 shows that this task remains
+effortless even if the number of distractors is much larger.
+
+```{r}
+#| echo: false
+#| label: fig-pop
+#| layout-ncol: 2
+#| fig-cap: Some properties pop out.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+spread <- function(n, shift=1/n, seed=12345) {
+    set.seed(seed)
+    x <- rep(seq(0, 1, length.out=n), n)
+    y <- rep(seq(0, 1, length.out=n), each=n)
+    xd <- runif(n^2)
+    yd <- runif(n^2)
+    list(x=x + shift*xd, y=y + shift*yd)
+}
+cols2 <- pal_npg()(2)
+dots <- function(n) {
+    n2 <- n^2
+    xy <- spread(n)
+    cols <- rep(cols2[1], n2)
+    cols[sample(1:n2, 1)] <- cols2[2]
+    pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+    grid.rect()
+    pushViewport(viewport(width=.9, height=.9,
+                          xscale=range(xy$x), yscale=range(xy$y)))
+    grid.circle(xy$x, xy$y, default.units="native", r=unit(1, "mm"), 
+                gp=gpar(col=cols, fill=cols))
+    popViewport(2)
+}
+
+grid.newpage()
+dots(5)
+
+grid.newpage()
+dots(10)
+```
+
+A feature of @fig-pop is that only one basic feature is changing: **colour**.
+Differences are very obvious, even impossible to ignore,
+if everything else remains the same.
+
+
+mention same-same terminology so can refer to it later in 
+congruence ?
+
+Grouping
+
+```{r}
+#| echo: false
+#| label: fig-gestalt-group
+#| fig.height: 2
+#| fig-cap: Gestalt grouping
+vp2 <- viewport(width=.9, y=unit(3, "lines"), 
+                height=unit(1, "npc") - unit(6, "lines"), 
+                just="bottom")
+pushViewport(viewport(width=.8, 
+                      layout=grid.layout(1, 5, widths=c(1, .5), 
+                                         respect=TRUE),
+                      gp=gpar(cex=1.5)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+grid.circle(unit(.15, "npc") + rep(3.5*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(5*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), gp=gpar(fill="black"))
+grid.circle(unit(.85, "npc") + rep(5*unit(-2:2, "mm"), 7), 
+            unit(.5, "npc") + rep(3.5*unit(-2:2, "mm"), each=7), 
+            r=unit(1, "mm"), gp=gpar(fill="black"))
+grid.text("proximity", y=unit(-2, "lines"), just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(col=rep(cols2, each=5), fill=rep(cols2, each=5)))
+grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(col=rep(cols2, length.out=5), 
+                    fill=rep(cols2, length.out=5)))
+grid.text("similarity", y=unit(-2, "lines"), just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=5),
+             vp2)
+grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(fill="black"))
+grid.segments(unit(.2, "npc") + 4*unit(-2:2, "mm"),
+              unit(.5, "npc") + 4*unit(-2, "mm"), 
+              unit(.2, "npc") + 4*unit(-2:2, "mm"),
+              unit(.5, "npc") + 4*unit(2, "mm"))
+grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(fill="black"))
+grid.segments(unit(.8, "npc") + 4*unit(-2, "mm"),
+              unit(.5, "npc") + 4*unit(-2:2, "mm"), 
+              unit(.8, "npc") + 4*unit(2, "mm"),
+              unit(.5, "npc") + 4*unit(-2:2, "mm"))
+grid.text("connectivity", y=unit(-2, "lines"), just="top")
+popViewport(2)
+```
+
+```{r}
+#| echo: false
+#| label: fig-gestalt-order
+#| fig-cap: Gestalt order
+#| fig.height: 2
+cols <- rep(cols2, each=2)
+vp2 <- viewport(width=.9, y=unit(2, "lines"), 
+                height=unit(1, "npc") - unit(4, "lines"), 
+                just="bottom")
+pushViewport(viewport(layout=grid.layout(16, 4)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.roundrect(.5, .2, .5, .2, 
+               gp=gpar(col=NA, fill="grey"))
+grid.roundrect(.5, .8, .5, .2, 
+               gp=gpar(col=NA, fill="grey"))
+grid.segments(c(.4, .6), .2, c(.4, .6), .8,
+              gp=gpar(lwd=3))
+grid.circle(c(.4, .4, .6, .6), c(.2, .8, .2, .8),
+            r=unit(2, "mm"), gp=gpar(fill="black"))
+grid.text("enclosure", y=0, just="top")
+popViewport()
+grid.text(">", x=1, y=0, just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.segments(c(.4, .6), .2, c(.4, .6), .8,
+              gp=gpar(lwd=3))
+grid.circle(c(.4, .4, .6, .6), c(.2, .8, .2, .8),
+            r=unit(2, "mm"), gp=gpar(fill="black"))
+grid.text("connection", y=0, just="top")
+popViewport()
+grid.text(">", x=1, y=0, just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.circle(c(.4, .4, .6, .6), c(.2, .8, .2, .8),
+            r=unit(2, "mm"), gp=gpar(col=cols, fill=cols))
+grid.text("proximity", y=0, just="top")
+popViewport()
+grid.text(">", x=1, y=0, just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=4),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.circle(c(.4, .4, .6, .6), c(.4, .6, .4, .6),
+            r=unit(2, "mm"), gp=gpar(col=cols, fill=cols))
+grid.text("similarity", y=0, just="top")
+popViewport(3)
+```
+
+complex difference hard to detect (orange circle within blue and orange
+triangles and circles)
+
+Ensembles (but only with reference to @fig-visual-model-demo at this point) ?
+
+The main point is that the visual system is *very* good at some tasks.
+An effective data visualisation will make use of the things that
+the visual system is good at.
+
+## Visual focus
+
+@fig-eye-2 show a slightly more detailed view of the structure of the eye
+(compared to @fig-eye).  The retina contains two types of light-sensitive
+cells:  **cones** and **rods**.  The cones are sensitive to colour and are 
+concentrated very densely at the centre of the retina, an area called
+the **fovea**.  Rods only detect the amount of light and 
+are spread more sparsely towards the periphery of the retina.
+
+This arrangement means that, despite the experience of a complete, detailed
+field of view, we only get detailed and colourful information from
+a small foveal region.  The information from our peripheral vision is
+colourless and low-resolution.
+
+::: {#fig-eye-2}
+
+![](Figures/eye-basic-2.svg)
+
+A slightly less simple diagram of the human eye.  There are two kinds
+of light-sensitive cells in the
+retina.  Cones are colour-sensitive and focused very densely at the
+centre of the retina.  Rods are only light-sensitive and are spread
+less densely towards the periphery of the retina.
+:::
+
+Furthermore, when we view an image, we do not simply stare at the centre
+and see everything. Instead, we perform a series of **fixations**, which are
+brief periods of focus on one area of the image, with **saccades** in between,
+which are rapid changes in the location of our focus.
+@fig-extinction demonstrates that where we look within an image
+makes a difference.[^extinction]
+
+[^extinction]:
+  Explain that this is NOT just a fovea vs periphery illusion---there is
+  currently no complete explanation for this effect---but it 
+  serves to show that we are getting different information from different
+  regions of the field of view.
+
+```{r}
+#| echo: false
+#| label: fig-extinction
+#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  What happens to the white dots?
+tile <- grobTree(rectGrob(gp=gpar(col=NA, fill="black")),
+                 segmentsGrob(0, 0, 1, 1, gp=gpar(col="grey50", lwd=8)),
+                 segmentsGrob(0, 1, 1, 0, gp=gpar(col="grey50", lwd=8)),
+                 circleGrob(c(0, 0, .5, 1, 1), c(0, 1, .5, 1, 0),
+                            r=unit(2, "mm"),
+                            gp=gpar(col="black", lwd=2, fill="white")),
+                 vp=viewport(width=unit(2, "cm"), height=unit(2, "cm")))
+pat <- pattern(tile,
+               width=unit(2, "cm"),
+               height=unit(2, "cm"),
+               extend="repeat")
+grid.newpage()
+grid.rect(gp=gpar(col=NA, fill=pat))
+## grid.segments(0, .5, 1, .5, gp=gpar(col="white", lwd=170))
+## grid.segments(.5, 0, .5, 1, gp=gpar(col="white", lwd=170))
+```
+
+The implications for data visualisation are that, in order to 
+perform comparisons of individual values, we need to perform multiple
+fixations in order to get detailed information from multiple
+locations within an image.
+For example, @fig-fixations shows a data visualisation from the MASSIVIS
+project.[^MASSVIS]  The image on the left is the original plot and the
+image on the right shows the fixations (as points) and saccades (as lines
+between points), from one person viewing the plot for 10 seconds. 
+
+[^MASSVIS]:
+  The plot was originally from The Economist, but this image was taken
+  from the resources provided on the 
+  [MASSVIS project web site](http://massvis.mit.edu/).  
+  The eye tracking data were taken from the same web site.
+
+::: {#fig-fixations layout-ncol=2}
+
+![](Images/economist_daily_chart_75_orig.svg)
+
+![](Images/economist_daily_chart_75_track.svg)
+
+Eye tracking data from the MASSVIS project that shows fixations (points) and 
+saccades (lines between points) for one person viewing an image for 10 seconds.
 :::
 
 
@@ -2526,6 +2791,7 @@ enable us to map *back* to **data summaries**
   Need some references to articles about ensembles in data vis lit
   (ideally NOT the scatter plot one cos want to use that later for 
    scatter plots).
+  ALSO must relate this to Gestalt section in visual model ?
 
 ::: {#fig-data-vis-stat-decode}
 
@@ -3462,6 +3728,9 @@ less easy to accurately map back from size
 to the number of points scored and even
 harder to map back from colour to the number of runs.
 
+**TODO** relate back to gestalt in visual-model where lots of things
+changing makes pop-out stop working.
+
 One goal of visualising multiple variables like we have in 
 @fig-multiple is to discover or display multivariate relationships
 between the variables.  For example, we can see that there are four 
@@ -3885,10 +4154,28 @@ Need to name check "cognitive fit theory" ?
 
 # TODO
 
+* add fovea and rods and cones to visual-model.qmd
+
 * add gestalt to visual-model.qmd ?
   => get to call on it when discussing scatter plots for identifying
      clusters (and in other places too) ?
   pre-attentive pop out too ?
+
+* add citation for extinction illusion
+
+* add citation to MASSVIS for fixation images
+ 
+* Add mention that mosaic plots can easily show independence or lack of ?
+
+* add mention of anscombe's quartet to summaries.qmd to compare
+  numerical with visual summaries.
+
+* add plot of differences between lines in crimegroup line plot ?
+  (do NOT perceive vertical difference)
+  citation?  see franconeri 2021
+
+* add footnote about visual feature vs visual channel vs visual dimension
+  terminology soup.
 
 * Need some citations to the literature in visual-shapes.qmd
 
@@ -3912,8 +4199,12 @@ Need to name check "cognitive fit theory" ?
   He also mentions line plots as being in between separable bar plots
   and configural radar plots.
 
+  Some useful stuff in Franconeri et al (2021) ?
+
 * how mappings can go wrong?  
   As an umbrella for some topics below, e.g., visual illusions?
+  The main point is that an effective data visualisation will AVOID
+  the things that the visual system is bad at.
 
 * CVD
 

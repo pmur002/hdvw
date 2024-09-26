@@ -474,6 +474,172 @@ dev.off()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-pop
+#| layout-ncol: 2
+#| fig-cap: Some properties pop out.
+#| fig-subcap:
+#|   - low n
+#|   - high n
+spread <- function(n, shift=1/n, seed=12345) {
+    set.seed(seed)
+    x <- rep(seq(0, 1, length.out=n), n)
+    y <- rep(seq(0, 1, length.out=n), each=n)
+    xd <- runif(n^2)
+    yd <- runif(n^2)
+    list(x=x + shift*xd, y=y + shift*yd)
+}
+cols2 <- pal_npg()(2)
+dots <- function(n) {
+    n2 <- n^2
+    xy <- spread(n)
+    cols <- rep(cols2[1], n2)
+    cols[sample(1:n2, 1)] <- cols2[2]
+    pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
+    grid.rect()
+    pushViewport(viewport(width=.9, height=.9,
+                          xscale=range(xy$x), yscale=range(xy$y)))
+    grid.circle(xy$x, xy$y, default.units="native", r=unit(1, "mm"), 
+                gp=gpar(col=cols, fill=cols))
+    popViewport(2)
+}
+
+grid.newpage()
+dots(5)
+
+grid.newpage()
+dots(10)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-gestalt-group
+#| fig.height: 2
+#| fig-cap: Gestalt grouping
+vp2 <- viewport(width=.9, y=unit(3, "lines"), 
+                height=unit(1, "npc") - unit(6, "lines"), 
+                just="bottom")
+pushViewport(viewport(width=.8, 
+                      layout=grid.layout(1, 5, widths=c(1, .5), 
+                                         respect=TRUE),
+                      gp=gpar(cex=1.5)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+grid.circle(unit(.15, "npc") + rep(3.5*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(5*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), gp=gpar(fill="black"))
+grid.circle(unit(.85, "npc") + rep(5*unit(-2:2, "mm"), 7), 
+            unit(.5, "npc") + rep(3.5*unit(-2:2, "mm"), each=7), 
+            r=unit(1, "mm"), gp=gpar(fill="black"))
+grid.text("proximity", y=unit(-2, "lines"), just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(col=rep(cols2, each=5), fill=rep(cols2, each=5)))
+grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(col=rep(cols2, length.out=5), 
+                    fill=rep(cols2, length.out=5)))
+grid.text("similarity", y=unit(-2, "lines"), just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=5),
+             vp2)
+grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(fill="black"))
+grid.segments(unit(.2, "npc") + 4*unit(-2:2, "mm"),
+              unit(.5, "npc") + 4*unit(-2, "mm"), 
+              unit(.2, "npc") + 4*unit(-2:2, "mm"),
+              unit(.5, "npc") + 4*unit(2, "mm"))
+grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
+            unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
+            r=unit(1, "mm"), 
+            gp=gpar(fill="black"))
+grid.segments(unit(.8, "npc") + 4*unit(-2, "mm"),
+              unit(.5, "npc") + 4*unit(-2:2, "mm"), 
+              unit(.8, "npc") + 4*unit(2, "mm"),
+              unit(.5, "npc") + 4*unit(-2:2, "mm"))
+grid.text("connectivity", y=unit(-2, "lines"), just="top")
+popViewport(2)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-gestalt-order
+#| fig-cap: Gestalt order
+#| fig.height: 2
+cols <- rep(cols2, each=2)
+vp2 <- viewport(width=.9, y=unit(2, "lines"), 
+                height=unit(1, "npc") - unit(4, "lines"), 
+                just="bottom")
+pushViewport(viewport(layout=grid.layout(16, 4)))
+pushViewport(viewport(layout.pos.col=1),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.roundrect(.5, .2, .5, .2, 
+               gp=gpar(col=NA, fill="grey"))
+grid.roundrect(.5, .8, .5, .2, 
+               gp=gpar(col=NA, fill="grey"))
+grid.segments(c(.4, .6), .2, c(.4, .6), .8,
+              gp=gpar(lwd=3))
+grid.circle(c(.4, .4, .6, .6), c(.2, .8, .2, .8),
+            r=unit(2, "mm"), gp=gpar(fill="black"))
+grid.text("enclosure", y=0, just="top")
+popViewport()
+grid.text(">", x=1, y=0, just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.segments(c(.4, .6), .2, c(.4, .6), .8,
+              gp=gpar(lwd=3))
+grid.circle(c(.4, .4, .6, .6), c(.2, .8, .2, .8),
+            r=unit(2, "mm"), gp=gpar(fill="black"))
+grid.text("connection", y=0, just="top")
+popViewport()
+grid.text(">", x=1, y=0, just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.circle(c(.4, .4, .6, .6), c(.2, .8, .2, .8),
+            r=unit(2, "mm"), gp=gpar(col=cols, fill=cols))
+grid.text("proximity", y=0, just="top")
+popViewport()
+grid.text(">", x=1, y=0, just="top")
+popViewport(2)
+pushViewport(viewport(layout.pos.col=4),
+             vp2, viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.circle(c(.4, .4, .6, .6), c(.4, .6, .4, .6),
+            r=unit(2, "mm"), gp=gpar(col=cols, fill=cols))
+grid.text("similarity", y=0, just="top")
+popViewport(3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-extinction
+#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  What happens to the white dots?
+tile <- grobTree(rectGrob(gp=gpar(col=NA, fill="black")),
+                 segmentsGrob(0, 0, 1, 1, gp=gpar(col="grey50", lwd=8)),
+                 segmentsGrob(0, 1, 1, 0, gp=gpar(col="grey50", lwd=8)),
+                 circleGrob(c(0, 0, .5, 1, 1), c(0, 1, .5, 1, 0),
+                            r=unit(2, "mm"),
+                            gp=gpar(col="black", lwd=2, fill="white")),
+                 vp=viewport(width=unit(2, "cm"), height=unit(2, "cm")))
+pat <- pattern(tile,
+               width=unit(2, "cm"),
+               height=unit(2, "cm"),
+               extend="repeat")
+grid.newpage()
+grid.rect(gp=gpar(col=NA, fill=pat))
+## grid.segments(0, .5, 1, .5, gp=gpar(col="white", lwd=170))
+## grid.segments(.5, 0, .5, 1, gp=gpar(col="white", lwd=170))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| message: false
 #| label: tbl-crime-group-total
 #| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.
