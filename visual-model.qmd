@@ -12,14 +12,12 @@ to the properties of the data (@fig-decode).
 ![](Diagrams/data-sym-decode.png)
 
 The effectiveness of a data visualisation will depend on how
-well our visual system can map from data symbols back to
+well our visual system can map from data symbols *back* to
 properties of the data.
 :::
 
 In this section we will establish a very simple model of the visual system 
 that we can refer to as we discuss different mappings.[^simple-visual-models]
-We will add some more detail about the visual system as we
-need to in later sections.
 
 [^simple-visual-models]:
   Simple descriptions of the human visual system can be found in many books on
@@ -29,8 +27,9 @@ need to in later sections.
 
 ## The eye {#sec-eye}
 
-In order for us to perceive a data visualisation, light from the
-data visualisation must enter the eye.  Light passes through the pupil, 
+In order for us to perceive a data visualisation, light must emit from the
+(on-screen) data visualisation or reflect off the (printed) 
+data visualisation and enter the eye.  Light passes through the pupil, 
 is focused by the lens, and is projected onto the retina at the back of
 the eye.  The retina contains around 100 million light-sensitive
 nerve cells and signals from those are combined into about 1 million
@@ -165,13 +164,14 @@ A very simple model of visual processing.
 :::
 
 Lower-level processing occurs subconsciously and more rapidly than higher-level
-processing, which can require cognitive effort
-(see @fig-visual-model).  Furthermore, lower-level
+processing, which can require cognitive effort.  Furthermore, lower-level
 processing occurs in parallel and can involve many instances of visual 
-features at once, whereas higher-level processing will only focus on one
-or a few items.  On the other hand, lower-level visual features are rapidly
+features at once, whereas higher-level processing will only focus on 
+a small number of
+items.  On the other hand, lower-level visual features are rapidly
 discarded as our attention shifts, while higher-level visual objects are more
-persistent and may become part of long-term memories.  
+persistent and may become part of long-term memories
+(see @fig-visual-model).
 
 ::: {#fig-visual-model}
 
@@ -181,13 +181,13 @@ Some of the properties of visual processing.
 :::
 
 @fig-visual-model-demo shows an image that is made up of
-many small elements:  tiny triangles with different **lengths**,
+many small items:  tiny triangles with different **lengths**,
 orientations (**angles**), and **colours**.
 The orientations of the triangles represents wind direction and the 
 length of the triangles represents wind strength;  blue triangles
 are over the sea and green triangles are over land.[^NOMADS]
 The visual system can very quickly
-perceive many small elements like this at once.
+perceive many small items like this at once.
 There is no need to concentrate separately
 on every individual triangle in the image.
 At a higher level of processing, darker and lighter **regions** are
@@ -222,31 +222,33 @@ that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
 
-## Gestalt[^gestalt]
+## Visual summaries
 
-[^gestalt]:
-  Mention the Gestalt "school" or whatever.  This section could also cover
-  ensembles, though not by that name ... yet ?
 
-The ability to gather large amounts of basic information from an image
+The ability to gather a large amount of basic features from an image
 very quickly
 is further supplemented by rapid visual processing that combines and 
-summarises the information.  These subconscious, or **pre-attentive**,
+summarises the information.  These subconscious
 processes extract properties from an image without any mental effort.
 
 For example, in @fig-pop-colour-1 we can detect the one teal dot amongst the
 19 orange dots without effort. @fig-pop-colour-2 shows that this task remains
-effortless even if the number of distractors is much larger.
+effortless even if the number of distractors is much larger.[^pre-attentive]
+
+[^pre-attentive]:
+  Mention "pre-attentive" 
+  plus citations.
 
 ```{r}
 #| echo: false
 #| label: fig-pop-colour
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some properties pop out.  Find the teal dot.
 #| fig-subcap:
 #|   - low n
 #|   - high n
-spread <- function(n, shift=1/n, seed=1234567) {
+spread <- function(n, shift=1/n, seed=12345678) {
     set.seed(seed)
     x <- rep(seq(0, 1, length.out=n), n)
     y <- rep(seq(0, 1, length.out=n), each=n)
@@ -267,7 +269,7 @@ dots <- function(n, different=1) {
     grid.rect()
     pushViewport(viewport(width=.9, height=.9,
                           xscale=range(xy$x), yscale=range(xy$y)))
-    grid.circle(xy$x, xy$y, default.units="native", r=unit(1, "mm"), 
+    grid.circle(xy$x, xy$y, default.units="native", r=unit(1.5, "mm"), 
                 gp=gpar(col=cols, fill=cols))
     popViewport(2)
 }
@@ -279,25 +281,41 @@ grid.newpage()
 dots(10)
 ```
 
-This ability to detect an odd-one-out in a field of distractors also
-applies to other basic features like angle.
+@fig-pop-angle shows that
+this ability to identify a single unique item within an image
+also
+applies to other basic features like **angle**, though the effect
+is particularly strong for colour.
+
+The visual system is very sensitive to items that are **different**.
 
 ```{r}
 #| echo: false
 #| label: fig-pop-angle
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some properties pop out.
 #| fig-subcap:
 #|   - low n
 #|   - high n
 mult2 <- c(1, -1)
+pch2 <- c(4, 3)
+lwd2 <- c(3, 3)
+size2 <- c(4, 4)
+len <- 1
 lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     n2 <- n^2
     xy <- spread(n)
     mult <- rep(mult2[1], n2)
+    pch <- rep(pch2[1], n2)
+    lwd <- rep(lwd2[1], n2)
+    size <- rep(size2[1], n2)
     sub <- TRUE ## xy$x < xy$y
     i <- resample((1:n2)[sub], diffm)
     mult[i] <- mult2[2]
+    pch[i] <- pch2[2]
+    lwd[i] <- lwd2[2]
+    size[i] <- size2[2]
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
     pushViewport(viewport(width=.9, height=.9,
@@ -309,11 +327,17 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     } else {
         cols <- "black"
     }
-    grid.segments(unit(xy$x, "native") + unit(2, "mm"), 
-                  unit(xy$y, "native") + mult*unit(2, "mm"), 
-                  unit(xy$x, "native") - unit(2, "mm"), 
-                  unit(xy$y, "native") - mult*unit(2, "mm"),
-                  gp=gpar(col=cols, lwd=2))
+    if (FALSE) {
+        grid.segments(unit(xy$x, "native") + unit(len, "mm"), 
+                      unit(xy$y, "native") + mult*unit(len, "mm"), 
+                      unit(xy$x, "native") - unit(len, "mm"), 
+                      unit(xy$y, "native") - mult*unit(len, "mm"),
+                      gp=gpar(col=cols, lwd=2))
+    } else {
+        grid.points(unit(xy$x, "native"), unit(xy$y, "native"),
+                    pch=pch, gp=gpar(col=cols, lwd=lwd),
+                    size=unit(size, "mm"))
+    }
     popViewport(2)
 }
 
@@ -324,22 +348,17 @@ grid.newpage()
 lines(10)
 ```
 
-A feature of @fig-pop-colour is that only one basic feature is changing: 
-**colour**.
-Differences are very obvious, even impossible to ignore,
-if everything else remains the same.
-
-
-mention same-same terminology so can refer to it later in 
-congruence ?
-
-If multiple items are different, we automatically perceive groups of items.
-The teal dots are a separate group from the orange dots.
+When multiple items differ by a single visual feature, 
+this ability to automatically identify the differences
+means that we perceive groups of items.
+For example, we are able to perceive 
+the teal dots as a separate group from the orange dots in @fig-group-colour.
 
 ```{r}
 #| echo: false
 #| label: fig-group-colour
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some groups appear automatically.
 #| fig-subcap:
 #|   - low n
@@ -351,12 +370,14 @@ grid.newpage()
 dots(10, 25)
 ```
 
-This also works for angle, though less strongly.
+@fig-group-angle shows that this effect also works
+for other visual features, in this case **angle**.
 
 ```{r}
 #| echo: false
 #| label: fig-group-angle
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some groups appear automatically 
 #| fig-subcap:
 #|   - low n
@@ -368,13 +389,26 @@ grid.newpage()
 lines(10, diffm=50)
 ```
 
-If we change more than one feature, the ability to spot the odd one
-out disappears.
+However, the automatic identification of groups 
+is stronger for some visual features than others and,
+if we change more than one feature at once, it gets harder
+to identify multiple groups.
+For example, in @fig-group-colour-angle, the items differ by 
+both colour and angle and it is easier to see groups of colours
+than it is to see groups of different angles.
+There is also a single teal plus shape in both @fig-group-colour-angle-1
+and @fig-group-colour-angle-2, but these are much harder to find 
+than the single teal item in @fig-pop-colour or the single plus shape
+in @fig-pop-angle.
+
+The visual system is particularly sensitive to items that are **different**
+when everything else is the **same**.
 
 ```{r}
 #| echo: false
 #| label: fig-group-colour-angle
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: If more than one thing changes at once, pop out stops. Find the blue line that slopes to the left.
 #| fig-subcap:
 #|   - low n
@@ -388,7 +422,10 @@ lines(10, col=TRUE, diffm=50, diffc=20)
 
 The ability to identify groups is based on other things besides 
 having the same feature.  That is called similarity, but 
-groups also formed based on proximity and connectivity.
+groups also formed based on proximity and connectivity.[^gestalt]
+
+[^gestalt]:
+  mention Gestalt "school" or whatever, plus citations.
 
 ```{r}
 #| echo: false
@@ -594,6 +631,6 @@ saccades (lines between points) for one person viewing an image for 10 seconds.
 
 The human visual system captures a large amount of information from the
 visual field.  Large numbers of simple features are rapidly extracted,
-while more complex visual elements take longer and require more 
+while more complex visual items take longer and require more 
 congnitive effort, but persist for longer.
 

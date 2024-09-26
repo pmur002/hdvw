@@ -476,11 +476,12 @@ dev.off()
 #| echo: false
 #| label: fig-pop-colour
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some properties pop out.  Find the teal dot.
 #| fig-subcap:
 #|   - low n
 #|   - high n
-spread <- function(n, shift=1/n, seed=1234567) {
+spread <- function(n, shift=1/n, seed=12345678) {
     set.seed(seed)
     x <- rep(seq(0, 1, length.out=n), n)
     y <- rep(seq(0, 1, length.out=n), each=n)
@@ -501,7 +502,7 @@ dots <- function(n, different=1) {
     grid.rect()
     pushViewport(viewport(width=.9, height=.9,
                           xscale=range(xy$x), yscale=range(xy$y)))
-    grid.circle(xy$x, xy$y, default.units="native", r=unit(1, "mm"), 
+    grid.circle(xy$x, xy$y, default.units="native", r=unit(1.5, "mm"), 
                 gp=gpar(col=cols, fill=cols))
     popViewport(2)
 }
@@ -517,18 +518,29 @@ dots(10)
 #| echo: false
 #| label: fig-pop-angle
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some properties pop out.
 #| fig-subcap:
 #|   - low n
 #|   - high n
 mult2 <- c(1, -1)
+pch2 <- c(4, 3)
+lwd2 <- c(3, 3)
+size2 <- c(4, 4)
+len <- 1
 lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     n2 <- n^2
     xy <- spread(n)
     mult <- rep(mult2[1], n2)
+    pch <- rep(pch2[1], n2)
+    lwd <- rep(lwd2[1], n2)
+    size <- rep(size2[1], n2)
     sub <- TRUE ## xy$x < xy$y
     i <- resample((1:n2)[sub], diffm)
     mult[i] <- mult2[2]
+    pch[i] <- pch2[2]
+    lwd[i] <- lwd2[2]
+    size[i] <- size2[2]
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
     pushViewport(viewport(width=.9, height=.9,
@@ -540,11 +552,17 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     } else {
         cols <- "black"
     }
-    grid.segments(unit(xy$x, "native") + unit(2, "mm"), 
-                  unit(xy$y, "native") + mult*unit(2, "mm"), 
-                  unit(xy$x, "native") - unit(2, "mm"), 
-                  unit(xy$y, "native") - mult*unit(2, "mm"),
-                  gp=gpar(col=cols, lwd=2))
+    if (FALSE) {
+        grid.segments(unit(xy$x, "native") + unit(len, "mm"), 
+                      unit(xy$y, "native") + mult*unit(len, "mm"), 
+                      unit(xy$x, "native") - unit(len, "mm"), 
+                      unit(xy$y, "native") - mult*unit(len, "mm"),
+                      gp=gpar(col=cols, lwd=2))
+    } else {
+        grid.points(unit(xy$x, "native"), unit(xy$y, "native"),
+                    pch=pch, gp=gpar(col=cols, lwd=lwd),
+                    size=unit(size, "mm"))
+    }
     popViewport(2)
 }
 
@@ -559,6 +577,7 @@ lines(10)
 #| echo: false
 #| label: fig-group-colour
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some groups appear automatically.
 #| fig-subcap:
 #|   - low n
@@ -574,6 +593,7 @@ dots(10, 25)
 #| echo: false
 #| label: fig-group-angle
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: Some groups appear automatically
 #| fig-subcap:
 #|   - low n
@@ -589,6 +609,7 @@ lines(10, diffm=50)
 #| echo: false
 #| label: fig-group-colour-angle
 #| layout-ncol: 2
+#| fig.height: 6
 #| fig-cap: If more than one thing changes at once, pop out stops. Find the blue line that slopes to the left.
 #| fig-subcap:
 #|   - low n
