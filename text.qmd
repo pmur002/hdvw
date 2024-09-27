@@ -1,0 +1,209 @@
+
+# Text
+
+@fig-no-text is a version of @fig-crime with all of the text
+removed.  Although we can see that some values, or rather three sets of values,
+haved decreased, we cannot tell what the values are or by how much they
+have decreased.  If there was ever any doubt, @fig-no-text makes it 
+clear that text
+is doing a lot of important work in a data visualisation.
+
+```{r}
+#| echo: false
+#| label: fig-no-text
+#| fig-cap:  A line plot with all text removed.  Without text, it is impossible to know what data values are represented in this plot.
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor)) +
+    theme(text=element_text(colour="transparent"),
+          axis.text=element_text(colour="transparent"),
+          panel.grid.major.y=element_line(colour="black", linewidth=.1),
+          aspect.ratio=1)
+```
+
+Eye-tracking studies also show that people spend a lot of time looking
+at the text within a data visualisation.  In @fig-fixations,
+there are more fixations and longer fixations on the text than 
+anywhere else.
+
+This section looks at the role text plays in making data visualisations work.
+
+## Data symbols
+
+@fig-bar-text is a version of @fig-bar with white text added to each bar
+showing the exact number of offenders in each ethnic group.
+This is an example of using text as a **data symbol**.
+
+```{r}
+#| echo: false
+#| label: fig-bar-text
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot are the horizontal bars *and* the text values at the end of each bar.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group)) +
+    geom_text(aes(label=paste0(total, " "), x=total, y=group), 
+              hjust=1, colour="white", fontface="bold") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+```
+
+Just like the bars in @fig-bar-text, data values are mapped to 
+visual features of the text.
+For example, 
+the data values for the number of offenders in each ethnic group
+are mapped to the **length** of the bars,
+but they are also mapped to the horizontal **position**
+of the text *and* to the **shape** of the text, the letters and digits 
+that make up the text.
+The ethnic groups are mapped to the vertical **position** of the bars
+*and* to the vertical **position** of the text.
+
+Compared to the bars in @fig-bar-text, the text data symbols
+are much more complex shapes.
+In terms of the simple visual processing model from @sec-visual-processing,
+text is a visual object.
+This means that text can convey more sophisticated information,
+at the expense of more cognitive effort, and with a limit on how many
+shapes we can process simultaneously
+(see @fig-visual-model).[^verbal-processing]
+
+[^verbal-processing]:
+  Talk about there being separate verbal processing areas in the brain.
+  Text has to come in as visual, so undergoes visual processing,
+  but text is also processed separately for its language value.
+
+The value of text data symbols is that they allow us to map *back* to
+data values very well (@fig-decode).
+In terms of the capabilities that we discussed in @sec-mapping-visual-features,
+text is appropriate for both **quantitative** and **qualitative** data values,
+text is extremely **accurate** and has a very large **capacity**.
+
+> Text data symbols are effective because they can be used to represent
+  any sort of data and they allow a very accurate
+  mapping *back* to data values.
+
+The weakness of text is that our visual system cannot generate
+**visual summaries** of large amounts of text (@sec-summaries).
+This is why a table of numbers, like @tbl-crime,
+is ineffective for perceiving groups of values or trends in values.
+
+> Large numbers of text data symbols are *not* effective because
+  the visual system cannot generate visual summaries from the text.
+
+## Guides
+
+@fig-crime-guides is a version of @fig-crime with the guides highlighted
+in purple.  There are tick marks and tick labels on the x-axis and y-axis,
+There are horizontal grid lines, and there is a legend to show the
+mapping from the different ages to colour.
+
+```{r}
+#| echo: false
+#| label: fig-crime-guides
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot have been highlighted in purple.
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
+    geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
+    scale_colour_manual(name="age",
+                        values=pal_brewer(palette="Purples")(5)[-(1:2)]) +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.y=element_line(colour=highlight),
+          axis.line=element_line(colour="grey"),
+          axis.ticks=element_line(colour=highlight),
+          axis.text=element_text(colour=highlight, face="bold"),          
+          axis.title=element_text(colour="grey"),
+          legend.text=element_text(colour=highlight, face="bold"),
+          legend.title=element_text(colour="grey"),
+          aspect.ratio=1)
+```
+
+The first thing to note about the guides in @fig-crime-guides is that they
+are all composed of **data symbols**, with **data values** mapped to
+**visual features** of the data symbols (@sec-mapping-visual-features).
+This is perhaps easiest to see with
+the grid lines.  Each grid line is a data symbol where a data value,
+a rate of offending, 
+has been mapped to the vertical **position** of the line.
+Similarly, each tick mark on the y-axis
+is a line data symbol where a rate of offending
+has been mapped to the vertical **position** of the line
+and each tick mark on the x-axis is a line data symbol where a 
+year has been mapped to the horizontal **position** of the line.
+Finally, each of the tick labels on the y-axis is a text data symbol
+where a rate of offending has been mapped to the vertical **position**
+of the text *and* to the **shape** of the text and similarly for the
+x-axis tick labels.
+The legend is also made up of line data symbols and text data symbols,
+this time with age data values mapped to the **colour** of lines
+and the **shape** of text.
+
+Furthermore, the grid lines, tick marks, and tick labels form groups
+thanks to their shared proximity (@sec-visual-model-groups).
+
+The fact that guides typically involve **text** data symbols
+makes sense because a guide typically presents only a small number of known
+data values that we want to map *back* to as accurately as possible.
+That is where text excels.   
+
+Viewed as groups of data symbols, the guides on a data visualisation
+make sense:  the guides provide a very accurate way to map *back*
+from **positions** and **colours** on the plot to data values.
+
+> Guides are effective because they map known data values 
+  to data symbols and because those data symbols map *back* to data values
+  extremely well.
+  
+## Labels
+
+@fig-crime-labels shows a version of @fig-crime with the labels 
+highlighted in purple.  In this data visualisation, the only
+labels are axis titles and the legend title.  An overall plot title
+and a plot caption are other examples of labels (see @sec-terminology).
+
+```{r}
+#| echo: false
+#| label: fig-crime-labels
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The labels in this plot have been highlighted in purple.
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
+    geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
+    scale_colour_manual(name="age",
+                        values=grey(0:2/4)) +
+    theme(plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          panel.border=element_rect(colour="grey"),
+          panel.grid.major.y=element_line(colour="grey", linewidth=.2),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour=highlight, face="bold"),
+          legend.text=element_text(colour="grey"),
+          legend.title=element_text(colour=highlight, face="bold"),
+          aspect.ratio=1)
+```
+
+The difference between labels and the other components of a data visualisation,
+the data symbols and the guides, is that labels relate to **metadata** 
+rather than data values.  Labels contain information like
+descriptions of variables and 
+units of measure and sources of data.
+
+::: {#fig-label-mapping layout-ncol=2}
+
+![](Diagrams/meta-label.png)
+
+Labels can be viewed as mappings from metadata to text as a visual
+representation,
+the benefit of which is that the mapping *back* to metadata has
+extremely high-fidelity.
+:::
+
+Another purpose of labels is to direct attention ...
+
+## Case study:  Word clouds
+
+Good mapping back to concepts or objects from text data symbols
+Note the use of size? (bad)
+Note the use of colours? (good)
+Orientation used without it corresponding to change in the data (very bad!)
+
+See ./Data/RWC/Wordcloud/

@@ -1977,4 +1977,71 @@ pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-no-text
+#| fig-cap:  A line plot with all text removed.  Without text, it is impossible to know what data values are represented in this plot.
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor)) +
+    theme(text=element_text(colour="transparent"),
+          axis.text=element_text(colour="transparent"),
+          panel.grid.major.y=element_line(colour="black", linewidth=.1),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-bar-text
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot are the horizontal bars *and* the text values at the end of each bar.
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group)) +
+    geom_text(aes(label=paste0(total, " "), x=total, y=group), 
+              hjust=1, colour="white", fontface="bold") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-crime-guides
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot have been highlighted in purple.
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
+    geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
+    scale_colour_manual(name="age",
+                        values=pal_brewer(palette="Purples")(5)[-(1:2)]) +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.y=element_line(colour=highlight),
+          axis.line=element_line(colour="grey"),
+          axis.ticks=element_line(colour=highlight),
+          axis.text=element_text(colour=highlight, face="bold"),          
+          axis.title=element_text(colour="grey"),
+          legend.text=element_text(colour=highlight, face="bold"),
+          legend.title=element_text(colour="grey"),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-crime-labels
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The labels in this plot have been highlighted in purple.
+ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
+    geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
+    scale_colour_manual(name="age",
+                        values=grey(0:2/4)) +
+    theme(plot.title=element_text(colour=highlight, face="bold"),
+          plot.subtitle=element_text(colour=highlight, face="bold"),
+          panel.border=element_rect(colour="grey"),
+          panel.grid.major.y=element_line(colour="grey", linewidth=.2),
+          axis.ticks=element_line(colour="grey"),
+          axis.text=element_text(colour="grey"),
+          axis.title=element_text(colour=highlight, face="bold"),
+          legend.text=element_text(colour="grey"),
+          legend.title=element_text(colour=highlight, face="bold"),
+          aspect.ratio=1)
+
 dev.off()
