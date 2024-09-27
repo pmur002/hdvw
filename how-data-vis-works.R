@@ -474,13 +474,34 @@ dev.off()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-extinction
+#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  What happens to the white dots?
+tile <- grobTree(rectGrob(gp=gpar(col=NA, fill="black")),
+                 segmentsGrob(0, 0, 1, 1, gp=gpar(col="grey50", lwd=8)),
+                 segmentsGrob(0, 1, 1, 0, gp=gpar(col="grey50", lwd=8)),
+                 circleGrob(c(0, 0, .5, 1, 1), c(0, 1, .5, 1, 0),
+                            r=unit(2, "mm"),
+                            gp=gpar(col="black", lwd=2, fill="white")),
+                 vp=viewport(width=unit(2, "cm"), height=unit(2, "cm")))
+pat <- pattern(tile,
+               width=unit(2, "cm"),
+               height=unit(2, "cm"),
+               extend="repeat")
+grid.newpage()
+grid.rect(gp=gpar(col=NA, fill=pat))
+## grid.segments(0, .5, 1, .5, gp=gpar(col="white", lwd=170))
+## grid.segments(.5, 0, .5, 1, gp=gpar(col="white", lwd=170))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-pop-colour
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: Some properties pop out.  Find the teal dot.
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
 #| fig-subcap:
-#|   - low n
-#|   - high n
+#|   - One teal dot amongst 24 orange dots.
+#|   - One teal dot amongst 99 orange dots.
 spread <- function(n, shift=1/n, seed=12345678) {
     set.seed(seed)
     x <- rep(seq(0, 1, length.out=n), n)
@@ -516,13 +537,6 @@ dots(10)
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-pop-angle
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Some properties pop out.
-#| fig-subcap:
-#|   - low n
-#|   - high n
 mult2 <- c(1, -1)
 pch2 <- c(4, 3)
 lwd2 <- c(3, 3)
@@ -566,22 +580,16 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     popViewport(2)
 }
 
-grid.newpage()
-lines(5)
-
-grid.newpage()
-lines(10)
-
 
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-group-colour
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: Some groups appear automatically.
+#| fig-cap: We effortlessly perceive groups of dots that differ only by colour.
 #| fig-subcap:
-#|   - low n
-#|   - high n
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
 grid.newpage()
 dots(5, 5)
 
@@ -591,29 +599,13 @@ dots(10, 25)
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-group-angle
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Some groups appear automatically
-#| fig-subcap:
-#|   - low n
-#|   - high n
-grid.newpage()
-lines(5, diffm=5)
-
-grid.newpage()
-lines(10, diffm=50)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: fig-group-colour-angle
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: If more than one thing changes at once, pop out stops. Find the blue line that slopes to the left.
+#| fig-cap: Collections of items that differ by both colour and angle.  It is harder to perceive all of the different groups of items.
 #| fig-subcap:
-#|   - low n
-#|   - high n
+#|   - Five teal crosses and one teal plus amongst 15 orange crosses and four orange plusses.
+#|   - Twenty teal crosses and one teal plus amongst thirty orange crosses and fourty-nine orange plusses.
 grid.newpage()
 lines(5, col=TRUE, diffm=5, diffc=5)
 
@@ -673,7 +665,8 @@ grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5),
 grid.segments(unit(.8, "npc") + 4*unit(-2, "mm"),
               unit(.5, "npc") + 4*unit(-2:2, "mm"), 
               unit(.8, "npc") + 4*unit(2, "mm"),
-              unit(.5, "npc") + 4*unit(-2:2, "mm"))
+              unit(.5, "npc") + 4*unit(-2:2, "mm"),
+              gp=gpar(lwd=2))
 grid.text("connectivity", y=unit(-2, "lines"), just="top")
 popViewport(2)
 
@@ -726,27 +719,6 @@ grid.circle(c(.4, .4, .6, .6), c(.4, .6, .4, .6),
             r=unit(2, "mm"), gp=gpar(col=cols, fill=cols))
 grid.text("similarity", y=0, just="top")
 popViewport(3)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-extinction
-#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  What happens to the white dots?
-tile <- grobTree(rectGrob(gp=gpar(col=NA, fill="black")),
-                 segmentsGrob(0, 0, 1, 1, gp=gpar(col="grey50", lwd=8)),
-                 segmentsGrob(0, 1, 1, 0, gp=gpar(col="grey50", lwd=8)),
-                 circleGrob(c(0, 0, .5, 1, 1), c(0, 1, .5, 1, 0),
-                            r=unit(2, "mm"),
-                            gp=gpar(col="black", lwd=2, fill="white")),
-                 vp=viewport(width=unit(2, "cm"), height=unit(2, "cm")))
-pat <- pattern(tile,
-               width=unit(2, "cm"),
-               height=unit(2, "cm"),
-               extend="repeat")
-grid.newpage()
-grid.rect(gp=gpar(col=NA, fill=pat))
-## grid.segments(0, .5, 1, .5, gp=gpar(col="white", lwd=170))
-## grid.segments(.5, 0, .5, 1, gp=gpar(col="white", lwd=170))
 
 
 ## -----------------------------------------------------------------------------

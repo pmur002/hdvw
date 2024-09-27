@@ -798,6 +798,85 @@ is focused by the lens onto retina.  Light-sensitive neurons pass
 signals via the optic nerve to the brain.
 :::
 
+## Visual focus
+
+@fig-eye-2 show a slightly more detailed view of the structure of the eye
+(compared to @fig-eye).  The retina contains two types of light-sensitive
+cells:  **cones** and **rods**.  The cones are sensitive to colour and are 
+concentrated very densely at the centre of the retina, an area called
+the **fovea**.  Rods only detect the amount of light and 
+are spread more sparsely towards the periphery of the retina.
+
+This arrangement means that, despite the experience of a complete, detailed
+field of view, we only get detailed and colourful information from
+a small foveal region.  The information from our peripheral vision is
+colourless and low-resolution.
+
+::: {#fig-eye-2}
+
+![](Figures/eye-basic-2.svg)
+
+A slightly less simple diagram of the human eye.  There are two kinds
+of light-sensitive cells in the
+retina.  Cones are colour-sensitive and focused very densely at the
+centre of the retina.  Rods are only light-sensitive and are spread
+less densely towards the periphery of the retina.
+:::
+
+Furthermore, when we view an image, we do not simply stare at the centre
+and see everything. Instead, we perform a series of **fixations**, which are
+brief periods of focus on one area of the image, with **saccades** in between,
+which are rapid changes in the location of our focus.
+@fig-extinction demonstrates that where we look within an image
+makes a difference.[^extinction]
+
+[^extinction]:
+  Explain that this is NOT just a fovea vs periphery illusion---there is
+  currently no complete explanation for this effect---but it 
+  serves to show that we are getting different information from different
+  regions of the field of view.
+
+```{r}
+#| echo: false
+#| label: fig-extinction
+#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  What happens to the white dots?
+tile <- grobTree(rectGrob(gp=gpar(col=NA, fill="black")),
+                 segmentsGrob(0, 0, 1, 1, gp=gpar(col="grey50", lwd=8)),
+                 segmentsGrob(0, 1, 1, 0, gp=gpar(col="grey50", lwd=8)),
+                 circleGrob(c(0, 0, .5, 1, 1), c(0, 1, .5, 1, 0),
+                            r=unit(2, "mm"),
+                            gp=gpar(col="black", lwd=2, fill="white")),
+                 vp=viewport(width=unit(2, "cm"), height=unit(2, "cm")))
+pat <- pattern(tile,
+               width=unit(2, "cm"),
+               height=unit(2, "cm"),
+               extend="repeat")
+grid.newpage()
+grid.rect(gp=gpar(col=NA, fill=pat))
+## grid.segments(0, .5, 1, .5, gp=gpar(col="white", lwd=170))
+## grid.segments(.5, 0, .5, 1, gp=gpar(col="white", lwd=170))
+```
+
+@fig-fixations shows eye-tracking data from one person viewing
+an image for 10 seconds.[^MASSVIS]  
+The fixations are shown as circles (with larger circles representing
+longer fixations) and the saccades  are shown as lines
+between the circles. 
+
+[^MASSVIS]:
+  The plot was originally from The Economist, but this image was taken
+  from the resources provided on the 
+  [MASSVIS project web site](http://massvis.mit.edu/).  
+  The eye tracking data were taken from the same web site.
+
+::: {#fig-fixations}
+
+![](Images/economist_daily_chart_75_track.svg)
+
+Eye tracking data from the MASSVIS project that shows fixations (points) and 
+saccades (lines between points) for one person viewing an image for 10 seconds.
+:::
+
 ## Visual processing {#sec-visual-processing}
 
 The processing of the 
@@ -876,32 +955,39 @@ that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
 
-## Visual summaries
-
+## Visual summaries {#sec-visual-model-summaries}
 
 The ability to gather a large amount of basic features from an image
 very quickly
-is further supplemented by rapid visual processing that combines and 
+is supplemented by rapid visual processing that combines and 
 summarises the information.  These subconscious
 processes extract properties from an image without any mental effort.
 
 For example, in @fig-pop-colour-1 we can detect the one teal dot amongst the
-19 orange dots without effort. @fig-pop-colour-2 shows that this task remains
+24 orange dots without effort. @fig-pop-colour-2 shows that this task remains
 effortless even if the number of distractors is much larger.[^pre-attentive]
 
 [^pre-attentive]:
   Mention "pre-attentive" 
   plus citations.
 
+This ability to identify a single unique item within an image
+also
+applies to other basic features like **angle**, though the effect
+is particularly strong for colour.
+
+The visual system is very sensitive to items that are **different**.
+
+
 ```{r}
 #| echo: false
 #| label: fig-pop-colour
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: Some properties pop out.  Find the teal dot.
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
 #| fig-subcap:
-#|   - low n
-#|   - high n
+#|   - One teal dot amongst 24 orange dots.
+#|   - One teal dot amongst 99 orange dots.
 spread <- function(n, shift=1/n, seed=12345678) {
     set.seed(seed)
     x <- rep(seq(0, 1, length.out=n), n)
@@ -935,23 +1021,8 @@ grid.newpage()
 dots(10)
 ```
 
-@fig-pop-angle shows that
-this ability to identify a single unique item within an image
-also
-applies to other basic features like **angle**, though the effect
-is particularly strong for colour.
-
-The visual system is very sensitive to items that are **different**.
-
 ```{r}
 #| echo: false
-#| label: fig-pop-angle
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Some properties pop out.
-#| fig-subcap:
-#|   - low n
-#|   - high n
 mult2 <- c(1, -1)
 pch2 <- c(4, 3)
 lwd2 <- c(3, 3)
@@ -994,12 +1065,6 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     }
     popViewport(2)
 }
-
-grid.newpage()
-lines(5)
-
-grid.newpage()
-lines(10)
 ```
 
 When multiple items differ by a single visual feature, 
@@ -1013,34 +1078,15 @@ the teal dots as a separate group from the orange dots in @fig-group-colour.
 #| label: fig-group-colour
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: Some groups appear automatically.
+#| fig-cap: We effortlessly perceive groups of dots that differ only by colour.
 #| fig-subcap:
-#|   - low n
-#|   - high n
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
 grid.newpage()
 dots(5, 5)
 
 grid.newpage()
 dots(10, 25)
-```
-
-@fig-group-angle shows that this effect also works
-for other visual features, in this case **angle**.
-
-```{r}
-#| echo: false
-#| label: fig-group-angle
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Some groups appear automatically 
-#| fig-subcap:
-#|   - low n
-#|   - high n
-grid.newpage()
-lines(5, diffm=5)
-
-grid.newpage()
-lines(10, diffm=50)
 ```
 
 However, the automatic identification of groups 
@@ -1049,11 +1095,10 @@ if we change more than one feature at once, it gets harder
 to identify multiple groups.
 For example, in @fig-group-colour-angle, the items differ by 
 both colour and angle and it is easier to see groups of colours
-than it is to see groups of different angles.
-There is also a single teal plus shape in both @fig-group-colour-angle-1
-and @fig-group-colour-angle-2, but these are much harder to find 
-than the single teal item in @fig-pop-colour or the single plus shape
-in @fig-pop-angle.
+than it is to see groups of different angles ("plusses" and "crosses").
+There is also a single teal "plus" in both @fig-group-colour-angle-1
+and @fig-group-colour-angle-2, but this is much harder to find 
+than the single teal dot in either @fig-pop-colour-1 or @fig-pop-colour-2.
 
 The visual system is particularly sensitive to items that are **different**
 when everything else is the **same**.
@@ -1063,10 +1108,10 @@ when everything else is the **same**.
 #| label: fig-group-colour-angle
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: If more than one thing changes at once, pop out stops. Find the blue line that slopes to the left.
+#| fig-cap: Collections of items that differ by both colour and angle.  It is harder to perceive all of the different groups of items.
 #| fig-subcap:
-#|   - low n
-#|   - high n
+#|   - Five teal crosses and one teal plus amongst 15 orange crosses and four orange plusses.
+#|   - Twenty teal crosses and one teal plus amongst thirty orange crosses and fourty-nine orange plusses.
 grid.newpage()
 lines(5, col=TRUE, diffm=5, diffc=5)
 
@@ -1074,12 +1119,23 @@ grid.newpage()
 lines(10, col=TRUE, diffm=50, diffc=20)
 ```
 
-The ability to identify groups is based on other things besides 
-having the same feature.  That is called similarity, but 
-groups also formed based on proximity and connectivity.[^gestalt]
+## Visual groups {#sec-visual-model-groups}
+
+In @fig-group-colour and @fig-group-colour-angle,
+separate groups of items are identified based on their 
+**similarity**, for example, because the items have the same colour.
+Experiments have also shown that we automatically perceive groups
+based on the **proximity** of items, **connections** between items,
+and the **enclosure** of items.[^gestalt]
 
 [^gestalt]:
   mention Gestalt "school" or whatever, plus citations.
+
+For example, in @fig-gestalt-group there are several matrices of dots.
+In each matrix, we can see either rows of dots or columns of dots simply
+by manipulating the proximity of the dots to each other, or by
+manipulating the colours of the dots, or by manipulating which dots
+are connected by lines.
 
 ```{r}
 #| echo: false
@@ -1133,12 +1189,14 @@ grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5),
 grid.segments(unit(.8, "npc") + 4*unit(-2, "mm"),
               unit(.5, "npc") + 4*unit(-2:2, "mm"), 
               unit(.8, "npc") + 4*unit(2, "mm"),
-              unit(.5, "npc") + 4*unit(-2:2, "mm"))
+              unit(.5, "npc") + 4*unit(-2:2, "mm"),
+              gp=gpar(lwd=2))
 grid.text("connectivity", y=unit(-2, "lines"), just="top")
 popViewport(2)
 ```
 
-Some features are stronger than others.
+These grouping effects are very powerful and can even be used to override
+each other in some combinations, as shown in @fig-gestalt-group.
 
 ```{r}
 #| echo: false
@@ -1190,103 +1248,27 @@ grid.text("similarity", y=0, just="top")
 popViewport(3)
 ```
 
-Ensembles (but only with reference to @fig-visual-model-demo at this point) ?
-
 The main point is that the visual system is *very* good at some tasks.
 An effective data visualisation will make use of the things that
 the visual system is good at.
 
-## Visual focus
-
-@fig-eye-2 show a slightly more detailed view of the structure of the eye
-(compared to @fig-eye).  The retina contains two types of light-sensitive
-cells:  **cones** and **rods**.  The cones are sensitive to colour and are 
-concentrated very densely at the centre of the retina, an area called
-the **fovea**.  Rods only detect the amount of light and 
-are spread more sparsely towards the periphery of the retina.
-
-This arrangement means that, despite the experience of a complete, detailed
-field of view, we only get detailed and colourful information from
-a small foveal region.  The information from our peripheral vision is
-colourless and low-resolution.
-
-::: {#fig-eye-2}
-
-![](Figures/eye-basic-2.svg)
-
-A slightly less simple diagram of the human eye.  There are two kinds
-of light-sensitive cells in the
-retina.  Cones are colour-sensitive and focused very densely at the
-centre of the retina.  Rods are only light-sensitive and are spread
-less densely towards the periphery of the retina.
-:::
-
-Furthermore, when we view an image, we do not simply stare at the centre
-and see everything. Instead, we perform a series of **fixations**, which are
-brief periods of focus on one area of the image, with **saccades** in between,
-which are rapid changes in the location of our focus.
-@fig-extinction demonstrates that where we look within an image
-makes a difference.[^extinction]
-
-[^extinction]:
-  Explain that this is NOT just a fovea vs periphery illusion---there is
-  currently no complete explanation for this effect---but it 
-  serves to show that we are getting different information from different
-  regions of the field of view.
-
-```{r}
-#| echo: false
-#| label: fig-extinction
-#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  What happens to the white dots?
-tile <- grobTree(rectGrob(gp=gpar(col=NA, fill="black")),
-                 segmentsGrob(0, 0, 1, 1, gp=gpar(col="grey50", lwd=8)),
-                 segmentsGrob(0, 1, 1, 0, gp=gpar(col="grey50", lwd=8)),
-                 circleGrob(c(0, 0, .5, 1, 1), c(0, 1, .5, 1, 0),
-                            r=unit(2, "mm"),
-                            gp=gpar(col="black", lwd=2, fill="white")),
-                 vp=viewport(width=unit(2, "cm"), height=unit(2, "cm")))
-pat <- pattern(tile,
-               width=unit(2, "cm"),
-               height=unit(2, "cm"),
-               extend="repeat")
-grid.newpage()
-grid.rect(gp=gpar(col=NA, fill=pat))
-## grid.segments(0, .5, 1, .5, gp=gpar(col="white", lwd=170))
-## grid.segments(.5, 0, .5, 1, gp=gpar(col="white", lwd=170))
-```
-
-The implications for data visualisation are that, in order to 
-perform comparisons of individual values, we need to perform multiple
-fixations in order to get detailed information from multiple
-locations within an image.
-For example, @fig-fixations shows a data visualisation from the MASSIVIS
-project.[^MASSVIS]  The image on the left is the original plot and the
-image on the right shows the fixations (as points) and saccades (as lines
-between points), from one person viewing the plot for 10 seconds. 
-
-[^MASSVIS]:
-  The plot was originally from The Economist, but this image was taken
-  from the resources provided on the 
-  [MASSVIS project web site](http://massvis.mit.edu/).  
-  The eye tracking data were taken from the same web site.
-
-::: {#fig-fixations layout-ncol=2}
-
-![](Images/economist_daily_chart_75_orig.svg)
-
-![](Images/economist_daily_chart_75_track.svg)
-
-Eye tracking data from the MASSVIS project that shows fixations (points) and 
-saccades (lines between points) for one person viewing an image for 10 seconds.
-:::
-
 
 ## Summary
 
-The human visual system captures a large amount of information from the
-visual field.  Large numbers of simple features are rapidly extracted,
+The human visual system captures a very large amount of information from the
+visual field.  
+
+Detailed information is only available at the centre of the visual field
+so multiple fixations are required to capture detailed information
+from multiple locations within an image.
+
+Large numbers of simple features are rapidly extracted,
 while more complex visual items take longer and require more 
 congnitive effort, but persist for longer.
+
+Items are rapidly differentiated into groups in terms of similarity 
+(of basic visual features), proximity, connection, and enclosure.
+
 
 
 # Visual Features {#sec-mapping-visual-features}
@@ -2875,7 +2857,7 @@ to the visual features of a more complicated data symbol.
   about the distribution, like the median
   and interquartile range, to basic visual features.
 
-## Visual summaries {#sec-visual-summary}
+## Visual summaries {#sec-visual-summaries}
 
 @fig-rwc-dotplot shows stacked dot plots of the number of points scored by 
 countries from the different hemispheres in Rugby World Cup matches.
@@ -3040,7 +3022,7 @@ The benefit of a data visualisation that maps
 **data summaries** to visual features is that it allows us to perceive
 data summaries very easily.  For example, although we can perceive
 a general idea of central tendency from the dots in @fig-rwc-dotplot
-(see @sec-visual-summary),
+(see @sec-visual-summaries),
 it is much easier and more accurate to perceive
 median values from the thick vertical lines in @fig-boxplot.
 
@@ -3334,7 +3316,7 @@ features or even to obscure the original visual features.
   visual feature: position in space.
 
 Furthermore, our visual system allows us to perceive **visual summaries**
-(see @sec-visual-summary) of **position in space** 
+(see @sec-visual-summaries) of **position in space** 
 (see @fig-visual-corr).[^ensemble-corr]
 For example, in @fig-scatter we can easily see a positive 
 **correlation** between the number of clean breaks and the number of
@@ -3717,7 +3699,7 @@ multiple data values into a data symbol, so we run a higher risk
 of losing the ability to perceive individual data values.
 
 There is also a similarity between complex data symbols and visual summaries 
-(@sec-visual-summary).  In both cases, we gain the ability to perceive
+(@sec-visual-summaries).  In both cases, we gain the ability to perceive
 data summaries from collections of data values.
 Again, the difference is that with visual summaries, we are summarising
 many simple data symbols that each represent individual data values, 
@@ -4405,6 +4387,12 @@ Need to name check "cognitive fit theory" ?
 * guides
 
 * labels (text)
+
+* layout (arrangement of elements of plot)
+  come at it from visual-model perspective.
+  alignment, proximity, repetition are all gestalt
+  (contrast is just make things different that should be different + vice versa)
+  overriding theme is organisation and visual simplicity
 
 * bubble plots (area not effective => something better?)
 
