@@ -4370,10 +4370,16 @@ text is extremely **accurate**, and text has a very large **capacity**.
   any sort of data and they allow a very accurate
   mapping *back* to data values.
 
-The weakness of text is that our visual system cannot generate
+The weaknesses of text are that comparing values requires more cognitive
+effort compared to comparing simple visual features (like the
+lengths of bars), plus our visual system cannot generate
 **visual summaries** of large amounts of text (@sec-visual-summaries).
 This is why a table of numbers, like @tbl-crime,
 is ineffective for perceiving groups of values or trends in values.
+
+> It is harder to compare data values that are mapped to 
+  text because it requires more effort to map *back* to data 
+  values and to perform mental calculations.
 
 > Large numbers of text data symbols are *not* effective because
   the visual system cannot generate visual summaries from the text.
@@ -4601,19 +4607,101 @@ with no corresponding change in the data values.
 
 ## Case study:  Tables
 
-Common guidelines are aimed at reducing the cognitive burden of having
-to focus on each individual piece of text 
-BUT then you lose the accuracy benefit.
-Guidelines also make more text labels the same, which makes
-different easier to spot.
-When comparing two numbers, as text, even though text more accurate,
-the cognitive burden is higher than when comparing two bars.
+@tbl-rwc-table shows a subset of the 2023 Rugby World Cup data set
+(@tbl-rwc-2023).  We have established earlier in this section that
+visualising data values in a table provides an excellent 
+basis for accurately mapping 
+*back* to individual data values, but imposes a larger cognitive burden
+for comparing values, and is a very poor for extracting visual
+summaries, such as trends.
+
+For example, it is very difficult to determine from @tbl-rwc-table
+whether there is any relationship between the values in the 
+four numeric columns.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-table
+#| tbl-cap: Performance measures for the top 8 teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+rwc8 <- subset(RWCperGame, country %in% topNations,
+               select=c("country", "sphere", 
+                        "runs", "breaks", "tries", "points"))
+rwc8mess <- data.frame(lapply(rwc8, function(x) sapply(x, format, digits=4)))
+kable(rwc8mess, row.names=FALSE)
+```
+
+However, there are standard guidelines for
+formatting tables of values that can improve the readability of
+a table, for example, @schwabish.
+@tbl-rwc-table-tidy shows the same data as @tbl-rwc-table, but with
+all numeric columns right-aligned, a consistent number of decimal 
+places in each column, fewer decimal places than the data 
+actually possess, and the rows have been ordered from the highest number of
+points per game to the lowest.
+
+It is easier to see some structure in @tbl-rwc-table.
+For example, the number of tries appears to decrease as well as the 
+number of points.
+We can also see some evidence of the number of breaks decreasing as 
+well, though it is weaker.
+
+There are some familiar explanations for the improvement in the
+table display. 
+The reduction in detail, with fewer decimal places, means that
+there is less complexity in the visual field.
+The consistent number of decimal places means that less is
+changing, so differences are easier to detect
+(@sec-visual-model-summaries).
+Finally, the consistent baseline provided by right-alignment
+means that the text **length** provides a crude comparison,
+particularly in the column showing the number of clean breaks.
+However, it is worth noting that some of the **accuracy** of the text
+has been sacrificed in order to make some of these gains.
+
+**TODO** provide links from ALL of these points to previous sections.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-table-tidy
+#| tbl-cap: Performance measures for the top 8 teams at the 2023 Rugby World Cup. This is a version of @tbl-rwc-table with some standard table design guidelines applied.
+rwc8tidy <- rwc8
+rwc8tidy$runs <- round(rwc8tidy$runs)
+rwc8tidy <- rwc8tidy[order(rwc8tidy$points, decreasing=TRUE),]
+kable(rwc8tidy, digits=1, row.names=FALSE)
+```
+
+For comparison, @fig-rwc-table shows a scatter plot of the data from 
+@tbl-rwc-table.  The data symbol is a circle,
+with the number of tries mapped to horizontal **position**,
+the number of points mapped to vertical **position**,
+the number of clean breaks mapped to **size**,
+and the number of runs mapped to **colour** (shade).
+The relationships between tries and points and between
+breaks and both tries and points are still easier to perceive
+in this plot than in @tbl-rwc-table-tidy, but @tbl-rwc-table-tidy,
+even with its rounding,
+still provides better accuracy, particularly for breaks and runs.
+
+```{r}
+#| echo: false
+#| label: fig-rwc-table
+#| fig-cap:  A scatter plot of the performance measures for the top 8 teams at the 2023 Rugby World Cup.
+ggplot(rwc8) +
+    geom_point(aes(tries, points, size=breaks, colour=runs)) +
+    scale_colour_gradient(low="grey80", high="black") +
+    theme(aspect.ratio=1)
+```
+
 
 # TODO
 
 * REMOVE the `code` formatting of data variable names in 
   mapping-visual-features.qmd
   (and anywhere else)
+
+* Move congruence to just after colour ?
 
 * somehow mention primacy of position in space in visual-model (with cite) ?
 
@@ -4803,6 +4891,8 @@ to emphasise structure - combination of order and category
 
   * do the side-by-side pie chart idea as an example of reasoning your
     way to a new visualisation.
+
+  * Move the discussion/revisit of tables from text section to here ?
 
   * Another possible application of data vis knowledge:
     Analyse one of the weird boxplot variations that look a bit like a ziggurat?

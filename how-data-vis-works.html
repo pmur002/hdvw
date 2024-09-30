@@ -3056,7 +3056,10 @@ Figure&nbsp;11.2: A bar plot of the total number of offenders for different ethn
 <blockquote class="blockquote">
 <p>Text data symbols are effective because they can be used to represent any sort of data and they allow a very accurate mapping <em>back</em> to data values.</p>
 </blockquote>
-<p>The weakness of text is that our visual system cannot generate <strong>visual summaries</strong> of large amounts of text (<a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;6.2</a>). This is why a table of numbers, like <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1.1</a>, is ineffective for perceiving groups of values or trends in values.</p>
+<p>The weaknesses of text are that comparing values requires more cognitive effort compared to comparing simple visual features (like the lengths of bars), plus our visual system cannot generate <strong>visual summaries</strong> of large amounts of text (<a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;6.2</a>). This is why a table of numbers, like <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1.1</a>, is ineffective for perceiving groups of values or trends in values.</p>
+<blockquote class="blockquote">
+<p>It is harder to compare data values that are mapped to text because it requires more effort to map <em>back</em> to data values and to perform mental calculations.</p>
+</blockquote>
 <blockquote class="blockquote">
 <p>Large numbers of text data symbols are <em>not</em> effective because the visual system cannot generate visual summaries from the text.</p>
 </blockquote>
@@ -3214,13 +3217,216 @@ Figure&nbsp;11.7: A bar plot of the frequency of different words in the Wikipedi
 </section>
 <section id="case-study-tables" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="case-study-tables"><span class="header-section-number">11.6</span> Case study: Tables</h2>
-<p>Common guidelines are aimed at reducing the cognitive burden of having to focus on each individual piece of text BUT then you lose the accuracy benefit. Guidelines also make more text labels the same, which makes different easier to spot. When comparing two numbers, as text, even though text more accurate, the cognitive burden is higher than when comparing two bars.</p>
+<p><a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;11.2</a> shows a subset of the 2023 Rugby World Cup data set (<a href="#tbl-rwc-2023" class="quarto-xref">Table&nbsp;7.1</a>). We have established earlier in this section that visualising data values in a table provides an excellent basis for accurately mapping <em>back</em> to individual data values, but imposes a larger cognitive burden for comparing values, and is a very poor for extracting visual summaries, such as trends.</p>
+<p>For example, it is very difficult to determine from <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;11.2</a> whether there is any relationship between the values in the four numeric columns.</p>
+<div class="cell">
+<div id="tbl-rwc-table" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.2: Performance measures for the top 8 teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+</figcaption>
+<div aria-describedby="tbl-rwc-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: left;">sphere</th>
+<th style="text-align: left;">runs</th>
+<th style="text-align: left;">breaks</th>
+<th style="text-align: left;">tries</th>
+<th style="text-align: left;">points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">95.14</td>
+<td style="text-align: left;">5.429</td>
+<td style="text-align: left;">3.857</td>
+<td style="text-align: left;">29.71</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: left;">100.3</td>
+<td style="text-align: left;">5.571</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">31.57</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fiji</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">138</td>
+<td style="text-align: left;">5.6</td>
+<td style="text-align: left;">2.4</td>
+<td style="text-align: left;">22.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wales</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: left;">109.4</td>
+<td style="text-align: left;">5.6</td>
+<td style="text-align: left;">3.8</td>
+<td style="text-align: left;">32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">131.3</td>
+<td style="text-align: left;">6.286</td>
+<td style="text-align: left;">2.714</td>
+<td style="text-align: left;">26.43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ireland</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: left;">137.6</td>
+<td style="text-align: left;">8.8</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">42.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: left;">126</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">47.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">New Zealand</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">139.3</td>
+<td style="text-align: left;">12.57</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">48</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>However, there are standard guidelines for formatting tables of values that can improve the readability of a table, for example, <span class="citation" data-cites="schwabish">Schwabish (<a href="#ref-schwabish" role="doc-biblioref">2020</a>)</span>. <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;11.3</a> shows the same data as <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;11.2</a>, but with all numeric columns right-aligned, a consistent number of decimal places in each column, fewer decimal places than the data actually possess, and the rows have been ordered from the highest number of points per game to the lowest.</p>
+<p>It is easier to see some structure in <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;11.2</a>. For example, the number of tries appears to decrease as well as the number of points. We can also see some evidence of the number of breaks decreasing as well, though it is weaker.</p>
+<p>There are some familiar explanations for the improvement in the table display. The reduction in detail, with fewer decimal places, means that there is less complexity in the visual field. The consistent number of decimal places means that less is changing, so differences are easier to detect (<a href="#sec-visual-model-summaries" class="quarto-xref">Section&nbsp;2.4</a>). Finally, the consistent baseline provided by right-alignment means that the text <strong>length</strong> provides a crude comparison, particularly in the column showing the number of clean breaks. However, it is worth noting that some of the <strong>accuracy</strong> of the text has been sacrificed in order to make some of these gains.</p>
+<p><strong>TODO</strong> provide links from ALL of these points to previous sections.</p>
+<div class="cell">
+<div id="tbl-rwc-table-tidy" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-table-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.3: Performance measures for the top 8 teams at the 2023 Rugby World Cup. This is a version of <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;11.2</a> with some standard table design guidelines applied.
+</figcaption>
+<div aria-describedby="tbl-rwc-table-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: left;">sphere</th>
+<th style="text-align: right;">runs</th>
+<th style="text-align: right;">breaks</th>
+<th style="text-align: right;">tries</th>
+<th style="text-align: right;">points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">New Zealand</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">12.6</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">48.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">47.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ireland</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">138</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">42.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wales</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">32.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">31.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">5.4</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">29.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">6.3</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">26.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fiji</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">138</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">22.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>For comparison, <a href="#fig-rwc-table" class="quarto-xref">Figure&nbsp;11.8</a> shows a scatter plot of the data from <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;11.2</a>. The data symbol is a circle, with the number of tries mapped to horizontal <strong>position</strong>, the number of points mapped to vertical <strong>position</strong>, the number of clean breaks mapped to <strong>size</strong>, and the number of runs mapped to <strong>colour</strong> (shade). The relationships between tries and points and between breaks and both tries and points are still easier to perceive in this plot than in <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;11.3</a>, but <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;11.3</a>, even with its rounding, still provides better accuracy, particularly for breaks and runs.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-rwc-table" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rwc-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-rwc-table-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rwc-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.8: A scatter plot of the performance measures for the top 8 teams at the 2023 Rugby World Cup.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="todo-1" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> TODO</h1>
 <ul>
 <li><p>REMOVE the <code>code</code> formatting of data variable names in mapping-visual-features.qmd (and anywhere else)</p></li>
+<li><p>Move congruence to just after colour ?</p></li>
 <li><p>somehow mention primacy of position in space in visual-model (with cite) ?</p></li>
 <li><p>add citation for extinction illusion</p></li>
 <li><p>add citation to MASSVIS for fixation images</p></li>
@@ -3280,6 +3486,7 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <ul>
 <li><p>Use heatmap as case study?</p></li>
 <li><p>do the side-by-side pie chart idea as an example of reasoning your way to a new visualisation.</p></li>
+<li><p>Move the discussion/revisit of tables from text section to here ?</p></li>
 <li><p>Another possible application of data vis knowledge: Analyse one of the weird boxplot variations that look a bit like a ziggurat?</p></li>
 </ul></li>
 <li><p>citations to stuff on pictographs and glyphs and icon-based plots (in clutter section?)</p></li>
@@ -3321,6 +3528,9 @@ Mackinlay, Jock. 1986. <span>“Automatic Design of Graphical Presentations of R
 </div>
 <div id="ref-pomerantz1994emergent" class="csl-entry" role="listitem">
 Pomerantz, James R., and Anna I. Cragin. 1994. <span>“Emergent Features and Feature Combination.”</span> <em>Attention, Perception, &amp; Psychophysics</em> 55 (1): 48–55.
+</div>
+<div id="ref-schwabish" class="csl-entry" role="listitem">
+Schwabish, Jonathan A. 2020. <span>“Ten Guidelines for Better Tables.”</span> <em>Journal of Benefit-Cost Analysis</em> 11 (2): 151–78.
 </div>
 <div id="ref-Sönning2023" class="csl-entry" role="listitem">
 Sönning, Lukas. 2023. <span>“Drawing on Principles of Perception: The Line Plot.”</span> In <em>Data Visualization in Corpus Linguistics: Critical Reflections and Future Directions</em>, edited by Lukas Sönning and Ole Schützler. Studies in Variation, Contacts and Change in English 22. Helsinki: VARIENG. <a href="https://urn.fi/URN:NBN:fi:varieng:series-22-2">https://urn.fi/URN:NBN:fi:varieng:series-22-2</a>.

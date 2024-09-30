@@ -2081,4 +2081,37 @@ ggplot(temp) +
           strip.background=element_blank(),
           strip.text=element_blank())
 
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| message: false
+#| label: tbl-rwc-table
+#| tbl-cap: Performance measures for the top 8 teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+rwc8 <- subset(RWCperGame, country %in% topNations,
+               select=c("country", "sphere", 
+                        "runs", "breaks", "tries", "points"))
+rwc8mess <- data.frame(lapply(rwc8, function(x) sapply(x, format, digits=4)))
+kable(rwc8mess, row.names=FALSE)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| message: false
+#| label: tbl-rwc-table-tidy
+#| tbl-cap: Performance measures for the top 8 teams at the 2023 Rugby World Cup. This is a version of @tbl-rwc-table with some standard table design guidelines applied.
+rwc8tidy <- rwc8
+rwc8tidy$runs <- round(rwc8tidy$runs)
+rwc8tidy <- rwc8tidy[order(rwc8tidy$points, decreasing=TRUE),]
+kable(rwc8tidy, digits=1, row.names=FALSE)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rwc-table
+#| fig-cap:  A scatter plot of the performance measures for the top 8 teams at the 2023 Rugby World Cup.
+ggplot(rwc8) +
+    geom_point(aes(tries, points, size=breaks, colour=runs)) +
+    scale_colour_gradient(low="grey80", high="black") +
+    theme(aspect.ratio=1)
+
 dev.off()
