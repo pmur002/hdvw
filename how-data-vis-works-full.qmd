@@ -30,6 +30,7 @@ library(ggsci)
 library(grid)
 library(ggmosaic)
 library(GGally)
+library(ggforce)
 ```
 
 ```{r}
@@ -674,8 +675,10 @@ In this section we will establish a very simple model of the visual system
 that we can refer to as we discuss different mappings.[^simple-visual-models]
 
 [^simple-visual-models]:
-  Simple descriptions of the human visual system can be found in many books on
-  data visualisation, for example, @cairo2012functional.
+  Simple descriptions of the human visual system can be found in many articles
+  and books on
+  data visualisation, for example, @Sönning2023, 
+  @franconeri2021, and @cairo2012functional.
   See @ware2021information for a more in-depth,
   but still very accessible description.
 
@@ -858,7 +861,7 @@ grid.rect(gp=gpar(col=NA, fill=pat))
 ```
 
 @fig-fixations shows eye-tracking data from one person viewing
-an image for 10 seconds.[^MASSVIS]  
+an image for 10 seconds.[^MASSVIS]
 The fixations are shown as circles (with larger circles representing
 longer fixations) and the saccades  are shown as lines
 between the circles. 
@@ -4292,6 +4295,13 @@ have decreased.  If there was ever any doubt, @fig-no-text makes it
 clear that text
 is doing a lot of important work in a data visualisation.
 
+Eye-tracking studies also show that people spend a lot of time looking
+at the text within a data visualisation.  For example, in @fig-fixations,
+there are more fixations and longer fixations on the text than 
+anywhere else.
+
+This section looks at the role text plays in making data visualisations work.
+
 ```{r}
 #| echo: false
 #| label: fig-no-text
@@ -4303,13 +4313,6 @@ ggplot(crimeAgeSimple) +
           panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
 ```
-
-Eye-tracking studies also show that people spend a lot of time looking
-at the text within a data visualisation.  In @fig-fixations,
-there are more fixations and longer fixations on the text than 
-anywhere else.
-
-This section looks at the role text plays in making data visualisations work.
 
 ## Data symbols
 
@@ -4326,24 +4329,27 @@ ggplot(crimeGroupTotal) +
     geom_text(aes(label=paste0(total, " "), x=total, y=group), 
               hjust=1, colour="white", fontface="bold") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=1)
+    theme(aspect.ratio=1,
+          axis.title.y=element_blank())
 ```
 
-Just like the bars in @fig-bar-text, data values are mapped to 
-visual features of the text.
+Just as data values are mapped to the visual features of the
+bar data symbols in @fig-bar-text, 
+data values are also mapped to the
+visual features of the text data symbols.
 For example, 
-the data values for the number of offenders in each ethnic group
+the ethnic groups are mapped to the vertical **position** of the bars
+*and* to the vertical **position** of the text.
+The data values for the number of offenders in each ethnic group
 are mapped to the **length** of the bars,
 but they are also mapped to the horizontal **position**
-of the text *and* to the **shape** of the text, the letters and digits 
+of the text *and* to the **shape** of the text---the letters and digits 
 that make up the text.
-The ethnic groups are mapped to the vertical **position** of the bars
-*and* to the vertical **position** of the text.
 
-Compared to the bars in @fig-bar-text, the text data symbols
+Compared to the bar data symbols in @fig-bar-text, the text data symbols
 are much more complex shapes.
 In terms of the simple visual processing model from @sec-visual-processing,
-text is a visual object.
+the text data symbols are **visual objects**.
 This means that text can convey more sophisticated information,
 at the expense of more cognitive effort, and with a limit on how many
 shapes we can process simultaneously
@@ -4356,16 +4362,16 @@ shapes we can process simultaneously
 
 The value of text data symbols is that they allow us to map *back* to
 data values very well (@fig-decode).
-In terms of the capabilities that we discussed in @sec-mapping-visual-features,
+In terms of the criteria that we discussed in @sec-mapping-visual-features,
 text is appropriate for both **quantitative** and **qualitative** data values,
-text is extremely **accurate** and has a very large **capacity**.
+text is extremely **accurate**, and text has a very large **capacity**.
 
 > Text data symbols are effective because they can be used to represent
   any sort of data and they allow a very accurate
   mapping *back* to data values.
 
 The weakness of text is that our visual system cannot generate
-**visual summaries** of large amounts of text (@sec-summaries).
+**visual summaries** of large amounts of text (@sec-visual-summaries).
 This is why a table of numbers, like @tbl-crime,
 is ineffective for perceiving groups of values or trends in values.
 
@@ -4376,8 +4382,8 @@ is ineffective for perceiving groups of values or trends in values.
 
 @fig-crime-guides is a version of @fig-crime with the guides highlighted
 in purple.  There are tick marks and tick labels on the x-axis and y-axis,
-There are horizontal grid lines, and there is a legend to show the
-mapping from the different ages to colour.
+there are horizontal grid lines, and there is a legend to show the
+mapping from the different ages to different colours.
 
 ```{r}
 #| echo: false
@@ -4415,7 +4421,8 @@ and each tick mark on the x-axis is a line data symbol where a
 year has been mapped to the horizontal **position** of the line.
 Finally, each of the tick labels on the y-axis is a text data symbol
 where a rate of offending has been mapped to the vertical **position**
-of the text *and* to the **shape** of the text and similarly for the
+of the text *and* to the **shape** of the text and similar mappings
+apply to the
 x-axis tick labels.
 The legend is also made up of line data symbols and text data symbols,
 this time with age data values mapped to the **colour** of lines
@@ -4424,10 +4431,12 @@ and the **shape** of text.
 Furthermore, the grid lines, tick marks, and tick labels form groups
 thanks to their shared proximity (@sec-visual-model-groups).
 
+**TODO** also gestalt continuity because they are aligned?
+
 The fact that guides typically involve **text** data symbols
 makes sense because a guide typically presents only a small number of known
 data values that we want to map *back* to as accurately as possible.
-That is where text excels.   
+This is the situation where text excels.   
 
 Viewed as groups of data symbols, the guides on a data visualisation
 make sense:  the guides provide a very accurate way to map *back*
@@ -4469,7 +4478,11 @@ The difference between labels and the other components of a data visualisation,
 the data symbols and the guides, is that labels relate to **metadata** 
 rather than data values.  Labels contain information like
 descriptions of variables and 
-units of measure and sources of data.
+units of measurement and references to data sources.
+These are all important pieces of information, but they are more complex,
+more abstract, and far fewer in number than data values, so it again
+makes sense that the best way to present this information 
+is via text.
 
 ::: {#fig-label-mapping layout-ncol=2}
 
@@ -4481,16 +4494,120 @@ the benefit of which is that the mapping *back* to metadata has
 extremely high-fidelity.
 :::
 
-Another purpose of labels is to direct attention ...
+
+**TODO** Another purpose of labels is to direct attention ...
+
+## Annotations
+
+**TODO** one-off text data symbols and labels
+
+(labelling of teams in dotplot of points per game might work)
 
 ## Case study:  Word clouds
 
-Good mapping back to concepts or objects from text data symbols
-Note the use of size? (bad)
-Note the use of colours? (good)
-Orientation used without it corresponding to change in the data (very bad!)
+@fig-wordcloud shows a word cloud data visualisation based on the
+text of the [Wikipedia page on the Rugby World Cup](https://en.wikipedia.org/wiki/Rugby_World_Cup) [@wiki-rwc]
+This visualisation shows the frequency with which different words
+appear on the Wikipedia page.  The data values that are being visualised
+are shown in @tbl-wiki-rwc.
 
-See ./Data/RWC/Wordcloud/
+::: {#fig-wordcloud}
+
+![](Data/RWC/WordCloud/wordcloud-trim.svg)
+
+A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup.  This image was produced using the R package {wordcloud} [@pkg-wordcloud].
+:::
+
+This data visualisation is unusual because it consists entirely of text
+**data symbols**.
+The mappings in @fig-wordcloud are from each word to the **shape** of 
+a text data symbol and from frequency to the **size**
+of a text data symbol.
+There is no need for a guide for the mapping from words to text shape because
+the mapping is exact;  there is no need to "convert" each text data symbol
+into a word data value because it is already there.
+
+There is no guide for the mapping from word frequency to text size,
+but the visualisation is still effective at conveying the *relative* 
+frequencies.  The larger words occurred more frequently.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-wiki-rwc
+#| tbl-cap: A table of the number of times different words occur in the Wikipedia page for the Rugby World Cup (for words that appear more than once).  There are 287 different words, but only the first 6 are shown here.
+kable(head(wikiRWC), row.names=FALSE)
+```
+
+The mapping of frequencies to **size** does not provide the best **accuracy**
+for mapping *back* to frequencies, so we cannot identify the exact frequency
+of any one word, we cannot identify the quantitative difference in frequency 
+between pairs of words, and we cannot easily perceive the distribution
+of frequencies across words.
+A word cloud is only effective
+for approximate 
+ordinal comparisons of word frequencies (@sec-mapping-visual-features).
+
+Frequency is also mapped to **position in space**, with more frequent
+words placed towards the centre of the word cloud.
+This is an example of redundant mapping; more frequent words are both
+larger *and* more central.
+
+**TODO** link back to redundant mappings
+
+Another benefit of the mapping from frequency to position in space
+is the efficient use of space.
+For example, @fig-wordcloud-bar shows 
+the same data presented as a bar plot with 
+the frequency of each word mapped to a separate bar.  Although 
+the accuracy is improved for comparing frequencies, the bar plot
+does not have as much room for the words themselves.
+
+```{r}
+#| echo: false
+#| label: fig-wordcloud-bar
+#| fig-cap: A bar plot of the frequency of different words in the Wikipedia page for the Rugby World Cup.
+temp <- subset(wikiRWC, freq > 1)
+padding <- 300 - nrow(temp)
+maxlen <- max(nchar(temp$word))
+temp$word <- sprintf(paste0("%", maxlen, "s"), temp$word)
+temp <- rbind(temp, 
+              data.frame(word=sapply(1:padding, 
+                                     function(i) 
+                                         paste(rep(" ", i), collapse="")),
+                         freq=rep(0, padding)))
+temp$word <- reorder(temp$word, temp$freq)
+temp$group <- rep(1:6, each=50)
+ggplot(temp) + 
+    geom_col(aes(freq, word)) + 
+    scale_x_continuous(breaks=c(0, 4, 8, 20, 40, 60),
+                       expand=expansion(add=c(0, 5))) +
+    facet_row(vars(group), scales="free", space="free") +
+    theme(axis.text.y=element_text(size=7),
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank(),
+          strip.background=element_blank(),
+          strip.text=element_blank())
+```
+
+One weakness of the word cloud is that the **angle** of words changes
+with no corresponding change in the data values.
+
+**TODO** link this back to congruence and same=same (different=different).
+
+> A word cloud is effective for conveying relative frequencies of words
+  because it maps words to text data symbols and it maps word frequency
+  to both size and position in space.
+
+## Case study:  Tables
+
+Common guidelines are aimed at reducing the cognitive burden of having
+to focus on each individual piece of text 
+BUT then you lose the accuracy benefit.
+Guidelines also make more text labels the same, which makes
+different easier to spot.
+When comparing two numbers, as text, even though text more accurate,
+the cognitive burden is higher than when comparing two bars.
 
 # TODO
 
@@ -4566,12 +4683,9 @@ See ./Data/RWC/Wordcloud/
   BUT lose visual summaries (cos not just simple shapes with simple features)?
   case study: chernoff faces
 
-* annotations (labelling of teams in dotplot of points per game might work)
-
 * attention
   bottom-up AND top-down
-
-* labels (top-down attention)
+  Bottom-up includes ALL pre-attentive cues!?
 
 * jittering
   which is dodgy because it involves a visual change that is NOT related
@@ -4588,6 +4702,7 @@ See ./Data/RWC/Wordcloud/
   alignment, proximity, repetition are all gestalt
   (contrast is just make things different that should be different + vice versa)
   overriding theme is organisation and visual simplicity
+  alignment is continuity ?
 
   One way to look at this is that, when you map data values to a data symbol
   you leave some (often several) visual features of the data symbol 
@@ -4607,6 +4722,7 @@ See ./Data/RWC/Wordcloud/
   Principle of unambiguity ?
   Example is mosaic plot which changes *shape* as well as area so
   two identical areas could end up looking different => BAD!
+  Another example is word cloud which changes orientation NOT based on data.
   Put this in "same is same" within visual congruence?
   (and put gestalt similarity here?  and just cite gestalt in footnotes?)
   A simple example is the width of a bar plot - we manage to ignore that
@@ -4677,16 +4793,27 @@ to emphasise structure - combination of order and category
 * kiviat plots or radar plots or spider plots
   (David Peebles (2008))
 
-* do the side-by-side pie chart idea as an example of reasoning your
-  way to a new visualisation.
+* End game/summary: 
+  Present process by which a data vis can be broken down.
+  What mappings are being used? 
+  What can be mapped back to?
+  ...
 
-* Another possible application of data vis knowledge:
-  Analyse one of the weird boxplot variations that look a bit like a ziggurat?
+  * Use heatmap as case study?
+
+  * do the side-by-side pie chart idea as an example of reasoning your
+    way to a new visualisation.
+
+  * Another possible application of data vis knowledge:
+    Analyse one of the weird boxplot variations that look a bit like a ziggurat?
 
 * citations to stuff on pictographs and glyphs and icon-based plots
   (in clutter section?)
 
+* add citations for R packages used in plots and diagrams.
+
 * An index that links to all of the places that different sorts of plots
   are discussed ?
 
+* Check all references, especially the ones generated by chatgpt !
 &nbsp;

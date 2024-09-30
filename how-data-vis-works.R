@@ -16,6 +16,7 @@ library(ggsci)
 library(grid)
 library(ggmosaic)
 library(GGally)
+library(ggforce)
 
 
 ## -----------------------------------------------------------------------------
@@ -1999,7 +2000,8 @@ ggplot(crimeGroupTotal) +
     geom_text(aes(label=paste0(total, " "), x=total, y=group), 
               hjust=1, colour="white", fontface="bold") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=1)
+    theme(aspect.ratio=1,
+          axis.title.y=element_blank())
 
 
 ## -----------------------------------------------------------------------------
@@ -2043,5 +2045,40 @@ ggplot(crimeAgeSimple) +
           legend.text=element_text(colour="grey"),
           legend.title=element_text(colour=highlight, face="bold"),
           aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| message: false
+#| label: tbl-wiki-rwc
+#| tbl-cap: A table of the number of times different words occur in the Wikipedia page for the Rugby World Cup (for words that appear more than once).  There are 287 different words, but only the first 6 are shown here.
+kable(head(wikiRWC), row.names=FALSE)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-wordcloud-bar
+#| fig-cap: A bar plot of the frequency of different words in the Wikipedia page for the Rugby World Cup.
+temp <- subset(wikiRWC, freq > 1)
+padding <- 300 - nrow(temp)
+maxlen <- max(nchar(temp$word))
+temp$word <- sprintf(paste0("%", maxlen, "s"), temp$word)
+temp <- rbind(temp, 
+              data.frame(word=sapply(1:padding, 
+                                     function(i) 
+                                         paste(rep(" ", i), collapse="")),
+                         freq=rep(0, padding)))
+temp$word <- reorder(temp$word, temp$freq)
+temp$group <- rep(1:6, each=50)
+ggplot(temp) + 
+    geom_col(aes(freq, word)) + 
+    scale_x_continuous(breaks=c(0, 4, 8, 20, 40, 60),
+                       expand=expansion(add=c(0, 5))) +
+    facet_row(vars(group), scales="free", space="free") +
+    theme(axis.text.y=element_text(size=7),
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank(),
+          strip.background=element_blank(),
+          strip.text=element_blank())
 
 dev.off()

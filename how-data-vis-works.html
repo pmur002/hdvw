@@ -158,7 +158,9 @@ div.csl-indent {
   <li><a href="#data-symbols" id="toc-data-symbols" class="nav-link" data-scroll-target="#data-symbols"><span class="header-section-number">11.1</span> Data symbols</a></li>
   <li><a href="#guides" id="toc-guides" class="nav-link" data-scroll-target="#guides"><span class="header-section-number">11.2</span> Guides</a></li>
   <li><a href="#labels" id="toc-labels" class="nav-link" data-scroll-target="#labels"><span class="header-section-number">11.3</span> Labels</a></li>
-  <li><a href="#case-study-word-clouds" id="toc-case-study-word-clouds" class="nav-link" data-scroll-target="#case-study-word-clouds"><span class="header-section-number">11.4</span> Case study: Word clouds</a></li>
+  <li><a href="#annotations" id="toc-annotations" class="nav-link" data-scroll-target="#annotations"><span class="header-section-number">11.4</span> Annotations</a></li>
+  <li><a href="#case-study-word-clouds" id="toc-case-study-word-clouds" class="nav-link" data-scroll-target="#case-study-word-clouds"><span class="header-section-number">11.5</span> Case study: Word clouds</a></li>
+  <li><a href="#case-study-tables" id="toc-case-study-tables" class="nav-link" data-scroll-target="#case-study-tables"><span class="header-section-number">11.6</span> Case study: Tables</a></li>
   </ul></li>
   <li><a href="#todo-1" id="toc-todo-1" class="nav-link" data-scroll-target="#todo-1"><span class="header-section-number">12</span> TODO</a></li>
   </ul>
@@ -564,8 +566,7 @@ Figure&nbsp;2.4: The extinction illusion. Look at one corner of the image and th
 </div>
 </div>
 </div>
-<p><a href="#fig-fixations" class="quarto-xref">Figure&nbsp;2.5</a> shows eye-tracking data from one person viewing an image for 10 seconds.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a><br>
-The fixations are shown as circles (with larger circles representing longer fixations) and the saccades are shown as lines between the circles.</p>
+<p><a href="#fig-fixations" class="quarto-xref">Figure&nbsp;2.5</a> shows eye-tracking data from one person viewing an image for 10 seconds.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The fixations are shown as circles (with larger circles representing longer fixations) and the saccades are shown as lines between the circles.</p>
 <div id="fig-fixations" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fixations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3016,6 +3017,8 @@ Figure&nbsp;10.2: A bar plot of the proportion of offenders from different ethni
 <section id="text" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Text</h1>
 <p><a href="#fig-no-text" class="quarto-xref">Figure&nbsp;11.1</a> is a version of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1.1</a> with all of the text removed. Although we can see that some values, or rather three sets of values, haved decreased, we cannot tell what the values are or by how much they have decreased. If there was ever any doubt, <a href="#fig-no-text" class="quarto-xref">Figure&nbsp;11.1</a> makes it clear that text is doing a lot of important work in a data visualisation.</p>
+<p>Eye-tracking studies also show that people spend a lot of time looking at the text within a data visualisation. For example, in <a href="#fig-fixations" class="quarto-xref">Figure&nbsp;2.5</a>, there are more fixations and longer fixations on the text than anywhere else.</p>
+<p>This section looks at the role text plays in making data visualisations work.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-no-text" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -3030,8 +3033,6 @@ Figure&nbsp;11.1: A line plot with all text removed. Without text, it is impossi
 </div>
 </div>
 </div>
-<p>Eye-tracking studies also show that people spend a lot of time looking at the text within a data visualisation. In <a href="#fig-fixations" class="quarto-xref">Figure&nbsp;2.5</a>, there are more fixations and longer fixations on the text than anywhere else.</p>
-<p>This section looks at the role text plays in making data visualisations work.</p>
 <section id="data-symbols" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="data-symbols"><span class="header-section-number">11.1</span> Data symbols</h2>
 <p><a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;11.2</a> is a version of <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a> with white text added to each bar showing the exact number of offenders in each ethnic group. This is an example of using text as a <strong>data symbol</strong>.</p>
@@ -3049,20 +3050,20 @@ Figure&nbsp;11.2: A bar plot of the total number of offenders for different ethn
 </div>
 </div>
 </div>
-<p>Just like the bars in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;11.2</a>, data values are mapped to visual features of the text. For example, the data values for the number of offenders in each ethnic group are mapped to the <strong>length</strong> of the bars, but they are also mapped to the horizontal <strong>position</strong> of the text <em>and</em> to the <strong>shape</strong> of the text, the letters and digits that make up the text. The ethnic groups are mapped to the vertical <strong>position</strong> of the bars <em>and</em> to the vertical <strong>position</strong> of the text.</p>
-<p>Compared to the bars in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;11.2</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;2.3</a>, text is a visual object. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;2.7</a>).<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a></p>
-<p>The value of text data symbols is that they allow us to map <em>back</em> to data values very well (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;2.1</a>). In terms of the capabilities that we discussed in <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a>, text is appropriate for both <strong>quantitative</strong> and <strong>qualitative</strong> data values, text is extremely <strong>accurate</strong> and has a very large <strong>capacity</strong>.</p>
+<p>Just as data values are mapped to the visual features of the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;11.2</a>, data values are also mapped to the visual features of the text data symbols. For example, the ethnic groups are mapped to the vertical <strong>position</strong> of the bars <em>and</em> to the vertical <strong>position</strong> of the text. The data values for the number of offenders in each ethnic group are mapped to the <strong>length</strong> of the bars, but they are also mapped to the horizontal <strong>position</strong> of the text <em>and</em> to the <strong>shape</strong> of the text—the letters and digits that make up the text.</p>
+<p>Compared to the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;11.2</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;2.3</a>, the text data symbols are <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;2.7</a>).<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a></p>
+<p>The value of text data symbols is that they allow us to map <em>back</em> to data values very well (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;2.1</a>). In terms of the criteria that we discussed in <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a>, text is appropriate for both <strong>quantitative</strong> and <strong>qualitative</strong> data values, text is extremely <strong>accurate</strong>, and text has a very large <strong>capacity</strong>.</p>
 <blockquote class="blockquote">
 <p>Text data symbols are effective because they can be used to represent any sort of data and they allow a very accurate mapping <em>back</em> to data values.</p>
 </blockquote>
-<p>The weakness of text is that our visual system cannot generate <strong>visual summaries</strong> of large amounts of text (<a href="#sec-summaries" class="quarto-xref">Chapter&nbsp;6</a>). This is why a table of numbers, like <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1.1</a>, is ineffective for perceiving groups of values or trends in values.</p>
+<p>The weakness of text is that our visual system cannot generate <strong>visual summaries</strong> of large amounts of text (<a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;6.2</a>). This is why a table of numbers, like <a href="#tbl-crime" class="quarto-xref">Table&nbsp;1.1</a>, is ineffective for perceiving groups of values or trends in values.</p>
 <blockquote class="blockquote">
 <p>Large numbers of text data symbols are <em>not</em> effective because the visual system cannot generate visual summaries from the text.</p>
 </blockquote>
 </section>
 <section id="guides" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="guides"><span class="header-section-number">11.2</span> Guides</h2>
-<p><a href="#fig-crime-guides" class="quarto-xref">Figure&nbsp;11.3</a> is a version of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1.1</a> with the guides highlighted in purple. There are tick marks and tick labels on the x-axis and y-axis, There are horizontal grid lines, and there is a legend to show the mapping from the different ages to colour.</p>
+<p><a href="#fig-crime-guides" class="quarto-xref">Figure&nbsp;11.3</a> is a version of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1.1</a> with the guides highlighted in purple. There are tick marks and tick labels on the x-axis and y-axis, there are horizontal grid lines, and there is a legend to show the mapping from the different ages to different colours.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-crime-guides" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -3077,9 +3078,10 @@ Figure&nbsp;11.3: A line plot of the crime rate amongst youth offenders aged 14 
 </div>
 </div>
 </div>
-<p>The first thing to note about the guides in <a href="#fig-crime-guides" class="quarto-xref">Figure&nbsp;11.3</a> is that they are all composed of <strong>data symbols</strong>, with <strong>data values</strong> mapped to <strong>visual features</strong> of the data symbols (<a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a>). This is perhaps easiest to see with the grid lines. Each grid line is a data symbol where a data value, a rate of offending, has been mapped to the vertical <strong>position</strong> of the line. Similarly, each tick mark on the y-axis is a line data symbol where a rate of offending has been mapped to the vertical <strong>position</strong> of the line and each tick mark on the x-axis is a line data symbol where a year has been mapped to the horizontal <strong>position</strong> of the line. Finally, each of the tick labels on the y-axis is a text data symbol where a rate of offending has been mapped to the vertical <strong>position</strong> of the text <em>and</em> to the <strong>shape</strong> of the text and similarly for the x-axis tick labels. The legend is also made up of line data symbols and text data symbols, this time with age data values mapped to the <strong>colour</strong> of lines and the <strong>shape</strong> of text.</p>
+<p>The first thing to note about the guides in <a href="#fig-crime-guides" class="quarto-xref">Figure&nbsp;11.3</a> is that they are all composed of <strong>data symbols</strong>, with <strong>data values</strong> mapped to <strong>visual features</strong> of the data symbols (<a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a>). This is perhaps easiest to see with the grid lines. Each grid line is a data symbol where a data value, a rate of offending, has been mapped to the vertical <strong>position</strong> of the line. Similarly, each tick mark on the y-axis is a line data symbol where a rate of offending has been mapped to the vertical <strong>position</strong> of the line and each tick mark on the x-axis is a line data symbol where a year has been mapped to the horizontal <strong>position</strong> of the line. Finally, each of the tick labels on the y-axis is a text data symbol where a rate of offending has been mapped to the vertical <strong>position</strong> of the text <em>and</em> to the <strong>shape</strong> of the text and similar mappings apply to the x-axis tick labels. The legend is also made up of line data symbols and text data symbols, this time with age data values mapped to the <strong>colour</strong> of lines and the <strong>shape</strong> of text.</p>
 <p>Furthermore, the grid lines, tick marks, and tick labels form groups thanks to their shared proximity (<a href="#sec-visual-model-groups" class="quarto-xref">Section&nbsp;2.5</a>).</p>
-<p>The fact that guides typically involve <strong>text</strong> data symbols makes sense because a guide typically presents only a small number of known data values that we want to map <em>back</em> to as accurately as possible. That is where text excels.</p>
+<p><strong>TODO</strong> also gestalt continuity because they are aligned?</p>
+<p>The fact that guides typically involve <strong>text</strong> data symbols makes sense because a guide typically presents only a small number of known data values that we want to map <em>back</em> to as accurately as possible. This is the situation where text excels.</p>
 <p>Viewed as groups of data symbols, the guides on a data visualisation make sense: the guides provide a very accurate way to map <em>back</em> from <strong>positions</strong> and <strong>colours</strong> on the plot to data values.</p>
 <blockquote class="blockquote">
 <p>Guides are effective because they map known data values to data symbols and because those data symbols map <em>back</em> to data values extremely well.</p>
@@ -3102,7 +3104,7 @@ Figure&nbsp;11.4: A line plot of the crime rate amongst youth offenders aged 14 
 </div>
 </div>
 </div>
-<p>The difference between labels and the other components of a data visualisation, the data symbols and the guides, is that labels relate to <strong>metadata</strong> rather than data values. Labels contain information like descriptions of variables and units of measure and sources of data.</p>
+<p>The difference between labels and the other components of a data visualisation, the data symbols and the guides, is that labels relate to <strong>metadata</strong> rather than data values. Labels contain information like descriptions of variables and units of measurement and references to data sources. These are all important pieces of information, but they are more complex, more abstract, and far fewer in number than data values, so it again makes sense that the best way to present this information is via text.</p>
 <div id="fig-label-mapping" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-label-mapping-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3117,12 +3119,102 @@ Figure&nbsp;11.5: Labels can be viewed as mappings from metadata to text as a vi
 </figcaption>
 </figure>
 </div>
-<p>Another purpose of labels is to direct attention …</p>
+<p><strong>TODO</strong> Another purpose of labels is to direct attention …</p>
 </section>
-<section id="case-study-word-clouds" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="case-study-word-clouds"><span class="header-section-number">11.4</span> Case study: Word clouds</h2>
-<p>Good mapping back to concepts or objects from text data symbols Note the use of size? (bad) Note the use of colours? (good) Orientation used without it corresponding to change in the data (very bad!)</p>
-<p>See ./Data/RWC/Wordcloud/</p>
+<section id="annotations" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="annotations"><span class="header-section-number">11.4</span> Annotations</h2>
+<p><strong>TODO</strong> one-off text data symbols and labels</p>
+<p>(labelling of teams in dotplot of points per game might work)</p>
+</section>
+<section id="case-study-word-clouds" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="case-study-word-clouds"><span class="header-section-number">11.5</span> Case study: Word clouds</h2>
+<p><a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;11.6</a> shows a word cloud data visualisation based on the text of the <a href="https://en.wikipedia.org/wiki/Rugby_World_Cup">Wikipedia page on the Rugby World Cup</a> <span class="citation" data-cites="wiki-rwc">(<a href="#ref-wiki-rwc" role="doc-biblioref">Wikipedia 2024</a>)</span> This visualisation shows the frequency with which different words appear on the Wikipedia page. The data values that are being visualised are shown in <a href="#tbl-wiki-rwc" class="quarto-xref">Table&nbsp;11.1</a>.</p>
+<div id="fig-wordcloud" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wordcloud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Data/RWC/WordCloud/wordcloud-trim.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wordcloud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6: A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup. This image was produced using the R package {wordcloud} <span class="citation" data-cites="pkg-wordcloud">(<a href="#ref-pkg-wordcloud" role="doc-biblioref">Fellows 2018</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>This data visualisation is unusual because it consists entirely of text <strong>data symbols</strong>. The mappings in <a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;11.6</a> are from each word to the <strong>shape</strong> of a text data symbol and from frequency to the <strong>size</strong> of a text data symbol. There is no need for a guide for the mapping from words to text shape because the mapping is exact; there is no need to “convert” each text data symbol into a word data value because it is already there.</p>
+<p>There is no guide for the mapping from word frequency to text size, but the visualisation is still effective at conveying the <em>relative</em> frequencies. The larger words occurred more frequently.</p>
+<div class="cell">
+<div id="tbl-wiki-rwc" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-wiki-rwc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.1: A table of the number of times different words occur in the Wikipedia page for the Rugby World Cup (for words that appear more than once). There are 287 different words, but only the first 6 are shown here.
+</figcaption>
+<div aria-describedby="tbl-wiki-rwc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">rugby</td>
+<td style="text-align: right;">72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">world</td>
+<td style="text-align: right;">66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tournament</td>
+<td style="text-align: right;">56</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cup</td>
+<td style="text-align: right;">54</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">new</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">zealand</td>
+<td style="text-align: right;">38</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The mapping of frequencies to <strong>size</strong> does not provide the best <strong>accuracy</strong> for mapping <em>back</em> to frequencies, so we cannot identify the exact frequency of any one word, we cannot identify the quantitative difference in frequency between pairs of words, and we cannot easily perceive the distribution of frequencies across words. A word cloud is only effective for approximate ordinal comparisons of word frequencies (<a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a>).</p>
+<p>Frequency is also mapped to <strong>position in space</strong>, with more frequent words placed towards the centre of the word cloud. This is an example of redundant mapping; more frequent words are both larger <em>and</em> more central.</p>
+<p><strong>TODO</strong> link back to redundant mappings</p>
+<p>Another benefit of the mapping from frequency to position in space is the efficient use of space. For example, <a href="#fig-wordcloud-bar" class="quarto-xref">Figure&nbsp;11.7</a> shows the same data presented as a bar plot with the frequency of each word mapped to a separate bar. Although the accuracy is improved for comparing frequencies, the bar plot does not have as much room for the words themselves.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-wordcloud-bar" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wordcloud-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-wordcloud-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wordcloud-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.7: A bar plot of the frequency of different words in the Wikipedia page for the Rugby World Cup.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>One weakness of the word cloud is that the <strong>angle</strong> of words changes with no corresponding change in the data values.</p>
+<p><strong>TODO</strong> link this back to congruence and same=same (different=different).</p>
+<blockquote class="blockquote">
+<p>A word cloud is effective for conveying relative frequencies of words because it maps words to text data symbols and it maps word frequency to both size and position in space.</p>
+</blockquote>
+</section>
+<section id="case-study-tables" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="case-study-tables"><span class="header-section-number">11.6</span> Case study: Tables</h2>
+<p>Common guidelines are aimed at reducing the cognitive burden of having to focus on each individual piece of text BUT then you lose the accuracy benefit. Guidelines also make more text labels the same, which makes different easier to spot. When comparing two numbers, as text, even though text more accurate, the cognitive burden is higher than when comparing two bars.</p>
 </section>
 </section>
 <section id="todo-1" class="level1" data-number="12">
@@ -3153,17 +3245,15 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <li><p>big data (or even medium data) - need better name =&gt; overlapping and summary plots like boxplots (then violin plots)</p></li>
 <li><p>use of white space around points in scatter plot</p></li>
 <li><p>visual objects pictures as data points icons higher-level =&gt; gain more complex information transfer BUT lose visual summaries (cos not just simple shapes with simple features)? case study: chernoff faces</p></li>
-<li><p>annotations (labelling of teams in dotplot of points per game might work)</p></li>
-<li><p>attention bottom-up AND top-down</p></li>
-<li><p>labels (top-down attention)</p></li>
+<li><p>attention bottom-up AND top-down Bottom-up includes ALL pre-attentive cues!?</p></li>
 <li><p>jittering which is dodgy because it involves a visual change that is NOT related to a change in the data. The hope is that the randomness of the visual change reduces the signal.</p></li>
 <li><p>deliberately losing information (e.g., luminance scale for quant)</p></li>
 <li><p>clutter link back to visual objects ?</p></li>
-<li><p>layout (arrangement of elements of plot) come at it from visual-model perspective. alignment, proximity, repetition are all gestalt (contrast is just make things different that should be different + vice versa) overriding theme is organisation and visual simplicity</p>
+<li><p>layout (arrangement of elements of plot) come at it from visual-model perspective. alignment, proximity, repetition are all gestalt (contrast is just make things different that should be different + vice versa) overriding theme is organisation and visual simplicity alignment is continuity ?</p>
 <p>One way to look at this is that, when you map data values to a data symbol you leave some (often several) visual features of the data symbol undetermined. How to choose values for those other visual features ?</p></li>
 <li><p>somewhere in intro (?) as a footnote (?) cite Sonning (2022), which goes into great detail about how to do a line plot right; this document aims to provide a simpler set of concepts that can be applied to any data vis by a less expert reader.</p></li>
 <li><p>bubble plots (area not effective =&gt; something better?)</p></li>
-<li><p>Things that do not change are not salient (e.g., the widths of bars in bar plot), BUT things that DO change are salient (so only do this to represent changes in the data). This should be cited to something. Principle of unambiguity ? Example is mosaic plot which changes <em>shape</em> as well as area so two identical areas could end up looking different =&gt; BAD! Put this in “same is same” within visual congruence? (and put gestalt similarity here? and just cite gestalt in footnotes?) A simple example is the width of a bar plot - we manage to ignore that because it does not change? AND have “different is different”? And just cite the relevant literature for these points in footnotes?</p></li>
+<li><p>Things that do not change are not salient (e.g., the widths of bars in bar plot), BUT things that DO change are salient (so only do this to represent changes in the data). This should be cited to something. Principle of unambiguity ? Example is mosaic plot which changes <em>shape</em> as well as area so two identical areas could end up looking different =&gt; BAD! Another example is word cloud which changes orientation NOT based on data. Put this in “same is same” within visual congruence? (and put gestalt similarity here? and just cite gestalt in footnotes?) A simple example is the width of a bar plot - we manage to ignore that because it does not change? AND have “different is different”? And just cite the relevant literature for these points in footnotes?</p></li>
 <li><p>Add citation for distance effect</p></li>
 <li><p>Use reordering of <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;4.7</a> (so that they start tallest to smallest) THEN should see change in that pattern later on more easily? Use this as an example of “visual shape” in a bar plot. Revisit heatmaps - regions/shapes of colours?</p></li>
 <li><p>Need citation for contrast effect</p></li>
@@ -3186,12 +3276,17 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <li><p>add example (section?) to combine.qmd where either separable is NOT appropriate or integral is NOT appropriate. In the mosaic plot case, the interaction is beneficial.</p></li>
 <li><p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models? also talk about failing assumptions of these models, like unimodal for boxplot)</p></li>
 <li><p>kiviat plots or radar plots or spider plots (David Peebles (2008))</p></li>
+<li><p>End game/summary: Present process by which a data vis can be broken down. What mappings are being used? What can be mapped back to? …</p>
+<ul>
+<li><p>Use heatmap as case study?</p></li>
 <li><p>do the side-by-side pie chart idea as an example of reasoning your way to a new visualisation.</p></li>
 <li><p>Another possible application of data vis knowledge: Analyse one of the weird boxplot variations that look a bit like a ziggurat?</p></li>
+</ul></li>
 <li><p>citations to stuff on pictographs and glyphs and icon-based plots (in clutter section?)</p></li>
+<li><p>add citations for R packages used in plots and diagrams.</p></li>
 <li><p>An index that links to all of the places that different sorts of plots are discussed ?</p></li>
+<li><p>Check all references, especially the ones generated by chatgpt ! &nbsp;</p></li>
 </ul>
-<p>&nbsp;</p>
 
 </section>
 
@@ -3212,6 +3307,12 @@ Cleveland, William S. 1985. <span>“Graphical Methods for Data Presentation: Fu
 <div id="ref-cleveland1984graphical" class="csl-entry" role="listitem">
 Cleveland, William S, and Robert McGill. 1984. <span>“Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods.”</span> <em>Journal of the American Statistical Association</em> 79 (387): 531–54.
 </div>
+<div id="ref-pkg-wordcloud" class="csl-entry" role="listitem">
+Fellows, Ian. 2018. <em>Wordcloud: Word Clouds</em>. <a href="https://CRAN.R-project.org/package=wordcloud">https://CRAN.R-project.org/package=wordcloud</a>.
+</div>
+<div id="ref-franconeri2021" class="csl-entry" role="listitem">
+Franconeri, Steven L., Lace M. Padilla, Priti Shah, Jeffrey M. Zacks, and Jessica Hullman. 2021. <span>“The Science of Visual Data Communication: What Works.”</span> <em>Psychological Science in the Public Interest</em> 22 (3): 110–61. <a href="https://doi.org/10.1177/15291006211051956">https://doi.org/10.1177/15291006211051956</a>.
+</div>
 <div id="ref-heer2010crowdsourcing" class="csl-entry" role="listitem">
 Heer, Jeffrey, and Michael Bostock. 2010. <span>“Crowdsourcing Graphical Perception: Using Mechanical Turk to Assess Visualization Design.”</span> In <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</em>, 203–12. ACM.
 </div>
@@ -3220,6 +3321,9 @@ Mackinlay, Jock. 1986. <span>“Automatic Design of Graphical Presentations of R
 </div>
 <div id="ref-pomerantz1994emergent" class="csl-entry" role="listitem">
 Pomerantz, James R., and Anna I. Cragin. 1994. <span>“Emergent Features and Feature Combination.”</span> <em>Attention, Perception, &amp; Psychophysics</em> 55 (1): 48–55.
+</div>
+<div id="ref-Sönning2023" class="csl-entry" role="listitem">
+Sönning, Lukas. 2023. <span>“Drawing on Principles of Perception: The Line Plot.”</span> In <em>Data Visualization in Corpus Linguistics: Critical Reflections and Future Directions</em>, edited by Lukas Sönning and Ole Schützler. Studies in Variation, Contacts and Change in English 22. Helsinki: VARIENG. <a href="https://urn.fi/URN:NBN:fi:varieng:series-22-2">https://urn.fi/URN:NBN:fi:varieng:series-22-2</a>.
 </div>
 <div id="ref-stevens1957psychophysics" class="csl-entry" role="listitem">
 Stevens, Stanley Smith. 1957. <span>“On the Psychophysical Law.”</span> <em>Psychological Review</em> 64 (3): 153–81.
@@ -3236,6 +3340,9 @@ Ware, Colin. 2021. <em>Information Visualization: Perception for Design</em>. 4t
 <div id="ref-weber1834tastsinn" class="csl-entry" role="listitem">
 Weber, Ernst Heinrich. 1846. <span>“Der Tastsinn Und Das Gemeingef<span>ü</span>hl.”</span> <em>Rudolf Wagner (Hg.): Handw<span>ö</span>rterbuch Der Physiologie. Braunschweig</em> 3: 481–588.
 </div>
+<div id="ref-wiki-rwc" class="csl-entry" role="listitem">
+Wikipedia. 2024. <span>“<span>Rugby World Cup</span>: <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="http://en.wikipedia.org/w/index.php?title=Rugby%20World%20Cup" class="uri">http://en.wikipedia.org/w/index.php?title=Rugby%20World%20Cup</a>.
+</div>
 <div id="ref-wilkinson2005" class="csl-entry" role="listitem">
 Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Second edition. New York: Springer.
 </div>
@@ -3249,7 +3356,7 @@ Zhang, Jiajie. 1996. <span>“A Representational Analysis of Relational Informat
 <li id="fn2"><p>This document is not only a synthesis, but also a <em>simplification</em> of lot of different terms, theories, and results from the literature of vision science. The goal of this document is to provide a description that is sufficiently straightforward for the non-expert to consume, hopefully without making too many experts roll in their graves or send them to an early one.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Gathering axes and legends together under the generic label of “guides” is from the Grammar of Graphics <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>The idea of characterising a data visualisation as a set of “mappings” from data values to visual representations is also from the Grammar of Graphics <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Simple descriptions of the human visual system can be found in many books on data visualisation, for example, <span class="citation" data-cites="cairo2012functional">Cairo (<a href="#ref-cairo2012functional" role="doc-biblioref">2012</a>)</span>. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more in-depth, but still very accessible description.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Simple descriptions of the human visual system can be found in many articles and books on data visualisation, for example, <span class="citation" data-cites="Sönning2023">Sönning (<a href="#ref-Sönning2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="franconeri2021">Franconeri et al. (<a href="#ref-franconeri2021" role="doc-biblioref">2021</a>)</span>, and <span class="citation" data-cites="cairo2012functional">Cairo (<a href="#ref-cairo2012functional" role="doc-biblioref">2012</a>)</span>. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more in-depth, but still very accessible description.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Explain that this is NOT just a fovea vs periphery illusion—there is currently no complete explanation for this effect—but it serves to show that we are getting different information from different regions of the field of view.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>The plot was originally from The Economist, but this image was taken from the resources provided on the <a href="http://massvis.mit.edu/">MASSVIS project web site</a>.<br>
 The eye tracking data were taken from the same web site.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

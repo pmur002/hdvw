@@ -71,3 +71,6 @@ RWCtopPerGame$country <- factor(RWCtopPerGame$country, levels=topNations)
 
 RWCtopNorm <- RWCnorm[RWCnorm$country %in% topNations, ]
 RWCtopNorm$country <- factor(RWCtopNorm$country, levels=topNations)
+
+## Wikipedia page
+wikiRWC <- read.csv(file.path(dataPath, "WordCloud", "wiki-rwc.csv"))

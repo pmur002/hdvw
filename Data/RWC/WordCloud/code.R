@@ -30,16 +30,29 @@ df <- data.frame(word = names(words), freq=words)
 remove <- c("-", "–", "–", "—", "retrieved", "tbd", "archived")
 df <- df[!(df$word %in% remove), ]
 
+write.csv(df, "wiki-rwc.csv", row.names=FALSE)
+
 ## Word cloud
 
 library(wordcloud)
 
+svg("wordcloud.svg")
+par(mar=rep(0, 4))
 wordcloud(words = df$word, freq = df$freq, min.freq = 2,
-          max.words=200, random.order=FALSE, rot.per=0.35,
-          colors=brewer.pal(8, "Dark2"))
+          max.words=200, random.order=FALSE, rot.per=0.35)
+dev.off()
+
+## Trim some whitespace
+
+svg <- readLines("wordcloud.svg")
+vbline <- grep("viewBox", svg)
+svg[vbline] <- gsub("0 0 504 504", "52 52 400 400", svg[vbline])
+## width/height
+svg[vbline] <- gsub("504", "400", svg[vbline])
+writeLines(svg, "wordcloud-trim.svg")
 
 notrun <- function() {
-    library(wordcloud)
+    library(wordcloud2)
     wordcloud2(data=subset(df, freq > 1), size=1.6, color='random-dark')
 }
 
