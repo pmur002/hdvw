@@ -8,13 +8,6 @@ have decreased.  If there was ever any doubt, @fig-no-text makes it
 clear that text
 is doing a lot of important work in a data visualisation.
 
-Eye-tracking studies also show that people spend a lot of time looking
-at the text within a data visualisation.  For example, in @fig-fixations,
-there are more fixations and longer fixations on the text than 
-anywhere else.
-
-This section looks at the role text plays in making data visualisations work.
-
 ```{r}
 #| echo: false
 #| label: fig-no-text
@@ -26,6 +19,22 @@ ggplot(crimeAgeSimple) +
           panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
 ```
+
+Eye-tracking studies also show that people spend a lot of time looking
+at the text within a data visualisation.  For example, in @fig-fixations,
+there are more fixations and longer fixations on the text than 
+anywhere else.
+
+::: {#fig-fixations}
+
+![](Images/economist_daily_chart_75_track.svg)
+
+Eye tracking data from the MASSVIS project that shows fixations (circles) and 
+saccades (lines between circles) for one person viewing an image for 10 seconds.
+Longer fixations are represented by larger circles.
+:::
+
+This section looks at the role text plays in making data visualisations work.
 
 ## Data symbols
 
@@ -216,11 +225,10 @@ extremely high-fidelity.
 
 **TODO** Another purpose of labels is to direct attention ...
 
-## Annotations
+top-down
 
-**TODO** one-off text data symbols and labels
-
-(labelling of teams in dotplot of points per game might work)
+Do text labels with colours that match the data symbols we want
+the viewer to attend to.
 
 ## Case study:  Word clouds
 
@@ -365,7 +373,7 @@ The reduction in detail, with fewer decimal places, means that
 there is less complexity in the visual field.
 The consistent number of decimal places means that less is
 changing, so differences are easier to detect
-(@sec-visual-model-summaries).
+(@sec-differences).
 Finally, the consistent baseline provided by right-alignment
 means that the text **length** provides a crude comparison,
 particularly in the column showing the number of clean breaks.

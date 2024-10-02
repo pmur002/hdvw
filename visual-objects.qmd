@@ -1,0 +1,111 @@
+
+# Visual Objects
+
+@fig-flags shows a scatter plot of the number of clean breaks and the
+number of tries for countries
+at the 2023 Rugby World Cup (@tbl-rwc-2023).
+This shows the same positive relationship between clean breaks and tries
+that we saw in @fig-scatter.
+However, this scatter plot is using a much more complicated data symbol:
+the flags of the different countries rather than a simple circle for
+each country.
+
+```{r}
+#| echo: false
+#| label: fig-flags
+#| fig-cap: A scatter plot with flags as data symbols
+size <- 10
+flag <- function(data, coords) {
+    width <- unit(size, "mm")
+    height <- data$ar * width
+    flags <- lapply(1:nrow(data),
+                    function(i) {
+                        grobTree(rectGrob(coords$x[i], coords$y[i], 
+                                          width, height[i], 
+                                          gp=gpar(fill="white")),
+                                 rasterGrob(readPNG(data$path[i]), 
+                                            coords$x[i], coords$y[i], width))
+                    })
+    do.call(grobTree, flags)
+}
+ggplot(rwcFlags) +
+    grid_panel(flag, aes(breaks, tries, path=path, ar=ar)) +
+    theme(aspect.ratio=2/3)
+```
+
+The flag data symbols in @fig-flags are examples of **visual objects**.
+The flags are not simple shapes like bars or circles.
+On the other hand, the relatively complex flags are, at least for
+some viewers and for some flags, extremely familiar.
+
+There are simple mappings from number of clean breaks to the
+horizontal **position** of each flag and from number of tries to the
+vertical **position** of each flag, but each country value is not
+being mapped to a basic feature of a simple shape.
+
+This section looks at the effectiveness of using visual objects 
+as data symbols.
+
+## Icons
+
+Do dog and cat from master class ?
+
+## Maps
+
+## Case study: Chernoff faces
+
+@fig-chernoff visualises the 2023 Rugby World Cup data (@tbl-rwc-2023) using
+Chernoff faces.
+The data symbol in this visualisation is a little unusual; each
+country is represented by a combination of circles, curves, and lines
+that together produce a **visual object** that resembles a face.
+The mappings in this visualisation are also a little unusual.
+The number of points scored is mapped to the **curvature** of the
+smile, the number of tries is mapped to the **angle** of the eye brows,
+and the number of clean breaks is mapped to the horizontal **position** of 
+the eyes.
+
+```{r}
+#| echo: false
+#| label: fig-chernoff
+#| fig-cap: A Chernoff faces plot of the ...
+rwcChernoff <- RWCperGame
+rwcChernoff$country <- reorder(rwcChernoff$country, rwcChernoff$points)
+ggplot(rwcChernoff) +
+    geom_chernoff(aes(x="", y="", smile=points, brow=tries, 
+                      eyes=breaks),
+                  size=20, fill="white") +
+    facet_wrap(vars(country), strip.position="bottom") +
+    coord_cartesian(clip="off") +
+    theme(panel.border=element_blank(),
+          strip.background=element_blank(),
+          axis.title=element_blank(),
+          axis.text=element_blank(),
+          axis.ticks=element_blank(),
+          legend.position="none",
+          aspect.ratio=1)
+```
+
+The mappings in a Chernoff face are *not* very accurate (see @sec-accuracy;
+**curvature** is ranked *below* colour in terms of accuracy), so
+Cheroff faces are *not* very effectuve for 
+mapping *back* to raw data values.
+
+However, the familiarity of Chernoff faces means that we are easily
+able to perceive common combinations of the facial features.
+For example, we can see several sad faces at the top-left of @fig-chernoff
+and several happy faces at the bottom-right.
+We can perceive countries that share similar combinations
+of performance measures.
+In other words, we can perceive multi-dimensional correlations
+and multi-dimensional groupings in the data.
+
+In this case, the happier faces have been arranged to
+correspond to the more successful teams and the 
+teams have been ordered from least points scored to most points scored.
+The resulting proximity helps with perceiving groups of similar faces.
+
+> A Chernoff face is effective at conveying multi-dimensional relationships
+  because the data symbol is a familiar visual object from which we can
+  easily perceive simple human emotions.
+

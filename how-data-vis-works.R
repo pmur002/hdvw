@@ -2,6 +2,7 @@ pdf(NULL)
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| message: false
+library(png)
 library(dplyr)
 library(reshape2)
 library(tidyr)
@@ -9,6 +10,7 @@ library(knitr)
 library(kableExtra)
 library(reshape2)
 library(ggplot2)
+library(gggrid)
 library(scales)
 library(colorspace)
 library(rcartocolor)
@@ -17,6 +19,8 @@ library(grid)
 library(ggmosaic)
 library(GGally)
 library(ggforce)
+library(ggChernoff)
+library(ggimage)
 
 
 ## -----------------------------------------------------------------------------
@@ -496,56 +500,82 @@ grid.rect(gp=gpar(col=NA, fill=pat))
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-pop-colour
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
-#| fig-subcap:
-#|   - One teal dot amongst 24 orange dots.
-#|   - One teal dot amongst 99 orange dots.
 spread <- function(n, shift=1/n, seed=12345678) {
     set.seed(seed)
-    x <- rep(seq(0, 1, length.out=n), n)
-    y <- rep(seq(0, 1, length.out=n), each=n)
+    xy <- grid(n)
     xd <- runif(n^2)
     yd <- runif(n^2)
-    list(x=x + shift*xd, y=y + shift*yd)
+    list(x=xy$x + shift*xd, y=xy$y + shift*yd)
 }
-cols2 <- pal_npg()(2)
+
+grid <- function(n) {
+    x <- rep(seq(0, 1, length.out=n), n)
+    y <- rep(seq(0, 1, length.out=n), each=n)
+    list(x=x, y=y)
+}
+
 resample <- function(x, ...) x[sample.int(length(x), ...)]
-dots <- function(n, different=1) {
+
+dots <- function(n, different=1, cols2=colsnpg, spread=FALSE, mix=FALSE, r2) {
     n2 <- n^2
-    xy <- spread(n)
-    cols <- rep(cols2[1], n2)
-    sub <- TRUE ## xy$x < xy$y
-    i <- resample((1:n2)[sub], different)
-    cols[i] <- cols2[2]
+    if (missing(r2)) {
+        if (n < 10) {
+            r2 <- c(3, 3)
+        } else {
+            r2 <- c(1.5, 1.5)
+        }
+    }
+    if (spread) {
+        xy <- spread(n)
+        wh <- .9
+    } else {
+        xy <-grid(n)
+        wh <- .8
+    }
+    draw <- function(xy, cols2, r2) {
+        N <- length(xy$x)
+        cols <- rep(cols2[1], N)
+        r <- rep(r2[1], N)
+        sub <- TRUE ## xy$x < xy$y
+        i <- resample((1:N)[sub], different)
+        cols[i] <- cols2[2]
+        r[i] <- r2[2]
+        grid.circle(xy$x, xy$y, default.units="native", r=unit(r, "mm"), 
+                    gp=gpar(col=cols, fill=cols))
+    }
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
-    pushViewport(viewport(width=.9, height=.9,
+    pushViewport(viewport(width=wh, height=wh,
                           xscale=range(xy$x), yscale=range(xy$y)))
-    grid.circle(xy$x, xy$y, default.units="native", r=unit(1.5, "mm"), 
-                gp=gpar(col=cols, fill=cols))
+    if (mix) {
+        split <- sample(1:n2, round(n2/2))
+        draw(lapply(xy, function(x) x[split]), rep(cols2[2], 2), r2)
+        draw(lapply(xy, function(x) x[-split]), rep(cols2[1], 2), rev(r2))
+    } else {
+        draw(xy, cols2, r2)
+    }
     popViewport(2)
 }
 
-grid.newpage()
-dots(5)
-
-grid.newpage()
-dots(10)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 mult2 <- c(1, -1)
 pch2 <- c(4, 3)
 lwd2 <- c(3, 3)
 size2 <- c(4, 4)
 len <- 1
-lines <- function(n, col=FALSE, diffm=1, diffc=1) {
+lines <- function(n, col=FALSE, diffm=1, diffc=1, cols2=colsnpg, spread=FALSE) {
     n2 <- n^2
-    xy <- spread(n)
+    if (n < 10) {
+        size2 <- c(6, 6)
+    } else {
+        size2 <- c(4, 4)
+    }
+    if (spread) {
+        xy <- spread(n)
+        wh <- .9
+    } else {
+        xy <-grid(n)
+        wh <- .8
+    }
     mult <- rep(mult2[1], n2)
     pch <- rep(pch2[1], n2)
     lwd <- rep(lwd2[1], n2)
@@ -558,7 +588,7 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     size[i] <- size2[2]
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
-    pushViewport(viewport(width=.9, height=.9,
+    pushViewport(viewport(width=wh, height=wh,
                           xscale=range(xy$x), yscale=range(xy$y)))
     if (col) {
         cols <- rep(cols2[1], n2)
@@ -584,34 +614,74 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-group-colour
+#| label: fig-pop-colour
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We effortlessly perceive groups of dots that differ only by colour.
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
 #| fig-subcap:
-#|   - Five teal dots amongst 20 orange dots.
-#|   - Twenty-five teal dots amongst 75 orange dots.
-grid.newpage()
-dots(5, 5)
+#|   - One teal dot amongst 24 orange dots.
+#|   - One teal dot amongst 99 orange dots.
+colsnpg <- pal_npg()(2)
 
 grid.newpage()
-dots(10, 25)
+dots(5)
+
+grid.newpage()
+dots(10)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-group-colour-angle
+#| label: fig-diff-size
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: Collections of items that differ by both colour and angle.  It is harder to perceive all of the different groups of items.
+#| fig-cap: We effortlessly perceive groups of dots that differ only by size.
 #| fig-subcap:
-#|   - Five teal crosses and one teal plus amongst 15 orange crosses and four orange plusses.
-#|   - Twenty teal crosses and one teal plus amongst thirty orange crosses and fourty-nine orange plusses.
-grid.newpage()
-lines(5, col=TRUE, diffm=5, diffc=5)
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
+colssame <- rep("black", 2)
 
 grid.newpage()
-lines(10, col=TRUE, diffm=50, diffc=20)
+dots(5, cols2=colssame, r2=c(3, 5))
+
+grid.newpage()
+dots(10, cols2=colssame, r2=c(1.5, 3))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-diff-salience
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: We effortlessly perceive groups of dots that differ by combination of features.
+#| fig-subcap:
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
+#col1 <- coords(as(sRGB(t(col2rgb(colsnpg[1])/255)), "polarLUV"))
+#colssimilar <- hcl(c(col1[3], col1[3] + 10), col1[2], c(col1[1], col1[1] - 10))
+colssimilar <- c(colsnpg[1], darken(colsnpg[1]))
+
+grid.newpage()
+dots(5, cols2=colsnpg, r2=c(3, 5))
+
+grid.newpage()
+dots(10, cols2=colsnpg, r2=c(1.5, 3))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-diff-serial
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: We have to work much harder when there is more going on.
+#| fig-subcap:
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
+grid.newpage()
+dots(5, cols2=colsnpg, r2=c(3, 5), spread=TRUE, mix=TRUE)
+
+grid.newpage()
+dots(10, cols2=colsnpg, r2=c(1.5, 3), spread=TRUE, mix=TRUE)
 
 
 ## -----------------------------------------------------------------------------
@@ -641,12 +711,12 @@ pushViewport(viewport(layout.pos.col=3),
 grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
-            gp=gpar(col=rep(cols2, each=5), fill=rep(cols2, each=5)))
+            gp=gpar(col=rep(colsnpg, each=5), fill=rep(colsnpg, each=5)))
 grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
-            gp=gpar(col=rep(cols2, length.out=5), 
-                    fill=rep(cols2, length.out=5)))
+            gp=gpar(col=rep(colsnpg, length.out=5), 
+                    fill=rep(colsnpg, length.out=5)))
 grid.text("similarity", y=unit(-2, "lines"), just="top")
 popViewport(2)
 pushViewport(viewport(layout.pos.col=5),
@@ -677,7 +747,7 @@ popViewport(2)
 #| label: fig-gestalt-order
 #| fig-cap: Gestalt order
 #| fig.height: 2
-cols <- rep(cols2, each=2)
+cols <- rep(colsnpg, each=2)
 vp2 <- viewport(width=.9, y=unit(2, "lines"), 
                 height=unit(1, "npc") - unit(4, "lines"), 
                 just="bottom")
@@ -1499,6 +1569,52 @@ ggplot(crimeDistrictTotal) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-prop
+#| fig.width: 4
+#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.
+#| fig-subcap:
+#|   - A pie chart.
+#|   - A bar plot.
+#| layout-ncol: 2
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y="", fill=group), colour="black") +
+    coord_polar() +
+    labs(title="Proportions of Youth Offenders 2011 to 2021") +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.y=element_blank())
+
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+grid.newpage()
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-bar-part
+#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=1, y=group), colour="black", fill="grey80") +
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(0)) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| message: false
 #| label: tbl-rwc-all
 #| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
@@ -1935,48 +2051,46 @@ ggplot(all) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-prop
-#| fig.width: 4
-#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.
-#| fig-subcap:
-#|   - A pie chart.
-#|   - A bar plot.
-#| layout-ncol: 2
-ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total/sum(total), y="", fill=group), colour="black") +
-    coord_polar() +
-    labs(title="Proportions of Youth Offenders 2011 to 2021") +
-    theme(aspect.ratio=1,
-          axis.title=element_blank(),
-          axis.text.x=element_blank(),
-          axis.ticks.y=element_blank())
-
-gg <- ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total/sum(total), y=group), colour="black") +
-    scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=1,
-          axis.title=element_blank(),
-          axis.ticks.y=element_blank())
-grid.newpage()
-pushViewport(viewport(height=.8, width=.8))
-print(gg, newpage=FALSE)
-popViewport()
+#| label: fig-flags
+#| fig-cap: A scatter plot with flags as data symbols
+size <- 10
+flag <- function(data, coords) {
+    width <- unit(size, "mm")
+    height <- data$ar * width
+    flags <- lapply(1:nrow(data),
+                    function(i) {
+                        grobTree(rectGrob(coords$x[i], coords$y[i], 
+                                          width, height[i], 
+                                          gp=gpar(fill="white")),
+                                 rasterGrob(readPNG(data$path[i]), 
+                                            coords$x[i], coords$y[i], width))
+                    })
+    do.call(grobTree, flags)
+}
+ggplot(rwcFlags) +
+    grid_panel(flag, aes(breaks, tries, path=path, ar=ar)) +
+    theme(aspect.ratio=2/3)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-bar-part
-#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.
-gg <- ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=1, y=group), colour="black", fill="grey80") +
-    geom_col(aes(x=total/sum(total), y=group), colour="black") +
-    scale_x_continuous(expand=expansion(0)) +
-    theme(aspect.ratio=1,
+#| label: fig-chernoff
+#| fig-cap: A Chernoff faces plot of the ...
+rwcChernoff <- RWCperGame
+rwcChernoff$country <- reorder(rwcChernoff$country, rwcChernoff$points)
+ggplot(rwcChernoff) +
+    geom_chernoff(aes(x="", y="", smile=points, brow=tries, 
+                      eyes=breaks),
+                  size=20, fill="white") +
+    facet_wrap(vars(country), strip.position="bottom") +
+    coord_cartesian(clip="off") +
+    theme(panel.border=element_blank(),
+          strip.background=element_blank(),
           axis.title=element_blank(),
-          axis.ticks.y=element_blank())
-pushViewport(viewport(height=.8, width=.8))
-print(gg, newpage=FALSE)
-popViewport()
+          axis.text=element_blank(),
+          axis.ticks=element_blank(),
+          legend.position="none",
+          aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------

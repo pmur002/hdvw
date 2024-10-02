@@ -16,6 +16,7 @@ format:
 ```{r}
 #| echo: false
 #| message: false
+library(png)
 library(dplyr)
 library(reshape2)
 library(tidyr)
@@ -23,6 +24,7 @@ library(knitr)
 library(kableExtra)
 library(reshape2)
 library(ggplot2)
+library(gggrid)
 library(scales)
 library(colorspace)
 library(rcartocolor)
@@ -31,6 +33,8 @@ library(grid)
 library(ggmosaic)
 library(GGally)
 library(ggforce)
+library(ggChernoff)
+library(ggimage)
 ```
 
 ```{r}
@@ -888,7 +892,7 @@ signals from the optic nerve occurs in several areas of the brain.
 Very basic **visual features** are extracted first, such as 
 **position** (spatial arrangements), **angle** (orientations), **colour**,
 and simple **patterns** (spatial frequencies).
-This low-level information is passed on and built upon
+This low-level information is passed on and built upon 
 to produce higher-level representations, such as regions and **shapes**.
 Information is then also integrated from prior knowledge to assist with
 the identification of **objects**---things like trees, animals, and faces.
@@ -901,7 +905,7 @@ A very simple model of visual processing.
 :::
 
 Lower-level processing occurs subconsciously and more rapidly than higher-level
-processing, which can require cognitive effort.  Furthermore, lower-level
+processing, which can require conscious effort.  Furthermore, lower-level
 processing occurs in parallel and can involve many instances of visual 
 features at once, whereas higher-level processing will only focus on 
 a small number of
@@ -935,8 +939,9 @@ At a higher level of processing again, at least for the denizens of Oceania,
 the green regions are recognised as a very familiar **object**: the
 outline of New Zealand.
 
-The small lines convey a lot of simple pieces of information;
-what is the wind strength and direction at each location.
+The small lines convey a lot of simple pieces of information---what
+is the wind strength and direction at each location---though
+we have to focus on a particular spot in order to extract that information.
 The darker and lighter regions convey several more complex ideas like
 regions of stronger and lighter winds.
 The green regions combine to convey the single complex and abstract
@@ -959,13 +964,13 @@ that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
 
-## Visual summaries {#sec-visual-model-summaries}
+## Visual differences {#sec-differences}
 
 The ability to gather a large amount of basic features from an image
 very quickly
 is supplemented by rapid visual processing that combines and 
 summarises the information.  These subconscious
-processes extract properties from an image without any mental effort.
+processes extract some properties from an image without any mental effort.
 
 For example, in @fig-pop-colour-1 we can detect the one teal dot amongst the
 24 orange dots without effort. @fig-pop-colour-2 shows that this task remains
@@ -975,66 +980,84 @@ effortless even if the number of distractors is much larger.[^pre-attentive]
   Mention "pre-attentive" 
   plus citations.
 
-This ability to identify a single unique item within an image
-also
-applies to other basic features like **angle**, though the effect
-is particularly strong for colour.
-
-The visual system is very sensitive to items that are **different**.
-
-
 ```{r}
 #| echo: false
-#| label: fig-pop-colour
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
-#| fig-subcap:
-#|   - One teal dot amongst 24 orange dots.
-#|   - One teal dot amongst 99 orange dots.
 spread <- function(n, shift=1/n, seed=12345678) {
     set.seed(seed)
-    x <- rep(seq(0, 1, length.out=n), n)
-    y <- rep(seq(0, 1, length.out=n), each=n)
+    xy <- grid(n)
     xd <- runif(n^2)
     yd <- runif(n^2)
-    list(x=x + shift*xd, y=y + shift*yd)
+    list(x=xy$x + shift*xd, y=xy$y + shift*yd)
 }
-cols2 <- pal_npg()(2)
+
+grid <- function(n) {
+    x <- rep(seq(0, 1, length.out=n), n)
+    y <- rep(seq(0, 1, length.out=n), each=n)
+    list(x=x, y=y)
+}
+
 resample <- function(x, ...) x[sample.int(length(x), ...)]
-dots <- function(n, different=1) {
+
+dots <- function(n, different=1, cols2=colsnpg, spread=FALSE, mix=FALSE, r2) {
     n2 <- n^2
-    xy <- spread(n)
-    cols <- rep(cols2[1], n2)
-    sub <- TRUE ## xy$x < xy$y
-    i <- resample((1:n2)[sub], different)
-    cols[i] <- cols2[2]
+    if (missing(r2)) {
+        if (n < 10) {
+            r2 <- c(3, 3)
+        } else {
+            r2 <- c(1.5, 1.5)
+        }
+    }
+    if (spread) {
+        xy <- spread(n)
+        wh <- .9
+    } else {
+        xy <-grid(n)
+        wh <- .8
+    }
+    draw <- function(xy, cols2, r2) {
+        N <- length(xy$x)
+        cols <- rep(cols2[1], N)
+        r <- rep(r2[1], N)
+        sub <- TRUE ## xy$x < xy$y
+        i <- resample((1:N)[sub], different)
+        cols[i] <- cols2[2]
+        r[i] <- r2[2]
+        grid.circle(xy$x, xy$y, default.units="native", r=unit(r, "mm"), 
+                    gp=gpar(col=cols, fill=cols))
+    }
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
-    pushViewport(viewport(width=.9, height=.9,
+    pushViewport(viewport(width=wh, height=wh,
                           xscale=range(xy$x), yscale=range(xy$y)))
-    grid.circle(xy$x, xy$y, default.units="native", r=unit(1.5, "mm"), 
-                gp=gpar(col=cols, fill=cols))
+    if (mix) {
+        split <- sample(1:n2, round(n2/2))
+        draw(lapply(xy, function(x) x[split]), rep(cols2[2], 2), r2)
+        draw(lapply(xy, function(x) x[-split]), rep(cols2[1], 2), rev(r2))
+    } else {
+        draw(xy, cols2, r2)
+    }
     popViewport(2)
 }
 
-grid.newpage()
-dots(5)
-
-grid.newpage()
-dots(10)
-```
-
-```{r}
-#| echo: false
 mult2 <- c(1, -1)
 pch2 <- c(4, 3)
 lwd2 <- c(3, 3)
 size2 <- c(4, 4)
 len <- 1
-lines <- function(n, col=FALSE, diffm=1, diffc=1) {
+lines <- function(n, col=FALSE, diffm=1, diffc=1, cols2=colsnpg, spread=FALSE) {
     n2 <- n^2
-    xy <- spread(n)
+    if (n < 10) {
+        size2 <- c(6, 6)
+    } else {
+        size2 <- c(4, 4)
+    }
+    if (spread) {
+        xy <- spread(n)
+        wh <- .9
+    } else {
+        xy <-grid(n)
+        wh <- .8
+    }
     mult <- rep(mult2[1], n2)
     pch <- rep(pch2[1], n2)
     lwd <- rep(lwd2[1], n2)
@@ -1047,7 +1070,7 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     size[i] <- size2[2]
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
-    pushViewport(viewport(width=.9, height=.9,
+    pushViewport(viewport(width=wh, height=wh,
                           xscale=range(xy$x), yscale=range(xy$y)))
     if (col) {
         cols <- rep(cols2[1], n2)
@@ -1071,64 +1094,109 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
 }
 ```
 
-When multiple items differ by a single visual feature, 
-this ability to automatically identify the differences
-means that we perceive groups of items.
-For example, we are able to perceive 
-the teal dots as a separate group from the orange dots in @fig-group-colour.
+```{r}
+#| echo: false
+#| label: fig-pop-colour
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
+#| fig-subcap:
+#|   - One teal dot amongst 24 orange dots.
+#|   - One teal dot amongst 99 orange dots.
+colsnpg <- pal_npg()(2)
+
+grid.newpage()
+dots(5)
+
+grid.newpage()
+dots(10)
+```
+
+This ability to identify an item that is different from all other items
+within an image
+also
+applies to other basic features like size, as shown
+in @fig-diff-size.
 
 ```{r}
 #| echo: false
-#| label: fig-group-colour
+#| label: fig-diff-size
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We effortlessly perceive groups of dots that differ only by colour.
+#| fig-cap: We effortlessly perceive groups of dots that differ only by size.
+#| fig-subcap:
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
+colssame <- rep("black", 2)
+
+grid.newpage()
+dots(5, cols2=colssame, r2=c(3, 5))
+
+grid.newpage()
+dots(10, cols2=colssame, r2=c(1.5, 3))
+```
+
+If an item differs on more than one visual feature, the effect is 
+even stronger (@fig-diff-salience).
+
+The visual system is very sensitive to items that are **different** in terms
+of basic **visual features**.
+
+```{r}
+#| echo: false
+#| label: fig-diff-salience
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: We effortlessly perceive groups of dots that differ by combination of features.
+#| fig-subcap:
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
+#col1 <- coords(as(sRGB(t(col2rgb(colsnpg[1])/255)), "polarLUV"))
+#colssimilar <- hcl(c(col1[3], col1[3] + 10), col1[2], c(col1[1], col1[1] - 10))
+colssimilar <- c(colsnpg[1], darken(colsnpg[1]))
+
+grid.newpage()
+dots(5, cols2=colsnpg, r2=c(3, 5))
+
+grid.newpage()
+dots(10, cols2=colsnpg, r2=c(1.5, 3))
+```
+
+On the other hand, if change occurs across multiple visual features
+in a less structured fashion then finding a particular item of interest
+becomes much harder.  For example, it is more difficult to see the one large 
+teal dot in @fig-diff-serial than it is in @fig-diff-salience.
+
+```{r}
+#| echo: false
+#| label: fig-diff-serial
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: We have to work much harder when there is more going on.
 #| fig-subcap:
 #|   - Five teal dots amongst 20 orange dots.
 #|   - Twenty-five teal dots amongst 75 orange dots.
 grid.newpage()
-dots(5, 5)
+dots(5, cols2=colsnpg, r2=c(3, 5), spread=TRUE, mix=TRUE)
 
 grid.newpage()
-dots(10, 25)
+dots(10, cols2=colsnpg, r2=c(1.5, 3), spread=TRUE, mix=TRUE)
 ```
 
-However, the automatic identification of groups 
-is stronger for some visual features than others and,
-if we change more than one feature at once, it gets harder
-to identify multiple groups.
-For example, in @fig-group-colour-angle, the items differ by 
-both colour and angle and it is easier to see groups of colours
-than it is to see groups of different angles ("plusses" and "crosses").
-There is also a single teal "plus" in both @fig-group-colour-angle-1
-and @fig-group-colour-angle-2, but this is much harder to find 
-than the single teal dot in either @fig-pop-colour-1 or @fig-pop-colour-2.
+Attention is drawn to items that are different to everything else,
+for example, larger and brighter items.  This is bottom-up.
+But attention can also be task-oriented.  This is top-down.
+For example, can you find the single small orange dot in 
+@fig-diff-serial?  Did you notice it prior to being asked to find it?
 
-The visual system is particularly sensitive to items that are **different**
-when everything else is the **same**.
+## Visual similarities {#sec-visual-model-groups}
 
-```{r}
-#| echo: false
-#| label: fig-group-colour-angle
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Collections of items that differ by both colour and angle.  It is harder to perceive all of the different groups of items.
-#| fig-subcap:
-#|   - Five teal crosses and one teal plus amongst 15 orange crosses and four orange plusses.
-#|   - Twenty teal crosses and one teal plus amongst thirty orange crosses and fourty-nine orange plusses.
-grid.newpage()
-lines(5, col=TRUE, diffm=5, diffc=5)
+In @fig-diff-serial, we can see several groups of items:
+orange dots, teal dots, large dots, and small dots.
 
-grid.newpage()
-lines(10, col=TRUE, diffm=50, diffc=20)
-```
-
-## Visual groups {#sec-visual-model-groups}
-
-In @fig-group-colour and @fig-group-colour-angle,
-separate groups of items are identified based on their 
-**similarity**, for example, because the items have the same colour.
-Experiments have also shown that we automatically perceive groups
+These separate groups of items are identified based on their 
+**similarity**---the items have the same colour.
+We also automatically perceive groups
 based on the **proximity** of items, **connections** between items,
 and the **enclosure** of items.[^gestalt]
 
@@ -1168,12 +1236,12 @@ pushViewport(viewport(layout.pos.col=3),
 grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
-            gp=gpar(col=rep(cols2, each=5), fill=rep(cols2, each=5)))
+            gp=gpar(col=rep(colsnpg, each=5), fill=rep(colsnpg, each=5)))
 grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
-            gp=gpar(col=rep(cols2, length.out=5), 
-                    fill=rep(cols2, length.out=5)))
+            gp=gpar(col=rep(colsnpg, length.out=5), 
+                    fill=rep(colsnpg, length.out=5)))
 grid.text("similarity", y=unit(-2, "lines"), just="top")
 popViewport(2)
 pushViewport(viewport(layout.pos.col=5),
@@ -1207,7 +1275,7 @@ each other in some combinations, as shown in @fig-gestalt-group.
 #| label: fig-gestalt-order
 #| fig-cap: Gestalt order
 #| fig.height: 2
-cols <- rep(cols2, each=2)
+cols <- rep(colsnpg, each=2)
 vp2 <- viewport(width=.9, y=unit(2, "lines"), 
                 height=unit(1, "npc") - unit(4, "lines"), 
                 just="bottom")
@@ -2720,6 +2788,172 @@ data values, but they have a very limited capacity.
 
 
 
+# Visual Congruence
+
+@fig-prop shows a pie chart of the proportions of total youth 
+offenders between 2011 and 2021 in 
+different ethnic groups and a bar plot of the same data.
+We learned in @sec-mapping-visual-features that mapping 
+**quantitative** proportions to **lengths**, like in the
+bar plot, is more appropriate
+and more accurate than mapping the proportions to **angles**
+or **areas**, like in the pie chart.
+
+However, which data visualisation is superior at conveying the
+fact that Māori offenders make up approximately 50% of the total?
+Which visualisation is better at conveying 
+the proportion of offenders that are European/Other?
+
+Although it is easy to perceive that the bar for Māori is just below 0.5
+in length from the bar plot, it is even easier to see that the light blue
+wedge in the pie chart is just under half a circle.
+It is also easy to see that the red wedge is close to a third of a circle.
+
+```{r}
+#| echo: false
+#| label: fig-prop
+#| fig.width: 4
+#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.  
+#| fig-subcap:
+#|   - A pie chart.
+#|   - A bar plot.
+#| layout-ncol: 2
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y="", fill=group), colour="black") +
+    coord_polar() +
+    labs(title="Proportions of Youth Offenders 2011 to 2021") +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.y=element_blank())
+
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+grid.newpage()
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+The purpose of this section is to show that we need to consider more
+than just the accuracy or capacity of our mappings from 
+data values to basic visual feature in order to understand the effectiveness
+of a data visualisation.
+
+## Part-to-whole
+
+The reason why the pie chart in @fig-prop is more effective
+than a bar plot for conveying proportions is because 
+the wedges in a pie chart are **congruent** with fractions of a whole.
+A semi-circle has a strong visual association with *half* of a circle
+and thirds and quarters are similarly evocative.
+
+> One reason why a pie chart can be effective is because 
+  segments of a pie vividly convey fractions of a whole.
+
+@fig-bar-part shows that if we place a bar representing a proportion bar 
+within a reference rectangle that corresponds to a proportion of 1,
+then we can also create a part-to-whole congruence with bars, though the effect
+is not as strong as it is for pie wedges.
+
+```{r}
+#| echo: false
+#| label: fig-bar-part
+#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.  
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=1, y=group), colour="black", fill="grey80") +
+    geom_col(aes(x=total/sum(total), y=group), colour="black") +
+    scale_x_continuous(expand=expansion(0)) +
+    theme(aspect.ratio=1,
+          axis.title=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+## More is more
+
+One reason why a bar plot like @fig-prop-2 conveys relative proportions
+well is because a longer bar is congruent with *more* of something.
+This is part of the reason why visual features like **length** and **area** are 
+appropriate for conveying quantitative values (@sec-quant-features).
+
+Representing negative values.
+
+horizontal bars (distances) versus vertical bars (amounts) 
+look up Tversky and kosslyn
+
+## Dark is more
+
+## Same is same
+
+In @sec-differences we saw that the visual system is very
+sensitive to **differences**, 
+particularly when everything else remains the **same**.
+This means that data symbols that change if the data values change
+will be effective because the visual system will notice the difference
+in the data symbols.
+
+For example, 
+in a bar plot like @fig-prop-2, the lengths of the bars are different,
+so we map *back* to changes in the data values.
+This is helped by the fact that the bars are all the same "width";
+they do not change in the vertical dimension.
+
+* Things that do not change are not salient (e.g., the widths of bars in
+  bar plot), BUT things that DO change are salient (so only do this to
+  represent changes in the data).  This should be cited to something.
+  Principle of unambiguity ?
+
+  Example is mosaic plot which changes *shape* as well as area so
+  two identical areas could end up looking different => BAD!
+  This has to be mentioned in the mosaic plot case study
+  because that comes LATER.
+
+  Another example is word cloud which changes orientation NOT based on data.
+
+  AND have "different is different"?
+  And just cite the relevant literature for these points in footnotes?
+  
+
+
+## Visual dissonance
+
+Pie chart of crime level - larger bars have lighter colour so the messages
+are a bit mixed.  To do with interaction of visual features ?
+Can you make a plot that does not create the visual dissonance
+(e.g., darker colours with different positions?)
+
+## TODO
+
+Also related to familiarity of visual objects ...
+
+More is more for length and area esp.
+=> bars MUST start at zero
+
+Lines with peaks and valleys have a natural correspondence with 
+mountain ranges.
+
+Lines imply continuity (at least) if not linear interpolation
+(density plot this is absolutely ok)
+
+At least some of the ideas in "congruence" are similar to "expressiveness"
+cite tamarara munzner and jock mackinlay 
+(and Enrico Bertini? https://filwd.substack.com/p/beyond-precision-expressiveness-in)
+although tamara's expressiveness is more like the quant/qual distinction
+(or possibly capacity?).
+
+Looks like Barbara Tversky uses congruence more in the sense we are using
+it here.
+
+Need to name check "cognitive fit theory" ?
+
+
 # Data summaries {#sec-summaries}
 
 In @sec-mapping-visual-features we described a data visualisation as
@@ -4149,142 +4383,116 @@ ggplot(all) +
 Mention that multivariate visualisation is an area where dynamic and
 interactive graphics can be useful, e.g., GGobi ?
 
-# Visual Congruence
+# Visual Objects
 
-@fig-prop shows a pie chart of the proportions of total youth 
-offenders between 2011 and 2021 in 
-different ethnic groups and a bar plot of the same data.
-We learned in @sec-mapping-visual-features that mapping 
-**quantitative** proportions to **lengths**, like in the
-bar plot, is more appropriate
-and more accurate than mapping the proportions to **angles**
-or **areas**, like in the pie chart.
-
-However, which data visualisation is superior at conveying the
-fact that Māori offenders make up approximately 50% of the total?
-Which visualisation is better at conveying 
-the proportion of offenders that are European/Other?
-
-Although it is easy to perceive that the bar for Māori is just below 0.5
-in length from the bar plot, it is even easier to see that the light blue
-wedge in the pie chart is just under half a circle.
-It is also easy to see that the red wedge is close to a third of a circle.
+@fig-flags shows a scatter plot of the number of clean breaks and the
+number of tries for countries
+at the 2023 Rugby World Cup (@tbl-rwc-2023).
+This shows the same positive relationship between clean breaks and tries
+that we saw in @fig-scatter.
+However, this scatter plot is using a much more complicated data symbol:
+the flags of the different countries rather than a simple circle for
+each country.
 
 ```{r}
 #| echo: false
-#| label: fig-prop
-#| fig.width: 4
-#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.  
-#| fig-subcap:
-#|   - A pie chart.
-#|   - A bar plot.
-#| layout-ncol: 2
-ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total/sum(total), y="", fill=group), colour="black") +
-    coord_polar() +
-    labs(title="Proportions of Youth Offenders 2011 to 2021") +
-    theme(aspect.ratio=1,
-          axis.title=element_blank(),
-          axis.text.x=element_blank(),
-          axis.ticks.y=element_blank())
-
-gg <- ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total/sum(total), y=group), colour="black") +
-    scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=1,
-          axis.title=element_blank(),
-          axis.ticks.y=element_blank())
-grid.newpage()
-pushViewport(viewport(height=.8, width=.8))
-print(gg, newpage=FALSE)
-popViewport()
+#| label: fig-flags
+#| fig-cap: A scatter plot with flags as data symbols
+size <- 10
+flag <- function(data, coords) {
+    width <- unit(size, "mm")
+    height <- data$ar * width
+    flags <- lapply(1:nrow(data),
+                    function(i) {
+                        grobTree(rectGrob(coords$x[i], coords$y[i], 
+                                          width, height[i], 
+                                          gp=gpar(fill="white")),
+                                 rasterGrob(readPNG(data$path[i]), 
+                                            coords$x[i], coords$y[i], width))
+                    })
+    do.call(grobTree, flags)
+}
+ggplot(rwcFlags) +
+    grid_panel(flag, aes(breaks, tries, path=path, ar=ar)) +
+    theme(aspect.ratio=2/3)
 ```
 
-The purpose of this section is to show that the effectiveness
-of a data visualisation does not just 
-depend on the accuracy with which we can
-map back from basic visual features 
-to raw data values.
+The flag data symbols in @fig-flags are examples of **visual objects**.
+The flags are not simple shapes like bars or circles.
+On the other hand, the relatively complex flags are, at least for
+some viewers and for some flags, extremely familiar.
 
-In terms of our simple model of visual processing (@sec-visual-processing),
-this section deals with higher levels of processing where connections
-can be made between existing knowledge and the visual features that
-arise from the perception of basic visual features
-(see @fig-visual-model).
+There are simple mappings from number of clean breaks to the
+horizontal **position** of each flag and from number of tries to the
+vertical **position** of each flag, but each country value is not
+being mapped to a basic feature of a simple shape.
 
-## Part-to-whole
+This section looks at the effectiveness of using visual objects 
+as data symbols.
 
-The reason why the pie chart in @fig-prop is more effective
-than a bar plot for conveying proportions is because 
-the wedges in a pie chart are **congruent** with fractions of a whole.
-A semi-circle has a strong visual association with *half* of a circle
-and thirds and quarters are similarly evocative.
+## Icons
 
-> One reason why a pie chart can be effective is because 
-  segments of a pie vividly convey fractions of a whole.
+Do dog and cat from master class ?
 
-@fig-bar-part shows that if we place a bar representing a proportion bar 
-within a reference rectangle that corresponds to a proportion of 1,
-then we can also create a part-to-whole congruence with bars, though the effect
-is not as strong as it is for pie wedges.
+## Maps
+
+## Case study: Chernoff faces
+
+@fig-chernoff visualises the 2023 Rugby World Cup data (@tbl-rwc-2023) using
+Chernoff faces.
+The data symbol in this visualisation is a little unusual; each
+country is represented by a combination of circles, curves, and lines
+that together produce a **visual object** that resembles a face.
+The mappings in this visualisation are also a little unusual.
+The number of points scored is mapped to the **curvature** of the
+smile, the number of tries is mapped to the **angle** of the eye brows,
+and the number of clean breaks is mapped to the horizontal **position** of 
+the eyes.
 
 ```{r}
 #| echo: false
-#| label: fig-bar-part
-#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.  
-gg <- ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=1, y=group), colour="black", fill="grey80") +
-    geom_col(aes(x=total/sum(total), y=group), colour="black") +
-    scale_x_continuous(expand=expansion(0)) +
-    theme(aspect.ratio=1,
+#| label: fig-chernoff
+#| fig-cap: A Chernoff faces plot of the ...
+rwcChernoff <- RWCperGame
+rwcChernoff$country <- reorder(rwcChernoff$country, rwcChernoff$points)
+ggplot(rwcChernoff) +
+    geom_chernoff(aes(x="", y="", smile=points, brow=tries, 
+                      eyes=breaks),
+                  size=20, fill="white") +
+    facet_wrap(vars(country), strip.position="bottom") +
+    coord_cartesian(clip="off") +
+    theme(panel.border=element_blank(),
+          strip.background=element_blank(),
           axis.title=element_blank(),
-          axis.ticks.y=element_blank())
-pushViewport(viewport(height=.8, width=.8))
-print(gg, newpage=FALSE)
-popViewport()
+          axis.text=element_blank(),
+          axis.ticks=element_blank(),
+          legend.position="none",
+          aspect.ratio=1)
 ```
 
-## Dark is more
+The mappings in a Chernoff face are *not* very accurate (see @sec-accuracy;
+**curvature** is ranked *below* colour in terms of accuracy), so
+Cheroff faces are *not* very effectuve for 
+mapping *back* to raw data values.
 
-## More is more
+However, the familiarity of Chernoff faces means that we are easily
+able to perceive common combinations of the facial features.
+For example, we can see several sad faces at the top-left of @fig-chernoff
+and several happy faces at the bottom-right.
+We can perceive countries that share similar combinations
+of performance measures.
+In other words, we can perceive multi-dimensional correlations
+and multi-dimensional groupings in the data.
 
-Representing negative values.
+In this case, the happier faces have been arranged to
+correspond to the more successful teams and the 
+teams have been ordered from least points scored to most points scored.
+The resulting proximity helps with perceiving groups of similar faces.
 
-## Same is same
+> A Chernoff face is effective at conveying multi-dimensional relationships
+  because the data symbol is a familiar visual object from which we can
+  easily perceive simple human emotions.
 
-## Visual dissonance
-
-Pie chart of crime level - larger bars have lighter colour so the messages
-are a bit mixed.  To do with interaction of visual features ?
-Can you make a plot that does not create the visual dissonance
-(e.g., darker colours with different positions?)
-
-## TODO
-
-Also related to familiarity of visual objects ...
-
-More is more for length and area esp.
-=> bars MUST start at zero
-
-Dark is more for colour.
-
-The above need citations
-
-Angle is part-of-whole.
-
-Lines with peaks and valleys have a natural correspondence with 
-mountain ranges.
-
-At least some of the ideas in "congruence" are similar to "expressiveness"
-cite tamarara munzner and jock mackinlay 
-(and Enrico Bertini? https://filwd.substack.com/p/beyond-precision-expressiveness-in)
-although tamara's expressiveness is more like the quant/qual distinction
-(or possibly capacity?).
-
-Looks like Barbara Tversky uses congruence more in the sense we are using
-it here.
-
-Need to name check "cognitive fit theory" ?
 
 # Text
 
@@ -4294,13 +4502,6 @@ haved decreased, we cannot tell what the values are or by how much they
 have decreased.  If there was ever any doubt, @fig-no-text makes it 
 clear that text
 is doing a lot of important work in a data visualisation.
-
-Eye-tracking studies also show that people spend a lot of time looking
-at the text within a data visualisation.  For example, in @fig-fixations,
-there are more fixations and longer fixations on the text than 
-anywhere else.
-
-This section looks at the role text plays in making data visualisations work.
 
 ```{r}
 #| echo: false
@@ -4313,6 +4514,22 @@ ggplot(crimeAgeSimple) +
           panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
 ```
+
+Eye-tracking studies also show that people spend a lot of time looking
+at the text within a data visualisation.  For example, in @fig-fixations,
+there are more fixations and longer fixations on the text than 
+anywhere else.
+
+::: {#fig-fixations}
+
+![](Images/economist_daily_chart_75_track.svg)
+
+Eye tracking data from the MASSVIS project that shows fixations (circles) and 
+saccades (lines between circles) for one person viewing an image for 10 seconds.
+Longer fixations are represented by larger circles.
+:::
+
+This section looks at the role text plays in making data visualisations work.
 
 ## Data symbols
 
@@ -4503,11 +4720,10 @@ extremely high-fidelity.
 
 **TODO** Another purpose of labels is to direct attention ...
 
-## Annotations
+top-down
 
-**TODO** one-off text data symbols and labels
-
-(labelling of teams in dotplot of points per game might work)
+Do text labels with colours that match the data symbols we want
+the viewer to attend to.
 
 ## Case study:  Word clouds
 
@@ -4652,7 +4868,7 @@ The reduction in detail, with fewer decimal places, means that
 there is less complexity in the visual field.
 The consistent number of decimal places means that less is
 changing, so differences are easier to detect
-(@sec-visual-model-summaries).
+(@sec-differences).
 Finally, the consistent baseline provided by right-alignment
 means that the text **length** provides a crude comparison,
 particularly in the column showing the number of clean breaks.
@@ -4701,13 +4917,13 @@ ggplot(rwc8) +
   mapping-visual-features.qmd
   (and anywhere else)
 
-* Move congruence to just after colour ?
-
 * somehow mention primacy of position in space in visual-model (with cite) ?
 
 * add citation for extinction illusion
 
 * add citation to MASSVIS for fixation images
+
+* Add citation to Wikipedia "Visual system" in visual-model.qmd
  
 * Add mention that mosaic plots can easily show independence or lack of ?
 
@@ -4720,6 +4936,8 @@ ggplot(rwc8) +
 
 * add footnote about visual feature vs visual channel vs visual dimension
   terminology soup.
+
+* need citations for more is more and dark is more and part-to-whole.
 
 * Need some citations to the literature in visual-shapes.qmd
 
@@ -4750,6 +4968,8 @@ ggplot(rwc8) +
   The main point is that an effective data visualisation will AVOID
   the things that the visual system is bad at.
 
+* add types of cones to colour chapter?
+
 * CVD
 
 * visual illusions (put in a section on "how mappings go wrong"?)
@@ -4774,6 +4994,8 @@ ggplot(rwc8) +
 * attention
   bottom-up AND top-down
   Bottom-up includes ALL pre-attentive cues!?
+  bottom-up based on visual feature maps, particularly areas of contrast
+  (in terms of colour, orientation, brightness).
 
 * jittering
   which is dodgy because it involves a visual change that is NOT related
@@ -4804,20 +5026,6 @@ ggplot(rwc8) +
 
 * bubble plots (area not effective => something better?)
 
-* Things that do not change are not salient (e.g., the widths of bars in
-  bar plot), BUT things that DO change are salient (so only do this to
-  represent changes in the data).  This should be cited to something.
-  Principle of unambiguity ?
-  Example is mosaic plot which changes *shape* as well as area so
-  two identical areas could end up looking different => BAD!
-  Another example is word cloud which changes orientation NOT based on data.
-  Put this in "same is same" within visual congruence?
-  (and put gestalt similarity here?  and just cite gestalt in footnotes?)
-  A simple example is the width of a bar plot - we manage to ignore that
-  because it does not change?
-  AND have "different is different"?
-  And just cite the relevant literature for these points in footnotes?
-  
 * Add citation for distance effect
 
 * Use reordering of @fig-side-bar-year (so that they start tallest to smallest)
@@ -4827,12 +5035,17 @@ ggplot(rwc8) +
 
 * Need citation for contrast effect
 
+* Need citation for chernoff faces
+
 * case study of density plots
   (revisit histograms in terms of shape as well; point out that 
    density plots are preferred to histograms?
    revisit boxplots too and talk about violin plots?)
 
 * case study for spinograms
+
+* add mention of underestimation of correlation in scatter plots
+  (with citation) in a footnote
 
 * Case study: Heatmaps
 
@@ -4873,6 +5086,9 @@ to emphasise structure - combination of order and category
   or integral is NOT appropriate.  In the mosaic plot case, the interaction
   is beneficial.
 
+* add direct labelling to text chapter?
+  some sort of ggrepel version of the flags example in visual-objects?
+
 * model fits like lm straight line and ref Hadley's data-space vs model-space
   "data models" to mirror "data statistics"
   (revisit box plots as VERY simple models? also talk about failing
@@ -4901,9 +5117,14 @@ to emphasise structure - combination of order and category
   (in clutter section?)
 
 * add citations for R packages used in plots and diagrams.
+  General one for R and ggplot2, then specific ones for specific plots
 
 * An index that links to all of the places that different sorts of plots
   are discussed ?
 
 * Check all references, especially the ones generated by chatgpt !
 &nbsp;
+
+* add how-to-cite
+
+* add docker container to build in

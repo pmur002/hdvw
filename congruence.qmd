@@ -50,17 +50,10 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-The purpose of this section is to show that the effectiveness
-of a data visualisation does not just 
-depend on the accuracy with which we can
-map back from basic visual features 
-to raw data values.
-
-In terms of our simple model of visual processing (@sec-visual-processing),
-this section deals with higher levels of processing where connections
-can be made between existing knowledge and the visual features that
-arise from the perception of basic visual features
-(see @fig-visual-model).
+The purpose of this section is to show that we need to consider more
+than just the accuracy or capacity of our mappings from 
+data values to basic visual feature in order to understand the effectiveness
+of a data visualisation.
 
 ## Part-to-whole
 
@@ -94,13 +87,51 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-## Dark is more
-
 ## More is more
+
+One reason why a bar plot like @fig-prop-2 conveys relative proportions
+well is because a longer bar is congruent with *more* of something.
+This is part of the reason why visual features like **length** and **area** are 
+appropriate for conveying quantitative values (@sec-quant-features).
 
 Representing negative values.
 
+horizontal bars (distances) versus vertical bars (amounts) 
+look up Tversky and kosslyn
+
+## Dark is more
+
 ## Same is same
+
+In @sec-differences we saw that the visual system is very
+sensitive to **differences**, 
+particularly when everything else remains the **same**.
+This means that data symbols that change if the data values change
+will be effective because the visual system will notice the difference
+in the data symbols.
+
+For example, 
+in a bar plot like @fig-prop-2, the lengths of the bars are different,
+so we map *back* to changes in the data values.
+This is helped by the fact that the bars are all the same "width";
+they do not change in the vertical dimension.
+
+* Things that do not change are not salient (e.g., the widths of bars in
+  bar plot), BUT things that DO change are salient (so only do this to
+  represent changes in the data).  This should be cited to something.
+  Principle of unambiguity ?
+
+  Example is mosaic plot which changes *shape* as well as area so
+  two identical areas could end up looking different => BAD!
+  This has to be mentioned in the mosaic plot case study
+  because that comes LATER.
+
+  Another example is word cloud which changes orientation NOT based on data.
+
+  AND have "different is different"?
+  And just cite the relevant literature for these points in footnotes?
+  
+
 
 ## Visual dissonance
 
@@ -116,14 +147,11 @@ Also related to familiarity of visual objects ...
 More is more for length and area esp.
 => bars MUST start at zero
 
-Dark is more for colour.
-
-The above need citations
-
-Angle is part-of-whole.
-
 Lines with peaks and valleys have a natural correspondence with 
 mountain ranges.
+
+Lines imply continuity (at least) if not linear interpolation
+(density plot this is absolutely ok)
 
 At least some of the ideas in "congruence" are similar to "expressiveness"
 cite tamarara munzner and jock mackinlay 
@@ -135,3 +163,4 @@ Looks like Barbara Tversky uses congruence more in the sense we are using
 it here.
 
 Need to name check "cognitive fit theory" ?
+

@@ -74,3 +74,20 @@ RWCtopNorm$country <- factor(RWCtopNorm$country, levels=topNations)
 
 ## Wikipedia page
 wikiRWC <- read.csv(file.path(dataPath, "WordCloud", "wiki-rwc.csv"))
+
+## Flags
+iso <- read.csv(file.path(dataPath, "Flags", "iso-3166-1.csv"))
+rwcFlags <- merge(RWCperGame, iso, by.x="country", by.y="Name", all.x=TRUE)
+rwcFlags$Code[rwcFlags$country == "Namibia"] <- "NA"
+rwcFlags$Code[rwcFlags$country == "England"] <- "GB-ENG"
+rwcFlags$Code[rwcFlags$country == "Scotland"] <- "GB-SCT"
+rwcFlags$Code[rwcFlags$country == "Wales"] <- "GB-WLS"
+rwcFlags$path <- file.path(dataPath, "Flags", "country-flags", "png100px",
+                           paste0(tolower(rwcFlags$Code),
+                                  ".png"))
+dims <- lapply(rwcFlags$path,
+               function(x) {
+                   dim(readPNG(x))
+               })
+rwcFlags$ar <- sapply(dims, function(x) x[1]/x[2])
+                           

@@ -233,7 +233,7 @@ signals from the optic nerve occurs in several areas of the brain.
 Very basic **visual features** are extracted first, such as 
 **position** (spatial arrangements), **angle** (orientations), **colour**,
 and simple **patterns** (spatial frequencies).
-This low-level information is passed on and built upon
+This low-level information is passed on and built upon 
 to produce higher-level representations, such as regions and **shapes**.
 Information is then also integrated from prior knowledge to assist with
 the identification of **objects**---things like trees, animals, and faces.
@@ -246,7 +246,7 @@ A very simple model of visual processing.
 :::
 
 Lower-level processing occurs subconsciously and more rapidly than higher-level
-processing, which can require cognitive effort.  Furthermore, lower-level
+processing, which can require conscious effort.  Furthermore, lower-level
 processing occurs in parallel and can involve many instances of visual 
 features at once, whereas higher-level processing will only focus on 
 a small number of
@@ -280,8 +280,9 @@ At a higher level of processing again, at least for the denizens of Oceania,
 the green regions are recognised as a very familiar **object**: the
 outline of New Zealand.
 
-The small lines convey a lot of simple pieces of information;
-what is the wind strength and direction at each location.
+The small lines convey a lot of simple pieces of information---what
+is the wind strength and direction at each location---though
+we have to focus on a particular spot in order to extract that information.
 The darker and lighter regions convey several more complex ideas like
 regions of stronger and lighter winds.
 The green regions combine to convey the single complex and abstract
@@ -304,13 +305,13 @@ that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
 
-## Visual summaries {#sec-visual-model-summaries}
+## Visual differences {#sec-differences}
 
 The ability to gather a large amount of basic features from an image
 very quickly
 is supplemented by rapid visual processing that combines and 
 summarises the information.  These subconscious
-processes extract properties from an image without any mental effort.
+processes extract some properties from an image without any mental effort.
 
 For example, in @fig-pop-colour-1 we can detect the one teal dot amongst the
 24 orange dots without effort. @fig-pop-colour-2 shows that this task remains
@@ -320,66 +321,84 @@ effortless even if the number of distractors is much larger.[^pre-attentive]
   Mention "pre-attentive" 
   plus citations.
 
-This ability to identify a single unique item within an image
-also
-applies to other basic features like **angle**, though the effect
-is particularly strong for colour.
-
-The visual system is very sensitive to items that are **different**.
-
-
 ```{r}
 #| echo: false
-#| label: fig-pop-colour
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
-#| fig-subcap:
-#|   - One teal dot amongst 24 orange dots.
-#|   - One teal dot amongst 99 orange dots.
 spread <- function(n, shift=1/n, seed=12345678) {
     set.seed(seed)
-    x <- rep(seq(0, 1, length.out=n), n)
-    y <- rep(seq(0, 1, length.out=n), each=n)
+    xy <- grid(n)
     xd <- runif(n^2)
     yd <- runif(n^2)
-    list(x=x + shift*xd, y=y + shift*yd)
+    list(x=xy$x + shift*xd, y=xy$y + shift*yd)
 }
-cols2 <- pal_npg()(2)
+
+grid <- function(n) {
+    x <- rep(seq(0, 1, length.out=n), n)
+    y <- rep(seq(0, 1, length.out=n), each=n)
+    list(x=x, y=y)
+}
+
 resample <- function(x, ...) x[sample.int(length(x), ...)]
-dots <- function(n, different=1) {
+
+dots <- function(n, different=1, cols2=colsnpg, spread=FALSE, mix=FALSE, r2) {
     n2 <- n^2
-    xy <- spread(n)
-    cols <- rep(cols2[1], n2)
-    sub <- TRUE ## xy$x < xy$y
-    i <- resample((1:n2)[sub], different)
-    cols[i] <- cols2[2]
+    if (missing(r2)) {
+        if (n < 10) {
+            r2 <- c(3, 3)
+        } else {
+            r2 <- c(1.5, 1.5)
+        }
+    }
+    if (spread) {
+        xy <- spread(n)
+        wh <- .9
+    } else {
+        xy <-grid(n)
+        wh <- .8
+    }
+    draw <- function(xy, cols2, r2) {
+        N <- length(xy$x)
+        cols <- rep(cols2[1], N)
+        r <- rep(r2[1], N)
+        sub <- TRUE ## xy$x < xy$y
+        i <- resample((1:N)[sub], different)
+        cols[i] <- cols2[2]
+        r[i] <- r2[2]
+        grid.circle(xy$x, xy$y, default.units="native", r=unit(r, "mm"), 
+                    gp=gpar(col=cols, fill=cols))
+    }
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
-    pushViewport(viewport(width=.9, height=.9,
+    pushViewport(viewport(width=wh, height=wh,
                           xscale=range(xy$x), yscale=range(xy$y)))
-    grid.circle(xy$x, xy$y, default.units="native", r=unit(1.5, "mm"), 
-                gp=gpar(col=cols, fill=cols))
+    if (mix) {
+        split <- sample(1:n2, round(n2/2))
+        draw(lapply(xy, function(x) x[split]), rep(cols2[2], 2), r2)
+        draw(lapply(xy, function(x) x[-split]), rep(cols2[1], 2), rev(r2))
+    } else {
+        draw(xy, cols2, r2)
+    }
     popViewport(2)
 }
 
-grid.newpage()
-dots(5)
-
-grid.newpage()
-dots(10)
-```
-
-```{r}
-#| echo: false
 mult2 <- c(1, -1)
 pch2 <- c(4, 3)
 lwd2 <- c(3, 3)
 size2 <- c(4, 4)
 len <- 1
-lines <- function(n, col=FALSE, diffm=1, diffc=1) {
+lines <- function(n, col=FALSE, diffm=1, diffc=1, cols2=colsnpg, spread=FALSE) {
     n2 <- n^2
-    xy <- spread(n)
+    if (n < 10) {
+        size2 <- c(6, 6)
+    } else {
+        size2 <- c(4, 4)
+    }
+    if (spread) {
+        xy <- spread(n)
+        wh <- .9
+    } else {
+        xy <-grid(n)
+        wh <- .8
+    }
     mult <- rep(mult2[1], n2)
     pch <- rep(pch2[1], n2)
     lwd <- rep(lwd2[1], n2)
@@ -392,7 +411,7 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
     size[i] <- size2[2]
     pushViewport(viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
     grid.rect()
-    pushViewport(viewport(width=.9, height=.9,
+    pushViewport(viewport(width=wh, height=wh,
                           xscale=range(xy$x), yscale=range(xy$y)))
     if (col) {
         cols <- rep(cols2[1], n2)
@@ -416,64 +435,109 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1) {
 }
 ```
 
-When multiple items differ by a single visual feature, 
-this ability to automatically identify the differences
-means that we perceive groups of items.
-For example, we are able to perceive 
-the teal dots as a separate group from the orange dots in @fig-group-colour.
+```{r}
+#| echo: false
+#| label: fig-pop-colour
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
+#| fig-subcap:
+#|   - One teal dot amongst 24 orange dots.
+#|   - One teal dot amongst 99 orange dots.
+colsnpg <- pal_npg()(2)
+
+grid.newpage()
+dots(5)
+
+grid.newpage()
+dots(10)
+```
+
+This ability to identify an item that is different from all other items
+within an image
+also
+applies to other basic features like size, as shown
+in @fig-diff-size.
 
 ```{r}
 #| echo: false
-#| label: fig-group-colour
+#| label: fig-diff-size
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We effortlessly perceive groups of dots that differ only by colour.
+#| fig-cap: We effortlessly perceive groups of dots that differ only by size.
+#| fig-subcap:
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
+colssame <- rep("black", 2)
+
+grid.newpage()
+dots(5, cols2=colssame, r2=c(3, 5))
+
+grid.newpage()
+dots(10, cols2=colssame, r2=c(1.5, 3))
+```
+
+If an item differs on more than one visual feature, the effect is 
+even stronger (@fig-diff-salience).
+
+The visual system is very sensitive to items that are **different** in terms
+of basic **visual features**.
+
+```{r}
+#| echo: false
+#| label: fig-diff-salience
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: We effortlessly perceive groups of dots that differ by combination of features.
+#| fig-subcap:
+#|   - Five teal dots amongst 20 orange dots.
+#|   - Twenty-five teal dots amongst 75 orange dots.
+#col1 <- coords(as(sRGB(t(col2rgb(colsnpg[1])/255)), "polarLUV"))
+#colssimilar <- hcl(c(col1[3], col1[3] + 10), col1[2], c(col1[1], col1[1] - 10))
+colssimilar <- c(colsnpg[1], darken(colsnpg[1]))
+
+grid.newpage()
+dots(5, cols2=colsnpg, r2=c(3, 5))
+
+grid.newpage()
+dots(10, cols2=colsnpg, r2=c(1.5, 3))
+```
+
+On the other hand, if change occurs across multiple visual features
+in a less structured fashion then finding a particular item of interest
+becomes much harder.  For example, it is more difficult to see the one large 
+teal dot in @fig-diff-serial than it is in @fig-diff-salience.
+
+```{r}
+#| echo: false
+#| label: fig-diff-serial
+#| layout-ncol: 2
+#| fig.height: 6
+#| fig-cap: We have to work much harder when there is more going on.
 #| fig-subcap:
 #|   - Five teal dots amongst 20 orange dots.
 #|   - Twenty-five teal dots amongst 75 orange dots.
 grid.newpage()
-dots(5, 5)
+dots(5, cols2=colsnpg, r2=c(3, 5), spread=TRUE, mix=TRUE)
 
 grid.newpage()
-dots(10, 25)
+dots(10, cols2=colsnpg, r2=c(1.5, 3), spread=TRUE, mix=TRUE)
 ```
 
-However, the automatic identification of groups 
-is stronger for some visual features than others and,
-if we change more than one feature at once, it gets harder
-to identify multiple groups.
-For example, in @fig-group-colour-angle, the items differ by 
-both colour and angle and it is easier to see groups of colours
-than it is to see groups of different angles ("plusses" and "crosses").
-There is also a single teal "plus" in both @fig-group-colour-angle-1
-and @fig-group-colour-angle-2, but this is much harder to find 
-than the single teal dot in either @fig-pop-colour-1 or @fig-pop-colour-2.
+Attention is drawn to items that are different to everything else,
+for example, larger and brighter items.  This is bottom-up.
+But attention can also be task-oriented.  This is top-down.
+For example, can you find the single small orange dot in 
+@fig-diff-serial?  Did you notice it prior to being asked to find it?
 
-The visual system is particularly sensitive to items that are **different**
-when everything else is the **same**.
+## Visual similarities {#sec-visual-model-groups}
 
-```{r}
-#| echo: false
-#| label: fig-group-colour-angle
-#| layout-ncol: 2
-#| fig.height: 6
-#| fig-cap: Collections of items that differ by both colour and angle.  It is harder to perceive all of the different groups of items.
-#| fig-subcap:
-#|   - Five teal crosses and one teal plus amongst 15 orange crosses and four orange plusses.
-#|   - Twenty teal crosses and one teal plus amongst thirty orange crosses and fourty-nine orange plusses.
-grid.newpage()
-lines(5, col=TRUE, diffm=5, diffc=5)
+In @fig-diff-serial, we can see several groups of items:
+orange dots, teal dots, large dots, and small dots.
 
-grid.newpage()
-lines(10, col=TRUE, diffm=50, diffc=20)
-```
-
-## Visual groups {#sec-visual-model-groups}
-
-In @fig-group-colour and @fig-group-colour-angle,
-separate groups of items are identified based on their 
-**similarity**, for example, because the items have the same colour.
-Experiments have also shown that we automatically perceive groups
+These separate groups of items are identified based on their 
+**similarity**---the items have the same colour.
+We also automatically perceive groups
 based on the **proximity** of items, **connections** between items,
 and the **enclosure** of items.[^gestalt]
 
@@ -513,12 +577,12 @@ pushViewport(viewport(layout.pos.col=3),
 grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
-            gp=gpar(col=rep(cols2, each=5), fill=rep(cols2, each=5)))
+            gp=gpar(col=rep(colsnpg, each=5), fill=rep(colsnpg, each=5)))
 grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
-            gp=gpar(col=rep(cols2, length.out=5), 
-                    fill=rep(cols2, length.out=5)))
+            gp=gpar(col=rep(colsnpg, length.out=5), 
+                    fill=rep(colsnpg, length.out=5)))
 grid.text("similarity", y=unit(-2, "lines"), just="top")
 popViewport(2)
 pushViewport(viewport(layout.pos.col=5),
@@ -552,7 +616,7 @@ each other in some combinations, as shown in @fig-gestalt-group.
 #| label: fig-gestalt-order
 #| fig-cap: Gestalt order
 #| fig.height: 2
-cols <- rep(cols2, each=2)
+cols <- rep(colsnpg, each=2)
 vp2 <- viewport(width=.9, y=unit(2, "lines"), 
                 height=unit(1, "npc") - unit(4, "lines"), 
                 just="bottom")
