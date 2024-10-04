@@ -635,10 +635,10 @@ dots(10)
 #| label: fig-diff-size
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We effortlessly perceive groups of dots that differ only by size.
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that differs only by size.
 #| fig-subcap:
-#|   - Five teal dots amongst 20 orange dots.
-#|   - Twenty-five teal dots amongst 75 orange dots.
+#|   - One larger dot amongst 24 smaller dots.
+#|   - One larger dot amongst 99 smaller dots.
 colssame <- rep("black", 2)
 
 grid.newpage()
@@ -653,10 +653,10 @@ dots(10, cols2=colssame, r2=c(1.5, 3))
 #| label: fig-diff-salience
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We effortlessly perceive groups of dots that differ by combination of features.
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that differs by both colour and size.
 #| fig-subcap:
-#|   - Five teal dots amongst 20 orange dots.
-#|   - Twenty-five teal dots amongst 75 orange dots.
+#|   - One larger teal dot amongst 24 smaller orange dots.
+#|   - One larger teal dot amongst 99 smaller orange dots.
 #col1 <- coords(as(sRGB(t(col2rgb(colsnpg[1])/255)), "polarLUV"))
 #colssimilar <- hcl(c(col1[3], col1[3] + 10), col1[2], c(col1[1], col1[1] - 10))
 colssimilar <- c(colsnpg[1], darken(colsnpg[1]))
@@ -675,8 +675,8 @@ dots(10, cols2=colsnpg, r2=c(1.5, 3))
 #| fig.height: 6
 #| fig-cap: We have to work much harder when there is more going on.
 #| fig-subcap:
-#|   - Five teal dots amongst 20 orange dots.
-#|   - Twenty-five teal dots amongst 75 orange dots.
+#|   - One larger teal dot amongst 24 dots that differ by colour and/or size.
+#|   - One larger teal dot amongst 99 dots that differ by colour and/or size.
 grid.newpage()
 dots(5, cols2=colsnpg, r2=c(3, 5), spread=TRUE, mix=TRUE)
 
@@ -688,7 +688,7 @@ dots(10, cols2=colsnpg, r2=c(1.5, 3), spread=TRUE, mix=TRUE)
 #| echo: false
 #| label: fig-gestalt-group
 #| fig.height: 2
-#| fig-cap: Gestalt grouping
+#| fig-cap: In each matrix of dots, we clearly see either rows or columns. In the pair of matrices on the left, making the dots slightly closer together horizontally produces rows, and making the dots slightly closer vertically produces columns.  In the middle pair of matrices, using the same colour on each row produces rows, and using the same colour on each column produces columns.  In the pair of matrices on the right, drawing vertical lines produces columns and drawing horizontal lines produces rows.
 vp2 <- viewport(width=.9, y=unit(3, "lines"), 
                 height=unit(1, "npc") - unit(6, "lines"), 
                 just="bottom")
@@ -728,7 +728,8 @@ grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5),
 grid.segments(unit(.2, "npc") + 4*unit(-2:2, "mm"),
               unit(.5, "npc") + 4*unit(-2, "mm"), 
               unit(.2, "npc") + 4*unit(-2:2, "mm"),
-              unit(.5, "npc") + 4*unit(2, "mm"))
+              unit(.5, "npc") + 4*unit(2, "mm"),
+              gp=gpar(lwd=1.5))
 grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
@@ -738,14 +739,14 @@ grid.segments(unit(.8, "npc") + 4*unit(-2, "mm"),
               unit(.8, "npc") + 4*unit(2, "mm"),
               unit(.5, "npc") + 4*unit(-2:2, "mm"),
               gp=gpar(lwd=2))
-grid.text("connectivity", y=unit(-2, "lines"), just="top")
+grid.text("connection", y=unit(-2, "lines"), just="top")
 popViewport(2)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-gestalt-order
-#| fig-cap: Gestalt order
+#| fig-cap: For each set of four dots, we automatically perceive two pairs of dots.  On the left, the enclosing grey rectangles produce an upper pair and a lower pair.  Second from left, the lines produce a left pair and a right pair.  Second from right, closeness produces an upper pair and a lower pair.  On the right, colour produces a left pair and a right pair.
 #| fig.height: 2
 cols <- rep(colsnpg, each=2)
 vp2 <- viewport(width=.9, y=unit(2, "lines"), 
@@ -855,7 +856,8 @@ ggplot(crimeGroupTotal) +
 #| label: fig-visual-features
 #| fig-cap: Some examples of basic visual features are **position**, **length**, **angle**, **area**, **colour**, and **shape**.[^list-of-features]
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
+pushViewport(viewport(width=unit(1, "snpc"),
+                      layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.text("position", x=0, just="right")
 grid.segments(.2, .5, .8, .5, gp=gpar(lwd=2))

@@ -209,7 +209,8 @@ grid.rect(gp=gpar(col=NA, fill=pat))
 an image for 10 seconds.[^MASSVIS]
 The fixations are shown as circles (with larger circles representing
 longer fixations) and the saccades  are shown as lines
-between the circles. 
+between the circles.  For example, we can see that the viewer has 
+fixated multiple times upon the large, colourful circles.
 
 [^MASSVIS]:
   The plot was originally from The Economist, but this image was taken
@@ -217,13 +218,15 @@ between the circles.
   [MASSVIS project web site](http://massvis.mit.edu/).  
   The eye tracking data were taken from the same web site.
 
-::: {#fig-fixations}
+::: {#fig-fixations layout-ncol=2 layout-valign="bottom"} 
 
-![](Images/economist_daily_chart_75_track.svg)
+![A thumbnail of the original image.](MASSVIS/visMost505-thumb.png){#fig-fixations-1 fig-align="left"}
+
+![Fixations and saccades from eye tracking.](MASSVIS/visMost505-track.svg){#fig-fixations-2 fig-align="left"}
 
 Eye tracking data from the MASSVIS project that shows fixations (circles) and 
-saccades (lines between circles) for one person viewing an image for 10 seconds.
-Longer fixations are represented by larger circles.
+saccades (lines between circles) for one person viewing an image for 
+10 seconds.[^MASSVIS-permissions]
 :::
 
 ## Visual processing {#sec-visual-processing}
@@ -464,10 +467,10 @@ in @fig-diff-size.
 #| label: fig-diff-size
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We effortlessly perceive groups of dots that differ only by size.
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that differs only by size.
 #| fig-subcap:
-#|   - Five teal dots amongst 20 orange dots.
-#|   - Twenty-five teal dots amongst 75 orange dots.
+#|   - One larger dot amongst 24 smaller dots.
+#|   - One larger dot amongst 99 smaller dots.
 colssame <- rep("black", 2)
 
 grid.newpage()
@@ -479,7 +482,6 @@ dots(10, cols2=colssame, r2=c(1.5, 3))
 
 If an item differs on more than one visual feature, the effect is 
 even stronger (@fig-diff-salience).
-
 The visual system is very sensitive to items that are **different** in terms
 of basic **visual features**.
 
@@ -488,10 +490,10 @@ of basic **visual features**.
 #| label: fig-diff-salience
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We effortlessly perceive groups of dots that differ by combination of features.
+#| fig-cap: Amongst a collection of dots, we effortlessly perceive one dot that differs by both colour and size.
 #| fig-subcap:
-#|   - Five teal dots amongst 20 orange dots.
-#|   - Twenty-five teal dots amongst 75 orange dots.
+#|   - One larger teal dot amongst 24 smaller orange dots.
+#|   - One larger teal dot amongst 99 smaller orange dots.
 #col1 <- coords(as(sRGB(t(col2rgb(colsnpg[1])/255)), "polarLUV"))
 #colssimilar <- hcl(c(col1[3], col1[3] + 10), col1[2], c(col1[1], col1[1] - 10))
 colssimilar <- c(colsnpg[1], darken(colsnpg[1]))
@@ -503,10 +505,15 @@ grid.newpage()
 dots(10, cols2=colsnpg, r2=c(1.5, 3))
 ```
 
-On the other hand, if change occurs across multiple visual features
-in a less structured fashion then finding a particular item of interest
-becomes much harder.  For example, it is more difficult to see the one large 
-teal dot in @fig-diff-serial than it is in @fig-diff-salience.
+On the other hand, if the distractor items are both similar on one
+visual feature, but different on another, and if the arrangement
+of the items is less structured, then finding a particular item of interest
+becomes much harder.  For example, if we look for the
+single larger 
+teal dot in @fig-diff-serial,
+it is much harder to find than it is in @fig-diff-salience.
+The visual system's sensitivity to **different** items is much
+greater when all other items are the **same**.
 
 ```{r}
 #| echo: false
@@ -515,8 +522,8 @@ teal dot in @fig-diff-serial than it is in @fig-diff-salience.
 #| fig.height: 6
 #| fig-cap: We have to work much harder when there is more going on.
 #| fig-subcap:
-#|   - Five teal dots amongst 20 orange dots.
-#|   - Twenty-five teal dots amongst 75 orange dots.
+#|   - One larger teal dot amongst 24 dots that differ by colour and/or size.
+#|   - One larger teal dot amongst 99 dots that differ by colour and/or size.
 grid.newpage()
 dots(5, cols2=colsnpg, r2=c(3, 5), spread=TRUE, mix=TRUE)
 
@@ -524,37 +531,64 @@ grid.newpage()
 dots(10, cols2=colsnpg, r2=c(1.5, 3), spread=TRUE, mix=TRUE)
 ```
 
-Attention is drawn to items that are different to everything else,
-for example, larger and brighter items.  This is bottom-up.
-But attention can also be task-oriented.  This is top-down.
-For example, can you find the single small orange dot in 
-@fig-diff-serial?  Did you notice it prior to being asked to find it?
+## Visual attention {#sec-attention}
+
+Where we focus within an image
+is not random.[^attention]
+The figures from @sec-differences show that
+our attention is automatically drawn to the **larger**, **brighter**, and
+more **colourful** items within an image.
+This happens due to very early visual processing and without
+conscious thought.
+
+[^attention]:
+  Citation to bottom-up vs top-down.
+
+Where we focus within an image, and what information we extract,
+is also affected by conscious goals---what are we looking for?[^filtering]
+For example, when you were looking for the larger teal dot in @fig-diff-serial,
+did you notice that there was also a single small orange dot?
+Now that your attention has been drawn to that task, it will
+be easier to find the smaller orange dot.
+
+[^filtering]:
+  Citation to mentions of attention
+  filtering visual input differently
 
 ## Visual similarities {#sec-visual-model-groups}
 
 In @fig-diff-serial, we can see several groups of items:
 orange dots, teal dots, large dots, and small dots.
-
 These separate groups of items are identified based on their 
-**similarity**---the items have the same colour.
-We also automatically perceive groups
-based on the **proximity** of items, **connections** between items,
-and the **enclosure** of items.[^gestalt]
+**similarity**---each group of items have the same size and the same colour.
+
+As with the detection of differences that we saw in @sec-differences,
+the grouping of similar items within an image happens automatically and
+without conscious effort.
+Furthermore, there are other visual properties 
+that mean we automatically perceive items as groups:
+items that are close together (items that have similar
+**positions**) are seen as a group;
+items that are connected by lines
+are seen as a group;
+and items that are enclosed by a border or background 
+are seen as a group.[^gestalt]
 
 [^gestalt]:
   mention Gestalt "school" or whatever, plus citations.
 
 For example, in @fig-gestalt-group there are several matrices of dots.
-In each matrix, we can see either rows of dots or columns of dots simply
-by manipulating the proximity of the dots to each other, or by
-manipulating the colours of the dots, or by manipulating which dots
-are connected by lines.
+In each matrix, we can see either rows of dots or columns of dots 
+by manipulating visual features that affect our perception of groups:
+dots that are closer together for a group;
+dots that are the same colour form a group;
+dots that are connected by lines form a group.
 
 ```{r}
 #| echo: false
 #| label: fig-gestalt-group
 #| fig.height: 2
-#| fig-cap: Gestalt grouping
+#| fig-cap: In each matrix of dots, we clearly see either rows or columns. In the pair of matrices on the left, making the dots slightly closer together horizontally produces rows, and making the dots slightly closer vertically produces columns.  In the middle pair of matrices, using the same colour on each row produces rows, and using the same colour on each column produces columns.  In the pair of matrices on the right, drawing vertical lines produces columns and drawing horizontal lines produces rows.
 vp2 <- viewport(width=.9, y=unit(3, "lines"), 
                 height=unit(1, "npc") - unit(6, "lines"), 
                 just="bottom")
@@ -594,7 +628,8 @@ grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5),
 grid.segments(unit(.2, "npc") + 4*unit(-2:2, "mm"),
               unit(.5, "npc") + 4*unit(-2, "mm"), 
               unit(.2, "npc") + 4*unit(-2:2, "mm"),
-              unit(.5, "npc") + 4*unit(2, "mm"))
+              unit(.5, "npc") + 4*unit(2, "mm"),
+              gp=gpar(lwd=1.5))
 grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
@@ -604,17 +639,19 @@ grid.segments(unit(.8, "npc") + 4*unit(-2, "mm"),
               unit(.8, "npc") + 4*unit(2, "mm"),
               unit(.5, "npc") + 4*unit(-2:2, "mm"),
               gp=gpar(lwd=2))
-grid.text("connectivity", y=unit(-2, "lines"), just="top")
+grid.text("connection", y=unit(-2, "lines"), just="top")
 popViewport(2)
 ```
 
 These grouping effects are very powerful and can even be used to override
-each other in some combinations, as shown in @fig-gestalt-group.
+each other in some combinations.  @fig-gestalt-group shows that an enclosing
+border can be stronger than a connecting line, connecting lines can be 
+stronger than closeness, and closeness can be stronger than similar colours.
 
 ```{r}
 #| echo: false
 #| label: fig-gestalt-order
-#| fig-cap: Gestalt order
+#| fig-cap: For each set of four dots, we automatically perceive two pairs of dots.  On the left, the enclosing grey rectangles produce an upper pair and a lower pair.  Second from left, the lines produce a left pair and a right pair.  Second from right, closeness produces an upper pair and a lower pair.  On the right, colour produces a left pair and a right pair.
 #| fig.height: 2
 cols <- rep(colsnpg, each=2)
 vp2 <- viewport(width=.9, y=unit(2, "lines"), 
@@ -661,11 +698,6 @@ grid.text("similarity", y=0, just="top")
 popViewport(3)
 ```
 
-The main point is that the visual system is *very* good at some tasks.
-An effective data visualisation will make use of the things that
-the visual system is good at.
-
-
 ## Summary
 
 The human visual system captures a very large amount of information from the
@@ -679,7 +711,16 @@ Large numbers of simple features are rapidly extracted,
 while more complex visual items take longer and require more 
 congnitive effort, but persist for longer.
 
-Items are rapidly differentiated into groups in terms of similarity 
+Large, bright, colourful items automatically stand out.
+
+Items are automatically grouped in terms of similarity 
 (of basic visual features), proximity, connection, and enclosure.
+
+The main point is that the visual system is *very* good at 
+perceiving certain visual features.
+
+An effective data visualisation will make use of the things that
+the visual system is good at.
+
 
 
