@@ -127,6 +127,7 @@ gg <- ggplot(crimeGroupTotal) +
     geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
                  linetype="dotted") +
     geom_point(aes(x=total, y=group)) +
+    scale_x_continuous(name="total") +
     theme(aspect.ratio=1)
 grid.newpage()
 pushViewport(viewport(width=.9, height=.9))
@@ -134,44 +135,53 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-Representing negative values.
+Another way that **length** can convey information more naturally than
+**position** is visualising negative values.
+For example @fig-neg-bar shows the total points differential
+(points scored minus points conceded) for
+Tier One nations at Rugby World Cups.
+The *direction* of the bars very clearly indicates the change from
+positive points differential to negative points differential.
 
 ```{r}
 #| echo: false
+#| label: fig-neg-bar
+#| fig-cap: A bar plot of the total points differential for Tier One nations at Rugby World Cups.
 rwcAlltime <- aggregate(rwcAll[c("scored", "conceded")], 
                         list(team=rwcAll$team), sum)
 rwcAlltime$diff <- rwcAlltime$scored - rwcAlltime$conceded
 rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
 ggplot(rwcAlltime) +
     geom_col(aes(x=diff, y=team)) +
+    scale_x_continuous(name="points differential") +
     theme(aspect.ratio=2/3)
 ```
 
+By comparison, the change from positive to negative points differential
+is much more abstract in @fig-neg-dot, which shows a dot plot of the
+same data.
+
 ```{r}
 #| echo: false
+#| label: fig-neg-dot
+#| fig-cap: A dot plot of the total points differential for Tier One nations at Rugby World Cups.
 ggplot(rwcAlltime) +
     geom_point(aes(x=diff, y=team)) +
     geom_segment(aes(x=-Inf, xend=Inf, y=team, yend=team), linetype="dotted") +
     annotate("segment", x=0, xend=0, y=-Inf, yend=Inf, linetype="solid") +
+    scale_x_continuous(name="points differential") +
     theme(aspect.ratio=2/3)
 ```
 
-```{r}
-#| echo: false
-rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
-                        list(team=rwcAll$team, year=rwcAll$year), sum)
-rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
-rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
-ggplot(rwcAllyear) +
-    geom_tile(aes(x=year, y=team, fill=diff)) +
-    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE) +
-    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
-    scale_y_discrete(expand=expansion(0)) +
-    theme(aspect.ratio=1)
-```
+A more subtle effect can be seen in @fig-bar-orientation,
+which shows two different bar plots of the total number
+of offenders in different ethnic groups.
+The vertical bars are more natural for conveying count data like this
+because of the natural correspondence with stacks of items.[^vertical-bars]
 
-horizontal bars (distances) versus vertical bars (amounts) 
-look up Tversky and kosslyn
+[^vertical-bars]:
+  horizontal bars (distances) versus vertical bars (amounts) 
+  look up Tversky and kosslyn
 
 ```{r}
 #| echo: false
@@ -185,6 +195,7 @@ look up Tversky and kosslyn
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_discrete(name=NULL) +
     force_panelsizes(rows = unit(2.5, "in"),
                      cols = unit(2.5, "in"))
 
@@ -192,14 +203,81 @@ temp <- crimeGroupTotal
 temp$group <- gsub("/", "/\n", temp$group)
 ggplot(temp) + 
     geom_col(aes(y=total, x=group)) +
+    scale_x_discrete(name=NULL) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     force_panelsizes(rows = unit(2.5, "in"),
                      cols = unit(2.5, "in"))
 ```
 
-Dark is more
+## Case study: Divergent colour palettes
 
-## Same is same
+@fig-neg-tile shows a heatmap of the points differential for Tier One
+nations at each Rugby World Cup.  The data symbols are rectangles, or "tiles".
+The teams are mapped to the vertical **positions** of the tiles and
+the years are mapped to the horizontal **positions** of the tiles.
+These are both effective mappings and we can easily map *back* to
+teams or years.
+The points differentials are mapped to the **colour** of the tiles,
+but in a slightly complicated way.  Positive data values map to a shade
+of purple, while negative values map to a shade of brown.
+In both cases, we have a constant **hue**, with increasing **chroma** and
+decreasing **luminance** as the data values get further away from zero.
+
+The use of two **hues** creates two different groups (positive and negative
+values), while the changes in **chroma** and **luminance** convey
+changes in absolute magnitude (if only for ordinal comparisons).
+
+@fig-neg-tile also demonstrates another example of visual congruence because
+darker colours are naturally associated with larger data values.[^dark-is-more]
+
+[^dark-is-more]: 
+  citation please!
+
+```{r}
+#| echo: false
+#| label: fig-neg-tile
+#| fig-cap: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups.  South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.[^gggrid-bite]
+rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
+                        list(team=rwcAll$team, year=rwcAll$year), sum)
+rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
+rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
+rwcAllyear <- merge(rwcAllyear,
+                    melt(with(rwcAllyear, table(team, year)) == 0, 
+                         value.name="absent"),
+                    all=TRUE)
+edge <- function(data, coords) {
+    polygonGrob(c(0, 0,
+                  coords$x[data$absent][2] + .05, 
+                  coords$x[data$absent][2] + .05, 
+                  0, 0, 1, 1),
+                c(1, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] - .05, 
+                  coords$y[data$absent][1] - .05,
+                  0, 0, 1),
+                gp=gpar(fill=NA))
+}
+ggplot(rwcAllyear) +
+    geom_tile(aes(x=year, y=team, fill=diff)) +
+    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE,
+                                    na.value="transparent") +
+    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
+    scale_y_discrete(expand=expansion(0)) +
+    grid_panel(edge, aes(x=year, y=team, absent=absent)) +
+    theme(panel.border=element_blank(),
+          aspect.ratio=1)
+```
+
+[^gggrid-bite]:
+  The {gggrid} package [@pkg-gggrid]
+  was used to take the "bite" out of the panel
+  border in @fig-neg-tile where South Africa was excluded.
+
+> A diverging colour palette is effective because it creates two distinct
+  ordinal visual features.
+
+## Same is same {#sec-same-same}
 
 In @sec-differences we saw that the visual system is very
 sensitive to **differences**, 
@@ -207,37 +285,46 @@ particularly when everything else remains the **same**.
 This means that data symbols that change if the data values change
 will be effective because the visual system will notice the difference
 in the data symbols.
+More specifically, if a **visual feature** of a data symbol
+changes then the visual system will notice that change.
+Furthermore, if a visual feature of a data symbol
+changes while all other visual features of the data symbol remain the **same**,
+the visual system will notice the change more easily.
 
 For example, 
-in a bar plot like @fig-prop-2, the lengths of the bars are different,
-so we map *back* to changes in the data values.
-This is helped by the fact that the bars are all the same "width";
-they do not change in the vertical dimension.
+in a bar plot like @fig-bar, the data symbols are bars
+and only the **lengths** of the bars and the vertical **positions** of
+the bars are different.
+The "widths" of the bars and the **colours** of the bars remain
+the same.
 
-* Things that do not change are not salient (e.g., the widths of bars in
-  bar plot), BUT things that DO change are salient (so only do this to
-  represent changes in the data).  This should be cited to something.
-  Principle of unambiguity ?
+> Another reason why bar plots are effective is because the bars
+  differ in length, but are otherwise the same.
 
-  Example is mosaic plot which changes *shape* as well as area so
-  two identical areas could end up looking different => BAD!
-  This has to be mentioned in the mosaic plot case study
-  because that comes LATER.
-
-  Another example is word cloud which changes orientation NOT based on data.
-
-  AND have "different is different"?
-  And just cite the relevant literature for these points in footnotes?
-  
-
-
-## Visual dissonance
+## Visual dissonance {#sec-dissonance}
 
 The fact that **length** and **area** naturally convey amounts means
 that care must be taken *not* to confuse that association.
+For example, @fig-bar-not-zero shows the number of times each team
+entered the opposition's final third during a match at the 
+2023 Women's World Cup.
+The final third of the pitch is shown as darker green regions, broken
+into five different zones, with a number of entries for each zone
+and for each team represented by a line with an arrow.
+
+In @fig-bar-not-zero, longer lines correspond to a larger number of 
+entries.  However, the bars start at the halfway line on the pitch
+rather than at the final third of the pitch.
+This means that the zero entries by South Africa into the second-from-right
+zone is represented by a non-zero-length line.
+Apart from making comparisons of the line lengths very inaccurate,
+this creates a confusing visual effect because the viewer
+is expected to associate a non-zero length with a value of zero.
 
 ```{r}
 #| echo: false
+#| label: fig-bar-not-zero
+#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.  This data visualisation is an adaptation of a graphic shown during television coverage of the match.
 entries <- data.frame(team=rep(c("Netherlands", "South Africa"), each=5),
                       region=rep(1:5, 2),
                       count=c(10, 4, 1, 2, 3, 
@@ -257,7 +344,7 @@ grid.rect(y=1, height=2/3, just="top",
           width=44/80, gp=gpar(col=NA, fill=hcl(hue, 70, 50)))
 grid.rect(y=1, height=2/3, just="top", 
           width=20/80, gp=gpar(col=NA, fill=hcl(hue, 70, 40)))
-grid.rect(y=1, height=2/3, just="top")
+## grid.rect(y=1, height=2/3, just="top")
 grid.rect(y=1, height=6/50, width=20/80, just="top")
 grid.rect(y=1, height=18/50, width=44/80, just="top")
 pushViewport(viewport(clip=rectGrob(y=1 - 18/50, just="top")))
@@ -291,19 +378,51 @@ grid.text(c("Netherlands", "South Africa"),
 popViewport()
 ```
 
-Similar for colours
+For any example of **congruence**, 
+where a visual feature naturally corresponds to
+a property of the data,
+there is an opportunity for **dissonance** if the visual feature
+is used inappropriately.  We can improve the effectiveness of 
+a data visualisation by taking advantage of visual congruence
+and we can reduce the effectiveness of a data visualisation 
+if we create visual dissonance.
 
-Even more important for same is same.
+@fig-stroop shows that we can also create dissonance with our mappings
+of data values to colours.
+
+```{r}
+#| echo: false
+#| label: fig-stroop
+#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
+#| fig-height: 1
+grid.newpage()
+pushViewport(viewport(width=.5))
+grid.text(c("red", "green", "blue"), 1:3/4, 
+          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
+```
+
+We saw in @sec-same-same that we want to map differences in data values
+to differences in visual features *and* keep everything else the
+same.  Failing to follow that approach will make it harder to 
+perceive changes in the data values.
+However, a worse error, and 
+another source of visual dissonance arises if we change
+visual features *without* any underlying change in the data values.
+
+**TODO** refer back to using quant feature for qual data as a form
+of this problem - then foreshadow (or even link to) examples to come
+later on.
 
 Pie chart of crime level - larger bars have lighter colour so the messages
 are a bit mixed.  To do with interaction of visual features ?
 Can you make a plot that does not create the visual dissonance
 (e.g., darker colours with different positions?)
 
-## TODO
+> A data visualisation is *not* effective if it contains mappings
+  that are dissonant because that will cause slower and/or
+  incorrect mappings *back* to the data.
 
-More is more for length and area esp.
-=> bars MUST start at zero
+## TODO
 
 Lines contain angles which represent differences in x/y (kosslyn 1989)
 
@@ -329,3 +448,4 @@ it here.
 
 Need to name check "cognitive fit theory" ?
 
+## Summary

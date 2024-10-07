@@ -1086,7 +1086,7 @@ grid.rect(c(.25, .5, .75), 0, width=colWidth, height=c(.3, .6, .9),
 popViewport(2)
 pushViewport(viewport(layout.pos.col=2), 
              viewport(width=unit(.8, "snpc"), height=unit(.8, "snpc")))
-grid.circle(c(.1, .5, .9), y=c(.1, .5, .9), 
+grid.circle(c(.25, .5, .75), y=c(.1, .5, .9), 
             r=sqrt(c(.0125, .025, .0375)), gp=gpar(fill="black"))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3), 
@@ -1097,9 +1097,9 @@ regpoly <- function(x, y, n, offset=0) {
     y <- y + .125*sin(t)
     grid.polygon(x, y, gp=gpar(fill="black"))
 }
-regpoly(.1, .1, 3, pi/2)
+regpoly(.25, .1, 3, 0)
 regpoly(.5, .5, 6, pi/2)
-regpoly(.9, .9, 9, pi/2)
+regpoly(.75, .9, 9, pi/2)
 popViewport(2)
 
 
@@ -1639,6 +1639,7 @@ gg <- ggplot(crimeGroupTotal) +
     geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
                  linetype="dotted") +
     geom_point(aes(x=total, y=group)) +
+    scale_x_continuous(name="total") +
     theme(aspect.ratio=1)
 grid.newpage()
 pushViewport(viewport(width=.9, height=.9))
@@ -1648,36 +1649,28 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-neg-bar
+#| fig-cap: A bar plot of the total points differential for Tier One nations at Rugby World Cups.
 rwcAlltime <- aggregate(rwcAll[c("scored", "conceded")], 
                         list(team=rwcAll$team), sum)
 rwcAlltime$diff <- rwcAlltime$scored - rwcAlltime$conceded
 rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
 ggplot(rwcAlltime) +
     geom_col(aes(x=diff, y=team)) +
+    scale_x_continuous(name="points differential") +
     theme(aspect.ratio=2/3)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-neg-dot
+#| fig-cap: A dot plot of the total points differential for Tier One nations at Rugby World Cups.
 ggplot(rwcAlltime) +
     geom_point(aes(x=diff, y=team)) +
     geom_segment(aes(x=-Inf, xend=Inf, y=team, yend=team), linetype="dotted") +
     annotate("segment", x=0, xend=0, y=-Inf, yend=Inf, linetype="solid") +
+    scale_x_continuous(name="points differential") +
     theme(aspect.ratio=2/3)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
-                        list(team=rwcAll$team, year=rwcAll$year), sum)
-rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
-rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
-ggplot(rwcAllyear) +
-    geom_tile(aes(x=year, y=team, fill=diff)) +
-    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE) +
-    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
-    scale_y_discrete(expand=expansion(0)) +
-    theme(aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
@@ -1692,6 +1685,7 @@ ggplot(rwcAllyear) +
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_discrete(name=NULL) +
     force_panelsizes(rows = unit(2.5, "in"),
                      cols = unit(2.5, "in"))
 
@@ -1699,6 +1693,7 @@ temp <- crimeGroupTotal
 temp$group <- gsub("/", "/\n", temp$group)
 ggplot(temp) + 
     geom_col(aes(y=total, x=group)) +
+    scale_x_discrete(name=NULL) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     force_panelsizes(rows = unit(2.5, "in"),
                      cols = unit(2.5, "in"))
@@ -1706,6 +1701,44 @@ ggplot(temp) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-neg-tile
+#| fig-cap: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups.  South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.[^gggrid-bite]
+rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
+                        list(team=rwcAll$team, year=rwcAll$year), sum)
+rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
+rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
+rwcAllyear <- merge(rwcAllyear,
+                    melt(with(rwcAllyear, table(team, year)) == 0, 
+                         value.name="absent"),
+                    all=TRUE)
+edge <- function(data, coords) {
+    polygonGrob(c(0, 0,
+                  coords$x[data$absent][2] + .05, 
+                  coords$x[data$absent][2] + .05, 
+                  0, 0, 1, 1),
+                c(1, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] - .05, 
+                  coords$y[data$absent][1] - .05,
+                  0, 0, 1),
+                gp=gpar(fill=NA))
+}
+ggplot(rwcAllyear) +
+    geom_tile(aes(x=year, y=team, fill=diff)) +
+    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE,
+                                    na.value="transparent") +
+    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
+    scale_y_discrete(expand=expansion(0)) +
+    grid_panel(edge, aes(x=year, y=team, absent=absent)) +
+    theme(panel.border=element_blank(),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-bar-not-zero
+#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.  This data visualisation is an adaptation of a graphic shown during television coverage of the match.
 entries <- data.frame(team=rep(c("Netherlands", "South Africa"), each=5),
                       region=rep(1:5, 2),
                       count=c(10, 4, 1, 2, 3, 
@@ -1725,7 +1758,7 @@ grid.rect(y=1, height=2/3, just="top",
           width=44/80, gp=gpar(col=NA, fill=hcl(hue, 70, 50)))
 grid.rect(y=1, height=2/3, just="top", 
           width=20/80, gp=gpar(col=NA, fill=hcl(hue, 70, 40)))
-grid.rect(y=1, height=2/3, just="top")
+## grid.rect(y=1, height=2/3, just="top")
 grid.rect(y=1, height=6/50, width=20/80, just="top")
 grid.rect(y=1, height=18/50, width=44/80, just="top")
 pushViewport(viewport(clip=rectGrob(y=1 - 18/50, just="top")))
@@ -1757,6 +1790,17 @@ grid.text(c("Netherlands", "South Africa"),
           hjust=c(0, 1),
           gp=gpar(col=c("pink", "orange"), fontface="bold"))
 popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-stroop
+#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
+#| fig-height: 1
+grid.newpage()
+pushViewport(viewport(width=.5))
+grid.text(c("red", "green", "blue"), 1:3/4, 
+          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
 
 
 ## -----------------------------------------------------------------------------
@@ -2001,6 +2045,24 @@ gg <- ggplot(offenders) +
           aspect.ratio=1)
 pushViewport(viewport(width=1, height=1))
 print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-area-shape
+#| fig-cap: Three different shapes that all have the same area.
+#| fig-height: 3
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1))
+grid.rect(width=.8, height=.2, gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+grid.rect(width=.4, height=.4, gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+grid.rect(width=.2, height=.8, gp=gpar(fill="black"))
 popViewport()
 
 

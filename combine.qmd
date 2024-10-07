@@ -380,6 +380,35 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
+A final weakness with mosaic plots is that the **shape** of the rectangles
+changes as well as the **area**.
+In @sec-dissonance we saw that changes in visual features should only 
+reflect changes in the data.
+
+@fig-area-shape shows that we can create different rectangles with the
+same area, but different shapes.  There can be
+rectangles within a mosaic plot with the same area, which
+represents the same overall probability data value,
+but with different shapes.  The different shapes are a visual signal
+of differences in the data when in reality no difference exists.
+
+```{r}
+#| echo: false
+#| label: fig-area-shape
+#| fig-cap: Three different shapes that all have the same area.
+#| fig-height: 3
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1))
+grid.rect(width=.8, height=.2, gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+grid.rect(width=.4, height=.4, gp=gpar(fill="black"))
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+grid.rect(width=.2, height=.8, gp=gpar(fill="black"))
+popViewport()
+```
 
 ## Summary
 
