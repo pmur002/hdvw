@@ -21,6 +21,7 @@ library(GGally)
 library(ggforce)
 library(ggChernoff)
 library(ggimage)
+library(ggh4x)
 
 
 ## -----------------------------------------------------------------------------
@@ -1612,6 +1613,149 @@ gg <- ggplot(crimeGroupTotal) +
           axis.ticks.y=element_blank())
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-more-is-more
+#| fig.width: 4
+#| fig-cap: A bar plot and a dot plot of the total number of offenders for different ethnic groups.
+#| fig-subcap:
+#|   - Bars.
+#|   - Dots.
+#| layout-ncol: 2
+
+gg <- ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+grid.newpage()
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+
+gg <- ggplot(crimeGroupTotal) + 
+    geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
+                 linetype="dotted") +
+    geom_point(aes(x=total, y=group)) +
+    theme(aspect.ratio=1)
+grid.newpage()
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+rwcAlltime <- aggregate(rwcAll[c("scored", "conceded")], 
+                        list(team=rwcAll$team), sum)
+rwcAlltime$diff <- rwcAlltime$scored - rwcAlltime$conceded
+rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
+ggplot(rwcAlltime) +
+    geom_col(aes(x=diff, y=team)) +
+    theme(aspect.ratio=2/3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+ggplot(rwcAlltime) +
+    geom_point(aes(x=diff, y=team)) +
+    geom_segment(aes(x=-Inf, xend=Inf, y=team, yend=team), linetype="dotted") +
+    annotate("segment", x=0, xend=0, y=-Inf, yend=Inf, linetype="solid") +
+    theme(aspect.ratio=2/3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
+                        list(team=rwcAll$team, year=rwcAll$year), sum)
+rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
+rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
+ggplot(rwcAllyear) +
+    geom_tile(aes(x=year, y=team, fill=diff)) +
+    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE) +
+    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
+    scale_y_discrete(expand=expansion(0)) +
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-bar-orientation
+#| fig.width: 4
+#| fig-cap: Data visualisations of the number of offenders from different ethnic groups.
+#| fig-subcap:
+#|   - Horizontal bars.
+#|   - Vertical bars.
+#| layout-ncol: 2
+ggplot(crimeGroupTotal) + 
+    geom_col(aes(x=total, y=group)) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    force_panelsizes(rows = unit(2.5, "in"),
+                     cols = unit(2.5, "in"))
+
+temp <- crimeGroupTotal
+temp$group <- gsub("/", "/\n", temp$group)
+ggplot(temp) + 
+    geom_col(aes(y=total, x=group)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    force_panelsizes(rows = unit(2.5, "in"),
+                     cols = unit(2.5, "in"))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+entries <- data.frame(team=rep(c("Netherlands", "South Africa"), each=5),
+                      region=rep(1:5, 2),
+                      count=c(10, 4, 1, 2, 3, 
+                              4, 2, 2, 0, 2))
+hue <- 120
+grid.newpage()
+pushViewport(viewport(width=.5, height=.9,
+                      gp=gpar(lwd=1, fill=NA)),
+             viewport(y=0, height=.75, just="bottom"))
+grid.rect(gp=gpar(fill=hcl(hue, 70, 80)))
+pushViewport(viewport(clip="on"))
+grid.circle(y=0, r=10/80)
+popViewport()
+grid.rect(y=1, height=2/3, just="top", 
+          gp=gpar(col=NA, fill=hcl(hue, 70, 60)))
+grid.rect(y=1, height=2/3, just="top", 
+          width=44/80, gp=gpar(col=NA, fill=hcl(hue, 70, 50)))
+grid.rect(y=1, height=2/3, just="top", 
+          width=20/80, gp=gpar(col=NA, fill=hcl(hue, 70, 40)))
+grid.rect(y=1, height=2/3, just="top")
+grid.rect(y=1, height=6/50, width=20/80, just="top")
+grid.rect(y=1, height=18/50, width=44/80, just="top")
+pushViewport(viewport(clip=rectGrob(y=1 - 18/50, just="top")))
+grid.circle(y=1 - 12/50, r=.2)
+popViewport()
+grid.circle(y=1 - 12/50, r=unit(1, "mm"), gp=gpar(fill="black"))
+x <- unit(rep(c(9/80, 24/80, .5, 56/80, 71/80), 2), "npc") +
+     unit(rep(c(-3, 3), each=5), "mm")
+y <- 1/3 + (entries$count)/max(entries$count)*2/3
+col <- rep(c("pink", "orange"), each=5)
+grid.segments(x, 0, x, y, 
+              arrow=arrow(type="closed"),
+              gp=gpar(col=col, fill=col, lwd=1, 
+                      linejoin="mitre", lineend="butt"))
+grid.segments(x, 0, x, y - .05, 
+              gp=gpar(col=col, fill=col, lwd=15, lineend="butt"))
+grid.text(entries$count, x, unit(10, "mm"), gp=gpar(fontface="bold"))
+grid.rect()
+pushViewport(viewport(y=unit(1, "npc") + unit(10, "pt"), height=unit(20, "pt"),
+                      just="bottom"))
+grid.text("Final Third Entries",
+          gp=gpar(fontsize=20))
+popViewport()
+pushViewport(viewport(y=unit(1, "npc") + unit(40, "pt"), height=unit(20, "pt"),
+                      just="bottom"))
+grid.rect(gp=gpar(fill=hcl(hue, 70, 40)))
+grid.text(c("Netherlands", "South Africa"), 
+          x=unit(0:1, "npc") + unit(c(2, -2), "mm"),
+          hjust=c(0, 1),
+          gp=gpar(col=c("pink", "orange"), fontface="bold"))
 popViewport()
 
 
