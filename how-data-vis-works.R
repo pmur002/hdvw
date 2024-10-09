@@ -22,6 +22,7 @@ library(ggforce)
 library(ggChernoff)
 library(ggimage)
 library(ggh4x)
+library(sf)
 
 
 ## -----------------------------------------------------------------------------
@@ -2385,6 +2386,69 @@ ggplot(rwcFlags) +
     grid_panel(flagPanel, 
                aes(breaks, tries, path=path, ar=ar)) +
     theme(aspect.ratio=2/3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-scatter-country-no-legend
+#| fig-cap: A scatter plot with a different shape per country
+ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, shape=country), fill="grey", size=3) +
+    scale_shape_manual(values=(1:25)[-c(15:18, 20)], 
+                       guide="none") +
+    theme(aspect.ratio=2/3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: tbl-map-data
+#| tbl-cap: The average crime rate over the period 2011 to 2021 for each police district of New Zealand.
+kable(crimeDistrictTotal[c("district", "rate")], digits=2)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-map
+#| fig-cap: A choropleth map of the average crime rate over the period 2011 to 2021 for each police district.
+districts <- 
+    st_read("Data/YouthCrime/SHP/nz-police-district-boundaries-29-april-2021.shp",
+            quiet=TRUE)
+centroids <- st_coordinates(st_centroid(st_geometry(districts)))
+districts$X <- centroids[,1]
+districts$Y <- centroids[,2]
+districts <- inner_join(districts, crimeDistrictTotal,
+                        by=join_by(D_MACRON == district))
+ggplot(districts) +
+    geom_sf(aes(fill=rate)) +
+    scale_fill_continuous(name="crime rate") +
+    theme(axis.ticks=element_blank(),
+          axis.text=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-district-bar
+crimeDistrictBar <- crimeDistrictTotal
+crimeDistrictBar$district <- 
+    reorder(crimeDistrictBar$district, 
+            crimeDistrictBar$total/crimeDistrictBar$avgPop)
+ggplot(crimeDistrictBar) +
+    geom_col(aes(total/avgPop, district)) +
+    scale_x_continuous(name="crime rate", expand=expansion(c(0, .05))) +
+    scale_y_discrete(name=NULL) + 
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-map-dot
+#| fig-cap: A circle map of the average crime rate over the period 2011 to 2021 for each police district.
+ggplot(districts) +
+    geom_sf() +
+    geom_point(aes(X, Y, size=rate)) +
+    scale_fill_continuous(name="crime rate") +
+    theme(axis.ticks=element_blank(),
+          axis.text=element_blank())
 
 
 ## -----------------------------------------------------------------------------

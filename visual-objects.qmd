@@ -22,20 +22,23 @@ ggplot(RWCperGame) +
     theme(aspect.ratio=2/3)
 ```
 
-
-@fig-flags shows a data visualisation of the number of clean breaks and the
+@fig-flags shows another scatter plot of the number of clean breaks and the
 number of tries for countries
-at the 2023 Rugby World Cup (@tbl-rwc-2023).
+at the 2023 Rugby World Cup, but this time with flags as the data symbols.
+In one sense, this is just a variation on @fig-flags because the country
+names are mapped to the **shape** of a data symbol. 
+Each data symbol is a shape that allows us to distinguish between the
+different countries.
 
-@fig-flags is similar to the scatter plot of the same data in 
-@fig-scatter.
-In both cases, there are simple mappings from number of clean breaks to the
-horizontal **position** of a data symbol and from number of tries to the
-vertical **position** of a data symbol.
-However, the data symbol in @fig-scatter was a simple dot and the
-data symbol in @fig-flags is a flag image.
-Furthermore, @fig-flags contains
-an additional mapping:  each country is mapped to a different flag image.
+The difference between the data symbols in @fig-scatter-country and 
+the data symbols on @fig-flags is that the flags are not only more
+complicated shapes, but they are familiar shapes.
+The flags convey differences, but they
+also convey the more sophisticated concept of the country
+names.
+In the terms of @sec-visual-processing, 
+the flags are **visual objects** that might take longer to
+process, but convey more information.
 
 ```{r}
 #| echo: false
@@ -74,6 +77,11 @@ ggplot(rwcFlags) +
           aspect.ratio=2/3)
 ```
 
+@fig-flags-direct demonstrates this point by repeating the scatter plot,
+but removing the legend.  We are still able to identify not only 
+that the data symbols represent different things, but we can identify
+the country names as well.
+
 ```{r}
 #| echo: false
 #| label: fig-flags-direct
@@ -97,29 +105,36 @@ ggplot(rwcFlags) +
     theme(aspect.ratio=2/3)
 ```
 
-POINT OUT that the flags demonstrate visual objects - familiarity
-BUT ALSO that they demonstrate the pitfalls, like if you do not 
-recognise some of the flags!
+Just to make the point completely clear, @fig-scatter-country-no-legend
+shows @fig-scatter-country without a legend.
+There is nothing about the shape of the data symbols in 
+@fig-scatter-country-no-legend that conveys the country names.
+We can clearly see that @fig-flags-direct contains more information
+than @fig-scatter-country-no-legend.
 
-The flag data symbols in @fig-flags are examples of **visual objects**.
-The country data values are not being mapped to a basic visual feature
-of a data symbol.  Instead, each country is mapped to a flag data symbol that
-is very different in many details from the other flag data symbols.
+```{r}
+#| echo: false
+#| label: fig-scatter-country-no-legend
+#| fig-cap: A scatter plot with a different shape per country
+ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, shape=country), fill="grey", size=3) +
+    scale_shape_manual(values=(1:25)[-c(15:18, 20)], 
+                       guide="none") +
+    theme(aspect.ratio=2/3)
+```
 
-We could say that we are mapping the country to the **shape** of the flag,
-which is a reasonable mapping because we can perceive differences
-between the **shape** of the different flags, which allows us to
-map *back* to the different countries.
-However, the flags are more than just noticeably different from each other.
-At least for
-some viewers, each flag is extremely familiar, so the data symbol
-conveys the actual country data value, not just that each country is different.
+> A plot that uses visual objects as data symbols can be effective
+  because the visual objects can convey more information
+  and more complex information.
 
-the country names more effectively than, for example,
-mapping country names to the **colour** of data points.
+@fig-flags-direct also demonstrates a weakness of **visual objects**.
+The flags work well for identifying the country names *only if*
+we are familiar with all of the different flags.
+For example, it may only be Australians and New Zealanders who can 
+reliably identify the difference between their two flags.
 
-This section looks at the effectiveness of using visual objects 
-as data symbols.
+> A plot that uses visual objects as data symbols may *not* be effective
+  if the visual objects are only familiar to some people.
 
 ## Icons
 
@@ -127,18 +142,113 @@ Do dog and cat from master class ?
 
 ## Case study: Choropleth maps {#sec-choropleth}
 
-```{r}
+@fig-map shows a choropleth map of the
+average crime rate, over the period from 2011 to 2021, 
+in each police district of New Zealand.
+The data values for this map are shown in @tbl-map-data.
 
+```{r}
+#| echo: false
+#| label: tbl-map-data
+#| tbl-cap: The average crime rate over the period 2011 to 2021 for each police district of New Zealand.
+kable(crimeDistrictTotal[c("district", "rate")], digits=2)
 ```
 
-The major advantage is the mapping *back* from map regions to 
-the corresponding conceptual regions.
+The data symbol in @fig-map is a polygon representing the geographic
+boundary of each police district.  This implicitly entails a mapping
+from police district to the **position** of each polygon.
+Crime rate is mapped to the fill colour of each region.
 
-One weakness is that we use colour for quantitative values.
+The use of polygons as data symbols is effective because
+the polygons form familiar shapes with familiar spatial arrangements
+(familiar to a New Zealand audience at least).
+The polygons are **visual objects** that convey the concepts
+of districts within New Zealand.
+The spatial arrangements are also a form of visual **congruence**;
+the arrangements mirror the real-world spatial relationships 
+between the regions
+(see @sec-congruence).
 
-One weakness is that areas change without corresponding changes in the data.
+```{r}
+#| echo: false
+#| label: fig-map
+#| fig-cap: A choropleth map of the average crime rate over the period 2011 to 2021 for each police district.
+districts <- 
+    st_read("Data/YouthCrime/SHP/nz-police-district-boundaries-29-april-2021.shp",
+            quiet=TRUE)
+centroids <- st_coordinates(st_centroid(st_geometry(districts)))
+districts$X <- centroids[,1]
+districts$Y <- centroids[,2]
+districts <- inner_join(districts, crimeDistrictTotal,
+                        by=join_by(D_MACRON == district))
+ggplot(districts) +
+    geom_sf(aes(fill=rate)) +
+    scale_fill_continuous(name="crime rate") +
+    theme(axis.ticks=element_blank(),
+          axis.text=element_blank())
+```
+
+> A choropleth map is effective because it maps geographic regions to
+  familiar visual objects that convey 
+
+A weakness of @fig-map is that it maps the **quantitative** crime rate
+to colour (chroma and/or luminance).  
+This means that we can only map *back* to ordinal comparisons
+between regions (see @sec-ordinal).
+
+> A choropleth map is *only* effective for making ordinal comparisons
+  between geographic regions because it maps quantitative values to
+  colour.
+
+@fig-district-bar shows a bar plot of the same data,
+which demonstrates the advantages and disadvantages of
+the choropleth map in @fig-map.
+In @fig-district-bar, it is much easier to compare the crime rate
+values because crime rates are mapped to bar **length**, but
+it is much harder to associate the different regions with their
+spatial arrangements because all we have are the region names.
+
+```{r}
+#| echo: false
+#| label: fig-district-bar
+crimeDistrictBar <- crimeDistrictTotal
+crimeDistrictBar$district <- 
+    reorder(crimeDistrictBar$district, 
+            crimeDistrictBar$total/crimeDistrictBar$avgPop)
+ggplot(crimeDistrictBar) +
+    geom_col(aes(total/avgPop, district)) +
+    scale_x_continuous(name="crime rate", expand=expansion(c(0, .05))) +
+    scale_y_discrete(name=NULL) + 
+    theme(aspect.ratio=1)
+```
+
+Another potential weakness with choropleth maps is the fact that
+regions differ in terms of **area**.
+We know from @sec-more-is-more that larger data symbols are
+associated with larger data values.
+The larger polygons accurately
+reflect the fact that some 
+police districts are geographically larger than other, 
+but there is potential for larger polygons
+to be erroneously mapped *back* to larger crime rates.
+
+Add links to alternatives like cartograms (though I really don't like
+those because you lose the familiar shapes so what's the point)
+and dots in regions and ...
 
 Link to MacEachren and Bertin
+
+```{r}
+#| echo: false
+#| label: fig-map-dot
+#| fig-cap: A circle map of the average crime rate over the period 2011 to 2021 for each police district.
+ggplot(districts) +
+    geom_sf() +
+    geom_point(aes(X, Y, size=rate)) +
+    scale_fill_continuous(name="crime rate") +
+    theme(axis.ticks=element_blank(),
+          axis.text=element_blank())
+```
 
 ## Case study: Chernoff faces
 
