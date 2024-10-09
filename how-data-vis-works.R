@@ -1572,6 +1572,34 @@ ggplot(crimeDistrictTotal) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-neg-tile
+#| fig-cap: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups.  South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.[^gggrid-bite]
+edge <- function(data, coords) {
+    polygonGrob(c(0, 0,
+                  coords$x[data$absent][2] + .05, 
+                  coords$x[data$absent][2] + .05, 
+                  0, 0, 1, 1),
+                c(1, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] - .05, 
+                  coords$y[data$absent][1] - .05,
+                  0, 0, 1),
+                gp=gpar(fill=NA))
+}
+ggplot(rwcAllyear) +
+    geom_tile(aes(x=year, y=team, fill=diff)) +
+    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE,
+                                    na.value="transparent") +
+    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
+    scale_y_discrete(expand=expansion(0)) +
+    grid_panel(edge, aes(x=year, y=team, absent=absent)) +
+    theme(panel.border=element_blank(),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-prop
 #| fig.width: 4
 #| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.
@@ -1651,9 +1679,6 @@ popViewport()
 #| echo: false
 #| label: fig-neg-bar
 #| fig-cap: A bar plot of the total points differential for Tier One nations at Rugby World Cups.
-rwcAlltime <- aggregate(rwcAll[c("scored", "conceded")], 
-                        list(team=rwcAll$team), sum)
-rwcAlltime$diff <- rwcAlltime$scored - rwcAlltime$conceded
 rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
 ggplot(rwcAlltime) +
     geom_col(aes(x=diff, y=team)) +
@@ -1701,44 +1726,8 @@ ggplot(temp) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-neg-tile
-#| fig-cap: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups.  South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.[^gggrid-bite]
-rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
-                        list(team=rwcAll$team, year=rwcAll$year), sum)
-rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
-rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
-rwcAllyear <- merge(rwcAllyear,
-                    melt(with(rwcAllyear, table(team, year)) == 0, 
-                         value.name="absent"),
-                    all=TRUE)
-edge <- function(data, coords) {
-    polygonGrob(c(0, 0,
-                  coords$x[data$absent][2] + .05, 
-                  coords$x[data$absent][2] + .05, 
-                  0, 0, 1, 1),
-                c(1, 
-                  coords$y[data$absent][1] + .05, 
-                  coords$y[data$absent][1] + .05, 
-                  coords$y[data$absent][1] - .05, 
-                  coords$y[data$absent][1] - .05,
-                  0, 0, 1),
-                gp=gpar(fill=NA))
-}
-ggplot(rwcAllyear) +
-    geom_tile(aes(x=year, y=team, fill=diff)) +
-    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE,
-                                    na.value="transparent") +
-    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
-    scale_y_discrete(expand=expansion(0)) +
-    grid_panel(edge, aes(x=year, y=team, absent=absent)) +
-    theme(panel.border=element_blank(),
-          aspect.ratio=1)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: fig-bar-not-zero
-#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.  This data visualisation is an adaptation of a graphic shown during television coverage of the match.
+#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.[^final-third]
 entries <- data.frame(team=rep(c("Netherlands", "South Africa"), each=5),
                       region=rep(1:5, 2),
                       count=c(10, 4, 1, 2, 3, 
@@ -1805,10 +1794,50 @@ grid.text(c("red", "green", "blue"), 1:3/4,
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-listener-beans
+#| fig-cap:  A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.[^listener-cakes]
+#| warning: false
+cake <- readPNG("Images/birthday-cake-cropped.png")
+old <- data.frame(gender=c("Male", "Female"),
+                  count=c(2, 5))
+cakes <- function(data, coords) {
+    grobTree(rasterGrob(cake, 
+                        rep(coords$x, data$y + 1) + c(.05, -.05), 
+                        unlist(mapply(function(x, y) {
+                                          seq(0, x, length.out=y)
+                                       },
+                                       coords$y, data$y + 1)), 
+                        just="bottom", 
+                        height=.2))
+}
+ggplot(old) +
+    geom_col(aes(x=gender, y=count), fill="transparent") +
+    grid_panel(cakes, aes(x=gender, y=count - 1)) +
+    scale_x_discrete(name=NULL, labels=c("Males 100+", "Females 100+")) +
+    scale_y_continuous(expand=expansion(0, .05)) +
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank(),
+          panel.grid.major.y=element_line(linewidth=.5),
+          aspect.ratio=1) +
+    labs(title="For every five females age 100+,\nthere are two males aged 100+")
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| message: false
 #| label: tbl-rwc-all
 #| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
 kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-jitter
+#| fig-cap: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
+ggplot(rwcAll) +
+    geom_jitter(aes(x=scored, y=hemisphere), height=.2, width=0, alpha=.5) +
+    scale_x_continuous(name="points scored")
 
 
 ## -----------------------------------------------------------------------------
@@ -2068,6 +2097,36 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: tbl-interaction
+#| tbl-cap: The number of offenders in different ethnic groups in 2011 and in 2021.
+crimeGroupSub <- subset(crimeGroup, year %in% c(2011, 2021))
+kable(crimeGroupSub[c("group", "year", "count")],
+      row.names=FALSE)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-interaction
+#| fig-cap: An interaction plot showing the change in the number of offenders in different ethnic groups between 2011 and 2021.
+ggplot(crimeGroupSub) +
+    geom_line(aes(x=year, y=count, colour=group)) +
+    scale_x_continuous(name=NULL, breaks=c(2011, 2021)) +
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-interaction-bar
+#| fig-cap: A bar plot showing the number of offenders in different ethnic groups in 2011 and in 2021.
+ggplot(crimeGroupSub) +
+    geom_col(aes(x=year, y=count, fill=group), position="dodge") +
+    scale_x_continuous(name=NULL, breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-line
 #| fig-cap: A line plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
 gg <- ggplot(crimeGroup) +
@@ -2259,10 +2318,57 @@ ggplot(all) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-scatter-country
+#| fig-cap: A scatter plot with a different shape per country
+ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, shape=country), fill="grey", size=3) +
+    scale_shape_manual(values=(1:25)[-c(15:18, 20)], 
+                       guide=guide_legend(ncol=2), name=NULL) +
+    theme(aspect.ratio=2/3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-flags
 #| fig-cap: A scatter plot with flags as data symbols
 size <- 10
-flag <- function(data, coords) {
+flagGroup <- function(data, coords) {
+    width <- unit(size, "mm")
+    height <- data$ar * width
+    grobTree(rectGrob(coords$x, coords$y, 
+                      width, height, 
+                      gp=gpar(fill="white")),
+             rasterGrob(readPNG(data$path), 
+                        coords$x, coords$y, width))
+}
+flag_key <- function(data, ...) {
+    i <- data$shape
+    data <- rwcFlags[i, ]
+    width <- unit(size, "mm")
+    height <- data$ar * width
+    grobTree(rectGrob(.5, .5,
+                      width, height, 
+                      gp=gpar(fill="white")),
+             rasterGrob(readPNG(data$path), 
+                        .5, .5, width))
+}
+ggplot(rwcFlags) +
+    grid_group(flagGroup, 
+               aes(breaks, tries, path=path, ar=ar, 
+                   shape=country),
+               inherit.aes=FALSE,
+               show.legend=TRUE, key_glyph=flag_key) +
+    scale_shape_manual(values=1:nrow(rwcFlags), guide=guide_legend(ncol=2)) +
+    theme(legend.key.width=unit(size, "mm"),
+          legend.key.height=unit(max(rwcFlags$ar)*size + 1, "mm"),
+          aspect.ratio=2/3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-flags-direct
+#| fig-cap: A scatter plot with flags as data symbols
+flagPanel <- function(data, coords) {
     width <- unit(size, "mm")
     height <- data$ar * width
     flags <- lapply(1:nrow(data),
@@ -2276,7 +2382,8 @@ flag <- function(data, coords) {
     do.call(grobTree, flags)
 }
 ggplot(rwcFlags) +
-    grid_panel(flag, aes(breaks, tries, path=path, ar=ar)) +
+    grid_panel(flagPanel, 
+               aes(breaks, tries, path=path, ar=ar)) +
     theme(aspect.ratio=2/3)
 
 

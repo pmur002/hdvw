@@ -1,5 +1,5 @@
 
-# Summaries {#sec-summaries}
+# Data Summaries {#sec-summaries}
 
 In @sec-mapping-visual-features we described a data visualisation as
 a mapping from data values to the visual features of a data symbol
@@ -22,25 +22,9 @@ because they rely on **data summaries** instead of raw data values.
 
 ## Box Plots
 
-The Rugby World Cup is a competition that is held every four years, with the
-first event taking place in 1987.
-We have data on the number of points that were scored in World Cup matches
-for Tier One nations (the top 10 rugby-playing nations).
-@tbl-rwc-all shows a sample of these data.[^rwc]
-
-[^rwc]:
-  Attribution to kaggle data set.
-
-```{r}
-#| echo: false
-#| message: false
-#| label: tbl-rwc-all
-#| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
-```
-
 @fig-boxplot shows box plots of the number of 
-points scored by all teams, 
+points scored by all teams at Rugby World Cup matches
+(@tbl-rwc-all),
 with a separate
 box plot for teams from different hemispheres.
 This is an effective data visualisation for

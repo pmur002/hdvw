@@ -9,6 +9,22 @@ rwcAll <- merge(read.csv(file.path(dataPath, "rwc-all-time.csv")),
                 hemi, by.x="team", by.y="country")
 rwcAll$hemisphere <- factor(rwcAll$hemisphere, levels=c("South", "North"))
 
+rwcAlltime <- aggregate(rwcAll[c("scored", "conceded")], 
+                        list(team=rwcAll$team, hemisphere=rwcAll$hemisphere),
+                        sum)
+rwcAlltime$diff <- rwcAlltime$scored - rwcAlltime$conceded
+rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
+
+rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
+                        list(team=rwcAll$team, year=rwcAll$year,
+                             hemisphere=rwcAll$hemisphere), sum)
+rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
+rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
+rwcAllyear <- merge(rwcAllyear,
+                    melt(with(rwcAllyear, table(team, year)) == 0, 
+                         value.name="absent"),
+                    all=TRUE)
+
 ## Source:
 ## https://www.rugbyworldcup.com/2023/stats/
 

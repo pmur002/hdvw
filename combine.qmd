@@ -193,7 +193,7 @@ allow us to map back to data summaries.
   between variables is because we are able to perceive visual summaries from
   a collection of positions in space.
 
-## Case study: Mosaic plots
+## Case study: Mosaic plots {#sec-mosaic}
 
 @tbl-offenders shows a table of counts for offences committed
 in New Zealand in 2021.
@@ -408,6 +408,78 @@ popViewport()
 pushViewport(viewport(layout.pos.col=3))
 grid.rect(width=.2, height=.8, gp=gpar(fill="black"))
 popViewport()
+```
+
+## Case study: Interaction plots
+
+@fig-interaction shows an interaction plot of the number of offenders
+in different ethnic groups, comparing 2011 to 2021.
+The raw data are shown in @tbl-interaction.
+
+```{r}
+#| echo: false
+#| label: tbl-interaction
+#| tbl-cap: The number of offenders in different ethnic groups in 2011 and in 2021.
+crimeGroupSub <- subset(crimeGroup, year %in% c(2011, 2021))
+kable(crimeGroupSub[c("group", "year", "count")],
+      row.names=FALSE)
+```
+
+The purpose of the interaction plot is to show the *change* in the number
+of offenders between 2011 and 2021 for each of the ethnic groups.
+If the lines of the interaction plot were parallel we would conclude
+that the same change has happened to all ethnic groups;  the fact that the 
+lines are not parallel indicates that there have been different changes
+in some ethnic groups compared to other ethnic groups.[^interaction-plot]
+
+[^interaction-plot]:
+  An interaction plot is typically used in a more experimental setting 
+  where the x-axis might be different treatments and the groups might
+  be different patient groups and the y-axis might be a measure
+  of response to treatment.  The outcome is then whether the treatment
+  has had the same effect for different patient groups (or not).
+
+```{r}
+#| echo: false
+#| label: fig-interaction
+#| fig-cap: An interaction plot showing the change in the number of offenders in different ethnic groups between 2011 and 2021.
+ggplot(crimeGroupSub) +
+    geom_line(aes(x=year, y=count, colour=group)) +
+    scale_x_continuous(name=NULL, breaks=c(2011, 2021)) +
+    theme(aspect.ratio=1)
+```
+
+The data symbols in @fig-interaction are straight line segments.
+The year is mapped to the horizontal start and end **position** of the lines
+and the number of offenders is mapped to the vertical start and end
+**position** of the lines.  The ethnic group is mapped to the **colour**
+of the lines.  These mappings are effective for mapping *back* to the
+raw data values in @tbl-interaction.
+
+In addition, the explicit mappings generate
+an **emergent feature**: the **angle** of the lines.
+Furthermore, the angle of the lines allow us to map *back* to 
+a **data summary**: the *change* in the number
+of offenders between 2011 and 2021 (see @fig-visual-corr).
+
+> An interaction plot is effective because the angle of the lines
+  allows us to map *back* to changes in the data values.
+
+It is more difficult to perceive the *change* in the number of offenders
+for each ethnic group in
+a bar plot like the one shown in @fig-interaction-bar.
+Partly this is because we have to perceive and compare two bars
+for each ethnic group rather than a single line.
+
+```{r}
+#| echo: false
+#| label: fig-interaction-bar
+#| fig-cap: A bar plot showing the number of offenders in different ethnic groups in 2011 and in 2021.
+ggplot(crimeGroupSub) +
+    geom_col(aes(x=year, y=count, fill=group), position="dodge") +
+    scale_x_continuous(name=NULL, breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
 ```
 
 ## Summary

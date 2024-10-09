@@ -285,6 +285,60 @@ ggplot(crimeDistrictTotal) +
           axis.ticks.y=element_blank())
 ```
 
+## Case study: Divergent colour palettes
+
+@fig-neg-tile shows a heatmap of the points differential for Tier One
+nations at each Rugby World Cup.  The data symbols are rectangles, or "tiles".
+The teams are mapped to the vertical **positions** of the tiles and
+the years are mapped to the horizontal **positions** of the tiles.
+These are both effective mappings and we can easily map *back* to
+teams or years.
+The points differentials are mapped to the **colour** of the tiles,
+but in a slightly complicated way.  Positive data values map to a shade
+of purple, while negative values map to a shade of brown.
+In both cases, we have a constant **hue**, with increasing **chroma** and
+decreasing **luminance** as the data values get further away from zero.
+
+The use of two **hues** creates two different groups (positive and negative
+values), while the changes in **chroma** and **luminance** convey
+changes in absolute magnitude (if only for ordinal comparisons).
+
+```{r}
+#| echo: false
+#| label: fig-neg-tile
+#| fig-cap: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups.  South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.[^gggrid-bite]
+edge <- function(data, coords) {
+    polygonGrob(c(0, 0,
+                  coords$x[data$absent][2] + .05, 
+                  coords$x[data$absent][2] + .05, 
+                  0, 0, 1, 1),
+                c(1, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] + .05, 
+                  coords$y[data$absent][1] - .05, 
+                  coords$y[data$absent][1] - .05,
+                  0, 0, 1),
+                gp=gpar(fill=NA))
+}
+ggplot(rwcAllyear) +
+    geom_tile(aes(x=year, y=team, fill=diff)) +
+    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE,
+                                    na.value="transparent") +
+    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
+    scale_y_discrete(expand=expansion(0)) +
+    grid_panel(edge, aes(x=year, y=team, absent=absent)) +
+    theme(panel.border=element_blank(),
+          aspect.ratio=1)
+```
+
+[^gggrid-bite]:
+  The {gggrid} package [@pkg-gggrid]
+  was used to take the "bite" out of the panel
+  border in @fig-neg-tile where South Africa was excluded.
+
+> A diverging colour palette is effective because it creates two distinct
+  ordinal visual features.
+
 ## Summary
 
 **Colour** is really three visual features:  **hue**, **chroma**, 

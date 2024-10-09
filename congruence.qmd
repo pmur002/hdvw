@@ -1,22 +1,21 @@
 
-# Visual Congruence
+# Visual Congruence {#sec-congruence}
 
 @fig-prop shows a pie chart of the proportions of total youth 
 offenders between 2011 and 2021 in 
 different ethnic groups and a bar plot of the same data.
-We learned in @sec-mapping-visual-features that mapping 
+We learned in @sec-accuracy that mapping 
 **quantitative** proportions to **lengths**, like in the
-bar plot, is more appropriate
-and more accurate than mapping the proportions to **angles**
+bar plot, is more accurate than mapping the proportions to **angles**
 or **areas**, like in the pie chart.
 
-However, which data visualisation is superior at conveying the
-fact that Māori offenders make up approximately 50% of the total?
-Which visualisation is better at conveying 
-the proportion of offenders that are European/Other?
+However, the superior represenation of the
+fact that Māori offenders make up approximately 50% of the total is
+the pie chart rather than the bar plot.
 
-Although it is easy to perceive that the bar for Māori is just below 0.5
-in length from the bar plot, it is even easier to see that the light blue
+Although it is easy to determine from the length of the bar and the scale 
+on the x-axis in the bar plot that the bar for Māori is just below 0.5, 
+it is even easier, without any guides at all, to see that the light blue
 wedge in the pie chart is just under half a circle.
 It is also easy to see that the red wedge is close to a third of a circle.
 
@@ -52,8 +51,14 @@ popViewport()
 
 The purpose of this section is to show that we need to consider more
 than just the accuracy or capacity of our mappings from 
-data values to basic visual feature in order to understand the effectiveness
-of a data visualisation.
+data values to basic visual features in order to understand the effectiveness
+of a data visualisation.[^congruence-lit]
+
+[^congruence-lit]:
+  @TVERSKY2002247 discusses congruence at least in the sense of 
+  matching the spatial properties of data values to the spatial
+  arrangement of visual features.  The concept is also discussed in
+  @DBLP:journals/corr/abs-2008-11310.
 
 ## Part-to-whole
 
@@ -99,7 +104,8 @@ different ethnic groups.
 Part of the reason why **length** and **area** work so well is because
 a longer bar naturally conveys the idea of *more*.
 By contrast, the **position** of data points in a dot plot of the same data,
-as shown in @fig-more-is-more, do not convey the same sense of *more*.
+as shown in @fig-more-is-more, do not inherently 
+convey the same sense of *more*.
 In a bar plot, the data symbols that correspond to larger data values
 are actually larger data symbols;
 the presentation of larger data values is more abstract in a dot plot.
@@ -147,9 +153,6 @@ positive points differential to negative points differential.
 #| echo: false
 #| label: fig-neg-bar
 #| fig-cap: A bar plot of the total points differential for Tier One nations at Rugby World Cups.
-rwcAlltime <- aggregate(rwcAll[c("scored", "conceded")], 
-                        list(team=rwcAll$team), sum)
-rwcAlltime$diff <- rwcAlltime$scored - rwcAlltime$conceded
 rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
 ggplot(rwcAlltime) +
     geom_col(aes(x=diff, y=team)) +
@@ -158,8 +161,8 @@ ggplot(rwcAlltime) +
 ```
 
 By comparison, the change from positive to negative points differential
-is much more abstract in @fig-neg-dot, which shows a dot plot of the
-same data.
+is much more abstract in a dot plot of the
+same data (@fig-neg-dot).
 
 ```{r}
 #| echo: false
@@ -173,15 +176,20 @@ ggplot(rwcAlltime) +
     theme(aspect.ratio=2/3)
 ```
 
+> One reason why bar plots are effective is because larger data values are
+  represented by larger data symbols.
+
 A more subtle effect can be seen in @fig-bar-orientation,
 which shows two different bar plots of the total number
 of offenders in different ethnic groups.
-The vertical bars are more natural for conveying count data like this
+In this case,
+the vertical bars are more natural for conveying count data like this
 because of the natural correspondence with stacks of items.[^vertical-bars]
 
 [^vertical-bars]:
   horizontal bars (distances) versus vertical bars (amounts) 
   look up Tversky and kosslyn
+  OTOH, horizontal bars are more accurate than vertical bars (citation please!)
 
 ```{r}
 #| echo: false
@@ -209,81 +217,14 @@ ggplot(temp) +
                      cols = unit(2.5, "in"))
 ```
 
-## Case study: Divergent colour palettes
-
-@fig-neg-tile shows a heatmap of the points differential for Tier One
-nations at each Rugby World Cup.  The data symbols are rectangles, or "tiles".
-The teams are mapped to the vertical **positions** of the tiles and
-the years are mapped to the horizontal **positions** of the tiles.
-These are both effective mappings and we can easily map *back* to
-teams or years.
-The points differentials are mapped to the **colour** of the tiles,
-but in a slightly complicated way.  Positive data values map to a shade
-of purple, while negative values map to a shade of brown.
-In both cases, we have a constant **hue**, with increasing **chroma** and
-decreasing **luminance** as the data values get further away from zero.
-
-The use of two **hues** creates two different groups (positive and negative
-values), while the changes in **chroma** and **luminance** convey
-changes in absolute magnitude (if only for ordinal comparisons).
-
-@fig-neg-tile also demonstrates another example of visual congruence because
-darker colours are naturally associated with larger data values.[^dark-is-more]
-
-[^dark-is-more]: 
-  citation please!
-
-```{r}
-#| echo: false
-#| label: fig-neg-tile
-#| fig-cap: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups.  South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.[^gggrid-bite]
-rwcAllyear <- aggregate(rwcAll[c("scored", "conceded")], 
-                        list(team=rwcAll$team, year=rwcAll$year), sum)
-rwcAllyear$diff <- rwcAllyear$scored - rwcAllyear$conceded
-rwcAllyear$team <- factor(rwcAllyear$team, levels=levels(rwcAlltime$team))
-rwcAllyear <- merge(rwcAllyear,
-                    melt(with(rwcAllyear, table(team, year)) == 0, 
-                         value.name="absent"),
-                    all=TRUE)
-edge <- function(data, coords) {
-    polygonGrob(c(0, 0,
-                  coords$x[data$absent][2] + .05, 
-                  coords$x[data$absent][2] + .05, 
-                  0, 0, 1, 1),
-                c(1, 
-                  coords$y[data$absent][1] + .05, 
-                  coords$y[data$absent][1] + .05, 
-                  coords$y[data$absent][1] - .05, 
-                  coords$y[data$absent][1] - .05,
-                  0, 0, 1),
-                gp=gpar(fill=NA))
-}
-ggplot(rwcAllyear) +
-    geom_tile(aes(x=year, y=team, fill=diff)) +
-    scale_fill_continuous_diverging(palette="Purple-Brown", rev=TRUE,
-                                    na.value="transparent") +
-    scale_x_continuous(breaks=unique(rwcAllyear$year), expand=expansion(0)) +
-    scale_y_discrete(expand=expansion(0)) +
-    grid_panel(edge, aes(x=year, y=team, absent=absent)) +
-    theme(panel.border=element_blank(),
-          aspect.ratio=1)
-```
-
-[^gggrid-bite]:
-  The {gggrid} package [@pkg-gggrid]
-  was used to take the "bite" out of the panel
-  border in @fig-neg-tile where South Africa was excluded.
-
-> A diverging colour palette is effective because it creates two distinct
-  ordinal visual features.
-
 ## Same is same {#sec-same-same}
 
 In @sec-differences we saw that the visual system is very
 sensitive to **differences**, 
 particularly when everything else remains the **same**.
-This means that data symbols that change if the data values change
-will be effective because the visual system will notice the difference
+This means that mapping *changes* in data values to *changes* in 
+data symbols 
+will be effective because the visual system will notice the differences
 in the data symbols.
 More specifically, if a **visual feature** of a data symbol
 changes then the visual system will notice that change.
@@ -324,7 +265,7 @@ is expected to associate a non-zero length with a value of zero.
 ```{r}
 #| echo: false
 #| label: fig-bar-not-zero
-#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.  This data visualisation is an adaptation of a graphic shown during television coverage of the match.
+#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.[^final-third]
 entries <- data.frame(team=rep(c("Netherlands", "South Africa"), each=5),
                       region=rep(1:5, 2),
                       count=c(10, 4, 1, 2, 3, 
@@ -378,6 +319,10 @@ grid.text(c("Netherlands", "South Africa"),
 popViewport()
 ```
 
+[^final-third]:
+  This data visualisation is an adaptation of a graphic shown during 
+  television coverage of the match.
+
 For any example of **congruence**, 
 where a visual feature naturally corresponds to
 a property of the data,
@@ -386,6 +331,9 @@ is used inappropriately.  We can improve the effectiveness of
 a data visualisation by taking advantage of visual congruence
 and we can reduce the effectiveness of a data visualisation 
 if we create visual dissonance.
+
+**TODO** need expansion of colour dissonance (possibly preceded by
+section on colour associations?) 
 
 @fig-stroop shows that we can also create dissonance with our mappings
 of data values to colours.
@@ -409,43 +357,139 @@ However, a worse error, and
 another source of visual dissonance arises if we change
 visual features *without* any underlying change in the data values.
 
-**TODO** refer back to using quant feature for qual data as a form
-of this problem - then foreshadow (or even link to) examples to come
-later on.
+@fig-listener-beans shows a data visualisation of the relative number of 
+people aged over 100 for females versus males.
+There are numerous problems with this data visualisation, but here
+we will just focus on the horizontal **position** of the cake images.
+The cakes for females are positioned to the left of the cakes for males,
+which is acceptable because that difference in position reflects
+a difference in the data---males versus females.
+However, within each gender, the cakes are also staggered a small amount
+to the left then to the right.
+This visual difference in the cake positions does not correspond to
+any difference in the data values.  We are tempted to seek meaning from the
+the left-to-right staggering of the cakes when no meaning exists.
 
-Pie chart of crime level - larger bars have lighter colour so the messages
-are a bit mixed.  To do with interaction of visual features ?
-Can you make a plot that does not create the visual dissonance
-(e.g., darker colours with different positions?)
+We will see other examples of visual changes that do not relate to
+changes in the data in @sec-mosaic and @sec-word-cloud.
+
+```{r}
+#| echo: false
+#| label: fig-listener-beans
+#| fig-cap:  A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.[^listener-cakes]
+#| warning: false
+cake <- readPNG("Images/birthday-cake-cropped.png")
+old <- data.frame(gender=c("Male", "Female"),
+                  count=c(2, 5))
+cakes <- function(data, coords) {
+    grobTree(rasterGrob(cake, 
+                        rep(coords$x, data$y + 1) + c(.05, -.05), 
+                        unlist(mapply(function(x, y) {
+                                          seq(0, x, length.out=y)
+                                       },
+                                       coords$y, data$y + 1)), 
+                        just="bottom", 
+                        height=.2))
+}
+ggplot(old) +
+    geom_col(aes(x=gender, y=count), fill="transparent") +
+    grid_panel(cakes, aes(x=gender, y=count - 1)) +
+    scale_x_discrete(name=NULL, labels=c("Males 100+", "Females 100+")) +
+    scale_y_continuous(expand=expansion(0, .05)) +
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank(),
+          panel.grid.major.y=element_line(linewidth=.5),
+          aspect.ratio=1) +
+    labs(title="For every five females age 100+,\nthere are two males aged 100+")
+```
+
+[^listener-cakes]:
+  This plot is based on a data visualisation from the New Zealand Listener 
+  October 14-20 2023.
 
 > A data visualisation is *not* effective if it contains mappings
-  that are dissonant because that will cause slower and/or
+  that are dissonant because that can cause distraction and slower and/or
   incorrect mappings *back* to the data.
 
-## TODO
+## Case study: Jittering
 
-Lines contain angles which represent differences in x/y (kosslyn 1989)
+The Rugby World Cup is a competition that is held every four years, with the
+first event taking place in 1987.
+We have data on the number of points that were scored in World Cup matches
+for Tier One nations (the top 10 rugby-playing nations).
+@tbl-rwc-all shows a sample of these data.[^rwc]
 
-Lines with peaks and valleys have a natural correspondence with 
-mountain ranges.
+[^rwc]:
+  Attribution to kaggle data set.
 
-Lines imply continuity (at least) if not linear interpolation
-(density plot this is absolutely ok)
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-all
+#| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
+```
 
-Lines (angles) imply trends (whereas bars are discrete) (Zacks and Tversky 1999)
-People use "trend words" (increasing/decreasing) versus "discrete words"
-(higher/lower than) AND are faster to judge absolute values from bars
-but slope from line graphs.
+@fig-jitter shows a scatterplot of the number of points scored 
+by teams from different hemispheres at Rugby World Cup matches.
+In this data visualisation, the data symbols are dots,
+the number of points scored is mapped to the horizontal **position** of
+the dots, and the hemisphere is mapped to the vertical **position**
+of the dots.
 
-At least some of the ideas in "congruence" are similar to "expressiveness"
-cite tamarara munzner and jock mackinlay 
-(and Enrico Bertini? https://filwd.substack.com/p/beyond-precision-expressiveness-in)
-although tamara's expressiveness is more like the quant/qual distinction
-(or possibly capacity?).
+To ameliorate the overlapping of data points, a random amount of "jitter"
+has been
+added the vertical position
+of the dots.  The filled interior of each dot is also semitransparent.
 
-Looks like Barbara Tversky uses congruence more in the sense we are using
-it here.
+```{r}
+#| echo: false
+#| label: fig-jitter
+#| fig-cap: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
+ggplot(rwcAll) +
+    geom_jitter(aes(x=scored, y=hemisphere), height=.2, width=0, alpha=.5) +
+    scale_x_continuous(name="points scored")
+```
 
-Need to name check "cognitive fit theory" ?
+The scatter plot in @fig-jitter is effective for mapping *back* to 
+the number of points scored because each data value maps to the
+horizontal position of a single data symbol.
+Similarly, we can easily map *back* to the separate hemispheres.
+
+On the other hand, the jittering means that there are visual differences
+between the vertical positions of the dots that do not correspond to
+any differences in data values.  For example, there are two dots representing
+matches where a team from the Northern hemisphere scored zero points.
+The data values for these two dots are identical (zero points scored and
+northern hemisphere), but they are visually different.
+The randomness of the jittering may help to dilute any temptation
+to seek meaning from the artificial visual difference, but the
+addition of jittering may cause confusion.
+
+> Jittering data symbols is effective because it reduces the amount of overlap
+  amongst data
+  symbols, but jittering may also 
+  reduce the effectiveness of a data visualisation because it introduces
+  visual dissonance.
 
 ## Summary
+
+The effectiveness of a data visualisation may depend on more than
+just the accuracy and capacity of visual features.
+
+Visual **congruence** refers to whether
+a data symbol or visual feature has 
+a natural correspondence with properties of the data.
+
+Some data visualisations are effective because they are visually congruent.
+
+Data symbols that are larger for larger data values are more effective.
+
+Data symbols that only change if the data values change are more effective.
+
+Visual **dissonance** refers to whether a data symbol or visual feature
+contradicts properties of the data.
+
+Some data visualisations are *not* effective because they are visually
+dissonant.
