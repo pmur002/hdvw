@@ -136,16 +136,42 @@ reliably identify the difference between their two flags.
 > A plot that uses visual objects as data symbols may *not* be effective
   if the visual objects are only familiar to some people.
 
-## Icons
+## Chart junk
 
-@fig-pic shows a data visualisation of the number of pet dogs and pet cats 
+**TODO** Discuss the pros and cons of using visual objects.
+
+Can refer to visual-model to make the argument *against* based on
+the benefits of using simple shapes, basic visual features, and
+only changing visual features based on changes in the data, while
+keeping everything else constant.
+
+OTOH, there are arguments for engagement, attention, and memorability.
+
+This section can then inform the case studies.
+
+## Case study: Pictograms
+
+@fig-pic shows a pictogram of the number of pet dogs and pet cats 
 globally.[^statista]
-The data symbols in this plot are images of a cat and a dog,
-with the number of pets mapped to the height of each image.
+The data symbols in this plot are images, or **icons**, of a cat and a dog,
+with the number of pets mapped to the height of each icon.[^pictograms]
+Icons are an example of **visual objects**;  they 
+are effective at conveying categories because they
+visually resemble physical objects, in this case, cats and dogs.
 
 [^statista]:
   reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/
 
+[^pictograms]:  
+  different terminology: icons, glyphs, pictograms
+  Vehement opposition to these from some quarters
+
+Unfortunately, because the cat and dog images are not simple shapes, it
+is harder to accurately perceive the heights of the images, so it is
+harder to map back to the number of cats and dogs.
+Even worse, we actually perceive the size, or **area**, of the images.
+The dog image is wider than the cat image so the number of dogs is
+visually over-emphasised.
 
 ```{r}
 #| echo: false
@@ -166,6 +192,7 @@ dog <- readPicture("Images/dog-cairo.svg")
 ```{r}
 #| echo: false
 #| label: fig-pic
+#| fig-cap: A data visualisation of the number of pet cats and pet dogs worldwide.
 petGlyph <- function(data, coords) {
     grobTree(pictureGrob(cat, coords$x[2], 0, height=coords$y[2], 
                          just="bottom", expansion=0),
@@ -179,24 +206,45 @@ ggplot(pets) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1/2)
 ```
+
+@fig-pic-alt shows two alternative uses of icons that attempt to resolve
+some of the problems in @fig-pic.  In @fig-pic-alt-1, the images are
+distorted so that they have the same width and so that only the height
+of the images changes.  There is also a bar
+to help with the perception of **length**.
+While the bar makes it much easier to map *back* to the
+number of pets,
+the distortion is not effective because it hinders the perception of
+the icon.
+
+@fig-pic-alt-2 uses a bar to represent the number of pets and just
+has a small version of the icon at the base of each bar.
+We know that the bar is effective for mapping *back* to the number
+of pets and the small icons are effective as labels for the bars.
 
 ```{r}
 #| echo: false
 #| layout-ncol: 2
 #| fig.width: 4
 #| label: fig-pic-alt
+#| fig-cap: Two alternative uses of icons.
 #| fig-subcap:
-#|   - distorted pictograms
-#|   - repeated pictograms 
+#|   - distorted icons
+#|   - icon labels
 petStretch <- function(data, coords) {
-    grobTree(pictureGrob(cat, coords$x[2], width=unit(3, "cm"),
+    grobTree(rectGrob(coords$x[2], width=unit(3, "cm"),
+                      0, height=coords$y[2], 
+                      just="bottom", gp=gpar(col=NA, fill="grey80")),
+             pictureGrob(cat, coords$x[2], width=unit(3, "cm"),
                          0, height=coords$y[2], 
                          just="bottom", expansion=0, distort=TRUE),
+             rectGrob(coords$x[1], width=unit(3, "cm"),
+                      0, height=coords$y[1], 
+                      just="bottom", gp=gpar(col=NA, fill="grey80")),
              pictureGrob(dog, coords$x[1], width=unit(3, "cm"),
                          0, height=coords$y[1], 
                          just="bottom", expansion=0, distort=TRUE))
@@ -204,15 +252,59 @@ petStretch <- function(data, coords) {
 ggplot(pets) + 
     grid_panel(petStretch, aes(x=pet, y=count)) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(1, 1))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1)
 
+petKey <- function(data, coords) {
+    grobTree(pictureGrob(cat, coords$x[2], 0, height=.2, 
+                         just="bottom", expansion=0),
+             pictureGrob(dog, coords$x[1], 0, height=.2, 
+                         just="bottom", expansion=0))
+}
+ggplot(pets) + 
+    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
+    grid_panel(petKey, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+```
+
+@fig-pic-icon shows two more alternatives to @fig-pic.
+@fig-pic-icon-2 is just a standard bar plot.  We know that
+this is effective for mapping *back* to the number of pets.
+
+@fig-pic-icon-1 uses repetitions of the icons to represent
+the number of pets, still within a bar.
+In this case, each icon represents 100 million
+pets.
+The ability to count icons is effective for mapping *back* to
+the overall counts.[^icon-plots]
+
+[^icon-plots]:
+  cite the study that reckons using icons can help with perceiving counts.
+  More effective when each icon represents 1 (and so there are no fractional
+  icons) ?
+
+
+```{r}
+#| echo: false
+#| layout-ncol: 2
+#| fig.width: 4
+#| label: fig-pic-icon
+#| fig-cap: Two more alternative data visualisations of the pet data.
+#| fig-subcap: 
+#|   - Icons are repeated to represent the number of pets.
+#|   - A basic bar plot
 petIcon <- function(data, coords) {
     height <- .2
     ncat <- coords$y[2] %/% height + 1
@@ -220,12 +312,19 @@ petIcon <- function(data, coords) {
     cats <- do.call(grobTree, 
                     lapply(1:ncat,
                            function(i) {
-                               pictureGrob(cat, 
-                                           coords$x[2], (i - 1)*height, 
-                                           height=height, 
-                                           just="bottom",
-                                           expansion=0,
-                                           clip="inherit")
+                               grobTree(rectGrob(coords$x[2], 
+                                                 (i - 1)*height,
+                                                 height + .05, height,
+                                                 just="bottom",
+                                                 gp=gpar(col=NA, 
+                                                         fill="grey80")),
+                                        pictureGrob(cat, 
+                                                    coords$x[2], 
+                                                    (i - 1)*height, 
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
+                                                    clip="inherit"))
                            }))
     catPile <- grobTree(cats,
                         vp=viewport(clip=rectGrob(y=0, height=coords$y[2], 
@@ -233,12 +332,19 @@ petIcon <- function(data, coords) {
     dogs <- do.call(grobTree, 
                     lapply(1:ndog,
                            function(i) {
-                               pictureGrob(dog, 
-                                           coords$x[1], (i - 1)*height, 
-                                           height=height, 
-                                           just="bottom",
-                                           expansion=0,
-                                           clip="inherit")
+                               grobTree(rectGrob(coords$x[1], 
+                                                 (i - 1)*height,
+                                                 height + .05, height,
+                                                 just="bottom",
+                                                 gp=gpar(col=NA, 
+                                                         fill="grey80")),
+                                        pictureGrob(dog, 
+                                                    coords$x[1], 
+                                                    (i - 1)*height,  
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
+                                                    clip="inherit"))
                            }))
     dogPile <- grobTree(dogs,
                         vp=viewport(clip=rectGrob(y=0, height=coords$y[1], 
@@ -248,40 +354,26 @@ petIcon <- function(data, coords) {
 ggplot(pets) + 
     grid_panel(petIcon, aes(x=pet, y=count)) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(1, 1))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1)
-```
 
-```{r}
-#| echo: false
-petKey <- function(data, coords) {
-    grobTree(pictureGrob(cat, coords$x[2], 0, height=unit(2, "cm"), 
-                         just="bottom", expansion=0),
-             pictureGrob(dog, coords$x[1], 0, height=unit(2, "cm"), 
-                         just="bottom", expansion=0))
-}
 ggplot(pets) + 
-    geom_col(aes(x=pet, y=count), fill="grey50") +
-    grid_panel(petKey, aes(x=pet, y=count)) +
+    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(1, 1))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1)
 ```
 
-
-Footnote:  different terminology icons, glyphs, pictograms
 
 ## Case study: Choropleth maps {#sec-choropleth}
 

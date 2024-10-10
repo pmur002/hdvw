@@ -2420,6 +2420,7 @@ dog <- readPicture("Images/dog-cairo.svg")
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-pic
+#| fig-cap: A data visualisation of the number of pet cats and pet dogs worldwide.
 petGlyph <- function(data, coords) {
     grobTree(pictureGrob(cat, coords$x[2], 0, height=coords$y[2], 
                          just="bottom", expansion=0),
@@ -2433,7 +2434,6 @@ ggplot(pets) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1/2)
@@ -2444,13 +2444,20 @@ ggplot(pets) +
 #| layout-ncol: 2
 #| fig.width: 4
 #| label: fig-pic-alt
+#| fig-cap: Two alternative uses of icons.
 #| fig-subcap:
-#|   - distorted pictograms
-#|   - repeated pictograms
+#|   - distorted icons
+#|   - icon labels
 petStretch <- function(data, coords) {
-    grobTree(pictureGrob(cat, coords$x[2], width=unit(3, "cm"),
+    grobTree(rectGrob(coords$x[2], width=unit(3, "cm"),
+                      0, height=coords$y[2], 
+                      just="bottom", gp=gpar(col=NA, fill="grey80")),
+             pictureGrob(cat, coords$x[2], width=unit(3, "cm"),
                          0, height=coords$y[2], 
                          just="bottom", expansion=0, distort=TRUE),
+             rectGrob(coords$x[1], width=unit(3, "cm"),
+                      0, height=coords$y[1], 
+                      just="bottom", gp=gpar(col=NA, fill="grey80")),
              pictureGrob(dog, coords$x[1], width=unit(3, "cm"),
                          0, height=coords$y[1], 
                          just="bottom", expansion=0, distort=TRUE))
@@ -2458,15 +2465,42 @@ petStretch <- function(data, coords) {
 ggplot(pets) + 
     grid_panel(petStretch, aes(x=pet, y=count)) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(1, 1))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1)
 
+petKey <- function(data, coords) {
+    grobTree(pictureGrob(cat, coords$x[2], 0, height=.2, 
+                         just="bottom", expansion=0),
+             pictureGrob(dog, coords$x[1], 0, height=.2, 
+                         just="bottom", expansion=0))
+}
+ggplot(pets) + 
+    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
+    grid_panel(petKey, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| layout-ncol: 2
+#| fig.width: 4
+#| label: fig-pic-icon
+#| fig-cap: Two more alternative data visualisations of the pet data.
+#| fig-subcap:
+#|   - Icons are repeated to represent the number of pets.
+#|   - A basic bar plot
 petIcon <- function(data, coords) {
     height <- .2
     ncat <- coords$y[2] %/% height + 1
@@ -2474,12 +2508,19 @@ petIcon <- function(data, coords) {
     cats <- do.call(grobTree, 
                     lapply(1:ncat,
                            function(i) {
-                               pictureGrob(cat, 
-                                           coords$x[2], (i - 1)*height, 
-                                           height=height, 
-                                           just="bottom",
-                                           expansion=0,
-                                           clip="inherit")
+                               grobTree(rectGrob(coords$x[2], 
+                                                 (i - 1)*height,
+                                                 height + .05, height,
+                                                 just="bottom",
+                                                 gp=gpar(col=NA, 
+                                                         fill="grey80")),
+                                        pictureGrob(cat, 
+                                                    coords$x[2], 
+                                                    (i - 1)*height, 
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
+                                                    clip="inherit"))
                            }))
     catPile <- grobTree(cats,
                         vp=viewport(clip=rectGrob(y=0, height=coords$y[2], 
@@ -2487,12 +2528,19 @@ petIcon <- function(data, coords) {
     dogs <- do.call(grobTree, 
                     lapply(1:ndog,
                            function(i) {
-                               pictureGrob(dog, 
-                                           coords$x[1], (i - 1)*height, 
-                                           height=height, 
-                                           just="bottom",
-                                           expansion=0,
-                                           clip="inherit")
+                               grobTree(rectGrob(coords$x[1], 
+                                                 (i - 1)*height,
+                                                 height + .05, height,
+                                                 just="bottom",
+                                                 gp=gpar(col=NA, 
+                                                         fill="grey80")),
+                                        pictureGrob(dog, 
+                                                    coords$x[1], 
+                                                    (i - 1)*height,  
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
+                                                    clip="inherit"))
                            }))
     dogPile <- grobTree(dogs,
                         vp=viewport(clip=rectGrob(y=0, height=coords$y[1], 
@@ -2502,33 +2550,21 @@ petIcon <- function(data, coords) {
 ggplot(pets) + 
     grid_panel(petIcon, aes(x=pet, y=count)) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(1, 1))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1)
 
-
-## -----------------------------------------------------------------------------
-#| echo: false
-petKey <- function(data, coords) {
-    grobTree(pictureGrob(cat, coords$x[2], 0, height=unit(2, "cm"), 
-                         just="bottom", expansion=0),
-             pictureGrob(dog, coords$x[1], 0, height=unit(2, "cm"), 
-                         just="bottom", expansion=0))
-}
 ggplot(pets) + 
-    geom_col(aes(x=pet, y=count), fill="grey50") +
-    grid_panel(petKey, aes(x=pet, y=count)) +
+    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(1, 1))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
     coord_cartesian(clip="off") +
     xlab("") +
     ylab("millions") +
-    labs(title="Number of Pets Worldwide") +
     theme(axis.text.x=element_blank(),
           axis.ticks.x=element_blank(),
           aspect.ratio=1)

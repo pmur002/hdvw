@@ -158,9 +158,10 @@ div.csl-indent {
   </ul></li>
   <li><a href="#visual-objects" id="toc-visual-objects" class="nav-link" data-scroll-target="#visual-objects"><span class="header-section-number">11</span> Visual Objects</a>
   <ul class="collapse">
-  <li><a href="#icons" id="toc-icons" class="nav-link" data-scroll-target="#icons"><span class="header-section-number">11.1</span> Icons</a></li>
-  <li><a href="#sec-choropleth" id="toc-sec-choropleth" class="nav-link" data-scroll-target="#sec-choropleth"><span class="header-section-number">11.2</span> Case study: Choropleth maps</a></li>
-  <li><a href="#case-study-chernoff-faces" id="toc-case-study-chernoff-faces" class="nav-link" data-scroll-target="#case-study-chernoff-faces"><span class="header-section-number">11.3</span> Case study: Chernoff faces</a></li>
+  <li><a href="#chart-junk" id="toc-chart-junk" class="nav-link" data-scroll-target="#chart-junk"><span class="header-section-number">11.1</span> Chart junk</a></li>
+  <li><a href="#case-study-pictograms" id="toc-case-study-pictograms" class="nav-link" data-scroll-target="#case-study-pictograms"><span class="header-section-number">11.2</span> Case study: Pictograms</a></li>
+  <li><a href="#sec-choropleth" id="toc-sec-choropleth" class="nav-link" data-scroll-target="#sec-choropleth"><span class="header-section-number">11.3</span> Case study: Choropleth maps</a></li>
+  <li><a href="#case-study-chernoff-faces" id="toc-case-study-chernoff-faces" class="nav-link" data-scroll-target="#case-study-chernoff-faces"><span class="header-section-number">11.4</span> Case study: Chernoff faces</a></li>
   </ul></li>
   <li><a href="#text" id="toc-text" class="nav-link" data-scroll-target="#text"><span class="header-section-number">12</span> Text</a>
   <ul class="collapse">
@@ -3480,67 +3481,108 @@ Figure&nbsp;11.4: A scatter plot with a different shape per country
 <blockquote class="blockquote">
 <p>A plot that uses visual objects as data symbols may <em>not</em> be effective if the visual objects are only familiar to some people.</p>
 </blockquote>
-<section id="icons" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="icons"><span class="header-section-number">11.1</span> Icons</h2>
-<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;11.5</a> shows a data visualisation of the number of pet dogs and pet cats globally.<a href="#fn39" class="footnote-ref" id="fnref39" role="doc-noteref"><sup>39</sup></a> The data symbols in this plot are images of a cat and a dog, with the number of pets mapped to the height of each image.</p>
+<section id="chart-junk" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="chart-junk"><span class="header-section-number">11.1</span> Chart junk</h2>
+<p><strong>TODO</strong> Discuss the pros and cons of using visual objects.</p>
+<p>Can refer to visual-model to make the argument <em>against</em> based on the benefits of using simple shapes, basic visual features, and only changing visual features based on changes in the data, while keeping everything else constant.</p>
+<p>OTOH, there are arguments for engagement, attention, and memorability.</p>
+<p>This section can then inform the case studies.</p>
+</section>
+<section id="case-study-pictograms" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="case-study-pictograms"><span class="header-section-number">11.2</span> Case study: Pictograms</h2>
+<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;11.5</a> shows a pictogram of the number of pet dogs and pet cats globally.<a href="#fn39" class="footnote-ref" id="fnref39" role="doc-noteref"><sup>39</sup></a> The data symbols in this plot are images, or <strong>icons</strong>, of a cat and a dog, with the number of pets mapped to the height of each icon.<a href="#fn40" class="footnote-ref" id="fnref40" role="doc-noteref"><sup>40</sup></a> Icons are an example of <strong>visual objects</strong>; they are effective at conveying categories because they visually resemble physical objects, in this case, cats and dogs.</p>
+<p>Unfortunately, because the cat and dog images are not simple shapes, it is harder to accurately perceive the heights of the images, so it is harder to map back to the number of cats and dogs. Even worse, we actually perceive the size, or <strong>area</strong>, of the images. The dog image is wider than the cat image so the number of dogs is visually over-emphasised.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-pic" class="quarto-figure quarto-figure-center quarto-float anchored" width="100%">
+<div id="fig-pic" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="how-data-vis-works_files/figure-html/fig-pic-1.svg" id="fig-pic" class="img-fluid figure-img" style="width:100.0%">
+<img src="how-data-vis-works_files/figure-html/fig-pic-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.5
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.5: A data visualisation of the number of pet cats and pet dogs worldwide.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<p><a href="#fig-pic-alt" class="quarto-xref">Figure&nbsp;11.6</a> shows two alternative uses of icons that attempt to resolve some of the problems in <a href="#fig-pic" class="quarto-xref">Figure&nbsp;11.5</a>. In <a href="#fig-pic-alt-1" class="quarto-xref">Figure&nbsp;11.6 (a)</a>, the images are distorted so that they have the same width and so that only the height of the images changes. There is also a bar to help with the perception of <strong>length</strong>. While the bar makes it much easier to map <em>back</em> to the number of pets, the distortion is not effective because it hinders the perception of the icon.</p>
+<p><a href="#fig-pic-alt-2" class="quarto-xref">Figure&nbsp;11.6 (b)</a> uses a bar to represent the number of pets and just has a small version of the icon at the base of each bar. We know that the bar is effective for mapping <em>back</em> to the number of pets and the small icons are effective as labels for the bars.</p>
+<div id="fig-pic-alt" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pic-alt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-pic-alt" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-pic-alt-1" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-pic-alt-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="how-data-vis-works_files/figure-html/fig-pic-alt-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<img src="how-data-vis-works_files/figure-html/fig-pic-alt-1.svg" class="img-fluid figure-img" style="width:100.0%" data-ref-parent="fig-pic-alt">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pic-alt-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.6: distorted pictograms
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-pic-alt-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) distorted icons
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-pic-alt" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-pic-alt-2" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-pic-alt-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="how-data-vis-works_files/figure-html/fig-pic-alt-2.svg" class="img-fluid figure-img" style="width:100.0%">
+<img src="how-data-vis-works_files/figure-html/fig-pic-alt-2.svg" class="img-fluid figure-img" style="width:100.0%" data-ref-parent="fig-pic-alt">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pic-alt-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.7: repeated pictograms
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-pic-alt-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) icon labels
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="how-data-vis-works_files/figure-html/unnamed-chunk-112-1.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pic-alt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6: Two alternative uses of icons.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-pic-icon" class="quarto-xref">Figure&nbsp;11.7</a> shows two more alternatives to <a href="#fig-pic" class="quarto-xref">Figure&nbsp;11.5</a>. <a href="#fig-pic-icon-2" class="quarto-xref">Figure&nbsp;11.7 (b)</a> is just a standard bar plot. We know that this is effective for mapping <em>back</em> to the number of pets.</p>
+<p><a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;11.7 (a)</a> uses repetitions of the icons to represent the number of pets, still within a bar. In this case, each icon represents 100 million pets. The ability to count icons is effective for mapping <em>back</em> to the overall counts.<a href="#fn41" class="footnote-ref" id="fnref41" role="doc-noteref"><sup>41</sup></a></p>
+<div id="fig-pic-icon" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pic-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-pic-icon" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-pic-icon-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-pic-icon-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-pic-icon-1.svg" class="img-fluid figure-img" style="width:100.0%" data-ref-parent="fig-pic-icon">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-pic-icon-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Icons are repeated to represent the number of pets.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-pic-icon" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-pic-icon-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-pic-icon-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-pic-icon-2.svg" class="img-fluid figure-img" style="width:100.0%" data-ref-parent="fig-pic-icon">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-pic-icon-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) A basic bar plot
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Footnote: different terminology icons, glyphs, pictograms</p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pic-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.7: Two more alternative data visualisations of the pet data.
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="sec-choropleth" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="sec-choropleth"><span class="header-section-number">11.2</span> Case study: Choropleth maps</h2>
+<section id="sec-choropleth" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-choropleth"><span class="header-section-number">11.3</span> Case study: Choropleth maps</h2>
 <p><a href="#fig-map" class="quarto-xref">Figure&nbsp;11.8</a> shows a choropleth map of the average crime rate, over the period from 2011 to 2021, in each police district of New Zealand. The data values for this map are shown in <a href="#tbl-map-data" class="quarto-xref">Table&nbsp;11.1</a>.</p>
 <div class="cell">
 <div id="tbl-map-data" class="cell quarto-float anchored">
@@ -3689,8 +3731,8 @@ Figure&nbsp;11.10: Alternative map-based representations of the average crime ra
 </figure>
 </div>
 </section>
-<section id="case-study-chernoff-faces" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="case-study-chernoff-faces"><span class="header-section-number">11.3</span> Case study: Chernoff faces</h2>
+<section id="case-study-chernoff-faces" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="case-study-chernoff-faces"><span class="header-section-number">11.4</span> Case study: Chernoff faces</h2>
 <p><a href="#fig-chernoff" class="quarto-xref">Figure&nbsp;11.11</a> visualises the 2023 Rugby World Cup data (<a href="#tbl-rwc-2023" class="quarto-xref">Table&nbsp;8.1</a>) using Chernoff faces. The data symbol in this visualisation is a little unusual; each country is represented by a combination of circles, curves, and lines that together produce a <strong>visual object</strong> that resembles a face. The mappings in this visualisation are also a little unusual. The number of points scored is mapped to the <strong>curvature</strong> of the smile, the number of tries is mapped to the <strong>angle</strong> of the eye brows, and the number of clean breaks is mapped to the horizontal <strong>position</strong> of the eyes.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -3763,7 +3805,7 @@ Figure&nbsp;12.1: A line plot with all text removed. Without text, it is impossi
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fixations-text-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.2: Eye tracking data from the MASSVIS project that shows fixations (circles) and saccades (lines between circles) for one person viewing an image for 10 seconds. <a href="#fn40" class="footnote-ref" id="fnref40" role="doc-noteref"><sup>40</sup></a>
+Figure&nbsp;12.2: Eye tracking data from the MASSVIS project that shows fixations (circles) and saccades (lines between circles) for one person viewing an image for 10 seconds. <a href="#fn42" class="footnote-ref" id="fnref42" role="doc-noteref"><sup>42</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -3786,7 +3828,7 @@ Figure&nbsp;12.3: A bar plot of the total number of offenders for different ethn
 </div>
 </div>
 <p>Just as data values are mapped to the visual features of the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;12.3</a>, data values are also mapped to the visual features of the text data symbols. For example, the ethnic groups are mapped to the vertical <strong>position</strong> of the bars <em>and</em> to the vertical <strong>position</strong> of the text. The data values for the number of offenders in each ethnic group are mapped to the <strong>length</strong> of the bars, but they are also mapped to the horizontal <strong>position</strong> of the text <em>and</em> to the <strong>shape</strong> of the text—the letters and digits that make up the text.</p>
-<p>Compared to the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;12.3</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;2.3</a>, the text data symbols are <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;2.7</a>).<a href="#fn41" class="footnote-ref" id="fnref41" role="doc-noteref"><sup>41</sup></a></p>
+<p>Compared to the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;12.3</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;2.3</a>, the text data symbols are <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;2.7</a>).<a href="#fn43" class="footnote-ref" id="fnref43" role="doc-noteref"><sup>43</sup></a></p>
 <p>The value of text data symbols is that they allow us to map <em>back</em> to data values very well (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;2.1</a>). In terms of the criteria that we discussed in <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a>, text is appropriate for both <strong>quantitative</strong> and <strong>qualitative</strong> data values, text is extremely <strong>accurate</strong>, and text has a very large <strong>capacity</strong>.</p>
 <blockquote class="blockquote">
 <p>Text data symbols are effective because they can be used to represent any sort of data and they allow a very accurate mapping <em>back</em> to data values.</p>
@@ -4199,7 +4241,7 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <li><p>visual objects pictures as data points icons higher-level =&gt; gain more complex information transfer BUT lose visual summaries (cos not just simple shapes with simple features)? case study: chernoff faces</p></li>
 <li><p>jittering which is dodgy because it involves a visual change that is NOT related to a change in the data. The hope is that the randomness of the visual change reduces the signal. Do jittering as a case study !!! (post same is same congruence)</p></li>
 <li><p>deliberately losing information (e.g., luminance scale for quant)</p></li>
-<li><p>clutter link back to visual objects ?</p></li>
+<li><p>clutter link back to visual objects ? put within visual-objects?</p></li>
 <li><p>layout (arrangement of elements of plot) come at it from visual-model perspective. alignment, proximity, repetition are all gestalt (contrast is just make things different that should be different + vice versa) overriding theme is organisation and visual simplicity alignment is continuity ?</p>
 <p>One way to look at this is that, when you map data values to a data symbol you leave some (often several) visual features of the data symbol undetermined. How to choose values for those other visual features ?</p>
 <p>Could also have a bit in here about highlighting to direct attention and back ref to visual attention in visual-model</p>
@@ -4378,8 +4420,10 @@ The eye tracking data were taken from the same web site.<a href="#fnref7" class=
 <li id="fn37"><p>Tufte’s small multiples<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn38"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn39"><p>reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/<a href="#fnref39" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn40"><p>Only a thumbnail version of the original image is shown in order to comply with terms of use of the MASSVIS data set.<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn41"><p>Talk about there being separate verbal processing areas in the brain. Text has to come in as visual, so undergoes visual processing, but text is also processed separately for its language value.<a href="#fnref41" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn40"><p>different terminology: icons, glyphs, pictograms Vehement opposition to these from some quarters<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn41"><p>cite the study that reckons using icons can help with perceiving counts. More effective when each icon represents 1 (and so there are no fractional icons) ?<a href="#fnref41" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn42"><p>Only a thumbnail version of the original image is shown in order to comply with terms of use of the MASSVIS data set.<a href="#fnref42" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn43"><p>Talk about there being separate verbal processing areas in the brain. Text has to come in as visual, so undergoes visual processing, but text is also processed separately for its language value.<a href="#fnref43" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
