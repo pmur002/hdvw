@@ -23,6 +23,8 @@ library(ggChernoff)
 library(ggimage)
 library(ggh4x)
 library(sf)
+library(grImport2)
+library(rsvg)
 
 
 ## -----------------------------------------------------------------------------
@@ -2401,6 +2403,139 @@ ggplot(RWCperGame) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+## https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/
+pets <- data.frame(pet=c("dog", "cat"), count=c(471, 373))
+## https://openclipart.org/download/319840/cat-silhouette.svg
+## https://openclipart.org/download/276049/Dog.svg
+runonce <- function() {
+    rsvg_svg("Images/cat.svg", "Images/cat-cairo.svg")
+    rsvg_svg("Images/dog-crop-manual.svg", "Images/dog-cairo.svg")
+}
+## cat <- readPNG("Images/cat.png")
+## dog <- readPNG("Images/dog.png")
+cat <- readPicture("Images/cat-cairo.svg")
+dog <- readPicture("Images/dog-cairo.svg")
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-pic
+petGlyph <- function(data, coords) {
+    grobTree(pictureGrob(cat, coords$x[2], 0, height=coords$y[2], 
+                         just="bottom", expansion=0),
+             pictureGrob(dog, coords$x[1], 0, height=coords$y[1], 
+                         just="bottom", expansion=0))
+}
+ggplot(pets) + 
+    grid_panel(petGlyph, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(1, 1))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    labs(title="Number of Pets Worldwide") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1/2)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| layout-ncol: 2
+#| fig.width: 4
+#| label: fig-pic-alt
+#| fig-subcap:
+#|   - distorted pictograms
+#|   - repeated pictograms
+petStretch <- function(data, coords) {
+    grobTree(pictureGrob(cat, coords$x[2], width=unit(3, "cm"),
+                         0, height=coords$y[2], 
+                         just="bottom", expansion=0, distort=TRUE),
+             pictureGrob(dog, coords$x[1], width=unit(3, "cm"),
+                         0, height=coords$y[1], 
+                         just="bottom", expansion=0, distort=TRUE))
+}
+ggplot(pets) + 
+    grid_panel(petStretch, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(1, 1))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    labs(title="Number of Pets Worldwide") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+
+petIcon <- function(data, coords) {
+    height <- .2
+    ncat <- coords$y[2] %/% height + 1
+    ndog <- coords$y[1] %/% height + 1
+    cats <- do.call(grobTree, 
+                    lapply(1:ncat,
+                           function(i) {
+                               pictureGrob(cat, 
+                                           coords$x[2], (i - 1)*height, 
+                                           height=height, 
+                                           just="bottom",
+                                           expansion=0,
+                                           clip="inherit")
+                           }))
+    catPile <- grobTree(cats,
+                        vp=viewport(clip=rectGrob(y=0, height=coords$y[2], 
+                                    just="bottom")))
+    dogs <- do.call(grobTree, 
+                    lapply(1:ndog,
+                           function(i) {
+                               pictureGrob(dog, 
+                                           coords$x[1], (i - 1)*height, 
+                                           height=height, 
+                                           just="bottom",
+                                           expansion=0,
+                                           clip="inherit")
+                           }))
+    dogPile <- grobTree(dogs,
+                        vp=viewport(clip=rectGrob(y=0, height=coords$y[1], 
+                                    just="bottom")))
+    grobTree(catPile, dogPile)
+}
+ggplot(pets) + 
+    grid_panel(petIcon, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(1, 1))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    labs(title="Number of Pets Worldwide") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+petKey <- function(data, coords) {
+    grobTree(pictureGrob(cat, coords$x[2], 0, height=unit(2, "cm"), 
+                         just="bottom", expansion=0),
+             pictureGrob(dog, coords$x[1], 0, height=unit(2, "cm"), 
+                         just="bottom", expansion=0))
+}
+ggplot(pets) + 
+    geom_col(aes(x=pet, y=count), fill="grey50") +
+    grid_panel(petKey, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(1, 1))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    labs(title="Number of Pets Worldwide") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: tbl-map-data
 #| tbl-cap: The average crime rate over the period 2011 to 2021 for each police district of New Zealand.
 kable(crimeDistrictTotal[c("district", "rate")], digits=2)
@@ -2441,13 +2576,77 @@ ggplot(crimeDistrictBar) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-map-dot
-#| fig-cap: A circle map of the average crime rate over the period 2011 to 2021 for each police district.
+#| label: fig-map-alt
+#| layout-ncol: 2
+#| fig-cap: Alternative map-based representations of the average crime rate over the period 2011 to 2021 for each police district.
+#| fig.width: 4
+#| fig-subcap:
+#|   - Dots as data symbols.
+#|   - Bars as data symbols.
 ggplot(districts) +
     geom_sf() +
     geom_point(aes(X, Y, size=rate)) +
     scale_fill_continuous(name="crime rate") +
-    theme(axis.ticks=element_blank(),
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text=element_blank())
+
+w <- 2
+h <- 4
+therm <- function(data, coords) {
+    grobTree(rectGrob(coords$x, coords$y, 
+                      width=unit(w, "mm"), height=unit(h, "mm"),
+                      just="bottom",
+                      gp=gpar(fill="white")),
+             rectGrob(coords$x, coords$y, 
+                      width=unit(w, "mm"), 
+                      height=unit(h*data$height/max(data$height), "mm"),
+                      just="bottom",
+                      gp=gpar(fill="black")))
+}
+thermKey <- function(data, coords) {
+    vp <- vpTree(viewport(.8, .2,
+                          layout=grid.layout(5, 1, 
+                                             widths=unit(1, "cm"),
+                                             heights=unit(h, "mm")),
+                          gp=gpar(fontsize=9),
+                          name="layout"),
+                 vpList(vpStack(viewport(layout.pos.row=5, name="c1"),
+                                viewport(x=0, width=unit(w, "mm"), name="k1")),
+                        vpStack(viewport(layout.pos.row=3, name="c2"),
+                                viewport(x=0, width=unit(w, "mm"), name="k2")),
+                        vpStack(viewport(layout.pos.row=1, name="c3"),
+                                viewport(x=0, width=unit(w, "mm"), name="k3"))))
+    grobTree(rectGrob(gp=gpar(fill="white"), 
+                      vp="layout::c1::k1"),
+             textGrob(0, unit(1, "npc") + unit(1, "mm"), hjust=0,
+                      vp="layout::c1::k1"),
+             rectGrob(gp=gpar(fill="white"), 
+                      vp="layout::c2::k2"),
+             rectGrob(y=0, height=.5, just="bottom",
+                      gp=gpar(fill="black"), 
+                      vp="layout::c2::k2"),
+             textGrob(round(max(districts$rate)/2, 2), 
+                      unit(1, "npc") + unit(1, "mm"), hjust=0,
+                      vp="layout::c2::k2"),
+             rectGrob(gp=gpar(fill="black"), 
+                      vp="layout::c3::k3"),
+             textGrob(round(max(districts$rate), 2), 
+                      unit(1, "npc") + unit(1, "mm"), hjust=0,
+                      vp="layout::c3::k3"),
+             textGrob("rate", 
+                      y=unit(1, "lines") + unit(2, "mm"), vjust=0,
+                      gp=gpar(fontsize=10),
+                      vp="layout::c3::k3"),
+             childrenvp=vp)
+}
+ggplot(districts) +
+    geom_sf() +
+    grid_panel(therm, aes(X, Y, height=rate)) +
+    grid_panel(thermKey) +
+    scale_fill_continuous(name="crime rate") +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank(),
           axis.text=element_blank())
 
 
