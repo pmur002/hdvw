@@ -23,6 +23,7 @@ library(ggChernoff)
 library(ggimage)
 library(ggh4x)
 library(sf)
+library(grImport)
 library(grImport2)
 library(rsvg)
 
@@ -2403,175 +2404,6 @@ ggplot(RWCperGame) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-## https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/
-pets <- data.frame(pet=c("dog", "cat"), count=c(471, 373))
-## https://openclipart.org/download/319840/cat-silhouette.svg
-## https://openclipart.org/download/276049/Dog.svg
-runonce <- function() {
-    rsvg_svg("Images/cat.svg", "Images/cat-cairo.svg")
-    rsvg_svg("Images/dog-crop-manual.svg", "Images/dog-cairo.svg")
-}
-## cat <- readPNG("Images/cat.png")
-## dog <- readPNG("Images/dog.png")
-cat <- readPicture("Images/cat-cairo.svg")
-dog <- readPicture("Images/dog-cairo.svg")
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-pic
-#| fig-cap: A data visualisation of the number of pet cats and pet dogs worldwide.
-petGlyph <- function(data, coords) {
-    grobTree(pictureGrob(cat, coords$x[2], 0, height=coords$y[2], 
-                         just="bottom", expansion=0),
-             pictureGrob(dog, coords$x[1], 0, height=coords$y[1], 
-                         just="bottom", expansion=0))
-}
-ggplot(pets) + 
-    grid_panel(petGlyph, aes(x=pet, y=count)) +
-    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(1, 1))) +
-    coord_cartesian(clip="off") +
-    xlab("") +
-    ylab("millions") +
-    theme(axis.text.x=element_blank(),
-          axis.ticks.x=element_blank(),
-          aspect.ratio=1/2)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| layout-ncol: 2
-#| fig.width: 4
-#| label: fig-pic-alt
-#| fig-cap: Two alternative uses of icons.
-#| fig-subcap:
-#|   - distorted icons
-#|   - icon labels
-petStretch <- function(data, coords) {
-    grobTree(rectGrob(coords$x[2], width=unit(3, "cm"),
-                      0, height=coords$y[2], 
-                      just="bottom", gp=gpar(col=NA, fill="grey80")),
-             pictureGrob(cat, coords$x[2], width=unit(3, "cm"),
-                         0, height=coords$y[2], 
-                         just="bottom", expansion=0, distort=TRUE),
-             rectGrob(coords$x[1], width=unit(3, "cm"),
-                      0, height=coords$y[1], 
-                      just="bottom", gp=gpar(col=NA, fill="grey80")),
-             pictureGrob(dog, coords$x[1], width=unit(3, "cm"),
-                         0, height=coords$y[1], 
-                         just="bottom", expansion=0, distort=TRUE))
-}
-ggplot(pets) + 
-    grid_panel(petStretch, aes(x=pet, y=count)) +
-    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(.5, .5))) +
-    coord_cartesian(clip="off") +
-    xlab("") +
-    ylab("millions") +
-    theme(axis.text.x=element_blank(),
-          axis.ticks.x=element_blank(),
-          aspect.ratio=1)
-
-petKey <- function(data, coords) {
-    grobTree(pictureGrob(cat, coords$x[2], 0, height=.2, 
-                         just="bottom", expansion=0),
-             pictureGrob(dog, coords$x[1], 0, height=.2, 
-                         just="bottom", expansion=0))
-}
-ggplot(pets) + 
-    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
-    grid_panel(petKey, aes(x=pet, y=count)) +
-    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(.5, .5))) +
-    coord_cartesian(clip="off") +
-    xlab("") +
-    ylab("millions") +
-    theme(axis.text.x=element_blank(),
-          axis.ticks.x=element_blank(),
-          aspect.ratio=1)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| layout-ncol: 2
-#| fig.width: 4
-#| label: fig-pic-icon
-#| fig-cap: Two more alternative data visualisations of the pet data.
-#| fig-subcap:
-#|   - Icons are repeated to represent the number of pets.
-#|   - A basic bar plot
-petIcon <- function(data, coords) {
-    height <- .2
-    ncat <- coords$y[2] %/% height + 1
-    ndog <- coords$y[1] %/% height + 1
-    cats <- do.call(grobTree, 
-                    lapply(1:ncat,
-                           function(i) {
-                               grobTree(rectGrob(coords$x[2], 
-                                                 (i - 1)*height,
-                                                 height + .05, height,
-                                                 just="bottom",
-                                                 gp=gpar(col=NA, 
-                                                         fill="grey80")),
-                                        pictureGrob(cat, 
-                                                    coords$x[2], 
-                                                    (i - 1)*height, 
-                                                    height=height, 
-                                                    just="bottom",
-                                                    expansion=0,
-                                                    clip="inherit"))
-                           }))
-    catPile <- grobTree(cats,
-                        vp=viewport(clip=rectGrob(y=0, height=coords$y[2], 
-                                    just="bottom")))
-    dogs <- do.call(grobTree, 
-                    lapply(1:ndog,
-                           function(i) {
-                               grobTree(rectGrob(coords$x[1], 
-                                                 (i - 1)*height,
-                                                 height + .05, height,
-                                                 just="bottom",
-                                                 gp=gpar(col=NA, 
-                                                         fill="grey80")),
-                                        pictureGrob(dog, 
-                                                    coords$x[1], 
-                                                    (i - 1)*height,  
-                                                    height=height, 
-                                                    just="bottom",
-                                                    expansion=0,
-                                                    clip="inherit"))
-                           }))
-    dogPile <- grobTree(dogs,
-                        vp=viewport(clip=rectGrob(y=0, height=coords$y[1], 
-                                    just="bottom")))
-    grobTree(catPile, dogPile)
-}
-ggplot(pets) + 
-    grid_panel(petIcon, aes(x=pet, y=count)) +
-    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(.5, .5))) +
-    coord_cartesian(clip="off") +
-    xlab("") +
-    ylab("millions") +
-    theme(axis.text.x=element_blank(),
-          axis.ticks.x=element_blank(),
-          aspect.ratio=1)
-
-ggplot(pets) + 
-    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
-    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    scale_x_discrete(expand=expansion(c(.5, .5))) +
-    coord_cartesian(clip="off") +
-    xlab("") +
-    ylab("millions") +
-    theme(axis.text.x=element_blank(),
-          axis.ticks.x=element_blank(),
-          aspect.ratio=1)
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: tbl-map-data
 #| tbl-cap: The average crime rate over the period 2011 to 2021 for each police district of New Zealand.
 kable(crimeDistrictTotal[c("district", "rate")], digits=2)
@@ -2684,6 +2516,205 @@ ggplot(districts) +
     theme(axis.title=element_blank(),
           axis.ticks=element_blank(),
           axis.text=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-junk
+#| fig-cap: A choropleth map of the average crime rate over the period 2011 to 2021 for each police district (like @fig-map), with cartoon villian images added.
+runonce <- function() {
+    PostScriptTrace("Images/criminal.eps", "Images/criminal.xml")
+}
+crimPic <- grImport::readPicture("Images/criminal.xml")
+## [-1] to remove the background
+crim <- function(data, coords) {
+    vp <- viewport(x=.25, y=.7, width=.4)
+    crimDef <- defineGrob(grImport::pictureGrob(crimPic[-1]), 
+                          vp=vp,
+                          name="crim")
+    crimTL <- useGrob("crim", vp=vp)
+    crimBR <- useGrob("crim",
+                      transform=function(group, ...) {
+                          viewportTransform(group, flip=groupFlip(flipX=TRUE))
+                      },
+                      vp=viewport(x=.75, y=.15, width=.4))
+    grobTree(crimDef, crimTL, crimBR)
+}
+ggplot(districts) +
+    geom_sf(aes(fill=rate)) +
+    grid_panel(crim) +
+    scale_fill_continuous(name="crime rate") +
+    theme(axis.ticks=element_blank(),
+          axis.text=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+## https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/
+pets <- data.frame(pet=c("dog", "cat"), count=c(471, 373))
+## https://openclipart.org/download/319840/cat-silhouette.svg
+## https://openclipart.org/download/276049/Dog.svg
+runonce <- function() {
+    rsvg_svg("Images/cat.svg", "Images/cat-cairo.svg")
+    rsvg_svg("Images/dog-crop-manual.svg", "Images/dog-cairo.svg")
+}
+## cat <- readPNG("Images/cat.png")
+## dog <- readPNG("Images/dog.png")
+cat <- grImport2::readPicture("Images/cat-cairo.svg")
+dog <- grImport2::readPicture("Images/dog-cairo.svg")
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-pic
+#| fig-cap: A data visualisation of the number of pet cats and pet dogs worldwide.
+petGlyph <- function(data, coords) {
+    grobTree(grImport2::pictureGrob(cat, coords$x[2], 0, height=coords$y[2], 
+                         just="bottom", expansion=0),
+             grImport2::pictureGrob(dog, coords$x[1], 0, height=coords$y[1], 
+                         just="bottom", expansion=0))
+}
+ggplot(pets) + 
+    grid_panel(petGlyph, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(1, 1))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1/2)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| layout-ncol: 2
+#| fig.width: 4
+#| label: fig-pic-alt
+#| fig-cap: Two alternative uses of icons.
+#| fig-subcap:
+#|   - distorted icons
+#|   - icon labels
+petStretch <- function(data, coords) {
+    grobTree(rectGrob(coords$x[2], width=unit(3, "cm"),
+                      0, height=coords$y[2], 
+                      just="bottom", gp=gpar(col=NA, fill="grey80")),
+             grImport2::pictureGrob(cat, coords$x[2], width=unit(3, "cm"),
+                         0, height=coords$y[2], 
+                         just="bottom", expansion=0, distort=TRUE),
+             rectGrob(coords$x[1], width=unit(3, "cm"),
+                      0, height=coords$y[1], 
+                      just="bottom", gp=gpar(col=NA, fill="grey80")),
+             grImport2::pictureGrob(dog, coords$x[1], width=unit(3, "cm"),
+                         0, height=coords$y[1], 
+                         just="bottom", expansion=0, distort=TRUE))
+}
+ggplot(pets) + 
+    grid_panel(petStretch, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+
+petKey <- function(data, coords) {
+    grobTree(grImport2::pictureGrob(cat, coords$x[2], 0, height=.2, 
+                         just="bottom", expansion=0),
+             grImport2::pictureGrob(dog, coords$x[1], 0, height=.2, 
+                         just="bottom", expansion=0))
+}
+ggplot(pets) + 
+    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
+    grid_panel(petKey, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| layout-ncol: 2
+#| fig.width: 4
+#| label: fig-pic-icon
+#| fig-cap: Two more alternative data visualisations of the pet data.
+#| fig-subcap:
+#|   - Icons are repeated to represent the number of pets.
+#|   - A basic bar plot
+petIcon <- function(data, coords) {
+    height <- .2
+    ncat <- coords$y[2] %/% height + 1
+    ndog <- coords$y[1] %/% height + 1
+    cats <- do.call(grobTree, 
+                    lapply(1:ncat,
+                           function(i) {
+                               grobTree(rectGrob(coords$x[2], 
+                                                 (i - 1)*height,
+                                                 height + .05, height,
+                                                 just="bottom",
+                                                 gp=gpar(col=NA, 
+                                                         fill="grey80")),
+                                        grImport2::pictureGrob(cat, 
+                                                    coords$x[2], 
+                                                    (i - 1)*height, 
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
+                                                    clip="inherit"))
+                           }))
+    catPile <- grobTree(cats,
+                        vp=viewport(clip=rectGrob(y=0, height=coords$y[2], 
+                                    just="bottom")))
+    dogs <- do.call(grobTree, 
+                    lapply(1:ndog,
+                           function(i) {
+                               grobTree(rectGrob(coords$x[1], 
+                                                 (i - 1)*height,
+                                                 height + .05, height,
+                                                 just="bottom",
+                                                 gp=gpar(col=NA, 
+                                                         fill="grey80")),
+                                        grImport2::pictureGrob(dog, 
+                                                    coords$x[1], 
+                                                    (i - 1)*height,  
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
+                                                    clip="inherit"))
+                           }))
+    dogPile <- grobTree(dogs,
+                        vp=viewport(clip=rectGrob(y=0, height=coords$y[1], 
+                                    just="bottom")))
+    grobTree(catPile, dogPile)
+}
+ggplot(pets) + 
+    grid_panel(petIcon, aes(x=pet, y=count)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
+
+ggplot(pets) + 
+    geom_col(aes(x=pet, y=count), width=.5, fill="grey80") +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    scale_x_discrete(expand=expansion(c(.5, .5))) +
+    coord_cartesian(clip="off") +
+    xlab("") +
+    ylab("millions") +
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
