@@ -339,6 +339,7 @@ extract the important information.[^chart-junk]
 #| echo: false
 #| label: fig-junk
 #| fig-cap: A choropleth map of the average crime rate over the period 2011 to 2021 for each police district (like @fig-map), with cartoon villian images added.
+#| fig.keep: "last"
 runonce <- function() {
     PostScriptTrace("Images/criminal.eps", "Images/criminal.xml")
 }
@@ -370,9 +371,14 @@ crim <- function(data, coords) {
 ggplot(districts) +
     geom_sf(aes(fill=rate), colour="black", linewidth=.5) +
     grid_panel(crim, aes(xmin=xmin, xmax=xmax, ymin=ymin), data=bboxDF) +
-    scale_fill_continuous(name="crime rate") +
-    theme(axis.ticks=element_blank(),
-          axis.text=element_blank())
+    scale_fill_continuous(name="crime rate", 
+                          guide=guide_colourbar(display="gradient")) +
+    theme(panel.border=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text=element_blank(),
+          legend.key=element_rect(colour="black"))
+grid.force()
+grid.edit("bar::rect", grep=TRUE, gp=gpar(col="black"))
 ```
 
 The cartoon villians are an example of **visual objects**.
