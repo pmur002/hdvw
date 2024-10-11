@@ -2525,11 +2525,18 @@ ggplot(districts) +
 runonce <- function() {
     PostScriptTrace("Images/criminal.eps", "Images/criminal.xml")
 }
-crimPic <- grImport::readPicture("Images/criminal.xml")
+bbox <- st_bbox(districts$geometry)
+bboxDF <- data.frame(t(as.numeric(bbox)))
+names(bboxDF) <- names(bbox)
 ## [-1] to remove the background
+crimPic <- grImport::readPicture("Images/criminal.xml")[-1]
+dx <- diff(crimPic@summary@xscale)
+dy <- diff(crimPic@summary@yscale)
+ar <- dy/dx
 crim <- function(data, coords) {
-    vp <- viewport(x=.25, y=.7, width=.4)
-    crimDef <- defineGrob(grImport::pictureGrob(crimPic[-1]), 
+    vp <- viewport(x=coords$xmin + .2, y=.7, width=.4, 
+                   height=unit(ar*.4, "snpc"))
+    crimDef <- defineGrob(grImport::pictureGrob(crimPic, exp=0), 
                           vp=vp,
                           name="crim")
     crimTL <- useGrob("crim", vp=vp)
@@ -2537,12 +2544,15 @@ crim <- function(data, coords) {
                       transform=function(group, ...) {
                           viewportTransform(group, flip=groupFlip(flipX=TRUE))
                       },
-                      vp=viewport(x=.75, y=.15, width=.4))
+                      vp=viewport(x=coords$xmax - .2, 
+                                  y=unit(coords$ymin, "npc") + 
+                                    unit(ar*.2, "snpc"),
+                                  width=.4, height=unit(ar*.4, "snpc")))
     grobTree(crimDef, crimTL, crimBR)
 }
 ggplot(districts) +
-    geom_sf(aes(fill=rate)) +
-    grid_panel(crim) +
+    geom_sf(aes(fill=rate), colour="black", linewidth=.5) +
+    grid_panel(crim, aes(xmin=xmin, xmax=xmax, ymin=ymin), data=bboxDF) +
     scale_fill_continuous(name="crime rate") +
     theme(axis.ticks=element_blank(),
           axis.text=element_blank())
