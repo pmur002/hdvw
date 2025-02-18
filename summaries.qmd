@@ -18,9 +18,20 @@ In the simple scenario of a bar plot, the data values are total counts
 allow us to map back to the total counts (@fig-visual-feature-decode).
 
 In this section, we explore some data visualisations that are effective 
-because they rely on **data summaries** instead of raw data values.
+because they rely on **data summaries** instead of 
+raw data values.[^info-vis-ref-model]
 
-## Box Plots
+[^info-vis-ref-model]:
+  MUST make reference to the Information Visualization Reference Model 
+  of Card et al (1999) that differentiates data transforms from visual
+  mappings from view transforms (the last particularly for interactive
+  graphics?), PLUS the design-centric extension by Wu and Chang (2024),
+  which teases out design-specific transforms as well (the data prep
+  for a box plot being a good example).  These papers provide a formal
+  basis for some of the hand-waving that I do in this section, particularly
+  on mapping back to data summaries rather than raw data.
+
+## Box plots
 
 @fig-boxplot shows box plots of the number of 
 points scored by all teams at Rugby World Cup matches
@@ -393,6 +404,75 @@ pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+## Cognitive load
+
+On page 46 of his book "How the World Really Works" [@smil2022how],
+Vaclav Smil writes:
+
+> rising food production reduced the malnutrition rate from 2 in 3 people
+  in 1950 to 1 in 11 by 2019
+
+In order to grasp the change in malnutrition rate, we are required
+to compare "2 in 3" to "1 in 11".  This requires mental effort to calculate
+the ratios or fractions and then compare them.
+It is easier to compare the rates if we 
+hold the denominator constant, comparing "2 in 3" to "2 in 22".
+It is easier still if we calculate the fractions, comparing 0.667 to 0.091.
+And it is easier still to compare those fractions visually
+(@fig-cog-load).
+
+```{r}
+#| echo: false
+#| label: fig-cog-load
+#| fig-cap: A bar plot comparing two fractions.
+fractions <- data.frame(year=factor(c(1950, 2019)), frac=c(2/3, 1/11))
+ggplot(fractions) +
+    geom_col(aes(year, frac)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
+    labs(title="Proportion of Population Suffering from Malnutrition")
+```
+
+The point is that we would like to reduce the cognitive load that is
+required of the viewer.  This can be achieved by making the mental
+calculations that are required easier, or by presenting the 
+pre-calculated values, as well as by presenting the values visually
+rather than as text.
+
+Visual summaries can require more or less mental effort as well.
+
+```{r}
+#| echo: false
+#| label: fig-cog-load-hi
+#| fig-cap: A bar plot comparing two fractions.
+counts <- data.frame(year=factor(c(1950, 1950, 2019, 2019)), 
+                     group=factor(c("yes", "out of", "yes", "out of"),
+                                  levels=c("out of", "yes")),
+                     count=c(2, 3, 1, 11))
+fills <- pal_npg()(2)
+ggplot(counts) +
+    geom_col(aes(year, count, fill=group), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
+    labs(title=paste0('<span style="color: ', fills[1], '">X</span> ',
+                      'people out of ',
+                      '<span styl="color: ', fills[2], '">Y</span> ',
+                      'suffer from Malnutrition')) +
+    theme(legend.position="none",
+          plot.title=element_markdown())
+```
+
+The point is that we ideally want to present data in a way that
+requires the least cognitive load from the viewer.
+The answer is different for different questions, but we 
+can make the viewer's life easier by calculating summaries
+of the data and only presenting the summaries.
+
+It is possible to rely on some visual summaries, but be careful
+not to set a visual task that requires too much mental effort.
 
 ## Summary
 

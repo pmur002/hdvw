@@ -26,6 +26,7 @@ library(sf)
 library(grImport)
 library(grImport2)
 library(rsvg)
+library(ggtext)
 
 
 ## -----------------------------------------------------------------------------
@@ -317,86 +318,86 @@ dev.off()
 #| echo: false
 #| eval: false
 #| label: eye-basic
-## ## grid.newpage()
-## eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
-## eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
-## pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
-##                       gp=gpar(lineheight=.9, fill=NA)))
-## grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
-## grid.segments(0, .5,
-##               unit(.17, "npc") - unit(2, "mm"), .5,
-##               gp=gpar(lwd=3, fill="black"),
-##               arrow=arrow(type="closed", length=unit(3, "mm")))
-## grid.draw(eyeball)
-## grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
-## grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
-## pushViewport(viewport(clip=eyeballNot))
-## pushViewport(viewport(x=.22, width=.5))
-## grid.use("cornea")
-## popViewport(2)
-## pushViewport(viewport(x=.22, width=.5))
-## grid.use("lens")
-## popViewport()
-## grid.text("lens", x=unit(.25, "npc") + unit(2, "mm"), just="left")
-## pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
-## grid.circle(r=.28, gp=gpar(lwd=3))
-## popViewport()
-## grid.text("retina", x=.75, just="right")
-## pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, -.2, 1.2))))
-## grid.circle(r=.28, gp=gpar(lwd=3))
-## popViewport()
-## pushViewport(viewport(clip=eyeballNot))
-## grid.segments(.5, .5, 1, .35,
-##               gp=gpar(lwd=3, fill="black"),
-##               arrow=arrow(type="closed", length=unit(3, "mm")))
-## popViewport()
-## grid.text("optic\nnerve", y=.35,
-##           x=unit(1, "npc") + unit(2, "mm"), just="left")
+# ## grid.newpage()
+# eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+# eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+# pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+#                       gp=gpar(lineheight=.9, fill=NA)))
+# grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+# grid.segments(0, .5,
+#               unit(.17, "npc") - unit(2, "mm"), .5,
+#               gp=gpar(lwd=3, fill="black"),
+#               arrow=arrow(type="closed", length=unit(3, "mm")))
+# grid.draw(eyeball)
+# grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+# grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+# pushViewport(viewport(clip=eyeballNot))
+# pushViewport(viewport(x=.22, width=.5))
+# grid.use("cornea")
+# popViewport(2)
+# pushViewport(viewport(x=.22, width=.5))
+# grid.use("lens")
+# popViewport()
+# grid.text("lens", x=unit(.25, "npc") + unit(2, "mm"), just="left")
+# pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+# grid.circle(r=.28, gp=gpar(lwd=3))
+# popViewport()
+# grid.text("retina", x=.75, just="right")
+# pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, -.2, 1.2))))
+# grid.circle(r=.28, gp=gpar(lwd=3))
+# popViewport()
+# pushViewport(viewport(clip=eyeballNot))
+# grid.segments(.5, .5, 1, .35,
+#               gp=gpar(lwd=3, fill="black"),
+#               arrow=arrow(type="closed", length=unit(3, "mm")))
+# popViewport()
+# grid.text("optic\nnerve", y=.35,
+#           x=unit(1, "npc") + unit(2, "mm"), just="left")
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| eval: false
 #| label: eye-basic-2
-## ## grid.newpage()
-## eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
-## eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
-## pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
-##                       gp=gpar(lineheight=.9, fill=NA)))
-## grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
-## grid.segments(0, .5,
-##               unit(.17, "npc") - unit(2, "mm"), .5,
-##               gp=gpar(lwd=3, fill="black"),
-##               arrow=arrow(type="closed", length=unit(3, "mm")))
-## grid.draw(eyeball)
-## grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
-## grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
-## pushViewport(viewport(clip=eyeballNot))
-## pushViewport(viewport(x=.22, width=.5))
-## grid.use("cornea")
-## popViewport(2)
-## pushViewport(viewport(x=.22, width=.5))
-## grid.use("lens")
-## popViewport()
-## pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
-## grid.circle(r=.28, gp=gpar(lwd=3))
-## popViewport()
-## grid.text("cones", x=.75, just="right")
-## pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .65, 1.2))))
-## grid.circle(r=.28, gp=gpar(lwd=3))
-## popViewport()
-## grid.text("rods", x=.7, y=.65, just="right")
-## pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .3, -.2))))
-## grid.circle(r=.28, gp=gpar(lwd=3))
-## popViewport()
-## grid.text("rods", x=.7, y=.35, just="right")
-## pushViewport(viewport(clip=eyeballNot))
-## grid.segments(.5, .5, 1, .35,
-##               gp=gpar(lwd=3, fill="black"),
-##               arrow=arrow(type="closed", length=unit(3, "mm")))
-## popViewport()
-## grid.text("brain\nthis\nway", y=.35,
-##           x=unit(1, "npc") + unit(2, "mm"), just="left")
+# ## grid.newpage()
+# eyeball <- circleGrob(r=.3, gp=gpar(lwd=3, fill="grey90"))
+# eyeballNot <- as.path(grobTree(eyeball, rectGrob(width=1.5)), rule="evenodd")
+# pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+#                       gp=gpar(lineheight=.9, fill=NA)))
+# grid.text("light", x=unit(0, "npc") - unit(2, "mm"), just="right")
+# grid.segments(0, .5,
+#               unit(.17, "npc") - unit(2, "mm"), .5,
+#               gp=gpar(lwd=3, fill="black"),
+#               arrow=arrow(type="closed", length=unit(3, "mm")))
+# grid.draw(eyeball)
+# grid.define(circleGrob(r=.1), name="cornea", gp=gpar(lwd=3))
+# grid.define(circleGrob(r=.07), name="lens", gp=gpar(lwd=3, fill="white"))
+# pushViewport(viewport(clip=eyeballNot))
+# pushViewport(viewport(x=.22, width=.5))
+# grid.use("cornea")
+# popViewport(2)
+# pushViewport(viewport(x=.22, width=.5))
+# grid.use("lens")
+# popViewport()
+# pushViewport(viewport(clip=rectGrob(x=.5, height=.1, just="left")))
+# grid.circle(r=.28, gp=gpar(lwd=3))
+# popViewport()
+# grid.text("cones", x=.75, just="right")
+# pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .65, 1.2))))
+# grid.circle(r=.28, gp=gpar(lwd=3))
+# popViewport()
+# grid.text("rods", x=.7, y=.65, just="right")
+# pushViewport(viewport(clip=polygonGrob(c(.5, 1, 1), c(.5, .3, -.2))))
+# grid.circle(r=.28, gp=gpar(lwd=3))
+# popViewport()
+# grid.text("rods", x=.7, y=.35, just="right")
+# pushViewport(viewport(clip=eyeballNot))
+# grid.segments(.5, .5, 1, .35,
+#               gp=gpar(lwd=3, fill="black"),
+#               arrow=arrow(type="closed", length=unit(3, "mm")))
+# popViewport()
+# grid.text("brain\nthis\nway", y=.35,
+#           x=unit(1, "npc") + unit(2, "mm"), just="left")
 
 
 ## -----------------------------------------------------------------------------
@@ -1953,6 +1954,41 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-cog-load
+#| fig-cap: A bar plot comparing two fractions.
+fractions <- data.frame(year=factor(c(1950, 2019)), frac=c(2/3, 1/11))
+ggplot(fractions) +
+    geom_col(aes(year, frac)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
+    labs(title="Proportion of Population Suffering from Malnutrition")
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-cog-load-hi
+#| fig-cap: A bar plot comparing two fractions.
+counts <- data.frame(year=factor(c(1950, 1950, 2019, 2019)), 
+                     group=factor(c("yes", "out of", "yes", "out of"),
+                                  levels=c("out of", "yes")),
+                     count=c(2, 3, 1, 11))
+fills <- pal_npg()(2)
+ggplot(counts) +
+    geom_col(aes(year, count, fill=group), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
+    labs(title=paste0('<span style="color: ', fills[1], '">X</span> ',
+                      'people out of ',
+                      '<span styl="color: ', fills[2], '">Y</span> ',
+                      'suffer from Malnutrition')) +
+    theme(legend.position="none",
+          plot.title=element_markdown())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-bar-colour
 #| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot come from mapping ethnic group to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
 ggplot(crimeGroupTotal) + 
@@ -2554,12 +2590,14 @@ crim <- function(data, coords) {
 ggplot(districts) +
     geom_sf(aes(fill=rate), colour="black", linewidth=.5) +
     grid_panel(crim, aes(xmin=xmin, xmax=xmax, ymin=ymin), data=bboxDF) +
+    scale_y_continuous(expand=expansion(0)) +
     scale_fill_continuous(name="crime rate", 
                           guide=guide_colourbar(display="gradient")) +
     theme(panel.border=element_blank(),
           axis.ticks=element_blank(),
           axis.text=element_blank(),
-          legend.key=element_rect(colour="black"))
+          legend.margin=margin(0, 0, 0, 0),
+          legend.justification="bottom")
 grid.force()
 grid.edit("bar::rect", grep=TRUE, gp=gpar(col="black"))
 

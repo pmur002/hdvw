@@ -126,11 +126,12 @@ div.csl-indent {
   </ul></li>
   <li><a href="#sec-summaries" id="toc-sec-summaries" class="nav-link" data-scroll-target="#sec-summaries"><span class="header-section-number">7</span> Data Summaries</a>
   <ul class="collapse">
-  <li><a href="#box-plots" id="toc-box-plots" class="nav-link" data-scroll-target="#box-plots"><span class="header-section-number">7.1</span> Box Plots</a></li>
+  <li><a href="#box-plots" id="toc-box-plots" class="nav-link" data-scroll-target="#box-plots"><span class="header-section-number">7.1</span> Box plots</a></li>
   <li><a href="#sec-visual-summaries" id="toc-sec-visual-summaries" class="nav-link" data-scroll-target="#sec-visual-summaries"><span class="header-section-number">7.2</span> Visual summaries</a></li>
   <li><a href="#case-study-histograms" id="toc-case-study-histograms" class="nav-link" data-scroll-target="#case-study-histograms"><span class="header-section-number">7.3</span> Case study: Histograms</a></li>
   <li><a href="#sec-summary-caveats" id="toc-sec-summary-caveats" class="nav-link" data-scroll-target="#sec-summary-caveats"><span class="header-section-number">7.4</span> Caveats</a></li>
-  <li><a href="#summary-6" id="toc-summary-6" class="nav-link" data-scroll-target="#summary-6"><span class="header-section-number">7.5</span> Summary</a></li>
+  <li><a href="#cognitive-load" id="toc-cognitive-load" class="nav-link" data-scroll-target="#cognitive-load"><span class="header-section-number">7.5</span> Cognitive load</a></li>
+  <li><a href="#summary-6" id="toc-summary-6" class="nav-link" data-scroll-target="#summary-6"><span class="header-section-number">7.6</span> Summary</a></li>
   </ul></li>
   <li><a href="#combining-mappings" id="toc-combining-mappings" class="nav-link" data-scroll-target="#combining-mappings"><span class="header-section-number">8</span> Combining Mappings</a>
   <ul class="collapse">
@@ -332,7 +333,7 @@ Figure&nbsp;1.2: A heatmap of the crime rate amongst youth offenders aged 14 to 
 <p><strong>TODO:</strong> link to interactive graphics books like Cook &amp; Swayne and Theus and Unwin.</p>
 <p>This document is also focused on what <strong>vision science</strong> has to tell us about effective data visualisation. We will consider factors that influence how rapidly and how accurately information can be extracted from a data visualisation. This will include findings from a broad range of research, encompassing Statistics, Computer Science, and Psychology.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> However, this document does not cover all fields of research that impact on data visualisation. We will not, for example, address the ethical use of data visualisation, beyond a basic assumption that we want to faithfully represent the properties of the data.</p>
 <p><strong>TODO:</strong> link to Alberto Cairo at least. franconeri et al 2021 has some Cairo refs For resources on this important topic, see …</p>
-<p><strong>TODO</strong> also mention “story-telling” or “narratives” ? or “task taxonomies” ?</p>
+<p><strong>TODO</strong> also mention “story-telling” or “narratives” ? or “task taxonomies” ? how data vis can have emotional affects ?</p>
 <p>It is also important to acknowledge that vision science cannot yet tell us everything about how data visualisation works. However, what is known will help us to have some understanding of why some data visualisations are so effective and others are less effective.</p>
 </section>
 <section id="sec-terminology" class="level2" data-number="1.3">
@@ -1982,9 +1983,9 @@ Figure&nbsp;6.10: The number of points scored in Rugby World Cup games by teams 
 <p>In <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a> we described a data visualisation as a mapping from data values to the visual features of a data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;3.1</a>). For example, a bar plot, like <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>, maps the total number of youth offenders to the <strong>lengths</strong> of bars.</p>
 <p>We also emphasised the importance of the mapping <em>back</em> from the visual features to the data values. For example, the effectiveness of the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a> relies on our ability to accurately perceive the lengths of the bars, particularly relative to each other.</p>
 <p>In the simple scenario of a bar plot, the data values are total counts (<a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;3.1</a>), which are mapped to the lengths of bars, which allow us to map back to the total counts (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;3.6</a>).</p>
-<p>In this section, we explore some data visualisations that are effective because they rely on <strong>data summaries</strong> instead of raw data values.</p>
+<p>In this section, we explore some data visualisations that are effective because they rely on <strong>data summaries</strong> instead of raw data values.<a href="#fn28" class="footnote-ref" id="fnref28" role="doc-noteref"><sup>28</sup></a></p>
 <section id="box-plots" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="box-plots"><span class="header-section-number">7.1</span> Box Plots</h2>
+<h2 data-number="7.1" class="anchored" data-anchor-id="box-plots"><span class="header-section-number">7.1</span> Box plots</h2>
 <p><a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;7.1</a> shows box plots of the number of points scored by all teams at Rugby World Cup matches (<a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;6.1</a>), with a separate box plot for teams from different hemispheres. This is an effective data visualisation for comparing the distributions of points scored between hemispheres because we are able to easily see differences between the median values of the countries (the thick vertical lines) and differences between the interquartile ranges of the countries (the horizontal rectangles). For example, we can see that the median points scored by southern hemisphere teams is larger than the median for northern hemisphere teams and the interquartile range of points scored is also wider for southern hemisphere teams.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2082,7 +2083,7 @@ Figure&nbsp;7.3: Stacked dotplots of the number of points scored by Tier One nat
 </div>
 <p>The fact that we can map <em>back</em> to raw data values from a dot plot is not news. That is easy because we have mapped raw data values to accurate visual features (see <a href="#sec-dot-plots" class="quarto-xref">Section&nbsp;3.7</a>). However, <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;7.3</a> also demonstrates that, in addition to mapping <em>back</em> from visual features to raw data values, our visual system allows us to map <em>back</em> from visual features to <strong>data summaries</strong>.</p>
 <p>For example, we can see that the southern hemisphere teams score slightly more points on average than the northern hemisphere teams; the data symbols for southern-hemisphere teams appear shifted to the right of the data symbols for northern-hemisphere teams. In other words, we can perform <strong>visual summaries</strong> that map back to <strong>data summaries</strong>. For example, we can visually average the <strong>positions</strong> of the data points.</p>
-<p>In <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;7.3</a>, we have mapped raw data values to visual features, which has enabled us to map <em>back</em> to raw data values. In addition, <strong>visual summaries</strong> of the visual features enable us to map <em>back</em> to <strong>data summaries</strong> (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;7.4</a>).<a href="#fn28" class="footnote-ref" id="fnref28" role="doc-noteref"><sup>28</sup></a></p>
+<p>In <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;7.3</a>, we have mapped raw data values to visual features, which has enabled us to map <em>back</em> to raw data values. In addition, <strong>visual summaries</strong> of the visual features enable us to map <em>back</em> to <strong>data summaries</strong> (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;7.4</a>).<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a></p>
 <div id="fig-data-vis-stat-decode" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-stat-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2272,8 +2273,46 @@ Figure&nbsp;7.8: A histogram of the points scored per game by Tier One nations a
 </div>
 </div>
 </section>
-<section id="summary-6" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="summary-6"><span class="header-section-number">7.5</span> Summary</h2>
+<section id="cognitive-load" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="cognitive-load"><span class="header-section-number">7.5</span> Cognitive load</h2>
+<p>On page 46 of his book “How the World Really Works” <span class="citation" data-cites="smil2022how">(<a href="#ref-smil2022how" role="doc-biblioref">Smil 2022</a>)</span>, Vaclav Smil writes:</p>
+<blockquote class="blockquote">
+<p>rising food production reduced the malnutrition rate from 2 in 3 people in 1950 to 1 in 11 by 2019</p>
+</blockquote>
+<p>In order to grasp the change in malnutrition rate, we are required to compare “2 in 3” to “1 in 11”. This requires mental effort to calculate the ratios or fractions and then compare them. It is easier to compare the rates if we hold the denominator constant, comparing “2 in 3” to “2 in 22”. It is easier still if we calculate the fractions, comparing 0.667 to 0.091. And it is easier still to compare those fractions visually (<a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;7.9</a>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-cog-load" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cog-load-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-cog-load-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cog-load-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.9: A bar plot comparing two fractions.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The point is that we would like to reduce the cognitive load that is required of the viewer. This can be achieved by making the mental calculations that are required easier, or by presenting the pre-calculated values, as well as by presenting the values visually rather than as text.</p>
+<p>**Ideally, we would now ask a different question that requires mental effort from the</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-cog-load-hi" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cog-load-hi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-cog-load-hi-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cog-load-hi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.10: A bar plot comparing two fractions.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-6" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="summary-6"><span class="header-section-number">7.6</span> Summary</h2>
 <p>Data summaries, such as measures of central tendency, measures of variability, and tables of counts, provide information about the distribution of a set of data values.</p>
 <p>Some data visualisations, like box plots and histograms, are effective because they map <strong>data summaries</strong> to visual features. This makes it easy to perceive and compare data summaries.</p>
 <p>Care must be taken to use data summaries that appropriately summarise the data values.</p>
@@ -2306,7 +2345,7 @@ Figure&nbsp;8.1: A simple data visualisation maps <strong>two</strong> data valu
 </div>
 <section id="independent-visual-features" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="independent-visual-features"><span class="header-section-number">8.1</span> Independent visual features</h2>
-<p>A bar plot involves mapping a qualitative variable to <strong>position</strong> and a quantitative variable to <strong>length</strong> (e.g., <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>). We know that each visual feature is effective on its own—we can map <em>back</em> from positions to qualitative values and we can map <em>back</em> from lengths to quantitative values—but another reason why the bar plot is effective overall is because the two visual features act independently.<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a> Our perception of the horizontal <strong>length</strong> of the bars is not affected by the vertical <strong>position</strong> of the bars.<a href="#fn30" class="footnote-ref" id="fnref30" role="doc-noteref"><sup>30</sup></a></p>
+<p>A bar plot involves mapping a qualitative variable to <strong>position</strong> and a quantitative variable to <strong>length</strong> (e.g., <a href="#fig-bar" class="quarto-xref">Figure&nbsp;3.2</a>). We know that each visual feature is effective on its own—we can map <em>back</em> from positions to qualitative values and we can map <em>back</em> from lengths to quantitative values—but another reason why the bar plot is effective overall is because the two visual features act independently.<a href="#fn30" class="footnote-ref" id="fnref30" role="doc-noteref"><sup>30</sup></a> Our perception of the horizontal <strong>length</strong> of the bars is not affected by the vertical <strong>position</strong> of the bars.<a href="#fn31" class="footnote-ref" id="fnref31" role="doc-noteref"><sup>31</sup></a></p>
 <p><a href="#fig-bar-colour" class="quarto-xref">Figure&nbsp;8.2</a> demostrates that we can also add <strong>colour</strong> to the mix without creating any interactions. We can perceive the colour of the bars and the position of the bars and the lengths of the bars independently of each other.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2651,7 +2690,7 @@ Figure&nbsp;8.3: A scatter plot of the number of times a team breaks through the
 </div>
 <p>The data symbol in a scatter plot is a data point, in this case a circle. There are two mappings in the scatter plot in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;8.3</a>: the <strong>quantitative</strong> number of clean breaks is mapped to the horizontal <strong>position</strong> of the data points and the <strong>quantitative</strong> number of tries scored is mapped to the vertical <strong>position</strong> of the data points.</p>
 <p>We know from <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a> that using <strong>position</strong> means that we should be able to accurately map <em>back</em> to the original data values. For example, we can easily see that one team scored a little over 7.5 clean breaks per game and we can see that two teams scored about 6 tries per game.</p>
-<p>However, there is something else going on in the scatter plot. The two explicit mappings to horizontal and vertical position <strong>interact</strong> to create an additional visual feature:<a href="#fn31" class="footnote-ref" id="fnref31" role="doc-noteref"><sup>31</sup></a> <strong>position in space</strong> (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;8.4</a>).<a href="#fn32" class="footnote-ref" id="fnref32" role="doc-noteref"><sup>32</sup></a> For example, we can perceive not only horizontal and vertical distances between data points, but also euclidean distances between data points (“as the crow flies”).</p>
+<p>However, there is something else going on in the scatter plot. The two explicit mappings to horizontal and vertical position <strong>interact</strong> to create an additional visual feature:<a href="#fn32" class="footnote-ref" id="fnref32" role="doc-noteref"><sup>32</sup></a> <strong>position in space</strong> (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;8.4</a>).<a href="#fn33" class="footnote-ref" id="fnref33" role="doc-noteref"><sup>33</sup></a> For example, we can perceive not only horizontal and vertical distances between data points, but also euclidean distances between data points (“as the crow flies”).</p>
 <div id="fig-interact" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2669,7 +2708,7 @@ Figure&nbsp;8.4: If we map data values to visual features and the visual feature
 <blockquote class="blockquote">
 <p>One reason why a scatter plot is effective at conveying relationships between variables is because the mappings of data values to visual features—horizontal position and vertical position—interact to produce an additional visual feature: position in space.</p>
 </blockquote>
-<p>Furthermore, our visual system allows us to perceive <strong>visual summaries</strong> (see <a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;7.2</a>) of <strong>position in space</strong> (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;8.5</a>).<a href="#fn33" class="footnote-ref" id="fnref33" role="doc-noteref"><sup>33</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;8.3</a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points.</p>
+<p>Furthermore, our visual system allows us to perceive <strong>visual summaries</strong> (see <a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;7.2</a>) of <strong>position in space</strong> (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;8.5</a>).<a href="#fn34" class="footnote-ref" id="fnref34" role="doc-noteref"><sup>34</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;8.3</a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points.</p>
 <p><strong>TODO</strong> relate perception of clusters to gestalt proximity</p>
 <div id="fig-visual-corr" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -2731,7 +2770,7 @@ Table&nbsp;8.2: Counts of offences committed in New Zealand in 2021 by the sex o
 </figure>
 </div>
 </div>
-<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;8.6</a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;8.2</a>.<a href="#fn34" class="footnote-ref" id="fnref34" role="doc-noteref"><sup>34</sup></a> This is an effective data visualisation for making several comparisons: the proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
+<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;8.6</a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;8.2</a>.<a href="#fn35" class="footnote-ref" id="fnref35" role="doc-noteref"><sup>35</sup></a> This is an effective data visualisation for making several comparisons: the proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
 <p>For example, we can see that there are more male offenders than female offenders, court action is more common than non-court action for both males and female offenders, court action is more common for male offenders than for female offenders, and the most common offences involve male offenders and result in court action.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2960,7 +2999,7 @@ Table&nbsp;8.4: The number of offenders in different ethnic groups in 2011 and i
 </figure>
 </div>
 </div>
-<p>The purpose of the interaction plot is to show the <em>change</em> in the number of offenders between 2011 and 2021 for each of the ethnic groups. If the lines of the interaction plot were parallel we would conclude that the same change has happened to all ethnic groups; the fact that the lines are not parallel indicates that there have been different changes in some ethnic groups compared to other ethnic groups.<a href="#fn35" class="footnote-ref" id="fnref35" role="doc-noteref"><sup>35</sup></a></p>
+<p>The purpose of the interaction plot is to show the <em>change</em> in the number of offenders between 2011 and 2021 for each of the ethnic groups. If the lines of the interaction plot were parallel we would conclude that the same change has happened to all ethnic groups; the fact that the lines are not parallel indicates that there have been different changes in some ethnic groups compared to other ethnic groups.<a href="#fn36" class="footnote-ref" id="fnref36" role="doc-noteref"><sup>36</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-interaction" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -3077,7 +3116,7 @@ Figure&nbsp;9.3: If we map multiple data values to multiple visual features of a
 </figure>
 </div>
 <p>In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;2.3</a>, these more complicated shapes can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;2.7</a>). In other words, the more complex data symbols allow us to map back to <strong>data summaries</strong> (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;9.4</a>). For example, in <a href="#fig-line" class="quarto-xref">Figure&nbsp;9.2</a> we are able to perceive overall trends in the number of offenders, periods of more rapid change versus periods of slower change, and local maxima and minima.</p>
-<p>In terms of <a href="#sec-congruence" class="quarto-xref">Chapter&nbsp;6</a>, the use of lines for data symbols is also <strong>congruent</strong> with trends in the data; we naturally associate slopes with increases and decreases in data values.<a href="#fn36" class="footnote-ref" id="fnref36" role="doc-noteref"><sup>36</sup></a></p>
+<p>In terms of <a href="#sec-congruence" class="quarto-xref">Chapter&nbsp;6</a>, the use of lines for data symbols is also <strong>congruent</strong> with trends in the data; we naturally associate slopes with increases and decreases in data values.<a href="#fn37" class="footnote-ref" id="fnref37" role="doc-noteref"><sup>37</sup></a></p>
 <div id="fig-data-vis-shape-decode" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-shape-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3325,7 +3364,7 @@ Table&nbsp;10.1: The data summaries that are mapped to visual features in <a hre
 </blockquote>
 </section>
 <section id="small-multiplessmall-multiples" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">10.2</span> Small multiples<a href="#fn37" class="footnote-ref" id="fnref37" role="doc-noteref"><sup>37</sup></a></h2>
+<h2 data-number="10.2" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">10.2</span> Small multiples<a href="#fn38" class="footnote-ref" id="fnref38" role="doc-noteref"><sup>38</sup></a></h2>
 <p>One difficulty with <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;10.2</a> is that many of the lines overlap each other, which makes it difficult to separately perceive individual visual shapes. <a href="#fig-profile" class="quarto-xref">Figure&nbsp;10.3</a> shows an alternative approach to visualising the same data, a profile plot, where a shape is drawn for each country. The shape in this case is a filled in polygon, effectively the lines in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;10.2</a> with the area below them (down to zero) filled in.</p>
 <p><strong>TODO</strong> relate to over-plotting section (wherever that ends up)</p>
 <p>Again, this can be effective because of the overall shapes. For example, we can see a group of four shapes that are larger than the others. We can also see that Argentina and Fiji appear very similar, which was not apparent in previous plots.</p>
@@ -3348,7 +3387,7 @@ Figure&nbsp;10.3: A data visualisation of the performance measures for teams in 
 <p>The group of large shapes in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;10.3</a> is easier to see because the countries have been ordered by the number of points scored (the right-hand height of the shape). As we have seen before, ordering data symbols can make a big difference (<a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>).</p>
 </section>
 <section id="facettingfacetting" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="facettingfacetting"><span class="header-section-number">10.3</span> Facetting<a href="#fn38" class="footnote-ref" id="fnref38" role="doc-noteref"><sup>38</sup></a></h2>
+<h2 data-number="10.3" class="anchored" data-anchor-id="facettingfacetting"><span class="header-section-number">10.3</span> Facetting<a href="#fn39" class="footnote-ref" id="fnref39" role="doc-noteref"><sup>39</sup></a></h2>
 <p><a href="#fig-facet-before" class="quarto-xref">Figure&nbsp;10.4</a> shows a line plot of the number of youth offenders per year in different Police Districts of New Zealand. This visualisation has some good mappings—we map year to horizontal <strong>position</strong> and count to vertical <strong>position</strong>—but also a weaker mapping: the Police District. We map districts to <strong>colour</strong>, but because there are 12 different districts, we are exceeding the capacity of colour (<a href="#sec-capacity" class="quarto-xref">Section&nbsp;3.6</a>). It is not easy to differentiate all of the different colours (not helped by overplotting of the lines).</p>
 <p>A better mapping for Police District would be <strong>position</strong>, which has a much higher capacity, but position has already been taken by year and count.</p>
 <div class="cell">
@@ -3633,7 +3672,7 @@ Figure&nbsp;11.7: Alternative map-based representations of the average crime rat
 </section>
 <section id="chart-junk" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="chart-junk"><span class="header-section-number">11.2</span> Chart junk</h2>
-<p><a href="#fig-junk" class="quarto-xref">Figure&nbsp;11.8</a> shows a version of <a href="#fig-map" class="quarto-xref">Figure&nbsp;11.5</a> with two cartoon villians added in the top-left and bottom-right corners.<a href="#fn39" class="footnote-ref" id="fnref39" role="doc-noteref"><sup>39</sup></a> These sorts of annotations are often, derisively, referred to as <strong>chart junk</strong>, with the suggestion that they add no value and make it harder to extract the important information.<a href="#fn40" class="footnote-ref" id="fnref40" role="doc-noteref"><sup>40</sup></a></p>
+<p><a href="#fig-junk" class="quarto-xref">Figure&nbsp;11.8</a> shows a version of <a href="#fig-map" class="quarto-xref">Figure&nbsp;11.5</a> with two cartoon villians added in the top-left and bottom-right corners.<a href="#fn40" class="footnote-ref" id="fnref40" role="doc-noteref"><sup>40</sup></a> These sorts of annotations are often, derisively, referred to as <strong>chart junk</strong>, with the suggestion that they add no value and make it harder to extract the important information.<a href="#fn41" class="footnote-ref" id="fnref41" role="doc-noteref"><sup>41</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-junk" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -3653,16 +3692,16 @@ Figure&nbsp;11.8: A choropleth map of the average crime rate over the period 201
 <blockquote class="blockquote">
 <p>Chart junk is <em>not</em> effective because it does not map <em>back</em> to data values and because it distracts from the visual elements that do map <em>back</em> to data values.</p>
 </blockquote>
-<p>It is important to point out that not all <strong>visual objects</strong> are chart junk. For example, the data symbols in <a href="#fig-junk" class="quarto-xref">Figure&nbsp;11.8</a>, the map regions, are also <strong>visual objects</strong>, but they differ from the cartoon villians because they are related to the data values.</p>
-<p>Furthermore, <strong>visual objects</strong> that have no connection to the raw data may still have some positive effects. For example, the cartoon villians convey the concept of crime more dramatically than the simple text label “crime rate”. The more complex and interesting images may attract attention to the data visualisation as a whole and there is some evidence that such annotations improve the memorability of a data visualisation.<a href="#fn41" class="footnote-ref" id="fnref41" role="doc-noteref"><sup>41</sup></a></p>
+<p>However, it is important to point out that not all <strong>visual objects</strong> are chart junk. For example, the data symbols in <a href="#fig-junk" class="quarto-xref">Figure&nbsp;11.8</a>, the map regions, are also <strong>visual objects</strong>, but they differ from the cartoon villians because they are related to the data values.</p>
+<p>Furthermore, <strong>visual objects</strong> that have no connection to the raw data may still have some positive effects. For example, the cartoon villians are not devoid of information; they convey the concept of crime more dramatically than the simple text label “crime rate”. The more complex and interesting images may attract attention to the data visualisation as a whole and there is some evidence that such annotations improve the memorability of a data visualisation.<a href="#fn42" class="footnote-ref" id="fnref42" role="doc-noteref"><sup>42</sup></a></p>
 <blockquote class="blockquote">
 <p>Chart junk can be effective because it has a greater emotional impact and is more memorable.</p>
 </blockquote>
-<p>Overall, visual objects that are not related to the raw data are <em>not</em> effective for mapping <em>back</em> to the raw data, so any other benefits have to be weighted against that cost.<a href="#fn42" class="footnote-ref" id="fnref42" role="doc-noteref"><sup>42</sup></a></p>
+<p>Overall, visual objects that are not related to the raw data are <em>not</em> effective for mapping <em>back</em> to the raw data, so any other benefits have to be weighed against that cost.<a href="#fn43" class="footnote-ref" id="fnref43" role="doc-noteref"><sup>43</sup></a></p>
 </section>
 <section id="case-study-pictograms" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="case-study-pictograms"><span class="header-section-number">11.3</span> Case study: Pictograms</h2>
-<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;11.9</a> shows a pictogram of the number of pet dogs and pet cats globally.<a href="#fn43" class="footnote-ref" id="fnref43" role="doc-noteref"><sup>43</sup></a> The data symbols in this plot are images, or <strong>icons</strong>, of a cat and a dog, with the number of pets mapped to the height of each icon.<a href="#fn44" class="footnote-ref" id="fnref44" role="doc-noteref"><sup>44</sup></a> Icons are an example of <strong>visual objects</strong>; they are effective at conveying categories because they visually resemble physical objects, in this case, cats and dogs.</p>
+<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;11.9</a> shows a pictogram of the number of pet dogs and pet cats globally.<a href="#fn44" class="footnote-ref" id="fnref44" role="doc-noteref"><sup>44</sup></a> The data symbols in this plot are images, or <strong>icons</strong>, of a cat and a dog, with the number of pets mapped to the height of each icon.<a href="#fn45" class="footnote-ref" id="fnref45" role="doc-noteref"><sup>45</sup></a> Icons are an example of <strong>visual objects</strong>; they are effective at conveying categories because they visually resemble physical objects, in this case, cats and dogs.</p>
 <p>Unfortunately, because the cat and dog images are not simple shapes, it is harder to accurately perceive the heights of the images, so it is harder to map back to the number of cats and dogs. Even worse, we actually perceive the size, or <strong>area</strong>, of the images. The dog image is wider than the cat image so the number of dogs is visually over-emphasised.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -3716,7 +3755,7 @@ Figure&nbsp;11.10: Two alternative uses of icons.
 </figure>
 </div>
 <p><a href="#fig-pic-icon" class="quarto-xref">Figure&nbsp;11.11</a> shows two more alternatives to <a href="#fig-pic" class="quarto-xref">Figure&nbsp;11.9</a>. <a href="#fig-pic-icon-2" class="quarto-xref">Figure&nbsp;11.11 (b)</a> is just a standard bar plot. We know that this is effective for mapping <em>back</em> to the number of pets.</p>
-<p><a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;11.11 (a)</a> uses repetitions of the icons to represent the number of pets, still within a bar. In this case, each icon represents 100 million pets. The ability to count icons is effective for mapping <em>back</em> to the overall counts.<a href="#fn45" class="footnote-ref" id="fnref45" role="doc-noteref"><sup>45</sup></a></p>
+<p><a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;11.11 (a)</a> uses repetitions of the icons to represent the number of pets, still within a bar. In this case, each icon represents 100 million pets. The ability to count icons is effective for mapping <em>back</em> to the overall counts.<a href="#fn46" class="footnote-ref" id="fnref46" role="doc-noteref"><sup>46</sup></a></p>
 <div id="fig-pic-icon" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pic-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3770,7 +3809,7 @@ Figure&nbsp;11.12: A Chernoff faces plot of the …
 </div>
 </div>
 </div>
-<p>The mappings in a Chernoff face are <em>not</em> very accurate (see <a href="#sec-accuracy" class="quarto-xref">Section&nbsp;3.5</a>; <strong>curvature</strong> is ranked <em>below</em> colour in terms of accuracy),<a href="#fn46" class="footnote-ref" id="fnref46" role="doc-noteref"><sup>46</sup></a> so Cheroff faces are <em>not</em> very effective for mapping <em>back</em> to raw data values.</p>
+<p>The mappings in a Chernoff face are <em>not</em> very accurate (see <a href="#sec-accuracy" class="quarto-xref">Section&nbsp;3.5</a>; <strong>curvature</strong> is ranked <em>below</em> colour in terms of accuracy),<a href="#fn47" class="footnote-ref" id="fnref47" role="doc-noteref"><sup>47</sup></a> so Cheroff faces are <em>not</em> very effective for mapping <em>back</em> to raw data values.</p>
 <p>However, the familiarity of Chernoff faces means that we are easily able to perceive common combinations of the facial features. For example, we can see several sad faces at the top-left of <a href="#fig-chernoff" class="quarto-xref">Figure&nbsp;11.12</a> and several happy faces at the bottom-right. We can perceive countries that share similar combinations of performance measures. In other words, we can perceive multi-dimensional correlations and multi-dimensional groupings in the data.</p>
 <p>In this case, the happier faces have been arranged to correspond to the more successful teams and the teams have been ordered from least points scored to most points scored. The resulting proximity helps with perceiving groups of similar faces.</p>
 <blockquote class="blockquote">
@@ -3780,6 +3819,7 @@ Figure&nbsp;11.12: A Chernoff faces plot of the …
 </section>
 <section id="text" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Text</h1>
+<p><strong>TODO</strong> - <strong>MUST</strong> add that text has spectacular congruence!</p>
 <p><a href="#fig-no-text" class="quarto-xref">Figure&nbsp;12.1</a> is a version of <a href="#fig-crime" class="quarto-xref">Figure&nbsp;1.1</a> with all of the text removed. Although we can see that some values, or rather three sets of values, haved decreased, we cannot tell what the values are or by how much they have decreased. If there was ever any doubt, <a href="#fig-no-text" class="quarto-xref">Figure&nbsp;12.1</a> makes it clear that text is doing a lot of important work in a data visualisation.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -3827,7 +3867,7 @@ Figure&nbsp;12.1: A line plot with all text removed. Without text, it is impossi
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fixations-text-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.2: Eye tracking data from the MASSVIS project that shows fixations (circles) and saccades (lines between circles) for one person viewing an image for 10 seconds. <a href="#fn47" class="footnote-ref" id="fnref47" role="doc-noteref"><sup>47</sup></a>
+Figure&nbsp;12.2: Eye tracking data from the MASSVIS project that shows fixations (circles) and saccades (lines between circles) for one person viewing an image for 10 seconds. <a href="#fn48" class="footnote-ref" id="fnref48" role="doc-noteref"><sup>48</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -3850,7 +3890,7 @@ Figure&nbsp;12.3: A bar plot of the total number of offenders for different ethn
 </div>
 </div>
 <p>Just as data values are mapped to the visual features of the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;12.3</a>, data values are also mapped to the visual features of the text data symbols. For example, the ethnic groups are mapped to the vertical <strong>position</strong> of the bars <em>and</em> to the vertical <strong>position</strong> of the text. The data values for the number of offenders in each ethnic group are mapped to the <strong>length</strong> of the bars, but they are also mapped to the horizontal <strong>position</strong> of the text <em>and</em> to the <strong>shape</strong> of the text—the letters and digits that make up the text.</p>
-<p>Compared to the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;12.3</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;2.3</a>, the text data symbols are <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;2.7</a>).<a href="#fn48" class="footnote-ref" id="fnref48" role="doc-noteref"><sup>48</sup></a></p>
+<p>Compared to the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;12.3</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;2.3</a>, the text data symbols are <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;2.7</a>).<a href="#fn49" class="footnote-ref" id="fnref49" role="doc-noteref"><sup>49</sup></a></p>
 <p>The value of text data symbols is that they allow us to map <em>back</em> to data values very well (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;2.1</a>). In terms of the criteria that we discussed in <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;3</a>, text is appropriate for both <strong>quantitative</strong> and <strong>qualitative</strong> data values, text is extremely <strong>accurate</strong>, and text has a very large <strong>capacity</strong>.</p>
 <blockquote class="blockquote">
 <p>Text data symbols are effective because they can be used to represent any sort of data and they allow a very accurate mapping <em>back</em> to data values.</p>
@@ -4270,6 +4310,7 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <p>As example do facetted crime district line plots with panel per year (or even just single line plot) PLUS map of regions PLUS colour scale to match panel strip fill colour (or line colours) with region fill colour on map</p>
 <p>Another example is <a href="#fig-junk" class="quarto-xref">Figure&nbsp;11.8</a> where the left edge and right and bottom edges of the criminal are aligned with the left and right and bottom edges of the regions AND the borders on the regions are thicker and black so that the criminals and the regions match each other better. ALSO the legend has a border so ALL lines are the same (keep everything the same that should NOT be attended to; differences are seen as significant).</p></li>
 <li><p>somewhere in intro (?) as a footnote (?) cite Sonning (2022), which goes into great detail about how to do a line plot right; this document aims to provide a simpler set of concepts that can be applied to any data vis by a less expert reader.</p></li>
+<li><p>Mention that little is known about the accuracy of visual objects (though they must have good capacity because they are more abstract, right?)</p></li>
 <li><p>aspect ratio section (in combine?)</p></li>
 <li><p>bubble plots (area not effective =&gt; something better?)</p></li>
 <li><p>Add citation for distance effect</p></li>
@@ -4280,6 +4321,8 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;5.8</a> also demonstrates another example of visual congruence because darker colours are naturally associated with larger data values.</p></li>
 <li><p>Proper citation for stroop effect ?</p></li>
 <li><p>Use reordering of <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;4.7</a> (so that they start tallest to smallest) THEN should see change in that pattern later on more easily? Use this as an example of “visual shape” in a bar plot. Revisit heatmaps - regions/shapes of colours?</p></li>
+<li><p>Cite “Testing Statistical Charts: What Makes a Good Graph?” Vanderplas, Cook, and Hofmann (2020) when mention that there are many fewer studies of higher-level mappings between data and data vis (partly just because it is harder to study!).</p></li>
+<li><p>Could also mention in the “scope” that we are assuming that the data we have is sufficient for the question(s) of interest and contains no “substantive” problems (in the sense of Healy Chapter 1).</p></li>
 <li><p>Need citation for contrast effect</p></li>
 <li><p>Need citation for chernoff faces</p></li>
 <li><p>case study of density plots (revisit histograms in terms of shape as well; point out that density plots are preferred to histograms? revisit boxplots too and talk about violin plots?)</p></li>
@@ -4313,8 +4356,16 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <li><p>Move the discussion/revisit of tables from text section to here ?</p></li>
 <li><p>Another possible application of data vis knowledge: Analyse one of the weird boxplot variations that look a bit like a ziggurat?</p></li>
 </ul></li>
+<li><p>This nice quote …</p>
+<blockquote class="blockquote">
+<p>Graphics are for comparison - comparison of one kind or another - not for access to individual amounts. (Tukey 1993)</p>
+</blockquote>
+<p>… points out that reading individual values off a plot is not usually the point of a data vis, though it is still a precursor to making a comparison. In some ways, ordinal comparisons are more important than interval or ratio?</p></li>
+<li><p>Answer why “a picture is worth a thousand words” Because 1000 words is 1000 fixations, identifying 1000 visual objects, and then interpreting their combined meaning …</p></li>
 <li><p>citations to stuff on pictographs and glyphs and icon-based plots (in clutter section?)</p></li>
 <li><p>add citations for R packages used in plots and diagrams. General one for R and ggplot2, then specific ones for specific plots Add citation to {ggsci} for default (discrete) palette</p></li>
+<li><p>Add citation for surjective, injective, bijective in a footnote somewhere</p>
+<p>Adam has a nice example in his thesis Figure 4.5, a simpler version of which is a line or bar plot that contains a “total” line or bar - the visual objects do not map neatly, and disjointly to subsets of the data - there is overlap. This makes mapping back to the data harder or at least more ambiguous ?</p></li>
 <li><p>An index that links to all of the places that different sorts of plots are discussed ?</p></li>
 <li><p>Check all references, especially the ones generated by chatgpt ! &nbsp;</p></li>
 <li><p>add how-to-cite</p></li>
@@ -4369,6 +4420,9 @@ Pomerantz, James R., and Anna I. Cragin. 1994. <span>“Emergent Features and Fe
 </div>
 <div id="ref-schwabish" class="csl-entry" role="listitem">
 Schwabish, Jonathan A. 2020. <span>“Ten Guidelines for Better Tables.”</span> <em>Journal of Benefit-Cost Analysis</em> 11 (2): 151–78.
+</div>
+<div id="ref-smil2022how" class="csl-entry" role="listitem">
+Smil, Vaclav. 2022. <em>How the World Really Works: The Science Behind How We Got Here and Where We’re Going</em>. New York: Viking.
 </div>
 <div id="ref-Sönning2023" class="csl-entry" role="listitem">
 Sönning, Lukas. 2023. <span>“Drawing on Principles of Perception: The Line Plot.”</span> In <em>Data Visualization in Corpus Linguistics: Critical Reflections and Future Directions</em>, edited by Lukas Sönning and Ole Schützler. Studies in Variation, Contacts and Change in English 22. Helsinki: VARIENG. <a href="https://urn.fi/URN:NBN:fi:varieng:series-22-2">https://urn.fi/URN:NBN:fi:varieng:series-22-2</a>.
@@ -4431,27 +4485,28 @@ The eye tracking data were taken from the same web site.<a href="#fnref7" class=
 <li id="fn25"><p>This data visualisation is an adaptation of a graphic shown during television coverage of the match.<a href="#fnref25" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn26"><p>This plot is based on a data visualisation from the New Zealand Listener October 14-20 2023.<a href="#fnref26" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn27"><p>Attribution to kaggle data set.<a href="#fnref27" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn28"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). ALSO must relate this to Gestalt section in visual model ?<a href="#fnref28" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn29"><p>Refer to the literature that talks about separable and integral AND configural visual features.<a href="#fnref29" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn30"><p>Technically, there is an interaction because lengths that are further apart from each other vertically are harder to compare (see <a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>). However, compared to visual features that strongly interact, length and position are reasonably independent.<a href="#fnref30" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn31"><p>Need citations to literature that mention integral visual features.<a href="#fnref31" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn32"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>. Acknowledge that my use is a little loose because the use in the literature is really about separate data symbols combining to create emergent features (like clusters?).<a href="#fnref32" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn33"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots.<a href="#fnref33" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn34"><p>This two-dimensional mosaic plot could also be called a spine plot. Mosaic plot is the more general term that includes plots of more than two qualitative variables.<a href="#fnref34" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn35"><p>An interaction plot is typically used in a more experimental setting where the x-axis might be different treatments and the groups might be different patient groups and the y-axis might be a measure of response to treatment. The outcome is then whether the treatment has had the same effect for different patient groups (or not).<a href="#fnref35" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn36"><p>According to Zacks and Tversky 1999 people use “trend words” (increasing/decreasing) versus “discrete words” (higher/lower than) AND are faster to judge absolute values from bars but angle from line graphs.<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn37"><p>Tufte’s small multiples<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn38"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn39"><p>Attribution for the original public domain image.<a href="#fnref39" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn40"><p>Mention Tufte, Stephen Few? see DataVis/README for links to the debate.<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn41"><p>Links to studies that try to show benefits of chart junk. Mention affect (emotion) study?<a href="#fnref41" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn42"><p>There is a really nice summary of when chart junk might be acceptable somewhere in DataVis/README<a href="#fnref42" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn43"><p>reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/<a href="#fnref43" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn44"><p>different terminology: icons, glyphs, pictograms Vehement opposition to these from some quarters<a href="#fnref44" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn45"><p>cite the study that reckons using icons can help with perceiving counts. More effective when each icon represents 1 (and so there are no fractional icons) ?<a href="#fnref45" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn46"><p>Link to a resource that has a comprehensive list of visual channels and includes curvature.<a href="#fnref46" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn47"><p>Only a thumbnail version of the original image is shown in order to comply with terms of use of the MASSVIS data set.<a href="#fnref47" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn48"><p>Talk about there being separate verbal processing areas in the brain. Text has to come in as visual, so undergoes visual processing, but text is also processed separately for its language value.<a href="#fnref48" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn28"><p>MUST make reference to the Information Visualization Reference Model of Card et al (1999) that differentiates data transforms from visual mappings from view transforms (the last particularly for interactive graphics?), PLUS the design-centric extension by Wu and Chang (2024), which teases out design-specific transforms as well (the data prep for a box plot being a good example). These papers provide a formal basis for some of the hand-waving that I do in this section, particularly on mapping back to data summaries rather than raw data.<a href="#fnref28" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn29"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). ALSO must relate this to Gestalt section in visual model ?<a href="#fnref29" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn30"><p>Refer to the literature that talks about separable and integral AND configural visual features.<a href="#fnref30" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn31"><p>Technically, there is an interaction because lengths that are further apart from each other vertically are harder to compare (see <a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;4.1</a>). However, compared to visual features that strongly interact, length and position are reasonably independent.<a href="#fnref31" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn32"><p>Need citations to literature that mention integral visual features.<a href="#fnref32" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn33"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>. Acknowledge that my use is a little loose because the use in the literature is really about separate data symbols combining to create emergent features (like clusters?).<a href="#fnref33" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn34"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots.<a href="#fnref34" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn35"><p>This two-dimensional mosaic plot could also be called a spine plot. Mosaic plot is the more general term that includes plots of more than two qualitative variables.<a href="#fnref35" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn36"><p>An interaction plot is typically used in a more experimental setting where the x-axis might be different treatments and the groups might be different patient groups and the y-axis might be a measure of response to treatment. The outcome is then whether the treatment has had the same effect for different patient groups (or not).<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn37"><p>According to Zacks and Tversky 1999 people use “trend words” (increasing/decreasing) versus “discrete words” (higher/lower than) AND are faster to judge absolute values from bars but angle from line graphs.<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn38"><p>Tufte’s small multiples<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn39"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref39" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn40"><p>Attribution for the original public domain image.<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn41"><p>Mention Tufte, Stephen Few? see DataVis/README for links to the debate.<a href="#fnref41" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn42"><p>Links to studies that try to show benefits of chart junk. Rahman et al (2024) Mention affect (emotion) study?<a href="#fnref42" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn43"><p>There is a really nice summary of when chart junk might be acceptable somewhere in DataVis/README<a href="#fnref43" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn44"><p>reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/<a href="#fnref44" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn45"><p>different terminology: icons, glyphs, pictograms Vehement opposition to these from some quarters<a href="#fnref45" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn46"><p>cite the study that reckons using icons can help with perceiving counts. More effective when each icon represents 1 (and so there are no fractional icons) ?<a href="#fnref46" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn47"><p>Link to a resource that has a comprehensive list of visual channels and includes curvature.<a href="#fnref47" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn48"><p>Only a thumbnail version of the original image is shown in order to comply with terms of use of the MASSVIS data set.<a href="#fnref48" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn49"><p>Talk about there being separate verbal processing areas in the brain. Text has to come in as visual, so undergoes visual processing, but text is also processed separately for its language value.<a href="#fnref49" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

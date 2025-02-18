@@ -371,12 +371,14 @@ crim <- function(data, coords) {
 ggplot(districts) +
     geom_sf(aes(fill=rate), colour="black", linewidth=.5) +
     grid_panel(crim, aes(xmin=xmin, xmax=xmax, ymin=ymin), data=bboxDF) +
+    scale_y_continuous(expand=expansion(0)) +
     scale_fill_continuous(name="crime rate", 
                           guide=guide_colourbar(display="gradient")) +
     theme(panel.border=element_blank(),
           axis.ticks=element_blank(),
           axis.text=element_blank(),
-          legend.key=element_rect(colour="black"))
+          legend.margin=margin(0, 0, 0, 0),
+          legend.justification="bottom")
 grid.force()
 grid.edit("bar::rect", grep=TRUE, gp=gpar(col="black"))
 ```
@@ -403,14 +405,16 @@ that they will distract from the visual features that do convey data values.
   data values and because it distracts from the visual
   elements that do map *back* to data values.
 
-It is important to point out that not all **visual objects** are chart junk.
+However, 
+it is important to point out that not all **visual objects** are chart junk.
 For example, the data symbols in @fig-junk, the map regions, are also
 **visual objects**, but they differ from the cartoon villians because 
 they are related to the data values.
 
 Furthermore, **visual objects** that have no connection to the raw
 data may still have some positive effects.
-For example, the cartoon villians convey the concept of crime 
+For example, the cartoon villians are not devoid of information;
+they convey the concept of crime 
 more dramatically than the simple text label "crime rate".
 The more complex and interesting images may attract attention to
 the data visualisation as a whole and there is some evidence
@@ -419,6 +423,7 @@ visualisation.[^junk-pro]
 
 [^junk-pro]:
   Links to studies that try to show benefits of chart junk.
+  Rahman et al (2024)
   Mention affect (emotion) study?
 
 > Chart junk can be effective because it has a greater
@@ -426,7 +431,7 @@ visualisation.[^junk-pro]
 
 Overall, visual objects that are not related to the raw data
 are *not* effective for mapping *back* to the raw data,
-so any other benefits have to be weighted against that cost.[^junk-summary]
+so any other benefits have to be weighed against that cost.[^junk-summary]
 
 [^junk-summary]:
   There is a really nice summary of when chart junk might be acceptable

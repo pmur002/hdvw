@@ -40,6 +40,7 @@ library(sf)
 library(grImport)
 library(grImport2)
 library(rsvg)
+library(ggtext)
 ```
 
 ```{r}
@@ -291,6 +292,9 @@ knitr::opts_chunk$set(dev='svg',
   set of concepts that can be applied to any data vis by a less
   expert reader.
 
+* Mention that little is known about the accuracy of visual objects
+  (though they must have good capacity because they are more abstract, right?)
+
 * aspect ratio section (in combine?)
 
 * bubble plots (area not effective => something better?)
@@ -319,6 +323,16 @@ knitr::opts_chunk$set(dev='svg',
   THEN should see change in that pattern later on more easily?
   Use this as an example of "visual shape" in a bar plot.
   Revisit heatmaps - regions/shapes of colours?
+
+* Cite "Testing Statistical Charts: What Makes a Good Graph?"
+  Vanderplas, Cook, and Hofmann (2020) 
+  when mention that there are many fewer studies of higher-level
+  mappings between data and data vis
+  (partly just because it is harder to study!).
+
+* Could also mention in the "scope" that we are assuming that the data
+  we have is sufficient for the question(s) of interest and contains
+  no "substantive" problems (in the sense of Healy Chapter 1).
 
 * Need citation for contrast effect
 
@@ -413,12 +427,37 @@ to emphasise structure - combination of order and category
   * Another possible application of data vis knowledge:
     Analyse one of the weird boxplot variations that look a bit like a ziggurat?
 
+
+* This nice quote ...
+
+  > Graphics are for comparison - comparison of one kind or another - not for
+    access to individual amounts. (Tukey 1993)
+
+  ... points out that reading individual values off a plot is not usually
+  the point of a data vis, though it is still a precursor to making
+  a comparison.  In some ways, ordinal comparisons are more important
+  than interval or ratio?
+
+
+* Answer why "a picture is worth a thousand words"
+  Because 1000 words is 1000 fixations, identifying 1000 visual objects,
+  and then interpreting their combined meaning ...
+
 * citations to stuff on pictographs and glyphs and icon-based plots
   (in clutter section?)
 
 * add citations for R packages used in plots and diagrams.
   General one for R and ggplot2, then specific ones for specific plots
   Add citation to {ggsci} for default (discrete) palette
+
+* Add citation for surjective, injective, bijective in a footnote 
+  somewhere
+
+  Adam has a nice example in his thesis Figure 4.5, a simpler 
+  version of which is a line or bar plot that contains a "total"
+  line or bar - the visual objects do not map neatly, and disjointly
+  to subsets of the data - there is overlap.  This makes mapping 
+  back to the data harder or at least more ambiguous ?
 
 * An index that links to all of the places that different sorts of plots
   are discussed ?

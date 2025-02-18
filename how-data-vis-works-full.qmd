@@ -40,6 +40,7 @@ library(sf)
 library(grImport)
 library(grImport2)
 library(rsvg)
+library(ggtext)
 ```
 
 ```{r}
@@ -256,6 +257,7 @@ For resources on this important topic, see ...
 
 **TODO**
 also mention "story-telling" or "narratives" ?  or "task taxonomies" ?
+how data vis can have emotional affects ?
 
 It is also important to acknowledge that vision science cannot yet tell us
 everything about how data visualisation works.
@@ -2961,6 +2963,7 @@ of a data visualisation.[^congruence-lit]
   arrangement of visual features.  The concept is also discussed in
   @DBLP:journals/corr/abs-2008-11310.
 
+
 ## Part-to-whole
 
 The reason why the pie chart in @fig-prop is more effective
@@ -3414,9 +3417,20 @@ In the simple scenario of a bar plot, the data values are total counts
 allow us to map back to the total counts (@fig-visual-feature-decode).
 
 In this section, we explore some data visualisations that are effective 
-because they rely on **data summaries** instead of raw data values.
+because they rely on **data summaries** instead of 
+raw data values.[^info-vis-ref-model]
 
-## Box Plots
+[^info-vis-ref-model]:
+  MUST make reference to the Information Visualization Reference Model 
+  of Card et al (1999) that differentiates data transforms from visual
+  mappings from view transforms (the last particularly for interactive
+  graphics?), PLUS the design-centric extension by Wu and Chang (2024),
+  which teases out design-specific transforms as well (the data prep
+  for a box plot being a good example).  These papers provide a formal
+  basis for some of the hand-waving that I do in this section, particularly
+  on mapping back to data summaries rather than raw data.
+
+## Box plots
 
 @fig-boxplot shows box plots of the number of 
 points scored by all teams at Rugby World Cup matches
@@ -3788,6 +3802,67 @@ gg <- ggplot(rwcAll) +
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
+```
+
+## Cognitive load
+
+On page 46 of his book "How the World Really Works" [@smil2022how],
+Vaclav Smil writes:
+
+> rising food production reduced the malnutrition rate from 2 in 3 people
+  in 1950 to 1 in 11 by 2019
+
+In order to grasp the change in malnutrition rate, we are required
+to compare "2 in 3" to "1 in 11".  This requires mental effort to calculate
+the ratios or fractions and then compare them.
+It is easier to compare the rates if we 
+hold the denominator constant, comparing "2 in 3" to "2 in 22".
+It is easier still if we calculate the fractions, comparing 0.667 to 0.091.
+And it is easier still to compare those fractions visually
+(@fig-cog-load).
+
+```{r}
+#| echo: false
+#| label: fig-cog-load
+#| fig-cap: A bar plot comparing two fractions.
+fractions <- data.frame(year=factor(c(1950, 2019)), frac=c(2/3, 1/11))
+ggplot(fractions) +
+    geom_col(aes(year, frac)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
+    labs(title="Proportion of Population Suffering from Malnutrition")
+```
+
+The point is that we would like to reduce the cognitive load that is
+required of the viewer.  This can be achieved by making the mental
+calculations that are required easier, or by presenting the 
+pre-calculated values, as well as by presenting the values visually
+rather than as text.
+
+**Ideally, we would now ask a different question that requires
+mental effort from the 
+
+```{r}
+#| echo: false
+#| label: fig-cog-load-hi
+#| fig-cap: A bar plot comparing two fractions.
+counts <- data.frame(year=factor(c(1950, 1950, 2019, 2019)), 
+                     group=factor(c("yes", "out of", "yes", "out of"),
+                                  levels=c("out of", "yes")),
+                     count=c(2, 3, 1, 11))
+fills <- pal_npg()(2)
+ggplot(counts) +
+    geom_col(aes(year, count, fill=group), position="dodge") +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
+    labs(title=paste0('<span style="color: ', fills[1], '">X</span> ',
+                      'people out of ',
+                      '<span styl="color: ', fills[2], '">Y</span> ',
+                      'suffer from Malnutrition')) +
+    theme(legend.position="none",
+          plot.title=element_markdown())
 ```
 
 ## Summary
@@ -5291,12 +5366,14 @@ crim <- function(data, coords) {
 ggplot(districts) +
     geom_sf(aes(fill=rate), colour="black", linewidth=.5) +
     grid_panel(crim, aes(xmin=xmin, xmax=xmax, ymin=ymin), data=bboxDF) +
+    scale_y_continuous(expand=expansion(0)) +
     scale_fill_continuous(name="crime rate", 
                           guide=guide_colourbar(display="gradient")) +
     theme(panel.border=element_blank(),
           axis.ticks=element_blank(),
           axis.text=element_blank(),
-          legend.key=element_rect(colour="black"))
+          legend.margin=margin(0, 0, 0, 0),
+          legend.justification="bottom")
 grid.force()
 grid.edit("bar::rect", grep=TRUE, gp=gpar(col="black"))
 ```
@@ -5323,14 +5400,16 @@ that they will distract from the visual features that do convey data values.
   data values and because it distracts from the visual
   elements that do map *back* to data values.
 
-It is important to point out that not all **visual objects** are chart junk.
+However, 
+it is important to point out that not all **visual objects** are chart junk.
 For example, the data symbols in @fig-junk, the map regions, are also
 **visual objects**, but they differ from the cartoon villians because 
 they are related to the data values.
 
 Furthermore, **visual objects** that have no connection to the raw
 data may still have some positive effects.
-For example, the cartoon villians convey the concept of crime 
+For example, the cartoon villians are not devoid of information;
+they convey the concept of crime 
 more dramatically than the simple text label "crime rate".
 The more complex and interesting images may attract attention to
 the data visualisation as a whole and there is some evidence
@@ -5339,6 +5418,7 @@ visualisation.[^junk-pro]
 
 [^junk-pro]:
   Links to studies that try to show benefits of chart junk.
+  Rahman et al (2024)
   Mention affect (emotion) study?
 
 > Chart junk can be effective because it has a greater
@@ -5346,7 +5426,7 @@ visualisation.[^junk-pro]
 
 Overall, visual objects that are not related to the raw data
 are *not* effective for mapping *back* to the raw data,
-so any other benefits have to be weighted against that cost.[^junk-summary]
+so any other benefits have to be weighed against that cost.[^junk-summary]
 
 [^junk-summary]:
   There is a really nice summary of when chart junk might be acceptable
@@ -5641,6 +5721,8 @@ The resulting proximity helps with perceiving groups of similar faces.
 
 
 # Text
+
+**TODO** - **MUST** add that text has spectacular congruence!
 
 @fig-no-text is a version of @fig-crime with all of the text
 removed.  Although we can see that some values, or rather three sets of values,
@@ -6236,6 +6318,9 @@ ggplot(rwc8) +
   set of concepts that can be applied to any data vis by a less
   expert reader.
 
+* Mention that little is known about the accuracy of visual objects
+  (though they must have good capacity because they are more abstract, right?)
+
 * aspect ratio section (in combine?)
 
 * bubble plots (area not effective => something better?)
@@ -6264,6 +6349,16 @@ ggplot(rwc8) +
   THEN should see change in that pattern later on more easily?
   Use this as an example of "visual shape" in a bar plot.
   Revisit heatmaps - regions/shapes of colours?
+
+* Cite "Testing Statistical Charts: What Makes a Good Graph?"
+  Vanderplas, Cook, and Hofmann (2020) 
+  when mention that there are many fewer studies of higher-level
+  mappings between data and data vis
+  (partly just because it is harder to study!).
+
+* Could also mention in the "scope" that we are assuming that the data
+  we have is sufficient for the question(s) of interest and contains
+  no "substantive" problems (in the sense of Healy Chapter 1).
 
 * Need citation for contrast effect
 
@@ -6358,12 +6453,37 @@ to emphasise structure - combination of order and category
   * Another possible application of data vis knowledge:
     Analyse one of the weird boxplot variations that look a bit like a ziggurat?
 
+
+* This nice quote ...
+
+  > Graphics are for comparison - comparison of one kind or another - not for
+    access to individual amounts. (Tukey 1993)
+
+  ... points out that reading individual values off a plot is not usually
+  the point of a data vis, though it is still a precursor to making
+  a comparison.  In some ways, ordinal comparisons are more important
+  than interval or ratio?
+
+
+* Answer why "a picture is worth a thousand words"
+  Because 1000 words is 1000 fixations, identifying 1000 visual objects,
+  and then interpreting their combined meaning ...
+
 * citations to stuff on pictographs and glyphs and icon-based plots
   (in clutter section?)
 
 * add citations for R packages used in plots and diagrams.
   General one for R and ggplot2, then specific ones for specific plots
   Add citation to {ggsci} for default (discrete) palette
+
+* Add citation for surjective, injective, bijective in a footnote 
+  somewhere
+
+  Adam has a nice example in his thesis Figure 4.5, a simpler 
+  version of which is a line or bar plot that contains a "total"
+  line or bar - the visual objects do not map neatly, and disjointly
+  to subsets of the data - there is overlap.  This makes mapping 
+  back to the data harder or at least more ambiguous ?
 
 * An index that links to all of the places that different sorts of plots
   are discussed ?
