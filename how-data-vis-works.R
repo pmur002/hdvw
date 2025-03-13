@@ -803,7 +803,7 @@ popViewport(3)
 #| echo: false
 #| message: false
 #| label: tbl-crime-group-total
-#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.
+#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.  
 crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
 kable_styling(kable(crimeGroupTotalTable),
               bootstrap_options=c("basic", "hover"), 
@@ -1328,7 +1328,7 @@ kable(head(crimeGroupTable, row.names=FALSE))
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-stacked-bar-year
-#| fig-cap: A stacked bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021.
+#| fig-cap: A stacked bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
     geom_col(aes(year, count, fill=group), position="stack") +
     scale_y_continuous(expand=expansion(c(0, .05)))
@@ -1337,7 +1337,7 @@ ggplot(crimeGroup) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-side-bar-year
-#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021.
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
     geom_col(aes(year, count, fill=group), position="dodge") +
     scale_y_continuous(expand=expansion(c(0, .05)))
@@ -1346,7 +1346,7 @@ ggplot(crimeGroup) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-side-bar-group
-#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021.
+#| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
     geom_col(aes(group, count, fill=group, group=year), position="dodge") +
     scale_y_continuous(expand=expansion(c(0, .05)))
@@ -1607,7 +1607,7 @@ ggplot(rwcAllyear) +
 #| echo: false
 #| label: fig-prop
 #| fig.width: 4
-#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.
+#| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.  
 #| fig-subcap:
 #|   - A pie chart.
 #|   - A bar plot.
@@ -1636,7 +1636,7 @@ popViewport()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-bar-part
-#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.
+#| fig-cap: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.  
 gg <- ggplot(crimeGroupTotal) + 
     geom_col(aes(x=1, y=group), colour="black", fill="grey80") +
     geom_col(aes(x=total/sum(total), y=group), colour="black") +
@@ -1707,7 +1707,7 @@ ggplot(rwcAlltime) +
 #| echo: false
 #| label: fig-bar-orientation
 #| fig.width: 4
-#| fig-cap: Data visualisations of the number of offenders from different ethnic groups.
+#| fig-cap: Data visualisations of the number of offenders from different ethnic groups.  
 #| fig-subcap:
 #|   - Horizontal bars.
 #|   - Vertical bars.
@@ -2022,7 +2022,7 @@ popViewport()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: tbl-offenders
-#| tbl-cap: Counts of offences committed in New Zealand in 2021 by the sex of the offender and the action taken against the offender.
+#| tbl-cap: Counts of offences committed in New Zealand in 2021 by the sex of the offender and the action taken against the offender. 
 offenderTable <- with(offenders, table(Mop.Division, SEX))
 kable(offenderTable)
 
@@ -2699,7 +2699,7 @@ ggplot(pets) +
 #| fig.width: 4
 #| label: fig-pic-icon
 #| fig-cap: Two more alternative data visualisations of the pet data.
-#| fig-subcap:
+#| fig-subcap: 
 #|   - Icons are repeated to represent the number of pets.
 #|   - A basic bar plot
 petIcon <- function(data, coords) {

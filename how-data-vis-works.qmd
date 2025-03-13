@@ -95,6 +95,42 @@ knitr::opts_chunk$set(dev='svg',
                       out.width="100%")
 ```
 
+**TODO:  replace "mapping" with "encoding" and "mapping back" with "decoding"**
+
+# Executive Summary
+
+*"Visualization is essentially a mapping process from computer representations
+to perceptual representations, choosing encoding techniques to maximize human
+understanding and communication."* [@owen1999]
+
+* Producing a data visualisation involves an **encoding** of
+  **data values** as **visual features**.<br>
+  For example, numeric **counts** are encoded as the **heights of bars**
+  to create a bar plot.
+
+* Reading a data visualisation involves a **decoding** of
+  **visual features** to obtain **data values**.<br>
+  For example, the **heights of bars** in a bar plot
+  are decoded to obtain **counts**.
+
+* The **effectiveness** of a data visualisation depends on the
+  effectiveness of the **decoding**.<br>
+  For example, a bar plot is effective for comparing **counts**
+  because the visual system is effective at comparing the **heights
+  of bars**.
+
+* More **complex encodings** produce more **complex visual features**.<br>
+  For example, a scatter plot encodes **two numeric variables**
+  as the x- and y-locations of points, 
+  which produces the **position in space of points**.
+
+* More **complex visual features** lead to more **complex decodings**.<br>
+  For example, the **position in space of points** in a scatter plot
+  is decoded as the **correlation** between **two numeric variables**.
+  
+* An **effective** data visualisation encodes data values to
+  visual features that facilitate an effective decoding.
+
 {{< include intro.qmd >}}
 
 {{< include visual-model.qmd >}}
@@ -121,6 +157,17 @@ knitr::opts_chunk$set(dev='svg',
 
 # TODO
 
++ "Testing Statistical Charts: What Makes a Good Graph?"
+  Vanderplas, Cook, and Hofmann (2020)
+
+  "Going forward, we must do a better job of translating the academic research
+   into practice, making it easier for academics and nonacademics alike to
+   create useful, well-designed graphics."
+
+  That's what this document is trying to do!
+
+  Put this in a footnote ?
+
 * Need to refine the apologies at the start - trying to provide a simple
   set of principles for explaining data vis.  Some detail smoothed,
   some detail left out.
@@ -128,6 +175,14 @@ knitr::opts_chunk$set(dev='svg',
 * Add another apology (in scope?) that I am ignoring the "fun" or "joy" of
   data vis and point to some people like Jonathon Schwabish and
   Flowing Data
+
+* When talk about visual types, point out that qualitative are good
+  for group membership - these items are *the same* - as well as
+  being good for differences.
+  And link back to gestalt grouping in visual system(?)
+  Or more like the fundamental tasks that they support are **same**
+  as well as different.
+  Quantitative are actually not so good at **same** (?)
 
 * Add gestalt simplicity and/or symmetry in visual-model?
   tend to see symmetric elements as part of the same group.
@@ -137,9 +192,29 @@ knitr::opts_chunk$set(dev='svg',
   and link back to it from simple vs complex data symbols and a layout section
   and discussions of ordering variables (to make simpler shapes)?
   gestalt continuity could go in too?
+
++ "Rethinking the Ranks of Visual Channels"
+  McColeman et al (2021)
+  Make a bigger deal (at least in footnotes) of the lack of experimental
+  results for tasks other than A:B (especially with 
+  higher-level visual objects).
+  
+* "Low-Level Components of Analytic Activity in Information Visualization"
+  Amar et al (2005)
+  Set of 10 data visualisation tasks
+  I like the way these all correspond to a numerical summary.
+  Could use that in my data summaries/visual summaries section?
  
 * MUST acknowledge the mapping of differences to angles in a line plot
   (essentially an emergent feature!?).
+
+* Adam's section 4.4 Scaling and Encoding makes important points
+  about the mapping from data values to visual properties
+  (particularly mappings to positions). He breaks the transformation
+  into three separate functions!  So something needs to be said
+  about the complexity of some mappings.  Note that Adam is focused
+  on efficiency - e.g., his three functions are less complex than grid's
+  nested viewports.
 
 * Move the rwcAll table from jittering to more is more
 
@@ -159,6 +234,12 @@ knitr::opts_chunk$set(dev='svg',
   pie charts than bar charts)
 
 * Add citations to MacEachren and Bertin (e.g., in choropleth maps)
+
+* Add (at least in footnotes) the 
+  data > info > knowledge > understanding > wisdom 
+  hierarchy (Ackoff, 1989).
+  It corresponds quite nicely to the 
+  visual feature > shape > object hierarchy ?
 
 * acknowledge (in footnote) 
   that there is not a one-to-one correspondence between
@@ -263,6 +344,11 @@ knitr::opts_chunk$set(dev='svg',
   link back to visual objects ?
   put within visual-objects?
 
+* Layout/graphic design as Mapping Structure
+  Case study crap design
+  
+  Highlighting as Mapping Importance
+
 * layout (arrangement of elements of plot)
   come at it from visual-model perspective.
   alignment, proximity, repetition are all gestalt
@@ -298,6 +384,12 @@ knitr::opts_chunk$set(dev='svg',
 
 * Mention that little is known about the accuracy of visual objects
   (though they must have good capacity because they are more abstract, right?)
+
+  In general, there needs to be more explicit acknowledgement of the lack
+  of experimental results for complex data vis scenarios.
+  c.f., "Testing Statistical Charts: What Makes a Good Graph?"
+  Vanderplas, Cook, and Hofmann (2020) p 71.
+
 
 * aspect ratio section (in combine?)
 
