@@ -1,22 +1,52 @@
 
+## Taken from top of how-data-vis-works.qmd
+highlight <- "#7D12BA"
+library(colorspace)
+highrgb <- col2rgb(highlight)/255
+highhcl <- coords(as(sRGB(highrgb[1], highrgb[2], highrgb[3]), "polarLUV"))
+
+col1 <- 120
+col2 <- 240
+cols <- hcl(c(col1, col2), highhcl[2], highhcl[1])
+n <- 10
+grad1 <- paste0(apply(colorRamp(c(cols[1],
+                                  cols[2]))(seq(0, 1, length=n)),
+                      1,
+                      function(x) {
+                          do.call(rgb, as.list(x/255))
+                      }),
+                ";", round(1/n, 2), collapse=":")
+grad2 <- paste0(apply(colorRamp(c(cols[2],
+                                  cols[1]))(seq(0, 1, length=n)),
+                      1,
+                      function(x) {
+                          do.call(rgb, as.list(x/255))
+                      }),
+                ";", round(1/n, 2), collapse=":")
+
 graphDefault <- "  graph [ rankdir=LR; margin=.2; nodesep=.5 ];"
 nodeDefault <- '  node [ fontsize=20; fontname="sans bold"; margin=.2 ];'
 
 dataNode <- function(name, label) {
     paste0("  ", name,
-           ' [ label="', label, '"; shape=box; style=filled; fillcolor=gray ]')
+           ' [ label="', label, '"; ',
+           'shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; ',
+           'fillcolor="', cols[1], '" ]')
 }
 
 visualNode <- function(name, label) {
     paste0("  ", name,
            ' [ label="', label, '"; shape=box;\n',
            "  ", paste(rep(" ", nchar(name)), collapse=""), 
-           '   style=filled; fillcolor="#444444"; fontcolor=white ]')
+           'style="filled, rounded"; penwidth=0; fontcolor=white; ',
+           'fillcolor="', cols[2], '" ]')
 }
 
-ggplotNode <- function(name, label=name) {
+ggplotNode <- function(name, label=name, data=FALSE) {
     paste0("  ", name,
-           ' [ label="', label, '"; shape=ellipse; ]')
+           ' [ label="', label, '"; shape=box; style=rounded; ',
+           'color="', if (data) cols[1] else cols[2], '"; ',
+           'fontcolor="', if (data) cols[1] else cols[2], '" ]')
 }
 
 modelNode <- visualNode
@@ -28,22 +58,26 @@ textNode <- function(name, label=name) {
 
 ## data to visual
 mapEdge <- function(from, to) {
-    paste0("  ", from, ' -> ', to)
+    paste0("  ", from, ' -> ', to,
+           ' [ color="', grad1, '" ]')
 }
 
 ## computational processing
 compEdge <- function(from, to) {
-    paste0("  ", from, ' -> ', to)
+    paste0("  ", from, ' -> ', to,
+           ' [ color="', cols[1], '" ]')
 }
 
 ## visual processing
 procEdge <- function(from, to) {
-    paste0("  ", from, ' -> ', to)
+    paste0("  ", from, ' -> ', to,
+           ' [ color="', cols[2], '" ]')
 }
 
 ## visual to data
 backEdge <- function(from, to) {
-    paste0("  ", from, ' -> ', to, ' [ style="dashed" ]')
+    paste0("  ", from, ' -> ', to,
+           ' [ style="dashed", color="', grad2, '" ]')
 }
 
 ## Edges between model nodes
@@ -70,9 +104,11 @@ graph <- function(..., file) {
 
 ## Data nodes
 data <- dataNode("data", "data\\nvalues")
+data2 <- dataNode("data2", "data\\nvalues")
 stat <- dataNode("stat", "data\\nsummaries")
 stat2 <- dataNode("stat2", "summary\\nsummaries")
 meta <- dataNode("meta", "metadata\\n")
+dataData2Same <- sameRank("data", "data2")
 dataStatSame <- sameRank("data", "stat")
 dataStat2Same <- sameRank("data", "stat2")
 
@@ -94,7 +130,7 @@ visObjSame <- sameRank("vis", "obj")
 aes <- ggplotNode("aes", "aesthetics")
 geom <- ggplotNode("geom", "geoms")
 scale <- ggplotNode("scale", "scales")
-ggstat <- ggplotNode("ggstat", "stats")
+ggstat <- ggplotNode("ggstat", "stats", data=TRUE)
 
 ## Model nodes
 eye <- textNode("eye")
@@ -117,7 +153,9 @@ symDataEdge <- backEdge("sym:s", "data:se")
 symStatEdge <- backEdge("sym:s", "stat:se")
 visDataEdge <- backEdge("vis:s", "data:se")
 visDataEdge2 <- backEdge("vis:n", "data:ne")
+visData2Edge <- backEdge("vis:s", "data2:se")
 visDataEdge3 <- backEdge("vis:sw", "data:se")
+visDataEdge4 <- backEdge("vis:s", "data:s")
 visStatEdge <- backEdge("vis:s", "stat:se")
 visSumEdge <- procEdge("vis", "sum")
 visVisEdge <- procEdge("vis", "add")
@@ -136,14 +174,14 @@ labelStatEdge <- backEdge("label:s", "stat:se")
 
 ## Edges from ggplot
 dataAesEdge <- mapEdge("data", "aes")
-dataGGstatEdge <- mapEdge("data", "ggstat")
-ggstatStatEdge <- mapEdge("ggstat", "stat")
+dataGGstatEdge <- compEdge("data", "ggstat")
+ggstatStatEdge <- compEdge("ggstat", "stat")
 dataScaleEdge <- mapEdge("data", "scale")
 statScaleEdge <- mapEdge("stat", "scale")
-scaleAesEdge <- mapEdge("scale", "aes")
-aesGeomEdge <- mapEdge("aes", "geom")
-geomSymEdge <- mapEdge("geom", "sym")
-geomVisEdge <- mapEdge("geom", "vis")
+scaleAesEdge <- procEdge("scale", "aes")
+aesGeomEdge <- procEdge("aes", "geom")
+geomSymEdge <- procEdge("geom", "sym")
+geomVisEdge <- procEdge("geom", "vis")
 
 ## Edges for models
 eyeBasicEdge <- modelEdge("eye", "basic")
@@ -171,6 +209,28 @@ graph(data,
       dataVisEdge,
       visDataEdge,
       file="data-vis-decode.dot")
+
+graph(data,
+      vis,
+      invis(dataVisEdge),
+      visDataEdge2,
+      file="implicit-decode.dot")
+
+graph(data,
+      vis,
+      dataVisEdge,
+      visDataEdge,
+      visDataEdge2,
+      file="congruent-decode.dot")
+
+graph(data,
+      data2,
+      vis,
+      dataVisEdge,
+      visDataEdge,
+      visData2Edge,
+      dataData2Same,
+      file="dissonant-decode.dot")
 
 graph(data,
       vis,
@@ -390,3 +450,4 @@ graph(eye,
       basicShapeEdge,
       shapeObjectEdge,
       file="visual-processing.dot")
+
