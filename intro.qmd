@@ -8,8 +8,8 @@ conscious effort.
 For example, @tbl-crime shows data on the crime rate for
 youth offenders in New Zealand, for the ages 14 to 16, for 
 each year from 2011 to 2021.  With this purely text-based, tabular
-presentation of the data, it requires considerable effort
-and time to determine any trends in the crime rates.
+presentation of the data, it requires considerable time and effort
+to determine any trends in the crime rates.
 
 ```{r}
 #| echo: false
@@ -101,6 +101,8 @@ data visualisation.
   @tufte1983visual [p178]:
   "the only worse design than a pie chart is several of them ... pie charts
   should never be used." 
+  There are some other good references and choice quotes, but also
+  some dissenting voices (see DataVis resources).
 
 Understanding how data visualisation works will enable us to:
 
@@ -110,7 +112,7 @@ Understanding how data visualisation works will enable us to:
 * Reason about how to improve the effectiveness of a data visualisation.
 * Reason about whether a novel visualisation will be effective.
 
-## Scope
+## Scope {#sec-scope}
 
 The focus of this document is **static** data visualisations for
 **presentation**.  The assumption is that our data values have 
@@ -119,11 +121,11 @@ that makes it easy and efficient for viewers to perceive that property.
 Some of the information that we cover will also
 apply to interactive graphics and to exploratory graphics, but the
 specific requirements of those types of data visualisation will not be 
-addressed.
+addressed.[^interactive]
 
-**TODO:** 
-link to interactive graphics books like Cook & Swayne and 
-Theus and Unwin.
+[^interactive]:
+  link to interactive graphics books like Cook & Swayne and 
+  Theus and Unwin.
 
 This document is also focused on what **vision science**
 has to tell us about effective data visualisation.
@@ -131,11 +133,6 @@ We will consider factors that influence how rapidly and how
 accurately information can be extracted from a data visualisation.
 This will include findings from a broad range of research, encompassing
 Statistics, Computer Science, and Psychology.[^summary]
-However, this document does not cover all fields of research
-that impact on data visualisation.
-We will not, for example, address the ethical use of data visualisation,
-beyond a basic assumption that we want to faithfully represent
-the properties of the data.
 
 [^summary]:
   This document is not only a synthesis, but also a *simplification* of
@@ -153,14 +150,23 @@ the properties of the data.
   references to the relevant theories and experiments in the literature
   will be provided in footnotes like this one.
 
-**TODO:** 
-link to Alberto Cairo at least.
-franconeri et al 2021 has some Cairo refs
-For resources on this important topic, see ...
+However, this document does not cover all fields of research
+that impact on data visualisation.
+We will not, for example, address the ethical use of data visualisation,
+beyond a basic assumption that we want to faithfully represent
+the properties of the data.[^ethics]
 
-**TODO**
-also mention "story-telling" or "narratives" ?  or "task taxonomies" ?
-how data vis can have emotional affects ?
+[^ethics]:
+  link to Alberto Cairo at least.
+  franconeri et al 2021 has some Cairo refs
+  For resources on this important topic, see ...
+  There is also the issue of presenting the right data (at the right
+  level of detail), even if
+  we are pure of heart.
+  Nice example Cairo's How Charts Lie p94-95.
+  also mention "story-telling" or "narratives" ?  or "task taxonomies" ?
+  how data vis can have emotional affects ?
+  link to "Data Feminism" D'Ignazio and Klein
 
 It is also important to acknowledge that vision science cannot yet tell us
 everything about how data visualisation works.
@@ -279,7 +285,7 @@ barGeom <- bar +
           axis.title=element_text(colour="grey"))
 pieGeom <- pie + 
     geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
-              fill=highlight, colour="black", linewidth=.1) +
+              fill=highlight, colour="grey", linewidth=.1) +
     scale_fill_manual(values=grey(.6 + .4*1:n/(n + 1))) +
     theme(plot.title=element_text(colour="grey"),
           plot.subtitle=element_text(colour="grey"),
@@ -320,7 +326,8 @@ Guides
 : Guides are the elements of a data visualisation that explain
 how data values are represented, for example the axes on a line plot
 or bar plot and the legend on a donut plot (see @fig-guides).
-We will see later that **guides have a lot in common with data symbols**.
+We will see later that **guides have a lot in common with data symbols**
+(see @sec-guides).
 
 ```{r}
 #| echo: false
@@ -347,7 +354,7 @@ barGuide <- bar +
           axis.title=element_text(colour="grey"))
 pieGuide <- pie + 
     geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
-              fill="grey90", colour="grey", linewidth=.1) +
+              fill="grey90", colour="grey", linewidth=.5) +
     scale_fill_manual(values=colorRampPalette(c(highlight, lighten(highlight, .5)))(n)) +
     theme(plot.title=element_text(colour="grey"),
           plot.subtitle=element_text(colour="grey"),
@@ -466,7 +473,7 @@ of a data visualisation to a single question:
 What **mappings** are being used?[^mappings]
 
 Much of this document is focused on considering how data values are being
-converted, or **mapped**, into a visual representation.
+mapped, or **encoded**, into a visual representation.
 For example, in the line plot of crime rates for
 different ages in New Zealand in @fig-crime,
 the data values are `year`, crime `rate`, and `age` 
@@ -481,71 +488,65 @@ the data symbols are a set of coloured lines.
 We can describe this data visualisation in terms of a set of mappings
 (see @fig-mappings-1):
 
-* Each `year` value is mapped to a horizontal **position** along the
-  x-axis and each `rate` value is mapped to a vertical **position** 
+* Each `year` value is encoded as a horizontal **position** along the
+  x-axis and each `rate` value is encoded as a vertical **position** 
   along the y-axis.
   For example, the `year` 2011 maps to a location near the left edge
   of the plot and the `rate` 810 maps to a position 
   near the top edge of the plot.  
   The combined values of
   `year` and `rate` 
-  are mapped to the locations through which we draw
+  are encoded as the locations through which we draw
   the coloured lines.
 
-* Each `age` value is mapped to a **colour**.
+* Each `age` value is encoded as a **colour**.
   For example, the `age` 16 maps to a green colour.
-  The `age` values are mapped to the colours of the lines.
+  The `age` values are encoded as the colours of the lines.
 
 ::: {#fig-mappings-1 layout="[[1, -1], [1]]"}
 
 ![](Mappings/mappings-1.png)
 
-![](Animation/mappings-1.svg)
+![](Animation/mappings-1-static.svg)
 
 The data visualisation in @fig-crime can be described as a mapping
 of `year`, `rate`, and `age` to `x` and `y` positions and `colour`.
-The bottom image is an animation;  try refreshing the page or
-viewing the image it in its own tab to rerun the
-animation.
 :::
 
 The heatmap of the same data (see @fig-crime-heatmap) provides a different
 visual representation because it involves different data symbols,
 rectangles this time, and a different 
-set of mappings (see @fig-mappings-2):
+set of encodings (see @fig-mappings-2):
 
-* Each `year` value is mapped to a horizontal **position** along the
-  x-axis and each `age` value is mapped to a vertical **position** 
+* Each `year` value is encoded as a horizontal **position** along the
+  x-axis and each `age` value is encoded as a vertical **position** 
   along the y-axis.
   For example, the `year` 2011 maps to a location near the left edge
   of the plot and the `age` 16 maps to a position 
   near the top edge of the plot.  
   The combined values of
   `year` and `rate` 
-  are mapped to the locations at which we draw
+  are encoded as the locations at which we draw
   the coloured rectangles.
 
-* Each `rate` value is mapped to a **colour**.
+* Each `rate` value is encoded as a **colour**.
   For example, the `rate` 810 maps to white, while lower `rate` values
   map to progressively darker shades of purple.
-  The `rate` values are mapped to the colours of the rectangles.  
+  The `rate` values are encoded as the colours of the rectangles.  
 
 ::: {#fig-mappings-2 layout="[[1, -1], [1]]"}
 
 ![](Mappings/mappings-2.png)
 
-![](Animation/mappings-2.svg)
+![](Animation/mappings-2-static.svg)
 
 The data visualisation in @fig-crime-heatmap can be described as a mapping
 of `year`, `rate`, and `age` to `x` position, `colour`, and `y` position.
-The bottom image is an animation;  try refreshing the page or
-viewing the image it in its own tab to rerun the
-animation.
 :::
 
-We will look at a variety of different mappings from data values
+We will look at a variety of different encodings from data values
 to data symbols (@fig-mappings).  Understanding why some
-mappings work better than others will help us to understand why
+encodings work better than others will help us to understand why
 some data visualisations are more effective than others.
 
 ::: {#fig-mappings}
@@ -560,7 +561,7 @@ to transform **data values** into **data symbols**.
 
 Data visualisations can be incredibly effective for presenting
 important properties of data values.  However, any one data visualisation
-can only be effective for certain data values and for certain data 
+may only be effective for certain data values and for certain data 
 properties.
 
 The goal of this document is to explain why some data visualisations
@@ -569,9 +570,9 @@ are more effective than others;  how data visualisation works.
 The important elements of a data visualisation are **data symbols**,
 which are visual representations of the data values, **guides**, 
 which explain how data values
-are transformed to data symbols, and **labels**, which provide
+are encoded as data symbols, and **labels**, which provide
 context and guidance.
 
 We can characterise a data visualisation in terms of the **mappings**
-that it uses to convert data values into data symbols.
+that it uses to **encode** data values as data symbols.
 

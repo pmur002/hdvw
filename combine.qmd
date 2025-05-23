@@ -2,30 +2,38 @@
 # Combining Mappings
 
 Most data visualisations involve more than one data variable.
-For example, the bar plot in @fig-bar involves data on the ethnic
-group of offenders and data on the total number of
+For example, the bar plot in @fig-bar involves data on the **ethnic
+group** of offenders and data on the **count** of
 offenders in each ethnic group.
 
 In @fig-bar, each data value is mapped to a **visual feature** of a data symbol
 (@fig-visual-feature).  For example, 
-the ethnic group is mapped to the vertical **position** of the bars
-and the total number of offenders is mapped to the **length** of the bars.
+the ethnic group is encoded as the vertical **position** of the bars
+and the count of offenders is encoded as the **length** of the bars.
 
 We have so far only looked at mappings from data values to visual features
 in isolation.  For example, we know that the mapping from ethnic group to 
-position is effective because it uses a visual feature that is 
-appropriate for qualitative data and it uses a visual feature with
-a large capacity.  We also know that mapping the total number
-of offenders to length is effective because it uses a visual feature that
-is appropriate for quantitative data and a visual feature that is accurate.
+position is effective because position is 
+appropriate for qualitative data and position has sufficient capacity
+to differentiate between four ethnic groups.
+We also know that mapping the count
+of offenders to length is effective because length
+is appropriate for quantitative data and length provides an accurate
+decoding.
 Furthermore, the lengths of the bars are all aligned (they
-have a common baseline).
+have a common baseline) and the bars only differ in ways that
+reflect differences in the data (the bars all have the same width and colour).
 
 In this section, we begin to consider what happens when mappings are
 used in combination.  For a start, we will just extend our 
 thinking to data visualisations that involve mapping **two** data variables
-to **two** visual features, where each pair of data values 
-maps to a single data symbol (@fig-two-visual-features).
+to **two** visual features, like ethnic group and count to position and
+length.
+Furthermore, we will restrict ourselves to mappings 
+where each pair of data values 
+are encoded as a single data symbol (@fig-two-visual-features).
+For example, each combination of ethnic group and count produces a single
+bar.
 
 ::: {#fig-two-visual-features layout-ncol=2}
 
@@ -36,15 +44,15 @@ maps to a single data symbol (@fig-two-visual-features).
 A simple data visualisation maps **two** data values to
 **two** visual features to create a data symbol.
 Each pair of data values (`a` and `b`) is mapped to two visual
-features (`x` and `y`) of a single data symbol.
+features (`x` and `y`) of a **single** data symbol.
 :::
 
 ## Independent visual features
 
-A bar plot involves mapping a qualitative variable to **position**
-and a quantitative variable to **length** (e.g., @fig-bar).
-We know that each visual feature is effective on its own---we can map
-*back* from positions to qualitative values and we can map *back* from
+A bar plot involves encoding a qualitative variable as bar **position**
+and a quantitative variable as bar **length** (e.g., @fig-bar).
+We know that each visual feature is effective on its own---we can 
+decode from positions to qualitative values and we can decode from
 lengths to quantitative values---but another reason why the bar plot
 is effective overall is because the two visual features act
 independently.[^separable]
@@ -61,10 +69,10 @@ affected by the vertical **position** of the bars.[^independent-lie]
   However, compared to visual features that strongly interact, length
   and position are reasonably independent.
 
-@fig-bar-colour demostrates that we can also add **colour** to the mix 
-without creating any interactions.  We can perceive the colour of the bars
-and the position of the bars and the lengths of the bars independently
-of each other.
+@fig-bar-colour demonstrates that we can also add **colour** to the mix 
+without creating any interactions between visual features.
+The fact that the bottom two bars are blue and red does not
+affect our ability to perceive that they have different lengths.
 
 ```{r}
 #| echo: false
@@ -73,11 +81,12 @@ of each other.
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group, fill=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=1)
+    theme(aspect.ratio=1,
+          legend.position="none")
 ```
 
-> One reason why a bar plot is effective is because it maps data values
-  to visual features that can be perceived independently.
+> One reason why a bar plot is effective is because data values are
+  encoded as visual features that can be decoded independently.
 
 ## Scatter plots {#sec-integral}
 
@@ -120,19 +129,20 @@ popViewport()
 
 The data symbol in a scatter plot is a data point, in this case a circle.
 There are two mappings in the scatter plot in @fig-scatter:
-the **quantitative** number of clean breaks is mapped to the horizontal
+the **quantitative** number of clean breaks is encoded as the horizontal
 **position** of the data points and the **quantitative** number of tries 
-scored is mapped to the vertical **position** of the data points.
+scored is encoded as the vertical **position** of the data points.
 
-We know from @sec-mapping-visual-features that using **position** means
-that we should be able to accurately map *back* to the original data values.
+We know from @sec-mapping-visual-features 
+that we should be able to accurately decode the original data values
+from the positions of the data points.
 For example, we can easily see that one team scored a little over 
 7.5 clean breaks per game and we can see that two teams scored about
 6 tries per game.
 
 However, there is something else going on in the scatter plot.
-The two explicit mappings to horizontal and vertical position
-**interact** to create an additional visual feature:[^integral]
+The two explicit encodings---horizontal and vertical position---**interact** 
+to create an additional visual feature:[^integral]
 **position in space** (@fig-interact).[^emergent-features]
 For example, we can perceive not only horizontal and vertical
 distances between data points, but also euclidean distances between
@@ -143,6 +153,13 @@ data points ("as the crow flies").
   @pomerantz1994emergent.  Acknowledge that my use is a little loose
   because the use in the literature is really about separate data symbols
   combining to create emergent features (like clusters?).
+  MacEachren 1995 uses emergent in exactly this way!?
+  "Vision Science: Photons to Phenomenology" Stephen Palmer,
+  Figure 2.1.5 caption "The arrangement of several dots in a line give
+  rise to emergent properties, such as length, orientation, and
+  curvature, that are different from the properties of the dots that
+  compose it."
+  
 
 [^integral]:
   Need citations to literature that mention integral visual features.
@@ -163,21 +180,24 @@ features or even to obscure the original visual features.
   position and vertical position---interact to produce an additional
   visual feature: position in space.
 
-Furthermore, our visual system allows us to perceive **visual summaries**
-(see @sec-visual-summaries) of **position in space** 
+Furthermore, our visual system allows us to decode **visual summaries**
+(see @sec-visual-summaries) from **position in space** 
 (see @fig-visual-corr).[^ensemble-corr]
 For example, in @fig-scatter we can easily see a positive 
 **correlation** between the number of clean breaks and the number of
 tries scored.  We can also easily see **clusters** of data points;
 the four data points in the top-right corner of the plot appear separate 
-from the other data points.
-
-**TODO**
-relate perception of clusters to gestalt proximity
+from the other data points because they share a similar
+position in space (see @sec-visual-model-groups).
 
 [^ensemble-corr]:
   Citations to literature on ensembles again, this time specifically to
   correlation in scatter plots.
+  Talk about how, although there is some experimental support for reasonable
+  accuracy of correlation from scatter plot (with some bias),
+  there is not much experimental evidence for which is best 
+  for perceiving correlations Eg scatter plot vs parallel coords etc
+  Cite Cleveland (1994) for white space margin affecting strength of relation?
 
 ::: {#fig-visual-corr layout-ncol=2}
 
@@ -189,9 +209,20 @@ allow us to map back to the raw data values and the emergent features
 allow us to map back to data summaries.
 :::
 
+Although a scatter plot is similar to a bar plot because they both
+involve two encodings---position and length for a bar plot and 
+horizontal position and vertical position for a scatter plot---there 
+are additional decodings possible from the data symbols in a 
+scatterplot because the additional visual feature of position in space
+emerges from the combination of horizontal and vertical position.
+
 > One reason why a scatter plot is effective at conveying relationships
-  between variables is because we are able to perceive visual summaries from
+  between variables is because we are able to decode visual summaries from
   a collection of positions in space.
+
+**TODO**
+Admit a range rather than a dichotomy
+Munzner has good examples?
 
 ## Case study: Mosaic plots {#sec-mosaic}
 
@@ -210,7 +241,7 @@ kable(offenderTable)
 
 @fig-spine shows a mosaic plot of the data in @tbl-offenders.[^mosaic]
 This is an effective data visualisation for making several comparisons:
-the proportion of male versus female offenders; 
+the overall proportion of male versus female offenders; 
 within each sex, the proportion of different actions against offenders;
 between sexes, the distribution of different actions;
 and the overall proportions of combinations of sex and action against
@@ -249,15 +280,17 @@ popViewport()
 
 A mosaic plot is another example of a data visualisation that 
 maps **data summaries** to data symbols rather than raw data.
-The data symbols are rectangles, the widths of the rectangles are
-mapped from the proportion of male versus female offenders and
-the heights of the rectangles are mapped from the proportions of actions
-taken within males and females (see @tbl-offenders-summary).
+The data symbols are rectangles, the proportions 
+of male versus female offenders 
+are encoded as the widths of the rectangles, and
+the proportions of different actions
+taken, within males and females, are encoded as 
+the heights of the rectangles (see @tbl-offenders-summary).
 
 ```{r}
 #| echo: false
 #| label: tbl-offenders-summary
-#| tbl-cap: The data summaries calculated from @tbl-offenders that are mapped to the widths and heights of the rectangles in @fig-spine.
+#| tbl-cap: The data summaries calculated from @tbl-offenders that are encoded as the widths and heights of the rectangles in @fig-spine.
 #| tbl-subcap:
 #|   - Widths
 #|   - Heights
@@ -276,9 +309,9 @@ kable(props[,3:4], digits=2)
 
 A mosaic plot is also an example of a data visualisation 
 that maps to visual features that **interact**.
-The explicit mappings involve proportions to the widths and heights
+The explicit mappings involve encoding proportions as the widths and heights
 of the rectangles and we know from @sec-quant-features that 
-this will allow accurate mapping back from lengths to proportions.
+this will allow accurate decoding from lengths to proportions.
 
 > One reason why a mosaic plot is effective is because it maps 
   proportions to lengths.
@@ -294,8 +327,9 @@ each combination of sex and action taken.
   overall proportions.
 
 One weakness of mosaic plots is that area is not the most
-accurate visual feature (@sec-accuracy), so we are not able to map
-back to overall proportions as well as we are able to map back to
+accurate visual feature (@sec-accuracy), so we are not able to decode
+overall proportions from the rectangle areas as accurately 
+as we are able to decode
 the proportions that are represented by the separate widths and heights
 of the rectangles.
 
@@ -352,13 +386,13 @@ grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
 ```
 
 These weaknesses are exacerbated for mosaic plots of more than two
-variables.  For example, the mosaic plot in @fig-mosaic shows 
-proportions of youth versus adult offenders, then within age levels
-proportions of male versus female offenders, then within combinations
-of age levels and sex proportions of different actions taken against the
+variables.  For example, the mosaic plot in @fig-mosaic shows the
+proportions of youth versus adult offenders, then, within age levels, the
+proportions of male versus female offenders, then, within combinations
+of age levels and sex, the proportions of different actions taken against the
 offender.  Even though there are only very few levels for each variable, 
 our ability to compare heights and widths of rectangles is impaired
-by distance and distractors.
+by inconsistent baselines, distance between rectangles, and distractors.
 
 ```{r}
 #| echo: false
@@ -450,26 +484,28 @@ ggplot(crimeGroupSub) +
 ```
 
 The data symbols in @fig-interaction are straight line segments.
-The year is mapped to the horizontal start and end **position** of the lines
-and the number of offenders is mapped to the vertical start and end
-**position** of the lines.  The ethnic group is mapped to the **colour**
-of the lines.  These mappings are effective for mapping *back* to the
-raw data values in @tbl-interaction.
+The year is encoded as the horizontal start and end **position** of the lines
+and the number of offenders is encoded as the vertical start and end
+**position** of the lines.  The ethnic group is encoded as the **colour**
+of the lines.  These mappings are effective for decoding the
+raw data values in @tbl-interaction from the end points and the colours
+of the lines.
 
 In addition, the explicit mappings generate
 an **emergent feature**: the **angle** of the lines.
-Furthermore, the angle of the lines allow us to map *back* to 
+Furthermore, the angle of the lines allow us to decode
 a **data summary**: the *change* in the number
 of offenders between 2011 and 2021 (see @fig-visual-corr).
 
-> An interaction plot is effective because the angle of the lines
-  allows us to map *back* to changes in the data values.
+> An interaction plot is effective because it 
+  allows us to decode changes in the data values from
+  the angles of the lines.
 
 It is more difficult to perceive the *change* in the number of offenders
 for each ethnic group in
 a bar plot like the one shown in @fig-interaction-bar.
-Partly this is because we have to perceive and compare two bars
-for each ethnic group rather than a single line.
+Partly this is because we have to decode the lengths of two bars
+for each ethnic group rather than the slope of a single line.
 
 ```{r}
 #| echo: false
@@ -482,10 +518,179 @@ ggplot(crimeGroupSub) +
     theme(aspect.ratio=1)
 ```
 
+## Dangers of combining mappings
+
+@fig-nz-doctor-bar shows a plot of changes in 
+health spending by successive New Zealand 
+governments.[^nz-doctor]
+In this data visualisation,
+the average change in health spending over a government's entire term
+is encoded as the **height** of a bar, 
+with the duration of that government's term
+encoded as the **width** of the bar.
+Because height and width are visual features that interact, the result 
+is an **area** for each government's term.
+However, that area has no sensible interpretation;
+what does a percent multiplied by a number of years mean?
+The areas of the bars do not correspond to any property of the data values.
+
+[^nz-doctor]:
+  @fig-nz-doctor-bar is based on Figure 2 from @nz-doctor.
+
+```{r}
+#| echo: false
+#| label: fig-nz-doctor-bar
+#| fig-cap: A plot showing the differences in health spending for successive New Zealand governments using filled bars.
+nzdoctor <- data.frame(year=c(1999, 1999:2023), 
+                       block=rep(1:5, c(1, 9, 9, 6, 1)),
+                       percent=rep(c(0, 4.7, 1.3, 4.6, -3), c(1, 9, 9, 6, 1)),
+                       party=rep(rep(c(NA, rep(c("Labour", "National"), 2)),
+                                 c(1, 9, 9, 6, 1))))
+block <- function(data, coords) {
+    blockCoords <- split(coords, coords$block)
+    zero <- blockCoords[[1]]$y
+    step <- diff(coords$x)[2]
+    blockRect <- function(x) {
+        l <- x$x[1]
+        r <- l + diff(range(x$x)) + step
+        b <- zero
+        t <- x$y[1]
+        polygonGrob(c(l, l, r, r), c(b, t, t, b),
+                    gp=gpar(col=NA, fill=x$colour[1]))
+    }
+    blocks <- lapply(blockCoords[-1], blockRect)
+    do.call(grobTree, blocks)
+}
+blockYear <- function(data, coords) {
+    zero <- coords$y[1]
+    step <- diff(coords$x)[2]
+    years <- data$x[-1]
+    textGrob(paste0(" ", years, "-", substring(years + 1, 3, 4)),
+             coords$x[-1] + step/2, zero, hjust=0, rot=-90,
+             gp=gpar(fontsize=10))
+}
+partyColours <- c(rgb(217, 42, 31, max=255),
+                  rgb(46, 140, 204, max=255))
+ggDoctor <- ggplot(nzdoctor) +
+    grid_panel(block, aes(year, percent, colour=party, block=block)) +
+    grid_panel(blockYear, aes(year, percent)) +
+    scale_y_continuous(limits=c(-4, 6), expand=expansion(0), 
+                       breaks=-4:6, 
+                       labels=paste0(sprintf("%1.1f", -4:6), "%")) +
+    scale_x_continuous(expand=expansion(add=c(0, 1))) +
+    scale_colour_manual(values=partyColours) +
+    labs(title=paste("New Zealand Real Terms", 
+                     "Average Annual Health Spend Change Per Person",
+                     sep="\n")) +
+    theme(panel.border=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank())
+pushViewport(viewport(width=.9, height=.9))
+print(ggDoctor, newpage=FALSE)
+```
+
+The interaction of visual features can be a boon when the interaction
+produces an emergent feature that can be decoded to properties
+of the data (as in a scatter plot, or mosaic plot, or interaction plot).  
+However, it is possible to create a poor data visualisation
+if we produce an emergent feature that has no correspondence with 
+data values (@fig-data-vis-vis-lie).[^compatibility-principle]
+
+[^compatibility-principle]:
+  This is the "compatibility principle" ? of Carswell and Wickens ?
+
+::: {#fig-data-vis-vis-lie layout-ncol=2}
+
+![](Diagrams/data-vis-vis-lie.png)
+
+If we encode data values as visual features and the visual features interact, 
+the result can be emergent visual features.  However, this is only
+appropriate if the emergent features
+correspond to some property of the data.
+Otherwise, the decoding may lead to unhelpful and misleading interpretations.
+:::
+
+@fig-nz-doctor-line shows a different representation of the data.
+In this case, the average change in health spending is encoded as the (vertical)
+**position** of a line and the duration is encoded as the **length** of the
+line.  These visual features do not interact, so we no longer
+have a misleading emergent visual feature.
+
+```{r}
+#| echo: false
+#| label: fig-nz-doctor-line
+#| fig-cap: A plot showing the differences in health spending for successive New Zealand governments using horizontal lines.
+seg <- function(data, coords) {
+    segCoords <- split(coords, coords$seg)
+    zero <- segCoords[[1]]$y
+    step <- diff(coords$x)[2]
+    segLine <- function(x) {
+        l <- x$x[1]
+        r <- l + diff(range(x$x)) + step
+        y <- x$y[1]
+        grobTree(## segmentsGrob(l, zero, l, y,
+                 ##              gp=gpar(col=x$colour[1], lty="dotted")),
+                 segmentsGrob(l, y, r, y, 
+                              gp=gpar(col=x$colour[1], lwd=3)),
+                 circleGrob(l, y, r=unit(1, "mm"), 
+                            gp=gpar(col=x$colour[1], fill=x$colour[1], 
+                                    lwd=3)),
+                 circleGrob(r, y, r=unit(1, "mm"),
+                            gp=gpar(col=x$colour[1], fill=figbg, lwd=3)))
+    }
+    segs <- lapply(segCoords[-1], segLine)
+    do.call(grobTree, segs)
+}
+segNeg <- function(data, coords) {
+    zero <- coords$y[1]
+    polygonGrob(c(0, 0, 1, 1), c(0, zero, zero, 0),
+             gp=gpar(col=NA, fill="white"))
+}
+segYear <- function(data, coords) {
+    step <- diff(coords$x)[2]
+    years <- data$x[-1]
+    textGrob(paste0(" ", years, "-", substring(years + 1, 3, 4)),
+             coords$x[-1] + step/2, 0, hjust=0, rot=-90,
+             gp=gpar(fontsize=10))
+}
+border <- segmentsGrob(0, 0:1, 1, 0:1)
+ggDoctorLine <- ggplot(nzdoctor) +
+    grid_panel(segNeg, aes(year, percent)) +
+    grid_panel(seg, aes(year, percent, colour=party, seg=block)) +
+    geom_hline(yintercept=0, colour="grey") +
+    grid_panel(segYear, aes(year, percent)) +
+    ## grid_panel(border) +
+    scale_y_continuous(limits=c(-4, 6), expand=expansion(0), 
+                       breaks=-4:6, 
+                       labels=paste0(sprintf("%1.1f", -4:6), "%")) +
+    scale_x_continuous(expand=expansion(add=c(0, 1))) +
+    scale_colour_manual(values=partyColours) +
+    labs(title=paste("New Zealand Real Terms", 
+                     "Average Annual Health Spend Change Per Person",
+                     sep="\n")) +
+    theme(panel.border=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank()) +
+    coord_cartesian(clip="off")
+pushViewport(viewport(width=.9, height=.9),
+             viewport(y=1, 
+                      height=unit(1, "npc") - 
+                             grobWidth(textGrob(" 0000-00",
+                                                gp=gpar(fontsize=10))), 
+                      just="top"))
+print(ggDoctorLine, newpage=FALSE)
+```
+
+
 ## Summary
 
-The mappings in a bar plot---quantitative data values to lengths
-and qualitative values to position---are effective because we
+The mappings involved in a bar plot---quantitative data values encoded as
+lengths
+and qualitative values encoded as position---are effective because we
 are able to perceive some combinations of visual features,
 such as length, position, and colour **independently**.
 
@@ -499,3 +704,6 @@ The effectiveness of a mosaic plot also depends upon the **interaction**
 of visual features:  marginal and conditional
 proportions are mapped to widths and heights,
 which produce **area** to represent overall proportions.
+
+Care must be taken to avoid generating emergent features that do not
+represent any meaningful property of the data.

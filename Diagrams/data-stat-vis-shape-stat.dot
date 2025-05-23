@@ -1,17 +1,17 @@
 digraph {
   graph [ rankdir=LR; margin=.2; nodesep=.5 ];
   node [ fontsize=20; fontname="sans bold"; margin=.2 ];
-  data [ label="data\nvalues"; shape=box; style=filled; fillcolor=gray ]
-  stat [ label="data\nsummaries"; shape=box; style=filled; fillcolor=gray ]
-  stat2 [ label="summary\nsummaries"; shape=box; style=filled; fillcolor=gray ]
+  data [ label="data\nvalues"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#006400" ]
+  stat [ label="data\nsummaries"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#006400" ]
+  stat2 [ label="summary\nsummaries"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#006400" ]
   vis [ label="visual\nfeatures"; shape=box;
-        style=filled; fillcolor="#444444"; fontcolor=white ]
+     style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#005FB2" ]
   shape [ label="visual\nshapes"; shape=box;
-          style=filled; fillcolor="#444444"; fontcolor=white ]
-  data -> stat
-  stat -> vis
-  vis -> shape
-  shape:s -> stat2:se [ style="dashed" ]
+       style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#005FB2" ]
+  data -> stat [ color="#006400" ]
+  stat -> vis [ color="#006400;0.1:#006314;0.1:#006328;0.1:#00623B;0.1:#00624F;0.1:#006163;0.1:#006177;0.1:#00608A;0.1:#00609E;0.1:#005FB2;0.1" ]
+  vis -> shape [ color="#005FB2" ]
+  shape:s -> stat2:se [ style="dashed", color="#005FB2;0.1:#00609E;0.1:#00608A;0.1:#006177;0.1:#006163;0.1:#00624F;0.1:#00623B;0.1:#006328;0.1:#006314;0.1:#006400;0.1" ]
 { rank=same; data, stat }
 { rank=same; data, stat2 }
 { rank=same; vis, shape }

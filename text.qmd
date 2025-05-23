@@ -1,10 +1,36 @@
 
 # Text
 
+**Can really base this on Brath's book "Visualising with Text"**
+
+**TODO** Add section on tables.  Wainer?
+At least some table guidelines are essentially advocating for
+using pre-attentive visual features of text!
+See Tables section in Text article
+
 **TODO** - **MUST** add that text has spectacular congruence!
-Also, text is very flexible - it can convey data, information,
+Or at least, text has inherent semantics, so you must respect that
+or you will create visual dissonance (refer back to red-green-blue figure
+in visual dissonance section). 
+And the congruence is incredible strong so it is an effective
+encoding - similarly, any dissonance is extreme (to the point of
+being just plain wrong if not fraudulent).
+Refer back to intro to congruence section.
+
+**Also**, text is very flexible - it can convey data, information,
 knowledge, understanding, and wisdom. 
 Most other graphical elements are much more limited.
+
+**REFER** back to the executive summary as example of encoding
+categories as text visual features (colour, slant, weight).
+
+**TODO**  (in footnote) Refer to Borkin et al (2016) and Kong et al (2018) for
+importance and potential influence of titles, plus
+"Titles in Data Visualization: Empirical Evidence"
+https://filwd.substack.com/p/titles-in-data-visualization-empirical
+Basic messages are that people look a lot at titles and 
+people can be swayed by titles and titles (and text generally)
+make plots memorable.
 
 @fig-no-text is a version of @fig-crime with all of the text
 removed.  Although we can see that some values, or rather three sets of values,
@@ -71,12 +97,12 @@ bar data symbols in @fig-bar-text,
 data values are also mapped to the
 visual features of the text data symbols.
 For example, 
-the ethnic groups are mapped to the vertical **position** of the bars
-*and* to the vertical **position** of the text.
+the ethnic groups are encoded as the vertical **position** of the bars
+*and* as the vertical **position** of the text.
 The data values for the number of offenders in each ethnic group
-are mapped to the **length** of the bars,
-but they are also mapped to the horizontal **position**
-of the text *and* to the **shape** of the text---the letters and digits 
+are encoded as the **length** of the bars,
+but they are also encoded as the horizontal **position**
+of the text *and* as the **shape** of the text---the letters and digits 
 that make up the text.
 
 Compared to the bar data symbols in @fig-bar-text, the text data symbols
@@ -92,8 +118,9 @@ shapes we can process simultaneously
   Talk about there being separate verbal processing areas in the brain.
   Text has to come in as visual, so undergoes visual processing,
   but text is also processed separately for its language value.
+  Cite Ware p315-316
 
-The value of text data symbols is that they allow us to map *back* to
+The value of text data symbols is that they allow us to decode
 data values very well (@fig-decode).
 In terms of the criteria that we discussed in @sec-mapping-visual-features,
 text is appropriate for both **quantitative** and **qualitative** data values,
@@ -101,7 +128,13 @@ text is extremely **accurate**, and text has a very large **capacity**.
 
 > Text data symbols are effective because they can be used to represent
   any sort of data and they allow a very accurate
-  mapping *back* to data values.
+  decoding of data values.
+
+**NOTE** that this accuracy is excellent for a single value 
+but even for comparing two values it can get messy
+Eg what proportion of 1234 is 123?
+Even worse with words
+Example of cognitive effort 
 
 The weaknesses of text are that comparing values requires more cognitive
 effort compared to comparing simple visual features (like the
@@ -111,13 +144,13 @@ This is why a table of numbers, like @tbl-crime,
 is ineffective for perceiving groups of values or trends in values.
 
 > It is harder to compare data values that are mapped to 
-  text because it requires more effort to map *back* to data 
+  text because it requires more effort to decode data 
   values and to perform mental calculations.
 
 > Large numbers of text data symbols are *not* effective because
-  the visual system cannot generate visual summaries from the text.
+  the visual system cannot decode visual summaries from the text.
 
-## Guides
+## Guides {#sec-guides}
 
 @fig-crime-guides is a version of @fig-crime with the guides highlighted
 in purple.  There are tick marks and tick labels on the x-axis and y-axis,
@@ -152,37 +185,34 @@ are all composed of **data symbols**, with **data values** mapped to
 This is perhaps easiest to see with
 the grid lines.  Each grid line is a data symbol where a data value,
 a rate of offending, 
-has been mapped to the vertical **position** of the line.
+has been encoded as the vertical **position** of the line.
 Similarly, each tick mark on the y-axis
 is a line data symbol where a rate of offending
-has been mapped to the vertical **position** of the line
+has been encoded as the vertical **position** of the line
 and each tick mark on the x-axis is a line data symbol where a 
-year has been mapped to the horizontal **position** of the line.
+year has been encoded as the horizontal **position** of the line.
 Finally, each of the tick labels on the y-axis is a text data symbol
-where a rate of offending has been mapped to the vertical **position**
-of the text *and* to the **shape** of the text and similar mappings
+where a rate of offending has been encoded as the vertical **position**
+of the text *and* as the **shape** of the text.  Similar mappings
 apply to the
 x-axis tick labels.
 The legend is also made up of line data symbols and text data symbols,
-this time with age data values mapped to the **colour** of lines
+this time with age data values encoded as the **colour** of lines
 and the **shape** of text.
-
-Furthermore, the grid lines, tick marks, and tick labels form groups
-thanks to their shared proximity (@sec-visual-model-groups).
 
 **TODO** also gestalt continuity because they are aligned?
 
 The fact that guides typically involve **text** data symbols
 makes sense because a guide typically presents only a small number of known
-data values that we want to map *back* to as accurately as possible.
+data values that we want to decode as accurately as possible.
 This is the situation where text excels.   
 
 Viewed as groups of data symbols, the guides on a data visualisation
-make sense:  the guides provide a very accurate way to map *back*
-from **positions** and **colours** on the plot to data values.
+make sense:  the guides provide a very accurate way to decode data values
+from **positions** and **colours** on the plot.
 
-> Guides are effective because they map known data values 
-  to data symbols and because those data symbols map *back* to data values
+> Guides are effective because they encode known data values 
+  as data symbols and because decode data values from those data symbols 
   extremely well.
   
 ## Labels {#sec-labels}
@@ -215,7 +245,7 @@ ggplot(crimeAgeSimple) +
 
 The difference between labels and the other components of a data visualisation,
 the data symbols and the guides, is that labels relate to **metadata** 
-rather than data values.  Labels contain information like
+rather than raw data values.  Labels contain information like
 descriptions of variables and 
 units of measurement and references to data sources.
 These are all important pieces of information, but they are more complex,
@@ -244,7 +274,7 @@ the viewer to attend to.
 ## Case study:  Word clouds {#sec-word-cloud}
 
 @fig-wordcloud shows a word cloud data visualisation based on the
-text of the [Wikipedia page on the Rugby World Cup](https://en.wikipedia.org/wiki/Rugby_World_Cup) [@wiki-rwc]
+text of the [Wikipedia page on the Rugby World Cup](https://en.wikipedia.org/wiki/Rugby_World_Cup) [@wiki-rwc].
 This visualisation shows the frequency with which different words
 appear on the Wikipedia page.  The data values that are being visualised
 are shown in @tbl-wiki-rwc.
@@ -258,12 +288,13 @@ A word cloud of the frequency of words in the Wikipedia page for the Rugby World
 
 This data visualisation is unusual because it consists entirely of text
 **data symbols**.
-The mappings in @fig-wordcloud are from each word to the **shape** of 
-a text data symbol and from frequency to the **size**
+The mappings in @fig-wordcloud include encoding each word as the **shape** of 
+a text data symbol and encoding frequency as the **size**
 of a text data symbol.
 There is no need for a guide for the mapping from words to text shape because
-the mapping is exact;  there is no need to "convert" each text data symbol
-into a word data value because it is already there.
+there is an implicit decoding (@fig-implicit-decode);  
+we can decode each text data symbol
+into a word data value because that decoding has already been learned.
 
 There is no guide for the mapping from word frequency to text size,
 but the visualisation is still effective at conveying the *relative* 
@@ -278,7 +309,8 @@ kable(head(wikiRWC), row.names=FALSE)
 ```
 
 The mapping of frequencies to **size** does not provide the best **accuracy**
-for mapping *back* to frequencies, so we cannot identify the exact frequency
+for decoding frequencies because the data symbols are not simple shapes, 
+so we cannot identify the exact frequency
 of any one word, we cannot identify the quantitative difference in frequency 
 between pairs of words, and we cannot easily perceive the distribution
 of frequencies across words.
@@ -293,7 +325,7 @@ larger *and* more central.
 
 **TODO** link back to redundant mappings
 
-Another benefit of the mapping from frequency to position in space
+Another benefit of encoding frequency as position in space
 is the efficient use of space.
 For example, @fig-wordcloud-bar shows 
 the same data presented as a bar plot with 
@@ -342,8 +374,8 @@ with no corresponding change in the data values.
 @tbl-rwc-table shows a subset of the 2023 Rugby World Cup data set
 (@tbl-rwc-2023).  We have established earlier in this section that
 visualising data values in a table provides an excellent 
-basis for accurately mapping 
-*back* to individual data values, but imposes a larger cognitive burden
+basis for accurately decoding individual data values, 
+but imposes a larger cognitive burden
 for comparing values, and is a very poor for extracting visual
 summaries, such as trends.
 
@@ -426,3 +458,241 @@ ggplot(rwc8) +
     theme(aspect.ratio=1)
 ```
 
+## Stem-and-leaf plots
+
+**TODO**
+Must adapt this to HDVW style, both in terms of visual style
+AND in terms of approach (how data vis works)
+
+Quote from John Tukey about stem-and-leaf plots:
+
+\begin{quotation}
+\say{If we are going to make a mark, it may as well be a meaningful one.
+The simplest - and most useful - meaningful mark is a digit}
+\end{quotation}
+
+    Attributed to "Some Graphic and Semigraphic Displays" in 
+    T. A. Bancroft, ed. Statistical Papers in Honor of George W. Snedecor
+    (Ames, Iowa, 1972), p. 296.
+
+Even just glyphs are relatively complex visual objects that can
+be adjusted (via aesthetics) in multiple ways.
+As text gets larger it can represent more complex info.
+As text gets larger, can apply aesthetics to just subsets,
+e.g., glyphs within words, words within sentences (bold for emphasis).
+Similar to more complex visual objects like Chernoff faces.
+Brath calls this "proportional encoding" ?
+
+```{r}
+#| echo: false
+#| label: fig-tries-hist
+#| fig-cap: A histogram of the number of tries scored. The bars are horizontal for easy comparison with the stem-and-leaf plot.
+#| fig.keep: last
+ggplot(RWCperGame) +
+    geom_histogram(aes(y=round(tries, 1), colour=sphere, fill=sphere), 
+                   breaks=0:8, closed="left") +
+    labs(title="Rugby World Cup 2023") +
+    ylab("tries scored") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_continuous(breaks=0:8) +
+    scale_colour_manual(values=c("grey40", "grey40")) +
+    scale_fill_manual(values=c("grey40", "grey40")) +
+    theme(plot.background=element_rect(colour=NA, fill="grey95"),
+          legend.background=element_rect(colour=NA, fill="grey95"),
+          legend.title=element_text(colour=NA),
+          legend.text=element_text(colour=NA),
+          aspect.ratio=1,
+          axis.title.x=element_blank(),
+          panel.background=element_blank(),
+          panel.border=element_rect(colour="black", fill=NA),
+          panel.grid=element_blank())
+grid.force()
+keyRect <- grid.grep("key::rect", grep=TRUE, global=TRUE)
+grid.edit(keyRect[[1]], gp=gpar(col=NA, fill=NA))
+grid.edit(keyRect[[2]], gp=gpar(col=NA, fill=NA))
+ggTriesHist <- grid.grab()
+grid.newpage()
+pushViewport(viewport(height=.8))
+grid.draw(ggTriesHist)
+popViewport()
+```
+
+```{r echo=FALSE}
+stemAndLeaf <- 
+    gsub("^  ", "",
+         capture.output(stem(RWCperGame$tries, scale=2))[-c(1:3, 12)])
+```
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem
+#| fig-cap: A stem-and-leaf plot of the number of tries scored.
+## Try to get stem background same size as ggplot background
+pushViewport(viewport(height=.8))
+grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+grid.text("Rugby World Cup 2023", x=.3, just="left",
+          y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+stemAndLeafTeX <- paste("\\begin{verbatim}",
+                        paste(rev(stemAndLeaf), collapse="\n"),
+                        "\\end{verbatim}", sep="\n")
+grid.latex(stemAndLeafTeX,
+           x=.3, hjust="left", gp=gpar(fontsize=16))
+grid.text("tries scored", 
+          x=.3, just="left", 
+          y=unit(2, "lines"))
+popViewport()
+```
+
+Figure @fig-tries-hist shows a histogram of the
+number of tries scored by teams in the 2023 Rugby World Cup.
+The information being presented is the frequency of tries-scored
+values within a sequence of ranges, or bins: 0 to 1, 1 to 2, and so on.
+
+The length of each bar encodes the frequency for one of the bins.
+
+Figure @fig-tries-stem shows a stem-and-leaf 
+diagram of the same data (with tries scored rounded to one decimal place).
+
+We have pre-attentive decoding in play because the number of digits for
+each stem creates a length.
+We also have learned decoding in play because we are able to see
+exact data values for individual teams.
+
+```{r echo=FALSE}
+nc <- nchar(stemAndLeaf) - 4
+lengths <- cumsum(nc)
+stemAndLeafBold <- character(length(stemAndLeaf))
+stemSphere <- RWCperGame$sphere[order(RWCperGame$tries)]
+maxLen <- max(nc)
+index <- 1
+for (i in 1:length(stemAndLeaf)) {
+    l <- lengths[i]
+    index <- index:l
+    hemi <- stemSphere[index]
+    north <- hemi == "North"
+    stem <- substring(stemAndLeaf[i], 1, 4)
+    if (nchar(stem) < nchar(stemAndLeaf[i])) {
+        char <- strsplit(substring(stemAndLeaf[i], 5), "")[[1]]
+        char[north] <- paste0("\\textbf{", char[north], "}")
+    } else {
+        char <- ""
+    }
+    stemAndLeafBold[i] <- paste0(stem, paste(char, collapse=""))
+    index <- l + 1
+}
+```
+
+```{r echo=FALSE}
+stemBold <- function() {
+    grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+    grid.text("Rugby World Cup 2023", x=.3, just="left",
+              y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+    alltt <- LaTeXpackage("alltt", "\\usepackage{alltt}")
+    stemAndLeafBoldTeX <- paste("\\setmonofont{Latin Modern Mono Light}",
+                            "\\begin{alltt}",
+                            paste(rev(stemAndLeafBold), collapse="\n"),
+                            "\\end{alltt}", sep="\n")
+    grid.latex(stemAndLeafBoldTeX, packages=alltt,
+               x=.3, hjust="left", gp=gpar(fontsize=16))
+    grid.text("tries scored", 
+              x=.3, just="left", 
+              y=unit(2, "lines"))
+    grid.text(expression("South versus "*bold("North")), 
+              x=.3, just="left",
+              y=unit(1, "line"))
+}
+```
+
+```{r echo=FALSE}
+nc <- nchar(stemAndLeaf) - 4
+lengths <- cumsum(nc)
+stemAndLeafColour <- character(length(stemAndLeaf))
+maxLen <- max(nc)
+index <- 1
+for (i in 1:length(stemAndLeaf)) {
+    l <- lengths[i]
+    index <- index:l
+    hemi <- stemSphere[index]
+    north <- hemi == "North"
+    stem <- substring(stemAndLeaf[i], 1, 4)
+    if (nchar(stem) < nchar(stemAndLeaf[i])) {
+        char <- strsplit(substring(stemAndLeaf[i], 5), "")[[1]]
+        char[north] <- paste0("\\textcolor{salmon}{", char[north], "}")
+        char[!north] <- paste0("\\textcolor{teal}{", char[!north], "}")
+    } else {
+        char <- ""
+    }
+    stemAndLeafColour[i] <- paste0(stem, paste(char, collapse=""))
+    index <- l + 1
+}
+```
+
+```{r echo=FALSE}
+library(gridtext)
+NScols <- pal_npg()(2)
+colsTeX <- paste0("\\definecolor{", c("salmon", "teal"), "}",
+               apply(col2rgb(NScols), 2,
+               function(x) {
+                   paste0("{RGB}{", paste(x, collapse=", "), "}")
+               }), collapse="\n")
+stemColour <- function() {
+    grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+    grid.text("Rugby World Cup 2023", x=.3, just="left",
+              y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+    alltt <- LaTeXpackage("alltt", "\\usepackage{alltt}")
+    stemAndLeafColourTeX <- paste(colsTeX,
+                            "\\begin{alltt}",
+                            paste(rev(stemAndLeafColour), collapse="\n"),
+                            "\\end{alltt}", sep="\n")
+    grid.latex(stemAndLeafColourTeX, packages=list(alltt, "xcolor"),
+               x=.3, hjust="left", gp=gpar(fontsize=16))
+    grid.text("tries scored", 
+              x=.3, just="left", 
+              y=unit(2, "lines"))
+    grid.draw(richtext_grob(paste0('<span style="color: ', NScols[2], 
+                                   '">South</span> versus ',
+                                   '<span style="color: ', NScols[1], 
+                                   '">North</span>'), 
+                            x=.3, hjust=0,
+                            y=unit(1, "line")))
+}
+```
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem-weight
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemBold()
+popViewport()
+```
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem-colour
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemColour()
+popViewport()
+```
+
+Figure @fig-tries-stem-weight and
+Figure @fig-tries-stem-colour show
+variations on the stem-and-leaf plot using text-specific (weight)
+and general (colour) pre-attentive features on individual digits.
+=> even more detail available \cite{brath2014design}.
+
+Of course, the main downside is that this is limited to small data sets.
+
+## Summary
+
+**MUST** (in footnote)
+Acknowledge Ware:
+G8.18 (p327)
+"When a large number of data points must be represented in a visualization,
+use sybmols instead of words or pictorial icons."
+G8.19 (p327)
+"Use words directly on the chart where the number of symbolic objects
+in each category is relatively few and where space is available."

@@ -1,12 +1,76 @@
 
-# Visual Congruence {#sec-congruence}
+# Congruent Mappings {#sec-congruence}
+
+So far we have seen numerous examples of **explicit** mappings
+from data values to visual features. We **encode** data values
+as visual features so that the viewers of a data visualisation can
+**decode** the data values from the visual features 
+(@fig-visual-feature-decode).
+
+In this section, we acknowledge that some visual features come
+with **implicit** mappings.  In some cases, we are able to **decode**
+values from a visual feature based on prior experience and learning,
+rather than due to an explicit encoding (@fig-implicit-decode).
+
+::: {#fig-implicit-decode}
+
+![](Diagrams/implicit-decode.png)
+
+Some visual features have implicit encodings, which means that we
+can decode values from the visual features without having explicitly
+encoded values as visual features.
+:::
+
+For example, @fig-implicit shows three coloured circles.
+Without any explicit encoding, we can decode the red circle as "stop",
+the orange circle as "slow", and the green circle as "go".
+
+```{r}
+#| echo: false
+#| label: fig-implicit
+#| fig.width: 4
+#| fig.height: 1
+#| fig-cap: An example of visual features that contain implicit mappings.  
+## https://www.color-hex.com/color-palette/35021
+traffic <- c("#cc3232", "#e7b416", "#2dc937")
+grid.newpage()
+grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
+grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
+            gp=gpar(col=traffic, fill=traffic))
+```
+
+When an implicit encoding exists,
+we can produce a more effective mapping by building upon
+the implicit decoding.
+We can explicitly encode data values as visual features in such a way that
+the decoding is **congruent** with the implicit decoding, in the sense
+that the implicit decoding leads back to the original data values
+that we explicitly encoded
+(@fig-congruent-decode).[^congruence-lit]
+
+[^congruence-lit]:
+  @TVERSKY2002247 discusses congruence at least in the sense of 
+  matching the spatial properties of data values to the spatial
+  arrangement of visual features.  The concept is also discussed in
+  @DBLP:journals/corr/abs-2008-11310.
+
+::: {#fig-congruent-decode}
+
+![](Diagrams/congruent-decode.png)
+
+If we explicitly map data values to visual features in a way that
+is consistent with an implicit mapping, we can more effectively
+decode data values from visual features.
+:::
+
+## Part-to-whole
 
 @fig-prop shows a pie chart of the proportions of total youth 
 offenders between 2011 and 2021 in 
 different ethnic groups and a bar plot of the same data.
-We learned in @sec-accuracy that mapping 
-**quantitative** proportions to **lengths**, like in the
-bar plot, is more accurate than mapping the proportions to **angles**
+We learned in @sec-accuracy that encoding
+**quantitative** proportions as **lengths**, like in the
+bar plot, is more accurate than encoding the proportions as **angles**
 or **areas**, like in the pie chart.
 
 However, the superior represenation of the
@@ -49,28 +113,16 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-The purpose of this section is to show that we need to consider more
-than just the accuracy or capacity of our mappings from 
-data values to basic visual features in order to understand the effectiveness
-of a data visualisation.[^congruence-lit]
-
-[^congruence-lit]:
-  @TVERSKY2002247 discusses congruence at least in the sense of 
-  matching the spatial properties of data values to the spatial
-  arrangement of visual features.  The concept is also discussed in
-  @DBLP:journals/corr/abs-2008-11310.
-
-
-## Part-to-whole
-
 The reason why the pie chart in @fig-prop is more effective
-than a bar plot for conveying proportions is because 
-the wedges in a pie chart are **congruent** with fractions of a whole.
+than a bar plot for conveying simple proportions like a quarter
+or a third or a half is because 
+the wedges in a pie chart have an implicit decoding to
+fractions of a whole.
 A semi-circle has a strong visual association with *half* of a circle
 and thirds and quarters are similarly evocative.
 
 > One reason why a pie chart can be effective is because 
-  segments of a pie vividly convey fractions of a whole.
+  segments of a pie vividly convey simple fractions of a whole.
 
 @fig-bar-part shows that if we place a bar representing a proportion bar 
 within a reference rectangle that corresponds to a proportion of 1,
@@ -103,7 +155,7 @@ are appropriate for conveying the total number of offenders in
 different ethnic groups.
 
 Part of the reason why **length** and **area** work so well is because
-a longer bar naturally conveys the idea of *more*.
+a **longer** bar naturally conveys the idea of **more**.
 By contrast, the **position** of data points in a dot plot of the same data,
 as shown in @fig-more-is-more, do not inherently 
 convey the same sense of *more*.
@@ -142,11 +194,25 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
+The Rugby World Cup is a competition that is held every four years, with the
+first event taking place in 1987.
+We have data on the total number of points that were scored and conceded in World Cup matches
+for Tier One nations (the top 10 rugby-playing nations).
+@tbl-rwc-all-time shows these data.[^rwc]
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-all-time
+#| tbl-cap: A table of the total number of points scored and conceded for Tier One nations in Rugby World Cup matches.  
+kable(rwcAlltime[,c("team", "scored", "conceded", "diff")], digits=0)
+```
+
 Another way that **length** can convey information more naturally than
 **position** is visualising negative values.
 For example @fig-neg-bar shows the total points differential
 (points scored minus points conceded) for
-Tier One nations at Rugby World Cups.
+Tier One nations at Rugby World Cups (see @tbl-rwc-all).
 The *direction* of the bars very clearly indicates the change from
 positive points differential to negative points differential.
 
@@ -243,7 +309,46 @@ the same.
 > Another reason why bar plots are effective is because the bars
   differ in length, but are otherwise the same.
 
-## Visual dissonance {#sec-dissonance}
+## Dissonant mappings {#sec-dissonance}
+
+@fig-stroop provides a demonstration of the Stroop Effect.[^stroop]
+The task is to name the colour of each word.
+This task is difficult to do because there are two decodings involved and 
+the two decodings are inconsistent.
+Each set of letters has an implicit decoding based on the
+learned meaning of the word that the letters spell out,
+plus a decoding based on the actual colour of the letters.
+
+[^stroop]:
+  citation please!
+
+```{r}
+#| echo: false
+#| label: fig-stroop
+#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
+#| fig-height: 1
+grid.newpage()
+pushViewport(viewport(width=.5))
+grid.text(c("red", "green", "blue"), 1:3/4, 
+          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
+```
+
+The Stroop Effect shows that, if we fail to make our explicit encodings 
+congruent with any implicit encodings - if we create a
+**dissonant** mapping - we can make it harder
+and more confusing to decode a data visualisation because
+there is more than one possible decoding
+(@fig-dissonant-decode).
+
+::: {#fig-dissonant-decode}
+
+![](Diagrams/dissonant-decode.png)
+
+If we explicitly map data values to visual features, but the
+visual features have an implicit mapping to different data values,
+we can cause confusion and make it harder to effectively
+decode data values from visual features.
+:::
 
 The fact that **length** and **area** naturally convey amounts means
 that care must be taken *not* to confuse that association.
@@ -333,23 +438,6 @@ a data visualisation by taking advantage of visual congruence
 and we can reduce the effectiveness of a data visualisation 
 if we create visual dissonance.
 
-**TODO** need expansion of colour dissonance (possibly preceded by
-section on colour associations?) 
-
-@fig-stroop shows that we can also create dissonance with our mappings
-of data values to colours.
-
-```{r}
-#| echo: false
-#| label: fig-stroop
-#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
-#| fig-height: 1
-grid.newpage()
-pushViewport(viewport(width=.5))
-grid.text(c("red", "green", "blue"), 1:3/4, 
-          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
-```
-
 We saw in @sec-same-same that we want to map differences in data values
 to differences in visual features *and* keep everything else the
 same.  Failing to follow that approach will make it harder to 
@@ -358,7 +446,7 @@ However, a worse error, and
 another source of visual dissonance arises if we change
 visual features *without* any underlying change in the data values.
 
-@fig-listener-beans shows a data visualisation of the relative number of 
+@fig-listener-cakes shows a data visualisation of the relative number of 
 people aged over 100 for females versus males.
 There are numerous problems with this data visualisation, but here
 we will just focus on the horizontal **position** of the cake images.
@@ -376,7 +464,7 @@ changes in the data in @sec-mosaic and @sec-word-cloud.
 
 ```{r}
 #| echo: false
-#| label: fig-listener-beans
+#| label: fig-listener-cakes
 #| fig-cap:  A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.[^listener-cakes]
 #| warning: false
 cake <- readPNG("Images/birthday-cake-cropped.png")
@@ -411,38 +499,34 @@ ggplot(old) +
 
 > A data visualisation is *not* effective if it contains mappings
   that are dissonant because that can cause distraction and slower and/or
-  incorrect mappings *back* to the data.
+  incorrect **decoding** of data values from visual features.
 
 ## Case study: Jittering
 
-The Rugby World Cup is a competition that is held every four years, with the
-first event taking place in 1987.
-We have data on the number of points that were scored in World Cup matches
+We have data on the number of points that were scored in every World Cup match
 for Tier One nations (the top 10 rugby-playing nations).
 @tbl-rwc-all shows a sample of these data.[^rwc]
-
-[^rwc]:
-  Attribution to kaggle data set.
 
 ```{r}
 #| echo: false
 #| message: false
 #| label: tbl-rwc-all
-#| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
+#| tbl-cap: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAll[,c("team", "hemisphere", "scored")]), digits=0)
 ```
-
 @fig-jitter shows a scatterplot of the number of points scored 
-by teams from different hemispheres at Rugby World Cup matches.
+by teams from different hemispheres at Rugby World Cup matches
+(see @tbl-rwc-all).
 In this data visualisation, the data symbols are dots,
-the number of points scored is mapped to the horizontal **position** of
-the dots, and the hemisphere is mapped to the vertical **position**
+the number of points scored is encoded as the horizontal **position** of
+the dots, and the hemisphere is encoded as the vertical **position**
 of the dots.
 
 To ameliorate the overlapping of data points, a random amount of "jitter"
 has been
 added the vertical position
-of the dots.  The filled interior of each dot is also semitransparent.
+of the dots.  The filled interior of each dot is also semitransparent
+so that we can see where points overlap.
 
 ```{r}
 #| echo: false
@@ -453,13 +537,16 @@ ggplot(rwcAll) +
     scale_x_continuous(name="points scored")
 ```
 
-The scatter plot in @fig-jitter is effective for mapping *back* to 
-the number of points scored because each data value maps to the
+The scatter plot in @fig-jitter is effective for **decoding** to 
+the number of points scored because each data value is encoded as the
 horizontal position of a single data symbol.
-Similarly, we can easily map *back* to the separate hemispheres.
+Similarly, we can easily decode the hemisphere from each point.
+The proximity of the data symbols from the same hemisphere means
+that it is easy to perceive two "rows" of points.
 
 On the other hand, the jittering means that there are visual differences
-between the vertical positions of the dots that do not correspond to
+between the vertical positions of the dots, within the same hemisphere,
+that do not correspond to
 any differences in data values.  For example, there are two dots representing
 matches where a team from the Northern hemisphere scored zero points.
 The data values for these two dots are identical (zero points scored and
@@ -474,23 +561,40 @@ addition of jittering may cause confusion.
   reduce the effectiveness of a data visualisation because it introduces
   visual dissonance.
 
+## Dangers of implicit mappings
+
+A colour can have multiple implicit mappings, e.g., red -> hot and
+red -> angry and red -> stop (and red -> prosperity in Chinese culture).[^Arcia]
+
+[^Arcia]:
+  Cite "Sometimes more is more: iterative participatory design of infographics 
+  for engagement of community members with varying levels of health literacy"
+  Arcia et al (2016)
+  where people interpret icons
+  in multiple ways, e.g., specifically "pineapple" rather than generic "fruit".
+
+::: {#fig-ambiguous-decode}
+
+![](Diagrams/ambiguous-decode.png)
+
+A visual feature may have more than one implicit encoding, which means that we
+may decode more than one value from the visual feature.
+:::
+
 ## Summary
 
 The effectiveness of a data visualisation may depend on more than
 just the accuracy and capacity of visual features.
 
-Visual **congruence** refers to whether
-a data symbol or visual feature has 
-a natural correspondence with properties of the data.
+A **congruent** mapping is one where data values are **explicitly** encoded in
+a way that is consistent with an **implicit** encoding of the visual feature.
 
-Some data visualisations are effective because they are visually congruent.
+Some data visualisations are effective because they are visually congruent:
+data symbols that are larger for larger data values are more effective;
+data symbols that only change if the data values change are more effective.
 
-Data symbols that are larger for larger data values are more effective.
-
-Data symbols that only change if the data values change are more effective.
-
-Visual **dissonance** refers to whether a data symbol or visual feature
-contradicts properties of the data.
+A **dissonant** mapping is one where data values are **explicitly**
+encoded in a way that is inconsistent with an **implicit** encoding..
 
 Some data visualisations are *not* effective because they are visually
 dissonant.

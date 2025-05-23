@@ -1,0 +1,15 @@
+digraph {
+  graph [ rankdir=LR; margin=.2; nodesep=.5 ];
+  node [ fontsize=20; fontname="sans bold"; margin=.2 ];
+  data [ label="data\nvalues"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#006400" ]
+  lie [ label="garbage\nand lies"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#A40244" ]
+  vis [ label="visual\nfeatures"; shape=box;
+     style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#005FB2" ]
+  add [ label="emergent\nfeatures"; shape=box;
+     style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#005FB2" ]
+  data -> vis [ color="#006400;0.1:#006314;0.1:#006328;0.1:#00623B;0.1:#00624F;0.1:#006163;0.1:#006177;0.1:#00608A;0.1:#00609E;0.1:#005FB2;0.1" ]
+  vis -> add [ color="#005FB2" ]
+  add:s -> lie:se [ style="dashed", color="#005FB2;0.1:#1255A6;0.1:#244A9A;0.1:#37408D;0.1:#493681;0.1:#5B2B75;0.1:#6D2169;0.1:#80175C;0.1:#920C50;0.1:#A40244;0.1" ]
+{ rank=same; data, lie }
+{ rank=same; vis, add }
+}

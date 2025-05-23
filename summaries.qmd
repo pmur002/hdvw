@@ -1,24 +1,39 @@
 
-# Data Summaries {#sec-summaries}
+# Mapping Summaries {#sec-summaries}
+
+**TODO**
+Visual tasks are just different decoding?
+Different decoding have different difficulty
+Like visual summary
+Even ratio of two bars is visual task
+
+**TODO**
+Visual tasks are just different decoding
+Even compare two heights is different to extracting single data value
+A sort of data summary
+Correlation from scatter plot more complex example
+Effectiveness of data vis depends on encoding and decoding that is necessary 
+to perform task? 
 
 In @sec-mapping-visual-features we described a data visualisation as
-a mapping from data values to the visual features of a data symbol
+a mapping that **encodes** data values as the visual features of a data symbol
 (@fig-visual-feature).
 For example, a bar plot,
 like @fig-bar, maps the total number of youth offenders to the **lengths**
 of bars.
 
-We also emphasised the importance of the mapping *back* from the visual 
-features to the data values.  For example, the effectiveness of the bar plot
+We also emphasised the importance of the **decoding** from visual 
+features to data values.  For example, the effectiveness of the bar plot
 in @fig-bar relies on our ability to accurately perceive the lengths
 of the bars, particularly relative to each other.
 
 In the simple scenario of a bar plot, the data values are total counts
-(@tbl-crime-group-total), which are mapped to the lengths of bars, which
-allow us to map back to the total counts (@fig-visual-feature-decode).
+(e.g., @tbl-crime-group-total), which are encoded as the lengths of bars, which
+in turn allows us to decode lengths to retrieve 
+the total counts (@fig-visual-feature-decode).
 
 In this section, we explore some data visualisations that are effective 
-because they rely on **data summaries** instead of 
+because they map **data summaries** instead of 
 raw data values.[^info-vis-ref-model]
 
 [^info-vis-ref-model]:
@@ -30,6 +45,8 @@ raw data values.[^info-vis-ref-model]
   for a box plot being a good example).  These papers provide a formal
   basis for some of the hand-waving that I do in this section, particularly
   on mapping back to data summaries rather than raw data.
+  Could also reference Ackoff's "From Data to Wisdom" for difference
+  between data and information (data summaries).
 
 ## Box plots
 
@@ -71,10 +88,15 @@ to upper quartile), and horizontal lines to represent the extremes of
 the data values, from the the quartiles to the minimum and maximum 
 values.  Points are also included for "outliers" if data values
 lie further than 1.5 times the interquartile range beyond the 
-quartiles.  
+quartiles.[^boxplots]
+
+[^boxplots]:
+  Need to acknowledge that there are many variations, even on the simple
+  box plot, e.g., notches, definitions of the box, let alone violin plots, etc.
 
 Another important difference with a box plot is that it maps
-**data summaries** to visual features of the data symbol
+**data summaries**, rather than raw data values,
+to visual features of the data symbol
 (@fig-stat-vis-decode).
 For example, the median values are mapped to the horizontal **positions** of 
 thick vertical lines and the interquartile ranges are mapped to the
@@ -90,12 +112,12 @@ This is effective for mapping back to the data summaries, but it
 is not effective for mapping back to the raw data.
 :::
 
-
-To be explicit, the data values that are being mapped to visual features in 
+To be explicit, the data values that are being **encoded** 
+as visual features in 
 @fig-boxplot are *not* the raw data values in @tbl-rwc-all;
-the values that are being mapped to visual features in @fig-boxplot 
+the values that are being encoded to visual features in @fig-boxplot 
 are the **data summaries** shown in @tbl-rwc-all-stats.
-These are the values that we can map *back* to from the boxplots
+These are the values that we can **decode** from the boxplots
 in @fig-boxplot.
 
 ```{r}
@@ -113,17 +135,18 @@ kable(rwcStats, digits=1)
 
 @fig-boxplot is effective for allowing us to compare summaries like the 
 medians between different hemispheres because, although the box plot data
-symbol is relatively complicated, a box plot still just maps the data
-summaries to visual features. 
+symbol is relatively complicated, a box plot still just encodes the data
+summaries to simple visual features. 
 We know from 
 @sec-mapping-visual-features that
 **position** and **length** 
-are effective for mapping *back* to the data summaries
+are effective for **decoding** the data summaries from the visual features
 (@fig-stat-vis-decode).
 
 Notice how, even though @tbl-rwc-all-stats contains very few values,
-the data visualisation in @fig-boxplot makes it *much* easier to
-perceive the differences between the two rows of values in @tbl-rwc-all-stats.
+it is much easier to perceive the differences between the two rows of values
+using the data visualisation in @fig-boxplot rather than the table of
+values in @tbl-rwc-all-stats.
 Once again, we can see the power of mapping values to basic visual features.
 The only differences from previous sections
 is that we are mapping **data summaries** rather than raw data values
@@ -142,13 +165,14 @@ countries from the different hemispheres in Rugby World Cup matches.
 This data visualisation uses the same data as @fig-boxplot, but it
 maps raw data values rather than data summaries and it uses much simpler
 data symbols (data points).
-This data visualisation maps the
-number of points scored maps to the horizontal **position** of
-a data point and it maps the hemisphere to the vertical
+This data visualisation encodes the
+number of points scored maps as the horizontal **position** of
+a data point and it encodes the hemisphere as the vertical
 **position** of a data point.
 
-Because this data visualisation maps raw data values to visual features, 
-it is possible to map *back* to raw data values (@fig-visual-feature-decode).
+Because this data visualisation encodes raw data values as visual features, 
+it is possible to decode raw data values from the visual features
+(@fig-visual-feature-decode).
 For example, it is possible to see that the lowest score (zero points)
 for a northern
 hemisphere team ocurred twice.  It is also possible to see that
@@ -165,34 +189,35 @@ gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  colour="grey", linewidth=.1) +
     geom_dotplot(aes(scored, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
-    scale_x_continuous(name="points scored") +
+    scale_x_continuous(name="points scored", breaks=seq(0, 100, 10)) +
     theme(axis.title.y=element_blank())
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
-The fact that we can map *back* to raw data values from a dot plot is
-not news.  That is easy because we have mapped
-raw data values to accurate visual features
+The fact that we can decode raw data values from a dot plot is
+not news.  That is easy because we have encoded
+raw data values as accurate visual features
 (see @sec-dot-plots).
-However, @fig-rwc-dotplot also demonstrates that, in addition to mapping
-*back* from visual features to raw data values, 
-our visual system allows us to map *back* from visual features 
-to **data summaries**.
+However, @fig-rwc-dotplot also demonstrates that, in addition to decoding
+raw data values from visual features, 
+our visual system allows us to decode
+**data summaries** from visual features.
 
 For example, we can see that the southern hemisphere teams score slightly
 more points on average than the northern hemisphere teams;
 the data symbols for southern-hemisphere teams appear shifted to the right
 of the data symbols for northern-hemisphere teams.
-In other words, we can perform **visual summaries** that
-map back to **data summaries**.
+In other words, we can perceive **visual summaries**;
+we can perceive **data summaries** from collections of visual features.
 For example, we can visually average the **positions** of the data points.
 
-In @fig-rwc-dotplot, we have mapped raw data values to visual
-features, which has enabled us to map *back* to raw data values.
+In @fig-rwc-dotplot, we have encoded raw data values as visual
+features, which has enabled us to decode raw data values from individual
+visual features.
 In addition, **visual summaries** of the visual features
-enable us to map *back* to **data summaries**
+enable us to decode **data summaries** from collections of visual features
 (@fig-data-vis-stat-decode).[^ensembles]
 
 [^ensembles]:
@@ -226,8 +251,8 @@ a histogram is a data visualisation that maps data summaries,
 rather than raw values, to visual features (@fig-stat-vis-decode).
 
 However, a histogram differs from a box plot in two main ways:
-the data symbol for a histogram is simpler than a box plot
-(just rectangles or bars);
+the data symbol for a histogram is simpler than a box plot,
+because it consists of just rectangles or bars;
 and the data summaries for a histogram are more complicated than
 those for a box plot.
 
@@ -237,9 +262,9 @@ by each country (@tbl-rwc-all).
 To get the data summaries for the histogram, the raw data values are
 binned;  we break the range of the data into equal-sized intervals
 and count how many data values lie in each interval.
-The centre of each interval is then mapped to the horizontal **position**
+The centre of each interval is then encoded as the horizontal **position**
 of a bar
-and the count of data values in each interval is mapped to the **length**
+and the count of data values in each interval is encoded as the **length**
 of a bar.
 
 ```{r}
@@ -249,7 +274,8 @@ of a bar.
 breaks <- seq(0, 105, by=5)
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored), colour="black", fill="grey", breaks=breaks) +
-    scale_x_continuous(name="points scored") 
+    scale_x_continuous(name="points scored") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
@@ -272,9 +298,9 @@ histStats <- rbind(interval=paste0(hist$breaks[-length(hist$breaks)], "-",
 kable(histStats, align="r")
 ```
 
-As with a box plot, mapping data summaries to accurate
-visual features means that we can easily map *back* to
-the data summaries.
+As with a box plot, encoding data summaries as accurate
+visual features means that we can easily decode
+data summaries from the visual features.
 For a histogram, this means that
 we can easily compare the lengths of the bars,
 which means we can easily compare the relative counts of data values
@@ -294,19 +320,19 @@ the spread and/or skewness of the data.
   and those data summaries can be compared to provide information about
   the distribution of the data.
 
-## Caveats {#sec-summary-caveats}
+## The dangers of summaries {#sec-summary-caveats}
 
-The benefit of a data visualisation that maps
-**data summaries** to visual features is that it allows us to perceive
+The benefit of a data visualisation that encodes
+**data summaries** as visual features is that it allows us to decode
 data summaries very easily.  For example, although we can perceive
 a general idea of central tendency from the dots in @fig-rwc-dotplot
 (see @sec-visual-summaries),
 it is much easier and more accurate to perceive
 median values from the thick vertical lines in @fig-boxplot.
 
-The flipside is that a data visualisation that maps
-**data summaries** to visual features
-is *not* effective for mapping *back* to raw data values.
+The flipside is that a data visualisation that encodes
+**data summaries** as visual features
+is *not* effective for decoding raw data values.
 For example, we cannot see from the box plot in
 @fig-boxplot that the scores 1, 2, 4, and 5 never occurred, while
 this is clear from @fig-rwc-dotplot because the dot plot does map
@@ -321,7 +347,7 @@ data summaries is
 whether the data summaries provide reasonable summaries of the data.
 For example, @fig-boxplot-concede shows box plots of the number of 
 points *conceded* by each team in Rugby World Cup games.
-The box plot for southern hemisphere teams suggest a unimodal 
+The box plot for southern hemisphere teams suggests a unimodal 
 distribution with a slight right skew.
 
 ```{r}
@@ -355,19 +381,19 @@ gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  colour="grey", linewidth=.1) +
     geom_dotplot(aes(conceded, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
-    scale_x_continuous(name="points conceded") +
+    scale_x_continuous(name="points conceded", breaks=seq(0, 100, 10)) +
     theme(axis.title.y=element_blank())
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
-> A box plot is *not* effective if a five-number summary is not a 
-  sensible summary of the data values.
-
 > A data visualisation that is based on data summaries
   can only be effective if the data summaries are sensible
   summaries of the data.
+
+  A box plot is *not* effective if a five-number summary is not a 
+  sensible summary of the data values.
 
 A further complication arises with histograms because we have to
 *choose* the intervals that are used to calculate the data summaries
@@ -377,7 +403,8 @@ we used for @fig-hist, but with a greater number of narrower intervals.
 This visualisation tells a slightly different story than @fig-hist.
 The most common score is now 6 points and we see features
 like gaps at 1, 2, 4, and 5 points and a stronger suggestion of 
-bimodality.
+bimodality.  There are also point totals that appear strangely low,
+like 11 and 14.
 
 Unlike a box plot, where the data summaries are essentially fixed
 calculations, for a histogram we get to choose the data summaries
@@ -399,21 +426,104 @@ exclude important details.
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored), colour="black", fill="grey", 
                    binwidth=1, boundary=.5) +
-    scale_x_continuous(name="points scored") 
+    scale_x_continuous(name="points scored", breaks=seq(0, 100, 10)) 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
+## Case study: How charts lie
+
+In this document, we assume that the purpose of a data visualisation
+is to faithfully and honestly encode data values and the goal
+is to produce a data visualisation that provides the most effective decoding 
+of visual features (see @sec-scope).
+
+Nevertheless, less honest representations of data can also be 
+described in terms of mappings, particularly mappings of data
+summaries.
+
+For example, ... @fig-bars-at-zero[^bars-at-zero]
+This does not encode the raw data as the lengths of the bars, but
+the raw data - 34.  The top rate under Obama would be 39.6.
+Also does not help that the y-axis scale is not shown!
+
+[^bars-at-zero]: 
+  This is a reproduction of a chart from Alberto Cairo's "How Charts Lie"
+  (p12-13), which itself was a reproduction of a chart shown by Fox News.
+  (plus mention other classic how charts lie books like
+  Huff's How to Lie With Statistics ?)
+  Also link to Wilke's Principle of Proportional Ink?
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-bars-at-zero
+#| fig-cap: A bar plot of the increase in the top tax rate in the United States of America from President George W. Bush to President Barack Obama.
+years <- c("Now", "Jan. 2013")
+tax <- data.frame(year=factor(years, levels=years),
+                  rate=c(35, 39.6))
+barlabs <- function(data, coords) {
+    grobTree(textGrob(paste0(data$y[1], "%"), x=coords$x[1],
+                      y=unit(coords$y, "npc") + unit(1, "lines")),
+             textGrob("?", x=coords$x[2],
+                      gp=gpar(col=figbg, fontsize=100, fontface="bold")))
+}
+ggplot(tax) +
+    geom_col(aes(year, rate, fill=year)) +
+    scale_fill_manual(values=c("black", highlight)) +
+    grid_panel(segmentsGrob(0, 0, 1, 0, gp=gpar(lwd=3),
+               vp=viewport(clip=FALSE))) +
+    grid_panel(textGrob("If Bush\ntax cuts\nexpire",
+               x=0, y=1, just=c(0, 1),
+               gp=gpar(fontsize=30, fontface="bold", lineheight=.8))) +
+    grid_panel(textGrob("Top tax rate:",
+               x=0, y=.5, just="left",
+               gp=gpar(fontsize=20, fontface="bold"))) +
+    grid_panel(barlabs, aes(year, rate)) +
+    coord_cartesian(ylim=c(34, NA)) +
+    scale_y_continuous(expand=expansion(0)) +
+    theme_minimal() +
+    theme(plot.margin=unit(c(2, 0, 1, 0), "lines"),
+          panel.grid=element_blank(),
+          title=element_blank(),
+          axis.text.y=element_blank(),
+          axis.text.x=element_text(size=20, face="bold", 
+                                   colour=c("black", highlight)),
+          legend.position="none",
+          aspect.ratio=.8)
+```
+
+A data visualisation that encodes distorted data 
+or one that leaves out an important subset of the data
+is encoding unhelpful values to visual features.
+It is only then possible to decode from visual features
+to unhelpful data values.
+
+::: {#fig-lie-vis-decode}
+
+![](Diagrams/lie-vis-decode.png)
+
+A data visualisation may map an unrepresentative or "cooked" version
+of the data, 
+rather than the raw data, to visual features.
+Visual decoding leads back to the lies rather than the real data.
+:::
+
+
 ## Cognitive load
 
 On page 46 of his book "How the World Really Works" [@smil2022how],
-Vaclav Smil writes:
+Vaclav Smil writes that:
 
-> rising food production reduced the malnutrition rate from 2 in 3 people
-  in 1950 to 1 in 11 by 2019
+::: {.actual-quote}
 
-In order to grasp the change in malnutrition rate, we are required
+"rising food production reduced the malnutrition rate from 2 in 3 people
+in 1950 to 1 in 11 by 2019"
+
+:::
+
+In order to comprehend the change in malnutrition rate, we are required
 to compare "2 in 3" to "1 in 11".  This requires mental effort to calculate
 the ratios or fractions and then compare them.
 It is easier to compare the rates if we 
@@ -432,16 +542,25 @@ ggplot(fractions) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     xlab(NULL) +
     ylab(NULL) +
-    labs(title="Proportion of Population Suffering from Malnutrition")
+    labs(title="Proportion of Population Suffering from Malnutrition") +
+    theme(aspect.ratio=1)
 ```
 
-The point is that we would like to reduce the cognitive load that is
-required of the viewer.  This can be achieved by making the mental
-calculations that are required easier, or by presenting the 
-pre-calculated values, as well as by presenting the values visually
-rather than as text.
+The point is that we can reduce the cognitive load that is
+required of the viewer if we make the mental
+calculations that are required easier.  We can reduce
+the cognitive load further if we present the results of
+the calculation directly and even further
+if we encode the results of the calculation
+as simple visual features.
 
-Visual summaries can require more or less mental effort as well.
+Conversely, we can add to the cognitive load if we make the visual
+calculations harder.
+For example, @fig-cog-load-hi shows a bar plot of the original 
+"2 in 3" versus "1 in 11" data values.
+We now need to perceive the proportion of blue bars relative to red bars
+and compare those proportions, which is clearly more work than just 
+comparing the two bars in @fig-cog-load.
 
 ```{r}
 #| echo: false
@@ -457,22 +576,33 @@ ggplot(counts) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     xlab(NULL) +
     ylab(NULL) +
-    labs(title=paste0('<span style="color: ', fills[1], '">X</span> ',
+    labs(title=paste0('<span style="color: ', fills[2], '">X</span> ',
                       'people out of ',
-                      '<span styl="color: ', fills[2], '">Y</span> ',
+                      '<span style="color: ', fills[1], '">Y</span> ',
                       'suffer from Malnutrition')) +
     theme(legend.position="none",
+          aspect.ratio=1,
           plot.title=element_markdown())
 ```
 
-The point is that we ideally want to present data in a way that
-requires the least cognitive load from the viewer.
-The answer is different for different questions, but we 
-can make the viewer's life easier by calculating summaries
-of the data and only presenting the summaries.
+We ideally want to present data in a way that
+imposes the least cognitive load on the viewer.
+The solution will be different for different questions, but 
+if the question involves comparing data summaries, then
+one way that we 
+can make the viewer's life easier is by calculating summaries
+of the data and encoding data summaries as visual features.
 
-It is possible to rely on some visual summaries, but be careful
+It is possible in some cases to rely on visual summaries, but 
+we need to be careful
 not to set a visual task that requires too much mental effort.
+
+## Case study: Line of best fit
+
+Nice example of a complex calculation, the results of which are
+what gets visualised.
+Also example of performing the calculation numerically 
+rather than asking the viewer to perform it visually.
 
 ## Summary
 

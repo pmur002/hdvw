@@ -1,0 +1,55 @@
+
+# Mapping Structure
+
+@fig-rep-none shows a scatter plot of the number of clean breaks and the
+number of tries for countries
+at the 2023 Rugby World Cup (@tbl-rwc-2023).
+This data visualisation is similar to @fig-scatter.
+
+How to put all of the components of a plot together on an image.
+
+Start with example of plot where legend and data symbols do not match!
+
+```{r}
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot with a discordant legend.
+cols <- scales::hue_pal()(4)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=cols[c(2, 4)]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
+               colour=cols[1]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
+               colour=cols[3]) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+Much more subtle example from 
+787resources/Examples/2024-11-premier-league-momentum-plot
+where the purple label could be below (?)
+Would need to extract the data values from the plot somehow
+to reproduce it (initial attempts with AI have failed).
+
+Refer CRAP design in footnote, but use gestalt principles to lead in to
+contrast, repetition (similarity), alignment (continuity), 
+and proximity (proximity!).
+
++ "Gestalt principles"
+  Todorovic (2008)
+
+  Summaries of the main Gestalt principles.
+
+  Like a peer-reviewed Wikipedia ?
+
+  Possible link to alignment ... ?
+
+  "good Gestalt principle: elements tend to be grouped together if they are
+   parts of a pattern which is a good Gestalt, meaning as simple, orderly,
+   balanced, unified, coherent, regular, etc as possible"
+

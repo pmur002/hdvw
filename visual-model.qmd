@@ -1,10 +1,18 @@
 
 # The Visual System {#sec-visual-system}
 
+**TODO**
+connect every visual system topic to visual decoding.
+introduce "pre-attentive decoding" versus "learned decoding".
+Possibly rename sections, e.g., "visual differences" -> "decoding differences"
+
+**TODO**
+Add position to visual features in visual model 
+
 Understanding why some mappings are more effective than others will
 depend upon an understanding of how the human visual system works.
-The effectiveness of a mapping from data values to data symbols
-will depend on how well we can map *back* from the data symbols
+The effectiveness of an **encoding** from data values to data symbols
+will depend on how well we can **decode** from the data symbols
 to the properties of the data (@fig-decode).
 
 ::: {#fig-decode}
@@ -12,7 +20,7 @@ to the properties of the data (@fig-decode).
 ![](Diagrams/data-sym-decode.png)
 
 The effectiveness of a data visualisation will depend on how
-well our visual system can map from data symbols *back* to
+well our visual system can **decode** from the data symbols to the
 properties of the data.
 :::
 
@@ -26,12 +34,14 @@ that we can refer to as we discuss different mappings.[^simple-visual-models]
   @franconeri2021, and @cairo2012functional.
   See @ware2021information for a more in-depth,
   but still very accessible description.
+  The @wikipedia-visual-system is also good.
 
 ## The eye {#sec-eye}
 
 In order for us to perceive a data visualisation, light must emit from the
-(on-screen) data visualisation or reflect off the (printed) 
-data visualisation and enter the eye.  Light passes through the pupil, 
+data visualisation (on screen) or reflect off the 
+data visualisation (in print) 
+and enter the eye.  Light passes through the pupil, 
 is focused by the lens, and is projected onto the retina at the back of
 the eye.  The retina contains around 100 million light-sensitive
 nerve cells and signals from those are combined into about 1 million
@@ -148,16 +158,17 @@ signals via the optic nerve to the brain.
 
 ## Visual focus
 
-@fig-eye-2 show a slightly more detailed view of the structure of the eye
+@fig-eye-2 shows a slightly more detailed view of the structure of the eye
 (compared to @fig-eye).  The retina contains two types of light-sensitive
 cells:  **cones** and **rods**.  The cones are sensitive to colour and are 
-concentrated very densely at the centre of the retina, an area called
-the **fovea**.  Rods only detect the amount of light and 
+concentrated very densely at the centre of the retina, in an area called
+the **fovea**.  Rods only detect the amount of light (monochrome vision) and 
 are spread more sparsely towards the periphery of the retina.
 
 This arrangement means that, despite the experience of a complete, detailed
 field of view, we only get detailed and colourful information from
-a small foveal region.  The information from our peripheral vision is
+a small foveal region (less than 5 degrees of visual angle).  
+The information from our peripheral vision is
 colourless and low-resolution.
 
 ::: {#fig-eye-2}
@@ -207,10 +218,15 @@ grid.rect(gp=gpar(col=NA, fill=pat))
 
 @fig-fixations shows eye-tracking data from one person viewing
 an image for 10 seconds.[^MASSVIS]
-The fixations are shown as circles (with larger circles representing
-longer fixations) and the saccades  are shown as lines
+The original image is shown on the left and eye-tracking data is shown
+on the right, with hollow
+black circles showing the position of the coloured circles
+in the original image.
+In the eye-tracking image, 
+the fixations are shown as purple circles and the saccades  are shown as lines
 between the circles.  For example, we can see that the viewer has 
-fixated multiple times upon the large, colourful circles.
+fixated multiple times upon the large, colourful circles in the
+original image.
 
 [^MASSVIS]:
   The plot was originally from The Economist, but this image was taken
@@ -222,16 +238,48 @@ fixated multiple times upon the large, colourful circles.
 
 ![A thumbnail of the original image.](MASSVIS/visMost505-thumb.png){#fig-fixations-1 fig-align="left"}
 
-![Fixations and saccades from eye tracking.](MASSVIS/visMost505-track.svg){#fig-fixations-2 fig-align="left"}
+![Fixations and saccades from eye-tracking data.](MASSVIS/visMost505-track.svg){#fig-fixations-2 fig-align="left"}
 
-Eye tracking data from the MASSVIS project that shows fixations (circles) and 
+Eye tracking data (on the right) 
+from the MASSVIS project that shows fixations (circles) and 
 saccades (lines between circles) for one person viewing an image for 
-10 seconds.[^MASSVIS-permissions]
+10 seconds.  A thumbnail of 
+the original image is shown on the left.[^MASSVIS-permissions]
 :::
+
+**ADD**
+footnote that refers to Tufte's "within the eyespan"
+page 67 of "Envisioning Information"
+(talking about small multiples):
+"Information slices are positioned within the eyespan, so that viewers
+make comparisons at a glance - uninterrupted visual reasoning."
+
+## Visual memory
+
+When we switch focus to different areas of an image, 
+we may need to remember information from a previous area of focus.
+The most important feature of this visual memory is that it is 
+very limited.  We can only hold in memory a small number of 
+items at once.
+
+::: {#fig-memory}
+
+```{r}
+#| echo: false
+#| output: asis
+cat(readLines("Memory/memory-1.svg", warn=FALSE), sep="\n")
+cat(readLines("Memory/memory-3.svg", warn=FALSE), sep="\n")
+cat(readLines("Memory/memory-5.svg", warn=FALSE), sep="\n")
+```
+
+Three memory tasks.  The task is to remember the colours of the circles.  Within each box, click on each of the coloured circles, which will produce a colour wheel.  Click (in the same order) on the colour wheel where it matches the colour of the original circles.  This will present the results as small black dots representing the original circle colours and open dots representing the matching clicks, plus a (maximum) error (in degrees).  The task should be harder (and less accurate) with more circles.
+:::
+
+**ADD** footnotes to cite Ware 4th ed p397-405 and p423-425
 
 ## Visual processing {#sec-visual-processing}
 
-The processing of the 
+Processing of the 
 signals from the optic nerve occurs in several areas of the brain.
 Very basic **visual features** are extracted first, such as 
 **position** (spatial arrangements), **angle** (orientations), **colour**,
@@ -253,7 +301,8 @@ processing, which can require conscious effort.  Furthermore, lower-level
 processing occurs in parallel and can involve many instances of visual 
 features at once, whereas higher-level processing will only focus on 
 a small number of
-items.  On the other hand, lower-level visual features are rapidly
+items or a single item at once.
+On the other hand, lower-level visual features are rapidly
 discarded as our attention shifts, while higher-level visual objects are more
 persistent and may become part of long-term memories
 (see @fig-visual-model).
@@ -272,7 +321,7 @@ The orientations of the triangles represents wind direction and the
 length of the triangles represents wind strength;  blue triangles
 are over the sea and green triangles are over land.[^NOMADS]
 The visual system can very quickly
-perceive many small items like this at once.
+perceive many small **visual features** at once.
 There is no need to concentrate separately
 on every individual triangle in the image.
 At a higher level of processing, darker and lighter **regions** are
@@ -307,6 +356,8 @@ A visualisation of wind strength and wind direction
 that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
+
+**ADD** footnote cite to Ware (4th) p229-330
 
 ## Visual differences {#sec-differences}
 

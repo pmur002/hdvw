@@ -11,7 +11,8 @@ to one data point.
 
 In this section, we consider data visualisations that map **multiple
 data values** from one or more variables to a **single data symbol**
-(@fig-multivariate-symbol-b), which results in more complex data symbols.
+(@fig-multivariate-symbol-b).
+In this section, we begin to consider more complex data symbols.
 
 ::: {#fig-multivariate-symbol layout-ncol=2}
 
@@ -22,16 +23,18 @@ data values** from one or more variables to a **single data symbol**
 \(a) A simple data symbol, like a bar in a bar plot or a data point in a
 scatter plot involves mapping **one** data value from each of two variables 
 to two visual features of 
-**one** data symbol (this is a reproduction of the diagram in 
+**one** data symbol;  a single pair of data values
+produces a single data symbol (this is a reproduction of the diagram in 
 @fig-two-visual-features).
 \(b) A more complex data symbol is produced if we map
 **multiple** data values from each of two variables
 to two visual features of a **single** data symbol.
 Multiple data values from `a` and `b` are mapped to the visual
 features, `x` and `y`, of a single data symbol.
+Multiple pairs of values produce a single data symbol.
 :::
 
-## Line plots
+## Line plots {#sec-line-plots}
 
 @fig-line shows a line plot of the number of offenders per year 
 in different ethnic 
@@ -61,9 +64,9 @@ to **colour**.
 However, the **data symbols** in this data visualisation, the coloured lines,
 are different
 from any previous examples that we have seen.
-Although there are 44 rows of data, there are only 4 data symbols
-because multiple rows of data are used to create each data symbol.
-Each line in @fig-line represents 11 pairs of year and count values.
+Although there are 44 rows of data, there are only 4 data symbols.
+Multiple rows of data are used to create each data symbol.
+Each coloured line in @fig-line represents 11 pairs of year and count values.
 
 This contrasts with visualisations like bar plots that use simpler data symbols.
 For example, the bar plot of the same data in @fig-side-bar-year has
@@ -74,7 +77,16 @@ coloured lines create **visual shapes** (@fig-data-vis-shape)
 and those visual shapes convey information about collections of data
 values.
 For example, we can perceive slopes and curves and peaks and valleys
-in each of the coloured lines.
+in each of the coloured lines.[^Visual_Pattern_Rec]
+
+[^Visual_Pattern_Rec]:
+  "VISUAL PATTERN RECOGNITION"
+  Few (2006)
+  Makes this same point
+  [p 10]
+  Demonstration of difference between density plot (mostly see a shape) and
+  histogram (mostly see bar heights).
+
 
 ::: {#fig-data-vis-shape layout-ncol=2}
 
@@ -117,9 +129,9 @@ that contains a large amount of information,
 then we may be able to map back to more sophisticated **data summaries**.
 :::
 
-> One reason why line plots are effective is because they pack lots of
+> One reason why line plots are effective is because they encode multiple
   data values into a complex data symbol that creates a visual shape,
-  from which we are able to map back to data summaries.
+  from which we are able to decode data summaries.
 
 On the other hand, the more complex data symbols in a line plot,
 that contain multiple data values, are less effective at conveying
@@ -139,7 +151,7 @@ We know from @sec-mapping-visual-features that these should be very
 effective mappings that allow us to accurately map back to the raw data values.
 However, in a line plot, we are not mapping a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
-is being mapped, along with lots of other values,
+is being mapped, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
 individual data values lose their individual identity.
 
@@ -150,18 +162,18 @@ individual data values lose their individual identity.
 The creation of complex data symbols from multiple data values
 bears some similarity to the creation of emergent features by
 combining visual features (@sec-integral).  In both cases,
-we have *explicit* mappings from data values to basic visual features
-and we produce an *implicit* additional visual effect.
+we have *explicit* encodings from data values to basic visual features,
+but we also produce an *implicit* additional visual effect.
 The difference here is that with complex data symbols, we are collapsing
 multiple data values into a data symbol, so we run a higher risk
 of losing the ability to perceive individual data values.
 
 There is also a similarity between complex data symbols and visual summaries 
-(@sec-visual-summaries).  In both cases, we gain the ability to perceive
+(@sec-visual-summaries).  In both cases, we gain the ability to decode
 data summaries from collections of data values.
 Again, the difference is that with visual summaries, we are summarising
 many simple data symbols that each represent individual data values, 
-whereas with a complex data symbol we perceive the
+whereas with a complex data symbol we decode the
 data summary from a single data symbol that obscures the individual data values.
 
 ## Case study:  Scatter plots with lines
@@ -171,9 +183,9 @@ per year in different ethnic groups (@tbl-crime-group-year).
 This is very similar to @fig-line, but we have added a data point
 at every horizontal and vertical **position**.
 
-Like @fig-line, we can perceive overall trends from the line data symbols,
-but we can also perceive individual data values more easily because
-now every individual data value is mapped to its own data symbol.
+Like @fig-line, we can decode overall trends from the line data symbols,
+but we can also decode individual data values more easily because
+now every individual data value is also mapped to its own data symbol.
 
 ```{r}
 #| echo: false
@@ -204,7 +216,6 @@ a single mode and right skew.
 #| echo: false
 #| label: fig-density
 #| fig-cap: A density plot of the points scored per game by Tier One nations at Rugby World Cups.
-breaks <- seq(0, 105, by=5)
 gg <- ggplot(rwcAll) +
     geom_density(aes(scored), colour="black", linewidth=1) +
     scale_x_continuous(name="points scored") +
@@ -220,15 +231,16 @@ Also like a histogram, a density plot actually maps **data summaries**,
 density estimates
 rather than raw data values,
 to visual features (see @tbl-density-stats).
-However, rather than 
-mapping each data summary to its own data symbol, a density plot
-maps all of the data summaries to a single data symbol, a line, to create
+In the case of a histogram, the data summary values are counts within bins
+(see @tbl-hist-stats) and each data summary produces a separate bar.
+However, a density plot encodes
+all of the data summary values to a single data symbol, a line, to create
 a **visual shape**.
 The density estimates are mapped to the horizontal and vertical **positions**
 of a single line data symbol.
 The visual shape allows us to perceive summaries of the density estimates.
-For example, is there a single maximum density and how does the density
-change to either side of that peak.
+For example, whether there is a single maximum density and how the density
+changes to either side of that peak.
 
 ```{r}
 #| echo: false
@@ -241,13 +253,16 @@ kable(head(dStats), digits=c(2, 4))
 ```
 
 @fig-data-stat-vis-shape-stat shows the path from raw data values to
-the visual shape in a density plot and
-the summary information that we can map back to.
-We cannot map back to the raw data values from a density plot, nor
-can we map back very easily to the data summaries (the density estimates).
+data summaries (density estimates), which are encoded
+as the visual features (horizontal
+and vertical position) of a visual shape (a line)
+in a density plot and
+the summary information that we can decode from the visual shape.
+We cannot decode the raw data values from a density plot, nor
+can we very easily decode the data summaries (the density estimates).
 The only real purpose of the data symbol in a density plot is to 
-map back to **summaries** of the data summaries, so that
-we can perceive features of the density estimates.
+allow us to decode **summaries** of the data summaries, which are
+visual features of the density estimates.
 
 ::: {#fig-data-stat-vis-shape-stat layout-ncol=2}
 
@@ -265,12 +280,66 @@ choose how the data summaries are calculated from the raw data values.
 In the case of a density plot, we must choose a "kernel" and a "bandwidth",
 both of which affect the smoothness of the density estimates.
 This means that we may need to explore more than one kernel
-and bandwidth (see the end of @sec-summary-caveats).
+and bandwidth (see @sec-summary-caveats).
 
-## Caveats
+**TODO** density plots better for showing multiple distributions?
+Because gestalt continuity?
+
+```{r}
+#| echo: false
+#| label: fig-multiple-density
+#| fig-cap: Density plots of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+gg <- ggplot(rwcAll) +
+    geom_density(aes(scored, colour=hemisphere), linewidth=1) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+```{r}
+#| echo: false
+#| label: fig-multiple-hist
+#| fig-cap: Histograms of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+breaks <- seq(0, 105, by=5)
+gg <- ggplot(rwcAll) +
+    geom_histogram(aes(scored, colour=hemisphere, fill=hemisphere), 
+                   breaks=breaks, alpha=.2, position="identity") +
+    scale_x_continuous(name="points scored") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+## The dangers of visual shapes
 
 Need a caveat that more complex shapes does NOT necessarily mean 
-useful mappings back to data summaries - could just end up with a mess.
+useful mappings back to data summaries - could just end up with a mess
+(@fig-data-vis-shape-lie).
+
+::: {#fig-data-vis-shape-lie layout-ncol=2}
+
+![](Diagrams/data-vis-shape-lie.png)
+
+Mapping data values to the visual features of a complex shape 
+may not be effective if the complex shape decodes to unhelpful
+or misleading information.
+:::
+
+## Case study: loess curves
+
+Another example of data -> summary -> features -> shapes -> summaries
 
 ## Summary
+
+Mapping multiple data values to a single data symbol produces
+a **visual shape**, like a line on a line plot.
+
+Data summaries, such as trends over time, can can be decoded 
+from a visual shape.
+However, decoding raw data values from a visual shape may be harder, cmopared
+to decoding raw data values from a simple data symbol like a bar.
 

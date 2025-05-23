@@ -1,6 +1,7 @@
 ---
 title: How Data Visualisation Works
 author: Paul Murrell
+license: "CC BY"
 toc: true
 number-sections: true
 tbl-cap-location: top
@@ -41,6 +42,7 @@ library(grImport)
 library(grImport2)
 library(rsvg)
 library(ggtext)
+library(xdvir)
 ```
 
 ```{r}
@@ -95,41 +97,83 @@ knitr::opts_chunk$set(dev='svg',
                       out.width="100%")
 ```
 
-**TODO:  replace "mapping" with "encoding" and "mapping back" with "decoding"**
-
 # Executive Summary
 
-*"Visualization is essentially a mapping process from computer representations
-to perceptual representations, choosing encoding techniques to maximize human
-understanding and communication."* [@owen1999]
+```{r}
+#| echo: false
+#| purl: false
+enc <- function(x) {
+    paste0('<span class="encode">', x, '</span>')
+}
+dec <- function(x) {
+    paste0('<span class="decode">', x, '</span>')
+}
+```
 
-* Producing a data visualisation involves an **encoding** of
-  **data values** as **visual features**.<br>
-  For example, numeric **counts** are encoded as the **heights of bars**
+::: {.exec-summary}
+
+* Creating a data visualisation involves an 
+  `r enc("**encoding**")` of
+  <span style="color: #1A6000">**data values**</span> 
+  as <span style="color: #005A8F">**visual features**</span>.
+
+  For example, numeric <span style="color: #1A6000">**counts**</span> 
+  are `r enc("**encoded**")` 
+  as the <span style="color: #005A8F">**heights of bars**</span>
   to create a bar plot.
 
-* Reading a data visualisation involves a **decoding** of
-  **visual features** to obtain **data values**.<br>
-  For example, the **heights of bars** in a bar plot
-  are decoded to obtain **counts**.
+* Reading a data visualisation involves a 
+  `r dec("**decoding**")` of
+  <span style="color: #005A8F">**visual features**</span> 
+  to obtain <span style="color: #1A6000">**data values**</span>.
 
-* The **effectiveness** of a data visualisation depends on the
-  effectiveness of the **decoding**.<br>
-  For example, a bar plot is effective for comparing **counts**
-  because the visual system is effective at comparing the **heights
-  of bars**.
+  For example, the <span style="color: #005A8F">**heights of bars**</span>
+  in a bar plot
+  are `r dec("**decoded**")` 
+  to obtain <span style="color: #1A6000">**counts**</span>.
 
-* More **complex encodings** produce more **complex visual features**.<br>
-  For example, a scatter plot encodes **two numeric variables**
+* The <span style="color: #8D324A">**effectiveness**</span> 
+  of a data visualisation depends on the
+  effectiveness of the `r dec("**decoding**")`.
+
+  For example, a bar plot is effective for comparing 
+  <span style="color: #1A6000">**counts**</span>
+  because the visual system is effective at comparing the 
+  <span style="color: #005A8F">**heights of bars**</span>.
+
+* More `r enc("**complex encodings**")` produce more 
+  <span style="color: #005A8F">**complex visual features**</span>.
+
+  For example, a scatter plot `r enc("**encodes**")`
+  <span style="color: #1A6000">**two numeric variables**</span>
   as the x- and y-locations of points, 
-  which produces the **position in space of points**.
+  which produces the 
+  <span style="color: #005A8F">**position in space of points**</span>.
 
-* More **complex visual features** lead to more **complex decodings**.<br>
-  For example, the **position in space of points** in a scatter plot
-  is decoded as the **correlation** between **two numeric variables**.
+* More <span style="color: #005A8F">**complex visual features**</span> 
+  lead to more `r dec("**complex decodings**")`.
+
+  For example, the 
+  <span style="color: #005A8F">**position in space of points**</span>
+  in a scatter plot
+  is `r dec("**decoded**")` 
+  as the <span style="color: #1A6000">**correlation**</span> 
+  between two numeric variables.
   
-* An **effective** data visualisation encodes data values to
-  visual features that enable an effective decoding.
+* An <span style="color: #8D324A">**effective data visualisation**</span>
+  <span class="encode">**encodes**</span> data values to
+  visual features that facilitate an effective 
+  <span class="decode">**decoding**</span> from visual features
+  back to data values.
+
+:::
+
+::: {.actual-quote}
+
+Visualization is essentially a mapping process from computer representations
+to perceptual representations, choosing encoding techniques to maximize human
+understanding and communication. [@owen1999]
+:::
 
 
 # Introduction
@@ -141,8 +185,8 @@ conscious effort.
 For example, @tbl-crime shows data on the crime rate for
 youth offenders in New Zealand, for the ages 14 to 16, for 
 each year from 2011 to 2021.  With this purely text-based, tabular
-presentation of the data, it requires considerable effort
-and time to determine any trends in the crime rates.
+presentation of the data, it requires considerable time and effort
+to determine any trends in the crime rates.
 
 ```{r}
 #| echo: false
@@ -234,6 +278,8 @@ data visualisation.
   @tufte1983visual [p178]:
   "the only worse design than a pie chart is several of them ... pie charts
   should never be used." 
+  There are some other good references and choice quotes, but also
+  some dissenting voices (see DataVis resources).
 
 Understanding how data visualisation works will enable us to:
 
@@ -243,7 +289,7 @@ Understanding how data visualisation works will enable us to:
 * Reason about how to improve the effectiveness of a data visualisation.
 * Reason about whether a novel visualisation will be effective.
 
-## Scope
+## Scope {#sec-scope}
 
 The focus of this document is **static** data visualisations for
 **presentation**.  The assumption is that our data values have 
@@ -252,11 +298,11 @@ that makes it easy and efficient for viewers to perceive that property.
 Some of the information that we cover will also
 apply to interactive graphics and to exploratory graphics, but the
 specific requirements of those types of data visualisation will not be 
-addressed.
+addressed.[^interactive]
 
-**TODO:** 
-link to interactive graphics books like Cook & Swayne and 
-Theus and Unwin.
+[^interactive]:
+  link to interactive graphics books like Cook & Swayne and 
+  Theus and Unwin.
 
 This document is also focused on what **vision science**
 has to tell us about effective data visualisation.
@@ -264,11 +310,6 @@ We will consider factors that influence how rapidly and how
 accurately information can be extracted from a data visualisation.
 This will include findings from a broad range of research, encompassing
 Statistics, Computer Science, and Psychology.[^summary]
-However, this document does not cover all fields of research
-that impact on data visualisation.
-We will not, for example, address the ethical use of data visualisation,
-beyond a basic assumption that we want to faithfully represent
-the properties of the data.
 
 [^summary]:
   This document is not only a synthesis, but also a *simplification* of
@@ -286,14 +327,23 @@ the properties of the data.
   references to the relevant theories and experiments in the literature
   will be provided in footnotes like this one.
 
-**TODO:** 
-link to Alberto Cairo at least.
-franconeri et al 2021 has some Cairo refs
-For resources on this important topic, see ...
+However, this document does not cover all fields of research
+that impact on data visualisation.
+We will not, for example, address the ethical use of data visualisation,
+beyond a basic assumption that we want to faithfully represent
+the properties of the data.[^ethics]
 
-**TODO**
-also mention "story-telling" or "narratives" ?  or "task taxonomies" ?
-how data vis can have emotional affects ?
+[^ethics]:
+  link to Alberto Cairo at least.
+  franconeri et al 2021 has some Cairo refs
+  For resources on this important topic, see ...
+  There is also the issue of presenting the right data (at the right
+  level of detail), even if
+  we are pure of heart.
+  Nice example Cairo's How Charts Lie p94-95.
+  also mention "story-telling" or "narratives" ?  or "task taxonomies" ?
+  how data vis can have emotional affects ?
+  link to "Data Feminism" D'Ignazio and Klein
 
 It is also important to acknowledge that vision science cannot yet tell us
 everything about how data visualisation works.
@@ -412,7 +462,7 @@ barGeom <- bar +
           axis.title=element_text(colour="grey"))
 pieGeom <- pie + 
     geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
-              fill=highlight, colour="black", linewidth=.1) +
+              fill=highlight, colour="grey", linewidth=.1) +
     scale_fill_manual(values=grey(.6 + .4*1:n/(n + 1))) +
     theme(plot.title=element_text(colour="grey"),
           plot.subtitle=element_text(colour="grey"),
@@ -453,7 +503,8 @@ Guides
 : Guides are the elements of a data visualisation that explain
 how data values are represented, for example the axes on a line plot
 or bar plot and the legend on a donut plot (see @fig-guides).
-We will see later that **guides have a lot in common with data symbols**.
+We will see later that **guides have a lot in common with data symbols**
+(see @sec-guides).
 
 ```{r}
 #| echo: false
@@ -480,7 +531,7 @@ barGuide <- bar +
           axis.title=element_text(colour="grey"))
 pieGuide <- pie + 
     geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
-              fill="grey90", colour="grey", linewidth=.1) +
+              fill="grey90", colour="grey", linewidth=.5) +
     scale_fill_manual(values=colorRampPalette(c(highlight, lighten(highlight, .5)))(n)) +
     theme(plot.title=element_text(colour="grey"),
           plot.subtitle=element_text(colour="grey"),
@@ -599,7 +650,7 @@ of a data visualisation to a single question:
 What **mappings** are being used?[^mappings]
 
 Much of this document is focused on considering how data values are being
-converted, or **mapped**, into a visual representation.
+mapped, or **encoded**, into a visual representation.
 For example, in the line plot of crime rates for
 different ages in New Zealand in @fig-crime,
 the data values are `year`, crime `rate`, and `age` 
@@ -614,71 +665,65 @@ the data symbols are a set of coloured lines.
 We can describe this data visualisation in terms of a set of mappings
 (see @fig-mappings-1):
 
-* Each `year` value is mapped to a horizontal **position** along the
-  x-axis and each `rate` value is mapped to a vertical **position** 
+* Each `year` value is encoded as a horizontal **position** along the
+  x-axis and each `rate` value is encoded as a vertical **position** 
   along the y-axis.
   For example, the `year` 2011 maps to a location near the left edge
   of the plot and the `rate` 810 maps to a position 
   near the top edge of the plot.  
   The combined values of
   `year` and `rate` 
-  are mapped to the locations through which we draw
+  are encoded as the locations through which we draw
   the coloured lines.
 
-* Each `age` value is mapped to a **colour**.
+* Each `age` value is encoded as a **colour**.
   For example, the `age` 16 maps to a green colour.
-  The `age` values are mapped to the colours of the lines.
+  The `age` values are encoded as the colours of the lines.
 
 ::: {#fig-mappings-1 layout="[[1, -1], [1]]"}
 
 ![](Mappings/mappings-1.png)
 
-![](Animation/mappings-1.svg)
+![](Animation/mappings-1-static.svg)
 
 The data visualisation in @fig-crime can be described as a mapping
 of `year`, `rate`, and `age` to `x` and `y` positions and `colour`.
-The bottom image is an animation;  try refreshing the page or
-viewing the image it in its own tab to rerun the
-animation.
 :::
 
 The heatmap of the same data (see @fig-crime-heatmap) provides a different
 visual representation because it involves different data symbols,
 rectangles this time, and a different 
-set of mappings (see @fig-mappings-2):
+set of encodings (see @fig-mappings-2):
 
-* Each `year` value is mapped to a horizontal **position** along the
-  x-axis and each `age` value is mapped to a vertical **position** 
+* Each `year` value is encoded as a horizontal **position** along the
+  x-axis and each `age` value is encoded as a vertical **position** 
   along the y-axis.
   For example, the `year` 2011 maps to a location near the left edge
   of the plot and the `age` 16 maps to a position 
   near the top edge of the plot.  
   The combined values of
   `year` and `rate` 
-  are mapped to the locations at which we draw
+  are encoded as the locations at which we draw
   the coloured rectangles.
 
-* Each `rate` value is mapped to a **colour**.
+* Each `rate` value is encoded as a **colour**.
   For example, the `rate` 810 maps to white, while lower `rate` values
   map to progressively darker shades of purple.
-  The `rate` values are mapped to the colours of the rectangles.  
+  The `rate` values are encoded as the colours of the rectangles.  
 
 ::: {#fig-mappings-2 layout="[[1, -1], [1]]"}
 
 ![](Mappings/mappings-2.png)
 
-![](Animation/mappings-2.svg)
+![](Animation/mappings-2-static.svg)
 
 The data visualisation in @fig-crime-heatmap can be described as a mapping
 of `year`, `rate`, and `age` to `x` position, `colour`, and `y` position.
-The bottom image is an animation;  try refreshing the page or
-viewing the image it in its own tab to rerun the
-animation.
 :::
 
-We will look at a variety of different mappings from data values
+We will look at a variety of different encodings from data values
 to data symbols (@fig-mappings).  Understanding why some
-mappings work better than others will help us to understand why
+encodings work better than others will help us to understand why
 some data visualisations are more effective than others.
 
 ::: {#fig-mappings}
@@ -693,7 +738,7 @@ to transform **data values** into **data symbols**.
 
 Data visualisations can be incredibly effective for presenting
 important properties of data values.  However, any one data visualisation
-can only be effective for certain data values and for certain data 
+may only be effective for certain data values and for certain data 
 properties.
 
 The goal of this document is to explain why some data visualisations
@@ -702,19 +747,27 @@ are more effective than others;  how data visualisation works.
 The important elements of a data visualisation are **data symbols**,
 which are visual representations of the data values, **guides**, 
 which explain how data values
-are transformed to data symbols, and **labels**, which provide
+are encoded as data symbols, and **labels**, which provide
 context and guidance.
 
 We can characterise a data visualisation in terms of the **mappings**
-that it uses to convert data values into data symbols.
+that it uses to **encode** data values as data symbols.
 
 
 # The Visual System {#sec-visual-system}
 
+**TODO**
+connect every visual system topic to visual decoding.
+introduce "pre-attentive decoding" versus "learned decoding".
+Possibly rename sections, e.g., "visual differences" -> "decoding differences"
+
+**TODO**
+Add position to visual features in visual model 
+
 Understanding why some mappings are more effective than others will
 depend upon an understanding of how the human visual system works.
-The effectiveness of a mapping from data values to data symbols
-will depend on how well we can map *back* from the data symbols
+The effectiveness of an **encoding** from data values to data symbols
+will depend on how well we can **decode** from the data symbols
 to the properties of the data (@fig-decode).
 
 ::: {#fig-decode}
@@ -722,7 +775,7 @@ to the properties of the data (@fig-decode).
 ![](Diagrams/data-sym-decode.png)
 
 The effectiveness of a data visualisation will depend on how
-well our visual system can map from data symbols *back* to
+well our visual system can **decode** from the data symbols to the
 properties of the data.
 :::
 
@@ -736,12 +789,14 @@ that we can refer to as we discuss different mappings.[^simple-visual-models]
   @franconeri2021, and @cairo2012functional.
   See @ware2021information for a more in-depth,
   but still very accessible description.
+  The @wikipedia-visual-system is also good.
 
 ## The eye {#sec-eye}
 
 In order for us to perceive a data visualisation, light must emit from the
-(on-screen) data visualisation or reflect off the (printed) 
-data visualisation and enter the eye.  Light passes through the pupil, 
+data visualisation (on screen) or reflect off the 
+data visualisation (in print) 
+and enter the eye.  Light passes through the pupil, 
 is focused by the lens, and is projected onto the retina at the back of
 the eye.  The retina contains around 100 million light-sensitive
 nerve cells and signals from those are combined into about 1 million
@@ -858,16 +913,17 @@ signals via the optic nerve to the brain.
 
 ## Visual focus
 
-@fig-eye-2 show a slightly more detailed view of the structure of the eye
+@fig-eye-2 shows a slightly more detailed view of the structure of the eye
 (compared to @fig-eye).  The retina contains two types of light-sensitive
 cells:  **cones** and **rods**.  The cones are sensitive to colour and are 
-concentrated very densely at the centre of the retina, an area called
-the **fovea**.  Rods only detect the amount of light and 
+concentrated very densely at the centre of the retina, in an area called
+the **fovea**.  Rods only detect the amount of light (monochrome vision) and 
 are spread more sparsely towards the periphery of the retina.
 
 This arrangement means that, despite the experience of a complete, detailed
 field of view, we only get detailed and colourful information from
-a small foveal region.  The information from our peripheral vision is
+a small foveal region (less than 5 degrees of visual angle).  
+The information from our peripheral vision is
 colourless and low-resolution.
 
 ::: {#fig-eye-2}
@@ -917,10 +973,15 @@ grid.rect(gp=gpar(col=NA, fill=pat))
 
 @fig-fixations shows eye-tracking data from one person viewing
 an image for 10 seconds.[^MASSVIS]
-The fixations are shown as circles (with larger circles representing
-longer fixations) and the saccades  are shown as lines
+The original image is shown on the left and eye-tracking data is shown
+on the right, with hollow
+black circles showing the position of the coloured circles
+in the original image.
+In the eye-tracking image, 
+the fixations are shown as purple circles and the saccades  are shown as lines
 between the circles.  For example, we can see that the viewer has 
-fixated multiple times upon the large, colourful circles.
+fixated multiple times upon the large, colourful circles in the
+original image.
 
 [^MASSVIS]:
   The plot was originally from The Economist, but this image was taken
@@ -932,16 +993,48 @@ fixated multiple times upon the large, colourful circles.
 
 ![A thumbnail of the original image.](MASSVIS/visMost505-thumb.png){#fig-fixations-1 fig-align="left"}
 
-![Fixations and saccades from eye tracking.](MASSVIS/visMost505-track.svg){#fig-fixations-2 fig-align="left"}
+![Fixations and saccades from eye-tracking data.](MASSVIS/visMost505-track.svg){#fig-fixations-2 fig-align="left"}
 
-Eye tracking data from the MASSVIS project that shows fixations (circles) and 
+Eye tracking data (on the right) 
+from the MASSVIS project that shows fixations (circles) and 
 saccades (lines between circles) for one person viewing an image for 
-10 seconds.[^MASSVIS-permissions]
+10 seconds.  A thumbnail of 
+the original image is shown on the left.[^MASSVIS-permissions]
 :::
+
+**ADD**
+footnote that refers to Tufte's "within the eyespan"
+page 67 of "Envisioning Information"
+(talking about small multiples):
+"Information slices are positioned within the eyespan, so that viewers
+make comparisons at a glance - uninterrupted visual reasoning."
+
+## Visual memory
+
+When we switch focus to different areas of an image, 
+we may need to remember information from a previous area of focus.
+The most important feature of this visual memory is that it is 
+very limited.  We can only hold in memory a small number of 
+items at once.
+
+::: {#fig-memory}
+
+```{r}
+#| echo: false
+#| output: asis
+cat(readLines("Memory/memory-1.svg", warn=FALSE), sep="\n")
+cat(readLines("Memory/memory-3.svg", warn=FALSE), sep="\n")
+cat(readLines("Memory/memory-5.svg", warn=FALSE), sep="\n")
+```
+
+Three memory tasks.  The task is to remember the colours of the circles.  Within each box, click on each of the coloured circles, which will produce a colour wheel.  Click (in the same order) on the colour wheel where it matches the colour of the original circles.  This will present the results as small black dots representing the original circle colours and open dots representing the matching clicks, plus a (maximum) error (in degrees).  The task should be harder (and less accurate) with more circles.
+:::
+
+**ADD** footnotes to cite Ware 4th ed p397-405 and p423-425
 
 ## Visual processing {#sec-visual-processing}
 
-The processing of the 
+Processing of the 
 signals from the optic nerve occurs in several areas of the brain.
 Very basic **visual features** are extracted first, such as 
 **position** (spatial arrangements), **angle** (orientations), **colour**,
@@ -963,7 +1056,8 @@ processing, which can require conscious effort.  Furthermore, lower-level
 processing occurs in parallel and can involve many instances of visual 
 features at once, whereas higher-level processing will only focus on 
 a small number of
-items.  On the other hand, lower-level visual features are rapidly
+items or a single item at once.
+On the other hand, lower-level visual features are rapidly
 discarded as our attention shifts, while higher-level visual objects are more
 persistent and may become part of long-term memories
 (see @fig-visual-model).
@@ -982,7 +1076,7 @@ The orientations of the triangles represents wind direction and the
 length of the triangles represents wind strength;  blue triangles
 are over the sea and green triangles are over land.[^NOMADS]
 The visual system can very quickly
-perceive many small items like this at once.
+perceive many small **visual features** at once.
 There is no need to concentrate separately
 on every individual triangle in the image.
 At a higher level of processing, darker and lighter **regions** are
@@ -1017,6 +1111,8 @@ A visualisation of wind strength and wind direction
 that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
+
+**ADD** footnote cite to Ware (4th) p229-330
 
 ## Visual differences {#sec-differences}
 
@@ -1440,18 +1536,19 @@ the visual system is good at.
 
 We have established that the mappings from data values to data symbols
 are fundamental to a data visualisation.  However, there are many 
-possible ways to convert data values into visual representations;
+possible ways to map data values into visual representations;
 there are many
-possible mappings to choose from.
+possible encodings to choose from.
 
 We have also begun to explore the visual system and we have identified
 three levels of visual processing:  visual features, visual shapes,
 and visual objects.
 
-In this section, we begin to explore different sorts of mappings,
+In this section, we begin to explore different sorts of encodings,
 starting with 
-the simplest sort of mapping, where
-each **data value** is **mapped** to a basic **visual feature** of a data symbol
+the simplest, where
+each **data value** is **encoded** as 
+a basic **visual feature** of a data symbol
 (@fig-visual-feature).  
 
 ::: {#fig-visual-feature layout-ncol=2}
@@ -1460,7 +1557,7 @@ each **data value** is **mapped** to a basic **visual feature** of a data symbol
 
 ![](Mappings/mapping-1-1-1-1.png)
 
-A simple data visualisation maps each data value to a **visual feature**
+A simple data visualisation encodes each data value as a **visual feature**
 of a data symbol.  Each data value (`a`) is mapped to a visual
 feature (`x`) of a single data symbol.
 :::
@@ -1507,8 +1604,8 @@ ggplot(crimeGroupTotal) +
 ```
 
 Why is the data visualisation in @fig-bar so effective?
-To help answer that question, we need to look at how the data values
-are being mapped to data symbols.
+To help answer that question, we need to look at the encoding that
+is being used to map the data values to data symbols.
   
 ## Visual features
 
@@ -1518,8 +1615,17 @@ However, the important visual feature of the rectangles is their
 **length**;  the thickness of the bars does not relate to the data 
 values at all (see @fig-length).
 The `total` number of crimes for each ethnic group 
-is represented by the length of a rectangle.  Each data value
-is mapped to the length of one rectangle.
+is encoded as the length of a rectangle.  Each data value
+is mapped to the length of one rectangle.[^length-vs-position]
+
+[^length-vs-position]:
+  In the classic Cleveland and McGill formulation, the encoding is 
+  data value to **position** of bar end.
+  I prefer to use length, but it does not matter too much because both
+  position and length are good.
+  NOTE the reading that questions whether people use the decoding that
+  the data vis author intended
+  Hill and Imokhai (2025)
 
 ```{r}
 #| echo: false
@@ -1541,7 +1647,7 @@ ggplot(crimeGroupTotal) +
 ```
 
 There is another mapping being used in @fig-bar:
-The crime `group` is mapped to the vertical **positions** of the bars
+The crime `group` is encoded as the vertical **positions** of the bars
 (see @fig-position).  Each `group` value is mapped to the 
 vertical position of one rectangle.
 
@@ -1564,11 +1670,18 @@ ggplot(crimeGroupTotal) +
 ```
 
 **Length** and **position** are examples of basic visual features.
-One way to make an effective data visualisation is to map
-data values to the basic visual features of a data symbol.
+One way to make an effective data visualisation is to encode
+data values as the basic visual features of a data symbol.
 This is effective because basic visual features are 
 identified rapidly and without conscious effort by our visual system.
-@fig-visual-features shows some other examples of basic visual features.
+@fig-visual-features shows some other examples of basic visual 
+features.[^visual-features]
+
+[^visual-features]:
+  Acknowledge that a much larger list has been considered and evaluated
+  by different researchers.
+  For example p26 of "Better data visualizations" Jonathan Schwabish.
+  There should also be some stuff from research articles in DataVis/README
 
 ```{r}
 #| echo: false
@@ -1628,19 +1741,21 @@ popViewport()
 
 ## Quantitative features {#sec-quant-features}
 
-As we discussed in @sec-visual-system, the real purpose of mapping
-data values to data symbols is to make use of the visual system
-to map *back* to the data values.  In this section, we are considering
+As we discussed in @sec-visual-system, the real purpose of encoding
+data values as data symbols is to make use of the visual system
+to **decode** the data values from the data symbols.  
+In this section, we are considering
 mappings from data values to basic visual features, so we
-need to consider how well we are able to map back **from 
-visual features** to **data values** (@fig-visual-feature-decode).
+need to consider how well we are able to **decode** from 
+**visual features** to **data values** (@fig-visual-feature-decode).
 
 ::: {#fig-visual-feature-decode}
 
 ![](Diagrams/data-vis-decode.png)
 
-When we map data values to visual features, we want to map 
-to a visual feature that allows us to map back to the data values.
+When we encode data values as visual features, we want to map 
+to a visual feature that allows us to decode the data values from
+the visual fearure.
 :::
 
 One issue to consider is whether a visual feature is able to
@@ -1652,7 +1767,8 @@ Some types of data contain more information than others:
   ratio---as well as the categorisation of visual feature types
   is described in @zhang1996representational.  @munzner2014visualization,
   following @mackinlay1986automatic,
-  refers to this idea as "expressiveness".
+  refers to this idea as "expressiveness"
+  (vs "effectiveness" which is more about accuracy).
 
 * **Quantitative** data consists of numeric values, which naturally
   possess not only an ordering, but information about the size
@@ -1779,7 +1895,7 @@ popViewport(2)
 
 The bar plot in @fig-bar visualises the `total` number of offenders, 
 which are quantitative data values.  These quantitative values are
-mapped to the
+encoded as the
 **lengths** of bars, which is a visual feature that is capable of
 conveying all of the information in quantitative values.
 
@@ -1889,8 +2005,8 @@ grid.text("angle", y=unit(-1, "lines"))
 popViewport(2)
 ```
 
-The bar plot in @fig-bar maps the ethnic `group`s, which are
-qualitative data values, to the **position** of bars, which is
+The bar plot in @fig-bar encodes the ethnic `group`s, which are
+qualitative data values, as the **position** of bars, which is
 a qualitative visual feature.
 
 > One reason why a bar plot is effective for visualising
@@ -1900,8 +2016,8 @@ a qualitative visual feature.
 
 ## Accuracy {#sec-accuracy}
 
-Another issue that impacts on how well we can map *back* from
-a visual feature to the data values (@fig-visual-feature-decode)
+Another issue that impacts on how well we can **decode** the data values from
+a visual feature (@fig-visual-feature-decode)
 is the **accuracy** with which we can perceive quantitative values
 from visual features.  For example, how well can we perceive the size of the
 difference between the length of two bars?[^accuracy-research]
@@ -1955,7 +2071,7 @@ regpoly <- function(x, y, n, offset=0) {
     t <- seq(0, 2*pi, length.out=n+1)[-(n+1)] + offset
     x <- x + .125*cos(t)
     y <- y + .125*sin(t)
-    grid.polygon(x, y, gp=gpar(fill="black"))
+    grid.polygon(x, y, gp=gpar(fill=NA))
 }
 regpoly(.25, .1, 3, 0)
 regpoly(.5, .5, 6, pi/2)
@@ -1967,10 +2083,10 @@ This issue has been studied experimentally and
 @fig-accuracy shows the established ordering of the accuracy
 of basic visual features,
 with more accurate visual features at the top.[^candm]
-A data visualisation that maps 
-data values to visual features near the top of this
-ranking will be more effective than one that maps data values
-to visual features near the bottom.
+A data visualisation that encodes
+data values as visual features near the top of this
+ranking will be more effective than one that encodes data values
+as visual features near the bottom.
 
 [^candm]:
   In @cleveland1984graphical, 
@@ -1979,13 +2095,19 @@ to visual features near the bottom.
   (see @sec-unaligned), so this table is a slightly fuzzy representation
   of their results.  However, the general ordering of visual features
   is basically consistent with @cleveland1984graphical.
+  **NEED** to mention that these rankings are based on perceiving
+  part-of-whole (what proportion of A is B?).
+  Cite studies that look at rankings relative to other tasks
+  McColeman et al (2021)
+  Davis et al (2022)
 
 ```{r}
 #| echo: false
 #| label: fig-accuracy
 #| fig-cap: An ordering of basic visual features in terms of their accuracy, with more accurate at the top.
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
+pushViewport(viewport(width=unit(1, "snpc"),
+                      layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.text("position", x=0, just="right")
 grid.segments(.2, .5, .8, .5, gp=gpar(lwd=2))
@@ -2027,8 +2149,8 @@ grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"),
 popViewport()
 ```
 
-The bar plot in @fig-bar maps the `total` number of offenders,
-quantitative values, to the **lengths** of bars, which is an
+The bar plot in @fig-bar encodes the `total` number of offenders, which are
+quantitative values, as the **lengths** of bars, which is an
 **accurate** visual feature.  This means that viewers can make
 accurate comparisons between
 the lengths of the bars.
@@ -2036,7 +2158,7 @@ the lengths of the bars.
 > One reason why a bar plot is effective for visualising
   **quantitative data values** is because the quantitative data values,
   counts or proportions,
-  are mapped to a very **accurate visual feature**, the lengths of the bars.
+  are encoded as a very **accurate visual feature**, the lengths of the bars.
 
 ## Capacity {#sec-capacity}
 
@@ -2052,7 +2174,15 @@ as clearly different from each other).
 @fig-colour-cap shows that **colour** has a limited capacity.
 A small number of different colours are very easy to differentiate,
 but the differences become harder to perceive with a greater number
-of colours.
+of colours.[^colour-capacity]
+
+[^colour-capacity]:
+  "Do not use more than 10 colors for coding symbols if reliable
+   identification is required, especially if the symbols are to be
+   used against a variety of backgrounds."
+  Ware 4th ed [G4.18] p 126.
+  Also cite the study that shows how capacity depends on whether
+  points are spread out or arranged regularly ?
 
 ```{r}
 #| echo: false
@@ -2111,15 +2241,22 @@ bars(11)
 popViewport()
 ```
 
-The bar plot in @fig-bar maps the ethnic `group` to the
+The bar plot in @fig-bar encodes the ethnic `group` as the
 **position** of bars, which makes it easy to differentiate between
 the different ethnic groups.
 
 > One reason why a bar plot is effective for visualising
   **qualitative data values** is because the qualitative data values,
   the groups,
-  are mapped to a visual feature that has excellent **capacity**, 
+  are encoded as a visual feature that has excellent **capacity**, 
   the positions of the bars.
+
+**Need** to also mention limited capacity of point shapes?
+Footnote: "Evaluation of symbol contrast in scatterplots"
+Li et al (2009).
+Cleveland "The Elements of Graphing Data" 1994 [p239]
+suggests set of discriminable data point shapes:  o, +, <, s, w,
+which is small, though no explicit mention of capacity limit.)
 
 ## Case study: Dot plots {#sec-dot-plots}
 
@@ -2144,13 +2281,14 @@ ggplot(crimeGroupTotal) +
 Like the bar plot, 
 this is a very effective data visualisation, and for very similar 
 reasons.  This data visualisation uses a different data symbol, 
-data points instead of bars, but each data value is mapped to a
+data points instead of bars, but each data value is encoded as the
 basic visual feature of one data symbol.
 Furthermore, the quantitative data values (the totals)
-are mapped to the horizontal 
-**position** of the points, which is a very accurate
+are encoded as the horizontal 
+**position** of the points, which is a visual feature
+that is capable of representing numeric values and it is a very accurate
 visual feature, and the qualitative data values (the groups)
-are mapped to the vertical **position** of the points, which
+are encoded as the vertical **position** of the points, which
 is a visual feature with a high capacity.
 
 It could be argued that the dot plot in @fig-dot is even *more* effective
@@ -2181,15 +2319,16 @@ ggplot(crimeGroupTotal) +
 ```
 
 The data symbols in @fig-pie are wedges or segments of a circle
-and, on the positive side, the data values are mapped to basic
+and, on the positive side, the data values are encoded as basic
 visual features of these symbols:
-The `total` values are mapped to the **angle** and/or **area** of the wedges
-and the `group` values are mapped to the **colour** of the wedges.
+The `total` values are encoded as the **angle** and/or **area** of the wedges
+and the `group` values are encoded as the **colour** of the wedges.
 Although **colour** is an appropriate visual feature to represent
 **qualitative** data, and it has sufficient capacity to differentiate
-between only four groups, the mapping of quantitative values to **angle**
+between only four groups, the encoding of quantitative values as **angle**
 and/or **area** leads to less accurate perception of the differences
-between totals (compared to the lengths and positions employed in the
+between totals (compared to the lengths and positions encodings that
+were employed in the
 bar plot and the dot plot).
 
 ## Summary
@@ -2199,13 +2338,13 @@ numeric values, particularly counts,
 for several different groups.
 There are several reasons why bar plots work so well:
 
-* A bar plot maps data values 
-  to basic visual features, which are perceived rapidly and
-  without cognitive effort.
-* A bar plot maps the quantitative counts to a quantitative visual feature
-  (length) and the qualitative groups to a qualitative visual feature
+* A bar plot encodes data values 
+  as basic visual features, which are perceived rapidly and
+  without conscious effort.
+* A bar plot encodes the quantitative counts as a quantitative visual feature
+  (length) and the qualitative groups as a qualitative visual feature
   (position).
-* A bar plot maps the counts to a visual feature that is perceived
+* A bar plot encodes the counts to a visual feature that is perceived
   very accurately (length) and the groups to a visual feature
   that has a high capacity (position).
 
@@ -2215,9 +2354,10 @@ to represent the quantitative values.
 
 Pie charts by comparison have some weaknesses:
 
-* A pie chart maps quantitative counts to **angle** and/or **area**, 
+* A pie chart encodes quantitative counts as **angle** and/or **area**, 
   which is less accurate.
-* A pie chart maps qualitative groups to **colour**, which has a lower capacity.
+* A pie chart encodes qualitative groups as **colour**, 
+  which has a lower capacity.
 
 # Length {#sec-quantitative}
 
@@ -2242,15 +2382,16 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.8) +
-    scale_x_continuous(expand=expansion(c(0, .05))) 
+    geom_col(aes(x=total, y=district), width=.9) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
 ```
 
 @fig-bar-district-ordered shows a bar plot of the same data, but with the
 bars ordered from longest to shortest.  This data visualisation uses
-the same mappings as @fig-bar-district---police districts are mapped
-to the vertical positions of the bars and the total counts
-are mapped to the lengths of the bars---which means that it is also
+the same mappings as @fig-bar-district---police districts are encoded
+as the vertical positions of the bars and the total counts
+are encoded as the lengths of the bars---which means that it is also
 effective for comparing the total number of offenders between 
 police districts.
 
@@ -2261,9 +2402,10 @@ police districts.
 crimeDistrictTotal$districtOrdered <- 
     with(crimeDistrictTotal, reorder(district, total))
 ggplot(crimeDistrictTotal) +
-    geom_col(aes(x=total, y=districtOrdered), width=.8) +
+    geom_col(aes(x=total, y=districtOrdered), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    scale_y_discrete(name="district")
+    scale_y_discrete(name="district") +
+    theme(aspect.ratio=1)
 ```
 
 However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
@@ -2322,7 +2464,7 @@ popViewport(2)
 
 @fig-unaligned-length shows that it is harder to accurately compare
 the **lengths** of two bars if they are **unaligned** and do not share a 
-common base.  This also applies to the accuracy of comparing **positions**.
+common baseline.  This also applies to the accuracy of comparing **positions**.
 
 ```{r}
 #| echo: false
@@ -2344,13 +2486,23 @@ popViewport(2)
 
 @fig-stacked-bar shows an alternative visualisation of the data on 
 the total number of offenders in different ethnic groups.
-The bar plot of these data that we saw in @fig-bar mapped ethnic groups
-to the **positions** of the bars so that the bars were arranged
+The bar plot of these data that we saw in @fig-bar encoded ethnic groups
+as the **positions** of the bars so that the bars were arranged
 vertically with a common left-hand edge.
 In @fig-stacked-bar, the ethnic groups are 
-mapped to different **colours** and the bars are "stacked" horizontally.
+encoded as different **colours** and the bars are "stacked" 
+horizontally.[^stacking-as-position]
 
-Although the total number of offenders has been mapped to the same
+[^stacking-as-position]:
+  In a stacked bar plot, groups are encoded as the
+  positions of the bars and counts are encoded as the lengths
+  of the bars, but the positions are in the same
+  dimension as the lengths (in this case, both position and length
+  are horizontal).  In a side-by-side bar plot,
+  the position of the bars is in the opposite dimension to the
+  lengths of the bars.
+
+Although the total number of offenders has been encoded as the same
 visual feature in both @fig-stacked-bar and @fig-bar, the **lengths**
 of the bars, comparing those lengths is much harder in @fig-stacked-bar
 because the lengths are **unaligned**.
@@ -2393,7 +2545,8 @@ kable(head(crimeGroupTable, row.names=FALSE))
 
 @fig-stacked-bar-year shows the number of offenders (quantitative)
 for each ethnic group (qualitative) and
-for each year from 2011 to 2021 (qualitative, or at least discrete).
+for each year from 2011 to 2021 (treated here as
+qualitative, or at least discrete).
 In this data visualisation, the number of offenders is mapped to 
 the lengths of the bars, the years are mapped to the horizontal
 **position** of the bars, the ethnic groups are mapped to 
@@ -2445,7 +2598,8 @@ comparing between ethnicities for a specific year.
 #| label: fig-side-bar-group
 #| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
-    geom_col(aes(group, count, fill=group, group=year), position="dodge") +
+    geom_col(aes(group, count, fill=group, group=year), position="dodge",
+             colour=figbg) +
     scale_y_continuous(expand=expansion(c(0, .05)))
 ```
 
@@ -2458,7 +2612,8 @@ more comparisons.
 
 ## Perception is relative {#sec-perception-relative}
 
-@fig-relative shows that the perception of differences is relative;
+@fig-relative shows that the perception of differences between the lengths
+of bars is relative;
 it is easier to detect smaller differences when the visual features
 that we are comparing are smaller.[^Weber]
 It is easier to see that the pair of bars on the left have different
@@ -2559,9 +2714,10 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.8) +
+    geom_col(aes(x=total, y=district), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1))
+    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1),
+          aspect.ratio=1)
 ```
 
 > One reason why grid lines are effective is because they allow
@@ -2570,7 +2726,8 @@ ggplot(crimeTemp) +
 
 ## Summary
 
-Bar plots are effective because they map **quantitative** values to **lengths**,
+Bar plots are effective because they encode
+**quantitative** values as **lengths**,
 which are accurate visual features.
 
 However, comparisons between the bars in a bar plot can be difficult if
@@ -2589,8 +2746,9 @@ being compared smaller, so smaller differences are easier to detect.
 
 @fig-pie-hue shows a pie chart of the number of offenders for different
 levels of crime seriousness (between 2011 and 2021).
-In this data visualisation, level, which is a **qualitative** variable,
-is mapped to **colour**, which is appropriate for representing
+In this data visualisation, the crime level, 
+which is a **qualitative** variable,
+is encoded as **colour**, which is appropriate for representing
 qualitative values (see @sec-qual-features).  It is easy to identify
 different crime levels because it is easy to perceive differences between
 the colours of the wedges in the pie chart.
@@ -2607,8 +2765,8 @@ ggplot(crimeLevelTotal) +
           axis.ticks=element_blank())
 ```
 
-@fig-pie-ordinal show another pie chart of the same data, again mapping
-the **qualitative** level to **colour**.
+@fig-pie-ordinal show another pie chart of the same data, again encoding
+the **qualitative** level as **colour**.
 It is again easy to differentiate between different crime levels because we
 can easily perceive differences between the colours of the wedges.
 However, @fig-pie-ordinal is *more* effective than @fig-pie-hue because
@@ -2631,7 +2789,7 @@ The fact that there can be two data visualisations,
 @fig-pie-hue and @fig-pie-ordinal,
 with the same mappings,
 the **qualitative**
-level of crime maps to the visual feature **colour**,
+level of crime is encoded as the visual feature **colour**,
 but the two data visualisations 
 have different effectiveness suggests that there is still
 more to learn about how different visual features work.
@@ -2710,7 +2868,7 @@ popViewport(2)
 
 ## Ordinal visual features {#sec-ordinal}
 
-**Chroma** and **luminance** are both **qualitative** visual features
+**Chroma** and **luminance** are both **nominal** visual features
 in that they can be used to visualise different groups, but they
 are also **ordinal** visual features because we can perceive
 an ordering from a set of colours that differ in terms of either chroma
@@ -2742,6 +2900,7 @@ are very few different groups to represent.
 clpie <- function(n) {
     t <- rev(seq(0, 2*pi, length.out=100*n) + pi/2)
     cols <- hcl.colors(n+1, "Purples")[-(n+1)]
+    textcols <- c("white", "black")[rep(1:2, c(floor(n/3), n - floor(n/3)))]
     for (i in 1:n) {
         index <- 1:100 + (i-1)*100
         x <- cos(t[index])
@@ -2749,7 +2908,7 @@ clpie <- function(n) {
         grid.polygon(c(.5, .5 + .3*x), c(.5, .5 + .3*y), 
                      gp=gpar(col=figbg, lwd=4, fill=cols[i]))
         grid.text(letters[i], .5 + mean(.25*x), .5 + mean(.25*y),
-                  gp=gpar(cex=1))
+                  gp=gpar(cex=1, col=textcols[i]))
     }
 }
 pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
@@ -2831,7 +2990,8 @@ the blue wedges look more green at the boundary with their more blue
 neighbour and more blue at the boundary with their more green neighbour;
 furthermore, the colours in the legend are perceived differently from
 the corresponding colours in the wedges because the legend colours are
-surrounded by white.
+surrounded by a light grey, rather than sharing a boundary with
+a neighbouring colour.
 
 ```{r}
 #| echo: false
@@ -2847,8 +3007,8 @@ ggplot(crimeDistrictTotal) +
 ```
 
 The pie chart in @fig-pie-contrast is *not* an effective data visualisation
-because it maps qualitative data values with lots of different groups
-to colour hue.  This exceeds the **capacity** of the **hue** visual feature;
+because it encodes qualitative data values with many different groups
+as colour hue.  This exceeds the **capacity** of the **hue** visual feature;
 it is difficult to clearly distinguish between all of the different hues
 (see @sec-capacity).
 
@@ -2857,6 +3017,8 @@ for the purposes of demonstration,
 we can solve the colour perception problems in @fig-pie-contrast
 by adding a white border to all of the wedges
 (see @fig-pie-contrast-solved).
+Now all of the wedges and all of the squares in the legend are
+perceived relative to a surrounding white border.
 
 ```{r}
 #| echo: false
@@ -2871,15 +3033,48 @@ ggplot(crimeDistrictTotal) +
           axis.ticks.y=element_blank())
 ```
 
+## Colour palettes
+
+**Need** Discussion of different solutions to 
+different problems, e.g., highlighting (DO want one colour
+to stand out from the others).
+
+Example:  787 2025 Lab 8 challenge.  Trying to colour code
+many different categories of crime.  Use fewer colours, but repeat.
+OR use colour palette, but NOT in hue order (interleave instead) so
+get greater contrast between adjacent colours.
+Footnote attribute this to
+"Reflections on the Uses and Available Choices of Categorical Colorschemes"
+  Bartolomeo et al (2025)
+
 ## Case study: Divergent colour palettes
 
-@fig-neg-tile shows a heatmap of the points differential for Tier One
+The Rugby World Cup is a competition that is held every four years, with the
+first event taking place in 1987.
+We have data on the total number of points that were scored and conceded
+in World Cup matches
+for Tier One nations (the top 10 rugby-playing nations) at each World Cup.
+@tbl-rwc-all-year shows a sample of these data.[^rwc]
+
+[^rwc]:
+  Attribution to kaggle data set.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-all-year
+#| tbl-cap: A table of the total number of points scored and conceded by Tier One nations in Rugby World Cup matches at each World Cup.  Each row represents thetotal points scored by one team in one World Cup.  There are 100 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAllyear[,c("team", "year", "scored", "conceded", "diff")]), digits=0)
+```
+
+@fig-neg-tile shows a heatmap of the points differential 
+(points scored for minus points scored against) for Tier One
 nations at each Rugby World Cup.  The data symbols are rectangles, or "tiles".
-The teams are mapped to the vertical **positions** of the tiles and
-the years are mapped to the horizontal **positions** of the tiles.
-These are both effective mappings and we can easily map *back* to
+The teams are encoded as the vertical **positions** of the tiles and
+the years are encoded as the horizontal **positions** of the tiles.
+These are both effective mappings and we can easily **decode** to
 teams or years.
-The points differentials are mapped to the **colour** of the tiles,
+The points differentials are encoded as the **colour** of the tiles,
 but in a slightly complicated way.  Positive data values map to a shade
 of purple, while negative values map to a shade of brown.
 In both cases, we have a constant **hue**, with increasing **chroma** and
@@ -2923,7 +3118,8 @@ ggplot(rwcAllyear) +
   border in @fig-neg-tile where South Africa was excluded.
 
 > A diverging colour palette is effective because it creates two distinct
-  ordinal visual features.
+  visual features:  a nominal hue to differentiate between two groups and 
+  changes in chroma and/or luminance to encode ordinal values within each group.
 
 ## Summary
 
@@ -2938,14 +3134,78 @@ data values, but they have a very limited capacity.
 
 
 
-# Visual Congruence {#sec-congruence}
+# Congruent Mappings {#sec-congruence}
+
+So far we have seen numerous examples of **explicit** mappings
+from data values to visual features. We **encode** data values
+as visual features so that the viewers of a data visualisation can
+**decode** the data values from the visual features 
+(@fig-visual-feature-decode).
+
+In this section, we acknowledge that some visual features come
+with **implicit** mappings.  In some cases, we are able to **decode**
+values from a visual feature based on prior experience and learning,
+rather than due to an explicit encoding (@fig-implicit-decode).
+
+::: {#fig-implicit-decode}
+
+![](Diagrams/implicit-decode.png)
+
+Some visual features have implicit encodings, which means that we
+can decode values from the visual features without having explicitly
+encoded values as visual features.
+:::
+
+For example, @fig-implicit shows three coloured circles.
+Without any explicit encoding, we can decode the red circle as "stop",
+the orange circle as "slow", and the green circle as "go".
+
+```{r}
+#| echo: false
+#| label: fig-implicit
+#| fig.width: 4
+#| fig.height: 1
+#| fig-cap: An example of visual features that contain implicit mappings.  
+## https://www.color-hex.com/color-palette/35021
+traffic <- c("#cc3232", "#e7b416", "#2dc937")
+grid.newpage()
+grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
+grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
+            gp=gpar(col=traffic, fill=traffic))
+```
+
+When an implicit encoding exists,
+we can produce a more effective mapping by building upon
+the implicit decoding.
+We can explicitly encode data values as visual features in such a way that
+the decoding is **congruent** with the implicit decoding, in the sense
+that the implicit decoding leads back to the original data values
+that we explicitly encoded
+(@fig-congruent-decode).[^congruence-lit]
+
+[^congruence-lit]:
+  @TVERSKY2002247 discusses congruence at least in the sense of 
+  matching the spatial properties of data values to the spatial
+  arrangement of visual features.  The concept is also discussed in
+  @DBLP:journals/corr/abs-2008-11310.
+
+::: {#fig-congruent-decode}
+
+![](Diagrams/congruent-decode.png)
+
+If we explicitly map data values to visual features in a way that
+is consistent with an implicit mapping, we can more effectively
+decode data values from visual features.
+:::
+
+## Part-to-whole
 
 @fig-prop shows a pie chart of the proportions of total youth 
 offenders between 2011 and 2021 in 
 different ethnic groups and a bar plot of the same data.
-We learned in @sec-accuracy that mapping 
-**quantitative** proportions to **lengths**, like in the
-bar plot, is more accurate than mapping the proportions to **angles**
+We learned in @sec-accuracy that encoding
+**quantitative** proportions as **lengths**, like in the
+bar plot, is more accurate than encoding the proportions as **angles**
 or **areas**, like in the pie chart.
 
 However, the superior represenation of the
@@ -2988,28 +3248,16 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-The purpose of this section is to show that we need to consider more
-than just the accuracy or capacity of our mappings from 
-data values to basic visual features in order to understand the effectiveness
-of a data visualisation.[^congruence-lit]
-
-[^congruence-lit]:
-  @TVERSKY2002247 discusses congruence at least in the sense of 
-  matching the spatial properties of data values to the spatial
-  arrangement of visual features.  The concept is also discussed in
-  @DBLP:journals/corr/abs-2008-11310.
-
-
-## Part-to-whole
-
 The reason why the pie chart in @fig-prop is more effective
-than a bar plot for conveying proportions is because 
-the wedges in a pie chart are **congruent** with fractions of a whole.
+than a bar plot for conveying simple proportions like a quarter
+or a third or a half is because 
+the wedges in a pie chart have an implicit decoding to
+fractions of a whole.
 A semi-circle has a strong visual association with *half* of a circle
 and thirds and quarters are similarly evocative.
 
 > One reason why a pie chart can be effective is because 
-  segments of a pie vividly convey fractions of a whole.
+  segments of a pie vividly convey simple fractions of a whole.
 
 @fig-bar-part shows that if we place a bar representing a proportion bar 
 within a reference rectangle that corresponds to a proportion of 1,
@@ -3042,7 +3290,7 @@ are appropriate for conveying the total number of offenders in
 different ethnic groups.
 
 Part of the reason why **length** and **area** work so well is because
-a longer bar naturally conveys the idea of *more*.
+a **longer** bar naturally conveys the idea of **more**.
 By contrast, the **position** of data points in a dot plot of the same data,
 as shown in @fig-more-is-more, do not inherently 
 convey the same sense of *more*.
@@ -3081,11 +3329,25 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
+The Rugby World Cup is a competition that is held every four years, with the
+first event taking place in 1987.
+We have data on the total number of points that were scored and conceded in World Cup matches
+for Tier One nations (the top 10 rugby-playing nations).
+@tbl-rwc-all-time shows these data.[^rwc]
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-rwc-all-time
+#| tbl-cap: A table of the total number of points scored and conceded for Tier One nations in Rugby World Cup matches.  
+kable(rwcAlltime[,c("team", "scored", "conceded", "diff")], digits=0)
+```
+
 Another way that **length** can convey information more naturally than
 **position** is visualising negative values.
 For example @fig-neg-bar shows the total points differential
 (points scored minus points conceded) for
-Tier One nations at Rugby World Cups.
+Tier One nations at Rugby World Cups (see @tbl-rwc-all).
 The *direction* of the bars very clearly indicates the change from
 positive points differential to negative points differential.
 
@@ -3182,7 +3444,46 @@ the same.
 > Another reason why bar plots are effective is because the bars
   differ in length, but are otherwise the same.
 
-## Visual dissonance {#sec-dissonance}
+## Dissonant mappings {#sec-dissonance}
+
+@fig-stroop provides a demonstration of the Stroop Effect.[^stroop]
+The task is to name the colour of each word.
+This task is difficult to do because there are two decodings involved and 
+the two decodings are inconsistent.
+Each set of letters has an implicit decoding based on the
+learned meaning of the word that the letters spell out,
+plus a decoding based on the actual colour of the letters.
+
+[^stroop]:
+  citation please!
+
+```{r}
+#| echo: false
+#| label: fig-stroop
+#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
+#| fig-height: 1
+grid.newpage()
+pushViewport(viewport(width=.5))
+grid.text(c("red", "green", "blue"), 1:3/4, 
+          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
+```
+
+The Stroop Effect shows that, if we fail to make our explicit encodings 
+congruent with any implicit encodings - if we create a
+**dissonant** mapping - we can make it harder
+and more confusing to decode a data visualisation because
+there is more than one possible decoding
+(@fig-dissonant-decode).
+
+::: {#fig-dissonant-decode}
+
+![](Diagrams/dissonant-decode.png)
+
+If we explicitly map data values to visual features, but the
+visual features have an implicit mapping to different data values,
+we can cause confusion and make it harder to effectively
+decode data values from visual features.
+:::
 
 The fact that **length** and **area** naturally convey amounts means
 that care must be taken *not* to confuse that association.
@@ -3272,23 +3573,6 @@ a data visualisation by taking advantage of visual congruence
 and we can reduce the effectiveness of a data visualisation 
 if we create visual dissonance.
 
-**TODO** need expansion of colour dissonance (possibly preceded by
-section on colour associations?) 
-
-@fig-stroop shows that we can also create dissonance with our mappings
-of data values to colours.
-
-```{r}
-#| echo: false
-#| label: fig-stroop
-#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
-#| fig-height: 1
-grid.newpage()
-pushViewport(viewport(width=.5))
-grid.text(c("red", "green", "blue"), 1:3/4, 
-          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
-```
-
 We saw in @sec-same-same that we want to map differences in data values
 to differences in visual features *and* keep everything else the
 same.  Failing to follow that approach will make it harder to 
@@ -3297,7 +3581,7 @@ However, a worse error, and
 another source of visual dissonance arises if we change
 visual features *without* any underlying change in the data values.
 
-@fig-listener-beans shows a data visualisation of the relative number of 
+@fig-listener-cakes shows a data visualisation of the relative number of 
 people aged over 100 for females versus males.
 There are numerous problems with this data visualisation, but here
 we will just focus on the horizontal **position** of the cake images.
@@ -3315,7 +3599,7 @@ changes in the data in @sec-mosaic and @sec-word-cloud.
 
 ```{r}
 #| echo: false
-#| label: fig-listener-beans
+#| label: fig-listener-cakes
 #| fig-cap:  A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.[^listener-cakes]
 #| warning: false
 cake <- readPNG("Images/birthday-cake-cropped.png")
@@ -3350,38 +3634,34 @@ ggplot(old) +
 
 > A data visualisation is *not* effective if it contains mappings
   that are dissonant because that can cause distraction and slower and/or
-  incorrect mappings *back* to the data.
+  incorrect **decoding** of data values from visual features.
 
 ## Case study: Jittering
 
-The Rugby World Cup is a competition that is held every four years, with the
-first event taking place in 1987.
-We have data on the number of points that were scored in World Cup matches
+We have data on the number of points that were scored in every World Cup match
 for Tier One nations (the top 10 rugby-playing nations).
 @tbl-rwc-all shows a sample of these data.[^rwc]
-
-[^rwc]:
-  Attribution to kaggle data set.
 
 ```{r}
 #| echo: false
 #| message: false
 #| label: tbl-rwc-all
-#| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
+#| tbl-cap: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAll[,c("team", "hemisphere", "scored")]), digits=0)
 ```
-
 @fig-jitter shows a scatterplot of the number of points scored 
-by teams from different hemispheres at Rugby World Cup matches.
+by teams from different hemispheres at Rugby World Cup matches
+(see @tbl-rwc-all).
 In this data visualisation, the data symbols are dots,
-the number of points scored is mapped to the horizontal **position** of
-the dots, and the hemisphere is mapped to the vertical **position**
+the number of points scored is encoded as the horizontal **position** of
+the dots, and the hemisphere is encoded as the vertical **position**
 of the dots.
 
 To ameliorate the overlapping of data points, a random amount of "jitter"
 has been
 added the vertical position
-of the dots.  The filled interior of each dot is also semitransparent.
+of the dots.  The filled interior of each dot is also semitransparent
+so that we can see where points overlap.
 
 ```{r}
 #| echo: false
@@ -3392,13 +3672,16 @@ ggplot(rwcAll) +
     scale_x_continuous(name="points scored")
 ```
 
-The scatter plot in @fig-jitter is effective for mapping *back* to 
-the number of points scored because each data value maps to the
+The scatter plot in @fig-jitter is effective for **decoding** to 
+the number of points scored because each data value is encoded as the
 horizontal position of a single data symbol.
-Similarly, we can easily map *back* to the separate hemispheres.
+Similarly, we can easily decode the hemisphere from each point.
+The proximity of the data symbols from the same hemisphere means
+that it is easy to perceive two "rows" of points.
 
 On the other hand, the jittering means that there are visual differences
-between the vertical positions of the dots that do not correspond to
+between the vertical positions of the dots, within the same hemisphere,
+that do not correspond to
 any differences in data values.  For example, there are two dots representing
 matches where a team from the Northern hemisphere scored zero points.
 The data values for these two dots are identical (zero points scored and
@@ -3413,47 +3696,79 @@ addition of jittering may cause confusion.
   reduce the effectiveness of a data visualisation because it introduces
   visual dissonance.
 
+## Dangers of implicit mappings
+
+A colour can have multiple implicit mappings, e.g., red -> hot and
+red -> angry and red -> stop (and red -> prosperity in Chinese culture).[^Arcia]
+
+[^Arcia]:
+  Cite "Sometimes more is more: iterative participatory design of infographics 
+  for engagement of community members with varying levels of health literacy"
+  Arcia et al (2016)
+  where people interpret icons
+  in multiple ways, e.g., specifically "pineapple" rather than generic "fruit".
+
+::: {#fig-ambiguous-decode}
+
+![](Diagrams/ambiguous-decode.png)
+
+A visual feature may have more than one implicit encoding, which means that we
+may decode more than one value from the visual feature.
+:::
+
 ## Summary
 
 The effectiveness of a data visualisation may depend on more than
 just the accuracy and capacity of visual features.
 
-Visual **congruence** refers to whether
-a data symbol or visual feature has 
-a natural correspondence with properties of the data.
+A **congruent** mapping is one where data values are **explicitly** encoded in
+a way that is consistent with an **implicit** encoding of the visual feature.
 
-Some data visualisations are effective because they are visually congruent.
+Some data visualisations are effective because they are visually congruent:
+data symbols that are larger for larger data values are more effective;
+data symbols that only change if the data values change are more effective.
 
-Data symbols that are larger for larger data values are more effective.
-
-Data symbols that only change if the data values change are more effective.
-
-Visual **dissonance** refers to whether a data symbol or visual feature
-contradicts properties of the data.
+A **dissonant** mapping is one where data values are **explicitly**
+encoded in a way that is inconsistent with an **implicit** encoding..
 
 Some data visualisations are *not* effective because they are visually
 dissonant.
 
-# Data Summaries {#sec-summaries}
+# Mapping Summaries {#sec-summaries}
+
+**TODO**
+Visual tasks are just different decoding?
+Different decoding have different difficulty
+Like visual summary
+Even ratio of two bars is visual task
+
+**TODO**
+Visual tasks are just different decoding
+Even compare two heights is different to extracting single data value
+A sort of data summary
+Correlation from scatter plot more complex example
+Effectiveness of data vis depends on encoding and decoding that is necessary 
+to perform task? 
 
 In @sec-mapping-visual-features we described a data visualisation as
-a mapping from data values to the visual features of a data symbol
+a mapping that **encodes** data values as the visual features of a data symbol
 (@fig-visual-feature).
 For example, a bar plot,
 like @fig-bar, maps the total number of youth offenders to the **lengths**
 of bars.
 
-We also emphasised the importance of the mapping *back* from the visual 
-features to the data values.  For example, the effectiveness of the bar plot
+We also emphasised the importance of the **decoding** from visual 
+features to data values.  For example, the effectiveness of the bar plot
 in @fig-bar relies on our ability to accurately perceive the lengths
 of the bars, particularly relative to each other.
 
 In the simple scenario of a bar plot, the data values are total counts
-(@tbl-crime-group-total), which are mapped to the lengths of bars, which
-allow us to map back to the total counts (@fig-visual-feature-decode).
+(e.g., @tbl-crime-group-total), which are encoded as the lengths of bars, which
+in turn allows us to decode lengths to retrieve 
+the total counts (@fig-visual-feature-decode).
 
 In this section, we explore some data visualisations that are effective 
-because they rely on **data summaries** instead of 
+because they map **data summaries** instead of 
 raw data values.[^info-vis-ref-model]
 
 [^info-vis-ref-model]:
@@ -3465,6 +3780,8 @@ raw data values.[^info-vis-ref-model]
   for a box plot being a good example).  These papers provide a formal
   basis for some of the hand-waving that I do in this section, particularly
   on mapping back to data summaries rather than raw data.
+  Could also reference Ackoff's "From Data to Wisdom" for difference
+  between data and information (data summaries).
 
 ## Box plots
 
@@ -3506,10 +3823,15 @@ to upper quartile), and horizontal lines to represent the extremes of
 the data values, from the the quartiles to the minimum and maximum 
 values.  Points are also included for "outliers" if data values
 lie further than 1.5 times the interquartile range beyond the 
-quartiles.  
+quartiles.[^boxplots]
+
+[^boxplots]:
+  Need to acknowledge that there are many variations, even on the simple
+  box plot, e.g., notches, definitions of the box, let alone violin plots, etc.
 
 Another important difference with a box plot is that it maps
-**data summaries** to visual features of the data symbol
+**data summaries**, rather than raw data values,
+to visual features of the data symbol
 (@fig-stat-vis-decode).
 For example, the median values are mapped to the horizontal **positions** of 
 thick vertical lines and the interquartile ranges are mapped to the
@@ -3525,12 +3847,12 @@ This is effective for mapping back to the data summaries, but it
 is not effective for mapping back to the raw data.
 :::
 
-
-To be explicit, the data values that are being mapped to visual features in 
+To be explicit, the data values that are being **encoded** 
+as visual features in 
 @fig-boxplot are *not* the raw data values in @tbl-rwc-all;
-the values that are being mapped to visual features in @fig-boxplot 
+the values that are being encoded to visual features in @fig-boxplot 
 are the **data summaries** shown in @tbl-rwc-all-stats.
-These are the values that we can map *back* to from the boxplots
+These are the values that we can **decode** from the boxplots
 in @fig-boxplot.
 
 ```{r}
@@ -3548,17 +3870,18 @@ kable(rwcStats, digits=1)
 
 @fig-boxplot is effective for allowing us to compare summaries like the 
 medians between different hemispheres because, although the box plot data
-symbol is relatively complicated, a box plot still just maps the data
-summaries to visual features. 
+symbol is relatively complicated, a box plot still just encodes the data
+summaries to simple visual features. 
 We know from 
 @sec-mapping-visual-features that
 **position** and **length** 
-are effective for mapping *back* to the data summaries
+are effective for **decoding** the data summaries from the visual features
 (@fig-stat-vis-decode).
 
 Notice how, even though @tbl-rwc-all-stats contains very few values,
-the data visualisation in @fig-boxplot makes it *much* easier to
-perceive the differences between the two rows of values in @tbl-rwc-all-stats.
+it is much easier to perceive the differences between the two rows of values
+using the data visualisation in @fig-boxplot rather than the table of
+values in @tbl-rwc-all-stats.
 Once again, we can see the power of mapping values to basic visual features.
 The only differences from previous sections
 is that we are mapping **data summaries** rather than raw data values
@@ -3577,13 +3900,14 @@ countries from the different hemispheres in Rugby World Cup matches.
 This data visualisation uses the same data as @fig-boxplot, but it
 maps raw data values rather than data summaries and it uses much simpler
 data symbols (data points).
-This data visualisation maps the
-number of points scored maps to the horizontal **position** of
-a data point and it maps the hemisphere to the vertical
+This data visualisation encodes the
+number of points scored maps as the horizontal **position** of
+a data point and it encodes the hemisphere as the vertical
 **position** of a data point.
 
-Because this data visualisation maps raw data values to visual features, 
-it is possible to map *back* to raw data values (@fig-visual-feature-decode).
+Because this data visualisation encodes raw data values as visual features, 
+it is possible to decode raw data values from the visual features
+(@fig-visual-feature-decode).
 For example, it is possible to see that the lowest score (zero points)
 for a northern
 hemisphere team ocurred twice.  It is also possible to see that
@@ -3600,34 +3924,35 @@ gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  colour="grey", linewidth=.1) +
     geom_dotplot(aes(scored, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
-    scale_x_continuous(name="points scored") +
+    scale_x_continuous(name="points scored", breaks=seq(0, 100, 10)) +
     theme(axis.title.y=element_blank())
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
-The fact that we can map *back* to raw data values from a dot plot is
-not news.  That is easy because we have mapped
-raw data values to accurate visual features
+The fact that we can decode raw data values from a dot plot is
+not news.  That is easy because we have encoded
+raw data values as accurate visual features
 (see @sec-dot-plots).
-However, @fig-rwc-dotplot also demonstrates that, in addition to mapping
-*back* from visual features to raw data values, 
-our visual system allows us to map *back* from visual features 
-to **data summaries**.
+However, @fig-rwc-dotplot also demonstrates that, in addition to decoding
+raw data values from visual features, 
+our visual system allows us to decode
+**data summaries** from visual features.
 
 For example, we can see that the southern hemisphere teams score slightly
 more points on average than the northern hemisphere teams;
 the data symbols for southern-hemisphere teams appear shifted to the right
 of the data symbols for northern-hemisphere teams.
-In other words, we can perform **visual summaries** that
-map back to **data summaries**.
+In other words, we can perceive **visual summaries**;
+we can perceive **data summaries** from collections of visual features.
 For example, we can visually average the **positions** of the data points.
 
-In @fig-rwc-dotplot, we have mapped raw data values to visual
-features, which has enabled us to map *back* to raw data values.
+In @fig-rwc-dotplot, we have encoded raw data values as visual
+features, which has enabled us to decode raw data values from individual
+visual features.
 In addition, **visual summaries** of the visual features
-enable us to map *back* to **data summaries**
+enable us to decode **data summaries** from collections of visual features
 (@fig-data-vis-stat-decode).[^ensembles]
 
 [^ensembles]:
@@ -3661,8 +3986,8 @@ a histogram is a data visualisation that maps data summaries,
 rather than raw values, to visual features (@fig-stat-vis-decode).
 
 However, a histogram differs from a box plot in two main ways:
-the data symbol for a histogram is simpler than a box plot
-(just rectangles or bars);
+the data symbol for a histogram is simpler than a box plot,
+because it consists of just rectangles or bars;
 and the data summaries for a histogram are more complicated than
 those for a box plot.
 
@@ -3672,9 +3997,9 @@ by each country (@tbl-rwc-all).
 To get the data summaries for the histogram, the raw data values are
 binned;  we break the range of the data into equal-sized intervals
 and count how many data values lie in each interval.
-The centre of each interval is then mapped to the horizontal **position**
+The centre of each interval is then encoded as the horizontal **position**
 of a bar
-and the count of data values in each interval is mapped to the **length**
+and the count of data values in each interval is encoded as the **length**
 of a bar.
 
 ```{r}
@@ -3684,7 +4009,8 @@ of a bar.
 breaks <- seq(0, 105, by=5)
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored), colour="black", fill="grey", breaks=breaks) +
-    scale_x_continuous(name="points scored") 
+    scale_x_continuous(name="points scored") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
@@ -3707,9 +4033,9 @@ histStats <- rbind(interval=paste0(hist$breaks[-length(hist$breaks)], "-",
 kable(histStats, align="r")
 ```
 
-As with a box plot, mapping data summaries to accurate
-visual features means that we can easily map *back* to
-the data summaries.
+As with a box plot, encoding data summaries as accurate
+visual features means that we can easily decode
+data summaries from the visual features.
 For a histogram, this means that
 we can easily compare the lengths of the bars,
 which means we can easily compare the relative counts of data values
@@ -3729,19 +4055,19 @@ the spread and/or skewness of the data.
   and those data summaries can be compared to provide information about
   the distribution of the data.
 
-## Caveats {#sec-summary-caveats}
+## The dangers of summaries {#sec-summary-caveats}
 
-The benefit of a data visualisation that maps
-**data summaries** to visual features is that it allows us to perceive
+The benefit of a data visualisation that encodes
+**data summaries** as visual features is that it allows us to decode
 data summaries very easily.  For example, although we can perceive
 a general idea of central tendency from the dots in @fig-rwc-dotplot
 (see @sec-visual-summaries),
 it is much easier and more accurate to perceive
 median values from the thick vertical lines in @fig-boxplot.
 
-The flipside is that a data visualisation that maps
-**data summaries** to visual features
-is *not* effective for mapping *back* to raw data values.
+The flipside is that a data visualisation that encodes
+**data summaries** as visual features
+is *not* effective for decoding raw data values.
 For example, we cannot see from the box plot in
 @fig-boxplot that the scores 1, 2, 4, and 5 never occurred, while
 this is clear from @fig-rwc-dotplot because the dot plot does map
@@ -3756,7 +4082,7 @@ data summaries is
 whether the data summaries provide reasonable summaries of the data.
 For example, @fig-boxplot-concede shows box plots of the number of 
 points *conceded* by each team in Rugby World Cup games.
-The box plot for southern hemisphere teams suggest a unimodal 
+The box plot for southern hemisphere teams suggests a unimodal 
 distribution with a slight right skew.
 
 ```{r}
@@ -3790,19 +4116,19 @@ gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  colour="grey", linewidth=.1) +
     geom_dotplot(aes(conceded, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
-    scale_x_continuous(name="points conceded") +
+    scale_x_continuous(name="points conceded", breaks=seq(0, 100, 10)) +
     theme(axis.title.y=element_blank())
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
-> A box plot is *not* effective if a five-number summary is not a 
-  sensible summary of the data values.
-
 > A data visualisation that is based on data summaries
   can only be effective if the data summaries are sensible
   summaries of the data.
+
+  A box plot is *not* effective if a five-number summary is not a 
+  sensible summary of the data values.
 
 A further complication arises with histograms because we have to
 *choose* the intervals that are used to calculate the data summaries
@@ -3812,7 +4138,8 @@ we used for @fig-hist, but with a greater number of narrower intervals.
 This visualisation tells a slightly different story than @fig-hist.
 The most common score is now 6 points and we see features
 like gaps at 1, 2, 4, and 5 points and a stronger suggestion of 
-bimodality.
+bimodality.  There are also point totals that appear strangely low,
+like 11 and 14.
 
 Unlike a box plot, where the data summaries are essentially fixed
 calculations, for a histogram we get to choose the data summaries
@@ -3834,21 +4161,104 @@ exclude important details.
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored), colour="black", fill="grey", 
                    binwidth=1, boundary=.5) +
-    scale_x_continuous(name="points scored") 
+    scale_x_continuous(name="points scored", breaks=seq(0, 100, 10)) 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
+## Case study: How charts lie
+
+In this document, we assume that the purpose of a data visualisation
+is to faithfully and honestly encode data values and the goal
+is to produce a data visualisation that provides the most effective decoding 
+of visual features (see @sec-scope).
+
+Nevertheless, less honest representations of data can also be 
+described in terms of mappings, particularly mappings of data
+summaries.
+
+For example, ... @fig-bars-at-zero[^bars-at-zero]
+This does not encode the raw data as the lengths of the bars, but
+the raw data - 34.  The top rate under Obama would be 39.6.
+Also does not help that the y-axis scale is not shown!
+
+[^bars-at-zero]: 
+  This is a reproduction of a chart from Alberto Cairo's "How Charts Lie"
+  (p12-13), which itself was a reproduction of a chart shown by Fox News.
+  (plus mention other classic how charts lie books like
+  Huff's How to Lie With Statistics ?)
+  Also link to Wilke's Principle of Proportional Ink?
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-bars-at-zero
+#| fig-cap: A bar plot of the increase in the top tax rate in the United States of America from President George W. Bush to President Barack Obama.
+years <- c("Now", "Jan. 2013")
+tax <- data.frame(year=factor(years, levels=years),
+                  rate=c(35, 39.6))
+barlabs <- function(data, coords) {
+    grobTree(textGrob(paste0(data$y[1], "%"), x=coords$x[1],
+                      y=unit(coords$y, "npc") + unit(1, "lines")),
+             textGrob("?", x=coords$x[2],
+                      gp=gpar(col=figbg, fontsize=100, fontface="bold")))
+}
+ggplot(tax) +
+    geom_col(aes(year, rate, fill=year)) +
+    scale_fill_manual(values=c("black", highlight)) +
+    grid_panel(segmentsGrob(0, 0, 1, 0, gp=gpar(lwd=3),
+               vp=viewport(clip=FALSE))) +
+    grid_panel(textGrob("If Bush\ntax cuts\nexpire",
+               x=0, y=1, just=c(0, 1),
+               gp=gpar(fontsize=30, fontface="bold", lineheight=.8))) +
+    grid_panel(textGrob("Top tax rate:",
+               x=0, y=.5, just="left",
+               gp=gpar(fontsize=20, fontface="bold"))) +
+    grid_panel(barlabs, aes(year, rate)) +
+    coord_cartesian(ylim=c(34, NA)) +
+    scale_y_continuous(expand=expansion(0)) +
+    theme_minimal() +
+    theme(plot.margin=unit(c(2, 0, 1, 0), "lines"),
+          panel.grid=element_blank(),
+          title=element_blank(),
+          axis.text.y=element_blank(),
+          axis.text.x=element_text(size=20, face="bold", 
+                                   colour=c("black", highlight)),
+          legend.position="none",
+          aspect.ratio=.8)
+```
+
+A data visualisation that encodes distorted data 
+or one that leaves out an important subset of the data
+is encoding unhelpful values to visual features.
+It is only then possible to decode from visual features
+to unhelpful data values.
+
+::: {#fig-lie-vis-decode}
+
+![](Diagrams/lie-vis-decode.png)
+
+A data visualisation may map an unrepresentative or "cooked" version
+of the data, 
+rather than the raw data, to visual features.
+Visual decoding leads back to the lies rather than the real data.
+:::
+
+
 ## Cognitive load
 
 On page 46 of his book "How the World Really Works" [@smil2022how],
-Vaclav Smil writes:
+Vaclav Smil writes that:
 
-> rising food production reduced the malnutrition rate from 2 in 3 people
-  in 1950 to 1 in 11 by 2019
+::: {.actual-quote}
 
-In order to grasp the change in malnutrition rate, we are required
+"rising food production reduced the malnutrition rate from 2 in 3 people
+in 1950 to 1 in 11 by 2019"
+
+:::
+
+In order to comprehend the change in malnutrition rate, we are required
 to compare "2 in 3" to "1 in 11".  This requires mental effort to calculate
 the ratios or fractions and then compare them.
 It is easier to compare the rates if we 
@@ -3867,16 +4277,25 @@ ggplot(fractions) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     xlab(NULL) +
     ylab(NULL) +
-    labs(title="Proportion of Population Suffering from Malnutrition")
+    labs(title="Proportion of Population Suffering from Malnutrition") +
+    theme(aspect.ratio=1)
 ```
 
-The point is that we would like to reduce the cognitive load that is
-required of the viewer.  This can be achieved by making the mental
-calculations that are required easier, or by presenting the 
-pre-calculated values, as well as by presenting the values visually
-rather than as text.
+The point is that we can reduce the cognitive load that is
+required of the viewer if we make the mental
+calculations that are required easier.  We can reduce
+the cognitive load further if we present the results of
+the calculation directly and even further
+if we encode the results of the calculation
+as simple visual features.
 
-Visual summaries can require more or less mental effort as well.
+Conversely, we can add to the cognitive load if we make the visual
+calculations harder.
+For example, @fig-cog-load-hi shows a bar plot of the original 
+"2 in 3" versus "1 in 11" data values.
+We now need to perceive the proportion of blue bars relative to red bars
+and compare those proportions, which is clearly more work than just 
+comparing the two bars in @fig-cog-load.
 
 ```{r}
 #| echo: false
@@ -3892,22 +4311,33 @@ ggplot(counts) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     xlab(NULL) +
     ylab(NULL) +
-    labs(title=paste0('<span style="color: ', fills[1], '">X</span> ',
+    labs(title=paste0('<span style="color: ', fills[2], '">X</span> ',
                       'people out of ',
-                      '<span styl="color: ', fills[2], '">Y</span> ',
+                      '<span style="color: ', fills[1], '">Y</span> ',
                       'suffer from Malnutrition')) +
     theme(legend.position="none",
+          aspect.ratio=1,
           plot.title=element_markdown())
 ```
 
-The point is that we ideally want to present data in a way that
-requires the least cognitive load from the viewer.
-The answer is different for different questions, but we 
-can make the viewer's life easier by calculating summaries
-of the data and only presenting the summaries.
+We ideally want to present data in a way that
+imposes the least cognitive load on the viewer.
+The solution will be different for different questions, but 
+if the question involves comparing data summaries, then
+one way that we 
+can make the viewer's life easier is by calculating summaries
+of the data and encoding data summaries as visual features.
 
-It is possible to rely on some visual summaries, but be careful
+It is possible in some cases to rely on visual summaries, but 
+we need to be careful
 not to set a visual task that requires too much mental effort.
+
+## Case study: Line of best fit
+
+Nice example of a complex calculation, the results of which are
+what gets visualised.
+Also example of performing the calculation numerically 
+rather than asking the viewer to perform it visually.
 
 ## Summary
 
@@ -3936,30 +4366,38 @@ However, a dot plot is more effective for perceiving raw data values.
 # Combining Mappings
 
 Most data visualisations involve more than one data variable.
-For example, the bar plot in @fig-bar involves data on the ethnic
-group of offenders and data on the total number of
+For example, the bar plot in @fig-bar involves data on the **ethnic
+group** of offenders and data on the **count** of
 offenders in each ethnic group.
 
 In @fig-bar, each data value is mapped to a **visual feature** of a data symbol
 (@fig-visual-feature).  For example, 
-the ethnic group is mapped to the vertical **position** of the bars
-and the total number of offenders is mapped to the **length** of the bars.
+the ethnic group is encoded as the vertical **position** of the bars
+and the count of offenders is encoded as the **length** of the bars.
 
 We have so far only looked at mappings from data values to visual features
 in isolation.  For example, we know that the mapping from ethnic group to 
-position is effective because it uses a visual feature that is 
-appropriate for qualitative data and it uses a visual feature with
-a large capacity.  We also know that mapping the total number
-of offenders to length is effective because it uses a visual feature that
-is appropriate for quantitative data and a visual feature that is accurate.
+position is effective because position is 
+appropriate for qualitative data and position has sufficient capacity
+to differentiate between four ethnic groups.
+We also know that mapping the count
+of offenders to length is effective because length
+is appropriate for quantitative data and length provides an accurate
+decoding.
 Furthermore, the lengths of the bars are all aligned (they
-have a common baseline).
+have a common baseline) and the bars only differ in ways that
+reflect differences in the data (the bars all have the same width and colour).
 
 In this section, we begin to consider what happens when mappings are
 used in combination.  For a start, we will just extend our 
 thinking to data visualisations that involve mapping **two** data variables
-to **two** visual features, where each pair of data values 
-maps to a single data symbol (@fig-two-visual-features).
+to **two** visual features, like ethnic group and count to position and
+length.
+Furthermore, we will restrict ourselves to mappings 
+where each pair of data values 
+are encoded as a single data symbol (@fig-two-visual-features).
+For example, each combination of ethnic group and count produces a single
+bar.
 
 ::: {#fig-two-visual-features layout-ncol=2}
 
@@ -3970,15 +4408,15 @@ maps to a single data symbol (@fig-two-visual-features).
 A simple data visualisation maps **two** data values to
 **two** visual features to create a data symbol.
 Each pair of data values (`a` and `b`) is mapped to two visual
-features (`x` and `y`) of a single data symbol.
+features (`x` and `y`) of a **single** data symbol.
 :::
 
 ## Independent visual features
 
-A bar plot involves mapping a qualitative variable to **position**
-and a quantitative variable to **length** (e.g., @fig-bar).
-We know that each visual feature is effective on its own---we can map
-*back* from positions to qualitative values and we can map *back* from
+A bar plot involves encoding a qualitative variable as bar **position**
+and a quantitative variable as bar **length** (e.g., @fig-bar).
+We know that each visual feature is effective on its own---we can 
+decode from positions to qualitative values and we can decode from
 lengths to quantitative values---but another reason why the bar plot
 is effective overall is because the two visual features act
 independently.[^separable]
@@ -3995,10 +4433,10 @@ affected by the vertical **position** of the bars.[^independent-lie]
   However, compared to visual features that strongly interact, length
   and position are reasonably independent.
 
-@fig-bar-colour demostrates that we can also add **colour** to the mix 
-without creating any interactions.  We can perceive the colour of the bars
-and the position of the bars and the lengths of the bars independently
-of each other.
+@fig-bar-colour demonstrates that we can also add **colour** to the mix 
+without creating any interactions between visual features.
+The fact that the bottom two bars are blue and red does not
+affect our ability to perceive that they have different lengths.
 
 ```{r}
 #| echo: false
@@ -4007,11 +4445,12 @@ of each other.
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group, fill=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=1)
+    theme(aspect.ratio=1,
+          legend.position="none")
 ```
 
-> One reason why a bar plot is effective is because it maps data values
-  to visual features that can be perceived independently.
+> One reason why a bar plot is effective is because data values are
+  encoded as visual features that can be decoded independently.
 
 ## Scatter plots {#sec-integral}
 
@@ -4054,19 +4493,20 @@ popViewport()
 
 The data symbol in a scatter plot is a data point, in this case a circle.
 There are two mappings in the scatter plot in @fig-scatter:
-the **quantitative** number of clean breaks is mapped to the horizontal
+the **quantitative** number of clean breaks is encoded as the horizontal
 **position** of the data points and the **quantitative** number of tries 
-scored is mapped to the vertical **position** of the data points.
+scored is encoded as the vertical **position** of the data points.
 
-We know from @sec-mapping-visual-features that using **position** means
-that we should be able to accurately map *back* to the original data values.
+We know from @sec-mapping-visual-features 
+that we should be able to accurately decode the original data values
+from the positions of the data points.
 For example, we can easily see that one team scored a little over 
 7.5 clean breaks per game and we can see that two teams scored about
 6 tries per game.
 
 However, there is something else going on in the scatter plot.
-The two explicit mappings to horizontal and vertical position
-**interact** to create an additional visual feature:[^integral]
+The two explicit encodings---horizontal and vertical position---**interact** 
+to create an additional visual feature:[^integral]
 **position in space** (@fig-interact).[^emergent-features]
 For example, we can perceive not only horizontal and vertical
 distances between data points, but also euclidean distances between
@@ -4077,6 +4517,13 @@ data points ("as the crow flies").
   @pomerantz1994emergent.  Acknowledge that my use is a little loose
   because the use in the literature is really about separate data symbols
   combining to create emergent features (like clusters?).
+  MacEachren 1995 uses emergent in exactly this way!?
+  "Vision Science: Photons to Phenomenology" Stephen Palmer,
+  Figure 2.1.5 caption "The arrangement of several dots in a line give
+  rise to emergent properties, such as length, orientation, and
+  curvature, that are different from the properties of the dots that
+  compose it."
+  
 
 [^integral]:
   Need citations to literature that mention integral visual features.
@@ -4097,21 +4544,24 @@ features or even to obscure the original visual features.
   position and vertical position---interact to produce an additional
   visual feature: position in space.
 
-Furthermore, our visual system allows us to perceive **visual summaries**
-(see @sec-visual-summaries) of **position in space** 
+Furthermore, our visual system allows us to decode **visual summaries**
+(see @sec-visual-summaries) from **position in space** 
 (see @fig-visual-corr).[^ensemble-corr]
 For example, in @fig-scatter we can easily see a positive 
 **correlation** between the number of clean breaks and the number of
 tries scored.  We can also easily see **clusters** of data points;
 the four data points in the top-right corner of the plot appear separate 
-from the other data points.
-
-**TODO**
-relate perception of clusters to gestalt proximity
+from the other data points because they share a similar
+position in space (see @sec-visual-model-groups).
 
 [^ensemble-corr]:
   Citations to literature on ensembles again, this time specifically to
   correlation in scatter plots.
+  Talk about how, although there is some experimental support for reasonable
+  accuracy of correlation from scatter plot (with some bias),
+  there is not much experimental evidence for which is best 
+  for perceiving correlations Eg scatter plot vs parallel coords etc
+  Cite Cleveland (1994) for white space margin affecting strength of relation?
 
 ::: {#fig-visual-corr layout-ncol=2}
 
@@ -4123,9 +4573,20 @@ allow us to map back to the raw data values and the emergent features
 allow us to map back to data summaries.
 :::
 
+Although a scatter plot is similar to a bar plot because they both
+involve two encodings---position and length for a bar plot and 
+horizontal position and vertical position for a scatter plot---there 
+are additional decodings possible from the data symbols in a 
+scatterplot because the additional visual feature of position in space
+emerges from the combination of horizontal and vertical position.
+
 > One reason why a scatter plot is effective at conveying relationships
-  between variables is because we are able to perceive visual summaries from
+  between variables is because we are able to decode visual summaries from
   a collection of positions in space.
+
+**TODO**
+Admit a range rather than a dichotomy
+Munzner has good examples?
 
 ## Case study: Mosaic plots {#sec-mosaic}
 
@@ -4144,7 +4605,7 @@ kable(offenderTable)
 
 @fig-spine shows a mosaic plot of the data in @tbl-offenders.[^mosaic]
 This is an effective data visualisation for making several comparisons:
-the proportion of male versus female offenders; 
+the overall proportion of male versus female offenders; 
 within each sex, the proportion of different actions against offenders;
 between sexes, the distribution of different actions;
 and the overall proportions of combinations of sex and action against
@@ -4183,15 +4644,17 @@ popViewport()
 
 A mosaic plot is another example of a data visualisation that 
 maps **data summaries** to data symbols rather than raw data.
-The data symbols are rectangles, the widths of the rectangles are
-mapped from the proportion of male versus female offenders and
-the heights of the rectangles are mapped from the proportions of actions
-taken within males and females (see @tbl-offenders-summary).
+The data symbols are rectangles, the proportions 
+of male versus female offenders 
+are encoded as the widths of the rectangles, and
+the proportions of different actions
+taken, within males and females, are encoded as 
+the heights of the rectangles (see @tbl-offenders-summary).
 
 ```{r}
 #| echo: false
 #| label: tbl-offenders-summary
-#| tbl-cap: The data summaries calculated from @tbl-offenders that are mapped to the widths and heights of the rectangles in @fig-spine.
+#| tbl-cap: The data summaries calculated from @tbl-offenders that are encoded as the widths and heights of the rectangles in @fig-spine.
 #| tbl-subcap:
 #|   - Widths
 #|   - Heights
@@ -4210,9 +4673,9 @@ kable(props[,3:4], digits=2)
 
 A mosaic plot is also an example of a data visualisation 
 that maps to visual features that **interact**.
-The explicit mappings involve proportions to the widths and heights
+The explicit mappings involve encoding proportions as the widths and heights
 of the rectangles and we know from @sec-quant-features that 
-this will allow accurate mapping back from lengths to proportions.
+this will allow accurate decoding from lengths to proportions.
 
 > One reason why a mosaic plot is effective is because it maps 
   proportions to lengths.
@@ -4228,8 +4691,9 @@ each combination of sex and action taken.
   overall proportions.
 
 One weakness of mosaic plots is that area is not the most
-accurate visual feature (@sec-accuracy), so we are not able to map
-back to overall proportions as well as we are able to map back to
+accurate visual feature (@sec-accuracy), so we are not able to decode
+overall proportions from the rectangle areas as accurately 
+as we are able to decode
 the proportions that are represented by the separate widths and heights
 of the rectangles.
 
@@ -4286,13 +4750,13 @@ grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
 ```
 
 These weaknesses are exacerbated for mosaic plots of more than two
-variables.  For example, the mosaic plot in @fig-mosaic shows 
-proportions of youth versus adult offenders, then within age levels
-proportions of male versus female offenders, then within combinations
-of age levels and sex proportions of different actions taken against the
+variables.  For example, the mosaic plot in @fig-mosaic shows the
+proportions of youth versus adult offenders, then, within age levels, the
+proportions of male versus female offenders, then, within combinations
+of age levels and sex, the proportions of different actions taken against the
 offender.  Even though there are only very few levels for each variable, 
 our ability to compare heights and widths of rectangles is impaired
-by distance and distractors.
+by inconsistent baselines, distance between rectangles, and distractors.
 
 ```{r}
 #| echo: false
@@ -4384,26 +4848,28 @@ ggplot(crimeGroupSub) +
 ```
 
 The data symbols in @fig-interaction are straight line segments.
-The year is mapped to the horizontal start and end **position** of the lines
-and the number of offenders is mapped to the vertical start and end
-**position** of the lines.  The ethnic group is mapped to the **colour**
-of the lines.  These mappings are effective for mapping *back* to the
-raw data values in @tbl-interaction.
+The year is encoded as the horizontal start and end **position** of the lines
+and the number of offenders is encoded as the vertical start and end
+**position** of the lines.  The ethnic group is encoded as the **colour**
+of the lines.  These mappings are effective for decoding the
+raw data values in @tbl-interaction from the end points and the colours
+of the lines.
 
 In addition, the explicit mappings generate
 an **emergent feature**: the **angle** of the lines.
-Furthermore, the angle of the lines allow us to map *back* to 
+Furthermore, the angle of the lines allow us to decode
 a **data summary**: the *change* in the number
 of offenders between 2011 and 2021 (see @fig-visual-corr).
 
-> An interaction plot is effective because the angle of the lines
-  allows us to map *back* to changes in the data values.
+> An interaction plot is effective because it 
+  allows us to decode changes in the data values from
+  the angles of the lines.
 
 It is more difficult to perceive the *change* in the number of offenders
 for each ethnic group in
 a bar plot like the one shown in @fig-interaction-bar.
-Partly this is because we have to perceive and compare two bars
-for each ethnic group rather than a single line.
+Partly this is because we have to decode the lengths of two bars
+for each ethnic group rather than the slope of a single line.
 
 ```{r}
 #| echo: false
@@ -4416,10 +4882,179 @@ ggplot(crimeGroupSub) +
     theme(aspect.ratio=1)
 ```
 
+## Dangers of combining mappings
+
+@fig-nz-doctor-bar shows a plot of changes in 
+health spending by successive New Zealand 
+governments.[^nz-doctor]
+In this data visualisation,
+the average change in health spending over a government's entire term
+is encoded as the **height** of a bar, 
+with the duration of that government's term
+encoded as the **width** of the bar.
+Because height and width are visual features that interact, the result 
+is an **area** for each government's term.
+However, that area has no sensible interpretation;
+what does a percent multiplied by a number of years mean?
+The areas of the bars do not correspond to any property of the data values.
+
+[^nz-doctor]:
+  @fig-nz-doctor-bar is based on Figure 2 from @nz-doctor.
+
+```{r}
+#| echo: false
+#| label: fig-nz-doctor-bar
+#| fig-cap: A plot showing the differences in health spending for successive New Zealand governments using filled bars.
+nzdoctor <- data.frame(year=c(1999, 1999:2023), 
+                       block=rep(1:5, c(1, 9, 9, 6, 1)),
+                       percent=rep(c(0, 4.7, 1.3, 4.6, -3), c(1, 9, 9, 6, 1)),
+                       party=rep(rep(c(NA, rep(c("Labour", "National"), 2)),
+                                 c(1, 9, 9, 6, 1))))
+block <- function(data, coords) {
+    blockCoords <- split(coords, coords$block)
+    zero <- blockCoords[[1]]$y
+    step <- diff(coords$x)[2]
+    blockRect <- function(x) {
+        l <- x$x[1]
+        r <- l + diff(range(x$x)) + step
+        b <- zero
+        t <- x$y[1]
+        polygonGrob(c(l, l, r, r), c(b, t, t, b),
+                    gp=gpar(col=NA, fill=x$colour[1]))
+    }
+    blocks <- lapply(blockCoords[-1], blockRect)
+    do.call(grobTree, blocks)
+}
+blockYear <- function(data, coords) {
+    zero <- coords$y[1]
+    step <- diff(coords$x)[2]
+    years <- data$x[-1]
+    textGrob(paste0(" ", years, "-", substring(years + 1, 3, 4)),
+             coords$x[-1] + step/2, zero, hjust=0, rot=-90,
+             gp=gpar(fontsize=10))
+}
+partyColours <- c(rgb(217, 42, 31, max=255),
+                  rgb(46, 140, 204, max=255))
+ggDoctor <- ggplot(nzdoctor) +
+    grid_panel(block, aes(year, percent, colour=party, block=block)) +
+    grid_panel(blockYear, aes(year, percent)) +
+    scale_y_continuous(limits=c(-4, 6), expand=expansion(0), 
+                       breaks=-4:6, 
+                       labels=paste0(sprintf("%1.1f", -4:6), "%")) +
+    scale_x_continuous(expand=expansion(add=c(0, 1))) +
+    scale_colour_manual(values=partyColours) +
+    labs(title=paste("New Zealand Real Terms", 
+                     "Average Annual Health Spend Change Per Person",
+                     sep="\n")) +
+    theme(panel.border=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank())
+pushViewport(viewport(width=.9, height=.9))
+print(ggDoctor, newpage=FALSE)
+```
+
+The interaction of visual features can be a boon when the interaction
+produces an emergent feature that can be decoded to properties
+of the data (as in a scatter plot, or mosaic plot, or interaction plot).  
+However, it is possible to create a poor data visualisation
+if we produce an emergent feature that has no correspondence with 
+data values (@fig-data-vis-vis-lie).[^compatibility-principle]
+
+[^compatibility-principle]:
+  This is the "compatibility principle" ? of Carswell and Wickens ?
+
+::: {#fig-data-vis-vis-lie layout-ncol=2}
+
+![](Diagrams/data-vis-vis-lie.png)
+
+If we encode data values as visual features and the visual features interact, 
+the result can be emergent visual features.  However, this is only
+appropriate if the emergent features
+correspond to some property of the data.
+Otherwise, the decoding may lead to unhelpful and misleading interpretations.
+:::
+
+@fig-nz-doctor-line shows a different representation of the data.
+In this case, the average change in health spending is encoded as the (vertical)
+**position** of a line and the duration is encoded as the **length** of the
+line.  These visual features do not interact, so we no longer
+have a misleading emergent visual feature.
+
+```{r}
+#| echo: false
+#| label: fig-nz-doctor-line
+#| fig-cap: A plot showing the differences in health spending for successive New Zealand governments using horizontal lines.
+seg <- function(data, coords) {
+    segCoords <- split(coords, coords$seg)
+    zero <- segCoords[[1]]$y
+    step <- diff(coords$x)[2]
+    segLine <- function(x) {
+        l <- x$x[1]
+        r <- l + diff(range(x$x)) + step
+        y <- x$y[1]
+        grobTree(## segmentsGrob(l, zero, l, y,
+                 ##              gp=gpar(col=x$colour[1], lty="dotted")),
+                 segmentsGrob(l, y, r, y, 
+                              gp=gpar(col=x$colour[1], lwd=3)),
+                 circleGrob(l, y, r=unit(1, "mm"), 
+                            gp=gpar(col=x$colour[1], fill=x$colour[1], 
+                                    lwd=3)),
+                 circleGrob(r, y, r=unit(1, "mm"),
+                            gp=gpar(col=x$colour[1], fill=figbg, lwd=3)))
+    }
+    segs <- lapply(segCoords[-1], segLine)
+    do.call(grobTree, segs)
+}
+segNeg <- function(data, coords) {
+    zero <- coords$y[1]
+    polygonGrob(c(0, 0, 1, 1), c(0, zero, zero, 0),
+             gp=gpar(col=NA, fill="white"))
+}
+segYear <- function(data, coords) {
+    step <- diff(coords$x)[2]
+    years <- data$x[-1]
+    textGrob(paste0(" ", years, "-", substring(years + 1, 3, 4)),
+             coords$x[-1] + step/2, 0, hjust=0, rot=-90,
+             gp=gpar(fontsize=10))
+}
+border <- segmentsGrob(0, 0:1, 1, 0:1)
+ggDoctorLine <- ggplot(nzdoctor) +
+    grid_panel(segNeg, aes(year, percent)) +
+    grid_panel(seg, aes(year, percent, colour=party, seg=block)) +
+    geom_hline(yintercept=0, colour="grey") +
+    grid_panel(segYear, aes(year, percent)) +
+    ## grid_panel(border) +
+    scale_y_continuous(limits=c(-4, 6), expand=expansion(0), 
+                       breaks=-4:6, 
+                       labels=paste0(sprintf("%1.1f", -4:6), "%")) +
+    scale_x_continuous(expand=expansion(add=c(0, 1))) +
+    scale_colour_manual(values=partyColours) +
+    labs(title=paste("New Zealand Real Terms", 
+                     "Average Annual Health Spend Change Per Person",
+                     sep="\n")) +
+    theme(panel.border=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank()) +
+    coord_cartesian(clip="off")
+pushViewport(viewport(width=.9, height=.9),
+             viewport(y=1, 
+                      height=unit(1, "npc") - 
+                             grobWidth(textGrob(" 0000-00",
+                                                gp=gpar(fontsize=10))), 
+                      just="top"))
+print(ggDoctorLine, newpage=FALSE)
+```
+
+
 ## Summary
 
-The mappings in a bar plot---quantitative data values to lengths
-and qualitative values to position---are effective because we
+The mappings involved in a bar plot---quantitative data values encoded as
+lengths
+and qualitative values encoded as position---are effective because we
 are able to perceive some combinations of visual features,
 such as length, position, and colour **independently**.
 
@@ -4434,6 +5069,9 @@ of visual features:  marginal and conditional
 proportions are mapped to widths and heights,
 which produce **area** to represent overall proportions.
 
+Care must be taken to avoid generating emergent features that do not
+represent any meaningful property of the data.
+
 # Visual Shapes {#sec-visual-shapes}
 
 All of the data visualisations that we have considered so far
@@ -4446,7 +5084,8 @@ to one data point.
 
 In this section, we consider data visualisations that map **multiple
 data values** from one or more variables to a **single data symbol**
-(@fig-multivariate-symbol-b), which results in more complex data symbols.
+(@fig-multivariate-symbol-b).
+In this section, we begin to consider more complex data symbols.
 
 ::: {#fig-multivariate-symbol layout-ncol=2}
 
@@ -4457,16 +5096,18 @@ data values** from one or more variables to a **single data symbol**
 \(a) A simple data symbol, like a bar in a bar plot or a data point in a
 scatter plot involves mapping **one** data value from each of two variables 
 to two visual features of 
-**one** data symbol (this is a reproduction of the diagram in 
+**one** data symbol;  a single pair of data values
+produces a single data symbol (this is a reproduction of the diagram in 
 @fig-two-visual-features).
 \(b) A more complex data symbol is produced if we map
 **multiple** data values from each of two variables
 to two visual features of a **single** data symbol.
 Multiple data values from `a` and `b` are mapped to the visual
 features, `x` and `y`, of a single data symbol.
+Multiple pairs of values produce a single data symbol.
 :::
 
-## Line plots
+## Line plots {#sec-line-plots}
 
 @fig-line shows a line plot of the number of offenders per year 
 in different ethnic 
@@ -4496,9 +5137,9 @@ to **colour**.
 However, the **data symbols** in this data visualisation, the coloured lines,
 are different
 from any previous examples that we have seen.
-Although there are 44 rows of data, there are only 4 data symbols
-because multiple rows of data are used to create each data symbol.
-Each line in @fig-line represents 11 pairs of year and count values.
+Although there are 44 rows of data, there are only 4 data symbols.
+Multiple rows of data are used to create each data symbol.
+Each coloured line in @fig-line represents 11 pairs of year and count values.
 
 This contrasts with visualisations like bar plots that use simpler data symbols.
 For example, the bar plot of the same data in @fig-side-bar-year has
@@ -4509,7 +5150,16 @@ coloured lines create **visual shapes** (@fig-data-vis-shape)
 and those visual shapes convey information about collections of data
 values.
 For example, we can perceive slopes and curves and peaks and valleys
-in each of the coloured lines.
+in each of the coloured lines.[^Visual_Pattern_Rec]
+
+[^Visual_Pattern_Rec]:
+  "VISUAL PATTERN RECOGNITION"
+  Few (2006)
+  Makes this same point
+  [p 10]
+  Demonstration of difference between density plot (mostly see a shape) and
+  histogram (mostly see bar heights).
+
 
 ::: {#fig-data-vis-shape layout-ncol=2}
 
@@ -4552,9 +5202,9 @@ that contains a large amount of information,
 then we may be able to map back to more sophisticated **data summaries**.
 :::
 
-> One reason why line plots are effective is because they pack lots of
+> One reason why line plots are effective is because they encode multiple
   data values into a complex data symbol that creates a visual shape,
-  from which we are able to map back to data summaries.
+  from which we are able to decode data summaries.
 
 On the other hand, the more complex data symbols in a line plot,
 that contain multiple data values, are less effective at conveying
@@ -4574,7 +5224,7 @@ We know from @sec-mapping-visual-features that these should be very
 effective mappings that allow us to accurately map back to the raw data values.
 However, in a line plot, we are not mapping a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
-is being mapped, along with lots of other values,
+is being mapped, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
 individual data values lose their individual identity.
 
@@ -4585,18 +5235,18 @@ individual data values lose their individual identity.
 The creation of complex data symbols from multiple data values
 bears some similarity to the creation of emergent features by
 combining visual features (@sec-integral).  In both cases,
-we have *explicit* mappings from data values to basic visual features
-and we produce an *implicit* additional visual effect.
+we have *explicit* encodings from data values to basic visual features,
+but we also produce an *implicit* additional visual effect.
 The difference here is that with complex data symbols, we are collapsing
 multiple data values into a data symbol, so we run a higher risk
 of losing the ability to perceive individual data values.
 
 There is also a similarity between complex data symbols and visual summaries 
-(@sec-visual-summaries).  In both cases, we gain the ability to perceive
+(@sec-visual-summaries).  In both cases, we gain the ability to decode
 data summaries from collections of data values.
 Again, the difference is that with visual summaries, we are summarising
 many simple data symbols that each represent individual data values, 
-whereas with a complex data symbol we perceive the
+whereas with a complex data symbol we decode the
 data summary from a single data symbol that obscures the individual data values.
 
 ## Case study:  Scatter plots with lines
@@ -4606,9 +5256,9 @@ per year in different ethnic groups (@tbl-crime-group-year).
 This is very similar to @fig-line, but we have added a data point
 at every horizontal and vertical **position**.
 
-Like @fig-line, we can perceive overall trends from the line data symbols,
-but we can also perceive individual data values more easily because
-now every individual data value is mapped to its own data symbol.
+Like @fig-line, we can decode overall trends from the line data symbols,
+but we can also decode individual data values more easily because
+now every individual data value is also mapped to its own data symbol.
 
 ```{r}
 #| echo: false
@@ -4639,7 +5289,6 @@ a single mode and right skew.
 #| echo: false
 #| label: fig-density
 #| fig-cap: A density plot of the points scored per game by Tier One nations at Rugby World Cups.
-breaks <- seq(0, 105, by=5)
 gg <- ggplot(rwcAll) +
     geom_density(aes(scored), colour="black", linewidth=1) +
     scale_x_continuous(name="points scored") +
@@ -4655,15 +5304,16 @@ Also like a histogram, a density plot actually maps **data summaries**,
 density estimates
 rather than raw data values,
 to visual features (see @tbl-density-stats).
-However, rather than 
-mapping each data summary to its own data symbol, a density plot
-maps all of the data summaries to a single data symbol, a line, to create
+In the case of a histogram, the data summary values are counts within bins
+(see @tbl-hist-stats) and each data summary produces a separate bar.
+However, a density plot encodes
+all of the data summary values to a single data symbol, a line, to create
 a **visual shape**.
 The density estimates are mapped to the horizontal and vertical **positions**
 of a single line data symbol.
 The visual shape allows us to perceive summaries of the density estimates.
-For example, is there a single maximum density and how does the density
-change to either side of that peak.
+For example, whether there is a single maximum density and how the density
+changes to either side of that peak.
 
 ```{r}
 #| echo: false
@@ -4676,13 +5326,16 @@ kable(head(dStats), digits=c(2, 4))
 ```
 
 @fig-data-stat-vis-shape-stat shows the path from raw data values to
-the visual shape in a density plot and
-the summary information that we can map back to.
-We cannot map back to the raw data values from a density plot, nor
-can we map back very easily to the data summaries (the density estimates).
+data summaries (density estimates), which are encoded
+as the visual features (horizontal
+and vertical position) of a visual shape (a line)
+in a density plot and
+the summary information that we can decode from the visual shape.
+We cannot decode the raw data values from a density plot, nor
+can we very easily decode the data summaries (the density estimates).
 The only real purpose of the data symbol in a density plot is to 
-map back to **summaries** of the data summaries, so that
-we can perceive features of the density estimates.
+allow us to decode **summaries** of the data summaries, which are
+visual features of the density estimates.
 
 ::: {#fig-data-stat-vis-shape-stat layout-ncol=2}
 
@@ -4700,14 +5353,68 @@ choose how the data summaries are calculated from the raw data values.
 In the case of a density plot, we must choose a "kernel" and a "bandwidth",
 both of which affect the smoothness of the density estimates.
 This means that we may need to explore more than one kernel
-and bandwidth (see the end of @sec-summary-caveats).
+and bandwidth (see @sec-summary-caveats).
 
-## Caveats
+**TODO** density plots better for showing multiple distributions?
+Because gestalt continuity?
+
+```{r}
+#| echo: false
+#| label: fig-multiple-density
+#| fig-cap: Density plots of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+gg <- ggplot(rwcAll) +
+    geom_density(aes(scored, colour=hemisphere), linewidth=1) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+```{r}
+#| echo: false
+#| label: fig-multiple-hist
+#| fig-cap: Histograms of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+breaks <- seq(0, 105, by=5)
+gg <- ggplot(rwcAll) +
+    geom_histogram(aes(scored, colour=hemisphere, fill=hemisphere), 
+                   breaks=breaks, alpha=.2, position="identity") +
+    scale_x_continuous(name="points scored") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+## The dangers of visual shapes
 
 Need a caveat that more complex shapes does NOT necessarily mean 
-useful mappings back to data summaries - could just end up with a mess.
+useful mappings back to data summaries - could just end up with a mess
+(@fig-data-vis-shape-lie).
+
+::: {#fig-data-vis-shape-lie layout-ncol=2}
+
+![](Diagrams/data-vis-shape-lie.png)
+
+Mapping data values to the visual features of a complex shape 
+may not be effective if the complex shape decodes to unhelpful
+or misleading information.
+:::
+
+## Case study: loess curves
+
+Another example of data -> summary -> features -> shapes -> summaries
 
 ## Summary
+
+Mapping multiple data values to a single data symbol produces
+a **visual shape**, like a line on a line plot.
+
+Data summaries, such as trends over time, can can be decoded 
+from a visual shape.
+However, decoding raw data values from a visual shape may be harder, cmopared
+to decoding raw data values from a simple data symbol like a bar.
 
 
 # Multiple Mappings
@@ -4718,12 +5425,12 @@ This visualisation is different from anything we have seen previously
 because it involves multiple mappings.
 The data symbol in this case is a simple data point, but we have
 mapped data values to *five* different visual features of each data point.
-The number of clean breaks is mapped to the horizontal **position** of 
+The number of clean breaks is encoded as the horizontal **position** of 
 the data points and
-the number of tries is mapped to the vertical **position** of the data points.
-The number of points scored is mapped to the **size** of the points, the
-hemisphere is mapped to the **shape** of the points, and the number of runs
-is mapped to the **colour** of the points.
+the number of tries is encoded as the vertical **position** of the data points.
+The number of points scored is encoded as the **size** of the points, the
+hemisphere is encoded as the **shape** of the points, and the number of runs
+is encoded as the **colour** of the points.
 
 ```{r}
 #| echo: false
@@ -4741,7 +5448,7 @@ ggplot(RWCperGame) +
 ```
 
 @fig-multiple is effective in some ways because some of the mappings
-are to effective visual features. For example, we can easily map back from
+involve effective visual features. For example, we can easily map back from
 horizontal and vertical positions to the number of clean breaks and the
 number of tries.  We can also map back from the emergent feature of **position
 in space** (@sec-integral) to a correlation between clean breaks and tries.
@@ -4750,9 +5457,9 @@ However, other mappings are less effective.  For example, it is
 less easy to accurately map back from size 
 to the number of points scored and even
 harder to map back from colour to the number of runs.
-
-**TODO** relate back to gestalt in visual-model where lots of things
-changing makes pop-out stop working.
+In addition, we are hampered by the fact that many different
+visual features are changing at once, so it is harder
+to perceive individual differences (see @sec-differences).
 
 One goal of visualising multiple variables like we have in 
 @fig-multiple is to discover or display multivariate relationships
@@ -4764,7 +5471,7 @@ and score more points compared to the other teams.
 
 This section looks at some of the different approaches to visualising
 several variables at once.  How do we perceive multivariate relationships?
-Can we still perceive individual data values at the same time?
+And can we still perceive individual data values at the same time?
 
 ## Parallel coordinates plots
 
@@ -4776,11 +5483,11 @@ quantitative data values (see @sec-mapping-visual-features).
 If we attempted to map all of the variables in @tbl-rwc-2023, we could
 actually run out of visual features to use (@fig-visual-features).
 
-A different approach is to map more of the data variables
+An alternative approach is to map more of the data variables
 to the same visual feature.  For example, @fig-parallel shows 
 a parallel coordinates plot of the data from @fig-multiple.
 In this visualisation, all of the quantitative variables have been
-mapped to **position**, with hemisphere mapped to colour.
+encoded as **position**, with just hemisphere (qualitative) encoded as colour.
 
 ```{r}
 #| echo: false
@@ -4797,15 +5504,15 @@ popViewport()
 ```
 
 A parallel coordinates plot maps data summaries rather than raw data values
-(@sec-summaries), for example, all data values are standardised to a range
+(@sec-summaries).  For example, all data values are standardised to a range
 between 0 and 1.  @tbl-parallel-stats shows some of the values that
 are actually mapped to visual features in @fig-parallel.
-Each variable is mapped to a different 
-horizontal **position** and the values within each variable are mapped 
-to vertical **position**.  In this way, all quantitative data values
-are mapped to **position**.
+Each variable is encoded as a different 
+horizontal **position** and the values within each variable are encoded as
+vertical **position**.  In this way, all quantitative data values
+are encoded as **position**.
 
-In addition, the hemisphere is mapped to **colour** and a 
+In addition, the hemisphere is encoded as **colour** and a 
 separate line data symbol is drawn for each country.
 This means that a visual shape is drawn for each country
 (@sec-visual-shapes).
@@ -4828,13 +5535,16 @@ kable(head(long), digits=2)
 ```
 
 On one hand, a parallel coordinates plot appears to
-makes sense because it maps lots
-of data values to **position**, which is an accurate visual feature
+makes sense because it encodes multiple
+data values to **position**, which is an accurate visual feature
 for quantitative data.
 However, this advantage is immediately squandered because the values that
-are mapped are not the raw data values
+are encoded are not the raw data values
 (@fig-stat-vis-decode), so a parallel coordinates plot
-is not effective for mapping back to raw data values.
+is not effective for decoding raw data values from the positions of the lines.
+Furthermore, the data symbols are lines, so each data symbol encodes
+multiple data values (@sec-line-plots), which makes it difficult to decode
+even individual data summary values from the lines.
 
 The effectiveness of a parallel coordinates plot comes from the visual
 shapes produced by the lines.  For example, in @fig-parallel,
@@ -4849,6 +5559,15 @@ rather than criss-crossing each other wildly suggests that there is
 an overall correlation between all four quantitative variables, not
 just in the top four teams.
 
+::: {#fig-mappings-1-n-1-n layout-ncol=2}
+
+![](Mappings/mapping-1-n-1-n.png)
+
+In a parallel coordinates plot, a single row of data---one data value from 
+each of several variables---is mapped to
+a visual shape (a line).
+:::
+
 > A parallel coordinates plot can be effective at identifying 
   high-dimensional groups or correlations
   because it maps multiple data values from different variables
@@ -4862,14 +5581,14 @@ just in the top four teams.
 One difficulty with @fig-parallel is that many of the lines overlap
 each other, which makes it difficult to separately perceive 
 individual visual shapes.  @fig-profile shows an alternative
-approach to visualising the same data, 
-a profile plot, where a shape is drawn for each country.
-The shape in this case is a filled in polygon, effectively the lines
+approach to visualising the same data, called 
+a profile plot.  Similar to a parallel coordinates plot, 
+a visual shape is drawn for each country, but 
+the shape in this case is a filled in polygon, effectively the lines
 in @fig-parallel with the area below them (down to zero) filled in.
 
-**TODO** relate to over-plotting section (wherever that ends up)
-
-Again, this can be effective because of the overall shapes.
+Again, this sort of data visualisation 
+can be effective because of the overall shapes.
 For example, we can see a group of
 four shapes that are larger than the others.
 We can also see that Argentina and Fiji appear
@@ -4897,18 +5616,18 @@ popViewport()
 ```
 
 @fig-profile uses the same data summaries as @fig-parallel
-(@tbl-parallel-stats), and similar mappings: each variable is mapped
-to a different horizontal **position** and the values within each variable
-are mapped to vertical **position** and hemisphere is mapped to 
+(@tbl-parallel-stats), and similar mappings: each variable is encoded as
+a different horizontal **position** and the values within each variable
+are encoded as vertical **position** and hemisphere is mapped to 
 **colour**.  The data symbol is also similar:  multiple data values 
-are mapped to a single data symbol, either a line or a polygon.
+are mapped to a single data symbol, in this case a polygon.
 
 The difference in @fig-profile is that, rather than having all of the
 data symbols on the same plot, each data symbol is drawn in its
 own **position in space**.  This makes it easy to view each distinct
 data symbol.
 
-The group of large shapes in @fig-profile is easier to see because
+The cluster of four larger shapes in @fig-profile is also easier to see because
 the countries have been ordered by the number of points scored 
 (the right-hand height of the shape).  As we have seen before,
 ordering data symbols can make a big difference (@sec-distance-effect).
@@ -4920,10 +5639,12 @@ ordering data symbols can make a big difference (@sec-distance-effect).
 
 @fig-facet-before shows a line plot of the number of youth offenders per year
 in different Police Districts of New Zealand.
-This visualisation has some good mappings---we map 
-year to horizontal **position** and count to 
-vertical **position**---but also a weaker mapping:  the Police District.
-We map districts to **colour**, but because there are 12 different districts,
+This visualisation makes use of several effective mappings. 
+For example, we encode
+year as horizontal **position** and we encode count as
+vertical **position**.
+However, there is also a weaker mapping:  the Police District.
+We encode districts as **colour**, but because there are 12 different districts,
 we are exceeding the capacity of colour (@sec-capacity).  It is not
 easy to differentiate all of the different colours (not helped by 
 overplotting of the lines).
@@ -4943,12 +5664,12 @@ ggplot(crimeDistrict) +
 ```
 
 @fig-facet-after shows one solution: a facetted plot.
-Each district has been mapped to a **position in space**
+Each district has been encoded as a **position in space**
 and we draw a separate plot for each district.  This makes
 it very easy to distinguish the individual districts.
 
 One downside is that comparisons between districts are more difficult
-because of counts and/or years are **unaligned** (@sec-unaligned).
+because counts and/or years are **unaligned** (@sec-unaligned).
 In this case, we have mitigated that problem by drawing a grey line
 for all districts in each plot.  Similar to grid
 lines, this makes it easier to compare the line for each district
@@ -4976,21 +5697,33 @@ with a similar starting count of offenders (@sec-distance-effect).
 
 ## Case study: Scatterplot matrices
 
-A form of facetting - get to see the correlation between all four variables
-like in @fig-parallel.
+@fig-splom shows a scatter plot matrix 
+of the performance measures
+for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
 
-This tells a nice story ...
+This is another example of reusing **position** to encode data values.
+Each combination of variables is encoded as a separate scatter plot
+at a different position in space
+and, within each scatter plot, two variables are encoded as horizontal
+and vertical position.
 
-* Going down the diagonal: the number of runs is correlated loosely with
-  the number of clean breaks; the number of clean breaks is more
-  strongly correlated with the number of tries; and the number of tries is
-  very strongly correlated with the number of points.
+Within each scatter plot, there is an emergent feature of position in
+space, which allows us to decode the correlation between different
+pairs of variables.  Although this only allows us to see pairwise
+correlations between variables, we can also get a glimpse of 
+higher-level correlations across several of the scatterplots.
 
-* Going down the columns:  the number of runs is correlated loosely
-  with the number of clean breaks, a little more loosely with the number
-  of tries and a little more loosely still with the number of points;
-  the number of clean breaks is reasonably correlated with the number
-  of tries and a little more loosely with the number of points.
+For example,
+looking down the diagonal of the matrix,
+we can see that: the number of runs is correlated loosely with
+the number of clean breaks; the number of clean breaks is more
+strongly correlated with the number of tries; and the number of tries is
+very strongly correlated with the number of points.
+
+If we look down the first column of the matrix, we
+can see that:  the number of runs is correlated loosely
+with the number of clean breaks, a little more loosely with the number
+of tries and a little more loosely still with the number of points.
 
 ```{r}
 #| echo: false
@@ -5035,6 +5768,16 @@ ggplot(all) +
 
 ## Summary
 
+When we need to visualise multiple variables at once, it is not
+effective to map each different variable to a different visual feature.
+
+An alternative is to reuse the same visual feature for multiple
+different variables.
+In particular, we can reuse **position**.  
+
+
+
+**TODO** 
 Mention that multivariate visualisation is an area where dynamic and
 interactive graphics can be useful, e.g., GGobi ?
 
@@ -5044,7 +5787,7 @@ interactive graphics can be useful, e.g., GGobi ?
 number of tries for countries
 at the 2023 Rugby World Cup (@tbl-rwc-2023).
 This data visualisation is similar to @fig-scatter, but it adds an
-extra mapping of country names to the **shape** of the data symbols.
+extra mapping.  Country names are encoded as the **shape** of the data symbols.
 This is a reasonable mapping, despite the large number of different
 countries, because each different shape only appears once.
 We are able to distinguish all countries from each other and,
@@ -5065,7 +5808,7 @@ ggplot(RWCperGame) +
 number of tries for countries
 at the 2023 Rugby World Cup, but this time with flags as the data symbols.
 In one sense, this is just a variation on @fig-flags because the country
-names are mapped to the **shape** of a data symbol. 
+names are encoded as the **shape** of a data symbol. 
 Each data symbol is a shape that allows us to distinguish between the
 different countries.
 
@@ -5119,7 +5862,23 @@ ggplot(rwcFlags) +
 @fig-flags-direct demonstrates this point by repeating the scatter plot,
 but removing the legend.  We are still able to identify not only 
 that the data symbols represent different things, but we can identify
-the country names as well.
+(at least some of) the country names as well.
+
+::: {#fig-data-obj-decode layout-ncol=2}
+
+![](Diagrams/data-obj-decode.png)
+
+If we encode data values as familiar visual objects, it is possible to
+decode more sophisticated data values and the decoding will
+occur without an explanatory legend.
+:::
+
+In terms of @sec-congruence, the flags have **implicit** mappings
+(@fig-implicit-decode).
+We can **decode** the flags to data values, in this case country
+names, even without an explicit encoding, because we 
+have learned the association between flags and the countries
+that they represent.
 
 ```{r}
 #| echo: false
@@ -5146,7 +5905,9 @@ ggplot(rwcFlags) +
 
 Just to make the point completely clear, @fig-scatter-country-no-legend
 shows @fig-scatter-country without a legend.
-There is nothing about the shape of the data symbols in 
+Although we can still perceive that the data symbols are different
+from each other,
+there is nothing about the shape of the data symbols in 
 @fig-scatter-country-no-legend that conveys the country names.
 We can clearly see that @fig-flags-direct contains more information
 than @fig-scatter-country-no-legend.
@@ -5190,9 +5951,9 @@ kable(crimeDistrictTotal[c("district", "rate")], digits=2)
 ```
 
 The data symbol in @fig-map is a polygon representing the geographic
-boundary of each police district.  This implicitly entails a mapping
-from police district to the **position** of each polygon.
-Crime rate is mapped to the fill colour of each region.
+boundary of each police district.  This implicitly entails an encoding of
+a police district as the **position** of a polygon.
+Crime rate is encoded as the fill colour of each polygon.
 
 The use of polygons as data symbols is effective because
 the polygons form familiar shapes with familiar spatial arrangements
@@ -5226,26 +5987,27 @@ ggplot(districts) +
 > A choropleth map is effective because it maps geographic regions to
   familiar visual objects that resemble the real world regions.
 
-A weakness of @fig-map is that it maps the **quantitative** crime rate
-to colour (chroma and/or luminance).
-This means that we can only map *back* to ordinal comparisons
+A weakness of @fig-map is that it encodes the **quantitative** crime rate
+as colour (chroma and/or luminance).
+This means that we can only decode ordinal comparisons
 between regions (see @sec-ordinal).  For example, we can
 see that the highest crime rate occurs in the district to the east
 of the North Island, but it is difficult to perceive how much higher
 that crime rate is compared to the next highest crime rate.
 
 > A choropleth map is *only* effective for making ordinal comparisons
-  between geographic regions because it maps quantitative values to
+  between geographic regions because it encodes quantitative values as
   colour.
 
 @fig-district-bar shows a bar plot of the same data,
 which demonstrates the advantages and disadvantages of
 the choropleth map in @fig-map.
 In @fig-district-bar, it is much easier to compare the crime rate
-values because crime rates are mapped to bar **length**, but
+values because crime rates are encoded as bar **length**. However,
 it is much harder to associate the different regions with their
-spatial arrangements because all we have are the region names, which
-are arranged vertically and with no correspondence to the spatial
+spatial arrangements because all we have are the region names.
+Each police district is encoded as the vertical position of a bar,
+with no correspondence to the spatial
 arrangement of the regions in the real world.
 
 ```{r}
@@ -5270,17 +6032,18 @@ The larger polygons accurately
 reflect the fact that some 
 police districts are geographically larger than others, 
 but there is potential for larger polygons
-to be erroneously mapped *back* to larger crime rates.
+to be erroneously decoded as larger crime rates.
 
 Two alternative approaches are shown in @fig-map-alt.
 These both retain the region shapes of the map, but map
 crime rates to the **area** of circles or the **length** of bars.
 These data symbols have a spatial arrangement that corresponds 
 to the real-world arrangement of police districts
-and they provide a better mapping *back* to data values than
-the colours in the choropleth map,
-although area is still not the most accurate visual feature and the lengths
-are unaligned (see @sec-accuracy).
+and they provide a better decoding of crime rates from data symbols
+compared to
+the colours in the choropleth map
+(although area is still not the most accurate visual feature and the lengths
+are unaligned; see @sec-accuracy).
 
 
 ```{r}
@@ -5378,7 +6141,7 @@ extract the important information.[^chart-junk]
 #| echo: false
 #| label: fig-junk
 #| fig-cap: A choropleth map of the average crime rate over the period 2011 to 2021 for each police district (like @fig-map), with cartoon villian images added.
-#| fig.keep: "last"
+#| fig.keep: last
 runonce <- function() {
     PostScriptTrace("Images/criminal.eps", "Images/criminal.xml")
 }
@@ -5440,9 +6203,10 @@ The cartoon villians are relatively large, complex, and colourful
 and bear no connection to the raw data, so there is a good chance
 that they will distract from the visual features that do convey data values.
 
-> Chart junk is *not* effective because it does not map *back* to 
-  data values and because it distracts from the visual
-  elements that do map *back* to data values.
+> Chart junk is *not* effective because it is impossible to decode
+  data values from chart junk (no data values have been encoded)
+  and because chart junk distracts from the visual
+  elements that do represent data values.
 
 However, 
 it is important to point out that not all **visual objects** are chart junk.
@@ -5468,8 +6232,8 @@ visualisation.[^junk-pro]
 > Chart junk can be effective because it has a greater
   emotional impact and is more memorable.
 
-Overall, visual objects that are not related to the raw data
-are *not* effective for mapping *back* to the raw data,
+Overall, visual objects that are not related to data values
+are *not* effective for decoding data values,
 so any other benefits have to be weighed against that cost.[^junk-summary]
 
 [^junk-summary]:
@@ -5481,7 +6245,7 @@ so any other benefits have to be weighed against that cost.[^junk-summary]
 @fig-pic shows a pictogram of the number of pet dogs and pet cats 
 globally.[^statista]
 The data symbols in this plot are images, or **icons**, of a cat and a dog,
-with the number of pets mapped to the height of each icon.[^pictograms]
+with the number of pets encoded as the height of each icon.[^pictograms]
 Icons are an example of **visual objects**;  they 
 are effective at conveying categories because they
 visually resemble physical objects, in this case, cats and dogs.
@@ -5495,7 +6259,7 @@ visually resemble physical objects, in this case, cats and dogs.
 
 Unfortunately, because the cat and dog images are not simple shapes, it
 is harder to accurately perceive the heights of the images, so it is
-harder to map back to the number of cats and dogs.
+harder to decode the number of cats and dogs.
 Even worse, we actually perceive the size, or **area**, of the images.
 The dog image is wider than the cat image so the number of dogs is
 visually over-emphasised.
@@ -5543,14 +6307,14 @@ some of the problems in @fig-pic.  In @fig-pic-alt-1, the images are
 distorted so that they have the same width and so that only the height
 of the images changes.  There is also a bar
 to help with the perception of **length**.
-While the bar makes it much easier to map *back* to the
+While the bar makes it much easier to decode the
 number of pets,
 the distortion is not effective because it hinders the perception of
 the icon.
 
 @fig-pic-alt-2 uses a bar to represent the number of pets and just
 has a small version of the icon at the base of each bar.
-We know that the bar is effective for mapping *back* to the number
+We know that the bar is effective for decoding the number
 of pets and the small icons are effective as labels for the bars.
 
 ```{r}
@@ -5608,13 +6372,13 @@ ggplot(pets) +
 
 @fig-pic-icon shows two more alternatives to @fig-pic.
 @fig-pic-icon-2 is just a standard bar plot.  We know that
-this is effective for mapping *back* to the number of pets.
+this is effective for decoding the number of pets.
 
 @fig-pic-icon-1 uses repetitions of the icons to represent
 the number of pets, still within a bar.
 In this case, each icon represents 100 million
 pets.
-The ability to count icons is effective for mapping *back* to
+The ability to count icons is effective for decoding
 the overall counts.[^icon-plots]
 
 [^icon-plots]:
@@ -5710,9 +6474,9 @@ The data symbol in this visualisation is a little unusual; each
 country is represented by a combination of circles, curves, and lines
 that together produce a **visual object** that resembles a face.
 The mappings in this visualisation are also a little unusual.
-The number of points scored is mapped to the **curvature** of the
-smile, the number of tries is mapped to the **angle** of the eye brows,
-and the number of clean breaks is mapped to the horizontal **position** of 
+The number of points scored is encoded as the **curvature** of the
+smile, the number of tries is encoded as the **angle** of the eye brows,
+and the number of clean breaks is encoded as the horizontal **position** of 
 the eyes.
 
 ```{r}
@@ -5739,7 +6503,7 @@ ggplot(rwcChernoff) +
 The mappings in a Chernoff face are *not* very accurate (see @sec-accuracy;
 **curvature** is ranked *below* colour in terms of accuracy),[^curvature] so
 Cheroff faces are *not* very effective for 
-mapping *back* to raw data values.
+decoding raw data values.
 
 [^curvature]:
   Link to a resource that has a comprehensive list of visual channels
@@ -5747,8 +6511,9 @@ mapping *back* to raw data values.
 
 However, the familiarity of Chernoff faces means that we are easily
 able to perceive common combinations of the facial features.
-For example, we can see several sad faces at the top-left of @fig-chernoff
-and several happy faces at the bottom-right.
+For example, we can see several sad, worried
+faces at the top-left of @fig-chernoff
+and several happy, perhaps even smug, faces at the bottom-right.
 We can perceive countries that share similar combinations
 of performance measures.
 In other words, we can perceive multi-dimensional correlations
@@ -5763,13 +6528,96 @@ The resulting proximity helps with perceiving groups of similar faces.
   because the data symbol is a familiar visual object from which we can
   easily perceive simple human emotions.
 
+## The dangers of visual objects
+
+One issue with more complex data visualisations 
+is that their effectiveness depends on a larger amount of
+learning and experience. 
+If the viewer does not have the knowledge required to 
+decode a visual object, then the data visualisation will fail.
+We saw an example of this in @fig-flags-direct, where the 
+familiarity of different country
+flags will vary with nationality and age, for example.
+
+An extreme version of this problem is the use of not just complex
+or unusual
+data symbols, but entirely novel data visualisations.[^novel-plot]
+
+[^novel-plot]:
+  Kosslyn's Principle of appropriate knowledge ?
+
+Andrews curve of RWCperGame statistics
+(analogue of @fig-parallel).
+**Cite Andrews article.**
+Can see the three distinct groups of countries more easily in this
+than in parallel plot, but hard to understand exactly what
+you are seeing.
+Plus NO chance of recovering original data values
+(another example of visualising data summary).
+
+```{r}
+#| echo: false
+#| label: fig-andrews
+#| warning: false
+#| results: hide
+#| fig-cap: An Andrews plot of the performance measures for teams in the 2023 Rugby World Cup.
+## remotes::install_github("gbasulto/drewcurves")
+library(drewcurves)
+drew <- drewcurves(RWCperGame[c(2, 11, 5, 10, 7)], # RWCperGame[-1]
+                   group=1, # sphere
+                   return_dataframe=TRUE)
+gg <- ggplot(drew) +
+    geom_line(aes(t, value, colour=sphere, group=key), alpha=.5) +
+    theme(axis.title=element_blank(),
+          axis.text=element_blank(),
+          axis.ticks=element_blank())
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+Another example of this problem are the hurrican "cones of uncertainty"
+that Cairo highlights in Chapter 5 of How Charts Lie.
+
+## Summary
+
+If we encode data values as familiar visual objects, it becomes possible
+to decode more complex concepts based on prior learning and experience.
+
+This may obviate the need for legends.
 
 # Text
 
+**Can really base this on Brath's book "Visualising with Text"**
+
+**TODO** Add section on tables.  Wainer?
+At least some table guidelines are essentially advocating for
+using pre-attentive visual features of text!
+See Tables section in Text article
+
 **TODO** - **MUST** add that text has spectacular congruence!
-Also, text is very flexible - it can convey data, information,
+Or at least, text has inherent semantics, so you must respect that
+or you will create visual dissonance (refer back to red-green-blue figure
+in visual dissonance section). 
+And the congruence is incredible strong so it is an effective
+encoding - similarly, any dissonance is extreme (to the point of
+being just plain wrong if not fraudulent).
+Refer back to intro to congruence section.
+
+**Also**, text is very flexible - it can convey data, information,
 knowledge, understanding, and wisdom. 
 Most other graphical elements are much more limited.
+
+**REFER** back to the executive summary as example of encoding
+categories as text visual features (colour, slant, weight).
+
+**TODO**  (in footnote) Refer to Borkin et al (2016) and Kong et al (2018) for
+importance and potential influence of titles, plus
+"Titles in Data Visualization: Empirical Evidence"
+https://filwd.substack.com/p/titles-in-data-visualization-empirical
+Basic messages are that people look a lot at titles and 
+people can be swayed by titles and titles (and text generally)
+make plots memorable.
 
 @fig-no-text is a version of @fig-crime with all of the text
 removed.  Although we can see that some values, or rather three sets of values,
@@ -5836,12 +6684,12 @@ bar data symbols in @fig-bar-text,
 data values are also mapped to the
 visual features of the text data symbols.
 For example, 
-the ethnic groups are mapped to the vertical **position** of the bars
-*and* to the vertical **position** of the text.
+the ethnic groups are encoded as the vertical **position** of the bars
+*and* as the vertical **position** of the text.
 The data values for the number of offenders in each ethnic group
-are mapped to the **length** of the bars,
-but they are also mapped to the horizontal **position**
-of the text *and* to the **shape** of the text---the letters and digits 
+are encoded as the **length** of the bars,
+but they are also encoded as the horizontal **position**
+of the text *and* as the **shape** of the text---the letters and digits 
 that make up the text.
 
 Compared to the bar data symbols in @fig-bar-text, the text data symbols
@@ -5857,8 +6705,9 @@ shapes we can process simultaneously
   Talk about there being separate verbal processing areas in the brain.
   Text has to come in as visual, so undergoes visual processing,
   but text is also processed separately for its language value.
+  Cite Ware p315-316
 
-The value of text data symbols is that they allow us to map *back* to
+The value of text data symbols is that they allow us to decode
 data values very well (@fig-decode).
 In terms of the criteria that we discussed in @sec-mapping-visual-features,
 text is appropriate for both **quantitative** and **qualitative** data values,
@@ -5866,7 +6715,13 @@ text is extremely **accurate**, and text has a very large **capacity**.
 
 > Text data symbols are effective because they can be used to represent
   any sort of data and they allow a very accurate
-  mapping *back* to data values.
+  decoding of data values.
+
+**NOTE** that this accuracy is excellent for a single value 
+but even for comparing two values it can get messy
+Eg what proportion of 1234 is 123?
+Even worse with words
+Example of cognitive effort 
 
 The weaknesses of text are that comparing values requires more cognitive
 effort compared to comparing simple visual features (like the
@@ -5876,13 +6731,13 @@ This is why a table of numbers, like @tbl-crime,
 is ineffective for perceiving groups of values or trends in values.
 
 > It is harder to compare data values that are mapped to 
-  text because it requires more effort to map *back* to data 
+  text because it requires more effort to decode data 
   values and to perform mental calculations.
 
 > Large numbers of text data symbols are *not* effective because
-  the visual system cannot generate visual summaries from the text.
+  the visual system cannot decode visual summaries from the text.
 
-## Guides
+## Guides {#sec-guides}
 
 @fig-crime-guides is a version of @fig-crime with the guides highlighted
 in purple.  There are tick marks and tick labels on the x-axis and y-axis,
@@ -5917,37 +6772,34 @@ are all composed of **data symbols**, with **data values** mapped to
 This is perhaps easiest to see with
 the grid lines.  Each grid line is a data symbol where a data value,
 a rate of offending, 
-has been mapped to the vertical **position** of the line.
+has been encoded as the vertical **position** of the line.
 Similarly, each tick mark on the y-axis
 is a line data symbol where a rate of offending
-has been mapped to the vertical **position** of the line
+has been encoded as the vertical **position** of the line
 and each tick mark on the x-axis is a line data symbol where a 
-year has been mapped to the horizontal **position** of the line.
+year has been encoded as the horizontal **position** of the line.
 Finally, each of the tick labels on the y-axis is a text data symbol
-where a rate of offending has been mapped to the vertical **position**
-of the text *and* to the **shape** of the text and similar mappings
+where a rate of offending has been encoded as the vertical **position**
+of the text *and* as the **shape** of the text.  Similar mappings
 apply to the
 x-axis tick labels.
 The legend is also made up of line data symbols and text data symbols,
-this time with age data values mapped to the **colour** of lines
+this time with age data values encoded as the **colour** of lines
 and the **shape** of text.
-
-Furthermore, the grid lines, tick marks, and tick labels form groups
-thanks to their shared proximity (@sec-visual-model-groups).
 
 **TODO** also gestalt continuity because they are aligned?
 
 The fact that guides typically involve **text** data symbols
 makes sense because a guide typically presents only a small number of known
-data values that we want to map *back* to as accurately as possible.
+data values that we want to decode as accurately as possible.
 This is the situation where text excels.   
 
 Viewed as groups of data symbols, the guides on a data visualisation
-make sense:  the guides provide a very accurate way to map *back*
-from **positions** and **colours** on the plot to data values.
+make sense:  the guides provide a very accurate way to decode data values
+from **positions** and **colours** on the plot.
 
-> Guides are effective because they map known data values 
-  to data symbols and because those data symbols map *back* to data values
+> Guides are effective because they encode known data values 
+  as data symbols and because decode data values from those data symbols 
   extremely well.
   
 ## Labels {#sec-labels}
@@ -5980,7 +6832,7 @@ ggplot(crimeAgeSimple) +
 
 The difference between labels and the other components of a data visualisation,
 the data symbols and the guides, is that labels relate to **metadata** 
-rather than data values.  Labels contain information like
+rather than raw data values.  Labels contain information like
 descriptions of variables and 
 units of measurement and references to data sources.
 These are all important pieces of information, but they are more complex,
@@ -6009,7 +6861,7 @@ the viewer to attend to.
 ## Case study:  Word clouds {#sec-word-cloud}
 
 @fig-wordcloud shows a word cloud data visualisation based on the
-text of the [Wikipedia page on the Rugby World Cup](https://en.wikipedia.org/wiki/Rugby_World_Cup) [@wiki-rwc]
+text of the [Wikipedia page on the Rugby World Cup](https://en.wikipedia.org/wiki/Rugby_World_Cup) [@wiki-rwc].
 This visualisation shows the frequency with which different words
 appear on the Wikipedia page.  The data values that are being visualised
 are shown in @tbl-wiki-rwc.
@@ -6023,12 +6875,13 @@ A word cloud of the frequency of words in the Wikipedia page for the Rugby World
 
 This data visualisation is unusual because it consists entirely of text
 **data symbols**.
-The mappings in @fig-wordcloud are from each word to the **shape** of 
-a text data symbol and from frequency to the **size**
+The mappings in @fig-wordcloud include encoding each word as the **shape** of 
+a text data symbol and encoding frequency as the **size**
 of a text data symbol.
 There is no need for a guide for the mapping from words to text shape because
-the mapping is exact;  there is no need to "convert" each text data symbol
-into a word data value because it is already there.
+there is an implicit decoding (@fig-implicit-decode);  
+we can decode each text data symbol
+into a word data value because that decoding has already been learned.
 
 There is no guide for the mapping from word frequency to text size,
 but the visualisation is still effective at conveying the *relative* 
@@ -6043,7 +6896,8 @@ kable(head(wikiRWC), row.names=FALSE)
 ```
 
 The mapping of frequencies to **size** does not provide the best **accuracy**
-for mapping *back* to frequencies, so we cannot identify the exact frequency
+for decoding frequencies because the data symbols are not simple shapes, 
+so we cannot identify the exact frequency
 of any one word, we cannot identify the quantitative difference in frequency 
 between pairs of words, and we cannot easily perceive the distribution
 of frequencies across words.
@@ -6058,7 +6912,7 @@ larger *and* more central.
 
 **TODO** link back to redundant mappings
 
-Another benefit of the mapping from frequency to position in space
+Another benefit of encoding frequency as position in space
 is the efficient use of space.
 For example, @fig-wordcloud-bar shows 
 the same data presented as a bar plot with 
@@ -6107,8 +6961,8 @@ with no corresponding change in the data values.
 @tbl-rwc-table shows a subset of the 2023 Rugby World Cup data set
 (@tbl-rwc-2023).  We have established earlier in this section that
 visualising data values in a table provides an excellent 
-basis for accurately mapping 
-*back* to individual data values, but imposes a larger cognitive burden
+basis for accurately decoding individual data values, 
+but imposes a larger cognitive burden
 for comparing values, and is a very poor for extracting visual
 summaries, such as trends.
 
@@ -6191,8 +7045,333 @@ ggplot(rwc8) +
     theme(aspect.ratio=1)
 ```
 
+## Stem-and-leaf plots
+
+**TODO**
+Must adapt this to HDVW style, both in terms of visual style
+AND in terms of approach (how data vis works)
+
+Quote from John Tukey about stem-and-leaf plots:
+
+\begin{quotation}
+\say{If we are going to make a mark, it may as well be a meaningful one.
+The simplest - and most useful - meaningful mark is a digit}
+\end{quotation}
+
+    Attributed to "Some Graphic and Semigraphic Displays" in 
+    T. A. Bancroft, ed. Statistical Papers in Honor of George W. Snedecor
+    (Ames, Iowa, 1972), p. 296.
+
+Even just glyphs are relatively complex visual objects that can
+be adjusted (via aesthetics) in multiple ways.
+As text gets larger it can represent more complex info.
+As text gets larger, can apply aesthetics to just subsets,
+e.g., glyphs within words, words within sentences (bold for emphasis).
+Similar to more complex visual objects like Chernoff faces.
+Brath calls this "proportional encoding" ?
+
+```{r}
+#| echo: false
+#| label: fig-tries-hist
+#| fig-cap: A histogram of the number of tries scored. The bars are horizontal for easy comparison with the stem-and-leaf plot.
+#| fig.keep: last
+ggplot(RWCperGame) +
+    geom_histogram(aes(y=round(tries, 1), colour=sphere, fill=sphere), 
+                   breaks=0:8, closed="left") +
+    labs(title="Rugby World Cup 2023") +
+    ylab("tries scored") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_continuous(breaks=0:8) +
+    scale_colour_manual(values=c("grey40", "grey40")) +
+    scale_fill_manual(values=c("grey40", "grey40")) +
+    theme(plot.background=element_rect(colour=NA, fill="grey95"),
+          legend.background=element_rect(colour=NA, fill="grey95"),
+          legend.title=element_text(colour=NA),
+          legend.text=element_text(colour=NA),
+          aspect.ratio=1,
+          axis.title.x=element_blank(),
+          panel.background=element_blank(),
+          panel.border=element_rect(colour="black", fill=NA),
+          panel.grid=element_blank())
+grid.force()
+keyRect <- grid.grep("key::rect", grep=TRUE, global=TRUE)
+grid.edit(keyRect[[1]], gp=gpar(col=NA, fill=NA))
+grid.edit(keyRect[[2]], gp=gpar(col=NA, fill=NA))
+ggTriesHist <- grid.grab()
+grid.newpage()
+pushViewport(viewport(height=.8))
+grid.draw(ggTriesHist)
+popViewport()
+```
+
+```{r echo=FALSE}
+stemAndLeaf <- 
+    gsub("^  ", "",
+         capture.output(stem(RWCperGame$tries, scale=2))[-c(1:3, 12)])
+```
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem
+#| fig-cap: A stem-and-leaf plot of the number of tries scored.
+## Try to get stem background same size as ggplot background
+pushViewport(viewport(height=.8))
+grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+grid.text("Rugby World Cup 2023", x=.3, just="left",
+          y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+stemAndLeafTeX <- paste("\\begin{verbatim}",
+                        paste(rev(stemAndLeaf), collapse="\n"),
+                        "\\end{verbatim}", sep="\n")
+grid.latex(stemAndLeafTeX,
+           x=.3, hjust="left", gp=gpar(fontsize=16))
+grid.text("tries scored", 
+          x=.3, just="left", 
+          y=unit(2, "lines"))
+popViewport()
+```
+
+Figure @fig-tries-hist shows a histogram of the
+number of tries scored by teams in the 2023 Rugby World Cup.
+The information being presented is the frequency of tries-scored
+values within a sequence of ranges, or bins: 0 to 1, 1 to 2, and so on.
+
+The length of each bar encodes the frequency for one of the bins.
+
+Figure @fig-tries-stem shows a stem-and-leaf 
+diagram of the same data (with tries scored rounded to one decimal place).
+
+We have pre-attentive decoding in play because the number of digits for
+each stem creates a length.
+We also have learned decoding in play because we are able to see
+exact data values for individual teams.
+
+```{r echo=FALSE}
+nc <- nchar(stemAndLeaf) - 4
+lengths <- cumsum(nc)
+stemAndLeafBold <- character(length(stemAndLeaf))
+stemSphere <- RWCperGame$sphere[order(RWCperGame$tries)]
+maxLen <- max(nc)
+index <- 1
+for (i in 1:length(stemAndLeaf)) {
+    l <- lengths[i]
+    index <- index:l
+    hemi <- stemSphere[index]
+    north <- hemi == "North"
+    stem <- substring(stemAndLeaf[i], 1, 4)
+    if (nchar(stem) < nchar(stemAndLeaf[i])) {
+        char <- strsplit(substring(stemAndLeaf[i], 5), "")[[1]]
+        char[north] <- paste0("\\textbf{", char[north], "}")
+    } else {
+        char <- ""
+    }
+    stemAndLeafBold[i] <- paste0(stem, paste(char, collapse=""))
+    index <- l + 1
+}
+```
+
+```{r echo=FALSE}
+stemBold <- function() {
+    grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+    grid.text("Rugby World Cup 2023", x=.3, just="left",
+              y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+    alltt <- LaTeXpackage("alltt", "\\usepackage{alltt}")
+    stemAndLeafBoldTeX <- paste("\\setmonofont{Latin Modern Mono Light}",
+                            "\\begin{alltt}",
+                            paste(rev(stemAndLeafBold), collapse="\n"),
+                            "\\end{alltt}", sep="\n")
+    grid.latex(stemAndLeafBoldTeX, packages=alltt,
+               x=.3, hjust="left", gp=gpar(fontsize=16))
+    grid.text("tries scored", 
+              x=.3, just="left", 
+              y=unit(2, "lines"))
+    grid.text(expression("South versus "*bold("North")), 
+              x=.3, just="left",
+              y=unit(1, "line"))
+}
+```
+
+```{r echo=FALSE}
+nc <- nchar(stemAndLeaf) - 4
+lengths <- cumsum(nc)
+stemAndLeafColour <- character(length(stemAndLeaf))
+maxLen <- max(nc)
+index <- 1
+for (i in 1:length(stemAndLeaf)) {
+    l <- lengths[i]
+    index <- index:l
+    hemi <- stemSphere[index]
+    north <- hemi == "North"
+    stem <- substring(stemAndLeaf[i], 1, 4)
+    if (nchar(stem) < nchar(stemAndLeaf[i])) {
+        char <- strsplit(substring(stemAndLeaf[i], 5), "")[[1]]
+        char[north] <- paste0("\\textcolor{salmon}{", char[north], "}")
+        char[!north] <- paste0("\\textcolor{teal}{", char[!north], "}")
+    } else {
+        char <- ""
+    }
+    stemAndLeafColour[i] <- paste0(stem, paste(char, collapse=""))
+    index <- l + 1
+}
+```
+
+```{r echo=FALSE}
+library(gridtext)
+NScols <- pal_npg()(2)
+colsTeX <- paste0("\\definecolor{", c("salmon", "teal"), "}",
+               apply(col2rgb(NScols), 2,
+               function(x) {
+                   paste0("{RGB}{", paste(x, collapse=", "), "}")
+               }), collapse="\n")
+stemColour <- function() {
+    grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+    grid.text("Rugby World Cup 2023", x=.3, just="left",
+              y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+    alltt <- LaTeXpackage("alltt", "\\usepackage{alltt}")
+    stemAndLeafColourTeX <- paste(colsTeX,
+                            "\\begin{alltt}",
+                            paste(rev(stemAndLeafColour), collapse="\n"),
+                            "\\end{alltt}", sep="\n")
+    grid.latex(stemAndLeafColourTeX, packages=list(alltt, "xcolor"),
+               x=.3, hjust="left", gp=gpar(fontsize=16))
+    grid.text("tries scored", 
+              x=.3, just="left", 
+              y=unit(2, "lines"))
+    grid.draw(richtext_grob(paste0('<span style="color: ', NScols[2], 
+                                   '">South</span> versus ',
+                                   '<span style="color: ', NScols[1], 
+                                   '">North</span>'), 
+                            x=.3, hjust=0,
+                            y=unit(1, "line")))
+}
+```
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem-weight
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemBold()
+popViewport()
+```
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem-colour
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemColour()
+popViewport()
+```
+
+Figure @fig-tries-stem-weight and
+Figure @fig-tries-stem-colour show
+variations on the stem-and-leaf plot using text-specific (weight)
+and general (colour) pre-attentive features on individual digits.
+=> even more detail available \cite{brath2014design}.
+
+Of course, the main downside is that this is limited to small data sets.
+
+## Summary
+
+**MUST** (in footnote)
+Acknowledge Ware:
+G8.18 (p327)
+"When a large number of data points must be represented in a visualization,
+use sybmols instead of words or pictorial icons."
+G8.19 (p327)
+"Use words directly on the chart where the number of symbolic objects
+in each category is relatively few and where space is available."
+
+# Mapping Structure
+
+@fig-rep-none shows a scatter plot of the number of clean breaks and the
+number of tries for countries
+at the 2023 Rugby World Cup (@tbl-rwc-2023).
+This data visualisation is similar to @fig-scatter.
+
+How to put all of the components of a plot together on an image.
+
+Start with example of plot where legend and data symbols do not match!
+
+```{r}
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot with a discordant legend.
+cols <- scales::hue_pal()(4)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=cols[c(2, 4)]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
+               colour=cols[1]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
+               colour=cols[3]) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+Much more subtle example from 
+787resources/Examples/2024-11-premier-league-momentum-plot
+where the purple label could be below (?)
+Would need to extract the data values from the plot somehow
+to reproduce it (initial attempts with AI have failed).
+
+Refer CRAP design in footnote, but use gestalt principles to lead in to
+contrast, repetition (similarity), alignment (continuity), 
+and proximity (proximity!).
+
++ "Gestalt principles"
+  Todorovic (2008)
+
+  Summaries of the main Gestalt principles.
+
+  Like a peer-reviewed Wikipedia ?
+
+  Possible link to alignment ... ?
+
+  "good Gestalt principle: elements tend to be grouped together if they are
+   parts of a pattern which is a good Gestalt, meaning as simple, orderly,
+   balanced, unified, coherent, regular, etc as possible"
+
+
+# Review
+
+Add review at the end that reinforces the threads like visual feature, shape,
+object and mappings
+
+
+List of questions to evaluate a data vis:
+
+* What are my data variables
+* What visual features are they mapped to
+* What type of data
+* Can the visual features represent the data
+* Mapping data or data summary
+* Do visual features interact
+* Is there emergent features
+* Is the data symbol a visual shape
+* Is that appropriate
+* A visual object
+* Is that appropriate
+
+And so on ...
+
 
 # TODO
+
++ **replace "mapping" with "encoding" and "mapping back" with "decoding" 
+  everywhere!**
+
++ **remember** to use "data symbol" instead of "geometric shape" or
+  some other term like "mark"
+
++ add review at end of each section and/or preview to start of 
+  each section to reinforce the building concepts.
 
 + "Testing Statistical Charts: What Makes a Good Graph?"
   Vanderplas, Cook, and Hofmann (2020)
@@ -6213,6 +7392,8 @@ ggplot(rwc8) +
   data vis and point to some people like Jonathon Schwabish and
   Flowing Data
 
+* Add texture (at least) to list of standard visual features
+
 * When talk about visual types, point out that qualitative are good
   for group membership - these items are *the same* - as well as
   being good for differences.
@@ -6220,6 +7401,21 @@ ggplot(rwc8) +
   Or more like the fundamental tasks that they support are **same**
   as well as different.
   Quantitative are actually not so good at **same** (?)
+
+* When talk about basic data types and what you can do with them,
+  maybe introduce the explicit idea of "comparison" and all tasks
+  basically being based on comparison (with some examples of breaking
+  down tasks).
+  There is a nice simple list of tasks (rather than some overblown
+  task taxonomy) in 
+  "Low-Level Components of Analytic Activity in Information Visualization"
+  Amar et al (2005)
+  which describes comparison as a "fundamental cognitive action" that
+  underlies all data vis tasks.
+
+* Check whether HDVW covers all of the types of tasks in 
+  "Low-Level Components of Analytic Activity in Information Visualization"
+  Amar et al (2005)
 
 * Add gestalt simplicity and/or symmetry in visual-model?
   tend to see symmetric elements as part of the same group.
@@ -6242,8 +7438,31 @@ ggplot(rwc8) +
   I like the way these all correspond to a numerical summary.
   Could use that in my data summaries/visual summaries section?
  
+* Point out early in visual features that a bar plot is quite simple
+  The differences are in the bars so those differences are easy to spot
+  Refer back to visual model
+  Also refer back from same is same
+  Also refer back from wherever discuss data ink ratio perhaps not by that name
+
+* memory limits:  wherever mention, add footnote that acknowledges 
+  some controversy (different models and number of items limit
+  vs continuous resource limit), with ref to e.g.,
+  "Psychophysical scaling reveals a unified theory of visual memory strength"
+  Schurgin et al (2020)
+  and the binary map model 
+
 * MUST acknowledge the mapping of differences to angles in a line plot
   (essentially an emergent feature!?).
+
+* In colour, mention "In Color Perception, Size Matters"
+  Stone (2012)
+  "In designing colors for digital visualization systems. one of the most
+   critical factors is the interaction between size and color appearance."
+
+* Add Adobe aesthetic colour palette guidelines.  https://color.adobe.com/
+  Add order of colours in color palette for bar plot. Bartolomeo et al (2025)
+  To colour section.
+  Or to design section if that makes more sense.
 
 * Adam's section 4.4 Scaling and Encoding makes important points
   about the mapping from data values to visual properties
@@ -6277,6 +7496,8 @@ ggplot(rwc8) +
   hierarchy (Ackoff, 1989).
   It corresponds quite nicely to the 
   visual feature > shape > object hierarchy ?
+  Do this in text.qmd ?
+  => text can be used for range of things, not just data or metadata
 
 * acknowledge (in footnote) 
   that there is not a one-to-one correspondence between
@@ -6289,6 +7510,12 @@ ggplot(rwc8) +
      features) and can add links to carswell and wickens (1990) that
      line plots (between two lines) are configural
 
+* Interesting case study might be matrix versus two columns with 
+  connecting lines.
+  I find the latter better but can I explain why? 
+  Example from the brath and banissi article linking text aesthetics to 
+  standard aesthetics like length
+
 * somehow mention primacy of position in space in visual-model (with cite) ?
 
 * add mention in multiple mappings about implicit borders around
@@ -6300,8 +7527,6 @@ ggplot(rwc8) +
 
 * add citation to MASSVIS for fixation images
 
-* Add citation to Wikipedia "Visual system" in visual-model.qmd
- 
 * Add mention that mosaic plots can easily show independence or lack of ?
 
 * add mention of anscombe's quartet to summaries.qmd to compare
@@ -6324,6 +7549,16 @@ ggplot(rwc8) +
 * need citations for more is more and dark is more and part-to-whole.
 
 * Need some citations to the literature in visual-shapes.qmd
+
+  + "Understanding Charts and Graphs"
+  Kosslyn (1989)
+    [somewhere after p 205]
+    + Lines are objects
+    "For example, if one wants a reader to see an interaction, a line graph is
+     better than a bar graph: not only is a line a single perceptual unit, and
+     hence there will be less to hold in short-term memory, but we are good at
+     detecting slope differences-which convey the relevant information (see
+     Pinker, 1988)."
 
   Link to "emergent features" and "gestalts" in, e.g.,  
   Pomerantz and Cragin (2014) ?
@@ -6352,6 +7587,9 @@ ggplot(rwc8) +
   The main point is that an effective data visualisation will AVOID
   the things that the visual system is bad at.
 
+* Must talk about the role of **scales** in encodings
+  (not all encodings are linear, not all encodings are obvious!)
+
 * add types of cones to colour chapter?
 
 * CVD
@@ -6359,9 +7597,23 @@ ggplot(rwc8) +
 * visual illusions (put in a section on "how mappings go wrong"?)
 
 * redundant encodings
+  Use same diagram as congruent mappings
 
-* non-linear scales
+* non-linear scales.
   separate "position" section?
+  NOTE that there ARE some situations where non-linear position.
+  scales are ok, e.g., log-log.
+  Length is still dodgy. 
+  You DO still get ordinal info, even if cannot decode sizes of differences.
+  Non-linearity might actually be ok on non-position scales, e.g., 
+  a colour scale for numeric data, where differences are smaller at
+  one end;  all you are after, if you are using colour, is ordinal,
+  so changing colours more swiftly at one end of the scale is ok (?)
+  At least some 'colorspace' functions allow non-linear palettes.
+
+* Example where using legend is BETTER than direct labelling:
+  facetted bar plot.  Instead of multiple repeated sets of axis labels,
+  just use coloured bars, plus single legend.
 
 * big data (or even medium data) - need better name
   => overlapping and summary plots like boxplots (then violin plots)
@@ -6376,6 +7628,14 @@ ggplot(rwc8) +
   case study: chernoff faces
 
 * deliberately losing information (e.g., luminance scale for quant)
+
+  "Why Shouldn’t All Charts Be Scatter Plots?
+   Beyond Precision-Driven Visualizations"
+  Bertini et al (2021)
+  Claims that ordinal comparisons more common in practice than
+  quantitative comparisons (?)
+
+
 
 * clutter
   link back to visual objects ?
@@ -6521,12 +7781,40 @@ to emphasise structure - combination of order and category
 
 * case study: barycentric plots (ternary plots)
 
+## Case study: SinaPlots
+
+A SinaPlot is a nice combination of decode for raw data and for data summary.
+[^sina]
+@fig-sina is actually a combination of a SinaPlot and a violin plot.
+
+[^sina]:
+  @Sidiropoulos03072018
+
+```{r}
+#| echo: false
+#| label: fig-sina
+#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
+gg <- ggplot(rwcAll, aes(scored, y="")) +
+    geom_violin() +
+    geom_sina() +
+    scale_x_continuous(name="points scored")
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
 * attributions for data sources
 
 * add example (section?) to combine.qmd 
   where either separable is NOT appropriate
   or integral is NOT appropriate.  In the mosaic plot case, the interaction
   is beneficial.
+  See "dangers of combining mappings"
+
+* do we mention effectiveness of luminance in heatmap for ensemble perception
+  of regions?
+
+* must say that chroma and luminance and hue are all integral ?
 
 * add direct labelling to text chapter?
   some sort of ggrepel version of the flags example in visual-objects?
@@ -6591,6 +7879,15 @@ to emphasise structure - combination of order and category
   line or bar - the visual objects do not map neatly, and disjointly
   to subsets of the data - there is overlap.  This makes mapping 
   back to the data harder or at least more ambiguous ?
+
+* Get visualisation of uncertainty in somewhere ?
+  Variability is a data summary, which we map to a visual feature.
+  Box plots already do this.
+  Only opportunity to demonstrate gradients as a visual feature?
+
+* Use the Data Rocks advice to generate a colour palette for this document ?
+  
+  https://buttondown.com/datarocksnz/archive/design-matters-6-the-ultimate-dashboard-colour/
 
 * An index that links to all of the places that different sorts of plots
   are discussed ?

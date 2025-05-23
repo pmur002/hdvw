@@ -27,6 +27,7 @@ library(grImport)
 library(grImport2)
 library(rsvg)
 library(ggtext)
+library(xdvir)
 
 
 ## -----------------------------------------------------------------------------
@@ -70,6 +71,8 @@ theme_update(plot.background=element_rect(colour=NA,
 source("rwc.R")
 source("youth-crime.R")
 crimeAgeSimple <- subset(crimeAge, age %in% c("14", "15", "16"))
+
+
 
 
 
@@ -188,7 +191,7 @@ barGeom <- bar +
           axis.title=element_text(colour="grey"))
 pieGeom <- pie + 
     geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
-              fill=highlight, colour="black", linewidth=.1) +
+              fill=highlight, colour="grey", linewidth=.1) +
     scale_fill_manual(values=grey(.6 + .4*1:n/(n + 1))) +
     theme(plot.title=element_text(colour="grey"),
           plot.subtitle=element_text(colour="grey"),
@@ -239,7 +242,7 @@ barGuide <- bar +
           axis.title=element_text(colour="grey"))
 pieGuide <- pie + 
     geom_rect(aes(xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax), 
-              fill="grey90", colour="grey", linewidth=.1) +
+              fill="grey90", colour="grey", linewidth=.5) +
     scale_fill_manual(values=colorRampPalette(c(highlight, lighten(highlight, .5)))(n)) +
     theme(plot.title=element_text(colour="grey"),
           plot.subtitle=element_text(colour="grey"),
@@ -502,6 +505,14 @@ grid.newpage()
 grid.rect(gp=gpar(col=NA, fill=pat))
 ## grid.segments(0, .5, 1, .5, gp=gpar(col="white", lwd=170))
 ## grid.segments(.5, 0, .5, 1, gp=gpar(col="white", lwd=170))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| output: asis
+cat(readLines("Memory/memory-1.svg", warn=FALSE), sep="\n")
+cat(readLines("Memory/memory-3.svg", warn=FALSE), sep="\n")
+cat(readLines("Memory/memory-5.svg", warn=FALSE), sep="\n")
 
 
 ## -----------------------------------------------------------------------------
@@ -1100,7 +1111,7 @@ regpoly <- function(x, y, n, offset=0) {
     t <- seq(0, 2*pi, length.out=n+1)[-(n+1)] + offset
     x <- x + .125*cos(t)
     y <- y + .125*sin(t)
-    grid.polygon(x, y, gp=gpar(fill="black"))
+    grid.polygon(x, y, gp=gpar(fill=NA))
 }
 regpoly(.25, .1, 3, 0)
 regpoly(.5, .5, 6, pi/2)
@@ -1113,7 +1124,8 @@ popViewport(2)
 #| label: fig-accuracy
 #| fig-cap: An ordering of basic visual features in terms of their accuracy, with more accurate at the top.
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
+pushViewport(viewport(width=unit(1, "snpc"),
+                      layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.text("position", x=0, just="right")
 grid.segments(.2, .5, .8, .5, gp=gpar(lwd=2))
@@ -1247,8 +1259,9 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.8) +
-    scale_x_continuous(expand=expansion(c(0, .05))) 
+    geom_col(aes(x=total, y=district), width=.9) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
@@ -1258,9 +1271,10 @@ ggplot(crimeTemp) +
 crimeDistrictTotal$districtOrdered <- 
     with(crimeDistrictTotal, reorder(district, total))
 ggplot(crimeDistrictTotal) +
-    geom_col(aes(x=total, y=districtOrdered), width=.8) +
+    geom_col(aes(x=total, y=districtOrdered), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    scale_y_discrete(name="district")
+    scale_y_discrete(name="district") +
+    theme(aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
@@ -1348,7 +1362,8 @@ ggplot(crimeGroup) +
 #| label: fig-side-bar-group
 #| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
-    geom_col(aes(group, count, fill=group, group=year), position="dodge") +
+    geom_col(aes(group, count, fill=group, group=year), position="dodge",
+             colour=figbg) +
     scale_y_continuous(expand=expansion(c(0, .05)))
 
 
@@ -1416,9 +1431,10 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.8) +
+    geom_col(aes(x=total, y=district), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1))
+    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1),
+          aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
@@ -1487,6 +1503,7 @@ popViewport(2)
 clpie <- function(n) {
     t <- rev(seq(0, 2*pi, length.out=100*n) + pi/2)
     cols <- hcl.colors(n+1, "Purples")[-(n+1)]
+    textcols <- c("white", "black")[rep(1:2, c(floor(n/3), n - floor(n/3)))]
     for (i in 1:n) {
         index <- 1:100 + (i-1)*100
         x <- cos(t[index])
@@ -1494,7 +1511,7 @@ clpie <- function(n) {
         grid.polygon(c(.5, .5 + .3*x), c(.5, .5 + .3*y), 
                      gp=gpar(col=figbg, lwd=4, fill=cols[i]))
         grid.text(letters[i], .5 + mean(.25*x), .5 + mean(.25*y),
-                  gp=gpar(cex=1))
+                  gp=gpar(cex=1, col=textcols[i]))
     }
 }
 pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
@@ -1577,6 +1594,14 @@ ggplot(crimeDistrictTotal) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| message: false
+#| label: tbl-rwc-all-year
+#| tbl-cap: A table of the total number of points scored and conceded by Tier One nations in Rugby World Cup matches at each World Cup.  Each row represents thetotal points scored by one team in one World Cup.  There are 100 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAllyear[,c("team", "year", "scored", "conceded", "diff")]), digits=0)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-neg-tile
 #| fig-cap: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups.  South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.[^gggrid-bite]
 edge <- function(data, coords) {
@@ -1601,6 +1626,20 @@ ggplot(rwcAllyear) +
     grid_panel(edge, aes(x=year, y=team, absent=absent)) +
     theme(panel.border=element_blank(),
           aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-implicit
+#| fig.width: 4
+#| fig.height: 1
+#| fig-cap: An example of visual features that contain implicit mappings.  
+## https://www.color-hex.com/color-palette/35021
+traffic <- c("#cc3232", "#e7b416", "#2dc937")
+grid.newpage()
+grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
+grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
+            gp=gpar(col=traffic, fill=traffic))
 
 
 ## -----------------------------------------------------------------------------
@@ -1682,6 +1721,14 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| message: false
+#| label: tbl-rwc-all-time
+#| tbl-cap: A table of the total number of points scored and conceded for Tier One nations in Rugby World Cup matches.  
+kable(rwcAlltime[,c("team", "scored", "conceded", "diff")], digits=0)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-neg-bar
 #| fig-cap: A bar plot of the total points differential for Tier One nations at Rugby World Cups.
 rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
@@ -1727,6 +1774,17 @@ ggplot(temp) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     force_panelsizes(rows = unit(2.5, "in"),
                      cols = unit(2.5, "in"))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-stroop
+#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
+#| fig-height: 1
+grid.newpage()
+pushViewport(viewport(width=.5))
+grid.text(c("red", "green", "blue"), 1:3/4, 
+          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
 
 
 ## -----------------------------------------------------------------------------
@@ -1788,18 +1846,7 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-stroop
-#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
-#| fig-height: 1
-grid.newpage()
-pushViewport(viewport(width=.5))
-grid.text(c("red", "green", "blue"), 1:3/4, 
-          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-listener-beans
+#| label: fig-listener-cakes
 #| fig-cap:  A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.[^listener-cakes]
 #| warning: false
 cake <- readPNG("Images/birthday-cake-cropped.png")
@@ -1832,8 +1879,8 @@ ggplot(old) +
 #| echo: false
 #| message: false
 #| label: tbl-rwc-all
-#| tbl-cap: A table of the number of points scored and conceded by Tier One nations in Rugby World Cup matches, along with the team name, the global hemisphere of origin, the year, and a match identifier.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c("team", "opposition", "year", "scored", "conceded", "match")]), digits=0)
+#| tbl-cap: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
+kable(head(rwcAll[,c("team", "hemisphere", "scored")]), digits=0)
 
 
 ## -----------------------------------------------------------------------------
@@ -1879,7 +1926,7 @@ gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  colour="grey", linewidth=.1) +
     geom_dotplot(aes(scored, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
-    scale_x_continuous(name="points scored") +
+    scale_x_continuous(name="points scored", breaks=seq(0, 100, 10)) +
     theme(axis.title.y=element_blank())
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
@@ -1893,7 +1940,8 @@ popViewport()
 breaks <- seq(0, 105, by=5)
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored), colour="black", fill="grey", breaks=breaks) +
-    scale_x_continuous(name="points scored") 
+    scale_x_continuous(name="points scored") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
@@ -1932,7 +1980,7 @@ gg <- ggplot(rwcAll) +
     geom_segment(aes(x=-Inf, xend=Inf, y=hemisphere, yend=hemisphere),
                  colour="grey", linewidth=.1) +
     geom_dotplot(aes(conceded, hemisphere), binwidth=1, dotsize=.8, fill=NA) +
-    scale_x_continuous(name="points conceded") +
+    scale_x_continuous(name="points conceded", breaks=seq(0, 100, 10)) +
     theme(axis.title.y=element_blank())
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
@@ -1946,10 +1994,49 @@ popViewport()
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored), colour="black", fill="grey", 
                    binwidth=1, boundary=.5) +
-    scale_x_continuous(name="points scored") 
+    scale_x_continuous(name="points scored", breaks=seq(0, 100, 10)) 
 pushViewport(viewport(height=.8, width=.8))
 print(gg, newpage=FALSE)
 popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| warning: false
+#| label: fig-bars-at-zero
+#| fig-cap: A bar plot of the increase in the top tax rate in the United States of America from President George W. Bush to President Barack Obama.
+years <- c("Now", "Jan. 2013")
+tax <- data.frame(year=factor(years, levels=years),
+                  rate=c(35, 39.6))
+barlabs <- function(data, coords) {
+    grobTree(textGrob(paste0(data$y[1], "%"), x=coords$x[1],
+                      y=unit(coords$y, "npc") + unit(1, "lines")),
+             textGrob("?", x=coords$x[2],
+                      gp=gpar(col=figbg, fontsize=100, fontface="bold")))
+}
+ggplot(tax) +
+    geom_col(aes(year, rate, fill=year)) +
+    scale_fill_manual(values=c("black", highlight)) +
+    grid_panel(segmentsGrob(0, 0, 1, 0, gp=gpar(lwd=3),
+               vp=viewport(clip=FALSE))) +
+    grid_panel(textGrob("If Bush\ntax cuts\nexpire",
+               x=0, y=1, just=c(0, 1),
+               gp=gpar(fontsize=30, fontface="bold", lineheight=.8))) +
+    grid_panel(textGrob("Top tax rate:",
+               x=0, y=.5, just="left",
+               gp=gpar(fontsize=20, fontface="bold"))) +
+    grid_panel(barlabs, aes(year, rate)) +
+    coord_cartesian(ylim=c(34, NA)) +
+    scale_y_continuous(expand=expansion(0)) +
+    theme_minimal() +
+    theme(plot.margin=unit(c(2, 0, 1, 0), "lines"),
+          panel.grid=element_blank(),
+          title=element_blank(),
+          axis.text.y=element_blank(),
+          axis.text.x=element_text(size=20, face="bold", 
+                                   colour=c("black", highlight)),
+          legend.position="none",
+          aspect.ratio=.8)
 
 
 ## -----------------------------------------------------------------------------
@@ -1962,7 +2049,8 @@ ggplot(fractions) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     xlab(NULL) +
     ylab(NULL) +
-    labs(title="Proportion of Population Suffering from Malnutrition")
+    labs(title="Proportion of Population Suffering from Malnutrition") +
+    theme(aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
@@ -1979,11 +2067,12 @@ ggplot(counts) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     xlab(NULL) +
     ylab(NULL) +
-    labs(title=paste0('<span style="color: ', fills[1], '">X</span> ',
+    labs(title=paste0('<span style="color: ', fills[2], '">X</span> ',
                       'people out of ',
-                      '<span styl="color: ', fills[2], '">Y</span> ',
+                      '<span style="color: ', fills[1], '">Y</span> ',
                       'suffer from Malnutrition')) +
     theme(legend.position="none",
+          aspect.ratio=1,
           plot.title=element_markdown())
 
 
@@ -1994,7 +2083,8 @@ ggplot(counts) +
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group, fill=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=1)
+    theme(aspect.ratio=1,
+          legend.position="none")
 
 
 ## -----------------------------------------------------------------------------
@@ -2050,7 +2140,7 @@ popViewport()
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: tbl-offenders-summary
-#| tbl-cap: The data summaries calculated from @tbl-offenders that are mapped to the widths and heights of the rectangles in @fig-spine.
+#| tbl-cap: The data summaries calculated from @tbl-offenders that are encoded as the widths and heights of the rectangles in @fig-spine.
 #| tbl-subcap:
 #|   - Widths
 #|   - Heights
@@ -2167,6 +2257,127 @@ ggplot(crimeGroupSub) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-nz-doctor-bar
+#| fig-cap: A plot showing the differences in health spending for successive New Zealand governments using filled bars.
+nzdoctor <- data.frame(year=c(1999, 1999:2023), 
+                       block=rep(1:5, c(1, 9, 9, 6, 1)),
+                       percent=rep(c(0, 4.7, 1.3, 4.6, -3), c(1, 9, 9, 6, 1)),
+                       party=rep(rep(c(NA, rep(c("Labour", "National"), 2)),
+                                 c(1, 9, 9, 6, 1))))
+block <- function(data, coords) {
+    blockCoords <- split(coords, coords$block)
+    zero <- blockCoords[[1]]$y
+    step <- diff(coords$x)[2]
+    blockRect <- function(x) {
+        l <- x$x[1]
+        r <- l + diff(range(x$x)) + step
+        b <- zero
+        t <- x$y[1]
+        polygonGrob(c(l, l, r, r), c(b, t, t, b),
+                    gp=gpar(col=NA, fill=x$colour[1]))
+    }
+    blocks <- lapply(blockCoords[-1], blockRect)
+    do.call(grobTree, blocks)
+}
+blockYear <- function(data, coords) {
+    zero <- coords$y[1]
+    step <- diff(coords$x)[2]
+    years <- data$x[-1]
+    textGrob(paste0(" ", years, "-", substring(years + 1, 3, 4)),
+             coords$x[-1] + step/2, zero, hjust=0, rot=-90,
+             gp=gpar(fontsize=10))
+}
+partyColours <- c(rgb(217, 42, 31, max=255),
+                  rgb(46, 140, 204, max=255))
+ggDoctor <- ggplot(nzdoctor) +
+    grid_panel(block, aes(year, percent, colour=party, block=block)) +
+    grid_panel(blockYear, aes(year, percent)) +
+    scale_y_continuous(limits=c(-4, 6), expand=expansion(0), 
+                       breaks=-4:6, 
+                       labels=paste0(sprintf("%1.1f", -4:6), "%")) +
+    scale_x_continuous(expand=expansion(add=c(0, 1))) +
+    scale_colour_manual(values=partyColours) +
+    labs(title=paste("New Zealand Real Terms", 
+                     "Average Annual Health Spend Change Per Person",
+                     sep="\n")) +
+    theme(panel.border=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank())
+pushViewport(viewport(width=.9, height=.9))
+print(ggDoctor, newpage=FALSE)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-nz-doctor-line
+#| fig-cap: A plot showing the differences in health spending for successive New Zealand governments using horizontal lines.
+seg <- function(data, coords) {
+    segCoords <- split(coords, coords$seg)
+    zero <- segCoords[[1]]$y
+    step <- diff(coords$x)[2]
+    segLine <- function(x) {
+        l <- x$x[1]
+        r <- l + diff(range(x$x)) + step
+        y <- x$y[1]
+        grobTree(## segmentsGrob(l, zero, l, y,
+                 ##              gp=gpar(col=x$colour[1], lty="dotted")),
+                 segmentsGrob(l, y, r, y, 
+                              gp=gpar(col=x$colour[1], lwd=3)),
+                 circleGrob(l, y, r=unit(1, "mm"), 
+                            gp=gpar(col=x$colour[1], fill=x$colour[1], 
+                                    lwd=3)),
+                 circleGrob(r, y, r=unit(1, "mm"),
+                            gp=gpar(col=x$colour[1], fill=figbg, lwd=3)))
+    }
+    segs <- lapply(segCoords[-1], segLine)
+    do.call(grobTree, segs)
+}
+segNeg <- function(data, coords) {
+    zero <- coords$y[1]
+    polygonGrob(c(0, 0, 1, 1), c(0, zero, zero, 0),
+             gp=gpar(col=NA, fill="white"))
+}
+segYear <- function(data, coords) {
+    step <- diff(coords$x)[2]
+    years <- data$x[-1]
+    textGrob(paste0(" ", years, "-", substring(years + 1, 3, 4)),
+             coords$x[-1] + step/2, 0, hjust=0, rot=-90,
+             gp=gpar(fontsize=10))
+}
+border <- segmentsGrob(0, 0:1, 1, 0:1)
+ggDoctorLine <- ggplot(nzdoctor) +
+    grid_panel(segNeg, aes(year, percent)) +
+    grid_panel(seg, aes(year, percent, colour=party, seg=block)) +
+    geom_hline(yintercept=0, colour="grey") +
+    grid_panel(segYear, aes(year, percent)) +
+    ## grid_panel(border) +
+    scale_y_continuous(limits=c(-4, 6), expand=expansion(0), 
+                       breaks=-4:6, 
+                       labels=paste0(sprintf("%1.1f", -4:6), "%")) +
+    scale_x_continuous(expand=expansion(add=c(0, 1))) +
+    scale_colour_manual(values=partyColours) +
+    labs(title=paste("New Zealand Real Terms", 
+                     "Average Annual Health Spend Change Per Person",
+                     sep="\n")) +
+    theme(panel.border=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank()) +
+    coord_cartesian(clip="off")
+pushViewport(viewport(width=.9, height=.9),
+             viewport(y=1, 
+                      height=unit(1, "npc") - 
+                             grobWidth(textGrob(" 0000-00",
+                                                gp=gpar(fontsize=10))), 
+                      just="top"))
+print(ggDoctorLine, newpage=FALSE)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-line
 #| fig-cap: A line plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
 gg <- ggplot(crimeGroup) +
@@ -2199,7 +2410,6 @@ popViewport()
 #| echo: false
 #| label: fig-density
 #| fig-cap: A density plot of the points scored per game by Tier One nations at Rugby World Cups.
-breaks <- seq(0, 105, by=5)
 gg <- ggplot(rwcAll) +
     geom_density(aes(scored), colour="black", linewidth=1) +
     scale_x_continuous(name="points scored") +
@@ -2219,6 +2429,35 @@ popViewport()
 d <- density(rwcAll$scored, from=min(rwcAll$scored), to=max(rwcAll$scored))
 dStats <- cbind(scored=d$x, density=d$y)
 kable(head(dStats), digits=c(2, 4))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-multiple-density
+#| fig-cap: Density plots of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+gg <- ggplot(rwcAll) +
+    geom_density(aes(scored, colour=hemisphere), linewidth=1) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-multiple-hist
+#| fig-cap: Histograms of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+breaks <- seq(0, 105, by=5)
+gg <- ggplot(rwcAll) +
+    geom_histogram(aes(scored, colour=hemisphere, fill=hemisphere), 
+                   breaks=breaks, alpha=.2, position="identity") +
+    scale_x_continuous(name="points scored") +
+    scale_y_continuous(expand=expansion(c(0, .05)))
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
 
 
 ## -----------------------------------------------------------------------------
@@ -2558,7 +2797,7 @@ ggplot(districts) +
 #| echo: false
 #| label: fig-junk
 #| fig-cap: A choropleth map of the average crime rate over the period 2011 to 2021 for each police district (like @fig-map), with cartoon villian images added.
-#| fig.keep: "last"
+#| fig.keep: last
 runonce <- function() {
     PostScriptTrace("Images/criminal.eps", "Images/criminal.xml")
 }
@@ -2794,6 +3033,27 @@ ggplot(rwcChernoff) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-andrews
+#| warning: false
+#| results: hide
+#| fig-cap: An Andrews plot of the performance measures for teams in the 2023 Rugby World Cup.
+## remotes::install_github("gbasulto/drewcurves")
+library(drewcurves)
+drew <- drewcurves(RWCperGame[c(2, 11, 5, 10, 7)], # RWCperGame[-1]
+                   group=1, # sphere
+                   return_dataframe=TRUE)
+gg <- ggplot(drew) +
+    geom_line(aes(t, value, colour=sphere, group=key), alpha=.5) +
+    theme(axis.title=element_blank(),
+          axis.text=element_blank(),
+          axis.ticks=element_blank())
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-no-text
 #| fig-cap:  A line plot with all text removed.  Without text, it is impossible to know what data values are represented in this plot.
 ggplot(crimeAgeSimple) +
@@ -2926,5 +3186,218 @@ ggplot(rwc8) +
     geom_point(aes(tries, points, size=breaks, colour=runs)) +
     scale_colour_gradient(low="grey80", high="black") +
     theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-tries-hist
+#| fig-cap: A histogram of the number of tries scored. The bars are horizontal for easy comparison with the stem-and-leaf plot.
+#| fig.keep: last
+ggplot(RWCperGame) +
+    geom_histogram(aes(y=round(tries, 1), colour=sphere, fill=sphere), 
+                   breaks=0:8, closed="left") +
+    labs(title="Rugby World Cup 2023") +
+    ylab("tries scored") +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_continuous(breaks=0:8) +
+    scale_colour_manual(values=c("grey40", "grey40")) +
+    scale_fill_manual(values=c("grey40", "grey40")) +
+    theme(plot.background=element_rect(colour=NA, fill="grey95"),
+          legend.background=element_rect(colour=NA, fill="grey95"),
+          legend.title=element_text(colour=NA),
+          legend.text=element_text(colour=NA),
+          aspect.ratio=1,
+          axis.title.x=element_blank(),
+          panel.background=element_blank(),
+          panel.border=element_rect(colour="black", fill=NA),
+          panel.grid=element_blank())
+grid.force()
+keyRect <- grid.grep("key::rect", grep=TRUE, global=TRUE)
+grid.edit(keyRect[[1]], gp=gpar(col=NA, fill=NA))
+grid.edit(keyRect[[2]], gp=gpar(col=NA, fill=NA))
+ggTriesHist <- grid.grab()
+grid.newpage()
+pushViewport(viewport(height=.8))
+grid.draw(ggTriesHist)
+popViewport()
+
+
+## ----echo=FALSE---------------------------------------------------------------
+stemAndLeaf <- 
+    gsub("^  ", "",
+         capture.output(stem(RWCperGame$tries, scale=2))[-c(1:3, 12)])
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-tries-stem
+#| fig-cap: A stem-and-leaf plot of the number of tries scored.
+## Try to get stem background same size as ggplot background
+pushViewport(viewport(height=.8))
+grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+grid.text("Rugby World Cup 2023", x=.3, just="left",
+          y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+stemAndLeafTeX <- paste("\\begin{verbatim}",
+                        paste(rev(stemAndLeaf), collapse="\n"),
+                        "\\end{verbatim}", sep="\n")
+grid.latex(stemAndLeafTeX,
+           x=.3, hjust="left", gp=gpar(fontsize=16))
+grid.text("tries scored", 
+          x=.3, just="left", 
+          y=unit(2, "lines"))
+popViewport()
+
+
+## ----echo=FALSE---------------------------------------------------------------
+nc <- nchar(stemAndLeaf) - 4
+lengths <- cumsum(nc)
+stemAndLeafBold <- character(length(stemAndLeaf))
+stemSphere <- RWCperGame$sphere[order(RWCperGame$tries)]
+maxLen <- max(nc)
+index <- 1
+for (i in 1:length(stemAndLeaf)) {
+    l <- lengths[i]
+    index <- index:l
+    hemi <- stemSphere[index]
+    north <- hemi == "North"
+    stem <- substring(stemAndLeaf[i], 1, 4)
+    if (nchar(stem) < nchar(stemAndLeaf[i])) {
+        char <- strsplit(substring(stemAndLeaf[i], 5), "")[[1]]
+        char[north] <- paste0("\\textbf{", char[north], "}")
+    } else {
+        char <- ""
+    }
+    stemAndLeafBold[i] <- paste0(stem, paste(char, collapse=""))
+    index <- l + 1
+}
+
+
+## ----echo=FALSE---------------------------------------------------------------
+stemBold <- function() {
+    grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+    grid.text("Rugby World Cup 2023", x=.3, just="left",
+              y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+    alltt <- LaTeXpackage("alltt", "\\usepackage{alltt}")
+    stemAndLeafBoldTeX <- paste("\\setmonofont{Latin Modern Mono Light}",
+                            "\\begin{alltt}",
+                            paste(rev(stemAndLeafBold), collapse="\n"),
+                            "\\end{alltt}", sep="\n")
+    grid.latex(stemAndLeafBoldTeX, packages=alltt,
+               x=.3, hjust="left", gp=gpar(fontsize=16))
+    grid.text("tries scored", 
+              x=.3, just="left", 
+              y=unit(2, "lines"))
+    grid.text(expression("South versus "*bold("North")), 
+              x=.3, just="left",
+              y=unit(1, "line"))
+}
+
+
+## ----echo=FALSE---------------------------------------------------------------
+nc <- nchar(stemAndLeaf) - 4
+lengths <- cumsum(nc)
+stemAndLeafColour <- character(length(stemAndLeaf))
+maxLen <- max(nc)
+index <- 1
+for (i in 1:length(stemAndLeaf)) {
+    l <- lengths[i]
+    index <- index:l
+    hemi <- stemSphere[index]
+    north <- hemi == "North"
+    stem <- substring(stemAndLeaf[i], 1, 4)
+    if (nchar(stem) < nchar(stemAndLeaf[i])) {
+        char <- strsplit(substring(stemAndLeaf[i], 5), "")[[1]]
+        char[north] <- paste0("\\textcolor{salmon}{", char[north], "}")
+        char[!north] <- paste0("\\textcolor{teal}{", char[!north], "}")
+    } else {
+        char <- ""
+    }
+    stemAndLeafColour[i] <- paste0(stem, paste(char, collapse=""))
+    index <- l + 1
+}
+
+
+## ----echo=FALSE---------------------------------------------------------------
+library(gridtext)
+NScols <- pal_npg()(2)
+colsTeX <- paste0("\\definecolor{", c("salmon", "teal"), "}",
+               apply(col2rgb(NScols), 2,
+               function(x) {
+                   paste0("{RGB}{", paste(x, collapse=", "), "}")
+               }), collapse="\n")
+stemColour <- function() {
+    grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
+    grid.text("Rugby World Cup 2023", x=.3, just="left",
+              y=unit(1, "npc") - unit(1, "line"), gp=gpar(cex=1.5))
+    alltt <- LaTeXpackage("alltt", "\\usepackage{alltt}")
+    stemAndLeafColourTeX <- paste(colsTeX,
+                            "\\begin{alltt}",
+                            paste(rev(stemAndLeafColour), collapse="\n"),
+                            "\\end{alltt}", sep="\n")
+    grid.latex(stemAndLeafColourTeX, packages=list(alltt, "xcolor"),
+               x=.3, hjust="left", gp=gpar(fontsize=16))
+    grid.text("tries scored", 
+              x=.3, just="left", 
+              y=unit(2, "lines"))
+    grid.draw(richtext_grob(paste0('<span style="color: ', NScols[2], 
+                                   '">South</span> versus ',
+                                   '<span style="color: ', NScols[1], 
+                                   '">North</span>'), 
+                            x=.3, hjust=0,
+                            y=unit(1, "line")))
+}
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-tries-stem-weight
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemBold()
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-tries-stem-colour
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemColour()
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot with a discordant legend.
+cols <- scales::hue_pal()(4)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=cols[c(2, 4)]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
+               colour=cols[1]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
+               colour=cols[3]) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-sina
+#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
+gg <- ggplot(rwcAll, aes(scored, y="")) +
+    geom_violin() +
+    geom_sina() +
+    scale_x_continuous(name="points scored")
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
 
 dev.off()

@@ -7,12 +7,12 @@ This visualisation is different from anything we have seen previously
 because it involves multiple mappings.
 The data symbol in this case is a simple data point, but we have
 mapped data values to *five* different visual features of each data point.
-The number of clean breaks is mapped to the horizontal **position** of 
+The number of clean breaks is encoded as the horizontal **position** of 
 the data points and
-the number of tries is mapped to the vertical **position** of the data points.
-The number of points scored is mapped to the **size** of the points, the
-hemisphere is mapped to the **shape** of the points, and the number of runs
-is mapped to the **colour** of the points.
+the number of tries is encoded as the vertical **position** of the data points.
+The number of points scored is encoded as the **size** of the points, the
+hemisphere is encoded as the **shape** of the points, and the number of runs
+is encoded as the **colour** of the points.
 
 ```{r}
 #| echo: false
@@ -30,7 +30,7 @@ ggplot(RWCperGame) +
 ```
 
 @fig-multiple is effective in some ways because some of the mappings
-are to effective visual features. For example, we can easily map back from
+involve effective visual features. For example, we can easily map back from
 horizontal and vertical positions to the number of clean breaks and the
 number of tries.  We can also map back from the emergent feature of **position
 in space** (@sec-integral) to a correlation between clean breaks and tries.
@@ -39,9 +39,9 @@ However, other mappings are less effective.  For example, it is
 less easy to accurately map back from size 
 to the number of points scored and even
 harder to map back from colour to the number of runs.
-
-**TODO** relate back to gestalt in visual-model where lots of things
-changing makes pop-out stop working.
+In addition, we are hampered by the fact that many different
+visual features are changing at once, so it is harder
+to perceive individual differences (see @sec-differences).
 
 One goal of visualising multiple variables like we have in 
 @fig-multiple is to discover or display multivariate relationships
@@ -53,7 +53,7 @@ and score more points compared to the other teams.
 
 This section looks at some of the different approaches to visualising
 several variables at once.  How do we perceive multivariate relationships?
-Can we still perceive individual data values at the same time?
+And can we still perceive individual data values at the same time?
 
 ## Parallel coordinates plots
 
@@ -65,11 +65,11 @@ quantitative data values (see @sec-mapping-visual-features).
 If we attempted to map all of the variables in @tbl-rwc-2023, we could
 actually run out of visual features to use (@fig-visual-features).
 
-A different approach is to map more of the data variables
+An alternative approach is to map more of the data variables
 to the same visual feature.  For example, @fig-parallel shows 
 a parallel coordinates plot of the data from @fig-multiple.
 In this visualisation, all of the quantitative variables have been
-mapped to **position**, with hemisphere mapped to colour.
+encoded as **position**, with just hemisphere (qualitative) encoded as colour.
 
 ```{r}
 #| echo: false
@@ -86,15 +86,15 @@ popViewport()
 ```
 
 A parallel coordinates plot maps data summaries rather than raw data values
-(@sec-summaries), for example, all data values are standardised to a range
+(@sec-summaries).  For example, all data values are standardised to a range
 between 0 and 1.  @tbl-parallel-stats shows some of the values that
 are actually mapped to visual features in @fig-parallel.
-Each variable is mapped to a different 
-horizontal **position** and the values within each variable are mapped 
-to vertical **position**.  In this way, all quantitative data values
-are mapped to **position**.
+Each variable is encoded as a different 
+horizontal **position** and the values within each variable are encoded as
+vertical **position**.  In this way, all quantitative data values
+are encoded as **position**.
 
-In addition, the hemisphere is mapped to **colour** and a 
+In addition, the hemisphere is encoded as **colour** and a 
 separate line data symbol is drawn for each country.
 This means that a visual shape is drawn for each country
 (@sec-visual-shapes).
@@ -117,13 +117,16 @@ kable(head(long), digits=2)
 ```
 
 On one hand, a parallel coordinates plot appears to
-makes sense because it maps lots
-of data values to **position**, which is an accurate visual feature
+makes sense because it encodes multiple
+data values to **position**, which is an accurate visual feature
 for quantitative data.
 However, this advantage is immediately squandered because the values that
-are mapped are not the raw data values
+are encoded are not the raw data values
 (@fig-stat-vis-decode), so a parallel coordinates plot
-is not effective for mapping back to raw data values.
+is not effective for decoding raw data values from the positions of the lines.
+Furthermore, the data symbols are lines, so each data symbol encodes
+multiple data values (@sec-line-plots), which makes it difficult to decode
+even individual data summary values from the lines.
 
 The effectiveness of a parallel coordinates plot comes from the visual
 shapes produced by the lines.  For example, in @fig-parallel,
@@ -138,6 +141,15 @@ rather than criss-crossing each other wildly suggests that there is
 an overall correlation between all four quantitative variables, not
 just in the top four teams.
 
+::: {#fig-mappings-1-n-1-n layout-ncol=2}
+
+![](Mappings/mapping-1-n-1-n.png)
+
+In a parallel coordinates plot, a single row of data---one data value from 
+each of several variables---is mapped to
+a visual shape (a line).
+:::
+
 > A parallel coordinates plot can be effective at identifying 
   high-dimensional groups or correlations
   because it maps multiple data values from different variables
@@ -151,14 +163,14 @@ just in the top four teams.
 One difficulty with @fig-parallel is that many of the lines overlap
 each other, which makes it difficult to separately perceive 
 individual visual shapes.  @fig-profile shows an alternative
-approach to visualising the same data, 
-a profile plot, where a shape is drawn for each country.
-The shape in this case is a filled in polygon, effectively the lines
+approach to visualising the same data, called 
+a profile plot.  Similar to a parallel coordinates plot, 
+a visual shape is drawn for each country, but 
+the shape in this case is a filled in polygon, effectively the lines
 in @fig-parallel with the area below them (down to zero) filled in.
 
-**TODO** relate to over-plotting section (wherever that ends up)
-
-Again, this can be effective because of the overall shapes.
+Again, this sort of data visualisation 
+can be effective because of the overall shapes.
 For example, we can see a group of
 four shapes that are larger than the others.
 We can also see that Argentina and Fiji appear
@@ -186,18 +198,18 @@ popViewport()
 ```
 
 @fig-profile uses the same data summaries as @fig-parallel
-(@tbl-parallel-stats), and similar mappings: each variable is mapped
-to a different horizontal **position** and the values within each variable
-are mapped to vertical **position** and hemisphere is mapped to 
+(@tbl-parallel-stats), and similar mappings: each variable is encoded as
+a different horizontal **position** and the values within each variable
+are encoded as vertical **position** and hemisphere is mapped to 
 **colour**.  The data symbol is also similar:  multiple data values 
-are mapped to a single data symbol, either a line or a polygon.
+are mapped to a single data symbol, in this case a polygon.
 
 The difference in @fig-profile is that, rather than having all of the
 data symbols on the same plot, each data symbol is drawn in its
 own **position in space**.  This makes it easy to view each distinct
 data symbol.
 
-The group of large shapes in @fig-profile is easier to see because
+The cluster of four larger shapes in @fig-profile is also easier to see because
 the countries have been ordered by the number of points scored 
 (the right-hand height of the shape).  As we have seen before,
 ordering data symbols can make a big difference (@sec-distance-effect).
@@ -209,10 +221,12 @@ ordering data symbols can make a big difference (@sec-distance-effect).
 
 @fig-facet-before shows a line plot of the number of youth offenders per year
 in different Police Districts of New Zealand.
-This visualisation has some good mappings---we map 
-year to horizontal **position** and count to 
-vertical **position**---but also a weaker mapping:  the Police District.
-We map districts to **colour**, but because there are 12 different districts,
+This visualisation makes use of several effective mappings. 
+For example, we encode
+year as horizontal **position** and we encode count as
+vertical **position**.
+However, there is also a weaker mapping:  the Police District.
+We encode districts as **colour**, but because there are 12 different districts,
 we are exceeding the capacity of colour (@sec-capacity).  It is not
 easy to differentiate all of the different colours (not helped by 
 overplotting of the lines).
@@ -232,12 +246,12 @@ ggplot(crimeDistrict) +
 ```
 
 @fig-facet-after shows one solution: a facetted plot.
-Each district has been mapped to a **position in space**
+Each district has been encoded as a **position in space**
 and we draw a separate plot for each district.  This makes
 it very easy to distinguish the individual districts.
 
 One downside is that comparisons between districts are more difficult
-because of counts and/or years are **unaligned** (@sec-unaligned).
+because counts and/or years are **unaligned** (@sec-unaligned).
 In this case, we have mitigated that problem by drawing a grey line
 for all districts in each plot.  Similar to grid
 lines, this makes it easier to compare the line for each district
@@ -265,21 +279,33 @@ with a similar starting count of offenders (@sec-distance-effect).
 
 ## Case study: Scatterplot matrices
 
-A form of facetting - get to see the correlation between all four variables
-like in @fig-parallel.
+@fig-splom shows a scatter plot matrix 
+of the performance measures
+for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
 
-This tells a nice story ...
+This is another example of reusing **position** to encode data values.
+Each combination of variables is encoded as a separate scatter plot
+at a different position in space
+and, within each scatter plot, two variables are encoded as horizontal
+and vertical position.
 
-* Going down the diagonal: the number of runs is correlated loosely with
-  the number of clean breaks; the number of clean breaks is more
-  strongly correlated with the number of tries; and the number of tries is
-  very strongly correlated with the number of points.
+Within each scatter plot, there is an emergent feature of position in
+space, which allows us to decode the correlation between different
+pairs of variables.  Although this only allows us to see pairwise
+correlations between variables, we can also get a glimpse of 
+higher-level correlations across several of the scatterplots.
 
-* Going down the columns:  the number of runs is correlated loosely
-  with the number of clean breaks, a little more loosely with the number
-  of tries and a little more loosely still with the number of points;
-  the number of clean breaks is reasonably correlated with the number
-  of tries and a little more loosely with the number of points.
+For example,
+looking down the diagonal of the matrix,
+we can see that: the number of runs is correlated loosely with
+the number of clean breaks; the number of clean breaks is more
+strongly correlated with the number of tries; and the number of tries is
+very strongly correlated with the number of points.
+
+If we look down the first column of the matrix, we
+can see that:  the number of runs is correlated loosely
+with the number of clean breaks, a little more loosely with the number
+of tries and a little more loosely still with the number of points.
 
 ```{r}
 #| echo: false
@@ -324,5 +350,15 @@ ggplot(all) +
 
 ## Summary
 
+When we need to visualise multiple variables at once, it is not
+effective to map each different variable to a different visual feature.
+
+An alternative is to reuse the same visual feature for multiple
+different variables.
+In particular, we can reuse **position**.  
+
+
+
+**TODO** 
 Mention that multivariate visualisation is an area where dynamic and
 interactive graphics can be useful, e.g., GGobi ?

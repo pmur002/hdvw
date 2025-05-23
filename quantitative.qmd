@@ -22,15 +22,16 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.8) +
-    scale_x_continuous(expand=expansion(c(0, .05))) 
+    geom_col(aes(x=total, y=district), width=.9) +
+    scale_x_continuous(expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=1)
 ```
 
 @fig-bar-district-ordered shows a bar plot of the same data, but with the
 bars ordered from longest to shortest.  This data visualisation uses
-the same mappings as @fig-bar-district---police districts are mapped
-to the vertical positions of the bars and the total counts
-are mapped to the lengths of the bars---which means that it is also
+the same mappings as @fig-bar-district---police districts are encoded
+as the vertical positions of the bars and the total counts
+are encoded as the lengths of the bars---which means that it is also
 effective for comparing the total number of offenders between 
 police districts.
 
@@ -41,9 +42,10 @@ police districts.
 crimeDistrictTotal$districtOrdered <- 
     with(crimeDistrictTotal, reorder(district, total))
 ggplot(crimeDistrictTotal) +
-    geom_col(aes(x=total, y=districtOrdered), width=.8) +
+    geom_col(aes(x=total, y=districtOrdered), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    scale_y_discrete(name="district")
+    scale_y_discrete(name="district") +
+    theme(aspect.ratio=1)
 ```
 
 However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
@@ -102,7 +104,7 @@ popViewport(2)
 
 @fig-unaligned-length shows that it is harder to accurately compare
 the **lengths** of two bars if they are **unaligned** and do not share a 
-common base.  This also applies to the accuracy of comparing **positions**.
+common baseline.  This also applies to the accuracy of comparing **positions**.
 
 ```{r}
 #| echo: false
@@ -124,13 +126,23 @@ popViewport(2)
 
 @fig-stacked-bar shows an alternative visualisation of the data on 
 the total number of offenders in different ethnic groups.
-The bar plot of these data that we saw in @fig-bar mapped ethnic groups
-to the **positions** of the bars so that the bars were arranged
+The bar plot of these data that we saw in @fig-bar encoded ethnic groups
+as the **positions** of the bars so that the bars were arranged
 vertically with a common left-hand edge.
 In @fig-stacked-bar, the ethnic groups are 
-mapped to different **colours** and the bars are "stacked" horizontally.
+encoded as different **colours** and the bars are "stacked" 
+horizontally.[^stacking-as-position]
 
-Although the total number of offenders has been mapped to the same
+[^stacking-as-position]:
+  In a stacked bar plot, groups are encoded as the
+  positions of the bars and counts are encoded as the lengths
+  of the bars, but the positions are in the same
+  dimension as the lengths (in this case, both position and length
+  are horizontal).  In a side-by-side bar plot,
+  the position of the bars is in the opposite dimension to the
+  lengths of the bars.
+
+Although the total number of offenders has been encoded as the same
 visual feature in both @fig-stacked-bar and @fig-bar, the **lengths**
 of the bars, comparing those lengths is much harder in @fig-stacked-bar
 because the lengths are **unaligned**.
@@ -173,7 +185,8 @@ kable(head(crimeGroupTable, row.names=FALSE))
 
 @fig-stacked-bar-year shows the number of offenders (quantitative)
 for each ethnic group (qualitative) and
-for each year from 2011 to 2021 (qualitative, or at least discrete).
+for each year from 2011 to 2021 (treated here as
+qualitative, or at least discrete).
 In this data visualisation, the number of offenders is mapped to 
 the lengths of the bars, the years are mapped to the horizontal
 **position** of the bars, the ethnic groups are mapped to 
@@ -225,7 +238,8 @@ comparing between ethnicities for a specific year.
 #| label: fig-side-bar-group
 #| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
-    geom_col(aes(group, count, fill=group, group=year), position="dodge") +
+    geom_col(aes(group, count, fill=group, group=year), position="dodge",
+             colour=figbg) +
     scale_y_continuous(expand=expansion(c(0, .05)))
 ```
 
@@ -238,7 +252,8 @@ more comparisons.
 
 ## Perception is relative {#sec-perception-relative}
 
-@fig-relative shows that the perception of differences is relative;
+@fig-relative shows that the perception of differences between the lengths
+of bars is relative;
 it is easier to detect smaller differences when the visual features
 that we are comparing are smaller.[^Weber]
 It is easier to see that the pair of bars on the left have different
@@ -339,9 +354,10 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.8) +
+    geom_col(aes(x=total, y=district), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1))
+    theme(panel.grid.major.x=element_line(colour="black", linewidth=.1),
+          aspect.ratio=1)
 ```
 
 > One reason why grid lines are effective is because they allow
@@ -350,7 +366,8 @@ ggplot(crimeTemp) +
 
 ## Summary
 
-Bar plots are effective because they map **quantitative** values to **lengths**,
+Bar plots are effective because they encode
+**quantitative** values as **lengths**,
 which are accurate visual features.
 
 However, comparisons between the bars in a bar plot can be difficult if
