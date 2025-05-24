@@ -99,6 +99,16 @@ knitr::opts_chunk$set(dev='svg',
 
 # Executive Summary
 
+::: {.actual-quote}
+
+*Visualization is essentially a mapping process from computer representations
+to perceptual representations, choosing encoding techniques to maximize human
+understanding and communication.*[^definition]
+:::
+
+[^definition]:
+  @owen1999
+
 ```{r}
 #| echo: false
 #| purl: false
@@ -127,7 +137,7 @@ dec <- function(x) {
   <span style="color: #005A8F">**visual features**</span> 
   to obtain <span style="color: #1A6000">**data values**</span>.
 
-  For example, the <span style="color: #005A8F">**heights of bars**</span>
+  For example, the <span style="color: #005A8F">**heights**</span> of bars
   in a bar plot
   are `r dec("**decoded**")` 
   to obtain <span style="color: #1A6000">**counts**</span>.
@@ -139,7 +149,7 @@ dec <- function(x) {
   For example, a bar plot is effective for comparing 
   <span style="color: #1A6000">**counts**</span>
   because the visual system is effective at comparing the 
-  <span style="color: #005A8F">**heights of bars**</span>.
+  <span style="color: #005A8F">**heights**</span> of bars.
 
 * More `r enc("**complex encodings**")` produce more 
   <span style="color: #005A8F">**complex visual features**</span>.
@@ -148,13 +158,13 @@ dec <- function(x) {
   <span style="color: #1A6000">**two numeric variables**</span>
   as the x- and y-locations of points, 
   which produces the 
-  <span style="color: #005A8F">**position in space of points**</span>.
+  <span style="color: #005A8F">**position in space**</span> of points.
 
 * More <span style="color: #005A8F">**complex visual features**</span> 
   lead to more `r dec("**complex decodings**")`.
 
   For example, the 
-  <span style="color: #005A8F">**position in space of points**</span>
+  <span style="color: #005A8F">**position in space**</span> of points
   in a scatter plot
   is `r dec("**decoded**")` 
   as the <span style="color: #1A6000">**correlation**</span> 
@@ -168,12 +178,6 @@ dec <- function(x) {
 
 :::
 
-::: {.actual-quote}
-
-Visualization is essentially a mapping process from computer representations
-to perceptual representations, choosing encoding techniques to maximize human
-understanding and communication. [@owen1999]
-:::
 
 
 # Introduction
@@ -3136,16 +3140,25 @@ data values, but they have a very limited capacity.
 
 # Congruent Mappings {#sec-congruence}
 
-So far we have seen numerous examples of **explicit** mappings
-from data values to visual features. We **encode** data values
-as visual features so that the viewers of a data visualisation can
-**decode** the data values from the visual features 
-(@fig-visual-feature-decode).
+The purpose of this section is to show that we need to consider more
+than just the accuracy or capacity of our mappings from 
+data values to basic visual features in order to understand the effectiveness
+of a data visualisation.[^congruence-lit]
 
-In this section, we acknowledge that some visual features come
-with **implicit** mappings.  In some cases, we are able to **decode**
-values from a visual feature based on prior experience and learning,
-rather than due to an explicit encoding (@fig-implicit-decode).
+[^congruence-lit]:
+  @TVERSKY2002247 discusses congruence at least in the sense of 
+  matching the spatial properties of data values to the spatial
+  arrangement of visual features.  The concept is also discussed in
+  @DBLP:journals/corr/abs-2008-11310.
+
+## Implicit mappings {#sec-implicit}
+
+Sort of like pre-attentive analogue of learned decodings.
+
+Do a simple example - maybe just the fact that a bar twice the length
+of another bar is perceived as "twice" !?
+These implicit mappings are the basis of whether visual features
+are quant or qual!?
 
 ::: {#fig-implicit-decode}
 
@@ -3156,38 +3169,14 @@ can decode values from the visual features without having explicitly
 encoded values as visual features.
 :::
 
-For example, @fig-implicit shows three coloured circles.
-Without any explicit encoding, we can decode the red circle as "stop",
-the orange circle as "slow", and the green circle as "go".
-
-```{r}
-#| echo: false
-#| label: fig-implicit
-#| fig.width: 4
-#| fig.height: 1
-#| fig-cap: An example of visual features that contain implicit mappings.  
-## https://www.color-hex.com/color-palette/35021
-traffic <- c("#cc3232", "#e7b416", "#2dc937")
-grid.newpage()
-grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
-grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
-            gp=gpar(col=traffic, fill=traffic))
-```
-
-When an implicit encoding exists,
+When an learned encoding exists,
 we can produce a more effective mapping by building upon
-the implicit decoding.
+the learned decoding.
 We can explicitly encode data values as visual features in such a way that
-the decoding is **congruent** with the implicit decoding, in the sense
-that the implicit decoding leads back to the original data values
+the decoding is **congruent** with the learned decoding, in the sense
+that the learned decoding leads back to the original data values
 that we explicitly encoded
-(@fig-congruent-decode).[^congruence-lit]
-
-[^congruence-lit]:
-  @TVERSKY2002247 discusses congruence at least in the sense of 
-  matching the spatial properties of data values to the spatial
-  arrangement of visual features.  The concept is also discussed in
-  @DBLP:journals/corr/abs-2008-11310.
+(@fig-congruent-decode).
 
 ::: {#fig-congruent-decode}
 
@@ -3446,6 +3435,11 @@ the same.
 
 ## Dissonant mappings {#sec-dissonance}
 
+**TODO** MUST move this example to AFTER learned decodings,
+perhaps even after text
+(because it is a conflict between explicit encoding and LEARNED
+decoding NOT between explicit encoding and IMPLICIT decoding).
+
 @fig-stroop provides a demonstration of the Stroop Effect.[^stroop]
 The task is to name the colour of each word.
 This task is difficult to do because there are two decodings involved and 
@@ -3696,40 +3690,20 @@ addition of jittering may cause confusion.
   reduce the effectiveness of a data visualisation because it introduces
   visual dissonance.
 
-## Dangers of implicit mappings
-
-A colour can have multiple implicit mappings, e.g., red -> hot and
-red -> angry and red -> stop (and red -> prosperity in Chinese culture).[^Arcia]
-
-[^Arcia]:
-  Cite "Sometimes more is more: iterative participatory design of infographics 
-  for engagement of community members with varying levels of health literacy"
-  Arcia et al (2016)
-  where people interpret icons
-  in multiple ways, e.g., specifically "pineapple" rather than generic "fruit".
-
-::: {#fig-ambiguous-decode}
-
-![](Diagrams/ambiguous-decode.png)
-
-A visual feature may have more than one implicit encoding, which means that we
-may decode more than one value from the visual feature.
-:::
-
 ## Summary
 
 The effectiveness of a data visualisation may depend on more than
 just the accuracy and capacity of visual features.
 
 A **congruent** mapping is one where data values are **explicitly** encoded in
-a way that is consistent with an **implicit** encoding of the visual feature.
+a way that is consistent with an **implicit** decoding of the visual feature.
 
 Some data visualisations are effective because they are visually congruent:
 data symbols that are larger for larger data values are more effective;
 data symbols that only change if the data values change are more effective.
 
 A **dissonant** mapping is one where data values are **explicitly**
-encoded in a way that is inconsistent with an **implicit** encoding..
+encoded in a way that is inconsistent with an **implicit** decoding.
 
 Some data visualisations are *not* effective because they are visually
 dissonant.
@@ -5807,7 +5781,8 @@ ggplot(RWCperGame) +
 @fig-flags shows another scatter plot of the number of clean breaks and the
 number of tries for countries
 at the 2023 Rugby World Cup, but this time with flags as the data symbols.
-In one sense, this is just a variation on @fig-flags because the country
+In one sense, this is just a variation on @fig-scatter-country
+because the country
 names are encoded as the **shape** of a data symbol. 
 Each data symbol is a shape that allows us to distinguish between the
 different countries.
@@ -5853,32 +5828,68 @@ ggplot(rwcFlags) +
                    shape=country),
                inherit.aes=FALSE,
                show.legend=TRUE, key_glyph=flag_key) +
-    scale_shape_manual(values=1:nrow(rwcFlags), guide=guide_legend(ncol=2)) +
+    scale_shape_manual(values=1:nrow(rwcFlags), guide=guide_legend(ncol=2),
+                       name=NULL) +
     theme(legend.key.width=unit(size, "mm"),
           legend.key.height=unit(max(rwcFlags$ar)*size + 1, "mm"),
           aspect.ratio=2/3)
 ```
 
-@fig-flags-direct demonstrates this point by repeating the scatter plot,
-but removing the legend.  We are still able to identify not only 
-that the data symbols represent different things, but we can identify
-(at least some of) the country names as well.
+## Learned mappings {#sec-learned}
 
-::: {#fig-data-obj-decode layout-ncol=2}
+We **encode** data values
+as visual features so that the viewers of a data visualisation can
+**decode** the data values from the visual features 
+(@fig-visual-feature-decode).
 
-![](Diagrams/data-obj-decode.png)
+In @sec-implicit, we saw that some encodings are effective because
+there are implicit decodings.  For example, a longer bar in a bar
+plot naturally corresponds to a larger quantity.
+Basic visual features, like length, are effective thanks
+to **pre-existing** decodings that are built-in features
+of our visual system.
 
-If we encode data values as familiar visual objects, it is possible to
-decode more sophisticated data values and the decoding will
-occur without an explanatory legend.
+Part of the power of visual objects also comes from **pre-existing** decodings.
+However, these decodings are **learned** rather than being built-in.
+In some cases, we are able to **decode**
+values from a visual feature based on prior experience and learning,
+rather than due to an explicit encoding (@fig-learned-decode).
+
+::: {#fig-learned-decode}
+
+![](Diagrams/learned-decode.png)
+
+Some visual features have learned encodings, which means that we
+can decode values from the visual features without having explicitly
+encoded values as visual features.
 :::
 
-In terms of @sec-congruence, the flags have **implicit** mappings
-(@fig-implicit-decode).
-We can **decode** the flags to data values, in this case country
-names, even without an explicit encoding, because we 
-have learned the association between flags and the countries
-that they represent.
+For example, @fig-learned shows three coloured circles.
+Without any explicit encoding, we can decode the red circle as "stop",
+the orange circle as "slow", and the green circle as "go".
+
+```{r}
+#| echo: false
+#| label: fig-learned
+#| fig.width: 4
+#| fig.height: 1
+#| fig-cap: An example of visual symbols that have pre-existing, learned decodings.  
+## https://www.color-hex.com/color-palette/35021
+traffic <- c("#cc3232", "#e7b416", "#2dc937")
+grid.newpage()
+grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
+grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
+            gp=gpar(col=traffic, fill=traffic))
+```
+
+The flags in @fig-flags provide examples of learned decodings.
+We associate each flag with a particular country because we have
+seen these flags before and they have learned the decoding from flag
+to country.
+@fig-flags-direct demonstrates this point by repeating the scatter plot,
+but removing the legend.  We are still able to identify not only 
+that the data symbols represent different countries, but we can identify
+(at least some of) the country names as well.
 
 ```{r}
 #| echo: false
@@ -5924,8 +5935,8 @@ ggplot(RWCperGame) +
 ```
 
 > A plot that uses visual objects as data symbols can be effective
-  because the visual objects can convey more information
-  and more complex information.
+  because the visual objects can convey information based on learned
+  associations.
 
 @fig-flags-direct also demonstrates a weakness of **visual objects**.
 The flags work well for identifying the country names *only if*
@@ -5934,7 +5945,7 @@ For example, it may only be Australians and New Zealanders who can
 reliably identify the difference between their two flags.
 
 > A plot that uses visual objects as data symbols may *not* be effective
-  if the visual objects are only familiar to some people.
+  if the learned associations are not widely known.
 
 ## Case study: Choropleth maps {#sec-choropleth}
 
@@ -6528,6 +6539,31 @@ The resulting proximity helps with perceiving groups of similar faces.
   because the data symbol is a familiar visual object from which we can
   easily perceive simple human emotions.
 
+## Dangers of learned mappings
+
+A colour can have multiple learned mappings, e.g., red -> hot and
+red -> angry and red -> stop (and red -> prosperity in Chinese culture).[^Arcia]
+
+[^Arcia]:
+  Cite "Sometimes more is more: iterative participatory design of infographics 
+  for engagement of community members with varying levels of health literacy"
+  Arcia et al (2016)
+  where people interpret icons
+  in multiple ways, e.g., specifically "pineapple" rather than generic "fruit".
+
+::: {#fig-ambiguous-decode}
+
+![](Diagrams/ambiguous-decode.png)
+
+A visual feature may have more than one learned encoding, which means that we
+may decode more than one value from the visual feature.
+:::
+
+**ALSO** you can really f**k things up if you create something dissonant
+with a learned decoding, e.g., use the wrong flag for the wrong
+country.  Note how much worse this is than just swapping a couple of
+the shapes in @fig-scatter-country
+
 ## The dangers of visual objects
 
 One issue with more complex data visualisations 
@@ -6577,7 +6613,7 @@ popViewport()
 ```
 
 Another example of this problem are the hurrican "cones of uncertainty"
-that Cairo highlights in Chapter 5 of How Charts Lie.
+that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).
 
 ## Summary
 
@@ -6639,7 +6675,7 @@ ggplot(crimeAgeSimple) +
 ```
 
 Eye-tracking studies also show that people spend a lot of time looking
-at the text within a data visualisation.  For example, in @fig-fixations,
+at the text within a data visualisation.  For example, in @fig-fixations-text,
 there are more fixations in the regions that
 contain text than anywhere else.
 
@@ -6687,9 +6723,11 @@ For example,
 the ethnic groups are encoded as the vertical **position** of the bars
 *and* as the vertical **position** of the text.
 The data values for the number of offenders in each ethnic group
-are encoded as the **length** of the bars,
-but they are also encoded as the horizontal **position**
-of the text *and* as the **shape** of the text---the letters and digits 
+are encoded as the **length** of the bars *and*
+as the horizontal **position**
+of the text.
+Furthermore, the data values for the number of offenders in each ethnic group
+are encoded as the **shape** of the text---the letters and digits 
 that make up the text.
 
 Compared to the bar data symbols in @fig-bar-text, the text data symbols
@@ -6707,32 +6745,53 @@ shapes we can process simultaneously
   but text is also processed separately for its language value.
   Cite Ware p315-316
 
-The value of text data symbols is that they allow us to decode
-data values very well (@fig-decode).
+Just as we can decode data values from the visual features of the bars
+in @fig-bar-text,
+we can decode data values from the visual features of the text.
+For example, the horizontal position of the text by itself
+allows us to perceive that some counts are (much) larger than others.
+
+However, the unique power of text comes from **decoding** the
+**shape** of the text.
+Text is the ultimate example of a **learned mapping** (@sec-learned).
+We all learn to read text (and numbers), which means that, 
+when we are presented with
+a text shape, there is a pre-existing decoding to the semantic content
+of the text (@fig-learned-decode).
+For example, in @fig-bar-text, we are able to decode the data
+value 41787 (the count for Māori) from the text "41787".
+
 In terms of the criteria that we discussed in @sec-mapping-visual-features,
-text is appropriate for both **quantitative** and **qualitative** data values,
-text is extremely **accurate**, and text has a very large **capacity**.
+the value of text data symbols is that they allow us to decode
+data values very **accurately** (@fig-decode).
+Text is also very flexible because it is
+appropriate for both **quantitative** and **qualitative** data values.
+Finally, text has a very large **capacity**;  we are able to distinguish
+between many different words and numbers.
 
 > Text data symbols are effective because they can be used to represent
   any sort of data and they allow a very accurate
   decoding of data values.
 
-**NOTE** that this accuracy is excellent for a single value 
-but even for comparing two values it can get messy
-Eg what proportion of 1234 is 123?
-Even worse with words
-Example of cognitive effort 
-
-The weaknesses of text are that comparing values requires more cognitive
+One weakness of text data symbols
+is that comparing values (rather than just decoding a single value)
+requires more cognitive
 effort compared to comparing simple visual features (like the
-lengths of bars), plus our visual system cannot generate
-**visual summaries** of large amounts of text (@sec-visual-summaries).
-This is why a table of numbers, like @tbl-crime,
-is ineffective for perceiving groups of values or trends in values.
+lengths of bars).
+For example, in @fig-bar, it is quick and easy to approximate 
+the ratio of Pasifika to Māori or European/Other to Māori from
+the lengths of the bars,
+but those comparisons are slower and take more conscious effort
+using the text data symbols in @fig-bar-text.
 
 > It is harder to compare data values that are mapped to 
   text because it requires more effort to decode data 
   values and to perform mental calculations.
+
+In addition, our visual system cannot generate
+**visual summaries** of large amounts of text (@sec-visual-summaries).
+This is why a table of numbers, like @tbl-crime,
+is ineffective for perceiving groups of values or trends in values.
 
 > Large numbers of text data symbols are *not* effective because
   the visual system cannot decode visual summaries from the text.
@@ -6741,13 +6800,14 @@ is ineffective for perceiving groups of values or trends in values.
 
 @fig-crime-guides is a version of @fig-crime with the guides highlighted
 in purple.  There are tick marks and tick labels on the x-axis and y-axis,
-there are horizontal grid lines, and there is a legend to show the
+there are horizontal grid lines, and there are legend elements to show the
 mapping from the different ages to different colours.
 
 ```{r}
 #| echo: false
 #| label: fig-crime-guides
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot have been highlighted in purple.
+#| fig-keep: last
 ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
     geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
@@ -6764,6 +6824,9 @@ ggplot(crimeAgeSimple) +
           legend.text=element_text(colour=highlight, face="bold"),
           legend.title=element_text(colour="grey"),
           aspect.ratio=1)
+grid.force()
+grid.edit("key::segments", grep=TRUE, global=TRUE,
+          gp=gpar(lwd=2))
 ```
 
 The first thing to note about the guides in @fig-crime-guides is that they
@@ -6787,22 +6850,50 @@ The legend is also made up of line data symbols and text data symbols,
 this time with age data values encoded as the **colour** of lines
 and the **shape** of text.
 
-**TODO** also gestalt continuity because they are aligned?
+The **decoding** of the **shape** of the **text** data symbols 
+within the guides shows the
+critical role that text plays within guides.
+If we look again at @fig-no-text, there are coloured lines on the plot
+and there are coloured lines on the legend.
+The fact that these lines have different colours indicates that
+there are three different groups, but the colours alone
+do not tell us what the groups are.  We can decode different values
+from the colours of the lines, but we cannot decode exact data values.
+In the original Figure @fig-crime, the shapes of the text labels on the legend
+allow us to decode the original data values---the three ages 14, 15, and 16.
 
-The fact that guides typically involve **text** data symbols
-makes sense because a guide typically presents only a small number of known
-data values that we want to decode as accurately as possible.
+The proximity of the text labels in the legend to the coloured lines
+in the legend means that we associate each label with each
+coloured line (@sec-visual-model-groups).
+So the text labels in the legend are the most important data symbols
+in @fig-crime that allow us to decode the colours of the lines.
+
+The text labels on axes perform a similar service.
+For example, the numbers on the axes in @fig-crime
+are the only data symbols that provide exact decoding from
+positions to data values (years or rates).
+The lines within the plot, by themselves, only show that values 
+are decreasing.
+It is only the relative position of the lines to the axis tick labels
+(and grid lines)
+that allows us to decode from the lines to (approximate) data values.
+
+Text data symbols within guides are effective because 
+guides contain only a few data values that need to be decoded 
+precisely.
 This is the situation where text excels.   
-
-Viewed as groups of data symbols, the guides on a data visualisation
-make sense:  the guides provide a very accurate way to decode data values
-from **positions** and **colours** on the plot.
 
 > Guides are effective because they encode known data values 
   as data symbols and because decode data values from those data symbols 
   extremely well.
   
 ## Labels {#sec-labels}
+
+**TODO**
+Add title to the plot (here and everywhere else it is used!)
+
+**TODO**
+add annotation example => WAY more complex information
 
 @fig-crime-labels shows a version of @fig-crime with the labels 
 highlighted in purple.  In this data visualisation, the only
@@ -7045,7 +7136,7 @@ ggplot(rwc8) +
     theme(aspect.ratio=1)
 ```
 
-## Stem-and-leaf plots
+## Case study: Stem-and-leaf plots
 
 **TODO**
 Must adapt this to HDVW style, both in terms of visual style
@@ -7275,38 +7366,64 @@ Of course, the main downside is that this is limited to small data sets.
 
 ## Summary
 
-**MUST** (in footnote)
-Acknowledge Ware:
-G8.18 (p327)
-"When a large number of data points must be represented in a visualization,
-use sybmols instead of words or pictorial icons."
-G8.19 (p327)
-"Use words directly on the chart where the number of symbolic objects
-in each category is relatively few and where space is available."
+Data values can be encoded as the visual features of text, such as
+position and colour, just like for other data symbols.
+
+The shape of text---the characters used in text---is particularly 
+important because we have a learned decoding
+of text.  We can read data values from text.
+
+We can use text to encode any type of data,
+we can represent a very large number of different categories,
+and we can decode individual data values from text extremely accurately.
+
+On the other hand, decoding a large number of data values
+from text is very slow and we cannot generate visual summaries from text.
+
+Guides are really just collections of data symbols, with specific
+data values encoded as the visual features to demonstrate
+how data values have been encoded.
+
+The text elements within guides are essential because they provide the
+only precise decoding of exact data values.  This is what allows the
+decoding of the main data symbols within a data visualisation.
+
+Overall, text is very valuable in a data visualisation for accurately
+encoding a small number of data values, or to express complex information.
+But text is not appropriate for representing a large number of raw
+data values.[^ware-text]
+
+[^ware-text]:
+  Acknowledge Ware 4th Ed:
+  G8.18 (p327)
+  "When a large number of data points must be represented in a visualization,
+  use sybmols instead of words or pictorial icons."
+  G8.19 (p327)
+  "Use words directly on the chart where the number of symbolic objects
+  in each category is relatively few and where space is available."
+
+**TODO** Cite my text article ?
 
 # Mapping Structure
 
-@fig-rep-none shows a scatter plot of the number of clean breaks and the
+@fig-rep-guide shows a scatter plot of the number of clean breaks and the
 number of tries for countries
 at the 2023 Rugby World Cup (@tbl-rwc-2023).
-This data visualisation is similar to @fig-scatter.
+This data visualisation is similar to @fig-scatter, but with an
+additional encoding of the hemisphere for each country as the colour
+of the data points.
 
-How to put all of the components of a plot together on an image.
-
-Start with example of plot where legend and data symbols do not match!
-
+The legend (guide) in @fig-rep-guide demonstrates the scale for the colour
+encoding:  which colour is used to encode each hemisphere.
+ 
 ```{r}
 #| echo: false
-#| label: fig-rep-none
-#| fig-cap: A scatter plot with a discordant legend.
-cols <- scales::hue_pal()(4)
+#| label: fig-rep-guide
+#| fig-cap: A scatter plot with a legend.
+repcols <- scales::hue_pal()(4)
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=cols[c(2, 4)]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
-               colour=cols[1]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
-               colour=cols[3]) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
     theme(aspect.ratio=1)
@@ -7314,6 +7431,54 @@ pushViewport(viewport(height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+@fig-rep-none 
+
+As is usual when there is an encoding of data values as colour, 
+@fig-rep-none includes a legend (guide) to show the scale for
+the colour encoding:  which colours correspond to which hemisphere values.
+However, @fig-rep-none
+There is a problem with 
+
+```{r}
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot with a discordant legend.
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(2, 4)], name="hemisphere") +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
+               colour=repcols[1]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
+               colour=repcols[3]) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+```{r}
+#| echo: false
+#| label: fig-rep-double
+#| fig-cap: A scatter plot with a legend.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+```
+
 
 Much more subtle example from 
 787resources/Examples/2024-11-premier-league-momentum-plot
@@ -7351,13 +7516,17 @@ List of questions to evaluate a data vis:
 * What visual features are they mapped to
 * What type of data
 * Can the visual features represent the data
+* Is there the capacity to represent all categories
+* How accurate are the decodings
+* Is there congruence or dissonance in the mapping
 * Mapping data or data summary
 * Do visual features interact
-* Is there emergent features
+* Are there emergent features
 * Is the data symbol a visual shape
 * Is that appropriate
 * A visual object
 * Is that appropriate
+* Learned mappings somehow (distinct from implicit mappings)
 
 And so on ...
 
@@ -7595,6 +7764,10 @@ And so on ...
 * CVD
 
 * visual illusions (put in a section on "how mappings go wrong"?)
+  OR add these AFTER dissonant mappings (because they are examples
+  of our visual system telling us something that is at odds with
+  the explicit encoding!?)
+  Refer back to luminance and colour contrast.
 
 * redundant encodings
   Use same diagram as congruent mappings

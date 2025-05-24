@@ -546,3 +546,9 @@ graph(eye,
       shapeObjectEdge,
       file="visual-processing.dot")
 
+graph(data,
+      vis,
+      invis(dataVisEdge),
+      visDataEdge2,
+      file="learned-decode.dot")
+

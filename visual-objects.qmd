@@ -25,7 +25,8 @@ ggplot(RWCperGame) +
 @fig-flags shows another scatter plot of the number of clean breaks and the
 number of tries for countries
 at the 2023 Rugby World Cup, but this time with flags as the data symbols.
-In one sense, this is just a variation on @fig-flags because the country
+In one sense, this is just a variation on @fig-scatter-country
+because the country
 names are encoded as the **shape** of a data symbol. 
 Each data symbol is a shape that allows us to distinguish between the
 different countries.
@@ -71,32 +72,68 @@ ggplot(rwcFlags) +
                    shape=country),
                inherit.aes=FALSE,
                show.legend=TRUE, key_glyph=flag_key) +
-    scale_shape_manual(values=1:nrow(rwcFlags), guide=guide_legend(ncol=2)) +
+    scale_shape_manual(values=1:nrow(rwcFlags), guide=guide_legend(ncol=2),
+                       name=NULL) +
     theme(legend.key.width=unit(size, "mm"),
           legend.key.height=unit(max(rwcFlags$ar)*size + 1, "mm"),
           aspect.ratio=2/3)
 ```
 
-@fig-flags-direct demonstrates this point by repeating the scatter plot,
-but removing the legend.  We are still able to identify not only 
-that the data symbols represent different things, but we can identify
-(at least some of) the country names as well.
+## Learned mappings {#sec-learned}
 
-::: {#fig-data-obj-decode layout-ncol=2}
+We **encode** data values
+as visual features so that the viewers of a data visualisation can
+**decode** the data values from the visual features 
+(@fig-visual-feature-decode).
 
-![](Diagrams/data-obj-decode.png)
+In @sec-implicit, we saw that some encodings are effective because
+there are implicit decodings.  For example, a longer bar in a bar
+plot naturally corresponds to a larger quantity.
+Basic visual features, like length, are effective thanks
+to **pre-existing** decodings that are built-in features
+of our visual system.
 
-If we encode data values as familiar visual objects, it is possible to
-decode more sophisticated data values and the decoding will
-occur without an explanatory legend.
+Part of the power of visual objects also comes from **pre-existing** decodings.
+However, these decodings are **learned** rather than being built-in.
+In some cases, we are able to **decode**
+values from a visual feature based on prior experience and learning,
+rather than due to an explicit encoding (@fig-learned-decode).
+
+::: {#fig-learned-decode}
+
+![](Diagrams/learned-decode.png)
+
+Some visual features have learned encodings, which means that we
+can decode values from the visual features without having explicitly
+encoded values as visual features.
 :::
 
-In terms of @sec-congruence, the flags have **implicit** mappings
-(@fig-implicit-decode).
-We can **decode** the flags to data values, in this case country
-names, even without an explicit encoding, because we 
-have learned the association between flags and the countries
-that they represent.
+For example, @fig-learned shows three coloured circles.
+Without any explicit encoding, we can decode the red circle as "stop",
+the orange circle as "slow", and the green circle as "go".
+
+```{r}
+#| echo: false
+#| label: fig-learned
+#| fig.width: 4
+#| fig.height: 1
+#| fig-cap: An example of visual symbols that have pre-existing, learned decodings.  
+## https://www.color-hex.com/color-palette/35021
+traffic <- c("#cc3232", "#e7b416", "#2dc937")
+grid.newpage()
+grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
+grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
+            gp=gpar(col=traffic, fill=traffic))
+```
+
+The flags in @fig-flags provide examples of learned decodings.
+We associate each flag with a particular country because we have
+seen these flags before and they have learned the decoding from flag
+to country.
+@fig-flags-direct demonstrates this point by repeating the scatter plot,
+but removing the legend.  We are still able to identify not only 
+that the data symbols represent different countries, but we can identify
+(at least some of) the country names as well.
 
 ```{r}
 #| echo: false
@@ -142,8 +179,8 @@ ggplot(RWCperGame) +
 ```
 
 > A plot that uses visual objects as data symbols can be effective
-  because the visual objects can convey more information
-  and more complex information.
+  because the visual objects can convey information based on learned
+  associations.
 
 @fig-flags-direct also demonstrates a weakness of **visual objects**.
 The flags work well for identifying the country names *only if*
@@ -152,7 +189,7 @@ For example, it may only be Australians and New Zealanders who can
 reliably identify the difference between their two flags.
 
 > A plot that uses visual objects as data symbols may *not* be effective
-  if the visual objects are only familiar to some people.
+  if the learned associations are not widely known.
 
 ## Case study: Choropleth maps {#sec-choropleth}
 
@@ -746,6 +783,31 @@ The resulting proximity helps with perceiving groups of similar faces.
   because the data symbol is a familiar visual object from which we can
   easily perceive simple human emotions.
 
+## Dangers of learned mappings
+
+A colour can have multiple learned mappings, e.g., red -> hot and
+red -> angry and red -> stop (and red -> prosperity in Chinese culture).[^Arcia]
+
+[^Arcia]:
+  Cite "Sometimes more is more: iterative participatory design of infographics 
+  for engagement of community members with varying levels of health literacy"
+  Arcia et al (2016)
+  where people interpret icons
+  in multiple ways, e.g., specifically "pineapple" rather than generic "fruit".
+
+::: {#fig-ambiguous-decode}
+
+![](Diagrams/ambiguous-decode.png)
+
+A visual feature may have more than one learned encoding, which means that we
+may decode more than one value from the visual feature.
+:::
+
+**ALSO** you can really f**k things up if you create something dissonant
+with a learned decoding, e.g., use the wrong flag for the wrong
+country.  Note how much worse this is than just swapping a couple of
+the shapes in @fig-scatter-country
+
 ## The dangers of visual objects
 
 One issue with more complex data visualisations 
@@ -795,7 +857,7 @@ popViewport()
 ```
 
 Another example of this problem are the hurrican "cones of uncertainty"
-that Cairo highlights in Chapter 5 of How Charts Lie.
+that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).
 
 ## Summary
 

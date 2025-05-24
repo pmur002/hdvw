@@ -52,7 +52,7 @@ ggplot(crimeAgeSimple) +
 ```
 
 Eye-tracking studies also show that people spend a lot of time looking
-at the text within a data visualisation.  For example, in @fig-fixations,
+at the text within a data visualisation.  For example, in @fig-fixations-text,
 there are more fixations in the regions that
 contain text than anywhere else.
 
@@ -100,9 +100,11 @@ For example,
 the ethnic groups are encoded as the vertical **position** of the bars
 *and* as the vertical **position** of the text.
 The data values for the number of offenders in each ethnic group
-are encoded as the **length** of the bars,
-but they are also encoded as the horizontal **position**
-of the text *and* as the **shape** of the text---the letters and digits 
+are encoded as the **length** of the bars *and*
+as the horizontal **position**
+of the text.
+Furthermore, the data values for the number of offenders in each ethnic group
+are encoded as the **shape** of the text---the letters and digits 
 that make up the text.
 
 Compared to the bar data symbols in @fig-bar-text, the text data symbols
@@ -120,32 +122,53 @@ shapes we can process simultaneously
   but text is also processed separately for its language value.
   Cite Ware p315-316
 
-The value of text data symbols is that they allow us to decode
-data values very well (@fig-decode).
+Just as we can decode data values from the visual features of the bars
+in @fig-bar-text,
+we can decode data values from the visual features of the text.
+For example, the horizontal position of the text by itself
+allows us to perceive that some counts are (much) larger than others.
+
+However, the unique power of text comes from **decoding** the
+**shape** of the text.
+Text is the ultimate example of a **learned mapping** (@sec-learned).
+We all learn to read text (and numbers), which means that, 
+when we are presented with
+a text shape, there is a pre-existing decoding to the semantic content
+of the text (@fig-learned-decode).
+For example, in @fig-bar-text, we are able to decode the data
+value 41787 (the count for Māori) from the text "41787".
+
 In terms of the criteria that we discussed in @sec-mapping-visual-features,
-text is appropriate for both **quantitative** and **qualitative** data values,
-text is extremely **accurate**, and text has a very large **capacity**.
+the value of text data symbols is that they allow us to decode
+data values very **accurately** (@fig-decode).
+Text is also very flexible because it is
+appropriate for both **quantitative** and **qualitative** data values.
+Finally, text has a very large **capacity**;  we are able to distinguish
+between many different words and numbers.
 
 > Text data symbols are effective because they can be used to represent
   any sort of data and they allow a very accurate
   decoding of data values.
 
-**NOTE** that this accuracy is excellent for a single value 
-but even for comparing two values it can get messy
-Eg what proportion of 1234 is 123?
-Even worse with words
-Example of cognitive effort 
-
-The weaknesses of text are that comparing values requires more cognitive
+One weakness of text data symbols
+is that comparing values (rather than just decoding a single value)
+requires more cognitive
 effort compared to comparing simple visual features (like the
-lengths of bars), plus our visual system cannot generate
-**visual summaries** of large amounts of text (@sec-visual-summaries).
-This is why a table of numbers, like @tbl-crime,
-is ineffective for perceiving groups of values or trends in values.
+lengths of bars).
+For example, in @fig-bar, it is quick and easy to approximate 
+the ratio of Pasifika to Māori or European/Other to Māori from
+the lengths of the bars,
+but those comparisons are slower and take more conscious effort
+using the text data symbols in @fig-bar-text.
 
 > It is harder to compare data values that are mapped to 
   text because it requires more effort to decode data 
   values and to perform mental calculations.
+
+In addition, our visual system cannot generate
+**visual summaries** of large amounts of text (@sec-visual-summaries).
+This is why a table of numbers, like @tbl-crime,
+is ineffective for perceiving groups of values or trends in values.
 
 > Large numbers of text data symbols are *not* effective because
   the visual system cannot decode visual summaries from the text.
@@ -154,13 +177,14 @@ is ineffective for perceiving groups of values or trends in values.
 
 @fig-crime-guides is a version of @fig-crime with the guides highlighted
 in purple.  There are tick marks and tick labels on the x-axis and y-axis,
-there are horizontal grid lines, and there is a legend to show the
+there are horizontal grid lines, and there are legend elements to show the
 mapping from the different ages to different colours.
 
 ```{r}
 #| echo: false
 #| label: fig-crime-guides
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot have been highlighted in purple.
+#| fig-keep: last
 ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
     geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
@@ -177,6 +201,9 @@ ggplot(crimeAgeSimple) +
           legend.text=element_text(colour=highlight, face="bold"),
           legend.title=element_text(colour="grey"),
           aspect.ratio=1)
+grid.force()
+grid.edit("key::segments", grep=TRUE, global=TRUE,
+          gp=gpar(lwd=2))
 ```
 
 The first thing to note about the guides in @fig-crime-guides is that they
@@ -200,22 +227,50 @@ The legend is also made up of line data symbols and text data symbols,
 this time with age data values encoded as the **colour** of lines
 and the **shape** of text.
 
-**TODO** also gestalt continuity because they are aligned?
+The **decoding** of the **shape** of the **text** data symbols 
+within the guides shows the
+critical role that text plays within guides.
+If we look again at @fig-no-text, there are coloured lines on the plot
+and there are coloured lines on the legend.
+The fact that these lines have different colours indicates that
+there are three different groups, but the colours alone
+do not tell us what the groups are.  We can decode different values
+from the colours of the lines, but we cannot decode exact data values.
+In the original Figure @fig-crime, the shapes of the text labels on the legend
+allow us to decode the original data values---the three ages 14, 15, and 16.
 
-The fact that guides typically involve **text** data symbols
-makes sense because a guide typically presents only a small number of known
-data values that we want to decode as accurately as possible.
+The proximity of the text labels in the legend to the coloured lines
+in the legend means that we associate each label with each
+coloured line (@sec-visual-model-groups).
+So the text labels in the legend are the most important data symbols
+in @fig-crime that allow us to decode the colours of the lines.
+
+The text labels on axes perform a similar service.
+For example, the numbers on the axes in @fig-crime
+are the only data symbols that provide exact decoding from
+positions to data values (years or rates).
+The lines within the plot, by themselves, only show that values 
+are decreasing.
+It is only the relative position of the lines to the axis tick labels
+(and grid lines)
+that allows us to decode from the lines to (approximate) data values.
+
+Text data symbols within guides are effective because 
+guides contain only a few data values that need to be decoded 
+precisely.
 This is the situation where text excels.   
-
-Viewed as groups of data symbols, the guides on a data visualisation
-make sense:  the guides provide a very accurate way to decode data values
-from **positions** and **colours** on the plot.
 
 > Guides are effective because they encode known data values 
   as data symbols and because decode data values from those data symbols 
   extremely well.
   
 ## Labels {#sec-labels}
+
+**TODO**
+Add title to the plot (here and everywhere else it is used!)
+
+**TODO**
+add annotation example => WAY more complex information
 
 @fig-crime-labels shows a version of @fig-crime with the labels 
 highlighted in purple.  In this data visualisation, the only
@@ -458,7 +513,7 @@ ggplot(rwc8) +
     theme(aspect.ratio=1)
 ```
 
-## Stem-and-leaf plots
+## Case study: Stem-and-leaf plots
 
 **TODO**
 Must adapt this to HDVW style, both in terms of visual style
@@ -688,11 +743,40 @@ Of course, the main downside is that this is limited to small data sets.
 
 ## Summary
 
-**MUST** (in footnote)
-Acknowledge Ware:
-G8.18 (p327)
-"When a large number of data points must be represented in a visualization,
-use sybmols instead of words or pictorial icons."
-G8.19 (p327)
-"Use words directly on the chart where the number of symbolic objects
-in each category is relatively few and where space is available."
+Data values can be encoded as the visual features of text, such as
+position and colour, just like for other data symbols.
+
+The shape of text---the characters used in text---is particularly 
+important because we have a learned decoding
+of text.  We can read data values from text.
+
+We can use text to encode any type of data,
+we can represent a very large number of different categories,
+and we can decode individual data values from text extremely accurately.
+
+On the other hand, decoding a large number of data values
+from text is very slow and we cannot generate visual summaries from text.
+
+Guides are really just collections of data symbols, with specific
+data values encoded as the visual features to demonstrate
+how data values have been encoded.
+
+The text elements within guides are essential because they provide the
+only precise decoding of exact data values.  This is what allows the
+decoding of the main data symbols within a data visualisation.
+
+Overall, text is very valuable in a data visualisation for accurately
+encoding a small number of data values, or to express complex information.
+But text is not appropriate for representing a large number of raw
+data values.[^ware-text]
+
+[^ware-text]:
+  Acknowledge Ware 4th Ed:
+  G8.18 (p327)
+  "When a large number of data points must be represented in a visualization,
+  use sybmols instead of words or pictorial icons."
+  G8.19 (p327)
+  "Use words directly on the chart where the number of symbolic objects
+  in each category is relatively few and where space is available."
+
+**TODO** Cite my text article ?

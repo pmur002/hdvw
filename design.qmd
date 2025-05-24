@@ -1,27 +1,24 @@
 
 # Mapping Structure
 
-@fig-rep-none shows a scatter plot of the number of clean breaks and the
+@fig-rep-guide shows a scatter plot of the number of clean breaks and the
 number of tries for countries
 at the 2023 Rugby World Cup (@tbl-rwc-2023).
-This data visualisation is similar to @fig-scatter.
+This data visualisation is similar to @fig-scatter, but with an
+additional encoding of the hemisphere for each country as the colour
+of the data points.
 
-How to put all of the components of a plot together on an image.
-
-Start with example of plot where legend and data symbols do not match!
-
+The legend (guide) in @fig-rep-guide demonstrates the scale for the colour
+encoding:  which colour is used to encode each hemisphere.
+ 
 ```{r}
 #| echo: false
-#| label: fig-rep-none
-#| fig-cap: A scatter plot with a discordant legend.
-cols <- scales::hue_pal()(4)
+#| label: fig-rep-guide
+#| fig-cap: A scatter plot with a legend.
+repcols <- scales::hue_pal()(4)
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=cols[c(2, 4)]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
-               colour=cols[1]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
-               colour=cols[3]) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
     theme(aspect.ratio=1)
@@ -29,6 +26,54 @@ pushViewport(viewport(height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+@fig-rep-none 
+
+As is usual when there is an encoding of data values as colour, 
+@fig-rep-none includes a legend (guide) to show the scale for
+the colour encoding:  which colours correspond to which hemisphere values.
+However, @fig-rep-none
+There is a problem with 
+
+```{r}
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot with a discordant legend.
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(2, 4)], name="hemisphere") +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
+               colour=repcols[1]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
+               colour=repcols[3]) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+```{r}
+#| echo: false
+#| label: fig-rep-double
+#| fig-cap: A scatter plot with a legend.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+```
+
 
 Much more subtle example from 
 787resources/Examples/2024-11-premier-league-momentum-plot

@@ -99,6 +99,16 @@ knitr::opts_chunk$set(dev='svg',
 
 # Executive Summary
 
+::: {.actual-quote}
+
+*Visualization is essentially a mapping process from computer representations
+to perceptual representations, choosing encoding techniques to maximize human
+understanding and communication.*[^definition]
+:::
+
+[^definition]:
+  @owen1999
+
 ```{r}
 #| echo: false
 #| purl: false
@@ -127,7 +137,7 @@ dec <- function(x) {
   <span style="color: #005A8F">**visual features**</span> 
   to obtain <span style="color: #1A6000">**data values**</span>.
 
-  For example, the <span style="color: #005A8F">**heights of bars**</span>
+  For example, the <span style="color: #005A8F">**heights**</span> of bars
   in a bar plot
   are `r dec("**decoded**")` 
   to obtain <span style="color: #1A6000">**counts**</span>.
@@ -139,7 +149,7 @@ dec <- function(x) {
   For example, a bar plot is effective for comparing 
   <span style="color: #1A6000">**counts**</span>
   because the visual system is effective at comparing the 
-  <span style="color: #005A8F">**heights of bars**</span>.
+  <span style="color: #005A8F">**heights**</span> of bars.
 
 * More `r enc("**complex encodings**")` produce more 
   <span style="color: #005A8F">**complex visual features**</span>.
@@ -148,13 +158,13 @@ dec <- function(x) {
   <span style="color: #1A6000">**two numeric variables**</span>
   as the x- and y-locations of points, 
   which produces the 
-  <span style="color: #005A8F">**position in space of points**</span>.
+  <span style="color: #005A8F">**position in space**</span> of points.
 
 * More <span style="color: #005A8F">**complex visual features**</span> 
   lead to more `r dec("**complex decodings**")`.
 
   For example, the 
-  <span style="color: #005A8F">**position in space of points**</span>
+  <span style="color: #005A8F">**position in space**</span> of points
   in a scatter plot
   is `r dec("**decoded**")` 
   as the <span style="color: #1A6000">**correlation**</span> 
@@ -168,12 +178,6 @@ dec <- function(x) {
 
 :::
 
-::: {.actual-quote}
-
-Visualization is essentially a mapping process from computer representations
-to perceptual representations, choosing encoding techniques to maximize human
-understanding and communication. [@owen1999]
-:::
 
 {{< include intro.qmd >}}
 
@@ -436,6 +440,10 @@ understanding and communication. [@owen1999]
 * CVD
 
 * visual illusions (put in a section on "how mappings go wrong"?)
+  OR add these AFTER dissonant mappings (because they are examples
+  of our visual system telling us something that is at odds with
+  the explicit encoding!?)
+  Refer back to luminance and colour contrast.
 
 * redundant encodings
   Use same diagram as congruent mappings

@@ -1630,20 +1630,6 @@ ggplot(rwcAllyear) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-implicit
-#| fig.width: 4
-#| fig.height: 1
-#| fig-cap: An example of visual features that contain implicit mappings.  
-## https://www.color-hex.com/color-palette/35021
-traffic <- c("#cc3232", "#e7b416", "#2dc937")
-grid.newpage()
-grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
-grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
-            gp=gpar(col=traffic, fill=traffic))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: fig-prop
 #| fig.width: 4
 #| fig-cap: Data visualisations of the proportion of offenders from different ethnic groups.  
@@ -2637,10 +2623,25 @@ ggplot(rwcFlags) +
                    shape=country),
                inherit.aes=FALSE,
                show.legend=TRUE, key_glyph=flag_key) +
-    scale_shape_manual(values=1:nrow(rwcFlags), guide=guide_legend(ncol=2)) +
+    scale_shape_manual(values=1:nrow(rwcFlags), guide=guide_legend(ncol=2),
+                       name=NULL) +
     theme(legend.key.width=unit(size, "mm"),
           legend.key.height=unit(max(rwcFlags$ar)*size + 1, "mm"),
           aspect.ratio=2/3)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-learned
+#| fig.width: 4
+#| fig.height: 1
+#| fig-cap: An example of visual symbols that have pre-existing, learned decodings.  
+## https://www.color-hex.com/color-palette/35021
+traffic <- c("#cc3232", "#e7b416", "#2dc937")
+grid.newpage()
+grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
+grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
+            gp=gpar(col=traffic, fill=traffic))
 
 
 ## -----------------------------------------------------------------------------
@@ -3081,6 +3082,7 @@ ggplot(crimeGroupTotal) +
 #| echo: false
 #| label: fig-crime-guides
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot have been highlighted in purple.
+#| fig-keep: last
 ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
     geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
@@ -3097,6 +3099,9 @@ ggplot(crimeAgeSimple) +
           legend.text=element_text(colour=highlight, face="bold"),
           legend.title=element_text(colour="grey"),
           aspect.ratio=1)
+grid.force()
+grid.edit("key::segments", grep=TRUE, global=TRUE,
+          gp=gpar(lwd=2))
 
 
 ## -----------------------------------------------------------------------------
@@ -3370,22 +3375,57 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-rep-none
-#| fig-cap: A scatter plot with a discordant legend.
-cols <- scales::hue_pal()(4)
+#| label: fig-rep-guide
+#| fig-cap: A scatter plot with a legend.
+repcols <- scales::hue_pal()(4)
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=cols[c(2, 4)]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
-               colour=cols[1]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
-               colour=cols[3]) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
     theme(aspect.ratio=1)
 pushViewport(viewport(height=.8))
 print(gg, newpage=FALSE)
 popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot with a discordant legend.
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(2, 4)], name="hemisphere") +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
+               colour=repcols[1]) +
+    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
+               colour=repcols[3]) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-double
+#| fig-cap: A scatter plot with a legend.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
 
 
 ## -----------------------------------------------------------------------------

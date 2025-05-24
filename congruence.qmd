@@ -1,16 +1,25 @@
 
 # Congruent Mappings {#sec-congruence}
 
-So far we have seen numerous examples of **explicit** mappings
-from data values to visual features. We **encode** data values
-as visual features so that the viewers of a data visualisation can
-**decode** the data values from the visual features 
-(@fig-visual-feature-decode).
+The purpose of this section is to show that we need to consider more
+than just the accuracy or capacity of our mappings from 
+data values to basic visual features in order to understand the effectiveness
+of a data visualisation.[^congruence-lit]
 
-In this section, we acknowledge that some visual features come
-with **implicit** mappings.  In some cases, we are able to **decode**
-values from a visual feature based on prior experience and learning,
-rather than due to an explicit encoding (@fig-implicit-decode).
+[^congruence-lit]:
+  @TVERSKY2002247 discusses congruence at least in the sense of 
+  matching the spatial properties of data values to the spatial
+  arrangement of visual features.  The concept is also discussed in
+  @DBLP:journals/corr/abs-2008-11310.
+
+## Implicit mappings {#sec-implicit}
+
+Sort of like pre-attentive analogue of learned decodings.
+
+Do a simple example - maybe just the fact that a bar twice the length
+of another bar is perceived as "twice" !?
+These implicit mappings are the basis of whether visual features
+are quant or qual!?
 
 ::: {#fig-implicit-decode}
 
@@ -21,38 +30,14 @@ can decode values from the visual features without having explicitly
 encoded values as visual features.
 :::
 
-For example, @fig-implicit shows three coloured circles.
-Without any explicit encoding, we can decode the red circle as "stop",
-the orange circle as "slow", and the green circle as "go".
-
-```{r}
-#| echo: false
-#| label: fig-implicit
-#| fig.width: 4
-#| fig.height: 1
-#| fig-cap: An example of visual features that contain implicit mappings.  
-## https://www.color-hex.com/color-palette/35021
-traffic <- c("#cc3232", "#e7b416", "#2dc937")
-grid.newpage()
-grid.roundrect(width=unit(10, "mm"), height=.9, gp=gpar(fill="black"))
-grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
-            gp=gpar(col=traffic, fill=traffic))
-```
-
-When an implicit encoding exists,
+When an learned encoding exists,
 we can produce a more effective mapping by building upon
-the implicit decoding.
+the learned decoding.
 We can explicitly encode data values as visual features in such a way that
-the decoding is **congruent** with the implicit decoding, in the sense
-that the implicit decoding leads back to the original data values
+the decoding is **congruent** with the learned decoding, in the sense
+that the learned decoding leads back to the original data values
 that we explicitly encoded
-(@fig-congruent-decode).[^congruence-lit]
-
-[^congruence-lit]:
-  @TVERSKY2002247 discusses congruence at least in the sense of 
-  matching the spatial properties of data values to the spatial
-  arrangement of visual features.  The concept is also discussed in
-  @DBLP:journals/corr/abs-2008-11310.
+(@fig-congruent-decode).
 
 ::: {#fig-congruent-decode}
 
@@ -311,6 +296,11 @@ the same.
 
 ## Dissonant mappings {#sec-dissonance}
 
+**TODO** MUST move this example to AFTER learned decodings,
+perhaps even after text
+(because it is a conflict between explicit encoding and LEARNED
+decoding NOT between explicit encoding and IMPLICIT decoding).
+
 @fig-stroop provides a demonstration of the Stroop Effect.[^stroop]
 The task is to name the colour of each word.
 This task is difficult to do because there are two decodings involved and 
@@ -561,40 +551,20 @@ addition of jittering may cause confusion.
   reduce the effectiveness of a data visualisation because it introduces
   visual dissonance.
 
-## Dangers of implicit mappings
-
-A colour can have multiple implicit mappings, e.g., red -> hot and
-red -> angry and red -> stop (and red -> prosperity in Chinese culture).[^Arcia]
-
-[^Arcia]:
-  Cite "Sometimes more is more: iterative participatory design of infographics 
-  for engagement of community members with varying levels of health literacy"
-  Arcia et al (2016)
-  where people interpret icons
-  in multiple ways, e.g., specifically "pineapple" rather than generic "fruit".
-
-::: {#fig-ambiguous-decode}
-
-![](Diagrams/ambiguous-decode.png)
-
-A visual feature may have more than one implicit encoding, which means that we
-may decode more than one value from the visual feature.
-:::
-
 ## Summary
 
 The effectiveness of a data visualisation may depend on more than
 just the accuracy and capacity of visual features.
 
 A **congruent** mapping is one where data values are **explicitly** encoded in
-a way that is consistent with an **implicit** encoding of the visual feature.
+a way that is consistent with an **implicit** decoding of the visual feature.
 
 Some data visualisations are effective because they are visually congruent:
 data symbols that are larger for larger data values are more effective;
 data symbols that only change if the data values change are more effective.
 
 A **dissonant** mapping is one where data values are **explicitly**
-encoded in a way that is inconsistent with an **implicit** encoding..
+encoded in a way that is inconsistent with an **implicit** decoding.
 
 Some data visualisations are *not* effective because they are visually
 dissonant.
