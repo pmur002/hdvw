@@ -81,7 +81,7 @@ crimeAgeSimple <- subset(crimeAge, age %in% c("14", "15", "16"))
 #| echo: false
 #| message: false
 #| label: tbl-crime
-#| tbl-cap: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021.  It is difficult to perceive trends in the crime rates from this purely text-based, tabular presentation of the data.
+#| tbl-cap: A table of the number of distinct youth offenders, per 10,000 of popuplation, aged 14 to 16 from 2011 to 2021.  It is difficult to perceive trends in the crime rates from this purely text-based, tabular presentation of the data.
 
 crimeTable <- dcast(crimeAgeSimple[c("age", "year", "rate")],
                     age ~ year)
@@ -92,8 +92,16 @@ kable(crimeTable, digits=0)
 #| echo: false
 #| label: crime-age-line
 #| output: false
-ggplot(crimeAgeSimple) +
+gg <- ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+crimeAgeLineTitle <- ggtitle("Youth Crime in New Zealand",
+                             "Distinct offenders per 10,000 pop.")
+crimeAgeLineXlab <- xlab(NULL)
+crimeAgeLineYlab <- ylab(NULL)
 
 
 ## -----------------------------------------------------------------------------
@@ -101,23 +109,42 @@ ggplot(crimeAgeSimple) +
 #| label: fig-crime
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  Detecting trends in the crime rates is very fast and easy with this data visualisation.
 gg <- 
-ggplot(crimeAgeSimple) +
+gg <- ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor))
-gg +
+ggCrimeAge <- gg +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
     scale_colour_discrete(name="age") +
+    crimeAgeLineTitle +
+    crimeAgeLineXlab +
+    crimeAgeLineYlab +
     theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(ggCrimeAge, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+crimeAgeHeatTitle <- ggtitle("Youth Crime in New Zealand",
+                             "Distinct offenders per 10,000 pop.")
+crimeAgeHeatXlab <- xlab(NULL)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-crime-heatmap
 #| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.
-ggplot(crimeAgeSimple) +
+gg <- ggplot(crimeAgeSimple) +
     geom_tile(aes(year, age, fill=rate), colour=NA) +
-    scale_x_continuous(expand=expansion(0)) +
+    crimeAgeHeatTitle +
+    crimeAgeHeatXlab +
+    scale_x_continuous(expand=expansion(0), breaks=seq(2012, 2020, 2)) +    
     scale_y_continuous(expand=expansion(0), breaks=14:16) +
     theme(aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
 
 
 ## -----------------------------------------------------------------------------
@@ -1345,6 +1372,7 @@ kable(head(crimeGroupTable, row.names=FALSE))
 #| fig-cap: A stacked bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
     geom_col(aes(year, count, fill=group), position="stack") +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
     scale_y_continuous(expand=expansion(c(0, .05)))
 
 
@@ -1354,6 +1382,7 @@ ggplot(crimeGroup) +
 #| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
     geom_col(aes(year, count, fill=group), position="dodge") +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
     scale_y_continuous(expand=expansion(c(0, .05)))
 
 
@@ -2368,7 +2397,7 @@ print(ggDoctorLine, newpage=FALSE)
 #| fig-cap: A line plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
 gg <- ggplot(crimeGroup) +
     geom_line(aes(year, count, colour=group)) +
-    scale_x_continuous(name=NULL) +
+    scale_x_continuous(name=NULL, breaks=seq(2012, 2020, 2)) +    
     scale_colour_npg(name="ethnic group") +
     theme(aspect.ratio=1)
 pushViewport(viewport(width=.8, height=.8))
@@ -2384,7 +2413,7 @@ gg <- ggplot(crimeGroup) +
     geom_line(aes(year, count, colour=group)) +
     geom_point(aes(year, count, colour=group), 
                pch=21, fill=figbg, stroke=1) +
-    scale_x_continuous(name=NULL) +
+    scale_x_continuous(name=NULL, breaks=seq(2012, 2020, 2)) +    
     scale_colour_npg(name="ethnic group") +
     theme(aspect.ratio=1)
 pushViewport(viewport(width=.8, height=.8))
@@ -2519,6 +2548,7 @@ popViewport()
 #| fig-cap: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
 ggplot(crimeDistrict) +
     geom_line(aes(year, count, colour=district)) +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
     scale_colour_manual(values=carto_pal(12, "Safe")) +
     theme(aspect.ratio=1)
 
@@ -2536,6 +2566,7 @@ ggplot(crimeDistrict) +
     geom_line(aes(year, count, group=district2), data=crime2, 
               col="grey", linewidth=.2) +
     geom_line(aes(year, count)) +
+    scale_x_continuous(breaks=seq(2012, 2020, 4)) +    
     facet_wrap(vars(district)) +
     theme(aspect.ratio=.8)
 
@@ -3057,12 +3088,19 @@ popViewport()
 #| echo: false
 #| label: fig-no-text
 #| fig-cap:  A line plot with all text removed.  Without text, it is impossible to know what data values are represented in this plot.
-ggplot(crimeAgeSimple) +
+ggNoText <- ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor)) +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
+    crimeAgeLineTitle +
+    crimeAgeLineXlab +
+    crimeAgeLineYlab +
     theme(text=element_text(colour="transparent"),
           axis.text=element_text(colour="transparent"),
           panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(ggNoText, newpage=FALSE)
+popViewport()
 
 
 ## -----------------------------------------------------------------------------
@@ -3083,9 +3121,13 @@ ggplot(crimeGroupTotal) +
 #| label: fig-crime-guides
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot have been highlighted in purple.
 #| fig-keep: last
-ggplot(crimeAgeSimple) +
+ggCrimeGuides <- ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
+    crimeAgeLineTitle +
+    crimeAgeLineXlab +
+    crimeAgeLineYlab +
     geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
     scale_colour_manual(name="age",
                         values=pal_brewer(palette="Purples")(5)[-(1:2)]) +
     theme(panel.border=element_rect(colour="grey"),
@@ -3099,6 +3141,9 @@ ggplot(crimeAgeSimple) +
           legend.text=element_text(colour=highlight, face="bold"),
           legend.title=element_text(colour="grey"),
           aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(ggCrimeGuides, newpage=FALSE)
+popViewport()
 grid.force()
 grid.edit("key::segments", grep=TRUE, global=TRUE,
           gp=gpar(lwd=2))
@@ -3108,9 +3153,13 @@ grid.edit("key::segments", grep=TRUE, global=TRUE,
 #| echo: false
 #| label: fig-crime-labels
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The labels in this plot have been highlighted in purple.
-ggplot(crimeAgeSimple) +
+ggCrimeLabels <- ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
+    crimeAgeLineTitle +
+    crimeAgeLineXlab +
+    crimeAgeLineYlab +
     geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
     scale_colour_manual(name="age",
                         values=grey(0:2/4)) +
     theme(plot.title=element_text(colour=highlight, face="bold"),
@@ -3123,6 +3172,102 @@ ggplot(crimeAgeSimple) +
           legend.text=element_text(colour="grey"),
           legend.title=element_text(colour=highlight, face="bold"),
           aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(ggCrimeLabels, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| message: false
+library(xdvir)
+markStr <- r"(
+\begin{minipage}{1.4in}
+Despite recording the most clean breaks and
+tries in the tournament,
+\zsavepos{leftNZ}\mbox{New Zealand}\zsavepos{rightNZ},
+came second to a much more defensive 
+\zsavepos{leftSA}\mbox{South Africa}\zsavepos{rightSA}.
+\Rzmark{leftNZ}\Rzmark{rightNZ}
+\Rzmark{leftSA}\Rzmark{rightSA}
+\end{minipage})"
+markTeX <- function(data, coords) {
+    latexGrob(markStr, packages="zref",
+              x=unit(0, "npc") + unit(2, "mm"),
+              y=unit(1, "npc") - unit(2, "mm"),
+              hjust="left", vjust="top",
+              gp=gpar(fontsize=10))
+}
+makeContent.markCurve <- function(x) {
+    ## Delay this calculation until drawing time so that we
+    ## are in the correct viewport
+    devLoc <- deviceLoc(x$x, x$y)
+    addMark(x$name, devLoc$x, devLoc$y)
+    x
+}
+markCurve <- function(data, coords) {
+    grobTree(gTree(x=unit(coords$x[data$name == "New Zealand"], "npc"),
+                   y=unit(coords$y[data$name == "New Zealand"], "npc"),
+                   name="NZ", cl="markCurve"),
+             gTree(x=unit(coords$x[data$name == "South Africa"], "npc"),
+                   y=unit(coords$y[data$name == "South Africa"], "npc"),
+                   name="SA", cl="markCurve"))
+}
+ggTeX <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    grid_panel(markTeX) +
+    grid_panel(markCurve, aes(breaks, tries, name=country)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    scale_colour_discrete(name="hemisphere") +
+    labs(title="Rugby Word Cup 2023") +
+    theme(aspect.ratio=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: rwcTeX
+#| fig-cap: The number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams in the 2023 Rugby World Cup.
+library(gridGeometry)
+pushViewport(viewport(width=.9, height=.9))
+print(ggTeX, newpage=FALSE)
+popViewport()
+leftNZ <- getMark("leftNZ")
+rightNZ <- getMark("rightNZ")
+ptNZ <- getMark("NZ")
+grid.segments(leftNZ$devx, leftNZ$devy - unit(1, "mm"), 
+              rightNZ$devx, rightNZ$devy - unit(1, "mm"))
+nzBez <- bezierGrob(unit.c(rightNZ$devx, ptNZ$devx, ptNZ$devx, ptNZ$devx),
+                    unit.c(rightNZ$devy - unit(1, "mm"),
+                           rightNZ$devy - unit(1, "mm"),
+                           rightNZ$devy - unit(1, "mm"),
+                           ptNZ$devy))
+NScols <- pal_npg()(2)
+endGradient <- function(x, steps=10, size=1) {
+    cols <- colorRampPalette(c("black", NScols[1]))(steps)
+    for (i in steps:1) {
+        start <- unit(-i*size, "mm")
+        end <- unit(1, "npc") - unit((i - 1)*size, "mm")
+        grid.trim(x, start, end, gp=gpar(col=cols[steps - i + 1]))
+    }
+}
+grid.trim(nzBez, 0, unit(-10, "mm"))
+endGradient(nzBez)
+leftSA <- getMark("leftSA")
+rightSA <- getMark("rightSA")
+ptSA <- getMark("SA")
+grid.segments(leftSA$devx, leftSA$devy - unit(1, "mm"), 
+              rightSA$devx, rightSA$devy - unit(1, "mm"))
+saBez <- bezierGrob(unit.c(rightSA$devx, 
+                           rightSA$devx + unit(3, "mm"),
+                           rightSA$devx + unit(3, "mm"),
+                           ptSA$devx),
+                    unit.c(rightSA$devy - unit(1, "mm"),
+                           rightSA$devy - unit(1, "mm"),
+                           rightSA$devy - unit(1, "mm"),
+                           ptSA$devy))
+grid.trim(saBez, 0, unit(-5, "mm"))
+endGradient(saBez, steps=5)
 
 
 ## -----------------------------------------------------------------------------
@@ -3377,7 +3522,7 @@ popViewport()
 #| echo: false
 #| label: fig-rep-guide
 #| fig-cap: A scatter plot with a legend.
-repcols <- scales::hue_pal()(4)
+repcols <- pal_npg()(4)
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
     scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
@@ -3393,19 +3538,20 @@ popViewport()
 #| echo: false
 #| label: fig-rep-none
 #| fig-cap: A scatter plot with a discordant legend.
+#| fig-keep: last
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(2, 4)], name="hemisphere") +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
-               colour=repcols[1]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
-               colour=repcols[3]) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
     theme(aspect.ratio=1)
 pushViewport(viewport(height=.8))
 print(gg, newpage=FALSE)
 popViewport()
+grid.force()
+keyPoint <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
+grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
 
 
 ## -----------------------------------------------------------------------------
@@ -3426,6 +3572,57 @@ grid.force()
 keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
 grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
 grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-single
+#| fig-cap: A scatter plot with a legend.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoints[[1]], gp=gpar(col=NA))
+grid.edit(keyPoints[[2]], gp=gpar(col=NA))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-title
+#| fig-cap: A scatter plot with a title.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    ggtitle(paste('<span style="color: ', repcols[3], '">**North**</span>',
+                  "versus",
+                  '<span style="color: ', repcols[1], '">**South**</span>')) +
+    theme(aspect.ratio=1,
+          plot.title=element_markdown(),
+          legend.title=element_text(colour=NA))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=NA))
+grid.edit(keyText[[2]], gp=gpar(col=NA))
+keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoints[[1]], gp=gpar(col=NA))
+grid.edit(keyPoints[[2]], gp=gpar(col=NA))
 
 
 ## -----------------------------------------------------------------------------

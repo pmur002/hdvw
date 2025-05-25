@@ -10,12 +10,19 @@ of the data points.
 
 The legend (guide) in @fig-rep-guide demonstrates the scale for the colour
 encoding:  which colour is used to encode each hemisphere.
+In @sec-guides, we described how the proximity of the labels "South"
+and "North" to the coloured points in the legend allow us to
+associate the colours with the different hemispheres.
+The different values of hemisphere are encoded as the vertical
+positions of the points and the text labels;
+both the orange point and the label "South" have the same
+vertical position.
  
 ```{r}
 #| echo: false
 #| label: fig-rep-guide
 #| fig-cap: A scatter plot with a legend.
-repcols <- scales::hue_pal()(4)
+repcols <- pal_npg()(4)
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
     scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
@@ -27,31 +34,50 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-@fig-rep-none 
+What about the horizontal position of the points and the text in
+the legend?  These do not encode hemisphere values because they
+are the same for both North and South.
+What about the position of the legend title, "hemisphere"?
 
-As is usual when there is an encoding of data values as colour, 
-@fig-rep-none includes a legend (guide) to show the scale for
-the colour encoding:  which colours correspond to which hemisphere values.
-However, @fig-rep-none
-There is a problem with 
+All of the elements of the legend are positioned together
+and to the right of the main plot.
+Their proximity to each other (and separation from
+the main plot) mean that we see the legend as a separate
+group (@sec-visual-model-groups).
+
+One way to express this is that the position of the elements of the legend 
+**encode** the **structure** of the overall data visualisation.
+Our visual system **decodes** the structure based on the proximity
+of the legend elements.
+
+In this section
+
+## Contrast
+
+@sec-differences
+
+@sec-attention
+
+## Repetition
 
 ```{r}
 #| echo: false
 #| label: fig-rep-none
 #| fig-cap: A scatter plot with a discordant legend.
+#| fig-keep: last
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(2, 4)], name="hemisphere") +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "North"),
-               colour=repcols[1]) +
-    geom_point(aes(breaks, tries), data=subset(RWCperGame, sphere == "South"),
-               colour=repcols[3]) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
     theme(aspect.ratio=1)
 pushViewport(viewport(height=.8))
 print(gg, newpage=FALSE)
 popViewport()
+grid.force()
+keyPoint <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
+grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
 ```
 
 ```{r}
@@ -73,6 +99,65 @@ keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
 grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
 grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
 ```
+
+```{r}
+#| echo: false
+#| label: fig-rep-single
+#| fig-cap: A scatter plot with a legend.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoints[[1]], gp=gpar(col=NA))
+grid.edit(keyPoints[[2]], gp=gpar(col=NA))
+```
+
+```{r}
+#| echo: false
+#| label: fig-rep-title
+#| fig-cap: A scatter plot with a title.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    ggtitle(paste('<span style="color: ', repcols[3], '">**North**</span>',
+                  "versus",
+                  '<span style="color: ', repcols[1], '">**South**</span>')) +
+    theme(aspect.ratio=1,
+          plot.title=element_markdown(),
+          legend.title=element_text(colour=NA))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=NA))
+grid.edit(keyText[[2]], gp=gpar(col=NA))
+keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoints[[1]], gp=gpar(col=NA))
+grid.edit(keyPoints[[2]], gp=gpar(col=NA))
+```
+
+## Alignment
+
+good gestalt
+
+## Proximity
+
+@sec-visual-model-groups
 
 
 Much more subtle example from 

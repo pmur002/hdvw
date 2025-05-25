@@ -49,7 +49,7 @@ comparing the changes over time between groups.
 #| fig-cap: A line plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
 gg <- ggplot(crimeGroup) +
     geom_line(aes(year, count, colour=group)) +
-    scale_x_continuous(name=NULL) +
+    scale_x_continuous(name=NULL, breaks=seq(2012, 2020, 2)) +    
     scale_colour_npg(name="ethnic group") +
     theme(aspect.ratio=1)
 pushViewport(viewport(width=.8, height=.8))
@@ -195,7 +195,7 @@ gg <- ggplot(crimeGroup) +
     geom_line(aes(year, count, colour=group)) +
     geom_point(aes(year, count, colour=group), 
                pch=21, fill=figbg, stroke=1) +
-    scale_x_continuous(name=NULL) +
+    scale_x_continuous(name=NULL, breaks=seq(2012, 2020, 2)) +    
     scale_colour_npg(name="ethnic group") +
     theme(aspect.ratio=1)
 pushViewport(viewport(width=.8, height=.8))

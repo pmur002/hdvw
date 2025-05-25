@@ -15,7 +15,7 @@ to determine any trends in the crime rates.
 #| echo: false
 #| message: false
 #| label: tbl-crime
-#| tbl-cap: A table of the number of youth offenders aged 14 to 16 from 2011 to 2021.  It is difficult to perceive trends in the crime rates from this purely text-based, tabular presentation of the data.
+#| tbl-cap: A table of the number of distinct youth offenders, per 10,000 of popuplation, aged 14 to 16 from 2011 to 2021.  It is difficult to perceive trends in the crime rates from this purely text-based, tabular presentation of the data.
 
 crimeTable <- dcast(crimeAgeSimple[c("age", "year", "rate")],
                     age ~ year)
@@ -36,8 +36,16 @@ and less than the crime rate for 16-year-olds (the green line).
 #| echo: false
 #| label: crime-age-line
 #| output: false
-ggplot(crimeAgeSimple) +
+gg <- ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor))
+```
+
+```{r}
+#| echo: false
+crimeAgeLineTitle <- ggtitle("Youth Crime in New Zealand",
+                             "Distinct offenders per 10,000 pop.")
+crimeAgeLineXlab <- xlab(NULL)
+crimeAgeLineYlab <- ylab(NULL)
 ```
 
 ```{r}
@@ -46,10 +54,17 @@ ggplot(crimeAgeSimple) +
 #| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  Detecting trends in the crime rates is very fast and easy with this data visualisation.
 gg <- 
 <<crime-age-line>>
-gg +
+ggCrimeAge <- gg +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
     scale_colour_discrete(name="age") +
+    crimeAgeLineTitle +
+    crimeAgeLineXlab +
+    crimeAgeLineYlab +
     theme(panel.grid.major.y=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(ggCrimeAge, newpage=FALSE)
+popViewport()
 ```
 
 @fig-crime-heatmap shows a different data visualisation of the same data,
@@ -61,13 +76,25 @@ Not all data visualisations are equally effective.
 
 ```{r}
 #| echo: false
+crimeAgeHeatTitle <- ggtitle("Youth Crime in New Zealand",
+                             "Distinct offenders per 10,000 pop.")
+crimeAgeHeatXlab <- xlab(NULL)
+```
+
+```{r}
+#| echo: false
 #| label: fig-crime-heatmap
 #| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.
-ggplot(crimeAgeSimple) +
+gg <- ggplot(crimeAgeSimple) +
     geom_tile(aes(year, age, fill=rate), colour=NA) +
-    scale_x_continuous(expand=expansion(0)) +
+    crimeAgeHeatTitle +
+    crimeAgeHeatXlab +
+    scale_x_continuous(expand=expansion(0), breaks=seq(2012, 2020, 2)) +    
     scale_y_continuous(expand=expansion(0), breaks=14:16) +
     theme(aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
 ```
 
 Although @fig-crime is very effective for the questions
