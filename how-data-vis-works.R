@@ -1793,17 +1793,6 @@ ggplot(temp) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-stroop
-#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
-#| fig-height: 1
-grid.newpage()
-pushViewport(viewport(width=.5))
-grid.text(c("red", "green", "blue"), 1:3/4, 
-          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: fig-bar-not-zero
 #| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.[^final-third]
 entries <- data.frame(team=rep(c("Netherlands", "South Africa"), each=5),
@@ -3065,6 +3054,17 @@ ggplot(rwcChernoff) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-stroop
+#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
+#| fig-height: 1
+grid.newpage()
+pushViewport(viewport(width=.5))
+grid.text(c("red", "green", "blue"), 1:3/4, 
+          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-andrews
 #| warning: false
 #| results: hide
@@ -3214,19 +3214,21 @@ markCurve <- function(data, coords) {
                    name="SA", cl="markCurve"))
 }
 ggTeX <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
+    geom_point(aes(breaks, tries), colour="grey") +
+    geom_point(aes(breaks, tries), colour="black", 
+               data=subset(RWCperGame, 
+                           country %in% c("New Zealand", "South Africa"))) +
     grid_panel(markTeX) +
     grid_panel(markCurve, aes(breaks, tries, name=country)) +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
-    scale_colour_discrete(name="hemisphere") +
     labs(title="Rugby Word Cup 2023") +
     theme(aspect.ratio=1)
 
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: rwcTeX
+#| label: fig-ann
 #| fig-cap: The number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams in the 2023 Rugby World Cup.
 library(gridGeometry)
 pushViewport(viewport(width=.9, height=.9))
@@ -3237,37 +3239,24 @@ rightNZ <- getMark("rightNZ")
 ptNZ <- getMark("NZ")
 grid.segments(leftNZ$devx, leftNZ$devy - unit(1, "mm"), 
               rightNZ$devx, rightNZ$devy - unit(1, "mm"))
-nzBez <- bezierGrob(unit.c(rightNZ$devx, ptNZ$devx, ptNZ$devx, ptNZ$devx),
-                    unit.c(rightNZ$devy - unit(1, "mm"),
-                           rightNZ$devy - unit(1, "mm"),
-                           rightNZ$devy - unit(1, "mm"),
-                           ptNZ$devy))
-NScols <- pal_npg()(2)
-endGradient <- function(x, steps=10, size=1) {
-    cols <- colorRampPalette(c("black", NScols[1]))(steps)
-    for (i in steps:1) {
-        start <- unit(-i*size, "mm")
-        end <- unit(1, "npc") - unit((i - 1)*size, "mm")
-        grid.trim(x, start, end, gp=gpar(col=cols[steps - i + 1]))
-    }
-}
-grid.trim(nzBez, 0, unit(-10, "mm"))
-endGradient(nzBez)
+grid.bezier(unit.c(rightNZ$devx, ptNZ$devx, ptNZ$devx, ptNZ$devx),
+            unit.c(rightNZ$devy - unit(1, "mm"),
+                   rightNZ$devy - unit(1, "mm"),
+                   rightNZ$devy - unit(1, "mm"),
+                   ptNZ$devy))
 leftSA <- getMark("leftSA")
 rightSA <- getMark("rightSA")
 ptSA <- getMark("SA")
 grid.segments(leftSA$devx, leftSA$devy - unit(1, "mm"), 
               rightSA$devx, rightSA$devy - unit(1, "mm"))
-saBez <- bezierGrob(unit.c(rightSA$devx, 
-                           rightSA$devx + unit(3, "mm"),
-                           rightSA$devx + unit(3, "mm"),
-                           ptSA$devx),
-                    unit.c(rightSA$devy - unit(1, "mm"),
-                           rightSA$devy - unit(1, "mm"),
-                           rightSA$devy - unit(1, "mm"),
-                           ptSA$devy))
-grid.trim(saBez, 0, unit(-5, "mm"))
-endGradient(saBez, steps=5)
+grid.bezier(unit.c(rightSA$devx, 
+                   rightSA$devx + unit(3, "mm"),
+                   rightSA$devx + unit(3, "mm"),
+                   ptSA$devx),
+            unit.c(rightSA$devy - unit(1, "mm"),
+                   rightSA$devy - unit(1, "mm"),
+                   rightSA$devy - unit(1, "mm"),
+                   ptSA$devy))
 
 
 ## -----------------------------------------------------------------------------
@@ -3623,6 +3612,49 @@ grid.edit(keyText[[2]], gp=gpar(col=NA))
 keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
 grid.edit(keyPoints[[1]], gp=gpar(col=NA))
 grid.edit(keyPoints[[2]], gp=gpar(col=NA))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-yji
+youthCols <- c("#bf0000", "#2b4689", "#e1b728", "#8fbb22",
+               "#0087c0", "#bdaa7c", "#f15a22")
+gg1 <- ggplot(subset(crimeGroup, group != "Unknown")) +
+    geom_line(aes(year, rate, colour=group)) +
+    scale_colour_manual(values=youthCols[1:3]) +
+    crimeAgeLineTitle +
+    theme(axis.title=element_blank(),
+          legend.justification="left",
+          legend.margin=margin(),
+          legend.title=element_blank(),
+          legend.position="top")
+typeTotal <- subset(crimeTypeTotal, prop > .04)
+typeTotal$type <- reorder(typeTotal$type, typeTotal$prop,
+                          decreasing=TRUE)
+levels(typeTotal$type) <- c(levels(typeTotal$type), "Other")
+typeTotal <- rbind(typeTotal, 
+                   data.frame(type="Other", total=NA,
+                              prop=sum(subset(crimeTypeTotal, 
+                                              prop <= .04)$prop)))
+gg2 <- ggplot(typeTotal) +
+    geom_col(aes(x=prop, y="", fill=type), colour=figbg) +
+    scale_fill_manual(values=youthCols, 
+                      guide=guide_legend(position="top", ncol=1)) +
+    coord_polar(direction=-1) +
+    theme_void() +
+    theme(plot.margin=margin(4, 0, 0, 0, "pt"),
+          legend.justification="centre",
+          legend.margin=margin(),
+          legend.title=element_blank(),
+          legend.key.size=unit(2, "mm"))
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 2, widths=2:1)))
+pushViewport(viewport(layout.pos.col=1))
+print(gg1, newpage=FALSE)
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+print(gg2, newpage=FALSE)
+popViewport()
 
 
 ## -----------------------------------------------------------------------------

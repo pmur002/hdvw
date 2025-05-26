@@ -296,50 +296,6 @@ the same.
 
 ## Dissonant mappings {#sec-dissonance}
 
-**TODO** MUST move this example to AFTER learned decodings,
-perhaps even after text
-(because it is a conflict between explicit encoding and LEARNED
-decoding NOT between explicit encoding and IMPLICIT decoding).
-
-@fig-stroop provides a demonstration of the Stroop Effect.[^stroop]
-The task is to name the colour of each word.
-This task is difficult to do because there are two decodings involved and 
-the two decodings are inconsistent.
-Each set of letters has an implicit decoding based on the
-learned meaning of the word that the letters spell out,
-plus a decoding based on the actual colour of the letters.
-
-[^stroop]:
-  citation please!
-
-```{r}
-#| echo: false
-#| label: fig-stroop
-#| fig-cap:  The Stroop effect. Try to name the *colour* of each word.
-#| fig-height: 1
-grid.newpage()
-pushViewport(viewport(width=.5))
-grid.text(c("red", "green", "blue"), 1:3/4, 
-          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
-```
-
-The Stroop Effect shows that, if we fail to make our explicit encodings 
-congruent with any implicit encodings - if we create a
-**dissonant** mapping - we can make it harder
-and more confusing to decode a data visualisation because
-there is more than one possible decoding
-(@fig-dissonant-decode).
-
-::: {#fig-dissonant-decode}
-
-![](Diagrams/dissonant-decode.png)
-
-If we explicitly map data values to visual features, but the
-visual features have an implicit mapping to different data values,
-we can cause confusion and make it harder to effectively
-decode data values from visual features.
-:::
-
 The fact that **length** and **area** naturally convey amounts means
 that care must be taken *not* to confuse that association.
 For example, @fig-bar-not-zero shows the number of times each team
@@ -428,6 +384,23 @@ a data visualisation by taking advantage of visual congruence
 and we can reduce the effectiveness of a data visualisation 
 if we create visual dissonance.
 
+If we fail to make our explicit encodings 
+congruent with any implicit encodings - if we create a
+**dissonant** mapping - we can make it harder
+and more confusing to decode a data visualisation because
+there is more than one possible decoding
+(@fig-dissonant-decode).
+
+::: {#fig-dissonant-decode}
+
+![](Diagrams/dissonant-decode.png)
+
+If we explicitly map data values to visual features, but the
+visual features have an implicit mapping to different data values,
+we can cause confusion and make it harder to effectively
+decode data values from visual features.
+:::
+
 We saw in @sec-same-same that we want to map differences in data values
 to differences in visual features *and* keep everything else the
 same.  Failing to follow that approach will make it harder to 
@@ -448,9 +421,6 @@ to the left then to the right.
 This visual difference in the cake positions does not correspond to
 any difference in the data values.  We are tempted to seek meaning from the
 the left-to-right staggering of the cakes when no meaning exists.
-
-We will see other examples of visual changes that do not relate to
-changes in the data in @sec-mosaic and @sec-word-cloud.
 
 ```{r}
 #| echo: false

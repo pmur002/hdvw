@@ -1,28 +1,12 @@
 
 # Text
 
-**Can really base this on Brath's book "Visualising with Text"**
-
-**TODO** Add section on tables.  Wainer?
-At least some table guidelines are essentially advocating for
-using pre-attentive visual features of text!
-See Tables section in Text article
-
-**TODO** - **MUST** add that text has spectacular congruence!
-Or at least, text has inherent semantics, so you must respect that
-or you will create visual dissonance (refer back to red-green-blue figure
-in visual dissonance section). 
-And the congruence is incredible strong so it is an effective
-encoding - similarly, any dissonance is extreme (to the point of
-being just plain wrong if not fraudulent).
-Refer back to intro to congruence section.
-
-**Also**, text is very flexible - it can convey data, information,
-knowledge, understanding, and wisdom. 
-Most other graphical elements are much more limited.
-
 **REFER** back to the executive summary as example of encoding
 categories as text visual features (colour, slant, weight).
+
+**TODO** Another purpose of labels is to direct attention ...
+
+top-down
 
 **TODO**  (in footnote) Refer to Borkin et al (2016) and Kong et al (2018) for
 importance and potential influence of titles, plus
@@ -78,9 +62,14 @@ saccades (lines between circles) for one person viewing an image for
   Only a thumbnail version of the original image is shown in order to comply
   with terms of use of the MASSVIS data set.
 
-This section looks at the role text plays in making data visualisations work.
+This section looks at the role that 
+text plays in making data visualisations work.[^brath]
 
-## Data symbols
+[^brath]:
+  Provide citation to Brath book at least.
+  Perhaps cite my text article, however that gets to see the light of day.
+
+## Data symbols {#sec-data-symbols}
 
 @fig-bar-text is a version of @fig-bar with white text added to each bar
 showing the exact number of offenders in each ethnic group.
@@ -114,6 +103,40 @@ Furthermore, the data values for the number of offenders in each ethnic group
 are encoded as the **shape** of the text---the letters and digits 
 that make up the text.
 
+Just as we can decode data values from the visual features of the bars
+in @fig-bar-text,
+we can decode data values from the visual features of the text.
+For example, we can see just from the horizontal position of the text,
+without reading the text values, 
+that some counts are (much) larger than others.
+
+> Encoding data values as the position, colour, and size of 
+  text data symbols is effective for the same reasons that these
+  visual features are effective for other types of data symbols.
+
+However, the unique power of text comes from **decoding** the
+**shape** of the text.
+Text is the ultimate example of a **learned mapping** (@sec-learned).
+We all learn to read text (and numbers), which means that, 
+when we are presented with
+a text shape, there is a pre-existing decoding to the semantic content
+of the text (@fig-learned-decode).
+For example, in @fig-bar-text, we are able to decode the data
+value `41787` (the count for Māori) from the text "41787".
+Furthermore, this decoding is extremely accurate and very flexible.
+
+In terms of the criteria that we discussed in @sec-mapping-visual-features,
+the value of text data symbols is that they allow us to decode
+data values very **accurately** (@fig-decode).
+Text is also very flexible because it is
+appropriate for both **quantitative** and **qualitative** data values.
+Finally, text has a very large **capacity**;  we are able to distinguish
+between many different words and numbers.
+
+> Text data symbols are effective because they can be used to represent
+  any sort of data and they allow a very accurate
+  decoding of data values.
+
 Compared to the bar data symbols in @fig-bar-text, the text data symbols
 are much more complex shapes.
 In terms of the simple visual processing model from @sec-visual-processing,
@@ -129,33 +152,6 @@ shapes we can process simultaneously
   but text is also processed separately for its language value.
   Cite Ware p315-316
 
-Just as we can decode data values from the visual features of the bars
-in @fig-bar-text,
-we can decode data values from the visual features of the text.
-For example, the horizontal position of the text by itself
-allows us to perceive that some counts are (much) larger than others.
-
-However, the unique power of text comes from **decoding** the
-**shape** of the text.
-Text is the ultimate example of a **learned mapping** (@sec-learned).
-We all learn to read text (and numbers), which means that, 
-when we are presented with
-a text shape, there is a pre-existing decoding to the semantic content
-of the text (@fig-learned-decode).
-For example, in @fig-bar-text, we are able to decode the data
-value 41787 (the count for Māori) from the text "41787".
-
-In terms of the criteria that we discussed in @sec-mapping-visual-features,
-the value of text data symbols is that they allow us to decode
-data values very **accurately** (@fig-decode).
-Text is also very flexible because it is
-appropriate for both **quantitative** and **qualitative** data values.
-Finally, text has a very large **capacity**;  we are able to distinguish
-between many different words and numbers.
-
-> Text data symbols are effective because they can be used to represent
-  any sort of data and they allow a very accurate
-  decoding of data values.
 
 One weakness of text data symbols
 is that comparing values (rather than just decoding a single value)
@@ -250,14 +246,15 @@ The fact that these lines have different colours indicates that
 there are three different groups, but the colours alone
 do not tell us what the groups are.  We can decode different values
 from the colours of the lines, but we cannot decode exact data values.
-In the original Figure @fig-crime, the shapes of the text labels on the legend
+In the original @fig-crime, the shapes of the text labels on the legend
 allow us to decode the original data values---the three ages 14, 15, and 16.
 
 The proximity of the text labels in the legend to the coloured lines
 in the legend means that we associate each label with each
 coloured line (@sec-visual-model-groups).
-So the text labels in the legend are the most important data symbols
-in @fig-crime that allow us to decode the colours of the lines.
+So the text labels in the legend are the essential data symbols
+in @fig-crime because only they allow us to decode from the colours of the lines
+to the three age groups.
 
 The text labels on axes perform a similar service.
 For example, the numbers on the axes in @fig-crime
@@ -265,9 +262,11 @@ are the only data symbols that provide exact decoding from
 positions to data values (years or rates).
 The lines within the plot, by themselves, only show that values 
 are decreasing.
-It is only the relative position of the lines to the axis tick labels
-(and grid lines)
-that allows us to decode from the lines to (approximate) data values.
+It is only the relative position of the lines within the plot
+to the tick labels on the axes
+(and the grid lines)
+that allows us to decode from the lines within the plot
+to (approximate) data values.
 
 Text data symbols within guides are effective because 
 guides contain only a few data values that need to be decoded 
@@ -275,8 +274,7 @@ precisely.
 This is the situation where text excels.   
 
 > Guides are effective because they encode known data values 
-  as data symbols and because decode data values from those data symbols 
-  extremely well.
+  as text data symbols as well as the data symbols used in the main plot.
   
 ## Labels {#sec-labels}
 
@@ -315,34 +313,56 @@ popViewport()
 
 The difference between labels and the other components of a data visualisation,
 the data symbols and the guides, is that labels relate to **metadata** 
-rather than raw data values.  Labels contain information like
-descriptions of variables and 
-units of measurement and references to data sources.
-These are all important pieces of information, but they are more complex,
-more abstract, and far fewer in number than data values, so it again
-makes sense that the best way to present this information 
-is via text.
+rather than raw data values.  We can still
+consider this a mapping, just one that involves encoding metadata
+rather than data values (@fig-label-mapping).
 
 ::: {#fig-label-mapping layout-ncol=2}
 
 ![](Diagrams/meta-label.png)
 
-Labels can be viewed as mappings from metadata to text as a visual
-representation,
-the benefit of which is that the mapping *back* to metadata has
-extremely high-fidelity.
+Labels can be viewed as an encoding of metadata as text.
+We can encode complex information using text and
+we can decode text with extremely high fidelity.
 :::
 
+Labels contain information like
+descriptions of variables and 
+units of measurement and references to data sources.
+These are all important pieces of information, but they are more complex,
+more abstract, and far fewer in number than data values.
+Fortunately, text is very capable of expressing complex information
+and works very well in small amounts, so it is ideal
+for this role.
 
-**TODO** Another purpose of labels is to direct attention ...
+To emphasise that point, imagine how impossible it would be
+to encode the
+information in the title of @fig-crime-labels, or just
+the legend title, only using simple geometric data symbols
+like bars and points.
+Using pictograms, which have learned decodings like
+text, would also be very difficult because it is much harder to compose
+pictograms in the way that text can be composed into phrases
+and sentences.
 
-top-down
+> Text is the only way to encode the type of complex and abstract information
+  that is required for titles and axis labels.
 
-Do text labels with colours that match the data symbols we want
-the viewer to attend to.
+Another use of text in a data visualisation is to label specific
+points of interest.
+For example, 
+@fig-ann shows a variation of @fig-scatter, with
+text added to help explain the result of the Rugby World Cup final to
+disillusioned New Zealanders.
+This demonstrates further the value of text as the only way to encode
+complex and nuanced information.[^Ackoff]
 
-**TODO**
-add annotation example => WAY more complex information
+[^Ackoff]:
+  Russell Akoff's "From Data to Wisdom"
+  Text is very flexible - it can convey data, information,
+  knowledge, understanding, and wisdom. 
+  Most other graphical elements are much more limited.
+
 
 ```{r}
 #| echo: false
@@ -381,19 +401,21 @@ markCurve <- function(data, coords) {
                    name="SA", cl="markCurve"))
 }
 ggTeX <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
+    geom_point(aes(breaks, tries), colour="grey") +
+    geom_point(aes(breaks, tries), colour="black", 
+               data=subset(RWCperGame, 
+                           country %in% c("New Zealand", "South Africa"))) +
     grid_panel(markTeX) +
     grid_panel(markCurve, aes(breaks, tries, name=country)) +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
-    scale_colour_discrete(name="hemisphere") +
     labs(title="Rugby Word Cup 2023") +
     theme(aspect.ratio=1)
 ```
 
 ```{r}
 #| echo: false
-#| label: rwcTeX
+#| label: fig-ann
 #| fig-cap: The number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams in the 2023 Rugby World Cup.
 library(gridGeometry)
 pushViewport(viewport(width=.9, height=.9))
@@ -404,53 +426,46 @@ rightNZ <- getMark("rightNZ")
 ptNZ <- getMark("NZ")
 grid.segments(leftNZ$devx, leftNZ$devy - unit(1, "mm"), 
               rightNZ$devx, rightNZ$devy - unit(1, "mm"))
-nzBez <- bezierGrob(unit.c(rightNZ$devx, ptNZ$devx, ptNZ$devx, ptNZ$devx),
-                    unit.c(rightNZ$devy - unit(1, "mm"),
-                           rightNZ$devy - unit(1, "mm"),
-                           rightNZ$devy - unit(1, "mm"),
-                           ptNZ$devy))
-NScols <- pal_npg()(2)
-endGradient <- function(x, steps=10, size=1) {
-    cols <- colorRampPalette(c("black", NScols[1]))(steps)
-    for (i in steps:1) {
-        start <- unit(-i*size, "mm")
-        end <- unit(1, "npc") - unit((i - 1)*size, "mm")
-        grid.trim(x, start, end, gp=gpar(col=cols[steps - i + 1]))
-    }
-}
-grid.trim(nzBez, 0, unit(-10, "mm"))
-endGradient(nzBez)
+grid.bezier(unit.c(rightNZ$devx, ptNZ$devx, ptNZ$devx, ptNZ$devx),
+            unit.c(rightNZ$devy - unit(1, "mm"),
+                   rightNZ$devy - unit(1, "mm"),
+                   rightNZ$devy - unit(1, "mm"),
+                   ptNZ$devy))
 leftSA <- getMark("leftSA")
 rightSA <- getMark("rightSA")
 ptSA <- getMark("SA")
 grid.segments(leftSA$devx, leftSA$devy - unit(1, "mm"), 
               rightSA$devx, rightSA$devy - unit(1, "mm"))
-saBez <- bezierGrob(unit.c(rightSA$devx, 
-                           rightSA$devx + unit(3, "mm"),
-                           rightSA$devx + unit(3, "mm"),
-                           ptSA$devx),
-                    unit.c(rightSA$devy - unit(1, "mm"),
-                           rightSA$devy - unit(1, "mm"),
-                           rightSA$devy - unit(1, "mm"),
-                           ptSA$devy))
-grid.trim(saBez, 0, unit(-5, "mm"))
-endGradient(saBez, steps=5)
+grid.bezier(unit.c(rightSA$devx, 
+                   rightSA$devx + unit(3, "mm"),
+                   rightSA$devx + unit(3, "mm"),
+                   ptSA$devx),
+            unit.c(rightSA$devy - unit(1, "mm"),
+                   rightSA$devy - unit(1, "mm"),
+                   rightSA$devy - unit(1, "mm"),
+                   ptSA$devy))
 ```
 
 ## Case study:  Word clouds {#sec-word-cloud}
 
 @fig-wordcloud shows a word cloud data visualisation based on the
-text of the [Wikipedia page on the Rugby World Cup](https://en.wikipedia.org/wiki/Rugby_World_Cup) [@wiki-rwc].
+text of the Wikipedia page on the Rugby World Cup.[^wiki-rwc]
 This visualisation shows the frequency with which different words
 appear on the Wikipedia page.  The data values that are being visualised
 are shown in @tbl-wiki-rwc.
+
+[^wiki-rwc]:
+  [](https://en.wikipedia.org/wiki/Rugby_World_Cup) [@wiki-rwc]
 
 ::: {#fig-wordcloud}
 
 ![](Data/RWC/WordCloud/wordcloud-trim.svg)
 
-A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup.  This image was produced using the R package {wordcloud} [@pkg-wordcloud].
+A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup.[^wordcloud-pkg]
 :::
+
+[^wordcloud-pkg]:
+    This image was produced using the R package {wordcloud} [@pkg-wordcloud].
 
 This data visualisation is unusual because it consists entirely of text
 **data symbols**.
@@ -458,13 +473,18 @@ The mappings in @fig-wordcloud include encoding each word as the **shape** of
 a text data symbol and encoding frequency as the **size**
 of a text data symbol.
 There is no need for a guide for the mapping from words to text shape because
-there is an implicit decoding (@fig-implicit-decode);  
+there is a learned decoding (@fig-learned-decode);
 we can decode each text data symbol
 into a word data value because that decoding has already been learned.
 
 There is no guide for the mapping from word frequency to text size,
-but the visualisation is still effective at conveying the *relative* 
+so we cannot decode exact word frequencies.
+@tbl-wiki-rwc shows the six most frequent words.
+However, the visualisation is still effective at conveying the *relative* 
 frequencies.  The larger words occurred more frequently.
+For example, we can see the names of the teams that were most successful
+at the tournament, like New Zealand and South Africa, 
+are much larger than less successful teams.
 
 ```{r}
 #| echo: false
@@ -474,9 +494,12 @@ frequencies.  The larger words occurred more frequently.
 kable(head(wikiRWC), row.names=FALSE)
 ```
 
-The mapping of frequencies to **size** does not provide the best **accuracy**
-for decoding frequencies because the data symbols are not simple shapes, 
-so we cannot identify the exact frequency
+The encoding of frequencies as the **size** of the words
+does not provide the best **accuracy**
+for decoding frequencies (@sec-accuracy)
+and this made worse by the fact that longer words become even
+larger. This means that
+we cannot identify the exact frequency
 of any one word, we cannot identify the quantitative difference in frequency 
 between pairs of words, and we cannot easily perceive the distribution
 of frequencies across words.
@@ -490,6 +513,12 @@ This is an example of redundant mapping; more frequent words are both
 larger *and* more central.
 
 **TODO** link back to redundant mappings
+
+> A word cloud is effective for conveying words 
+  because it maps words to text data symbols.
+  It is also partially effective for conveying relative frequencies of words
+  because it maps word frequency
+  to both size and position in space.
 
 Another benefit of encoding frequency as position in space
 is the efficient use of space.
@@ -528,17 +557,19 @@ ggplot(temp) +
 
 One weakness of the word cloud is that the **angle** of words changes
 with no corresponding change in the data values.
+This is an example of a **dissonant** mapping, which can cause confusion
+(@sec-dissonance).  The viewer will notice the differences in angle
+and attempt to decode that difference to a difference in data values
+that does not exist.
 
-**TODO** link this back to congruence and same=same (different=different).
-
-> A word cloud is effective for conveying relative frequencies of words
-  because it maps words to text data symbols and it maps word frequency
-  to both size and position in space.
+> The different angles of text in a word cloud is not effective
+  because it does not encode any differences in the data.
 
 ## Case study:  Tables
 
 @tbl-rwc-table shows a subset of the 2023 Rugby World Cup data set
-(@tbl-rwc-2023).  We have established earlier in this section that
+(@tbl-rwc-2023), just including the top eight nations in the 
+tournament.  We established in @sec-data-symbols that
 visualising data values in a table provides an excellent 
 basis for accurately decoding individual data values, 
 but imposes a larger cognitive burden
@@ -563,12 +594,16 @@ kable(rwc8mess, row.names=FALSE)
 
 However, there are standard guidelines for
 formatting tables of values that can improve the readability of
-a table, for example, @schwabish.
+a table.[^table-guidelines]
 @tbl-rwc-table-tidy shows the same data as @tbl-rwc-table, but with
-all numeric columns right-aligned, a consistent number of decimal 
+all of the numeric columns right-aligned, a consistent number of decimal 
 places in each column, fewer decimal places than the data 
 actually possess, and the rows have been ordered from the highest number of
 points per game to the lowest.
+
+[^table-guidelines]:
+  For example, @schwabish.
+  Also get a Wainer reference in here?
 
 It is easier to see some structure in @tbl-rwc-table.
 For example, the number of tries appears to decrease as well as the 
@@ -584,10 +619,13 @@ The consistent number of decimal places means that less is
 changing, so differences are easier to detect
 (@sec-differences).
 Finally, the consistent baseline provided by right-alignment
-means that the text **length** provides a crude comparison,
+means that the text **length** of the numbers (the number of digits
+in each number) provides a crude encoding of the size of the number,
 particularly in the column showing the number of clean breaks.
 However, it is worth noting that some of the **accuracy** of the text
 has been sacrificed in order to make some of these gains.
+
+**TODO** link back to "good gestalt"/simplicity in visual model
 
 **TODO** provide links from ALL of these points to previous sections.
 
@@ -632,10 +670,10 @@ AND in terms of approach (how data vis works)
 
 Quote from John Tukey about stem-and-leaf plots:
 
-\begin{quotation}
-\say{If we are going to make a mark, it may as well be a meaningful one.
-The simplest - and most useful - meaningful mark is a digit}
-\end{quotation}
+::: {.acutal-quote}
+If we are going to make a mark, it may as well be a meaningful one.
+The simplest - and most useful - meaningful mark is a digit
+:::
 
     Attributed to "Some Graphic and Semigraphic Displays" in 
     T. A. Bancroft, ed. Statistical Papers in Honor of George W. Snedecor
