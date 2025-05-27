@@ -154,7 +154,9 @@ data2 <- dataNode("data2", "data\\nvalues")
 stat <- dataNode("stat", "data\\nsummaries")
 stat2 <- dataNode("stat2", "summary\\nsummaries")
 lie <- lieNode("lie", "garbage\\nand lies")
-meta <- dataNode("meta", "metadata\\n")
+meta <- dataNode("meta", "metadata /\\nbackground")
+org <- dataNode("org", "structure /\\norganisation")
+imp <- dataNode("imp", "importance /\\nsignificance")
 dataData2Same <- sameRank("data", "data2")
 dataStatSame <- sameRank("data", "stat")
 dataStat2Same <- sameRank("data", "stat2")
@@ -189,7 +191,9 @@ objects <- modelNode("objects", "visual\\nobjects")
 ## Edges from data
 dataSymEdge <- mapEdge("data", "sym")
 dataVisEdge <- mapEdge("data", "vis")
+dataVisEdge2 <- mapEdge("data:e", "vis:w")
 data2VisEdge <- mapEdge("data2", "vis")
+data2VisEdge2 <- mapEdge("data2:e", "vis:w")
 dataStatEdge <- compEdge("data", "stat")
 dataLieEdge <- lieEdge("data", "lie")
 lieVisEdge <- mapEdge("lie", "vis", grad=grad4)
@@ -198,6 +202,8 @@ statVisEdge <- mapEdge("stat", "vis")
 dataObjEdge <- mapEdge("data", "obj")
 statLabelEdge <- mapEdge("stat", "label")
 metaLabelEdge <- mapEdge("meta", "label")
+orgVisEdge <- mapEdge("org", "vis")
+impVisEdge <- mapEdge("imp", "vis")
 
 ## Edges from visual
 symDataEdge <- backEdge("sym:s", "data:se")
@@ -226,6 +232,8 @@ objDataEdge <- backEdge("obj:s", "data:se")
 objStatEdge <- backEdge("obj:s", "stat:se")
 labelMetaEdge <- backEdge("label:s", "meta:se")
 labelStatEdge <- backEdge("label:s", "stat:se")
+visOrgEdge <- backEdge("vis:s", "org:se")
+visImpEdge <- backEdge("vis:s", "imp:se")
 
 ## Edges from ggplot
 dataAesEdge <- mapEdge("data", "aes")
@@ -551,4 +559,27 @@ graph(data,
       invis(dataVisEdge),
       visDataEdge2,
       file="learned-decode.dot")
+
+graph(data,
+      data2,
+      vis,
+      invis(data2VisEdge),
+      dataVisEdge2,
+      data2VisEdge2,
+      visDataEdge,
+      visData2Edge,
+      dataData2Same,
+      file="conflict-decode.dot")
+
+graph(org,
+      vis,
+      orgVisEdge,
+      visOrgEdge,
+      file="org-vis-decode.dot")
+
+graph(imp,
+      vis,
+      impVisEdge,
+      visImpEdge,
+      file="imp-vis-decode.dot")
 

@@ -2102,7 +2102,7 @@ kable(RWCperGame, digits=1, row.names=FALSE)
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-scatter
-#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages).
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries)) +
     scale_x_continuous(name="clean breaks") +
@@ -3222,7 +3222,6 @@ ggTeX <- ggplot(RWCperGame) +
     grid_panel(markCurve, aes(breaks, tries, name=country)) +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
-    labs(title="Rugby Word Cup 2023") +
     theme(aspect.ratio=1)
 
 
@@ -3509,116 +3508,10 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-rep-guide
-#| fig-cap: A scatter plot with a legend.
-repcols <- pal_npg()(4)
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-rep-none
-#| fig-cap: A scatter plot with a discordant legend.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyPoint <- grid.grep("key::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
-grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-rep-double
-#| fig-cap: A scatter plot with a legend.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-rep-single
-#| fig-cap: A scatter plot with a legend.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
-keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoints[[1]], gp=gpar(col=NA))
-grid.edit(keyPoints[[2]], gp=gpar(col=NA))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-rep-title
-#| fig-cap: A scatter plot with a title.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    ggtitle(paste('<span style="color: ', repcols[3], '">**North**</span>',
-                  "versus",
-                  '<span style="color: ', repcols[1], '">**South**</span>')) +
-    theme(aspect.ratio=1,
-          plot.title=element_markdown(),
-          legend.title=element_text(colour=NA))
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=NA))
-grid.edit(keyText[[2]], gp=gpar(col=NA))
-keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoints[[1]], gp=gpar(col=NA))
-grid.edit(keyPoints[[2]], gp=gpar(col=NA))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: fig-yji
 youthCols <- c("#bf0000", "#2b4689", "#e1b728", "#8fbb22",
                "#0087c0", "#bdaa7c", "#f15a22")
+youthCols <- pal_npg()(7)
 gg1 <- ggplot(subset(crimeGroup, group != "Unknown")) +
     geom_line(aes(year, rate, colour=group)) +
     scale_colour_manual(values=youthCols[1:3]) +
@@ -3655,6 +3548,150 @@ popViewport()
 pushViewport(viewport(layout.pos.col=2))
 print(gg2, newpage=FALSE)
 popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-guide
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+repcols <- pal_npg()(4)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-align
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+repcols <- pal_npg()(10)[c(1, 2, 3, 9)]
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          axis.title.x=element_text(hjust=1),
+          axis.title.y=element_text(angle=0),
+          legend.justification="top",
+          legend.margin=margin(0, 10, 10, 40, "pt"),
+          legend.key.size=unit(2, "mm"),
+          legend.key.spacing.y=unit(2, "mm"))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+tickLabel <- grid.get("axis.1-2-1-2::titleGrob::text", grep=TRUE)
+grid.edit("ylab::title::text", grep=TRUE,
+          x=unit(1, "npc") + grobWidth(tickLabel), hjust=1)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyPoint <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
+grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-rep-double
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-contrast
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+subtle <- "grey"
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          panel.border=element_rect(colour=subtle, fill=NA),
+          axis.title=element_text(colour=subtle),
+          axis.text=element_text(colour=subtle),
+          axis.ticks=element_line(colour=subtle),
+          legend.title=element_text(colour=subtle))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-highlight
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+dimcols <- lighten(repcols[c(1, 3)], .7)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere),
+               data=subset(RWCperGame, 
+                           !country %in% c("New Zealand", "South Africa"))) +
+    geom_point(aes(breaks, tries), colour=repcols[1], size=3,
+               data=subset(RWCperGame, 
+                           country %in% c("New Zealand", "South Africa"))) +
+    geom_text(aes(breaks, tries, label=country), hjust=1.15,
+              fontface="bold", colour=dimcols[1], size=3,
+              data=subset(RWCperGame, 
+                          country %in% c("New Zealand", "South Africa"))) +
+    scale_colour_manual(values=dimcols, name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          panel.border=element_rect(colour=subtle, fill=NA),
+          axis.title=element_text(colour=subtle),
+          axis.text=element_text(colour=subtle),
+          axis.ticks=element_line(colour=subtle),
+          legend.title=element_text(colour=subtle))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 
 
 ## -----------------------------------------------------------------------------

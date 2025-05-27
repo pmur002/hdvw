@@ -1,197 +1,28 @@
 
 # Mapping Structure
 
-@fig-rep-guide shows a scatter plot of the number of clean breaks and the
-number of tries for countries
-at the 2023 Rugby World Cup (@tbl-rwc-2023).
-This data visualisation is similar to @fig-scatter, but with an
-additional encoding of the hemisphere for each country as the colour
-of the data points.
+@fig-yji shows a line plot of the rate of youth crime in New Zealand
+for different ethnic groups
+and a pie chart showing the proportions of different types of crime.[^yji]
+There is a problem with this figure because 
+the line plot and the pie chart share the same colour palette
+even though they are visualising different variables (ethnicity
+and crime type).
+For example, the ethnic group `European/Other` is encoded as 
+the orange colour of a line *and* the crime type `Theft` is also
+encoded as an
+orange colour, in this case of a wedge.
 
-The legend (guide) in @fig-rep-guide demonstrates the scale for the colour
-encoding:  which colour is used to encode each hemisphere.
-In @sec-guides, we described how the proximity of the labels "South"
-and "North" to the coloured points in the legend allow us to
-associate the colours with the different hemispheres.
-The different values of hemisphere are encoded as the vertical
-positions of the points and the text labels;
-both the orange point and the label "South" have the same
-vertical position.
- 
-```{r}
-#| echo: false
-#| label: fig-rep-guide
-#| fig-cap: A scatter plot with a legend.
-repcols <- pal_npg()(4)
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-```
-
-What about the horizontal position of the points and the text in
-the legend?  These do not encode hemisphere values because they
-are the same for both North and South.
-What about the position of the legend title, "hemisphere"?
-
-All of the elements of the legend are positioned together
-and to the right of the main plot.
-Their proximity to each other (and separation from
-the main plot) mean that we see the legend as a separate
-group (@sec-visual-model-groups).
-This creates a visual structure for the plot, which helps
-the viewer to navigate and comprehend the different elements
-of the plot (could do with a CITE here).
-This is analogous to reading a block of text, which is split into
-paragraphs and sections with headings, to help the reader
-navigate the text.
-
-One way to express this is that the **position** of the elements of the legend 
-**encode** the **structure** of the overall data visualisation.
-Our visual system **decodes** the structure based on the proximity
-of the legend elements.
-
-In this section we look at the overall arrangement of the elements
-of a plot.
-An effective data visualisation has to convey information about
-how to read the plot as well as information about the data itself.
-
-**TODO** 
-surely must be a call-back to facetting somewhere here?
-
-## Mapping importance
-
-Contrast
-
-@sec-differences
-
-@sec-attention
-
-## Mapping ???
-
-Repetition
-
-```{r}
-#| echo: false
-#| label: fig-rep-none
-#| fig-cap: A scatter plot with a discordant legend.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyPoint <- grid.grep("key::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
-grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
-```
-
-```{r}
-#| echo: false
-#| label: fig-rep-double
-#| fig-cap: A scatter plot with a legend.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
-```
-
-```{r}
-#| echo: false
-#| label: fig-rep-single
-#| fig-cap: A scatter plot with a legend.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
-keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoints[[1]], gp=gpar(col=NA))
-grid.edit(keyPoints[[2]], gp=gpar(col=NA))
-```
-
-```{r}
-#| echo: false
-#| label: fig-rep-title
-#| fig-cap: A scatter plot with a title.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    ggtitle(paste('<span style="color: ', repcols[3], '">**North**</span>',
-                  "versus",
-                  '<span style="color: ', repcols[1], '">**South**</span>')) +
-    theme(aspect.ratio=1,
-          plot.title=element_markdown(),
-          legend.title=element_text(colour=NA))
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=NA))
-grid.edit(keyText[[2]], gp=gpar(col=NA))
-keyPoints <- grid.grep("key::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoints[[1]], gp=gpar(col=NA))
-grid.edit(keyPoints[[2]], gp=gpar(col=NA))
-```
-
-## Mapping navigation
-
-Alignment
-
-good gestalt
-
-## Mapping connections
-
-@sec-visual-model-groups
-
-@fig-yji shows plots from Youth Justice Indicator Report
-that encode different categories (from different variables)
-as the same colour!
-
-Use this as chapter intro ?
-We need to consider larger questions about how elements
-of a plot fit together.
-Could also deliberately make the alignment bad so that we can talk about
-that too?
+[^yji]:
+  Based on figures from the Youth Justice Indicators Report from 2021
+  [](https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/).
 
 ```{r}
 #| echo: false
 #| label: fig-yji
 youthCols <- c("#bf0000", "#2b4689", "#e1b728", "#8fbb22",
                "#0087c0", "#bdaa7c", "#f15a22")
+youthCols <- pal_npg()(7)
 gg1 <- ggplot(subset(crimeGroup, group != "Unknown")) +
     geom_line(aes(year, rate, colour=group)) +
     scale_colour_manual(values=youthCols[1:3]) +
@@ -230,15 +61,315 @@ print(gg2, newpage=FALSE)
 popViewport()
 ```
 
-Much more subtle example from 
-787resources/Examples/2024-11-premier-league-momentum-plot
-where the purple label could be below (?)
-Would need to extract the data values from the plot somehow
-to reproduce it (initial attempts with AI have failed).
+This creates a confusing data visualisation because the same visual feature
+possesses multiple conflicting decodings (@fig-conflict-decode).
+There is nothing wrong with the encodings in the line plot by itself
+or with the encodings in the pie chart by itself, but the overall combination of
+elements within @fig-yji is ineffective.
 
-Refer CRAP design in footnote, but use gestalt principles to lead in to
-contrast, repetition (similarity), alignment (continuity), 
-and proximity (proximity!).
+::: {#fig-conflict-decode}
+
+![](Diagrams/conflict-decode.png)
+
+If we encode more than one data value to the same visual feature, it is unclear
+which is the correct decoding.
+:::
+
+In this section we look at the overall arrangement and coordination
+of the elements
+of a data visualisation.[^CRAP-design]
+
+[^CRAP-design]:
+  Acknowledge that many of these ideas align with the 
+  ideas of contrast, repetition, alignment, and proximity 
+  that are espoused in Naomi Robbins book.
+
+## Mapping organisation
+
+@fig-rep-guide shows a scatter plot of the number of clean breaks and the
+number of tries for countries
+at the 2023 Rugby World Cup (@tbl-rwc-2023).
+This data visualisation is similar to @fig-scatter, but with an
+additional encoding of the hemisphere for each country as the colour
+of the data points.
+
+The legend (guide) in @fig-rep-guide demonstrates the scale for the colour
+encoding:  which colour is used to encode each hemisphere.
+In @sec-guides, we described how the proximity of the labels "South"
+and "North" to the coloured points in the legend allow us to
+associate the colours with the different hemispheres.
+The different values of hemisphere are encoded as the vertical
+positions of the points and the text labels;
+both the orange point and the label "South" have the same
+vertical position.
+ 
+```{r}
+#| echo: false
+#| label: fig-rep-guide
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+repcols <- pal_npg()(4)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+What about the horizontal position of the points and the text in
+the legend?  These do not encode hemisphere values because they
+are the same for both North and South.
+What about the position of the legend title, "hemisphere"?
+
+All of the elements of the legend are positioned together
+and to the right of the main plot.
+Their proximity to each other (and separation from
+the main plot) mean that we see the legend as a separate
+group (@sec-visual-model-groups).
+This creates a visual organisation for the plot, which helps
+the viewer to navigate and comprehend the different elements
+of the plot (could do with a CITE here).
+This is analogous to reading a body of text, which is split into
+paragraphs and sections with headings to help the reader
+navigate the text.
+
+One way to express this is that the **position** of the elements of the legend 
+**encode** the **organisation** of the overall data visualisation.
+Our visual system **decodes** the legend as a separate element
+based on the proximity of the text and points in the legend.
+
+::: {#fig-org-vis-decode}
+
+![](Diagrams/org-vis-decode.png)
+
+We can encode the structure of a data visualisation as position
+so that elements that are part of the same structure are close to each other.
+:::
+
+> An effective data visualisation has to convey information about
+  how to read the plot as well as information about the data itself.
+
+@fig-align shows a variation of @fig-rep-guide, with exactly 
+the same plot elements, but in a different arrangement.
+There is greater separation of the legend from the main
+plot.
+The legend has also been moved so that its top is aligned
+with the top of the main plot.
+Similarly, the axis titles have been moved so that they
+align with the top and right sides of the plot, and the
+y-axis label has been rotated to horizontal.
+More subtly, the right edge of the y-axis label is
+aligned with the right edge of the y-axis tick labels
+and the points in the legend are aligned with the left
+edge of the legend title.
+
+```{r}
+#| echo: false
+#| label: fig-align
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+repcols <- pal_npg()(10)[c(1, 2, 3, 9)]
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          axis.title.x=element_text(hjust=1),
+          axis.title.y=element_text(angle=0),
+          legend.justification="top",
+          legend.margin=margin(0, 10, 10, 40, "pt"),
+          legend.key.size=unit(2, "mm"),
+          legend.key.spacing.y=unit(2, "mm"))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+tickLabel <- grid.get("axis.1-2-1-2::titleGrob::text", grep=TRUE)
+grid.edit("ylab::title::text", grep=TRUE,
+          x=unit(1, "npc") + grobWidth(tickLabel), hjust=1)
+```
+
+All of these changes are aimed at making the data visualisation 
+more orderly.  The legend is more obviously a separate element
+from the main plot and the axis titles more obviously 
+connect to the main plot.
+
+Link to **good gestalt** back in visual model (once that exists).
+
+**TODO** 
+surely must be a call-back to facetting somewhere here?
+
+## Consistent mappings
+
+@fig-rep-none shows a variation on @fig-rep-guide with a modified 
+legend.  In this plot, the hemisphere of a country is encoded using
+orange and green within the main plot, but then hemisphere is encoded
+using light blue and brown in the legend.
+This is clearly an ineffective data visualisation, but
+it highlights the importance of maintaining consistent mappings between
+different elements of a plot.[^CRAP-rep]
+
+[^CRAP-rep]:
+  This particularly echoes the repetition part of CRAP design.
+
+```{r}
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyPoint <- grid.grep("key::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
+grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
+```
+
+@fig-rep-double demonstrates that we can harness consistent
+mappings to improve upon the original @fig-rep-guide.
+In this plot, the encoding of hemisphere as the colour of points
+is not only consistent between the main plot and the legend,
+but it has been extended to the colour of legend text.
+The visual grouping of elements that relate to the same hemisphere
+is stronger within the legend and across the entire data visualisation
+(@sec-visual-model-groups).
+
+```{r}
+#| echo: false
+#| label: fig-rep-double
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+```
+
+## Mapping importance
+
+@fig-contrast shows a variation on @fig-rep-double
+with many elements of the plot drawn in light grey.
+The effect of this change is to create two visual groups,
+one lighter and less saturated than the other.
+This emphasises the main data symbols in the main plot and in the
+legend, and de-emphasises the axes and labels.
+Our attention is drawn to the darker and more saturated
+elements first (@sec-attention), with the other elements in the background,
+which we can focus on if we need the additional information.[^contrast]
+
+[^contrast]: 
+  CRAP contrast
+
+If we compare this to @fig-rep-double, there is a similar visual impact
+from all elements of the plot, so it is less clear where to look first.
+
+This is another example of encoding non-data values as visual 
+features.  Here we are encoding the **importance** of different
+visual elements as visual features, in this case colour.
+We decode the different colours to a more important group of elements
+and a less important group of elements.
+
+::: {#fig-imp-vis-decode}
+
+![](Diagrams/imp-vis-decode.png)
+
+We can encode the importance of elements within a data visualisation as 
+visual features 
+so that elements that are more important are more visible.
+:::
+
+```{r}
+#| echo: false
+#| label: fig-contrast
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+subtle <- "grey"
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          panel.border=element_rect(colour=subtle, fill=NA),
+          axis.title=element_text(colour=subtle),
+          axis.text=element_text(colour=subtle),
+          axis.ticks=element_line(colour=subtle),
+          legend.title=element_text(colour=subtle))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+```
+
+@fig-highlight shows a similar application of importance.
+In this case, we are highlighting two data points (New Zealand
+and South Africa).
+The distinct colour and larger size of the two points encodes the 
+importance of those points and
+draws attention to those points, with everything else as background
+context.
+
+```{r}
+#| echo: false
+#| label: fig-highlight
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+dimcols <- lighten(repcols[c(1, 3)], .7)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere),
+               data=subset(RWCperGame, 
+                           !country %in% c("New Zealand", "South Africa"))) +
+    geom_point(aes(breaks, tries), colour=repcols[1], size=3,
+               data=subset(RWCperGame, 
+                           country %in% c("New Zealand", "South Africa"))) +
+    geom_text(aes(breaks, tries, label=country), hjust=1.15,
+              fontface="bold", colour=dimcols[1], size=3,
+              data=subset(RWCperGame, 
+                          country %in% c("New Zealand", "South Africa"))) +
+    scale_colour_manual(values=dimcols, name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          panel.border=element_rect(colour=subtle, fill=NA),
+          axis.title=element_text(colour=subtle),
+          axis.text=element_text(colour=subtle),
+          axis.ticks=element_line(colour=subtle),
+          legend.title=element_text(colour=subtle))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
+```
+
+
+
+@sec-differences
 
 + "Gestalt principles"
   Todorovic (2008)
@@ -253,3 +384,14 @@ and proximity (proximity!).
    parts of a pattern which is a good Gestalt, meaning as simple, orderly,
    balanced, unified, coherent, regular, etc as possible"
 
+## Summary
+
+Just as we can map data values to visual features, to 
+communicate information about the data,
+we can map non-data information to visual features, to
+communicate important aspects of the structure of a data visualisation.
+
+Communicating structure helps
+the viewer to navigate within a data visualisation.
+
+Position is especially important 
