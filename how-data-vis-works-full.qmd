@@ -1431,6 +1431,14 @@ are seen as a group.[^gestalt]
 [^gestalt]:
   mention Gestalt "school" or whatever, plus citations.
   enclosure == common region
+  "Gestalt principles"
+  Todorovic (2008)
+  Summaries of the main Gestalt principles.
+  Like a peer-reviewed Wikipedia ?
+  Possible link to alignment ... ?
+  "good Gestalt principle: elements tend to be grouped together if they are
+   parts of a pattern which is a good Gestalt, meaning as simple, orderly,
+   balanced, unified, coherent, regular, etc as possible"
 
 For example, in @fig-gestalt-group there are several matrices of dots.
 In each matrix, we can see either rows of dots or columns of dots 
@@ -3769,7 +3777,7 @@ raw data values.[^info-vis-ref-model]
   which teases out design-specific transforms as well (the data prep
   for a box plot being a good example).  These papers provide a formal
   basis for some of the hand-waving that I do in this section, particularly
-  on mapping back to data summaries rather than raw data.
+  on decoding to data summaries rather than raw data.
   Could also reference Ackoff's "From Data to Wisdom" for difference
   between data and information (data summaries).
 
@@ -3831,10 +3839,10 @@ thick vertical lines and the interquartile ranges are mapped to the
 
 ![](Diagrams/stat-vis-decode.png)
 
-A data visualisation may map data summaries, 
-rather than the raw data, to visual features.
-This is effective for mapping back to the data summaries, but it
-is not effective for mapping back to the raw data.
+A data visualisation may encode data summaries, 
+rather than the raw data, as visual features.
+This is effective for decoding the data summaries, but it
+is not effective for decoding the raw data.
 :::
 
 To be explicit, the data values that are being **encoded** 
@@ -3955,8 +3963,8 @@ enable us to decode **data summaries** from collections of visual features
 
 ![](Diagrams/data-vis-stat-decode.png)
 
-A data visualisation that maps data values to visual features allows us
-to map *back* to data values, but it may *also* allow us to map back to
+A data visualisation that encodes data values as visual features allows us
+to decode data values, but it may *also* allow us to decode
 summaries of the data, such as measures of central tendency or variability.
 :::
 
@@ -4522,7 +4530,7 @@ data points ("as the crow flies").
 
 ![](Diagrams/data-vis-vis.png)
 
-If we map data values to visual features and the visual features interact, 
+If we encode data values as visual features and the visual features interact, 
 the result can be additional visual features.  It is possible for the 
 additional visual feature to be dominant relative to the original visual
 features or even to obscure the original visual features.
@@ -4557,10 +4565,10 @@ position in space (see @sec-visual-model-groups).
 
 ![](Diagrams/data-vis-vis-stat.png)
 
-If we map data values to visual features and the visual features interact, 
+If we encode data values as visual features and the visual features interact, 
 the result can be emergent visual features.  The original visual features
-allow us to map back to the raw data values and the emergent features
-allow us to map back to data summaries.
+allow us to decode raw data values and the emergent features
+allow us to decode data summaries.
 :::
 
 Although a scatter plot is similar to a bar plot because they both
@@ -5166,8 +5174,8 @@ these more complicated shapes can convey more sophisticated information,
 at the expense of more cognitive effort, and with a limit on how many
 shapes we can process simultaneously
 (see @fig-visual-model).
-In other words, the more complex data symbols allow us to 
-map back to **data summaries** (@fig-data-vis-shape-decode).
+In other words, the more complex data symbols allow us to decode
+**data summaries** (@fig-data-vis-shape-decode).
 For example, in @fig-line we are able to perceive overall trends in the number
 of offenders, periods of more rapid change versus periods of slower
 change, and local maxima and minima.
@@ -5189,7 +5197,7 @@ and decreases in data values.[^line-trends]
 
 If we map data values to a **visual shape**
 that contains a large amount of information,
-then we may be able to map back to more sophisticated **data summaries**.
+then we may be able to decode more sophisticated **data summaries**.
 :::
 
 > One reason why line plots are effective is because they encode multiple
@@ -5201,8 +5209,8 @@ that contain multiple data values, are less effective at conveying
 the *individual* raw data values. 
 The coloured lines in @fig-line are not simple shapes
 from which it is easy to perceive basic **visual features**.
-This means that, although we may be able to map back to data summaries,
-it is not easy to map back to the raw data values
+This means that, although we may be able to decode data summaries,
+it is not easy to decode the raw data values
 (@fig-data-vis-shape-decode).
 For example, compare the ease with which we can
 determine the number of European/Other
@@ -5211,14 +5219,14 @@ offenders in 2013 from @fig-line versus @fig-side-bar-year.
 This deficiency is significant because the main mappings in a line plot
 are from **quantitative** data values to (horizontal and vertical) **position**.
 We know from @sec-mapping-visual-features that these should be very
-effective mappings that allow us to accurately map back to the raw data values.
+effective mappings that allow us to accurately decode the raw data values.
 However, in a line plot, we are not mapping a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
 is being mapped, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
 individual data values lose their individual identity.
 
-> One reason why a line plot is *not* effective for mapping back to
+> One reason why a line plot is *not* effective for decoding
   raw data values is because each raw data value is not mapped to its
   own data symbol.
 
@@ -5332,7 +5340,7 @@ visual features of the density estimates.
 ![](Diagrams/data-stat-vis-shape-stat.png)
 
 A density plot maps data summaries to visual features to create a visual
-shape from which we can map back to **summaries** of the data summaries.
+shape from which we can decode **summaries** of the data summaries.
 :::
 
 > A density plot is effective because it conveys high-level features of
@@ -5438,15 +5446,18 @@ ggplot(RWCperGame) +
 ```
 
 @fig-multiple is effective in some ways because some of the mappings
-involve effective visual features. For example, we can easily map back from
-horizontal and vertical positions to the number of clean breaks and the
-number of tries.  We can also map back from the emergent feature of **position
-in space** (@sec-integral) to a correlation between clean breaks and tries.
+involve effective visual features. For example, we can easily decode
+the number of clean breaks and the
+number of tries from
+horizontal and vertical positions.  
+We can also decode a correlation between clean breaks and tries
+from the emergent feature of **position
+in space** (@sec-integral).
 
 However, other mappings are less effective.  For example, it is 
-less easy to accurately map back from size 
-to the number of points scored and even
-harder to map back from colour to the number of runs.
+less easy to accurately decode number of points scored from size 
+and even
+harder to decode the number of runs from colour.
 In addition, we are hampered by the fact that many different
 visual features are changing at once, so it is harder
 to perceive individual differences (see @sec-differences).
@@ -5622,7 +5633,7 @@ the countries have been ordered by the number of points scored
 (the right-hand height of the shape).  As we have seen before,
 ordering data symbols can make a big difference (@sec-distance-effect).
 
-## Facetting[^facetting]
+## Facetting[^facetting] {#sec-facetting}
 
 [^facetting]: 
   trellis multi-panels, ggplot2 facets, GoG ??
@@ -7830,8 +7841,11 @@ connect to the main plot.
 
 Link to **good gestalt** back in visual model (once that exists).
 
-**TODO** 
-surely must be a call-back to facetting somewhere here?
+Link to @sec-facetting and 
+@fig-facet-after as example of strong alignment and orderliness
+
+Could contrast with relative disorder in @fig-map-alt-2
+
 
 ## Consistent mappings
 
@@ -8001,18 +8015,6 @@ grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 
 @sec-differences
 
-+ "Gestalt principles"
-  Todorovic (2008)
-
-  Summaries of the main Gestalt principles.
-
-  Like a peer-reviewed Wikipedia ?
-
-  Possible link to alignment ... ?
-
-  "good Gestalt principle: elements tend to be grouped together if they are
-   parts of a pattern which is a good Gestalt, meaning as simple, orderly,
-   balanced, unified, coherent, regular, etc as possible"
 
 ## Summary
 
@@ -8553,7 +8555,7 @@ popViewport()
   Present process by which a data vis can be broken down.
   What data symbols are being used?  (simple or complex)
   What mappings are being used? 
-  What do we want to map back to? (data or summaries)
+  What do we want to decode? (data or summaries)
   If mapping back to raw data, are the mappings accurate?
   What can be mapped back to?
   Are mappings congruent with data?

@@ -162,7 +162,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#parallel-coordinates-plots" id="toc-parallel-coordinates-plots" class="nav-link" data-scroll-target="#parallel-coordinates-plots"><span class="header-section-number">11.1</span> Parallel coordinates plots</a></li>
   <li><a href="#small-multiplessmall-multiples" id="toc-small-multiplessmall-multiples" class="nav-link" data-scroll-target="#small-multiplessmall-multiples"><span class="header-section-number">11.2</span> Small multiples</a></li>
-  <li><a href="#facettingfacetting" id="toc-facettingfacetting" class="nav-link" data-scroll-target="#facettingfacetting"><span class="header-section-number">11.3</span> Facetting</a></li>
+  <li><a href="#sec-facetting" id="toc-sec-facetting" class="nav-link" data-scroll-target="#sec-facetting"><span class="header-section-number">11.3</span> Facetting</a></li>
   <li><a href="#case-study-scatterplot-matrices" id="toc-case-study-scatterplot-matrices" class="nav-link" data-scroll-target="#case-study-scatterplot-matrices"><span class="header-section-number">11.4</span> Case study: Scatterplot matrices</a></li>
   <li><a href="#summary-9" id="toc-summary-9" class="nav-link" data-scroll-target="#summary-9"><span class="header-section-number">11.5</span> Summary</a></li>
   </ul></li>
@@ -2617,7 +2617,7 @@ Figure&nbsp;8.1: Box plots of the number of points scored in all Rugby World Cup
 <img src="Diagrams/stat-vis-decode.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stat-vis-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.2: A data visualisation may map data summaries, rather than the raw data, to visual features. This is effective for mapping back to the data summaries, but it is not effective for mapping back to the raw data.
+Figure&nbsp;8.2: A data visualisation may encode data summaries, rather than the raw data, as visual features. This is effective for decoding the data summaries, but it is not effective for decoding the raw data.
 </figcaption>
 </figure>
 </div>
@@ -2698,7 +2698,7 @@ Figure&nbsp;8.3: Stacked dotplots of the number of points scored by Tier One nat
 <img src="Diagrams/data-vis-stat-decode.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-stat-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.4: A data visualisation that maps data values to visual features allows us to map <em>back</em> to data values, but it may <em>also</em> allow us to map back to summaries of the data, such as measures of central tendency or variability.
+Figure&nbsp;8.4: A data visualisation that encodes data values as visual features allows us to decode data values, but it may <em>also</em> allow us to decode summaries of the data, such as measures of central tendency or variability.
 </figcaption>
 </figure>
 </div>
@@ -3344,7 +3344,7 @@ Figure&nbsp;9.3: A scatter plot of the number of times a team breaks through the
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.4: If we map data values to visual features and the visual features interact, the result can be additional visual features. It is possible for the additional visual feature to be dominant relative to the original visual features or even to obscure the original visual features.
+Figure&nbsp;9.4: If we encode data values as visual features and the visual features interact, the result can be additional visual features. It is possible for the additional visual feature to be dominant relative to the original visual features or even to obscure the original visual features.
 </figcaption>
 </figure>
 </div>
@@ -3362,7 +3362,7 @@ Figure&nbsp;9.4: If we map data values to visual features and the visual feature
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.5: If we map data values to visual features and the visual features interact, the result can be emergent visual features. The original visual features allow us to map back to the raw data values and the emergent features allow us to map back to data summaries.
+Figure&nbsp;9.5: If we encode data values as visual features and the visual features interact, the result can be emergent visual features. The original visual features allow us to decode raw data values and the emergent features allow us to decode data summaries.
 </figcaption>
 </figure>
 </div>
@@ -3809,7 +3809,7 @@ Figure&nbsp;10.3: If we map multiple data values to multiple visual features of 
 </figcaption>
 </figure>
 </div>
-<p>In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;3.4</a>, these more complicated shapes can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;3.8</a>). In other words, the more complex data symbols allow us to map back to <strong>data summaries</strong> (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;10.4</a>). For example, in <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> we are able to perceive overall trends in the number of offenders, periods of more rapid change versus periods of slower change, and local maxima and minima.</p>
+<p>In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;3.4</a>, these more complicated shapes can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;3.8</a>). In other words, the more complex data symbols allow us to decode <strong>data summaries</strong> (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;10.4</a>). For example, in <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> we are able to perceive overall trends in the number of offenders, periods of more rapid change versus periods of slower change, and local maxima and minima.</p>
 <p>In terms of <a href="#sec-congruence" class="quarto-xref">Chapter&nbsp;7</a>, the use of lines for data symbols is also <strong>congruent</strong> with trends in the data; we naturally associate slopes with increases and decreases in data values.<a href="#fn51" class="footnote-ref" id="fnref51" role="doc-noteref"><sup>51</sup></a></p>
 <div id="fig-data-vis-shape-decode" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -3821,17 +3821,17 @@ Figure&nbsp;10.3: If we map multiple data values to multiple visual features of 
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-shape-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.4: If we map data values to a <strong>visual shape</strong> that contains a large amount of information, then we may be able to map back to more sophisticated <strong>data summaries</strong>.
+Figure&nbsp;10.4: If we map data values to a <strong>visual shape</strong> that contains a large amount of information, then we may be able to decode more sophisticated <strong>data summaries</strong>.
 </figcaption>
 </figure>
 </div>
 <blockquote class="blockquote">
 <p>One reason why line plots are effective is because they encode multiple data values into a complex data symbol that creates a visual shape, from which we are able to decode data summaries.</p>
 </blockquote>
-<p>On the other hand, the more complex data symbols in a line plot, that contain multiple data values, are less effective at conveying the <em>individual</em> raw data values. The coloured lines in <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> are not simple shapes from which it is easy to perceive basic <strong>visual features</strong>. This means that, although we may be able to map back to data summaries, it is not easy to map back to the raw data values (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;10.4</a>). For example, compare the ease with which we can determine the number of European/Other offenders in 2013 from <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> versus <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;5.7</a>.</p>
-<p>This deficiency is significant because the main mappings in a line plot are from <strong>quantitative</strong> data values to (horizontal and vertical) <strong>position</strong>. We know from <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;4</a> that these should be very effective mappings that allow us to accurately map back to the raw data values. However, in a line plot, we are not mapping a single data value to a basic visual feature of a single, simple shape. Instead, a single data value is being mapped, along with many other values, to a basic visual feature of a complicated shape. In effect, the individual data values lose their individual identity.</p>
+<p>On the other hand, the more complex data symbols in a line plot, that contain multiple data values, are less effective at conveying the <em>individual</em> raw data values. The coloured lines in <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> are not simple shapes from which it is easy to perceive basic <strong>visual features</strong>. This means that, although we may be able to decode data summaries, it is not easy to decode the raw data values (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;10.4</a>). For example, compare the ease with which we can determine the number of European/Other offenders in 2013 from <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> versus <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;5.7</a>.</p>
+<p>This deficiency is significant because the main mappings in a line plot are from <strong>quantitative</strong> data values to (horizontal and vertical) <strong>position</strong>. We know from <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;4</a> that these should be very effective mappings that allow us to accurately decode the raw data values. However, in a line plot, we are not mapping a single data value to a basic visual feature of a single, simple shape. Instead, a single data value is being mapped, along with many other values, to a basic visual feature of a complicated shape. In effect, the individual data values lose their individual identity.</p>
 <blockquote class="blockquote">
-<p>One reason why a line plot is <em>not</em> effective for mapping back to raw data values is because each raw data value is not mapped to its own data symbol.</p>
+<p>One reason why a line plot is <em>not</em> effective for decoding raw data values is because each raw data value is not mapped to its own data symbol.</p>
 </blockquote>
 <p>The creation of complex data symbols from multiple data values bears some similarity to the creation of emergent features by combining visual features (<a href="#sec-integral" class="quarto-xref">Section&nbsp;9.2</a>). In both cases, we have <em>explicit</em> encodings from data values to basic visual features, but we also produce an <em>implicit</em> additional visual effect. The difference here is that with complex data symbols, we are collapsing multiple data values into a data symbol, so we run a higher risk of losing the ability to perceive individual data values.</p>
 <p>There is also a similarity between complex data symbols and visual summaries (<a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;8.2</a>). In both cases, we gain the ability to decode data summaries from collections of data values. Again, the difference is that with visual summaries, we are summarising many simple data symbols that each represent individual data values, whereas with a complex data symbol we decode the data summary from a single data symbol that obscures the individual data values.</p>
@@ -3931,7 +3931,7 @@ Table&nbsp;10.1: A table of density estimates at a sample of values over the ran
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-stat-vis-shape-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.7: A density plot maps data summaries to visual features to create a visual shape from which we can map back to <strong>summaries</strong> of the data summaries.
+Figure&nbsp;10.7: A density plot maps data summaries to visual features to create a visual shape from which we can decode <strong>summaries</strong> of the data summaries.
 </figcaption>
 </figure>
 </div>
@@ -4014,8 +4014,9 @@ Figure&nbsp;11.1: A data visualisation of the performance measures for teams in 
 </div>
 </div>
 </div>
-<p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;11.1</a> is effective in some ways because some of the mappings involve effective visual features. For example, we can easily map back from horizontal and vertical positions to the number of clean breaks and the number of tries. We can also map back from the emergent feature of <strong>position in space</strong> (<a href="#sec-integral" class="quarto-xref">Section&nbsp;9.2</a>) to a correlation between clean breaks and tries.</p>
-<p>However, other mappings are less effective. For example, it is less easy to accurately map back from size to the number of points scored and even harder to map back from colour to the number of runs. In addition, we are hampered by the fact that many different visual features are changing at once, so it is harder to perceive individual differences (see <a href="#sec-differences" class="quarto-xref">Section&nbsp;3.5</a>).</p>
+<p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;11.1</a> is effective in some ways because some of the mappings involve effective visual features. For example, we can easily decode the number of clean breaks and the number of tries from horizontal and vertical positions.<br>
+We can also decode a correlation between clean breaks and tries from the emergent feature of <strong>position in space</strong> (<a href="#sec-integral" class="quarto-xref">Section&nbsp;9.2</a>).</p>
+<p>However, other mappings are less effective. For example, it is less easy to accurately decode number of points scored from size and even harder to decode the number of runs from colour. In addition, we are hampered by the fact that many different visual features are changing at once, so it is harder to perceive individual differences (see <a href="#sec-differences" class="quarto-xref">Section&nbsp;3.5</a>).</p>
 <p>One goal of visualising multiple variables like we have in <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;11.1</a> is to discover or display multivariate relationships between the variables. For example, we can see that there are four teams in the top-right corner of the plot that are all relatively large and relatively dark in colour, which suggests that there is a group of teams that run more, make more clean breaks, score more tries, and score more points compared to the other teams.</p>
 <p>This section looks at some of the different approaches to visualising several variables at once. How do we perceive multivariate relationships? And can we still perceive individual data values at the same time?</p>
 <section id="parallel-coordinates-plots" class="level2" data-number="11.1">
@@ -4141,8 +4142,8 @@ Figure&nbsp;11.4: A data visualisation of the performance measures for teams in 
 <p>The difference in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;11.4</a> is that, rather than having all of the data symbols on the same plot, each data symbol is drawn in its own <strong>position in space</strong>. This makes it easy to view each distinct data symbol.</p>
 <p>The cluster of four larger shapes in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;11.4</a> is also easier to see because the countries have been ordered by the number of points scored (the right-hand height of the shape). As we have seen before, ordering data symbols can make a big difference (<a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;5.1</a>).</p>
 </section>
-<section id="facettingfacetting" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="facettingfacetting"><span class="header-section-number">11.3</span> Facetting<a href="#fn53" class="footnote-ref" id="fnref53" role="doc-noteref"><sup>53</sup></a></h2>
+<section id="sec-facetting" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">11.3</span> Facetting<a href="#fn53" class="footnote-ref" id="fnref53" role="doc-noteref"><sup>53</sup></a></h2>
 <p><a href="#fig-facet-before" class="quarto-xref">Figure&nbsp;11.5</a> shows a line plot of the number of youth offenders per year in different Police Districts of New Zealand. This visualisation makes use of several effective mappings. For example, we encode year as horizontal <strong>position</strong> and we encode count as vertical <strong>position</strong>. However, there is also a weaker mapping: the Police District. We encode districts as <strong>colour</strong>, but because there are 12 different districts, we are exceeding the capacity of colour (<a href="#sec-capacity" class="quarto-xref">Section&nbsp;4.6</a>). It is not easy to differentiate all of the different colours (not helped by overplotting of the lines).</p>
 <p>A better mapping for Police District would be <strong>position</strong>, which has a much higher capacity, but position has already been taken by year and count.</p>
 <div class="cell">
@@ -5300,7 +5301,8 @@ Figure&nbsp;14.5: A scatter plot of the number of times a team breaks through th
 </div>
 <p>All of these changes are aimed at making the data visualisation more orderly. The legend is more obviously a separate element from the main plot and the axis titles more obviously connect to the main plot.</p>
 <p>Link to <strong>good gestalt</strong> back in visual model (once that exists).</p>
-<p><strong>TODO</strong> surely must be a call-back to facetting somewhere here?</p>
+<p>Link to <a href="#sec-facetting" class="quarto-xref">Section&nbsp;11.3</a> and <a href="#fig-facet-after" class="quarto-xref">Figure&nbsp;11.6</a> as example of strong alignment and orderliness</p>
+<p>Could contrast with relative disorder in <a href="#fig-map-alt-2" class="quarto-xref">Figure&nbsp;12.9 (b)</a></p>
 </section>
 <section id="consistent-mappings" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="consistent-mappings"><span class="header-section-number">14.2</span> Consistent mappings</h2>
@@ -5380,13 +5382,6 @@ Figure&nbsp;14.10: A scatter plot of the number of times a team breaks through t
 </div>
 </div>
 <p><a href="#sec-differences" class="quarto-xref">Section&nbsp;3.5</a></p>
-<ul>
-<li><p>“Gestalt principles” Todorovic (2008)</p>
-<p>Summaries of the main Gestalt principles.</p>
-<p>Like a peer-reviewed Wikipedia ?</p>
-<p>Possible link to alignment … ?</p>
-<p>“good Gestalt principle: elements tend to be grouped together if they are parts of a pattern which is a good Gestalt, meaning as simple, orderly, balanced, unified, coherent, regular, etc as possible”</p></li>
-</ul>
 </section>
 <section id="summary-12" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="summary-12"><span class="header-section-number">14.4</span> Summary</h2>
@@ -5571,7 +5566,7 @@ Figure&nbsp;17.1: A SinaPlot of the points scored per game by Tier One nations a
 <li><p>add direct labelling to text chapter? some sort of ggrepel version of the flags example in visual-objects? relate visual objects (other than text) to direct labelling?</p></li>
 <li><p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models? also talk about failing assumptions of these models, like unimodal for boxplot)</p></li>
 <li><p>kiviat plots or radar plots or spider plots (David Peebles (2008))</p></li>
-<li><p>End game/summary: Present process by which a data vis can be broken down. What data symbols are being used? (simple or complex) What mappings are being used? What do we want to map back to? (data or summaries) If mapping back to raw data, are the mappings accurate? What can be mapped back to? Are mappings congruent with data? …</p>
+<li><p>End game/summary: Present process by which a data vis can be broken down. What data symbols are being used? (simple or complex) What mappings are being used? What do we want to decode? (data or summaries) If mapping back to raw data, are the mappings accurate? What can be mapped back to? Are mappings congruent with data? …</p>
 <ul>
 <li><p>Use heatmap as case study?</p></li>
 <li><p>do the side-by-side pie chart idea as an example of reasoning your way to a new visualisation.</p></li>
@@ -5711,7 +5706,7 @@ The eye tracking data were taken from the same web site.<a href="#fnref10" class
 <li id="fn13"><p>Mention “pre-attentive” plus citations.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p>Citation to bottom-up vs top-down.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn15"><p>Citation to mentions of attention filtering visual input differently<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn16"><p>mention Gestalt “school” or whatever, plus citations. enclosure == common region<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>mention Gestalt “school” or whatever, plus citations. enclosure == common region “Gestalt principles” Todorovic (2008) Summaries of the main Gestalt principles. Like a peer-reviewed Wikipedia ? Possible link to alignment … ? “good Gestalt principle: elements tend to be grouped together if they are parts of a pattern which is a good Gestalt, meaning as simple, orderly, balanced, unified, coherent, regular, etc as possible”<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17"><p>In the classic Cleveland and McGill formulation, the encoding is data value to <strong>position</strong> of bar end. I prefer to use length, but it does not matter too much because both position and length are good. NOTE the reading that questions whether people use the decoding that the data vis author intended Hill and Imokhai (2025)<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn18"><p>Acknowledge that a much larger list has been considered and evaluated by different researchers. For example p26 of “Better data visualizations” Jonathan Schwabish. There should also be some stuff from research articles in DataVis/README<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn19"><p>Talk about this being a quite small list; munzner has more, and Wolfe and Horowitz 2004 suggest 20? (see Pomerantz and Cragin (2014))<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -5732,7 +5727,7 @@ The eye tracking data were taken from the same web site.<a href="#fnref10" class
 <li id="fn34"><p>This data visualisation is an adaptation of a graphic shown during television coverage of the match.<a href="#fnref34" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn35"><p>This plot is based on a data visualisation from the New Zealand Listener October 14-20 2023.<a href="#fnref35" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn36"><p>Attribution to kaggle data set.<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn37"><p>MUST make reference to the Information Visualization Reference Model of Card et al (1999) that differentiates data transforms from visual mappings from view transforms (the last particularly for interactive graphics?), PLUS the design-centric extension by Wu and Chang (2024), which teases out design-specific transforms as well (the data prep for a box plot being a good example). These papers provide a formal basis for some of the hand-waving that I do in this section, particularly on mapping back to data summaries rather than raw data. Could also reference Ackoff’s “From Data to Wisdom” for difference between data and information (data summaries).<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn37"><p>MUST make reference to the Information Visualization Reference Model of Card et al (1999) that differentiates data transforms from visual mappings from view transforms (the last particularly for interactive graphics?), PLUS the design-centric extension by Wu and Chang (2024), which teases out design-specific transforms as well (the data prep for a box plot being a good example). These papers provide a formal basis for some of the hand-waving that I do in this section, particularly on decoding to data summaries rather than raw data. Could also reference Ackoff’s “From Data to Wisdom” for difference between data and information (data summaries).<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn38"><p>Need to acknowledge that there are many variations, even on the simple box plot, e.g., notches, definitions of the box, let alone violin plots, etc.<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn39"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). ALSO must relate this to Gestalt section in visual model ?<a href="#fnref39" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn40"><p>This is a reproduction of a chart from Alberto Cairo’s “How Charts Lie” (p12-13), which itself was a reproduction of a chart shown by Fox News. (plus mention other classic how charts lie books like Huff’s How to Lie With Statistics ?) Also link to Wilke’s Principle of Proportional Ink?<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
