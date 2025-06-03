@@ -374,6 +374,65 @@ grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 
 @sec-differences
 
+## The dangers of inconsistent mappings
+
+Use bar plot from 787resources/Examples/2025-05-TMR-axis-flip/
+
+The issue is that the x-axis labelling (vertically) swaps tick mark
+labels with text data symbols showing heights of bars
+(because first couple of bars are negative).
+
+The host, Emma Vigeland, actually confuses the labels and goes from
+-$1,000 to $4.3M, which should of course be -$1,000 to $389.3K"
+
+```{r}
+#| echo: false
+#| label: fig-trump-bill
+#| fig-cap: A bar plot of the distributional effects of Trump's "Big, Beautiful Bill".[^trump-bill]
+bill <- read.csv("Data/trump-bill.csv")
+bill$Income.group <- factor(bill$Income.group,
+                            levels=bill$Income.group)
+bill$amountLabel <- c("-1K", "-705", "845", "3.2K", "6.1K",
+                      "8.8K", "20K", "44.4K", "389.3K")
+bill$groupLabel <- gsub(" [(]", "\n(", 
+                        gsub("K to ", "K-", bill$Income.group))
+
+ggplot(bill) +
+    geom_col(aes(Income.group,
+                 Average.change.in.after.tax.and.transfer.income),
+             fill=c(rep("lightblue", 8), 4)) +
+    geom_text(aes(Income.group,
+                  Average.change.in.after.tax.and.transfer.income,
+                  label=amountLabel),
+              vjust=c(rep(2, 2), rep(-.5, 5), rep(1.5, 2)),
+              colour=c(rep("black", 8), "white"),
+              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
+    geom_text(aes(Income.group,
+                  0,
+                  label=groupLabel),
+              lineheight=1,
+              size=3,
+              vjust=c(rep(-.5, 2), rep(1.5, 7)),
+              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
+    scale_y_continuous(expand=expansion(c(0, .05)),
+                       breaks=1000*seq(100, 300, 100), 
+                       labels=paste0(seq(100, 300, 100), "K")) +
+    scale_x_discrete(label=bill$groupLabel) +
+    coord_cartesian(clip="off") +
+    ylab(NULL) +
+    xlab(NULL) +
+    ggtitle("Dollar change in after-tax income in 2026, by income level") +
+    theme(panel.border=element_blank(),
+          panel.grid.major.y=element_line(colour="grey"),
+          axis.ticks=element_blank(),
+          axis.text.x=element_text(colour=NA))
+```
+
+[^trump-bill]:
+  Based on plot from "Popular Information" web site (Judd Legum)
+  https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful
+  Data source: Penn Wharton Budget Model
+  https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15
 
 ## Summary
 

@@ -3696,6 +3696,49 @@ grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-trump-bill
+#| fig-cap: A bar plot of the distributional effects of Trump's "Big, Beautiful Bill".[^trump-bill]
+bill <- read.csv("Data/trump-bill.csv")
+bill$Income.group <- factor(bill$Income.group,
+                            levels=bill$Income.group)
+bill$amountLabel <- c("-1K", "-705", "845", "3.2K", "6.1K",
+                      "8.8K", "20K", "44.4K", "389.3K")
+bill$groupLabel <- gsub(" [(]", "\n(", 
+                        gsub("K to ", "K-", bill$Income.group))
+
+ggplot(bill) +
+    geom_col(aes(Income.group,
+                 Average.change.in.after.tax.and.transfer.income),
+             fill=c(rep("lightblue", 8), 4)) +
+    geom_text(aes(Income.group,
+                  Average.change.in.after.tax.and.transfer.income,
+                  label=amountLabel),
+              vjust=c(rep(2, 2), rep(-.5, 5), rep(1.5, 2)),
+              colour=c(rep("black", 8), "white"),
+              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
+    geom_text(aes(Income.group,
+                  0,
+                  label=groupLabel),
+              lineheight=1,
+              size=3,
+              vjust=c(rep(-.5, 2), rep(1.5, 7)),
+              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
+    scale_y_continuous(expand=expansion(c(0, .05)),
+                       breaks=1000*seq(100, 300, 100), 
+                       labels=paste0(seq(100, 300, 100), "K")) +
+    scale_x_discrete(label=bill$groupLabel) +
+    coord_cartesian(clip="off") +
+    ylab(NULL) +
+    xlab(NULL) +
+    ggtitle("Dollar change in after-tax income in 2026, by income level") +
+    theme(panel.border=element_blank(),
+          panel.grid.major.y=element_line(colour="grey"),
+          axis.ticks=element_blank(),
+          axis.text.x=element_text(colour=NA))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-sina
 #| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
 gg <- ggplot(rwcAll, aes(scored, y="")) +
