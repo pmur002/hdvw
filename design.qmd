@@ -84,7 +84,7 @@ of a data visualisation.[^CRAP-design]
   ideas of contrast, repetition, alignment, and proximity 
   that are espoused in Naomi Robbins book.
 
-## Mapping organisation
+## Mapping organisation {#sec-map-org}
 
 @fig-rep-guide shows a scatter plot of the number of clean breaks and the
 number of tries for countries
@@ -141,16 +141,27 @@ One way to express this is that the **position** of the elements of the legend
 Our visual system **decodes** the legend as a separate element
 based on the proximity of the text and points in the legend.
 
+Another way to say it is that each element of the data visualisation in 
+@fig-rep-guide belongs to one of two groups:  the main plot or the legend.
+There is a **qualitative** value, `plot` or `legend`, associated with
+each element of the data visualisation.
+These qualitative values are encoded as the **position** of the elements
+within the data visualisation:  on the left or on the right.
+
 ::: {#fig-org-vis-decode}
 
 ![](Diagrams/org-vis-decode.png)
 
 We can encode the structure of a data visualisation as position
 so that elements that are part of the same structure are close to each other.
+
 :::
 
 > An effective data visualisation has to convey information about
   how to read the plot as well as information about the data itself.
+
+> The structure or organisation of a data visualisation is a qualitative value 
+  that can be effectively encoded as the position of different elements.
 
 @fig-align shows a variation of @fig-rep-guide, with exactly 
 the same plot elements, but in a different arrangement.
@@ -245,7 +256,7 @@ In this plot, the encoding of hemisphere as the colour of points
 is not only consistent between the main plot and the legend,
 but it has been extended to the colour of legend text.
 The visual grouping of elements that relate to the same hemisphere
-is stronger within the legend and across the entire data visualisation
+is now stronger within the legend and across the entire data visualisation
 (@sec-visual-model-groups).
 
 ```{r}
@@ -268,6 +279,94 @@ grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
 grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
 ```
 
+## The dangers of inconsistent mappings
+
+@fig-trump-bill shows a bar plot of the impact of a proposed tax
+bill during the second Trump administration.[^trump-bill]
+Each bar represents a change in income for a particular income bracket.
+Lower incomes are to the left and higher incomes are to the right.
+There are labels to describe each income bracket and there are
+labels that describe each change in income.
+Where the change in income is large, the label for change in income
+is written within the bar (at the top of the bar), but for smaller
+changes in income, the bar is too small to fit the label, so the
+label is placed just above the bar.
+For the two leftmost bars, the change in income is actually negative
+and the change in income label is placed *below* the bar.
+The labels that describe the income brackets are mostly below the
+bars, but for the two leftmost bars the labels for the income brackets
+are placed above the bars.
+
+In summary, there are two labels for each bar, one below the bar and one
+above (or at the top of) the bar.
+This consistent positioning of the labels encourages the viewer
+to decode two groups of labels:  one group above the bars and one 
+group below the bars.
+This can mislead us into comparing, for example, "-1K" for the
+leftmost bar with
+"4.3M" for the rightmost bar, when the correct comparison
+is between "-1K" (for the lowest income bracket) and "389.3K" 
+(for the highest income bracket).[^TMR]
+
+[^TMR]:
+  This is precisely the mistake that was made when this data visualisation
+  was discussed on [The Majority Report (~6:00)](https://www.youtube.com/watch?v=AQiukyzB6x0).  
+
+Just as it makes no sense to change the encoding of data values
+within a data visualisation (@fig-rep-none) or across multiple
+data visualisations within the same document (@fig-yji),
+it makes no sense to change the encoding of structure within a
+data visualisation.
+
+```{r}
+#| echo: false
+#| label: fig-trump-bill
+#| fig-cap: A bar plot of the distributional effects of Trump's "Big, Beautiful Bill".[^trump-bill]
+bill <- read.csv("Data/trump-bill.csv")
+bill$Income.group <- factor(bill$Income.group,
+                            levels=bill$Income.group)
+bill$amountLabel <- c("-1K", "-705", "845", "3.2K", "6.1K",
+                      "8.8K", "20K", "44.4K", "389.3K")
+bill$groupLabel <- gsub(" [(]", "\n(", 
+                        gsub("K to ", "K-", bill$Income.group))
+
+ggplot(bill) +
+    geom_col(aes(Income.group,
+                 Average.change.in.after.tax.and.transfer.income),
+             fill=c(rep("lightblue", 8), 4)) +
+    geom_text(aes(Income.group,
+                  Average.change.in.after.tax.and.transfer.income,
+                  label=amountLabel),
+              vjust=c(rep(2, 2), rep(-.5, 5), rep(1.5, 2)),
+              colour=c(rep("black", 8), "white"),
+              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
+    geom_text(aes(Income.group,
+                  0,
+                  label=groupLabel),
+              lineheight=1,
+              size=3,
+              vjust=c(rep(-.5, 2), rep(1.5, 7)),
+              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
+    scale_y_continuous(expand=expansion(c(0, .05)),
+                       breaks=1000*seq(100, 300, 100), 
+                       labels=paste0(seq(100, 300, 100), "K")) +
+    scale_x_discrete(label=bill$groupLabel) +
+    coord_cartesian(clip="off") +
+    ylab(NULL) +
+    xlab(NULL) +
+    ggtitle("Dollar change in after-tax income in 2026, by income level") +
+    theme(panel.border=element_blank(),
+          panel.grid.major.y=element_line(colour="grey"),
+          axis.ticks=element_blank(),
+          axis.text.x=element_text(colour=NA))
+```
+
+[^trump-bill]:
+  Based on plot from "Popular Information" web site (Judd Legum)
+  https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful
+  Data source: Penn Wharton Budget Model
+  https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15
+
 ## Mapping importance
 
 @fig-contrast shows a variation on @fig-rep-double
@@ -283,13 +382,16 @@ which we can focus on if we need the additional information.[^contrast]
 [^contrast]: 
   CRAP contrast
 
-If we compare this to @fig-rep-double, there is a similar visual impact
+By comparison, in @fig-rep-double there is a similar visual impact
 from all elements of the plot, so it is less clear where to look first.
+All of the elements of the data visualisation compete for our 
+attention.
 
-This is another example of encoding non-data values as visual 
-features.  Here we are encoding the **importance** of different
+This is another example of encoding (qualitative) non-data values as visual 
+features (see @sec-map-org).
+In this case, we are encoding the **importance** of different
 visual elements as visual features, in this case colour.
-We decode the different colours to a more important group of elements
+We decode the differences in colour to a more important group of elements
 and a less important group of elements.
 
 ::: {#fig-imp-vis-decode}
@@ -349,7 +451,7 @@ gg <- ggplot(RWCperGame) +
                data=subset(RWCperGame, 
                            country %in% c("New Zealand", "South Africa"))) +
     geom_text(aes(breaks, tries, label=country), hjust=1.15,
-              fontface="bold", colour=dimcols[1], size=3,
+              fontface="bold", colour=repcols[1], size=3,
               data=subset(RWCperGame, 
                           country %in% c("New Zealand", "South Africa"))) +
     scale_colour_manual(values=dimcols, name="hemisphere") +
@@ -373,66 +475,6 @@ grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 
 
 @sec-differences
-
-## The dangers of inconsistent mappings
-
-Use bar plot from 787resources/Examples/2025-05-TMR-axis-flip/
-
-The issue is that the x-axis labelling (vertically) swaps tick mark
-labels with text data symbols showing heights of bars
-(because first couple of bars are negative).
-
-The host, Emma Vigeland, actually confuses the labels and goes from
--$1,000 to $4.3M, which should of course be -$1,000 to $389.3K"
-
-```{r}
-#| echo: false
-#| label: fig-trump-bill
-#| fig-cap: A bar plot of the distributional effects of Trump's "Big, Beautiful Bill".[^trump-bill]
-bill <- read.csv("Data/trump-bill.csv")
-bill$Income.group <- factor(bill$Income.group,
-                            levels=bill$Income.group)
-bill$amountLabel <- c("-1K", "-705", "845", "3.2K", "6.1K",
-                      "8.8K", "20K", "44.4K", "389.3K")
-bill$groupLabel <- gsub(" [(]", "\n(", 
-                        gsub("K to ", "K-", bill$Income.group))
-
-ggplot(bill) +
-    geom_col(aes(Income.group,
-                 Average.change.in.after.tax.and.transfer.income),
-             fill=c(rep("lightblue", 8), 4)) +
-    geom_text(aes(Income.group,
-                  Average.change.in.after.tax.and.transfer.income,
-                  label=amountLabel),
-              vjust=c(rep(2, 2), rep(-.5, 5), rep(1.5, 2)),
-              colour=c(rep("black", 8), "white"),
-              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
-    geom_text(aes(Income.group,
-                  0,
-                  label=groupLabel),
-              lineheight=1,
-              size=3,
-              vjust=c(rep(-.5, 2), rep(1.5, 7)),
-              fontface=c(rep("bold", 2), rep("plain", 6), "bold")) +
-    scale_y_continuous(expand=expansion(c(0, .05)),
-                       breaks=1000*seq(100, 300, 100), 
-                       labels=paste0(seq(100, 300, 100), "K")) +
-    scale_x_discrete(label=bill$groupLabel) +
-    coord_cartesian(clip="off") +
-    ylab(NULL) +
-    xlab(NULL) +
-    ggtitle("Dollar change in after-tax income in 2026, by income level") +
-    theme(panel.border=element_blank(),
-          panel.grid.major.y=element_line(colour="grey"),
-          axis.ticks=element_blank(),
-          axis.text.x=element_text(colour=NA))
-```
-
-[^trump-bill]:
-  Based on plot from "Popular Information" web site (Judd Legum)
-  https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful
-  Data source: Penn Wharton Budget Model
-  https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15
 
 ## Summary
 

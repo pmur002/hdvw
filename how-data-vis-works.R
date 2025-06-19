@@ -3635,67 +3635,6 @@ grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-contrast
-#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
-#| fig-keep: last
-subtle <- "grey"
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1,
-          panel.border=element_rect(colour=subtle, fill=NA),
-          axis.title=element_text(colour=subtle),
-          axis.text=element_text(colour=subtle),
-          axis.ticks=element_line(colour=subtle),
-          legend.title=element_text(colour=subtle))
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-highlight
-#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
-#| fig-keep: last
-dimcols <- lighten(repcols[c(1, 3)], .7)
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere),
-               data=subset(RWCperGame, 
-                           !country %in% c("New Zealand", "South Africa"))) +
-    geom_point(aes(breaks, tries), colour=repcols[1], size=3,
-               data=subset(RWCperGame, 
-                           country %in% c("New Zealand", "South Africa"))) +
-    geom_text(aes(breaks, tries, label=country), hjust=1.15,
-              fontface="bold", colour=dimcols[1], size=3,
-              data=subset(RWCperGame, 
-                          country %in% c("New Zealand", "South Africa"))) +
-    scale_colour_manual(values=dimcols, name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1,
-          panel.border=element_rect(colour=subtle, fill=NA),
-          axis.title=element_text(colour=subtle),
-          axis.text=element_text(colour=subtle),
-          axis.ticks=element_line(colour=subtle),
-          legend.title=element_text(colour=subtle))
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: fig-trump-bill
 #| fig-cap: A bar plot of the distributional effects of Trump's "Big, Beautiful Bill".[^trump-bill]
 bill <- read.csv("Data/trump-bill.csv")
@@ -3735,6 +3674,67 @@ ggplot(bill) +
           panel.grid.major.y=element_line(colour="grey"),
           axis.ticks=element_blank(),
           axis.text.x=element_text(colour=NA))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-contrast
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+subtle <- "grey"
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          panel.border=element_rect(colour=subtle, fill=NA),
+          axis.title=element_text(colour=subtle),
+          axis.text=element_text(colour=subtle),
+          axis.ticks=element_line(colour=subtle),
+          legend.title=element_text(colour=subtle))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-highlight
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+dimcols <- lighten(repcols[c(1, 3)], .7)
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere),
+               data=subset(RWCperGame, 
+                           !country %in% c("New Zealand", "South Africa"))) +
+    geom_point(aes(breaks, tries), colour=repcols[1], size=3,
+               data=subset(RWCperGame, 
+                           country %in% c("New Zealand", "South Africa"))) +
+    geom_text(aes(breaks, tries, label=country), hjust=1.15,
+              fontface="bold", colour=repcols[1], size=3,
+              data=subset(RWCperGame, 
+                          country %in% c("New Zealand", "South Africa"))) +
+    scale_colour_manual(values=dimcols, name="hemisphere") +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          panel.border=element_rect(colour=subtle, fill=NA),
+          axis.title=element_text(colour=subtle),
+          axis.text=element_text(colour=subtle),
+          axis.ticks=element_line(colour=subtle),
+          legend.title=element_text(colour=subtle))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 
 
 ## -----------------------------------------------------------------------------

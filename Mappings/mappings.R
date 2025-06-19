@@ -169,7 +169,7 @@ frame <- function(label) {
     ## grid.roundrect(gp=gpar(col=NA, fill="#666"))
     ## grid.rect(gp=gpar(col=NA, fill="#666"))
     grid.text(label, x=unit(2, "mm"), just="left",
-              y=unit(1, "npc") - unit(.5, "lines"),
+              y=unit(1, "npc") - unit(.25, "lines"),
               gp=gpar(col="black", fontface="bold"))
     popViewport()
 }
@@ -180,22 +180,22 @@ mapping <- function(hlData, hlSymbol,
                     rnData=1:nrData, cnData=letters[1:ncData],
                     rnSymbol=rnData, cnSymbol=rev(letters)[ncData:1]) {
     grid.rect(gp=gpar(col=NA, fill="grey95"))
-    pushViewport(viewport(layout=grid.layout(1, 3)))
-    pushViewport(viewport(layout.pos.col=1))
-    pushViewport(viewport(x=.55, y=.45))
+    pushViewport(viewport(layout=grid.layout(1, 5, widths=c(1, 2, 2, 2, 1))))
+    pushViewport(viewport(layout.pos.col=2))
+    pushViewport(viewport(x=.55, y=.425))
     frame("data")
     dataframe(nrData, ncData, rnData, cnData, hl=hlData)
     popViewport()
     popViewport()
     
-    pushViewport(viewport(layout.pos.col=2))
+    pushViewport(viewport(layout.pos.col=3))
     grid.segments(.2, .5, .8, .5, 
                   arrow=arrow(angle=20, length=unit(3, "mm"), type="closed"),
                   gp=gpar(fill="black"))
     popViewport()
     
-    pushViewport(viewport(layout.pos.col=3))
-    pushViewport(viewport(x=.55, y=.45))
+    pushViewport(viewport(layout.pos.col=4))
+    pushViewport(viewport(x=.55, y=.425))
     frame("symbols")
     symbols(nrSymbol, ncSymbol, rnSymbol, cnSymbol, hl=hlSymbol)
     popViewport()
