@@ -1,24 +1,6 @@
 
 # Text
 
-**REFER** back to the executive summary as example of encoding
-categories as text visual features (colour, slant, weight).
-
-**TODO** Another purpose of labels is to direct attention ...
-
-top-down
-
-**TODO**  (in footnote) Refer to Borkin et al (2016) and Kong et al (2018) for
-importance and potential influence of titles, plus
-"Titles in Data Visualization: Empirical Evidence"
-https://filwd.substack.com/p/titles-in-data-visualization-empirical
-Basic messages are that people look a lot at titles and 
-people can be swayed by titles and titles (and text generally)
-make plots memorable.
-"a memorable visualization is often also an effective one."
-("Beyond Memorability: Visualization Recognition and Recall"
-  Borkin et al (2016))
-
 @fig-no-text is a version of @fig-crime with all of the text
 removed.  Although we can see that some values, or rather three sets of values,
 haved decreased, we cannot tell what the values are or by how much they
@@ -49,7 +31,14 @@ Eye-tracking studies also show that people spend a lot of time looking
 at the text within a data visualisation.  For example, in @fig-fixations-text,
 there are more fixations in the regions that
 contain text than anywhere else.
+There is also evidence that text elements are more memorable than
+the other elements of a data visualisation.[^memorability]
 
+[^memorability]:
+  "a memorable visualization is often also an effective one."
+  ("Beyond Memorability: Visualization Recognition and Recall"
+  Borkin et al (2016))
+ 
 ::: {#fig-fixations-text layout-ncol=2 layout-valign="bottom"}  
 
 ![A thumbnail of the original data visualisation.](MASSVIS/economist_daily_chart_75-thumb.png){#fig-fixations-text-1 fig-align="left"}
@@ -113,6 +102,13 @@ For example, we can see just from the horizontal position of the text,
 without reading the text values, 
 that some counts are (much) larger than others.
 
+We see examples of the use of simple visual features in text
+in almost any piece of writing.  For example,
+section headings are typically larger and bolder than the main text
+in a report and 
+@sec-exec makes use of colour and angle to create visual connections
+between associated terms within a bullet-point list.
+
 > Encoding data values as the position, colour, and size of 
   text data symbols is effective for the same reasons that these
   visual features are effective for other types of data symbols.
@@ -143,7 +139,7 @@ between many different words and numbers.
 Compared to the bar data symbols in @fig-bar-text, the text data symbols
 are much more complex shapes.
 In terms of the simple visual processing model from @sec-visual-processing,
-the text data symbols are **visual objects**.
+the text data symbols are similar to **visual objects**.
 This means that text can convey more sophisticated information,
 at the expense of more cognitive effort, and with a limit on how many
 shapes we can process simultaneously
@@ -448,6 +444,16 @@ grid.bezier(unit.c(rightSA$devx,
                    ptSA$devy))
 ```
 
+@fig-ann also demonstrates that text is an effective way of directing
+attention (@sec-attention).  
+Text labels can explicitly describe data values or,
+more usefully, 
+data summaries that the data visualisation is designed to show.[^top-down]
+
+[^top-down]:
+  Mention idea of top-down as opposed to bottom-up attention.
+  With cite.
+
 ## Case study:  Word clouds {#sec-word-cloud}
 
 @fig-wordcloud shows a word cloud data visualisation based on the
@@ -512,9 +518,7 @@ ordinal comparisons of word frequencies (@sec-mapping-visual-features).
 Frequency is also mapped to **position in space**, with more frequent
 words placed towards the centre of the word cloud.
 This is an example of redundant mapping; more frequent words are both
-larger *and* more central.
-
-**TODO** link back to redundant mappings
+larger *and* more central (@sec-redundant).
 
 > A word cloud is effective for conveying words 
   because it maps words to text data symbols.
@@ -764,7 +768,8 @@ each stem creates a length.
 We also have learned decoding in play because we are able to see
 exact data values for individual teams.
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 nc <- nchar(stemAndLeaf) - 4
 lengths <- cumsum(nc)
 stemAndLeafBold <- character(length(stemAndLeaf))
@@ -788,7 +793,8 @@ for (i in 1:length(stemAndLeaf)) {
 }
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 stemBold <- function() {
     grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
     grid.text("Rugby World Cup 2023", x=.3, just="left",
@@ -809,7 +815,8 @@ stemBold <- function() {
 }
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 nc <- nchar(stemAndLeaf) - 4
 lengths <- cumsum(nc)
 stemAndLeafColour <- character(length(stemAndLeaf))
@@ -833,7 +840,8 @@ for (i in 1:length(stemAndLeaf)) {
 }
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 library(gridtext)
 NScols <- pal_npg()(2)
 colsTeX <- paste0("\\definecolor{", c("salmon", "teal"), "}",
@@ -894,16 +902,146 @@ Of course, the main downside is that this is limited to small data sets.
 
 ## The dangers of text
 
-Greater impact that can even override message in data 
-"Trust and Recall of Information across Varying Degrees of 
-Title-Visualization Misalignment"
-Kong et al (2019)
+@fig-text-danger shows a data visualisation of the number of gun deaths
+in Florida between 1990 and 2012, covering the enactment of Florida's
+"stand your ground" law that loosened the constrainst on
+an individual's rights to use deadly force.[^florida-deaths]
+The title of the plot points out that gun deaths *decreased*
+after the law was enacted, which is perhaps surprising given that
+use of deadly force was less constrained after the introduction of the law.
 
-Studied what happens when caption and text are incoherent;
-viewer goes with the prominent visual feature.
-Main message is to make the text and chart coherent.
-"Towards Understanding How Readers Integrate Charts and Captions: A Case Study with Line Charts"
-Kim et al (2021)
+[^florida-deaths]:
+  Based on a [Business Insider](https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2) data visualisation;  data from [USA Facts](https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/).
+
+```{r}
+#| echo: false
+#| results: hide
+deaths <- read.csv("Data/florida-deaths.csv")
+bloodRed <- "#660000"
+xaxis <- function(data, coords) {
+    ticks <- coords$x[match(c(2000, 2010), data$x)]
+    labels <- coords$x[match(c(1995, 2005, 2012), data$x)]
+    grobTree(segmentsGrob(0, 1, 1, 1, gp=gpar(lwd=2)),
+             segmentsGrob(0, 0, 1, 0, gp=gpar(lwd=2)),
+             segmentsGrob(ticks, 0, ticks, unit(-5, "mm")),
+             textGrob(c("1990s", "2000s", "2010s"),
+                      labels, unit(-1, "mm"), just="top",
+                      gp=gpar(fontsize=20)))
+}
+labelbg <- function(data, coords) {
+    x <- coords$x[data$x == 2005]
+    y <- coords$y[data$x == 2005]
+    lab <- textGrob("2005\nFlorida enacted\nits 'Stand Your\nGround' law",
+                    unit(x, "npc") - unit(1, "cm"),
+                    unit(y, "npc") + unit(2, "cm"),
+                    just=c("left", "bottom"),
+                    gp=gpar(fontsize=20, fontface="bold", col="white",
+                            lineheight=1))
+    rectGrob(grobX(lab, "west") - unit(1, "cm"),
+             grobY(lab, "south"),
+             1,
+             grobHeight(lab),
+             just=c("left", "bottom"),
+             gp=gpar(col=NA, fill="white"))
+}
+label <- function(data, coords) {
+    x <- coords$x[data$x == 2005]
+    y <- coords$y[data$x == 2005]
+    lab <- textGrob("2005\nFlorida enacted\nits 'Stand Your\nGround' law",
+                    unit(x, "npc") - unit(1, "cm"),
+                    unit(y, "npc") + unit(2, "cm"),
+                    just=c("left", "bottom"),
+                    gp=gpar(fontsize=20, fontface="bold", col="white",
+                            lineheight=1))
+    grobTree(lab,
+             segmentsGrob(x, y, x,
+                          unit(y, "npc") + unit(18, "mm"),
+                          gp=gpar(lwd=1, col="white")))
+}
+gg <- ggplot(deaths) +
+    grid_panel(labelbg, aes(x=year, y=count)) +
+    geom_polygon(data=rbind(data.frame(year=2012, count=0),
+                            deaths,
+                            data.frame(year=1990, count=0)),
+                 aes(year, y=count, group=1),
+                 fill=adjustcolor(bloodRed, alpha=.8)) +
+    grid_panel(label, aes(x=year, y=count)) +
+    geom_line(aes(year, count, group=1), linewidth=1.5) +
+    geom_point(aes(year, count),
+               colour="white", size=5) +
+    geom_point(aes(year, count),
+               colour="black", size=3) +
+    scale_y_continuous(limits=c(1.05*max(deaths$count), 0), trans="reverse",
+                       expand=expansion(0)) +
+    coord_cartesian(clip="off") +
+    labs(title="Alarming Rise In Florida Gun Deaths\nAfter 'Stand Your Ground' Was Enacted\n") +
+    ## subtitle="All deaths involving guns\n") +
+    theme(plot.title=element_text(size=30, face="bold"),
+          plot.subtitle=element_text(size=20),
+          plot.title.position="plot",
+          panel.background=element_blank(),
+          panel.grid.minor=element_blank(),
+          panel.grid.major.x=element_blank(),
+          panel.grid.major.y=element_line(color="grey"),
+          aspect.ratio=1,
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.text.y=element_text(size=20),
+          axis.title.y=element_blank(),
+          axis.title.x=element_blank(),
+          plot.margin=unit(rep(10, 4), "mm")) +
+    grid_panel(xaxis, aes(x=year, y=count)) 
+## Deliberately misleading title to show power of text labels
+png("Images/deaths-florida-contra.png", height=750, width=680)
+pushViewport(viewport(y=1, height=unit(1, "npc") - unit(1, "in"), just="top"))
+ggcontra <- gg +
+    labs(title="Suprising *Decrease* In Florida Gun Deaths<br>After 'Stand Your Ground' Was Enacted<br>") +
+    theme(plot.title=element_markdown())
+print(ggcontra, newpage=FALSE)
+popViewport()
+grid.text("Source: USAFacts", x=unit(10, "mm"), just="left",
+          y=unit(2, "lines"),
+          gp=gpar(fontsize=20))
+dev.off()
+```
+
+::: {#fig-text-danger}
+
+![](Images/deaths-florida-contra.png){width=50%}
+
+The title influences our perception;  the message from the data symbols
+is actually quite different.
+:::
+
+However, if we look closely at the plot itself, we can see that
+the y-axis scale is inverted.  A downward trend is actually an 
+*increase* in gun deaths, so the data shows that
+gun deaths actually increased after the law was enacted.
+
+This example demonstrates that the text within a data visualisation
+is not only given a lot
+of attention, but it can have a dominant effect on the message that
+the viewer takes away.[^text-danger]
+
+[^text-danger]:
+  "Trust and Recall of Information across Varying Degrees of 
+  Title-Visualization Misalignment"
+  Kong et al (2019)
+  Greater impact that can even override message in data.
+  "Towards Understanding How Readers Integrate Charts and Captions: A Case Study with Line Charts"
+  Kim et al (2021)
+  Studied what happens when caption and text are incoherent;
+  viewer goes with the prominent visual feature.
+  Main message is to make the text and chart coherent.
+  
+@fig-text-danger is an example of a deliberately misleading
+data visualisation, which we obviously want to avoid.
+However, the broader point is that we need to be at least as careful with
+our choice of text content as we are with our selection of mappings
+from data values to visual features and we have a responsibility to
+work hard to make
+sure that the message from data symbols and from text labels
+is completely consistent.
 
 ## Alt text
 

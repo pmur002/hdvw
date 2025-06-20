@@ -163,6 +163,8 @@ data points ("as the crow flies").
 
 [^integral]:
   Need citations to literature that mention integral visual features.
+  Admit a range rather than a dichotomy.
+  Munzner has good examples?
 
 ::: {#fig-interact layout-ncol=2}
 
@@ -219,10 +221,6 @@ emerges from the combination of horizontal and vertical position.
 > One reason why a scatter plot is effective at conveying relationships
   between variables is because we are able to decode visual summaries from
   a collection of positions in space.
-
-**TODO**
-Admit a range rather than a dichotomy
-Munzner has good examples?
 
 ## Case study: Mosaic plots {#sec-mosaic}
 
@@ -685,6 +683,53 @@ pushViewport(viewport(width=.9, height=.9),
 print(ggDoctorLine, newpage=FALSE)
 ```
 
+## Redundant mappings {#sec-redundant}
+
+In @sec-mosaic, we focused on the encoding of quantitative values
+(proportions)
+as the widths and heights of the rectangular data symbols in a
+mosaic plot, for example, @fig-spine.  There are also qualitative
+values encoded in a mosaic plot:  the different categories, like 
+`Male` and `Female`.
+
+The main encoding of the categories in a mosaic plot
+is as the **position** of the
+rectangles.  For example, in @fig-spine, the rectangles for 
+`Female` are to the left and the rectangles for `Male` are to the right
+and the rectangles for different court actions are 
+stacked vertically, with `Not Proceeded With` at the bottom, 
+`Non-Court Action` in the middle, and `Court Action` at the top.
+
+In addition, different court actions are encoded as different **colours**.
+This additional encoding is **redundant** in the sense that we can already
+decode the court action from the vertical position of the bars.
+However, having the additional encoding means that we have two
+ways to decode the court action:  from the vertical position and from
+the colour.
+This becomes much more useful when there are more categories
+(@fig-spine-weak) or more variables (@fig-mosaic).[^redundant]
+
+[^redundant]:
+  Mention the conflicting opinions on redundant encoding:
+  Tufte and others against;  some studies for (including hofmann?)
+
+::: {#fig-data-vis-redundant layout-ncol=2}
+
+![](Diagrams/data-vis-redundant.png)
+
+![](Mappings/mapping-1-1-1-2.png)
+
+A redundant encoding maps a single data value to multiple visual features.
+Each data value (`a`) is mapped to not just one visual
+feature (`x`), but also a second visual feature (`y`), of a single data symbol.
+If we encode data values using multiple visual features,
+then multiple decodings are possible. 
+:::
+
+One useful application of redundant encoding is to accommodate
+viewers with CVD (@sec-CVD).  Having a secondary decoding
+alongside colour allows for the fact that the colour decoding
+may fail for some viewers.
 
 ## Summary
 

@@ -97,7 +97,7 @@ knitr::opts_chunk$set(dev='svg',
                       out.width="100%")
 ```
 
-# Executive Summary
+# Executive Summary {#sec-exec}
 
 ::: {.actual-quote}
 
@@ -826,14 +826,6 @@ that it uses to **encode** data values as data symbols.
 
 # The Visual System {#sec-visual-system}
 
-**TODO**
-connect every visual system topic to visual decoding.
-introduce "pre-attentive decoding" versus "learned decoding".
-Possibly rename sections, e.g., "visual differences" -> "decoding differences"
-
-**TODO**
-Add position to visual features in visual model 
-
 Understanding why some mappings are more effective than others will
 depend upon an understanding of how the human visual system works.
 The effectiveness of an **encoding** from data values to data symbols
@@ -1112,7 +1104,11 @@ and simple **patterns** (spatial frequencies).
 This low-level information is passed on and built upon 
 to produce higher-level representations, such as regions and **shapes**.
 Information is then also integrated from prior knowledge to assist with
-the identification of **objects**---things like trees, animals, and faces.
+the identification of **objects**---things like trees, animals, and 
+faces.[^ware-model]
+
+[^ware-model]:
+  cite Ware (4th) p229-330
 
 ::: {#fig-visual-processing}
 
@@ -1148,7 +1144,7 @@ are over the sea and green triangles are over land.[^NOMADS]
 The visual system can very quickly
 perceive many small **visual features** at once.
 There is no need to concentrate separately
-on every individual triangle in the image.
+on every individual triangle in the image..
 At a higher level of processing, darker and lighter **regions** are
 identified as well as regions of different colours.
 For example, a band of lighter wind forms a line from the top-left
@@ -1181,8 +1177,6 @@ A visualisation of wind strength and wind direction
 that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
-
-**ADD** footnote cite to Ware (4th) p229-330
 
 ## Visual differences {#sec-differences}
 
@@ -1583,6 +1577,170 @@ grid.text("similarity", y=0, just="top")
 popViewport(3)
 ```
 
+Another type of automatic grouping is demonstrated in 
+@fig-continuity.  On the left is a collection of dots.
+We naturally perceive a horizontal line 
+and a circle from these dots, as shown in the centre of @fig-continuity.
+We automatically complete lines, particularly smooth curves,
+even when the curve is broken, as in the central set of dots.
+We do not tend to complete lines with sharp corners, as indicated
+on the right of @fig-continuity.[^continuity]
+
+[^continuity]:
+  Gestalt continuity cite.
+
+```{r}
+#| echo: false
+#| label: fig-continuity
+#| fig-cap: We automatically complete curves.
+#| fig.height: 2
+library(vwline)
+curves <- function(col1="black", col2=col1, col3=col1, 
+                   col4=col1, col5=col1, col6=col1, col7=col1) {
+    r <- .3
+    n1 <- 6
+    n2 <- 1.5*n1
+    step1 <- convertWidth(unit(2*r/n1, "npc"), "mm")
+    step2 <- convertWidth(unit(pi*r/n2, "npc"), "mm")
+    grid.brushXspline(circleBrush(), c(.5 - r, .5 - r - .2), c(.5, .5), 
+                      w=unit(2, "mm"), spacing=step1, 
+                      gp=gpar(col=col1, fill=col1))
+    grid.brushXspline(circleBrush(), c(.5 - r, .5 + r), c(.5, .5), 
+                      w=unit(2, "mm"), spacing=step1, 
+                      gp=gpar(col=col2, fill=col2))
+    grid.brushXspline(circleBrush(), c(.5 + r, .5 + r + .2), c(.5, .5), 
+                      w=unit(2, "mm"), spacing=step1, 
+                      gp=gpar(col=col3, fill=col3))
+    t <- seq(0, pi, length.out=50)
+    grid.draw(editGrob(brushXsplineGrob(circleBrush(), 
+                                        .5 + r*cos(t), .5 + r*sin(t), 
+                                        w=unit(2, "mm"), spacing=step2, 
+                                        gp=gpar(col=col4, fill=col4)), 
+                       tol=1e-8))
+    grid.draw(editGrob(brushXsplineGrob(circleBrush(), 
+                                        .5 + r*cos(t + pi), .5 + r*sin(t + pi), 
+                                        w=unit(2, "mm"), spacing=step2, 
+                                        gp=gpar(col=col5, fill=col5)), 
+                       tol=1e-8))
+    grid.circle(.5 - r, .5, r=unit(1, "mm"), 
+                gp=gpar(col=col6, fill=col6))
+    grid.circle(.5 + r, .5, r=unit(1, "mm"), 
+                gp=gpar(col=col7, fill=col7))
+}
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 7, 
+                                         widths=unit(c(2, 1), c("cm", "null")), 
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=2))
+curves("grey")
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+curves(col1=colsnpg[1], col4=colsnpg[2], col5=colsnpg[2])
+popViewport()
+pushViewport(viewport(layout.pos.col=6))
+curves(col1=colsnpg[1], col2="grey", col3=colsnpg[1], 
+       col4=colsnpg[1], col5="grey")
+popViewport()
+```
+
+When we visualise quantitative data, we will be able to rely
+on the automatic identification of different groups of data
+symbols based on visual similarities.
+
+## Visual simplicity {#sec-simplicity}
+
+@fig-simplicity shows an arrangement of dots, similar to @fig-continuity.
+The collection of dots on the left has an ambiguous interpretation.
+Is this a single shape, or two overlapping shapes (as indicated in the
+centre of @fig-simplicity), or some complex combination of multiple shapes
+(as indicated on the right)?
+
+Our visual system has a preference for the simple interpretation.
+Given an ambiguous arrangement of visual elements, we will tend to perceive
+whatever is most orderly, regular, and coherent.[^good-gestalt]
+
+[^good-gestalt]:
+  Good gestalt and prägnanz cite
+
+```{r}
+#| echo: false
+#| label: fig-simplicity
+#| fig-cap: We automatically perceive simple shapes over more complex interpretations.
+#| fig.height: 2
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 7, 
+                                         widths=unit(c(2, 1), c("cm", "null")), 
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=2))
+curves("grey")
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+curves(col1=colsnpg[1], col4=colsnpg[2], col5=colsnpg[2])
+popViewport()
+pushViewport(viewport(layout.pos.col=6))
+curves(col1=colsnpg[1], col2="grey", col3=colsnpg[2], 
+       col4=colsnpg[1], col5=colsnpg[2], col7=colsnpg[2])
+popViewport()
+```
+
+This suggests that a data visualisations will be more effective
+if it is simple and orderly.  We should lead the viewer where
+they already want to go rather than fight for their attention.
+
+## Visual tasks {#sec-tasks}
+
+Identifying whether visual elements are the same or different
+is an example of a very simple visual task.
+@fig-visual-task (on the left) shows another simple visual task:
+judging the ratio of different lengths.
+However, on the right of @fig-visual-task is an example of a
+task that is much more difficult.
+In this task, we have to identify which of the four shapes in the
+bottom row is *not* a rotated version of the shape at the top.
+
+```{r}
+#| echo: false
+#| label: fig-visual-task
+#| fig-cap: On the left is a simple visual task, to estimate the relative length of the two lines.  On the right is a more complicated visual task, to decide which of the four bottom shapes is *not* a rotated version of the top shape.
+#| fig.height: 2
+grid.newpage()
+grid.segments(.1, .2, .1, .4, gp=gpar(lwd=20, lineend="butt"))
+grid.segments(.2, .2, .2, .7, gp=gpar(lwd=20, lineend="butt"))
+x <- c(.2, .2, .4, .4, .6, .6, .8)
+y <- c(.2, .7, .7, .4, .4, .5, .5)
+pushViewport(viewport(x=1/3, width=2/3, just="left"))
+grid.rect(gp=gpar(col=NA, fill="grey"))
+pushViewport(viewport(x=.5, y=.75, 
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.2, y=.3, angle=70,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.4, y=.3, angle=-70,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.6, y=.3, angle=-30,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(1 - x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.8, y=.3, angle=200,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+popViewport()
+```
+
+The left-hand task in @fig-visual-task is effortless and can
+be performed immediately.
+The right-hand task in @fig-visual-task requires much more deliberate effort 
+and time to perform.
+
+One way to create an effective data visualisation is to rely on
+visual tasks that are rapid and require little effort.
+
 ## Summary
 
 The human visual system captures a very large amount of information from the
@@ -1617,14 +1775,12 @@ are fundamental to a data visualisation.  However, there are many
 possible ways to map data values into visual representations;
 there are many
 possible encodings to choose from.
-
 We have also begun to explore the visual system and we have identified
 three levels of visual processing:  visual features, visual shapes,
 and visual objects.
-
 In this section, we begin to explore different sorts of encodings,
 starting with 
-the simplest, where
+the simplest case, where
 each **data value** is **encoded** as 
 a basic **visual feature** of a data symbol
 (@fig-visual-feature).  
@@ -1821,7 +1977,7 @@ popViewport()
 
 As we discussed in @sec-visual-system, the real purpose of encoding
 data values as data symbols is to make use of the visual system
-to **decode** the data values from the data symbols.  
+to **decode** the data values from the data symbols.
 In this section, we are considering
 mappings from data values to basic visual features, so we
 need to consider how well we are able to **decode** from 
@@ -3113,8 +3269,51 @@ ggplot(crimeDistrictTotal) +
           axis.ticks.y=element_blank())
 ```
 
+## Colour vision deficiency {#sec-CVD}
+
+Roughly 10% of the population, primarily men, suffer from a form of
+colour vision deficiency.
+In the most common case, the viewer will have difficulty distinguishing 
+between red and green hues.
+@fig-pie-hue-cvd simulates how the colours in @fig-pie-hue would appear
+to a person with severe deuteranopia.  
+
+```{r}
+#| echo: false
+#| label: fig-pie-hue-cvd
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level)) +
+    coord_polar() +
+    scale_fill_manual(values=deutan(pal_npg()(5)),
+                      guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
+```
+
+In order to avoid confusion for viewers with CVD, 
+it may be necessary to vary luminance and/or chroma in addition
+to or instead of hue.  For example, @fig-pie-ordinal-cvd 
+shows how the shades of purple in @fig-pie-ordinal would appear
+to a viewer with severe deuteranopia.  The difference in hue
+is of no importance in this case.
+
+```{r}
+#| echo: false
+#| label: fig-pie-ordinal-cvd
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level), colour="black") +
+    coord_polar() +
+    scale_fill_manual(values=deutan(pal_brewer(palette="Purples")(5)),
+                      guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
+```
+
 ## Colour palettes
 
+**TODO**
 **Need** Discussion of different solutions to 
 different problems, e.g., highlighting (DO want one colour
 to stand out from the others).
@@ -3756,20 +3955,6 @@ dissonant.
 
 # Mapping Summaries {#sec-summaries}
 
-**TODO**
-Visual tasks are just different decoding?
-Different decoding have different difficulty
-Like visual summary
-Even ratio of two bars is visual task
-
-**TODO**
-Visual tasks are just different decoding
-Even compare two heights is different to extracting single data value
-A sort of data summary
-Correlation from scatter plot more complex example
-Effectiveness of data vis depends on encoding and decoding that is necessary 
-to perform task? 
-
 In @sec-mapping-visual-features we described a data visualisation as
 a mapping that **encodes** data values as the visual features of a data symbol
 (@fig-visual-feature).
@@ -3782,10 +3967,11 @@ features to data values.  For example, the effectiveness of the bar plot
 in @fig-bar relies on our ability to accurately perceive the lengths
 of the bars, particularly relative to each other.
 
-In the simple scenario of a bar plot, the data values are total counts
+In the simple scenario of a bar plot, the data values are counts
 (e.g., @tbl-crime-group-total), which are encoded as the lengths of bars, which
 in turn allows us to decode lengths to retrieve 
-the total counts (@fig-visual-feature-decode).
+the counts (@fig-visual-feature-decode).
+The length of each bar represents a single raw data value.
 
 In this section, we explore some data visualisations that are effective 
 because they map **data summaries** instead of 
@@ -3800,8 +3986,6 @@ raw data values.[^info-vis-ref-model]
   for a box plot being a good example).  These papers provide a formal
   basis for some of the hand-waving that I do in this section, particularly
   on decoding to data summaries rather than raw data.
-  Could also reference Ackoff's "From Data to Wisdom" for difference
-  between data and information (data summaries).
 
 ## Box plots
 
@@ -4272,10 +4456,8 @@ On page 46 of his book "How the World Really Works" [@smil2022how],
 Vaclav Smil writes that:
 
 ::: {.actual-quote}
-
 "rising food production reduced the malnutrition rate from 2 in 3 people
 in 1950 to 1 in 11 by 2019"
-
 :::
 
 In order to comprehend the change in malnutrition rate, we are required
@@ -4342,22 +4524,21 @@ ggplot(counts) +
 
 We ideally want to present data in a way that
 imposes the least cognitive load on the viewer.
-The solution will be different for different questions, but 
-if the question involves comparing data summaries, then
+In terms of @sec-tasks, we want to present the viewer
+with simple **visual tasks**.
+
+The best data visualisation will be different for different questions
+of interest, but 
+if the question of interest involves comparing data summaries, then
 one way that we 
 can make the viewer's life easier is by calculating summaries
-of the data and encoding data summaries as visual features.
+of the data and encoding data summaries as visual features,
+rather than encoding raw data values and asking the viewer
+to perform visual summaries.
 
-It is possible in some cases to rely on visual summaries, but 
-we need to be careful
-not to set a visual task that requires too much mental effort.
-
-## Case study: Line of best fit
-
-Nice example of a complex calculation, the results of which are
-what gets visualised.
-Also example of performing the calculation numerically 
-rather than asking the viewer to perform it visually.
+> It is possible in some cases to rely on visual summaries, but 
+  we need to be careful
+  not to set a visual task that requires too much mental effort.
 
 ## Summary
 
@@ -4547,6 +4728,8 @@ data points ("as the crow flies").
 
 [^integral]:
   Need citations to literature that mention integral visual features.
+  Admit a range rather than a dichotomy.
+  Munzner has good examples?
 
 ::: {#fig-interact layout-ncol=2}
 
@@ -4603,10 +4786,6 @@ emerges from the combination of horizontal and vertical position.
 > One reason why a scatter plot is effective at conveying relationships
   between variables is because we are able to decode visual summaries from
   a collection of positions in space.
-
-**TODO**
-Admit a range rather than a dichotomy
-Munzner has good examples?
 
 ## Case study: Mosaic plots {#sec-mosaic}
 
@@ -5069,6 +5248,53 @@ pushViewport(viewport(width=.9, height=.9),
 print(ggDoctorLine, newpage=FALSE)
 ```
 
+## Redundant mappings {#sec-redundant}
+
+In @sec-mosaic, we focused on the encoding of quantitative values
+(proportions)
+as the widths and heights of the rectangular data symbols in a
+mosaic plot, for example, @fig-spine.  There are also qualitative
+values encoded in a mosaic plot:  the different categories, like 
+`Male` and `Female`.
+
+The main encoding of the categories in a mosaic plot
+is as the **position** of the
+rectangles.  For example, in @fig-spine, the rectangles for 
+`Female` are to the left and the rectangles for `Male` are to the right
+and the rectangles for different court actions are 
+stacked vertically, with `Not Proceeded With` at the bottom, 
+`Non-Court Action` in the middle, and `Court Action` at the top.
+
+In addition, different court actions are encoded as different **colours**.
+This additional encoding is **redundant** in the sense that we can already
+decode the court action from the vertical position of the bars.
+However, having the additional encoding means that we have two
+ways to decode the court action:  from the vertical position and from
+the colour.
+This becomes much more useful when there are more categories
+(@fig-spine-weak) or more variables (@fig-mosaic).[^redundant]
+
+[^redundant]:
+  Mention the conflicting opinions on redundant encoding:
+  Tufte and others against;  some studies for (including hofmann?)
+
+::: {#fig-data-vis-redundant layout-ncol=2}
+
+![](Diagrams/data-vis-redundant.png)
+
+![](Mappings/mapping-1-1-1-2.png)
+
+A redundant encoding maps a single data value to multiple visual features.
+Each data value (`a`) is mapped to not just one visual
+feature (`x`), but also a second visual feature (`y`), of a single data symbol.
+If we encode data values using multiple visual features,
+then multiple decodings are possible. 
+:::
+
+One useful application of redundant encoding is to accommodate
+viewers with CVD (@sec-CVD).  Having a secondary decoding
+alongside colour allows for the fact that the colour decoding
+may fail for some viewers.
 
 ## Summary
 
@@ -5355,7 +5581,8 @@ We cannot decode the raw data values from a density plot, nor
 can we very easily decode the data summaries (the density estimates).
 The only real purpose of the data symbol in a density plot is to 
 allow us to decode **summaries** of the data summaries, which are
-visual features of the density estimates.
+visual features of the density estimates (like the number of peaks
+and where the peaks occur).
 
 ::: {#fig-data-stat-vis-shape-stat layout-ncol=2}
 
@@ -5368,15 +5595,24 @@ shape from which we can decode **summaries** of the data summaries.
 > A density plot is effective because it conveys high-level features of
   density estimates of the raw data.
 
-A final commonality between density plots and histograms is that we get to
+Another commonality between density plots and histograms is that we get to
 choose how the data summaries are calculated from the raw data values.
 In the case of a density plot, we must choose a "kernel" and a "bandwidth",
 both of which affect the smoothness of the density estimates.
 This means that we may need to explore more than one kernel
 and bandwidth (see @sec-summary-caveats).
 
-**TODO** density plots better for showing multiple distributions?
-Because gestalt continuity?
+A final point about density plots, especially in comparison to histograms
+is that it is more effective to present multiple density curves,
+rather than multiple histograms.
+This is demonstrated in @fig-multiple-density and @fig-multiple-hist.
+Multiple histograms overlap each other, which makes it difficult
+to perceive the separate histograms and this is not satisfactorily 
+solved by adding semitransparency.
+By comparison, multiple density curves create very little
+overlap, and even though the orange curve passes "under" the blue curve,
+we effortlessly perceive the orange curve as a single, coherent shape
+(see @sec-visual-model-groups).
 
 ```{r}
 #| echo: false
@@ -5471,7 +5707,7 @@ ggplot(RWCperGame) +
 involve effective visual features. For example, we can easily decode
 the number of clean breaks and the
 number of tries from
-horizontal and vertical positions.  
+horizontal and vertical positions.
 We can also decode a correlation between clean breaks and tries
 from the emergent feature of **position
 in space** (@sec-integral).
@@ -5528,17 +5764,17 @@ popViewport()
 
 A parallel coordinates plot maps data summaries rather than raw data values
 (@sec-summaries).  For example, all data values are standardised to a range
-between 0 and 1.  @tbl-parallel-stats shows some of the values that
+between 0 and 1.[^parallel-coords]
+@tbl-parallel-stats shows some of the values that
 are actually mapped to visual features in @fig-parallel.
 Each variable is encoded as a different 
 horizontal **position** and the values within each variable are encoded as
 vertical **position**.  In this way, all quantitative data values
 are encoded as **position**.
 
-In addition, the hemisphere is encoded as **colour** and a 
-separate line data symbol is drawn for each country.
-This means that a visual shape is drawn for each country
-(@sec-visual-shapes).
+[^parallel-coords]:
+  Acknowledge and point to different ways that the data values can
+  be transformed (or summarised).
 
 ```{r}
 #| echo: false
@@ -5556,6 +5792,20 @@ vars$country <- reorder(vars$country, vars$points)
 long <- melt(vars, id.vars=1:2)
 kable(head(long), digits=2)
 ```
+
+In addition, the hemisphere is encoded as **colour** and a 
+separate line data symbol is drawn for each country.
+This means that a visual shape is drawn for each country
+(@fig-mappings-1-n-1-n; @sec-visual-shapes).
+
+::: {#fig-mappings-1-n-1-n layout-ncol=2}
+
+![](Mappings/mapping-1-n-1-n.png)
+
+In a parallel coordinates plot, a single row of data---one data value from 
+each of several variables---is mapped to
+a visual shape (a line).
+:::
 
 On one hand, a parallel coordinates plot appears to
 makes sense because it encodes multiple
@@ -5581,15 +5831,6 @@ Furthermore, the fact that many of the lines are reasonably horizontal
 rather than criss-crossing each other wildly suggests that there is 
 an overall correlation between all four quantitative variables, not
 just in the top four teams.
-
-::: {#fig-mappings-1-n-1-n layout-ncol=2}
-
-![](Mappings/mapping-1-n-1-n.png)
-
-In a parallel coordinates plot, a single row of data---one data value from 
-each of several variables---is mapped to
-a visual shape (a line).
-:::
 
 > A parallel coordinates plot can be effective at identifying 
   high-dimensional groups or correlations
@@ -5791,6 +6032,24 @@ ggplot(all) +
           aspect.ratio=1)
 ```
 
+## Dangers of multiple mappings
+
+@fig-multiple showed that the naive approach of just using 
+a separate visual feature for each data variable leads to
+complex data visualisations that are difficult to decode.
+Although there are better options, like small multiple and facetting,
+there is still a limit to how much information can effectively be displayed at
+once within a static data visualisation.
+
+This is one area where dynamic and interactive graphics can be useful
+because the viewer is able to rapidly switch between multiple views
+of the data, which means that each individual view can be 
+simpler.[^multiple-interactive]
+
+[^multiple-interactive]:
+  Cite again the classic interactive lit ?
+  Point to some tools that might help, like GGobi?
+
 ## Summary
 
 When we need to visualise multiple variables at once, it is not
@@ -5798,13 +6057,12 @@ effective to map each different variable to a different visual feature.
 
 An alternative is to reuse the same visual feature for multiple
 different variables.
-In particular, we can reuse **position**.  
+In particular, small multiples, or facetting, allows us
+to use **position** for more than 
+just two variables.
 
 
 
-**TODO** 
-Mention that multivariate visualisation is an area where dynamic and
-interactive graphics can be useful, e.g., GGobi ?
 
 # Visual Objects
 
@@ -5918,6 +6176,8 @@ encoded values as visual features.
 For example, @fig-learned shows three coloured circles.
 Without any explicit encoding, we can decode the red circle as "stop",
 the orange circle as "slow", and the green circle as "go".
+This is not a decoding that we are born with; it is a 
+decoding that we learn through experience.
 
 ```{r}
 #| echo: false
@@ -6734,24 +6994,6 @@ This may obviate the need for legends.
 
 # Text
 
-**REFER** back to the executive summary as example of encoding
-categories as text visual features (colour, slant, weight).
-
-**TODO** Another purpose of labels is to direct attention ...
-
-top-down
-
-**TODO**  (in footnote) Refer to Borkin et al (2016) and Kong et al (2018) for
-importance and potential influence of titles, plus
-"Titles in Data Visualization: Empirical Evidence"
-https://filwd.substack.com/p/titles-in-data-visualization-empirical
-Basic messages are that people look a lot at titles and 
-people can be swayed by titles and titles (and text generally)
-make plots memorable.
-"a memorable visualization is often also an effective one."
-("Beyond Memorability: Visualization Recognition and Recall"
-  Borkin et al (2016))
-
 @fig-no-text is a version of @fig-crime with all of the text
 removed.  Although we can see that some values, or rather three sets of values,
 haved decreased, we cannot tell what the values are or by how much they
@@ -6782,7 +7024,14 @@ Eye-tracking studies also show that people spend a lot of time looking
 at the text within a data visualisation.  For example, in @fig-fixations-text,
 there are more fixations in the regions that
 contain text than anywhere else.
+There is also evidence that text elements are more memorable than
+the other elements of a data visualisation.[^memorability]
 
+[^memorability]:
+  "a memorable visualization is often also an effective one."
+  ("Beyond Memorability: Visualization Recognition and Recall"
+  Borkin et al (2016))
+ 
 ::: {#fig-fixations-text layout-ncol=2 layout-valign="bottom"}  
 
 ![A thumbnail of the original data visualisation.](MASSVIS/economist_daily_chart_75-thumb.png){#fig-fixations-text-1 fig-align="left"}
@@ -6846,6 +7095,13 @@ For example, we can see just from the horizontal position of the text,
 without reading the text values, 
 that some counts are (much) larger than others.
 
+We see examples of the use of simple visual features in text
+in almost any piece of writing.  For example,
+section headings are typically larger and bolder than the main text
+in a report and 
+@sec-exec makes use of colour and angle to create visual connections
+between associated terms within a bullet-point list.
+
 > Encoding data values as the position, colour, and size of 
   text data symbols is effective for the same reasons that these
   visual features are effective for other types of data symbols.
@@ -6876,7 +7132,7 @@ between many different words and numbers.
 Compared to the bar data symbols in @fig-bar-text, the text data symbols
 are much more complex shapes.
 In terms of the simple visual processing model from @sec-visual-processing,
-the text data symbols are **visual objects**.
+the text data symbols are similar to **visual objects**.
 This means that text can convey more sophisticated information,
 at the expense of more cognitive effort, and with a limit on how many
 shapes we can process simultaneously
@@ -7181,6 +7437,16 @@ grid.bezier(unit.c(rightSA$devx,
                    ptSA$devy))
 ```
 
+@fig-ann also demonstrates that text is an effective way of directing
+attention (@sec-attention).  
+Text labels can explicitly describe data values or,
+more usefully, 
+data summaries that the data visualisation is designed to show.[^top-down]
+
+[^top-down]:
+  Mention idea of top-down as opposed to bottom-up attention.
+  With cite.
+
 ## Case study:  Word clouds {#sec-word-cloud}
 
 @fig-wordcloud shows a word cloud data visualisation based on the
@@ -7245,9 +7511,7 @@ ordinal comparisons of word frequencies (@sec-mapping-visual-features).
 Frequency is also mapped to **position in space**, with more frequent
 words placed towards the centre of the word cloud.
 This is an example of redundant mapping; more frequent words are both
-larger *and* more central.
-
-**TODO** link back to redundant mappings
+larger *and* more central (@sec-redundant).
 
 > A word cloud is effective for conveying words 
   because it maps words to text data symbols.
@@ -7497,7 +7761,8 @@ each stem creates a length.
 We also have learned decoding in play because we are able to see
 exact data values for individual teams.
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 nc <- nchar(stemAndLeaf) - 4
 lengths <- cumsum(nc)
 stemAndLeafBold <- character(length(stemAndLeaf))
@@ -7521,7 +7786,8 @@ for (i in 1:length(stemAndLeaf)) {
 }
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 stemBold <- function() {
     grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
     grid.text("Rugby World Cup 2023", x=.3, just="left",
@@ -7542,7 +7808,8 @@ stemBold <- function() {
 }
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 nc <- nchar(stemAndLeaf) - 4
 lengths <- cumsum(nc)
 stemAndLeafColour <- character(length(stemAndLeaf))
@@ -7566,7 +7833,8 @@ for (i in 1:length(stemAndLeaf)) {
 }
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 library(gridtext)
 NScols <- pal_npg()(2)
 colsTeX <- paste0("\\definecolor{", c("salmon", "teal"), "}",
@@ -7627,16 +7895,146 @@ Of course, the main downside is that this is limited to small data sets.
 
 ## The dangers of text
 
-Greater impact that can even override message in data 
-"Trust and Recall of Information across Varying Degrees of 
-Title-Visualization Misalignment"
-Kong et al (2019)
+@fig-text-danger shows a data visualisation of the number of gun deaths
+in Florida between 1990 and 2012, covering the enactment of Florida's
+"stand your ground" law that loosened the constrainst on
+an individual's rights to use deadly force.[^florida-deaths]
+The title of the plot points out that gun deaths *decreased*
+after the law was enacted, which is perhaps surprising given that
+use of deadly force was less constrained after the introduction of the law.
 
-Studied what happens when caption and text are incoherent;
-viewer goes with the prominent visual feature.
-Main message is to make the text and chart coherent.
-"Towards Understanding How Readers Integrate Charts and Captions: A Case Study with Line Charts"
-Kim et al (2021)
+[^florida-deaths]:
+  Based on a [Business Insider](https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2) data visualisation;  data from [USA Facts](https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/).
+
+```{r}
+#| echo: false
+#| results: hide
+deaths <- read.csv("Data/florida-deaths.csv")
+bloodRed <- "#660000"
+xaxis <- function(data, coords) {
+    ticks <- coords$x[match(c(2000, 2010), data$x)]
+    labels <- coords$x[match(c(1995, 2005, 2012), data$x)]
+    grobTree(segmentsGrob(0, 1, 1, 1, gp=gpar(lwd=2)),
+             segmentsGrob(0, 0, 1, 0, gp=gpar(lwd=2)),
+             segmentsGrob(ticks, 0, ticks, unit(-5, "mm")),
+             textGrob(c("1990s", "2000s", "2010s"),
+                      labels, unit(-1, "mm"), just="top",
+                      gp=gpar(fontsize=20)))
+}
+labelbg <- function(data, coords) {
+    x <- coords$x[data$x == 2005]
+    y <- coords$y[data$x == 2005]
+    lab <- textGrob("2005\nFlorida enacted\nits 'Stand Your\nGround' law",
+                    unit(x, "npc") - unit(1, "cm"),
+                    unit(y, "npc") + unit(2, "cm"),
+                    just=c("left", "bottom"),
+                    gp=gpar(fontsize=20, fontface="bold", col="white",
+                            lineheight=1))
+    rectGrob(grobX(lab, "west") - unit(1, "cm"),
+             grobY(lab, "south"),
+             1,
+             grobHeight(lab),
+             just=c("left", "bottom"),
+             gp=gpar(col=NA, fill="white"))
+}
+label <- function(data, coords) {
+    x <- coords$x[data$x == 2005]
+    y <- coords$y[data$x == 2005]
+    lab <- textGrob("2005\nFlorida enacted\nits 'Stand Your\nGround' law",
+                    unit(x, "npc") - unit(1, "cm"),
+                    unit(y, "npc") + unit(2, "cm"),
+                    just=c("left", "bottom"),
+                    gp=gpar(fontsize=20, fontface="bold", col="white",
+                            lineheight=1))
+    grobTree(lab,
+             segmentsGrob(x, y, x,
+                          unit(y, "npc") + unit(18, "mm"),
+                          gp=gpar(lwd=1, col="white")))
+}
+gg <- ggplot(deaths) +
+    grid_panel(labelbg, aes(x=year, y=count)) +
+    geom_polygon(data=rbind(data.frame(year=2012, count=0),
+                            deaths,
+                            data.frame(year=1990, count=0)),
+                 aes(year, y=count, group=1),
+                 fill=adjustcolor(bloodRed, alpha=.8)) +
+    grid_panel(label, aes(x=year, y=count)) +
+    geom_line(aes(year, count, group=1), linewidth=1.5) +
+    geom_point(aes(year, count),
+               colour="white", size=5) +
+    geom_point(aes(year, count),
+               colour="black", size=3) +
+    scale_y_continuous(limits=c(1.05*max(deaths$count), 0), trans="reverse",
+                       expand=expansion(0)) +
+    coord_cartesian(clip="off") +
+    labs(title="Alarming Rise In Florida Gun Deaths\nAfter 'Stand Your Ground' Was Enacted\n") +
+    ## subtitle="All deaths involving guns\n") +
+    theme(plot.title=element_text(size=30, face="bold"),
+          plot.subtitle=element_text(size=20),
+          plot.title.position="plot",
+          panel.background=element_blank(),
+          panel.grid.minor=element_blank(),
+          panel.grid.major.x=element_blank(),
+          panel.grid.major.y=element_line(color="grey"),
+          aspect.ratio=1,
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.text.y=element_text(size=20),
+          axis.title.y=element_blank(),
+          axis.title.x=element_blank(),
+          plot.margin=unit(rep(10, 4), "mm")) +
+    grid_panel(xaxis, aes(x=year, y=count)) 
+## Deliberately misleading title to show power of text labels
+png("Images/deaths-florida-contra.png", height=750, width=680)
+pushViewport(viewport(y=1, height=unit(1, "npc") - unit(1, "in"), just="top"))
+ggcontra <- gg +
+    labs(title="Suprising *Decrease* In Florida Gun Deaths<br>After 'Stand Your Ground' Was Enacted<br>") +
+    theme(plot.title=element_markdown())
+print(ggcontra, newpage=FALSE)
+popViewport()
+grid.text("Source: USAFacts", x=unit(10, "mm"), just="left",
+          y=unit(2, "lines"),
+          gp=gpar(fontsize=20))
+dev.off()
+```
+
+::: {#fig-text-danger}
+
+![](Images/deaths-florida-contra.png){width=50%}
+
+The title influences our perception;  the message from the data symbols
+is actually quite different.
+:::
+
+However, if we look closely at the plot itself, we can see that
+the y-axis scale is inverted.  A downward trend is actually an 
+*increase* in gun deaths, so the data shows that
+gun deaths actually increased after the law was enacted.
+
+This example demonstrates that the text within a data visualisation
+is not only given a lot
+of attention, but it can have a dominant effect on the message that
+the viewer takes away.[^text-danger]
+
+[^text-danger]:
+  "Trust and Recall of Information across Varying Degrees of 
+  Title-Visualization Misalignment"
+  Kong et al (2019)
+  Greater impact that can even override message in data.
+  "Towards Understanding How Readers Integrate Charts and Captions: A Case Study with Line Charts"
+  Kim et al (2021)
+  Studied what happens when caption and text are incoherent;
+  viewer goes with the prominent visual feature.
+  Main message is to make the text and chart coherent.
+  
+@fig-text-danger is an example of a deliberately misleading
+data visualisation, which we obviously want to avoid.
+However, the broader point is that we need to be at least as careful with
+our choice of text content as we are with our selection of mappings
+from data values to visual features and we have a responsibility to
+work hard to make
+sure that the message from data symbols and from text labels
+is completely consistent.
 
 ## Alt text
 
@@ -7892,7 +8290,8 @@ more orderly.  The legend is more obviously a separate element
 from the main plot and the axis titles more obviously 
 connect to the main plot.
 
-Link to **good gestalt** back in visual model (once that exists).
+**TODO**
+Link to @sec-simplicity.
 
 Link to @sec-facetting and 
 @fig-facet-after as example of strong alignment and orderliness
@@ -8214,6 +8613,11 @@ Have to throw bouquet at Quarto.
 + add review at end of each section and/or preview to start of 
   each section to reinforce the building concepts.
 
++ Check that every visual system topic is connected to a visual decoding topic.
+  Possibly rename sections, e.g., "visual differences" -> "decoding differences"
+
++ Flesh out all footnotes
+
 + review https://friendly.github.io/6135/lectures/GraphPerception.pdf
   from https://friendly.github.io/6135/index.html
   (especially the stuff on basic models of visual perception
@@ -8249,6 +8653,9 @@ Have to throw bouquet at Quarto.
 * Check whether HDVW covers all of the types of tasks in 
   "Low-Level Components of Analytic Activity in Information Visualization"
   Amar et al (2005)
+
+* In visual-model, make a BRIEF statement at the end of each section 
+  (maybe in black box) about the implications for data vis. 
 
 * Add gestalt simplicity and/or symmetry in visual-model?
   tend to see symmetric elements as part of the same group.
@@ -8638,7 +9045,16 @@ to emphasise structure - combination of order and category
 
 * case study: barycentric plots (ternary plots)
 
-## Case study: SinaPlots
+* Case study: Line of best fit
+
+  Nice example of a complex calculation, the results of which are what gets
+  visualised.  Also example of performing the calculation numerically rather
+  than asking the viewer to perform it visually.  This was in summaries.qmd,
+  but it cannot be there because it requires scatter plots, which come in
+  the next section.
+  Add this after mention of visualising models?
+
+* Case study: SinaPlots
 
 A SinaPlot is a nice combination of decode for raw data and for data summary.
 [^sina]

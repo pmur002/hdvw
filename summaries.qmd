@@ -1,20 +1,6 @@
 
 # Mapping Summaries {#sec-summaries}
 
-**TODO**
-Visual tasks are just different decoding?
-Different decoding have different difficulty
-Like visual summary
-Even ratio of two bars is visual task
-
-**TODO**
-Visual tasks are just different decoding
-Even compare two heights is different to extracting single data value
-A sort of data summary
-Correlation from scatter plot more complex example
-Effectiveness of data vis depends on encoding and decoding that is necessary 
-to perform task? 
-
 In @sec-mapping-visual-features we described a data visualisation as
 a mapping that **encodes** data values as the visual features of a data symbol
 (@fig-visual-feature).
@@ -27,10 +13,11 @@ features to data values.  For example, the effectiveness of the bar plot
 in @fig-bar relies on our ability to accurately perceive the lengths
 of the bars, particularly relative to each other.
 
-In the simple scenario of a bar plot, the data values are total counts
+In the simple scenario of a bar plot, the data values are counts
 (e.g., @tbl-crime-group-total), which are encoded as the lengths of bars, which
 in turn allows us to decode lengths to retrieve 
-the total counts (@fig-visual-feature-decode).
+the counts (@fig-visual-feature-decode).
+The length of each bar represents a single raw data value.
 
 In this section, we explore some data visualisations that are effective 
 because they map **data summaries** instead of 
@@ -45,8 +32,6 @@ raw data values.[^info-vis-ref-model]
   for a box plot being a good example).  These papers provide a formal
   basis for some of the hand-waving that I do in this section, particularly
   on decoding to data summaries rather than raw data.
-  Could also reference Ackoff's "From Data to Wisdom" for difference
-  between data and information (data summaries).
 
 ## Box plots
 
@@ -517,10 +502,8 @@ On page 46 of his book "How the World Really Works" [@smil2022how],
 Vaclav Smil writes that:
 
 ::: {.actual-quote}
-
 "rising food production reduced the malnutrition rate from 2 in 3 people
 in 1950 to 1 in 11 by 2019"
-
 :::
 
 In order to comprehend the change in malnutrition rate, we are required
@@ -587,22 +570,21 @@ ggplot(counts) +
 
 We ideally want to present data in a way that
 imposes the least cognitive load on the viewer.
-The solution will be different for different questions, but 
-if the question involves comparing data summaries, then
+In terms of @sec-tasks, we want to present the viewer
+with simple **visual tasks**.
+
+The best data visualisation will be different for different questions
+of interest, but 
+if the question of interest involves comparing data summaries, then
 one way that we 
 can make the viewer's life easier is by calculating summaries
-of the data and encoding data summaries as visual features.
+of the data and encoding data summaries as visual features,
+rather than encoding raw data values and asking the viewer
+to perform visual summaries.
 
-It is possible in some cases to rely on visual summaries, but 
-we need to be careful
-not to set a visual task that requires too much mental effort.
-
-## Case study: Line of best fit
-
-Nice example of a complex calculation, the results of which are
-what gets visualised.
-Also example of performing the calculation numerically 
-rather than asking the viewer to perform it visually.
+> It is possible in some cases to rely on visual summaries, but 
+  we need to be careful
+  not to set a visual task that requires too much mental effort.
 
 ## Summary
 

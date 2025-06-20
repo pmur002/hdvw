@@ -839,6 +839,116 @@ popViewport(3)
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-continuity
+#| fig-cap: We automatically complete curves.
+#| fig.height: 2
+library(vwline)
+curves <- function(col1="black", col2=col1, col3=col1, 
+                   col4=col1, col5=col1, col6=col1, col7=col1) {
+    r <- .3
+    n1 <- 6
+    n2 <- 1.5*n1
+    step1 <- convertWidth(unit(2*r/n1, "npc"), "mm")
+    step2 <- convertWidth(unit(pi*r/n2, "npc"), "mm")
+    grid.brushXspline(circleBrush(), c(.5 - r, .5 - r - .2), c(.5, .5), 
+                      w=unit(2, "mm"), spacing=step1, 
+                      gp=gpar(col=col1, fill=col1))
+    grid.brushXspline(circleBrush(), c(.5 - r, .5 + r), c(.5, .5), 
+                      w=unit(2, "mm"), spacing=step1, 
+                      gp=gpar(col=col2, fill=col2))
+    grid.brushXspline(circleBrush(), c(.5 + r, .5 + r + .2), c(.5, .5), 
+                      w=unit(2, "mm"), spacing=step1, 
+                      gp=gpar(col=col3, fill=col3))
+    t <- seq(0, pi, length.out=50)
+    grid.draw(editGrob(brushXsplineGrob(circleBrush(), 
+                                        .5 + r*cos(t), .5 + r*sin(t), 
+                                        w=unit(2, "mm"), spacing=step2, 
+                                        gp=gpar(col=col4, fill=col4)), 
+                       tol=1e-8))
+    grid.draw(editGrob(brushXsplineGrob(circleBrush(), 
+                                        .5 + r*cos(t + pi), .5 + r*sin(t + pi), 
+                                        w=unit(2, "mm"), spacing=step2, 
+                                        gp=gpar(col=col5, fill=col5)), 
+                       tol=1e-8))
+    grid.circle(.5 - r, .5, r=unit(1, "mm"), 
+                gp=gpar(col=col6, fill=col6))
+    grid.circle(.5 + r, .5, r=unit(1, "mm"), 
+                gp=gpar(col=col7, fill=col7))
+}
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 7, 
+                                         widths=unit(c(2, 1), c("cm", "null")), 
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=2))
+curves("grey")
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+curves(col1=colsnpg[1], col4=colsnpg[2], col5=colsnpg[2])
+popViewport()
+pushViewport(viewport(layout.pos.col=6))
+curves(col1=colsnpg[1], col2="grey", col3=colsnpg[1], 
+       col4=colsnpg[1], col5="grey")
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-simplicity
+#| fig-cap: We automatically perceive simple shapes over more complex interpretations.
+#| fig.height: 2
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 7, 
+                                         widths=unit(c(2, 1), c("cm", "null")), 
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=2))
+curves("grey")
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+curves(col1=colsnpg[1], col4=colsnpg[2], col5=colsnpg[2])
+popViewport()
+pushViewport(viewport(layout.pos.col=6))
+curves(col1=colsnpg[1], col2="grey", col3=colsnpg[2], 
+       col4=colsnpg[1], col5=colsnpg[2], col7=colsnpg[2])
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-visual-task
+#| fig-cap: On the left is a simple visual task, to estimate the relative length of the two lines.  On the right is a more complicated visual task, to decide which of the four bottom shapes is *not* a rotated version of the top shape.
+#| fig.height: 2
+grid.newpage()
+grid.segments(.1, .2, .1, .4, gp=gpar(lwd=20, lineend="butt"))
+grid.segments(.2, .2, .2, .7, gp=gpar(lwd=20, lineend="butt"))
+x <- c(.2, .2, .4, .4, .6, .6, .8)
+y <- c(.2, .7, .7, .4, .4, .5, .5)
+pushViewport(viewport(x=1/3, width=2/3, just="left"))
+grid.rect(gp=gpar(col=NA, fill="grey"))
+pushViewport(viewport(x=.5, y=.75, 
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.2, y=.3, angle=70,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.4, y=.3, angle=-70,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.6, y=.3, angle=-30,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(1 - x, y, gp=gpar(lwd=3))
+popViewport()
+pushViewport(viewport(x=.8, y=.3, angle=200,
+                      width=unit(.3, "snpc"), height=unit(.3, "snpc")))
+grid.polyline(x, y, gp=gpar(lwd=3))
+popViewport()
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| message: false
 #| label: tbl-crime-group-total
 #| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.  
@@ -1619,6 +1729,32 @@ ggplot(crimeDistrictTotal) +
     theme(aspect.ratio=1,
           axis.title.y=element_blank(),
           axis.ticks.y=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-pie-hue-cvd
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level)) +
+    coord_polar() +
+    scale_fill_manual(values=deutan(pal_npg()(5)),
+                      guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-pie-ordinal-cvd
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level), colour="black") +
+    coord_polar() +
+    scale_fill_manual(values=deutan(pal_brewer(palette="Purples")(5)),
+                      guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
 
 
 ## -----------------------------------------------------------------------------
@@ -3386,7 +3522,8 @@ grid.text("tries scored",
 popViewport()
 
 
-## ----echo=FALSE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
+#| echo: false
 nc <- nchar(stemAndLeaf) - 4
 lengths <- cumsum(nc)
 stemAndLeafBold <- character(length(stemAndLeaf))
@@ -3410,7 +3547,8 @@ for (i in 1:length(stemAndLeaf)) {
 }
 
 
-## ----echo=FALSE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
+#| echo: false
 stemBold <- function() {
     grid.rect(width=.912, gp=gpar(col=NA, fill="grey95"))
     grid.text("Rugby World Cup 2023", x=.3, just="left",
@@ -3431,7 +3569,8 @@ stemBold <- function() {
 }
 
 
-## ----echo=FALSE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
+#| echo: false
 nc <- nchar(stemAndLeaf) - 4
 lengths <- cumsum(nc)
 stemAndLeafColour <- character(length(stemAndLeaf))
@@ -3455,7 +3594,8 @@ for (i in 1:length(stemAndLeaf)) {
 }
 
 
-## ----echo=FALSE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
+#| echo: false
 library(gridtext)
 NScols <- pal_npg()(2)
 colsTeX <- paste0("\\definecolor{", c("salmon", "teal"), "}",
@@ -3504,6 +3644,98 @@ grid.newpage()
 pushViewport(viewport(height=.8))
 stemColour()
 popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| results: hide
+deaths <- read.csv("Data/florida-deaths.csv")
+bloodRed <- "#660000"
+xaxis <- function(data, coords) {
+    ticks <- coords$x[match(c(2000, 2010), data$x)]
+    labels <- coords$x[match(c(1995, 2005, 2012), data$x)]
+    grobTree(segmentsGrob(0, 1, 1, 1, gp=gpar(lwd=2)),
+             segmentsGrob(0, 0, 1, 0, gp=gpar(lwd=2)),
+             segmentsGrob(ticks, 0, ticks, unit(-5, "mm")),
+             textGrob(c("1990s", "2000s", "2010s"),
+                      labels, unit(-1, "mm"), just="top",
+                      gp=gpar(fontsize=20)))
+}
+labelbg <- function(data, coords) {
+    x <- coords$x[data$x == 2005]
+    y <- coords$y[data$x == 2005]
+    lab <- textGrob("2005\nFlorida enacted\nits 'Stand Your\nGround' law",
+                    unit(x, "npc") - unit(1, "cm"),
+                    unit(y, "npc") + unit(2, "cm"),
+                    just=c("left", "bottom"),
+                    gp=gpar(fontsize=20, fontface="bold", col="white",
+                            lineheight=1))
+    rectGrob(grobX(lab, "west") - unit(1, "cm"),
+             grobY(lab, "south"),
+             1,
+             grobHeight(lab),
+             just=c("left", "bottom"),
+             gp=gpar(col=NA, fill="white"))
+}
+label <- function(data, coords) {
+    x <- coords$x[data$x == 2005]
+    y <- coords$y[data$x == 2005]
+    lab <- textGrob("2005\nFlorida enacted\nits 'Stand Your\nGround' law",
+                    unit(x, "npc") - unit(1, "cm"),
+                    unit(y, "npc") + unit(2, "cm"),
+                    just=c("left", "bottom"),
+                    gp=gpar(fontsize=20, fontface="bold", col="white",
+                            lineheight=1))
+    grobTree(lab,
+             segmentsGrob(x, y, x,
+                          unit(y, "npc") + unit(18, "mm"),
+                          gp=gpar(lwd=1, col="white")))
+}
+gg <- ggplot(deaths) +
+    grid_panel(labelbg, aes(x=year, y=count)) +
+    geom_polygon(data=rbind(data.frame(year=2012, count=0),
+                            deaths,
+                            data.frame(year=1990, count=0)),
+                 aes(year, y=count, group=1),
+                 fill=adjustcolor(bloodRed, alpha=.8)) +
+    grid_panel(label, aes(x=year, y=count)) +
+    geom_line(aes(year, count, group=1), linewidth=1.5) +
+    geom_point(aes(year, count),
+               colour="white", size=5) +
+    geom_point(aes(year, count),
+               colour="black", size=3) +
+    scale_y_continuous(limits=c(1.05*max(deaths$count), 0), trans="reverse",
+                       expand=expansion(0)) +
+    coord_cartesian(clip="off") +
+    labs(title="Alarming Rise In Florida Gun Deaths\nAfter 'Stand Your Ground' Was Enacted\n") +
+    ## subtitle="All deaths involving guns\n") +
+    theme(plot.title=element_text(size=30, face="bold"),
+          plot.subtitle=element_text(size=20),
+          plot.title.position="plot",
+          panel.background=element_blank(),
+          panel.grid.minor=element_blank(),
+          panel.grid.major.x=element_blank(),
+          panel.grid.major.y=element_line(color="grey"),
+          aspect.ratio=1,
+          axis.ticks=element_blank(),
+          axis.text.x=element_blank(),
+          axis.text.y=element_text(size=20),
+          axis.title.y=element_blank(),
+          axis.title.x=element_blank(),
+          plot.margin=unit(rep(10, 4), "mm")) +
+    grid_panel(xaxis, aes(x=year, y=count)) 
+## Deliberately misleading title to show power of text labels
+png("Images/deaths-florida-contra.png", height=750, width=680)
+pushViewport(viewport(y=1, height=unit(1, "npc") - unit(1, "in"), just="top"))
+ggcontra <- gg +
+    labs(title="Suprising *Decrease* In Florida Gun Deaths<br>After 'Stand Your Ground' Was Enacted<br>") +
+    theme(plot.title=element_markdown())
+print(ggcontra, newpage=FALSE)
+popViewport()
+grid.text("Source: USAFacts", x=unit(10, "mm"), just="left",
+          y=unit(2, "lines"),
+          gp=gpar(fontsize=20))
+dev.off()
 
 
 ## -----------------------------------------------------------------------------

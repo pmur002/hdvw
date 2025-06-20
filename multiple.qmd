@@ -33,7 +33,7 @@ ggplot(RWCperGame) +
 involve effective visual features. For example, we can easily decode
 the number of clean breaks and the
 number of tries from
-horizontal and vertical positions.  
+horizontal and vertical positions.
 We can also decode a correlation between clean breaks and tries
 from the emergent feature of **position
 in space** (@sec-integral).
@@ -90,17 +90,17 @@ popViewport()
 
 A parallel coordinates plot maps data summaries rather than raw data values
 (@sec-summaries).  For example, all data values are standardised to a range
-between 0 and 1.  @tbl-parallel-stats shows some of the values that
+between 0 and 1.[^parallel-coords]
+@tbl-parallel-stats shows some of the values that
 are actually mapped to visual features in @fig-parallel.
 Each variable is encoded as a different 
 horizontal **position** and the values within each variable are encoded as
 vertical **position**.  In this way, all quantitative data values
 are encoded as **position**.
 
-In addition, the hemisphere is encoded as **colour** and a 
-separate line data symbol is drawn for each country.
-This means that a visual shape is drawn for each country
-(@sec-visual-shapes).
+[^parallel-coords]:
+  Acknowledge and point to different ways that the data values can
+  be transformed (or summarised).
 
 ```{r}
 #| echo: false
@@ -118,6 +118,20 @@ vars$country <- reorder(vars$country, vars$points)
 long <- melt(vars, id.vars=1:2)
 kable(head(long), digits=2)
 ```
+
+In addition, the hemisphere is encoded as **colour** and a 
+separate line data symbol is drawn for each country.
+This means that a visual shape is drawn for each country
+(@fig-mappings-1-n-1-n; @sec-visual-shapes).
+
+::: {#fig-mappings-1-n-1-n layout-ncol=2}
+
+![](Mappings/mapping-1-n-1-n.png)
+
+In a parallel coordinates plot, a single row of data---one data value from 
+each of several variables---is mapped to
+a visual shape (a line).
+:::
 
 On one hand, a parallel coordinates plot appears to
 makes sense because it encodes multiple
@@ -143,15 +157,6 @@ Furthermore, the fact that many of the lines are reasonably horizontal
 rather than criss-crossing each other wildly suggests that there is 
 an overall correlation between all four quantitative variables, not
 just in the top four teams.
-
-::: {#fig-mappings-1-n-1-n layout-ncol=2}
-
-![](Mappings/mapping-1-n-1-n.png)
-
-In a parallel coordinates plot, a single row of data---one data value from 
-each of several variables---is mapped to
-a visual shape (a line).
-:::
 
 > A parallel coordinates plot can be effective at identifying 
   high-dimensional groups or correlations
@@ -353,6 +358,24 @@ ggplot(all) +
           aspect.ratio=1)
 ```
 
+## Dangers of multiple mappings
+
+@fig-multiple showed that the naive approach of just using 
+a separate visual feature for each data variable leads to
+complex data visualisations that are difficult to decode.
+Although there are better options, like small multiple and facetting,
+there is still a limit to how much information can effectively be displayed at
+once within a static data visualisation.
+
+This is one area where dynamic and interactive graphics can be useful
+because the viewer is able to rapidly switch between multiple views
+of the data, which means that each individual view can be 
+simpler.[^multiple-interactive]
+
+[^multiple-interactive]:
+  Cite again the classic interactive lit ?
+  Point to some tools that might help, like GGobi?
+
 ## Summary
 
 When we need to visualise multiple variables at once, it is not
@@ -360,10 +383,9 @@ effective to map each different variable to a different visual feature.
 
 An alternative is to reuse the same visual feature for multiple
 different variables.
-In particular, we can reuse **position**.  
+In particular, small multiples, or facetting, allows us
+to use **position** for more than 
+just two variables.
 
 
 
-**TODO** 
-Mention that multivariate visualisation is an area where dynamic and
-interactive graphics can be useful, e.g., GGobi ?

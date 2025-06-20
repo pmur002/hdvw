@@ -290,8 +290,51 @@ ggplot(crimeDistrictTotal) +
           axis.ticks.y=element_blank())
 ```
 
+## Colour vision deficiency {#sec-CVD}
+
+Roughly 10% of the population, primarily men, suffer from a form of
+colour vision deficiency.
+In the most common case, the viewer will have difficulty distinguishing 
+between red and green hues.
+@fig-pie-hue-cvd simulates how the colours in @fig-pie-hue would appear
+to a person with severe deuteranopia.  
+
+```{r}
+#| echo: false
+#| label: fig-pie-hue-cvd
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level)) +
+    coord_polar() +
+    scale_fill_manual(values=deutan(pal_npg()(5)),
+                      guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
+```
+
+In order to avoid confusion for viewers with CVD, 
+it may be necessary to vary luminance and/or chroma in addition
+to or instead of hue.  For example, @fig-pie-ordinal-cvd 
+shows how the shades of purple in @fig-pie-ordinal would appear
+to a viewer with severe deuteranopia.  The difference in hue
+is of no importance in this case.
+
+```{r}
+#| echo: false
+#| label: fig-pie-ordinal-cvd
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+ggplot(crimeLevelTotal) +
+    geom_col(aes(x=total, y="", fill=level), colour="black") +
+    coord_polar() +
+    scale_fill_manual(values=deutan(pal_brewer(palette="Purples")(5)),
+                      guide=guide_legend(reverse=TRUE)) +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank())
+```
+
 ## Colour palettes
 
+**TODO**
 **Need** Discussion of different solutions to 
 different problems, e.g., highlighting (DO want one colour
 to stand out from the others).

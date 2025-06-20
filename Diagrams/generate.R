@@ -213,7 +213,7 @@ visDataEdge2 <- implicitEdge("vis:n", "data:ne")
 visData2Edge <- backEdge("vis:s", "data2:se")
 visData2Edge2 <- implicitEdge("vis:n", "data2:ne")
 visDataEdge3 <- backEdge("vis:sw", "data:se")
-visDataEdge4 <- backEdge("vis:s", "data:s")
+visDataEdge4 <- backEdge("vis:n", "data:ne")
 visStatEdge <- backEdge("vis:s", "stat:se")
 visLieEdge <- backEdge("vis:s", "lie:se", grad=grad5)
 visSumEdge <- procEdge("vis", "sum")
@@ -308,7 +308,7 @@ graph(data,
       vis,
       dataVisEdge,
       visDataEdge,
-      visDataEdge2,
+      visDataEdge4,
       file="data-vis-redundant.dot")
 
 graph(data,
