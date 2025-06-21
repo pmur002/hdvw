@@ -1607,30 +1607,58 @@ ggplot(crimeLevelTotal) +
 vp2 <- viewport(width=.9, y=unit(3, "lines"),
                 height=unit(1, "npc") - unit(6, "lines"),
                 just="bottom")
-pushViewport(viewport(width=.8, height=.8, layout=grid.layout(1, 3)))
+n <- 7
+t <- seq(0, 2*pi, length.out=n+1)[-(n+1)]
+hue <- t/pi*180
+chroma <- 100*1:5/5
+lum <- 100*1:5/6
+x <- .2 + .3*cos(t + 2*pi/n)
+y <- .5 + .3*sin(t + 2*pi/n)
+grid.newpage()
+grid.rect(width=unit(1, "npc") - unit(0/96, "in"),
+          height=unit(1, "npc") - unit(0/96, "in"),
+          gp=gpar(col=NA, fill="grey20"))
+pushViewport(viewport(x=.55, width=.8, height=.8, layout=grid.layout(1, 3)))
 pushViewport(viewport(layout.pos.col=1),
              vp2)
-pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
-n <- 7
-t <- seq(0, 2*pi, length.out=n+1)[-1]
-x <- .5 + .3*cos(t)
-y <- .5 + .3*sin(t)
-grid.circle(x, y, r=.1,
-            gp=gpar(col="black", fill=hcl(t/pi*180, 70, 70)))
-popViewport()
-grid.text("hue", y=unit(-2, "lines"))
+grid.move.to(.5, .5)
 popViewport(2)
 pushViewport(viewport(layout.pos.col=2),
              vp2)
-grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col="black", fill=hcl(300, 100*1:5/6, 70))) 
-grid.text("chroma", y=unit(-2, "lines"))
+grid.line.to(.5, .5, gp=gpar(col="grey40", lwd=2))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3),
              vp2)
+grid.line.to(.5, .5, gp=gpar(col="grey40", lwd=2))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.circle(x, y, r=.1,
+            gp=gpar(col="grey20", lwd=10))
+grid.circle(x, y, r=.1,
+            gp=gpar(col=figbg, fill=hcl(hue, chroma[3], lum[3]), 
+                    lwd=c(rep(0, n - 1), 0)))
+popViewport()
+grid.text("hue", x=.2, y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1,
+            gp=gpar(col="grey20", lwd=10))
 grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col="black", fill=hcl(300, 70, 100*5:1/6))) 
-grid.text("luminance", y=unit(-2, "lines"))
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma, lum[3]),
+                    lwd=c(0,0,0,0,0)))
+grid.text("chroma", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1,
+            gp=gpar(col="grey20", lwd=10))
+grid.circle(.5, 0:4/4, r=.1, 
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], lum), 
+                    lwd=c(0,0,0,0,0)))
+grid.text("luminance", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
 popViewport(2)
 
 
@@ -1755,6 +1783,33 @@ ggplot(crimeLevelTotal) +
                       guide=guide_legend(reverse=TRUE)) +
     theme(axis.title=element_blank(),
           axis.ticks=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-pie-order
+#| fig-cap: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
+ggplot(subset(crimeDistrict, year %in% c(2011, 2021))) + 
+    geom_col(aes(x=year, y=rate, fill=district), position="dodge",
+             colour=figbg) +
+    scale_fill_manual(values=pal_hue()(12)[t(matrix(1:12, 
+                                                    ncol=2))]) +
+    scale_x_continuous(breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(axis.title.x=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-pie-repeat
+#| fig-cap: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
+ggplot(subset(crimeDistrict, year %in% c(2011, 2021))) + 
+    geom_col(aes(x=year, y=rate, fill=district), position="dodge",
+             colour=figbg) +
+    scale_fill_manual(values=rep(pal_hue()(6), 2)) +
+    scale_x_continuous(breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(axis.title.x=element_blank())
 
 
 ## -----------------------------------------------------------------------------
@@ -3628,21 +3683,21 @@ stemColour <- function() {
 
 ## -----------------------------------------------------------------------------
 #| echo: false
-#| label: fig-tries-stem-weight
-#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
-grid.newpage()
-pushViewport(viewport(height=.8))
-stemBold()
-popViewport()
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
 #| label: fig-tries-stem-colour
 #| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
 grid.newpage()
 pushViewport(viewport(height=.8))
 stemColour()
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-tries-stem-weight
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemBold()
 popViewport()
 
 

@@ -1383,7 +1383,11 @@ single larger
 teal dot in @fig-diff-serial,
 it is much harder to find than it is in @fig-diff-salience.
 The visual system's sensitivity to **different** items is much
-greater when all other items are the **same**.
+greater when all other items are the **same**.[^same-diff]
+
+[^same-diff]:
+  We hang our hat on this several times later on, so it would be good
+  to ground it in the literature!!!
 
 ```{r}
 #| echo: false
@@ -2649,8 +2653,8 @@ The fact that two data visualisations with the same mappings
 can have a different effectiveness suggests that there is more to know about
 how different visual features work.
 
-This section covers some more details about how **quantitative**
-visual features work.
+This section covers some more details about how the **length**
+visual feature works.
 
 ## The distance effect {#sec-distance-effect}
 
@@ -3001,7 +3005,7 @@ ggplot(crimeLevelTotal) +
           axis.ticks=element_blank())
 ```
 
-@fig-pie-ordinal show another pie chart of the same data, again encoding
+@fig-pie-ordinal shows another pie chart of the same data, again encoding
 the **qualitative** level as **colour**.
 It is again easy to differentiate between different crime levels because we
 can easily perceive differences between the colours of the wedges.
@@ -3023,24 +3027,24 @@ ggplot(crimeLevelTotal) +
 
 The fact that there can be two data visualisations,
 @fig-pie-hue and @fig-pie-ordinal,
-with the same mappings,
+with the same mapping,
 the **qualitative**
 level of crime is encoded as the visual feature **colour**,
 but the two data visualisations 
 have different effectiveness suggests that there is still
 more to learn about how different visual features work.
 
-This section covers some more details about how **qualitative** visual
-features work.
+This section covers some more details about how the **colour** visual
+feature works.
 
 ## Hue, chroma, and luminance {#sec-colour}
 
 We have so far taken a very simplistic approach to **colour**,
 treating it as if it is a single **qualitative** visual feature
-(see @sec-qual-features).
+(@sec-qual-features).
 However, the perception of colour can be divided into 
 three separate visual features:  **hue**, **chroma**, and **luminance**
-(see @fig-hcl).[^tricolour]
+(@fig-hcl).[^tricolour]
 Hue describes what we normally refer to as the colour name: reds, oranges,
 yellows, greens, blues, and purples.
 Chroma describes the colourfulness, from bright to dull,
@@ -3075,30 +3079,58 @@ Hue is excellent for the perception of differences.
 vp2 <- viewport(width=.9, y=unit(3, "lines"),
                 height=unit(1, "npc") - unit(6, "lines"),
                 just="bottom")
-pushViewport(viewport(width=.8, height=.8, layout=grid.layout(1, 3)))
+n <- 7
+t <- seq(0, 2*pi, length.out=n+1)[-(n+1)]
+hue <- t/pi*180
+chroma <- 100*1:5/5
+lum <- 100*1:5/6
+x <- .2 + .3*cos(t + 2*pi/n)
+y <- .5 + .3*sin(t + 2*pi/n)
+grid.newpage()
+grid.rect(width=unit(1, "npc") - unit(0/96, "in"),
+          height=unit(1, "npc") - unit(0/96, "in"),
+          gp=gpar(col=NA, fill="grey20"))
+pushViewport(viewport(x=.55, width=.8, height=.8, layout=grid.layout(1, 3)))
 pushViewport(viewport(layout.pos.col=1),
              vp2)
-pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
-n <- 7
-t <- seq(0, 2*pi, length.out=n+1)[-1]
-x <- .5 + .3*cos(t)
-y <- .5 + .3*sin(t)
-grid.circle(x, y, r=.1,
-            gp=gpar(col="black", fill=hcl(t/pi*180, 70, 70)))
-popViewport()
-grid.text("hue", y=unit(-2, "lines"))
+grid.move.to(.5, .5)
 popViewport(2)
 pushViewport(viewport(layout.pos.col=2),
              vp2)
-grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col="black", fill=hcl(300, 100*1:5/6, 70))) 
-grid.text("chroma", y=unit(-2, "lines"))
+grid.line.to(.5, .5, gp=gpar(col="grey40", lwd=2))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3),
              vp2)
+grid.line.to(.5, .5, gp=gpar(col="grey40", lwd=2))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.circle(x, y, r=.1,
+            gp=gpar(col="grey20", lwd=10))
+grid.circle(x, y, r=.1,
+            gp=gpar(col=figbg, fill=hcl(hue, chroma[3], lum[3]), 
+                    lwd=c(rep(0, n - 1), 0)))
+popViewport()
+grid.text("hue", x=.2, y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1,
+            gp=gpar(col="grey20", lwd=10))
 grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col="black", fill=hcl(300, 70, 100*5:1/6))) 
-grid.text("luminance", y=unit(-2, "lines"))
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma, lum[3]),
+                    lwd=c(0,0,0,0,0)))
+grid.text("chroma", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1,
+            gp=gpar(col="grey20", lwd=10))
+grid.circle(.5, 0:4/4, r=.1, 
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], lum), 
+                    lwd=c(0,0,0,0,0)))
+grid.text("luminance", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
 popViewport(2)
 ```
 
@@ -3166,7 +3198,7 @@ relative.  For example, smaller differences in length are easier
 to see when the lengths themselves are short (see @fig-relative).
 
 There is a similar rule for the perception of **colours**. 
-Our perception of a colour is affected by neighbouring 
+Our perception of luminance and chroma is affected by neighbouring 
 colours.[^contrast-effect]
 This effect is demonstrated in @fig-contrast-effect:
 the same colour when surrounded by a darker background appears lighter
@@ -3272,11 +3304,14 @@ ggplot(crimeDistrictTotal) +
 ## Colour vision deficiency {#sec-CVD}
 
 Roughly 10% of the population, primarily men, suffer from a form of
-colour vision deficiency.
+colour vision deficiency.[^cvd]
 In the most common case, the viewer will have difficulty distinguishing 
 between red and green hues.
 @fig-pie-hue-cvd simulates how the colours in @fig-pie-hue would appear
-to a person with severe deuteranopia.  
+to a person with severe deuteranopia (red-green colour blindness).  
+
+[^cvd]:
+  Provide a cite for those percentages
 
 ```{r}
 #| echo: false
@@ -3295,7 +3330,8 @@ In order to avoid confusion for viewers with CVD,
 it may be necessary to vary luminance and/or chroma in addition
 to or instead of hue.  For example, @fig-pie-ordinal-cvd 
 shows how the shades of purple in @fig-pie-ordinal would appear
-to a viewer with severe deuteranopia.  The difference in hue
+to a viewer with severe deuteranopia.
+The difference in hue
 is of no importance in this case.
 
 ```{r}
@@ -3313,18 +3349,84 @@ ggplot(crimeLevelTotal) +
 
 ## Colour palettes
 
-**TODO**
-**Need** Discussion of different solutions to 
-different problems, e.g., highlighting (DO want one colour
-to stand out from the others).
+When we encode nominal or ordinal data values as colours,
+we have to choose a set of colours, or a **colour palette**.
+For example, in @fig-pie-hue we have to choose a different colour
+to represent each level of crime.
 
-Example:  787 2025 Lab 8 challenge.  Trying to colour code
-many different categories of crime.  Use fewer colours, but repeat.
-OR use colour palette, but NOT in hue order (interleave instead) so
-get greater contrast between adjacent colours.
-Footnote attribute this to
-"Reflections on the Uses and Available Choices of Categorical Colorschemes"
+This choice is difficult because there are many different colours 
+to choose from and often there is no obvious mapping 
+from a data value to a particular
+colour.  For example, what specific hue, chroma, and luminance
+should we choose to represent a `high` crime level?
+
+There are also competing criteria involved in selecting colours.
+For example, although the primary goal is to represent different categories 
+with colours that are as different from each
+other as possible, as we saw in @sec-CVD, we also 
+have to take into account that some viewers may have difficulty
+perceiving differences between particular colours.
+
+Fortunately, researchers have produced a number of 
+predefined colour palettes that we can make use of.
+For example, the colours used in @fig-pie-hue
+are based on palettes used in journals published by the
+Nature Publishing Group.[^ggsci]
+
+[^ggsci]:
+  cite ggsci, colour brewer (and others?)
+
+If the data symbols are arranged in a regular pattern,
+like in a bar plot,
+then comparisons between neighbours are most important,
+so we can order the colours to maximise neighbour differences
+rather than maximising all pairwise differences.[^bartolomeo]
+@fig-pie-order demonstrates this idea with a bar plot of the crime
+rate in different districts for both 2011 and 2021.
+This bar plot uses the same set of
+hues as @fig-pie-contrast-solved, just in a different order
+so that adjacent bars have very different colours.
+
+[^bartolomeo]:
+  "Reflections on the Uses and Available Choices of Categorical Colorschemes"
   Bartolomeo et al (2025)
+
+```{r}
+#| echo: false
+#| label: fig-pie-order
+#| fig-cap: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
+ggplot(subset(crimeDistrict, year %in% c(2011, 2021))) + 
+    geom_col(aes(x=year, y=rate, fill=district), position="dodge",
+             colour=figbg) +
+    scale_fill_manual(values=pal_hue()(12)[t(matrix(1:12, 
+                                                    ncol=2))]) +
+    scale_x_continuous(breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(axis.title.x=element_blank())
+```
+
+A similar idea is to just reuse a smaller set of hues, which means
+larger differences between adjacent colours, but repeat
+the set.   The
+regular arrangement of the data symbols means that we can
+still differentiate between repeated colours because of the bar positions
+(@fig-pie-repeat).  For example, we can differentiate the pink for 
+the Wellington district
+from the pink for the Eastern district because Wellington is at the end and
+Eastern is in the middle.
+
+```{r}
+#| echo: false
+#| label: fig-pie-repeat
+#| fig-cap: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
+ggplot(subset(crimeDistrict, year %in% c(2011, 2021))) + 
+    geom_col(aes(x=year, y=rate, fill=district), position="dodge",
+             colour=figbg) +
+    scale_fill_manual(values=rep(pal_hue()(6), 2)) +
+    scale_x_continuous(breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(axis.title.x=element_blank())
+```
 
 ## Case study: Divergent colour palettes
 
@@ -3410,7 +3512,8 @@ and **luminance**.
 **Chroma** and **luminance** can be used to represent **ordinal**
 data values, but they have a very limited capacity.
 
-
+We should lean on the work done by experts when it comes to choosing
+colour palettes.
 
 
 # Congruent Mappings {#sec-congruence}
@@ -3444,12 +3547,12 @@ can decode values from the visual features without having explicitly
 encoded values as visual features.
 :::
 
-When an learned encoding exists,
+When an implicit encoding exists,
 we can produce a more effective mapping by building upon
-the learned decoding.
+the implicit decoding.
 We can explicitly encode data values as visual features in such a way that
-the decoding is **congruent** with the learned decoding, in the sense
-that the learned decoding leads back to the original data values
+the decoding is **congruent** with the implicit decoding, in the sense
+that the implicit decoding leads back to the original data values
 that we explicitly encoded
 (@fig-congruent-decode).
 
@@ -5522,7 +5625,7 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-## Case study: Density plots
+## Case study: Density plots {#sec-density}
 
 @fig-density shows a density plot of the number of points scored by Tier One
 nations at the Rugby World Cups (@tbl-rwc-all).
@@ -7095,16 +7198,16 @@ For example, we can see just from the horizontal position of the text,
 without reading the text values, 
 that some counts are (much) larger than others.
 
+> Encoding data values as the position, colour, and size of 
+  text data symbols is effective for the same reasons that these
+  visual features are effective for other types of data symbols.
+
 We see examples of the use of simple visual features in text
 in almost any piece of writing.  For example,
 section headings are typically larger and bolder than the main text
 in a report and 
 @sec-exec makes use of colour and angle to create visual connections
 between associated terms within a bullet-point list.
-
-> Encoding data values as the position, colour, and size of 
-  text data symbols is effective for the same reasons that these
-  visual features are effective for other types of data symbols.
 
 However, the unique power of text comes from **decoding** the
 **shape** of the text.
@@ -7617,16 +7720,12 @@ there is less complexity in the visual field.
 The consistent number of decimal places means that less is
 changing, so differences are easier to detect
 (@sec-differences).
-Finally, the consistent baseline provided by right-alignment
+Also, the consistent baseline provided by right-alignment
 means that the text **length** of the numbers (the number of digits
 in each number) provides a crude encoding of the size of the number,
 particularly in the column showing the number of clean breaks.
 However, it is worth noting that some of the **accuracy** of the text
 has been sacrificed in order to make some of these gains.
-
-**TODO** link back to "good gestalt"/simplicity in visual model
-
-**TODO** provide links from ALL of these points to previous sections.
 
 ```{r}
 #| echo: false
@@ -7663,28 +7762,23 @@ ggplot(rwc8) +
 
 ## Case study: Stem-and-leaf plots
 
-**TODO**
-Must adapt this to HDVW style, both in terms of visual style
-AND in terms of approach (how data vis works)
+Figure @fig-tries-hist shows a histogram of the
+number of tries scored by teams in the 2023 Rugby World Cup.
+The data symbols in @fig-tries-hist are bars.
+The raw data values are the average number of tries per game for each team,
+but the lengths of the bars encode **data summaries**:  the
+number of teams with an average number of tries within each
+range: 0 to 1, 1 to 2, and so on.
 
-Quote from John Tukey about stem-and-leaf plots:
+Because the borders of the bars are not drawn, we get an emergent
+shape from the combined bars (similar to a density plot;  @sec-density).
 
-::: {.acutal-quote}
-If we are going to make a mark, it may as well be a meaningful one.
-The simplest - and most useful - meaningful mark is a digit
-:::
-
-    Attributed to "Some Graphic and Semigraphic Displays" in 
-    T. A. Bancroft, ed. Statistical Papers in Honor of George W. Snedecor
-    (Ames, Iowa, 1972), p. 296.
-
-Even just glyphs are relatively complex visual objects that can
-be adjusted (via aesthetics) in multiple ways.
-As text gets larger it can represent more complex info.
-As text gets larger, can apply aesthetics to just subsets,
-e.g., glyphs within words, words within sentences (bold for emphasis).
-Similar to more complex visual objects like Chernoff faces.
-Brath calls this "proportional encoding" ?
+This histogram allows us to see features of the data summaries, 
+such as a suggestion that there is a small subset of teams that score a higher
+number of tries than the other teams (a bimodal distribution; though
+in this case we have a very small amount of data).
+However, there is no way to decode the raw data values from this
+histogram.
 
 ```{r}
 #| echo: false
@@ -7720,6 +7814,34 @@ grid.draw(ggTriesHist)
 popViewport()
 ```
 
+Figure @fig-tries-stem shows a stem-and-leaf 
+diagram of the same data (with tries scored rounded to one decimal place).
+The data symbol in this case is a text digit.
+Every team is encoded as a digit from 0 to 9, which represents the
+first decimal place for the average number of tries scored by
+each team.  For example, New Zealand scored 7.0 tries per game on average
+and that is encoded as a `0` beside the `7` on the y-axis.
+The number of tries is also encoded as a combination of vertical
+position (the whole number of tries) and
+horizontal position (teams with the same whole number of tries are
+stacked horizontally, but also ordered by the first decimal place value).
+
+The number of teams within each range (0 to 1, 1 to 2, etc)
+is encoded by the number of digits.
+Another way to look at it is that the data symbol is a piece of text
+consisting of several digits and the number of teams is encoded as
+the **length** of the piece of text.
+
+As with the histogram in @fig-tries-hist, there are emergent shapes
+with two distinct humps visible, one taller than the other.
+However, in @fig-tries-stem we are able to decode the raw data values as well.
+Furthermore, because the data symbols are text digits, we are able to
+decode individual data values very accurately.
+
+In summary, @fig-tries-stem combines standard decodings (**length**)
+with **learned decodings** (text shape) to provide access to both
+high-level features of data summaries *and* raw data values.
+
 ```{r echo=FALSE}
 stemAndLeaf <- 
     gsub("^  ", "",
@@ -7746,20 +7868,10 @@ grid.text("tries scored",
 popViewport()
 ```
 
-Figure @fig-tries-hist shows a histogram of the
-number of tries scored by teams in the 2023 Rugby World Cup.
-The information being presented is the frequency of tries-scored
-values within a sequence of ranges, or bins: 0 to 1, 1 to 2, and so on.
-
-The length of each bar encodes the frequency for one of the bins.
-
-Figure @fig-tries-stem shows a stem-and-leaf 
-diagram of the same data (with tries scored rounded to one decimal place).
-
-We have pre-attentive decoding in play because the number of digits for
-each stem creates a length.
-We also have learned decoding in play because we are able to see
-exact data values for individual teams.
+@fig-tries-stem-colour shows a variation on @fig-tries-stem
+with the hemisphere encoded as the colours of the digits.
+This provides another demonstration that we can use simple visual features
+like colour to encode data values with text data symbols.
 
 ```{r}
 #| echo: false
@@ -7867,16 +7979,6 @@ stemColour <- function() {
 
 ```{r}
 #| echo: false
-#| label: fig-tries-stem-weight
-#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
-grid.newpage()
-pushViewport(viewport(height=.8))
-stemBold()
-popViewport()
-```
-
-```{r}
-#| echo: false
 #| label: fig-tries-stem-colour
 #| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
 grid.newpage()
@@ -7885,15 +7987,51 @@ stemColour()
 popViewport()
 ```
 
-Figure @fig-tries-stem-weight and
-Figure @fig-tries-stem-colour show
-variations on the stem-and-leaf plot using text-specific (weight)
-and general (colour) pre-attentive features on individual digits.
-=> even more detail available \cite{brath2014design}.
+@fig-tries-stem-weight shows another variation on @fig-tries-stem,
+this time with the hemisphere encoded as the **weight** of the 
+digits.  This demonstrates the idea that there are text-specific
+visual features that can be used to encode data values.
+Other examples are font family (e.g., Arial versus Roman)
+and font slant (italic versus upright).[^text-specific]
 
-Of course, the main downside is that this is limited to small data sets.
+[^text-specific]:
+  [@brath2014design] at least
 
-## The dangers of text
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem-weight
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemBold()
+popViewport()
+```
+
+Stem-and-leaf plots might be seen as an archaic form of data visualisation,
+but we can see that they are effective in many ways.[^tukey-stem]
+
+[^tukey-stem]:
+  Quote from John Tukey about stem-and-leaf plots:
+
+  ::: {.acutal-quote}
+  If we are going to make a mark, it may as well be a meaningful one.
+  The simplest - and most useful - meaningful mark is a digit
+  :::
+
+  Attributed to "Some Graphic and Semigraphic Displays" in 
+  T. A. Bancroft, ed. Statistical Papers in Honor of George W. Snedecor
+  (Ames, Iowa, 1972), p. 296.
+
+Unfortunately, despite all of their advantages, stem-and-leaf plots
+have a limited usefulness because they can only accommodate very
+small data sets.
+There is a similarity between a stem-and-leaf plot and the stacked icon
+plot in @fig-pic-icon-1. However, whereas an icon can easily be used to
+represent some multiple of objects, that option is not available 
+for text digits.
+
+## Dangers of text
 
 @fig-text-danger shows a data visualisation of the number of gun deaths
 in Florida between 1990 and 2012, covering the enactment of Florida's
@@ -8038,7 +8176,34 @@ is completely consistent.
 
 ## Alt text
 
-For accessibility!
+Is a data visualisation effective if we cannot see it?
+We saw in @sec-CVD that a data visualisation may not be effective
+if a colour encoding does not take into account red-green colour blindness.
+But what about a low-vision or blind audience?
+
+Although data visualisation is based on the visual system,
+it is still possible to make a data visualisation effective 
+for a low-vision or blind audience by providing a text description
+of the data visualisation.
+Alt text is a text description of a data visualisation
+that will be recognised and read out by a screen reader.
+
+The alt text for a data visualisation will ideally describe what variables
+are being displayed and how they are encoded (what sort of plot is it),
+data summaries like trends, clusters, outliers, and correlations,
+and include the main message of the visualisation, including
+causal explanations and wider implications.[^alt-text]
+
+[^alt-text]:
+  "Accessible Visualization via Natural Language Descriptions: 
+   A Four-Level Model of Semantic Content"
+  Lundgard and Satyanarayan (2022)
+
+Another option sometimes employed is to provide tables of data in addition to
+the data visualisation, though this will not always be possible or
+practical.
+
+All of the images in this document have alt text (or at least they should!).
 
 ## Summary
 
@@ -8078,7 +8243,6 @@ data values.[^ware-text]
   "Use words directly on the chart where the number of symbolic objects
   in each category is relatively few and where space is available."
 
-**TODO** Cite my text article ?
 
 # Mapping Structure
 
@@ -8286,18 +8450,22 @@ grid.edit("ylab::title::text", grep=TRUE,
 ```
 
 All of these changes are aimed at making the data visualisation 
-more orderly.  The legend is more obviously a separate element
+more orderly (@sec-simplicity).
+The legend is more obviously a separate element
 from the main plot and the axis titles more obviously 
 connect to the main plot.
+A more orderly arrangement of the visual elements 
+will provide fewer distractions and lead to 
+a more effective data visualisation 
+because the important differences in the data
+will be more readily perceived (@sec-differences).
 
-**TODO**
-Link to @sec-simplicity.
-
-Link to @sec-facetting and 
-@fig-facet-after as example of strong alignment and orderliness
-
-Could contrast with relative disorder in @fig-map-alt-2
-
+The strong alignment and regular patterns within facetted plots like
+@fig-facet-after are another effective example of keeping everything else
+the same in order to champion the changes in the data.
+Conversely, another weakness of placing data symbols on maps, like in
+@fig-map-alt-2,
+is the distracting complexity that results.
 
 ## Consistent mappings
 
@@ -8618,6 +8786,10 @@ Have to throw bouquet at Quarto.
 
 + Flesh out all footnotes
 
++ Add alt text to ALL figures (fig-alt)
+
++ Check that colour palettes are ok for CVD
+
 + review https://friendly.github.io/6135/lectures/GraphPerception.pdf
   from https://friendly.github.io/6135/index.html
   (especially the stuff on basic models of visual perception
@@ -8787,6 +8959,9 @@ Have to throw bouquet at Quarto.
   (density plot this is absolutely ok)
 
 * need citations for more is more and dark is more and part-to-whole.
+
+* Mention that density plots are congruent because the peaks
+  are like mountain ranges ?
 
 * Mention memorability of data vis somewhere;
   possibly only needs to be a footnote addition to, e.g., intro

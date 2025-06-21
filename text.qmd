@@ -102,16 +102,16 @@ For example, we can see just from the horizontal position of the text,
 without reading the text values, 
 that some counts are (much) larger than others.
 
+> Encoding data values as the position, colour, and size of 
+  text data symbols is effective for the same reasons that these
+  visual features are effective for other types of data symbols.
+
 We see examples of the use of simple visual features in text
 in almost any piece of writing.  For example,
 section headings are typically larger and bolder than the main text
 in a report and 
 @sec-exec makes use of colour and angle to create visual connections
 between associated terms within a bullet-point list.
-
-> Encoding data values as the position, colour, and size of 
-  text data symbols is effective for the same reasons that these
-  visual features are effective for other types of data symbols.
 
 However, the unique power of text comes from **decoding** the
 **shape** of the text.
@@ -624,16 +624,12 @@ there is less complexity in the visual field.
 The consistent number of decimal places means that less is
 changing, so differences are easier to detect
 (@sec-differences).
-Finally, the consistent baseline provided by right-alignment
+Also, the consistent baseline provided by right-alignment
 means that the text **length** of the numbers (the number of digits
 in each number) provides a crude encoding of the size of the number,
 particularly in the column showing the number of clean breaks.
 However, it is worth noting that some of the **accuracy** of the text
 has been sacrificed in order to make some of these gains.
-
-**TODO** link back to "good gestalt"/simplicity in visual model
-
-**TODO** provide links from ALL of these points to previous sections.
 
 ```{r}
 #| echo: false
@@ -670,28 +666,23 @@ ggplot(rwc8) +
 
 ## Case study: Stem-and-leaf plots
 
-**TODO**
-Must adapt this to HDVW style, both in terms of visual style
-AND in terms of approach (how data vis works)
+Figure @fig-tries-hist shows a histogram of the
+number of tries scored by teams in the 2023 Rugby World Cup.
+The data symbols in @fig-tries-hist are bars.
+The raw data values are the average number of tries per game for each team,
+but the lengths of the bars encode **data summaries**:  the
+number of teams with an average number of tries within each
+range: 0 to 1, 1 to 2, and so on.
 
-Quote from John Tukey about stem-and-leaf plots:
+Because the borders of the bars are not drawn, we get an emergent
+shape from the combined bars (similar to a density plot;  @sec-density).
 
-::: {.acutal-quote}
-If we are going to make a mark, it may as well be a meaningful one.
-The simplest - and most useful - meaningful mark is a digit
-:::
-
-    Attributed to "Some Graphic and Semigraphic Displays" in 
-    T. A. Bancroft, ed. Statistical Papers in Honor of George W. Snedecor
-    (Ames, Iowa, 1972), p. 296.
-
-Even just glyphs are relatively complex visual objects that can
-be adjusted (via aesthetics) in multiple ways.
-As text gets larger it can represent more complex info.
-As text gets larger, can apply aesthetics to just subsets,
-e.g., glyphs within words, words within sentences (bold for emphasis).
-Similar to more complex visual objects like Chernoff faces.
-Brath calls this "proportional encoding" ?
+This histogram allows us to see features of the data summaries, 
+such as a suggestion that there is a small subset of teams that score a higher
+number of tries than the other teams (a bimodal distribution; though
+in this case we have a very small amount of data).
+However, there is no way to decode the raw data values from this
+histogram.
 
 ```{r}
 #| echo: false
@@ -727,6 +718,34 @@ grid.draw(ggTriesHist)
 popViewport()
 ```
 
+Figure @fig-tries-stem shows a stem-and-leaf 
+diagram of the same data (with tries scored rounded to one decimal place).
+The data symbol in this case is a text digit.
+Every team is encoded as a digit from 0 to 9, which represents the
+first decimal place for the average number of tries scored by
+each team.  For example, New Zealand scored 7.0 tries per game on average
+and that is encoded as a `0` beside the `7` on the y-axis.
+The number of tries is also encoded as a combination of vertical
+position (the whole number of tries) and
+horizontal position (teams with the same whole number of tries are
+stacked horizontally, but also ordered by the first decimal place value).
+
+The number of teams within each range (0 to 1, 1 to 2, etc)
+is encoded by the number of digits.
+Another way to look at it is that the data symbol is a piece of text
+consisting of several digits and the number of teams is encoded as
+the **length** of the piece of text.
+
+As with the histogram in @fig-tries-hist, there are emergent shapes
+with two distinct humps visible, one taller than the other.
+However, in @fig-tries-stem we are able to decode the raw data values as well.
+Furthermore, because the data symbols are text digits, we are able to
+decode individual data values very accurately.
+
+In summary, @fig-tries-stem combines standard decodings (**length**)
+with **learned decodings** (text shape) to provide access to both
+high-level features of data summaries *and* raw data values.
+
 ```{r echo=FALSE}
 stemAndLeaf <- 
     gsub("^  ", "",
@@ -753,20 +772,10 @@ grid.text("tries scored",
 popViewport()
 ```
 
-Figure @fig-tries-hist shows a histogram of the
-number of tries scored by teams in the 2023 Rugby World Cup.
-The information being presented is the frequency of tries-scored
-values within a sequence of ranges, or bins: 0 to 1, 1 to 2, and so on.
-
-The length of each bar encodes the frequency for one of the bins.
-
-Figure @fig-tries-stem shows a stem-and-leaf 
-diagram of the same data (with tries scored rounded to one decimal place).
-
-We have pre-attentive decoding in play because the number of digits for
-each stem creates a length.
-We also have learned decoding in play because we are able to see
-exact data values for individual teams.
+@fig-tries-stem-colour shows a variation on @fig-tries-stem
+with the hemisphere encoded as the colours of the digits.
+This provides another demonstration that we can use simple visual features
+like colour to encode data values with text data symbols.
 
 ```{r}
 #| echo: false
@@ -874,16 +883,6 @@ stemColour <- function() {
 
 ```{r}
 #| echo: false
-#| label: fig-tries-stem-weight
-#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
-grid.newpage()
-pushViewport(viewport(height=.8))
-stemBold()
-popViewport()
-```
-
-```{r}
-#| echo: false
 #| label: fig-tries-stem-colour
 #| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
 grid.newpage()
@@ -892,15 +891,51 @@ stemColour()
 popViewport()
 ```
 
-Figure @fig-tries-stem-weight and
-Figure @fig-tries-stem-colour show
-variations on the stem-and-leaf plot using text-specific (weight)
-and general (colour) pre-attentive features on individual digits.
-=> even more detail available \cite{brath2014design}.
+@fig-tries-stem-weight shows another variation on @fig-tries-stem,
+this time with the hemisphere encoded as the **weight** of the 
+digits.  This demonstrates the idea that there are text-specific
+visual features that can be used to encode data values.
+Other examples are font family (e.g., Arial versus Roman)
+and font slant (italic versus upright).[^text-specific]
 
-Of course, the main downside is that this is limited to small data sets.
+[^text-specific]:
+  [@brath2014design] at least
 
-## The dangers of text
+
+```{r}
+#| echo: false
+#| label: fig-tries-stem-weight
+#| fig-cap: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
+grid.newpage()
+pushViewport(viewport(height=.8))
+stemBold()
+popViewport()
+```
+
+Stem-and-leaf plots might be seen as an archaic form of data visualisation,
+but we can see that they are effective in many ways.[^tukey-stem]
+
+[^tukey-stem]:
+  Quote from John Tukey about stem-and-leaf plots:
+
+  ::: {.acutal-quote}
+  If we are going to make a mark, it may as well be a meaningful one.
+  The simplest - and most useful - meaningful mark is a digit
+  :::
+
+  Attributed to "Some Graphic and Semigraphic Displays" in 
+  T. A. Bancroft, ed. Statistical Papers in Honor of George W. Snedecor
+  (Ames, Iowa, 1972), p. 296.
+
+Unfortunately, despite all of their advantages, stem-and-leaf plots
+have a limited usefulness because they can only accommodate very
+small data sets.
+There is a similarity between a stem-and-leaf plot and the stacked icon
+plot in @fig-pic-icon-1. However, whereas an icon can easily be used to
+represent some multiple of objects, that option is not available 
+for text digits.
+
+## Dangers of text
 
 @fig-text-danger shows a data visualisation of the number of gun deaths
 in Florida between 1990 and 2012, covering the enactment of Florida's
@@ -1045,7 +1080,34 @@ is completely consistent.
 
 ## Alt text
 
-For accessibility!
+Is a data visualisation effective if we cannot see it?
+We saw in @sec-CVD that a data visualisation may not be effective
+if a colour encoding does not take into account red-green colour blindness.
+But what about a low-vision or blind audience?
+
+Although data visualisation is based on the visual system,
+it is still possible to make a data visualisation effective 
+for a low-vision or blind audience by providing a text description
+of the data visualisation.
+Alt text is a text description of a data visualisation
+that will be recognised and read out by a screen reader.
+
+The alt text for a data visualisation will ideally describe what variables
+are being displayed and how they are encoded (what sort of plot is it),
+data summaries like trends, clusters, outliers, and correlations,
+and include the main message of the visualisation, including
+causal explanations and wider implications.[^alt-text]
+
+[^alt-text]:
+  "Accessible Visualization via Natural Language Descriptions: 
+   A Four-Level Model of Semantic Content"
+  Lundgard and Satyanarayan (2022)
+
+Another option sometimes employed is to provide tables of data in addition to
+the data visualisation, though this will not always be possible or
+practical.
+
+All of the images in this document have alt text (or at least they should!).
 
 ## Summary
 
@@ -1085,4 +1147,3 @@ data values.[^ware-text]
   "Use words directly on the chart where the number of symbolic objects
   in each category is relatively few and where space is available."
 
-**TODO** Cite my text article ?

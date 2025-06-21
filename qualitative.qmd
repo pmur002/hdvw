@@ -22,7 +22,7 @@ ggplot(crimeLevelTotal) +
           axis.ticks=element_blank())
 ```
 
-@fig-pie-ordinal show another pie chart of the same data, again encoding
+@fig-pie-ordinal shows another pie chart of the same data, again encoding
 the **qualitative** level as **colour**.
 It is again easy to differentiate between different crime levels because we
 can easily perceive differences between the colours of the wedges.
@@ -44,24 +44,24 @@ ggplot(crimeLevelTotal) +
 
 The fact that there can be two data visualisations,
 @fig-pie-hue and @fig-pie-ordinal,
-with the same mappings,
+with the same mapping,
 the **qualitative**
 level of crime is encoded as the visual feature **colour**,
 but the two data visualisations 
 have different effectiveness suggests that there is still
 more to learn about how different visual features work.
 
-This section covers some more details about how **qualitative** visual
-features work.
+This section covers some more details about how the **colour** visual
+feature works.
 
 ## Hue, chroma, and luminance {#sec-colour}
 
 We have so far taken a very simplistic approach to **colour**,
 treating it as if it is a single **qualitative** visual feature
-(see @sec-qual-features).
+(@sec-qual-features).
 However, the perception of colour can be divided into 
 three separate visual features:  **hue**, **chroma**, and **luminance**
-(see @fig-hcl).[^tricolour]
+(@fig-hcl).[^tricolour]
 Hue describes what we normally refer to as the colour name: reds, oranges,
 yellows, greens, blues, and purples.
 Chroma describes the colourfulness, from bright to dull,
@@ -96,30 +96,58 @@ Hue is excellent for the perception of differences.
 vp2 <- viewport(width=.9, y=unit(3, "lines"),
                 height=unit(1, "npc") - unit(6, "lines"),
                 just="bottom")
-pushViewport(viewport(width=.8, height=.8, layout=grid.layout(1, 3)))
+n <- 7
+t <- seq(0, 2*pi, length.out=n+1)[-(n+1)]
+hue <- t/pi*180
+chroma <- 100*1:5/5
+lum <- 100*1:5/6
+x <- .2 + .3*cos(t + 2*pi/n)
+y <- .5 + .3*sin(t + 2*pi/n)
+grid.newpage()
+grid.rect(width=unit(1, "npc") - unit(0/96, "in"),
+          height=unit(1, "npc") - unit(0/96, "in"),
+          gp=gpar(col=NA, fill="grey20"))
+pushViewport(viewport(x=.55, width=.8, height=.8, layout=grid.layout(1, 3)))
 pushViewport(viewport(layout.pos.col=1),
              vp2)
-pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
-n <- 7
-t <- seq(0, 2*pi, length.out=n+1)[-1]
-x <- .5 + .3*cos(t)
-y <- .5 + .3*sin(t)
-grid.circle(x, y, r=.1,
-            gp=gpar(col="black", fill=hcl(t/pi*180, 70, 70)))
-popViewport()
-grid.text("hue", y=unit(-2, "lines"))
+grid.move.to(.5, .5)
 popViewport(2)
 pushViewport(viewport(layout.pos.col=2),
              vp2)
-grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col="black", fill=hcl(300, 100*1:5/6, 70))) 
-grid.text("chroma", y=unit(-2, "lines"))
+grid.line.to(.5, .5, gp=gpar(col="grey40", lwd=2))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3),
              vp2)
+grid.line.to(.5, .5, gp=gpar(col="grey40", lwd=2))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=1),
+             vp2)
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc")))
+grid.circle(x, y, r=.1,
+            gp=gpar(col="grey20", lwd=10))
+grid.circle(x, y, r=.1,
+            gp=gpar(col=figbg, fill=hcl(hue, chroma[3], lum[3]), 
+                    lwd=c(rep(0, n - 1), 0)))
+popViewport()
+grid.text("hue", x=.2, y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1,
+            gp=gpar(col="grey20", lwd=10))
 grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col="black", fill=hcl(300, 70, 100*5:1/6))) 
-grid.text("luminance", y=unit(-2, "lines"))
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma, lum[3]),
+                    lwd=c(0,0,0,0,0)))
+grid.text("chroma", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=3),
+             vp2)
+grid.circle(.5, 0:4/4, r=.1,
+            gp=gpar(col="grey20", lwd=10))
+grid.circle(.5, 0:4/4, r=.1, 
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], lum), 
+                    lwd=c(0,0,0,0,0)))
+grid.text("luminance", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
 popViewport(2)
 ```
 
@@ -187,7 +215,7 @@ relative.  For example, smaller differences in length are easier
 to see when the lengths themselves are short (see @fig-relative).
 
 There is a similar rule for the perception of **colours**. 
-Our perception of a colour is affected by neighbouring 
+Our perception of luminance and chroma is affected by neighbouring 
 colours.[^contrast-effect]
 This effect is demonstrated in @fig-contrast-effect:
 the same colour when surrounded by a darker background appears lighter
@@ -293,11 +321,14 @@ ggplot(crimeDistrictTotal) +
 ## Colour vision deficiency {#sec-CVD}
 
 Roughly 10% of the population, primarily men, suffer from a form of
-colour vision deficiency.
+colour vision deficiency.[^cvd]
 In the most common case, the viewer will have difficulty distinguishing 
 between red and green hues.
 @fig-pie-hue-cvd simulates how the colours in @fig-pie-hue would appear
-to a person with severe deuteranopia.  
+to a person with severe deuteranopia (red-green colour blindness).  
+
+[^cvd]:
+  Provide a cite for those percentages
 
 ```{r}
 #| echo: false
@@ -316,7 +347,8 @@ In order to avoid confusion for viewers with CVD,
 it may be necessary to vary luminance and/or chroma in addition
 to or instead of hue.  For example, @fig-pie-ordinal-cvd 
 shows how the shades of purple in @fig-pie-ordinal would appear
-to a viewer with severe deuteranopia.  The difference in hue
+to a viewer with severe deuteranopia.
+The difference in hue
 is of no importance in this case.
 
 ```{r}
@@ -334,18 +366,84 @@ ggplot(crimeLevelTotal) +
 
 ## Colour palettes
 
-**TODO**
-**Need** Discussion of different solutions to 
-different problems, e.g., highlighting (DO want one colour
-to stand out from the others).
+When we encode nominal or ordinal data values as colours,
+we have to choose a set of colours, or a **colour palette**.
+For example, in @fig-pie-hue we have to choose a different colour
+to represent each level of crime.
 
-Example:  787 2025 Lab 8 challenge.  Trying to colour code
-many different categories of crime.  Use fewer colours, but repeat.
-OR use colour palette, but NOT in hue order (interleave instead) so
-get greater contrast between adjacent colours.
-Footnote attribute this to
-"Reflections on the Uses and Available Choices of Categorical Colorschemes"
+This choice is difficult because there are many different colours 
+to choose from and often there is no obvious mapping 
+from a data value to a particular
+colour.  For example, what specific hue, chroma, and luminance
+should we choose to represent a `high` crime level?
+
+There are also competing criteria involved in selecting colours.
+For example, although the primary goal is to represent different categories 
+with colours that are as different from each
+other as possible, as we saw in @sec-CVD, we also 
+have to take into account that some viewers may have difficulty
+perceiving differences between particular colours.
+
+Fortunately, researchers have produced a number of 
+predefined colour palettes that we can make use of.
+For example, the colours used in @fig-pie-hue
+are based on palettes used in journals published by the
+Nature Publishing Group.[^ggsci]
+
+[^ggsci]:
+  cite ggsci, colour brewer (and others?)
+
+If the data symbols are arranged in a regular pattern,
+like in a bar plot,
+then comparisons between neighbours are most important,
+so we can order the colours to maximise neighbour differences
+rather than maximising all pairwise differences.[^bartolomeo]
+@fig-pie-order demonstrates this idea with a bar plot of the crime
+rate in different districts for both 2011 and 2021.
+This bar plot uses the same set of
+hues as @fig-pie-contrast-solved, just in a different order
+so that adjacent bars have very different colours.
+
+[^bartolomeo]:
+  "Reflections on the Uses and Available Choices of Categorical Colorschemes"
   Bartolomeo et al (2025)
+
+```{r}
+#| echo: false
+#| label: fig-pie-order
+#| fig-cap: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
+ggplot(subset(crimeDistrict, year %in% c(2011, 2021))) + 
+    geom_col(aes(x=year, y=rate, fill=district), position="dodge",
+             colour=figbg) +
+    scale_fill_manual(values=pal_hue()(12)[t(matrix(1:12, 
+                                                    ncol=2))]) +
+    scale_x_continuous(breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(axis.title.x=element_blank())
+```
+
+A similar idea is to just reuse a smaller set of hues, which means
+larger differences between adjacent colours, but repeat
+the set.   The
+regular arrangement of the data symbols means that we can
+still differentiate between repeated colours because of the bar positions
+(@fig-pie-repeat).  For example, we can differentiate the pink for 
+the Wellington district
+from the pink for the Eastern district because Wellington is at the end and
+Eastern is in the middle.
+
+```{r}
+#| echo: false
+#| label: fig-pie-repeat
+#| fig-cap: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
+ggplot(subset(crimeDistrict, year %in% c(2011, 2021))) + 
+    geom_col(aes(x=year, y=rate, fill=district), position="dodge",
+             colour=figbg) +
+    scale_fill_manual(values=rep(pal_hue()(6), 2)) +
+    scale_x_continuous(breaks=c(2011, 2021)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(axis.title.x=element_blank())
+```
 
 ## Case study: Divergent colour palettes
 
@@ -431,5 +529,6 @@ and **luminance**.
 **Chroma** and **luminance** can be used to represent **ordinal**
 data values, but they have a very limited capacity.
 
-
+We should lean on the work done by experts when it comes to choosing
+colour palettes.
 
