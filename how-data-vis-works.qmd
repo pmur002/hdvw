@@ -10,39 +10,15 @@ crossref:
   sec-prefix: Section
 bibliography: how-data-vis-works.bib
 format: 
-  html:    
+  html:
     css: style.css
 ---
 
 ```{r}
 #| echo: false
 #| message: false
-library(png)
-library(dplyr)
-library(reshape2)
-library(tidyr)
-library(knitr)
-library(kableExtra)
-library(reshape2)
-library(ggplot2)
-library(gggrid)
-library(scales)
-library(colorspace)
-library(rcartocolor)
-library(ggsci)
-library(grid)
-library(ggmosaic)
-library(GGally)
-library(ggforce)
-library(ggChernoff)
-library(ggimage)
-library(ggh4x)
-library(sf)
-library(grImport)
-library(grImport2)
-library(rsvg)
-library(ggtext)
-library(xdvir)
+pkgs <- readLines("packages.txt")
+invisible(lapply(pkgs, library, character.only=TRUE))
 ```
 
 ```{r}
@@ -671,6 +647,10 @@ to emphasise structure - combination of order and category
   the next section.
   Add this after mention of visualising models?
 
+  Add footnote to Hadley's more complex model visualisation paper
+  https://vita.had.co.nz/papers/model-vis.pdf
+  https://dl.acm.org/doi/10.1002/sam.11271
+
 * Case study: SinaPlots
 
 A SinaPlot is a nice combination of decode for raw data and for data summary.
@@ -738,7 +718,19 @@ popViewport()
   * Another possible application of data vis knowledge:
     Analyse one of the weird boxplot variations that look a bit like a ziggurat?
 
+* Another example of deliberate reduction in visual feature expressiveness
+  is categorical colour scheme in heat map (so at least some features
+  are more obvious).
 
+* Add reference to Ehrenberg (1977) advice on tables in footnote
+  in case study on tables (in text topic)
+  PLUS reference to 
+  "UNDERSTANDING GRAPHS AND TABLES"
+  Wainer (1992)
+
+* Smooth lines through scatter plot case study ?
+  footnote cite to Tukey for visualising phenomena rather than raw data?
+  
 * This nice quote ...
 
   > Graphics are for comparison - comparison of one kind or another - not for
