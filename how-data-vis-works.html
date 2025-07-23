@@ -71,12 +71,12 @@ div.csl-indent {
    
   <ul>
   <li><a href="#sec-exec" id="toc-sec-exec" class="nav-link active" data-scroll-target="#sec-exec"><span class="header-section-number">1</span> Executive Summary</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">2</span> Introduction</a>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link" data-scroll-target="#sec-intro"><span class="header-section-number">2</span> Introduction</a>
   <ul class="collapse">
   <li><a href="#how-will-it-help" id="toc-how-will-it-help" class="nav-link" data-scroll-target="#how-will-it-help"><span class="header-section-number">2.1</span> How will it help?</a></li>
   <li><a href="#sec-scope" id="toc-sec-scope" class="nav-link" data-scroll-target="#sec-scope"><span class="header-section-number">2.2</span> Scope</a></li>
   <li><a href="#sec-terminology" id="toc-sec-terminology" class="nav-link" data-scroll-target="#sec-terminology"><span class="header-section-number">2.3</span> Terminology</a></li>
-  <li><a href="#mappings" id="toc-mappings" class="nav-link" data-scroll-target="#mappings"><span class="header-section-number">2.4</span> Mappings</a></li>
+  <li><a href="#sec-mappings" id="toc-sec-mappings" class="nav-link" data-scroll-target="#sec-mappings"><span class="header-section-number">2.4</span> Mappings</a></li>
   <li><a href="#how-to-read-this-document" id="toc-how-to-read-this-document" class="nav-link" data-scroll-target="#how-to-read-this-document"><span class="header-section-number">2.5</span> How to read this document</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">2.6</span> Summary</a></li>
   </ul></li>
@@ -256,7 +256,7 @@ div.csl-indent {
 </ul>
 </div>
 </section>
-<section id="introduction" class="level1" data-number="2">
+<section id="sec-intro" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Introduction</h1>
 <p>A data visualisation presents data values in a visual format. In an effective data visualisation, this allows properties of the data to be perceived very rapidly and without conscious effort. For example, <a href="#tbl-crime" class="quarto-xref">Table&nbsp;2.1</a> shows data on the crime rate for youth offenders in New Zealand, for the ages 14 to 16, for each year from 2011 to 2021. With this purely text-based, tabular presentation of the data, it requires considerable time and effort to determine any trends in the crime rates.</p>
 <div class="cell">
@@ -492,8 +492,8 @@ Figure&nbsp;2.6: Examples of labels: the titles and sub-titles on all three plot
 </figure>
 </div>
 </section>
-<section id="mappings" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="mappings"><span class="header-section-number">2.4</span> Mappings</h2>
+<section id="sec-mappings" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-mappings"><span class="header-section-number">2.4</span> Mappings</h2>
 <p>Although we have reduced a data visualisation to just three components, data symbols, guides, and labels, there are still many possible variations. Which data symbols are being used? How are the axes labelled? What colours are being used? As much as possible, we are going to further reduce the design of a data visualisation to a single question: What <strong>mappings</strong> are being used?<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
 <p>Much of this document is focused on considering how data values are being mapped, or <strong>encoded</strong>, into a visual representation. For example, in the line plot of crime rates for different ages in New Zealand in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;2.1</a>, the data values are <code>year</code>, crime <code>rate</code>, and <code>age</code> (see <a href="#tbl-crime" class="quarto-xref">Table&nbsp;2.1</a>) and the data symbols are a set of coloured lines.</p>
 <p>We can describe this data visualisation in terms of a set of mappings (see <a href="#fig-mappings-1" class="quarto-xref">Figure&nbsp;2.7</a>):</p>
@@ -1303,7 +1303,10 @@ Figure&nbsp;3.16: We automatically complete curves.
 </div>
 </div>
 </div>
-<p>When we visualise quantitative data, we will be able to rely on the automatic identification of different groups of data symbols based on visual similarities.</p>
+<p>When we visualise qualitative data, we will be able to rely on the automatic identification of different groups of data symbols based on visual similarities.</p>
+<blockquote class="blockquote">
+<p>A data visualisation of qualitative data may be effective if it relies on the automatic identification of visual groups (proximity, similarity, etc).</p>
+</blockquote>
 </section>
 <section id="sec-simplicity" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="sec-simplicity"><span class="header-section-number">3.8</span> Visual simplicity</h2>
@@ -1323,7 +1326,10 @@ Figure&nbsp;3.17: We automatically perceive simple shapes over more complex inte
 </div>
 </div>
 </div>
-<p>This suggests that a data visualisations will be more effective if it is simple and orderly. We should lead the viewer where they already want to go rather than fight for their attention.</p>
+<p>This suggests that a data visualisations will be more effective if it is simple and orderly. We should lead the viewer where they already want to go rather than forcing the viewer to perceive a more complex interpretation.</p>
+<blockquote class="blockquote">
+<p>A data visualisation may be effective if it lends itself to a simple interpretation.</p>
+</blockquote>
 </section>
 <section id="sec-tasks" class="level2" data-number="3.9">
 <h2 data-number="3.9" class="anchored" data-anchor-id="sec-tasks"><span class="header-section-number">3.9</span> Visual tasks</h2>
@@ -1358,7 +1364,10 @@ Figure&nbsp;3.18: On the left is a simple visual task, to estimate the relative 
 </section>
 <section id="sec-mapping-visual-features" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Visual Features</h1>
-<p>We have established that the mappings from data values to data symbols are fundamental to a data visualisation. However, there are many possible ways to map data values into visual representations; there are many possible encodings to choose from. We have also begun to explore the visual system and we have identified three levels of visual processing: visual features, visual shapes, and visual objects. In this section, we begin to explore different sorts of encodings, starting with the simplest case, where each <strong>data value</strong> is <strong>encoded</strong> as a basic <strong>visual feature</strong> of a data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;4.1</a>).</p>
+<p>We have established that the mappings from data values to data symbols are fundamental to a data visualisation. We have also established some basic properties of the visual system and we have identified three levels of visual processing: visual features, visual shapes, and visual objects.</p>
+<p>There are many possible ways to map from data values to data symbols. For example, in <a href="#sec-mappings" class="quarto-xref">Section&nbsp;2.4</a>, we saw that the same data values could be mapped in different ways to produce different data visualisations (<a href="#fig-crime" class="quarto-xref">Figure&nbsp;2.1</a> and <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;2.2</a>).</p>
+<p>On one hand, there are many possible encodings to choose from and, on the other hand, there are many possible data symbols to map to.</p>
+<p>In this section, we begin to explore different sorts of mappings, starting with the simplest case, where each <strong>data value</strong> is <strong>encoded</strong> as a basic <strong>visual feature</strong> of a <strong>data symbol</strong> (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;4.1</a>).</p>
 <div id="fig-visual-feature" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1473,7 +1482,7 @@ Figure&nbsp;4.4: A bar plot of number of crimes for different ethnic groups. The
 </div>
 </div>
 </div>
-<p><strong>Length</strong> and <strong>position</strong> are examples of basic visual features. One way to make an effective data visualisation is to encode data values as the basic visual features of a data symbol. This is effective because basic visual features are identified rapidly and without conscious effort by our visual system. <a href="#fig-visual-features" class="quarto-xref">Figure&nbsp;4.5</a> shows some other examples of basic visual features.<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></p>
+<p><strong>Length</strong> and <strong>position</strong> are examples of basic visual features. One way to make an effective data visualisation is to encode data values as the basic visual features of a data symbol. This is effective because basic visual features are identified rapidly and without conscious effort by our visual system (<a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;3.4</a>). <a href="#fig-visual-features" class="quarto-xref">Figure&nbsp;4.5</a> shows some other examples of basic visual features.<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-visual-features" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1489,7 +1498,7 @@ Figure&nbsp;4.5: Some examples of basic visual features are <strong>position</st
 </div>
 </div>
 <blockquote class="blockquote">
-<p>One reason why a bar plot is an effective data visualisation is because it involves a mapping from data values to the basic visual features of data symbols—the the positions and lengths of bars—and basic visual features are processed rapidly and subconsciously by our visual system.</p>
+<p>One reason why a bar plot is an effective data visualisation is because it involves a mapping from data values to the basic visual features of data symbols—the positions and lengths of bars—and basic visual features are processed rapidly and subconsciously by our visual system.</p>
 </blockquote>
 </section>
 <section id="sec-quant-features" class="level2" data-number="4.3">
@@ -1508,7 +1517,8 @@ Figure&nbsp;4.6: When we encode data values as visual features, we want to map t
 <p>One issue to consider is whether a visual feature is able to represent all of the information in the data values.<a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a> Some types of data contain more information than others:</p>
 <ul>
 <li><p><strong>Quantitative</strong> data consists of numeric values, which naturally possess not only an ordering, but information about the size of differences between values. For example, the <code>year</code> 2020 comes after the year 2010 and there is a gap of 10 years in between. This is also referred to as <strong>interval</strong> data. <strong>Ratio</strong> data is quantitative data that also contains a “zero” reference value, so there is also information about absolute size and ratios of differences. For example, 200 offenders is twice as many as 100 offenders.</p></li>
-<li><p><strong>Qualitative</strong> data consists of categorical values that are typically character values. <strong>Ordinal</strong> data consists of categories that are ordered, but there is no information about the size of differences. For example, a “high” crime level is more severe than a “medium” crime level, which is more severe than a “low” crime level, but we cannot measure the size of the differences. <strong>Nominal</strong> data consists of just group labels, e.g., ethnic groups, and the only information we have is that the categories are different from each other.</p></li>
+<li><p><strong>Qualitative</strong> data consists of categorical values.<br>
+<strong>Ordinal</strong> data consists of categories that are ordered, but there is no information about the size of differences. For example, a “high” crime level is more severe than a “medium” crime level, which is more severe than a “low” crime level, but we cannot measure the size of the differences. <strong>Nominal</strong> data consists of just group labels, e.g., ethnic groups, and the only information we have is that the categories are different from each other.</p></li>
 </ul>
 <p><a href="#fig-quant-features" class="quarto-xref">Figure&nbsp;4.7</a> shows that <strong>position</strong>, <strong>length</strong>, <strong>angle</strong>, and <strong>area</strong> are visual features that are capable of representing <strong>quantitative</strong> data values. For example, a bar that is twice as high as another bar comfortably represents a data value that is twice as much as another data value. All but <strong>position</strong> also possess a natural representation of zero.</p>
 <div class="cell">
@@ -1547,7 +1557,7 @@ Figure&nbsp;4.8: The visual features <strong>colour</strong> and <strong>shape</
 </section>
 <section id="sec-qual-features" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="sec-qual-features"><span class="header-section-number">4.4</span> Qualitative features</h2>
-<p>If we have <strong>qualitative</strong> data, then we are primarily concerned with conveying differences between data values. <a href="#fig-qual-features" class="quarto-xref">Figure&nbsp;4.9</a> shows that <strong>position</strong>, <strong>colour</strong>, and <strong>shape</strong> are capable of representing qualitative data values. For example, blue is clearly different from green, which is clearly different from brown.</p>
+<p>If we have <strong>qualitative</strong> data, then we are primarily concerned with conveying whether data values are the same or different. <a href="#fig-qual-features" class="quarto-xref">Figure&nbsp;4.9</a> shows that <strong>position</strong>, <strong>colour</strong>, and <strong>shape</strong> are capable of representing qualitative data values. For example, blue is clearly different from green, which is clearly different from brown. In <a href="#sec-visual-model-groups" class="quarto-xref">Section&nbsp;3.7</a> we saw that we also easily identify visual objects that have the same visual features.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-qual-features" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1562,7 +1572,7 @@ Figure&nbsp;4.9: The visual features <strong>colour</strong>, <strong>shape</str
 </div>
 </div>
 </div>
-<p>By contrast, <a href="#fig-not-qual" class="quarto-xref">Figure&nbsp;4.10</a> shows that <strong>length</strong>, <strong>area</strong>, and <strong>angle</strong> are not appropriate for representing qualitative data values. In this case, the visual features imply an inherent order, which is misleading because that <em>adds</em> information that is not present in the data values.</p>
+<p>By contrast, <a href="#fig-not-qual" class="quarto-xref">Figure&nbsp;4.10</a> shows that <strong>length</strong>, <strong>area</strong>, and <strong>angle</strong> are not appropriate for representing qualitative data values. While we can identify whether lengths or areas are different from each other, these visual features imply an inherent <em>order</em>, which is misleading because that <em>adds</em> information that is not present in the data values.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-not-qual" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5610,8 +5620,6 @@ Figure&nbsp;14.11: A scatter plot of the number of times a team breaks through t
 <li><p>Check that colour palettes are ok for CVD</p></li>
 <li><p>review https://friendly.github.io/6135/lectures/GraphPerception.pdf from https://friendly.github.io/6135/index.html (especially the stuff on basic models of visual perception and cognition!) to see that (i) I am covering everything and (ii) I am not telling too many lies.</p></li>
 <li><p>Add another apology (in scope?) that I am ignoring the “fun” or “joy” of data vis and point to some people like Jonathon Schwabish and Flowing Data</p></li>
-<li><p>Add texture (at least) to list of standard visual features</p></li>
-<li><p>When talk about visual types, point out that qualitative are good for group membership - these items are <em>the same</em> - as well as being good for differences. And link back to gestalt grouping in visual system(?) Or more like the fundamental tasks that they support are <strong>same</strong> as well as different. Quantitative are actually not so good at <strong>same</strong> (?)</p></li>
 <li><p>When talk about basic data types and what you can do with them, maybe introduce the explicit idea of “comparison” and all tasks basically being based on comparison (with some examples of breaking down tasks). There is a nice simple list of tasks (rather than some overblown task taxonomy) in “Low-Level Components of Analytic Activity in Information Visualization” Amar et al (2005) which describes comparison as a “fundamental cognitive action” that underlies all data vis tasks.</p></li>
 <li><p>Check whether HDVW covers all of the types of tasks in “Low-Level Components of Analytic Activity in Information Visualization” Amar et al (2005)</p></li>
 <li><p>In visual-model, make a BRIEF statement at the end of each section (maybe in black box) about the implications for data vis.</p></li>

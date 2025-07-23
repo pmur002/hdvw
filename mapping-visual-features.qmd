@@ -2,18 +2,26 @@
 # Visual Features {#sec-mapping-visual-features}
 
 We have established that the mappings from data values to data symbols
-are fundamental to a data visualisation.  However, there are many 
-possible ways to map data values into visual representations;
-there are many
-possible encodings to choose from.
-We have also begun to explore the visual system and we have identified
+are fundamental to a data visualisation.
+We have also established some basic properties of
+the visual system and we have identified
 three levels of visual processing:  visual features, visual shapes,
 and visual objects.
-In this section, we begin to explore different sorts of encodings,
-starting with 
-the simplest case, where
+
+There are many 
+possible ways to map from data values to data symbols.
+For example, in @sec-mappings, we saw that the same data values could be
+mapped in different ways to produce different data visualisations
+(@fig-crime and @fig-crime-heatmap).
+ 
+On one hand, there are many
+possible encodings to choose from and, on the other hand, 
+there are many possible data symbols to map to.
+
+In this section, we begin to explore different sorts of mappings,
+starting with the simplest case, where
 each **data value** is **encoded** as 
-a basic **visual feature** of a data symbol
+a basic **visual feature** of a **data symbol**
 (@fig-visual-feature).  
 
 ::: {#fig-visual-feature layout-ncol=2}
@@ -138,7 +146,8 @@ ggplot(crimeGroupTotal) +
 One way to make an effective data visualisation is to encode
 data values as the basic visual features of a data symbol.
 This is effective because basic visual features are 
-identified rapidly and without conscious effort by our visual system.
+identified rapidly and without conscious effort by our visual system
+(@sec-visual-processing).
 @fig-visual-features shows some other examples of basic visual 
 features.[^visual-features]
 
@@ -201,7 +210,7 @@ popViewport()
 > One reason why a bar plot is an effective data visualisation is 
   because it involves a mapping from data values
   to the basic visual features of data symbols---the
-  the positions and lengths of bars---and basic visual features 
+  positions and lengths of bars---and basic visual features 
   are processed rapidly and subconsciously by our visual system.
 
 ## Quantitative features {#sec-quant-features}
@@ -245,8 +254,8 @@ Some types of data contain more information than others:
   about absolute size and ratios of differences.
   For example, 200 offenders is twice as many as 100 offenders.
 
-* **Qualitative** data consists of categorical values that are typically
-  character values.  **Ordinal** data consists of categories that
+* **Qualitative** data consists of categorical values.  
+  **Ordinal** data consists of categories that
   are ordered, but there is no information about the size of differences.
   For example, a "high" crime level is more severe than a "medium"
   crime level, which is more severe than a "low" crime level, but 
@@ -372,11 +381,12 @@ conveying all of the information in quantitative values.
 ## Qualitative features {#sec-qual-features}
 
 If we have **qualitative** data, then we are primarily concerned with
-conveying differences between data values.
+conveying whether data values are the same or different.
 @fig-qual-features shows that **position**, **colour**, and **shape**
 are capable of representing qualitative data values.  For example,
 blue is clearly different from green, which is clearly different from 
-brown.
+brown.  In @sec-visual-model-groups we saw that we also easily
+identify visual objects that have the same visual features.
 
 ```{r}
 #| echo: false
@@ -420,8 +430,10 @@ popViewport(2)
 ```
 
 By contrast, @fig-not-qual shows that **length**, **area**, and **angle**
-are not appropriate for representing qualitative data values.  In this
-case, the visual features imply an inherent order, which is misleading
+are not appropriate for representing qualitative data values.
+While we can identify whether lengths or areas are 
+different from each other, these
+visual features imply an inherent *order*, which is misleading
 because that *adds* information that is not present in the data values.
 
 ```{r}

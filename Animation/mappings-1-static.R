@@ -17,7 +17,7 @@ names(crime) <- c("year", "rate", "age")
 crime$rate <- round(crime$rate)
 
 figbg <- "#F2F2F2"
-highlight <- "#7D12BA" 
+highlight <- "black" ## "#7D12BA" 
 
 theme_set(theme_bw())
 theme_update(plot.background=element_rect(colour=NA, 
@@ -64,7 +64,7 @@ gg <- ggplot(crime) +
     grid_panel(rateShow, aes(y=rate))
 
 nrow <- 9
-rowcols <- rep("black", nrow)
+rowcols <- rep("grey", nrow)
 rowcols[3] <- highlight
 rowface <- rep("plain", nrow)
 rowface[3] <- "bold"
@@ -79,7 +79,7 @@ grid.newpage()
 grid.rect(gp=gpar(col=NA, fill=figbg))
 pushViewport(viewport(x=1/3, width=2/3, just="left"))
 print(gg, newpage=FALSE)
-grid.rect(gp=gpar(col=NA, fill=rgb(1,1,1,.7)))
+grid.rect(gp=gpar(col=NA, fill=rgb(1,1,1,.8)))
 upViewport()
 pushViewport(viewport(x=0, width=1/3, just="left"))
 grid.draw(gt)

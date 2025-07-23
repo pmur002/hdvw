@@ -156,7 +156,7 @@ dec <- function(x) {
 
 
 
-# Introduction
+# Introduction {#sec-intro}
 
 A data visualisation presents data values in a visual
 format.  In an effective data visualisation, this allows
@@ -667,7 +667,7 @@ the axis titles on the line plot and the bar plot; and the legend
 title on the donut plot.
 :::
 
-## Mappings
+## Mappings {#sec-mappings}
 
 Although we have reduced a data visualisation to just three components,
 data symbols, 
@@ -1623,9 +1623,13 @@ curves(col1=colsnpg[1], col2="grey", col3=colsnpg[1],
 popViewport()
 ```
 
-When we visualise quantitative data, we will be able to rely
+When we visualise qualitative data, we will be able to rely
 on the automatic identification of different groups of data
 symbols based on visual similarities.
+
+> A data visualisation of qualitative data may be effective if it
+  relies on the automatic identification of visual groups
+  (proximity, similarity, etc).
 
 ## Visual simplicity {#sec-simplicity}
 
@@ -1665,7 +1669,11 @@ popViewport()
 
 This suggests that a data visualisations will be more effective
 if it is simple and orderly.  We should lead the viewer where
-they already want to go rather than fight for their attention.
+they already want to go rather than forcing the viewer
+to perceive a more complex interpretation.
+
+> A data visualisation may be effective if it
+  lends itself to a simple interpretation.
 
 ## Visual tasks {#sec-tasks}
 
@@ -1751,18 +1759,26 @@ the visual system is good at.
 # Visual Features {#sec-mapping-visual-features}
 
 We have established that the mappings from data values to data symbols
-are fundamental to a data visualisation.  However, there are many 
-possible ways to map data values into visual representations;
-there are many
-possible encodings to choose from.
-We have also begun to explore the visual system and we have identified
+are fundamental to a data visualisation.
+We have also established some basic properties of
+the visual system and we have identified
 three levels of visual processing:  visual features, visual shapes,
 and visual objects.
-In this section, we begin to explore different sorts of encodings,
-starting with 
-the simplest case, where
+
+There are many 
+possible ways to map from data values to data symbols.
+For example, in @sec-mappings, we saw that the same data values could be
+mapped in different ways to produce different data visualisations
+(@fig-crime and @fig-crime-heatmap).
+ 
+On one hand, there are many
+possible encodings to choose from and, on the other hand, 
+there are many possible data symbols to map to.
+
+In this section, we begin to explore different sorts of mappings,
+starting with the simplest case, where
 each **data value** is **encoded** as 
-a basic **visual feature** of a data symbol
+a basic **visual feature** of a **data symbol**
 (@fig-visual-feature).  
 
 ::: {#fig-visual-feature layout-ncol=2}
@@ -1887,7 +1903,8 @@ ggplot(crimeGroupTotal) +
 One way to make an effective data visualisation is to encode
 data values as the basic visual features of a data symbol.
 This is effective because basic visual features are 
-identified rapidly and without conscious effort by our visual system.
+identified rapidly and without conscious effort by our visual system
+(@sec-visual-processing).
 @fig-visual-features shows some other examples of basic visual 
 features.[^visual-features]
 
@@ -1950,7 +1967,7 @@ popViewport()
 > One reason why a bar plot is an effective data visualisation is 
   because it involves a mapping from data values
   to the basic visual features of data symbols---the
-  the positions and lengths of bars---and basic visual features 
+  positions and lengths of bars---and basic visual features 
   are processed rapidly and subconsciously by our visual system.
 
 ## Quantitative features {#sec-quant-features}
@@ -1994,8 +2011,8 @@ Some types of data contain more information than others:
   about absolute size and ratios of differences.
   For example, 200 offenders is twice as many as 100 offenders.
 
-* **Qualitative** data consists of categorical values that are typically
-  character values.  **Ordinal** data consists of categories that
+* **Qualitative** data consists of categorical values.  
+  **Ordinal** data consists of categories that
   are ordered, but there is no information about the size of differences.
   For example, a "high" crime level is more severe than a "medium"
   crime level, which is more severe than a "low" crime level, but 
@@ -2121,11 +2138,12 @@ conveying all of the information in quantitative values.
 ## Qualitative features {#sec-qual-features}
 
 If we have **qualitative** data, then we are primarily concerned with
-conveying differences between data values.
+conveying whether data values are the same or different.
 @fig-qual-features shows that **position**, **colour**, and **shape**
 are capable of representing qualitative data values.  For example,
 blue is clearly different from green, which is clearly different from 
-brown.
+brown.  In @sec-visual-model-groups we saw that we also easily
+identify visual objects that have the same visual features.
 
 ```{r}
 #| echo: false
@@ -2169,8 +2187,10 @@ popViewport(2)
 ```
 
 By contrast, @fig-not-qual shows that **length**, **area**, and **angle**
-are not appropriate for representing qualitative data values.  In this
-case, the visual features imply an inherent order, which is misleading
+are not appropriate for representing qualitative data values.
+While we can identify whether lengths or areas are 
+different from each other, these
+visual features imply an inherent *order*, which is misleading
 because that *adds* information that is not present in the data values.
 
 ```{r}
@@ -8776,16 +8796,6 @@ Have to throw bouquet at Quarto.
 * Add another apology (in scope?) that I am ignoring the "fun" or "joy" of
   data vis and point to some people like Jonathon Schwabish and
   Flowing Data
-
-* Add texture (at least) to list of standard visual features
-
-* When talk about visual types, point out that qualitative are good
-  for group membership - these items are *the same* - as well as
-  being good for differences.
-  And link back to gestalt grouping in visual system(?)
-  Or more like the fundamental tasks that they support are **same**
-  as well as different.
-  Quantitative are actually not so good at **same** (?)
 
 * When talk about basic data types and what you can do with them,
   maybe introduce the explicit idea of "comparison" and all tasks
