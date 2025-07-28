@@ -890,6 +890,45 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-symmetry
+#| fig-cap: We automatically perceive groups from symmetric arrangements.
+#| fig.height: 2
+library(vwline)
+arc <- function(angle, offset, x=.5) {
+    r <- .3
+    n1 <- 6
+    n2 <- 1.5*n1
+    step2 <- convertWidth(unit(pi*r/n2, "npc"), "mm")
+    t <- seq(-angle + offset, angle + offset, length.out=50)
+    grid.draw(editGrob(brushXsplineGrob(circleBrush(), 
+                                        x + r*cos(t), .5 + r*sin(t), 
+                                        w=unit(2, "mm"), spacing=step2, 
+                                        gp=gpar(fill="black")), 
+                       tol=1e-8))
+}
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 7, 
+                                         widths=unit(c(2, 1), c("cm", "null")), 
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=2))
+arc(pi/2, 0, .55)
+arc(pi/2, pi, .45)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+arc(pi/2, pi, .5)
+arc(pi/2, pi, 1)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+pushViewport(viewport(layout.pos.col=6))
+arc(pi/5, 0, .5)
+arc(pi/2, pi, .5)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-visual-task
 #| fig-cap: On the left is a simple visual task, to estimate the relative length of the two lines.  On the right is a more complicated visual task, to decide which of the four bottom shapes is *not* a rotated version of the top shape.
 #| fig.height: 2

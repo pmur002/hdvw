@@ -283,7 +283,7 @@ the identification of **objects**---things like trees, animals, and
 faces.[^ware-model]
 
 [^ware-model]:
-  cite Ware (4th) p229-330
+  cite Ware (4th) p229-330, also fig 6.1
 
 ::: {#fig-visual-processing}
 
@@ -836,7 +836,7 @@ symbols based on visual similarities.
 The collection of dots on the left has an ambiguous interpretation.
 Is this a single shape, or two overlapping shapes (as indicated in the
 centre of @fig-simplicity), or some complex combination of multiple shapes
-(as indicated on the right)?
+(as indicated on the right of @fig-simplicity)?
 
 Our visual system has a preference for the simple interpretation.
 Given an ambiguous arrangement of visual elements, we will tend to perceive
@@ -866,18 +866,60 @@ curves(col1=colsnpg[1], col2="grey", col3=colsnpg[2],
 popViewport()
 ```
 
-This suggests that a data visualisations will be more effective
+@fig-symmetry shows that we also perceive groups when
+items have a symmetric arrangement.
+
+```{r}
+#| echo: false
+#| label: fig-symmetry
+#| fig-cap: We automatically perceive groups from symmetric arrangements.
+#| fig.height: 2
+library(vwline)
+arc <- function(angle, offset, x=.5) {
+    r <- .3
+    n1 <- 6
+    n2 <- 1.5*n1
+    step2 <- convertWidth(unit(pi*r/n2, "npc"), "mm")
+    t <- seq(-angle + offset, angle + offset, length.out=50)
+    grid.draw(editGrob(brushXsplineGrob(circleBrush(), 
+                                        x + r*cos(t), .5 + r*sin(t), 
+                                        w=unit(2, "mm"), spacing=step2, 
+                                        gp=gpar(fill="black")), 
+                       tol=1e-8))
+}
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 7, 
+                                         widths=unit(c(2, 1), c("cm", "null")), 
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=2))
+arc(pi/2, 0, .55)
+arc(pi/2, pi, .45)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+arc(pi/2, pi, .5)
+arc(pi/2, pi, 1)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+pushViewport(viewport(layout.pos.col=6))
+arc(pi/5, 0, .5)
+arc(pi/2, pi, .5)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+```
+
+These results suggest that a data visualisations will be more effective
 if it is simple and orderly.  We should lead the viewer where
-they already want to go rather than forcing the viewer
+they already want to go rather than trying to force the viewer
 to perceive a more complex interpretation.
 
-> A data visualisation may be effective if it
+> A data visualisation may be effective if it is orderly and
   lends itself to a simple interpretation.
 
 ## Visual tasks {#sec-tasks}
 
 Identifying whether visual elements are the same or different
-is an example of a very simple visual task.
+(@sec-differences) is an example of a very simple visual task.
 @fig-visual-task (on the left) shows another simple visual task:
 judging the ratio of different lengths.
 However, on the right of @fig-visual-task is an example of a

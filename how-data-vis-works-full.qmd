@@ -329,7 +329,7 @@ has to tell us about effective data visualisation.
 We will consider factors that influence how rapidly and how
 accurately information can be extracted from a data visualisation.
 This will include findings from a broad range of research, encompassing
-Statistics, Computer Science, and Psychology.[^summary]
+Statistics, Computer Science, Psychology, and Cartography.[^summary]
 
 [^summary]:
   This document is not only a synthesis, but also a *simplification* of
@@ -364,6 +364,20 @@ the properties of the data.[^ethics]
   also mention "story-telling" or "narratives" ?  or "task taxonomies" ?
   how data vis can have emotional affects ?
   link to "Data Feminism" D'Ignazio and Klein
+
+This document is also aimed at a numerate audience,
+so we assume an appreciation of the importance of collecting
+the right data in the right way for the questions that we
+hope to answer.[^bertini]
+
+[^bertini]:
+    Nice example that shows other things people are concerned about
+    from Enrico Bertini
+    "How NOT to Lie with Charts"
+    https://filwd.substack.com/p/how-not-to-lie-with-charts
+    Mention that lots of authors like Cairo and Munzner tackle
+    the entire data vis process.
+
 
 It is also important to acknowledge that vision science cannot yet tell us
 everything about how data visualisation works.
@@ -1084,7 +1098,7 @@ the identification of **objects**---things like trees, animals, and
 faces.[^ware-model]
 
 [^ware-model]:
-  cite Ware (4th) p229-330
+  cite Ware (4th) p229-330, also fig 6.1
 
 ::: {#fig-visual-processing}
 
@@ -1637,7 +1651,7 @@ symbols based on visual similarities.
 The collection of dots on the left has an ambiguous interpretation.
 Is this a single shape, or two overlapping shapes (as indicated in the
 centre of @fig-simplicity), or some complex combination of multiple shapes
-(as indicated on the right)?
+(as indicated on the right of @fig-simplicity)?
 
 Our visual system has a preference for the simple interpretation.
 Given an ambiguous arrangement of visual elements, we will tend to perceive
@@ -1667,18 +1681,60 @@ curves(col1=colsnpg[1], col2="grey", col3=colsnpg[2],
 popViewport()
 ```
 
-This suggests that a data visualisations will be more effective
+@fig-symmetry shows that we also perceive groups when
+items have a symmetric arrangement.
+
+```{r}
+#| echo: false
+#| label: fig-symmetry
+#| fig-cap: We automatically perceive groups from symmetric arrangements.
+#| fig.height: 2
+library(vwline)
+arc <- function(angle, offset, x=.5) {
+    r <- .3
+    n1 <- 6
+    n2 <- 1.5*n1
+    step2 <- convertWidth(unit(pi*r/n2, "npc"), "mm")
+    t <- seq(-angle + offset, angle + offset, length.out=50)
+    grid.draw(editGrob(brushXsplineGrob(circleBrush(), 
+                                        x + r*cos(t), .5 + r*sin(t), 
+                                        w=unit(2, "mm"), spacing=step2, 
+                                        gp=gpar(fill="black")), 
+                       tol=1e-8))
+}
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 7, 
+                                         widths=unit(c(2, 1), c("cm", "null")), 
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=2))
+arc(pi/2, 0, .55)
+arc(pi/2, pi, .45)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+arc(pi/2, pi, .5)
+arc(pi/2, pi, 1)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+pushViewport(viewport(layout.pos.col=6))
+arc(pi/5, 0, .5)
+arc(pi/2, pi, .5)
+## grid.segments(.5, 0, .5, 1)
+popViewport()
+```
+
+These results suggest that a data visualisations will be more effective
 if it is simple and orderly.  We should lead the viewer where
-they already want to go rather than forcing the viewer
+they already want to go rather than trying to force the viewer
 to perceive a more complex interpretation.
 
-> A data visualisation may be effective if it
+> A data visualisation may be effective if it is orderly and
   lends itself to a simple interpretation.
 
 ## Visual tasks {#sec-tasks}
 
 Identifying whether visual elements are the same or different
-is an example of a very simple visual task.
+(@sec-differences) is an example of a very simple visual task.
 @fig-visual-task (on the left) shows another simple visual task:
 judging the ratio of different lengths.
 However, on the right of @fig-visual-task is an example of a
@@ -8742,7 +8798,7 @@ visual shape, visual object and mappings
 
 List of questions to evaluate a data vis (maybe nest these a bit):
 
-* What are my data variables
+* What are the data variables
 * What visual features are they mapped to
 * What type of data
 * Can the visual features represent the data
@@ -8757,6 +8813,15 @@ List of questions to evaluate a data vis (maybe nest these a bit):
 * A visual object
 * Is that appropriate
 * Learned mappings somehow (distinct from implicit mappings)
+
+* Do all visual differences correspond to differences in the data?
+* Are all differences in the data represented by visual differences? 
+
+* Does each data value map to its own data symbol
+  If not, individual data values may be difficult to decode 
+* Do multiple data values map to a single data symbol
+  If not, data summaries may be difficult to decode 
+
 
 And so on ...
 
@@ -8792,10 +8857,6 @@ Have to throw bouquet at Quarto.
   and cognition!)
   to see that (i) I am covering everything and (ii) I am not
   telling too many lies.
-
-* Add another apology (in scope?) that I am ignoring the "fun" or "joy" of
-  data vis and point to some people like Jonathon Schwabish and
-  Flowing Data
 
 * When talk about basic data types and what you can do with them,
   maybe introduce the explicit idea of "comparison" and all tasks
