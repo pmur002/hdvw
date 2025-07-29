@@ -119,9 +119,10 @@ div.csl-indent {
   <li><a href="#sec-ordinal" id="toc-sec-ordinal" class="nav-link" data-scroll-target="#sec-ordinal"><span class="header-section-number">6.2</span> Ordinal visual features</a></li>
   <li><a href="#sec-colour-relative" id="toc-sec-colour-relative" class="nav-link" data-scroll-target="#sec-colour-relative"><span class="header-section-number">6.3</span> Perception is relative</a></li>
   <li><a href="#sec-CVD" id="toc-sec-CVD" class="nav-link" data-scroll-target="#sec-CVD"><span class="header-section-number">6.4</span> Colour vision deficiency</a></li>
-  <li><a href="#colour-palettes" id="toc-colour-palettes" class="nav-link" data-scroll-target="#colour-palettes"><span class="header-section-number">6.5</span> Colour palettes</a></li>
-  <li><a href="#case-study-divergent-colour-palettes" id="toc-case-study-divergent-colour-palettes" class="nav-link" data-scroll-target="#case-study-divergent-colour-palettes"><span class="header-section-number">6.6</span> Case study: Divergent colour palettes</a></li>
-  <li><a href="#summary-4" id="toc-summary-4" class="nav-link" data-scroll-target="#summary-4"><span class="header-section-number">6.7</span> Summary</a></li>
+  <li><a href="#size-matters" id="toc-size-matters" class="nav-link" data-scroll-target="#size-matters"><span class="header-section-number">6.5</span> Size matters</a></li>
+  <li><a href="#colour-palettes" id="toc-colour-palettes" class="nav-link" data-scroll-target="#colour-palettes"><span class="header-section-number">6.6</span> Colour palettes</a></li>
+  <li><a href="#case-study-divergent-colour-palettes" id="toc-case-study-divergent-colour-palettes" class="nav-link" data-scroll-target="#case-study-divergent-colour-palettes"><span class="header-section-number">6.7</span> Case study: Divergent colour palettes</a></li>
+  <li><a href="#summary-4" id="toc-summary-4" class="nav-link" data-scroll-target="#summary-4"><span class="header-section-number">6.8</span> Summary</a></li>
   </ul></li>
   <li><a href="#sec-congruence" id="toc-sec-congruence" class="nav-link" data-scroll-target="#sec-congruence"><span class="header-section-number">7</span> Congruent Mappings</a>
   <ul class="collapse">
@@ -1064,6 +1065,7 @@ Figure&nbsp;3.6: Three memory tasks. The task is to remember the colours of the 
 </figure>
 </div>
 <p><strong>ADD</strong> footnotes to cite Ware 4th ed p397-405 and p423-425</p>
+<p>And footnote that acknowledges some controversy (different models and number of items limit vs continuous resource limit), with ref to e.g., “Psychophysical scaling reveals a unified theory of visual memory strength” Schurgin et al (2020) and the binary map model</p>
 </section>
 <section id="sec-visual-processing" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-visual-processing"><span class="header-section-number">3.4</span> Visual processing</h2>
@@ -2163,13 +2165,31 @@ Figure&nbsp;6.9: A data visualisation of the number of offenders for different l
 </div>
 </div>
 </section>
-<section id="colour-palettes" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="colour-palettes"><span class="header-section-number">6.5</span> Colour palettes</h2>
+<section id="size-matters" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="size-matters"><span class="header-section-number">6.5</span> Size matters</h2>
+<p>The perception of colours is also affected by the size of the coloured region. In particular, small regions of colour may blend together with neighbouring colours. <a href="#fn36" class="footnote-ref" id="fnref36" role="doc-noteref"><sup>36</sup></a> For example, on the left of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;6.10</a>, the yellow and blue stripes are the same colours both in the top set if wide bars and in the bottom set of narrow bars. The right side of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;6.10</a> shows that the same colours may appear different when they are used as fill colours for larger regions, like bars, compared to when they are used for thin lines.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-colour-size" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-colour-size-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how-data-vis-works_files/figure-html/fig-colour-size-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-colour-size-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.10: The perception of colours varies based on the size of the coloured regions.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="colour-palettes" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="colour-palettes"><span class="header-section-number">6.6</span> Colour palettes</h2>
 <p>When we encode nominal or ordinal data values as colours, we have to choose a set of colours, or a <strong>colour palette</strong>. For example, in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;6.1</a> we have to choose a different colour to represent each level of crime.</p>
 <p>This choice is difficult because there are many different colours to choose from and often there is no obvious mapping from a data value to a particular colour. For example, what specific hue, chroma, and luminance should we choose to represent a <code>high</code> crime level?</p>
 <p>There are also competing criteria involved in selecting colours. For example, although the primary goal is to represent different categories with colours that are as different from each other as possible, as we saw in <a href="#sec-CVD" class="quarto-xref">Section&nbsp;6.4</a>, we also have to take into account that some viewers may have difficulty perceiving differences between particular colours.</p>
-<p>Fortunately, researchers have produced a number of predefined colour palettes that we can make use of. For example, the colours used in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;6.1</a> are based on palettes used in journals published by the Nature Publishing Group.<a href="#fn36" class="footnote-ref" id="fnref36" role="doc-noteref"><sup>36</sup></a></p>
-<p>If the data symbols are arranged in a regular pattern, like in a bar plot, then comparisons between neighbours are most important, so we can order the colours to maximise neighbour differences rather than maximising all pairwise differences.<a href="#fn37" class="footnote-ref" id="fnref37" role="doc-noteref"><sup>37</sup></a> <a href="#fig-pie-order" class="quarto-xref">Figure&nbsp;6.10</a> demonstrates this idea with a bar plot of the crime rate in different districts for both 2011 and 2021. This bar plot uses the same set of hues as <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;6.7</a>, just in a different order so that adjacent bars have very different colours.</p>
+<p>Fortunately, researchers have produced a number of predefined colour palettes that we can make use of. For example, the colours used in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;6.1</a> are based on palettes used in journals published by the Nature Publishing Group.<a href="#fn37" class="footnote-ref" id="fnref37" role="doc-noteref"><sup>37</sup></a></p>
+<p>If the data symbols are arranged in a regular pattern, like in a bar plot, then comparisons between neighbours are most important, so we can order the colours to maximise neighbour differences rather than maximising all pairwise differences.<a href="#fn38" class="footnote-ref" id="fnref38" role="doc-noteref"><sup>38</sup></a> <a href="#fig-pie-order" class="quarto-xref">Figure&nbsp;6.11</a> demonstrates this idea with a bar plot of the crime rate in different districts for both 2011 and 2021. This bar plot uses the same set of hues as <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;6.7</a>, just in a different order so that adjacent bars have very different colours.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie-order" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2178,13 +2198,13 @@ Figure&nbsp;6.9: A data visualisation of the number of offenders for different l
 <img src="how-data-vis-works_files/figure-html/fig-pie-order-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.10: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
+Figure&nbsp;6.11: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A similar idea is to just reuse a smaller set of hues, which means larger differences between adjacent colours, but repeat the set. The regular arrangement of the data symbols means that we can still differentiate between repeated colours because of the bar positions (<a href="#fig-pie-repeat" class="quarto-xref">Figure&nbsp;6.11</a>). For example, we can differentiate the pink for the Wellington district from the pink for the Eastern district because Wellington is at the end and Eastern is in the middle.</p>
+<p>A similar idea is to just reuse a smaller set of hues, which means larger differences between adjacent colours, but repeat the set. The regular arrangement of the data symbols means that we can still differentiate between repeated colours because of the bar positions (<a href="#fig-pie-repeat" class="quarto-xref">Figure&nbsp;6.12</a>). For example, we can differentiate the pink for the Wellington district from the pink for the Eastern district because Wellington is at the end and Eastern is in the middle.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie-repeat" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2193,16 +2213,16 @@ Figure&nbsp;6.10: The hues in this pie chart are ordered so that adjacent hues a
 <img src="how-data-vis-works_files/figure-html/fig-pie-repeat-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-repeat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.11: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
+Figure&nbsp;6.12: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="case-study-divergent-colour-palettes" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="case-study-divergent-colour-palettes"><span class="header-section-number">6.6</span> Case study: Divergent colour palettes</h2>
-<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations) at each World Cup. <a href="#tbl-rwc-all-year" class="quarto-xref">Table&nbsp;6.1</a> shows a sample of these data.<a href="#fn38" class="footnote-ref" id="fnref38" role="doc-noteref"><sup>38</sup></a></p>
+<section id="case-study-divergent-colour-palettes" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="case-study-divergent-colour-palettes"><span class="header-section-number">6.7</span> Case study: Divergent colour palettes</h2>
+<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations) at each World Cup. <a href="#tbl-rwc-all-year" class="quarto-xref">Table&nbsp;6.1</a> shows a sample of these data.<a href="#fn39" class="footnote-ref" id="fnref39" role="doc-noteref"><sup>39</sup></a></p>
 <div class="cell">
 <div id="tbl-rwc-all-year" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -2271,7 +2291,7 @@ Table&nbsp;6.1: A table of the total number of points scored and conceded by Tie
 </figure>
 </div>
 </div>
-<p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;6.12</a> shows a heatmap of the points differential (points scored for minus points scored against) for Tier One nations at each Rugby World Cup. The data symbols are rectangles, or “tiles”. The teams are encoded as the vertical <strong>positions</strong> of the tiles and the years are encoded as the horizontal <strong>positions</strong> of the tiles. These are both effective mappings and we can easily <strong>decode</strong> to teams or years. The points differentials are encoded as the <strong>colour</strong> of the tiles, but in a slightly complicated way. Positive data values map to a shade of purple, while negative values map to a shade of brown. In both cases, we have a constant <strong>hue</strong>, with increasing <strong>chroma</strong> and decreasing <strong>luminance</strong> as the data values get further away from zero.</p>
+<p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;6.13</a> shows a heatmap of the points differential (points scored for minus points scored against) for Tier One nations at each Rugby World Cup. The data symbols are rectangles, or “tiles”. The teams are encoded as the vertical <strong>positions</strong> of the tiles and the years are encoded as the horizontal <strong>positions</strong> of the tiles. These are both effective mappings and we can easily <strong>decode</strong> to teams or years. The points differentials are encoded as the <strong>colour</strong> of the tiles, but in a slightly complicated way. Positive data values map to a shade of purple, while negative values map to a shade of brown. In both cases, we have a constant <strong>hue</strong>, with increasing <strong>chroma</strong> and decreasing <strong>luminance</strong> as the data values get further away from zero.</p>
 <p>The use of two <strong>hues</strong> creates two different groups (positive and negative values), while the changes in <strong>chroma</strong> and <strong>luminance</strong> convey changes in absolute magnitude (if only for ordinal comparisons).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -2281,7 +2301,7 @@ Table&nbsp;6.1: A table of the total number of points scored and conceded by Tie
 <img src="how-data-vis-works_files/figure-html/fig-neg-tile-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-neg-tile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.12: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups. South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.<a href="#fn39" class="footnote-ref" id="fnref39" role="doc-noteref"><sup>39</sup></a>
+Figure&nbsp;6.13: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups. South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.<a href="#fn40" class="footnote-ref" id="fnref40" role="doc-noteref"><sup>40</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -2291,8 +2311,8 @@ Figure&nbsp;6.12: A heatmap of the total points differentials for Tier One natio
 <p>A diverging colour palette is effective because it creates two distinct visual features: a nominal hue to differentiate between two groups and changes in chroma and/or luminance to encode ordinal values within each group.</p>
 </blockquote>
 </section>
-<section id="summary-4" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="summary-4"><span class="header-section-number">6.7</span> Summary</h2>
+<section id="summary-4" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="summary-4"><span class="header-section-number">6.8</span> Summary</h2>
 <p><strong>Colour</strong> is really three visual features: <strong>hue</strong>, <strong>chroma</strong>, and <strong>luminance</strong>.</p>
 <p><strong>Hue</strong> is excellent for representing <strong>nominal</strong> data values.</p>
 <p><strong>Chroma</strong> and <strong>luminance</strong> can be used to represent <strong>ordinal</strong> data values, but they have a very limited capacity.</p>
@@ -2301,7 +2321,7 @@ Figure&nbsp;6.12: A heatmap of the total points differentials for Tier One natio
 </section>
 <section id="sec-congruence" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Congruent Mappings</h1>
-<p>The purpose of this section is to show that we need to consider more than just the accuracy or capacity of our mappings from data values to basic visual features in order to understand the effectiveness of a data visualisation.<a href="#fn40" class="footnote-ref" id="fnref40" role="doc-noteref"><sup>40</sup></a></p>
+<p>The purpose of this section is to show that we need to consider more than just the accuracy or capacity of our mappings from data values to basic visual features in order to understand the effectiveness of a data visualisation.<a href="#fn41" class="footnote-ref" id="fnref41" role="doc-noteref"><sup>41</sup></a></p>
 <section id="sec-implicit" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-implicit"><span class="header-section-number">7.1</span> Implicit mappings</h2>
 <p>Sort of like pre-attentive analogue of learned decodings.</p>
@@ -2427,7 +2447,7 @@ Figure&nbsp;7.5: A bar plot and a dot plot of the total number of offenders for 
 </figcaption>
 </figure>
 </div>
-<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all-time" class="quarto-xref">Table&nbsp;7.1</a> shows these data.<a href="#fn41" class="footnote-ref" id="fnref41" role="doc-noteref"><sup>41</sup></a></p>
+<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all-time" class="quarto-xref">Table&nbsp;7.1</a> shows these data.<a href="#fn42" class="footnote-ref" id="fnref42" role="doc-noteref"><sup>42</sup></a></p>
 <div class="cell">
 <div id="tbl-rwc-all-time" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -2546,7 +2566,7 @@ Figure&nbsp;7.7: A dot plot of the total points differential for Tier One nation
 <blockquote class="blockquote">
 <p>One reason why bar plots are effective is because larger data values are represented by larger data symbols.</p>
 </blockquote>
-<p>A more subtle effect can be seen in <a href="#fig-bar-orientation" class="quarto-xref">Figure&nbsp;7.8</a>, which shows two different bar plots of the total number of offenders in different ethnic groups. In this case, the vertical bars are more natural for conveying count data like this because of the natural correspondence with stacks of items.<a href="#fn42" class="footnote-ref" id="fnref42" role="doc-noteref"><sup>42</sup></a></p>
+<p>A more subtle effect can be seen in <a href="#fig-bar-orientation" class="quarto-xref">Figure&nbsp;7.8</a>, which shows two different bar plots of the total number of offenders in different ethnic groups. In this case, the vertical bars are more natural for conveying count data like this because of the natural correspondence with stacks of items.<a href="#fn43" class="footnote-ref" id="fnref43" role="doc-noteref"><sup>43</sup></a></p>
 <div id="fig-bar-orientation" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bar-orientation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2603,7 +2623,7 @@ Figure&nbsp;7.8: Data visualisations of the number of offenders from different e
 <img src="how-data-vis-works_files/figure-html/fig-bar-not-zero-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-not-zero-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.9: The number of times each team entered the opposition’s final third in the Women’s World Cup match between the Netherlands and South Africa.<a href="#fn43" class="footnote-ref" id="fnref43" role="doc-noteref"><sup>43</sup></a>
+Figure&nbsp;7.9: The number of times each team entered the opposition’s final third in the Women’s World Cup match between the Netherlands and South Africa.<a href="#fn44" class="footnote-ref" id="fnref44" role="doc-noteref"><sup>44</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -2631,7 +2651,7 @@ Figure&nbsp;7.10: If we explicitly map data values to visual features, but the v
 <img src="how-data-vis-works_files/figure-html/fig-listener-cakes-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-listener-cakes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.11: A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.<a href="#fn44" class="footnote-ref" id="fnref44" role="doc-noteref"><sup>44</sup></a>
+Figure&nbsp;7.11: A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.<a href="#fn45" class="footnote-ref" id="fnref45" role="doc-noteref"><sup>45</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -2643,7 +2663,7 @@ Figure&nbsp;7.11: A data visualisation of the number of females aged over 100 re
 </section>
 <section id="case-study-jittering" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="case-study-jittering"><span class="header-section-number">7.6</span> Case study: Jittering</h2>
-<p>We have data on the number of points that were scored in every World Cup match for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;7.2</a> shows a sample of these data.<a href="#fn45" class="footnote-ref" id="fnref45" role="doc-noteref"><sup>45</sup></a></p>
+<p>We have data on the number of points that were scored in every World Cup match for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;7.2</a> shows a sample of these data.<a href="#fn46" class="footnote-ref" id="fnref46" role="doc-noteref"><sup>46</sup></a></p>
 <div class="cell">
 <div id="tbl-rwc-all" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -2734,7 +2754,7 @@ Figure&nbsp;7.12: The number of points scored in Rugby World Cup games by teams 
 <p>In <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;4</a> we described a data visualisation as a mapping that <strong>encodes</strong> data values as the visual features of a data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;4.1</a>). For example, a bar plot, like <a href="#fig-bar" class="quarto-xref">Figure&nbsp;4.2</a>, maps the total number of youth offenders to the <strong>lengths</strong> of bars.</p>
 <p>We also emphasised the importance of the <strong>decoding</strong> from visual features to data values. For example, the effectiveness of the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;4.2</a> relies on our ability to accurately perceive the lengths of the bars, particularly relative to each other.</p>
 <p>In the simple scenario of a bar plot, the data values are counts (e.g., <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;4.1</a>), which are encoded as the lengths of bars, which in turn allows us to decode lengths to retrieve the counts (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;4.6</a>). The length of each bar represents a single raw data value.</p>
-<p>In this section, we explore some data visualisations that are effective because they map <strong>data summaries</strong> instead of raw data values.<a href="#fn46" class="footnote-ref" id="fnref46" role="doc-noteref"><sup>46</sup></a></p>
+<p>In this section, we explore some data visualisations that are effective because they map <strong>data summaries</strong> instead of raw data values.<a href="#fn47" class="footnote-ref" id="fnref47" role="doc-noteref"><sup>47</sup></a></p>
 <section id="box-plots" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="box-plots"><span class="header-section-number">8.1</span> Box plots</h2>
 <p><a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;8.1</a> shows box plots of the number of points scored by all teams at Rugby World Cup matches (<a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;7.2</a>), with a separate box plot for teams from different hemispheres. This is an effective data visualisation for comparing the distributions of points scored between hemispheres because we are able to easily see differences between the median values of the countries (the thick vertical lines) and differences between the interquartile ranges of the countries (the horizontal rectangles). For example, we can see that the median points scored by southern hemisphere teams is larger than the median for northern hemisphere teams and the interquartile range of points scored is also wider for southern hemisphere teams.</p>
@@ -2752,7 +2772,7 @@ Figure&nbsp;8.1: Box plots of the number of points scored in all Rugby World Cup
 </div>
 </div>
 </div>
-<p>Box plots are quite different from bar plots and dot plots because the data symbol is a much more complicated shape: there is a vertical line to represent the median, a rectangle to represent the interquartile range (lower quartile to upper quartile), and horizontal lines to represent the extremes of the data values, from the the quartiles to the minimum and maximum values. Points are also included for “outliers” if data values lie further than 1.5 times the interquartile range beyond the quartiles.<a href="#fn47" class="footnote-ref" id="fnref47" role="doc-noteref"><sup>47</sup></a></p>
+<p>Box plots are quite different from bar plots and dot plots because the data symbol is a much more complicated shape: there is a vertical line to represent the median, a rectangle to represent the interquartile range (lower quartile to upper quartile), and horizontal lines to represent the extremes of the data values, from the the quartiles to the minimum and maximum values. Points are also included for “outliers” if data values lie further than 1.5 times the interquartile range beyond the quartiles.<a href="#fn48" class="footnote-ref" id="fnref48" role="doc-noteref"><sup>48</sup></a></p>
 <p>Another important difference with a box plot is that it maps <strong>data summaries</strong>, rather than raw data values, to visual features of the data symbol (<a href="#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;8.2</a>). For example, the median values are mapped to the horizontal <strong>positions</strong> of thick vertical lines and the interquartile ranges are mapped to the <strong>lengths</strong> of horizontal rectangles.</p>
 <div id="fig-stat-vis-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -2834,7 +2854,7 @@ Figure&nbsp;8.3: Stacked dotplots of the number of points scored by Tier One nat
 </div>
 <p>The fact that we can decode raw data values from a dot plot is not news. That is easy because we have encoded raw data values as accurate visual features (see <a href="#sec-dot-plots" class="quarto-xref">Section&nbsp;4.7</a>). However, <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;8.3</a> also demonstrates that, in addition to decoding raw data values from visual features, our visual system allows us to decode <strong>data summaries</strong> from visual features.</p>
 <p>For example, we can see that the southern hemisphere teams score slightly more points on average than the northern hemisphere teams; the data symbols for southern-hemisphere teams appear shifted to the right of the data symbols for northern-hemisphere teams. In other words, we can perceive <strong>visual summaries</strong>; we can perceive <strong>data summaries</strong> from collections of visual features. For example, we can visually average the <strong>positions</strong> of the data points.</p>
-<p>In <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;8.3</a>, we have encoded raw data values as visual features, which has enabled us to decode raw data values from individual visual features. In addition, <strong>visual summaries</strong> of the visual features enable us to decode <strong>data summaries</strong> from collections of visual features (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;8.4</a>).<a href="#fn48" class="footnote-ref" id="fnref48" role="doc-noteref"><sup>48</sup></a></p>
+<p>In <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;8.3</a>, we have encoded raw data values as visual features, which has enabled us to decode raw data values from individual visual features. In addition, <strong>visual summaries</strong> of the visual features enable us to decode <strong>data summaries</strong> from collections of visual features (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;8.4</a>).<a href="#fn49" class="footnote-ref" id="fnref49" role="doc-noteref"><sup>49</sup></a></p>
 <div id="fig-data-vis-stat-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-stat-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3026,7 +3046,7 @@ Figure&nbsp;8.8: A histogram of the points scored per game by Tier One nations a
 <h2 data-number="8.5" class="anchored" data-anchor-id="case-study-how-charts-lie"><span class="header-section-number">8.5</span> Case study: How charts lie</h2>
 <p>In this document, we assume that the purpose of a data visualisation is to faithfully and honestly encode data values and the goal is to produce a data visualisation that provides the most effective decoding of visual features (see <a href="#sec-scope" class="quarto-xref">Section&nbsp;2.2</a>).</p>
 <p>Nevertheless, less honest representations of data can also be described in terms of mappings, particularly mappings of data summaries.</p>
-<p>For example, … <a href="#fig-bars-at-zero" class="quarto-xref">Figure&nbsp;8.9</a><a href="#fn49" class="footnote-ref" id="fnref49" role="doc-noteref"><sup>49</sup></a> This does not encode the raw data as the lengths of the bars, but the raw data - 34. The top rate under Obama would be 39.6. Also does not help that the y-axis scale is not shown!</p>
+<p>For example, … <a href="#fig-bars-at-zero" class="quarto-xref">Figure&nbsp;8.9</a><a href="#fn50" class="footnote-ref" id="fnref50" role="doc-noteref"><sup>50</sup></a> This does not encode the raw data as the lengths of the bars, but the raw data - 34. The top rate under Obama would be 39.6. Also does not help that the y-axis scale is not shown!</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bars-at-zero" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3130,7 +3150,7 @@ Figure&nbsp;9.1: A simple data visualisation maps <strong>two</strong> data valu
 </div>
 <section id="independent-visual-features" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="independent-visual-features"><span class="header-section-number">9.1</span> Independent visual features</h2>
-<p>A bar plot involves encoding a qualitative variable as bar <strong>position</strong> and a quantitative variable as bar <strong>length</strong> (e.g., <a href="#fig-bar" class="quarto-xref">Figure&nbsp;4.2</a>). We know that each visual feature is effective on its own—we can decode from positions to qualitative values and we can decode from lengths to quantitative values—but another reason why the bar plot is effective overall is because the two visual features act independently.<a href="#fn50" class="footnote-ref" id="fnref50" role="doc-noteref"><sup>50</sup></a> Our perception of the horizontal <strong>length</strong> of the bars is not affected by the vertical <strong>position</strong> of the bars.<a href="#fn51" class="footnote-ref" id="fnref51" role="doc-noteref"><sup>51</sup></a></p>
+<p>A bar plot involves encoding a qualitative variable as bar <strong>position</strong> and a quantitative variable as bar <strong>length</strong> (e.g., <a href="#fig-bar" class="quarto-xref">Figure&nbsp;4.2</a>). We know that each visual feature is effective on its own—we can decode from positions to qualitative values and we can decode from lengths to quantitative values—but another reason why the bar plot is effective overall is because the two visual features act independently.<a href="#fn51" class="footnote-ref" id="fnref51" role="doc-noteref"><sup>51</sup></a> Our perception of the horizontal <strong>length</strong> of the bars is not affected by the vertical <strong>position</strong> of the bars.<a href="#fn52" class="footnote-ref" id="fnref52" role="doc-noteref"><sup>52</sup></a></p>
 <p><a href="#fig-bar-colour" class="quarto-xref">Figure&nbsp;9.2</a> demonstrates that we can also add <strong>colour</strong> to the mix without creating any interactions between visual features. The fact that the bottom two bars are blue and red does not affect our ability to perceive that they have different lengths.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -3475,7 +3495,7 @@ Figure&nbsp;9.3: A scatter plot of the number of times a team breaks through the
 </div>
 <p>The data symbol in a scatter plot is a data point, in this case a circle. There are two mappings in the scatter plot in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;9.3</a>: the <strong>quantitative</strong> number of clean breaks is encoded as the horizontal <strong>position</strong> of the data points and the <strong>quantitative</strong> number of tries scored is encoded as the vertical <strong>position</strong> of the data points.</p>
 <p>We know from <a href="#sec-mapping-visual-features" class="quarto-xref">Chapter&nbsp;4</a> that we should be able to accurately decode the original data values from the positions of the data points. For example, we can easily see that one team scored a little over 7.5 clean breaks per game and we can see that two teams scored about 6 tries per game.</p>
-<p>However, there is something else going on in the scatter plot. The two explicit encodings—horizontal and vertical position—<strong>interact</strong> to create an additional visual feature:<a href="#fn52" class="footnote-ref" id="fnref52" role="doc-noteref"><sup>52</sup></a> <strong>position in space</strong> (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;9.4</a>).<a href="#fn53" class="footnote-ref" id="fnref53" role="doc-noteref"><sup>53</sup></a> For example, we can perceive not only horizontal and vertical distances between data points, but also euclidean distances between data points (“as the crow flies”).</p>
+<p>However, there is something else going on in the scatter plot. The two explicit encodings—horizontal and vertical position—<strong>interact</strong> to create an additional visual feature:<a href="#fn53" class="footnote-ref" id="fnref53" role="doc-noteref"><sup>53</sup></a> <strong>position in space</strong> (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;9.4</a>).<a href="#fn54" class="footnote-ref" id="fnref54" role="doc-noteref"><sup>54</sup></a> For example, we can perceive not only horizontal and vertical distances between data points, but also euclidean distances between data points (“as the crow flies”).</p>
 <div id="fig-interact" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3493,7 +3513,7 @@ Figure&nbsp;9.4: If we encode data values as visual features and the visual feat
 <blockquote class="blockquote">
 <p>One reason why a scatter plot is effective at conveying relationships between variables is because the mappings of data values to visual features—horizontal position and vertical position—interact to produce an additional visual feature: position in space.</p>
 </blockquote>
-<p>Furthermore, our visual system allows us to decode <strong>visual summaries</strong> (see <a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;8.2</a>) from <strong>position in space</strong> (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;9.5</a>).<a href="#fn54" class="footnote-ref" id="fnref54" role="doc-noteref"><sup>54</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;9.3</a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points because they share a similar position in space (see <a href="#sec-visual-model-groups" class="quarto-xref">Section&nbsp;3.7</a>).</p>
+<p>Furthermore, our visual system allows us to decode <strong>visual summaries</strong> (see <a href="#sec-visual-summaries" class="quarto-xref">Section&nbsp;8.2</a>) from <strong>position in space</strong> (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;9.5</a>).<a href="#fn55" class="footnote-ref" id="fnref55" role="doc-noteref"><sup>55</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;9.3</a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points because they share a similar position in space (see <a href="#sec-visual-model-groups" class="quarto-xref">Section&nbsp;3.7</a>).</p>
 <div id="fig-visual-corr" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3555,7 +3575,7 @@ Table&nbsp;9.2: Counts of offences committed in New Zealand in 2021 by the sex o
 </figure>
 </div>
 </div>
-<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;9.6</a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;9.2</a>.<a href="#fn55" class="footnote-ref" id="fnref55" role="doc-noteref"><sup>55</sup></a> This is an effective data visualisation for making several comparisons: the overall proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
+<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;9.6</a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;9.2</a>.<a href="#fn56" class="footnote-ref" id="fnref56" role="doc-noteref"><sup>56</sup></a> This is an effective data visualisation for making several comparisons: the overall proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
 <p>For example, we can see that there are more male offenders than female offenders, court action is more common than non-court action for both males and female offenders, court action is more common for male offenders than for female offenders, and the most common offences involve male offenders and result in court action.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -3784,7 +3804,7 @@ Table&nbsp;9.4: The number of offenders in different ethnic groups in 2011 and i
 </figure>
 </div>
 </div>
-<p>The purpose of the interaction plot is to show the <em>change</em> in the number of offenders between 2011 and 2021 for each of the ethnic groups. If the lines of the interaction plot were parallel we would conclude that the same change has happened to all ethnic groups; the fact that the lines are not parallel indicates that there have been different changes in some ethnic groups compared to other ethnic groups.<a href="#fn56" class="footnote-ref" id="fnref56" role="doc-noteref"><sup>56</sup></a></p>
+<p>The purpose of the interaction plot is to show the <em>change</em> in the number of offenders between 2011 and 2021 for each of the ethnic groups. If the lines of the interaction plot were parallel we would conclude that the same change has happened to all ethnic groups; the fact that the lines are not parallel indicates that there have been different changes in some ethnic groups compared to other ethnic groups.<a href="#fn57" class="footnote-ref" id="fnref57" role="doc-noteref"><sup>57</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-interaction" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3822,7 +3842,7 @@ Figure&nbsp;9.11: A bar plot showing the number of offenders in different ethnic
 </section>
 <section id="dangers-of-combining-mappings" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="dangers-of-combining-mappings"><span class="header-section-number">9.5</span> Dangers of combining mappings</h2>
-<p><a href="#fig-nz-doctor-bar" class="quarto-xref">Figure&nbsp;9.12</a> shows a plot of changes in health spending by successive New Zealand governments.<a href="#fn57" class="footnote-ref" id="fnref57" role="doc-noteref"><sup>57</sup></a> In this data visualisation, the average change in health spending over a government’s entire term is encoded as the <strong>height</strong> of a bar, with the duration of that government’s term encoded as the <strong>width</strong> of the bar. Because height and width are visual features that interact, the result is an <strong>area</strong> for each government’s term. However, that area has no sensible interpretation; what does a percent multiplied by a number of years mean? The areas of the bars do not correspond to any property of the data values.</p>
+<p><a href="#fig-nz-doctor-bar" class="quarto-xref">Figure&nbsp;9.12</a> shows a plot of changes in health spending by successive New Zealand governments.<a href="#fn58" class="footnote-ref" id="fnref58" role="doc-noteref"><sup>58</sup></a> In this data visualisation, the average change in health spending over a government’s entire term is encoded as the <strong>height</strong> of a bar, with the duration of that government’s term encoded as the <strong>width</strong> of the bar. Because height and width are visual features that interact, the result is an <strong>area</strong> for each government’s term. However, that area has no sensible interpretation; what does a percent multiplied by a number of years mean? The areas of the bars do not correspond to any property of the data values.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-nz-doctor-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3838,7 +3858,7 @@ Figure&nbsp;9.12: A plot showing the differences in health spending for successi
 </div>
 </div>
 <p>The interaction of visual features can be a boon when the interaction produces an emergent feature that can be decoded to properties of the data (as in a scatter plot, or mosaic plot, or interaction plot).<br>
-However, it is possible to create a poor data visualisation if we produce an emergent feature that has no correspondence with data values (<a href="#fig-data-vis-vis-lie" class="quarto-xref">Figure&nbsp;9.13</a>).<a href="#fn58" class="footnote-ref" id="fnref58" role="doc-noteref"><sup>58</sup></a></p>
+However, it is possible to create a poor data visualisation if we produce an emergent feature that has no correspondence with data values (<a href="#fig-data-vis-vis-lie" class="quarto-xref">Figure&nbsp;9.13</a>).<a href="#fn59" class="footnote-ref" id="fnref59" role="doc-noteref"><sup>59</sup></a></p>
 <div id="fig-data-vis-vis-lie" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-vis-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3873,7 +3893,7 @@ Figure&nbsp;9.14: A plot showing the differences in health spending for successi
 <h2 data-number="9.6" class="anchored" data-anchor-id="sec-redundant"><span class="header-section-number">9.6</span> Redundant mappings</h2>
 <p>In <a href="#sec-mosaic" class="quarto-xref">Section&nbsp;9.3</a>, we focused on the encoding of quantitative values (proportions) as the widths and heights of the rectangular data symbols in a mosaic plot, for example, <a href="#fig-spine" class="quarto-xref">Figure&nbsp;9.6</a>. There are also qualitative values encoded in a mosaic plot: the different categories, like <code>Male</code> and <code>Female</code>.</p>
 <p>The main encoding of the categories in a mosaic plot is as the <strong>position</strong> of the rectangles. For example, in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;9.6</a>, the rectangles for <code>Female</code> are to the left and the rectangles for <code>Male</code> are to the right and the rectangles for different court actions are stacked vertically, with <code>Not Proceeded With</code> at the bottom, <code>Non-Court Action</code> in the middle, and <code>Court Action</code> at the top.</p>
-<p>In addition, different court actions are encoded as different <strong>colours</strong>. This additional encoding is <strong>redundant</strong> in the sense that we can already decode the court action from the vertical position of the bars. However, having the additional encoding means that we have two ways to decode the court action: from the vertical position and from the colour. This becomes much more useful when there are more categories (<a href="#fig-spine-weak" class="quarto-xref">Figure&nbsp;9.7</a>) or more variables (<a href="#fig-mosaic" class="quarto-xref">Figure&nbsp;9.8</a>).<a href="#fn59" class="footnote-ref" id="fnref59" role="doc-noteref"><sup>59</sup></a></p>
+<p>In addition, different court actions are encoded as different <strong>colours</strong>. This additional encoding is <strong>redundant</strong> in the sense that we can already decode the court action from the vertical position of the bars. However, having the additional encoding means that we have two ways to decode the court action: from the vertical position and from the colour. This becomes much more useful when there are more categories (<a href="#fig-spine-weak" class="quarto-xref">Figure&nbsp;9.7</a>) or more variables (<a href="#fig-mosaic" class="quarto-xref">Figure&nbsp;9.8</a>).<a href="#fn60" class="footnote-ref" id="fnref60" role="doc-noteref"><sup>60</sup></a></p>
 <div id="fig-data-vis-redundant" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-redundant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3959,7 +3979,7 @@ Figure&nbsp;10.2: A line plot of the number of offenders per year in different e
 </div>
 <p>There are some familiar mappings in this data visualisation: year is mapped to horizontal <strong>position</strong>, the number of offenders is mapped to vertical <strong>position</strong>, and the ethnic group is mapped to <strong>colour</strong>. However, the <strong>data symbols</strong> in this data visualisation, the coloured lines, are different from any previous examples that we have seen. Although there are 44 rows of data, there are only 4 data symbols. Multiple rows of data are used to create each data symbol. Each coloured line in <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> represents 11 pairs of year and count values.</p>
 <p>This contrasts with visualisations like bar plots that use simpler data symbols. For example, the bar plot of the same data in <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;5.7</a> has 44 bars.</p>
-<p><a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> is effective at conveying changes over time because the coloured lines create <strong>visual shapes</strong> (<a href="#fig-data-vis-shape" class="quarto-xref">Figure&nbsp;10.3</a>) and those visual shapes convey information about collections of data values. For example, we can perceive slopes and curves and peaks and valleys in each of the coloured lines.<a href="#fn60" class="footnote-ref" id="fnref60" role="doc-noteref"><sup>60</sup></a></p>
+<p><a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> is effective at conveying changes over time because the coloured lines create <strong>visual shapes</strong> (<a href="#fig-data-vis-shape" class="quarto-xref">Figure&nbsp;10.3</a>) and those visual shapes convey information about collections of data values. For example, we can perceive slopes and curves and peaks and valleys in each of the coloured lines.<a href="#fn61" class="footnote-ref" id="fnref61" role="doc-noteref"><sup>61</sup></a></p>
 <div id="fig-data-vis-shape" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-shape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3975,7 +3995,7 @@ Figure&nbsp;10.3: If we map multiple data values to multiple visual features of 
 </figure>
 </div>
 <p>In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;3.4</a>, these more complicated shapes can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;3.8</a>). In other words, the more complex data symbols allow us to decode <strong>data summaries</strong> (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;10.4</a>). For example, in <a href="#fig-line" class="quarto-xref">Figure&nbsp;10.2</a> we are able to perceive overall trends in the number of offenders, periods of more rapid change versus periods of slower change, and local maxima and minima.</p>
-<p>In terms of <a href="#sec-congruence" class="quarto-xref">Chapter&nbsp;7</a>, the use of lines for data symbols is also <strong>congruent</strong> with trends in the data; we naturally associate slopes with increases and decreases in data values.<a href="#fn61" class="footnote-ref" id="fnref61" role="doc-noteref"><sup>61</sup></a></p>
+<p>In terms of <a href="#sec-congruence" class="quarto-xref">Chapter&nbsp;7</a>, the use of lines for data symbols is also <strong>congruent</strong> with trends in the data; we naturally associate slopes with increases and decreases in data values.<a href="#fn62" class="footnote-ref" id="fnref62" role="doc-noteref"><sup>62</sup></a></p>
 <div id="fig-data-vis-shape-decode" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-shape-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -4201,7 +4221,7 @@ Figure&nbsp;11.2: A data visualisation of the performance measures for teams in 
 </div>
 </div>
 </div>
-<p>A parallel coordinates plot maps data summaries rather than raw data values (<a href="#sec-summaries" class="quarto-xref">Chapter&nbsp;8</a>). For example, all data values are standardised to a range between 0 and 1.<a href="#fn62" class="footnote-ref" id="fnref62" role="doc-noteref"><sup>62</sup></a> <a href="#tbl-parallel-stats" class="quarto-xref">Table&nbsp;11.1</a> shows some of the values that are actually mapped to visual features in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;11.2</a>. Each variable is encoded as a different horizontal <strong>position</strong> and the values within each variable are encoded as vertical <strong>position</strong>. In this way, all quantitative data values are encoded as <strong>position</strong>.</p>
+<p>A parallel coordinates plot maps data summaries rather than raw data values (<a href="#sec-summaries" class="quarto-xref">Chapter&nbsp;8</a>). For example, all data values are standardised to a range between 0 and 1.<a href="#fn63" class="footnote-ref" id="fnref63" role="doc-noteref"><sup>63</sup></a> <a href="#tbl-parallel-stats" class="quarto-xref">Table&nbsp;11.1</a> shows some of the values that are actually mapped to visual features in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;11.2</a>. Each variable is encoded as a different horizontal <strong>position</strong> and the values within each variable are encoded as vertical <strong>position</strong>. In this way, all quantitative data values are encoded as <strong>position</strong>.</p>
 <div class="cell">
 <div id="tbl-parallel-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -4285,7 +4305,7 @@ Figure&nbsp;11.3: In a parallel coordinates plot, a single row of data—one dat
 </blockquote>
 </section>
 <section id="small-multiplessmall-multiples" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">11.2</span> Small multiples<a href="#fn63" class="footnote-ref" id="fnref63" role="doc-noteref"><sup>63</sup></a></h2>
+<h2 data-number="11.2" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">11.2</span> Small multiples<a href="#fn64" class="footnote-ref" id="fnref64" role="doc-noteref"><sup>64</sup></a></h2>
 <p>One difficulty with <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;11.2</a> is that many of the lines overlap each other, which makes it difficult to separately perceive individual visual shapes. <a href="#fig-profile" class="quarto-xref">Figure&nbsp;11.4</a> shows an alternative approach to visualising the same data, called a profile plot. Similar to a parallel coordinates plot, a visual shape is drawn for each country, but the shape in this case is a filled in polygon, effectively the lines in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;11.2</a> with the area below them (down to zero) filled in.</p>
 <p>Again, this sort of data visualisation can be effective because of the overall shapes. For example, we can see a group of four shapes that are larger than the others. We can also see that Argentina and Fiji appear very similar, which was not apparent in previous plots.</p>
 <div class="cell">
@@ -4307,7 +4327,7 @@ Figure&nbsp;11.4: A data visualisation of the performance measures for teams in 
 <p>The cluster of four larger shapes in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;11.4</a> is also easier to see because the countries have been ordered by the number of points scored (the right-hand height of the shape). As we have seen before, ordering data symbols can make a big difference (<a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;5.1</a>).</p>
 </section>
 <section id="sec-facetting" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">11.3</span> Facetting<a href="#fn64" class="footnote-ref" id="fnref64" role="doc-noteref"><sup>64</sup></a></h2>
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">11.3</span> Facetting<a href="#fn65" class="footnote-ref" id="fnref65" role="doc-noteref"><sup>65</sup></a></h2>
 <p><a href="#fig-facet-before" class="quarto-xref">Figure&nbsp;11.5</a> shows a line plot of the number of youth offenders per year in different Police Districts of New Zealand. This visualisation makes use of several effective mappings. For example, we encode year as horizontal <strong>position</strong> and we encode count as vertical <strong>position</strong>. However, there is also a weaker mapping: the Police District. We encode districts as <strong>colour</strong>, but because there are 12 different districts, we are exceeding the capacity of colour (<a href="#sec-capacity" class="quarto-xref">Section&nbsp;4.6</a>). It is not easy to differentiate all of the different colours (not helped by overplotting of the lines).</p>
 <p>A better mapping for Police District would be <strong>position</strong>, which has a much higher capacity, but position has already been taken by year and count.</p>
 <div class="cell">
@@ -4367,7 +4387,7 @@ Figure&nbsp;11.7: A scatter plot matrix of the quantitative performance measures
 <section id="dangers-of-multiple-mappings" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="dangers-of-multiple-mappings"><span class="header-section-number">11.5</span> Dangers of multiple mappings</h2>
 <p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;11.1</a> showed that the naive approach of just using a separate visual feature for each data variable leads to complex data visualisations that are difficult to decode. Although there are better options, like small multiple and facetting, there is still a limit to how much information can effectively be displayed at once within a static data visualisation.</p>
-<p>This is one area where dynamic and interactive graphics can be useful because the viewer is able to rapidly switch between multiple views of the data, which means that each individual view can be simpler.<a href="#fn65" class="footnote-ref" id="fnref65" role="doc-noteref"><sup>65</sup></a></p>
+<p>This is one area where dynamic and interactive graphics can be useful because the viewer is able to rapidly switch between multiple views of the data, which means that each individual view can be simpler.<a href="#fn66" class="footnote-ref" id="fnref66" role="doc-noteref"><sup>66</sup></a></p>
 </section>
 <section id="summary-9" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="summary-9"><span class="header-section-number">11.6</span> Summary</h2>
@@ -4628,7 +4648,7 @@ Figure&nbsp;12.9: Alternative map-based representations of the average crime rat
 </section>
 <section id="chart-junk-and-clutter" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="chart-junk-and-clutter"><span class="header-section-number">12.3</span> Chart junk and clutter</h2>
-<p><a href="#fig-junk" class="quarto-xref">Figure&nbsp;12.10</a> shows a version of <a href="#fig-map" class="quarto-xref">Figure&nbsp;12.7</a> with two cartoon villians added in the top-left and bottom-right corners.<a href="#fn66" class="footnote-ref" id="fnref66" role="doc-noteref"><sup>66</sup></a> These sorts of annotations are often, derisively, referred to as <strong>chart junk</strong>, with the suggestion that they add no value and make it harder to extract the important information.<a href="#fn67" class="footnote-ref" id="fnref67" role="doc-noteref"><sup>67</sup></a></p>
+<p><a href="#fig-junk" class="quarto-xref">Figure&nbsp;12.10</a> shows a version of <a href="#fig-map" class="quarto-xref">Figure&nbsp;12.7</a> with two cartoon villians added in the top-left and bottom-right corners.<a href="#fn67" class="footnote-ref" id="fnref67" role="doc-noteref"><sup>67</sup></a> These sorts of annotations are often, derisively, referred to as <strong>chart junk</strong>, with the suggestion that they add no value and make it harder to extract the important information.<a href="#fn68" class="footnote-ref" id="fnref68" role="doc-noteref"><sup>68</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-junk" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4649,15 +4669,15 @@ Figure&nbsp;12.10: A choropleth map of the average crime rate over the period 20
 <p>Chart junk is <em>not</em> effective because it is impossible to decode data values from chart junk (no data values have been encoded) and because chart junk distracts from the visual elements that do represent data values.</p>
 </blockquote>
 <p>However, it is important to point out that not all <strong>visual objects</strong> are chart junk. For example, the data symbols in <a href="#fig-junk" class="quarto-xref">Figure&nbsp;12.10</a>, the map regions, are also <strong>visual objects</strong>, but they differ from the cartoon villians because they are related to the data values.</p>
-<p>Furthermore, <strong>visual objects</strong> that have no connection to the raw data may still have some positive effects. For example, the cartoon villians are not devoid of information; they convey the concept of crime more dramatically than the simple text label “crime rate”. The more complex and interesting images may attract attention to the data visualisation as a whole and there is some evidence that such annotations improve the memorability of a data visualisation.<a href="#fn68" class="footnote-ref" id="fnref68" role="doc-noteref"><sup>68</sup></a></p>
+<p>Furthermore, <strong>visual objects</strong> that have no connection to the raw data may still have some positive effects. For example, the cartoon villians are not devoid of information; they convey the concept of crime more dramatically than the simple text label “crime rate”. The more complex and interesting images may attract attention to the data visualisation as a whole and there is some evidence that such annotations improve the memorability of a data visualisation.<a href="#fn69" class="footnote-ref" id="fnref69" role="doc-noteref"><sup>69</sup></a></p>
 <blockquote class="blockquote">
 <p>Chart junk can be effective because it has a greater emotional impact and is more memorable.</p>
 </blockquote>
-<p>Overall, visual objects that are not related to data values are <em>not</em> effective for decoding data values, so any other benefits have to be weighed against that cost.<a href="#fn69" class="footnote-ref" id="fnref69" role="doc-noteref"><sup>69</sup></a></p>
+<p>Overall, visual objects that are not related to data values are <em>not</em> effective for decoding data values, so any other benefits have to be weighed against that cost.<a href="#fn70" class="footnote-ref" id="fnref70" role="doc-noteref"><sup>70</sup></a></p>
 </section>
 <section id="case-study-pictograms" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="case-study-pictograms"><span class="header-section-number">12.4</span> Case study: Pictograms</h2>
-<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;12.11</a> shows a pictogram of the number of pet dogs and pet cats globally.<a href="#fn70" class="footnote-ref" id="fnref70" role="doc-noteref"><sup>70</sup></a> The data symbols in this plot are images, or <strong>icons</strong>, of a cat and a dog, with the number of pets encoded as the height of each icon.<a href="#fn71" class="footnote-ref" id="fnref71" role="doc-noteref"><sup>71</sup></a> Icons are an example of <strong>visual objects</strong>; they are effective at conveying categories because they visually resemble physical objects, in this case, cats and dogs.</p>
+<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;12.11</a> shows a pictogram of the number of pet dogs and pet cats globally.<a href="#fn71" class="footnote-ref" id="fnref71" role="doc-noteref"><sup>71</sup></a> The data symbols in this plot are images, or <strong>icons</strong>, of a cat and a dog, with the number of pets encoded as the height of each icon.<a href="#fn72" class="footnote-ref" id="fnref72" role="doc-noteref"><sup>72</sup></a> Icons are an example of <strong>visual objects</strong>; they are effective at conveying categories because they visually resemble physical objects, in this case, cats and dogs.</p>
 <p>Unfortunately, because the cat and dog images are not simple shapes, it is harder to accurately perceive the heights of the images, so it is harder to decode the number of cats and dogs. Even worse, we actually perceive the size, or <strong>area</strong>, of the images. The dog image is wider than the cat image so the number of dogs is visually over-emphasised.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -4711,7 +4731,7 @@ Figure&nbsp;12.12: Two alternative uses of icons.
 </figure>
 </div>
 <p><a href="#fig-pic-icon" class="quarto-xref">Figure&nbsp;12.13</a> shows two more alternatives to <a href="#fig-pic" class="quarto-xref">Figure&nbsp;12.11</a>. <a href="#fig-pic-icon-2" class="quarto-xref">Figure&nbsp;12.13 (b)</a> is just a standard bar plot. We know that this is effective for decoding the number of pets.</p>
-<p><a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;12.13 (a)</a> uses repetitions of the icons to represent the number of pets, still within a bar. In this case, each icon represents 100 million pets. The ability to count icons is effective for decoding the overall counts.<a href="#fn72" class="footnote-ref" id="fnref72" role="doc-noteref"><sup>72</sup></a></p>
+<p><a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;12.13 (a)</a> uses repetitions of the icons to represent the number of pets, still within a bar. In this case, each icon represents 100 million pets. The ability to count icons is effective for decoding the overall counts.<a href="#fn73" class="footnote-ref" id="fnref73" role="doc-noteref"><sup>73</sup></a></p>
 <div id="fig-pic-icon" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pic-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -4765,7 +4785,7 @@ Figure&nbsp;12.14: A Chernoff faces plot of the …
 </div>
 </div>
 </div>
-<p>The mappings in a Chernoff face are <em>not</em> very accurate (see <a href="#sec-accuracy" class="quarto-xref">Section&nbsp;4.5</a>; <strong>curvature</strong> is ranked <em>below</em> colour in terms of accuracy),<a href="#fn73" class="footnote-ref" id="fnref73" role="doc-noteref"><sup>73</sup></a> so Cheroff faces are <em>not</em> very effective for decoding raw data values.</p>
+<p>The mappings in a Chernoff face are <em>not</em> very accurate (see <a href="#sec-accuracy" class="quarto-xref">Section&nbsp;4.5</a>; <strong>curvature</strong> is ranked <em>below</em> colour in terms of accuracy),<a href="#fn74" class="footnote-ref" id="fnref74" role="doc-noteref"><sup>74</sup></a> so Cheroff faces are <em>not</em> very effective for decoding raw data values.</p>
 <p>However, the familiarity of Chernoff faces means that we are easily able to perceive common combinations of the facial features. For example, we can see several sad, worried faces at the top-left of <a href="#fig-chernoff" class="quarto-xref">Figure&nbsp;12.14</a> and several happy, perhaps even smug, faces at the bottom-right. We can perceive countries that share similar combinations of performance measures. In other words, we can perceive multi-dimensional correlations and multi-dimensional groupings in the data.</p>
 <p>In this case, the happier faces have been arranged to correspond to the more successful teams and the teams have been ordered from least points scored to most points scored. The resulting proximity helps with perceiving groups of similar faces.</p>
 <blockquote class="blockquote">
@@ -4774,7 +4794,7 @@ Figure&nbsp;12.14: A Chernoff faces plot of the …
 </section>
 <section id="sec-learned-danger" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="sec-learned-danger"><span class="header-section-number">12.6</span> Dangers of learned mappings</h2>
-<p><a href="#fig-stroop" class="quarto-xref">Figure&nbsp;12.15</a> provides a demonstration of the Stroop Effect.<a href="#fn74" class="footnote-ref" id="fnref74" role="doc-noteref"><sup>74</sup></a> The task is to name the colour of each word. This task is difficult to do because there are two decodings involved and the two decodings are inconsistent. Each set of letters has a learned decoding based on the <strong>shape</strong> of the letters—the word that the letters spell out—but there is also a learned decoding based on the actual <strong>colour</strong> of the letters—the colour names that we learn as children.</p>
+<p><a href="#fig-stroop" class="quarto-xref">Figure&nbsp;12.15</a> provides a demonstration of the Stroop Effect.<a href="#fn75" class="footnote-ref" id="fnref75" role="doc-noteref"><sup>75</sup></a> The task is to name the colour of each word. This task is difficult to do because there are two decodings involved and the two decodings are inconsistent. Each set of letters has a learned decoding based on the <strong>shape</strong> of the letters—the word that the letters spell out—but there is also a learned decoding based on the actual <strong>colour</strong> of the letters—the colour names that we learn as children.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-stroop" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4789,7 +4809,7 @@ Figure&nbsp;12.15: The Stroop effect. Try to name the <em>colour</em> of each wo
 </div>
 </div>
 </div>
-<p>One issue with relying on learned decodings is that we may learn more than one association for the same visual feature. For example, the colour red is commonly associated with hot (versus blue for cold), but also with stop (versus green for go), plus also passion, or even anger.<a href="#fn75" class="footnote-ref" id="fnref75" role="doc-noteref"><sup>75</sup></a> Furthermore, many associations are specific to a particular culture. For example, red is associated with luck and prosperity in Chinese culture, among other things.<a href="#fn76" class="footnote-ref" id="fnref76" role="doc-noteref"><sup>76</sup></a></p>
+<p>One issue with relying on learned decodings is that we may learn more than one association for the same visual feature. For example, the colour red is commonly associated with hot (versus blue for cold), but also with stop (versus green for go), plus also passion, or even anger.<a href="#fn76" class="footnote-ref" id="fnref76" role="doc-noteref"><sup>76</sup></a> Furthermore, many associations are specific to a particular culture. For example, red is associated with luck and prosperity in Chinese culture, among other things.<a href="#fn77" class="footnote-ref" id="fnref77" role="doc-noteref"><sup>77</sup></a></p>
 <p>Relying on a learned decoding can cause confusion if there are multiple possible decodings. It may not be clear which data value should be decoded from the visual feature (<a href="#fig-ambiguous-decode" class="quarto-xref">Figure&nbsp;12.16</a>).</p>
 <div id="fig-ambiguous-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -4810,7 +4830,7 @@ Figure&nbsp;12.16: A visual feature may have more than one learned decoding, whi
 <section id="the-dangers-of-visual-objects" class="level2" data-number="12.7">
 <h2 data-number="12.7" class="anchored" data-anchor-id="the-dangers-of-visual-objects"><span class="header-section-number">12.7</span> The dangers of visual objects</h2>
 <p>One issue with more complex data visualisations is that their effectiveness depends on a larger amount of learning and experience. If the viewer does not have the knowledge required to decode a visual object, then the data visualisation will fail. We saw an example of this in <a href="#fig-flags-direct" class="quarto-xref">Figure&nbsp;12.5</a>, where the familiarity of different country flags will vary with nationality and age, for example.</p>
-<p>An extreme version of this problem is the use of not just complex or unusual data symbols, but entirely novel data visualisations.<a href="#fn77" class="footnote-ref" id="fnref77" role="doc-noteref"><sup>77</sup></a></p>
+<p>An extreme version of this problem is the use of not just complex or unusual data symbols, but entirely novel data visualisations.<a href="#fn78" class="footnote-ref" id="fnref78" role="doc-noteref"><sup>78</sup></a></p>
 <p>Andrews curve of RWCperGame statistics (analogue of <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;11.2</a>). <strong>Cite Andrews article.</strong> Can see the three distinct groups of countries more easily in this than in parallel plot, but hard to understand exactly what you are seeing. Plus NO chance of recovering original data values (another example of visualising data summary).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -4827,6 +4847,7 @@ Figure&nbsp;12.17: An Andrews plot of the performance measures for teams in the 
 </div>
 </div>
 <p>Another example of this problem are the hurrican “cones of uncertainty” that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).</p>
+<p>Mention that little is known about the accuracy of visual objects (though they must have good capacity because they are more abstract, right?)<a href="#fn79" class="footnote-ref" id="fnref79" role="doc-noteref"><sup>79</sup></a>:</p>
 </section>
 <section id="summary-10" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="summary-10"><span class="header-section-number">12.8</span> Summary</h2>
@@ -4851,7 +4872,7 @@ Figure&nbsp;13.1: A line plot with all text removed. Without text, it is impossi
 </div>
 </div>
 </div>
-<p>Eye-tracking studies also show that people spend a lot of time looking at the text within a data visualisation. For example, in <a href="#fig-fixations-text" class="quarto-xref">Figure&nbsp;13.2</a>, there are more fixations in the regions that contain text than anywhere else. There is also evidence that text elements are more memorable than the other elements of a data visualisation.<a href="#fn78" class="footnote-ref" id="fnref78" role="doc-noteref"><sup>78</sup></a></p>
+<p>Eye-tracking studies also show that people spend a lot of time looking at the text within a data visualisation. For example, in <a href="#fig-fixations-text" class="quarto-xref">Figure&nbsp;13.2</a>, there are more fixations in the regions that contain text than anywhere else. There is also evidence that text elements are more memorable than the other elements of a data visualisation.<a href="#fn80" class="footnote-ref" id="fnref80" role="doc-noteref"><sup>80</sup></a></p>
 <div id="fig-fixations-text" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fixations-text-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -4883,11 +4904,11 @@ Figure&nbsp;13.1: A line plot with all text removed. Without text, it is impossi
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fixations-text-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.2: Eye tracking data from the MASSVIS project that shows fixations (circles) and saccades (lines between circles) for one person viewing an image for 10 seconds. <a href="#fn79" class="footnote-ref" id="fnref79" role="doc-noteref"><sup>79</sup></a>
+Figure&nbsp;13.2: Eye tracking data from the MASSVIS project that shows fixations (circles) and saccades (lines between circles) for one person viewing an image for 10 seconds. <a href="#fn81" class="footnote-ref" id="fnref81" role="doc-noteref"><sup>81</sup></a>
 </figcaption>
 </figure>
 </div>
-<p>This section looks at the role that text plays in making data visualisations work.<a href="#fn80" class="footnote-ref" id="fnref80" role="doc-noteref"><sup>80</sup></a></p>
+<p>This section looks at the role that text plays in making data visualisations work.<a href="#fn82" class="footnote-ref" id="fnref82" role="doc-noteref"><sup>82</sup></a></p>
 <section id="sec-data-symbols" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="sec-data-symbols"><span class="header-section-number">13.1</span> Data symbols</h2>
 <p><a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;13.3</a> is a version of <a href="#fig-bar" class="quarto-xref">Figure&nbsp;4.2</a> with white text added to each bar showing the exact number of offenders in each ethnic group. This is an example of using text as a <strong>data symbol</strong>.</p>
@@ -4916,7 +4937,7 @@ Figure&nbsp;13.3: A bar plot of the total number of offenders for different ethn
 <blockquote class="blockquote">
 <p>Text data symbols are effective because they can be used to represent any sort of data and they allow a very accurate decoding of data values.</p>
 </blockquote>
-<p>Compared to the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;13.3</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;3.4</a>, the text data symbols are similar to <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;3.8</a>).<a href="#fn81" class="footnote-ref" id="fnref81" role="doc-noteref"><sup>81</sup></a></p>
+<p>Compared to the bar data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;13.3</a>, the text data symbols are much more complex shapes. In terms of the simple visual processing model from <a href="#sec-visual-processing" class="quarto-xref">Section&nbsp;3.4</a>, the text data symbols are similar to <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;3.8</a>).<a href="#fn83" class="footnote-ref" id="fnref83" role="doc-noteref"><sup>83</sup></a></p>
 <p>One weakness of text data symbols is that comparing values (rather than just decoding a single value) requires more cognitive effort compared to comparing simple visual features (like the lengths of bars). For example, in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;4.2</a>, it is quick and easy to approximate the ratio of Pasifika to Māori or European/Other to Māori from the lengths of the bars, but those comparisons are slower and take more conscious effort using the text data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;13.3</a>.</p>
 <blockquote class="blockquote">
 <p>It is harder to compare data values that are mapped to text because it requires more effort to decode data values and to perform mental calculations.</p>
@@ -4989,7 +5010,7 @@ Figure&nbsp;13.6: Labels can be viewed as an encoding of metadata as text. We ca
 <blockquote class="blockquote">
 <p>Text is the only way to encode the type of complex and abstract information that is required for titles and axis labels.</p>
 </blockquote>
-<p>Another use of text in a data visualisation is to label specific points of interest. For example, <a href="#fig-ann" class="quarto-xref">Figure&nbsp;13.7</a> shows a variation of <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;9.3</a>, with text added to help explain the result of the Rugby World Cup final to disillusioned New Zealanders. This demonstrates further the value of text as the only way to encode complex and nuanced information.<a href="#fn82" class="footnote-ref" id="fnref82" role="doc-noteref"><sup>82</sup></a></p>
+<p>Another use of text in a data visualisation is to label specific points of interest. For example, <a href="#fig-ann" class="quarto-xref">Figure&nbsp;13.7</a> shows a variation of <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;9.3</a>, with text added to help explain the result of the Rugby World Cup final to disillusioned New Zealanders. This demonstrates further the value of text as the only way to encode complex and nuanced information.<a href="#fn84" class="footnote-ref" id="fnref84" role="doc-noteref"><sup>84</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ann" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5005,18 +5026,18 @@ Figure&nbsp;13.7: The number of times a team breaks through the opposition defen
 </div>
 </div>
 <p><a href="#fig-ann" class="quarto-xref">Figure&nbsp;13.7</a> also demonstrates that text is an effective way of directing attention (<a href="#sec-attention" class="quarto-xref">Section&nbsp;3.6</a>).<br>
-Text labels can explicitly describe data values or, more usefully, data summaries that the data visualisation is designed to show.<a href="#fn83" class="footnote-ref" id="fnref83" role="doc-noteref"><sup>83</sup></a></p>
+Text labels can explicitly describe data values or, more usefully, data summaries that the data visualisation is designed to show.<a href="#fn85" class="footnote-ref" id="fnref85" role="doc-noteref"><sup>85</sup></a></p>
 </section>
 <section id="sec-word-cloud" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="sec-word-cloud"><span class="header-section-number">13.4</span> Case study: Word clouds</h2>
-<p><a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;13.8</a> shows a word cloud data visualisation based on the text of the Wikipedia page on the Rugby World Cup.<a href="#fn84" class="footnote-ref" id="fnref84" role="doc-noteref"><sup>84</sup></a> This visualisation shows the frequency with which different words appear on the Wikipedia page. The data values that are being visualised are shown in <a href="#tbl-wiki-rwc" class="quarto-xref">Table&nbsp;13.1</a>.</p>
+<p><a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;13.8</a> shows a word cloud data visualisation based on the text of the Wikipedia page on the Rugby World Cup.<a href="#fn86" class="footnote-ref" id="fnref86" role="doc-noteref"><sup>86</sup></a> This visualisation shows the frequency with which different words appear on the Wikipedia page. The data values that are being visualised are shown in <a href="#tbl-wiki-rwc" class="quarto-xref">Table&nbsp;13.1</a>.</p>
 <div id="fig-wordcloud" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-wordcloud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Data/RWC/WordCloud/wordcloud-trim.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wordcloud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.8: A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup.<a href="#fn85" class="footnote-ref" id="fnref85" role="doc-noteref"><sup>85</sup></a>
+Figure&nbsp;13.8: A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup.<a href="#fn87" class="footnote-ref" id="fnref87" role="doc-noteref"><sup>87</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -5189,7 +5210,7 @@ Table&nbsp;13.2: Performance measures for the top 8 teams at the 2023 Rugby Worl
 </figure>
 </div>
 </div>
-<p>However, there are standard guidelines for formatting tables of values that can improve the readability of a table.<a href="#fn86" class="footnote-ref" id="fnref86" role="doc-noteref"><sup>86</sup></a> <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;13.3</a> shows the same data as <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;13.2</a>, but with all of the numeric columns right-aligned, a consistent number of decimal places in each column, fewer decimal places than the data actually possess, and the rows have been ordered from the highest number of points per game to the lowest.</p>
+<p>However, there are standard guidelines for formatting tables of values that can improve the readability of a table.<a href="#fn88" class="footnote-ref" id="fnref88" role="doc-noteref"><sup>88</sup></a> <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;13.3</a> shows the same data as <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;13.2</a>, but with all of the numeric columns right-aligned, a consistent number of decimal places in each column, fewer decimal places than the data actually possess, and the rows have been ordered from the highest number of points per game to the lowest.</p>
 <p>It is easier to see some structure in <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;13.2</a>. For example, the number of tries appears to decrease as well as the number of points. We can also see some evidence of the number of breaks decreasing as well, though it is weaker.</p>
 <p>There are some familiar explanations for the improvement in the table display. The reduction in detail, with fewer decimal places, means that there is less complexity in the visual field. The consistent number of decimal places means that less is changing, so differences are easier to detect (<a href="#sec-differences" class="quarto-xref">Section&nbsp;3.5</a>). Also, the consistent baseline provided by right-alignment means that the text <strong>length</strong> of the numbers (the number of digits in each number) provides a crude encoding of the size of the number, particularly in the column showing the number of clean breaks. However, it is worth noting that some of the <strong>accuracy</strong> of the text has been sacrificed in order to make some of these gains.</p>
 <div class="cell">
@@ -5351,7 +5372,7 @@ Figure&nbsp;13.13: A stem-and-leaf plot of the number of tries scored with hemis
 </div>
 </div>
 </div>
-<p><a href="#fig-tries-stem-weight" class="quarto-xref">Figure&nbsp;13.14</a> shows another variation on <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;13.12</a>, this time with the hemisphere encoded as the <strong>weight</strong> of the digits. This demonstrates the idea that there are text-specific visual features that can be used to encode data values. Other examples are font family (e.g., Arial versus Roman) and font slant (italic versus upright).<a href="#fn87" class="footnote-ref" id="fnref87" role="doc-noteref"><sup>87</sup></a></p>
+<p><a href="#fig-tries-stem-weight" class="quarto-xref">Figure&nbsp;13.14</a> shows another variation on <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;13.12</a>, this time with the hemisphere encoded as the <strong>weight</strong> of the digits. This demonstrates the idea that there are text-specific visual features that can be used to encode data values. Other examples are font family (e.g., Arial versus Roman) and font slant (italic versus upright).<a href="#fn89" class="footnote-ref" id="fnref89" role="doc-noteref"><sup>89</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-tries-stem-weight" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5366,12 +5387,12 @@ Figure&nbsp;13.14: A stem-and-leaf plot of the number of tries scored with hemis
 </div>
 </div>
 </div>
-<p>Stem-and-leaf plots might be seen as an archaic form of data visualisation, but we can see that they are effective in many ways.<a href="#fn88" class="footnote-ref" id="fnref88" role="doc-noteref"><sup>88</sup></a></p>
+<p>Stem-and-leaf plots might be seen as an archaic form of data visualisation, but we can see that they are effective in many ways.<a href="#fn90" class="footnote-ref" id="fnref90" role="doc-noteref"><sup>90</sup></a></p>
 <p>Unfortunately, despite all of their advantages, stem-and-leaf plots have a limited usefulness because they can only accommodate very small data sets. There is a similarity between a stem-and-leaf plot and the stacked icon plot in <a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;12.13 (a)</a>. However, whereas an icon can easily be used to represent some multiple of objects, that option is not available for text digits.</p>
 </section>
 <section id="dangers-of-text" class="level2" data-number="13.7">
 <h2 data-number="13.7" class="anchored" data-anchor-id="dangers-of-text"><span class="header-section-number">13.7</span> Dangers of text</h2>
-<p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;13.15</a> shows a data visualisation of the number of gun deaths in Florida between 1990 and 2012, covering the enactment of Florida’s “stand your ground” law that loosened the constrainst on an individual’s rights to use deadly force.<a href="#fn89" class="footnote-ref" id="fnref89" role="doc-noteref"><sup>89</sup></a> The title of the plot points out that gun deaths <em>decreased</em> after the law was enacted, which is perhaps surprising given that use of deadly force was less constrained after the introduction of the law.</p>
+<p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;13.15</a> shows a data visualisation of the number of gun deaths in Florida between 1990 and 2012, covering the enactment of Florida’s “stand your ground” law that loosened the constrainst on an individual’s rights to use deadly force.<a href="#fn91" class="footnote-ref" id="fnref91" role="doc-noteref"><sup>91</sup></a> The title of the plot points out that gun deaths <em>decreased</em> after the law was enacted, which is perhaps surprising given that use of deadly force was less constrained after the introduction of the law.</p>
 <div id="fig-text-danger" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-text-danger-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5383,14 +5404,14 @@ Figure&nbsp;13.15: The title influences our perception; the message from the dat
 </figure>
 </div>
 <p>However, if we look closely at the plot itself, we can see that the y-axis scale is inverted. A downward trend is actually an <em>increase</em> in gun deaths, so the data shows that gun deaths actually increased after the law was enacted.</p>
-<p>This example demonstrates that the text within a data visualisation is not only given a lot of attention, but it can have a dominant effect on the message that the viewer takes away.<a href="#fn90" class="footnote-ref" id="fnref90" role="doc-noteref"><sup>90</sup></a></p>
+<p>This example demonstrates that the text within a data visualisation is not only given a lot of attention, but it can have a dominant effect on the message that the viewer takes away.<a href="#fn92" class="footnote-ref" id="fnref92" role="doc-noteref"><sup>92</sup></a></p>
 <p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;13.15</a> is an example of a deliberately misleading data visualisation, which we obviously want to avoid. However, the broader point is that we need to be at least as careful with our choice of text content as we are with our selection of mappings from data values to visual features and we have a responsibility to work hard to make sure that the message from data symbols and from text labels is completely consistent.</p>
 </section>
 <section id="alt-text" class="level2" data-number="13.8">
 <h2 data-number="13.8" class="anchored" data-anchor-id="alt-text"><span class="header-section-number">13.8</span> Alt text</h2>
 <p>Is a data visualisation effective if we cannot see it? We saw in <a href="#sec-CVD" class="quarto-xref">Section&nbsp;6.4</a> that a data visualisation may not be effective if a colour encoding does not take into account red-green colour blindness. But what about a low-vision or blind audience?</p>
 <p>Although data visualisation is based on the visual system, it is still possible to make a data visualisation effective for a low-vision or blind audience by providing a text description of the data visualisation. Alt text is a text description of a data visualisation that will be recognised and read out by a screen reader.</p>
-<p>The alt text for a data visualisation will ideally describe what variables are being displayed and how they are encoded (what sort of plot is it), data summaries like trends, clusters, outliers, and correlations, and include the main message of the visualisation, including causal explanations and wider implications.<a href="#fn91" class="footnote-ref" id="fnref91" role="doc-noteref"><sup>91</sup></a></p>
+<p>The alt text for a data visualisation will ideally describe what variables are being displayed and how they are encoded (what sort of plot is it), data summaries like trends, clusters, outliers, and correlations, and include the main message of the visualisation, including causal explanations and wider implications.<a href="#fn93" class="footnote-ref" id="fnref93" role="doc-noteref"><sup>93</sup></a></p>
 <p>Another option sometimes employed is to provide tables of data in addition to the data visualisation, though this will not always be possible or practical.</p>
 <p>All of the images in this document have alt text (or at least they should!).</p>
 </section>
@@ -5402,12 +5423,12 @@ Figure&nbsp;13.15: The title influences our perception; the message from the dat
 <p>On the other hand, decoding a large number of data values from text is very slow and we cannot generate visual summaries from text.</p>
 <p>Guides are really just collections of data symbols, with specific data values encoded as the visual features to demonstrate how data values have been encoded.</p>
 <p>The text elements within guides are essential because they provide the only precise decoding of exact data values. This is what allows the decoding of the main data symbols within a data visualisation.</p>
-<p>Overall, text is very valuable in a data visualisation for accurately encoding a small number of data values, or to express complex information. But text is not appropriate for representing a large number of raw data values.<a href="#fn92" class="footnote-ref" id="fnref92" role="doc-noteref"><sup>92</sup></a></p>
+<p>Overall, text is very valuable in a data visualisation for accurately encoding a small number of data values, or to express complex information. But text is not appropriate for representing a large number of raw data values.<a href="#fn94" class="footnote-ref" id="fnref94" role="doc-noteref"><sup>94</sup></a></p>
 </section>
 </section>
 <section id="mapping-structure" class="level1" data-number="14">
 <h1 data-number="14"><span class="header-section-number">14</span> Mapping Structure</h1>
-<p><a href="#fig-yji" class="quarto-xref">Figure&nbsp;14.1</a> shows a line plot of the rate of youth crime in New Zealand for different ethnic groups and a pie chart showing the proportions of different types of crime.<a href="#fn93" class="footnote-ref" id="fnref93" role="doc-noteref"><sup>93</sup></a> There is a problem with this figure because the line plot and the pie chart share the same colour palette even though they are visualising different variables (ethnicity and crime type). For example, the ethnic group <code>European/Other</code> is encoded as the orange colour of a line <em>and</em> the crime type <code>Theft</code> is also encoded as an orange colour, in this case of a wedge.</p>
+<p><a href="#fig-yji" class="quarto-xref">Figure&nbsp;14.1</a> shows a line plot of the rate of youth crime in New Zealand for different ethnic groups and a pie chart showing the proportions of different types of crime.<a href="#fn95" class="footnote-ref" id="fnref95" role="doc-noteref"><sup>95</sup></a> There is a problem with this figure because the line plot and the pie chart share the same colour palette even though they are visualising different variables (ethnicity and crime type). For example, the ethnic group <code>European/Other</code> is encoded as the orange colour of a line <em>and</em> the crime type <code>Theft</code> is also encoded as an orange colour, in this case of a wedge.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-yji" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
@@ -5433,7 +5454,7 @@ Figure&nbsp;14.2: If we encode more than one data value to the same visual featu
 </figcaption>
 </figure>
 </div>
-<p>In this section we look at the overall arrangement and coordination of the elements of a data visualisation.<a href="#fn94" class="footnote-ref" id="fnref94" role="doc-noteref"><sup>94</sup></a></p>
+<p>In this section we look at the overall arrangement and coordination of the elements of a data visualisation.<a href="#fn96" class="footnote-ref" id="fnref96" role="doc-noteref"><sup>96</sup></a></p>
 <section id="sec-map-org" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="sec-map-org"><span class="header-section-number">14.1</span> Mapping organisation</h2>
 <p><a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;14.3</a> shows a scatter plot of the number of clean breaks and the number of tries for countries at the 2023 Rugby World Cup (<a href="#tbl-rwc-2023" class="quarto-xref">Table&nbsp;9.1</a>). This data visualisation is similar to <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;9.3</a>, but with an additional encoding of the hemisphere for each country as the colour of the data points.</p>
@@ -5492,7 +5513,7 @@ Figure&nbsp;14.5: A scatter plot of the number of times a team breaks through th
 </section>
 <section id="consistent-mappings" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="consistent-mappings"><span class="header-section-number">14.2</span> Consistent mappings</h2>
-<p><a href="#fig-rep-none" class="quarto-xref">Figure&nbsp;14.6</a> shows a variation on <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;14.3</a> with a modified legend. In this plot, the hemisphere of a country is encoded using orange and green within the main plot, but then hemisphere is encoded using light blue and brown in the legend. This is clearly an ineffective data visualisation, but it highlights the importance of maintaining consistent mappings between different elements of a plot.<a href="#fn95" class="footnote-ref" id="fnref95" role="doc-noteref"><sup>95</sup></a></p>
+<p><a href="#fig-rep-none" class="quarto-xref">Figure&nbsp;14.6</a> shows a variation on <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;14.3</a> with a modified legend. In this plot, the hemisphere of a country is encoded using orange and green within the main plot, but then hemisphere is encoded using light blue and brown in the legend. This is clearly an ineffective data visualisation, but it highlights the importance of maintaining consistent mappings between different elements of a plot.<a href="#fn97" class="footnote-ref" id="fnref97" role="doc-noteref"><sup>97</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rep-none" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5525,8 +5546,8 @@ Figure&nbsp;14.7: A scatter plot of the number of times a team breaks through th
 </section>
 <section id="the-dangers-of-inconsistent-mappings" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="the-dangers-of-inconsistent-mappings"><span class="header-section-number">14.3</span> The dangers of inconsistent mappings</h2>
-<p><a href="#fig-trump-bill" class="quarto-xref">Figure&nbsp;14.8</a> shows a bar plot of the impact of a proposed tax bill during the second Trump administration.<a href="#fn96" class="footnote-ref" id="fnref96" role="doc-noteref"><sup>96</sup></a> Each bar represents a change in income for a particular income bracket. Lower incomes are to the left and higher incomes are to the right. There are labels to describe each income bracket and there are labels that describe each change in income. Where the change in income is large, the label for change in income is written within the bar (at the top of the bar), but for smaller changes in income, the bar is too small to fit the label, so the label is placed just above the bar. For the two leftmost bars, the change in income is actually negative and the change in income label is placed <em>below</em> the bar. The labels that describe the income brackets are mostly below the bars, but for the two leftmost bars the labels for the income brackets are placed above the bars.</p>
-<p>In summary, there are two labels for each bar, one below the bar and one above (or at the top of) the bar. This consistent positioning of the labels encourages the viewer to decode two groups of labels: one group above the bars and one group below the bars. This can mislead us into comparing, for example, “-1K” for the leftmost bar with “4.3M” for the rightmost bar, when the correct comparison is between “-1K” (for the lowest income bracket) and “389.3K” (for the highest income bracket).<a href="#fn97" class="footnote-ref" id="fnref97" role="doc-noteref"><sup>97</sup></a></p>
+<p><a href="#fig-trump-bill" class="quarto-xref">Figure&nbsp;14.8</a> shows a bar plot of the impact of a proposed tax bill during the second Trump administration.<a href="#fn98" class="footnote-ref" id="fnref98" role="doc-noteref"><sup>98</sup></a> Each bar represents a change in income for a particular income bracket. Lower incomes are to the left and higher incomes are to the right. There are labels to describe each income bracket and there are labels that describe each change in income. Where the change in income is large, the label for change in income is written within the bar (at the top of the bar), but for smaller changes in income, the bar is too small to fit the label, so the label is placed just above the bar. For the two leftmost bars, the change in income is actually negative and the change in income label is placed <em>below</em> the bar. The labels that describe the income brackets are mostly below the bars, but for the two leftmost bars the labels for the income brackets are placed above the bars.</p>
+<p>In summary, there are two labels for each bar, one below the bar and one above (or at the top of) the bar. This consistent positioning of the labels encourages the viewer to decode two groups of labels: one group above the bars and one group below the bars. This can mislead us into comparing, for example, “-1K” for the leftmost bar with “4.3M” for the rightmost bar, when the correct comparison is between “-1K” (for the lowest income bracket) and “389.3K” (for the highest income bracket).<a href="#fn99" class="footnote-ref" id="fnref99" role="doc-noteref"><sup>99</sup></a></p>
 <p>Just as it makes no sense to change the encoding of data values within a data visualisation (<a href="#fig-rep-none" class="quarto-xref">Figure&nbsp;14.6</a>) or across multiple data visualisations within the same document (<a href="#fig-yji" class="quarto-xref">Figure&nbsp;14.1</a>), it makes no sense to change the encoding of structure within a data visualisation.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -5536,7 +5557,7 @@ Figure&nbsp;14.7: A scatter plot of the number of times a team breaks through th
 <img src="how-data-vis-works_files/figure-html/fig-trump-bill-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trump-bill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.8: A bar plot of the distributional effects of Trump’s “Big, Beautiful Bill”.<a href="#fn98" class="footnote-ref" id="fnref98" role="doc-noteref"><sup>98</sup></a>
+Figure&nbsp;14.8: A bar plot of the distributional effects of Trump’s “Big, Beautiful Bill”.<a href="#fn100" class="footnote-ref" id="fnref100" role="doc-noteref"><sup>100</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -5545,7 +5566,7 @@ Figure&nbsp;14.8: A bar plot of the distributional effects of Trump’s “Big, 
 </section>
 <section id="mapping-importance" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="mapping-importance"><span class="header-section-number">14.4</span> Mapping importance</h2>
-<p><a href="#fig-contrast" class="quarto-xref">Figure&nbsp;14.10</a> shows a variation on <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;14.7</a> with many elements of the plot drawn in light grey. The effect of this change is to create two visual groups, one lighter and less saturated than the other. This emphasises the main data symbols in the main plot and in the legend, and de-emphasises the axes and labels. Our attention is drawn to the darker and more saturated elements first (<a href="#sec-attention" class="quarto-xref">Section&nbsp;3.6</a>), with the other elements in the background, which we can focus on if we need the additional information.<a href="#fn99" class="footnote-ref" id="fnref99" role="doc-noteref"><sup>99</sup></a></p>
+<p><a href="#fig-contrast" class="quarto-xref">Figure&nbsp;14.10</a> shows a variation on <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;14.7</a> with many elements of the plot drawn in light grey. The effect of this change is to create two visual groups, one lighter and less saturated than the other. This emphasises the main data symbols in the main plot and in the legend, and de-emphasises the axes and labels. Our attention is drawn to the darker and more saturated elements first (<a href="#sec-attention" class="quarto-xref">Section&nbsp;3.6</a>), with the other elements in the background, which we can focus on if we need the additional information.<a href="#fn101" class="footnote-ref" id="fnref101" role="doc-noteref"><sup>101</sup></a></p>
 <p>By comparison, in <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;14.7</a> there is a similar visual impact from all elements of the plot, so it is less clear where to look first. All of the elements of the data visualisation compete for our attention.</p>
 <p>This is another example of encoding (qualitative) non-data values as visual features (see <a href="#sec-map-org" class="quarto-xref">Section&nbsp;14.1</a>). In this case, we are encoding the <strong>importance</strong> of different visual elements as visual features, in this case colour. We decode the differences in colour to a more important group of elements and a less important group of elements.</p>
 <div id="fig-imp-vis-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5642,9 +5663,6 @@ Figure&nbsp;14.11: A scatter plot of the number of times a team breaks through t
 <li><p>When talk about basic data types and what you can do with them, maybe introduce the explicit idea of “comparison” and all tasks basically being based on comparison (with some examples of breaking down tasks). There is a nice simple list of tasks (rather than some overblown task taxonomy) in “Low-Level Components of Analytic Activity in Information Visualization” Amar et al (2005) which describes comparison as a “fundamental cognitive action” that underlies all data vis tasks.</p></li>
 <li><p>Check whether HDVW covers all of the types of tasks in “Low-Level Components of Analytic Activity in Information Visualization” Amar et al (2005)</p></li>
 <li><p>In visual-model, make a BRIEF statement at the end of each section (maybe in black box) about the implications for data vis.</p></li>
-<li><p>Point out early in visual features that a bar plot is quite simple The differences are in the bars so those differences are easy to spot Refer back to visual model Also refer back from same is same Also refer back from wherever discuss data ink ratio perhaps not by that name</p></li>
-<li><p>memory limits: wherever mention, add footnote that acknowledges some controversy (different models and number of items limit vs continuous resource limit), with ref to e.g., “Psychophysical scaling reveals a unified theory of visual memory strength” Schurgin et al (2020) and the binary map model</p></li>
-<li><p>MUST acknowledge the mapping of differences to angles in a line plot (essentially an emergent feature!?).</p></li>
 <li><p>In colour, mention “In Color Perception, Size Matters” Stone (2012) “In designing colors for digital visualization systems. one of the most critical factors is the interaction between size and color appearance.”</p></li>
 <li><p>Add Adobe aesthetic colour palette guidelines. https://color.adobe.com/ Add order of colours in color palette for bar plot. Bartolomeo et al (2025) To colour section. Or to design section if that makes more sense.</p></li>
 <li><p>Adam’s section 4.4 Scaling and Encoding makes important points about the mapping from data values to visual properties (particularly mappings to positions). He breaks the transformation into three separate functions! So something needs to be said about the complexity of some mappings. Note that Adam is focused on efficiency - e.g., his three functions are less complex than grid’s nested viewports.</p></li>
@@ -5702,9 +5720,6 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <li><p>visual objects pictures as data points icons higher-level =&gt; gain more complex information transfer BUT lose visual summaries (cos not just simple shapes with simple features)? case study: chernoff faces</p></li>
 <li><p>deliberately losing information (e.g., luminance scale for quant)</p>
 <p>“Why Shouldn’t All Charts Be Scatter Plots? Beyond Precision-Driven Visualizations” Bertini et al (2021) Claims that ordinal comparisons more common in practice than quantitative comparisons (?)</p></li>
-<li><p>somewhere in intro (?) as a footnote (?) cite Sonning (2022), which goes into great detail about how to do a line plot right; this document aims to provide a simpler set of concepts that can be applied to any data vis by a less expert reader.</p></li>
-<li><p>Mention that little is known about the accuracy of visual objects (though they must have good capacity because they are more abstract, right?)</p>
-<p>In general, there needs to be more explicit acknowledgement of the lack of experimental results for complex data vis scenarios. c.f., “Testing Statistical Charts: What Makes a Good Graph?” Vanderplas, Cook, and Hofmann (2020) p 71.</p></li>
 <li><p>aspect ratio section (in combine?)</p></li>
 <li><p>bubble plots (area not effective =&gt; something better?)</p></li>
 <li><p>Add citation for distance effect</p></li>
@@ -5712,7 +5727,7 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <li><p>Add annotation example in text that just labels with text each country in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;9.3</a></p></li>
 <li><p>Need citation for more-is-more (kosslyn?) AND for representing negative values AND for dark is more AND for same is same (Principle of unambiguity ?)</p></li>
 <li><p>Dark is more</p>
-<p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;6.12</a> also demonstrates another example of visual congruence because darker colours are naturally associated with larger data values.</p></li>
+<p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;6.13</a> also demonstrates another example of visual congruence because darker colours are naturally associated with larger data values.</p></li>
 <li><p>Proper citation for stroop effect ?</p></li>
 <li><p>Use reordering of <a href="#fig-side-bar-year" class="quarto-xref">Figure&nbsp;5.7</a> (so that they start tallest to smallest) THEN should see change in that pattern later on more easily? Use this as an example of “visual shape” in a bar plot. Revisit heatmaps - regions/shapes of colours?</p></li>
 <li><p>Cite “Testing Statistical Charts: What Makes a Good Graph?” Vanderplas, Cook, and Hofmann (2020) when mention that there are many fewer studies of higher-level mappings between data and data vis (partly just because it is harder to study!).</p></li>
@@ -5743,7 +5758,7 @@ As an umbrella for some topics below, e.g., visual illusions? The main point is 
 <p>Add footnote to Hadley’s more complex model visualisation paper https://vita.had.co.nz/papers/model-vis.pdf https://dl.acm.org/doi/10.1002/sam.11271</p></li>
 <li><p>Case study: SinaPlots</p></li>
 </ul>
-<p>A SinaPlot is a nice combination of decode for raw data and for data summary. <a href="#fn100" class="footnote-ref" id="fnref100" role="doc-noteref"><sup>100</sup></a> <a href="#fig-sina" class="quarto-xref">Figure&nbsp;17.1</a> is actually a combination of a SinaPlot and a violin plot.</p>
+<p>A SinaPlot is a nice combination of decode for raw data and for data summary. <a href="#fn102" class="footnote-ref" id="fnref102" role="doc-noteref"><sup>102</sup></a> <a href="#fig-sina" class="quarto-xref">Figure&nbsp;17.1</a> is actually a combination of a SinaPlot and a violin plot.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-sina" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5932,75 +5947,77 @@ The eye tracking data were taken from the same web site.<a href="#fnref12" class
 <li id="fn33"><p>The three-dimensional experience of colour arises from the fact that there are three different sorts of cones in the retina (see <a href="#sec-eye" class="quarto-xref">Section&nbsp;3.1</a>), each sensitive to a different range of light wavelengths: The L cones respond to long wavelengths (reds); the M cones respond to medium wavelengths (greens); and the S cones respond to short wavelengths (blues). The neural connections that combine the messages from the retina are also divided into three pathways: light-dark, which represents the sum of L, M, and S cones; red-green, which represents the difference between L and M cones; and blue-yellow, which represents the difference between S cones and the sum of L and M cones. For more information, see <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span>.<a href="#fnref33" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn34"><p>This relative perception of colours is useful for being able to adapt to a wide range of lighting conditions. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more detailed discussion.<a href="#fnref34" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn35"><p>Provide a cite for those percentages<a href="#fnref35" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn36"><p>cite ggsci, colour brewer (and others?)<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn37"><p>“Reflections on the Uses and Available Choices of Categorical Colorschemes” Bartolomeo et al (2025)<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn38"><p>Attribution to kaggle data set.<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn39"><p>The {gggrid} package <span class="citation" data-cites="pkg-gggrid">(<a href="#ref-pkg-gggrid" role="doc-biblioref">Murrell 2022</a>)</span> was used to take the “bite” out of the panel border in <a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;6.12</a> where South Africa was excluded.<a href="#fnref39" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn40"><p><span class="citation" data-cites="TVERSKY2002247">Tversky, Morrison, and Betrancourt (<a href="#ref-TVERSKY2002247" role="doc-biblioref">2002</a>)</span> discusses congruence at least in the sense of matching the spatial properties of data values to the spatial arrangement of visual features. The concept is also discussed in <span class="citation" data-cites="DBLP:journals/corr/abs-2008-11310">Bertini, Correll, and Franconeri (<a href="#ref-DBLP:journals/corr/abs-2008-11310" role="doc-biblioref">2020</a>)</span>.<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn41"><p>Attribution to kaggle data set.<a href="#fnref41" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn42"><p>horizontal bars (distances) versus vertical bars (amounts) look up Tversky and kosslyn OTOH, horizontal bars are more accurate than vertical bars (citation please!)<a href="#fnref42" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn43"><p>This data visualisation is an adaptation of a graphic shown during television coverage of the match.<a href="#fnref43" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn44"><p>This plot is based on a data visualisation from the New Zealand Listener October 14-20 2023.<a href="#fnref44" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn45"><p>Attribution to kaggle data set.<a href="#fnref45" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn46"><p>MUST make reference to the Information Visualization Reference Model of Card et al (1999) that differentiates data transforms from visual mappings from view transforms (the last particularly for interactive graphics?), PLUS the design-centric extension by Wu and Chang (2024), which teases out design-specific transforms as well (the data prep for a box plot being a good example). These papers provide a formal basis for some of the hand-waving that I do in this section, particularly on decoding to data summaries rather than raw data. Also “Low-Level Components of Analytic Activity in Information Visualization” Amar et al (2005) Set of 10 data visualisation tasks I like the way these all correspond to a numerical summary.<a href="#fnref46" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn47"><p>Need to acknowledge that there are many variations, even on the simple box plot, e.g., notches, definitions of the box, let alone violin plots, etc.<a href="#fnref47" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn48"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). ALSO must relate this to Gestalt section in visual model ?<a href="#fnref48" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn49"><p>This is a reproduction of a chart from Alberto Cairo’s “How Charts Lie” (p12-13), which itself was a reproduction of a chart shown by Fox News. (plus mention other classic how charts lie books like Huff’s How to Lie With Statistics ?) Also link to Wilke’s Principle of Proportional Ink?<a href="#fnref49" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn50"><p>Refer to the literature that talks about separable and integral AND configural visual features.<a href="#fnref50" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn51"><p>Technically, there is an interaction because lengths that are further apart from each other vertically are harder to compare (see <a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;5.1</a>). However, compared to visual features that strongly interact, length and position are reasonably independent.<a href="#fnref51" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn52"><p>Need citations to literature that mention integral visual features. Admit a range rather than a dichotomy. Munzner has good examples?<a href="#fnref52" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn53"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>. Acknowledge that my use is a little loose because the use in the literature is really about separate data symbols combining to create emergent features (like clusters?). MacEachren 1995 uses emergent in exactly this way!? “Vision Science: Photons to Phenomenology” Stephen Palmer, Figure 2.1.5 caption “The arrangement of several dots in a line give rise to emergent properties, such as length, orientation, and curvature, that are different from the properties of the dots that compose it.”<a href="#fnref53" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn54"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots. Talk about how, although there is some experimental support for reasonable accuracy of correlation from scatter plot (with some bias), there is not much experimental evidence for which is best for perceiving correlations Eg scatter plot vs parallel coords etc Cite Cleveland (1994) for white space margin affecting strength of relation?<a href="#fnref54" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn55"><p>This two-dimensional mosaic plot could also be called a spine plot. Mosaic plot is the more general term that includes plots of more than two qualitative variables.<a href="#fnref55" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn56"><p>An interaction plot is typically used in a more experimental setting where the x-axis might be different treatments and the groups might be different patient groups and the y-axis might be a measure of response to treatment. The outcome is then whether the treatment has had the same effect for different patient groups (or not).<a href="#fnref56" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn57"><p><a href="#fig-nz-doctor-bar" class="quarto-xref">Figure&nbsp;9.12</a> is based on Figure 2 from <span class="citation" data-cites="nz-doctor">Huskinson (<a href="#ref-nz-doctor" role="doc-biblioref">2024</a>)</span>.<a href="#fnref57" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn58"><p>This is the “compatibility principle” ? of Carswell and Wickens ?<a href="#fnref58" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn59"><p>Mention the conflicting opinions on redundant encoding: Tufte and others against; some studies for (including hofmann?)<a href="#fnref59" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn60"><p>“VISUAL PATTERN RECOGNITION” Few (2006) Makes this same point [p 10] Demonstration of difference between density plot (mostly see a shape) and histogram (mostly see bar heights).<a href="#fnref60" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn61"><p>According to Zacks and Tversky 1999 people use “trend words” (increasing/decreasing) versus “discrete words” (higher/lower than) AND are faster to judge absolute values from bars but angle from line graphs.<a href="#fnref61" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn62"><p>Acknowledge and point to different ways that the data values can be transformed (or summarised).<a href="#fnref62" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn63"><p>Tufte’s small multiples<a href="#fnref63" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn64"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref64" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn65"><p>Cite again the classic interactive lit ? Point to some tools that might help, like GGobi?<a href="#fnref65" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn66"><p>Attribution for the original public domain image.<a href="#fnref66" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn67"><p>Mention Tufte (data-ink ratio), Stephen Few? see DataVis/README for links to the debate.<a href="#fnref67" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn68"><p>Links to studies that try to show benefits of chart junk. Rahman et al (2024) Mention affect (emotion) study?<a href="#fnref68" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn69"><p>There is a really nice summary of when chart junk might be acceptable somewhere in DataVis/README<a href="#fnref69" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn70"><p>reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/<a href="#fnref70" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn71"><p>different terminology: icons, glyphs, pictograms Vehement opposition to these from some quarters<a href="#fnref71" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn72"><p>cite the study that reckons using icons can help with perceiving counts. More effective when each icon represents 1 (and so there are no fractional icons) ?<a href="#fnref72" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn73"><p>Link to a resource that has a comprehensive list of visual channels and includes curvature.<a href="#fnref73" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn74"><p>citation please!<a href="#fnref74" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn75"><p>Cite “Sometimes more is more: iterative participatory design of infographics for engagement of community members with varying levels of health literacy” Arcia et al (2016) where people interpret icons in multiple ways, e.g., specifically “pineapple” rather than generic “fruit”. Also cite something about cultural differences in perception. e.g., “More of what? Dissociating effects of conceptual and numeric mappings on interpreting colormap data visualizations” Soto et al (2023)<a href="#fnref75" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn76"><p>“A Study on the Metaphor of “Red” in Chinese Culture” Qiang (2011)<a href="#fnref76" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn77"><p>Kosslyn’s Principle of appropriate knowledge ?<a href="#fnref77" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn78"><p>“a memorable visualization is often also an effective one.” (“Beyond Memorability: Visualization Recognition and Recall” Borkin et al (2016))<a href="#fnref78" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn79"><p>Only a thumbnail version of the original image is shown in order to comply with terms of use of the MASSVIS data set.<a href="#fnref79" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn80"><p>Provide citation to Brath book at least. Perhaps cite my text article, however that gets to see the light of day.<a href="#fnref80" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn81"><p>Talk about there being separate verbal processing areas in the brain. Text has to come in as visual, so undergoes visual processing, but text is also processed separately for its language value. Cite Ware p315-316<a href="#fnref81" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn82"><p>Russell Akoff’s “From Data to Wisdom” Text is very flexible - it can convey data, information, knowledge, understanding, and wisdom. Most other graphical elements are much more limited.<a href="#fnref82" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn83"><p>Mention idea of top-down as opposed to bottom-up attention. With cite.<a href="#fnref83" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn84"><p><a href="https://en.wikipedia.org/wiki/Rugby_World_Cup"></a> <span class="citation" data-cites="wiki-rwc">(<a href="#ref-wiki-rwc" role="doc-biblioref">Wikipedia 2024</a>)</span><a href="#fnref84" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn85"><p>This image was produced using the R package {wordcloud} <span class="citation" data-cites="pkg-wordcloud">(<a href="#ref-pkg-wordcloud" role="doc-biblioref">Fellows 2018</a>)</span>.<a href="#fnref85" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn86"><p>For example, <span class="citation" data-cites="schwabish">Schwabish (<a href="#ref-schwabish" role="doc-biblioref">2020</a>)</span>. Also get a Wainer reference in here?<a href="#fnref86" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn87"><p><span class="citation" data-cites="brath2014design">(<a href="#ref-brath2014design" role="doc-biblioref">Brath and Banissi 2014</a>)</span> at least<a href="#fnref87" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn88"><p>Quote from John Tukey about stem-and-leaf plots:</p>
+<li id="fn36"><p>“In Color Perception, Size Matters” Stone (2012) “In designing colors for digital visualization systems. one of the most critical factors is the interaction between size and color appearance.” Talks about “spreading”, which means a sort of blending or averaging of colours over small areas <em>by the visual system</em>.<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn37"><p>cite ggsci, colour brewer (and others?)<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn38"><p>“Reflections on the Uses and Available Choices of Categorical Colorschemes” Bartolomeo et al (2025)<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn39"><p>Attribution to kaggle data set.<a href="#fnref39" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn40"><p>The {gggrid} package <span class="citation" data-cites="pkg-gggrid">(<a href="#ref-pkg-gggrid" role="doc-biblioref">Murrell 2022</a>)</span> was used to take the “bite” out of the panel border in <a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;6.13</a> where South Africa was excluded.<a href="#fnref40" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn41"><p><span class="citation" data-cites="TVERSKY2002247">Tversky, Morrison, and Betrancourt (<a href="#ref-TVERSKY2002247" role="doc-biblioref">2002</a>)</span> discusses congruence at least in the sense of matching the spatial properties of data values to the spatial arrangement of visual features. The concept is also discussed in <span class="citation" data-cites="DBLP:journals/corr/abs-2008-11310">Bertini, Correll, and Franconeri (<a href="#ref-DBLP:journals/corr/abs-2008-11310" role="doc-biblioref">2020</a>)</span>.<a href="#fnref41" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn42"><p>Attribution to kaggle data set.<a href="#fnref42" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn43"><p>horizontal bars (distances) versus vertical bars (amounts) look up Tversky and kosslyn OTOH, horizontal bars are more accurate than vertical bars (citation please!)<a href="#fnref43" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn44"><p>This data visualisation is an adaptation of a graphic shown during television coverage of the match.<a href="#fnref44" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn45"><p>This plot is based on a data visualisation from the New Zealand Listener October 14-20 2023.<a href="#fnref45" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn46"><p>Attribution to kaggle data set.<a href="#fnref46" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn47"><p>MUST make reference to the Information Visualization Reference Model of Card et al (1999) that differentiates data transforms from visual mappings from view transforms (the last particularly for interactive graphics?), PLUS the design-centric extension by Wu and Chang (2024), which teases out design-specific transforms as well (the data prep for a box plot being a good example). These papers provide a formal basis for some of the hand-waving that I do in this section, particularly on decoding to data summaries rather than raw data. Also “Low-Level Components of Analytic Activity in Information Visualization” Amar et al (2005) Set of 10 data visualisation tasks I like the way these all correspond to a numerical summary.<a href="#fnref47" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn48"><p>Need to acknowledge that there are many variations, even on the simple box plot, e.g., notches, definitions of the box, let alone violin plots, etc.<a href="#fnref48" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn49"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). ALSO must relate this to Gestalt section in visual model ?<a href="#fnref49" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn50"><p>This is a reproduction of a chart from Alberto Cairo’s “How Charts Lie” (p12-13), which itself was a reproduction of a chart shown by Fox News. (plus mention other classic how charts lie books like Huff’s How to Lie With Statistics ?) Also link to Wilke’s Principle of Proportional Ink?<a href="#fnref50" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn51"><p>Refer to the literature that talks about separable and integral AND configural visual features.<a href="#fnref51" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn52"><p>Technically, there is an interaction because lengths that are further apart from each other vertically are harder to compare (see <a href="#sec-distance-effect" class="quarto-xref">Section&nbsp;5.1</a>). However, compared to visual features that strongly interact, length and position are reasonably independent.<a href="#fnref52" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn53"><p>Need citations to literature that mention integral visual features. Admit a range rather than a dichotomy. Munzner has good examples?<a href="#fnref53" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn54"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>. Acknowledge that my use is a little loose because the use in the literature is really about separate data symbols combining to create emergent features (like clusters?). MacEachren 1995 uses emergent in exactly this way!? “Vision Science: Photons to Phenomenology” Stephen Palmer, Figure 2.1.5 caption “The arrangement of several dots in a line give rise to emergent properties, such as length, orientation, and curvature, that are different from the properties of the dots that compose it.”<a href="#fnref54" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn55"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots. Talk about how, although there is some experimental support for reasonable accuracy of correlation from scatter plot (with some bias), there is not much experimental evidence for which is best for perceiving correlations Eg scatter plot vs parallel coords etc Cite Cleveland (1994) for white space margin affecting strength of relation?<a href="#fnref55" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn56"><p>This two-dimensional mosaic plot could also be called a spine plot. Mosaic plot is the more general term that includes plots of more than two qualitative variables.<a href="#fnref56" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn57"><p>An interaction plot is typically used in a more experimental setting where the x-axis might be different treatments and the groups might be different patient groups and the y-axis might be a measure of response to treatment. The outcome is then whether the treatment has had the same effect for different patient groups (or not).<a href="#fnref57" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn58"><p><a href="#fig-nz-doctor-bar" class="quarto-xref">Figure&nbsp;9.12</a> is based on Figure 2 from <span class="citation" data-cites="nz-doctor">Huskinson (<a href="#ref-nz-doctor" role="doc-biblioref">2024</a>)</span>.<a href="#fnref58" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn59"><p>This is the “compatibility principle” ? of Carswell and Wickens ?<a href="#fnref59" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn60"><p>Mention the conflicting opinions on redundant encoding: Tufte and others against; some studies for (including hofmann?)<a href="#fnref60" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn61"><p>“VISUAL PATTERN RECOGNITION” Few (2006) Makes this same point [p 10] Demonstration of difference between density plot (mostly see a shape) and histogram (mostly see bar heights).<a href="#fnref61" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn62"><p>According to Zacks and Tversky 1999 people use “trend words” (increasing/decreasing) versus “discrete words” (higher/lower than) AND are faster to judge absolute values from bars but angle from line graphs.<a href="#fnref62" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn63"><p>Acknowledge and point to different ways that the data values can be transformed (or summarised).<a href="#fnref63" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn64"><p>Tufte’s small multiples<a href="#fnref64" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn65"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref65" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn66"><p>Cite again the classic interactive lit ? Point to some tools that might help, like GGobi?<a href="#fnref66" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn67"><p>Attribution for the original public domain image.<a href="#fnref67" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn68"><p>Mention Tufte (data-ink ratio), Stephen Few? see DataVis/README for links to the debate.<a href="#fnref68" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn69"><p>Links to studies that try to show benefits of chart junk. Rahman et al (2024) Mention affect (emotion) study?<a href="#fnref69" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn70"><p>There is a really nice summary of when chart junk might be acceptable somewhere in DataVis/README<a href="#fnref70" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn71"><p>reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/<a href="#fnref71" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn72"><p>different terminology: icons, glyphs, pictograms Vehement opposition to these from some quarters<a href="#fnref72" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn73"><p>cite the study that reckons using icons can help with perceiving counts. More effective when each icon represents 1 (and so there are no fractional icons) ?<a href="#fnref73" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn74"><p>Link to a resource that has a comprehensive list of visual channels and includes curvature.<a href="#fnref74" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn75"><p>citation please!<a href="#fnref75" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn76"><p>Cite “Sometimes more is more: iterative participatory design of infographics for engagement of community members with varying levels of health literacy” Arcia et al (2016) where people interpret icons in multiple ways, e.g., specifically “pineapple” rather than generic “fruit”. Also cite something about cultural differences in perception. e.g., “More of what? Dissociating effects of conceptual and numeric mappings on interpreting colormap data visualizations” Soto et al (2023)<a href="#fnref76" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn77"><p>“A Study on the Metaphor of “Red” in Chinese Culture” Qiang (2011)<a href="#fnref77" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn78"><p>Kosslyn’s Principle of appropriate knowledge ?<a href="#fnref78" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn79"><p>in general, there needs to be more explicit acknowledgement of the lack of experimental results for complex data vis scenarios. c.f., “Testing Statistical Charts: What Makes a Good Graph?” Vanderplas, Cook, and Hofmann (2020) p 71.<a href="#fnref79" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn80"><p>“a memorable visualization is often also an effective one.” (“Beyond Memorability: Visualization Recognition and Recall” Borkin et al (2016))<a href="#fnref80" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn81"><p>Only a thumbnail version of the original image is shown in order to comply with terms of use of the MASSVIS data set.<a href="#fnref81" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn82"><p>Provide citation to Brath book at least. Perhaps cite my text article, however that gets to see the light of day.<a href="#fnref82" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn83"><p>Talk about there being separate verbal processing areas in the brain. Text has to come in as visual, so undergoes visual processing, but text is also processed separately for its language value. Cite Ware p315-316<a href="#fnref83" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn84"><p>Russell Akoff’s “From Data to Wisdom” Text is very flexible - it can convey data, information, knowledge, understanding, and wisdom. Most other graphical elements are much more limited.<a href="#fnref84" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn85"><p>Mention idea of top-down as opposed to bottom-up attention. With cite.<a href="#fnref85" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn86"><p><a href="https://en.wikipedia.org/wiki/Rugby_World_Cup"></a> <span class="citation" data-cites="wiki-rwc">(<a href="#ref-wiki-rwc" role="doc-biblioref">Wikipedia 2024</a>)</span><a href="#fnref86" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn87"><p>This image was produced using the R package {wordcloud} <span class="citation" data-cites="pkg-wordcloud">(<a href="#ref-pkg-wordcloud" role="doc-biblioref">Fellows 2018</a>)</span>.<a href="#fnref87" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn88"><p>For example, <span class="citation" data-cites="schwabish">Schwabish (<a href="#ref-schwabish" role="doc-biblioref">2020</a>)</span>. Also get a Wainer reference in here?<a href="#fnref88" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn89"><p><span class="citation" data-cites="brath2014design">(<a href="#ref-brath2014design" role="doc-biblioref">Brath and Banissi 2014</a>)</span> at least<a href="#fnref89" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn90"><p>Quote from John Tukey about stem-and-leaf plots:</p>
 <div class="actual-quote">
 <p>If we are going to make a mark, it may as well be a meaningful one. The simplest - and most useful - meaningful mark is a digit.</p>
 </div>
-<p>Attributed to “Some Graphic and Semigraphic Displays” in T. A. Bancroft, ed.&nbsp;Statistical Papers in Honor of George W. Snedecor (Ames, Iowa, 1972), p.&nbsp;296.<a href="#fnref88" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn89"><p>Based on a <a href="https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2">Business Insider</a> data visualisation; data from <a href="https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/">USA Facts</a>.<a href="#fnref89" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn90"><p>“Trust and Recall of Information across Varying Degrees of Title-Visualization Misalignment” Kong et al (2019) Greater impact that can even override message in data. “Towards Understanding How Readers Integrate Charts and Captions: A Case Study with Line Charts” Kim et al (2021) Studied what happens when caption and text are incoherent; viewer goes with the prominent visual feature. Main message is to make the text and chart coherent.<a href="#fnref90" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn91"><p>“Accessible Visualization via Natural Language Descriptions: A Four-Level Model of Semantic Content” Lundgard and Satyanarayan (2022)<a href="#fnref91" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn92"><p>Acknowledge Ware 4th Ed: G8.18 (p327) “When a large number of data points must be represented in a visualization, use sybmols instead of words or pictorial icons.” G8.19 (p327) “Use words directly on the chart where the number of symbolic objects in each category is relatively few and where space is available.”<a href="#fnref92" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn93"><p>Based on figures from the Youth Justice Indicators Report from 2021 <a href="https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/"></a>.<a href="#fnref93" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn94"><p>Acknowledge that many of these ideas align with the ideas of contrast, repetition, alignment, and proximity that are espoused in Naomi Robbins book.<a href="#fnref94" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn95"><p>This particularly echoes the repetition part of CRAP design.<a href="#fnref95" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn96"><p>Based on plot from “Popular Information” web site (Judd Legum) https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful Data source: Penn Wharton Budget Model https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15<a href="#fnref96" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn97"><p>This is precisely the mistake that was made when this data visualisation was discussed on <a href="https://www.youtube.com/watch?v=AQiukyzB6x0">The Majority Report (~6:00)</a>.<a href="#fnref97" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<p>Attributed to “Some Graphic and Semigraphic Displays” in T. A. Bancroft, ed.&nbsp;Statistical Papers in Honor of George W. Snedecor (Ames, Iowa, 1972), p.&nbsp;296.<a href="#fnref90" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn91"><p>Based on a <a href="https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2">Business Insider</a> data visualisation; data from <a href="https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/">USA Facts</a>.<a href="#fnref91" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn92"><p>“Trust and Recall of Information across Varying Degrees of Title-Visualization Misalignment” Kong et al (2019) Greater impact that can even override message in data. “Towards Understanding How Readers Integrate Charts and Captions: A Case Study with Line Charts” Kim et al (2021) Studied what happens when caption and text are incoherent; viewer goes with the prominent visual feature. Main message is to make the text and chart coherent.<a href="#fnref92" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn93"><p>“Accessible Visualization via Natural Language Descriptions: A Four-Level Model of Semantic Content” Lundgard and Satyanarayan (2022)<a href="#fnref93" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn94"><p>Acknowledge Ware 4th Ed: G8.18 (p327) “When a large number of data points must be represented in a visualization, use sybmols instead of words or pictorial icons.” G8.19 (p327) “Use words directly on the chart where the number of symbolic objects in each category is relatively few and where space is available.”<a href="#fnref94" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn95"><p>Based on figures from the Youth Justice Indicators Report from 2021 <a href="https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/"></a>.<a href="#fnref95" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn96"><p>Acknowledge that many of these ideas align with the ideas of contrast, repetition, alignment, and proximity that are espoused in Naomi Robbins book.<a href="#fnref96" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn97"><p>This particularly echoes the repetition part of CRAP design.<a href="#fnref97" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn98"><p>Based on plot from “Popular Information” web site (Judd Legum) https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful Data source: Penn Wharton Budget Model https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15<a href="#fnref98" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn99"><p>CRAP contrast<a href="#fnref99" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn100"><p><span class="citation" data-cites="Sidiropoulos03072018">Sidiropoulos et al. (<a href="#ref-Sidiropoulos03072018" role="doc-biblioref">2018</a>)</span><a href="#fnref100" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn99"><p>This is precisely the mistake that was made when this data visualisation was discussed on <a href="https://www.youtube.com/watch?v=AQiukyzB6x0">The Majority Report (~6:00)</a>.<a href="#fnref99" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn100"><p>Based on plot from “Popular Information” web site (Judd Legum) https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful Data source: Penn Wharton Budget Model https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15<a href="#fnref100" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn101"><p>CRAP contrast<a href="#fnref101" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn102"><p><span class="citation" data-cites="Sidiropoulos03072018">Sidiropoulos et al. (<a href="#ref-Sidiropoulos03072018" role="doc-biblioref">2018</a>)</span><a href="#fnref102" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main>
 <!-- /main column -->

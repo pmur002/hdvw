@@ -1802,6 +1802,40 @@ ggplot(crimeLevelTotal) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-colour-size
+#| fig-height: 3
+#| fig-cap: The perception of colours varies based on the size of the coloured regions.
+grid.newpage()
+grid.rect(width=unit(1, "npc") - unit(0/96, "in"),
+          height=unit(1, "npc") - unit(0/96, "in"),
+          gp=gpar(col=NA, fill="grey20"))
+cols <- c("#FFF200", "#00ADEF")
+pushViewport(viewport(layout=grid.layout(2, 2)))
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=1),
+             viewport(width=.8, height=.6, y=.4))
+grid.rect(x=0:8/9, width=1/9, just="left", gp=gpar(col=NA, fill=cols))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=2),
+             viewport(width=.8, height=.6))
+grid.rect(x=0:58/59, width=1/59, just="left", gp=gpar(col=NA, fill=cols))
+popViewport(2)
+x <- rep(1:5/6, each=2)
+y <- c(1, 2, 4, 3, 3, 4, 3, 3, 5, 2)/6
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.rect(x=unit(x, "npc") + unit(c(-5, 0), "mm"), width=unit(5, "mm"),
+          y=0, height=y, hjust=0, vjust=0,
+          gp=gpar(col=NA, fill=cols))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.lines(x[c(TRUE, FALSE)], y[c(TRUE, FALSE)], gp=gpar(col=cols[1]))
+grid.lines(x[c(FALSE, TRUE)], y[c(FALSE, TRUE)], gp=gpar(col=cols[2]))
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-pie-order
 #| fig-cap: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
 ggplot(subset(crimeDistrict, year %in% c(2011, 2021))) + 

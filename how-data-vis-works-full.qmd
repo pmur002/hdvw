@@ -1089,6 +1089,13 @@ Three memory tasks.  The task is to remember the colours of the circles.  Within
 
 **ADD** footnotes to cite Ware 4th ed p397-405 and p423-425
 
+And footnote that acknowledges 
+some controversy (different models and number of items limit
+vs continuous resource limit), with ref to e.g.,
+"Psychophysical scaling reveals a unified theory of visual memory strength"
+Schurgin et al (2020)
+and the binary map model 
+
 ## Visual processing {#sec-visual-processing}
 
 Processing of the 
@@ -3402,6 +3409,60 @@ ggplot(crimeLevelTotal) +
                       guide=guide_legend(reverse=TRUE)) +
     theme(axis.title=element_blank(),
           axis.ticks=element_blank())
+```
+
+## Size matters
+
+The perception of colours is also affected by the size of the
+coloured region.  In particular, small regions of colour 
+may blend together with neighbouring colours.  [^stone]
+For example, on the left of @fig-colour-size, the yellow and blue
+stripes are the same colours both in the top set if wide bars 
+and in the bottom set of narrow bars.
+The right side of @fig-colour-size shows that the same colours
+may appear different when they are used as fill colours for larger regions,
+like bars, compared to when they are used for thin lines.
+
+[^stone]:
+    "In Color Perception, Size Matters"
+    Stone (2012)
+    "In designing colors for digital visualization systems. one of the most
+    critical factors is the interaction between size and color appearance."
+    Talks about "spreading", which means a sort of blending or averaging
+    of colours over small areas *by the visual system*.
+
+```{r}
+#| echo: false
+#| label: fig-colour-size
+#| fig-height: 3
+#| fig-cap: The perception of colours varies based on the size of the coloured regions.
+grid.newpage()
+grid.rect(width=unit(1, "npc") - unit(0/96, "in"),
+          height=unit(1, "npc") - unit(0/96, "in"),
+          gp=gpar(col=NA, fill="grey20"))
+cols <- c("#FFF200", "#00ADEF")
+pushViewport(viewport(layout=grid.layout(2, 2)))
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=1),
+             viewport(width=.8, height=.6, y=.4))
+grid.rect(x=0:8/9, width=1/9, just="left", gp=gpar(col=NA, fill=cols))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=2),
+             viewport(width=.8, height=.6))
+grid.rect(x=0:58/59, width=1/59, just="left", gp=gpar(col=NA, fill=cols))
+popViewport(2)
+x <- rep(1:5/6, each=2)
+y <- c(1, 2, 4, 3, 3, 4, 3, 3, 5, 2)/6
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=1),
+             viewport(width=.8, height=.8))
+grid.rect(x=unit(x, "npc") + unit(c(-5, 0), "mm"), width=unit(5, "mm"),
+          y=0, height=y, hjust=0, vjust=0,
+          gp=gpar(col=NA, fill=cols))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=2),
+             viewport(width=.8, height=.8))
+grid.lines(x[c(TRUE, FALSE)], y[c(TRUE, FALSE)], gp=gpar(col=cols[1]))
+grid.lines(x[c(FALSE, TRUE)], y[c(FALSE, TRUE)], gp=gpar(col=cols[2]))
+popViewport()
 ```
 
 ## Colour palettes
@@ -7150,6 +7211,16 @@ popViewport()
 Another example of this problem are the hurrican "cones of uncertainty"
 that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).
 
+Mention that little is known about the accuracy of visual objects
+(though they must have good capacity because they are more abstract, 
+right?)[^evaluating]:
+
+[^evaluating]:
+    in general, there needs to be more explicit acknowledgement of the lack
+    of experimental results for complex data vis scenarios.
+    c.f., "Testing Statistical Charts: What Makes a Good Graph?"
+    Vanderplas, Cook, and Hofmann (2020) p 71.
+
 ## Summary
 
 If we encode data values as familiar visual objects, it becomes possible
@@ -8886,22 +8957,6 @@ Have to throw bouquet at Quarto.
 * In visual-model, make a BRIEF statement at the end of each section 
   (maybe in black box) about the implications for data vis. 
 
-* Point out early in visual features that a bar plot is quite simple
-  The differences are in the bars so those differences are easy to spot
-  Refer back to visual model
-  Also refer back from same is same
-  Also refer back from wherever discuss data ink ratio perhaps not by that name
-
-* memory limits:  wherever mention, add footnote that acknowledges 
-  some controversy (different models and number of items limit
-  vs continuous resource limit), with ref to e.g.,
-  "Psychophysical scaling reveals a unified theory of visual memory strength"
-  Schurgin et al (2020)
-  and the binary map model 
-
-* MUST acknowledge the mapping of differences to angles in a line plot
-  (essentially an emergent feature!?).
-
 * In colour, mention "In Color Perception, Size Matters"
   Stone (2012)
   "In designing colors for digital visualization systems. one of the most
@@ -9109,14 +9164,6 @@ Have to throw bouquet at Quarto.
   Bertini et al (2021)
   Claims that ordinal comparisons more common in practice than
   quantitative comparisons (?)
-
-* Mention that little is known about the accuracy of visual objects
-  (though they must have good capacity because they are more abstract, right?)
-
-  In general, there needs to be more explicit acknowledgement of the lack
-  of experimental results for complex data vis scenarios.
-  c.f., "Testing Statistical Charts: What Makes a Good Graph?"
-  Vanderplas, Cook, and Hofmann (2020) p 71.
 
 * aspect ratio section (in combine?)
 
