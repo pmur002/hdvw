@@ -986,7 +986,7 @@ ggplot(crimeGroupTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-length
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the total number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
@@ -1005,7 +1005,7 @@ ggplot(crimeGroupTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-position
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic `group`s, have been mapped to the **positions** of the bars (the purple dots).
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic groups, have been mapped to the **positions** of the bars (the purple dots).
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
@@ -1307,7 +1307,7 @@ popViewport()
 pushViewport(viewport(layout.pos.row=5, layout.pos.col=2))
 grid.text("colour", x=0, just="right")
 grid.circle(c(.3, .7), .5, r=unit(2, "mm"), 
-            gp=gpar(fill=hcl(240, c(40, 70), c(40, 70))))
+            gp=gpar(fill=hcl(240, c(40, 70), c(70, 40))))
 popViewport()
 pushViewport(viewport(layout.pos.row=6))
 grid.rect(gp=gpar(col=NA, fill="grey90"))

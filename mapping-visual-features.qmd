@@ -19,9 +19,10 @@ possible encodings to choose from and, on the other hand,
 there are many possible data symbols to map to.
 
 In this section, we begin to explore different sorts of mappings,
-starting with the simplest case, where
-each **data value** is **encoded** as 
-a basic **visual feature** of a **data symbol**
+starting with the simplest case: 
+each data value is encoded as 
+a basic **visual feature** of a data symbol;
+and **one** data value maps to **one** data symbol
 (@fig-visual-feature).  
 
 ::: {#fig-visual-feature layout-ncol=2}
@@ -39,8 +40,8 @@ feature (`x`) of a single data symbol.
 
 In order to demonstrate mapping data values to visual features,
 we will work with a data visualisation of
-the `total` number of
-crimes for different ethnic `group`s.  The data values are shown
+the total number of
+crimes for different ethnic groups.  The data values are shown
 in @tbl-crime-group-total.
 
 ```{r}
@@ -55,16 +56,16 @@ kable_styling(kable(crimeGroupTotalTable),
 ```
 
 A bar plot of these data is shown in @fig-bar.
-This is a very effective way to visualise the `total` values,
+This is a very effective way to visualise the total values,
 particularly if we are interested in comparing the raw totals.
 With this data visualisation, it is very easy to answer 
 questions like the following:
 
 * Which ethnic group has the largest total number of offenders?
 * Which ethnic group has the smallest total number of offenders?
-* Is the total number of offenders higher for `Māori` or `Pasifika`?
-* Is the total number of offenders for `European/Other` more or less
-  than half the total for `Māori`?
+* Is the total number of offenders higher for Māori or Pasifika?
+* Is the total number of offenders for European/Other more or less
+  than half the total for Māori?
 
 ```{r}
 #| echo: false
@@ -87,7 +88,7 @@ are a set of rectangles or bars.
 However, the important visual feature of the rectangles is their
 **length**;  the thickness of the bars does not relate to the data 
 values at all (see @fig-length).
-The `total` number of crimes for each ethnic group 
+The total number of crimes for each ethnic group 
 is encoded as the length of a rectangle.  Each data value
 is mapped to the length of one rectangle.[^length-vs-position]
 
@@ -103,7 +104,7 @@ is mapped to the length of one rectangle.[^length-vs-position]
 ```{r}
 #| echo: false
 #| label: fig-length
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the `total` number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the total number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
@@ -120,14 +121,14 @@ ggplot(crimeGroupTotal) +
 ```
 
 There is another mapping being used in @fig-bar:
-The crime `group` is encoded as the vertical **positions** of the bars
-(see @fig-position).  Each `group` value is mapped to the 
+The crime group is encoded as the vertical **positions** of the bars
+(see @fig-position).  Each group value is mapped to the 
 vertical position of one rectangle.
 
 ```{r}
 #| echo: false
 #| label: fig-position
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic `group`s, have been mapped to the **positions** of the bars (the purple dots).
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic groups, have been mapped to the **positions** of the bars (the purple dots).
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
@@ -152,10 +153,19 @@ identified rapidly and without conscious effort by our visual system
 features.[^visual-features]
 
 [^visual-features]:
-  Acknowledge that a much larger list has been considered and evaluated
-  by different researchers.
-  For example p26 of "Better data visualizations" Jonathan Schwabish.
-  There should also be some stuff from research articles in DataVis/README
+    Mention different terminologies:
+    visual feature vs visual channel vs visual dimension.
+
+    Acknowledge that a much larger list has been considered and evaluated
+    by different researchers.
+    For example p26 of "Better data visualizations" Jonathan Schwabish.
+    There should also be some stuff from research articles in DataVis/README
+
+    Also acknowledge
+    that there is not a one-to-one correspondence between
+    visual features that are initially perceived by visual system and
+    the visual channels of Cleveland and Mcgill, but it is a useful
+    simplification to elide them.
 
 ```{r}
 #| echo: false
@@ -243,18 +253,20 @@ Some types of data contain more information than others:
   following @mackinlay1986automatic,
   refers to this idea as "expressiveness"
   (vs "effectiveness" which is more about accuracy).
+  Pinker 1990, p. 111 talks about the different types of data
+  that can be extracted from different visual representations.
 
 * **Quantitative** data consists of numeric values, which naturally
   possess not only an ordering, but information about the size
   of differences between values.  For example, 
-  the `year` 2020 comes after the year 2010 and there is a gap
+  the year 2020 comes after the year 2010 and there is a gap
   of 10 years in between.  This is also referred to as **interval** data.
   **Ratio** data is quantitative data that also contains a 
   "zero" reference value, so there is also information
   about absolute size and ratios of differences.
   For example, 200 offenders is twice as many as 100 offenders.
 
-* **Qualitative** data consists of categorical values.  
+* **Qualitative** data consists of categorical values.
   **Ordinal** data consists of categories that
   are ordered, but there is no information about the size of differences.
   For example, a "high" crime level is more severe than a "medium"
@@ -367,7 +379,7 @@ grid.text("shape", y=unit(-1, "lines"))
 popViewport(2)
 ```
 
-The bar plot in @fig-bar visualises the `total` number of offenders, 
+The bar plot in @fig-bar visualises the total number of offenders, 
 which are quantitative data values.  These quantitative values are
 encoded as the
 **lengths** of bars, which is a visual feature that is capable of
@@ -482,7 +494,7 @@ grid.text("angle", y=unit(-1, "lines"))
 popViewport(2)
 ```
 
-The bar plot in @fig-bar encodes the ethnic `group`s, which are
+The bar plot in @fig-bar encodes the ethnic groups, which are
 qualitative data values, as the **position** of bars, which is
 a qualitative visual feature.
 
@@ -614,7 +626,7 @@ popViewport()
 pushViewport(viewport(layout.pos.row=5, layout.pos.col=2))
 grid.text("colour", x=0, just="right")
 grid.circle(c(.3, .7), .5, r=unit(2, "mm"), 
-            gp=gpar(fill=hcl(240, c(40, 70), c(40, 70))))
+            gp=gpar(fill=hcl(240, c(40, 70), c(70, 40))))
 popViewport()
 pushViewport(viewport(layout.pos.row=6))
 grid.rect(gp=gpar(col=NA, fill="grey90"))
@@ -626,7 +638,7 @@ grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"),
 popViewport()
 ```
 
-The bar plot in @fig-bar encodes the `total` number of offenders, which are
+The bar plot in @fig-bar encodes the total number of offenders, which are
 quantitative values, as the **lengths** of bars, which is an
 **accurate** visual feature.  This means that viewers can make
 accurate comparisons between
@@ -718,7 +730,7 @@ bars(11)
 popViewport()
 ```
 
-The bar plot in @fig-bar encodes the ethnic `group` as the
+The bar plot in @fig-bar encodes the ethnic group as the
 **position** of bars, which makes it easy to differentiate between
 the different ethnic groups.
 
@@ -739,7 +751,7 @@ which is small, though no explicit mention of capacity limit.)
 
 We have seen that, for several reasons,
 @fig-bar is an effective way to visualise
-the `total` number of offenders for different ethnic `group`s.
+the total number of offenders for different ethnic groups.
 @fig-dot shows an alternative representation of these data in the
 form of a dot plot [@cleveland1985graphical]. 
 
@@ -770,15 +782,15 @@ is a visual feature with a high capacity.
 
 It could be argued that the dot plot in @fig-dot is even *more* effective
 than the bar plot in @fig-bar for perceiving the differences 
-between `total`s because **position** ranks higher than **length**
+between totals because **position** ranks higher than **length**
 in @fig-accuracy.  On the other hand, if we want to compare 
 totals in terms of their ratios, @fig-bar is superior because it
 includes a representation of zero.
 
 ## Case study: Pie charts
 
-@fig-pie shows yet another visualisation of the `total` number of offenders
-for different ethnic `group`s, this time a pie chart.
+@fig-pie shows yet another visualisation of the total number of offenders
+for different ethnic groups, this time a pie chart.
 This is a less effective representation of the data than the
 bar plot in @fig-bar or the dot plot in @fig-dot and we can use
 familiar reasoning to see why.
@@ -798,8 +810,8 @@ ggplot(crimeGroupTotal) +
 The data symbols in @fig-pie are wedges or segments of a circle
 and, on the positive side, the data values are encoded as basic
 visual features of these symbols:
-The `total` values are encoded as the **angle** and/or **area** of the wedges
-and the `group` values are encoded as the **colour** of the wedges.
+The total values are encoded as the **angle** and/or **area** of the wedges
+and the group values are encoded as the **colour** of the wedges.[^pie-encoding]
 Although **colour** is an appropriate visual feature to represent
 **qualitative** data, and it has sufficient capacity to differentiate
 between only four groups, the encoding of quantitative values as **angle**
@@ -807,6 +819,12 @@ and/or **area** leads to less accurate perception of the differences
 between totals (compared to the lengths and positions encodings that
 were employed in the
 bar plot and the dot plot).
+
+[^pie-encoding]:
+    cite the paper that looked at people decoding from area vs angle
+    vs chord(!)  vs arc length(!) for pie charts
+    "The relative merits of circles and bars for representing component parts."
+    Eells (1926)
 
 ## Summary
 

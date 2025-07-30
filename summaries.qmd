@@ -17,10 +17,10 @@ In the simple scenario of a bar plot, the data values are counts
 (e.g., @tbl-crime-group-total), which are encoded as the lengths of bars, which
 in turn allows us to decode lengths to retrieve 
 the counts (@fig-visual-feature-decode).
-The length of each bar represents a single raw data value.
+Each raw data value (count) is mapped to the length of a bar.
 
 In this section, we explore some data visualisations that are effective 
-because they map **data summaries** instead of 
+because they encode **data summaries** instead of 
 raw data values.[^info-vis-ref-model]
 
 [^info-vis-ref-model]:
@@ -334,11 +334,14 @@ the raw data values to data symbols.
 
 Another point to consider with a data visualisation that is based on
 data summaries is
-whether the data summaries provide reasonable summaries of the data.
+whether the data summaries provide reasonable summaries of the data.[^Anscombe]
 For example, @fig-boxplot-concede shows box plots of the number of 
 points *conceded* by each team in Rugby World Cup games.
 The box plot for southern hemisphere teams suggests a unimodal 
 distribution with a slight right skew.
+
+[^Anscombe]:
+    Cite Anscombe's quartet and the dinosaur one.
 
 ```{r}
 #| echo: false
@@ -391,7 +394,8 @@ and that choice can have a large influence on the data summaries.
 For example, @fig-hist-thin shows a histogram of the same data that
 we used for @fig-hist, but with a greater number of narrower intervals.
 This visualisation tells a slightly different story than @fig-hist.
-The most common score is now 6 points and we see features
+The most common score is now 6 points (rather than between 15 and 20 points)
+and we see features
 like gaps at 1, 2, 4, and 5 points and a stronger suggestion of 
 bimodality.  There are also point totals that appear strangely low,
 like 11 and 14.
