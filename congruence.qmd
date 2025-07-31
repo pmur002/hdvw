@@ -146,13 +146,31 @@ are appropriate for conveying the total number of offenders in
 different ethnic groups.
 
 Part of the reason why **length** and **area** work so well is because
-a **longer** bar naturally conveys the idea of **more**.
+a **longer** bar naturally conveys the idea of **more**.[^prop-ink]
 By contrast, the **position** of data points in a dot plot of the same data,
 as shown in @fig-more-is-more, do not inherently 
 convey the same sense of *more*.
 In a bar plot, the data symbols that correspond to larger data values
 are actually larger data symbols;
 the presentation of larger data values is more abstract in a dot plot.
+
+[^prop-ink]:
+    Wilke's Principle of Proportional Ink.
+    ChatGPT attributed this to Wilkinson (GoG), but I cannot find
+    the reference anywhere.
+    Wilke attributes this to 
+    Bergstrom, C. T., and J. West. 2016. 
+    "The Principle of Proportional Ink."
+    http://callingbullshit.org/tools/tools_proportional_ink.html.
+    A corollary is that bars should start at zero.
+
+    Kosslyn (2006)
+    "Graph Design for the Eye and Mind"
+    ./Resources/Graph-Design-for-the-Eye-and-Mind/appendix-3.pdf
+    Principle of Compatibility says
+    "A message is easiest to understand if its form is compatible with its 
+    meaning", plus explicitly "more is more"
+
 
 ```{r}
 #| echo: false
@@ -413,7 +431,14 @@ same.  Failing to follow that approach will make it harder to
 perceive changes in the data values.
 However, a worse error, and 
 another source of visual dissonance arises if we change
-visual features *without* any underlying change in the data values.
+visual features *without* any underlying 
+change in the data values.[^kosslyn-same]
+
+[^kosslyn-same]:
+    "Graph Design for the Eye and Mind"
+    Kosslyn (2006)
+    "Principle of Informative Changes"
+    change in aesthetic where no change in data is BAD!
 
 @fig-listener-cakes shows a data visualisation of the relative number of 
 people aged over 100 for females versus males.

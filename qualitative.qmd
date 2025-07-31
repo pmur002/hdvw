@@ -145,7 +145,7 @@ pushViewport(viewport(layout.pos.col=3),
 grid.circle(.5, 0:4/4, r=.1,
             gp=gpar(col="grey20", lwd=10))
 grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], lum), 
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], rev(lum)), 
                     lwd=c(0,0,0,0,0)))
 grid.text("luminance", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
 popViewport(2)
@@ -159,7 +159,17 @@ are also **ordinal** visual features because we can perceive
 an ordering from a set of colours that differ in terms of either chroma
 or luminance or both.  A set of colours that transitions from darker
 to lighter and/or brighter to duller conveys an ordering from larger
-to smaller.
+to smaller.[^dark-is-more]
+
+[^dark-is-more]:
+    "Mapping Color to Meaning in Colormap Data Visualizations"
+    Schloss et al (2018)
+    Evidence for dark-is-more bias
+
+    "More of what? Dissociating effects of conceptual and numeric mappings on 
+    interpreting colormap data visualizations"
+    Soto et al (2023)
+    Evidence for dark-is-more bias
 
 This helps to explain why @fig-pie-ordinal is more effective
 than @fig-pie-hue.  In @fig-pie-ordinal, the colours differ

@@ -1801,6 +1801,14 @@ and time to perform.
 One way to create an effective data visualisation is to rely on
 visual tasks that are rapid and require little effort.
 
+## The dangers of the visual system
+
+Visual illusions.
+
+The fact that vertical lines appear longer than horizontal lines
+is a good simple one to demonstrate and relate to data vis
+(both L and T versions).
+
 ## Summary
 
 The human visual system captures a very large amount of information from the
@@ -2718,6 +2726,37 @@ Ditto log-log plot.
     of spatial relatedness ... is a quality without which it is difficult or
     impossible for the human mind to apprehend anything."
 
+## Aligned versus unaligned {#sec-unaligned-pos}
+
+Elaborate on the classic order to allow for aligned vs unaligned.
+Not entirely sure how to demo this with actual plot, though
+in quantitative (length) there is an abstract demo.
+
+```{r}
+#| echo: false
+#| label: fig-unaligned-pos
+#| fig-cap: It is easier to compare two positions on the left because they are **aligned**;  they share a common baseline.  The two positions on the right are harder to compare because they are **unaligned**.
+grid.newpage()
+pushViewport(viewport(x=0, width=.5, just="left"))
+pushViewport(viewport(width=unit(.8, "snpc")))
+grid.segments(.2, .2, .2, .4, gp=gpar(col="grey"))
+grid.segments(.7, .2, .7, .4, gp=gpar(col="grey"))
+grid.segments(.2, .6, .2, .8, gp=gpar(col="grey"))
+grid.segments(.7, .6, .7, .8, gp=gpar(col="grey"))
+grid.segments(.2, c(.3, .7), .7, c(.3, .7), gp=gpar(lty="dotted"))
+grid.circle(c(.45, .55), c(.3, .7), r=unit(2, "mm"), gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(x=.5, width=.5, just="left"))
+pushViewport(viewport(x=.4, width=unit(.8, "snpc")))
+grid.segments(.2, .2, .2, .4, gp=gpar(col="grey"))
+grid.segments(.7, .2, .7, .4, gp=gpar(col="grey"))
+grid.segments(.3, .6, .3, .8, gp=gpar(col="grey"))
+grid.segments(.8, .6, .8, .8, gp=gpar(col="grey"))
+grid.segments(c(.2, .3), c(.3, .7), c(.7, .8), c(.3, .7), gp=gpar(lty="dotted"))
+grid.circle(c(.45, .65), c(.3, .7), r=unit(2, "mm"), gp=gpar(fill="black"))
+popViewport(2)
+```
+
 ## Overplotting
 
 If a data value is mapped to a representation that is not
@@ -2729,11 +2768,23 @@ Add link from birthday cake example back to jittering.
 ## Non-linear scales
 
 The effective decoding of position is dependent on 
-a linear encoding.
+a linear encoding.[^tufte-prop]
+
+[^tufte-prop]:
+    Tufte, E. R. (1983). The Visual Display of Quantitative Information. 
+    (Tufte also emphasized a similar principle: "The representation of numbers
+    should be directly proportional to the quantities represented.")
 
 In a non-linear encoding, the same visual difference does not
 decode to the same data difference.
-That is going to be confusing!
+That is going to be confusing![^log-scales]
+
+[^log-scales]:
+    Proportional Ink and Logarithmic Scales
+    https://callingbullshit.org/tools/logarithmic_scales.html
+    If you plot log values, then the ink is proportional,
+    but the numbers are harder to interpret
+    (in my terms, you can only map back to log values)
 
 Revisit in qualitative.Rmd to point out that non-linear ordinal scales
 are ok, e.g., jet colour scale
@@ -2846,7 +2897,8 @@ popViewport(2)
 
 @fig-unaligned-length shows that it is harder to accurately compare
 the **lengths** of two bars if they are **unaligned** and do not share a 
-common baseline.  This also applies to the accuracy of comparing **positions**.
+common baseline (similar to the accuracy of comparing **positions**;
+@sec-unaligned-pos).
 
 ```{r}
 #| echo: false
@@ -3272,7 +3324,7 @@ pushViewport(viewport(layout.pos.col=3),
 grid.circle(.5, 0:4/4, r=.1,
             gp=gpar(col="grey20", lwd=10))
 grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], lum), 
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], rev(lum)), 
                     lwd=c(0,0,0,0,0)))
 grid.text("luminance", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
 popViewport(2)
@@ -3286,7 +3338,17 @@ are also **ordinal** visual features because we can perceive
 an ordering from a set of colours that differ in terms of either chroma
 or luminance or both.  A set of colours that transitions from darker
 to lighter and/or brighter to duller conveys an ordering from larger
-to smaller.
+to smaller.[^dark-is-more]
+
+[^dark-is-more]:
+    "Mapping Color to Meaning in Colormap Data Visualizations"
+    Schloss et al (2018)
+    Evidence for dark-is-more bias
+
+    "More of what? Dissociating effects of conceptual and numeric mappings on 
+    interpreting colormap data visualizations"
+    Soto et al (2023)
+    Evidence for dark-is-more bias
 
 This helps to explain why @fig-pie-ordinal is more effective
 than @fig-pie-hue.  In @fig-pie-ordinal, the colours differ
@@ -3868,13 +3930,31 @@ are appropriate for conveying the total number of offenders in
 different ethnic groups.
 
 Part of the reason why **length** and **area** work so well is because
-a **longer** bar naturally conveys the idea of **more**.
+a **longer** bar naturally conveys the idea of **more**.[^prop-ink]
 By contrast, the **position** of data points in a dot plot of the same data,
 as shown in @fig-more-is-more, do not inherently 
 convey the same sense of *more*.
 In a bar plot, the data symbols that correspond to larger data values
 are actually larger data symbols;
 the presentation of larger data values is more abstract in a dot plot.
+
+[^prop-ink]:
+    Wilke's Principle of Proportional Ink.
+    ChatGPT attributed this to Wilkinson (GoG), but I cannot find
+    the reference anywhere.
+    Wilke attributes this to 
+    Bergstrom, C. T., and J. West. 2016. 
+    "The Principle of Proportional Ink."
+    http://callingbullshit.org/tools/tools_proportional_ink.html.
+    A corollary is that bars should start at zero.
+
+    Kosslyn (2006)
+    "Graph Design for the Eye and Mind"
+    ./Resources/Graph-Design-for-the-Eye-and-Mind/appendix-3.pdf
+    Principle of Compatibility says
+    "A message is easiest to understand if its form is compatible with its 
+    meaning", plus explicitly "more is more"
+
 
 ```{r}
 #| echo: false
@@ -4135,7 +4215,14 @@ same.  Failing to follow that approach will make it harder to
 perceive changes in the data values.
 However, a worse error, and 
 another source of visual dissonance arises if we change
-visual features *without* any underlying change in the data values.
+visual features *without* any underlying 
+change in the data values.[^kosslyn-same]
+
+[^kosslyn-same]:
+    "Graph Design for the Eye and Mind"
+    Kosslyn (2006)
+    "Principle of Informative Changes"
+    change in aesthetic where no change in data is BAD!
 
 @fig-listener-cakes shows a data visualisation of the relative number of 
 people aged over 100 for females versus males.
@@ -6273,7 +6360,7 @@ and we draw a separate plot for each district.  This makes
 it very easy to distinguish the individual districts.
 
 One downside is that comparisons between districts are more difficult
-because counts and/or years are **unaligned** (@sec-unaligned).
+because counts and/or years are **unaligned** (@sec-unaligned-pos).
 In this case, we have mitigated that problem by drawing a grey line
 for all districts in each plot.  Similar to grid
 lines, this makes it easier to compare the line for each district
@@ -6501,7 +6588,12 @@ Part of the power of visual objects also comes from **pre-existing** decodings.
 However, these decodings are **learned** rather than being built-in.
 In some cases, we are able to **decode**
 values from a visual feature based on prior experience and learning,
-rather than due to an explicit encoding (@fig-learned-decode).
+rather than due to an explicit encoding (@fig-learned-decode).[^inferred]
+
+[^inferred]:
+    "Mapping Color to Meaning in Colormap Data Visualizations"
+    Schloss et al (2018)
+    They call this an "inferred mapping"
 
 ::: {#fig-learned-decode}
 

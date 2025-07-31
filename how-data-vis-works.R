@@ -1398,6 +1398,31 @@ ggplot(crimeGroupTotal) +
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-unaligned-pos
+#| fig-cap: It is easier to compare two positions on the left because they are **aligned**;  they share a common baseline.  The two positions on the right are harder to compare because they are **unaligned**.
+grid.newpage()
+pushViewport(viewport(x=0, width=.5, just="left"))
+pushViewport(viewport(width=unit(.8, "snpc")))
+grid.segments(.2, .2, .2, .4, gp=gpar(col="grey"))
+grid.segments(.7, .2, .7, .4, gp=gpar(col="grey"))
+grid.segments(.2, .6, .2, .8, gp=gpar(col="grey"))
+grid.segments(.7, .6, .7, .8, gp=gpar(col="grey"))
+grid.segments(.2, c(.3, .7), .7, c(.3, .7), gp=gpar(lty="dotted"))
+grid.circle(c(.45, .55), c(.3, .7), r=unit(2, "mm"), gp=gpar(fill="black"))
+popViewport(2)
+pushViewport(viewport(x=.5, width=.5, just="left"))
+pushViewport(viewport(x=.4, width=unit(.8, "snpc")))
+grid.segments(.2, .2, .2, .4, gp=gpar(col="grey"))
+grid.segments(.7, .2, .7, .4, gp=gpar(col="grey"))
+grid.segments(.3, .6, .3, .8, gp=gpar(col="grey"))
+grid.segments(.8, .6, .8, .8, gp=gpar(col="grey"))
+grid.segments(c(.2, .3), c(.3, .7), c(.7, .8), c(.3, .7), gp=gpar(lty="dotted"))
+grid.circle(c(.45, .65), c(.3, .7), r=unit(2, "mm"), gp=gpar(fill="black"))
+popViewport(2)
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-bar-district
 #| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.
 crimeTemp <- crimeDistrictTotal
@@ -1671,7 +1696,7 @@ pushViewport(viewport(layout.pos.col=3),
 grid.circle(.5, 0:4/4, r=.1,
             gp=gpar(col="grey20", lwd=10))
 grid.circle(.5, 0:4/4, r=.1, 
-            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], lum), 
+            gp=gpar(col=figbg, fill=hcl(hue[7], chroma[3], rev(lum)), 
                     lwd=c(0,0,0,0,0)))
 grid.text("luminance", y=unit(-2, "lines"), gp=gpar(col=figbg, fontface="bold"))
 popViewport(2)
