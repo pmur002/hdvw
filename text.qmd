@@ -124,6 +124,27 @@ For example, in @fig-bar-text, we are able to decode the data
 value `41787` (the count for Māori) from the text "41787".
 Furthermore, this decoding is extremely accurate and very flexible.
 
+@fig-scatter-text shows another example of text data symbols
+
+```{r}
+#| echo: false
+#| label: fig-scatter-text
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries)) +
+    geom_text(aes(breaks, tries, label=country), 
+              hjust=c(1, 1, 0, 0), vjust=c(0, 0, 1, 1),
+              data=subset(RWCperGame, 
+                          country %in% c("New Zealand", "South Africa",
+                                         "England", "Wales"))) +
+    scale_x_continuous(name="clean breaks", expand=expansion(c(.05, .3))) +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=.5)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
 In terms of the criteria that we discussed in @sec-mapping-visual-features,
 the value of text data symbols is that they allow us to decode
 data values very **accurately** (@fig-decode).
@@ -174,6 +195,10 @@ is ineffective for perceiving groups of values or trends in values.
 
 > Large numbers of text data symbols are *not* effective because
   the visual system cannot decode visual summaries from the text.
+
+Why si a picture is worth a thousand words?
+Because 1000 words is 1000 fixations, identifying 1000 visual objects,
+and then interpreting their combined meaning.
 
 ## Guides {#sec-guides}
 
@@ -608,8 +633,12 @@ actually possess, and the rows have been ordered from the highest number of
 points per game to the lowest.
 
 [^table-guidelines]:
-  For example, @schwabish.
-  Also get a Wainer reference in here?
+    For example, @schwabish.
+ 
+    Ehrenberg (1977) advice on tables 
+
+    "UNDERSTANDING GRAPHS AND TABLES"
+    Wainer (1992)
 
 It is easier to see some structure in @tbl-rwc-table.
 For example, the number of tries appears to decrease as well as the 

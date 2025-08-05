@@ -27,16 +27,21 @@ raw data values.[^info-vis-ref-model]
   MUST make reference to the Information Visualization Reference Model 
   of Card et al (1999) that differentiates data transforms from visual
   mappings from view transforms (the last particularly for interactive
-  graphics?), PLUS the design-centric extension by Wu and Chang (2024),
+  graphics?)
+
+  PLUS the design-centric extension by Wu and Chang (2024),
   which teases out design-specific transforms as well (the data prep
   for a box plot being a good example).  These papers provide a formal
   basis for some of the hand-waving that I do in this section, particularly
   on decoding to data summaries rather than raw data.
+
   Also
   "Low-Level Components of Analytic Activity in Information Visualization"
   Amar et al (2005)
   Set of 10 data visualisation tasks
   I like the way these all correspond to a numerical summary.
+
+  PLUS of course "stats" in Wilkinson GoG
 
 ## Box plots
 
@@ -151,7 +156,7 @@ to the visual features of a more complicated data symbol.
 ## Visual summaries {#sec-visual-summaries}
 
 @fig-rwc-dotplot shows stacked dot plots of the number of points scored by 
-countries from the different hemispheres in Rugby World Cup matches.
+countries from the different hemispheres in Rugby World Cup matches.[^dotplot]
 This data visualisation uses the same data as @fig-boxplot, but it
 maps raw data values rather than data summaries and it uses much simpler
 data symbols (data points).
@@ -159,6 +164,9 @@ This data visualisation encodes the
 number of points scored maps as the horizontal **position** of
 a data point and it encodes the hemisphere as the vertical
 **position** of a data point.
+
+[^dotplot]:
+    @Wilkinson01081999
 
 Because this data visualisation encodes raw data values as visual features, 
 it is possible to decode raw data values from the visual features
@@ -504,6 +512,53 @@ rather than the raw data, to visual features.
 Visual decoding leads back to the lies rather than the real data.
 :::
 
+## Simplification
+
+deliberately losing information (e.g., luminance scale for quant)
+
+"Why Shouldn’t All Charts Be Scatter Plots?
+Beyond Precision-Driven Visualizations"
+Bertini et al (2021)
+Claims that ordinal comparisons more common in practice than
+quantitative comparisons (?)
+
+This nice quote ...
+
+> Graphics are for comparison - comparison of one kind or another - not for
+  access to individual amounts. (Tukey 1993)
+
+... points out that reading individual values off a plot is not usually
+the point of a data vis, though it is still a precursor to making
+a comparison.  In some ways, ordinal comparisons are more important
+than interval or ratio?
+
+## Case study:  Heatmaps
+
+Heatmaps
+are a common way of representing three-dimensional data where 
+two of the data variables are either qualitative 
+or have been measured on a regular grid.
+The latter two variables naturally map to horizontal and vertical
+**position** to produce an array of
+rectangles, while the third variable maps to **colour**
+(see @fig-mappings-2).
+
+The mappings from data values to visual features for a heatmap
+are ...
+
+colour is not quant but can convey trends
+
+using luminance for quant, but not trying for accurate decoding
+of individual data values,
+BUT mention effectiveness of luminance in heatmap for ensemble perception
+of regions?
+
+get contrast effect but again not typically trying to match cells
+
+get regions/shapes of colour => higher-level structures
+
+talk about colour palettes that have deliberate colour boundaries
+to emphasise structure - combination of order and category
 
 ## Cognitive load
 

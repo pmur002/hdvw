@@ -1399,6 +1399,7 @@ ggplot(crimeGroupTotal) +
 ## -----------------------------------------------------------------------------
 #| echo: false
 #| label: fig-unaligned-pos
+#| fig-height: 3
 #| fig-cap: It is easier to compare two positions on the left because they are **aligned**;  they share a common baseline.  The two positions on the right are harder to compare because they are **unaligned**.
 grid.newpage()
 pushViewport(viewport(x=0, width=.5, just="left"))
@@ -2731,6 +2732,19 @@ popViewport()
 
 ## -----------------------------------------------------------------------------
 #| echo: false
+#| label: fig-sina
+#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
+gg <- ggplot(rwcAll, aes(scored, y="")) +
+    geom_violin() +
+    geom_sina() +
+    scale_x_continuous(name="points scored")
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
 #| label: fig-multiple
 #| fig-cap: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
 ggplot(RWCperGame) + 
@@ -3379,6 +3393,25 @@ ggplot(crimeGroupTotal) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
     theme(aspect.ratio=1,
           axis.title.y=element_blank())
+
+
+## -----------------------------------------------------------------------------
+#| echo: false
+#| label: fig-scatter-text
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries)) +
+    geom_text(aes(breaks, tries, label=country), 
+              hjust=c(1, 1, 0, 0), vjust=c(0, 0, 1, 1),
+              data=subset(RWCperGame, 
+                          country %in% c("New Zealand", "South Africa",
+                                         "England", "Wales"))) +
+    scale_x_continuous(name="clean breaks", expand=expansion(c(.05, .3))) +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=.5)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
 
 
 ## -----------------------------------------------------------------------------
@@ -4096,18 +4129,5 @@ grid.force()
 keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
 grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
 grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
-
-
-## -----------------------------------------------------------------------------
-#| echo: false
-#| label: fig-sina
-#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
-gg <- ggplot(rwcAll, aes(scored, y="")) +
-    geom_violin() +
-    geom_sina() +
-    scale_x_continuous(name="points scored")
-pushViewport(viewport(height=.8, width=.8))
-print(gg, newpage=FALSE)
-popViewport()
 
 dev.off()

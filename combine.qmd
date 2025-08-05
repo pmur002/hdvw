@@ -150,22 +150,29 @@ distances between data points, but also euclidean distances between
 data points ("as the crow flies").
 
 [^emergent-features]:
-  Relate this to mentions in literature of "emergent features", e.g.,
-  @pomerantz1994emergent.  Acknowledge that my use is a little loose
-  because the use in the literature is really about separate data symbols
-  combining to create emergent features (like clusters?).
-  MacEachren 1995 uses emergent in exactly this way!?
-  "Vision Science: Photons to Phenomenology" Stephen Palmer,
-  Figure 2.1.5 caption "The arrangement of several dots in a line give
-  rise to emergent properties, such as length, orientation, and
-  curvature, that are different from the properties of the dots that
-  compose it."
+    Relate this to mentions in literature of "emergent features", e.g.,
+    @pomerantz1994emergent.  Acknowledge that my use is a little loose
+    because the use in the literature is really about separate data symbols
+    combining to create emergent features (like clusters?).
+    MacEachren 1995 uses emergent as "configural"
+    (integral, but still also separable) 
+    "Vision Science: Photons to Phenomenology" Stephen Palmer,
+    Figure 2.1.5 caption "The arrangement of several dots in a line give
+    rise to emergent properties, such as length, orientation, and
+    curvature, that are different from the properties of the dots that
+    compose it."
   
+    NOTE that 
+    "Emergent features and feature combination"
+    Pomerantz and Cragin (2014)
+    (is this the same as @pomerantz1994emergent ???)
+    explicitly differentiate between (fast) emergent features and
+    "normal" (slow) feature integration that I am loosely using here.
 
 [^integral]:
-  Need citations to literature that mention integral visual features.
-  Admit a range rather than a dichotomy.
-  Munzner has good examples?
+    Need citations to literature that mention integral visual features.
+    Admit a range rather than a dichotomy.
+    Munzner has good examples?
 
 ::: {#fig-interact layout-ncol=2}
 
@@ -197,10 +204,10 @@ position in space (see @sec-visual-model-groups).
   Citations to literature on ensembles again, this time specifically to
   correlation in scatter plots.
   Talk about how, although there is some experimental support for reasonable
-  accuracy of correlation from scatter plot (with some bias),
+  accuracy of correlation from scatter plot (with some bias - 
+  specifically underestimation),
   there is not much experimental evidence for which is best 
   for perceiving correlations Eg scatter plot vs parallel coords etc
-  Cite Cleveland (1994) for white space margin affecting strength of relation?
 
 ::: {#fig-visual-corr layout-ncol=2}
 
@@ -696,6 +703,12 @@ pushViewport(viewport(width=.9, height=.9),
 print(ggDoctorLine, newpage=FALSE)
 ```
 
+**There is also the problem of separable when integral would be appropriate
+(reduce to separate effects inappropriately?)** Is there an example?
+
+**Must** say that chroma and luminance and hue are all integral.
+Is this an example of integrating ineffectively?
+
 ## Redundant mappings {#sec-redundant}
 
 In @sec-mosaic, we focused on the encoding of quantitative values
@@ -723,8 +736,18 @@ This becomes much more useful when there are more categories
 (@fig-spine-weak) or more variables (@fig-mosaic).[^redundant]
 
 [^redundant]:
-  Mention the conflicting opinions on redundant encoding:
-  Tufte and others against;  some studies for (including hofmann?)
+    "Clusters Beat Trend!? Testing Feature Hierarchy in Statistical Graphics"
+    VanderPlas and Hofmann (2017)
+    says redundancy helps
+
+    "Beyond Memorability: Visualization Recognition and Recall"
+    Borkin et al (2015)
+    also says redundancy helps
+
+    "The Science of Visual Data Communication: What Works"
+    Franconeri et al (2021)
+    says it doesn't (though only with expert opinion like Tukey to back it up.
+    Exception is to allow for colour-blind viewers.
 
 ::: {#fig-data-vis-redundant layout-ncol=2}
 

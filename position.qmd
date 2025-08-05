@@ -43,6 +43,7 @@ in quantitative (length) there is an abstract demo.
 ```{r}
 #| echo: false
 #| label: fig-unaligned-pos
+#| fig-height: 3
 #| fig-cap: It is easier to compare two positions on the left because they are **aligned**;  they share a common baseline.  The two positions on the right are harder to compare because they are **unaligned**.
 grid.newpage()
 pushViewport(viewport(x=0, width=.5, just="left"))
@@ -73,7 +74,10 @@ visible, decoding is going to be a challenge.
 Bring jittering case study back here.
 Add link from birthday cake example back to jittering.
 
-## Non-linear scales
+big data (or even medium data) - need better name
+=> overlapping and summary plots like boxplots (then violin plots)
+
+## Non-linear scales {#sec-non-linear}
 
 The effective decoding of position is dependent on 
 a linear encoding.[^tufte-prop]
@@ -94,6 +98,15 @@ That is going to be confusing![^log-scales]
     but the numbers are harder to interpret
     (in my terms, you can only map back to log values)
 
+NOTE that there ARE some situations where non-linear position.
+scales are ok, e.g., log-log.
+Length is still dodgy. 
+You DO still get ordinal info, even if cannot decode sizes of differences.
+Non-linearity might actually be ok on non-position scales, e.g., 
+a colour scale for numeric data, where differences are smaller at
+one end;  all you are after, if you are using colour, is ordinal,
+so changing colours more swiftly at one end of the scale is ok (?)
+At least some 'colorspace' functions allow non-linear palettes.
 Revisit in qualitative.Rmd to point out that non-linear ordinal scales
 are ok, e.g., jet colour scale
 

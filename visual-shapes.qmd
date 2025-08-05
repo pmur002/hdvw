@@ -80,13 +80,12 @@ For example, we can perceive slopes and curves and peaks and valleys
 in each of the coloured lines.[^Visual_Pattern_Rec]
 
 [^Visual_Pattern_Rec]:
-  "VISUAL PATTERN RECOGNITION"
-  Few (2006)
-  Makes this same point
-  [p 10]
-  Demonstration of difference between density plot (mostly see a shape) and
-  histogram (mostly see bar heights).
-
+    "VISUAL PATTERN RECOGNITION"
+    Few (2006)
+    Makes this same point
+    [p 10]
+    Demonstration of difference between density plot (mostly see a shape) and
+    histogram (mostly see bar heights).
 
 ::: {#fig-data-vis-shape layout-ncol=2}
 
@@ -107,7 +106,27 @@ In other words, the more complex data symbols allow us to decode
 **data summaries** (@fig-data-vis-shape-decode).
 For example, in @fig-line we are able to perceive overall trends in the number
 of offenders, periods of more rapid change versus periods of slower
-change, and local maxima and minima.
+change, and local maxima and minima.[^lines-as-shapes]
+
+[^lines-as-shapes]:
+    "Understanding Charts and Graphs"
+    Kosslyn (1989)
+    [somewhere after p 205]
+    Lines are objects
+    "For example, if one wants a reader to see an interaction, a line graph is
+     better than a bar graph: not only is a line a single perceptual unit, and
+     hence there will be less to hold in short-term memory, but we are good at
+     detecting slope differences-which convey the relevant information (see
+     Pinker, 1988)."
+
+::: {#fig-data-vis-shape-decode layout-ncol=2}
+
+![](Diagrams/data-vis-shape-decode.png)
+
+If we map data values to a **visual shape**
+that contains a large amount of information,
+then we may be able to decode more sophisticated **data summaries**.
+:::
 
 In terms of @sec-congruence, 
 the use of lines for data symbols is also **congruent** with
@@ -119,15 +138,6 @@ and decreases in data values.[^line-trends]
   people use "trend words" (increasing/decreasing) versus "discrete words"
   (higher/lower than) AND are faster to judge absolute values from bars
   but angle from line graphs.
-
-::: {#fig-data-vis-shape-decode layout-ncol=2}
-
-![](Diagrams/data-vis-shape-decode.png)
-
-If we map data values to a **visual shape**
-that contains a large amount of information,
-then we may be able to decode more sophisticated **data summaries**.
-:::
 
 > One reason why line plots are effective is because they encode multiple
   data values into a complex data symbol that creates a visual shape,
@@ -153,9 +163,18 @@ However, in a line plot, we are not mapping a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
 is being mapped, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
-individual data values lose their individual identity.
+individual data values lose their individual identity.[^bijective]
 
-> One reason why a line plot is *not* effective for decoding
+[^bijective]:
+    citation for surjective, injective, bijective 
+
+    Adam has a nice example in his thesis Figure 4.5, a simpler 
+    version of which is a line or bar plot that contains a "total"
+    line or bar - the visual objects do not map neatly, and disjointly
+    to subsets of the data - there is overlap.  This makes mapping 
+    back to the data harder or at least more ambiguous ?
+
+> One reason why a line plot is *less* effective for decoding
   raw data values is because each raw data value is not mapped to its
   own data symbol.
 
@@ -166,7 +185,22 @@ we have *explicit* encodings from data values to basic visual features,
 but we also produce an *implicit* additional visual effect.
 The difference here is that with complex data symbols, we are collapsing
 multiple data values into a data symbol, so we run a higher risk
-of losing the ability to perceive individual data values.
+of losing the ability to perceive individual data values.[^lines-configural]
+
+[^lines-configural]:
+    Also link to "configural displays" (David Peebles (2008)) and "display
+    proximity" (Barnett & Wickens, 1988; Carswell & Wickens, 1987; Wickens &
+    Andre, 1990) "According to the proximity compatibility principle (Wickens &
+    Carswell, 1995), representations with high display proximity facilitate
+    high mental proximity tasks requiring the integration of information from
+    multiple sources. The relationship between display and mental proximity
+    has been revealed in several studies (e.g., Barnett & Wickens, 1988; Bennett
+    & Flach, 1992; Bennett, Toms, & Woods, 1993; Carswell & Wickens, 1987;
+    Wickens & Andre, 1990; Wickens & Carswell, 1995) and it is argued that the
+    advantage comes when emergent features (Pomerantz & Pristach, 1989) of the
+    representation indicate additional information about the domain."  He also
+    mentions line plots as being in between separable bar plots and configural
+    radar plots.
 
 There is also a similarity between complex data symbols and visual summaries 
 (@sec-visual-summaries).  In both cases, we gain the ability to decode
@@ -324,6 +358,14 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
+## Aspect ratio
+
+How aspect ratio affects ability to detect features in lines
+
+Also use of white space around points in scatter plot ?
+
+Cite Cleveland (1994) for white space margin affecting strength of relation?
+
 ## The dangers of visual shapes
 
 Need a caveat that more complex shapes does NOT necessarily mean 
@@ -342,9 +384,57 @@ or misleading information.
 Lines imply continuity (at least) if not linear interpolation
 so do example where connecting with lines not such a great idea.
 
+## Case study: Violin plots
+
+And other variations on boxplots
+
+* Case study: SinaPlots
+
+A SinaPlot is a nice combination of decode for raw data and for data summary.
+[^sina]
+@fig-sina is actually a combination of a SinaPlot and a violin plot.
+
+[^sina]:
+  @Sidiropoulos03072018
+
+```{r}
+#| echo: false
+#| label: fig-sina
+#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
+gg <- ggplot(rwcAll, aes(scored, y="")) +
+    geom_violin() +
+    geom_sina() +
+    scale_x_continuous(name="points scored")
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
 ## Case study: loess curves
 
 Another example of data -> summary -> features -> shapes -> summaries
+
+## Case study: Line of best fit
+
+Nice example of a complex calculation, the results of which are what gets
+visualised.  Also example of performing the calculation numerically rather
+than asking the viewer to perform it visually.  This was in summaries.qmd,
+but it cannot be there because it requires scatter plots, which come in
+the next section.
+Add this after mention of visualising models?
+
+Add footnote to Hadley's more complex model visualisation paper
+https://vita.had.co.nz/papers/model-vis.pdf
+https://dl.acm.org/doi/10.1002/sam.11271
+
+model fits like lm straight line and ref Hadley's data-space vs model-space
+"data models" to mirror "data statistics"
+(revisit box plots as VERY simple models? also talk about failing
+assumptions of these models, like unimodal for boxplot)
+
+footnote cite to Tukey for visualising phenomena rather than raw data?
+"Data-Based Graphics: Visual Display in the Decades to Come"
+Tukey (1990)
 
 ## Summary
 

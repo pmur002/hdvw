@@ -380,9 +380,13 @@ hope to answer.[^bertini]
     from Enrico Bertini
     "How NOT to Lie with Charts"
     https://filwd.substack.com/p/how-not-to-lie-with-charts
+
     Mention that lots of authors like Cairo and Munzner tackle
     the entire data vis process.
 
+    We are assuming that the data
+    we have is sufficient for the question(s) of interest and contains
+    no "substantive" problems (in the sense of Healy Chapter 1).
 
 It is also important to acknowledge that vision science cannot yet tell us
 everything about how data visualisation works.
@@ -2735,6 +2739,7 @@ in quantitative (length) there is an abstract demo.
 ```{r}
 #| echo: false
 #| label: fig-unaligned-pos
+#| fig-height: 3
 #| fig-cap: It is easier to compare two positions on the left because they are **aligned**;  they share a common baseline.  The two positions on the right are harder to compare because they are **unaligned**.
 grid.newpage()
 pushViewport(viewport(x=0, width=.5, just="left"))
@@ -2765,7 +2770,10 @@ visible, decoding is going to be a challenge.
 Bring jittering case study back here.
 Add link from birthday cake example back to jittering.
 
-## Non-linear scales
+big data (or even medium data) - need better name
+=> overlapping and summary plots like boxplots (then violin plots)
+
+## Non-linear scales {#sec-non-linear}
 
 The effective decoding of position is dependent on 
 a linear encoding.[^tufte-prop]
@@ -2786,6 +2794,15 @@ That is going to be confusing![^log-scales]
     but the numbers are harder to interpret
     (in my terms, you can only map back to log values)
 
+NOTE that there ARE some situations where non-linear position.
+scales are ok, e.g., log-log.
+Length is still dodgy. 
+You DO still get ordinal info, even if cannot decode sizes of differences.
+Non-linearity might actually be ok on non-position scales, e.g., 
+a colour scale for numeric data, where differences are smaller at
+one end;  all you are after, if you are using colour, is ordinal,
+so changing colours more swiftly at one end of the scale is ok (?)
+At least some 'colorspace' functions allow non-linear palettes.
 Revisit in qualitative.Rmd to point out that non-linear ordinal scales
 are ok, e.g., jet colour scale
 
@@ -4090,7 +4107,13 @@ More specifically, if a **visual feature** of a data symbol
 changes then the visual system will notice that change.
 Furthermore, if a visual feature of a data symbol
 changes while all other visual features of the data symbol remain the **same**,
-the visual system will notice the change more easily.
+the visual system will notice the change more easily.[^kosslyn-informative]
+
+[^kosslyn-informative]:
+    Sort of relates to Kosslyn's
+    "Principle of Informative Changes"
+    "Graph Design for the Eye and Mind"
+    Kosslyn (2006)
 
 For example, 
 in a bar plot like @fig-bar, the data symbols are bars
@@ -4382,16 +4405,21 @@ raw data values.[^info-vis-ref-model]
   MUST make reference to the Information Visualization Reference Model 
   of Card et al (1999) that differentiates data transforms from visual
   mappings from view transforms (the last particularly for interactive
-  graphics?), PLUS the design-centric extension by Wu and Chang (2024),
+  graphics?)
+
+  PLUS the design-centric extension by Wu and Chang (2024),
   which teases out design-specific transforms as well (the data prep
   for a box plot being a good example).  These papers provide a formal
   basis for some of the hand-waving that I do in this section, particularly
   on decoding to data summaries rather than raw data.
+
   Also
   "Low-Level Components of Analytic Activity in Information Visualization"
   Amar et al (2005)
   Set of 10 data visualisation tasks
   I like the way these all correspond to a numerical summary.
+
+  PLUS of course "stats" in Wilkinson GoG
 
 ## Box plots
 
@@ -4506,7 +4534,7 @@ to the visual features of a more complicated data symbol.
 ## Visual summaries {#sec-visual-summaries}
 
 @fig-rwc-dotplot shows stacked dot plots of the number of points scored by 
-countries from the different hemispheres in Rugby World Cup matches.
+countries from the different hemispheres in Rugby World Cup matches.[^dotplot]
 This data visualisation uses the same data as @fig-boxplot, but it
 maps raw data values rather than data summaries and it uses much simpler
 data symbols (data points).
@@ -4514,6 +4542,9 @@ This data visualisation encodes the
 number of points scored maps as the horizontal **position** of
 a data point and it encodes the hemisphere as the vertical
 **position** of a data point.
+
+[^dotplot]:
+    @Wilkinson01081999
 
 Because this data visualisation encodes raw data values as visual features, 
 it is possible to decode raw data values from the visual features
@@ -4859,6 +4890,53 @@ rather than the raw data, to visual features.
 Visual decoding leads back to the lies rather than the real data.
 :::
 
+## Simplification
+
+deliberately losing information (e.g., luminance scale for quant)
+
+"Why Shouldn’t All Charts Be Scatter Plots?
+Beyond Precision-Driven Visualizations"
+Bertini et al (2021)
+Claims that ordinal comparisons more common in practice than
+quantitative comparisons (?)
+
+This nice quote ...
+
+> Graphics are for comparison - comparison of one kind or another - not for
+  access to individual amounts. (Tukey 1993)
+
+... points out that reading individual values off a plot is not usually
+the point of a data vis, though it is still a precursor to making
+a comparison.  In some ways, ordinal comparisons are more important
+than interval or ratio?
+
+## Case study:  Heatmaps
+
+Heatmaps
+are a common way of representing three-dimensional data where 
+two of the data variables are either qualitative 
+or have been measured on a regular grid.
+The latter two variables naturally map to horizontal and vertical
+**position** to produce an array of
+rectangles, while the third variable maps to **colour**
+(see @fig-mappings-2).
+
+The mappings from data values to visual features for a heatmap
+are ...
+
+colour is not quant but can convey trends
+
+using luminance for quant, but not trying for accurate decoding
+of individual data values,
+BUT mention effectiveness of luminance in heatmap for ensemble perception
+of regions?
+
+get contrast effect but again not typically trying to match cells
+
+get regions/shapes of colour => higher-level structures
+
+talk about colour palettes that have deliberate colour boundaries
+to emphasise structure - combination of order and category
 
 ## Cognitive load
 
@@ -5125,22 +5203,29 @@ distances between data points, but also euclidean distances between
 data points ("as the crow flies").
 
 [^emergent-features]:
-  Relate this to mentions in literature of "emergent features", e.g.,
-  @pomerantz1994emergent.  Acknowledge that my use is a little loose
-  because the use in the literature is really about separate data symbols
-  combining to create emergent features (like clusters?).
-  MacEachren 1995 uses emergent in exactly this way!?
-  "Vision Science: Photons to Phenomenology" Stephen Palmer,
-  Figure 2.1.5 caption "The arrangement of several dots in a line give
-  rise to emergent properties, such as length, orientation, and
-  curvature, that are different from the properties of the dots that
-  compose it."
+    Relate this to mentions in literature of "emergent features", e.g.,
+    @pomerantz1994emergent.  Acknowledge that my use is a little loose
+    because the use in the literature is really about separate data symbols
+    combining to create emergent features (like clusters?).
+    MacEachren 1995 uses emergent as "configural"
+    (integral, but still also separable) 
+    "Vision Science: Photons to Phenomenology" Stephen Palmer,
+    Figure 2.1.5 caption "The arrangement of several dots in a line give
+    rise to emergent properties, such as length, orientation, and
+    curvature, that are different from the properties of the dots that
+    compose it."
   
+    NOTE that 
+    "Emergent features and feature combination"
+    Pomerantz and Cragin (2014)
+    (is this the same as @pomerantz1994emergent ???)
+    explicitly differentiate between (fast) emergent features and
+    "normal" (slow) feature integration that I am loosely using here.
 
 [^integral]:
-  Need citations to literature that mention integral visual features.
-  Admit a range rather than a dichotomy.
-  Munzner has good examples?
+    Need citations to literature that mention integral visual features.
+    Admit a range rather than a dichotomy.
+    Munzner has good examples?
 
 ::: {#fig-interact layout-ncol=2}
 
@@ -5172,10 +5257,10 @@ position in space (see @sec-visual-model-groups).
   Citations to literature on ensembles again, this time specifically to
   correlation in scatter plots.
   Talk about how, although there is some experimental support for reasonable
-  accuracy of correlation from scatter plot (with some bias),
+  accuracy of correlation from scatter plot (with some bias - 
+  specifically underestimation),
   there is not much experimental evidence for which is best 
   for perceiving correlations Eg scatter plot vs parallel coords etc
-  Cite Cleveland (1994) for white space margin affecting strength of relation?
 
 ::: {#fig-visual-corr layout-ncol=2}
 
@@ -5671,6 +5756,12 @@ pushViewport(viewport(width=.9, height=.9),
 print(ggDoctorLine, newpage=FALSE)
 ```
 
+**There is also the problem of separable when integral would be appropriate
+(reduce to separate effects inappropriately?)** Is there an example?
+
+**Must** say that chroma and luminance and hue are all integral.
+Is this an example of integrating ineffectively?
+
 ## Redundant mappings {#sec-redundant}
 
 In @sec-mosaic, we focused on the encoding of quantitative values
@@ -5698,8 +5789,18 @@ This becomes much more useful when there are more categories
 (@fig-spine-weak) or more variables (@fig-mosaic).[^redundant]
 
 [^redundant]:
-  Mention the conflicting opinions on redundant encoding:
-  Tufte and others against;  some studies for (including hofmann?)
+    "Clusters Beat Trend!? Testing Feature Hierarchy in Statistical Graphics"
+    VanderPlas and Hofmann (2017)
+    says redundancy helps
+
+    "Beyond Memorability: Visualization Recognition and Recall"
+    Borkin et al (2015)
+    also says redundancy helps
+
+    "The Science of Visual Data Communication: What Works"
+    Franconeri et al (2021)
+    says it doesn't (though only with expert opinion like Tukey to back it up.
+    Exception is to allow for colour-blind viewers.
 
 ::: {#fig-data-vis-redundant layout-ncol=2}
 
@@ -5822,13 +5923,12 @@ For example, we can perceive slopes and curves and peaks and valleys
 in each of the coloured lines.[^Visual_Pattern_Rec]
 
 [^Visual_Pattern_Rec]:
-  "VISUAL PATTERN RECOGNITION"
-  Few (2006)
-  Makes this same point
-  [p 10]
-  Demonstration of difference between density plot (mostly see a shape) and
-  histogram (mostly see bar heights).
-
+    "VISUAL PATTERN RECOGNITION"
+    Few (2006)
+    Makes this same point
+    [p 10]
+    Demonstration of difference between density plot (mostly see a shape) and
+    histogram (mostly see bar heights).
 
 ::: {#fig-data-vis-shape layout-ncol=2}
 
@@ -5849,7 +5949,27 @@ In other words, the more complex data symbols allow us to decode
 **data summaries** (@fig-data-vis-shape-decode).
 For example, in @fig-line we are able to perceive overall trends in the number
 of offenders, periods of more rapid change versus periods of slower
-change, and local maxima and minima.
+change, and local maxima and minima.[^lines-as-shapes]
+
+[^lines-as-shapes]:
+    "Understanding Charts and Graphs"
+    Kosslyn (1989)
+    [somewhere after p 205]
+    Lines are objects
+    "For example, if one wants a reader to see an interaction, a line graph is
+     better than a bar graph: not only is a line a single perceptual unit, and
+     hence there will be less to hold in short-term memory, but we are good at
+     detecting slope differences-which convey the relevant information (see
+     Pinker, 1988)."
+
+::: {#fig-data-vis-shape-decode layout-ncol=2}
+
+![](Diagrams/data-vis-shape-decode.png)
+
+If we map data values to a **visual shape**
+that contains a large amount of information,
+then we may be able to decode more sophisticated **data summaries**.
+:::
 
 In terms of @sec-congruence, 
 the use of lines for data symbols is also **congruent** with
@@ -5861,15 +5981,6 @@ and decreases in data values.[^line-trends]
   people use "trend words" (increasing/decreasing) versus "discrete words"
   (higher/lower than) AND are faster to judge absolute values from bars
   but angle from line graphs.
-
-::: {#fig-data-vis-shape-decode layout-ncol=2}
-
-![](Diagrams/data-vis-shape-decode.png)
-
-If we map data values to a **visual shape**
-that contains a large amount of information,
-then we may be able to decode more sophisticated **data summaries**.
-:::
 
 > One reason why line plots are effective is because they encode multiple
   data values into a complex data symbol that creates a visual shape,
@@ -5895,9 +6006,18 @@ However, in a line plot, we are not mapping a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
 is being mapped, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
-individual data values lose their individual identity.
+individual data values lose their individual identity.[^bijective]
 
-> One reason why a line plot is *not* effective for decoding
+[^bijective]:
+    citation for surjective, injective, bijective 
+
+    Adam has a nice example in his thesis Figure 4.5, a simpler 
+    version of which is a line or bar plot that contains a "total"
+    line or bar - the visual objects do not map neatly, and disjointly
+    to subsets of the data - there is overlap.  This makes mapping 
+    back to the data harder or at least more ambiguous ?
+
+> One reason why a line plot is *less* effective for decoding
   raw data values is because each raw data value is not mapped to its
   own data symbol.
 
@@ -5908,7 +6028,22 @@ we have *explicit* encodings from data values to basic visual features,
 but we also produce an *implicit* additional visual effect.
 The difference here is that with complex data symbols, we are collapsing
 multiple data values into a data symbol, so we run a higher risk
-of losing the ability to perceive individual data values.
+of losing the ability to perceive individual data values.[^lines-configural]
+
+[^lines-configural]:
+    Also link to "configural displays" (David Peebles (2008)) and "display
+    proximity" (Barnett & Wickens, 1988; Carswell & Wickens, 1987; Wickens &
+    Andre, 1990) "According to the proximity compatibility principle (Wickens &
+    Carswell, 1995), representations with high display proximity facilitate
+    high mental proximity tasks requiring the integration of information from
+    multiple sources. The relationship between display and mental proximity
+    has been revealed in several studies (e.g., Barnett & Wickens, 1988; Bennett
+    & Flach, 1992; Bennett, Toms, & Woods, 1993; Carswell & Wickens, 1987;
+    Wickens & Andre, 1990; Wickens & Carswell, 1995) and it is argued that the
+    advantage comes when emergent features (Pomerantz & Pristach, 1989) of the
+    representation indicate additional information about the domain."  He also
+    mentions line plots as being in between separable bar plots and configural
+    radar plots.
 
 There is also a similarity between complex data symbols and visual summaries 
 (@sec-visual-summaries).  In both cases, we gain the ability to decode
@@ -6066,6 +6201,14 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
+## Aspect ratio
+
+How aspect ratio affects ability to detect features in lines
+
+Also use of white space around points in scatter plot ?
+
+Cite Cleveland (1994) for white space margin affecting strength of relation?
+
 ## The dangers of visual shapes
 
 Need a caveat that more complex shapes does NOT necessarily mean 
@@ -6084,9 +6227,57 @@ or misleading information.
 Lines imply continuity (at least) if not linear interpolation
 so do example where connecting with lines not such a great idea.
 
+## Case study: Violin plots
+
+And other variations on boxplots
+
+* Case study: SinaPlots
+
+A SinaPlot is a nice combination of decode for raw data and for data summary.
+[^sina]
+@fig-sina is actually a combination of a SinaPlot and a violin plot.
+
+[^sina]:
+  @Sidiropoulos03072018
+
+```{r}
+#| echo: false
+#| label: fig-sina
+#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
+gg <- ggplot(rwcAll, aes(scored, y="")) +
+    geom_violin() +
+    geom_sina() +
+    scale_x_continuous(name="points scored")
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
 ## Case study: loess curves
 
 Another example of data -> summary -> features -> shapes -> summaries
+
+## Case study: Line of best fit
+
+Nice example of a complex calculation, the results of which are what gets
+visualised.  Also example of performing the calculation numerically rather
+than asking the viewer to perform it visually.  This was in summaries.qmd,
+but it cannot be there because it requires scatter plots, which come in
+the next section.
+Add this after mention of visualising models?
+
+Add footnote to Hadley's more complex model visualisation paper
+https://vita.had.co.nz/papers/model-vis.pdf
+https://dl.acm.org/doi/10.1002/sam.11271
+
+model fits like lm straight line and ref Hadley's data-space vs model-space
+"data models" to mirror "data statistics"
+(revisit box plots as VERY simple models? also talk about failing
+assumptions of these models, like unimodal for boxplot)
+
+footnote cite to Tukey for visualising phenomena rather than raw data?
+"Data-Based Graphics: Visual Display in the Decades to Come"
+Tukey (1990)
 
 ## Summary
 
@@ -6158,7 +6349,7 @@ This section looks at some of the different approaches to visualising
 several variables at once.  How do we perceive multivariate relationships?
 And can we still perceive individual data values at the same time?
 
-## Parallel coordinates plots
+## Parallel coordinates plots {#sec-parallel}
 
 One issue with @fig-multiple is that it attempts to map each data variable
 to a separate visual feature.  Once we have used both horizontal
@@ -6262,6 +6453,12 @@ just in the top four teams.
   high-dimensional groups or correlations
   because it maps multiple data values from different variables
   to a single visual shape.
+
+## Case study:  Bubble plots
+
+An example of using area/size for third variable.
+
+Provide some better options.
 
 ## Small multiples[^small-multiples]
 
@@ -6457,6 +6654,19 @@ ggplot(all) +
     theme(axis.title=element_blank(),
           aspect.ratio=1)
 ```
+
+## Non-cartesian mappings
+
+Parallel plots is actually an example of this, so can just
+refer back to @sec-parallel
+
+Refer back to @sec-non-linear
+
+## Case study: kiviat plots or radar plots or spider plots
+
+  (David Peebles (2008))
+
+## Case study: Barycentric plots (ternary plots)
 
 ## Dangers of multiple mappings
 
@@ -6878,7 +7088,7 @@ ggplot(districts) +
           axis.text=element_blank())
 ```
 
-## Chart junk and clutter
+## Chart junk and clutter {#sec-junk}
 
 @fig-junk shows a version of @fig-map with two cartoon villians
 added in the top-left and bottom-right corners.[^crims]
@@ -7225,7 +7435,7 @@ ggplot(pets) +
 ## Case study: Chernoff faces
 
 @fig-chernoff visualises the 2023 Rugby World Cup data (@tbl-rwc-2023) using
-Chernoff faces.
+Chernoff faces.[^chernoff]
 The data symbol in this visualisation is a little unusual; each
 country is represented by a combination of circles, curves, and lines
 that together produce a **visual object** that resembles a face.
@@ -7234,6 +7444,9 @@ The number of points scored is encoded as the **curvature** of the
 smile, the number of tries is encoded as the **angle** of the eye brows,
 and the number of clean breaks is encoded as the horizontal **position** of 
 the eyes.
+
+[^chernoff]:
+    @chernoff1973faces
 
 ```{r}
 #| echo: false
@@ -7561,6 +7774,27 @@ For example, in @fig-bar-text, we are able to decode the data
 value `41787` (the count for Māori) from the text "41787".
 Furthermore, this decoding is extremely accurate and very flexible.
 
+@fig-scatter-text shows another example of text data symbols
+
+```{r}
+#| echo: false
+#| label: fig-scatter-text
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries)) +
+    geom_text(aes(breaks, tries, label=country), 
+              hjust=c(1, 1, 0, 0), vjust=c(0, 0, 1, 1),
+              data=subset(RWCperGame, 
+                          country %in% c("New Zealand", "South Africa",
+                                         "England", "Wales"))) +
+    scale_x_continuous(name="clean breaks", expand=expansion(c(.05, .3))) +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=.5)
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
 In terms of the criteria that we discussed in @sec-mapping-visual-features,
 the value of text data symbols is that they allow us to decode
 data values very **accurately** (@fig-decode).
@@ -7611,6 +7845,10 @@ is ineffective for perceiving groups of values or trends in values.
 
 > Large numbers of text data symbols are *not* effective because
   the visual system cannot decode visual summaries from the text.
+
+Why si a picture is worth a thousand words?
+Because 1000 words is 1000 fixations, identifying 1000 visual objects,
+and then interpreting their combined meaning.
 
 ## Guides {#sec-guides}
 
@@ -8045,8 +8283,12 @@ actually possess, and the rows have been ordered from the highest number of
 points per game to the lowest.
 
 [^table-guidelines]:
-  For example, @schwabish.
-  Also get a Wainer reference in here?
+    For example, @schwabish.
+ 
+    Ehrenberg (1977) advice on tables 
+
+    "UNDERSTANDING GRAPHS AND TABLES"
+    Wainer (1992)
 
 It is easier to see some structure in @tbl-rwc-table.
 For example, the number of tries appears to decrease as well as the 
@@ -9067,6 +9309,13 @@ grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 
 @sec-differences
 
+## Distractions
+
+Add examples of making the WRONG thing important (e.g., use thick lines
+on bar borders or bright colours on unimportant elements) ?
+
+Refer back to chart junk and clutter (@sec-junk).
+
 ## Summary
 
 Just as we can map data values to visual features, to 
@@ -9083,6 +9332,25 @@ Position is especially important
 
 Add review at the end that reinforces the threads like visual feature, 
 visual shape, visual object and mappings
+
+Present process by which a data vis can be broken down.
+What data symbols are being used?  (simple or complex)
+What mappings are being used? 
+What do we want to decode? (data or summaries)
+If mapping back to raw data, are the mappings accurate?
+What can be mapped back to?
+Are mappings congruent with data?
+...
+
+* Use heatmap as case study?
+
+* do the side-by-side pie chart idea as an example of reasoning your
+  way to a new visualisation.
+
+* Move the discussion/revisit of tables from text section to here ?
+
+* Another possible application of data vis knowledge:
+  Analyse one of the weird boxplot variations that look a bit like a ziggurat?
 
 
 List of questions to evaluate a data vis (maybe nest these a bit):
@@ -9173,327 +9441,18 @@ Have to throw bouquet at Quarto.
   (do NOT perceive vertical difference)
   citation?  see franconeri 2021
 
-* need citations for more is more and dark is more and part-to-whole.
-  "More of what? Dissociating effects of conceptual and numeric mappings on 
-   interpreting colormap data visualizations"
-  Soto et al (2023)
-  Dark-is-more bias (in colours) vs high-is-more bias (in colour legend)
-  on colourmaps (choropleth maps).
-
-* Mention that density plots are congruent because the peaks
-  are like mountain ranges ?
-
-* Mention memorability of data vis somewhere;
-  possibly only needs to be a footnote addition to, e.g., intro
-  to congruence.Rmd, that acknowledges some other things that
-  are important beyond accuracy (with cites to some of the studies
-  on memorability - which are fairly few I think).
-  Another place would be in text.Rmd
-
-* Need some citations to the literature in visual-shapes.qmd
-
-  + "Understanding Charts and Graphs"
-  Kosslyn (1989)
-    [somewhere after p 205]
-    + Lines are objects
-    "For example, if one wants a reader to see an interaction, a line graph is
-     better than a bar graph: not only is a line a single perceptual unit, and
-     hence there will be less to hold in short-term memory, but we are good at
-     detecting slope differences-which convey the relevant information (see
-     Pinker, 1988)."
-
-  Link to "emergent features" and "gestalts" in, e.g.,  
-  Pomerantz and Cragin (2014) ?
-
-  Also link to "configural displays" (David Peebles (2008)) and
-  "display proximity" (Barnett & Wickens, 1988; Carswell & Wickens, 1987;
-  Wickens & Andre, 1990)
-  "According to the proximity compatibility principle (Wickens &
-  Carswell, 1995), representations with high display proximity fa-
-  cilitate high mental proximity tasks requiring the integration of
-  information from multiple sources. The relationship between dis-
-  play and mental proximity has been revealed in several studies
-  (e.g., Barnett & Wickens, 1988; Bennett & Flach, 1992; Bennett,
-  Toms, & Woods, 1993; Carswell & Wickens, 1987; Wickens &
-  Andre, 1990; Wickens & Carswell, 1995) and it is argued that the
-  advantage comes when emergent features (Pomerantz & Pristach,
-  1989) of the representation indicate additional information about
-  the domain."
-  He also mentions line plots as being in between separable bar plots
-  and configural radar plots.
-
-  Some useful stuff in Franconeri et al (2021) ?
-
-* how mappings can go wrong?  
-  As an umbrella for some topics below, e.g., visual illusions?
-  The main point is that an effective data visualisation will AVOID
-  the things that the visual system is bad at.
-
-* Must talk about the role of **scales** in encodings
-  (not all encodings are linear, not all encodings are obvious!)
-
-* add types of cones to colour chapter?
-
-* CVD
-
-* visual illusions (put in a section on "how mappings go wrong"?)
-  OR add these AFTER dissonant mappings (because they are examples
-  of our visual system telling us something that is at odds with
-  the explicit encoding!?)
-  Refer back to luminance and colour contrast.
-
-* redundant encodings
-  Use same diagram as congruent mappings
-
-  "Clusters Beat Trend!? Testing Feature Hierarchy in Statistical Graphics"
-  VanderPlas and Hofmann (2017)
-  says redundancy helps
-
-  "Beyond Memorability: Visualization Recognition and Recall"
-  Borkin et al (2015)
-  also says redundancy helps
-
-  "The Science of Visual Data Communication: What Works"
-  Franconeri et al (2021)
-  says it doesn't (though only with expert opinion like Tukey to back it up.
-  Exception is to allow for colour-blind viewers.
-
-* non-linear scales.
-  separate "position" section?
-  NOTE that there ARE some situations where non-linear position.
-  scales are ok, e.g., log-log.
-  Length is still dodgy. 
-  You DO still get ordinal info, even if cannot decode sizes of differences.
-  Non-linearity might actually be ok on non-position scales, e.g., 
-  a colour scale for numeric data, where differences are smaller at
-  one end;  all you are after, if you are using colour, is ordinal,
-  so changing colours more swiftly at one end of the scale is ok (?)
-  At least some 'colorspace' functions allow non-linear palettes.
-
-* Example where using legend is BETTER than direct labelling:
-  facetted bar plot.  Instead of multiple repeated sets of axis labels,
-  just use coloured bars, plus single legend.
-
-* big data (or even medium data) - need better name
-  => overlapping and summary plots like boxplots (then violin plots)
-
-* use of white space around points in scatter plot
-
-* visual objects
-  pictures as data points
-  icons 
-  higher-level => gain more complex information transfer
-  BUT lose visual summaries (cos not just simple shapes with simple features)?
-  case study: chernoff faces
-
-* deliberately losing information (e.g., luminance scale for quant)
-
-  "Why Shouldn’t All Charts Be Scatter Plots?
-   Beyond Precision-Driven Visualizations"
-  Bertini et al (2021)
-  Claims that ordinal comparisons more common in practice than
-  quantitative comparisons (?)
-
-* aspect ratio section (in combine?)
-
-* bubble plots (area not effective => something better?)
-
-* Add citation for distance effect
-
-* Add back-ref in Labels in Text to visual attention in visual-model 
-
-* Add annotation example in text that just labels with text each country
-  in @fig-scatter 
-
-* Need citation for more-is-more (kosslyn?)
-  AND for representing negative values
-  AND for dark is more
-  AND for same is same (Principle of unambiguity ?)
-
-* Dark is more
-
-  @fig-neg-tile also demonstrates another example of visual congruence because
-  darker colours are naturally associated with larger data 
-  values.
-
-* Proper citation for stroop effect ?
-
-* Use reordering of @fig-side-bar-year (so that they start tallest to smallest)
-  THEN should see change in that pattern later on more easily?
-  Use this as an example of "visual shape" in a bar plot.
-  Revisit heatmaps - regions/shapes of colours?
-
-* Cite "Testing Statistical Charts: What Makes a Good Graph?"
-  Vanderplas, Cook, and Hofmann (2020) 
-  when mention that there are many fewer studies of higher-level
-  mappings between data and data vis
-  (partly just because it is harder to study!).
-
-* Could also mention in the "scope" that we are assuming that the data
-  we have is sufficient for the question(s) of interest and contains
-  no "substantive" problems (in the sense of Healy Chapter 1).
-
-* Need citation for contrast effect
-
-* Need citation for chernoff faces
-
-* case study of density plots
-  (revisit histograms in terms of shape as well; point out that 
-   density plots are preferred to histograms?
-   revisit boxplots too and talk about violin plots?)
-
 * check have not missed any major pros or cons for choropleth maps
   https://www.practicalreporting.com/blog/2024/8/21/ive-stopped-using-colored-region-choropleth-maps-should-you
 
-* add citation for choropleth maps
-
-* case study for spinograms
-
-* add mention of underestimation of correlation in scatter plots
-  (with citation) in a footnote
-
-* add examples of making the WRONG thing important (e.g., use thick lines
-  on bar borders or bright colours on unimportant elements) ?
-
-* Case study: Heatmaps
-
-Heatmaps
-are a common way of representing three-dimensional data where 
-two of the data variables are either qualitative 
-or have been measured on a regular grid.
-The latter two variables naturally map to horizontal and vertical
-**position** to produce an array of
-rectangles, while the third variable maps to **colour**
-(see @fig-mappings-2).
-
-The mappings from data values to visual features for a heatmap
-are ...
-
-colour is not quant but can convey trends
-
-get contrast effect but again not typically trying to match cells
-
-get regions/shapes of colour => higher-level structures
-
-talk about colour palettes that have deliberate colour boundaries
-to emphasise structure - combination of order and category
-
-* citation for data statistics to GoG
-
-* citation for ensembles in statistics.qmd
-
-* citation for "stacked dot plot" in statistics.qmd
-  and/or use a different name
-
-* case study: barycentric plots (ternary plots)
-
-* Case study: Line of best fit
-
-  Nice example of a complex calculation, the results of which are what gets
-  visualised.  Also example of performing the calculation numerically rather
-  than asking the viewer to perform it visually.  This was in summaries.qmd,
-  but it cannot be there because it requires scatter plots, which come in
-  the next section.
-  Add this after mention of visualising models?
-
-  Add footnote to Hadley's more complex model visualisation paper
-  https://vita.had.co.nz/papers/model-vis.pdf
-  https://dl.acm.org/doi/10.1002/sam.11271
-
-* Case study: SinaPlots
-
-A SinaPlot is a nice combination of decode for raw data and for data summary.
-[^sina]
-@fig-sina is actually a combination of a SinaPlot and a violin plot.
-
-[^sina]:
-  @Sidiropoulos03072018
-
-```{r}
-#| echo: false
-#| label: fig-sina
-#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
-gg <- ggplot(rwcAll, aes(scored, y="")) +
-    geom_violin() +
-    geom_sina() +
-    scale_x_continuous(name="points scored")
-pushViewport(viewport(height=.8, width=.8))
-print(gg, newpage=FALSE)
-popViewport()
-```
-
 * attributions for data sources
 
-* add example (section?) to combine.qmd 
-  where either separable is NOT appropriate
-  or integral is NOT appropriate.  In the mosaic plot case, the interaction
-  is beneficial.
-  See "dangers of combining mappings"
 
-* do we mention effectiveness of luminance in heatmap for ensemble perception
-  of regions?
 
-* must say that chroma and luminance and hue are all integral ?
+
 
 * add direct labelling to text chapter?
   some sort of ggrepel version of the flags example in visual-objects?
   relate visual objects (other than text) to direct labelling?
-
-* model fits like lm straight line and ref Hadley's data-space vs model-space
-  "data models" to mirror "data statistics"
-  (revisit box plots as VERY simple models? also talk about failing
-   assumptions of these models, like unimodal for boxplot)
-
-* kiviat plots or radar plots or spider plots
-  (David Peebles (2008))
-
-* End game/summary: 
-  Present process by which a data vis can be broken down.
-  What data symbols are being used?  (simple or complex)
-  What mappings are being used? 
-  What do we want to decode? (data or summaries)
-  If mapping back to raw data, are the mappings accurate?
-  What can be mapped back to?
-  Are mappings congruent with data?
-  ...
-
-  * Use heatmap as case study?
-
-  * do the side-by-side pie chart idea as an example of reasoning your
-    way to a new visualisation.
-
-  * Move the discussion/revisit of tables from text section to here ?
-
-  * Another possible application of data vis knowledge:
-    Analyse one of the weird boxplot variations that look a bit like a ziggurat?
-
-* Another example of deliberate reduction in visual feature expressiveness
-  is categorical colour scheme in heat map (so at least some features
-  are more obvious).
-
-* Add reference to Ehrenberg (1977) advice on tables in footnote
-  in case study on tables (in text topic)
-  PLUS reference to 
-  "UNDERSTANDING GRAPHS AND TABLES"
-  Wainer (1992)
-
-* Smooth lines through scatter plot case study ?
-  footnote cite to Tukey for visualising phenomena rather than raw data?
-  
-* This nice quote ...
-
-  > Graphics are for comparison - comparison of one kind or another - not for
-    access to individual amounts. (Tukey 1993)
-
-  ... points out that reading individual values off a plot is not usually
-  the point of a data vis, though it is still a precursor to making
-  a comparison.  In some ways, ordinal comparisons are more important
-  than interval or ratio?
-
-
-* Answer why "a picture is worth a thousand words"
-  Because 1000 words is 1000 fixations, identifying 1000 visual objects,
-  and then interpreting their combined meaning ...
 
 * citations to stuff on pictographs and glyphs and icon-based plots
   (in clutter section?)
@@ -9501,15 +9460,6 @@ popViewport()
 * add citations for R packages used in plots and diagrams.
   General one for R and ggplot2, then specific ones for specific plots
   Add citation to {ggsci} for default (discrete) palette
-
-* Add citation for surjective, injective, bijective in a footnote 
-  somewhere
-
-  Adam has a nice example in his thesis Figure 4.5, a simpler 
-  version of which is a line or bar plot that contains a "total"
-  line or bar - the visual objects do not map neatly, and disjointly
-  to subsets of the data - there is overlap.  This makes mapping 
-  back to the data harder or at least more ambiguous ?
 
 * Get visualisation of uncertainty in somewhere ?
   Variability is a data summary, which we map to a visual feature.
@@ -9523,8 +9473,13 @@ popViewport()
 * An index that links to all of the places that different sorts of plots
   are discussed ?
 
+  Use Quarto book format (each .qmd becomes its own chapter) and
+  then get search functionality for free (which is essentially 
+  an automated index).
+
+  Can also follow instructions to "publish" on GitHub pages
+
 * Check all references, especially the ones generated by chatgpt !
-&nbsp;
 
 * add how-to-cite
 
