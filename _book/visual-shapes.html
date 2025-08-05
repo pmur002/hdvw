@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Visual Shapes – How Data Visualisation Works</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./multiple.html" rel="next">
+<link href="./combine.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6e052200a5ff315289b52d7836046450.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./visual-shapes.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">How Data Visualisation Works</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Executive Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Visual System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mapping-visual-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visual Features</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./position.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Position</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Length</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qualitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Colour</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./congruence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Congruent Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping Summaries</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./combine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-shapes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visual Objects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mapping Structure</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Review</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-line-plots" id="toc-sec-line-plots" class="nav-link active" data-scroll-target="#sec-line-plots"><span class="header-section-number">11.1</span> Line plots</a></li>
+  <li><a href="#case-study-scatter-plots-with-lines" id="toc-case-study-scatter-plots-with-lines" class="nav-link" data-scroll-target="#case-study-scatter-plots-with-lines"><span class="header-section-number">11.2</span> Case study: Scatter plots with lines</a></li>
+  <li><a href="#sec-density" id="toc-sec-density" class="nav-link" data-scroll-target="#sec-density"><span class="header-section-number">11.3</span> Case study: Density plots</a></li>
+  <li><a href="#aspect-ratio" id="toc-aspect-ratio" class="nav-link" data-scroll-target="#aspect-ratio"><span class="header-section-number">11.4</span> Aspect ratio</a></li>
+  <li><a href="#the-dangers-of-visual-shapes" id="toc-the-dangers-of-visual-shapes" class="nav-link" data-scroll-target="#the-dangers-of-visual-shapes"><span class="header-section-number">11.5</span> The dangers of visual shapes</a></li>
+  <li><a href="#case-study-violin-plots" id="toc-case-study-violin-plots" class="nav-link" data-scroll-target="#case-study-violin-plots"><span class="header-section-number">11.6</span> Case study: Violin plots</a></li>
+  <li><a href="#case-study-loess-curves" id="toc-case-study-loess-curves" class="nav-link" data-scroll-target="#case-study-loess-curves"><span class="header-section-number">11.7</span> Case study: loess curves</a></li>
+  <li><a href="#case-study-line-of-best-fit" id="toc-case-study-line-of-best-fit" class="nav-link" data-scroll-target="#case-study-line-of-best-fit"><span class="header-section-number">11.8</span> Case study: Line of best fit</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">11.9</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-visual-shapes" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>All of the data visualisations that we have considered so far have mapped a <strong>single data value</strong> from one or more variables to a <strong>single data symbol</strong> (<a href="#fig-multivariate-symbol-a" class="quarto-xref">Figure&nbsp;<span>11.1 (a)</span></a>). For example, a bar plot like <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> maps one category and one count to one bar. A scatter plot like <a href="combine.html#fig-scatter" class="quarto-xref">Figure&nbsp;<span>10.3</span></a> maps one data value from a quantitative variable and one data value from another quantitative variable to one data point.</p>
+<p>In this section, we consider data visualisations that map <strong>multiple data values</strong> from one or more variables to a <strong>single data symbol</strong> (<a href="#fig-multivariate-symbol-b" class="quarto-xref">Figure&nbsp;<span>11.1 (b)</span></a>). In this section, we begin to consider more complex data symbols.</p>
+<div id="fig-multivariate-symbol" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multivariate-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-multivariate-symbol" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-multivariate-symbol-a" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-multivariate-symbol-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Mappings/mapping-1-2-1-2.png" class="img-fluid figure-img" data-ref-parent="fig-multivariate-symbol">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-multivariate-symbol-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Each row of data values maps to one data symbol.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-multivariate-symbol" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-multivariate-symbol-b" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-multivariate-symbol-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Mappings/mapping-2-2-1-2.png" class="img-fluid figure-img" data-ref-parent="fig-multivariate-symbol">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-multivariate-symbol-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Multiple rows of data values map to one data symbol.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multivariate-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: (a) A simple data symbol, like a bar in a bar plot or a data point in a scatter plot involves mapping <strong>one</strong> data value from each of two variables to two visual features of <strong>one</strong> data symbol; a single pair of data values produces a single data symbol (this is a reproduction of the diagram in <a href="combine.html#fig-two-visual-features" class="quarto-xref">Figure&nbsp;<span>10.1</span></a>). (b) A more complex data symbol is produced if we map <strong>multiple</strong> data values from each of two variables to two visual features of a <strong>single</strong> data symbol. Multiple data values from <code>a</code> and <code>b</code> are mapped to the visual features, <code>x</code> and <code>y</code>, of a single data symbol. Multiple pairs of values produce a single data symbol.
+</figcaption>
+</figure>
+</div>
+<section id="sec-line-plots" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-line-plots"><span class="header-section-number">11.1</span> Line plots</h2>
+<p><a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> shows a line plot of the number of offenders per year in different ethnic groups from 2011 to 2021 (see <a href="quantitative.html#tbl-crime-group-year" class="quarto-xref">Table&nbsp;<span>6.1</span></a>). This data visualisation is very effective for perceiving changes over time in the number of offenders within each group as well as comparing the changes over time between groups.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-line" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-shapes_files/figure-html/fig-line-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: A line plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>There are some familiar mappings in this data visualisation: year is mapped to horizontal <strong>position</strong>, the number of offenders is mapped to vertical <strong>position</strong>, and the ethnic group is mapped to <strong>colour</strong>. However, the <strong>data symbols</strong> in this data visualisation, the coloured lines, are different from any previous examples that we have seen. Although there are 44 rows of data, there are only 4 data symbols. Multiple rows of data are used to create each data symbol. Each coloured line in <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> represents 11 pairs of year and count values.</p>
+<p>This contrasts with visualisations like bar plots that use simpler data symbols. For example, the bar plot of the same data in <a href="quantitative.html#fig-side-bar-year" class="quarto-xref">Figure&nbsp;<span>6.7</span></a> has 44 bars.</p>
+<p><a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> is effective at conveying changes over time because the coloured lines create <strong>visual shapes</strong> (<a href="#fig-data-vis-shape" class="quarto-xref">Figure&nbsp;<span>11.3</span></a>) and those visual shapes convey information about collections of data values. For example, we can perceive slopes and curves and peaks and valleys in each of the coloured lines.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div id="fig-data-vis-shape" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-vis-shape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-shape.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-shape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.3: If we map multiple data values to multiple visual features of a single data symbol, like in a line plot, we create a smaller number of more complex data symbols, <strong>visual shapes</strong>, that contain a larger amount of information.
+</figcaption>
+</figure>
+</div>
+<p>In terms of the simple visual processing model from <a href="visual-model.html#sec-visual-processing" class="quarto-xref"><span>Section 3.4</span></a>, these more complicated shapes can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (see <a href="visual-model.html#fig-visual-model" class="quarto-xref">Figure&nbsp;<span>3.8</span></a>). In other words, the more complex data symbols allow us to decode <strong>data summaries</strong> (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;<span>11.4</span></a>). For example, in <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> we are able to perceive overall trends in the number of offenders, periods of more rapid change versus periods of slower change, and local maxima and minima.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div id="fig-data-vis-shape-decode" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-vis-shape-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-shape-decode.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-shape-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.4: If we map data values to a <strong>visual shape</strong> that contains a large amount of information, then we may be able to decode more sophisticated <strong>data summaries</strong>.
+</figcaption>
+</figure>
+</div>
+<p>In terms of <a href="congruence.html" class="quarto-xref"><span>Chapter 8</span></a>, the use of lines for data symbols is also <strong>congruent</strong> with trends in the data; we naturally associate slopes with increases and decreases in data values.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<blockquote class="blockquote">
+<p>One reason why line plots are effective is because they encode multiple data values into a complex data symbol that creates a visual shape, from which we are able to decode data summaries.</p>
+</blockquote>
+<p>On the other hand, the more complex data symbols in a line plot, that contain multiple data values, are less effective at conveying the <em>individual</em> raw data values. The coloured lines in <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> are not simple shapes from which it is easy to perceive basic <strong>visual features</strong>. This means that, although we may be able to decode data summaries, it is not easy to decode the raw data values (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;<span>11.4</span></a>). For example, compare the ease with which we can determine the number of European/Other offenders in 2013 from <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> versus <a href="quantitative.html#fig-side-bar-year" class="quarto-xref">Figure&nbsp;<span>6.7</span></a>.</p>
+<p>This deficiency is significant because the main mappings in a line plot are from <strong>quantitative</strong> data values to (horizontal and vertical) <strong>position</strong>. We know from <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 4</span></a> that these should be very effective mappings that allow us to accurately decode the raw data values. However, in a line plot, we are not mapping a single data value to a basic visual feature of a single, simple shape. Instead, a single data value is being mapped, along with many other values, to a basic visual feature of a complicated shape. In effect, the individual data values lose their individual identity.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<blockquote class="blockquote">
+<p>One reason why a line plot is <em>less</em> effective for decoding raw data values is because each raw data value is not mapped to its own data symbol.</p>
+</blockquote>
+<p>The creation of complex data symbols from multiple data values bears some similarity to the creation of emergent features by combining visual features (<a href="combine.html#sec-integral" class="quarto-xref"><span>Section 10.2</span></a>). In both cases, we have <em>explicit</em> encodings from data values to basic visual features, but we also produce an <em>implicit</em> additional visual effect. The difference here is that with complex data symbols, we are collapsing multiple data values into a data symbol, so we run a higher risk of losing the ability to perceive individual data values.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>There is also a similarity between complex data symbols and visual summaries (<a href="summaries.html#sec-visual-summaries" class="quarto-xref"><span>Section 9.2</span></a>). In both cases, we gain the ability to decode data summaries from collections of data values. Again, the difference is that with visual summaries, we are summarising many simple data symbols that each represent individual data values, whereas with a complex data symbol we decode the data summary from a single data symbol that obscures the individual data values.</p>
+</section>
+<section id="case-study-scatter-plots-with-lines" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="case-study-scatter-plots-with-lines"><span class="header-section-number">11.2</span> Case study: Scatter plots with lines</h2>
+<p><a href="#fig-line-points" class="quarto-xref">Figure&nbsp;<span>11.5</span></a> shows a data visualisation of the number of offenders per year in different ethnic groups (<a href="quantitative.html#tbl-crime-group-year" class="quarto-xref">Table&nbsp;<span>6.1</span></a>). This is very similar to <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>, but we have added a data point at every horizontal and vertical <strong>position</strong>.</p>
+<p>Like <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>, we can decode overall trends from the line data symbols, but we can also decode individual data values more easily because now every individual data value is also mapped to its own data symbol.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-line-points" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-line-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-shapes_files/figure-html/fig-line-points-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-line-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.5: A plot of the number of offenders per year in different ethnic groups from 2011 to 2021 with both lines and points.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-density" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-density"><span class="header-section-number">11.3</span> Case study: Density plots</h2>
+<p><a href="#fig-density" class="quarto-xref">Figure&nbsp;<span>11.6</span></a> shows a density plot of the number of points scored by Tier One nations at the Rugby World Cups (<a href="congruence.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>8.2</span></a>). As with a histogram (<a href="summaries.html#fig-hist" class="quarto-xref">Figure&nbsp;<span>9.5</span></a>), this data visualisation is effective for conveying the distribution of data values. For example, we can perceive that there is evidence of a single mode and right skew.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-density" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-shapes_files/figure-html/fig-density-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6: A density plot of the points scored per game by Tier One nations at Rugby World Cups.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Also like a histogram, a density plot actually maps <strong>data summaries</strong>, density estimates rather than raw data values, to visual features (see <a href="#tbl-density-stats" class="quarto-xref">Table&nbsp;<span>11.1</span></a>). In the case of a histogram, the data summary values are counts within bins (see <a href="summaries.html#tbl-hist-stats" class="quarto-xref">Table&nbsp;<span>9.2</span></a>) and each data summary produces a separate bar. However, a density plot encodes all of the data summary values to a single data symbol, a line, to create a <strong>visual shape</strong>. The density estimates are mapped to the horizontal and vertical <strong>positions</strong> of a single line data symbol. The visual shape allows us to perceive summaries of the density estimates. For example, whether there is a single maximum density and how the density changes to either side of that peak.</p>
+<div class="cell">
+<div id="tbl-density-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-density-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.1: A table of density estimates at a sample of values over the range of the number of points scored by Tier One nations in Rugby World Cup matches. These data summaries are the values that are mapped to visual features to produce the density plot in <a href="#fig-density" class="quarto-xref">Figure&nbsp;<span>11.6</span></a>. There are 512 rows of values, but only the first 6 are shown here.
+</figcaption>
+<div aria-describedby="tbl-density-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">scored</th>
+<th style="text-align: right;">density</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.0055</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.0059</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">0.0063</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.0067</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">0.0071</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">0.0075</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-data-stat-vis-shape-stat" class="quarto-xref">Figure&nbsp;<span>11.7</span></a> shows the path from raw data values to data summaries (density estimates), which are encoded as the visual features (horizontal and vertical position) of a visual shape (a line) in a density plot and the summary information that we can decode from the visual shape. We cannot decode the raw data values from a density plot, nor can we very easily decode the data summaries (the density estimates). The only real purpose of the data symbol in a density plot is to allow us to decode <strong>summaries</strong> of the data summaries, which are visual features of the density estimates (like the number of peaks and where the peaks occur).</p>
+<div id="fig-data-stat-vis-shape-stat" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-stat-vis-shape-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-stat-vis-shape-stat.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-stat-vis-shape-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.7: A density plot maps data summaries to visual features to create a visual shape from which we can decode <strong>summaries</strong> of the data summaries.
+</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>A density plot is effective because it conveys high-level features of density estimates of the raw data.</p>
+</blockquote>
+<p>Another commonality between density plots and histograms is that we get to choose how the data summaries are calculated from the raw data values. In the case of a density plot, we must choose a “kernel” and a “bandwidth”, both of which affect the smoothness of the density estimates. This means that we may need to explore more than one kernel and bandwidth (see <a href="summaries.html#sec-summary-caveats" class="quarto-xref"><span>Section 9.4</span></a>).</p>
+<p>A final point about density plots, especially in comparison to histograms is that it is more effective to present multiple density curves, rather than multiple histograms. This is demonstrated in <a href="#fig-multiple-density" class="quarto-xref">Figure&nbsp;<span>11.8</span></a> and <a href="#fig-multiple-hist" class="quarto-xref">Figure&nbsp;<span>11.9</span></a>. Multiple histograms overlap each other, which makes it difficult to perceive the separate histograms and this is not satisfactorily solved by adding semitransparency. By comparison, multiple density curves create very little overlap, and even though the orange curve passes “under” the blue curve, we effortlessly perceive the orange curve as a single, coherent shape (see <a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 3.7</span></a>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-multiple-density" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multiple-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-shapes_files/figure-html/fig-multiple-density-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multiple-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.8: Density plots of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-multiple-hist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multiple-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-shapes_files/figure-html/fig-multiple-hist-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multiple-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.9: Histograms of the points scored per game by Tier One nations at Rugby World Cups, broken down by hemisphere.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="aspect-ratio" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="aspect-ratio"><span class="header-section-number">11.4</span> Aspect ratio</h2>
+<p>How aspect ratio affects ability to detect features in lines</p>
+<p>Also use of white space around points in scatter plot ?</p>
+<p>Cite Cleveland (1994) for white space margin affecting strength of relation?</p>
+</section>
+<section id="the-dangers-of-visual-shapes" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="the-dangers-of-visual-shapes"><span class="header-section-number">11.5</span> The dangers of visual shapes</h2>
+<p>Need a caveat that more complex shapes does NOT necessarily mean useful mappings back to data summaries - could just end up with a mess (<a href="#fig-data-vis-shape-lie" class="quarto-xref">Figure&nbsp;<span>11.10</span></a>).</p>
+<div id="fig-data-vis-shape-lie" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-vis-shape-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-shape-lie.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-shape-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.10: Mapping data values to the visual features of a complex shape may not be effective if the complex shape decodes to unhelpful or misleading information.
+</figcaption>
+</figure>
+</div>
+<p>Lines imply continuity (at least) if not linear interpolation so do example where connecting with lines not such a great idea.</p>
+</section>
+<section id="case-study-violin-plots" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="case-study-violin-plots"><span class="header-section-number">11.6</span> Case study: Violin plots</h2>
+<p>And other variations on boxplots</p>
+<ul>
+<li>Case study: SinaPlots</li>
+</ul>
+<p>A SinaPlot is a nice combination of decode for raw data and for data summary. <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> <a href="#fig-sina" class="quarto-xref">Figure&nbsp;<span>11.11</span></a> is actually a combination of a SinaPlot and a violin plot.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-sina" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sina-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-shapes_files/figure-html/fig-sina-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sina-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.11: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="case-study-loess-curves" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="case-study-loess-curves"><span class="header-section-number">11.7</span> Case study: loess curves</h2>
+<p>Another example of data -&gt; summary -&gt; features -&gt; shapes -&gt; summaries</p>
+</section>
+<section id="case-study-line-of-best-fit" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="case-study-line-of-best-fit"><span class="header-section-number">11.8</span> Case study: Line of best fit</h2>
+<p>Nice example of a complex calculation, the results of which are what gets visualised. Also example of performing the calculation numerically rather than asking the viewer to perform it visually. This was in summaries.qmd, but it cannot be there because it requires scatter plots, which come in the next section. Add this after mention of visualising models?</p>
+<p>Add footnote to Hadley’s more complex model visualisation paper https://vita.had.co.nz/papers/model-vis.pdf https://dl.acm.org/doi/10.1002/sam.11271</p>
+<p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models? also talk about failing assumptions of these models, like unimodal for boxplot)</p>
+<p>footnote cite to Tukey for visualising phenomena rather than raw data? “Data-Based Graphics: Visual Display in the Decades to Come” Tukey (1990)</p>
+</section>
+<section id="summary" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">11.9</span> Summary</h2>
+<p>Mapping multiple data values to a single data symbol produces a <strong>visual shape</strong>, like a line on a line plot.</p>
+<p>Data summaries, such as trends over time, can can be decoded from a visual shape. However, decoding raw data values from a visual shape may be harder, cmopared to decoding raw data values from a simple data symbol like a bar.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Sidiropoulos03072018" class="csl-entry" role="listitem">
+Sidiropoulos, Nikos, Sina Hadi Sohi, Thomas Lin Pedersen, Bo Torben Porse, Ole Winther, Nicolas Rapin, and Frederik Otzen Bagger and. 2018. <span>“SinaPlot: An Enhanced Chart for Simple and Truthful Representation of Single Observations over Multiple Classes.”</span> <em>Journal of Computational and Graphical Statistics</em> 27 (3): 673–76. <a href="https://doi.org/10.1080/10618600.2017.1366914">https://doi.org/10.1080/10618600.2017.1366914</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>“VISUAL PATTERN RECOGNITION” Few (2006) Makes this same point [p 10] Demonstration of difference between density plot (mostly see a shape) and histogram (mostly see bar heights).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>“Understanding Charts and Graphs” Kosslyn (1989) [somewhere after p 205] Lines are objects “For example, if one wants a reader to see an interaction, a line graph is better than a bar graph: not only is a line a single perceptual unit, and hence there will be less to hold in short-term memory, but we are good at detecting slope differences-which convey the relevant information (see Pinker, 1988).”<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>According to Zacks and Tversky 1999 people use “trend words” (increasing/decreasing) versus “discrete words” (higher/lower than) AND are faster to judge absolute values from bars but angle from line graphs.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>citation for surjective, injective, bijective</p>
+<p>Adam has a nice example in his thesis Figure 4.5, a simpler version of which is a line or bar plot that contains a “total” line or bar - the visual objects do not map neatly, and disjointly to subsets of the data - there is overlap. This makes mapping back to the data harder or at least more ambiguous ?<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Also link to “configural displays” (David Peebles (2008)) and “display proximity” (Barnett &amp; Wickens, 1988; Carswell &amp; Wickens, 1987; Wickens &amp; Andre, 1990) “According to the proximity compatibility principle (Wickens &amp; Carswell, 1995), representations with high display proximity facilitate high mental proximity tasks requiring the integration of information from multiple sources. The relationship between display and mental proximity has been revealed in several studies (e.g., Barnett &amp; Wickens, 1988; Bennett &amp; Flach, 1992; Bennett, Toms, &amp; Woods, 1993; Carswell &amp; Wickens, 1987; Wickens &amp; Andre, 1990; Wickens &amp; Carswell, 1995) and it is argued that the advantage comes when emergent features (Pomerantz &amp; Pristach, 1989) of the representation indicate additional information about the domain.” He also mentions line plots as being in between separable bar plots and configural radar plots.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><span class="citation" data-cites="Sidiropoulos03072018">Sidiropoulos et al. (<a href="#ref-Sidiropoulos03072018" role="doc-biblioref">2018</a>)</span><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./combine.html" class="pagination-link" aria-label="Combining Mappings">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Mappings</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./multiple.html" class="pagination-link" aria-label="Multiple Mappings">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

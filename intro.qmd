@@ -1,4 +1,10 @@
 
+```{r}
+#| echo: false
+#| message: false
+source("common.R")
+```
+
 # Introduction {#sec-intro}
 
 A data visualisation presents data values in a visual
@@ -38,14 +44,6 @@ and less than the crime rate for 16-year-olds (the green line).
 #| output: false
 gg <- ggplot(crimeAgeSimple) +
     geom_line(aes(x=year, y=rate, colour=ageFactor))
-```
-
-```{r}
-#| echo: false
-crimeAgeLineTitle <- ggtitle("Youth Crime in New Zealand",
-                             "Distinct offenders per 10,000 pop.")
-crimeAgeLineXlab <- xlab(NULL)
-crimeAgeLineYlab <- ylab(NULL)
 ```
 
 ```{r}

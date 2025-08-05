@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Multiple Mappings – How Data Visualisation Works</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./visual-objects.html" rel="next">
+<link href="./visual-shapes.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6e052200a5ff315289b52d7836046450.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./multiple.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">How Data Visualisation Works</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Executive Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Visual System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mapping-visual-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visual Features</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./position.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Position</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Length</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qualitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Colour</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./congruence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Congruent Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping Summaries</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./combine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-shapes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visual Objects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mapping Structure</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Review</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-parallel" id="toc-sec-parallel" class="nav-link active" data-scroll-target="#sec-parallel"><span class="header-section-number">12.1</span> Parallel coordinates plots</a></li>
+  <li><a href="#case-study-bubble-plots" id="toc-case-study-bubble-plots" class="nav-link" data-scroll-target="#case-study-bubble-plots"><span class="header-section-number">12.2</span> Case study: Bubble plots</a></li>
+  <li><a href="#small-multiplessmall-multiples" id="toc-small-multiplessmall-multiples" class="nav-link" data-scroll-target="#small-multiplessmall-multiples"><span class="header-section-number">12.3</span> Small multiples</a></li>
+  <li><a href="#sec-facetting" id="toc-sec-facetting" class="nav-link" data-scroll-target="#sec-facetting"><span class="header-section-number">12.4</span> Facetting</a></li>
+  <li><a href="#case-study-scatterplot-matrices" id="toc-case-study-scatterplot-matrices" class="nav-link" data-scroll-target="#case-study-scatterplot-matrices"><span class="header-section-number">12.5</span> Case study: Scatterplot matrices</a></li>
+  <li><a href="#non-cartesian-mappings" id="toc-non-cartesian-mappings" class="nav-link" data-scroll-target="#non-cartesian-mappings"><span class="header-section-number">12.6</span> Non-cartesian mappings</a></li>
+  <li><a href="#case-study-kiviat-plots-or-radar-plots-or-spider-plots" id="toc-case-study-kiviat-plots-or-radar-plots-or-spider-plots" class="nav-link" data-scroll-target="#case-study-kiviat-plots-or-radar-plots-or-spider-plots"><span class="header-section-number">12.7</span> Case study: kiviat plots or radar plots or spider plots</a></li>
+  <li><a href="#case-study-barycentric-plots-ternary-plots" id="toc-case-study-barycentric-plots-ternary-plots" class="nav-link" data-scroll-target="#case-study-barycentric-plots-ternary-plots"><span class="header-section-number">12.8</span> Case study: Barycentric plots (ternary plots)</a></li>
+  <li><a href="#dangers-of-multiple-mappings" id="toc-dangers-of-multiple-mappings" class="nav-link" data-scroll-target="#dangers-of-multiple-mappings"><span class="header-section-number">12.9</span> Dangers of multiple mappings</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">12.10</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> shows a data visualisation of the performance measures for teams in the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>10.1</span></a>). This visualisation is different from anything we have seen previously because it involves multiple mappings. The data symbol in this case is a simple data point, but we have mapped data values to <em>five</em> different visual features of each data point. The number of clean breaks is encoded as the horizontal <strong>position</strong> of the data points and the number of tries is encoded as the vertical <strong>position</strong> of the data points. The number of points scored is encoded as the <strong>size</strong> of the points, the hemisphere is encoded as the <strong>shape</strong> of the points, and the number of runs is encoded as the <strong>colour</strong> of the points.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-multiple" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multiple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="multiple_files/figure-html/fig-multiple-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multiple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> is effective in some ways because some of the mappings involve effective visual features. For example, we can easily decode the number of clean breaks and the number of tries from horizontal and vertical positions. We can also decode a correlation between clean breaks and tries from the emergent feature of <strong>position in space</strong> (<a href="combine.html#sec-integral" class="quarto-xref"><span>Section 10.2</span></a>).</p>
+<p>However, other mappings are less effective. For example, it is less easy to accurately decode number of points scored from size and even harder to decode the number of runs from colour. In addition, we are hampered by the fact that many different visual features are changing at once, so it is harder to perceive individual differences (see <a href="visual-model.html#sec-differences" class="quarto-xref"><span>Section 3.5</span></a>).</p>
+<p>One goal of visualising multiple variables like we have in <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> is to discover or display multivariate relationships between the variables. For example, we can see that there are four teams in the top-right corner of the plot that are all relatively large and relatively dark in colour, which suggests that there is a group of teams that run more, make more clean breaks, score more tries, and score more points compared to the other teams.</p>
+<p>This section looks at some of the different approaches to visualising several variables at once. How do we perceive multivariate relationships? And can we still perceive individual data values at the same time?</p>
+<section id="sec-parallel" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-parallel"><span class="header-section-number">12.1</span> Parallel coordinates plots</h2>
+<p>One issue with <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> is that it attempts to map each data variable to a separate visual feature. Once we have used both horizontal and vertical <strong>position</strong>, we have to start using less accurate and less appropriate visual features, like <strong>area</strong> and <strong>colour</strong> for quantitative data values (see <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 4</span></a>). If we attempted to map all of the variables in <a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>10.1</span></a>, we could actually run out of visual features to use (<a href="mapping-visual-features.html#fig-visual-features" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>).</p>
+<p>An alternative approach is to map more of the data variables to the same visual feature. For example, <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> shows a parallel coordinates plot of the data from <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>. In this visualisation, all of the quantitative variables have been encoded as <strong>position</strong>, with just hemisphere (qualitative) encoded as colour.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-parallel" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-parallel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="multiple_files/figure-html/fig-parallel-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-parallel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A parallel coordinates plot maps data summaries rather than raw data values (<a href="summaries.html" class="quarto-xref"><span>Chapter 9</span></a>). For example, all data values are standardised to a range between 0 and 1.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#tbl-parallel-stats" class="quarto-xref">Table&nbsp;<span>12.1</span></a> shows some of the values that are actually mapped to visual features in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>. Each variable is encoded as a different horizontal <strong>position</strong> and the values within each variable are encoded as vertical <strong>position</strong>. In this way, all quantitative data values are encoded as <strong>position</strong>.</p>
+<div class="cell">
+<div id="tbl-parallel-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-parallel-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12.1: The data summaries that are mapped to visual features in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>.
+</figcaption>
+<div aria-describedby="tbl-parallel-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: left;">sphere</th>
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Namibia</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">runs</td>
+<td style="text-align: right;">0.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Romania</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: left;">runs</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">runs</td>
+<td style="text-align: right;">0.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Samoa</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">runs</td>
+<td style="text-align: right;">0.31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Australia</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: left;">runs</td>
+<td style="text-align: right;">0.42</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Georgia</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: left;">runs</td>
+<td style="text-align: right;">0.47</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>In addition, the hemisphere is encoded as <strong>colour</strong> and a separate line data symbol is drawn for each country. This means that a visual shape is drawn for each country (<a href="#fig-mappings-1-n-1-n" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>; <a href="visual-shapes.html" class="quarto-xref"><span>Chapter 11</span></a>).</p>
+<div id="fig-mappings-1-n-1-n" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mappings-1-n-1-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Mappings/mapping-1-n-1-n.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mappings-1-n-1-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.3: In a parallel coordinates plot, a single row of data—one data value from each of several variables—is mapped to a visual shape (a line).
+</figcaption>
+</figure>
+</div>
+<p>On one hand, a parallel coordinates plot appears to makes sense because it encodes multiple data values to <strong>position</strong>, which is an accurate visual feature for quantitative data. However, this advantage is immediately squandered because the values that are encoded are not the raw data values (<a href="summaries.html#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;<span>9.2</span></a>), so a parallel coordinates plot is not effective for decoding raw data values from the positions of the lines. Furthermore, the data symbols are lines, so each data symbol encodes multiple data values (<a href="visual-shapes.html#sec-line-plots" class="quarto-xref"><span>Section 11.1</span></a>), which makes it difficult to decode even individual data summary values from the lines.</p>
+<p>The effectiveness of a parallel coordinates plot comes from the visual shapes produced by the lines. For example, in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>, we are able to identify a group of four lines at the top of the plot that are separate from the other lines. This grouping across at least three variables (clean breaks, tries, and points) is easier to see compared to <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>. We can also more clearly see that there are two teams that have similar numbers of runs to the top four, but then are mixed in with the other teams on the other variables. Furthermore, the fact that many of the lines are reasonably horizontal rather than criss-crossing each other wildly suggests that there is an overall correlation between all four quantitative variables, not just in the top four teams.</p>
+<blockquote class="blockquote">
+<p>A parallel coordinates plot can be effective at identifying high-dimensional groups or correlations because it maps multiple data values from different variables to a single visual shape.</p>
+</blockquote>
+</section>
+<section id="case-study-bubble-plots" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="case-study-bubble-plots"><span class="header-section-number">12.2</span> Case study: Bubble plots</h2>
+<p>An example of using area/size for third variable.</p>
+<p>Provide some better options.</p>
+</section>
+<section id="small-multiplessmall-multiples" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">12.3</span> Small multiples<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h2>
+<p>One difficulty with <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> is that many of the lines overlap each other, which makes it difficult to separately perceive individual visual shapes. <a href="#fig-profile" class="quarto-xref">Figure&nbsp;<span>12.4</span></a> shows an alternative approach to visualising the same data, called a profile plot. Similar to a parallel coordinates plot, a visual shape is drawn for each country, but the shape in this case is a filled in polygon, effectively the lines in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> with the area below them (down to zero) filled in.</p>
+<p>Again, this sort of data visualisation can be effective because of the overall shapes. For example, we can see a group of four shapes that are larger than the others. We can also see that Argentina and Fiji appear very similar, which was not apparent in previous plots.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-profile" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="multiple_files/figure-html/fig-profile-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.4: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-profile" class="quarto-xref">Figure&nbsp;<span>12.4</span></a> uses the same data summaries as <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> (<a href="#tbl-parallel-stats" class="quarto-xref">Table&nbsp;<span>12.1</span></a>), and similar mappings: each variable is encoded as a different horizontal <strong>position</strong> and the values within each variable are encoded as vertical <strong>position</strong> and hemisphere is mapped to <strong>colour</strong>. The data symbol is also similar: multiple data values are mapped to a single data symbol, in this case a polygon.</p>
+<p>The difference in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;<span>12.4</span></a> is that, rather than having all of the data symbols on the same plot, each data symbol is drawn in its own <strong>position in space</strong>. This makes it easy to view each distinct data symbol.</p>
+<p>The cluster of four larger shapes in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;<span>12.4</span></a> is also easier to see because the countries have been ordered by the number of points scored (the right-hand height of the shape). As we have seen before, ordering data symbols can make a big difference (<a href="quantitative.html#sec-distance-effect" class="quarto-xref"><span>Section 6.1</span></a>).</p>
+</section>
+<section id="sec-facetting" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">12.4</span> Facetting<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></h2>
+<p><a href="#fig-facet-before" class="quarto-xref">Figure&nbsp;<span>12.5</span></a> shows a line plot of the number of youth offenders per year in different Police Districts of New Zealand. This visualisation makes use of several effective mappings. For example, we encode year as horizontal <strong>position</strong> and we encode count as vertical <strong>position</strong>. However, there is also a weaker mapping: the Police District. We encode districts as <strong>colour</strong>, but because there are 12 different districts, we are exceeding the capacity of colour (<a href="mapping-visual-features.html#sec-capacity" class="quarto-xref"><span>Section 4.6</span></a>). It is not easy to differentiate all of the different colours (not helped by overplotting of the lines).</p>
+<p>A better mapping for Police District would be <strong>position</strong>, which has a much higher capacity, but position has already been taken by year and count.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-facet-before" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-facet-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="multiple_files/figure-html/fig-facet-before-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-before-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.5: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-facet-after" class="quarto-xref">Figure&nbsp;<span>12.6</span></a> shows one solution: a facetted plot. Each district has been encoded as a <strong>position in space</strong> and we draw a separate plot for each district. This makes it very easy to distinguish the individual districts.</p>
+<p>One downside is that comparisons between districts are more difficult because counts and/or years are <strong>unaligned</strong> (<a href="position.html#sec-unaligned-pos" class="quarto-xref"><span>Section 5.1</span></a>). In this case, we have mitigated that problem by drawing a grey line for all districts in each plot. Similar to grid lines, this makes it easier to compare the line for each district to other districts (<a href="quantitative.html#sec-perception-relative" class="quarto-xref"><span>Section 6.4</span></a>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-facet-after" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-facet-after-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="multiple_files/figure-html/fig-facet-after-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-after-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.6: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We have again ordered the panels so that districts are near to other districts with a similar starting count of offenders (<a href="quantitative.html#sec-distance-effect" class="quarto-xref"><span>Section 6.1</span></a>).</p>
+</section>
+<section id="case-study-scatterplot-matrices" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="case-study-scatterplot-matrices"><span class="header-section-number">12.5</span> Case study: Scatterplot matrices</h2>
+<p><a href="#fig-splom" class="quarto-xref">Figure&nbsp;<span>12.7</span></a> shows a scatter plot matrix of the performance measures for teams in the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>10.1</span></a>).</p>
+<p>This is another example of reusing <strong>position</strong> to encode data values. Each combination of variables is encoded as a separate scatter plot at a different position in space and, within each scatter plot, two variables are encoded as horizontal and vertical position.</p>
+<p>Within each scatter plot, there is an emergent feature of position in space, which allows us to decode the correlation between different pairs of variables. Although this only allows us to see pairwise correlations between variables, we can also get a glimpse of higher-level correlations across several of the scatterplots.</p>
+<p>For example, looking down the diagonal of the matrix, we can see that: the number of runs is correlated loosely with the number of clean breaks; the number of clean breaks is more strongly correlated with the number of tries; and the number of tries is very strongly correlated with the number of points.</p>
+<p>If we look down the first column of the matrix, we can see that: the number of runs is correlated loosely with the number of clean breaks, a little more loosely with the number of tries and a little more loosely still with the number of points.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-splom" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-splom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="multiple_files/figure-html/fig-splom-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-splom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.7: A scatter plot matrix of the quantitative performance measures for teams in the 2023 Rugby World Cup.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="non-cartesian-mappings" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="non-cartesian-mappings"><span class="header-section-number">12.6</span> Non-cartesian mappings</h2>
+<p>Parallel plots is actually an example of this, so can just refer back to <a href="#sec-parallel" class="quarto-xref"><span>Section 12.1</span></a></p>
+<p>Refer back to <a href="position.html#sec-non-linear" class="quarto-xref"><span>Section 5.3</span></a></p>
+</section>
+<section id="case-study-kiviat-plots-or-radar-plots-or-spider-plots" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="case-study-kiviat-plots-or-radar-plots-or-spider-plots"><span class="header-section-number">12.7</span> Case study: kiviat plots or radar plots or spider plots</h2>
+<p>(David Peebles (2008))</p>
+</section>
+<section id="case-study-barycentric-plots-ternary-plots" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="case-study-barycentric-plots-ternary-plots"><span class="header-section-number">12.8</span> Case study: Barycentric plots (ternary plots)</h2>
+</section>
+<section id="dangers-of-multiple-mappings" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="dangers-of-multiple-mappings"><span class="header-section-number">12.9</span> Dangers of multiple mappings</h2>
+<p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> showed that the naive approach of just using a separate visual feature for each data variable leads to complex data visualisations that are difficult to decode. Although there are better options, like small multiple and facetting, there is still a limit to how much information can effectively be displayed at once within a static data visualisation.</p>
+<p>This is one area where dynamic and interactive graphics can be useful because the viewer is able to rapidly switch between multiple views of the data, which means that each individual view can be simpler.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+</section>
+<section id="summary" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">12.10</span> Summary</h2>
+<p>When we need to visualise multiple variables at once, it is not effective to map each different variable to a different visual feature.</p>
+<p>An alternative is to reuse the same visual feature for multiple different variables. In particular, small multiples, or facetting, allows us to use <strong>position</strong> for more than just two variables.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Acknowledge and point to different ways that the data values can be transformed (or summarised).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Tufte’s small multiples<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Cite again the classic interactive lit ? Point to some tools that might help, like GGobi?<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./visual-shapes.html" class="pagination-link" aria-label="Visual Shapes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./visual-objects.html" class="pagination-link" aria-label="Visual Objects">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visual Objects</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Combining Mappings – How Data Visualisation Works</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./visual-shapes.html" rel="next">
+<link href="./summaries.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6e052200a5ff315289b52d7836046450.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./combine.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Mappings</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">How Data Visualisation Works</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Executive Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Visual System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mapping-visual-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visual Features</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./position.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Position</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Length</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qualitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Colour</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./congruence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Congruent Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping Summaries</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./combine.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-shapes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visual Objects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mapping Structure</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Review</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#independent-visual-features" id="toc-independent-visual-features" class="nav-link active" data-scroll-target="#independent-visual-features"><span class="header-section-number">10.1</span> Independent visual features</a></li>
+  <li><a href="#sec-integral" id="toc-sec-integral" class="nav-link" data-scroll-target="#sec-integral"><span class="header-section-number">10.2</span> Scatter plots</a></li>
+  <li><a href="#sec-mosaic" id="toc-sec-mosaic" class="nav-link" data-scroll-target="#sec-mosaic"><span class="header-section-number">10.3</span> Case study: Mosaic plots</a></li>
+  <li><a href="#case-study-interaction-plots" id="toc-case-study-interaction-plots" class="nav-link" data-scroll-target="#case-study-interaction-plots"><span class="header-section-number">10.4</span> Case study: Interaction plots</a></li>
+  <li><a href="#dangers-of-combining-mappings" id="toc-dangers-of-combining-mappings" class="nav-link" data-scroll-target="#dangers-of-combining-mappings"><span class="header-section-number">10.5</span> Dangers of combining mappings</a></li>
+  <li><a href="#sec-redundant" id="toc-sec-redundant" class="nav-link" data-scroll-target="#sec-redundant"><span class="header-section-number">10.6</span> Redundant mappings</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.7</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Mappings</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Most data visualisations involve more than one data variable. For example, the bar plot in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> involves data on the <strong>ethnic group</strong> of offenders and data on the <strong>count</strong> of offenders in each ethnic group.</p>
+<p>In <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>, each data value is mapped to a <strong>visual feature</strong> of a data symbol (<a href="mapping-visual-features.html#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>). For example, the ethnic group is encoded as the vertical <strong>position</strong> of the bars and the count of offenders is encoded as the <strong>length</strong> of the bars.</p>
+<p>We have so far only looked at mappings from data values to visual features in isolation. For example, we know that the mapping from ethnic group to position is effective because position is appropriate for qualitative data and position has sufficient capacity to differentiate between four ethnic groups. We also know that mapping the count of offenders to length is effective because length is appropriate for quantitative data and length provides an accurate decoding. Furthermore, the lengths of the bars are all aligned (they have a common baseline) and the bars only differ in ways that reflect differences in the data (the bars all have the same width and colour).</p>
+<p>In this section, we begin to consider what happens when mappings are used in combination. For a start, we will just extend our thinking to data visualisations that involve mapping <strong>two</strong> data variables to <strong>two</strong> visual features, like ethnic group and count to position and length. Furthermore, we will restrict ourselves to mappings where each pair of data values are encoded as a single data symbol (<a href="#fig-two-visual-features" class="quarto-xref">Figure&nbsp;<span>10.1</span></a>). For example, each combination of ethnic group and count produces a single bar.</p>
+<div id="fig-two-visual-features" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-two-visual-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Diagrams/data-vis.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Mappings/mapping-1-2-1-2.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-two-visual-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: A simple data visualisation maps <strong>two</strong> data values to <strong>two</strong> visual features to create a data symbol. Each pair of data values (<code>a</code> and <code>b</code>) is mapped to two visual features (<code>x</code> and <code>y</code>) of a <strong>single</strong> data symbol.
+</figcaption>
+</figure>
+</div>
+<section id="independent-visual-features" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="independent-visual-features"><span class="header-section-number">10.1</span> Independent visual features</h2>
+<p>A bar plot involves encoding a qualitative variable as bar <strong>position</strong> and a quantitative variable as bar <strong>length</strong> (e.g., <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>). We know that each visual feature is effective on its own—we can decode from positions to qualitative values and we can decode from lengths to quantitative values—but another reason why the bar plot is effective overall is because the two visual features act independently.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Our perception of the horizontal <strong>length</strong> of the bars is not affected by the vertical <strong>position</strong> of the bars.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><a href="#fig-bar-colour" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> demonstrates that we can also add <strong>colour</strong> to the mix without creating any interactions between visual features. The fact that the bottom two bars are blue and red does not affect our ability to perceive that they have different lengths.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bar-colour" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bar-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-bar-colour-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot come from mapping ethnic group to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>One reason why a bar plot is effective is because data values are encoded as visual features that can be decoded independently.</p>
+</blockquote>
+</section>
+<section id="sec-integral" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-integral"><span class="header-section-number">10.2</span> Scatter plots</h2>
+<p><a href="#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>10.1</span></a> shows data gathered on the performance of all twenty teams at the 2023 Rugby World Cup. Most measures are positive, for example, more <strong>points</strong> is better, but there are also a couple of negative measures: more <strong>tackles</strong> may just mean that the team was weak and was always being attacked; and more disciplinary <strong>cards</strong> (either <strong>y</strong>ellow or <strong>r</strong>ed) is definitely a bad sign.</p>
+<div class="cell">
+<div id="tbl-rwc-2023" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-2023-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: Performance measures for all twenty teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
+</figcaption>
+<div aria-describedby="tbl-rwc-2023-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: left;">sphere</th>
+<th style="text-align: right;">ycards</th>
+<th style="text-align: right;">rcards</th>
+<th style="text-align: right;">breaks</th>
+<th style="text-align: right;">tackles</th>
+<th style="text-align: right;">points</th>
+<th style="text-align: right;">converts</th>
+<th style="text-align: right;">offloads</th>
+<th style="text-align: right;">tries</th>
+<th style="text-align: right;">runs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Namibia</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">102.0</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">92.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Romania</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">142.5</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">81.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">132.2</td>
+<td style="text-align: right;">6.8</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">102.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Samoa</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">109.5</td>
+<td style="text-align: right;">23.0</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">102.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Australia</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">108.2</td>
+<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">110.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Georgia</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">149.8</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">1.8</td>
+<td style="text-align: right;">114.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">126.8</td>
+<td style="text-align: right;">16.2</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">99.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.4</td>
+<td style="text-align: right;">139.1</td>
+<td style="text-align: right;">29.7</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">5.4</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">95.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">124.9</td>
+<td style="text-align: right;">31.6</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">100.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fiji</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">99.8</td>
+<td style="text-align: right;">22.4</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">138.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wales</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">167.4</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">7.6</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">109.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japan</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">166.2</td>
+<td style="text-align: right;">27.2</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">89.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tonga</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">141.2</td>
+<td style="text-align: right;">24.0</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">8.2</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">107.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">6.3</td>
+<td style="text-align: right;">111.7</td>
+<td style="text-align: right;">26.4</td>
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">131.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">6.8</td>
+<td style="text-align: right;">138.2</td>
+<td style="text-align: right;">28.5</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">116.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">148.0</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">118.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ireland</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">126.4</td>
+<td style="text-align: right;">42.8</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">9.4</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">137.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">115.2</td>
+<td style="text-align: right;">47.6</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">10.6</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">126.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scotland</td>
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">11.2</td>
+<td style="text-align: right;">123.0</td>
+<td style="text-align: right;">36.5</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">13.8</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">151.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">New Zealand</td>
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">12.6</td>
+<td style="text-align: right;">123.4</td>
+<td style="text-align: right;">48.0</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">8.3</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">139.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-scatter" class="quarto-xref">Figure&nbsp;<span>10.3</span></a> shows a scatter plot of the number of “clean breaks” per game versus the number of “tries scored” per game for each team. A clean break means that a team has broken through the opposition defence and a “try scored” means that the team has earned 5 points. A clean break implies an opportunity to score a try, but does not guarantee that a try will be scored.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-scatter-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The data symbol in a scatter plot is a data point, in this case a circle. There are two mappings in the scatter plot in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;<span>10.3</span></a>: the <strong>quantitative</strong> number of clean breaks is encoded as the horizontal <strong>position</strong> of the data points and the <strong>quantitative</strong> number of tries scored is encoded as the vertical <strong>position</strong> of the data points.</p>
+<p>We know from <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 4</span></a> that we should be able to accurately decode the original data values from the positions of the data points. For example, we can easily see that one team scored a little over 7.5 clean breaks per game and we can see that two teams scored about 6 tries per game.</p>
+<p>However, there is something else going on in the scatter plot. The two explicit encodings—horizontal and vertical position—<strong>interact</strong> to create an additional visual feature:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <strong>position in space</strong> (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> For example, we can perceive not only horizontal and vertical distances between data points, but also euclidean distances between data points (“as the crow flies”).</p>
+<div id="fig-interact" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-vis.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: If we encode data values as visual features and the visual features interact, the result can be additional visual features. It is possible for the additional visual feature to be dominant relative to the original visual features or even to obscure the original visual features.
+</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>One reason why a scatter plot is effective at conveying relationships between variables is because the mappings of data values to visual features—horizontal position and vertical position—interact to produce an additional visual feature: position in space.</p>
+</blockquote>
+<p>Furthermore, our visual system allows us to decode <strong>visual summaries</strong> (see <a href="summaries.html#sec-visual-summaries" class="quarto-xref"><span>Section 9.2</span></a>) from <strong>position in space</strong> (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;<span>10.5</span></a>).<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;<span>10.3</span></a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points because they share a similar position in space (see <a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 3.7</span></a>).</p>
+<div id="fig-visual-corr" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-visual-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-vis-stat.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.5: If we encode data values as visual features and the visual features interact, the result can be emergent visual features. The original visual features allow us to decode raw data values and the emergent features allow us to decode data summaries.
+</figcaption>
+</figure>
+</div>
+<p>Although a scatter plot is similar to a bar plot because they both involve two encodings—position and length for a bar plot and horizontal position and vertical position for a scatter plot—there are additional decodings possible from the data symbols in a scatterplot because the additional visual feature of position in space emerges from the combination of horizontal and vertical position.</p>
+<blockquote class="blockquote">
+<p>One reason why a scatter plot is effective at conveying relationships between variables is because we are able to decode visual summaries from a collection of positions in space.</p>
+</blockquote>
+</section>
+<section id="sec-mosaic" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-mosaic"><span class="header-section-number">10.3</span> Case study: Mosaic plots</h2>
+<p><a href="#tbl-offenders" class="quarto-xref">Table&nbsp;<span>10.2</span></a> shows a table of counts for offences committed in New Zealand in 2021. For each offence, we know the sex of the offender and what action was taken against the offender.</p>
+<div class="cell">
+<div id="tbl-offenders" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-offenders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.2: Counts of offences committed in New Zealand in 2021 by the sex of the offender and the action taken against the offender.
+</figcaption>
+<div aria-describedby="tbl-offenders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Female</th>
+<th style="text-align: right;">Male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Court Action</td>
+<td style="text-align: right;">13950</td>
+<td style="text-align: right;">39526</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-Court Action</td>
+<td style="text-align: right;">8717</td>
+<td style="text-align: right;">19663</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Not Proceeded With</td>
+<td style="text-align: right;">381</td>
+<td style="text-align: right;">933</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>10.6</span></a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;<span>10.2</span></a>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> This is an effective data visualisation for making several comparisons: the overall proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
+<p>For example, we can see that there are more male offenders than female offenders, court action is more common than non-court action for both males and female offenders, court action is more common for male offenders than for female offenders, and the most common offences involve male offenders and result in court action.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-spine" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-spine-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.6: A spine plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A mosaic plot is another example of a data visualisation that maps <strong>data summaries</strong> to data symbols rather than raw data. The data symbols are rectangles, the proportions of male versus female offenders are encoded as the widths of the rectangles, and the proportions of different actions taken, within males and females, are encoded as the heights of the rectangles (see <a href="#tbl-offenders-summary" class="quarto-xref">Table&nbsp;<span>10.3</span></a>).</p>
+<div class="cell" data-layout-nrows="2">
+<div id="tbl-offenders-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-nrows="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-offenders-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.3: The data summaries calculated from <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;<span>10.2</span></a> that are encoded as the widths and heights of the rectangles in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>.
+</figcaption>
+<div aria-describedby="tbl-offenders-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="tbl-offenders-summary-1" class="do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-offenders-summary-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Widths
+</figcaption>
+<div aria-describedby="tbl-offenders-summary-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-offenders-summary-1" class="do-not-create-environment caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Female</th>
+<th style="text-align: right;">Male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Court Action</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-Court Action</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Not Proceeded With</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="tbl-offenders-summary-2" class="do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-offenders-summary-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Heights
+</figcaption>
+<div aria-describedby="tbl-offenders-summary-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-offenders-summary-2" class="do-not-create-environment caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Female</th>
+<th style="text-align: right;">Male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Court Action</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-Court Action</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Not Proceeded With</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>One reason why a mosaic plot is effective is because it maps proportions and conditional proportions, rather than raw counts, to the visual features of rectangles.</p>
+</blockquote>
+<p>A mosaic plot is also an example of a data visualisation that maps to visual features that <strong>interact</strong>. The explicit mappings involve encoding proportions as the widths and heights of the rectangles and we know from <a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 4.3</span></a> that this will allow accurate decoding from lengths to proportions.</p>
+<blockquote class="blockquote">
+<p>One reason why a mosaic plot is effective is because it maps proportions to lengths.</p>
+</blockquote>
+<p>However, the interaction of these mappings produces an <strong>emergent feature</strong>, which is the <strong>area</strong> of the rectangles (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>). Importantly, these areas correspond to additional data summaries, in this case, the overall proportion of offences in each combination of sex and action taken.</p>
+<blockquote class="blockquote">
+<p>One reason why a mosaic plot is effective is because the mappings<br>
+to length and height interact to produce area, which represents overall proportions.</p>
+</blockquote>
+<p>Mosaic plots also provide a simple visual check for independence between factors. For example, in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>10.6</span></a> we can see that the action taken is reasonably independent of the sex of the offender because the heights of the rectangles are similar for both Male and Female offenders (the conditional proportions are roughly the same).</p>
+<p>One weakness of mosaic plots is that area is not the most accurate visual feature (<a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 4.5</span></a>), so we are not able to decode overall proportions from the rectangle areas as accurately as we are able to decode the proportions that are represented by the separate widths and heights of the rectangles.</p>
+<p>Another weakness is that the lengths and heights of the rectangles are unaligned (<a href="quantitative.html#sec-unaligned" class="quarto-xref"><span>Section 6.2</span></a>). This compromises the accuracy of comparisons of widths between categories or the comparisons of heights between categories. This weakness is greater if there are more categories and/or larger differences between categories than we see in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>. For example, <a href="#fig-spine-weak" class="quarto-xref">Figure&nbsp;<span>10.7</span></a> shows a mosaic plot of the proportions of offenders in different age groups and, within age groups, the proportions of actions against the offender at a finer level of detail than in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>. If we attempt to compare the proportion of offences that result in “Formal Warnings” in younger age groups versus older age groups, we are hampered by the fact that the pink rectangles do not have a common vertical baseline. As a side note, we are also hampered in that case by the distance and distractors between the rectangles (see <a href="quantitative.html#sec-distance-effect" class="quarto-xref"><span>Section 6.1</span></a>); the ordering of the variables and the ordering of categories can have an impact on the effectiveness of a mosaic plot just like ordering the bars of a bar plot.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-spine-weak" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spine-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-spine-weak-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.7: A spine plot with problems
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>These weaknesses are exacerbated for mosaic plots of more than two variables. For example, the mosaic plot in <a href="#fig-mosaic" class="quarto-xref">Figure&nbsp;<span>10.8</span></a> shows the proportions of youth versus adult offenders, then, within age levels, the proportions of male versus female offenders, then, within combinations of age levels and sex, the proportions of different actions taken against the offender. Even though there are only very few levels for each variable, our ability to compare heights and widths of rectangles is impaired by inconsistent baselines, distance between rectangles, and distractors.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-mosaic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-mosaic-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.8: A mosaic plot of three variables
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A final weakness with mosaic plots is that the <strong>shape</strong> of the rectangles changes as well as the <strong>area</strong>. In <a href="congruence.html#sec-dissonance" class="quarto-xref"><span>Section 8.5</span></a> we saw that changes in visual features should only reflect changes in the data.</p>
+<p><a href="#fig-area-shape" class="quarto-xref">Figure&nbsp;<span>10.9</span></a> shows that we can create different rectangles with the same area, but different shapes. There can be rectangles within a mosaic plot with the same area, which represents the same overall probability data value, but with different shapes. The different shapes are a visual signal of differences in the data when in reality no difference exists.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-area-shape" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-area-shape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-area-shape-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-area-shape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.9: Three different shapes that all have the same area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="case-study-interaction-plots" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="case-study-interaction-plots"><span class="header-section-number">10.4</span> Case study: Interaction plots</h2>
+<p><a href="#fig-interaction" class="quarto-xref">Figure&nbsp;<span>10.10</span></a> shows an interaction plot of the number of offenders in different ethnic groups, comparing 2011 to 2021. The raw data are shown in <a href="#tbl-interaction" class="quarto-xref">Table&nbsp;<span>10.4</span></a>.</p>
+<div class="cell">
+<div id="tbl-interaction" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-interaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.4: The number of offenders in different ethnic groups in 2011 and in 2021.
+</figcaption>
+<div aria-describedby="tbl-interaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">group</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Māori</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">5957</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pasifika</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">1092</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">European/Other</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">5775</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Unknown</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">194</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Māori</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">2869</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pasifika</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">328</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">European/Other</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">1833</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Unknown</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">1589</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The purpose of the interaction plot is to show the <em>change</em> in the number of offenders between 2011 and 2021 for each of the ethnic groups. If the lines of the interaction plot were parallel we would conclude that the same change has happened to all ethnic groups; the fact that the lines are not parallel indicates that there have been different changes in some ethnic groups compared to other ethnic groups.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-interaction" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-interaction-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interaction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.10: An interaction plot showing the change in the number of offenders in different ethnic groups between 2011 and 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The data symbols in <a href="#fig-interaction" class="quarto-xref">Figure&nbsp;<span>10.10</span></a> are straight line segments. The year is encoded as the horizontal start and end <strong>position</strong> of the lines and the number of offenders is encoded as the vertical start and end <strong>position</strong> of the lines. The ethnic group is encoded as the <strong>colour</strong> of the lines. These mappings are effective for decoding the raw data values in <a href="#tbl-interaction" class="quarto-xref">Table&nbsp;<span>10.4</span></a> from the end points and the colours of the lines.</p>
+<p>In addition, the explicit mappings generate an <strong>emergent feature</strong>: the <strong>angle</strong> of the lines. Furthermore, the angle of the lines allow us to decode a <strong>data summary</strong>: the <em>change</em> in the number of offenders between 2011 and 2021 (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;<span>10.5</span></a>).</p>
+<blockquote class="blockquote">
+<p>An interaction plot is effective because it allows us to decode changes in the data values from the angles of the lines.</p>
+</blockquote>
+<p>It is more difficult to perceive the <em>change</em> in the number of offenders for each ethnic group in a bar plot like the one shown in <a href="#fig-interaction-bar" class="quarto-xref">Figure&nbsp;<span>10.11</span></a>. Partly this is because we have to decode the lengths of two bars for each ethnic group rather than the slope of a single line.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-interaction-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interaction-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-interaction-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interaction-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.11: A bar plot showing the number of offenders in different ethnic groups in 2011 and in 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dangers-of-combining-mappings" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="dangers-of-combining-mappings"><span class="header-section-number">10.5</span> Dangers of combining mappings</h2>
+<p><a href="#fig-nz-doctor-bar" class="quarto-xref">Figure&nbsp;<span>10.12</span></a> shows a plot of changes in health spending by successive New Zealand governments.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> In this data visualisation, the average change in health spending over a government’s entire term is encoded as the <strong>height</strong> of a bar, with the duration of that government’s term encoded as the <strong>width</strong> of the bar. Because height and width are visual features that interact, the result is an <strong>area</strong> for each government’s term. However, that area has no sensible interpretation; what does a percent multiplied by a number of years mean? The areas of the bars do not correspond to any property of the data values.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-nz-doctor-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nz-doctor-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-nz-doctor-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nz-doctor-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.12: A plot showing the differences in health spending for successive New Zealand governments using filled bars.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The interaction of visual features can be a boon when the interaction produces an emergent feature that can be decoded to properties of the data (as in a scatter plot, or mosaic plot, or interaction plot).<br>
+However, it is possible to create a poor data visualisation if we produce an emergent feature that has no correspondence with data values (<a href="#fig-data-vis-vis-lie" class="quarto-xref">Figure&nbsp;<span>10.13</span></a>).<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<div id="fig-data-vis-vis-lie" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-vis-vis-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<img src="Diagrams/data-vis-vis-lie.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-vis-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.13: If we encode data values as visual features and the visual features interact, the result can be emergent visual features. However, this is only appropriate if the emergent features correspond to some property of the data. Otherwise, the decoding may lead to unhelpful and misleading interpretations.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-nz-doctor-line" class="quarto-xref">Figure&nbsp;<span>10.14</span></a> shows a different representation of the data. In this case, the average change in health spending is encoded as the (vertical) <strong>position</strong> of a line and the duration is encoded as the <strong>length</strong> of the line. These visual features do not interact, so we no longer have a misleading emergent visual feature.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-nz-doctor-line" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nz-doctor-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="combine_files/figure-html/fig-nz-doctor-line-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nz-doctor-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.14: A plot showing the differences in health spending for successive New Zealand governments using horizontal lines.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>There is also the problem of separable when integral would be appropriate (reduce to separate effects inappropriately?)</strong> Is there an example?</p>
+<p><strong>Must</strong> say that chroma and luminance and hue are all integral. Is this an example of integrating ineffectively?</p>
+</section>
+<section id="sec-redundant" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-redundant"><span class="header-section-number">10.6</span> Redundant mappings</h2>
+<p>In <a href="#sec-mosaic" class="quarto-xref"><span>Section 10.3</span></a>, we focused on the encoding of quantitative values (proportions) as the widths and heights of the rectangular data symbols in a mosaic plot, for example, <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>. There are also qualitative values encoded in a mosaic plot: the different categories, like Male and Female.</p>
+<p>The main encoding of the categories in a mosaic plot is as the <strong>position</strong> of the rectangles. For example, in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>10.6</span></a>, the rectangles for Female are to the left and the rectangles for Male are to the right and the rectangles for different court actions are stacked vertically, with Not Proceeded With at the bottom, Non-Court Action in the middle, and Court Action at the top.</p>
+<p>In addition, different court actions are encoded as different <strong>colours</strong>. This additional encoding is <strong>redundant</strong> in the sense that we can already decode the court action from the vertical position of the bars. However, having the additional encoding means that we have two ways to decode the court action: from the vertical position and from the colour. This becomes much more useful when there are more categories (<a href="#fig-spine-weak" class="quarto-xref">Figure&nbsp;<span>10.7</span></a>) or more variables (<a href="#fig-mosaic" class="quarto-xref">Figure&nbsp;<span>10.8</span></a>).<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<div id="fig-data-vis-redundant" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-vis-redundant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Diagrams/data-vis-redundant.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Mappings/mapping-1-1-1-2.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-redundant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.15: A redundant encoding maps a single data value to multiple visual features. Each data value (<code>a</code>) is mapped to not just one visual feature (<code>x</code>), but also a second visual feature (<code>y</code>), of a single data symbol. If we encode data values using multiple visual features, then multiple decodings are possible.
+</figcaption>
+</figure>
+</div>
+<p>One useful application of redundant encoding is to accommodate viewers with CVD (<a href="qualitative.html#sec-CVD" class="quarto-xref"><span>Section 7.4</span></a>). Having a secondary decoding alongside colour allows for the fact that the colour decoding may fail for some viewers.</p>
+</section>
+<section id="summary" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.7</span> Summary</h2>
+<p>The mappings involved in a bar plot—quantitative data values encoded as lengths and qualitative values encoded as position—are effective because we are able to perceive some combinations of visual features, such as length, position, and colour <strong>independently</strong>.</p>
+<p>A scatter plot is effective for perceiving relationships between variables because the mappings of quantitative data values to both horizontal and vertical positions <strong>interact</strong> to produce <strong>position in space</strong> and our visual system is capable of producing useful <strong>visual summaries</strong> of position in space, such as correlation.</p>
+<p>The effectiveness of a mosaic plot also depends upon the <strong>interaction</strong> of visual features: marginal and conditional proportions are mapped to widths and heights, which produce <strong>area</strong> to represent overall proportions.</p>
+<p>Care must be taken to avoid generating emergent features that do not represent any meaningful property of the data.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-nz-doctor" class="csl-entry" role="listitem">
+Huskinson, Peter. 2024. <span>“Follow the Money to See What Budget 2024 Spends on Health.”</span> <em>New Zealand Doctor Rata Aotearoa</em>. <a href="https://www.nzdoctor.co.nz/article/opinion/follow-money-see-what-budget-2024-spends-health">https://www.nzdoctor.co.nz/article/opinion/follow-money-see-what-budget-2024-spends-health</a>.
+</div>
+<div id="ref-pomerantz1994emergent" class="csl-entry" role="listitem">
+Pomerantz, James R., and Anna I. Cragin. 1994. <span>“Emergent Features and Feature Combination.”</span> <em>Attention, Perception, &amp; Psychophysics</em> 55 (1): 48–55.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Refer to the literature that talks about separable and integral AND configural visual features. e.g., carswell and wickens (1990) looks at configural<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Technically, there is an interaction because lengths that are further apart from each other vertically are harder to compare (see <a href="quantitative.html#sec-distance-effect" class="quarto-xref"><span>Section 6.1</span></a>). However, compared to visual features that strongly interact, length and position are reasonably independent.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Need citations to literature that mention integral visual features. Admit a range rather than a dichotomy. Munzner has good examples?<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Relate this to mentions in literature of “emergent features”, e.g., <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span>. Acknowledge that my use is a little loose because the use in the literature is really about separate data symbols combining to create emergent features (like clusters?). MacEachren 1995 uses emergent as “configural” (integral, but still also separable) “Vision Science: Photons to Phenomenology” Stephen Palmer, Figure 2.1.5 caption “The arrangement of several dots in a line give rise to emergent properties, such as length, orientation, and curvature, that are different from the properties of the dots that compose it.”</p>
+<p>NOTE that “Emergent features and feature combination” Pomerantz and Cragin (2014) (is this the same as <span class="citation" data-cites="pomerantz1994emergent">Pomerantz and Cragin (<a href="#ref-pomerantz1994emergent" role="doc-biblioref">1994</a>)</span> ???) explicitly differentiate between (fast) emergent features and “normal” (slow) feature integration that I am loosely using here.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Citations to literature on ensembles again, this time specifically to correlation in scatter plots. Talk about how, although there is some experimental support for reasonable accuracy of correlation from scatter plot (with some bias - specifically underestimation), there is not much experimental evidence for which is best for perceiving correlations Eg scatter plot vs parallel coords etc<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>This two-dimensional mosaic plot could also be called a spine plot. Mosaic plot is the more general term that includes plots of more than two qualitative variables.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>An interaction plot is typically used in a more experimental setting where the x-axis might be different treatments and the groups might be different patient groups and the y-axis might be a measure of response to treatment. The outcome is then whether the treatment has had the same effect for different patient groups (or not).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Pinker 1990, p.&nbsp;111 talks about the difficulty of extracting different sorts of information from different data symbols (bars vs lines).<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><a href="#fig-nz-doctor-bar" class="quarto-xref">Figure&nbsp;<span>10.12</span></a> is based on Figure 2 from <span class="citation" data-cites="nz-doctor">Huskinson (<a href="#ref-nz-doctor" role="doc-biblioref">2024</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>This is the “compatibility principle” ? of Carswell and Wickens ?<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>“Clusters Beat Trend!? Testing Feature Hierarchy in Statistical Graphics” VanderPlas and Hofmann (2017) says redundancy helps</p>
+<p>“Beyond Memorability: Visualization Recognition and Recall” Borkin et al (2015) also says redundancy helps</p>
+<p>“The Science of Visual Data Communication: What Works” Franconeri et al (2021) says it doesn’t (though only with expert opinion like Tukey to back it up. Exception is to allow for colour-blind viewers.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./summaries.html" class="pagination-link" aria-label="Mapping Summaries">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping Summaries</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./visual-shapes.html" class="pagination-link" aria-label="Visual Shapes">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

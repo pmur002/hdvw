@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Colour – How Data Visualisation Works</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./congruence.html" rel="next">
+<link href="./quantitative.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6e052200a5ff315289b52d7836046450.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./qualitative.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Colour</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">How Data Visualisation Works</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Executive Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Visual System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mapping-visual-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Visual Features</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./position.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Position</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Length</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qualitative.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Colour</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./congruence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Congruent Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mapping Summaries</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./combine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-shapes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visual Objects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Text</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mapping Structure</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Review</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-colour" id="toc-sec-colour" class="nav-link active" data-scroll-target="#sec-colour"><span class="header-section-number">7.1</span> Hue, chroma, and luminance</a></li>
+  <li><a href="#sec-ordinal" id="toc-sec-ordinal" class="nav-link" data-scroll-target="#sec-ordinal"><span class="header-section-number">7.2</span> Ordinal visual features</a></li>
+  <li><a href="#sec-colour-relative" id="toc-sec-colour-relative" class="nav-link" data-scroll-target="#sec-colour-relative"><span class="header-section-number">7.3</span> Perception is relative</a></li>
+  <li><a href="#sec-CVD" id="toc-sec-CVD" class="nav-link" data-scroll-target="#sec-CVD"><span class="header-section-number">7.4</span> Colour vision deficiency</a></li>
+  <li><a href="#size-matters" id="toc-size-matters" class="nav-link" data-scroll-target="#size-matters"><span class="header-section-number">7.5</span> Size matters</a></li>
+  <li><a href="#colour-palettes" id="toc-colour-palettes" class="nav-link" data-scroll-target="#colour-palettes"><span class="header-section-number">7.6</span> Colour palettes</a></li>
+  <li><a href="#case-study-divergent-colour-palettes" id="toc-case-study-divergent-colour-palettes" class="nav-link" data-scroll-target="#case-study-divergent-colour-palettes"><span class="header-section-number">7.7</span> Case study: Divergent colour palettes</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.8</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Colour</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> shows a pie chart of the number of offenders for different levels of crime seriousness (between 2011 and 2021). In this data visualisation, the crime level, which is a <strong>qualitative</strong> variable, is encoded as <strong>colour</strong>, which is appropriate for representing qualitative values (see <a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 4.4</span></a>). It is easy to identify different crime levels because it is easy to perceive differences between the colours of the wedges in the pie chart.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-hue" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-hue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-hue-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-hue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: A data visualisation of the number of offenders for different levels of crime seriousness.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;<span>7.2</span></a> shows another pie chart of the same data, again encoding the <strong>qualitative</strong> level as <strong>colour</strong>. It is again easy to differentiate between different crime levels because we can easily perceive differences between the colours of the wedges. However, <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;<span>7.2</span></a> is <em>more</em> effective than <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> because we can <em>also</em> perceive an ordering of the wedges from more serious crimes, which are darker wedges, to less serious crimes, which are lighter wedges.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-ordinal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-ordinal-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: A data visualisation of the number of offenders for different levels of crime seriousness.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The fact that there can be two data visualisations, <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> and <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>, with the same mapping, the <strong>qualitative</strong> level of crime is encoded as the visual feature <strong>colour</strong>, but the two data visualisations have different effectiveness suggests that there is still more to learn about how different visual features work.</p>
+<p>This section covers some more details about how the <strong>colour</strong> visual feature works.</p>
+<section id="sec-colour" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-colour"><span class="header-section-number">7.1</span> Hue, chroma, and luminance</h2>
+<p>We have so far taken a very simplistic approach to <strong>colour</strong>, treating it as if it is a single <strong>qualitative</strong> visual feature (<a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 4.4</span></a>). However, the perception of colour can be divided into three separate visual features: <strong>hue</strong>, <strong>chroma</strong>, and <strong>luminance</strong> (<a href="#fig-hcl" class="quarto-xref">Figure&nbsp;<span>7.3</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Hue describes what we normally refer to as the colour name: reds, oranges, yellows, greens, blues, and purples. Chroma describes the colourfulness, from bright to dull, and luminance describes the lightness, from dark to light. Our visual system is capable to perceiving changes in hue and changes in chroma and changes in luminance.</p>
+<p>We have described colour as a <strong>qualitative</strong> visual feature so far, but that really strictly only applies to <strong>hue</strong>. For example, <a href="quantitative.html#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>6.5</span></a> used different hues to represent different ethnic groups. Hue is excellent for the perception of differences.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-hcl" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hcl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-hcl-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hcl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: The perception of colour can be divided into three components: differences in <strong>hue</strong>, the colours of the rainbow; differences in <strong>chroma</strong>, from bright and colourful to dull and grey; and differences in <strong>luminance</strong>, from light to dark.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-ordinal" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-ordinal"><span class="header-section-number">7.2</span> Ordinal visual features</h2>
+<p><strong>Chroma</strong> and <strong>luminance</strong> are both <strong>nominal</strong> visual features in that they can be used to visualise different groups, but they are also <strong>ordinal</strong> visual features because we can perceive an ordering from a set of colours that differ in terms of either chroma or luminance or both. A set of colours that transitions from darker to lighter and/or brighter to duller conveys an ordering from larger to smaller.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>This helps to explain why <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;<span>7.2</span></a> is more effective than <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>. In <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>, the colours differ mostly in terms of luminance and chroma so we are able to perceive changes from larger values to smaller values because the colours transition from darker to lighter.</p>
+<p>In this sense, <strong>chroma</strong> and <strong>luminance</strong> are able to convey more information than <strong>hue</strong> because they can represent <strong>nominal</strong> differences <em>and</em> <strong>ordinal</strong> differences, whereas hue can only represent nominal differences.</p>
+<p>On the other hand, <a href="#fig-lum-cap" class="quarto-xref">Figure&nbsp;<span>7.4</span></a> shows that chroma and luminance are even more limited than hue in terms of <strong>capacity</strong>. We can only use chroma and/or luminance to represent <strong>nominal</strong> data when there are very few different groups to represent.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-lum-cap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lum-cap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-lum-cap-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lum-cap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: Mapping qualitative values to luminance and chroma works well for representing nominal data values, but only for a very small number of values. The three values on the left are easily distringuishable, but it becomes difficult to clearly distinguish between adjacent colours in the middle and almost impossible for the colours on the right. This figure can be compared with <a href="mapping-visual-features.html#fig-colour-cap" class="quarto-xref">Figure&nbsp;<span>4.13</span></a>, which demonstrates the capacity of hue for representing nominal data values.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-colour-relative" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-colour-relative"><span class="header-section-number">7.3</span> Perception is relative</h2>
+<p>We saw in <a href="quantitative.html#sec-perception-relative" class="quarto-xref"><span>Section 6.4</span></a> that perception of <strong>lengths</strong> is relative. For example, smaller differences in length are easier to see when the lengths themselves are short (see <a href="quantitative.html#fig-relative" class="quarto-xref">Figure&nbsp;<span>6.9</span></a>).</p>
+<p>There is a similar rule for the perception of <strong>colours</strong>. Our perception of luminance and chroma is affected by neighbouring colours.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> This effect is demonstrated in <a href="#fig-contrast-effect" class="quarto-xref">Figure&nbsp;<span>7.5</span></a>: the same colour when surrounded by a darker background appears lighter than it does when surrounded by a lighter background.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-contrast-effect" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-contrast-effect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-contrast-effect-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-contrast-effect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.5: The perception of colours is relative. In the top row, the inner rectangles are exactly the same shade of grey on the left and exactly the same shade of purple on the right. The perception of the inner rectangles is affected by the surrounding colour, so the same shade appears darker against a light background and darker against a light background. The bottom row draws a line connecting the two inner rectangles to show that they really are the same shade.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This effect also applies to the perception of hue. <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> shows a pie chart of the number of offenders in each police district, with police district mapped to the <strong>colour</strong> of the wedges. There are two issues with the perception of the wedge colours: each wedge is affected by its neighbour so that, for example, some of the blue wedges look more green at the boundary with their more blue neighbour and more blue at the boundary with their more green neighbour; furthermore, the colours in the legend are perceived differently from the corresponding colours in the wedges because the legend colours are surrounded by a light grey, rather than sharing a boundary with a neighbouring colour.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-contrast" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-contrast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-contrast-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-contrast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.6: This pie chart demonstrates that the perception of hues is relative. The colours within each wedge appear to have a subtle gradient within the wedge because the perception of the wedge colour is affected differently by the neighbouring wedge colours.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The pie chart in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> is <em>not</em> an effective data visualisation because it encodes qualitative data values with many different groups as colour hue. This exceeds the <strong>capacity</strong> of the <strong>hue</strong> visual feature; it is difficult to clearly distinguish between all of the different hues (see <a href="mapping-visual-features.html#sec-capacity" class="quarto-xref"><span>Section 4.6</span></a>).</p>
+<p>Although it does not make the use of hue any more appropriate, for the purposes of demonstration, we can solve the colour perception problems in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> by adding a white border to all of the wedges (see <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;<span>7.7</span></a>). Now all of the wedges and all of the squares in the legend are perceived relative to a surrounding white border.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-contrast-solved" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-contrast-solved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-contrast-solved-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-contrast-solved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.7: The hues in this pie chart are perceived more accurately than those in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> because each wedge is surrounded by a white border.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-CVD" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-CVD"><span class="header-section-number">7.4</span> Colour vision deficiency</h2>
+<p>Roughly 10% of the population, primarily men, suffer from a form of colour vision deficiency.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> In the most common case, the viewer will have difficulty distinguishing between red and green hues. <a href="#fig-pie-hue-cvd" class="quarto-xref">Figure&nbsp;<span>7.8</span></a> simulates how the colours in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> would appear to a person with severe deuteranopia (red-green colour blindness).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-hue-cvd" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-hue-cvd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-hue-cvd-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-hue-cvd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.8: A data visualisation of the number of offenders for different levels of crime seriousness.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to avoid confusion for viewers with CVD, it may be necessary to vary luminance and/or chroma in addition to or instead of hue. For example, <a href="#fig-pie-ordinal-cvd" class="quarto-xref">Figure&nbsp;<span>7.9</span></a> shows how the shades of purple in <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;<span>7.2</span></a> would appear to a viewer with severe deuteranopia. The difference in hue is of no importance in this case.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-ordinal-cvd" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-ordinal-cvd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-ordinal-cvd-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-ordinal-cvd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.9: A data visualisation of the number of offenders for different levels of crime seriousness.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="size-matters" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="size-matters"><span class="header-section-number">7.5</span> Size matters</h2>
+<p>The perception of colours is also affected by the size of the coloured region. In particular, small regions of colour may blend together with neighbouring colours. <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> For example, on the left of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;<span>7.10</span></a>, the yellow and blue stripes are the same colours both in the top set if wide bars and in the bottom set of narrow bars. The right side of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;<span>7.10</span></a> shows that the same colours may appear different when they are used as fill colours for larger regions, like bars, compared to when they are used for thin lines.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-colour-size" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-colour-size-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-colour-size-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-colour-size-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.10: The perception of colours varies based on the size of the coloured regions.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="colour-palettes" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="colour-palettes"><span class="header-section-number">7.6</span> Colour palettes</h2>
+<p>When we encode nominal or ordinal data values as colours, we have to choose a set of colours, or a <strong>colour palette</strong>. For example, in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> we have to choose a different colour to represent each level of crime.</p>
+<p>This choice is difficult because there are many different colours to choose from and often there is no obvious mapping from a data value to a particular colour. For example, what specific hue, chroma, and luminance should we choose to represent a <code>high</code> crime level?</p>
+<p>There are also competing criteria involved in selecting colours. For example, although the primary goal is to represent different categories with colours that are as different from each other as possible, we also have to take into account that some viewers may have difficulty perceiving differences between particular colours (<a href="#sec-CVD" class="quarto-xref"><span>Section 7.4</span></a>).</p>
+<p>Fortunately, researchers have produced a number of predefined colour palettes that we can make use of.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> For example, the colours used in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> are based on palettes used in journals published by the Nature Publishing Group.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> There are also many helpful tools online.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>If the data symbols are arranged in a regular pattern, like in a bar plot, then comparisons between neighbours are most important, so we can order the colours to maximise neighbour differences rather than maximising all pairwise differences.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> <a href="#fig-pie-order" class="quarto-xref">Figure&nbsp;<span>7.11</span></a> demonstrates this idea with a bar plot of the crime rate in different districts for both 2011 and 2021. This bar plot uses the same set of hues as <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;<span>7.7</span></a>, just in a different order so that adjacent bars have very different colours.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-order" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-order-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.11: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A similar idea is to just reuse a smaller set of hues, which means larger differences between adjacent colours, but repeat the set. The regular arrangement of the data symbols means that we can still differentiate between repeated colours because of the bar positions (<a href="#fig-pie-repeat" class="quarto-xref">Figure&nbsp;<span>7.12</span></a>). For example, we can differentiate the pink for the Wellington district from the pink for the Eastern district because Wellington is at the end and Eastern is in the middle.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pie-repeat" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-repeat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-pie-repeat-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-repeat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.12: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="case-study-divergent-colour-palettes" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="case-study-divergent-colour-palettes"><span class="header-section-number">7.7</span> Case study: Divergent colour palettes</h2>
+<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations) at each World Cup. <a href="#tbl-rwc-all-year" class="quarto-xref">Table&nbsp;<span>7.1</span></a> shows a sample of these data.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<div class="cell">
+<div id="tbl-rwc-all-year" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-all-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.1: A table of the total number of points scored and conceded by Tier One nations in Rugby World Cup matches at each World Cup. Each row represents thetotal points scored by one team in one World Cup. There are 100 rows in total, with just the first 6 rows shown here.
+</figcaption>
+<div aria-describedby="tbl-rwc-all-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">team</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">scored</th>
+<th style="text-align: right;">conceded</th>
+<th style="text-align: right;">diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">1987</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">-73</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">1991</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">-40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">1995</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">-158</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">-75</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">-64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;<span>7.13</span></a> shows a heatmap of the points differential (points scored for minus points scored against) for Tier One nations at each Rugby World Cup. The data symbols are rectangles, or “tiles”. The teams are encoded as the vertical <strong>positions</strong> of the tiles and the years are encoded as the horizontal <strong>positions</strong> of the tiles. These are both effective mappings and we can easily <strong>decode</strong> to teams or years. The points differentials are encoded as the <strong>colour</strong> of the tiles, but in a slightly complicated way. Positive data values map to a shade of purple, while negative values map to a shade of brown. In both cases, we have a constant <strong>hue</strong>, with increasing <strong>chroma</strong> and decreasing <strong>luminance</strong> as the data values get further away from zero.</p>
+<p>The use of two <strong>hues</strong> creates two different groups (positive and negative values), while the changes in <strong>chroma</strong> and <strong>luminance</strong> convey changes in absolute magnitude (if only for ordinal comparisons).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-neg-tile" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-neg-tile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="qualitative_files/figure-html/fig-neg-tile-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-neg-tile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.13: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups. South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>A diverging colour palette is effective because it creates two distinct visual features: a nominal hue to differentiate between two groups and changes in chroma and/or luminance to encode ordinal values within each group.</p>
+</blockquote>
+</section>
+<section id="summary" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.8</span> Summary</h2>
+<p><strong>Colour</strong> is really three visual features: <strong>hue</strong>, <strong>chroma</strong>, and <strong>luminance</strong>.</p>
+<p><strong>Hue</strong> is excellent for representing <strong>nominal</strong> data values.</p>
+<p><strong>Chroma</strong> and <strong>luminance</strong> can be used to represent <strong>ordinal</strong> data values, but they have a very limited capacity.</p>
+<p>We should lean on the work done by experts when it comes to choosing colour palettes.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-pkg-gggrid" class="csl-entry" role="listitem">
+Murrell, Paul. 2022. <em>Gggrid: Draw with ’Grid’ in ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=gggrid">https://CRAN.R-project.org/package=gggrid</a>.
+</div>
+<div id="ref-ware2021information" class="csl-entry" role="listitem">
+Ware, Colin. 2021. <em>Information Visualization: Perception for Design</em>. 4th ed. Morgan Kaufmann.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The three-dimensional experience of colour arises from the fact that there are three different sorts of cones in the retina (see <a href="visual-model.html#sec-eye" class="quarto-xref"><span>Section 3.1</span></a>), each sensitive to a different range of light wavelengths: The L cones respond to long wavelengths (reds); the M cones respond to medium wavelengths (greens); and the S cones respond to short wavelengths (blues). The neural connections that combine the messages from the retina are also divided into three pathways: light-dark, which represents the sum of L, M, and S cones; red-green, which represents the difference between L and M cones; and blue-yellow, which represents the difference between S cones and the sum of L and M cones. For more information, see <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>“Mapping Color to Meaning in Colormap Data Visualizations” Schloss et al (2018) Evidence for dark-is-more bias</p>
+<p>“More of what? Dissociating effects of conceptual and numeric mappings on interpreting colormap data visualizations” Soto et al (2023) Evidence for dark-is-more bias<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This relative perception of colours is useful for being able to adapt to a wide range of lighting conditions. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more detailed discussion.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Provide a cite for those percentages<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>“In Color Perception, Size Matters” Stone (2012) “In designing colors for digital visualization systems. one of the most critical factors is the interaction between size and color appearance.” Talks about “spreading”, which means a sort of blending or averaging of colours over small areas <em>by the visual system</em>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>cite R Journal article with Achim<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>cite ggsci, colour brewer (and others?)<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>https://color.adobe.com/<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>“Reflections on the Uses and Available Choices of Categorical Colorschemes” Bartolomeo et al (2025)<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Attribution to kaggle data set.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>The {gggrid} package <span class="citation" data-cites="pkg-gggrid">(<a href="#ref-pkg-gggrid" role="doc-biblioref">Murrell 2022</a>)</span> was used to take the “bite” out of the panel border in <a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;<span>7.13</span></a> where South Africa was excluded.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./quantitative.html" class="pagination-link" aria-label="Length">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Length</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./congruence.html" class="pagination-link" aria-label="Congruent Mappings">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Congruent Mappings</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
