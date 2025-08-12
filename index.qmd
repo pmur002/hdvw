@@ -1,12 +1,4 @@
 
-```{r}
-#| echo: false
-#| message: false
-source("common.R")
-```
-
-# Executive Summary {#sec-exec}
-
 ::: {.actual-quote}
 
 *Visualization is essentially a mapping process from computer representations
@@ -15,176 +7,146 @@ understanding and communication.*[^definition]
 :::
 
 [^definition]:
-  @owen1999
-
-```{r}
-#| echo: false
-#| purl: false
-enc <- function(x) {
-    paste0('<span class="encode">', x, '</span>')
-}
-dec <- function(x) {
-    paste0('<span class="decode">', x, '</span>')
-}
-```
-
-::: {.exec-summary}
-
-* Creating a data visualisation involves an 
-  `r enc("**encoding**")` of
-  <span style="color: #1A6000">**data values**</span> 
-  as <span style="color: #005A8F">**visual features**</span>.
-
-  For example, numeric <span style="color: #1A6000">**counts**</span> 
-  are `r enc("**encoded**")` 
-  as the <span style="color: #005A8F">**heights of bars**</span>
-  to create a bar plot.
-
-* Reading a data visualisation involves a 
-  `r dec("**decoding**")` of
-  <span style="color: #005A8F">**visual features**</span> 
-  to obtain <span style="color: #1A6000">**data values**</span>.
-
-  For example, the <span style="color: #005A8F">**heights**</span> of bars
-  in a bar plot
-  are `r dec("**decoded**")` 
-  to obtain <span style="color: #1A6000">**counts**</span>.
-
-* The <span style="color: #8D324A">**effectiveness**</span> 
-  of a data visualisation depends on the
-  effectiveness of the `r dec("**decoding**")`.
-
-  For example, a bar plot is effective for comparing 
-  <span style="color: #1A6000">**counts**</span>
-  because the visual system is effective at comparing the 
-  <span style="color: #005A8F">**heights**</span> of bars.
-
-* More `r enc("**complex encodings**")` produce more 
-  <span style="color: #005A8F">**complex visual features**</span>.
-
-  For example, a scatter plot `r enc("**encodes**")`
-  <span style="color: #1A6000">**two numeric variables**</span>
-  as the x- and y-locations of points, 
-  which produces the 
-  <span style="color: #005A8F">**position in space**</span> of points.
-
-* More <span style="color: #005A8F">**complex visual features**</span> 
-  lead to more `r dec("**complex decodings**")`.
-
-  For example, the 
-  <span style="color: #005A8F">**position in space**</span> of points
-  in a scatter plot
-  is `r dec("**decoded**")` 
-  as the <span style="color: #1A6000">**correlation**</span> 
-  between two numeric variables.
-  
-* An <span style="color: #8D324A">**effective data visualisation**</span>
-  <span class="encode">**encodes**</span> data values to
-  visual features that facilitate an effective 
-  <span class="decode">**decoding**</span> from visual features
-  back to information about the data.
-
-:::
+    This quote is from an early web resource on data visualisation
+    that was produced by the ACM SIGGRAPH Education Committee [@owen1999].
 
 
-# Acknowledgements
+# Preface {.unnumbered}
 
-Lots of citations in footnotes
+This is a book about data visualisation.
 
-Have to throw bouquet at Quarto.
+Like many books, it scratches an author's itch.
 
-# TODO
+This particular itch began a long time ago, when first introduced to the
+works of Edward Tufte.
+Books like *The Visual Display of Quantitative Information*
+and *Envisioning Information*[^tufte]
+inspired an interest in how to produce effective graphics, but
+they were also frustrating.
 
-+ shrink lots of plots into .9x.9 viewport ?
+[^tufte]:
+    *The Visual Display of Quantitative Information* [@tufte1983visual]
+    and *Envisioning Information* [@tufte1990envisioning] are just two 
+    of a series of influential and visually attractive books
+    that also includes *Visual Explanations* [@tufte1997visual]
+    and *Beautiful Evidence* [@tufte2006beautiful].
 
-  Also look at adding titles and tweaking axis titles everywhere
-  (OR rely on figure captions instead of titles?)
+Reading a Tufte book to get better at data visualisation 
+is a bit like watching Roger Federer play to get better at tennis.
+It is possible to glean fragments of insight into the master's skill and
+technique, but
+it is difficult to come away with a clear set of rules for
+how to succeed on our own.
 
-+ add review at end of each section and/or preview to start of 
-  each section to reinforce the building concepts.
+At the same time,
+encountering the work of William S. Cleveland presented 
+a different problem.[^cleveland]
+Here were hard experimental results with clear implications
+for effective data visualisations:  use length not area; 
+use bars not pies.
+But they only told us about a small subset of the types of data
+visualisations 
+that we could create and they only told us about 
+a small subset of the types of questions that we could
+answer with those data visualisations.
 
-+ Check that every visual system topic is connected to a visual decoding topic.
-  Possibly rename sections, e.g., "visual differences" -> "decoding differences"
+[^cleveland]:
+    There were several studies by Cleveland, some in collaboration with
+    Robert McGill, which were summarised and extended in two books:
+    *The Elements of Graphing Data* [@cleveland1985elements] and 
+    *Visualizing Data* [@cleveland1993visualizing].
 
-+ Flesh out all footnotes
+In the intervening decades since those first encounters, a lot has happened.
 
-+ Add alt text to ALL figures (fig-alt)
+Data visualisation is an area of research for psychologists, 
+for computer scientists, for geographers,
+and even for statisticians.
+The literature is wide and deep and complex.
 
-+ Check that colour palettes are ok for CVD
+This has significantly reduced the size of the second problem.
+We know a lot more about a wider range of data visualisation types
+and data visualisation tasks.
+Unfortunately, this has introduced a new problem.
+There are comprehensive and detailed overviews of 
+current knowledge,[^ware-munzner] but it is now difficult 
+to consume and make sense of all of that knowledge.
 
-+ review https://friendly.github.io/6135/lectures/GraphPerception.pdf
-  from https://friendly.github.io/6135/index.html
-  (especially the stuff on basic models of visual perception
-  and cognition!)
-  to see that (i) I am covering everything and (ii) I am not
-  telling too many lies.
+[^ware-munzner]:
+    *Information Visualization: Perception for Design* [@ware2021information]
+    reviews a very wide range of research that has relevance to
+    data visualisation in one way or another and 
+    *Visualization Analysis and Design* [@munzner2014visualization]
+    provides a comprehensive and theoretical coverage of 
+    the complete process of creating effective data visualisations.
 
-* When talk about basic data types and what you can do with them,
-  maybe introduce the explicit idea of "comparison" and all tasks
-  basically being based on comparison (with some examples of breaking
-  down tasks).
-  There is a nice simple list of tasks (rather than some overblown
-  task taxonomy) in 
-  "Low-Level Components of Analytic Activity in Information Visualization"
-  Amar et al (2005)
-  which describes comparison as a "fundamental cognitive action" that
-  underlies all data vis tasks.
+At the same time, there are more
+accessible and practical guides for creating
+effective data visualisations.[^healey-wilke]
+These eschew much of the gory detail in favour of
+simple, applicable advice.
+The problem here is that, without the underlying 
+explanations, the guidelines can become just a long laundry list to
+commit to memory.
 
-* Check whether HDVW covers all of the types of tasks in 
-  "Low-Level Components of Analytic Activity in Information Visualization"
-  Amar et al (2005)
+[^healey-wilke]:
+    Modern examples include
+    *Data Visualization: A Practical Introduction* [@healy2018data] 
+    and *Fundamentals of Data Visualization: 
+    A Primer on Making Informative and Compelling Figures* 
+    [@wilke2019fundamentals].
 
-* In visual-model, make a BRIEF statement at the end of each section 
-  (maybe in black box) about the implications for data vis. 
+For some of us there is a need for a middle path.
+We would like to understand why we are making
+certain data visualisation choices, but we have brains that can only
+hold so many ideas at once.
+For us there is utility in a framework
+that contains a small number of core concepts,
+that covers a wide range of data visualisations,
+but connects them all with a relatively simple explanation.
 
-* Add the purpose of each type of plot as they are introduced so that 
-  explanation of effectiveness is relative to it's purpose
-  Eg a bar plot is effective at... Because... 
+This book attempts to provide such a framework.
+It is a synthesis of a large number of research articles
+and it is a simplification of a large amount of knowledge.
+It is an attempt to prune the complexity so that we can see the 
+forest through the trees, while at the same time leaving enough foliage that
+we can still recognise a tree when we see one.
 
-* add plot of differences between lines in crimegroup line plot ?
-  (do NOT perceive vertical difference)
-  citation?  see franconeri 2021
+I hope that it helps.
 
-* check have not missed any major pros or cons for choropleth maps
-  https://www.practicalreporting.com/blog/2024/8/21/ive-stopped-using-colored-region-choropleth-maps-should-you
+## How to Read this Book
 
-* attributions for data sources
+Although the goal is to provide a relatively simple conceptual
+framework for thinking about data visualisation,
+this is not a short book.
+The [Executive Summary](exec.html) provides the simplest possible statement
+of the framework and it may be useful to resurface and revisit this summary
+if you become lost in the depths of one of the chapters.
 
+Another major issue with a subject this complex and a subject that
+is studied from so many different angles is *terminology*.
+There is no consistency across all of the different sources of
+information from which this book was drawn, so all that we can do
+is attempt to be consistent with ourselves.  Some of the most
+important terms that will be reused relentlessly throughout this
+book are highlighted in the [Executive Summary](exec.html).
+The meaning of these terms is hopefully approximately what you 
+already think, but they will be made clearer as the book progresses.
 
+## Acknowledgements
 
+This book is based upon a large number of research articles and books,
+but in order to make the text appear more accessible and friendly,
+there are no formal citations in the main text.
+There are, however, a large number of footnotes,
+which provide the links between what is being described in the 
+main text and the underlying research, and 
+those footnotes contain proper citations.
+The real work is not being ignored, it is just being hidden from view.
 
+This book has been generated using the 
+[Quarto publishing system](https://quarto.org/).
+If any parts of the book looks nice to you it is probably 
+thanks to Quarto.
 
-* add direct labelling to text chapter?
-  some sort of ggrepel version of the flags example in visual-objects?
-  relate visual objects (other than text) to direct labelling?
+---
 
-* citations to stuff on pictographs and glyphs and icon-based plots
-  (in clutter section?)
-
-* add citations for R packages used in plots and diagrams.
-  General one for R and ggplot2, then specific ones for specific plots
-  Add citation to {ggsci} for default (discrete) palette
-
-* Get visualisation of uncertainty in somewhere ?
-  Variability is a data summary, which we map to a visual feature.
-  Box plots already do this.
-  Only opportunity to demonstrate gradients as a visual feature?
-
-* Use the Data Rocks advice to generate a colour palette for this document ?
-  
-  https://buttondown.com/datarocksnz/archive/design-matters-6-the-ultimate-dashboard-colour/
-
-* An index that links to all of the places that different sorts of plots
-  are discussed ?
-
-  Use Quarto book format (each .qmd becomes its own chapter) and
-  then get search functionality for free (which is essentially 
-  an automated index).
-
-  Can also follow instructions to "publish" on GitHub pages
-
-* Check all references, especially the ones generated by chatgpt !
-
-* add how-to-cite
-
-* add docker container to build in
