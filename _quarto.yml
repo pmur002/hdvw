@@ -41,4 +41,8 @@ knitr:
 format: 
   html:
     css: style.css
-  pdf: default
+  pdf: 
+    include-in-header:
+      text: |
+        \usepackage{endnotes}
+        \let\footnote=\endnote
