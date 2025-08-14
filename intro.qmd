@@ -85,7 +85,7 @@ crimeAgeHeatXlab <- xlab(NULL)
 ```{r}
 #| echo: false
 #| label: fig-crime-heatmap
-#| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.
+#| fig-cap: A heatmap of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021.  Some basic trends are visible, but details are harder to perceive compared to @fig-crime.
 gg <- ggplot(crimeAgeSimple) +
     geom_tile(aes(year, age, fill=rate), colour=NA) +
     crimeAgeHeatTitle +
@@ -139,10 +139,15 @@ The most obvious mapping in a data visualisation involves the
 conversion of **data values** to **data symbols** (@fig-mappings).
 
 ::: {#fig-mappings}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/data-sym.png}
+:::
 
+::: {.content-visible when-format=html}
 ![](Diagrams/data-sym.png)
+:::
 
-A data visualisation is largely defined by the **mappings** that it uses
+A data visualisation can be described by the **mappings** that it uses
 to represent **data values** as **data symbols**.
 :::
 
