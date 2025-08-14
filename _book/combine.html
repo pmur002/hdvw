@@ -276,7 +276,7 @@ div.csl-indent {
 <p>In <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, each data value is mapped to a <strong>visual feature</strong> of a data symbol (<a href="mapping-visual-features.html#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>). For example, the ethnic group is encoded as the vertical <strong>position</strong> of the bars and the count of offenders is encoded as the <strong>length</strong> of the bars.</p>
 <p>We have so far only looked at mappings from data values to visual features in isolation. For example, we know that the mapping from ethnic group to position is effective because position is appropriate for qualitative data and position has sufficient capacity to differentiate between four ethnic groups. We also know that mapping the count of offenders to length is effective because length is appropriate for quantitative data and length provides an accurate decoding. Furthermore, the lengths of the bars are all aligned (they have a common baseline) and the bars only differ in ways that reflect differences in the data (the bars all have the same width and colour).</p>
 <p>In this section, we begin to consider what happens when mappings are used in combination. For a start, we will just extend our thinking to data visualisations that involve mapping <strong>two</strong> data variables to <strong>two</strong> visual features, like ethnic group and count to position and length. Furthermore, we will restrict ourselves to mappings where each pair of data values are encoded as a single data symbol (<a href="#fig-two-visual-features" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>). For example, each combination of ethnic group and count produces a single bar.</p>
-<div id="fig-two-visual-features" class="quarto-layout-panel">
+<div id="fig-two-visual-features" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-two-visual-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
@@ -641,12 +641,12 @@ Figure&nbsp;9.3: A scatter plot of the number of times a team breaks through the
 <p>The data symbol in a scatter plot is a data point, in this case a circle. There are two mappings in the scatter plot in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;<span>9.3</span></a>: the <strong>quantitative</strong> number of clean breaks is encoded as the horizontal <strong>position</strong> of the data points and the <strong>quantitative</strong> number of tries scored is encoded as the vertical <strong>position</strong> of the data points.</p>
 <p>We know from <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> that we should be able to accurately decode the original data values from the positions of the data points. For example, we can easily see that one team scored a little over 7.5 clean breaks per game and we can see that two teams scored about 6 tries per game.</p>
 <p>However, there is something else going on in the scatter plot. The two explicit encodings—horizontal and vertical position—<strong>interact</strong> to create an additional visual feature:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <strong>position in space</strong> (<a href="#fig-interact" class="quarto-xref">Figure&nbsp;<span>9.4</span></a>).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> For example, we can perceive not only horizontal and vertical distances between data points, but also euclidean distances between data points (“as the crow flies”).</p>
-<div id="fig-interact" class="quarto-layout-panel">
+<div id="fig-interact" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-interact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<img src="Diagrams/data-vis-vis.png" class="img-fluid figure-img">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Diagrams/data-vis-vis.png" class="img-fluid figure-img"></p>
 </div>
 </div>
 </div>
@@ -659,12 +659,12 @@ Figure&nbsp;9.4: If we encode data values as visual features and the visual feat
 <p>One reason why a scatter plot is effective at conveying relationships between variables is because the mappings of data values to visual features—horizontal position and vertical position—interact to produce an additional visual feature: position in space.</p>
 </blockquote>
 <p>Furthermore, our visual system allows us to decode <strong>visual summaries</strong> (see <a href="summaries.html#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>) from <strong>position in space</strong> (see <a href="#fig-visual-corr" class="quarto-xref">Figure&nbsp;<span>9.5</span></a>).<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> For example, in <a href="#fig-scatter" class="quarto-xref">Figure&nbsp;<span>9.3</span></a> we can easily see a positive <strong>correlation</strong> between the number of clean breaks and the number of tries scored. We can also easily see <strong>clusters</strong> of data points; the four data points in the top-right corner of the plot appear separate from the other data points because they share a similar position in space (see <a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
-<div id="fig-visual-corr" class="quarto-layout-panel">
+<div id="fig-visual-corr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<img src="Diagrams/data-vis-vis-stat.png" class="img-fluid figure-img">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Diagrams/data-vis-vis-stat.png" class="img-fluid figure-img"></p>
 </div>
 </div>
 </div>
@@ -1005,12 +1005,12 @@ Figure&nbsp;9.12: A plot showing the differences in health spending for successi
 </div>
 <p>The interaction of visual features can be a boon when the interaction produces an emergent feature that can be decoded to properties of the data (as in a scatter plot, or mosaic plot, or interaction plot).<br>
 However, it is possible to create a poor data visualisation if we produce an emergent feature that has no correspondence with data values (<a href="#fig-data-vis-vis-lie" class="quarto-xref">Figure&nbsp;<span>9.13</span></a>).<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
-<div id="fig-data-vis-vis-lie" class="quarto-layout-panel">
+<div id="fig-data-vis-vis-lie" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-vis-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<img src="Diagrams/data-vis-vis-lie.png" class="img-fluid figure-img">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Diagrams/data-vis-vis-lie.png" class="img-fluid figure-img"></p>
 </div>
 </div>
 </div>
@@ -1042,7 +1042,7 @@ Figure&nbsp;9.14: A plot showing the differences in health spending for successi
 <p>In <a href="#sec-mosaic" class="quarto-xref"><span>Section 9.3</span></a>, we focused on the encoding of quantitative values (proportions) as the widths and heights of the rectangular data symbols in a mosaic plot, for example, <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>9.6</span></a>. There are also qualitative values encoded in a mosaic plot: the different categories, like Male and Female.</p>
 <p>The main encoding of the categories in a mosaic plot is as the <strong>position</strong> of the rectangles. For example, in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>9.6</span></a>, the rectangles for Female are to the left and the rectangles for Male are to the right and the rectangles for different court actions are stacked vertically, with Not Proceeded With at the bottom, Non-Court Action in the middle, and Court Action at the top.</p>
 <p>In addition, different court actions are encoded as different <strong>colours</strong>. This additional encoding is <strong>redundant</strong> in the sense that we can already decode the court action from the vertical position of the bars. However, having the additional encoding means that we have two ways to decode the court action: from the vertical position and from the colour. This becomes much more useful when there are more categories (<a href="#fig-spine-weak" class="quarto-xref">Figure&nbsp;<span>9.7</span></a>) or more variables (<a href="#fig-mosaic" class="quarto-xref">Figure&nbsp;<span>9.8</span></a>).<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
-<div id="fig-data-vis-redundant" class="quarto-layout-panel">
+<div id="fig-data-vis-redundant" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-redundant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
