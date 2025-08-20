@@ -1,0 +1,29 @@
+% For ensuring two figures are on two separate pages
+\usepackage{afterpage}
+% For shifting footnotes to end of chapter
+\usepackage{endnotes}
+\let\footnote=\endnote
+% For styling footnote indenting (when using endnotes)
+\makeatletter
+\renewcommand{\enoteformat}{%
+  \setlength{\leftskip}{0pt}%
+  \setlength{\parindent}{0pt}%
+  \makebox[0pt][r]{${}^{\theenmark}$~}%
+}
+\makeatother
+% For styling quotes 
+\usepackage[most]{tcolorbox}
+\AtBeginEnvironment{quote}{\begin{tcolorbox}[
+  enhanced,
+  colback=gray!10, 
+  colframe=gray,
+  boxrule=0pt,
+  borderline west={2pt}{0pt}{gray},
+  sharp corners,
+  left=10pt,
+  right=10pt,
+  top=5pt,
+  bottom=5pt
+]}
+\AtEndEnvironment{quote}{\end{tcolorbox}}
+
