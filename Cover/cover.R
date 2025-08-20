@@ -50,9 +50,9 @@ endX <- sapply(coords, function(x) x$x[length(x$x)])
 endY <- sapply(coords, function(x) x$y[length(x$y)])
 
 grid.circle(startX, startY, r=unit(2, "mm"), default.units="in",
-            gp=gpar(col=col1, fill=col1, lwd=2))
+            gp=gpar(col=col1, fill=NA, lwd=2))
 grid.circle(endX[nspots - 1], endY[nspots - 1], r=unit(2, "mm"),
-            default.units="in", gp=gpar(col=col2, fill=NA, lwd=2))
+            default.units="in", gp=gpar(col=col2, fill=col2, lwd=2))
 
 dev.off()
 

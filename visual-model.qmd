@@ -9,9 +9,31 @@ source("common.R")
 
 Understanding why some mappings are more effective than others will
 depend upon an understanding of how the human visual system works.
+In particular, in order to understand the effectiveness of a mapping
+from information to a visual representation,
+we need to know how we get from visual representations
+back to the original information.
+In @sec-intro, we described a mapping as an
+**encoding** of information as a visual representation.
+In this chapter, we will consider the reverse operation:
+the **decoding** of a visual representation back to the original information
+(@fig-decode).
 The effectiveness of an **encoding** from data values to data symbols
 will depend on how well we can **decode** from the data symbols
-to the properties of the data (@fig-decode).
+back to data values.
+
+In this chapter we will establish a very simple model of the visual system, 
+which will help us to understand the effectiveness of the
+different mappings that we consider throughout the book.[^simple-visual-models]
+
+[^simple-visual-models]:
+  Simple descriptions of the human visual system can be found in many articles
+  and books on
+  data visualisation, for example, @Sönning2023, 
+  @franconeri2021, and @cairo2012functional.
+  See @ware2021information for a more in-depth,
+  but still very accessible description.
+  The @wikipedia-visual-system is also good.
 
 ::: {#fig-decode}
 ::: {.content-visible when-format=pdf}
@@ -27,23 +49,10 @@ well our visual system can **decode** from the data symbols to the
 properties of the data.
 :::
 
-In this section we will establish a very simple model of the visual system 
-that we can refer to as we discuss different mappings.[^simple-visual-models]
-
-[^simple-visual-models]:
-  Simple descriptions of the human visual system can be found in many articles
-  and books on
-  data visualisation, for example, @Sönning2023, 
-  @franconeri2021, and @cairo2012functional.
-  See @ware2021information for a more in-depth,
-  but still very accessible description.
-  The @wikipedia-visual-system is also good.
-
 ## The eye {#sec-eye}
 
-In order for us to perceive a data visualisation, light must emit from the
-data visualisation (on screen) or reflect off the 
-data visualisation (in print) 
+In order for us to perceive a data visualisation, light must emit from 
+a computer screen or reflect off a page
 and enter the eye.  Light passes through the pupil, 
 is focused by the lens, and is projected onto the retina at the back of
 the eye.  The retina contains around 100 million light-sensitive
@@ -155,9 +164,12 @@ dev.off()
 ![](Figures/eye-basic.svg)
 
 A very simple diagram of the human eye.  Light enters via the pupil and
-is focused by the lens onto retina.  Light-sensitive neurons pass 
+is focused by the lens onto retina.  Light-sensitive neurons in the retina pass 
 signals via the optic nerve to the brain.
 :::
+
+> Data visualisation is effective because the visual system gathers
+  an enormous amount of information.
 
 ## Visual focus
 
@@ -170,9 +182,18 @@ are spread more sparsely towards the periphery of the retina.
 
 This arrangement means that, despite the experience of a complete, detailed
 field of view, we only get detailed and colourful information from
-a small foveal region (less than 5 degrees of visual angle).  
-The information from our peripheral vision is
-colourless and low-resolution.
+a small foveal region (less than 5 degrees of visual angle).
+The information from our peripheral vision is less
+colourful and lower-resolution.[^periphery]
+
+[^periphery]:
+    This is not to say that peripheral vision is useless.
+    Peripheral vision contributes significantly to our field of view
+    [@10.1167/jov.20.12.2; @annurev:/content/journals/10.1146/annurev-vision-082114-035733],
+    and is as capable as foveal vision at detecting motion
+    [@MCKEE198425].
+    However, our ability to perceive fine details is limited to a relatively
+    small area of focus.
 
 ::: {#fig-eye-2}
 
@@ -193,18 +214,19 @@ which are rapid changes in the location of our focus.
 makes a difference.[^extinction]
 
 [^extinction]:
-    "Variations on the Hermann grid: an extinction illusion"
-    Ninio and Stevens (2000)
+    The extinction illusion is related to the Hermann grid illusion
+    [@doi:10.1068/p2985].
 
-    Explain that this is NOT just a fovea vs periphery illusion---there is
-    currently no complete explanation for this effect---but it 
+    This illusion is not explained simply by differences in foveal
+    versus peripheral perception---there is
+    currently no complete explanation for the effect---but it 
     serves to show that we are getting different information from different
     regions of the field of view.
 
 ```{r}
 #| echo: false
 #| label: fig-extinction
-#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  What happens to the white dots?
+#| fig-cap: The extinction illusion. Look at one corner of the image and then switch focus to a different corner of the image.  At a certain viewing distance, the white dots should disappear when we are not focused on them.  We may also see black dots within the white dots in our peripheral vision.
 tile <- grobTree(rectGrob(gp=gpar(col=NA, fill="black")),
                  segmentsGrob(0, 0, 1, 1, gp=gpar(col="grey50", lwd=8)),
                  segmentsGrob(0, 1, 1, 0, gp=gpar(col="grey50", lwd=8)),
@@ -232,14 +254,17 @@ In the eye-tracking image,
 the fixations are shown as purple circles and the saccades  are shown as lines
 between the circles.  For example, we can see that the viewer has 
 fixated multiple times upon the large, colourful circles in the
-original image.
+original image and also text at the top and bottom of the image.
 
 [^MASSVIS]:
   The plot was originally from The Economist, but this image was taken
   from the resources provided on the 
-  [MASSVIS project web site](http://massvis.mit.edu/).  
+  [MASSVIS project web site](http://massvis.mit.edu/).
   The eye tracking data were taken from the same web site.
   Cite MASSVIS article.
+  Only a thumbnail version of the original image is shown in
+  @fig-fixations in order to comply
+  with terms of use of the MASSVIS data set.
 
 ::: {#fig-fixations layout-ncol=2 layout-valign="bottom"} 
 
@@ -251,26 +276,64 @@ Eye tracking data (on the right)
 from the MASSVIS project that shows fixations (circles) and 
 saccades (lines between circles) for one person viewing an image for 
 10 seconds.  A thumbnail of 
-the original image is shown on the left.[^MASSVIS-permissions]
+the original image is shown on the left.
 :::
 
-**ADD**
-footnote that refers to Tufte's "within the eyespan"
-page 67 of "Envisioning Information"
-(talking about small multiples):
-"Information slices are positioned within the eyespan, so that viewers
-make comparisons at a glance - uninterrupted visual reasoning."
+> A data visualisation may be require more effort to decode
+  if it contains many different areas of detail that require the viewer
+  to constantly switch focus.
 
 ## Visual memory
 
 When we switch focus to different areas of an image, 
-we may need to remember information from a previous area of focus.
-The most important feature of this visual memory is that it is 
+we are likely to need to remember information from a previous area of focus.
+How well can we hold visual information in memory?
+The most important feature of visual memory is that it is 
 very limited.  We can only hold in memory a small number of 
-items at once.
+items at once.[^memory-limits]
 
+[^memory-limits]:
+    And footnote that acknowledges 
+    some controversy (different models and number of items limit
+    vs continuous resource limit), with ref to e.g.,
+    "Psychophysical scaling reveals a unified theory of visual memory strength"
+    Schurgin et al (2020)
+    and the binary map model 
+
+    Some limitations of visual memory are briefly mentioned in
+    @ware2021information (pp. 397-405 and pp. 423-425).
+
+::: {.content-visible when-format=pdf}
+\afterpage{
+\begin{figure}[t]
+\includegraphics{Memory/static-1.pdf}
+
+\caption{\label{fig-memory-static-1}
+A memory task.  Focus on the circles in one of the three squares
+then turn the page and try to tell how many of the circles have
+changed colour in the corresponding square in @fig-memory-static-2.
+The task should be obviously harder when there are more circles
+to remember, which reflects the limits on visual memory.}
+\end{figure}
+}
+
+\afterpage{
+\begin{figure}[t]
+\includegraphics{Memory/static-2.pdf}
+
+\caption{\label{fig-memory-static-2}
+A memory task.  Look at the circles in one of the squares
+in @fig-memory-static-1 on the previous page and then come
+back here and try to tell how many circles have changed colour
+in the corresponding square.
+The task should be obviously harder when there are more circles
+to remember, which reflects the limits on visual memory.}
+\end{figure}
+}
+:::
+
+::: {.content-visible when-format=html}
 ::: {#fig-memory}
-
 ```{r}
 #| echo: false
 #| output: asis
@@ -279,17 +342,31 @@ cat(readLines("Memory/memory-3.svg", warn=FALSE), sep="\n")
 cat(readLines("Memory/memory-5.svg", warn=FALSE), sep="\n")
 ```
 
-Three memory tasks.  The task is to remember the colours of the circles.  Within each box, click on each of the coloured circles, which will produce a colour wheel.  Click (in the same order) on the colour wheel where it matches the colour of the original circles.  This will present the results as small black dots representing the original circle colours and open dots representing the matching clicks, plus a (maximum) error (in degrees).  The task should be harder (and less accurate) with more circles.
+Three memory tasks.  The task is to remember the colours of the circles.  Within each box, click on each of the coloured circles, which will produce a colour wheel.  Click (in the same order) on the colour wheel where it matches the colour of the original circles.  This will present the results as small black dots representing the original circle colours and open dots representing the matching clicks, plus a (maximum) error (in degrees).  The task should be harder (and less accurate) with more circles, which reflects the limits on visual memory.
+:::
 :::
 
-**ADD** footnotes to cite Ware 4th ed p397-405 and p423-425
+It is easier and faster to decode information from visual elements 
+if they lie within the scope of a single visual focus.
+If we have to switch focus, it not only takes longer to decode information,
+but we may hit limits on our ability to remember visual elements
+from previous areas of focus.[^at-a-glance]
 
-And footnote that acknowledges 
-some controversy (different models and number of items limit
-vs continuous resource limit), with ref to e.g.,
-"Psychophysical scaling reveals a unified theory of visual memory strength"
-Schurgin et al (2020)
-and the binary map model 
+[^at-a-glance]:
+    Tufte refers to this as drawing "within the eyespan"
+    [@tufte1990envisioning p. 67]
+
+    "In understanding human visual perception, an important component consists
+    of what people can perceive at a glance. If that glance provides the
+    observer with sufficient task-relevant information, this affords efficient
+    processing. If not, one must move one’s eyes and integrate information
+    across glances and over time, which is necessarily slower and limited by
+    both working memory and the ability to integrate that information."
+    [@PeripheralVisionACriticalComponentofManyVisualTasks].
+
+> A data visualisation will require more effort to decode 
+  if the viewer is required to switch focus and retain information
+  across multiple areas of visual focus.
 
 ## Visual processing {#sec-visual-processing}
 

@@ -137,6 +137,20 @@ into a visual representation?[^mappings]
 
 The most obvious mapping in a data visualisation involves the
 conversion of **data values** to **data symbols** (@fig-mappings).
+For example, in @fig-crime, all of the data values for 14-year-olds,
+the number of offenders for each year, have been mapped to an orange 
+line.  The data values for 15-year-olds have been mapped to 
+a blue line and the data values for 16-year-olds have been mapped 
+to a green line. 
+In other words, each row of @tbl-crime is mapped to a 
+separate coloured line.
+
+The heatmap of the same data (see @fig-crime-heatmap) provides a different
+visual representation because it employs a different mapping.
+In this case, the data symbol is a rectangle, with one data symbol
+for each combination of age and year, and with the colour of the rectangle
+reflecting the number of offenders of that age for that year.
+In other words, each cell of @tbl-crime is mapped to its own coloured rectangle.
 
 ::: {#fig-mappings}
 ::: {.content-visible when-format=pdf}
@@ -151,18 +165,8 @@ A data visualisation can be described by the **mappings** that it uses
 to represent **data values** as **data symbols**.
 :::
 
-For example, in @fig-crime, all of the data values for 14-year-olds,
-the number of offenders for each year, have been mapped to an orange 
-line.  The data values for 15-year-olds have been mapped to 
-a blue line and the data values for 16-year-olds have been mapped 
-to a green line. Each row of @tbl-crime is mapped to a coloured line.
-
-The heatmap of the same data (see @fig-crime-heatmap) provides a different
-visual representation because it employs a different mapping.
-In this case, the data symbol is a rectangle, with one data symbol
-for each combination of age and year, and with the colour of the rectangle
-reflecting the number of offenders of that age for that year.
-Each cell of @tbl-crime is mapped to a coloured rectangle.
+We will talk about **encoding** information using a visual representation,
+for example, encoding data values as data symbols.
 
 The journey that we take throughout this book will involve
 exploring a variety of different ways that information can
@@ -319,13 +323,8 @@ properties.
 The goal of this document is to explain why some data visualisations
 are more effective than others;  how data visualisation works. 
 
-The important elements of a data visualisation are **data symbols**,
-which are visual representations of the data values, **guides**, 
-which explain how data values
-are encoded as data symbols, and **labels**, which provide
-context and guidance.
-
-We can characterise a data visualisation in terms of the **mappings**
+We will focus on how information is **mapped** to a visual representation.
+We can characterise a data visualisation in terms of the mappings
 that it uses to **encode** data values as data symbols.
 
 ---

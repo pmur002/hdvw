@@ -40,7 +40,7 @@ generate <- function(nstim) {
     }
     for (i in seq_along(cols)) {
         grid.circle(x=stimX[i], y=stimY[i], r=unit(5, "mm"),
-                    gp=gpar(col=cols[i], fill=cols[i]),
+                    gp=gpar(col="black", fill=cols[i]),
                     name=elementName("stimulus-", hues[i]))
     }
 
