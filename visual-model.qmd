@@ -168,10 +168,128 @@ is focused by the lens onto retina.  Light-sensitive neurons in the retina pass
 signals via the optic nerve to the brain.
 :::
 
-> Data visualisation is effective because the visual system gathers
+> One reason why data visualisation is effective is
+  because the visual system gathers
   an enormous amount of information.
 
-## Visual focus
+## Visual processing {#sec-visual-processing}
+
+Processing of the 
+signals from the optic nerve occurs in several areas of the brain.[^essen]
+Very basic **visual features** are extracted first, such as 
+**position**, **angle**, and **colour**.[^feature-maps]
+This low-level information is passed on and built upon 
+to produce higher-level visual elements, such as regions and **shapes**.
+Information is then also integrated from prior knowledge to assist with
+the identification of **objects**---things like trees, animals, and 
+faces.[^ware-model]
+
+[^essen]:
+    A rough estimate is that more than 50% of the brain is involved
+    in visual processing [@vanessen1992information].
+
+[^feature-maps]:
+    Low-level visual processing involves the creation of "feature maps"
+    that identify colours, edges, and orientations, 
+    along with the spatial arrangement of those basic features
+    within the field of view.[@ware2021information, page=146]
+
+[^ware-model]:
+    A slightly more detailed overview is provided in
+    @ware2021information (page 20).
+
+::: {#fig-visual-processing}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/visual-processing.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/visual-processing.png)
+:::
+
+A very simple model of visual processing. 
+:::
+
+Lower-level processing occurs subconsciously and more rapidly than higher-level
+processing, which can require conscious effort.  Furthermore, lower-level
+processing occurs in parallel and can involve many instances of visual 
+features at once, whereas higher-level processing will only focus on 
+a small number of
+items or a single item at once.
+On the other hand, lower-level visual features are rapidly
+discarded as our attention shifts, while higher-level visual objects are more
+persistent and may even become part of long-term memory
+(see @fig-visual-model).
+
+::: {#fig-visual-model}
+
+![](Model/model.png)
+
+Some of the properties of visual processing. 
+:::
+
+@fig-visual-model-demo shows an image that is made up of
+many small items:  tiny triangles with different **positions**, **lengths**,
+**angles**, and **colours**.
+The angles of the triangles represents wind direction and the 
+length of the triangles represents wind strength. Blue triangles
+are over the sea and green triangles are over land.[^NOMADS]
+The visual system can very quickly
+perceive many small **visual features** at once.
+There is no need to concentrate separately
+on every individual triangle in the image.
+At a higher level of processing, darker and lighter **shapes** are
+identified as well as regions of different colours.
+For example, a band of lighter wind forms a line from the top-left
+corner at a roughly 45-degree angle.
+At a higher level of processing again, at least for the denizens of Oceania,
+the green regions are recognised as a very familiar **object**: the
+outline of New Zealand.
+
+The small lines in @fig-visual-model-demo
+convey a lot of simple pieces of information---what
+is the wind strength and direction at each location---though
+we have to focus on a particular spot in order to extract 
+a single piece of information.
+The shapes of darker and lighter regions convey several more complex ideas like
+areas of stronger and lighter winds.
+The green regions combine to convey the single complex and abstract
+concept of New Zealand.
+
+[^NOMADS]:
+    @fig-visual-model-demo is based on wind data from the
+    National Oceanic and Atmospheric Administration's Operational Model Archive 
+    and Distribution System ([NOMADS](https://nomads.ncep.noaa.gov/)).
+    The data were accessed and processed using 
+    the {rNOMADS} package [@rNOMADS], with raw data interpolated to a finer
+    grid.
+
+::: {#fig-visual-model-demo}
+
+::: {.content-visible when-format=pdf}
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Data/Weather/NOMADS.png)
+:::
+
+A visualisation of wind strength and wind direction 
+that is made up of lots of small lines of different
+lengths and different angles and different colours.
+:::
+
+> Encoding data values as simple visual features is effective
+  at conveying large amounts of simple information
+  because the visual system decodes simple visual features rapidly
+  and all at once.
+
+> Encoding data values as more complex visual shapes or visual objects
+  is effective because more complex information 
+  can be decoded from
+  visual shapes and visual objects.
+
+## Visual focus {#sec-visual-focus}
 
 @fig-eye-2 shows a slightly more detailed view of the structure of the eye
 (compared to @fig-eye).  The retina contains two types of light-sensitive
@@ -279,8 +397,8 @@ saccades (lines between circles) for one person viewing an image for
 the original image is shown on the left.
 :::
 
-> A data visualisation may be require more effort to decode
-  if it contains many different areas of detail that require the viewer
+> A data visualisation may fail if it 
+  requires the viewer
   to constantly switch focus.
 
 ## Visual memory
@@ -291,8 +409,17 @@ How well can we hold visual information in memory?
 The most important feature of visual memory is that it is 
 very limited.  We can only hold in memory a small number of 
 items at once.[^memory-limits]
+@fig-memory provides a simple demonstration of the 
+limitations of visual memory.
 
 [^memory-limits]:
+    Some limitations of visual memory are briefly mentioned in
+    @ware2021information (pages 397-405 and pages 423-425).
+
+    "A ... severely limited capacity is the restricted number of stimuli that
+    can be held in VSTM [visual short-term memory]" 
+    [@MAROIS2005296]
+
     And footnote that acknowledges 
     some controversy (different models and number of items limit
     vs continuous resource limit), with ref to e.g.,
@@ -300,10 +427,8 @@ items at once.[^memory-limits]
     Schurgin et al (2020)
     and the binary map model 
 
-    Some limitations of visual memory are briefly mentioned in
-    @ware2021information (pp. 397-405 and pp. 423-425).
 
-::: {.content-visible when-format=pdf}
+::: {#fig-memory .content-visible when-format=pdf}
 \afterpage{
 \begin{figure}[t]
 \includegraphics{Memory/static-1.pdf}
@@ -354,7 +479,7 @@ from previous areas of focus.[^at-a-glance]
 
 [^at-a-glance]:
     Tufte refers to this as drawing "within the eyespan"
-    [@tufte1990envisioning p. 67]
+    [@tufte1990envisioning, page=67]
 
     "In understanding human visual perception, an important component consists
     of what people can perceive at a glance. If that glance provides the
@@ -364,114 +489,51 @@ from previous areas of focus.[^at-a-glance]
     both working memory and the ability to integrate that information."
     [@PeripheralVisionACriticalComponentofManyVisualTasks].
 
+The limits on visual memory reflect well-known limits on working memory
+and those limits can also be worked around via familiar mechanisms such
+as chunking.[^miller]
+For example, we may only be able to hold in memory a small number of basic
+visual features such as the colours of circles (@fig-memory),
+but we can effectively hold many more basic visual features
+if we memorise more complex visual elements that are composed of 
+many basic visual features.
+In other words, can remember several **visual shapes** or 
+**visual objects** even if we cannot remember all of the individual
+visual features within those visual shapes or visual objects
+(@sec-visual-processing).
+For example, can hold in memory multiple country flags even though
+we cannot necessarily hold in memory all of the invidual colours 
+on those flags.
+
+[^miller]:
+    Miller's famous paper 
+    "The Magical Number Seven, Plus or Minus Two: 
+    Some Limits on Our Capacity for Processing Information"
+    [@miller1956magical]
+    talks about limits on working memory, but also how to 
+    "escape" those limits, for example, by chunking information.
+
 > A data visualisation will require more effort to decode 
-  if the viewer is required to switch focus and retain information
+  if the viewer is required to switch focus and remember
+  visual information
   across multiple areas of visual focus.
-
-## Visual processing {#sec-visual-processing}
-
-Processing of the 
-signals from the optic nerve occurs in several areas of the brain.
-Very basic **visual features** are extracted first, such as 
-**position** (spatial arrangements), **angle** (orientations), **colour**,
-and simple **patterns** (spatial frequencies).
-This low-level information is passed on and built upon 
-to produce higher-level representations, such as regions and **shapes**.
-Information is then also integrated from prior knowledge to assist with
-the identification of **objects**---things like trees, animals, and 
-faces.[^ware-model]
-
-[^ware-model]:
-  cite Ware (4th) p229-330, also fig 6.1
-
-::: {#fig-visual-processing}
-::: {.content-visible when-format=pdf}
-\includegraphics[scale=0.5]{Diagrams/visual-processing.png}
-:::
-
-::: {.content-visible when-format=html}
-![](Diagrams/visual-processing.png)
-:::
-
-A very simple model of visual processing. 
-:::
-
-Lower-level processing occurs subconsciously and more rapidly than higher-level
-processing, which can require conscious effort.  Furthermore, lower-level
-processing occurs in parallel and can involve many instances of visual 
-features at once, whereas higher-level processing will only focus on 
-a small number of
-items or a single item at once.
-On the other hand, lower-level visual features are rapidly
-discarded as our attention shifts, while higher-level visual objects are more
-persistent and may become part of long-term memories
-(see @fig-visual-model).
-
-::: {#fig-visual-model}
-
-![](Model/model.png)
-
-Some of the properties of visual processing. 
-:::
-
-@fig-visual-model-demo shows an image that is made up of
-many small items:  tiny triangles with different **lengths**,
-orientations (**angles**), and **colours**.
-The orientations of the triangles represents wind direction and the 
-length of the triangles represents wind strength;  blue triangles
-are over the sea and green triangles are over land.[^NOMADS]
-The visual system can very quickly
-perceive many small **visual features** at once.
-There is no need to concentrate separately
-on every individual triangle in the image..
-At a higher level of processing, darker and lighter **regions** are
-identified as well as regions of different colours.
-For example, a band of lighter wind forms a line from the top-left
-corner at a roughly 45-degree angle.
-At a higher level of processing again, at least for the denizens of Oceania,
-the green regions are recognised as a very familiar **object**: the
-outline of New Zealand.
-
-The small lines convey a lot of simple pieces of information---what
-is the wind strength and direction at each location---though
-we have to focus on a particular spot in order to extract that information.
-The darker and lighter regions convey several more complex ideas like
-regions of stronger and lighter winds.
-The green regions combine to convey the single complex and abstract
-concept of New Zealand.
-
-[^NOMADS]:
-  @fig-visual-model-demo is based on wind data from the
-  National Oceanic and Atmospheric Administration's Operational Model Archive 
-  and Distribution System ([NOMADS](https://nomads.ncep.noaa.gov/)).
-  The data were accessed and processed using 
-  the {rNOMADS} package [@rNOMADS], with raw data interpolated to a finer
-  grid.
-
-::: {#fig-visual-model-demo}
-
-![](Data/Weather/NOMADS.png)
-
-A visualisation of wind strength and wind direction 
-that is made up of lots of small lines of different
-lengths and different angles and different colours.
-:::
 
 ## Visual differences {#sec-differences}
 
 The ability to gather a large amount of basic features from an image
-very quickly
+very quickly (@sec-visual-processing)
 is supplemented by rapid visual processing that combines and 
 summarises the information.  These subconscious
 processes extract some properties from an image without any mental effort.
 
 For example, in @fig-pop-colour-1 we can detect the one teal dot amongst the
 24 orange dots without effort. @fig-pop-colour-2 shows that this task remains
-effortless even if the number of distractors is much larger.[^pre-attentive]
+effortless even if the number of dots is much larger.[^pre-attentive]
 
 [^pre-attentive]:
-  Mention "pre-attentive" 
-  plus citations.
+    The ability to detect features without conscious effort
+    is called "pre-attentive" processing or "pop out"
+    [@TREISMAN1985156].
 
 ```{r}
 #| echo: false
@@ -631,7 +693,8 @@ dots(10, cols2=colssame, r2=c(1.5, 3))
 
 If an item differs on more than one visual feature, the effect is 
 even stronger (@fig-diff-salience).
-The visual system is very sensitive to items that are **different** in terms
+This means that
+the visual system is very sensitive to items that are **different** in terms
 of basic **visual features**.
 
 ```{r}
@@ -654,7 +717,7 @@ grid.newpage()
 dots(10, cols2=colsnpg, r2=c(1.5, 3))
 ```
 
-On the other hand, if the distractor items are both similar on one
+On the other hand, if the distractor items are similar on one
 visual feature, but different on another, and if the arrangement
 of the items is less structured, then finding a particular item of interest
 becomes much harder.  For example, if we look for the
@@ -665,8 +728,12 @@ The visual system's sensitivity to **different** items is much
 greater when all other items are the **same**.[^same-diff]
 
 [^same-diff]:
-  We hang our hat on this several times later on, so it would be good
-  to ground it in the literature!!!
+    For example, from @Wolfe2017FiveFactors:
+    "Salience of a target increases with difference from the distractors
+    (target–distractor heterogeneity) and with the homogeneity of the
+    distractors (distractor–distractor homogeneity) along basic feature 
+    dimensions."
+
 
 ```{r}
 #| echo: false
@@ -684,29 +751,51 @@ grid.newpage()
 dots(10, cols2=colsnpg, r2=c(1.5, 3), spread=TRUE, mix=TRUE)
 ```
 
+> A data visualisation will be effective if important differences
+  in the data are encoded using different colours or sizes,
+  especially if everything else remains the same.
+
 ## Visual attention {#sec-attention}
 
 Where we focus within an image
-is not random.[^attention]
+is not random.
 The figures from @sec-differences show that
 our attention is automatically drawn to the **larger**, **brighter**, and
 more **colourful** items within an image.
 This happens due to very early visual processing and without
-conscious thought.
+conscious thought.[^attention]
 
 [^attention]:
-  Citation to bottom-up vs top-down.
+    Saliency maps [e.g., @itti-koch-niebur; @DVS],
+    which attempt to predict where the viewer will focus attention,
+    are based on the idea that attention is drawn to basic visual features 
+    like colour, angle, and size.
+
+> A data visualisation will be effective if it uses basic visual
+  features like colour to draw the viewer's attention to
+  important features.
 
 Where we focus within an image, and what information we extract,
 is also affected by conscious goals---what are we looking for?[^filtering]
 For example, when you were looking for the larger teal dot in @fig-diff-serial,
 did you notice that there was also a single small orange dot?
 Now that your attention has been drawn to that task, it will
-be easier to find the smaller orange dot.
+be easier to find the smaller orange dot.[^top-down]
 
 [^filtering]:
-  Citation to mentions of attention
-  filtering visual input differently
+    Having a conscious target to search for not only 
+    directs our visual focus (@sec-visual-focus), but
+    also filters the processing of visual input
+    to exclude visual features that are not of interest
+    [@Knudsen2020EvolutionOfNeuralProcessing].
+    In other words, to some extent, we see what we are looking for!
+
+[^top-down]:
+    @Wolfe2017FiveFactors describe "Bottom-up, stimulus-driven guidance"
+    versus "Top-down, user-driven guidance".
+
+> A data visualisation will be effective if it includes instructions
+  that direct the reader's attention to important features.
 
 ## Visual similarities {#sec-visual-model-groups}
 
@@ -714,37 +803,38 @@ In @fig-diff-serial, we can see several groups of items:
 orange dots, teal dots, large dots, and small dots.
 These separate groups of items are identified based on their 
 **similarity**---each group of items have the same size and the same colour.
+The flip side of being able to easily identify items that are different 
+(@sec-differences) is that we can easily identify items that are the same.
 
-As with the detection of differences that we saw in @sec-differences,
-the grouping of similar items within an image happens automatically and
+The grouping of similar items within an image also happens automatically and
 without conscious effort.
+@fig-gestalt-group shows pairs of dot matrices that are very similar,
+but in one matrix of each pair we see rows and in the other matrix we see
+columns.  For example, in the middle pair, items that are the same colour
+produce groups that are either rows or columns.
+
 Furthermore, there are other visual properties 
 that mean we automatically perceive items as groups:
 items that are close together (items that have similar
-**positions**) are seen as a group;
+**positions**) are seen as a group so we see either rows of black dots
+or columns of black dots on the left of @fig-gestalt-group;
 items that are connected by lines
-are seen as a group;
-and items that are enclosed by a border or background 
-are seen as a group.[^gestalt]
+are also seen as a group so we see either connected rows or connected columns 
+on the right of @fig-gestalt-group.[^gestalt]
 
 [^gestalt]:
-  mention Gestalt "school" or whatever, plus citations.
-  enclosure == common region
-  "Gestalt principles"
-  Todorovic (2008)
-  Summaries of the main Gestalt principles.
-  Like a peer-reviewed Wikipedia ?
-  Possible link to alignment ... ?
-  "good Gestalt principle: elements tend to be grouped together if they are
-   parts of a pattern which is a good Gestalt, meaning as simple, orderly,
-   balanced, unified, coherent, regular, etc as possible"
-
-For example, in @fig-gestalt-group there are several matrices of dots.
-In each matrix, we can see either rows of dots or columns of dots 
-by manipulating visual features that affect our perception of groups:
-dots that are closer together for a group;
-dots that are the same colour form a group;
-dots that are connected by lines form a group.
+    These visual effects are known as the Gestalt Grouping 
+    Principles (wagemans2012gestalt). 
+    The Proximity Principle says that items that are close to 
+    each other form a group.  The Similarity Principle says that items
+    that have the same colour or size form a group.
+    The Connectedness Principle says that items that are connected to each
+    other form a group.
+    The Common Region Principle says that items within the same bounded
+    region form a group
+    by their "proximity", similarity, 
+    @Todorovic:2008 provides a very accessible description
+    of these principles and several others.
 
 ```{r}
 #| echo: false
@@ -806,14 +896,14 @@ popViewport(2)
 ```
 
 These grouping effects are very powerful and can even be used to override
-each other in some combinations.  @fig-gestalt-group shows that an enclosing
+each other in some combinations.  @fig-gestalt-order shows that an enclosing
 border can be stronger than a connecting line, connecting lines can be 
-stronger than closeness, and closeness can be stronger than similar colours.
+stronger than proximity, and proximity can be stronger than similarity.
 
 ```{r}
 #| echo: false
 #| label: fig-gestalt-order
-#| fig-cap: For each set of four dots, we automatically perceive two pairs of dots.  On the left, the enclosing grey rectangles produce an upper pair and a lower pair.  Second from left, the lines produce a left pair and a right pair.  Second from right, closeness produces an upper pair and a lower pair.  On the right, colour produces a left pair and a right pair.
+#| fig-cap: For each set of four dots, we automatically perceive two pairs of dots.  On the left, the enclosing grey rectangles produce an upper pair and a lower pair, despite the fact that the left and right pair of dots are connected by lines.  Second from left, the connecting lines produce a left pair and a right pair, despite the fact that the top pair and the bottom pair are closer to each other.  Second from right, the positions of the dots (their proximity) produces an upper pair and a lower pair, despite the fact that the left and right pairs are coloured the same.  On the right, the same colours produce a left pair and a right pair.
 #| fig.height: 2
 cols <- rep(colsnpg, each=2)
 vp2 <- viewport(width=.9, y=unit(2, "lines"), 
@@ -870,7 +960,8 @@ We do not tend to complete lines with sharp corners, as indicated
 on the right of @fig-continuity.[^continuity]
 
 [^continuity]:
-  Gestalt continuity cite.
+    This is the Gestalt Continuity Principle [@Todorovic:2008]:
+    Items that lie along a smooth curve form a group.
 
 ```{r}
 #| echo: false
@@ -947,7 +1038,9 @@ Given an ambiguous arrangement of visual elements, we will tend to perceive
 whatever is most orderly, regular, and coherent.[^good-gestalt]
 
 [^good-gestalt]:
-  Good gestalt and prägnanz cite
+    This is the Gestalt Prägnanz Principle [@Todorovic:2008]:
+    The tendency to seek simplifying structure and to find order
+    within the chaos of an image.
 
 ```{r}
 #| echo: false
@@ -971,7 +1064,12 @@ popViewport()
 ```
 
 @fig-symmetry shows that we also perceive groups when
-items have a symmetric arrangement.
+items have a symmetric arrangement.[^symmetry]
+
+[^symmetry]:
+    This is the Gestalt Symmetry Principle [@Todorovic:2008]:
+    Items that exhibit symmetry will form a group
+    (in preference to items that do not exhibit symmetry).
 
 ```{r}
 #| echo: false
@@ -1025,7 +1123,7 @@ to perceive a more complex interpretation.
 Identifying whether visual elements are the same or different
 (@sec-differences) is an example of a very simple visual task.
 @fig-visual-task (on the left) shows another simple visual task:
-judging the ratio of different lengths.
+judging the ratio of two different lengths.
 However, on the right of @fig-visual-task is an example of a
 task that is much more difficult.
 In this task, we have to identify which of the four shapes in the
@@ -1071,16 +1169,134 @@ be performed immediately.
 The right-hand task in @fig-visual-task requires much more deliberate effort 
 and time to perform.
 
-One way to create an effective data visualisation is to rely on
-visual tasks that are rapid and require little effort.
+> A data visualisation will be effective if it relies on 
+  automatic and rapid visual processing rather than requiring
+  conscious mental effort.[^cog-effort]
 
-## The dangers of the visual system
+[^cog-effort]:
+    "the comprehension of visual displays tends to be easiest when
+    simple pattern identification processes are substituted for complex
+    cognitive processes"
+    [@carpenter1998graph, page=98]
 
-Visual illusions.
+## Dangers of the visual system
 
-The fact that vertical lines appear longer than horizontal lines
-is a good simple one to demonstrate and relate to data vis
-(both L and T versions).
+The value of data visualisation comes from the visual system's 
+ability to rapidly gather and process a large amount of 
+visual information.
+However, while data visualisations usually consist of 
+artificial and simple images presented on a two-dimensional
+page or screen, the visual system has evolved for the unstructured, 
+messy, and three-dimensional natural environment.
+This means that the visual system will sometimes generate 
+a more sophisticated, but erroneous interpretation of an image
+from a very simple arrangement of simple shapes.
+In other words, we are vulnerable to visual illusions.
+
+For example, @fig-illusion shows the Muller-Lyer Illusion and the
+Ebbinghaus Illusion.  In the former, two horizontal lines
+of the same length appear to have different lengths and, in the latter, 
+two orange circles of the same size appear to have different sizes.[^illusion]
+
+```{r}
+#| echo: false
+#| results: hide
+png("Images/muller-lyer.png", width=50, height=20)
+grid.newpage()
+grid.segments(.2, .5, .8, .5)
+grid.segments(.1, .7, .2, .5)
+grid.segments(.1, .3, .2, .5)
+grid.segments(.6, .7, .5, .5)
+grid.segments(.6, .3, .5, .5)
+grid.segments(.7, .7, .8, .5)
+grid.segments(.7, .3, .8, .5)
+dev.off()
+```
+
+[^illusion]:
+    The original publication of the Muller-Lyer illusion
+    (in German) is @muller1889optische, though
+    in that, the stimulus described is a single line with three sets
+    of arrows, as shown below.
+
+    ![](Images/muller-lyer.png).
+
+    The Ebbinghaus Illusion is also known as the Titchener Illusion
+    after its English-language populariser [@titchener1901experimental].
+
+    Various evolutionary explanations of these illusions have been
+    proposed, e.g., [@gregory1963distortion] and [@howe2005muller].
+
+```{r}
+#| echo: false
+#| label: fig-illusion
+#| fig-cap: The two horizonal lines in the Muller-Lyer illusion on the left have exactly the same physical length, but the top line appears longer.  The two inner circles in the Ebbinghaus illusion on the right have exactly the same physical radius, but they appear to be different sizes.
+#| fig.height: 2
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 5, widths=c(.2, 1, .2, 1, 1),
+                                         respect=TRUE),
+                      gp=gpar(lwd=3)))
+pushViewport(viewport(layout.pos.col=2))
+grid.segments(.3, .7, .7, .7)
+grid.segments(.2, .6, .3, .7)
+grid.segments(.2, .8, .3, .7)
+grid.segments(.8, .6, .7, .7)
+grid.segments(.8, .8, .7, .7)
+grid.segments(.3, .3, .7, .3)
+grid.segments(.4, .2, .3, .3)
+grid.segments(.4, .4, .3, .3)
+grid.segments(.6, .2, .7, .3)
+grid.segments(.6, .4, .7, .3)
+popViewport()
+pushViewport(viewport(layout.pos.col=4))
+t <- seq(0, 2*pi, length.out=7)[-7]
+grid.circle(.5, .5, r=unit(4, "mm"), gp=gpar(col="orange", fill="orange"))
+grid.circle(.5 + .3*cos(t), .5 + .3*sin(t), r=unit(7, "mm"), 
+            gp=gpar(col="grey", fill="grey"))
+popViewport()
+pushViewport(viewport(layout.pos.col=5))
+t <- seq(0, 2*pi, length.out=9)[-9]
+grid.circle(.5, .5, r=unit(4, "mm"), gp=gpar(col="orange", fill="orange"))
+grid.circle(.5 + .13*cos(t), .5 + .13*sin(t), r=unit(1.5, "mm"), 
+            gp=gpar(col="grey", fill="grey"))
+popViewport()
+```
+
+@fig-vert-horiz shows another illusions involving simple lines.
+Every line segment in this image is the same physical length,
+but we perceive some segments as longer than others.[^vert-horiz]
+
+[^vert-horiz]:
+    An early in-depth exploration of the 
+    Vertical-Horizontal Illusion was provided by
+    @KUNNAPASTM1955AAOT.
+
+```{r}
+#| echo: false
+#| label: fig-vert-horiz
+#| fig-cap: All of the horizontal and vertical line segments in this image are exactly the same physical length, but our visual system perceives some segments as longer than others.
+#| fig.height: 2
+pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE),
+                      gp=gpar(lwd=3, lineend="square", linejoin="mitre")))
+pushViewport(viewport(layout.pos.col=1))
+grid.segments(.3, .3, .3, .7)
+grid.segments(.3, .5, .7, .5)
+popViewport()
+pushViewport(viewport(layout.pos.col=2))
+grid.lines(c(.3, .3, .7), c(.7, .3, .3))
+popViewport()
+pushViewport(viewport(layout.pos.col=3))
+grid.segments(.5, .3, .5, .7)
+grid.segments(.3, .3, .7, .3)
+popViewport()
+```
+
+These visual illusions demonstrate that the visual system 
+can produce incorrect results for 
+even very simple visual tasks based on very simple visual elements.
+
+> A data visualisation will be ineffective if it (even accidentally)
+  generates a visual illusion.
 
 ## Summary
 
@@ -1093,19 +1309,20 @@ from multiple locations within an image.
 
 Large numbers of simple features are rapidly extracted,
 while more complex visual items take longer and require more 
-congnitive effort, but persist for longer.
+congnitive effort.
 
 Large, bright, colourful items automatically stand out.
 
-Items are automatically grouped in terms of similarity 
-(of basic visual features), proximity, connection, and enclosure.
+Items are automatically 
+differentiated and grouped based on basic visual features.
 
 The main point is that the visual system is *very* good at 
-perceiving certain visual features.
+perceiving certain visual properties.
 
-An effective data visualisation will make use of the things that
-the visual system is good at.
-
+An effective data visualisation will make use of the advantageous
+properties of 
+the visual system and it will avoid the undesirable properties
+of the visual system.
 
 ---
 

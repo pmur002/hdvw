@@ -805,11 +805,120 @@ to the brain.}
 \end{figure}%
 
 \begin{quote}
-Data visualisation is effective because the visual system gathers an
-enormous amount of information.
+One reason why data visualisation is effective is because the visual
+system gathers an enormous amount of information.
 \end{quote}
 
-\section{Visual focus}\label{visual-focus}
+\section{Visual processing}\label{sec-visual-processing}
+
+Processing of the signals from the optic nerve occurs in several areas
+of the brain.\footnote{A rough estimate is that more than 50\% of the
+  brain is involved in visual processing (Van Essen, Anderson, and
+  Felleman 1992).} Very basic \textbf{visual features} are extracted
+first, such as \textbf{position}, \textbf{angle}, and
+\textbf{colour}.\footnote{Low-level visual processing involves the
+  creation of ``feature maps'' that identify colours, edges, and
+  orientations, along with the spatial arrangement of those basic
+  features within the field of view.(Ware 2021, page=146)} This
+low-level information is passed on and built upon to produce
+higher-level visual elements, such as regions and \textbf{shapes}.
+Information is then also integrated from prior knowledge to assist with
+the identification of \textbf{objects}---things like trees, animals, and
+faces.\footnote{A slightly more detailed overview is provided in Ware
+  (2021) (page 20).}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/visual-processing.png}
+
+}
+
+\caption{\label{fig-visual-processing}A very simple model of visual
+processing.}
+
+\end{figure}%
+
+Lower-level processing occurs subconsciously and more rapidly than
+higher-level processing, which can require conscious effort.
+Furthermore, lower-level processing occurs in parallel and can involve
+many instances of visual features at once, whereas higher-level
+processing will only focus on a small number of items or a single item
+at once. On the other hand, lower-level visual features are rapidly
+discarded as our attention shifts, while higher-level visual objects are
+more persistent and may even become part of long-term memory (see
+Figure~\ref{fig-visual-model}).
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{Model/model.png}}
+
+}
+
+\caption{\label{fig-visual-model}Some of the properties of visual
+processing.}
+
+\end{figure}%
+
+Figure~\ref{fig-visual-model-demo} shows an image that is made up of
+many small items: tiny triangles with different \textbf{positions},
+\textbf{lengths}, \textbf{angles}, and \textbf{colours}. The angles of
+the triangles represents wind direction and the length of the triangles
+represents wind strength. Blue triangles are over the sea and green
+triangles are over land.\footnote{Figure~\ref{fig-visual-model-demo} is
+  based on wind data from the National Oceanic and Atmospheric
+  Administration's Operational Model Archive and Distribution System
+  (\href{https://nomads.ncep.noaa.gov/}{NOMADS}). The data were accessed
+  and processed using the \{rNOMADS\} package (Bowman and Lees 2015),
+  with raw data interpolated to a finer grid.} The visual system can
+very quickly perceive many small \textbf{visual features} at once. There
+is no need to concentrate separately on every individual triangle in the
+image. At a higher level of processing, darker and lighter
+\textbf{shapes} are identified as well as regions of different colours.
+For example, a band of lighter wind forms a line from the top-left
+corner at a roughly 45-degree angle. At a higher level of processing
+again, at least for the denizens of Oceania, the green regions are
+recognised as a very familiar \textbf{object}: the outline of New
+Zealand.
+
+The small lines in Figure~\ref{fig-visual-model-demo} convey a lot of
+simple pieces of information---what is the wind strength and direction
+at each location---though we have to focus on a particular spot in order
+to extract a single piece of information. The shapes of darker and
+lighter regions convey several more complex ideas like areas of stronger
+and lighter winds. The green regions combine to convey the single
+complex and abstract concept of New Zealand.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS.png}
+
+}
+
+\caption{\label{fig-visual-model-demo}A visualisation of wind strength
+and wind direction that is made up of lots of small lines of different
+lengths and different angles and different colours.}
+
+\end{figure}%
+
+\begin{quote}
+Encoding data values as simple visual features is effective at conveying
+large amounts of simple information because the visual system decodes
+simple visual features rapidly and all at once.
+\end{quote}
+
+\begin{quote}
+Encoding data values as more complex visual shapes or visual objects is
+effective because more complex information can be decoded from visual
+shapes and visual objects.
+\end{quote}
+
+\section{Visual focus}\label{sec-visual-focus}
 
 Figure~\ref{fig-eye-2} shows a slightly more detailed view of the
 structure of the eye (compared to Figure~\ref{fig-eye}). The retina
@@ -918,8 +1027,7 @@ thumbnail of the original image is shown on the left.}
 \end{figure}%
 
 \begin{quote}
-A data visualisation may be require more effort to decode if it contains
-many different areas of detail that require the viewer to constantly
+A data visualisation may fail if it requires the viewer to constantly
 switch focus.
 \end{quote}
 
@@ -929,14 +1037,24 @@ When we switch focus to different areas of an image, we are likely to
 need to remember information from a previous area of focus. How well can
 we hold visual information in memory? The most important feature of
 visual memory is that it is very limited. We can only hold in memory a
-small number of items at once.\footnote{And footnote that acknowledges
-  some controversy (different models and number of items limit vs
-  continuous resource limit), with ref to e.g., ``Psychophysical scaling
-  reveals a unified theory of visual memory strength'' Schurgin et al
-  (2020) and the binary map model
+small number of items at once.\footnote{Some limitations of visual
+  memory are briefly mentioned in Ware (2021) (pages 397-405 and pages
+  423-425).
 
-  Some limitations of visual memory are briefly mentioned in Ware (2021)
-  (pp.~397-405 and pp.~423-425).}
+  ``A \ldots{} severely limited capacity is the restricted number of
+  stimuli that can be held in VSTM {[}visual short-term memory{]}''
+  (Marois and Ivanoff 2005)
+
+  And footnote that acknowledges some controversy (different models and
+  number of items limit vs continuous resource limit), with ref to e.g.,
+  ``Psychophysical scaling reveals a unified theory of visual memory
+  strength'' Schurgin et al (2020) and the binary map model}
+Figure~\ref{fig-memory} provides a simple demonstration of the
+limitations of visual memory.
+
+\begin{figure}
+
+\centering{
 
 \afterpage{
 \begin{figure}[t]
@@ -965,12 +1083,18 @@ to remember, which reflects the limits on visual memory.}
 \end{figure}
 }
 
+}
+
+\caption{\label{fig-memory}}
+
+\end{figure}%
+
 It is easier and faster to decode information from visual elements if
 they lie within the scope of a single visual focus. If we have to switch
 focus, it not only takes longer to decode information, but we may hit
 limits on our ability to remember visual elements from previous areas of
 focus.\footnote{Tufte refers to this as drawing ``within the eyespan''
-  (Tufte 1990, 67)
+  (Tufte 1990, page=67)
 
   ``In understanding human visual perception, an important component
   consists of what people can perceive at a glance. If that glance
@@ -980,115 +1104,44 @@ focus.\footnote{Tufte refers to this as drawing ``within the eyespan''
   necessarily slower and limited by both working memory and the ability
   to integrate that information.'' (Rosenholtz 2023).}
 
+The limits on visual memory reflect well-known limits on working memory
+and those limits can also be worked around via familiar mechanisms such
+as chunking.\footnote{Miller's famous paper ``The Magical Number Seven,
+  Plus or Minus Two: Some Limits on Our Capacity for Processing
+  Information'' (Miller 1956) talks about limits on working memory, but
+  also how to ``escape'' those limits, for example, by chunking
+  information.} For example, we may only be able to hold in memory a
+small number of basic visual features such as the colours of circles
+(Figure~\ref{fig-memory}), but we can effectively hold many more basic
+visual features if we memorise more complex visual elements that are
+composed of many basic visual features. In other words, can remember
+several \textbf{visual shapes} or \textbf{visual objects} even if we
+cannot remember all of the individual visual features within those
+visual shapes or visual objects (Section~\ref{sec-visual-processing}).
+For example, can hold in memory multiple country flags even though we
+cannot necessarily hold in memory all of the invidual colours on those
+flags.
+
 \begin{quote}
 A data visualisation will require more effort to decode if the viewer is
-required to switch focus and retain information across multiple areas of
-visual focus.
+required to switch focus and remember visual information across multiple
+areas of visual focus.
 \end{quote}
-
-\section{Visual processing}\label{sec-visual-processing}
-
-Processing of the signals from the optic nerve occurs in several areas
-of the brain. Very basic \textbf{visual features} are extracted first,
-such as \textbf{position} (spatial arrangements), \textbf{angle}
-(orientations), \textbf{colour}, and simple \textbf{patterns} (spatial
-frequencies). This low-level information is passed on and built upon to
-produce higher-level representations, such as regions and
-\textbf{shapes}. Information is then also integrated from prior
-knowledge to assist with the identification of \textbf{objects}---things
-like trees, animals, and faces.\footnote{cite Ware (4th) p229-330, also
-  fig 6.1}
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[scale=0.5]{Diagrams/visual-processing.png}
-
-}
-
-\caption{\label{fig-visual-processing}A very simple model of visual
-processing.}
-
-\end{figure}%
-
-Lower-level processing occurs subconsciously and more rapidly than
-higher-level processing, which can require conscious effort.
-Furthermore, lower-level processing occurs in parallel and can involve
-many instances of visual features at once, whereas higher-level
-processing will only focus on a small number of items or a single item
-at once. On the other hand, lower-level visual features are rapidly
-discarded as our attention shifts, while higher-level visual objects are
-more persistent and may become part of long-term memories (see
-Figure~\ref{fig-visual-model}).
-
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{Model/model.png}}
-
-}
-
-\caption{\label{fig-visual-model}Some of the properties of visual
-processing.}
-
-\end{figure}%
-
-Figure~\ref{fig-visual-model-demo} shows an image that is made up of
-many small items: tiny triangles with different \textbf{lengths},
-orientations (\textbf{angles}), and \textbf{colours}. The orientations
-of the triangles represents wind direction and the length of the
-triangles represents wind strength; blue triangles are over the sea and
-green triangles are over land.\footnote{Figure~\ref{fig-visual-model-demo}
-  is based on wind data from the National Oceanic and Atmospheric
-  Administration's Operational Model Archive and Distribution System
-  (\href{https://nomads.ncep.noaa.gov/}{NOMADS}). The data were accessed
-  and processed using the \{rNOMADS\} package (Bowman and Lees 2015),
-  with raw data interpolated to a finer grid.} The visual system can
-very quickly perceive many small \textbf{visual features} at once. There
-is no need to concentrate separately on every individual triangle in the
-image.. At a higher level of processing, darker and lighter
-\textbf{regions} are identified as well as regions of different colours.
-For example, a band of lighter wind forms a line from the top-left
-corner at a roughly 45-degree angle. At a higher level of processing
-again, at least for the denizens of Oceania, the green regions are
-recognised as a very familiar \textbf{object}: the outline of New
-Zealand.
-
-The small lines convey a lot of simple pieces of information---what is
-the wind strength and direction at each location---though we have to
-focus on a particular spot in order to extract that information. The
-darker and lighter regions convey several more complex ideas like
-regions of stronger and lighter winds. The green regions combine to
-convey the single complex and abstract concept of New Zealand.
-
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{Data/Weather/NOMADS.png}}
-
-}
-
-\caption{\label{fig-visual-model-demo}A visualisation of wind strength
-and wind direction that is made up of lots of small lines of different
-lengths and different angles and different colours.}
-
-\end{figure}%
 
 \section{Visual differences}\label{sec-differences}
 
 The ability to gather a large amount of basic features from an image
-very quickly is supplemented by rapid visual processing that combines
-and summarises the information. These subconscious processes extract
-some properties from an image without any mental effort.
+very quickly (Section~\ref{sec-visual-processing}) is supplemented by
+rapid visual processing that combines and summarises the information.
+These subconscious processes extract some properties from an image
+without any mental effort.
 
 For example, in Figure~\ref{fig-pop-colour-1} we can detect the one teal
 dot amongst the 24 orange dots without effort.
 Figure~\ref{fig-pop-colour-2} shows that this task remains effortless
-even if the number of distractors is much larger.\footnote{Mention
-  ``pre-attentive'' plus citations.}
+even if the number of dots is much larger.\footnote{The ability to
+  detect features without conscious effort is called ``pre-attentive''
+  processing or ``pop out'' (Treisman 1985).}
 
 \begin{figure}
 
@@ -1161,9 +1214,9 @@ effortlessly perceive one dot that differs only by size.}
 \end{figure}%
 
 If an item differs on more than one visual feature, the effect is even
-stronger (Figure~\ref{fig-diff-salience}). The visual system is very
-sensitive to items that are \textbf{different} in terms of basic
-\textbf{visual features}.
+stronger (Figure~\ref{fig-diff-salience}). This means that the visual
+system is very sensitive to items that are \textbf{different} in terms
+of basic \textbf{visual features}.
 
 \begin{figure}
 
@@ -1198,15 +1251,18 @@ effortlessly perceive one dot that differs by both colour and size.}
 
 \end{figure}%
 
-On the other hand, if the distractor items are both similar on one
-visual feature, but different on another, and if the arrangement of the
-items is less structured, then finding a particular item of interest
-becomes much harder. For example, if we look for the single larger teal
-dot in Figure~\ref{fig-diff-serial}, it is much harder to find than it
-is in Figure~\ref{fig-diff-salience}. The visual system's sensitivity to
+On the other hand, if the distractor items are similar on one visual
+feature, but different on another, and if the arrangement of the items
+is less structured, then finding a particular item of interest becomes
+much harder. For example, if we look for the single larger teal dot in
+Figure~\ref{fig-diff-serial}, it is much harder to find than it is in
+Figure~\ref{fig-diff-salience}. The visual system's sensitivity to
 \textbf{different} items is much greater when all other items are the
-\textbf{same}.\footnote{We hang our hat on this several times later on,
-  so it would be good to ground it in the literature!!!}
+\textbf{same}.\footnote{For example, from Wolfe and Horowitz (2017):
+  ``Salience of a target increases with difference from the distractors
+  (target--distractor heterogeneity) and with the homogeneity of the
+  distractors (distractor--distractor homogeneity) along basic feature
+  dimensions.''}
 
 \begin{figure}
 
@@ -1241,52 +1297,80 @@ is more going on.}
 
 \end{figure}%
 
+\begin{quote}
+A data visualisation will be effective if important differences in the
+data are encoded using different colours or sizes, especially if
+everything else remains the same.
+\end{quote}
+
 \section{Visual attention}\label{sec-attention}
 
-Where we focus within an image is not random.\footnote{Citation to
-  bottom-up vs top-down.} The figures from Section~\ref{sec-differences}
-show that our attention is automatically drawn to the \textbf{larger},
-\textbf{brighter}, and more \textbf{colourful} items within an image.
-This happens due to very early visual processing and without conscious
-thought.
+Where we focus within an image is not random. The figures from
+Section~\ref{sec-differences} show that our attention is automatically
+drawn to the \textbf{larger}, \textbf{brighter}, and more
+\textbf{colourful} items within an image. This happens due to very early
+visual processing and without conscious thought.\footnote{Saliency maps
+  (e.g., Itti, Koch, and Niebur 1998; Matzen et al. 2018), which attempt
+  to predict where the viewer will focus attention, are based on the
+  idea that attention is drawn to basic visual features like colour,
+  angle, and size.}
+
+\begin{quote}
+A data visualisation will be effective if it uses basic visual features
+like colour to draw the viewer's attention to important features.
+\end{quote}
 
 Where we focus within an image, and what information we extract, is also
-affected by conscious goals---what are we looking for?\footnote{Citation
-  to mentions of attention filtering visual input differently} For
-example, when you were looking for the larger teal dot in
-Figure~\ref{fig-diff-serial}, did you notice that there was also a
-single small orange dot? Now that your attention has been drawn to that
-task, it will be easier to find the smaller orange dot.
+affected by conscious goals---what are we looking for?\footnote{Having a
+  conscious target to search for not only directs our visual focus
+  (Section~\ref{sec-visual-focus}), but also filters the processing of
+  visual input to exclude visual features that are not of interest
+  (Knudsen 2020). In other words, to some extent, we see what we are
+  looking for!} For example, when you were looking for the larger teal
+dot in Figure~\ref{fig-diff-serial}, did you notice that there was also
+a single small orange dot? Now that your attention has been drawn to
+that task, it will be easier to find the smaller orange dot.\footnote{Wolfe
+  and Horowitz (2017) describe ``Bottom-up, stimulus-driven guidance''
+  versus ``Top-down, user-driven guidance''.}
+
+\begin{quote}
+A data visualisation will be effective if it includes instructions that
+direct the reader's attention to important features.
+\end{quote}
 
 \section{Visual similarities}\label{sec-visual-model-groups}
 
 In Figure~\ref{fig-diff-serial}, we can see several groups of items:
 orange dots, teal dots, large dots, and small dots. These separate
 groups of items are identified based on their \textbf{similarity}---each
-group of items have the same size and the same colour.
+group of items have the same size and the same colour. The flip side of
+being able to easily identify items that are different
+(Section~\ref{sec-differences}) is that we can easily identify items
+that are the same.
 
-As with the detection of differences that we saw in
-Section~\ref{sec-differences}, the grouping of similar items within an
-image happens automatically and without conscious effort. Furthermore,
-there are other visual properties that mean we automatically perceive
-items as groups: items that are close together (items that have similar
-\textbf{positions}) are seen as a group; items that are connected by
-lines are seen as a group; and items that are enclosed by a border or
-background are seen as a group.\footnote{mention Gestalt ``school'' or
-  whatever, plus citations. enclosure == common region ``Gestalt
-  principles'' Todorovic (2008) Summaries of the main Gestalt
-  principles. Like a peer-reviewed Wikipedia ? Possible link to
-  alignment \ldots{} ? ``good Gestalt principle: elements tend to be
-  grouped together if they are parts of a pattern which is a good
-  Gestalt, meaning as simple, orderly, balanced, unified, coherent,
-  regular, etc as possible''}
+The grouping of similar items within an image also happens automatically
+and without conscious effort. Figure~\ref{fig-gestalt-group} shows pairs
+of dot matrices that are very similar, but in one matrix of each pair we
+see rows and in the other matrix we see columns. For example, in the
+middle pair, items that are the same colour produce groups that are
+either rows or columns.
 
-For example, in Figure~\ref{fig-gestalt-group} there are several
-matrices of dots. In each matrix, we can see either rows of dots or
-columns of dots by manipulating visual features that affect our
-perception of groups: dots that are closer together for a group; dots
-that are the same colour form a group; dots that are connected by lines
-form a group.
+Furthermore, there are other visual properties that mean we
+automatically perceive items as groups: items that are close together
+(items that have similar \textbf{positions}) are seen as a group so we
+see either rows of black dots or columns of black dots on the left of
+Figure~\ref{fig-gestalt-group}; items that are connected by lines are
+also seen as a group so we see either connected rows or connected
+columns on the right of Figure~\ref{fig-gestalt-group}.\footnote{These
+  visual effects are known as the Gestalt Grouping Principles
+  (wagemans2012gestalt). The Proximity Principle says that items that
+  are close to each other form a group. The Similarity Principle says
+  that items that have the same colour or size form a group. The
+  Connectedness Principle says that items that are connected to each
+  other form a group. The Common Region Principle says that items within
+  the same bounded region form a group by their ``proximity'',
+  similarity, Todorovic (2008) provides a very accessible description of
+  these principles and several others.}
 
 \begin{figure}
 
@@ -1308,10 +1392,10 @@ horizontal lines produces rows.}
 \end{figure}%
 
 These grouping effects are very powerful and can even be used to
-override each other in some combinations. Figure~\ref{fig-gestalt-group}
+override each other in some combinations. Figure~\ref{fig-gestalt-order}
 shows that an enclosing border can be stronger than a connecting line,
-connecting lines can be stronger than closeness, and closeness can be
-stronger than similar colours.
+connecting lines can be stronger than proximity, and proximity can be
+stronger than similarity.
 
 \begin{figure}
 
@@ -1323,10 +1407,14 @@ stronger than similar colours.
 
 \caption{\label{fig-gestalt-order}For each set of four dots, we
 automatically perceive two pairs of dots. On the left, the enclosing
-grey rectangles produce an upper pair and a lower pair. Second from
-left, the lines produce a left pair and a right pair. Second from right,
-closeness produces an upper pair and a lower pair. On the right, colour
-produces a left pair and a right pair.}
+grey rectangles produce an upper pair and a lower pair, despite the fact
+that the left and right pair of dots are connected by lines. Second from
+left, the connecting lines produce a left pair and a right pair, despite
+the fact that the top pair and the bottom pair are closer to each other.
+Second from right, the positions of the dots (their proximity) produces
+an upper pair and a lower pair, despite the fact that the left and right
+pairs are coloured the same. On the right, the same colours produce a
+left pair and a right pair.}
 
 \end{figure}%
 
@@ -1337,7 +1425,9 @@ shown in the centre of Figure~\ref{fig-continuity}. We automatically
 complete lines, particularly smooth curves, even when the curve is
 broken, as in the central set of dots. We do not tend to complete lines
 with sharp corners, as indicated on the right of
-Figure~\ref{fig-continuity}.\footnote{Gestalt continuity cite.}
+Figure~\ref{fig-continuity}.\footnote{This is the Gestalt Continuity
+  Principle (Todorovic 2008): Items that lie along a smooth curve form a
+  group.}
 
 \begin{figure}
 
@@ -1372,8 +1462,9 @@ of Figure~\ref{fig-simplicity})?
 
 Our visual system has a preference for the simple interpretation. Given
 an ambiguous arrangement of visual elements, we will tend to perceive
-whatever is most orderly, regular, and coherent.\footnote{Good gestalt
-  and prägnanz cite}
+whatever is most orderly, regular, and coherent.\footnote{This is the
+  Gestalt Prägnanz Principle (Todorovic 2008): The tendency to seek
+  simplifying structure and to find order within the chaos of an image.}
 
 \begin{figure}
 
@@ -1389,7 +1480,9 @@ over more complex interpretations.}
 \end{figure}%
 
 Figure~\ref{fig-symmetry} shows that we also perceive groups when items
-have a symmetric arrangement.
+have a symmetric arrangement.\footnote{This is the Gestalt Symmetry
+  Principle (Todorovic 2008): Items that exhibit symmetry will form a
+  group (in preference to items that do not exhibit symmetry).}
 
 \begin{figure}
 
@@ -1419,7 +1512,7 @@ to a simple interpretation.
 Identifying whether visual elements are the same or different
 (Section~\ref{sec-differences}) is an example of a very simple visual
 task. Figure~\ref{fig-visual-task} (on the left) shows another simple
-visual task: judging the ratio of different lengths. However, on the
+visual task: judging the ratio of two different lengths. However, on the
 right of Figure~\ref{fig-visual-task} is an example of a task that is
 much more difficult. In this task, we have to identify which of the four
 shapes in the bottom row is \emph{not} a rotated version of the shape at
@@ -1445,17 +1538,86 @@ be performed immediately. The right-hand task in
 Figure~\ref{fig-visual-task} requires much more deliberate effort and
 time to perform.
 
-One way to create an effective data visualisation is to rely on visual
-tasks that are rapid and require little effort.
+\begin{quote}
+A data visualisation will be effective if it relies on automatic and
+rapid visual processing rather than requiring conscious mental
+effort.\footnote{``the comprehension of visual displays tends to be
+  easiest when simple pattern identification processes are substituted
+  for complex cognitive processes'' (Carpenter and Shah 1998, page=98)}
+\end{quote}
 
-\section{The dangers of the visual
-system}\label{the-dangers-of-the-visual-system}
+\section{Dangers of the visual
+system}\label{dangers-of-the-visual-system}
 
-Visual illusions.
+The value of data visualisation comes from the visual system's ability
+to rapidly gather and process a large amount of visual information.
+However, while data visualisations usually consist of artificial and
+simple images presented on a two-dimensional page or screen, the visual
+system has evolved for the unstructured, messy, and three-dimensional
+natural environment. This means that the visual system will sometimes
+generate a more sophisticated, but erroneous interpretation of an image
+from a very simple arrangement of simple shapes. In other words, we are
+vulnerable to visual illusions.
 
-The fact that vertical lines appear longer than horizontal lines is a
-good simple one to demonstrate and relate to data vis (both L and T
-versions).
+For example, Figure~\ref{fig-illusion} shows the Muller-Lyer Illusion
+and the Ebbinghaus Illusion. In the former, two horizontal lines of the
+same length appear to have different lengths and, in the latter, two
+orange circles of the same size appear to have different
+sizes.\footnote{The original publication of the Muller-Lyer illusion (in
+  German) is Müller-Lyer (1889), though in that, the stimulus described
+  is a single line with three sets of arrows
+  \pandocbounded{\includegraphics[keepaspectratio]{Images/muller-lyer.png}}.
+
+  The Ebbinghaus Illusion is also known as the Titchener Illusion after
+  its English-language populariser (Titchener 1916).
+
+  Various evolutionary explanations of these illusions have been
+  proposed, e.g., (Gregory 1963) and (Howe and Purves 2005).}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-model_files/figure-pdf/fig-illusion-1.pdf}
+
+}
+
+\caption{\label{fig-illusion}The two horizonal lines in the Muller-Lyer
+illusion on the left have exactly the same physical length, but the top
+line appears longer. The two inner circles in the Ebbinghaus illusion on
+the right have exactly the same physical radius, but they appear to be
+different sizes.}
+
+\end{figure}%
+
+Figure~\ref{fig-vert-horiz} shows another illusions involving simple
+lines. Every line segment in this image is the same physical length, but
+we perceive some segments as longer than others.\footnote{An early
+  in-depth exploration of the Vertical-Horizontal Illusion was provided
+  by Künnapas (1955).}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-model_files/figure-pdf/fig-vert-horiz-1.pdf}
+
+}
+
+\caption{\label{fig-vert-horiz}All of the horizontal and vertical line
+segments in this image are exactly the same physical length, but our
+visual system perceives some segments as longer than others.}
+
+\end{figure}%
+
+These visual illusions demonstrate that the visual system can produce
+incorrect results for even very simple visual tasks based on very simple
+visual elements.
+
+\begin{quote}
+A data visualisation will be ineffective if it (even accidentally)
+generates a visual illusion.
+\end{quote}
 
 \section{Summary}\label{summary-1}
 
@@ -1467,19 +1629,19 @@ so multiple fixations are required to capture detailed information from
 multiple locations within an image.
 
 Large numbers of simple features are rapidly extracted, while more
-complex visual items take longer and require more congnitive effort, but
-persist for longer.
+complex visual items take longer and require more congnitive effort.
 
 Large, bright, colourful items automatically stand out.
 
-Items are automatically grouped in terms of similarity (of basic visual
-features), proximity, connection, and enclosure.
+Items are automatically differentiated and grouped based on basic visual
+features.
 
 The main point is that the visual system is \emph{very} good at
-perceiving certain visual features.
+perceiving certain visual properties.
 
-An effective data visualisation will make use of the things that the
-visual system is good at.
+An effective data visualisation will make use of the advantageous
+properties of the visual system and it will avoid the undesirable
+properties of the visual system.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1872,7 +2034,9 @@ the difference between the length of two bars?\footnote{The pioneering
   follows a power law. For example, the perception of length has a power
   of approximately one (linear), which suggests that we accurately
   perceive the magnitude of lengths, while area has a power less than
-  one, which suggests that we underestimate the magnitude of areas.}
+  one, which suggests that we underestimate the magnitude of areas.
+
+  Mention Weber law and Steven's law here?}
 
 It is easy to demonstrate that judgements of this sort are harder for
 some visual features than others. For example,
@@ -1941,8 +2105,18 @@ visual feature}, the lengths of the bars.
 
 When we are visualising \textbf{qualitative} data values, we are no
 longer concerned with accurately perceiving the size of differences; all
-we are concerned with is perceiving whether two values are different.
-For example, can we perceive a difference between two colours?
+we are concerned with is perceiving whether two values are different or
+the same. To be slightly more precise, we are concerned with being able
+to identify different values: which colour is this one?\footnote{The
+  question ``Which one is this?'' is different from the question ``Are
+  these two different?''. The former involves ``absolute judgements''
+  (Miller 1956) to identify a stimulus from a known set of stimuli. The
+  latter involves relative judgements and just-noticeable differences
+  (JND), which is considerably easier and something we have a much
+  higher sensitivity to (CITE please !).}
+
+\textbf{THIS NEEDS} a revisit - check again on Munzner's expressiveness
+and discriminability (see notes in DataVis/Resources)
 
 The issue in this scenario is the \textbf{capacity} of a visual feature:
 how many different categories can be represented (and still perceived as
@@ -1954,8 +2128,11 @@ differentiate, but the differences become harder to perceive with a
 greater number of colours.\footnote{``Do not use more than 10 colors for
   coding symbols if reliable identification is required, especially if
   the symbols are to be used against a variety of backgrounds.'' Ware
-  4th ed {[}G4.18{]} p 126. Also cite the study that shows how capacity
-  depends on whether points are spread out or arranged regularly ?}
+  4th ed {[}G4.18{]} p 126. ``Choosing Effective Colours for Data
+  Visualization'' Healey (1996) actually says 7 (and talks about colour
+  distance, colour linearity and colour category!). Also cite the study
+  that shows how capacity depends on whether points are spread out or
+  arranged regularly ?}
 
 \begin{figure}
 
@@ -2161,6 +2338,16 @@ Ditto log-log plot.
 \section{Position is relative}\label{position-is-relative}
 
 Accuracy is really ratios not absolute values
+
+\begin{itemize}
+\item
+  From Ware 4th
+
+  ``The lesson is that visualization is not good for representing
+  precise absolute numerical values, but rather for displaying patterns
+  of differences or changes over time, to which the eye and brain are
+  extremely sensitive.'' {[}page 70{]}
+\end{itemize}
 
 \section{Aligned versus unaligned}\label{sec-unaligned-pos}
 
@@ -3861,8 +4048,10 @@ the visual features enable us to decode \textbf{data summaries} from
 collections of visual features
 (Figure~\ref{fig-data-vis-stat-decode}).\footnote{Need some references
   to articles about ensembles in data vis lit (ideally NOT the scatter
-  plot one cos want to use that later for scatter plots). ALSO must
-  relate this to Gestalt section in visual model ?}
+  plot one cos want to use that later for scatter plots). Mention
+  ``subitizing'' (rapid identification of counts below a certain
+  threshold) Ware 4th p 173. ALSO must relate this to Gestalt section in
+  visual model ?}
 
 \begin{figure}
 
@@ -3884,6 +4073,14 @@ A dot plot is effective not just for perceiving raw data values, but
 also for perceving data summaries like clusters and outliers, and
 central tendency and spread.
 \end{quote}
+
+\textbf{ALSO MENTION} textures here? Ware 4th \textasciitilde p212 Large
+numbers of data symbols, especially in regular arrangement effectively
+create a set of textures that the visual system can identify and
+differentiate into regions(?) Refer back to
+Figure~\ref{fig-visual-model-demo}. May need to add something about
+texture as low-ish level visual feature back in visual model? NOTE that
+only small number of \emph{distint} textures are possible.
 
 \section{Case study: Histograms}\label{case-study-histograms}
 
@@ -3991,7 +4188,7 @@ and those data summaries can be compared to provide information about
 the distribution of the data.
 \end{quote}
 
-\section{The dangers of summaries}\label{sec-summary-caveats}
+\section{Dangers of summaries}\label{sec-summary-caveats}
 
 The benefit of a data visualisation that encodes \textbf{data summaries}
 as visual features is that it allows us to decode data summaries very
@@ -4174,6 +4371,24 @@ for access to individual amounts. (Tukey 1993)
 usually the point of a data vis, though it is still a precursor to
 making a comparison. In some ways, ordinal comparisons are more
 important than interval or ratio?
+
+\begin{itemize}
+\item
+  For a footnote \ldots{}
+
+  ``Chart and Graphs'' Karsten (1925)
+
+  This is the source of the ``insult to man's intelligence'' remark
+  about pie charts, though note the full quote:
+
+  ``In a sense, it might be construed as an insult to a man's
+  intelligence to show him a pie-chart, but the insult is not often
+  resented. For if your main object be to get a story across, you are
+  justified in taking that means which will encounter least resistance,
+  and in making your story as simple as possible. For publicity
+  purposes, the pie-chart is therefore almost invariably better than the
+  bar.'' {[}p98{]}
+\end{itemize}
 
 \section{Case study: Heatmaps}\label{case-study-heatmaps}
 
@@ -4997,8 +5212,15 @@ produces an emergent feature that can be decoded to properties of the
 data (as in a scatter plot, or mosaic plot, or interaction plot).\\
 However, it is possible to create a poor data visualisation if we
 produce an emergent feature that has no correspondence with data values
-(Figure~\ref{fig-data-vis-vis-lie}).\footnote{This is the
-  ``compatibility principle'' ? of Carswell and Wickens ?}
+(Figure~\ref{fig-data-vis-vis-lie}).\footnote{This is the ``proximity
+  compatibility principle'' ? of Carswell and Wickens ?
+
+  ``Review of Graph Comprehension Research: Implications for
+  Instruction'' Shah and Hoeffner (2002) ``Integrated, object-like
+  displays (e.g., a line graph) are better for integrative tasks,
+  whereas more separable formats (e.g., bar graphs) are better for less
+  integrative or synthetic tasks such as point reading (Carswell and
+  Wickens, 1987).''}
 
 \begin{figure}
 
@@ -5305,6 +5527,11 @@ we may be able to decode more sophisticated \textbf{data summaries}.}
 
 \end{figure}%
 
+This ability to perceive data summaries, such as peaks and slopes, when
+we use lines as data symbols is even more apparent if we compare
+Figure~\ref{fig-line} with Figure~\ref{fig-side-bar-year}. When we have
+bars as data symbols, these data summaries are much less apparent.
+
 In terms of Chapter~\ref{sec-congruence}, the use of lines for data
 symbols is also \textbf{congruent} with trends in the data; we naturally
 associate slopes with increases and decreases in data values.\footnote{According
@@ -5564,8 +5791,7 @@ Also use of white space around points in scatter plot ?
 Cite Cleveland (1994) for white space margin affecting strength of
 relation?
 
-\section{The dangers of visual
-shapes}\label{the-dangers-of-visual-shapes}
+\section{Dangers of visual shapes}\label{dangers-of-visual-shapes}
 
 Need a caveat that more complex shapes does NOT necessarily mean useful
 mappings back to data summaries - could just end up with a mess
@@ -5591,7 +5817,14 @@ decodes to unhelpful or misleading information.}
 \end{figure}%
 
 Lines imply continuity (at least) if not linear interpolation so do
-example where connecting with lines not such a great idea.
+example where connecting with lines not such a great idea. Refer back to
+Chapter~\ref{sec-congruence} (congruence).
+
+Example from ``Bars and lines: A study of graphic communication'' Zacks
+and Tversky (1999) (Fig 2) of inappropriate line plot: line connecting
+males and females =\textgreater{} some subjects made trend
+interpretation, the worst being ``The more male a person is, the taller
+he/she is''
 
 \section{Case study: Violin plots}\label{case-study-violin-plots}
 
@@ -5603,9 +5836,10 @@ And other variations on boxplots
   Case study: SinaPlots
 \end{itemize}
 
-A SinaPlot is a nice combination of decode for raw data and for data
-summary. \footnote{Sidiropoulos et al. (2018)} Figure~\ref{fig-sina} is
-actually a combination of a SinaPlot and a violin plot.
+A SinaPlot is a nice combination of decode for raw data and visual shape
+for data summary.\footnote{Sidiropoulos et al. (2018)}
+Figure~\ref{fig-sina} is actually a combination of a SinaPlot and a
+violin plot.
 
 \begin{figure}
 
@@ -6001,8 +6235,14 @@ plots}\label{case-study-kiviat-plots-or-radar-plots-or-spider-plots}
 
 (David Peebles (2008))
 
-\section{Case study: Barycentric plots (ternary
-plots)}\label{case-study-barycentric-plots-ternary-plots}
+\section{Case study: 2D density
+plots}\label{case-study-2d-density-plots}
+
+Stat summary visualised
+
+Compare with visual summary of density of points
+
+Different pros for each approach
 
 \section{Dangers of multiple
 mappings}\label{dangers-of-multiple-mappings}
@@ -6101,11 +6341,11 @@ plot naturally corresponds to a larger quantity. Basic visual features,
 like length, are effective thanks to \textbf{pre-existing} decodings
 that are built-in features of our visual system.
 
-Part of the power of visual objects also comes from
-\textbf{pre-existing} decodings. However, these decodings are
-\textbf{learned} rather than being built-in. In some cases, we are able
-to \textbf{decode} values from a visual feature based on prior
-experience and learning, rather than due to an explicit encoding
+Part of the power of \textbf{visual objects} also comes from
+pre-existing decodings. However, these decodings are \textbf{learned}
+rather than being built-in. In some cases, we are able to
+\textbf{decode} values from a visual feature based on prior experience
+and learning, rather than due to an implicit encoding
 (Figure~\ref{fig-learned-decode}).\footnote{``Mapping Color to Meaning
   in Colormap Data Visualizations'' Schloss et al (2018) They call this
   an ``inferred mapping''}
@@ -6189,7 +6429,7 @@ different shape per country}
 
 \begin{quote}
 A plot that uses visual objects as data symbols can be effective because
-the visual objects can convey information based on learned associations.
+the visual objects can convey information based on learned decodings.
 \end{quote}
 
 Figure~\ref{fig-flags-direct} also demonstrates a weakness of
@@ -6200,7 +6440,7 @@ reliably identify the difference between their two flags.
 
 \begin{quote}
 A plot that uses visual objects as data symbols may \emph{not} be
-effective if the learned associations are not widely known.
+effective if the learned decodings have not been learned by all viewers.
 \end{quote}
 
 \section{Case study: Choropleth maps}\label{sec-choropleth}
@@ -6648,14 +6888,22 @@ also with stop (versus green for go), plus also passion, or even
 anger.\footnote{Cite ``Sometimes more is more: iterative participatory
   design of infographics for engagement of community members with
   varying levels of health literacy'' Arcia et al (2016) where people
-  interpret icons in multiple ways, e.g., specifically ``pineapple''
-  rather than generic ``fruit''. Also cite something about cultural
-  differences in perception. e.g., ``More of what? Dissociating effects
-  of conceptual and numeric mappings on interpreting colormap data
-  visualizations'' Soto et al (2023)} Furthermore, many associations are
-specific to a particular culture. For example, red is associated with
-luck and prosperity in Chinese culture, among other things.\footnote{``A
-  Study on the Metaphor of ``Red'' in Chinese Culture'' Qiang (2011)}
+  interpret icons in multiple ways, e.g.~specifically ``pineapple''
+  rather than generic ``fruit''.
+
+  Also cite something about cultural differences in perception. e.g.,
+  ``More of what? Dissociating effects of conceptual and numeric
+  mappings on interpreting colormap data visualizations'' Soto et al
+  (2023)
+
+  ``Review of Graph Comprehension Research: Implications for
+  Instruction'' Shah and Hoeffner (2002) Give example of ambiguous
+  colour association ``green means profitable for financial managers but
+  infected for health care workers (Brockmann, 1991)''} Furthermore,
+many associations are specific to a particular culture. For example, red
+is associated with luck and prosperity in Chinese culture, among other
+things.\footnote{``A Study on the Metaphor of ``Red'' in Chinese
+  Culture'' Qiang (2011)}
 
 Relying on a learned decoding can cause confusion if there are multiple
 possible decodings. It may not be clear which data value should be
@@ -6695,8 +6943,24 @@ Employing a learned decoding incorrectly can at best weaken and at worst
 destroy the effectiveness of a data visualisation.
 \end{quote}
 
-\section{The dangers of visual
-objects}\label{the-dangers-of-visual-objects}
+\section{Case study: Barycentric plots (ternary
+plots)}\label{case-study-barycentric-plots-ternary-plots}
+
+Main encoding is three proportions, each to oblique axis (and at least
+two non-vertical and non-horizontal) =\textgreater{} retrieval of
+individual proportions difficult BUT get emergent feature of position
+within triangle from interaction of three position encodings
+(\href{combine.html}{Combining Mappings}) =\textgreater{} overall
+proportion combination retrievable IF you can decode position within
+triangle
+
+Example of plot that requires learning to decode
+(Section~\ref{sec-learned-danger}).
+
+Could do plot of Maori vs European vs Other proportions for different
+years?
+
+\section{Dangers of visual objects}\label{dangers-of-visual-objects}
 
 One issue with more complex data visualisations is that their
 effectiveness depends on a larger amount of learning and experience. If
@@ -6707,7 +6971,15 @@ country flags will vary with nationality and age, for example.
 
 An extreme version of this problem is the use of not just complex or
 unusual data symbols, but entirely novel data visualisations.\footnote{Kosslyn's
-  Principle of appropriate knowledge ?}
+  Principle of appropriate knowledge ?
+
+  Could mention Pinker's (1990) ``graph schema'' (prior knowledge about
+  a graph type).
+
+  Shah and Hoeffner (2002) provides several examples of young students
+  misinterpreting the message from line plots, which suggests that we
+  need to \emph{learn} how to make effective use of even basic data
+  visualisation formats.}
 
 Andrews curve of RWCperGame statistics (analogue of
 Figure~\ref{fig-parallel}). \textbf{Cite Andrews article.} Can see the
@@ -7120,8 +7392,9 @@ per-game averages) for teams in the 2023 Rugby World Cup.}
 Figure~\ref{fig-ann} also demonstrates that text is an effective way of
 directing attention (Section~\ref{sec-attention}).\\
 Text labels can explicitly describe data values or, more usefully, data
-summaries that the data visualisation is designed to show.\footnote{Mention
-  idea of top-down as opposed to bottom-up attention. With cite.}
+summaries that the data visualisation is designed to show.
+
+\textbf{REFER} to Section~\ref{sec-attention}.
 
 \section{Case study: Word clouds}\label{sec-word-cloud}
 
@@ -7491,6 +7764,25 @@ icon plot in Figure~\ref{fig-pic-icon-1}. However, whereas an icon can
 easily be used to represent some multiple of objects, that option is not
 available for text digits.
 
+\section{Case study: Direct
+Labelling}\label{case-study-direct-labelling}
+
+some sort of ggrepel version of the flags example in visual-objects?
+
+relate visual objects (other than text) to direct labelling?
+
+``Review of Graph Comprehension Research: Implications for Instruction''
+Shah and Hoeffner (2002) {[}p 56{]} Some quotes from discussion of
+usefulness of colour, but in relation to the use of legends: ``reduce
+the difficulty viewers face in keeping track of graphic referents
+because of the demands imposed on working memory'' {[}p 57{]} Cites
+Kosslyn (1994) for ``label graph features directly with their
+referents''
+
+``A Model of the Perceptual and Conceptual Processes in Graph
+Comprehension'' Carpenter and Shah (1998) Eye tracking study ``viewers
+must continuously reexamine the labels to refresh their memory''
+
 \section{Dangers of text}\label{dangers-of-text}
 
 Figure~\ref{fig-text-danger} shows a data visualisation of the number of
@@ -7836,8 +8128,8 @@ World Cup.}
 
 \end{figure}%
 
-\section{The dangers of inconsistent
-mappings}\label{the-dangers-of-inconsistent-mappings}
+\section{Dangers of inconsistent
+mappings}\label{dangers-of-inconsistent-mappings}
 
 Figure~\ref{fig-trump-bill} shows a bar plot of the impact of a proposed
 tax bill during the second Trump administration.\footnote{Based on plot
@@ -8002,6 +8294,16 @@ Position is especially important
 Add review at the end that reinforces the threads like visual feature,
 visual shape, visual object and mappings
 
+Basic questions:
+
+\begin{itemize}
+\tightlist
+\item
+  What are you asking the visual system to do?
+\item
+  Is the visual system good at that task?
+\end{itemize}
+
 Present process by which a data vis can be broken down. What data
 symbols are being used? (simple or complex) What mappings are being
 used? What do we want to decode? (data or summaries) If mapping back to
@@ -8112,6 +8414,12 @@ Communication}. 1st ed. San\,Francisco, CA: New Riders.
 ---------. 2019. \emph{How Charts Lie: Getting Smarter about Visual
 Information}. First. New York: W.~W. Norton \& Company.
 
+\bibitem[\citeproctext]{ref-carpenter1998graph}
+Carpenter, Patricia A., and Priti Shah. 1998. {``A Model of the
+Perceptual and Conceptual Processes in Graph Comprehension.''}
+\emph{Journal of Experimental Psychology: Applied} 4 (2): 75--100.
+\url{https://doi.org/10.1037/1076-898X.4.2.75}.
+
 \bibitem[\citeproctext]{ref-chernoff1973faces}
 Chernoff, Herman. 1973. {``The Use of Faces to Represent Points in
 k-Dimensional Space Graphically.''} \emph{Journal of the American
@@ -8161,6 +8469,11 @@ and Jessica Hullman. 2021. {``The Science of Visual Data Communication:
 What Works.''} \emph{Psychological Science in the Public Interest} 22
 (3): 110--61. \url{https://doi.org/10.1177/15291006211051956}.
 
+\bibitem[\citeproctext]{ref-gregory1963distortion}
+Gregory, Richard L. 1963. {``Distortion of Visual Space as Inappropriate
+Constancy Scaling.''} \emph{Nature} 199 (4894): 678--80.
+\url{https://doi.org/10.1038/199678a0}.
+
 \bibitem[\citeproctext]{ref-healy2018data}
 Healy, Kieran. 2018. \emph{Data Visualization: A Practical
 Introduction}. Princeton, NJ: Princeton University Press.
@@ -8171,27 +8484,71 @@ Perception: Using Mechanical Turk to Assess Visualization Design.''} In
 \emph{Proceedings of the SIGCHI Conference on Human Factors in Computing
 Systems}, 203--12. ACM.
 
+\bibitem[\citeproctext]{ref-howe2005muller}
+Howe, Piers D. L., and Dale Purves. 2005. {``The m{ü}ller-Lyer Illusion
+Explained by the Statistics of Image--Source Relationships.''}
+\emph{Proceedings of the National Academy of Sciences} 102 (4):
+1234--39. \url{https://doi.org/10.1073/pnas.0409314102}.
+
 \bibitem[\citeproctext]{ref-nz-doctor}
 Huskinson, Peter. 2024. {``Follow the Money to See What Budget 2024
 Spends on Health.''} \emph{New Zealand Doctor Rata Aotearoa}.
 \url{https://www.nzdoctor.co.nz/article/opinion/follow-money-see-what-budget-2024-spends-health}.
 
+\bibitem[\citeproctext]{ref-itti-koch-niebur}
+Itti, L., C. Koch, and E. Niebur. 1998. {``A Model of Saliency-Based
+Visual Attention for Rapid Scene Analysis.''} \emph{IEEE Transactions on
+Pattern Analysis and Machine Intelligence} 20 (11): 1254--59.
+\url{https://doi.org/10.1109/34.730558}.
+
 \bibitem[\citeproctext]{ref-karstenChartsAndGraphs}
 Karsten, Karl G. 1925. \emph{Charts and Graphs}. Prentice-Hall.
+
+\bibitem[\citeproctext]{ref-Knudsen2020EvolutionOfNeuralProcessing}
+Knudsen, Eric I. 2020. {``Evolution of Neural Processing for Visual
+Perception in Vertebrates.''} \emph{Journal of Comparative Neurology}
+528: 2888--2901. \url{https://doi.org/10.1002/cne.24871}.
 
 \bibitem[\citeproctext]{ref-kosslyn1989understanding}
 Kosslyn, Stephen M. 1989. {``Understanding Charts and Graphs.''}
 \emph{Applied Cognitive Psychology} 3 (3): 185--225.
+
+\bibitem[\citeproctext]{ref-KUNNAPASTM1955AAOT}
+Künnapas, T M. 1955. {``An Analysis of the "Vertical-Horizontal
+Illusion".''} \emph{Journal of Experimental Psychology} 49 (2): 134--40.
 
 \bibitem[\citeproctext]{ref-mackinlay1986automatic}
 Mackinlay, Jock. 1986. {``Automatic Design of Graphical Presentations of
 Relational Information.''} \emph{ACM Transactions on Graphics (TOG)} 5
 (2): 110--41.
 
+\bibitem[\citeproctext]{ref-MAROIS2005296}
+Marois, René, and Jason Ivanoff. 2005. {``Capacity Limits of Information
+Processing in the Brain.''} \emph{Trends in Cognitive Sciences} 9 (6):
+296--305.
+https://doi.org/\url{https://doi.org/10.1016/j.tics.2005.04.010}.
+
+\bibitem[\citeproctext]{ref-DVS}
+Matzen, Laura E., Michael J. Haass, Kristin M. Divis, Zhiyuan Wang, and
+Andrew T. Wilson. 2018. {``Data Visualization Saliency Model: A Tool for
+Evaluating Abstract Data Visualizations.''} \emph{IEEE Transactions on
+Visualization and Computer Graphics} 24 (1): 563--73.
+\url{https://doi.org/10.1109/TVCG.2017.2743939}.
+
 \bibitem[\citeproctext]{ref-MCKEE198425}
 Mckee, Suzanne P., and Ken Nakayama. 1984. {``The Detection of Motion in
 the Peripheral Visual Field.''} \emph{Vision Research} 24 (1): 25--32.
 https://doi.org/\url{https://doi.org/10.1016/0042-6989(84)90140-8}.
+
+\bibitem[\citeproctext]{ref-miller1956magical}
+Miller, George A. 1956. {``The Magical Number Seven, Plus or Minus Two:
+Some Limits on Our Capacity for Processing Information.''}
+\emph{Psychological Review} 63 (2): 81--97.
+\url{https://doi.org/10.1037/h0043158}.
+
+\bibitem[\citeproctext]{ref-muller1889optische}
+Müller-Lyer, Franz Carl. 1889. {``Optische Urteilst{ä}uschungen.''}
+\emph{Archiv f{ü}r Physiologie Suppl.}, 263--70.
 
 \bibitem[\citeproctext]{ref-munzner2014visualization}
 Munzner, Tamara. 2014. \emph{Visualization Analysis and Design}. CRC
@@ -8235,6 +8592,11 @@ Visual Tasks.''} Oxford University Press.
 \bibitem[\citeproctext]{ref-schwabish}
 Schwabish, Jonathan A. 2020. {``Ten Guidelines for Better Tables.''}
 \emph{Journal of Benefit-Cost Analysis} 11 (2): 151--78.
+
+\bibitem[\citeproctext]{ref-Shah2002}
+Shah, Priti, and James Hoeffner. 2002. {``Review of Graph Comprehension
+Research: Implications for Instruction.''} \emph{Educational Psychology
+Review} 14 (1): 47--69. \url{https://doi.org/10.1023/A:1013180410169}.
 
 \bibitem[\citeproctext]{ref-Sidiropoulos03072018}
 Sidiropoulos, Nikos, Sina Hadi Sohi, Thomas Lin Pedersen, Bo Torben
@@ -8280,6 +8642,20 @@ Theus, Martin, and Simon Urbanek. 2008. \emph{Interactive Graphics for
 Data Analysis: Principles and Examples}. 1st ed. Boca Raton, FL: Chapman
 \& Hall/CRC.
 
+\bibitem[\citeproctext]{ref-titchener1901experimental}
+Titchener, Edward Bradford. 1916. \emph{Experimental Psychology: A
+Manual of Laboratory Practice. Vol 1. Qualitative Experiments. Part i:
+Student's Manual.} New York, NY : Macmillan Publishing,.
+
+\bibitem[\citeproctext]{ref-Todorovic:2008}
+Todorovic, D. 2008. {``{G}estalt Principles.''} \emph{Scholarpedia} 3
+(12): 5345. \url{https://doi.org/10.4249/scholarpedia.5345}.
+
+\bibitem[\citeproctext]{ref-TREISMAN1985156}
+Treisman, Anne. 1985. {``Preattentive Processing in Vision.''}
+\emph{Computer Vision, Graphics, and Image Processing} 31 (2): 156--77.
+https://doi.org/\url{https://doi.org/10.1016/S0734-189X(85)80004-9}.
+
 \bibitem[\citeproctext]{ref-tufte1983visual}
 Tufte, Edward R. 1983. \emph{The Visual Display of Quantitative
 Information}. Cheshire, Connecticut: Graphics Press.
@@ -8307,6 +8683,12 @@ Unwin, Antony, Martin Theus, and Heike Hofmann. 2006. \emph{Graphics of
 Large Datasets: Visualizing a Million}. 1st ed. Statistics and
 Computing. New York, NY: Springer Science \& Business Media.
 \url{https://doi.org/10.1007/0-387-37977-0}.
+
+\bibitem[\citeproctext]{ref-vanessen1992information}
+Van Essen, David C., Charles H. Anderson, and Daniel J. Felleman. 1992.
+{``Information Processing in the Primate Visual System: An Integrated
+Systems Perspective.''} \emph{Science} 255 (5043): 419--23.
+\url{https://doi.org/10.1126/science.1734518}.
 
 \bibitem[\citeproctext]{ref-annurev-statistics-031219-041252}
 Vanderplas, Susan, Dianne Cook, and Heike Hofmann. 2020. {``Testing
@@ -8341,6 +8723,11 @@ Statistician} 53 (3): 276--81.
 \bibitem[\citeproctext]{ref-wilkinson2005}
 ---------. 2005. \emph{The Grammar of Graphics}. Second edition. New
 York: Springer.
+
+\bibitem[\citeproctext]{ref-Wolfe2017FiveFactors}
+Wolfe, Jeremy M., and Todd S. Horowitz. 2017. {``Five Factors That Guide
+Attention in Visual Search.''} \emph{Nature Human Behaviour} 1 (3):
+0058. \url{https://doi.org/10.1038/s41562-017-0058}.
 
 \bibitem[\citeproctext]{ref-zhang1996representational}
 Zhang, Jiajie. 1996. {``A Representational Analysis of Relational

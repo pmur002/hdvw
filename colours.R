@@ -9,3 +9,6 @@ col1 <- 40
 col2 <- 180
 col3 <- 0
 cols <- hcl(c(col1, col2, col3), highhcl[2], c(70, 60, 60))
+
+colsDarker <- darken(cols, .3)
+colsDarkest <- darken(colsDarker, .3)

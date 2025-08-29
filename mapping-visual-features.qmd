@@ -215,7 +215,7 @@ grid.circle(c(.3, .7), .5, r=unit(c(1, 3), "mm"), gp=gpar(fill="black"))
 popViewport()
 pushViewport(viewport(layout.pos.row=5, layout.pos.col=2))
 grid.text("colour", x=0, just="right")
-grid.circle(c(.3, .7), .5, r=unit(2, "mm"), gp=gpar(fill=2:3))
+grid.circle(c(.3, .7), .5, r=unit(2, "mm"), gp=gpar(fill=cols[1:2]))
 popViewport()
 pushViewport(viewport(layout.pos.row=6))
 grid.rect(gp=gpar(col=NA, fill="grey90"))
@@ -265,14 +265,14 @@ represent all of the information in the data values.[^matching-data-type]
 Some types of data contain more information than others:
 
 [^matching-data-type]:
-  The idea of matching the type of data---nominal, ordinal, interval, or
-  ratio---as well as the categorisation of visual feature types
-  is described in @zhang1996representational.  @munzner2014visualization,
-  following @mackinlay1986automatic,
-  refers to this idea as "expressiveness"
-  (vs "effectiveness" which is more about accuracy).
-  Pinker 1990, p. 111 talks about the different types of data
-  that can be extracted from different visual representations.
+    The idea of matching the type of data---nominal, ordinal, interval, or
+    ratio---as well as the categorisation of visual feature types
+    is described in @zhang1996representational.  @munzner2014visualization,
+    following @mackinlay1986automatic,
+    refers to this idea as "expressiveness"
+    (vs "effectiveness" which is more about accuracy).
+    Pinker 1990, p. 111 talks about the different types of data
+    that can be extracted from different visual representations.
 
 * **Quantitative** data consists of numeric values, which naturally
   possess not only an ordering, but information about the size
@@ -530,22 +530,24 @@ from visual features.  For example, how well can we perceive the size of the
 difference between the length of two bars?[^accuracy-research]
 
 [^accuracy-research]:
-  The pioneering work on the accuracy of different visual features
-  for statistical graphics was carried out by @cleveland1984graphical.
-  Their results have been replicated several times in subsequent 
-  studies, including @heer2010crowdsourcing.
-  The rankings were extended to a larger set of visual features
-  by @mackinlay1986automatic, although somewhat only by inference from other
-  psychophyscial results, rather than by direct experiment.
-  An argument for ranking the accuracy of visual features can also be
-  made from Steven's Law [@stevens1957psychophysics], which states that
-  the perception
-  of the magnitude of different stimuli follows a power law.
-  For example, the 
-  perception of length has a power of approximately one (linear), which
-  suggests that we accurately perceive the magnitude of lengths,
-  while area has a power less than one, which
-  suggests that we underestimate the magnitude of areas.
+    The pioneering work on the accuracy of different visual features
+    for statistical graphics was carried out by @cleveland1984graphical.
+    Their results have been replicated several times in subsequent 
+    studies, including @heer2010crowdsourcing.
+    The rankings were extended to a larger set of visual features
+    by @mackinlay1986automatic, although somewhat only by inference from other
+    psychophyscial results, rather than by direct experiment.
+    An argument for ranking the accuracy of visual features can also be
+    made from Steven's Law [@stevens1957psychophysics], which states that
+    the perception
+    of the magnitude of different stimuli follows a power law.
+    For example, the 
+    perception of length has a power of approximately one (linear), which
+    suggests that we accurately perceive the magnitude of lengths,
+    while area has a power less than one, which
+    suggests that we underestimate the magnitude of areas.
+
+    Mention Weber law and Steven's law here?
 
 It is easy to demonstrate that judgements of this sort are harder
 for some visual features than others.
@@ -596,18 +598,18 @@ ranking will be more effective than one that encodes data values
 as visual features near the bottom.
 
 [^candm]:
-  In @cleveland1984graphical, 
-  comparisons of bars were treated as **position** judgements
-  rather than **length** judgements, unless the bars were unaligned
-  (see @sec-unaligned), so this table is a slightly fuzzy representation
-  of their results.  However, the general ordering of visual features
-  is basically consistent with @cleveland1984graphical.
-  **NEED** to mention that these rankings are based on perceiving
-  part-of-whole (what proportion of A is B?).
-  Cite studies that look at rankings relative to other tasks
-  McColeman et al (2021)
-  Davis et al (2022)
-
+    In @cleveland1984graphical, 
+    comparisons of bars were treated as **position** judgements
+    rather than **length** judgements, unless the bars were unaligned
+    (see @sec-unaligned), so this table is a slightly fuzzy representation
+    of their results.  However, the general ordering of visual features
+    is basically consistent with @cleveland1984graphical.
+    **NEED** to mention that these rankings are based on perceiving
+    part-of-whole (what proportion of A is B?).
+    Cite studies that look at rankings relative to other tasks
+    McColeman et al (2021)
+    Davis et al (2022)
+ 
 ```{r}
 #| echo: false
 #| label: fig-accuracy
@@ -672,7 +674,21 @@ the lengths of the bars.
 When we are visualising **qualitative** data values, we are no longer
 concerned with accurately perceiving the size of differences;
 all we are concerned with is perceiving whether two values are 
-different.  For example, can we perceive a difference between two colours?
+different or the same.
+To be slightly more precise, we are concerned with being able to
+identify different values:  which colour is this one?[^identify]
+
+[^identify]:
+    The question "Which one is this?" is different from 
+    the question "Are these two different?".
+    The former involves "absolute judgements" [@miller1956magical]
+    to identify a stimulus from a known set of stimuli.
+    The latter involves relative judgements and just-noticeable differences
+    (JND), which is considerably easier and something we have a much
+    higher sensitivity to (CITE please !).
+
+**THIS NEEDS** a revisit - check again on Munzner's expressiveness
+and discriminability (see notes in DataVis/Resources)
 
 The issue in this scenario is the **capacity** of a visual feature:
 how many different categories can be represented (and still perceived
@@ -688,6 +704,9 @@ of colours.[^colour-capacity]
    identification is required, especially if the symbols are to be
    used against a variety of backgrounds."
   Ware 4th ed [G4.18] p 126.
+  "Choosing Effective Colours for Data Visualization"
+  Healey (1996) actually says 7 (and talks about colour distance,
+  colour linearity and colour category!).
   Also cite the study that shows how capacity depends on whether
   points are spread out or arranged regularly ?
 

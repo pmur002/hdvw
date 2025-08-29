@@ -99,11 +99,11 @@ Basic visual features, like length, are effective thanks
 to **pre-existing** decodings that are built-in features
 of our visual system.
 
-Part of the power of visual objects also comes from **pre-existing** decodings.
+Part of the power of **visual objects** also comes from pre-existing decodings.
 However, these decodings are **learned** rather than being built-in.
 In some cases, we are able to **decode**
 values from a visual feature based on prior experience and learning,
-rather than due to an explicit encoding (@fig-learned-decode).[^inferred]
+rather than due to an implicit encoding (@fig-learned-decode).[^inferred]
 
 [^inferred]:
     "Mapping Color to Meaning in Colormap Data Visualizations"
@@ -198,7 +198,7 @@ ggplot(RWCperGame) +
 
 > A plot that uses visual objects as data symbols can be effective
   because the visual objects can convey information based on learned
-  associations.
+  decodings.
 
 @fig-flags-direct also demonstrates a weakness of **visual objects**.
 The flags work well for identifying the country names *only if*
@@ -207,7 +207,7 @@ For example, it may only be Australians and New Zealanders who can
 reliably identify the difference between their two flags.
 
 > A plot that uses visual objects as data symbols may *not* be effective
-  if the learned associations are not widely known.
+  if the learned decodings have not been learned by all viewers.
 
 ## Case study: Choropleth maps {#sec-choropleth}
 
@@ -828,7 +828,7 @@ actual **colour** of the letters---the colour names that we learn
 as children.
 
 [^stroop]:
-  citation please!
+    citation please!
 
 ```{r}
 #| echo: false
@@ -851,20 +851,28 @@ culture.  For example, red is associated with luck and
 prosperity in Chinese culture, among other things.[^red-china]
 
 [^red-china]:
-  "A Study on the Metaphor of “Red” in Chinese Culture"
-  Qiang (2011)
+    "A Study on the Metaphor of “Red” in Chinese Culture"
+    Qiang (2011)
 
 [^Arcia]:
-  Cite "Sometimes more is more: iterative participatory design of infographics 
-  for engagement of community members with varying levels of health literacy"
-  Arcia et al (2016)
-  where people interpret icons
-  in multiple ways, e.g., specifically "pineapple" rather than generic "fruit".
-  Also cite something about cultural differences in perception.
-  e.g., 
-  "More of what? Dissociating effects of conceptual and numeric mappings on 
-  interpreting colormap data visualizations"
-  Soto et al (2023)
+    Cite "Sometimes more is more: iterative participatory design of infographics
+    for engagement of community members with varying levels of health literacy"
+    Arcia et al (2016)
+    where people interpret icons
+    in multiple ways, e.g. specifically "pineapple" rather than generic "fruit".
+
+    Also cite something about cultural differences in perception.
+    e.g., 
+    "More of what? Dissociating effects of conceptual and numeric mappings on 
+    interpreting colormap data visualizations"
+    Soto et al (2023)
+
+    "Review of Graph Comprehension Research: Implications for Instruction"
+    Shah and Hoeffner (2002)
+    Give example of ambiguous colour association
+    "green means profitable for financial managers but infected for health care
+    workers (Brockmann, 1991)"
+
 
 Relying on a learned decoding can cause confusion if there are multiple
 possible decodings.  It may not be clear
@@ -904,7 +912,23 @@ learned decodings.
 > Employing a learned decoding incorrectly can at best weaken and
   at worst destroy the effectiveness of a data visualisation.
 
-## The dangers of visual objects
+## Case study: Barycentric plots (ternary plots)
+
+Main encoding is three proportions, each to oblique axis 
+(and at least two non-vertical and non-horizontal)
+=> retrieval of individual proportions difficult
+BUT get emergent feature of position within triangle
+from interaction of three position encodings
+([Combining Mappings](combine.html))
+=> overall proportion combination retrievable
+IF you can decode position within triangle
+
+Example of plot that requires learning to decode 
+(@sec-learned-danger).
+
+Could do plot of Maori vs European vs Other proportions for different years?
+
+## Dangers of visual objects
 
 One issue with more complex data visualisations 
 is that their effectiveness depends on a larger amount of
@@ -920,7 +944,14 @@ or unusual
 data symbols, but entirely novel data visualisations.[^novel-plot]
 
 [^novel-plot]:
-  Kosslyn's Principle of appropriate knowledge ?
+    Kosslyn's Principle of appropriate knowledge ?
+
+    Could mention Pinker's (1990) "graph schema" (prior knowledge about
+    a graph type).
+
+    @Shah2002 provides several examples of young students misinterpreting
+    the message from line plots, which suggests that we need to *learn*
+    how to make effective use of even basic data visualisation formats.
 
 Andrews curve of RWCperGame statistics
 (analogue of @fig-parallel).

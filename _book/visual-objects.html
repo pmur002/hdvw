@@ -246,8 +246,9 @@ div.csl-indent {
   <li><a href="#case-study-pictograms" id="toc-case-study-pictograms" class="nav-link" data-scroll-target="#case-study-pictograms"><span class="header-section-number">12.4</span> Case study: Pictograms</a></li>
   <li><a href="#case-study-chernoff-faces" id="toc-case-study-chernoff-faces" class="nav-link" data-scroll-target="#case-study-chernoff-faces"><span class="header-section-number">12.5</span> Case study: Chernoff faces</a></li>
   <li><a href="#sec-learned-danger" id="toc-sec-learned-danger" class="nav-link" data-scroll-target="#sec-learned-danger"><span class="header-section-number">12.6</span> Dangers of learned mappings</a></li>
-  <li><a href="#the-dangers-of-visual-objects" id="toc-the-dangers-of-visual-objects" class="nav-link" data-scroll-target="#the-dangers-of-visual-objects"><span class="header-section-number">12.7</span> The dangers of visual objects</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">12.8</span> Summary</a></li>
+  <li><a href="#case-study-barycentric-plots-ternary-plots" id="toc-case-study-barycentric-plots-ternary-plots" class="nav-link" data-scroll-target="#case-study-barycentric-plots-ternary-plots"><span class="header-section-number">12.7</span> Case study: Barycentric plots (ternary plots)</a></li>
+  <li><a href="#dangers-of-visual-objects" id="toc-dangers-of-visual-objects" class="nav-link" data-scroll-target="#dangers-of-visual-objects"><span class="header-section-number">12.8</span> Dangers of visual objects</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">12.9</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -289,7 +290,7 @@ Figure&nbsp;12.1: A scatter plot with a different shape per country
 </div>
 </div>
 <p><a href="#fig-flags" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> shows another scatter plot of the number of clean breaks and the number of tries for countries at the 2023 Rugby World Cup, but this time with flags as the data symbols. In one sense, this is just a variation on <a href="#fig-scatter-country" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> because the country names are encoded as the <strong>shape</strong> of a data symbol. Each data symbol is a shape that allows us to distinguish between the different countries.</p>
-<p>The difference between the data symbols in <a href="#fig-scatter-country" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> and the data symbols on <a href="#fig-flags" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> is that the flags are not only more complicated shapes, but they are familiar shapes. The flags convey differences, but they also convey the more sophisticated concept of the country names. In the terms of <a href="visual-model.html#sec-visual-processing" class="quarto-xref"><span>Section 2.4</span></a>, the flags are <strong>visual objects</strong> that might take longer to process, but convey more information.</p>
+<p>The difference between the data symbols in <a href="#fig-scatter-country" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> and the data symbols on <a href="#fig-flags" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> is that the flags are not only more complicated shapes, but they are familiar shapes. The flags convey differences, but they also convey the more sophisticated concept of the country names. In the terms of <a href="visual-model.html#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>, the flags are <strong>visual objects</strong> that might take longer to process, but convey more information.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-flags" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -308,7 +309,7 @@ Figure&nbsp;12.2: A scatter plot with flags as data symbols
 <h2 data-number="12.1" class="anchored" data-anchor-id="sec-learned"><span class="header-section-number">12.1</span> Learned mappings</h2>
 <p>We <strong>encode</strong> data values as visual features so that the viewers of a data visualisation can <strong>decode</strong> the data values from the visual features (<a href="mapping-visual-features.html#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>).</p>
 <p>In <a href="congruence.html#sec-implicit" class="quarto-xref"><span>Section 7.1</span></a>, we saw that some encodings are effective because there are implicit decodings. For example, a longer bar in a bar plot naturally corresponds to a larger quantity. Basic visual features, like length, are effective thanks to <strong>pre-existing</strong> decodings that are built-in features of our visual system.</p>
-<p>Part of the power of visual objects also comes from <strong>pre-existing</strong> decodings. However, these decodings are <strong>learned</strong> rather than being built-in. In some cases, we are able to <strong>decode</strong> values from a visual feature based on prior experience and learning, rather than due to an explicit encoding (<a href="#fig-learned-decode" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Part of the power of <strong>visual objects</strong> also comes from pre-existing decodings. However, these decodings are <strong>learned</strong> rather than being built-in. In some cases, we are able to <strong>decode</strong> values from a visual feature based on prior experience and learning, rather than due to an implicit encoding (<a href="#fig-learned-decode" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div id="fig-learned-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-learned-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -365,11 +366,11 @@ Figure&nbsp;12.6: A scatter plot with a different shape per country
 </div>
 </div>
 <blockquote class="blockquote">
-<p>A plot that uses visual objects as data symbols can be effective because the visual objects can convey information based on learned associations.</p>
+<p>A plot that uses visual objects as data symbols can be effective because the visual objects can convey information based on learned decodings.</p>
 </blockquote>
 <p><a href="#fig-flags-direct" class="quarto-xref">Figure&nbsp;<span>12.5</span></a> also demonstrates a weakness of <strong>visual objects</strong>. The flags work well for identifying the country names <em>only if</em> we are familiar with all of the different flags. For example, it may only be Australians and New Zealanders who can reliably identify the difference between their two flags.</p>
 <blockquote class="blockquote">
-<p>A plot that uses visual objects as data symbols may <em>not</em> be effective if the learned associations are not widely known.</p>
+<p>A plot that uses visual objects as data symbols may <em>not</em> be effective if the learned decodings have not been learned by all viewers.</p>
 </blockquote>
 </section>
 <section id="sec-choropleth" class="level2" data-number="12.2">
@@ -707,8 +708,14 @@ Figure&nbsp;12.16: A visual feature may have more than one learned decoding, whi
 <p>Employing a learned decoding incorrectly can at best weaken and at worst destroy the effectiveness of a data visualisation.</p>
 </blockquote>
 </section>
-<section id="the-dangers-of-visual-objects" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="the-dangers-of-visual-objects"><span class="header-section-number">12.7</span> The dangers of visual objects</h2>
+<section id="case-study-barycentric-plots-ternary-plots" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="case-study-barycentric-plots-ternary-plots"><span class="header-section-number">12.7</span> Case study: Barycentric plots (ternary plots)</h2>
+<p>Main encoding is three proportions, each to oblique axis (and at least two non-vertical and non-horizontal) =&gt; retrieval of individual proportions difficult BUT get emergent feature of position within triangle from interaction of three position encodings (<a href="combine.html">Combining Mappings</a>) =&gt; overall proportion combination retrievable IF you can decode position within triangle</p>
+<p>Example of plot that requires learning to decode (<a href="#sec-learned-danger" class="quarto-xref"><span>Section 12.6</span></a>).</p>
+<p>Could do plot of Maori vs European vs Other proportions for different years?</p>
+</section>
+<section id="dangers-of-visual-objects" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="dangers-of-visual-objects"><span class="header-section-number">12.8</span> Dangers of visual objects</h2>
 <p>One issue with more complex data visualisations is that their effectiveness depends on a larger amount of learning and experience. If the viewer does not have the knowledge required to decode a visual object, then the data visualisation will fail. We saw an example of this in <a href="#fig-flags-direct" class="quarto-xref">Figure&nbsp;<span>12.5</span></a>, where the familiarity of different country flags will vary with nationality and age, for example.</p>
 <p>An extreme version of this problem is the use of not just complex or unusual data symbols, but entirely novel data visualisations.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
 <p>Andrews curve of RWCperGame statistics (analogue of <a href="multiple.html#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>). <strong>Cite Andrews article.</strong> Can see the three distinct groups of countries more easily in this than in parallel plot, but hard to understand exactly what you are seeing. Plus NO chance of recovering original data values (another example of visualising data summary).</p>
@@ -729,8 +736,8 @@ Figure&nbsp;12.17: An Andrews plot of the performance measures for teams in the 
 <p>Another example of this problem are the hurrican “cones of uncertainty” that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).</p>
 <p>Mention that little is known about the accuracy of visual objects (though they must have good capacity because they are more abstract, right?)<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>:</p>
 </section>
-<section id="summary" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">12.8</span> Summary</h2>
+<section id="summary" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">12.9</span> Summary</h2>
 <p>If we encode data values as familiar visual objects, it becomes possible to decode more complex concepts based on prior learning and experience.</p>
 <p>This may obviate the need for legends.</p>
 <hr>
@@ -739,6 +746,9 @@ Figure&nbsp;12.17: An Andrews plot of the performance measures for teams in the 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-chernoff1973faces" class="csl-entry" role="listitem">
 Chernoff, Herman. 1973. <span>“The Use of Faces to Represent Points in k-Dimensional Space Graphically.”</span> <em>Journal of the American Statistical Association</em> 68 (342): 361–68. <a href="https://doi.org/10.1080/01621459.1973.10482434">https://doi.org/10.1080/01621459.1973.10482434</a>.
+</div>
+<div id="ref-Shah2002" class="csl-entry" role="listitem">
+Shah, Priti, and James Hoeffner. 2002. <span>“Review of Graph Comprehension Research: Implications for Instruction.”</span> <em>Educational Psychology Review</em> 14 (1): 47–69. <a href="https://doi.org/10.1023/A:1013180410169">https://doi.org/10.1023/A:1013180410169</a>.
 </div>
 </div>
 </section>
@@ -761,9 +771,13 @@ Chernoff, Herman. 1973. <span>“The Use of Faces to Represent Points in k-Dimen
 <li id="fn10"><p><span class="citation" data-cites="chernoff1973faces">Chernoff (<a href="#ref-chernoff1973faces" role="doc-biblioref">1973</a>)</span><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>Link to a resource that has a comprehensive list of visual channels and includes curvature.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12"><p>citation please!<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13"><p>Cite “Sometimes more is more: iterative participatory design of infographics for engagement of community members with varying levels of health literacy” Arcia et al (2016) where people interpret icons in multiple ways, e.g., specifically “pineapple” rather than generic “fruit”. Also cite something about cultural differences in perception. e.g., “More of what? Dissociating effects of conceptual and numeric mappings on interpreting colormap data visualizations” Soto et al (2023)<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Cite “Sometimes more is more: iterative participatory design of infographics for engagement of community members with varying levels of health literacy” Arcia et al (2016) where people interpret icons in multiple ways, e.g.&nbsp;specifically “pineapple” rather than generic “fruit”.</p>
+<p>Also cite something about cultural differences in perception. e.g., “More of what? Dissociating effects of conceptual and numeric mappings on interpreting colormap data visualizations” Soto et al (2023)</p>
+<p>“Review of Graph Comprehension Research: Implications for Instruction” Shah and Hoeffner (2002) Give example of ambiguous colour association “green means profitable for financial managers but infected for health care workers (Brockmann, 1991)”<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p>“A Study on the Metaphor of “Red” in Chinese Culture” Qiang (2011)<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p>Kosslyn’s Principle of appropriate knowledge ?<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Kosslyn’s Principle of appropriate knowledge ?</p>
+<p>Could mention Pinker’s (1990) “graph schema” (prior knowledge about a graph type).</p>
+<p><span class="citation" data-cites="Shah2002">Shah and Hoeffner (<a href="#ref-Shah2002" role="doc-biblioref">2002</a>)</span> provides several examples of young students misinterpreting the message from line plots, which suggests that we need to <em>learn</em> how to make effective use of even basic data visualisation formats.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn16"><p>in general, there needs to be more explicit acknowledgement of the lack of experimental results for complex data vis scenarios. c.f., “Testing Statistical Charts: What Makes a Good Graph?” Vanderplas, Cook, and Hofmann (2020) p 71.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>

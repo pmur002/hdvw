@@ -243,7 +243,7 @@ div.csl-indent {
   <li><a href="#box-plots" id="toc-box-plots" class="nav-link active" data-scroll-target="#box-plots"><span class="header-section-number">8.1</span> Box plots</a></li>
   <li><a href="#sec-visual-summaries" id="toc-sec-visual-summaries" class="nav-link" data-scroll-target="#sec-visual-summaries"><span class="header-section-number">8.2</span> Visual summaries</a></li>
   <li><a href="#case-study-histograms" id="toc-case-study-histograms" class="nav-link" data-scroll-target="#case-study-histograms"><span class="header-section-number">8.3</span> Case study: Histograms</a></li>
-  <li><a href="#sec-summary-caveats" id="toc-sec-summary-caveats" class="nav-link" data-scroll-target="#sec-summary-caveats"><span class="header-section-number">8.4</span> The dangers of summaries</a></li>
+  <li><a href="#sec-summary-caveats" id="toc-sec-summary-caveats" class="nav-link" data-scroll-target="#sec-summary-caveats"><span class="header-section-number">8.4</span> Dangers of summaries</a></li>
   <li><a href="#case-study-how-charts-lie" id="toc-case-study-how-charts-lie" class="nav-link" data-scroll-target="#case-study-how-charts-lie"><span class="header-section-number">8.5</span> Case study: How charts lie</a></li>
   <li><a href="#simplification" id="toc-simplification" class="nav-link" data-scroll-target="#simplification"><span class="header-section-number">8.6</span> Simplification</a></li>
   <li><a href="#case-study-heatmaps" id="toc-case-study-heatmaps" class="nav-link" data-scroll-target="#case-study-heatmaps"><span class="header-section-number">8.7</span> Case study: Heatmaps</a></li>
@@ -394,6 +394,7 @@ Figure&nbsp;8.4: A data visualisation that encodes data values as visual feature
 <blockquote class="blockquote">
 <p>A dot plot is effective not just for perceiving raw data values, but also for perceving data summaries like clusters and outliers, and central tendency and spread.</p>
 </blockquote>
+<p><strong>ALSO MENTION</strong> textures here? Ware 4th ~p212 Large numbers of data symbols, especially in regular arrangement effectively create a set of textures that the visual system can identify and differentiate into regions(?) Refer back to <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>. May need to add something about texture as low-ish level visual feature back in visual model? NOTE that only small number of <em>distint</em> textures are possible.</p>
 </section>
 <section id="case-study-histograms" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="case-study-histograms"><span class="header-section-number">8.3</span> Case study: Histograms</h2>
@@ -510,7 +511,7 @@ Table&nbsp;8.2: A table of intervals the cover the range of the number of points
 </blockquote>
 </section>
 <section id="sec-summary-caveats" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="sec-summary-caveats"><span class="header-section-number">8.4</span> The dangers of summaries</h2>
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-summary-caveats"><span class="header-section-number">8.4</span> Dangers of summaries</h2>
 <p>The benefit of a data visualisation that encodes <strong>data summaries</strong> as visual features is that it allows us to decode data summaries very easily. For example, although we can perceive a general idea of central tendency from the dots in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> (see <a href="#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>), it is much easier and more accurate to perceive median values from the thick vertical lines in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.</p>
 <p>The flipside is that a data visualisation that encodes <strong>data summaries</strong> as visual features is <em>not</em> effective for decoding raw data values. For example, we cannot see from the box plot in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> that the scores 1, 2, 4, and 5 never occurred, while this is clear from <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> because the dot plot does map the raw data values to data symbols.</p>
 <blockquote class="blockquote">
@@ -608,6 +609,12 @@ Figure&nbsp;8.10: A data visualisation may map an unrepresentative or “cooked�
 <p>Graphics are for comparison - comparison of one kind or another - not for access to individual amounts. (Tukey 1993)</p>
 </blockquote>
 <p>… points out that reading individual values off a plot is not usually the point of a data vis, though it is still a precursor to making a comparison. In some ways, ordinal comparisons are more important than interval or ratio?</p>
+<ul>
+<li><p>For a footnote …</p>
+<p>“Chart and Graphs” Karsten (1925)</p>
+<p>This is the source of the “insult to man’s intelligence” remark about pie charts, though note the full quote:</p>
+<p>“In a sense, it might be construed as an insult to a man’s intelligence to show him a pie-chart, but the insult is not often resented. For if your main object be to get a story across, you are justified in taking that means which will encounter least resistance, and in making your story as simple as possible. For publicity purposes, the pie-chart is therefore almost invariably better than the bar.” [p98]</p></li>
+</ul>
 </section>
 <section id="case-study-heatmaps" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="case-study-heatmaps"><span class="header-section-number">8.7</span> Case study: Heatmaps</h2>
@@ -687,7 +694,7 @@ Wilkinson, Leland. 1999. <span>“Dot Plots.”</span> <em>The American Statisti
 <li id="fn1"><p>MUST make reference to the Information Visualization Reference Model of Card et al (1999) that differentiates data transforms from visual mappings from view transforms (the last particularly for interactive graphics?)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Need to acknowledge that there are many variations, even on the simple box plot, e.g., notches, definitions of the box, let alone violin plots, etc.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p><span class="citation" data-cites="Wilkinson01081999">Wilkinson (<a href="#ref-Wilkinson01081999" role="doc-biblioref">1999</a>)</span><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). ALSO must relate this to Gestalt section in visual model ?<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). Mention “subitizing” (rapid identification of counts below a certain threshold) Ware 4th p 173. ALSO must relate this to Gestalt section in visual model ?<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Cite Anscombe’s quartet and the dinosaur one.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>This is a reproduction of a chart from Alberto Cairo’s “How Charts Lie” (p12-13), which itself was a reproduction of a chart shown by Fox News. (plus mention other classic how charts lie books like Huff’s How to Lie With Statistics ?) Also link to Wilke’s Principle of Proportional Ink?<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>

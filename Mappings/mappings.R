@@ -1,16 +1,7 @@
 
 library(grid)
 
-## Taken from top of how-data-vis-works.qmd
-highlight <- "#7D12BA"
-## Matching Diagrams/generate.R
-library(colorspace)
-highrgb <- col2rgb(highlight)/255
-highhcl <- coords(as(sRGB(highrgb[1], highrgb[2], highrgb[3]), "polarLUV"))
-col1 <- 40
-col2 <- 180
-col3 <- 0
-cols <- hcl(c(col1, col2, col3), highhcl[2], c(70, 60, 60))
+source("../colours.R")
 
 size <- 7
 usize <- unit(size, "mm")

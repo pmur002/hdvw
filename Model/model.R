@@ -2,7 +2,7 @@
 library(grid)
 
 model <- function(verbal=FALSE) {
-    grid.rect(gp=gpar(col=NA, fill=linearGradient(c("grey80", "white"),
+    grid.rect(gp=gpar(col=NA, fill=linearGradient(c("white", "grey80"),
                                                   x1=.5, x2=.5)))
     pushViewport(viewport(layout=grid.layout(5, 6)))
 
@@ -53,17 +53,19 @@ model <- function(verbal=FALSE) {
     label("\nserial", col, 1)
 
     col <- 6
-    label("concrete\n", col, 5)
+    label("simple\n", col, 5)
     pointer(col, 2:4)
-    label("\nabstract", col, 1)
+    label("\ncomplex", col, 1)
 
     col <- 4
-    label("cognitive\nload", col, 5)
+    label("preattentive\n", col, 5)
     pointer(col, 2:4)
+    label("\nattentive", col, 1)
 
     col <- 5
-    label("persistence\n", col, 5)
+    label("fleeting\n", col, 5)
     pointer(col, 2:4)
+    label("\npersistent", col, 1)
 
     popViewport()
 }
