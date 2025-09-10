@@ -9,17 +9,19 @@ source("common.R")
 
 Understanding why some mappings are more effective than others will
 depend upon an understanding of how the human visual system works.
-In particular, in order to understand the effectiveness of a mapping
+In order to understand the effectiveness of a mapping
 from information to a visual representation,
 we need to know how we get from visual representations
 back to the original information.
-In @sec-intro, we described a mapping as an
-**encoding** of information as a visual representation.
+
+We will talk about the conversion of data values to data symbols
+as an **encoding** of the data values.
+Later chapters will explore many different encodings.
 In this chapter, we will consider the reverse operation:
-the **decoding** of a visual representation back to the original information
+the **decoding** of data symbols back to data values
 (@fig-decode).
-The effectiveness of an **encoding** from data values to data symbols
-will depend on how well we can **decode** from the data symbols
+The effectiveness of an encoding from data values to data symbols
+will depend on how well we can decode from the data symbols
 back to data values.
 
 In this chapter we will establish a very simple model of the visual system, 
@@ -177,7 +179,7 @@ signals via the optic nerve to the brain.
 Processing of the 
 signals from the optic nerve occurs in several areas of the brain.[^essen]
 Very basic **visual features** are extracted first, such as 
-**position**, **angle**, and **colour**.[^feature-maps]
+**position**, **angle**, **colour**, and **patterns**.[^feature-maps]
 This low-level information is passed on and built upon 
 to produce higher-level visual elements, such as regions and **shapes**.
 Information is then also integrated from prior knowledge to assist with
@@ -189,10 +191,14 @@ faces.[^ware-model]
     in visual processing [@vanessen1992information].
 
 [^feature-maps]:
-    Low-level visual processing involves the creation of "feature maps"
+    Low-level visual processing involves the creation of *feature maps*
     that identify colours, edges, and orientations, 
     along with the spatial arrangement of those basic features
-    within the field of view.[@ware2021information, page=146]
+    within the field of view.[@ware2021information, p. 146]
+
+    Patterns, or *textures*, are perceived at a slightly higher level,
+    based on low-level perception of spatial frequencies (fine detail
+    versus coarse detail).
 
 [^ware-model]:
     A slightly more detailed overview is provided in
@@ -536,7 +542,7 @@ effortless even if the number of dots is much larger.[^pre-attentive]
 
 [^pre-attentive]:
     The ability to detect features without conscious effort
-    is called "pre-attentive" processing or "pop out"
+    is called *pre-attentive* processing or *pop out*
     [@TREISMAN1985156].
 
 ```{r}
@@ -835,8 +841,7 @@ on the right of @fig-gestalt-group.[^gestalt]
     The Connectedness Principle says that items that are connected to each
     other form a group.
     The Common Region Principle says that items within the same bounded
-    region form a group
-    by their "proximity", similarity, 
+    region form a group.
     @Todorovic:2008 provides a very accessible description
     of these principles and several others.
 
@@ -1223,7 +1228,7 @@ dev.off()
     in that, the stimulus described is a single line with three sets
     of arrows, as shown below.
 
-    ![](Images/muller-lyer.png).
+    ![](Images/muller-lyer.png)
 
     The Ebbinghaus Illusion is also known as the Titchener Illusion
     after its English-language populariser [@titchener1901experimental].

@@ -557,8 +557,9 @@ that help to explain how all data visualisations work.
 One concept that we will lean on very heavily is the idea of
 \textbf{mappings}: how is information being converted into a visual
 representation?\footnote{The idea of characterising a data visualisation
-  as a set of ``mappings'' from data values to visual representations is
-  based on ideas within the \emph{Grammar of Graphics} (Wilkinson 2005).}
+  as a set of \emph{mappings} from data values to visual representations
+  is based on ideas within the \emph{Grammar of Graphics} (Wilkinson
+  2005).}
 
 The most obvious mapping in a data visualisation involves the conversion
 of \textbf{data values} to \textbf{data symbols}
@@ -590,9 +591,6 @@ the \textbf{mappings} that it uses to represent \textbf{data values} as
 \textbf{data symbols}.}
 
 \end{figure}%
-
-We will talk about \textbf{encoding} information using a visual
-representation, for example, encoding data values as data symbols.
 
 The journey that we take throughout this book will involve exploring a
 variety of different ways that information can be mapped to a visual
@@ -699,7 +697,7 @@ This document is also aimed at a numerate audience, so we assume an
 appreciation of the importance of collecting the right data in the right
 way for the questions that we hope to answer.\footnote{We are assuming
   that the data we have is sufficient for the question(s) of interest
-  and contains no ``substantive'' problems, in the sense of Healy
+  and contains no \emph{substantive} problems, in the sense of Healy
   (2018).
 
   Examples of books that provide a more comprehensive treatment of the
@@ -744,16 +742,17 @@ mappings that it uses to \textbf{encode} data values as data symbols.
 
 Understanding why some mappings are more effective than others will
 depend upon an understanding of how the human visual system works. In
-particular, in order to understand the effectiveness of a mapping from
-information to a visual representation, we need to know how we get from
-visual representations back to the original information. In
-Chapter~\ref{sec-intro}, we described a mapping as an \textbf{encoding}
-of information as a visual representation. In this chapter, we will
-consider the reverse operation: the \textbf{decoding} of a visual
-representation back to the original information
-(Figure~\ref{fig-decode}). The effectiveness of an \textbf{encoding}
-from data values to data symbols will depend on how well we can
-\textbf{decode} from the data symbols back to data values.
+order to understand the effectiveness of a mapping from information to a
+visual representation, we need to know how we get from visual
+representations back to the original information.
+
+We will talk about the conversion of data values to data symbols as an
+\textbf{encoding} of the data values. Later chapters will explore many
+different encodings. In this chapter, we will consider the reverse
+operation: the \textbf{decoding} of data symbols back to data values
+(Figure~\ref{fig-decode}). The effectiveness of an encoding from data
+values to data symbols will depend on how well we can decode from the
+data symbols back to data values.
 
 In this chapter we will establish a very simple model of the visual
 system, which will help us to understand the effectiveness of the
@@ -815,17 +814,20 @@ Processing of the signals from the optic nerve occurs in several areas
 of the brain.\footnote{A rough estimate is that more than 50\% of the
   brain is involved in visual processing (Van Essen, Anderson, and
   Felleman 1992).} Very basic \textbf{visual features} are extracted
-first, such as \textbf{position}, \textbf{angle}, and
-\textbf{colour}.\footnote{Low-level visual processing involves the
-  creation of ``feature maps'' that identify colours, edges, and
+first, such as \textbf{position}, \textbf{angle}, \textbf{colour}, and
+\textbf{patterns}.\footnote{Low-level visual processing involves the
+  creation of \emph{feature maps} that identify colours, edges, and
   orientations, along with the spatial arrangement of those basic
-  features within the field of view.(Ware 2021, page=146)} This
-low-level information is passed on and built upon to produce
-higher-level visual elements, such as regions and \textbf{shapes}.
-Information is then also integrated from prior knowledge to assist with
-the identification of \textbf{objects}---things like trees, animals, and
-faces.\footnote{A slightly more detailed overview is provided in Ware
-  (2021) (page 20).}
+  features within the field of view.(Ware 2021, 146)
+
+  Patterns, or \emph{textures}, are perceived at a slightly higher
+  level, based on low-level perception of spatial frequencies (fine
+  detail versus coarse detail).} This low-level information is passed on
+and built upon to produce higher-level visual elements, such as regions
+and \textbf{shapes}. Information is then also integrated from prior
+knowledge to assist with the identification of \textbf{objects}---things
+like trees, animals, and faces.\footnote{A slightly more detailed
+  overview is provided in Ware (2021) (page 20).}
 
 \begin{figure}
 
@@ -1140,8 +1142,8 @@ For example, in Figure~\ref{fig-pop-colour-1} we can detect the one teal
 dot amongst the 24 orange dots without effort.
 Figure~\ref{fig-pop-colour-2} shows that this task remains effortless
 even if the number of dots is much larger.\footnote{The ability to
-  detect features without conscious effort is called ``pre-attentive''
-  processing or ``pop out'' (Treisman 1985).}
+  detect features without conscious effort is called
+  \emph{pre-attentive} processing or \emph{pop out} (Treisman 1985).}
 
 \begin{figure}
 
@@ -1368,9 +1370,8 @@ columns on the right of Figure~\ref{fig-gestalt-group}.\footnote{These
   that items that have the same colour or size form a group. The
   Connectedness Principle says that items that are connected to each
   other form a group. The Common Region Principle says that items within
-  the same bounded region form a group by their ``proximity'',
-  similarity, Todorovic (2008) provides a very accessible description of
-  these principles and several others.}
+  the same bounded region form a group. Todorovic (2008) provides a very
+  accessible description of these principles and several others.}
 
 \begin{figure}
 
@@ -1567,7 +1568,7 @@ sizes.\footnote{The original publication of the Muller-Lyer illusion (in
   German) is Müller-Lyer (1889), though in that, the stimulus described
   is a single line with three sets of arrows, as shown below.
 
-  \pandocbounded{\includegraphics[keepaspectratio]{Images/muller-lyer.png}}.
+  \pandocbounded{\includegraphics[keepaspectratio]{Images/muller-lyer.png}}
 
   The Ebbinghaus Illusion is also known as the Titchener Illusion after
   its English-language populariser (Titchener 1916).
@@ -1652,25 +1653,29 @@ properties of the visual system.
 
 \chapter{Visual Features}\label{sec-mapping-visual-features}
 
-We have established that the mappings from data values to data symbols
-are fundamental to a data visualisation. We have also established some
-basic properties of the visual system and we have identified three
-levels of visual processing: visual features, visual shapes, and visual
-objects.
+In Chapter~\ref{sec-intro}, we described a data visualisation as a set
+of \textbf{mappings} from data values to data symbols
+(Figure~\ref{fig-mappings}). In Chapter~\ref{sec-visual-system}, we
+established some basic properties of the visual system, which will help
+to explain how well the \textbf{encoding} of data values to data symbols
+can be reversed to \textbf{decode} from data symbols back to data values
+(Figure~\ref{fig-decode}). We also identified three levels of visual
+processing: visual features, visual shapes, and visual objects
+(Figure~\ref{fig-visual-processing}).
 
-There are many possible ways to map from data values to data symbols.
+There are many possible mappings between data values and data symbols.
 For example, in Section~\ref{sec-mappings}, we saw that the same data
 values could be mapped in different ways to produce different data
-visualisations (Figure~\ref{fig-crime} and
-Figure~\ref{fig-crime-heatmap}).
+visualisations (e.g., Figure~\ref{fig-crime} and
+Figure~\ref{fig-crime-heatmap}). The remainder of this book explores
+different sorts of mappings and why they are more or less effective for
+different purposes.
 
-On one hand, there are many possible encodings to choose from and, on
-the other hand, there are many possible data symbols to map to.
-
-In this section, we begin to explore different sorts of mappings,
-starting with the simplest case: each data value is encoded as a basic
-\textbf{visual feature} of a data symbol; and \textbf{one} data value
-maps to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
+In this section, we start with a very simple sort of mapping. We will
+begin to explore data visualisations where each data value is
+\textbf{encoded} as a basic \textbf{visual feature} of a data symbol.
+Furthermore, in these data visualisations, \textbf{one} data value is
+mapped to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
 
 \begin{figure}
 
@@ -1690,17 +1695,19 @@ maps to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
 
 \caption{\label{fig-visual-feature}A simple data visualisation encodes
 each data value as a \textbf{visual feature} of a data symbol. Each data
-value (\texttt{a}) is mapped to a visual feature (\texttt{x}) of a
+value (\texttt{x}) is mapped to a visual feature (\texttt{a}) of a
 single data symbol.}
 
 \end{figure}%
 
 \section{Bar plots}\label{bar-plots}
 
-In order to demonstrate mapping data values to visual features, we will
-work with a data visualisation of the total number of crimes for
-different ethnic groups. The data values are shown in
-Table~\ref{tbl-crime-group-total}.
+A good example of this sort of simple mapping is a bar plot. In order to
+demonstrate bar plots, we will work with a data set containing the total
+number of offenders aged 14 to 16 in New Zealand between 2011 and 2021,
+for different ethnic groups. The data values are shown in
+Table~\ref{tbl-crime-group-total}. A bar plot of these data is shown in
+Figure~\ref{fig-bar}.
 
 \begin{longtable}[t]{lr}
 
@@ -1720,24 +1727,6 @@ Unknown & 5632\\
 
 \end{longtable}
 
-A bar plot of these data is shown in Figure~\ref{fig-bar}. This is a
-very effective way to visualise the total values, particularly if we are
-interested in comparing the raw totals. With this data visualisation, it
-is very easy to answer questions like the following:
-
-\begin{itemize}
-\tightlist
-\item
-  Which ethnic group has the largest total number of offenders?
-\item
-  Which ethnic group has the smallest total number of offenders?
-\item
-  Is the total number of offenders higher for Māori or Pasifika?
-\item
-  Is the total number of offenders for European/Other more or less than
-  half the total for Māori?
-\end{itemize}
-
 \begin{figure}
 
 \centering{
@@ -1752,23 +1741,46 @@ horizontal bars.}
 
 \end{figure}%
 
-Why is the data visualisation in Figure~\ref{fig-bar} so effective? To
-help answer that question, we need to look at the encoding that is being
-used to map the data values to data symbols.
+We can see that, for each data value in
+Table~\ref{tbl-crime-group-total}, there is a single bar in the bar
+plot. For example, each total number of offenders is mapped to a single
+bar.
+
+In terms of \textbf{decoding} ((\textbf{fid-decode?})), this means that
+we can decode individual data values from each data symbol. For example,
+we can decode a single total number of offenders from each
+bar.\footnote{citation for surjective, injective, bijective
+
+  Adam has a nice example in his thesis Figure 4.5, a simpler version of
+  which is a line or bar plot that contains a ``total'' line or bar -
+  the visual objects do not map neatly, and disjointly to subsets of the
+  data - there is overlap. This makes mapping back to the data harder or
+  at least more ambiguous ?}
+
+This allows us to answer simple questions about individual data values.
+For example, what is the largest total number of offenders?
 
 \section{Visual features}\label{visual-features}
 
-The data symbols in Figure~\ref{fig-bar} are a set of rectangles or
-bars. However, the important visual feature of the rectangles is their
-\textbf{length}; the thickness of the bars does not relate to the data
-values at all (see Figure~\ref{fig-length}). The total number of crimes
-for each ethnic group is encoded as the length of a rectangle. Each data
-value is mapped to the length of one rectangle.\footnote{In the classic
-  Cleveland and McGill formulation, the encoding is data value to
-  \textbf{position} of bar end. I prefer to use length, but it does not
-  matter too much because both position and length are good. NOTE the
-  reading that questions whether people use the decoding that the data
-  vis author intended Hill and Imokhai (2025)}
+The data symbols in Figure~\ref{fig-bar} are a set of bars or, put more
+simply, rectangles. We have seen that each data value from
+Table~\ref{tbl-crime-group-total} is mapped to one of these rectangles.
+For example, each total number of offenders is mapped to a rectangle.
+
+However, we can look more closely at the mapping and consider how
+individual data values are being \textbf{encoded} as a data symbol. For
+example, the total number of offenders for each ethnic group is encoded
+as the \textbf{length} of a rectangle (Figure~\ref{fig-length}). Each
+data value is mapped to the length of one rectangle.\footnote{Some
+  authors prefer to say that the total number of offenders is mapped to
+  the \textbf{position} of the ``top'' of the rectangle (e.g., William
+  S. Cleveland and McGill 1984), but the difference is not significant
+  because both length and position are excellent visual features in
+  terms of decoding (Section~\ref{sec-accuracy}).
+
+  It is also worth noting that there can be a discrepancy between the
+  encoding that the creator of a data visualisation employs and the
+  decoding that the viewer chooses to use (Hill and Imokhai 2025).}
 
 \begin{figure}
 
@@ -1784,10 +1796,10 @@ mapped to the \textbf{lengths} of the bars (the purple lines).}
 
 \end{figure}%
 
-There is another mapping being used in Figure~\ref{fig-bar}: The crime
-group is encoded as the vertical \textbf{positions} of the bars (see
-Figure~\ref{fig-position}). Each group value is mapped to the vertical
-position of one rectangle.
+Each ethnic group data value in Table~\ref{tbl-crime-group-total} is
+also mapped to a rectangle in Figure~\ref{fig-bar}. In terms of
+\textbf{encodings}, each ethnic group is encoded as the vertical
+\textbf{position} of one rectangle (Figure~\ref{fig-position}).
 
 \begin{figure}
 
@@ -1804,24 +1816,11 @@ mapped to the \textbf{positions} of the bars (the purple dots).}
 \end{figure}%
 
 \textbf{Length} and \textbf{position} are examples of basic visual
-features. One way to make an effective data visualisation is to encode
-data values as the basic visual features of a data symbol. This is
-effective because basic visual features are identified rapidly and
-without conscious effort by our visual system
-(Section~\ref{sec-visual-processing}). Figure~\ref{fig-visual-features}
-shows some other examples of basic visual features.\footnote{Mention
-  different terminologies: visual feature vs visual channel vs visual
-  dimension.
-
-  Acknowledge that a much larger list has been considered and evaluated
-  by different researchers. For example p26 of ``Better data
-  visualizations'' Jonathan Schwabish. There should also be some stuff
-  from research articles in DataVis/README
-
-  Also acknowledge that there is not a one-to-one correspondence between
-  visual features that are initially perceived by visual system and the
-  visual channels of Cleveland and Mcgill, but it is a useful
-  simplification to elide them.}
+features (Section~\ref{sec-visual-processing}). One way to make an
+effective data visualisation is to encode data values as the basic
+visual features of a data symbol. This is effective because basic visual
+features are identified rapidly and without conscious effort by our
+visual system.
 
 \begin{figure}
 
@@ -1831,16 +1830,11 @@ shows some other examples of basic visual features.\footnote{Mention
 
 }
 
-\caption[\label{fig-visual-features}Some examples of basic visual
+\caption{\label{fig-visual-features}Some examples of basic visual
 features are \textbf{position}, \textbf{length}, \textbf{angle},
-\textbf{area}, \textbf{colour}, and \textbf{shape}.]{\label{fig-visual-features}Some examples of basic visual
-features are \textbf{position}, \textbf{length}, \textbf{angle},
-\textbf{area}, \textbf{colour}, and \textbf{shape}.\footnotemark{}}
+\textbf{area}, \textbf{colour}, and \textbf{pattern}.}
 
 \end{figure}%
-\footnotetext{Talk about
-  this being a quite small list; munzner has more, and Wolfe and
-  Horowitz 2004 suggest 20? (see Pomerantz and Cragin (2014))}
 
 \begin{quote}
 One reason why a bar plot is an effective data visualisation is because
@@ -1849,11 +1843,37 @@ data symbols---the positions and lengths of bars---and basic visual
 features are processed rapidly and subconsciously by our visual system.
 \end{quote}
 
+Figure~\ref{fig-visual-features} shows some other examples of basic
+visual features that are commonly used to encode data values in a data
+visualisation.\footnote{In this book, we use \emph{visual feature} to
+  describe a basic visual quality of a data symbol, in place of more
+  established terms like \emph{visual variable} (Bertin 1983),
+  \emph{aesthetic} (Wilkinson 2005), or \emph{visual channel} (Munzner
+  2014).
+
+  This choice of terminology is deliberate so that we can elide the
+  basic visual quality of a data symbol with the early stages of visual
+  processing (Section~\ref{sec-visual-processing}). There is not a
+  direct correspondence between these two concepts, but it is a useful
+  simplification.
+
+  There are also differences in terminology for individual visual
+  features. For example, we use angle where others use \emph{tilt} or
+  \emph{slope} and the underlying visual feature is typically referred
+  to as \emph{orientation}.
+
+  The use of pattern for data point \emph{shape} is the most tenuous
+  connection. Data point shape is commonly included as a visual channel,
+  so we provide a connection to basic visual features via the early
+  perception of patterns, even though there is more involved in the
+  perception of data point shape Li, Wijk, and Martens (2009).} We will
+explore each of these in more detail in the following sections.
+
 \section{Quantitative features}\label{sec-quant-features}
 
 As we discussed in Chapter~\ref{sec-visual-system}, the real purpose of
 encoding data values as data symbols is to make use of the visual system
-to \textbf{decode} the data values from the data symbols. In this
+to \textbf{decode} back to data values from the data symbols. In this
 section, we are considering mappings from data values to basic visual
 features, so we need to consider how well we are able to \textbf{decode}
 from \textbf{visual features} to \textbf{data values}
@@ -1878,10 +1898,8 @@ all of the information in the data values.\footnote{The idea of matching
   the type of data---nominal, ordinal, interval, or ratio---as well as
   the categorisation of visual feature types is described in Zhang
   (1996). Munzner (2014), following Mackinlay (1986), refers to this
-  idea as ``expressiveness'' (vs ``effectiveness'' which is more about
-  accuracy). Pinker 1990, p.~111 talks about the different types of data
-  that can be extracted from different visual representations.} Some
-types of data contain more information than others:
+  idea as \emph{expressiveness}.} Some types of data contain more
+information than others:
 
 \begin{itemize}
 \item
@@ -1908,7 +1926,7 @@ types of data contain more information than others:
 Figure~\ref{fig-quant-features} shows that \textbf{position},
 \textbf{length}, \textbf{angle}, and \textbf{area} are visual features
 that are capable of representing \textbf{quantitative} data values. For
-example, a bar that is twice as high as another bar comfortably
+example, a bar that is twice as long as another bar comfortably
 represents a data value that is twice as much as another data value. All
 but \textbf{position} also possess a natural representation of zero.
 
@@ -1927,10 +1945,12 @@ quantitative data values.}
 \end{figure}%
 
 By contrast, Figure~\ref{fig-not-quant} shows that \textbf{colour} and
-\textbf{shape} are \emph{not} capable of representing quantitative
+\textbf{pattern} are \emph{not} capable of representing quantitative
 values. For example, the colour blue is not twice the colour green and a
-plus sign is not 10 more than a triangle. In effect, these visual
-representations \emph{lose} information.
+plus sign is not 10 more than a triangle. We can tell that there are
+three \emph{different} values, but in effect, these visual
+representations \emph{lose} information. It is not possible to decode
+the data values from the visual represenations.
 
 \begin{figure}
 
@@ -1941,7 +1961,8 @@ representations \emph{lose} information.
 }
 
 \caption{\label{fig-not-quant}The visual features \textbf{colour} and
-\textbf{shape} are not capable of visualising quantitative data values.}
+\textbf{pattern} are not capable of visualising quantitative data
+values.}
 
 \end{figure}%
 
@@ -1963,7 +1984,7 @@ feature}, the lengths of the bars.
 If we have \textbf{qualitative} data, then we are primarily concerned
 with conveying whether data values are the same or different.
 Figure~\ref{fig-qual-features} shows that \textbf{position},
-\textbf{colour}, and \textbf{shape} are capable of representing
+\textbf{colour}, and \textbf{pattern} are capable of representing
 qualitative data values. For example, blue is clearly different from
 green, which is clearly different from brown. In
 Section~\ref{sec-visual-model-groups} we saw that we also easily
@@ -1978,7 +1999,7 @@ identify visual objects that have the same visual features.
 }
 
 \caption{\label{fig-qual-features}The visual features \textbf{colour},
-\textbf{shape}, and \textbf{position} are capable of representing
+\textbf{pattern}, and \textbf{position} are capable of representing
 different groups.}
 
 \end{figure}%
@@ -2029,23 +2050,26 @@ the difference between the length of two bars?\footnote{The pioneering
   studies, including Heer and Bostock (2010). The rankings were extended
   to a larger set of visual features by Mackinlay (1986), although
   somewhat only by inference from other psychophyscial results, rather
-  than by direct experiment. An argument for ranking the accuracy of
-  visual features can also be made from Steven's Law (Stevens 1957),
-  which states that the perception of the magnitude of different stimuli
-  follows a power law. For example, the perception of length has a power
-  of approximately one (linear), which suggests that we accurately
-  perceive the magnitude of lengths, while area has a power less than
-  one, which suggests that we underestimate the magnitude of areas.
+  than by direct experiment.
 
-  Mention Weber law and Steven's law here?}
+  Munzner (2014), following Mackinlay (1986), refers to this idea as
+  \emph{effectiveness}.
+
+  An argument for ranking the accuracy of visual features can also be
+  made from Steven's Law (Stevens 1957), which states that the
+  perception of the magnitude of different stimuli follows a power law.
+  For example, the perception of length has a power of approximately one
+  (linear), which suggests that we accurately perceive the magnitude of
+  lengths, while area has a power less than one, which suggests that we
+  underestimate the magnitude of areas.}
 
 It is easy to demonstrate that judgements of this sort are harder for
 some visual features than others. For example,
 Figure~\ref{fig-accuracy-demo} presents sets of three bars, which differ
-by \textbf{length}, circles, which differ by \textbf{area}, and
-polygons, which differ by \textbf{shape} (number of sides). Judging the
+by \textbf{length}, circles, which differ by \textbf{area}, and stars,
+which differ by \textbf{pattern} (number of spikes). Judging the
 relative sizes of the bars is easier than judging the relative sizes of
-the circles and comparing the polygons is extremely difficult.
+the circles and decoding the stars is extremely difficult.
 
 \begin{figure}
 
@@ -2057,7 +2081,7 @@ the circles and comparing the polygons is extremely difficult.
 
 \caption{\label{fig-accuracy-demo}A demonstration of differences in
 accuracy between basic visual features. For each set of symbols, how
-much larger (or brighter) are the larger (or brighter) symbols?}
+much ``larger'' are the ``larger'' symbols?}
 
 \end{figure}%
 
@@ -2069,13 +2093,17 @@ with more accurate visual features at the top.\footnote{In William S.
   unless the bars were unaligned (see Section~\ref{sec-unaligned}), so
   this table is a slightly fuzzy representation of their results.
   However, the general ordering of visual features is basically
-  consistent with William S. Cleveland and McGill (1984). \textbf{NEED}
-  to mention that these rankings are based on perceiving part-of-whole
-  (what proportion of A is B?). Cite studies that look at rankings
-  relative to other tasks McColeman et al (2021) Davis et al (2022)} A
-data visualisation that encodes data values as visual features near the
-top of this ranking will be more effective than one that encodes data
-values as visual features near the bottom.
+  consistent with William S. Cleveland and McGill (1984).
+
+  These rankings are also based on a relative judgement (what proportion
+  of A is B?), which is just one possible decoding task, albeit a common
+  one, particularly for bar plots. The ranking of visual features may
+  differ for other sorts of decoding (McColeman et al. 2022). There is
+  also some evidence that the rankings may differ between individuals
+  even for simple relative judgements (Davis et al. 2024).} A data
+visualisation that encodes data values as visual features near the top
+of this ranking will be more effective than one that encodes data values
+as visual features near the bottom.
 
 \begin{figure}
 
@@ -2108,32 +2136,35 @@ When we are visualising \textbf{qualitative} data values, we are no
 longer concerned with accurately perceiving the size of differences; all
 we are concerned with is perceiving whether two values are different or
 the same. To be slightly more precise, we are concerned with being able
-to identify different values: which colour is this one?\footnote{The
-  question ``Which one is this?'' is different from the question ``Are
-  these two different?''. The former involves ``absolute judgements''
-  (Miller 1956) to identify a stimulus from a known set of stimuli. The
-  latter involves relative judgements and just-noticeable differences
-  (JND), which is considerably easier and something we have a much
-  higher sensitivity to (CITE please !).}
-
-\textbf{THIS NEEDS} a revisit - check again on Munzner's expressiveness
-and discriminability (see notes in DataVis/Resources)
+to \emph{identify} different values, for example, which colour, out of a
+set of known colours, is this one?\footnote{The question ``Which one is
+  this?'' is different from the question ``Are these two different?''.
+  The former involves ``absolute judgements'' (Miller 1956) to identify
+  a stimulus from a known set of stimuli. The latter involves relative
+  judgements and just-noticeable differences (JND), which are
+  considerably easier and something we have a much higher sensitivity
+  to. For example, we can differentiate between several million
+  different colours (Pointer and Attridge, n.d.), but we can only make
+  absolute judgements with up to 10 different colours.}
 
 The issue in this scenario is the \textbf{capacity} of a visual feature:
-how many different categories can be represented (and still perceived as
-clearly different from each other).
+how many different categories can be represented? In particular, how
+many different categories can be represented with the viewer able to
+reliably identify each separate category?
 
 Figure~\ref{fig-colour-cap} shows that \textbf{colour} has a limited
 capacity. A small number of different colours are very easy to
 differentiate, but the differences become harder to perceive with a
-greater number of colours.\footnote{``Do not use more than 10 colors for
-  coding symbols if reliable identification is required, especially if
-  the symbols are to be used against a variety of backgrounds.'' Ware
-  4th ed {[}G4.18{]} p 126. ``Choosing Effective Colours for Data
-  Visualization'' Healey (1996) actually says 7 (and talks about colour
-  distance, colour linearity and colour category!). Also cite the study
-  that shows how capacity depends on whether points are spread out or
-  arranged regularly ?}
+greater number of colours.\footnote{The recommended maximum number of
+  colours varies between sources. However, the consensus is that it is a
+  quite small number.
+
+  ``Do not use more than 10 colors for coding symbols if reliable
+  identification is required, especially if the symbols are to be used
+  against a variety of backgrounds.'' (Ware 2021 p 126).
+
+  Healey (1996) says the effective maximum is 7.} The difficulty only
+increases with irregular arrangements,
 
 \begin{figure}
 
@@ -2145,15 +2176,44 @@ greater number of colours.\footnote{``Do not use more than 10 colors for
 
 \caption{\label{fig-colour-cap}Mapping qualitative data values to colour
 works well for a small number of colours, but less well for a large
-number of colours. It is quite easy to distinguish between the three
-colours on the left and even between the seven colours in the middle,
-but it becomes harder for the eleven colours on the right.}
+number of colours. It is quite easy to identify which green the single
+dot corresponds to amongst three colours on the left and even amongst
+the seven colours in the middle, but it becomes harder for the eleven
+colours on the right.}
+
+\end{figure}%
+
+\textbf{Pattern} also has a very limited capacity
+(Figure~\ref{fig-pattern-cap}), again exacerbated by less regular
+arrangements.\footnote{The research evidence for the limited capacity of
+  pattern is suggestive rather than conclusive. The recommendations of
+  experts only extend to very small sets of patterns.
+
+  For example, William S. Cleveland (1985b) recommends using the
+  following set of patterns, in this order: \texttt{o}, \texttt{+},
+  \texttt{\textless{}}, \texttt{s}, and \texttt{w}.
+
+  Tremmel (1995) only provides guidance for three different patterns and
+  suggests using separate plots to accommodate a larger number of
+  categories (when relying on pattern).}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/mapping-visual-features_files/figure-pdf/fig-pattern-cap-1.pdf}
+
+}
+
+\caption{\label{fig-pattern-cap}Mapping qualitative data values to
+pattern works well for a small number of patterns, but less well for a
+large number of patterns.}
 
 \end{figure}%
 
 By contrast, Figure~\ref{fig-pos-cap} shows that \textbf{position} has a
-very large capacity. We can easily differentiate between locations even
-as the number of locations becomes large.
+greater capacity. We can easily identify the location of the single dot
+even as the number of alternative locations becomes large.
 
 \begin{figure}
 
@@ -2170,8 +2230,8 @@ of positions.}
 \end{figure}%
 
 The bar plot in Figure~\ref{fig-bar} encodes the ethnic group as the
-\textbf{position} of bars, which makes it easy to differentiate between
-the different ethnic groups.
+vertical \textbf{position} of bars, which makes it easy to identify the
+different ethnic groups.
 
 \begin{quote}
 One reason why a bar plot is effective for visualising
@@ -2180,18 +2240,15 @@ the groups, are encoded as a visual feature that has excellent
 \textbf{capacity}, the positions of the bars.
 \end{quote}
 
-\textbf{Need} to also mention limited capacity of point shapes?
-Footnote: ``Evaluation of symbol contrast in scatterplots'' Li et al
-(2009). Cleveland ``The Elements of Graphing Data'' 1994 {[}p239{]}
-suggests set of discriminable data point shapes: o, +, \textless, s, w,
-which is small, though no explicit mention of capacity limit.)
-
 \section{Case study: Dot plots}\label{sec-dot-plots}
 
 We have seen that, for several reasons, Figure~\ref{fig-bar} is an
 effective way to visualise the total number of offenders for different
 ethnic groups. Figure~\ref{fig-dot} shows an alternative representation
-of these data in the form of a dot plot (William S. Cleveland 1985a).
+of these data in the form of a dot plot\footnote{Dot plots (William S.
+  Cleveland 1985a) are different from scatter plots because they plot
+  one quantitative variable against (at least) one qualitative variable,
+  rather than plotting two quantitative variables against each other.}
 
 \begin{figure}
 
@@ -2206,16 +2263,21 @@ ethnic groups. The data symbols in this plot are the data points.}
 
 \end{figure}%
 
-Like the bar plot, this is a very effective data visualisation, and for
-very similar reasons. This data visualisation uses a different data
-symbol, data points instead of bars, but each data value is encoded as
-the basic visual feature of one data symbol. Furthermore, the
-quantitative data values (the totals) are encoded as the horizontal
-\textbf{position} of the points, which is a visual feature that is
-capable of representing numeric values and it is a very accurate visual
-feature, and the qualitative data values (the groups) are encoded as the
-vertical \textbf{position} of the points, which is a visual feature with
-a high capacity.
+Like a bar plot, a dot plot is an effective data visualisation, and for
+very similar reasons. Dot plots uses a different data symbol---data
+points instead of bars---but \textbf{each data value} is
+\textbf{encoded} as the basic \textbf{visual feature} of \textbf{one
+data symbol}. This means that we can \textbf{decode} individual data
+values from the data symbols and answer questions like: what is the
+difference in the number of offenders between Māori and European/Other?
+
+Furthermore, the quantitative data values (the totals) are encoded as
+the horizontal \textbf{position} of the points, which is a visual
+feature that is not only capable of representing numeric values, it is
+also a very accurate visual feature. The qualitative data values (the
+ethnic groups) are encoded as the vertical \textbf{position} of the
+points, which is a visual feature that is capable of representing
+qualitive data and is a visual feature with a high capacity.
 
 It could be argued that the dot plot in Figure~\ref{fig-dot} is even
 \emph{more} effective than the bar plot in Figure~\ref{fig-bar} for
@@ -2248,57 +2310,60 @@ wedges.}
 \end{figure}%
 
 The data symbols in Figure~\ref{fig-pie} are wedges or segments of a
-circle and, on the positive side, the data values are encoded as basic
-visual features of these symbols: The total values are encoded as the
-\textbf{angle} and/or \textbf{area} of the wedges and the group values
-are encoded as the \textbf{colour} of the wedges.\footnote{cite the
-  paper that looked at people decoding from area vs angle vs chord(!) vs
-  arc length(!) for pie charts ``The relative merits of circles and bars
-  for representing component parts.'' Eells (1926)} Although
+circle and again we have each data value mapping to a single data
+symbol. For example, each ethnic group maps to a separate wedge of the
+pie. As with bar plots and dot plots, in a pie chart the data values are
+encoded as basic visual features of these symbols. However, a pie chart
+makes use of different visual features: The total values are encoded as
+the \textbf{angle} and/or \textbf{area} of the wedges and the group
+values are encoded as the \textbf{colour} of the wedges.\footnote{We are
+  assuming here, as is common, that the viewer will decode from the
+  \textbf{angle} of pie wedges. That is not necessarily the case, for
+  example Eells (1926b) found evidence that viewers may decode from the
+  area, arc length, or even chord length of pie wedges. Fortunately, the
+  larger point holds, because most of these alternatives are relatively
+  poor visual features in terms of decoding accuracy.} Although
 \textbf{colour} is an appropriate visual feature to represent
 \textbf{qualitative} data, and it has sufficient capacity to
 differentiate between only four groups, the encoding of quantitative
 values as \textbf{angle} and/or \textbf{area} leads to less accurate
-perception of the differences between totals (compared to the lengths
-and positions encodings that were employed in the bar plot and the dot
-plot).
+decoding of the total number of offenders. For example, it is much
+harder to decode the number of offenders with an unknown ethinicity from
+the pie chart in Figure~\ref{fig-pie} compared to the bar plot in
+Figure~\ref{fig-bar} or the dot plot in Figure~\ref{fig-dot}.
+
+Although the situation seems bleak for pie charts, we have not yet seen
+all of the ways that we can assess different mappings of data values to
+data symbols. We will return to pie charts in
+Section~\ref{sec-part-to-whole} to show that all is not lost.
 
 \section{Summary}\label{summary-2}
 
-A bar plot is a very common data visualisation for representing numeric
-values, particularly counts, for several different groups. There are
-several reasons why bar plots work so well:
+A simple mapping of data values to data symbols involves mapping
+\textbf{each data value to a separate data symbol}. This allows the
+viewer to \textbf{decode} individual data values from the data symbols.
 
-\begin{itemize}
-\tightlist
-\item
-  A bar plot encodes data values as basic visual features, which are
-  perceived rapidly and without conscious effort.
-\item
-  A bar plot encodes the quantitative counts as a quantitative visual
-  feature (length) and the qualitative groups as a qualitative visual
-  feature (position).
-\item
-  A bar plot encodes the counts to a visual feature that is perceived
-  very accurately (length) and the groups to a visual feature that has a
-  high capacity (position).
-\end{itemize}
+A simple mapping of data values to data symbols also involves
+\textbf{encoding} each data value as a basic \textbf{visual feature} of
+the data symbol: position, length, area, angle, colour, and pattern.
+This is effective because visual features are decoded rapidly and
+without conscious effort.
 
-Dot plots are also very effective for the same scenario for the same
-reasons, except that a dot plot uses \textbf{position} instead of length
-to represent the quantitative values.
+Position, length, area, and angle are appropriate for encoding
+quantitative data because we can decode amounts from these visual
+features. We can decode position and length more accurately than area
+and angle.
 
-Pie charts by comparison have some weaknesses:
+Position, colour, and pattern are appropriate for encoding qualitative
+data because we can decode differences from these visual features. We
+can represent a large number of categories using position, but only a
+few categories using colours and patterns.
 
-\begin{itemize}
-\tightlist
-\item
-  A pie chart encodes quantitative counts as \textbf{angle} and/or
-  \textbf{area}, which is less accurate.
-\item
-  A pie chart encodes qualitative groups as \textbf{colour}, which has a
-  lower capacity.
-\end{itemize}
+Bar plots, dot plots, and pie charts all provide examples of simple
+mappings from data values to data symbol. We can decode bar plots and
+dot plots accurately because they involve encodings of data values to
+position and length. We cannot decode pie charts as accurately because
+they involve encoding data values to angle and area.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -2489,7 +2554,7 @@ visual features that are being compared are not in close proximity (see
 Figure~\ref{fig-distance-effect}).\footnote{The first demonstration of
   the ``distance effect'' is attributed to William S. Cleveland and
   McGill (1984). It has since been replicated several times, for
-  example, by Talbot et al. (2014).}
+  example, by Talbot et al. (2014) and Lu et al. (2021).}
 
 This helps to explain why Figure~\ref{fig-bar-district-ordered} is more
 effective than Figure~\ref{fig-bar-district} for some comparisons (e.g.,
@@ -3361,7 +3426,8 @@ scale on the x-axis in the bar plot that the bar for Māori is just below
 blue wedge in the pie chart is just under half a circle. It is also easy
 to see that the red wedge is close to a third of a circle.\footnote{Simkin
   and Hastie (1987) found empirical evidence that people judge
-  proportions better on pie charts than bar charts. So did Eells (1926).}
+  proportions better on pie charts than bar charts. So did Eells
+  (1926a).}
 
 \begin{figure}
 
@@ -4567,8 +4633,8 @@ ethnic group and count produces a single bar.
 
 \caption{\label{fig-two-visual-features}A simple data visualisation maps
 \textbf{two} data values to \textbf{two} visual features to create a
-data symbol. Each pair of data values (\texttt{a} and \texttt{b}) is
-mapped to two visual features (\texttt{x} and \texttt{y}) of a
+data symbol. Each pair of data values (\texttt{x} and \texttt{y}) is
+mapped to two visual features (\texttt{a} and \texttt{b}) of a
 \textbf{single} data symbol.}
 
 \end{figure}%
@@ -5323,8 +5389,8 @@ categories (Figure~\ref{fig-spine-weak}) or more variables
 
 \caption{\label{fig-data-vis-redundant}A redundant encoding maps a
 single data value to multiple visual features. Each data value
-(\texttt{a}) is mapped to not just one visual feature (\texttt{x}), but
-also a second visual feature (\texttt{y}), of a single data symbol. If
+(\texttt{x}) is mapped to not just one visual feature (\texttt{a}), but
+also a second visual feature (\texttt{b}), of a single data symbol. If
 we encode data values using multiple visual features, then multiple
 decodings are possible.}
 
@@ -5420,8 +5486,8 @@ produces a single data symbol (this is a reproduction of the diagram in
 Figure~\ref{fig-two-visual-features}). (b) A more complex data symbol is
 produced if we map \textbf{multiple} data values from each of two
 variables to two visual features of a \textbf{single} data symbol.
-Multiple data values from \texttt{a} and \texttt{b} are mapped to the
-visual features, \texttt{x} and \texttt{y}, of a single data symbol.
+Multiple data values from \texttt{x} and \texttt{y} are mapped to the
+visual features, \texttt{a} and \texttt{b}, of a single data symbol.
 Multiple pairs of values produce a single data symbol.}
 
 \end{figure}%
@@ -8008,6 +8074,12 @@ visualisation. Our visual system \textbf{decodes} the legend as a
 separate element based on the proximity of the text and points in the
 legend.
 
+\begin{quote}
+One way in which a data visualisation can be effective is if it provides
+information about how to read the plot as well as information about the
+data itself.
+\end{quote}
+
 Another way to say it is that each element of the data visualisation in
 Figure~\ref{fig-rep-guide} belongs to one of two groups: the main plot
 or the legend. There is a \textbf{qualitative} value, \texttt{plot} or
@@ -8028,17 +8100,6 @@ visualisation as position so that elements that are part of the same
 structure are close to each other.}
 
 \end{figure}%
-
-\begin{quote}
-An effective data visualisation has to convey information about how to
-read the plot as well as information about the data itself.
-\end{quote}
-
-\begin{quote}
-The structure or organisation of a data visualisation is a qualitative
-value that can be effectively encoded as the position of different
-elements.
-\end{quote}
 
 Figure~\ref{fig-align} shows a variation of Figure~\ref{fig-rep-guide},
 with exactly the same plot elements, but in a different arrangement.
@@ -8071,7 +8132,11 @@ separate element from the main plot and the axis titles more obviously
 connect to the main plot. A more orderly arrangement of the visual
 elements will provide fewer distractions and lead to a more effective
 data visualisation because the important differences in the data will be
-more readily perceived (Section~\ref{sec-differences}).
+more readily perceived (Section~\ref{sec-differences}).\footnote{``Bridging
+  Educational Theories of Cognitive Load to Visualization Design and
+  Evaluation'' Cabouat et al (2025) Shows that a more ``readable'' data
+  vis requires less mental effort to extract information. May get more
+  info from a closer reading of this paper.}
 
 The strong alignment and regular patterns within facetted plots like
 Figure~\ref{fig-facet-after} are another effective example of keeping
@@ -8276,6 +8341,10 @@ information about the data, we can map non-data information to visual
 features, to communicate important aspects of the structure of a data
 visualisation.
 
+The structure or organisation of a data visualisation is a qualitative
+value that can be effectively encoded as the position of different
+elements.
+
 Communicating structure helps the viewer to navigate within a data
 visualisation.
 
@@ -8373,6 +8442,10 @@ And so on \ldots{}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-bertin1983semiology}
+Bertin, Jacques. 1983. \emph{Semiology of Graphics: Diagrams, Networks,
+Maps}. Madison, WI: University of Wisconsin Press.
+
 \bibitem[\citeproctext]{ref-bertini-how-not-to-lie}
 Bertini, Enrico. 2025. {``How NOT to Lie with Charts.''}
 \url{https://filwd.substack.com/p/how-not-to-lie-with-charts}.
@@ -8421,6 +8494,11 @@ Perceptual and Conceptual Processes in Graph Comprehension.''}
 \emph{Journal of Experimental Psychology: Applied} 4 (2): 75--100.
 \url{https://doi.org/10.1037/1076-898X.4.2.75}.
 
+\bibitem[\citeproctext]{ref-chen1982topological}
+Chen, Lin. 1982. {``Topological Structure in Visual Perception.''}
+\emph{Science} 218 (4573): 699--700.
+\url{https://doi.org/10.1126/science.7134969}.
+
 \bibitem[\citeproctext]{ref-chernoff1973faces}
 Chernoff, Herman. 1973. {``The Use of Faces to Represent Points in
 k-Dimensional Space Graphically.''} \emph{Journal of the American
@@ -8454,11 +8532,25 @@ Cook, Dianne, and Deborah F. Swayne. 2007. \emph{Interactive and Dynamic
 Graphics for Data Analysis: With r and GGobi}. 1st ed. Use r! Springer
 New York. \url{https://doi.org/10.1007/978-0-387-71762-3}.
 
+\bibitem[\citeproctext]{ref-10.1109ux2fTVCG.2022.3226463}
+Davis, Russell, Xiaoying Pu, Yiren Ding, Brian D. Hall, Karen Bonilla,
+Mi Feng, Matthew Kay, and Lane Harrison. 2024. {``The Risks of Ranking:
+Revisiting Graphical Perception to Model Individual Differences in
+Visualization Performance.''} \emph{IEEE Transactions on Visualization
+and Computer Graphics} 30 (3): 1756--71.
+\url{https://doi.org/10.1109/TVCG.2022.3226463}.
+
 \bibitem[\citeproctext]{ref-78044e4a-01f4-3942-91fb-a9f8dacb4e28}
-Eells, Walter Crosby. 1926. {``The Relative Merits of Circles and Bars
+Eells, Walter Crosby. 1926a. {``The Relative Merits of Circles and Bars
 for Representing Component Parts.''} \emph{Journal of the American
 Statistical Association} 21 (154): 119--32.
 \url{http://www.jstor.org/stable/2277140}.
+
+\bibitem[\citeproctext]{ref-eells1926relative}
+---------. 1926b. {``The Relative Merits of Circles and Bars for
+Representing Component Parts.''} \emph{Journal of the American
+Statistical Association} 21 (154): 119--32.
+\url{https://doi.org/10.1080/01621459.1926.10502165}.
 
 \bibitem[\citeproctext]{ref-data_by_design_emory2021}
 Emory Digital Humanities Lab. 2021. {``Data\,by\,Design: An Interactive
@@ -8475,6 +8567,12 @@ Gregory, Richard L. 1963. {``Distortion of Visual Space as Inappropriate
 Constancy Scaling.''} \emph{Nature} 199 (4894): 678--80.
 \url{https://doi.org/10.1038/199678a0}.
 
+\bibitem[\citeproctext]{ref-568118}
+Healey, C. G. 1996. {``Choosing Effective Colours for Data
+Visualization.''} In \emph{Proceedings of Seventh Annual IEEE
+Visualization '96}, 263--70.
+\url{https://doi.org/10.1109/VISUAL.1996.568118}.
+
 \bibitem[\citeproctext]{ref-healy2018data}
 Healy, Kieran. 2018. \emph{Data Visualization: A Practical
 Introduction}. Princeton, NJ: Princeton University Press.
@@ -8484,6 +8582,13 @@ Heer, Jeffrey, and Michael Bostock. 2010. {``Crowdsourcing Graphical
 Perception: Using Mechanical Turk to Assess Visualization Design.''} In
 \emph{Proceedings of the SIGCHI Conference on Human Factors in Computing
 Systems}, 203--12. ACM.
+
+\bibitem[\citeproctext]{ref-doi:10.1177ux2f14738716251315912}
+Hill, Andrew, and Oshiorenua Imokhai. 2025. {``There's More Than One Way
+to Get Information from Infographic Glyphs: Evidence That People Use
+Both Area and Height to Extract Information.''} \emph{Information
+Visualization} 24 (3): 227--45.
+\url{https://doi.org/10.1177/14738716251315912}.
 
 \bibitem[\citeproctext]{ref-howe2005muller}
 Howe, Piers D. L., and Dale Purves. 2005. {``The m{ü}ller-Lyer Illusion
@@ -8518,6 +8623,19 @@ Kosslyn, Stephen M. 1989. {``Understanding Charts and Graphs.''}
 Künnapas, T M. 1955. {``An Analysis of the "Vertical-Horizontal
 Illusion".''} \emph{Journal of Experimental Psychology} 49 (2): 134--40.
 
+\bibitem[\citeproctext]{ref-4906843}
+Li, Jing, Jarke J. van Wijk, and Jean-Bernard Martens. 2009.
+{``Evaluation of Symbol Contrast in Scatterplots.''} In \emph{2009 IEEE
+Pacific Visualization Symposium}, 97--104.
+\url{https://doi.org/10.1109/PACIFICVIS.2009.4906843}.
+
+\bibitem[\citeproctext]{ref-lu2021modeling}
+Lu, Min, Joel Lanir, Chufeng Wang, Yucong Yao, Wen Zhang, Oliver
+Deussen, and Hui Huang. 2021. {``Modeling Just Noticeable Differences in
+Charts.''} \emph{IEEE Transactions on Visualization and Computer
+Graphics} 28 (1): 718--26.
+\url{https://doi.org/10.1109/TVCG.2021.3114874}.
+
 \bibitem[\citeproctext]{ref-mackinlay1986automatic}
 Mackinlay, Jock. 1986. {``Automatic Design of Graphical Presentations of
 Relational Information.''} \emph{ACM Transactions on Graphics (TOG)} 5
@@ -8535,6 +8653,12 @@ Andrew T. Wilson. 2018. {``Data Visualization Saliency Model: A Tool for
 Evaluating Abstract Data Visualizations.''} \emph{IEEE Transactions on
 Visualization and Computer Graphics} 24 (1): 563--73.
 \url{https://doi.org/10.1109/TVCG.2017.2743939}.
+
+\bibitem[\citeproctext]{ref-10.1109ux2fTVCG.2021.3114684}
+McColeman, Caitlyn M., Fumeng Yang, Timothy F. Brady, and Steven
+Franconeri. 2022. {``Rethinking the Ranks of Visual Channels.''}
+\emph{IEEE Transactions on Visualization and Computer Graphics} 28 (1):
+707--17. \url{https://doi.org/10.1109/TVCG.2021.3114684}.
 
 \bibitem[\citeproctext]{ref-MCKEE198425}
 Mckee, Suzanne P., and Ken Nakayama. 1984. {``The Detection of Motion in
@@ -8569,6 +8693,11 @@ Owen, G. Scott, Gitta Domik, Theresa-Marie Rhyne, Ken W. Brodlie, and
 Beatriz Sousa Santos. 1999. {``Definitions and Rationale for
 Visualization.''}
 \url{https://education.siggraph.org/static/HyperVis/visgoals/visgoal2.htm}.
+
+\bibitem[\citeproctext]{ref-pointer-attridge-1998}
+Pointer, M. R., and G. G. Attridge. n.d. {``The Number of Discernible
+Colours.''} \emph{Color Research \& Application} 23 (1): 52--54.
+https://doi.org/\url{https://doi.org/10.1002/(SICI)1520-6378(199802)23:1\%3C52::AID-COL8\%3E3.0.CO;2-2}.
 
 \bibitem[\citeproctext]{ref-pomerantz1994emergent}
 Pomerantz, James R., and Anna I. Cragin. 1994. {``Emergent Features and

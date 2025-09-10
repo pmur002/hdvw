@@ -168,8 +168,8 @@ frame <- function(label) {
 mapping <- function(hlData, hlSymbol,
                     nrData=4, ncData=3, 
                     nrSymbol=nrData, ncSymbol=ncData,
-                    rnData=1:nrData, cnData=letters[1:ncData],
-                    rnSymbol=rnData, cnSymbol=rev(letters)[ncData:1]) {
+                    rnData=1:nrData, cnData=rev(letters)[ncData:1],
+                    rnSymbol=rnData, cnSymbol=letters[1:ncData]) {
     grid.rect(gp=gpar(col=NA, fill="grey95"))
     pushViewport(viewport(layout=grid.layout(1, 5, widths=c(1, 2, 2, 2, 1))))
     pushViewport(viewport(layout.pos.col=2))
