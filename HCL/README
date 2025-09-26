@@ -1,0 +1,35 @@
+
++ HCL diagram using hcl(..., fixup=FALSE) to get boundaries of
+  sRGB space
+
+  ./hcl.R
+
+
++ Attempt to generate "optimal colour solid" spectral gamut in CIE Luv
+  (which is smoother than sharp-edged sRGB gamut)
+
+  See animation ...
+
+  https://en.wikipedia.org/wiki/CIELUV#Historical_background
+
+
++ Got Python code from Google search AI and that is generating  
+  a reasonable surface, though it needs the "line of purples" adding
+  (according to ChatGPT, that should just be a linear interpolation
+   between 380 and 700 in XYZ space)
+
+  ./cie-spectral-solid-boundary-google.py
+
+  IF can get that to be complete surface, then need to make
+  constant-L slices of it to create an HCL diagram of this smoother
+  gamut (the actual colours will be "fixed" sRGB, but the boundaries
+  should be smoother).
+
+  Need a 3D convex hull ?
+  May need CGAL  (there might be an RCGAL?  there is definitely an RcppCGAL)
+
+
++ Python code from Copilot does not seem to be doing as well ...
+
+  ./cie-spectral-solid-boundary.py
+
