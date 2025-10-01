@@ -13,23 +13,45 @@
   https://en.wikipedia.org/wiki/CIELUV#Historical_background
 
 
-+ Got Python code from Google search AI and that is generating  
-  a reasonable surface, though it needs the "line of purples" adding
-  (according to ChatGPT, that should just be a linear interpolation
-   between 380 and 700 in XYZ space)
++ NOTE that colorspace::max_chroma() just gives you the sRGB gamut
 
-  ./cie-spectral-solid-boundary-google.py
 
-  IF can get that to be complete surface, then need to make
-  constant-L slices of it to create an HCL diagram of this smoother
-  gamut (the actual colours will be "fixed" sRGB, but the boundaries
-  should be smoother).
++ package {colorSpec} 
 
-  Need a 3D convex hull ?
-  May need CGAL  (there might be an RCGAL?  there is definitely an RcppCGAL)
+  https://cran.r-project.org/web/packages/colorSpec/colorSpec.pdf
+
+  Has insideOptimalColors() function for testing points inside "object color
+  solid"
+
+  Also has D65
+
+  This vignette builds "sections" of optimal colour solid ?
+
+  https://cran.r-project.org/web/packages/colorSpec/vignettes/optimals.pdf
+
+  And colour matching functions ...
+
+  ?xyz1931  
+
+  Trick is how to generate set of "colorSpec" objects from Luv values ...
+
+
++ Got Python code from Google search AI and, after modified so that it
+  actually runs, plus addition so that it renders the complete surface 
+  (not just the "spectral pulses", but also their complements;  thanks
+  ChatGPT) is generating a reasonable surface
+
+  ./cie-spectral-solid-boundary.py
+
+
++ {gMOIP} package has inHull() for determining point inside convex hull
+  of other points
+
+  Can use geometry::convhulln() to only generate convex hull once
+  (to send to inHull())/
 
 
 + Python code from Copilot does not seem to be doing as well ...
 
-  ./cie-spectral-solid-boundary.py
+  ./cie-spectral-solid-boundary-copilot.py
 

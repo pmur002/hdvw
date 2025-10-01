@@ -1,0 +1,203 @@
+
+i want to generate points on the surface of the optimal colour solid - i can get one half of the surface from square spectral wave forms, but I am missing the other half of the surface.  Do I just flip the surface or do I need to do something with the line of purples?
+
+Short answer: You can’t get the full optimal-colour-solid surface by simply “flipping” the half you already have. The missing half comes from the complementary 0/1 spectra (and mixtures that produce the line of purples). Concretely, for a 3-channel colour system (e.g. CIE XYZ) the extreme reflectances that sit on the boundary are 0/1 step-functions with up to two wavelength transitions. That means you must include both the contiguous “pulse” spectra (one block of 1’s) and the complementary spectra (1 everywhere except that block) — and also allow convex combinations that give the line of purples between the two ends of the spectral locus.
+
+Below I explain why and give a practical algorithm + code you can drop into your workflow.
+
+Why “flip” alone is not enough
+
+The OCS (for reflectances constrained to 
+[
+0
+,
+1
+]
+[0,1]) is the convex image of all possible reflectance functions under the linear colour-matching transform. By Kreĭn–Milman / extreme-point arguments, the extreme reflectances are binary (0/1) and, for a 3-channel observer, require at most 2 transitions across wavelength.
+
+The single contiguous square pulse (one block of 1s, rest 0s) gives you points along the spectral locus (and part of the boundary). Its complement (a single contiguous block of 0s, with 1s elsewhere) is a different 0/1 function with two transitions and produces the other part of the boundary — numerically it is not just the negative (or simple flip) of the first half in XYZ space because the transform to XYZ is linear but the set of available reflectances is asymmetric (0..1), so complements produce distinct XYZ coordinates.
+
+The line of purples is the straight connection in chromaticity between the short-wavelength and long-wavelength ends of the spectral locus. Those points are obtained as convex combinations of two spectral endpoint colours (or equivalently as mixtures of 0/1 spectra that put energy at both ends). To reproduce that part of the OCS boundary you must allow mixtures / convex combinations (or include the two-block 0/1 spectra that place 1 at both ends and 0 in the middle).
+
+Practical recipe / algorithm
+
+Discretize wavelength range into 
+𝑁
+N samples and load your 3 colour matching functions 
+𝑥
+ˉ
+(
+𝜆
+)
+,
+𝑦
+ˉ
+(
+𝜆
+)
+,
+𝑧
+ˉ
+(
+𝜆
+)
+x
+ˉ
+(λ),
+y
+ˉ
+	​
+
+(λ),
+z
+ˉ
+(λ) (e.g. CIE 1931 2°).
+
+Generate all binary reflectances that are a single contiguous 1-block:
+
+for start index 
+𝑖
+i and end index 
+𝑗
+≥
+𝑖
+j≥i: r[k] = 1 for 
+𝑖
+≤
+𝑘
+≤
+𝑗
+i≤k≤j, else 0.
+
+(This produces the “spectral pulses”.)
+
+Also include their complements: r_comp = 1 - r.
+
+(These are the 1-except-for-one-block spectra; they are two-transition functions.)
+
+Optionally (or equivalently) include binary spectra that have two separated 1-blocks (i.e. 1 at both ends) — these produce the purple region directly when you let the second block be near the short wavelengths and the first near the long wavelengths.
+
+For each reflectance vector r, compute tristimulus 
+𝑋
+,
+𝑌
+,
+𝑍
+=
+∫
+𝑟
+(
+𝜆
+)
+ 
+𝑥
+ˉ
+,
+𝑦
+ˉ
+,
+𝑧
+ˉ
+ 
+d
+𝜆
+X,Y,Z=∫r(λ)
+x
+ˉ
+,
+y
+ˉ
+	​
+
+,
+z
+ˉ
+dλ (or discrete sum times Δλ).
+
+Collect all XYZ points and compute the convex hull of them (and optionally of their gamut when scaled by luminance if you want surfaces at different Y). The hull gives the OCS; the hull facets that lie between the two spectral ends correspond to the line of purples.
+
+If you want a smooth surface, sample start and end indices densely (or parametrize pulse width & position continuously) and include complements/2-block forms.
+
+Minimal Python snippet (drop in your CMFs)
+
+This does not fetch CMFs — pass them as arrays wavelengths and cmf (cmf shape (N,3)), but it shows the exact generation and convex hull step.
+
+import numpy as np
+from scipy.spatial import ConvexHull
+
+# wavelengths: 1D array length N
+# cmf: (N,3) array with columns [xbar, ybar, zbar]
+# delta: wavelength spacing (scalar)
+def generate_ocs_points(wavelengths, cmf, delta):
+    N = len(wavelengths)
+    pts = []
+
+    # all single contiguous pulses
+    for i in range(N):
+        for j in range(i, N):
+            r = np.zeros(N, dtype=float)
+            r[i:j+1] = 1.0
+            XYZ = (cmf * r[:,None]).sum(axis=0) * delta
+            pts.append(XYZ)
+
+            # include complement (1 - pulse)
+            r_comp = 1.0 - r
+            XYZc = (cmf * r_comp[:,None]).sum(axis=0) * delta
+            pts.append(XYZc)
+
+    # optional: also include two-block spectra (1 at two intervals)
+    # (useful if you want explicit purple-endpoint reflectances)
+    for i1 in range(N):
+        for j1 in range(i1, N):
+            for i2 in range(j1+1, N):
+                for j2 in range(i2, N):
+                    r2 = np.zeros(N, dtype=float)
+                    r2[i1:j1+1] = 1.0
+                    r2[i2:j2+1] = 1.0
+                    XYZ2 = (cmf * r2[:,None]).sum(axis=0) * delta
+                    pts.append(XYZ2)
+
+    pts = np.asarray(pts)  # shape (M,3)
+    # remove duplicates (numerical)
+    pts = np.unique(np.round(pts, decimals=12), axis=0)
+
+    # convex hull gives the boundary of the achievable XYZ set
+    hull = ConvexHull(pts)
+    hull_vertices = pts[hull.vertices]  # these are the boundary points (unordered)
+
+    return pts, hull, hull_vertices
+
+
+Notes:
+
+Use a reasonably fine wavelength sampling (e.g. 1 nm or 2 nm) so the discrete pulses approximate continuous step functions.
+
+Make sure delta (Δλ) matches your sampling spacing when integrating.
+
+If you want chromaticity boundary (xy), convert XYZ→xy for the hull vertices (but compute hull in XYZ to handle luminance correctly).
+
+The hull.vertices are indices of the extreme points; facets between the short- and long-wavelength endpoints are the line-of-purples region.
+
+How to check the line-of-purples is correct
+
+Identify the two hull vertices that correspond to the extreme short- and long-wavelength single-pulse spectra. The straight segment in chromaticity between them should be filled by hull facets or by the two-block spectra / complements (i.e., you’ll see the purple line appear as straight edges of the hull).
+
+If you do hull in XYZ space, the purple line is not a curved locus — it is a straight convex connection between the two spectral endpoints (because purple colours are non-spectral convex mixtures).
+
+Practical tips & gotchas
+
+If you only generate single pulses and then naively reflect (negate) the XYZ coordinates you’ll get nonsense: complements in reflectance space are not linear negations in XYZ.
+
+If computational cost is an issue, you don’t need to enumerate all two-block combinations; sampling start/width for one pulse and its complement is usually enough to get full hull coverage.
+
+If you want the full surface (not just hull vertices), sample densely (start, width) for pulses and complements and then compute the convex hull facets for a clean mesh.
+
+If your colour matching functions include negative lobes near ends, be careful with numerical rounding and with the physical interpretability of complements — but the 0/1 binary functions are still the mathematically correct extreme points.
+
+If you want, I can:
+
+adapt the snippet to your exact CMFs (you can paste the arrays or tell me which standard CMF you use), and run it and show a plotted chromaticity boundary / 3D hull mesh; or
+
+produce a compact generator that parametrizes the 0/1 functions by (start, width, complement-flag) and outputs a nicely sorted boundary in xy chromaticity coordinates.
+
+Which would you prefer?
