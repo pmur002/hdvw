@@ -19,6 +19,7 @@ costheta <- cos(angle/180*pi)
 sintheta <- sin(angle/180*pi)
 
 dotalpha <- .5
+dotsize <- unit(1, "mm")
 
 ## Optimal colour solid?
 z <- read.csv("cie_xyz_spectral_boundary.csv")
@@ -43,7 +44,8 @@ colorFromUV <- function(v, u, L=50, sRGB=TRUE) {
         real <- logical(length(rgb))
         start <- 1
         repeat {
-            end <- min(length(rgb), start + 9999)
+            end <- min(length(rgb), start + 4999)
+            cat(sprintf("%06d:%06d\n", start, end))
             real[start:end] <-
                 inHull(coords(luv)[start:end, ],
                        luvSolid[!duplicated(luvSolid), ],
@@ -116,31 +118,40 @@ semi <- function(left=TRUE) {
     popViewport()
 }
 
-slice <- function(cols, up=TRUE) {
+slice <- function(cols, up=TRUE, angled=TRUE) {
     ras <- rasterGrob(cols)
     if (up) {
         dy <- 1
     } else {
         dy <- -1
     }
-    circles <- circleGrob(c(.5 - r*costheta, .5 + r*costheta),
-                          c(.5 + dy*r*sintheta, .5 + dy*r*sintheta),
-                          unit(1, "mm"),
-                          gp=gpar(col=NA, fill=rgb(0, 0, 0)))
+    if (!angled) {
+        costheta <- 1
+        sintheta <- 0
+    }
+    circleLeft <- circleGrob(.5 - r*costheta, .5 + dy*r*sintheta,
+                             dotsize,
+                             gp=gpar(col=NA, fill=rgb(0, 0, 0)))
+    circleRight <- circleGrob(.5 + r*costheta, .5 + dy*r*sintheta,
+                              dotsize,
+                              gp=gpar(col=NA, fill=rgb(0, 0, 0)))
+    dotleft <<- deviceLoc(unit(.5 - r*costheta, "npc"),
+                          unit(.5 + dy*r*sintheta, "npc"))
+    dotright <<- deviceLoc(unit(.5 + r*costheta, "npc"),
+                           unit(.5 + dy*r*sintheta, "npc"))
     circleMask <- fillGrob(grobTree(rectGrob(width=2),
-                                    circles),
+                                    circleLeft, circleRight),
                            gp=gpar(fill="black"))
-    grid.draw(editGrob(circles, gp=gpar(fill=rgb(1, 1, 1, dotalpha))))
+    grid.draw(editGrob(circleLeft, gp=gpar(fill=rgb(1, 1, 1, dotalpha))))
+    grid.draw(editGrob(circleRight, gp=gpar(fill=rgb(1, 1, 1, dotalpha))))
     pushViewport(viewport(mask=circleMask))
-    grid.line.to(.5 - r*costheta, .5 + dy*r*sintheta,
-                 gp=gpar(col=rgb(1, 1, 1, dotalpha), lty="dotted"))
     grid.segments(.5, .5, .5 - r*costheta, .5 + dy*r*sintheta,
                   gp=gpar(col=rgb(1, 1, 1, dotalpha), lty="dotted"))
     grid.segments(.5, .5, .5 + r*costheta, .5 + dy*r*sintheta,
                   gp=gpar(col=rgb(1, 1, 1, dotalpha), lty="dotted"))
     popViewport()
     grid.draw(ras)
-    grid.circle(.5, .5, unit(1, "mm"),
+    grid.circle(.5, .5, dotsize,
                 gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
     pushViewport(viewport(mask=ras))
     grid.segments(.5, .5, .5  - r*costheta, .5 + dy*r*sintheta,
@@ -148,19 +159,31 @@ slice <- function(cols, up=TRUE) {
     grid.segments(.5, .5, .5  + r*costheta, .5 + dy*r*sintheta,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
     popViewport()
-    grid.move.to(.5 + r*costheta, .5 + dy*r*sintheta)
+}
+
+connector <- function(start, end) {
+    dots <- circleGrob(unit.c(start$x, end$x),
+                       unit.c(start$y, end$y),
+                       dotsize)
+    mask <- fillGrob(grobTree(rectGrob(), dots),
+                     gp=gpar(fill="black"))
+    pushViewport(viewport(mask=mask))
+    grid.segments(start$x, start$y, end$x, end$y,
+                  gp=gpar(col=rgb(1, 1, 1, dotalpha), lty="dotted", lwd=2))
+    popViewport()
 }
 
 hclDiagram <- function(sRGB=TRUE) {
     grid.newpage()
     grid.rect(gp=gpar(fill="black"))
-    pushViewport(viewport(width=.9, height=.9,
-                          layout=grid.layout(5, 5,
-                                             widths=c(1, .5, 2, .5, 1),
-                                             heights=c(2, .5, 2, .5, 2),
-                                             respect=TRUE),
-                          gp=gpar(fill=NA, lwd=2)))
+    topvp <- viewport(width=.9, height=.9,
+                      layout=grid.layout(5, 5,
+                                         widths=c(1, .5, 2, .5, 1),
+                                         heights=c(2, .5, 2, .5, 2),
+                                         respect=TRUE),
+                      gp=gpar(fill=NA, lwd=2))
 
+    pushViewport(topvp)
     ## 1, 1
     pushViewport(viewport(layout.pos.col=1, layout.pos.row=1))
     semi()
@@ -171,7 +194,8 @@ hclDiagram <- function(sRGB=TRUE) {
     nonNA <- which(!is.na(cols[quantile(L, .2),]))
     grid.segments(min(nonNA)/ncol(cols), .8, 1, .8,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
-    grid.move.to(1, .8)
+    grid.circle(1, .8, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
+    dot11 <- deviceLoc(unit(1, "npc"), unit(.8, "npc"))
     popViewport(2)
     ## 1, 2
     pushViewport(viewport(layout.pos.col=3, layout.pos.row=1),
@@ -184,14 +208,20 @@ hclDiagram <- function(sRGB=TRUE) {
     pushViewport(viewport(layout.pos.col=5, layout.pos.row=1))
     semi(FALSE)
     pushViewport(viewport(height=.5))
-    grid.line.to(0, .8, gp=gpar(col=rgb(1,1,1,dotalpha), lty="dotted"))
     cols <- outer(L, C, function(x, y) colorFromHue(x, y, angle, sRGB))
     grid.raster(cols, width=1, height=1)
     nonNA <- which(!is.na(cols[quantile(L, .2),]))
     grid.segments(max(nonNA)/ncol(cols), .8, 0, .8,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
+    grid.circle(0, .8, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
+    dot13 <- deviceLoc(unit(0, "npc"), unit(.8, "npc"))
     popViewport(2)
+    ## hlines
+    popViewport()
+    connector(dot11, dotleft)
+    connector(dot13, dotright)
 
+    pushViewport(topvp)
     ## 2, 1
     pushViewport(viewport(layout.pos.col=1, layout.pos.row=3))
     semi()
@@ -200,24 +230,15 @@ hclDiagram <- function(sRGB=TRUE) {
     nonNA <- which(!is.na(cols[median(L),]))
     grid.segments(min(nonNA)/ncol(cols), .5, 1, .5,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
-    grid.move.to(1, .5)
+    grid.circle(1, .5, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
+    dot21 <- deviceLoc(unit(1, "npc"), unit(.5, "npc"))
     popViewport()
     ## 2, 2
     pushViewport(viewport(layout.pos.col=3, layout.pos.row=3),
                  viewport(angle=0))
     circ()
     cols <- outer(rev(u), v, function(x, y) colorFromUV(x, y, 50, sRGB))
-    grid.raster(cols)
-    nonNA <- which(!is.na(cols[median(1:length(v)),]))
-    grid.line.to(min(nonNA)/ncol(cols), .5, 
-                 gp=gpar(col=rgb(1, 1, 1, dotalpha), lty="dotted"))
-    grid.segments(min(nonNA)/ncol(cols), .5, .5, .5,
-                  gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
-    grid.circle(.5, .5, unit(.5, "mm"),
-                gp=gpar(col=rgb(1, 1, 1, .2)))
-    grid.segments(max(nonNA)/ncol(cols), .5, .5, .5,
-                  gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
-    grid.move.to(max(nonNA)/ncol(cols), .5)
+    slice(cols, angled=FALSE)
     popViewport(2)
     ## 2, 3
     pushViewport(viewport(layout.pos.col=5, layout.pos.row=3))
@@ -225,12 +246,17 @@ hclDiagram <- function(sRGB=TRUE) {
     cols <- outer(L, C, function(x, y) colorFromHue(x, y, 0, sRGB))
     grid.raster(cols, width=1, height=.5)
     nonNA <- which(!is.na(cols[median(L),]))
-    grid.line.to(0, .5, 
-                 gp=gpar(col=rgb(1, 1, 1, dotalpha), lty="dotted"))
     grid.segments(max(nonNA)/ncol(cols), .5, 0, .5,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
+    grid.circle(0, .5, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
+    dot23 <- deviceLoc(unit(0, "npc"), unit(.5, "npc"))
     popViewport()
+    ## hlines
+    popViewport()
+    connector(dot21, dotleft)
+    connector(dot23, dotright)
 
+    pushViewport(topvp)
     ## 3, 1
     pushViewport(viewport(layout.pos.col=1, layout.pos.row=5))
     semi()
@@ -241,7 +267,8 @@ hclDiagram <- function(sRGB=TRUE) {
     nonNA <- which(!is.na(cols[quantile(L, .8),]))
     grid.segments(min(nonNA)/ncol(cols), .2, 1, .2,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
-    grid.move.to(1, .2)
+    grid.circle(1, .2, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
+    dot31 <- deviceLoc(unit(1, "npc"), unit(.2, "npc"))
     popViewport(2)
     ## 3, 2
     pushViewport(viewport(layout.pos.col=3, layout.pos.row=5),
@@ -254,21 +281,24 @@ hclDiagram <- function(sRGB=TRUE) {
     pushViewport(viewport(layout.pos.col=5, layout.pos.row=5))
     semi(FALSE)
     pushViewport(viewport(height=.5))
-    grid.line.to(0, .2, gp=gpar(col=rgb(1,1,1,dotalpha), lty="dotted"))
     cols <- outer(L, C, function(x, y) colorFromHue(x, y, 360 - angle, sRGB))
     grid.raster(cols, width=1, height=1)
     nonNA <- which(!is.na(cols[quantile(L, .8),]))
     grid.segments(max(nonNA)/ncol(cols), .2, 0, .2,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
+    grid.circle(0, .2, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
+    dot33 <- deviceLoc(unit(0, "npc"), unit(.2, "npc"))
     popViewport(2)
+    ## hlines
+    popViewport()
+    connector(dot31, dotleft)
+    connector(dot33, dotright)
 }
 
 png("hcl-srgb.png", width=600, height=800)
 hclDiagram()
 dev.off()
 
-pause <- function() {
-    png("hcl.png", width=600, height=800)
-    hclDiagram(sRGB=FALSE)
-    dev.off()
-}
+png("hcl.png", width=600, height=800)
+hclDiagram(sRGB=FALSE)
+dev.off()
