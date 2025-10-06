@@ -5,10 +5,10 @@ library(grid)
 library(colorspace)
 library(gMOIP)
 
-u <- -200:200
-v <- -200:200
-L <- 100:0
-C <- 0:200
+uRange <- -200:200
+vRange <- -200:200
+Lrange <- 100:0
+Crange <- 0:200
 
 r <- .475
 d <- .5 - r
@@ -28,78 +28,86 @@ luvSolid <- coords(as(XYZ(z[,1], z[,2], z[,3]), "LUV"))
 luvHull <- geometry::convhulln(luvSolid[!duplicated(luvSolid), ])
 
 colorFromUV <- function(v, u, L=50, sRGB=TRUE) {
-    if (sRGB) {
-        srgb <- coords(as(LUV(L, u, v), "sRGB"))
-        unreal <- apply(srgb, 1, function(row) any(row < 0 | row > 1))
-        cols <- character(nrow(srgb))
-        if (any(!unreal))
-            cols[!unreal] <- rgb(srgb[!unreal, , drop=FALSE])
-        if (any(unreal))
-            cols[unreal] <- NA
+    colsFile <- sprintf("uv-L-%03d%s.txt", L, ifelse(sRGB, "-srgb", ""))
+    if (file.exists(colsFile)) {
+        cols <- scan(colsFile, what="character")
+        imageFile <- sprintf("uv-L-%03d%s.png", L, ifelse(sRGB, "-srgb", ""))
+        if (!file.exists(imageFile)) {
+            png(imageFile, width=length(uRange), height=length(vRange),
+                bg="transparent")
+            grid.raster(matrix(cols, ncol=length(uRange), nrow=length(vRange)))
+            dev.off()
+        }
     } else {
-        luv <- LUV(L, u, v)
-        lch <- coords(as(luv, "polarLUV"))
-        rgb <- hcl(lch[,3], lch[,2], lch[,1], fixup=TRUE)
-        ## Cannot call inHull() on too many points at once
-        real <- logical(length(rgb))
-        start <- 1
-        repeat {
-            end <- min(length(rgb), start + 4999)
-            cat(sprintf("%06d:%06d\n", start, end))
-            real[start:end] <-
-                inHull(coords(luv)[start:end, ],
-                       luvSolid[!duplicated(luvSolid), ],
-                       luvHull) >= 0
-            if (end == length(rgb))
-                break
-            start <- end + 1
+        if (sRGB) {
+            srgb <- coords(as(LUV(L, u, v), "sRGB"))
+            unreal <- apply(srgb, 1, function(row) any(row < 0 | row > 1))
+            cols <- character(nrow(srgb))
+            if (any(!unreal))
+                cols[!unreal] <- rgb(srgb[!unreal, , drop=FALSE])
+            if (any(unreal))
+                cols[unreal] <- NA
+        } else {
+            luv <- LUV(L, u, v)
+            lch <- coords(as(luv, "polarLUV"))
+            rgb <- hcl(lch[,3], lch[,2], lch[,1], fixup=TRUE)
+            ## Cannot call inHull() on too many points at once
+            real <- logical(length(rgb))
+            start <- 1
+            repeat {
+                end <- min(length(rgb), start + 4999)
+                cat(sprintf("%06d:%06d\n", start, end))
+                real[start:end] <-
+                    inHull(coords(luv)[start:end, ],
+                           luvSolid[!duplicated(luvSolid), ],
+                           luvHull) >= 0
+                if (end == length(rgb))
+                    break
+                start <- end + 1
+            }
+            if (any(!real)) {
+                rgb[!real] <- NA
+            }
+            cols <- rgb   
         }
-        if (any(!real)) {
-            rgb[!real] <- NA
-        }
-        cols <- rgb   
+        writeLines(cols, colsFile)
     }
     cols
 }
 
 colorFromHue <- function(L, C, H=0, sRGB=TRUE) {
-    if (sRGB) {
-        srgb <- coords(as(polarLUV(L, C, H), "sRGB"))
-        unreal <- apply(srgb, 1, function(row) any(row < 0 | row > 1))
-        cols <- character(nrow(srgb))
-        if (any(!unreal))
-            cols[!unreal] <- rgb(srgb[!unreal, , drop=FALSE])
-        if (any(unreal))
-            cols[unreal] <- NA
-    } else {
-        rgb <- hcl(H, C, L, fixup=TRUE)
-        real <- inHull(coords(as(polarLUV(L, C, H), "LUV")),
-                       luvSolid[!duplicated(luvSolid), ],
-                       luvHull) >= 0
-        if (any(!real)) {
-            rgb[!real] <- NA
+    colsFile <- sprintf("LC-H-%03d%s.txt", H, ifelse(sRGB, "-srgb", ""))
+    if (file.exists(colsFile)) {
+        cols <- scan(colsFile, what="character")
+        imageFile <- sprintf("LC-H-%03d%s.png", H, ifelse(sRGB, "-srgb", ""))
+        if (!file.exists(imageFile)) {
+            png(imageFile, width=length(Crange), height=length(Lrange),
+                bg="transparent")
+            grid.raster(matrix(cols, ncol=length(Crange), nrow=length(Lrange)))
+            dev.off()
         }
-        cols <- rgb   
+    } else {
+        if (sRGB) {
+            srgb <- coords(as(polarLUV(L, C, H), "sRGB"))
+            unreal <- apply(srgb, 1, function(row) any(row < 0 | row > 1))
+            cols <- character(nrow(srgb))
+            if (any(!unreal))
+                cols[!unreal] <- rgb(srgb[!unreal, , drop=FALSE])
+            if (any(unreal))
+                cols[unreal] <- NA
+        } else {
+            rgb <- hcl(H, C, L, fixup=TRUE)
+            real <- inHull(coords(as(polarLUV(L, C, H), "LUV")),
+                           luvSolid[!duplicated(luvSolid), ],
+                           luvHull) >= 0
+            if (any(!real)) {
+                rgb[!real] <- NA
+            }
+            cols <- rgb   
+        }
+        writeLines(cols, colsFile)
     }
     cols
-}
-
-findEdge <- function(cols, left=TRUE, up=TRUE) {
-    if (left) {
-        x <- median(1:length(v)):1
-    } else {
-        x <- median(1:length(v)):length(v)
-    }
-    if (up) {
-        y <- median(1:length(v)) + round((1:length(x) - 1)*tan(angle/180*pi))
-    } else {
-        y <- median(1:length(v)) - round((1:length(x) - 1)*tan(angle/180*pi))
-    }    
-    while (!is.na(cols[x[1], y[1]])) {
-        x <- x[-1]
-        y <- y[-1]
-    }
-    c(x[1], y[1])
 }
 
 circ <- function() {
@@ -188,10 +196,10 @@ hclDiagram <- function(sRGB=TRUE) {
     pushViewport(viewport(layout.pos.col=1, layout.pos.row=1))
     semi()
     pushViewport(viewport(height=.5))
-    cols <- outer(L, rev(C),
+    cols <- outer(Lrange, rev(Crange),
                   function(x, y) colorFromHue(x, y, 180 - angle, sRGB))
     grid.raster(cols, width=1, height=1)
-    nonNA <- which(!is.na(cols[quantile(L, .2),]))
+    nonNA <- which(!is.na(cols[quantile(Lrange, .2),]))
     grid.segments(min(nonNA)/ncol(cols), .8, 1, .8,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
     grid.circle(1, .8, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
@@ -201,16 +209,18 @@ hclDiagram <- function(sRGB=TRUE) {
     pushViewport(viewport(layout.pos.col=3, layout.pos.row=1),
                  viewport(y=.5 - (.5 + r*sintheta - .65), angle=0))
     circ()
-    cols <- outer(rev(u), v, function(x, y) colorFromUV(x, y, 80, sRGB))
+    cols <- outer(rev(uRange), vRange,
+                  function(x, y) colorFromUV(x, y, 80, sRGB))
     slice(cols)
     popViewport(2)
     ## 1, 3
     pushViewport(viewport(layout.pos.col=5, layout.pos.row=1))
     semi(FALSE)
     pushViewport(viewport(height=.5))
-    cols <- outer(L, C, function(x, y) colorFromHue(x, y, angle, sRGB))
+    cols <- outer(Lrange, Crange,
+                  function(x, y) colorFromHue(x, y, angle, sRGB))
     grid.raster(cols, width=1, height=1)
-    nonNA <- which(!is.na(cols[quantile(L, .2),]))
+    nonNA <- which(!is.na(cols[quantile(Lrange, .2),]))
     grid.segments(max(nonNA)/ncol(cols), .8, 0, .8,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
     grid.circle(0, .8, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
@@ -225,9 +235,10 @@ hclDiagram <- function(sRGB=TRUE) {
     ## 2, 1
     pushViewport(viewport(layout.pos.col=1, layout.pos.row=3))
     semi()
-    cols <- outer(L, rev(C), function(x, y) colorFromHue(x, y, 180, sRGB))
+    cols <- outer(Lrange, rev(Crange),
+                  function(x, y) colorFromHue(x, y, 180, sRGB))
     grid.raster(cols, width=1, height=.5)
-    nonNA <- which(!is.na(cols[median(L),]))
+    nonNA <- which(!is.na(cols[median(Lrange),]))
     grid.segments(min(nonNA)/ncol(cols), .5, 1, .5,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
     grid.circle(1, .5, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
@@ -237,15 +248,17 @@ hclDiagram <- function(sRGB=TRUE) {
     pushViewport(viewport(layout.pos.col=3, layout.pos.row=3),
                  viewport(angle=0))
     circ()
-    cols <- outer(rev(u), v, function(x, y) colorFromUV(x, y, 50, sRGB))
+    cols <- outer(rev(uRange), vRange,
+                  function(x, y) colorFromUV(x, y, 50, sRGB))
     slice(cols, angled=FALSE)
     popViewport(2)
     ## 2, 3
     pushViewport(viewport(layout.pos.col=5, layout.pos.row=3))
     semi(FALSE)
-    cols <- outer(L, C, function(x, y) colorFromHue(x, y, 0, sRGB))
+    cols <- outer(Lrange, Crange,
+                  function(x, y) colorFromHue(x, y, 0, sRGB))
     grid.raster(cols, width=1, height=.5)
-    nonNA <- which(!is.na(cols[median(L),]))
+    nonNA <- which(!is.na(cols[median(Lrange),]))
     grid.segments(max(nonNA)/ncol(cols), .5, 0, .5,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
     grid.circle(0, .5, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
@@ -261,10 +274,10 @@ hclDiagram <- function(sRGB=TRUE) {
     pushViewport(viewport(layout.pos.col=1, layout.pos.row=5))
     semi()
     pushViewport(viewport(height=.5))
-    cols <- outer(L, rev(C),
+    cols <- outer(Lrange, rev(Crange),
                   function(x, y) colorFromHue(x, y, 180 + angle, sRGB))
     grid.raster(cols, width=1, height=1)
-    nonNA <- which(!is.na(cols[quantile(L, .8),]))
+    nonNA <- which(!is.na(cols[quantile(Lrange, .8),]))
     grid.segments(min(nonNA)/ncol(cols), .2, 1, .2,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
     grid.circle(1, .2, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
@@ -274,16 +287,18 @@ hclDiagram <- function(sRGB=TRUE) {
     pushViewport(viewport(layout.pos.col=3, layout.pos.row=5),
                  viewport(y=.5 + (.5 + r*sintheta - .65), angle=0))
     circ()
-    cols <- outer(rev(u), v, function(x, y) colorFromUV(x, y, 20, sRGB))
+    cols <- outer(rev(uRange), vRange,
+                  function(x, y) colorFromUV(x, y, 20, sRGB))
     slice(cols, up=FALSE)
     popViewport(2)
     ## 3, 3 
     pushViewport(viewport(layout.pos.col=5, layout.pos.row=5))
     semi(FALSE)
     pushViewport(viewport(height=.5))
-    cols <- outer(L, C, function(x, y) colorFromHue(x, y, 360 - angle, sRGB))
+    cols <- outer(Lrange, Crange,
+                  function(x, y) colorFromHue(x, y, 360 - angle, sRGB))
     grid.raster(cols, width=1, height=1)
-    nonNA <- which(!is.na(cols[quantile(L, .8),]))
+    nonNA <- which(!is.na(cols[quantile(Lrange, .8),]))
     grid.segments(max(nonNA)/ncol(cols), .2, 0, .2,
                   gp=gpar(col=rgb(1, 1, 1, .2), lwd=2))
     grid.circle(0, .2, dotsize, gp=gpar(col=NA, fill=rgb(1, 1, 1, dotalpha)))
