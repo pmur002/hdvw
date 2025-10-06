@@ -248,7 +248,8 @@ div.csl-indent {
   <li><a href="#case-study-violin-plots" id="toc-case-study-violin-plots" class="nav-link" data-scroll-target="#case-study-violin-plots"><span class="header-section-number">10.6</span> Case study: Violin plots</a></li>
   <li><a href="#case-study-loess-curves" id="toc-case-study-loess-curves" class="nav-link" data-scroll-target="#case-study-loess-curves"><span class="header-section-number">10.7</span> Case study: loess curves</a></li>
   <li><a href="#case-study-line-of-best-fit" id="toc-case-study-line-of-best-fit" class="nav-link" data-scroll-target="#case-study-line-of-best-fit"><span class="header-section-number">10.8</span> Case study: Line of best fit</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.9</span> Summary</a></li>
+  <li><a href="#sec-shape-non-linear" id="toc-sec-shape-non-linear" class="nav-link" data-scroll-target="#sec-shape-non-linear"><span class="header-section-number">10.9</span> Non-linear mappings</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.10</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -274,8 +275,9 @@ div.csl-indent {
 </header>
 
 
+<p><strong>TODO</strong> refer back to <a href="position.html#sec-pos-scarce" class="quarto-xref"><span>Section 4.3</span></a> and mention that shapes are one solution, with all of the drawbacks of not being able to decode individual data values. Footnote surjective/injective?</p>
 <p>All of the data visualisations that we have considered so far have mapped a <strong>single data value</strong> from one or more variables to a <strong>single data symbol</strong> (<a href="#fig-multivariate-symbol-a" class="quarto-xref">Figure&nbsp;<span>10.1 (a)</span></a>). For example, a bar plot like <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> maps one category and one count to one bar. A scatter plot like <a href="combine.html#fig-scatter" class="quarto-xref">Figure&nbsp;<span>9.3</span></a> maps one data value from a quantitative variable and one data value from another quantitative variable to one data point.</p>
-<p>In this section, we consider data visualisations that map <strong>multiple data values</strong> from one or more variables to a <strong>single data symbol</strong> (<a href="#fig-multivariate-symbol-b" class="quarto-xref">Figure&nbsp;<span>10.1 (b)</span></a>). In this section, we begin to consider more complex data symbols.</p>
+<p>In this chapter, we consider data visualisations that map <strong>multiple data values</strong> from one or more variables to a <strong>single data symbol</strong> (<a href="#fig-multivariate-symbol-b" class="quarto-xref">Figure&nbsp;<span>10.1 (b)</span></a>). In this chapter, we begin to consider more complex data symbols.</p>
 <div id="fig-multivariate-symbol" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-multivariate-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -367,6 +369,7 @@ Figure&nbsp;10.4: If we map data values to a <strong>visual shape</strong> that 
 </blockquote>
 <p>On the other hand, the more complex data symbols in a line plot, that contain multiple data values, are less effective at conveying the <em>individual</em> raw data values. The coloured lines in <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> are not simple shapes from which it is easy to perceive basic <strong>visual features</strong>. This means that, although we may be able to decode data summaries, it is not easy to decode the raw data values (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>). For example, compare the ease with which we can determine the number of European/Other offenders in 2013 from <a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> versus <a href="quantitative.html#fig-side-bar-year" class="quarto-xref">Figure&nbsp;<span>5.7</span></a>.</p>
 <p>This deficiency is significant because the main mappings in a line plot are from <strong>quantitative</strong> data values to (horizontal and vertical) <strong>position</strong>. We know from <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> that these should be very effective mappings that allow us to accurately decode the raw data values. However, in a line plot, we are not mapping a single data value to a basic visual feature of a single, simple shape. Instead, a single data value is being mapped, along with many other values, to a basic visual feature of a complicated shape. In effect, the individual data values lose their individual identity.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><strong>TODO</strong> Refer back to <a href="mapping-visual-features.html#sec-bar" class="quarto-xref"><span>Section 3.1</span></a> where we had bijective (but only use that terminology in footnote), so we could decode individual data values.</p>
 <blockquote class="blockquote">
 <p>One reason why a line plot is <em>less</em> effective for decoding raw data values is because each raw data value is not mapped to its own data symbol.</p>
 </blockquote>
@@ -394,7 +397,7 @@ Figure&nbsp;10.5: A plot of the number of offenders per year in different ethnic
 </section>
 <section id="sec-density" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="sec-density"><span class="header-section-number">10.3</span> Case study: Density plots</h2>
-<p><a href="#fig-density" class="quarto-xref">Figure&nbsp;<span>10.6</span></a> shows a density plot of the number of points scored by Tier One nations at the Rugby World Cups (<a href="congruence.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>7.2</span></a>). As with a histogram (<a href="summaries.html#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a>), this data visualisation is effective for conveying the distribution of data values. For example, we can perceive that there is evidence of a single mode and right skew.</p>
+<p><a href="#fig-density" class="quarto-xref">Figure&nbsp;<span>10.6</span></a> shows a density plot of the number of points scored by Tier One nations at the Rugby World Cups (<a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>). As with a histogram (<a href="summaries.html#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a>), this data visualisation is effective for conveying the distribution of data values. For example, we can perceive that there is evidence of a single mode and right skew.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-density" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -565,8 +568,19 @@ Figure&nbsp;10.11: A SinaPlot of the points scored per game by Tier One nations 
 <p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models? also talk about failing assumptions of these models, like unimodal for boxplot)</p>
 <p>footnote cite to Tukey for visualising phenomena rather than raw data? “Data-Based Graphics: Visual Display in the Decades to Come” Tukey (1990)</p>
 </section>
-<section id="summary" class="level2" data-number="10.9">
-<h2 data-number="10.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.9</span> Summary</h2>
+<section id="sec-shape-non-linear" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="sec-shape-non-linear"><span class="header-section-number">10.9</span> Non-linear mappings</h2>
+<p>Refer back to <a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a></p>
+<p>NOTE that there ARE some situations where non-linear position. scales are ok, e.g., log-log. Length is still dodgy. You DO still get ordinal info, even if cannot decode sizes of differences. Non-linearity might actually be ok on non-position scales, e.g., a colour scale for numeric data, where differences are smaller at one end; all you are after, if you are using colour, is ordinal, so changing colours more swiftly at one end of the scale is ok (?) At least some ‘colorspace’ functions allow non-linear palettes. Revisit in qualitative.Rmd to point out that non-linear ordinal scales are ok, e.g., jet colour scale</p>
+<p>Nice example of log-log scales in The Signal and the Noise (Nate Silver) See 787resources/Examples/2025-08-signal-noise-log-log</p>
+<p>Log log scales a good example of asking what is it you want to see? You cannot extract raw data or a compare raw data points. But all you want is to see the data summary of correlation so no harm no foul.</p>
+<p>Can get useful <em>shapes</em> out of non-linear scales</p>
+<p>cite the paper (cook? hofmann?) that looked at identification of curves vs straight lines in log-log plots? but only in visual-shapes chapter when call back to non-linear scales in position chapter</p>
+<p>Nice kiwi-biased example on this thread https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate But I think the point still holds that you LOSE the ability to judge size of differences - you can only decode things like order and groups (?)</p>
+<p>The ratio plot might be more interpretable if the axis is labelled as “number of times larger” ?</p>
+</section>
+<section id="summary" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.10</span> Summary</h2>
 <p>Mapping multiple data values to a single data symbol produces a <strong>visual shape</strong>, like a line on a line plot.</p>
 <p>Data summaries, such as trends over time, can can be decoded from a visual shape. However, decoding raw data values from a visual shape may be harder, cmopared to decoding raw data values from a simple data symbol like a bar.</p>
 <hr>
@@ -585,6 +599,7 @@ Sidiropoulos, Nikos, Sina Hadi Sohi, Thomas Lin Pedersen, Bo Torben Porse, Ole W
 <li id="fn2"><p>“Understanding Charts and Graphs” Kosslyn (1989) [somewhere after p 205] Lines are objects “For example, if one wants a reader to see an interaction, a line graph is better than a bar graph: not only is a line a single perceptual unit, and hence there will be less to hold in short-term memory, but we are good at detecting slope differences-which convey the relevant information (see Pinker, 1988).”<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>According to Zacks and Tversky 1999 people use “trend words” (increasing/decreasing) versus “discrete words” (higher/lower than) AND are faster to judge absolute values from bars but angle from line graphs.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>citation for surjective, injective, bijective</p>
+<p>Refer back to <a href="position.html#sec-pos-scarce" class="quarto-xref"><span>Section 4.3</span></a></p>
 <p>Adam has a nice example in his thesis Figure 4.5, a simpler version of which is a line or bar plot that contains a “total” line or bar - the visual objects do not map neatly, and disjointly to subsets of the data - there is overlap. This makes mapping back to the data harder or at least more ambiguous ?<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Also link to “configural displays” (David Peebles (2008)) and “display proximity” (Barnett &amp; Wickens, 1988; Carswell &amp; Wickens, 1987; Wickens &amp; Andre, 1990) “According to the proximity compatibility principle (Wickens &amp; Carswell, 1995), representations with high display proximity facilitate high mental proximity tasks requiring the integration of information from multiple sources. The relationship between display and mental proximity has been revealed in several studies (e.g., Barnett &amp; Wickens, 1988; Bennett &amp; Flach, 1992; Bennett, Toms, &amp; Woods, 1993; Carswell &amp; Wickens, 1987; Wickens &amp; Andre, 1990; Wickens &amp; Carswell, 1995) and it is argued that the advantage comes when emergent features (Pomerantz &amp; Pristach, 1989) of the representation indicate additional information about the domain.” He also mentions line plots as being in between separable bar plots and configural radar plots.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p><span class="citation" data-cites="Sidiropoulos03072018">Sidiropoulos et al. (<a href="#ref-Sidiropoulos03072018" role="doc-biblioref">2018</a>)</span><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

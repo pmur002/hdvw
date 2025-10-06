@@ -719,6 +719,18 @@ easy to apply to a broad range of data visualisations. References to the
 relevant literature are provided in footnotes so that the interested, or
 sceptical, reader can dig deeper.
 
+\section{Software}\label{software}
+
+This book is about the choices that go into \emph{designing} a data
+visualisation. It does not cover how to use software to implement those
+design choices and \emph{create} a data visualisation.
+
+All data visualisations in this book were created with R.\footnote{Many
+  of the diagrams in this book were also created with R (R Core Team
+  2025), but some of diagrams were created using graphviz (Ellson et al.
+  2002).} The code for all data visualisations is available in the
+github repository for this book.
+
 \section{Summary}\label{summary}
 
 Data visualisations can be incredibly effective for presenting important
@@ -746,9 +758,9 @@ order to understand the effectiveness of a mapping from information to a
 visual representation, we need to know how we get from visual
 representations back to the original information.
 
-We will talk about the conversion of data values to data symbols as an
-\textbf{encoding} of the data values. Later chapters will explore many
-different encodings. In this chapter, we will consider the reverse
+We will talk about the transformation of data values into data symbols
+as an \textbf{encoding} of the data values. Later chapters will explore
+many different encodings. In this chapter, we will consider the reverse
 operation: the \textbf{decoding} of data symbols back to data values
 (Figure~\ref{fig-decode}). The effectiveness of an encoding from data
 values to data symbols will depend on how well we can decode from the
@@ -874,17 +886,17 @@ triangles are over land.\footnote{Figure~\ref{fig-visual-model-demo} is
   based on wind data from the National Oceanic and Atmospheric
   Administration's Operational Model Archive and Distribution System
   (\href{https://nomads.ncep.noaa.gov/}{NOMADS}). The data were accessed
-  and processed using the \{rNOMADS\} package (Bowman and Lees 2015),
-  with raw data interpolated to a finer grid.} The visual system can
-very quickly perceive many small \textbf{visual features} at once. There
-is no need to concentrate separately on every individual triangle in the
-image. At a higher level of processing, darker and lighter
-\textbf{shapes} are identified as well as regions of different colours.
-For example, a band of lighter wind forms a line from the top-left
-corner at a roughly 45-degree angle. At a higher level of processing
-again, at least for the denizens of Oceania, the green regions are
-recognised as a very familiar \textbf{object}: the outline of New
-Zealand.
+  on September 14 2024 and processed using the \{rNOMADS\} package
+  (Bowman and Lees 2015), with raw data interpolated to a finer grid.}
+The visual system can very quickly perceive many small \textbf{visual
+features} at once. There is no need to concentrate separately on every
+individual triangle in the image. At a higher level of processing,
+darker and lighter \textbf{shapes} are identified as well as regions of
+different colours. For example, a band of lighter wind forms a line from
+the top-left corner at a roughly 45-degree angle. At a higher level of
+processing again, at least for the denizens of Oceania, the green
+regions are recognised as a very familiar \textbf{object}: the outline
+of New Zealand.
 
 The small lines in Figure~\ref{fig-visual-model-demo} convey a lot of
 simple pieces of information---what is the wind strength and direction
@@ -1096,7 +1108,7 @@ they lie within the scope of a single visual focus. If we have to switch
 focus, it not only takes longer to decode information, but we may hit
 limits on our ability to remember visual elements from previous areas of
 focus.\footnote{Tufte refers to this as drawing ``within the eyespan''
-  (Tufte 1990, page=67)
+  (Tufte 1990, 67)
 
   ``In understanding human visual perception, an important component
   consists of what people can perceive at a glance. If that glance
@@ -1544,11 +1556,10 @@ A data visualisation will be effective if it relies on automatic and
 rapid visual processing rather than requiring conscious mental
 effort.\footnote{``the comprehension of visual displays tends to be
   easiest when simple pattern identification processes are substituted
-  for complex cognitive processes'' (Carpenter and Shah 1998, page=98)}
+  for complex cognitive processes'' (Carpenter and Shah 1998, 98)}
 \end{quote}
 
-\section{Dangers of the visual
-system}\label{dangers-of-the-visual-system}
+\section{Dangers of the visual system}\label{sec-illusion}
 
 The value of data visualisation comes from the visual system's ability
 to rapidly gather and process a large amount of visual information.
@@ -1557,7 +1568,7 @@ simple images presented on a two-dimensional page or screen, the visual
 system has evolved for the unstructured, messy, and three-dimensional
 natural environment. This means that the visual system will sometimes
 generate a more sophisticated, but erroneous interpretation of an image
-from a very simple arrangement of simple shapes. In other words, we are
+from a very simple arrangement of basic shapes. In other words, we are
 vulnerable to visual illusions.
 
 For example, Figure~\ref{fig-illusion} shows the Muller-Lyer Illusion
@@ -1612,13 +1623,35 @@ visual system perceives some segments as longer than others.}
 
 \end{figure}%
 
-These visual illusions demonstrate that the visual system can produce
-incorrect results for even very simple visual tasks based on very simple
-visual elements.
+Figure~\ref{fig-3d} shows two images that are composed of three simple
+parallelograms. The three parallelograms are arranged separately on the
+left, which means that we decode them as three simple shapes. However,
+for the arrangement of the parallelograms on the right, the natural
+decoding is a 3-dimensional box, even though the image is clearly
+2-dimensional.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-model_files/figure-pdf/fig-3d-1.pdf}
+
+}
+
+\caption{\label{fig-3d}The image on the right is made up from the three
+simple parallelograms shown on the left. Because of their arrangement
+and their shading, we are tempted to decode the three parallelograms on
+the right as a 3-dimensional object.}
+
+\end{figure}%
+
+These examples demonstrate that the visual system can produce incorrect
+or unintended results for even very simple visual tasks based on very
+simple visual elements.
 
 \begin{quote}
-A data visualisation will be ineffective if it (even accidentally)
-generates a visual illusion.
+The effectiveness of a data visualisation will be compromised if it
+(even accidentally) generates a visual illusion.
 \end{quote}
 
 \section{Summary}\label{summary-1}
@@ -1671,7 +1704,7 @@ Figure~\ref{fig-crime-heatmap}). The remainder of this book explores
 different sorts of mappings and why they are more or less effective for
 different purposes.
 
-In this section, we start with a very simple sort of mapping. We will
+In this chapter, we start with a very simple sort of mapping. We will
 begin to explore data visualisations where each data value is
 \textbf{encoded} as a basic \textbf{visual feature} of a data symbol.
 Furthermore, in these data visualisations, \textbf{one} data value is
@@ -1700,7 +1733,7 @@ single data symbol.}
 
 \end{figure}%
 
-\section{Bar plots}\label{bar-plots}
+\section{Bar plots}\label{sec-bar}
 
 A good example of this sort of simple mapping is a bar plot. In order to
 demonstrate bar plots, we will work with a data set containing the total
@@ -1746,16 +1779,12 @@ Table~\ref{tbl-crime-group-total}, there is a single bar in the bar
 plot. For example, each total number of offenders is mapped to a single
 bar.
 
-In terms of \textbf{decoding} ((\textbf{fid-decode?})), this means that
+In terms of \textbf{decoding} (Figure~\ref{fig-decode}), this means that
 we can decode individual data values from each data symbol. For example,
 we can decode a single total number of offenders from each
-bar.\footnote{citation for surjective, injective, bijective
-
-  Adam has a nice example in his thesis Figure 4.5, a simpler version of
-  which is a line or bar plot that contains a ``total'' line or bar -
-  the visual objects do not map neatly, and disjointly to subsets of the
-  data - there is overlap. This makes mapping back to the data harder or
-  at least more ambiguous ?}
+bar.\footnote{This one-to-one mapping between data values and data
+  symbols is called a \emph{bijective} mapping (Ziemkiewicz and Kosara
+  2009).}
 
 This allows us to answer simple questions about individual data values.
 For example, what is the largest total number of offenders?
@@ -1866,8 +1895,9 @@ visualisation.\footnote{In this book, we use \emph{visual feature} to
   connection. Data point shape is commonly included as a visual channel,
   so we provide a connection to basic visual features via the early
   perception of patterns, even though there is more involved in the
-  perception of data point shape Li, Wijk, and Martens (2009).} We will
-explore each of these in more detail in the following sections.
+  perception of data point shape (Chen 1982; J. Li, Wijk, and Martens
+  2009).} We will explore each of these in more detail in the following
+sections.
 
 \section{Quantitative features}\label{sec-quant-features}
 
@@ -2161,10 +2191,10 @@ greater number of colours.\footnote{The recommended maximum number of
 
   ``Do not use more than 10 colors for coding symbols if reliable
   identification is required, especially if the symbols are to be used
-  against a variety of backgrounds.'' (Ware 2021 p 126).
+  against a variety of backgrounds.'' (Ware 2021, 126).
 
-  Healey (1996) says the effective maximum is 7.} The difficulty only
-increases with irregular arrangements,
+  Healey (1996) says the effective maximum is 7.} This difficulty only
+increases with irregular arrangements.
 
 \begin{figure}
 
@@ -2177,8 +2207,8 @@ increases with irregular arrangements,
 \caption{\label{fig-colour-cap}Mapping qualitative data values to colour
 works well for a small number of colours, but less well for a large
 number of colours. It is quite easy to identify which green the single
-dot corresponds to amongst three colours on the left and even amongst
-the seven colours in the middle, but it becomes harder for the eleven
+dot corresponds to amongst three colours on the left, but it is much
+harder with the seven colours in the middle, harder still for the eleven
 colours on the right.}
 
 \end{figure}%
@@ -2373,53 +2403,156 @@ they involve encoding data values to angle and area.
 
 \chapter{Position}\label{sec-position}
 
-Position is fundamental to our perception of an image.\footnote{``Design
-  for Information : An Introduction to the Histories, Theories, and Best
-  Practices Behind Effective Information Visualizations'' Isabel
-  Meirelles (2013) ``We process spatial properties (position and size)
-  separately from object properties (such as shape, color, texture,
-  etc). Furthermore, position in space and time has a dominant role in
-  perceptual organization, as well as in memory.'' Ware (2004, 2008),
-  Card et al.~(1999), MacEachren (2004), Kosslyn (1994).
+We saw in Chapter~\ref{sec-mapping-visual-features} that
+\textbf{position} is a very effective visual feature. It is appropriate
+for mapping quantitative data values (Figure~\ref{fig-quant-features})
+and it is appropriate for mapping qualitative data values
+(Figure~\ref{fig-qual-features}). \textbf{Position} is a visual feature
+with high accuracy (Figure~\ref{fig-accuracy}) and with high capacity
+(Figure~\ref{fig-pos-cap}).\footnote{It can be argued that position is a
+  visual feature that is fundamental to our perception of any image.
 
-  ``How Maps Work - Representation, Visualization, and Design''
-  MACEACHREN A. M. (1995) quotes Kubovy (1981) who includes position as
-  one of the ``indispensable attributes''
+  ``There is fairly widespread philosophical agreement, which certainly
+  accords with commonsense, that the spatial aspects of all existence
+  are fundamental. Before an awareness of time, there is an awareness of
+  relations in space.'' (Robinson and Petchenik 1976, 14)
 
-  ``UNDERSTANDING GRAPHS AND TABLES'' Wainer (1992) quotes Arthur H.
-  Robinson and Barbara Bartz Petchenik (1976) who said, ``There is
-  fairly widespread philosophical agreement, which certainly accords
-  with commonsense, that the spatial aspects of all existence are
-  fundamental. Before an awareness of time, there is an awareness of
-  relations in space.'' They conclude their book with the observation
-  that ``the concept of spatial relatedness \ldots{} is a quality
-  without which it is difficult or impossible for the human mind to
-  apprehend anything.''}
+  ``The concept of spatial relatedness \ldots{} is a quality without
+  which it is difficult or impossible for the human mind to apprehend
+  anything.'' (Robinson and Petchenik 1976, 123)
 
-\textbf{NOTE} that this is going to have to stick to simple
-demonstrations using bar plots (e.g., stacked vs dodged). Don't get
-scatter plots until chapter 10 (!) Case study q-q plots in combine.Rmd.
-Ditto log-log plot.
+  ``According to Kubovy (1981), position in space and time have a
+  dominant role in perceptual organization. In relation to visual
+  information displays, the contention for space as an indispensable
+  variable seems indisputable. For centuries, humans in all cultures
+  have ``mapped'' the nonvisible to space in order to facilitate
+  understanding.'' (MacEachren 1995; citing Kubovy 1981)
 
-\section{Position is relative}\label{position-is-relative}
+  ``We process spatial properties (position and size) separately from
+  object properties (such as shape, color, texture, etc). Furthermore,
+  position in space and time has a dominant role in perceptual
+  organization, as well as in memory.'' (Meirelles 2013)}
 
-Accuracy is really ratios not absolute values
+This means that, if we do not encode data values as the
+\textbf{position} of data symbols, it can be more difficult to decode
+data values from the data symbols.\footnote{Decoding individual data
+  values from individual data symbols is not the only visual task that
+  we need to perform, so it is not \emph{always} true that we should
+  encode data values as \textbf{position}. As we explore other sorts of
+  mappings in later chapters, we will see reasons why \textbf{position}
+  is not always best.} For example, Figure~\ref{fig-no-pos} shows
+another data visualisation of the total number of offenders in New
+Zealand for different ethnic groups (Table~\ref{tbl-crime-group-total}).
+We have previously seen a bar plot (Figure~\ref{fig-bar}), a dot plot
+(Figure~\ref{fig-dot}), and a pie chart (Figure~\ref{fig-pie}) of these
+data. In Figure~\ref{fig-no-pos}, the data symbols are circles, the
+number of offenders is encoded as the \textbf{area} of the circles, and
+the ethnic groups are encoded as the \textbf{colour} of the circles. One
+reason why it is more difficult to decode data values from
+Figure~\ref{fig-no-pos}, compared to, for example, Figure~\ref{fig-bar},
+is because none of the data values are encoded using \textbf{position}.
 
-\begin{itemize}
-\item
-  From Ware 4th
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-no-pos-1.pdf}
+
+}
+
+\caption{\label{fig-no-pos}A data visualisation that does not make use
+of position.}
+
+\end{figure}%
+
+However, we have already seen several data visualisations that do not
+map \emph{all} data values to position (e.g., Figure~\ref{fig-crime} and
+Figure~\ref{fig-crime-heatmap}), so there must be more to learn about
+mapping data values to basic visual features.\footnote{As Bertini,
+  Correll, and Franconeri (2020) put it: ``Why Shouldn't All Charts Be
+  Scatter Plots?''} In this chapter, we look more closely at the mapping
+of data values to the \textbf{position} of data symbols.
+
+\section{Perception is relative}\label{sec-rel-pos}
+
+In Section~\ref{sec-accuracy}, we saw that \textbf{position} was the
+most accurate visual feature for decoding quantitative values
+(Figure~\ref{fig-accuracy}). However, that accuracy is for
+\emph{relative} judgements rather than absolute judgements. In other
+words, we are good at \emph{comparisons} between positions,\footnote{In
+  the experiments described in William S. Cleveland and McGill (1984),
+  which are the basis of the accuracy ranking in
+  Figure~\ref{fig-accuracy}, ``subjects were asked to judge what percent
+  the smaller is of the larger''.} which is one of the most important
+decoding tasks in data visualisation.\footnote{Amar, Eagan, and Stasko
+  (2005), in their taxonomy of visual tasks, consider a ``low-level
+  comparison as being a fundamental cognitive action'' for reading a
+  data visualisation.
+
+  ``The fundamental task in data analysis is to make smart comparisons -
+  we're always trying to answer the question `Compared with what?'
+  {[}\ldots{]} It always comes down to making and showing smart
+  comparisons.'' (Tufte 2006, 127)
+
+  ``Almost everything we do with data involves comparison'' (Tukey 1990,
+  329)
 
   ``The lesson is that visualization is not good for representing
   precise absolute numerical values, but rather for displaying patterns
   of differences or changes over time, to which the eye and brain are
-  extremely sensitive.'' {[}page 70{]}
-\end{itemize}
+  extremely sensitive.''\\
+  (Ware 2021, 70)}
 
-\section{Aligned versus unaligned}\label{sec-unaligned-pos}
+For example, the box on the left of Figure~\ref{fig-rel-pos} shows a dot
+at a vertical positon along a dotted line. We can decode an amount from
+the position of the dot, but only relative to the ends of the dotted
+line; the dot is three-quarters of the way from the bottom to the top of
+the line. We cannot decode an absolute data value from the
+dot.\footnote{Even if we have mapped a \emph{proportion} data value to
+  the position of the dot, we would need to know that the bottom of the
+  line represents 0 and the top of the line represents 1 to be able to
+  correctly decode the proportion from the position of the dot.}
 
-Elaborate on the classic order to allow for aligned vs unaligned. Not
-entirely sure how to demo this with actual plot, though in quantitative
-(length) there is an abstract demo.
+The box in the middle of Figure~\ref{fig-rel-pos} shows two dots at
+vertical positions along two dotted lines. Again, we can only compare
+the positions of the two dots---the dot on the left is three times as
+far up its dotted line as the dot on the right.
+
+The box on the right of Figure~\ref{fig-rel-pos} shows two dots again,
+but this time adds an axis on the right edge of the box. It is now
+possible to decode an absolute value for each dot (75 and 25), but that
+is still only possible by making comparisons. We decode the positions of
+the dots relative to the positions of the tick marks on the axis.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-rel-pos-1.pdf}
+
+}
+
+\caption{\label{fig-rel-pos}Perception of position is relative rather
+than absolute.}
+
+\end{figure}%
+
+\begin{quote}
+A data visualisation that encodes a data value as the position of a data
+symbol is effective because we can decode the \emph{comparisons} between
+the positions accurately.
+\end{quote}
+
+\section{Unaligned position}\label{sec-unaligned-pos}
+
+We have established that \textbf{position} is a very accurate visual
+feature (Figure~\ref{fig-accuracy}), although that accuracy is for
+comparisons rather than for decoding individual values. Another
+limitation on the accuracy of \textbf{position} is that it works best
+when the comparison is between positions with a common baseline. For
+example, it is easier to compare the two positions on the left of
+Figure~\ref{fig-unaligned-pos} compared to the two positions on the
+right.
 
 \begin{figure}
 
@@ -2436,52 +2569,472 @@ they are \textbf{unaligned}.}
 
 \end{figure}%
 
-\section{Overplotting}\label{overplotting}
+Figure~\ref{fig-radial-pos} shows yet another data visualisation of the
+total number of offenders in New Zealand for different ethnic groups
+(Table~\ref{tbl-crime-group-total}). This data visualisation is similar
+to Figure~\ref{fig-dot} because it encodes the number of offenders to
+\textbf{position} along a line. However, it is harder to compare the
+number of offenders between different ethnic groups in
+Figure~\ref{fig-radial-pos} because the positions are not aligned.
 
-If a data value is mapped to a representation that is not visible,
-decoding is going to be a challenge.
+\begin{figure}
 
-Refer back to Section~\ref{sec-eye}
+\centering{
 
-Bring jittering case study back here. Add link from birthday cake
-example back to jittering.
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-radial-pos-1.pdf}
 
-big data (or even medium data) - need better name =\textgreater{}
-overlapping and summary plots like boxplots (then violin plots)
+}
 
-\section{Non-linear scales}\label{sec-non-linear}
+\caption{\label{fig-radial-pos}A data visualisation that makes use of
+\emph{unaligned} position.}
 
-The effective decoding of position is dependent on a linear
-encoding.\footnote{Tufte, E. R. (1983). The Visual Display of
-  Quantitative Information. (Tufte also emphasized a similar principle:
-  ``The representation of numbers should be directly proportional to the
-  quantities represented.'')}
+\end{figure}%
 
-In a non-linear encoding, the same visual difference does not decode to
-the same data difference. That is going to be confusing!\footnote{Proportional
-  Ink and Logarithmic Scales
-  https://callingbullshit.org/tools/logarithmic\_scales.html If you plot
-  log values, then the ink is proportional, but the numbers are harder
-  to interpret (in my terms, you can only map back to log values)}
+\begin{quote}
+Decoding data values from positions is most effective when the positions
+share a common baseline.
+\end{quote}
 
-NOTE that there ARE some situations where non-linear position. scales
-are ok, e.g., log-log. Length is still dodgy. You DO still get ordinal
-info, even if cannot decode sizes of differences. Non-linearity might
-actually be ok on non-position scales, e.g., a colour scale for numeric
-data, where differences are smaller at one end; all you are after, if
-you are using colour, is ordinal, so changing colours more swiftly at
-one end of the scale is ok (?) At least some `colorspace' functions
-allow non-linear palettes. Revisit in qualitative.Rmd to point out that
-non-linear ordinal scales are ok, e.g., jet colour scale
+\section{Position is a scarce resource}\label{sec-pos-scarce}
 
-Nice example of log-log scales in The Signal and the Noise (Nate Silver)
-See 787resources/Examples/2025-08-signal-noise-log-log
+In Section~\ref{sec-capacity} we saw that \textbf{position} has a higher
+capacity for decoding qualitative data values compared to colour or
+pattern (Figure~\ref{fig-pos-cap}). However, position has a limitation
+that does not affect colour or pattern: if we use the same position for
+more than one data value, we end up drawing data symbols on top of each
+other.
 
-Log log scales a good example of asking what is it you want to see? You
-cannot extract raw data or a compare raw data points. But all you want
-is to see the data summary of correlation so no harm no foul.
+For example, in Figure~\ref{fig-no-pos}, we use the same position for
+all four circles that represent different ethnic groups, so the circles
+are drawn on top of each other. The total number of youth offenders for
+each ethnic group is encoded as the \textbf{area} of a circle. The
+largest number of offenders is for the Māori ethnic group--the orange
+circle---with European/Other the next largest---the light blue circle.
+However, because the light blue circle is drawn on top of the orange
+circle, all that we can actually see is the part of the orange circle
+that extends beyond the light blue circle.
+
+This represents a serious problem. It is difficult for our visual system
+to decode from a data symbol to a data value if we cannot see all of the
+data symbol.\footnote{Wilke (2019) refers to this problem as the
+  \emph{principle of proportional ink}. The amount of ink used to
+  represent a data value should be proportional to the magnitude of the
+  data value.
+
+  Another way to decode Figure~\ref{fig-no-pos} is that there is a thin
+  orange disc outside a light blue disk (which is outside a thin green
+  disk, which is outside a dark blue circle). In this interpretation, we
+  can at least see all of the data symbol, so decoding is possible, but
+  the problem now is that the viewer is using a decoding that is
+  different from the encoding.
+
+  The concentric-circles interpretation is perhaps the most parsimonious
+  (Section~\ref{sec-simplicity}), but just the existence of an
+  alternative interpretation is a potential source of confusion and so a
+  cause for concern.}
+
+One way to express this limitation is that position is very effective
+for encoding \emph{different} data values, but it is not very effective
+for encoding the \emph{same} data value.
+
+\begin{quote}
+Decoding more than one data value from two data symbols that share the
+same position is, at best, compromised because we cannot see all of both
+data symbols.
+\end{quote}
+
+\section{Case study: Overplotting}\label{sec-overplot}
+
+The Rugby World Cup is a competition that is held every four years, with
+the first event taking place in 1987. We have data on the the number of
+points that were scored in every World Cup match by Tier One nations
+(the top 10 rugby-playing nations). Table~\ref{tbl-rwc-all} shows a
+sample of these data.\footnote{These data were obtained from
+  \href{https://www.kaggle.com/datasets/lylebegbie/international-rugby-union-results-from-18712022/data}{kaggle}
+  (Begbie 2022).}
+
+\begin{longtable}[]{@{}llr@{}}
+
+\caption{\label{tbl-rwc-all}A table of the number of points scored by
+Tier One nations in Rugby World Cup matches, along with the global
+hemisphere of origin. Each row represents the points scored by one team
+in one match. There are 294 rows in total, with just the first 6 rows
+shown here.}
+
+\tabularnewline
+
+\toprule\noalign{}
+team & hemisphere & scored \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Argentina & South & 8 \\
+Argentina & South & 18 \\
+Argentina & South & 13 \\
+Argentina & South & 28 \\
+Argentina & South & 10 \\
+Argentina & South & 7 \\
+
+\end{longtable}
+
+Figure~\ref{fig-overplot} shows a dot plot of the points scored in a
+match for all teams and all matches. This data visualisation has encoded
+the number of points scored as the horizontal \textbf{position} of data
+points. In theory, that allows us to decode from data points to a number
+of points scored. For example, we can see that one team from the
+southern hemisphere scored just over 100 points in one match.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-overplot-1.pdf}
+
+}
+
+\caption{\label{fig-overplot}The number of points scored in Rugby World
+Cup games by teams from the northern and southern hemispheres.}
+
+\end{figure}%
+
+However, as Table~\ref{tbl-rwc-all-dup} shows, exactly the same number
+of points were scored by more than one team (from the same hemisphere)
+and/or in more than one match. This means that there are multiple data
+points at exactly the same position, which means that there are multiple
+data points drawn on top of each other, which in effect means that there
+are data points that we cannot see.
+
+\begin{longtable}[]{@{}llr@{}}
+
+\caption{\label{tbl-rwc-all-dup}A table of the number of points scored
+by Tier One nations in Rugby World Cup matches, along with the global
+hemisphere of origin. Each row represents the points scored by one team
+in one match. There are 294 rows in total, with just the first 6 rows
+shown here, ordered by the number of points scored.}
+
+\tabularnewline
+
+\toprule\noalign{}
+team & hemisphere & scored \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+England & North & 0 \\
+Scotland & North & 0 \\
+England & North & 3 \\
+Ireland & North & 3 \\
+Ireland & North & 3 \\
+Italy & North & 3 \\
+
+\end{longtable}
+
+Although it is still possible to decode that, for example, at least one
+team from the northern hemisphere scored zero points in at least one
+match, it is not possible to decode whether that was just one team or
+just one match. We cannot decode an individual data value from each data
+symbol.\footnote{In effect, more than one data value is encoded as the
+  same data symbol, which means that we cannot decode back to individual
+  data values. This is called a \emph{surjective} mapping (Ziemkiewicz
+  and Kosara 2009).}
+
+Figure~\ref{fig-semitrans} shows the same data as
+Figure~\ref{fig-overplot}, but with the data points semi-transparent so
+that we can see that many of the points overlap. The same number of
+points was scored by multiple teams in multiple matches. This
+demonstrates one approach to resolving the problem of overplotting; we
+will see several other approaches in later chapters.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-semitrans-1.pdf}
+
+}
+
+\caption{\label{fig-semitrans}The number of points scored in Rugby World
+Cup games by teams from the northern and southern hemispheres.}
+
+\end{figure}%
+
+\section{Cartesian coordinates}\label{sec-cartesian}
+
+In Figure~\ref{fig-overplot}, we have encoded \emph{two} sets of data
+values using \textbf{position}. The number of points is encoded as the
+horizontal position of the data points and the hemisphere of origin for
+each team is encoded as the vertical position of the data points. This
+\emph{cartesian coordinate system} is effective because the visual
+system is better at decoding horizontal and vertical positions compared
+to oblique orientations like in Figure~\ref{fig-radial-pos}.\footnote{This
+  preference for horizontal and vertical orientations is known as the
+  \emph{oblique effect} (Appelle 1972; B. Li, Peterson, and Freeman
+  2003)}
+
+Because the horizontal and vertical positions are perpendicular,
+Cartesian coordinates also mean that we can make use of
+\textbf{position} twice without the position encodings interfering with
+each other.\footnote{Put mathematically, horizontal and vertical
+  positions are
+  \href{https://en.wikipedia.org/wiki/Orthogonality}{\emph{orthogonal}},
+  which means that they are
+  \href{https://en.wikipedia.org/wiki/Independence_(probability_theory)}{\emph{independent}}.}
+For example, in Figure~\ref{fig-overplot}, we can decode which
+hemisphere that a data symbol is from separately from decoding how many
+points were scored. The fact that a team is from the northern hemisphere
+does not \emph{by itself} imply anything about the number of points
+scored. Put another way, any difference between the data symbols for
+northern hemisphere teams and the data symbols for southern hemisphere
+teams must reflect something about the data.
+
+A good example of a data visualisation that does not employ Cartesian
+coordinates is a pie chart, like Figure~\ref{fig-pie}, though that is
+also a case where data values are \emph{not} encoded as
+\textbf{position}.
+
+\begin{quote}
+Cartesian (perpendicular) coordinates are effective because we can
+encode data values using position \emph{twice}; we can decode data
+values from horizontal positions and we can separately decode data
+values from vertical positions.
+\end{quote}
+
+\section{Case study: Ternary plots}\label{sec-ternary}
+
+Table~\ref{tbl-crime-level-tern} shows data on the severity of crimes
+committed by youth in New Zealand. For each year, we have the proportion
+of criminal offences that were low, medium, or high severity.\footnote{This
+  form of data is called \emph{compositional} data; it shows how a total
+  is composed of its different parts.}
+
+\begin{longtable}[]{@{}rrrr@{}}
+
+\caption{\label{tbl-crime-level-tern}A table of the proportion of crimes
+at different levels of severity for each year.}
+
+\tabularnewline
+
+\toprule\noalign{}
+year & Low & Medium & High \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2011 & 0.306 & 0.624 & 0.070 \\
+2012 & 0.310 & 0.616 & 0.074 \\
+2013 & 0.296 & 0.631 & 0.074 \\
+2014 & 0.293 & 0.638 & 0.069 \\
+2015 & 0.254 & 0.656 & 0.090 \\
+2016 & 0.246 & 0.655 & 0.099 \\
+
+\end{longtable}
+
+Figure~\ref{fig-ternary} shows a ternary plot of these data.\footnote{Ternary
+  plots, also known as barycentric plots, are common in specific areas
+  of science, for example, Earth science where the composition of rocks
+  or soils is studied.} In this data visualisation, there are three
+variables (three proportions that sum to 1), and the data values from
+each variable has been encoded as position. However, the positions are
+along axes that are not perpendicular. This means that it is not as easy
+to decode individual data values or compare data values because we are
+poorer at decoding positions that are not horizontal or vertical.
+Furthermore, because the three proportions sum to 1, a change in one
+proportion necessitates a change in at least one of the others. In other
+words, we cannot easily decode the difference between two data values
+from the difference between two data symbols.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-ternary-1.pdf}
+
+}
+
+\caption{\label{fig-ternary}A ternary plot of the data in
+Table~\ref{tbl-crime-level-tern}. We can see that for the entire decade
+around 60\% of crimes have been of medium severity, with around 30\% of
+low severity, and only 10\% of high severity.}
+
+\end{figure}%
+
+\section{Non-linear mappings}\label{sec-non-linear-pos}
+
+Table~\ref{tbl-crime-type} shows the total number of youth offenders
+broken down by type of crime. We have one qualitative variable, crime
+type, and one quantitative variable, total nunber of offenders.
+
+\begin{longtable}[]{@{}lr@{}}
+
+\caption{\label{tbl-crime-type}A table of the total number of youth
+offenders in New Zealand (2011 to 2021) broken down by type of crime.
+There are 16 different crime types in toral, with only the first 6 shown
+here.}
+
+\tabularnewline
+
+\toprule\noalign{}
+type & total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Abductions, threats & 2709 \\
+Against justice & 1177 \\
+Causing injury & 11326 \\
+Dangerous acts & 3124 \\
+Deceptions & 1198 \\
+Homicides & 57 \\
+
+\end{longtable}
+
+Figure~\ref{fig-linear} shows of dot plot of these data, with the total
+number of offenders encoded as the horizontal position of circles, one
+per type of crime. This plot is effective for comparing the total number
+of offenders between types of crime, both in terms of which crimes are
+more common than others and how much more common some crimes are than
+others. For example, we can see that theft is about twice as common as
+the next most common crime type.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-linear-1.pdf}
+
+}
+
+\caption{\label{fig-linear}A dot plot of the number of crimes for
+different regions of New Zealand.}
+
+\end{figure}%
+
+The effectiveness of Figure~\ref{fig-linear} comes not only from the
+fact that data values are encoded as the \textbf{position} of data
+symbols, but also from the fact that the encoding is \emph{linear}. In
+Figure~\ref{fig-linear}, the horizontal difference between 0 offenders
+and 5,000 offenders is exactly the same horizontal distance as the
+difference between 5,000 offenders and 10,000 offenders. The effective
+decoding of position is dependent on this sort of linear
+encoding.\footnote{``The representation of numbers should be directly
+  proportional to the quantities represented.'' (Tufte 1983)}
+
+When a small number of data values are considerably larger than the
+majority of data values, as in Figure~\ref{fig-linear}, a non-linear
+scale is sometimes employed in order to see the differences between the
+smaller values more easily. For example, Figure~\ref{fig-log} shows the
+same data and the same encodings, but with a \emph{log scale}. Rather
+than encoding the total number of offenders as the position of the
+circles, the log (base 10) of the total number of offenders is encoded
+as the position of the circles.\footnote{The log (base 10) of the data
+  values is the power to which we must raise 10 in order to get the data
+  value. For example, if the data value is 100, the logged data value is
+  2.
+
+  \(10^2 = 100 \iff log_{10}(100) = 2\)}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-log-1.pdf}
+
+}
+
+\caption{\label{fig-log}A dot plot of the number of crimes for different
+regions of New Zealand, with a non-linear (log) scale on the x-axis.}
+
+\end{figure}%
+
+Unfortunately, as a result of the non-linear horizontal scale, we lose
+the accuracy of the position encoding. We can no longer accurately
+decode from position to data values because the same horizontal distance
+means different things in terms of data values at different locations
+along the x-axis. For example, it is difficult to decode the number of
+offenders for Miscellaneous crimes; the position of the circle data
+symbol is visually roughly half-way between 100 and 1000, but the data
+value is not half-way between 100 and 1000. It is even more difficult to
+decode the size of the difference between the number of offenders for
+Miscellaneous crimes versus Homicides. Worse still, the difference
+between Miscellaneous and Homicide is visually very similar to the
+difference between Miscellaneous and crimes Against justice, but the
+differences between those data values are very different.
+
+We can still decode simple ordinal information from
+Figure~\ref{fig-log}---which type of crimes are more common than
+others---but we have lost the ability to decode quantitative information
+from the positions of the data symbols. We have essentially lost
+information.
+
+Figure~\ref{fig-log-data} shows the logged data again, but this time
+with labels on the x-axis that show logged values rather than the
+original data values. This shows that, in terms of logged data values,
+the positions of the data symbols are linear. We can accurately decode
+from the positions of the circles in Figure~\ref{fig-log-data}, but only
+to recover logged data values. If we want to compare logged data values,
+this is fine, but usually what we want is to compare the original data
+values---we need to decode to a logged value and then raise 10 to that
+power. For example, the log of the number of offenders for Deceptions is
+approximately 3, so the number of offenders is approximately 1000.
+However, this mental transformation requires much more conscious effort
+for most people, so we effectively lose the benefit of using a data
+visualisation, at least for the purpose of decoding quantitative
+information (Section~\ref{sec-tasks}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-log-data-1.pdf}
+
+}
+
+\caption{\label{fig-log-data}A dot plot of the number of crimes for
+different regions of New Zealand, with a non-linear (log) scale on the
+x-axis.}
+
+\end{figure}%
+
+Although a non-linear encoding from data values to the positions of data
+symbols presents problems for decoding quantitative information, there
+are still situations where non-linear scales can be useful. For example,
+if we are only interested in ordinal comparisons, then non-linear
+positions may still be effective. We will see more examples in later
+sections (Section~\ref{sec-col-non-linear},
+Section~\ref{sec-shape-non-linear}).
+
+\begin{quote}
+The encoding of quantitative data as the position of data symbols is
+only effective for decoding quantitative data if the encoding is linear.
+\end{quote}
 
 \section{Summary}\label{summary-3}
+
+Mapping data values to the position of data symbols allows for effective
+decoding for both quantitative and qualitative information, with the
+following caveats:
+
+\begin{itemize}
+\item
+  For quantitative values, what we can accurately decode are
+  \emph{comparisons} between quantitative values, not absolute
+  quantitative values.
+\item
+  The decoding is most accurate for positions that share a common
+  baseline.
+\item
+  Encoding identical data values as the positions of data symbols means
+  that the data symbols overlap, which compromises our ability to decode
+  data values from the data symbols.
+\item
+  We can encode one set of data values as horizontal positions and
+  another set of data values as vertical positions because we can decode
+  horizontal and vertical positions separately.
+\item
+  Decoding quantitative data values from the positions of data symbols
+  is only effective if the encoding is linear.
+\end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -2494,9 +3047,10 @@ is to see the data summary of correlation so no harm no foul.
 Figure~\ref{fig-bar-district} shows a bar plot of the total number of
 offenders in each police district in New Zealand (for ages 14 to 16 and
 from 2011 to 2021). For the reasons outlined in
-Chapter~\ref{sec-mapping-visual-features}, this data visualisation is
-effective for comparing the number of offenders in different police
-districts.
+Chapter~\ref{sec-mapping-visual-features} and
+Chapter~\ref{sec-position}), this data visualisation is effective for
+decoding the number of offenders in different police districts and
+making comparisons between them.
 
 \begin{figure}
 
@@ -2542,16 +3096,16 @@ visualisations with the same mappings can have a different effectiveness
 suggests that there is more to know about how different visual features
 work.
 
-This section covers some more details about how the \textbf{length}
-visual feature works.
+This chapter covers some more details about mappings that encode data
+values as \textbf{length}.
 
 \section{The distance effect}\label{sec-distance-effect}
 
 In Section~\ref{sec-accuracy}, we saw that \textbf{position} and
-\textbf{length} were the most accurate visual features (see
-Figure~\ref{fig-accuracy}). However, this accuracy decreases if the two
-visual features that are being compared are not in close proximity (see
-Figure~\ref{fig-distance-effect}).\footnote{The first demonstration of
+\textbf{length} were the most accurate visual features
+(Figure~\ref{fig-accuracy}). However, this accuracy decreases if the two
+visual features that are being compared are not in close proximity
+(Figure~\ref{fig-distance-effect}).\footnote{The first demonstration of
   the ``distance effect'' is attributed to William S. Cleveland and
   McGill (1984). It has since been replicated several times, for
   example, by Talbot et al. (2014) and Lu et al. (2021).}
@@ -2621,9 +3175,10 @@ Figure~\ref{fig-stacked-bar}, the ethnic groups are encoded as different
 
 Although the total number of offenders has been encoded as the same
 visual feature in both Figure~\ref{fig-stacked-bar} and
-Figure~\ref{fig-bar}, the \textbf{lengths} of the bars, comparing those
-lengths is much harder in Figure~\ref{fig-stacked-bar} because the
-lengths are \textbf{unaligned}.
+Figure~\ref{fig-bar}---in both cases, the number of offenders is encoded
+as the \textbf{lengths} of the bars---comparing those lengths is much
+harder in Figure~\ref{fig-stacked-bar} because the lengths are
+\textbf{unaligned}.
 
 \begin{figure}
 
@@ -2686,11 +3241,16 @@ lengths of the bars, the years are mapped to the horizontal
 colours of the bars, and the bars are stacked vertically.
 
 The problem that we face in this situation is that there are four bars
-to show for each year. Stacking the bars is one solution, but as we have
-just seen, this makes some comparisons more difficult. For example, we
-can easily see that the number of offenders in the unknown group
-increased after 2016, but it is much harder to see what has happened to
-the European/Other group since 2016.
+to show for each year. If we simply encode the year as the horizontal
+position of each bar, the bars will overlap and we will have great
+difficulty decoding data values from the bars
+(Section~\ref{sec-pos-scarce}).
+
+Stacking the bars is one solution, but as we have just seen, this makes
+some comparisons more difficult. For example, we can easily see that the
+number of offenders in the unknown group increased after 2016, but it is
+much harder to see what has happened to the European/Other group since
+2016.
 
 \begin{figure}
 
@@ -2876,10 +3436,10 @@ Figure~\ref{fig-pie-hue} shows a pie chart of the number of offenders
 for different levels of crime seriousness (between 2011 and 2021). In
 this data visualisation, the crime level, which is a
 \textbf{qualitative} variable, is encoded as \textbf{colour}, which is
-appropriate for representing qualitative values (see
-Section~\ref{sec-qual-features}). It is easy to identify different crime
-levels because it is easy to perceive differences between the colours of
-the wedges in the pie chart.
+appropriate for representing qualitative values
+(Section~\ref{sec-qual-features}). It is easy to decode the crime levels
+because it is easy to identify the colour for a particular crime level
+amongst the set of colours used.
 
 \begin{figure}
 
@@ -2896,12 +3456,12 @@ offenders for different levels of crime seriousness.}
 
 Figure~\ref{fig-pie-ordinal} shows another pie chart of the same data,
 again encoding the \textbf{qualitative} level as \textbf{colour}. It is
-again easy to differentiate between different crime levels because we
-can easily perceive differences between the colours of the wedges.
-However, Figure~\ref{fig-pie-ordinal} is \emph{more} effective than
-Figure~\ref{fig-pie-hue} because we can \emph{also} perceive an ordering
-of the wedges from more serious crimes, which are darker wedges, to less
-serious crimes, which are lighter wedges.
+again easy to identify each crime level because we can easily identify
+each separate wedge colour. However, Figure~\ref{fig-pie-ordinal} is
+\emph{more} effective than Figure~\ref{fig-pie-hue} because we can
+\emph{also} perceive an ordering of the wedges from more serious crimes,
+which are darker wedges, to less serious crimes, which are lighter
+wedges.
 
 \begin{figure}
 
@@ -2918,12 +3478,12 @@ offenders for different levels of crime seriousness.}
 
 The fact that there can be two data visualisations,
 Figure~\ref{fig-pie-hue} and Figure~\ref{fig-pie-ordinal}, with the same
-mapping, the \textbf{qualitative} level of crime is encoded as the
-visual feature \textbf{colour}, but the two data visualisations have
+mapping---the \textbf{qualitative} level of crime is encoded as the
+\textbf{colour} of the wedges---but the two data visualisations have
 different effectiveness suggests that there is still more to learn about
 how different visual features work.
 
-This section covers some more details about how the \textbf{colour}
+This chapter covers some more details about how the \textbf{colour}
 visual feature works.
 
 \section{Hue, chroma, and luminance}\label{sec-colour}
@@ -2943,18 +3503,20 @@ be divided into three separate visual features: \textbf{hue},
   divided into three pathways: light-dark, which represents the sum of
   L, M, and S cones; red-green, which represents the difference between
   L and M cones; and blue-yellow, which represents the difference
-  between S cones and the sum of L and M cones. For more information,
-  see Ware (2021).} Hue describes what we normally refer to as the
-colour name: reds, oranges, yellows, greens, blues, and purples. Chroma
-describes the colourfulness, from bright to dull, and luminance
+  between S cones and the sum of L and M cones. For a more detailed
+  description, see Ware (2021).} Hue describes what we normally refer to
+as the colour name: reds, oranges, yellows, greens, blues, and purples.
+Chroma describes the colourfulness, from bright to dull, and luminance
 describes the lightness, from dark to light. Our visual system is
 capable to perceiving changes in hue and changes in chroma and changes
 in luminance.
 
 We have described colour as a \textbf{qualitative} visual feature so
 far, but that really strictly only applies to \textbf{hue}. For example,
-Figure~\ref{fig-stacked-bar} used different hues to represent different
-ethnic groups. Hue is excellent for the perception of differences.
+in Figure~\ref{fig-stacked-bar}, we encoded different ethnic groups as
+different hues. We are very good at decoding qualitative data values
+from different hues, subject to the capacity limits described in
+Section~\ref{sec-capacity}.
 
 \begin{figure}
 
@@ -2975,17 +3537,14 @@ dark.}
 \section{Ordinal visual features}\label{sec-ordinal}
 
 \textbf{Chroma} and \textbf{luminance} are both \textbf{nominal} visual
-features in that they can be used to visualise different groups, but
-they are also \textbf{ordinal} visual features because we can perceive
-an ordering from a set of colours that differ in terms of either chroma
-or luminance or both. A set of colours that transitions from darker to
+features in that they can be used to encode different categories, but
+they are also \textbf{ordinal} visual features because we can decode an
+ordering from a set of colours that differ in terms of either chroma or
+luminance or both. A set of colours that transitions from darker to
 lighter and/or brighter to duller conveys an ordering from larger to
-smaller.\footnote{``Mapping Color to Meaning in Colormap Data
-  Visualizations'' Schloss et al (2018) Evidence for dark-is-more bias
-
-  ``More of what? Dissociating effects of conceptual and numeric
-  mappings on interpreting colormap data visualizations'' Soto et al
-  (2023) Evidence for dark-is-more bias}
+smaller.\footnote{Schloss, Leggon, and Lessard (2021) and Schloss et al.
+  (2023) are examples of studies that have demonstrated a dark-is-more
+  bias.}
 
 This helps to explain why Figure~\ref{fig-pie-ordinal} is more effective
 than Figure~\ref{fig-pie-hue}. In Figure~\ref{fig-pie-ordinal}, the
@@ -2996,7 +3555,15 @@ colours transition from darker to lighter.
 In this sense, \textbf{chroma} and \textbf{luminance} are able to convey
 more information than \textbf{hue} because they can represent
 \textbf{nominal} differences \emph{and} \textbf{ordinal} differences,
-whereas hue can only represent nominal differences.
+whereas hue can only represent nominal differences.\footnote{The stance
+  taken in this book, that chroma and luminance are only appropriate for
+  qualitative (including ordinal) data, is more rigid than in many other
+  places. Chroma and luminance are often included as an appropriate
+  choice for encoding \emph{quantitative} data values as well, albeit a
+  poor one. For example, William S. Cleveland and McGill (1984) includes
+  chroma (as \emph{saturation}) and Munzner (2014) includes both
+  luminance and chroma (as saturation) in their rankings of the accuracy
+  of different visual features.}
 
 On the other hand, Figure~\ref{fig-lum-cap} shows that chroma and
 luminance are even more limited than hue in terms of \textbf{capacity}.
@@ -3013,21 +3580,34 @@ data when there are very few different groups to represent.
 
 \caption{\label{fig-lum-cap}Mapping qualitative values to luminance and
 chroma works well for representing nominal data values, but only for a
-very small number of values. The three values on the left are easily
-distringuishable, but it becomes difficult to clearly distinguish
-between adjacent colours in the middle and almost impossible for the
-colours on the right. This figure can be compared with
-Figure~\ref{fig-colour-cap}, which demonstrates the capacity of hue for
-representing nominal data values.}
+very small number of values. It is possible to identify which shade of
+purple the single dot corresponds to amongst the three shades on the
+left, but it is much harder with the seven shades in the middle, harder
+still for the eleven shades on the right. This figure can be compared
+with Figure~\ref{fig-colour-cap}, which demonstrates the capacity of hue
+for representing nominal data values.}
 
 \end{figure}%
+
+\begin{quote}
+If we encode data values to the colour of data symbols, and the colours
+only differ in terms of \textbf{hue}, then we can only decode
+\textbf{nominal} information from the data symbols; do the data symbols
+represent \emph{different} groups or the \emph{same} group.
+\end{quote}
+
+\begin{quote}
+If we encode data values to the colour of data symbols, and the colours
+differ in terms of \textbf{chroma} and/or \textbf{luminance}, it is also
+possible to decode \textbf{ordinal} information form the data symbols.
+\end{quote}
 
 \section{Perception is relative}\label{sec-colour-relative}
 
 We saw in Section~\ref{sec-perception-relative} that perception of
 \textbf{lengths} is relative. For example, smaller differences in length
-are easier to see when the lengths themselves are short (see
-Figure~\ref{fig-relative}).
+are easier to see when the lengths themselves are short
+(Figure~\ref{fig-relative}).
 
 There is a similar rule for the perception of \textbf{colours}. Our
 perception of luminance and chroma is affected by neighbouring
@@ -3088,15 +3668,17 @@ The pie chart in Figure~\ref{fig-pie-contrast} is \emph{not} an
 effective data visualisation because it encodes qualitative data values
 with many different groups as colour hue. This exceeds the
 \textbf{capacity} of the \textbf{hue} visual feature; it is difficult to
-clearly distinguish between all of the different hues (see
-Section~\ref{sec-capacity}).
+clearly identify which wedge corresponds to which district
+(Section~\ref{sec-capacity}).
 
 Although it does not make the use of hue any more appropriate, for the
 purposes of demonstration, we can solve the colour perception problems
 in Figure~\ref{fig-pie-contrast} by adding a white border to all of the
 wedges (see Figure~\ref{fig-pie-contrast-solved}). Now all of the wedges
 and all of the squares in the legend are perceived relative to a
-surrounding white border.
+surrounding white border. This means that, not only is each wedge
+perceived as a solid block of constant colour, but it is easier to match
+the colours within the wedges with the colours in the legend.
 
 \begin{figure}
 
@@ -3112,14 +3694,152 @@ because each wedge is surrounded by a white border.}
 
 \end{figure}%
 
+\begin{quote}
+If we encode data values as the colour of data symbols, we may have
+difficulty decoding the colours if the same colour is presented with
+different colours adjacent to it.
+\end{quote}
+
+\section{Size matters}\label{size-matters}
+
+The perception of colours is also affected by the size of the coloured
+region. In particular, small regions of colour may blend together with
+neighbouring colours.\footnote{Stone (2012) describes ``spreading'',
+  which means a blending or averaging of colours over small areas
+  \emph{by the visual system}: ``In designing colors for digital
+  visualization systems, one of the most critical factors is the
+  interaction between size and color appearance.''} For example, on the
+left of Figure~\ref{fig-colour-size}, the yellow and blue stripes are,
+in reality, the same colours both in the top set of wide bars and in the
+bottom set of narrow bars, but the blue bars appear greener in the
+bottom set. The right side of Figure~\ref{fig-colour-size} shows that
+the same colours may appear different when they are used as fill colours
+for larger regions, like bars, compared to when they are used for thin
+lines. In this case, the blue line appears darker than the blue bars.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-colour-size-1.pdf}
+
+}
+
+\caption{\label{fig-colour-size}The perception of colours varies based
+on the size of the coloured regions.}
+
+\end{figure}%
+
+\begin{quote}
+If we encode data values as the colour of data symbols, we may have
+difficulty decoding the colours if there are large differences in the
+sizes of data symbols.
+\end{quote}
+
+\section{Colours in space}\label{sec-colour-spaces}
+
+Figure~\ref{fig-colour-spaces} shows the set of visible colours arranged
+so that if we move the same distance in any direction from any one
+colour, the perceived difference between the original colour and the new
+colour is constant.\footnote{Figure~\ref{fig-colour-spaces} shows the
+  extent of the \emph{optimal colour solid}, which is essentially the
+  colours that it is possible to produce by reflecting a light source
+  off a surface that has perfect reflectance. This colour solid was
+  determined assuming specific illumination conditions (D65), and
+  assuming a standard human observer.
+
+  The colours are shown in CIE \(L^*u^*v^*\) space (\emph{aka} HCL
+  space), which is (roughly) \emph{perceptually uniform} so that
+  perceptual differences between pairs of colours that are the same
+  distance apart within the space are perceived as having the same
+  visual difference.
+
+  The colours shown are produced using sRGB specifications, so many of
+  the colours, especially at high chroma, are not realistic.} This
+provides insight into what sorts of colours and what sorts of
+differences between colours are possible. For example, we can see that
+it is not possible to produce colours that have a high chroma \emph{and}
+are very dark. In other words, there is no such thing as a very
+colourful black. This is also true for colours that are very light.
+
+We can also see that the range of possible chroma values depends on both
+the hue and the luminance of colours. For example, it is possible to
+produce a light yellow with either a low chroma or a high chroma, but we
+can only produce a dark yellow with a low chroma. Equivalently, the
+range of possible luminance values depends on both the hue and the
+chroma of colours. For example, we can produce both dark and light
+low-chroma yellows, but we can only produce light high-chroma yellows.
+
+This means that, if we want to encode data values as the chroma of a
+data symbol, we can get a higher decoding \textbf{capacity} through
+careful selection of hue and luminance. For example, we can generate a
+wider range of light greens than dark greens and a wider range of reds
+that are neither too light nor too dark.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{HCL/hcl.png}
+
+}
+
+\caption{\label{fig-colour-spaces}Slices through the set of colours that
+are visible to humans. The central images show colours that differ in
+terms of chroma and hue, but share a common luminance (from lighter at
+the top to darker at the bottom). The images to the left and right show
+colours that differ in terms of chroma and luminance, but share a common
+hue. a}
+
+\end{figure}%
+
+Figure~\ref{fig-colour-spaces-srgb} is similar to
+Figure~\ref{fig-colour-spaces} except that, instead of showing the range
+of colours that it is possible to perceive, it shows the range of
+colours that it is possible to \emph{produce} using standard
+technology.\footnote{Figure~\ref{fig-colour-spaces-srgb} shows the gamut
+  of sRGB colours in CIE \(L^*u^*v^*\) space (\emph{aka} HCL space).}
+The simple message here is that the limits on the range of colours that
+we can use to encode data values is much smaller than the range of
+possible colours. On the positive side, the range of colours that we can
+produce is still very large.
+
+A more important message is that the general points about differences
+between colours still apply. For example, the range of possible chroma
+values is dependent on the hue and luminance of colours.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{HCL/hcl-srgb.png}
+
+}
+
+\caption{\label{fig-colour-spaces-srgb}Slices through the set of colours
+that it is possible to produce on a typical computer monitor.}
+
+\end{figure}%
+
+\begin{quote}
+If we encode data values as the colour of data symbols, the choice of
+hue, luminance, and chroma affects the capacity of decoding---how many
+different colours can be effectively decoded.
+\end{quote}
+
 \section{Colour vision deficiency}\label{sec-CVD}
 
 Roughly 10\% of the population, primarily men, suffer from a form of
-colour vision deficiency.\footnote{Provide a cite for those percentages}
-In the most common case, the viewer will have difficulty distinguishing
-between red and green hues. Figure~\ref{fig-pie-hue-cvd} simulates how
-the colours in Figure~\ref{fig-pie-hue} would appear to a person with
-severe deuteranopia (red-green colour blindness).
+colour vision deficiency (CVD). In the most common case, the viewer will
+have difficulty distinguishing between red and green hues.\footnote{This
+  is more commonly known as \emph{red-green colour blindness}.
+  Blue-yellow colour blindness is also possible, but much rarer. There
+  are also four distinct categories of red-green colour blindness,
+  though the effect on the colour perceived is similar in all cases. The
+  images used in this book simulate deuteranomaly (the most common form
+  of CVD). The approximate figure of 10\% is from Ware (2021).}
+Figure~\ref{fig-pie-hue-cvd} simulates how the colours in
+Figure~\ref{fig-pie-hue} would appear to a person with severe CVD.
 
 \begin{figure}
 
@@ -3130,7 +3850,9 @@ severe deuteranopia (red-green colour blindness).
 }
 
 \caption{\label{fig-pie-hue-cvd}A data visualisation of the number of
-offenders for different levels of crime seriousness.}
+offenders for different police districts. This is how a person with
+severe deuteranopia might perceive the colours in
+Figure~\ref{fig-pie-contrast}.}
 
 \end{figure}%
 
@@ -3149,75 +3871,131 @@ deuteranopia. The difference in hue is of no importance in this case.
 }
 
 \caption{\label{fig-pie-ordinal-cvd}A data visualisation of the number
-of offenders for different levels of crime seriousness.}
+of offenders for different levels of crime seriousness. This is how a
+person with severe deuteranopia might perceive the colours in
+Figure~\ref{fig-pie-ordinal}.}
 
 \end{figure}%
 
-\section{Size matters}\label{size-matters}
+\begin{quote}
+When we encode data values as the colour of data symbols, some viewers
+will have difficulty decoding the colours if we do not take into account
+common forms of colour vision deficiency.
+\end{quote}
 
-The perception of colours is also affected by the size of the coloured
-region. In particular, small regions of colour may blend together with
-neighbouring colours. \footnote{``In Color Perception, Size Matters''
-  Stone (2012) ``In designing colors for digital visualization systems.
-  one of the most critical factors is the interaction between size and
-  color appearance.'' Talks about ``spreading'', which means a sort of
-  blending or averaging of colours over small areas \emph{by the visual
-  system}.} For example, on the left of Figure~\ref{fig-colour-size},
-the yellow and blue stripes are the same colours both in the top set if
-wide bars and in the bottom set of narrow bars. The right side of
-Figure~\ref{fig-colour-size} shows that the same colours may appear
-different when they are used as fill colours for larger regions, like
-bars, compared to when they are used for thin lines.
+\section{Non-linear mappings}\label{sec-col-non-linear}
+
+The top row of Figure~\ref{fig-non-linear-lum} shows a linear luminance
+mapping; we have a set of rectangles that change luminance in equal
+steps. The two rectangles on the left of this row appear very similar,
+while the two rectangles on the right of this row appear quite
+different. The darker rectangles appear to change more slowly and the
+lighter rectangles appear to change more rapidly. In other words, the
+\emph{decoding} of luminance is \emph{not} linear.
 
 \begin{figure}
 
 \centering{
 
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-colour-size-1.pdf}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-non-linear-lum-1.pdf}
 
 }
 
-\caption{\label{fig-colour-size}The perception of colours varies based
-on the size of the coloured regions.}
+\caption{\label{fig-non-linear-lum}The two rows of purple values begin
+and end at the same level of luminance. The top row maps luminance
+linearly, but the bottom row uses a cube-root mapping.}
 
 \end{figure}%
 
-\section{Colour palettes}\label{colour-palettes}
+We saw in Section~\ref{sec-non-linear-pos} that accurate decoding of
+data values from \textbf{position} relies on using a linear encoding.
+That was because the decoding of position is linear. A linear encoding
+from data values to position, followed by a linear decoding from
+position to data values, leads to an accurate mapping. And that is
+particularly important for mapping quantitative data values.
 
-When we encode nominal or ordinal data values as colours, we have to
-choose a set of colours, or a \textbf{colour palette}. For example, in
-Figure~\ref{fig-pie-hue} we have to choose a different colour to
-represent each level of crime.
+Part of the reason why it is not appropriate to map quantitative data
+values to luminance is that the decoding of luminance is \emph{not}
+linear. This makes it difficult to accurately decode quantitative data
+values from the luminance of a data symbol.
 
-This choice is difficult because there are many different colours to
-choose from and often there is no obvious mapping from a data value to a
-particular colour. For example, what specific hue, chroma, and luminance
-should we choose to represent a \texttt{high} crime level?
+However, we can use luminance to map ordinal data values
+(Section~\ref{sec-ordinal}). In this case, all that we need is to be
+able to identify that a data symbol is lighter or darker than another
+data symbol.
 
-There are also competing criteria involved in selecting colours. For
-example, although the primary goal is to represent different categories
-with colours that are as different from each other as possible, we also
-have to take into account that some viewers may have difficulty
-perceiving differences between particular colours
-(Section~\ref{sec-CVD}).
+The bottom row of Figure~\ref{fig-non-linear-lum} shows a luminance
+mapping that takes larger steps for darker colours and smaller steps for
+lighter colours. In this row, the purples appear to change more evenly.
+We can see differences between the darker rectangles as well as between
+the lighter rectangles.
 
-Fortunately, researchers have produced a number of predefined colour
-palettes that we can make use of.\footnote{cite R Journal article with
-  Achim} For example, the colours used in Figure~\ref{fig-pie-hue} are
-based on palettes used in journals published by the Nature Publishing
-Group.\footnote{cite ggsci, colour brewer (and others?)} There are also
-many helpful tools online.\footnote{https://color.adobe.com/}
+In other words, a \emph{non-linear} mapping from data values to
+luminance can be used to generate a larger set of luminance levels that
+can be differentiated from each other. A non-linear luminance mapping
+leads to increased \textbf{capacity} for decoding data values from
+luminance.
 
-If the data symbols are arranged in a regular pattern, like in a bar
-plot, then comparisons between neighbours are most important, so we can
-order the colours to maximise neighbour differences rather than
-maximising all pairwise differences.\footnote{``Reflections on the Uses
-  and Available Choices of Categorical Colorschemes'' Bartolomeo et al
-  (2025)} Figure~\ref{fig-pie-order} demonstrates this idea with a bar
-plot of the crime rate in different districts for both 2011 and 2021.
-This bar plot uses the same set of hues as
+\begin{quote}
+When we are mapping nominal or ordinal data values, and we are encoding
+to a visual feature that has a non-linear decoding, a non-linear
+\emph{encoding} can be effective for increasing the capacity of the
+visual feature.
+\end{quote}
+
+\section{Escape capacity}\label{sec-escape}
+
+We have previously identified that colour has a limited capacity
+(Section~\ref{sec-capacity} and Section~\ref{sec-ordinal}). In general,
+we cannot use colour to encode more than around 7 different categories.
+Section~\ref{sec-colour-spaces} also demonstrated that this capacity
+varies for different combinations of hue, chroma, and luminance.
+
+One way to increase the decoding capacity of a colour encoding is to
+vary more than one of hue, chroma, and luminance at once. For example,
+the top row of Figure~\ref{fig-escape-lum} shows a set of colours that
+only vary in terms of luminance---hue and chroma are held constant (this
+is the bottom row from Figure~\ref{fig-non-linear-lum}). In the second
+row of Figure~\ref{fig-escape-lum}, in addition to increasing luminance,
+we have increasing chroma, so there are larger differences between
+colours, but still a clear ordering. Similarly, in the bottom row of
+Figure~\ref{fig-non-linear-lum}, the hue changes slightly as the
+luminance increases so that the differences are more obvious.
+
+In effect, this is another example of a non-linear encoding. We take a
+non-linear path through colour space (Section~\ref{sec-colour-spaces}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-escape-lum-1.pdf}
+
+}
+
+\caption{\label{fig-escape-lum}The top row holds hue and chroma constant
+and just varies luminance. It is limited to a very low chroma. The
+middle row varies chroma as well as luminance, which provides a wider
+range of colours compared to the top row by allowing a more colourful
+starting point. The bottom row varies hue and luminance, which provides
+a wider range of colours compared to the top row by allowing a
+different-hued starting point.}
+
+\end{figure}%
+
+Another way to expand the decoding capacity of a colour encoding is to
+reduce the number of colours that need to be directly compared. For
+example, if data symbols are arranged in a very regular pattern, like in
+a bar plot, comparisons between neighbouring data symbols are most
+important. This means that we can order the colours to maximise
+neighbour differences rather than maximising all pairwise
+differences.\footnote{This idea is described and demonstrated in
+  Bartolomeo et al. (2025).} Figure~\ref{fig-pie-order} demonstrates
+this idea with a bar plot of the crime rate in different districts for
+both 2011 and 2021. This bar plot uses the same set of hues as
 Figure~\ref{fig-pie-contrast-solved}, just in a different order so that
-adjacent bars have very different colours.
+adjacent bars have very different colours. It is very easy to
+distringuish between adjacent colours.
 
 \begin{figure}
 
@@ -3253,21 +4031,125 @@ so that adjacent hues are more distant from each other.}
 
 \end{figure}%
 
-\section{Case study: Divergent colour
-palettes}\label{case-study-divergent-colour-palettes}
+\section{Colour palettes}\label{colour-palettes}
 
-The Rugby World Cup is a competition that is held every four years, with
-the first event taking place in 1987. We have data on the total number
-of points that were scored and conceded in World Cup matches for Tier
-One nations (the top 10 rugby-playing nations) at each World Cup.
-Table~\ref{tbl-rwc-all-year} shows a sample of these data.\footnote{Attribution
-  to kaggle data set.}
+When we encode nominal or ordinal data values as colours, we have to
+choose a set of colours, or a \textbf{colour palette}. For example, in
+Figure~\ref{fig-pie-hue} we have to choose a different colour to
+represent each level of crime.
+
+This choice is difficult because there are many different colours to
+choose from and often there is no obvious mapping from a data value to a
+particular colour. For example, what specific hue, chroma, and luminance
+should we choose to represent a ``high'' crime level? As we have seen in
+the preceding sections, there are also many, sometimes competing,
+criteria involved in selecting effective colours.
+
+As an example, we can consider the problem of selecting a set of 5
+different hues to represent 5 different categorical data values, like
+the palette that is required to represent the difference levels of crime
+in Figure~\ref{fig-pie-hue}.
+
+We know that it is effective to encode qualitative data values as the
+hue of a data symbol (Section~\ref{sec-qual-features} and
+Section~\ref{sec-colour}). In order to make the individual hues easy to
+identify, we can place them evenly around the colour circle. If we do
+not want the viewer to decode any ordering of the data values from the
+data symbols, then we should also hold the chroma and luminance of the
+data symbols constant. The top row of Figure~\ref{fig-col-naive-cvd}
+shows a palette that follows that simple approach.
+
+The bottom row of Figure~\ref{fig-col-naive-cvd} shows one big problem
+with this attempt: the hues are very hard to identify for viewers with
+CVD (Section~\ref{sec-CVD}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-col-naive-cvd-1.pdf}
+
+}
+
+\caption{\label{fig-col-naive-cvd}The top row shows a colour palette
+that attempts to vary hue evenly, in order to allow decoding of nominal
+data values, while holding chroma and luminance constant, in order to
+avoid decoding of ordinal data values. The bottom row shows how the
+palette appears to a viewer with red-green CVD.}
+
+\end{figure}%
+
+Figure~\ref{fig-col-naive-chroma} shows another big problem with the
+palette in the top row of Figure~\ref{fig-col-naive-cvd}. An attempt to
+hold chroma constant for a range of hues will fail on most standard
+computer displays because they cannot produce high chroma for all hues
+(Section~\ref{sec-colour-spaces}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-col-naive-chroma-1.pdf}
+
+}
+
+\caption{\label{fig-col-naive-chroma}A view of the colour palette from
+Figure~\ref{fig-col-naive-cvd} relative to the range of colours that are
+possible on a standard computer monitor. The palette attempts to produce
+the same chroma for different hues, but only a much lower chroma can
+actually be achieved for some hues. The result is that the brow, green,
+and blue in the colour palette are less colourful than the purple and
+red.}
+
+\end{figure}%
+
+Given the difficulty of selecting an effective colour palette, there is
+a good argument for making use of pre-existing colour palettes that have
+been designed by experts. For example, the
+\href{https://colorbrewer2.org/}{ColorBrewer} web site provides tools
+for choosing colour palettes for nominal and ordinal encodings. The
+Okabe-Ito palette for encoding nominal data (up to 9 categories), is
+specifically designed to allow effective decoding by all types of CVD
+(Figure~\ref{fig-palettes}). \footnote{The ColorBrewer tools are
+  described in Harrower and Brewer (2003).
+
+  Okabe and Ito established the Color Universal Design organization, but
+  the associated web site is no longer available. Okabe and Ito (2008)
+  provides a general discussion of colour-blindness, including the
+  palette used in Figure~\ref{fig-palettes}. An earlier piece of work
+  that produced a palette of just 4 colours is described in Ichihara et
+  al. (2008).
+
+  Zeileis and Murrell (2023) provides an overview of a large number of
+  different palettes, within the context of producing data
+  visualisations in R.}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-palettes-1.pdf}
+
+}
+
+\caption{\label{fig-palettes}The top row shows the first 7 colours from
+Okabe-Ito. The bottom row is 7 sequential ``Greens'' from ColorBrewer.}
+
+\end{figure}%
+
+\section{Case study: Diverging colour palettes}\label{sec-divergent}
+
+We have data on the total number of points that were scored and conceded
+in World Cup matches for Tier One nations (the top 10 rugby-playing
+nations) at each World Cup. Table~\ref{tbl-rwc-all-year} shows a sample
+of these data. This an aggregated version of the data set that we saw in
+Table~\ref{tbl-rwc-all}.
 
 \begin{longtable}[]{@{}lrrrr@{}}
 
 \caption{\label{tbl-rwc-all-year}A table of the total number of points
 scored and conceded by Tier One nations in Rugby World Cup matches at
-each World Cup. Each row represents thetotal points scored by one team
+each World Cup. Each row represents the total points scored by one team
 in one World Cup. There are 100 rows in total, with just the first 6
 rows shown here.}
 
@@ -3290,21 +4172,25 @@ Italy & 2007 & 30 & 94 & -64 \\
 
 Figure~\ref{fig-neg-tile} shows a heatmap of the points differential
 (points scored for minus points scored against) for Tier One nations at
-each Rugby World Cup. The data symbols are rectangles, or ``tiles''. The
-teams are encoded as the vertical \textbf{positions} of the tiles and
-the years are encoded as the horizontal \textbf{positions} of the tiles.
-These are both effective mappings and we can easily \textbf{decode} to
-teams or years. The points differentials are encoded as the
-\textbf{colour} of the tiles, but in a slightly complicated way.
-Positive data values map to a shade of purple, while negative values map
-to a shade of brown. In both cases, we have a constant \textbf{hue},
+each Rugby World Cup. The data symbols are rectangles, the teams are
+encoded as the vertical \textbf{positions} of the rectangles, and the
+years are encoded as the horizontal \textbf{positions} of the
+rectangles. These are both effective mappings and we can easily
+\textbf{decode} to teams or years. The points differentials are encoded
+as the \textbf{colour} of the rectangles, but in a slightly complicated
+way. Positive data values map to a shade of green, while negative values
+map to a shade of brown. In both cases, we have a constant \textbf{hue},
 with increasing \textbf{chroma} and decreasing \textbf{luminance} as the
-data values get further away from zero.
+data values get further away from zero.\footnote{This colour palette is
+  based on the \emph{BrBG} diverging palette from ColorBrewer.}
 
 The use of two \textbf{hues} creates two different groups (positive and
 negative values), while the changes in \textbf{chroma} and
 \textbf{luminance} convey changes in absolute magnitude (if only for
-ordinal comparisons).
+ordinal comparisons).\footnote{In contrast to a \emph{diverging} colour
+  palette, a colour palette for nominal data is often called a
+  \emph{qualitative} palette and a palette for ordinal or qualitative
+  data is called a \emph{sequential} palette.}
 
 \begin{figure}
 
@@ -3314,18 +4200,12 @@ ordinal comparisons).
 
 }
 
-\caption[\label{fig-neg-tile}A heatmap of the total points differentials
+\caption{\label{fig-neg-tile}A heatmap of the total points differentials
 for Tier One nations at individual Rugby World Cups. South Africa was
 excluded from the 1987 and 1991 tournament due to its apartheid
-policies.]{\label{fig-neg-tile}A heatmap of the total points differentials
-for Tier One nations at individual Rugby World Cups. South Africa was
-excluded from the 1987 and 1991 tournament due to its apartheid
-policies.\footnotemark{}}
+policies.}
 
 \end{figure}%
-\footnotetext{The \{gggrid\} package (Murrell 2022) was used to
-  take the ``bite'' out of the panel border in Figure~\ref{fig-neg-tile}
-  where South Africa was excluded.}
 
 \begin{quote}
 A diverging colour palette is effective because it creates two distinct
@@ -3334,18 +4214,225 @@ changes in chroma and/or luminance to encode ordinal values within each
 group.
 \end{quote}
 
+\section{Case study: The rainbow}\label{case-study-the-rainbow}
+
+In some fields of research, for example medical imaging and geographic
+imaging, a common problem is to visualise numeric data values on a
+regular spatial grid. Figure~\ref{fig-nomads-rainbow} shows an example,
+where the grid is a set of longitudes and latitudes in the vicinity of
+New Zealand and the data values are measures of wind strength.
+
+A common solution is to encode the numeric data values using
+colour\footnote{The resulting image is often referred to as a
+  \emph{pseudo-colour} image.} and it is also common to use a rainbow
+colour palette for that encoding (the image on the right of
+Figure~\ref{fig-nomads-rainbow}). However, there are several problems
+with this approach.\footnote{The problems with rainbow palettes have
+  been well-known for decades and attempts have been made to stamp out
+  the use of rainbow colour palettes, but they remain popular in some
+  fields of research (Borland and Taylor Ii 2007; Gołębiowska and
+  Çöltekin 2022).}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS-rainbow.png}
+
+}
+
+\caption{\label{fig-nomads-rainbow}A snapshot of wind strength in the
+vicinity of New Zealand on September 14 2024. This uses the same data as
+Figure~\ref{fig-visual-model-demo}, but does not show wind direction.
+The image on the left encodes wind strength as shades of grey (darker is
+stronger) and the image on the right uses a rainbow colour palette (from
+red through green and blue to violet; see Figure~\ref{fig-rainbow}).}
+
+\end{figure}%
+
+Figure~\ref{fig-rainbow} shows the spectrum of colours for rainbow
+palettes.\footnote{The rainbow palette is typically a
+  fully-\emph{saturated}, maximum-\emph{value} spectrum of hues---the
+  most colourful and brightest colours that a typical computer monitor
+  can produce.
+
+  Saturation and value are essentially less accurate versions of chroma
+  and luminance. For example, a fully-saturated, maximum-value yellow
+  has a higher chroma and luminance than a fully-saturated,
+  maximum-value blue.
+
+  The rainbow spectrum is basically a path along the boundary of the
+  colours in Figure~\ref{fig-colour-spaces-srgb}, visiting the most
+  extreme points for different hues. This path clearly is not going to
+  have a simple monotonic change in either luminance or chroma.} This
+shows that a rainbow palette is mostly different in terms of hue and we
+have already established that hue is not a good visual feature for
+encoding quantitative data values (Section~\ref{sec-qual-features} and
+Section~\ref{sec-colour}).
+
+At the same time, The middle row of Figure~\ref{fig-rainbow} shows that
+the rainbow palette also varies in terms of luminance. We know that
+luminance can be an effective encoding for ordinal data values
+(Section~\ref{sec-ordinal}), but the luminance changes in a rainbow
+palette are not monotonic. There are regions of almost constant
+luminance plus regions where luminance decreases followed by regions
+where luminance increases.\footnote{A rainbow palette is a colour
+  encoding that is non-linear in an unhelpful way
+  (Section~\ref{sec-col-non-linear}).
+
+  The representation of luminance in Figure~\ref{fig-rainbow} also shows
+  an example of a 3d illusion (Section~\ref{sec-illusion}). The curved
+  line combined with the gradients of grey tempt us to see a curved wall
+  of constant height that is receding from us.} This makes a rainbow
+palette a poor encoding even for showing the order of numeric data
+values.
+
+Finally, the changes in luminance and chroma within the rainbow spectrum
+produce bands of colours (red, yellow, green, cyan, blue, magenta). In
+other words, the spectrum appears discrete rather than continuous. This
+can result in a decoding that \emph{adds} structure (discrete levels) to
+numeric data values that are in reality continuous.\footnote{Heer and
+  Stone (2012) discuss that viewers tend to group colours by discrete
+  colour names and that those colour groups help to explain how colour
+  palettes are decoded.} For example, Figure~\ref{fig-nomads-rainbow}
+suggests three main regions--red-yellow, green-cyan, and
+blue-magenta---but the underlying data values vary more smoothly than
+that.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-rainbow-1.pdf}
+
+}
+
+\caption{\label{fig-rainbow}The top row shows the spectrum of colours
+from which a classic \emph{rainbow} colour palette is taken. The middle
+row shows the changing luminance of the colours in the rainbow spectrum.
+The luminance of the blue colours is considerably less than the
+luminance of the yellows and greens and even the reds. The bottom row
+shows an example rainbow palette of 6 colours taken from the rainbow
+spectrum.}
+
+\end{figure}%
+
+\section{Case study: Viridis}\label{case-study-viridis}
+
+One of the arguments for using a rainbow colour palette is that viewers
+like that it is colourful. We also saw in Section~\ref{sec-escape} that
+varying hue in addition to luminance can help to increase the capacity
+of an ordinal colour scale.{[}\^{}multi-hue{]}
+
+\begin{verbatim}
+vary in hue as well as luminance and/or chroma (multi-hue palettes) lead 
+to faster and more accurate decoding than palettes with a constant
+hue (single-hue palettes).  @rainbow-not-all-bad makes a similar argument.
+\end{verbatim}
+
+The \textbf{viridis} colour palette, shown in
+Figure~\ref{fig-nomads-viridis} (on the right), is an attempt to fix the
+problems of the rainbow palette, while still retaining a significant
+range of hues. Compared to Figure~\ref{fig-nomads-rainbow}, it is much
+easier to decode regions of stronger winds and regions of weaker winds
+from the darker and lighter regions of Figure~\ref{fig-nomads-viridis}.
+
+At the same time, the image on the left of
+Figure~\ref{fig-nomads-viridis} shows a colour palette that only varies
+in terms of luminance and we can see that it is easier to see some
+details in the more colourful viridis map, such as the variations in low
+wind strength (the yellows) over New Zealand.
+
+\begin{figure}
+
+\centering{
+
+\begin{figure}[H]
+
+\begin{minipage}{0.50\linewidth}
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS-grey.png}\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS-viridis.png}\end{minipage}%
+
+\end{figure}%
+
+}
+
+\caption{\label{fig-nomads-viridis}A visualisation of wind strength}
+
+\end{figure}%
+
+Figure~\ref{fig-viridis} shows the spectrum for viridis colour
+palettes.\footnote{There is no official publication that explains the
+  development of the viridis colour spectrum, but there is a
+  \href{https://www.youtube.com/watch?v=xAoljeRJ3lU}{video on YouTube}
+  that is very good (Smith and Walt 2015).} We can see that there is
+still a large range of hues, but the change in luminance is now
+monotonic, which at least allows decoding of ordinal data values. In
+addition, the range of hues has been selected to be appropriate for
+viewers with red-green colour blindness
+(Section~\ref{sec-CVD}).\footnote{Nuñez (2018) take things a step
+  further with a \emph{cividis} colour palette that provides a CVD-safe
+  version of viridis that also has a wider and \emph{linear} variation
+  in luminance (in Figure~\ref{fig-viridis}, we can see that the changes
+  in luminance are non-linear and do not span the full range of
+  luminance).}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-viridis-1.pdf}
+
+}
+
+\caption{\label{fig-viridis}The top row shows the spectrum of colours
+from which a viridis colour palette is taken. The middle row shows the
+changing luminance of the colours in the viridis spectrum. The luminance
+change is monotonic. The bottom row shows an example viridis palette of
+6 colours taken from the viridis spectrum.}
+
+\end{figure}%
+
 \section{Summary}\label{summary-5}
 
 \textbf{Colour} is really three visual features: \textbf{hue},
 \textbf{chroma}, and \textbf{luminance}.
 
-\textbf{Hue} is excellent for representing \textbf{nominal} data values.
+\textbf{Hue} is excellent for encoding \textbf{nominal} data values,
+though it has a limited capacity.
 
-\textbf{Chroma} and \textbf{luminance} can be used to represent
-\textbf{ordinal} data values, but they have a very limited capacity.
+\textbf{Chroma} and \textbf{luminance} can be used to encode
+\textbf{ordinal} data values, but they have even lower capacity.
 
-We should lean on the work done by experts when it comes to choosing
-colour palettes.
+However, there are several complications:
+
+\begin{itemize}
+\item
+  The decoding of data values from hue, chroma, and luminance is
+  affected by surrounding colours and the size of the data symbol.
+\item
+  Approximately 10\% of viewers are unable to differentiate between red
+  and green hues with similar chroma and luminance.
+\item
+  The range of possible chroma values that can be decoded depends on
+  both hue and luminance.
+
+  The range of possible luminance values that can be decoded depends on
+  both hue and chroma.
+
+  The range of possible colours that can be produced is constrained by
+  the technological limits of standard computer monitors.
+\end{itemize}
+
+Selecting which colours should be used to encode data values is
+difficult to get right and a good solution often involves varying all of
+hue, chroma, and luminance at once.
+
+Consequently, it is usually a good idea to make use of pre-existing
+colour palettes that have been carefully designed to avoid most
+problems.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -3355,7 +4442,7 @@ colour palettes.
 
 \chapter{Congruent Mappings}\label{sec-congruence}
 
-The purpose of this section is to show that we need to consider more
+The purpose of this chapter is to show that we need to consider more
 than just the accuracy or capacity of our mappings from data values to
 basic visual features in order to understand the effectiveness of a data
 visualisation.\footnote{Tversky, Morrison, and Betrancourt (2002)
@@ -3367,6 +4454,9 @@ visualisation.\footnote{Tversky, Morrison, and Betrancourt (2002)
 \section{Implicit mappings}\label{sec-implicit}
 
 Sort of like pre-attentive analogue of learned decodings.
+
+Refer back to Section~\ref{sec-illusion}? Things that the visual system
+does whether we want it to or not.
 
 Do a simple example - maybe just the fact that a bar twice the length of
 another bar is perceived as ``twice'' !? These implicit mappings are the
@@ -3549,12 +4639,9 @@ number of offenders for different ethnic groups.}
 
 \end{figure}%
 
-The Rugby World Cup is a competition that is held every four years, with
-the first event taking place in 1987. We have data on the total number
-of points that were scored and conceded in World Cup matches for Tier
-One nations (the top 10 rugby-playing nations).
-Table~\ref{tbl-rwc-all-time} shows these data.\footnote{Attribution to
-  kaggle data set.}
+We have data on the total number of points that were scored and conceded
+in World Cup matches for Tier One nations (the top 10 rugby-playing
+nations). Table~\ref{tbl-rwc-all-time} shows these data.
 
 \begin{longtable}[]{@{}lrrr@{}}
 
@@ -3802,49 +4889,84 @@ that are dissonant because that can cause distraction and slower and/or
 incorrect \textbf{decoding} of data values from visual features.
 \end{quote}
 
-\section{Case study: Jittering}\label{case-study-jittering}
+\section{Case study: Time's arrow}\label{case-study-times-arrow}
 
-We have data on the number of points that were scored in every World Cup
-match for Tier One nations (the top 10 rugby-playing nations).
-Table~\ref{tbl-rwc-all} shows a sample of these data.\footnote{Attribution
-  to kaggle data set.}
+Figure~\ref{fig-bar-order} shows the results of a 2025 poll that asked
+what was the best thing that the Trump administration had done,
+comparing results in February to results in September. In terms of
+mappings, this bar plot makes good use of (vertical) \textbf{position}
+and (horizontal) \textbf{length} to encode different policy issues, the
+difference in dates, and the percent of respondents who voted for each
+policy. However, when we look at the top two bars, there is a temptation
+to read the pairs of bars in order from top to bottom.\footnote{The idea
+  for this data visualisation, and whether to question the vertical
+  ordering, comes from a
+  \href{https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking}{PolicyViz
+  Newsletter}. The original data source was a
+  \href{https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/}{Washington
+  Post poll}).} If we do not attend carefully to the legend, we may
+perceive a \emph{decrease} in the (relative) popularity of the
+immigration policy and an \emph{increase} in the popularity of DOGE.
+This is a subtle example of visual dissonance.
 
-\begin{longtable}[]{@{}llr@{}}
+\begin{figure}
 
-\caption{\label{tbl-rwc-all}A table of the number of points scored by
-Tier One nations in Rugby World Cup matches, along with the global
-hemisphere of origin. Each row represents the points scored by one team
-in one match. There are 294 rows in total, with just the first 6 rows
-shown here.}
+\centering{
 
-\tabularnewline
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/congruence_files/figure-pdf/fig-bar-order-1.pdf}
 
-\toprule\noalign{}
-team & hemisphere & scored \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Argentina & South & 8 \\
-Argentina & South & 18 \\
-Argentina & South & 13 \\
-Argentina & South & 28 \\
-Argentina & South & 10 \\
-Argentina & South & 7 \\
+}
 
-\end{longtable}
+\caption{\label{fig-bar-order}Bar plot of most popular Trump policies
+over time.}
+
+\end{figure}%
+
+Figure~\ref{fig-bar-order-vert} shows another version of the bar plot,
+with the bars running vertically. In this plot, the natural reading from
+left to right leads to the correct interpretation: the (relative)
+popularity of DOGE has declined while the popularity of the immigration
+policy has increased. This is an example of visual congruence.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/congruence_files/figure-pdf/fig-bar-order-vert-1.pdf}
+
+}
+
+\caption[\label{fig-bar-order-vert}Bar plot of most popular Trump
+policies over time.]{\label{fig-bar-order-vert}Bar plot of most popular Trump
+policies over time\footnotemark{}.}
+
+\end{figure}%
+\footnotetext{The idea for this data visualisation, and
+  whether to question the vertical ordering, comes from a
+  \href{https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking}{PolicyViz
+  Newsletter}. The original data source was a
+  \href{https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/}{Washington
+  Post poll}).}
+
+\section{Case study: Jittering}\label{sec-jitter}
+
+We have data on the the number of points that were scored in every World
+Cup match by Tier One nations (the top 10 rugby-playing nations).
+Table~\ref{tbl-rwc-all} shows a sample of these data.
 
 Figure~\ref{fig-jitter} shows a scatterplot of the number of points
-scored by teams from different hemispheres at Rugby World Cup matches
-(see Table~\ref{tbl-rwc-all}). In this data visualisation, the data
-symbols are dots, the number of points scored is encoded as the
-horizontal \textbf{position} of the dots, and the hemisphere is encoded
-as the vertical \textbf{position} of the dots.
+scored by teams from different hemispheres at Rugby World Cup matches.
+In this data visualisation, the data symbols are dots, the number of
+points scored is encoded as the horizontal \textbf{position} of the
+dots, and the hemisphere is encoded as the vertical \textbf{position} of
+the dots. We saw a similar visualisation of these data in
+Figure~\ref{fig-overplot}, which demonstrated the problem of
+overplotting of points that share the same data value.
 
-To ameliorate the overlapping of data points, a random amount of
-``jitter'' has been added the vertical position of the dots. The filled
-interior of each dot is also semitransparent so that we can see where
-points overlap.
+In Figure~\ref{fig-jitter}, to ameliorate the overlapping of data
+points, a random amount of ``jitter'' has been added the vertical
+position of the dots. The filled interior of each dot is also
+semitransparent so that we can see where points overlap.
 
 \begin{figure}
 
@@ -3929,26 +5051,47 @@ bars, which in turn allows us to decode lengths to retrieve the counts
 (Figure~\ref{fig-visual-feature-decode}). Each raw data value (count) is
 mapped to the length of a bar.
 
-In this section, we explore some data visualisations that are effective
+In this chapter, we explore some data visualisations that are effective
 because they encode \textbf{data summaries} instead of raw data
 values.\footnote{MUST make reference to the Information Visualization
   Reference Model of Card et al (1999) that differentiates data
   transforms from visual mappings from view transforms (the last
-  particularly for interactive graphics?)}
+  particularly for interactive graphics?)
 
-PLUS the design-centric extension by Wu and Chang (2024), which teases
-out design-specific transforms as well (the data prep for a box plot
-being a good example). These papers provide a formal basis for some of
-the hand-waving that I do in this section, particularly on decoding to
-data summaries rather than raw data.
+  PLUS the design-centric extension by Wu and Chang (2024), which teases
+  out design-specific transforms as well (the data prep for a box plot
+  being a good example). These papers provide a formal basis for some of
+  the hand-waving that I do in this chapter, particularly on decoding to
+  data summaries rather than raw data.
 
-Also ``Low-Level Components of Analytic Activity in Information
-Visualization'' Amar et al (2005) Set of 10 data visualisation tasks I
-like the way these all correspond to a numerical summary.
+  Also ``Low-Level Components of Analytic Activity in Information
+  Visualization'' Amar et al (2005) Set of 10 data visualisation tasks I
+  like the way these all correspond to a numerical summary.
 
-PLUS of course ``stats'' in Wilkinson GoG
+  PLUS of course ``stats'' in Wilkinson GoG
+
+  Could also refer back to Figure~\ref{fig-log}. A ``data summary''
+  could include any sort of data transformation. In a log plot, what you
+  can decode to is the logged values (although those are not usually
+  what is used for labels).
+
+  Wilke points out that log scales are appropriate for ratios(?)
+  https://clauswilke.com/dataviz/coordinate-systems-axes.html\#nonlinear-axes
+  I still think that is difficult for people to decode
+
+  Wilke points out that square root scale has NO linear interpretation.
+  At least log scales is linear in terms of the exponent.
+
+  Wilke also points out that map projections are nonlinear and or non
+  cartesian.
+
+  Robbins makes similar point
+  https://www.forbes.com/sites/naomirobbins/2012/01/19/when-should-i-use-logarithmic-scales-in-my-charts-and-graphs/}
 
 \section{Box plots}\label{box-plots}
+
+\textbf{TODO} Shift box plots to visual shapes ? Start here with
+histogram instead?
 
 Figure~\ref{fig-boxplot} shows box plots of the number of points scored
 by all teams at Rugby World Cup matches (Table~\ref{tbl-rwc-all}), with
@@ -4254,6 +5397,9 @@ of data values because it maps data summaries to basic visual features
 and those data summaries can be compared to provide information about
 the distribution of the data.
 \end{quote}
+
+\textbf{TODO} footnote acknowledge that bar plots are also actually
+visualisations of summaries; counts of individual data values.
 
 \section{Dangers of summaries}\label{sec-summary-caveats}
 
@@ -4606,7 +5752,7 @@ the lengths of the bars are all aligned (they have a common baseline)
 and the bars only differ in ways that reflect differences in the data
 (the bars all have the same width and colour).
 
-In this section, we begin to consider what happens when mappings are
+In this chapter, we begin to consider what happens when mappings are
 used in combination. For a start, we will just extend our thinking to
 data visualisations that involve mapping \textbf{two} data variables to
 \textbf{two} visual features, like ethnic group and count to position
@@ -4640,6 +5786,13 @@ mapped to two visual features (\texttt{a} and \texttt{b}) of a
 \end{figure}%
 
 \section{Independent visual features}\label{independent-visual-features}
+
+\textbf{TODO} refer back to Section~\ref{sec-cartesian} and
+Section~\ref{sec-ternary}. Get emergent feature of position within
+triangle from interaction of three position encodings
+(\href{combine.html}{Combining Mappings}) =\textgreater{} overall
+proportion combination retrievable IF you can decode position within
+triangle
 
 A bar plot involves encoding a qualitative variable as bar
 \textbf{position} and a quantitative variable as bar \textbf{length}
@@ -5334,8 +6487,10 @@ lines.}
 appropriate (reduce to separate effects inappropriately?)} Is there an
 example?
 
-\textbf{Must} say that chroma and luminance and hue are all integral. Is
-this an example of integrating ineffectively?
+\textbf{Must} say that chroma and luminance and hue are all integral.
+Especially chroma and luminance. Can successfully vary hue separately
+from the others (Section~\ref{sec-divergent}). Is this an example of
+integrating ineffectively? Refer back to Section~\ref{sec-escape}.
 
 \section{Redundant mappings}\label{sec-redundant}
 
@@ -5401,6 +6556,13 @@ with CVD (Section~\ref{sec-CVD}). Having a secondary decoding alongside
 colour allows for the fact that the colour decoding may fail for some
 viewers.
 
+\section{Case study: log-log plots}\label{case-study-log-log-plots}
+
+Involves non-linear scales, but the point is the shape that you (hope
+to) get.
+
+Could also do q-q plots?
+
 \section{Summary}\label{summary-8}
 
 The mappings involved in a bar plot---quantitative data values encoded
@@ -5431,6 +6593,10 @@ represent any meaningful property of the data.
 
 \chapter{Visual Shapes}\label{sec-visual-shapes}
 
+\textbf{TODO} refer back to Section~\ref{sec-pos-scarce} and mention
+that shapes are one solution, with all of the drawbacks of not being
+able to decode individual data values. Footnote surjective/injective?
+
 All of the data visualisations that we have considered so far have
 mapped a \textbf{single data value} from one or more variables to a
 \textbf{single data symbol} (Figure~\ref{fig-multivariate-symbol-a}).
@@ -5439,10 +6605,10 @@ one count to one bar. A scatter plot like Figure~\ref{fig-scatter} maps
 one data value from a quantitative variable and one data value from
 another quantitative variable to one data point.
 
-In this section, we consider data visualisations that map
+In this chapter, we consider data visualisations that map
 \textbf{multiple data values} from one or more variables to a
 \textbf{single data symbol} (Figure~\ref{fig-multivariate-symbol-b}). In
-this section, we begin to consider more complex data symbols.
+this chapter, we begin to consider more complex data symbols.
 
 \begin{figure}
 
@@ -5636,11 +6802,17 @@ visual feature of a complicated shape. In effect, the individual data
 values lose their individual identity.\footnote{citation for surjective,
   injective, bijective
 
+  Refer back to Section~\ref{sec-pos-scarce}
+
   Adam has a nice example in his thesis Figure 4.5, a simpler version of
   which is a line or bar plot that contains a ``total'' line or bar -
   the visual objects do not map neatly, and disjointly to subsets of the
   data - there is overlap. This makes mapping back to the data harder or
   at least more ambiguous ?}
+
+\textbf{TODO} Refer back to Section~\ref{sec-bar} where we had bijective
+(but only use that terminology in footnote), so we could decode
+individual data values.
 
 \begin{quote}
 One reason why a line plot is \emph{less} effective for decoding raw
@@ -5949,6 +7121,42 @@ footnote cite to Tukey for visualising phenomena rather than raw data?
 ``Data-Based Graphics: Visual Display in the Decades to Come'' Tukey
 (1990)
 
+\section{Non-linear mappings}\label{sec-shape-non-linear}
+
+Refer back to Section~\ref{sec-non-linear-pos}
+
+NOTE that there ARE some situations where non-linear position. scales
+are ok, e.g., log-log. Length is still dodgy. You DO still get ordinal
+info, even if cannot decode sizes of differences. Non-linearity might
+actually be ok on non-position scales, e.g., a colour scale for numeric
+data, where differences are smaller at one end; all you are after, if
+you are using colour, is ordinal, so changing colours more swiftly at
+one end of the scale is ok (?) At least some `colorspace' functions
+allow non-linear palettes. Revisit in qualitative.Rmd to point out that
+non-linear ordinal scales are ok, e.g., jet colour scale
+
+Nice example of log-log scales in The Signal and the Noise (Nate Silver)
+See 787resources/Examples/2025-08-signal-noise-log-log
+
+Log log scales a good example of asking what is it you want to see? You
+cannot extract raw data or a compare raw data points. But all you want
+is to see the data summary of correlation so no harm no foul.
+
+Can get useful \emph{shapes} out of non-linear scales
+
+cite the paper (cook? hofmann?) that looked at identification of curves
+vs straight lines in log-log plots? but only in visual-shapes chapter
+when call back to non-linear scales in position chapter
+
+Nice kiwi-biased example on this thread
+https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate
+But I think the point still holds that you LOSE the ability to judge
+size of differences - you can only decode things like order and groups
+(?)
+
+The ratio plot might be more interpretable if the axis is labelled as
+``number of times larger'' ?
+
 \section{Summary}\label{summary-9}
 
 Mapping multiple data values to a single data symbol produces a
@@ -5966,6 +7174,9 @@ symbol like a bar.
 \bookmarksetup{startatroot}
 
 \chapter{Multiple Mappings}\label{multiple-mappings}
+
+\textbf{TODO} a side-by-side bar plot and even a stacked bar plot both
+use nested position!!! Also stacked dot plots like fig-rwc-dotplot.
 
 Figure~\ref{fig-multiple} shows a data visualisation of the performance
 measures for teams in the 2023 Rugby World Cup
@@ -6015,7 +7226,7 @@ relatively large and relatively dark in colour, which suggests that
 there is a group of teams that run more, make more clean breaks, score
 more tries, and score more points compared to the other teams.
 
-This section looks at some of the different approaches to visualising
+This chapter looks at some of the different approaches to visualising
 several variables at once. How do we perceive multivariate
 relationships? And can we still perceive individual data values at the
 same time?
@@ -6035,7 +7246,12 @@ An alternative approach is to map more of the data variables to the same
 visual feature. For example, Figure~\ref{fig-parallel} shows a parallel
 coordinates plot of the data from Figure~\ref{fig-multiple}. In this
 visualisation, all of the quantitative variables have been encoded as
-\textbf{position}, with just hemisphere (qualitative) encoded as colour.
+\textbf{position}, with just hemisphere (qualitative) encoded as
+colour.\footnote{``GoFish: A Grammar of More Graphics!'' Pollock and
+  Satyanarayan (2025) Cite this as a grammar that allows more explicit
+  reuse of position (via ``geometric operators''). NOTE that the
+  stacking of bars in a stacked bar plot is also a simple version of the
+  reuse of position.}
 
 \begin{figure}
 
@@ -6295,7 +7511,7 @@ performance measures for teams in the 2023 Rugby World Cup.}
 Parallel plots is actually an example of this, so can just refer back to
 Section~\ref{sec-parallel}
 
-Refer back to Section~\ref{sec-non-linear}
+Refer back to Section~\ref{sec-cartesian}
 
 \section{Case study: kiviat plots or radar plots or spider
 plots}\label{case-study-kiviat-plots-or-radar-plots-or-spider-plots}
@@ -6509,6 +7725,9 @@ reliably identify the difference between their two flags.
 A plot that uses visual objects as data symbols may \emph{not} be
 effective if the learned decodings have not been learned by all viewers.
 \end{quote}
+
+\textbf{TODO} Refer back to Section~\ref{sec-rel-pos}. Visual shapes are
+one way to decode to absolute data values (rather than just relative)
 
 \section{Case study: Choropleth maps}\label{sec-choropleth}
 
@@ -7010,24 +8229,7 @@ Employing a learned decoding incorrectly can at best weaken and at worst
 destroy the effectiveness of a data visualisation.
 \end{quote}
 
-\section{Case study: Barycentric plots (ternary
-plots)}\label{case-study-barycentric-plots-ternary-plots}
-
-Main encoding is three proportions, each to oblique axis (and at least
-two non-vertical and non-horizontal) =\textgreater{} retrieval of
-individual proportions difficult BUT get emergent feature of position
-within triangle from interaction of three position encodings
-(\href{combine.html}{Combining Mappings}) =\textgreater{} overall
-proportion combination retrievable IF you can decode position within
-triangle
-
-Example of plot that requires learning to decode
-(Section~\ref{sec-learned-danger}).
-
-Could do plot of Maori vs European vs Other proportions for different
-years?
-
-\section{Dangers of visual objects}\label{dangers-of-visual-objects}
+\section{Dangers of visual objects}\label{sec-object-danger}
 
 One issue with more complex data visualisations is that their
 effectiveness depends on a larger amount of learning and experience. If
@@ -7079,6 +8281,9 @@ right?)\footnote{in general, there needs to be more explicit
   vis scenarios. c.f., ``Testing Statistical Charts: What Makes a Good
   Graph?'' Vanderplas, Cook, and Hofmann (2020) p 71.}:
 
+Refer back to Section~\ref{sec-ternary} as example of plot type that
+experts in specific fields learn to read.
+
 \section{Summary}\label{summary-11}
 
 If we encode data values as familiar visual objects, it becomes possible
@@ -7100,6 +8305,9 @@ three sets of values, haved decreased, we cannot tell what the values
 are or by how much they have decreased. If there was ever any doubt,
 Figure~\ref{fig-no-text} makes it clear that text is doing a lot of
 important work in a data visualisation.
+
+\textbf{TODO} Refer back to Section~\ref{sec-rel-pos}. Text is one way
+to decode to absolute data values (rather than just relative)
 
 \begin{figure}
 
@@ -7152,7 +8360,7 @@ circles) for one person viewing an image for 10 seconds.}
 
 \end{figure}%
 
-This section looks at the role that text plays in making data
+This chapter looks at the role that text plays in making data
 visualisations work.\footnote{Provide citation to Brath book at least.
   Perhaps cite my text article, however that gets to see the light of
   day.}
@@ -7286,7 +8494,7 @@ Large numbers of text data symbols are \emph{not} effective because the
 visual system cannot decode visual summaries from the text.
 \end{quote}
 
-Why si a picture is worth a thousand words? Because 1000 words is 1000
+Why is a picture is worth a thousand words? Because 1000 words is 1000
 fixations, identifying 1000 visual objects, and then interpreting their
 combined meaning.
 
@@ -7343,6 +8551,14 @@ Figure~\ref{fig-crime}, the shapes of the text labels on the legend
 allow us to decode the original data values---the three ages 14, 15, and
 16.
 
+\textbf{TODO} text is typically the \textbf{only} data symbol within a
+data visualisation that can be decoded to an \textbf{individual},
+\textbf{absolute} data value.\\
+Most other decoding is relative (e.g., Section~\ref{sec-rel-pos},
+Section~\ref{sec-perception-relative},
+Section~\ref{sec-colour-relative}) or to a data summary (e.g.,
+Section~\ref{sec-line-plots})
+
 The proximity of the text labels in the legend to the coloured lines in
 the legend means that we associate each label with each coloured line
 (Section~\ref{sec-visual-model-groups}). So the text labels in the
@@ -7368,6 +8584,9 @@ symbols as well as the data symbols used in the main plot.
 \end{quote}
 
 \section{Labels}\label{sec-labels}
+
+\textbf{TODO} Refer back to Figure~\ref{fig-log} from text. The labels
+are the confusing part on the log plot
 
 Figure~\ref{fig-crime-labels} shows a version of Figure~\ref{fig-crime}
 with the labels highlighted in purple. In this data visualisation, the
@@ -7624,7 +8843,7 @@ that can improve the readability of a table.\footnote{For example,
 
   Ehrenberg (1977) advice on tables
 
-  ``UNDERSTANDING GRAPHS AND TABLES'' Wainer (1992)}
+  ``UNDERSTANDING GRAPHS AND TABLES'' Wainer (1992) (Wainer 1992)}
 Table~\ref{tbl-rwc-table-tidy} shows the same data as
 Table~\ref{tbl-rwc-table}, but with all of the numeric columns
 right-aligned, a consistent number of decimal places in each column,
@@ -8016,7 +9235,7 @@ decoding.}
 
 \end{figure}%
 
-In this section we look at the overall arrangement and coordination of
+In this chapter we look at the overall arrangement and coordination of
 the elements of a data visualisation.\footnote{Acknowledge that many of
   these ideas align with the ideas of contrast, repetition, alignment,
   and proximity that are espoused in Naomi Robbins book.}
@@ -8442,6 +9661,31 @@ And so on \ldots{}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-amar-taxonomy}
+Amar, Robert, James Eagan, and John Stasko. 2005. {``Low-Level
+Components of Analytic Activity in Information Visualization.''} In
+\emph{Proceedings of the Proceedings of the 2005 IEEE Symposium on
+Information Visualization}, 15. INFOVIS '05. USA: IEEE Computer Society.
+\url{https://doi.org/10.1109/INFOVIS.2005.24}.
+
+\bibitem[\citeproctext]{ref-Appelle1972}
+Appelle, Stuart. 1972. {``Perception and Discrimination as a Function of
+Stimulus Orientation: The "Oblique Effect" in Man and Animals.''}
+\emph{Psychological Bulletin} 78 (4): 266--78.
+\url{https://doi.org/10.1037/h0033117}.
+
+\bibitem[\citeproctext]{ref-ivapp25}
+Bartolomeo, Sara Di, Raphael Buchmüller, Alexander Frings, Johannes
+Fuchs, and Daniel Keim. 2025. {``Reflections on the Uses and Available
+Choices of Categorical Colorschemes.''} INSTICC; SciTePress.
+\url{https://doi.org/10.5220/0013109400003912}.
+
+\bibitem[\citeproctext]{ref-Begbie2022_irugby_results_1871_2022}
+Begbie, Lyle. 2022. {``International Rugby Union Results from
+1871‑2022.''}
+\url{https://www.kaggle.com/datasets/lylebegbie/international-rugby-union-results-from-18712022/data};
+Kaggle.
+
 \bibitem[\citeproctext]{ref-bertin1983semiology}
 Bertin, Jacques. 1983. \emph{Semiology of Graphics: Diagrams, Networks,
 Maps}. Madison, WI: University of Wisconsin Press.
@@ -8459,6 +9703,12 @@ Visualizations.''} \emph{CoRR} abs/2008.11310.
 \bibitem[\citeproctext]{ref-boring1942sensation}
 Boring, Edwin G. 1942. \emph{Sensation and Perception in the History of
 Experimental Psychology}. Appleton-Century-Crofts.
+
+\bibitem[\citeproctext]{ref-rainbow-harmful}
+Borland, David, and Russell M. Taylor Ii. 2007. {``Rainbow Color Map
+(Still) Considered Harmful.''} \emph{IEEE Computer Graphics and
+Applications} 27 (2): 14--17.
+\url{https://doi.org/10.1109/MCG.2007.323435}.
 
 \bibitem[\citeproctext]{ref-rNOMADS}
 Bowman, Daniel C., and Jonathan M. Lees. 2015. {``Near Real Time Weather
@@ -8552,6 +9802,11 @@ Representing Component Parts.''} \emph{Journal of the American
 Statistical Association} 21 (154): 119--32.
 \url{https://doi.org/10.1080/01621459.1926.10502165}.
 
+\bibitem[\citeproctext]{ref-ellson2002graphviz}
+Ellson, John, Emden R Gansner, Lefteris Koutsofios, Stephen C North, and
+Gordon Woodhull. 2002. {``Graphviz---Open Source Graph Drawing Tools.''}
+\emph{International Symposium on Graph Drawing}, 483--84.
+
 \bibitem[\citeproctext]{ref-data_by_design_emory2021}
 Emory Digital Humanities Lab. 2021. {``Data\,by\,Design: An Interactive
 History of Data Visualization.''} \url{https://dev.dataxdesign.io/}.
@@ -8562,10 +9817,23 @@ and Jessica Hullman. 2021. {``The Science of Visual Data Communication:
 What Works.''} \emph{Psychological Science in the Public Interest} 22
 (3): 110--61. \url{https://doi.org/10.1177/15291006211051956}.
 
+\bibitem[\citeproctext]{ref-wrong-rainbow}
+Gołębiowska, Izabela, and Arzu Çöltekin. 2022. {``What's Wrong with the
+Rainbow? An Interdisciplinary Review of Empirical Evidence for and
+Against the Rainbow Color Scheme in Visualizations.''} \emph{ISPRS
+Journal of Photogrammetry and Remote Sensing} 194: 195--208.
+https://doi.org/\url{https://doi.org/10.1016/j.isprsjprs.2022.10.002}.
+
 \bibitem[\citeproctext]{ref-gregory1963distortion}
 Gregory, Richard L. 1963. {``Distortion of Visual Space as Inappropriate
 Constancy Scaling.''} \emph{Nature} 199 (4894): 678--80.
 \url{https://doi.org/10.1038/199678a0}.
+
+\bibitem[\citeproctext]{ref-Harrower2003ColorBrewerorg}
+Harrower, Mark, and Cynthia A. Brewer. 2003. {``ColorBrewer.org: An
+Online Tool for Selecting Colour Schemes for Maps.''} \emph{The
+Cartographic Journal} 40 (1): 27--37.
+\url{https://doi.org/10.1179/000870403235002042}.
 
 \bibitem[\citeproctext]{ref-568118}
 Healey, C. G. 1996. {``Choosing Effective Colours for Data
@@ -8582,6 +9850,13 @@ Heer, Jeffrey, and Michael Bostock. 2010. {``Crowdsourcing Graphical
 Perception: Using Mechanical Turk to Assess Visualization Design.''} In
 \emph{Proceedings of the SIGCHI Conference on Human Factors in Computing
 Systems}, 203--12. ACM.
+
+\bibitem[\citeproctext]{ref-color-naming}
+Heer, Jeffrey, and Maureen Stone. 2012. {``Color Naming Models for Color
+Selection, Image Editing and Palette Design.''} In \emph{Proceedings of
+the SIGCHI Conference on Human Factors in Computing Systems}, 1007--16.
+CHI '12. New York, NY, USA: Association for Computing Machinery.
+\url{https://doi.org/10.1145/2207676.2208547}.
 
 \bibitem[\citeproctext]{ref-doi:10.1177ux2f14738716251315912}
 Hill, Andrew, and Oshiorenua Imokhai. 2025. {``There's More Than One Way
@@ -8601,6 +9876,15 @@ Huskinson, Peter. 2024. {``Follow the Money to See What Budget 2024
 Spends on Health.''} \emph{New Zealand Doctor Rata Aotearoa}.
 \url{https://www.nzdoctor.co.nz/article/opinion/follow-money-see-what-budget-2024-spends-health}.
 
+\bibitem[\citeproctext]{ref-CUD}
+Ichihara, Yasuyo G., Masataka Okabe, Koichi Iga, Yosuke Tanaka, Kohei
+Musha, and Kei Ito. 2008. {``{Color universal design: the selection of
+four easily distinguishable colors for all color vision types}.''} In
+\emph{Color Imaging XIII: Processing, Hardcopy, and Applications},
+edited by Reiner Eschbach, Gabriel G. Marcu, and Shoji Tominaga,
+6807:68070O. International Society for Optics; Photonics; SPIE.
+\url{https://doi.org/10.1117/12.765420}.
+
 \bibitem[\citeproctext]{ref-itti-koch-niebur}
 Itti, L., C. Koch, and E. Niebur. 1998. {``A Model of Saliency-Based
 Visual Attention for Rapid Scene Analysis.''} \emph{IEEE Transactions on
@@ -8619,9 +9903,21 @@ Perception in Vertebrates.''} \emph{Journal of Comparative Neurology}
 Kosslyn, Stephen M. 1989. {``Understanding Charts and Graphs.''}
 \emph{Applied Cognitive Psychology} 3 (3): 185--225.
 
+\bibitem[\citeproctext]{ref-kubovy1981concurrent}
+Kubovy, Michael. 1981. {``Concurrent-Pitch Segregation and the Theory of
+Indispensable Attributes.''} In \emph{Perceptual Organization}, edited
+by Michael Kubovy and James R. Pomeranz, 55--98. Hillsdale, New Jersey:
+Lawrence Erlbaum.
+
 \bibitem[\citeproctext]{ref-KUNNAPASTM1955AAOT}
 Künnapas, T M. 1955. {``An Analysis of the "Vertical-Horizontal
 Illusion".''} \emph{Journal of Experimental Psychology} 49 (2): 134--40.
+
+\bibitem[\citeproctext]{ref-oblique-effect-neural}
+Li, Baowang, Matthew R. Peterson, and Ralph D. Freeman. 2003. {``Oblique
+Effect: A Neural Basis in the Visual Cortex.''} \emph{Journal of
+Neurophysiology} 90 (1): 204--17.
+\url{https://doi.org/10.1152/jn.00954.2002}.
 
 \bibitem[\citeproctext]{ref-4906843}
 Li, Jing, Jarke J. van Wijk, and Jean-Bernard Martens. 2009.
@@ -8635,6 +9931,10 @@ Deussen, and Hui Huang. 2021. {``Modeling Just Noticeable Differences in
 Charts.''} \emph{IEEE Transactions on Visualization and Computer
 Graphics} 28 (1): 718--26.
 \url{https://doi.org/10.1109/TVCG.2021.3114874}.
+
+\bibitem[\citeproctext]{ref-maceachren1995how}
+MacEachren, Alan M. 1995. \emph{How Maps Work: Representation,
+Visualization, and Design}. 1st ed. New York: The Guilford Press.
 
 \bibitem[\citeproctext]{ref-mackinlay1986automatic}
 Mackinlay, Jock. 1986. {``Automatic Design of Graphical Presentations of
@@ -8665,6 +9965,12 @@ Mckee, Suzanne P., and Ken Nakayama. 1984. {``The Detection of Motion in
 the Peripheral Visual Field.''} \emph{Vision Research} 24 (1): 25--32.
 https://doi.org/\url{https://doi.org/10.1016/0042-6989(84)90140-8}.
 
+\bibitem[\citeproctext]{ref-meirelles2013design}
+Meirelles, Isabel. 2013. \emph{Design for Information: An Introduction
+to the Histories, Theories, and Best Practices Behind Effective
+Information Visualizations}. Beverly, Massachusetts: Rockport
+Publishers.
+
 \bibitem[\citeproctext]{ref-miller1956magical}
 Miller, George A. 1956. {``The Magical Number Seven, Plus or Minus Two:
 Some Limits on Our Capacity for Processing Information.''}
@@ -8679,14 +9985,21 @@ Müller-Lyer, Franz Carl. 1889. {``Optische Urteilst{ä}uschungen.''}
 Munzner, Tamara. 2014. \emph{Visualization Analysis and Design}. CRC
 Press.
 
-\bibitem[\citeproctext]{ref-pkg-gggrid}
-Murrell, Paul. 2022. \emph{Gggrid: Draw with 'Grid' in 'Ggplot2'}.
-\url{https://CRAN.R-project.org/package=gggrid}.
-
 \bibitem[\citeproctext]{ref-doi:10.1068ux2fp2985}
 Ninio, Jacques, and Kent A Stevens. 2000. {``Variations on the Hermann
 Grid: An Extinction Illusion.''} \emph{Perception} 29 (10): 1209--17.
 \url{https://doi.org/10.1068/p2985}.
+
+\bibitem[\citeproctext]{ref-cividis}
+Nuñez, Christopher R. AND Renslow, Jamie R. AND Anderton. 2018.
+{``Optimizing Colormaps with Consideration for Color Vision Deficiency
+to Enable Accurate Interpretation of Scientific Data.''} \emph{PLOS ONE}
+13 (7): 1--14. \url{https://doi.org/10.1371/journal.pone.0199239}.
+
+\bibitem[\citeproctext]{ref-Okabe+Ito:2008}
+Okabe, Masataka, and Kei Ito. 2008. {``Color Universal Design ({CUD}):
+How to Make Figures and Presentations That Are Friendly to Colorblind
+People.''} \url{https://jfly.uni-koeln.de/color/}.
 
 \bibitem[\citeproctext]{ref-owen1999}
 Owen, G. Scott, Gitta Domik, Theresa-Marie Rhyne, Ken W. Brodlie, and
@@ -8704,9 +10017,19 @@ Pomerantz, James R., and Anna I. Cragin. 1994. {``Emergent Features and
 Feature Combination.''} \emph{Attention, Perception, \& Psychophysics}
 55 (1): 48--55.
 
+\bibitem[\citeproctext]{ref-Rlang}
+R Core Team. 2025. \emph{R: A Language and Environment for Statistical
+Computing}. Vienna, Austria: R Foundation for Statistical Computing.
+\url{https://www.R-project.org/}.
+
 \bibitem[\citeproctext]{ref-robbins2005creating}
 Robbins, Naomi B. 2005. \emph{Creating More Effective Graphs}. Hoboken,
 NJ: Wiley-Interscience.
+
+\bibitem[\citeproctext]{ref-RobinsonPetchenik1976}
+Robinson, Arthur H., and Barbara Bartz Petchenik. 1976. \emph{The Nature
+of Maps: Essays Toward Understanding Maps and Mapping}. Chicago:
+University of Chicago Press.
 
 \bibitem[\citeproctext]{ref-annurev:ux2fcontentux2fjournalsux2f10.1146ux2fannurev-vision-082114-035733}
 Rosenholtz, Ruth. 2016. {``Capabilities and Limitations of Peripheral
@@ -8718,6 +10041,18 @@ https://doi.org/\url{https://doi.org/10.1146/annurev-vision-082114-035733}.
 ---------. 2023. {``Peripheral Vision: A Critical Component of Many
 Visual Tasks.''} Oxford University Press.
 \url{https://doi.org/10.1093/acrefore/9780190236557.013.878}.
+
+\bibitem[\citeproctext]{ref-Schloss2023MoreOfWhat}
+Schloss, Karen B. et al. 2023. {``More of What? Dissociating Effects of
+Conceptual and Numeric Mappings on Interpreting Colormap Data
+Visualizations.''} \emph{Cognitive Research: Principles and
+Implications} 8 (38). \url{https://doi.org/10.1186/s41235-023-00482-1}.
+
+\bibitem[\citeproctext]{ref-semantic-discrim}
+Schloss, Karen B., Zachary Leggon, and Laurent Lessard. 2021.
+{``Semantic Discriminability for Visual Communication.''} \emph{IEEE
+Transactions on Visualization and Computer Graphics} 27 (2): 1022--31.
+\url{https://doi.org/10.1109/TVCG.2020.3030434}.
 
 \bibitem[\citeproctext]{ref-schwabish}
 Schwabish, Jonathan A. 2020. {``Ten Guidelines for Better Tables.''}
@@ -8740,6 +10075,11 @@ Computational and Graphical Statistics} 27 (3): 673--76.
 Smil, Vaclav. 2022. \emph{How the World Really Works: The Science Behind
 How We Got Here and Where We're Going}. New York: Viking.
 
+\bibitem[\citeproctext]{ref-smith2015bettercolormap}
+Smith, Nathaniel, and Stéfan van der Walt. 2015. {``A Better Default
+Colormap for Matplotlib.''} YouTube video.
+\url{https://www.youtube.com/watch?v=xAoljeRJ3lU}.
+
 \bibitem[\citeproctext]{ref-suxf6nning_2022}
 Sönning, Lukas. 2022. {``Drawing on Principles of Perception: The Line
 Plot.''} PsyArXiv. \url{https://doi.org/10.31234/osf.io/tjfz5}.
@@ -8760,6 +10100,11 @@ Stewart, Emma E. M., Matteo Valsecchi, and Alexander C. Schütz. 2020.
 {``A Review of Interactions Between Peripheral and Foveal Vision.''}
 \emph{Journal of Vision} 20 (12): 2--2.
 \url{https://doi.org/10.1167/jov.20.12.2}.
+
+\bibitem[\citeproctext]{ref-size-matters}
+Stone, Maureen. 2012. {``In Color Perception, Size Matters.''}
+\emph{IEEE Comput. Graph. Appl.} 32 (2): 8--13.
+\url{https://doi.org/10.1109/MCG.2012.37}.
 
 \bibitem[\citeproctext]{ref-talbot2014four}
 Talbot, Justin, Heidi Lam, Jock MacKinlay, and Jeffrey Heer. 2014.
@@ -8786,6 +10131,12 @@ Treisman, Anne. 1985. {``Preattentive Processing in Vision.''}
 \emph{Computer Vision, Graphics, and Image Processing} 31 (2): 156--77.
 https://doi.org/\url{https://doi.org/10.1016/S0734-189X(85)80004-9}.
 
+\bibitem[\citeproctext]{ref-Tremmel1995VisualSeparability}
+Tremmel, Lothar. 1995. {``The Visual Separability of Plotting Symbols in
+Scatterplots.''} \emph{Journal of Computational and Graphical
+Statistics} 4 (2): 101--12.
+\url{https://doi.org/10.1080/10618600.1995.10474669}.
+
 \bibitem[\citeproctext]{ref-tufte1983visual}
 Tufte, Edward R. 1983. \emph{The Visual Display of Quantitative
 Information}. Cheshire, Connecticut: Graphics Press.
@@ -8801,6 +10152,11 @@ Evidence and Narrative}. Cheshire, CT: Graphics Press.
 \bibitem[\citeproctext]{ref-tufte2006beautiful}
 ---------. 2006. \emph{Beautiful Evidence}. Cheshire, CT: Graphics
 Press.
+
+\bibitem[\citeproctext]{ref-tukey-1990}
+Tukey, John W. 1990. {``Data-Based Graphics: Visual Display in the
+Decades to Come.''} \emph{Statistical Science} 5 (3): 327--39.
+\url{http://www.jstor.org/stable/2245820}.
 
 \bibitem[\citeproctext]{ref-TVERSKY2002247}
 Tversky, Barbara, Julie Bauer Morrison, and Mireille Betrancourt. 2002.
@@ -8825,6 +10181,11 @@ Vanderplas, Susan, Dianne Cook, and Heike Hofmann. 2020. {``Testing
 Statistical Charts: What Makes a Good Graph?''} \emph{Annual Review of
 Statistics and Its Application} 7 (Volume 7, 2020): 61--88.
 https://doi.org/\url{https://doi.org/10.1146/annurev-statistics-031219-041252}.
+
+\bibitem[\citeproctext]{ref-graphs-and-tables}
+Wainer, Howard. 1992. {``UNDERSTANDING GRAPHS AND TABLES.''} \emph{ETS
+Research Report Series} 1992 (1): 4--20.
+https://doi.org/\url{https://doi.org/10.1002/j.2333-8504.1992.tb01443.x}.
 
 \bibitem[\citeproctext]{ref-ware2021information}
 Ware, Colin. 2021. \emph{Information Visualization: Perception for
@@ -8859,10 +10220,22 @@ Wolfe, Jeremy M., and Todd S. Horowitz. 2017. {``Five Factors That Guide
 Attention in Visual Search.''} \emph{Nature Human Behaviour} 1 (3):
 0058. \url{https://doi.org/10.1038/s41562-017-0058}.
 
+\bibitem[\citeproctext]{ref-RJ-2023-071}
+Zeileis, Achim, and Paul Murrell. 2023. {``Coloring in r's Blind
+Spot.''} \emph{The R Journal} 15: 240--56.
+\url{https://doi.org/10.32614/RJ-2023-071}.
+
 \bibitem[\citeproctext]{ref-zhang1996representational}
 Zhang, Jiajie. 1996. {``A Representational Analysis of Relational
 Information Displays.''} \emph{International Journal of Human-Computer
 Studies} 45 (1): 59--74.
+
+\bibitem[\citeproctext]{ref-Ziemkiewicz2009}
+Ziemkiewicz, Caroline, and Robert Kosara. 2009. {``Embedding Information
+Visualization Within Visual Representation.''} In \emph{Advances in
+Information and Intelligent Systems}, edited by Zbigniew W. Ras and
+William Ribarsky, 307--26. Berlin, Heidelberg: Springer Berlin
+Heidelberg. \url{https://doi.org/10.1007/978-3-642-04141-9_15}.
 
 \end{CSLReferences}
 

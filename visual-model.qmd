@@ -14,7 +14,7 @@ from information to a visual representation,
 we need to know how we get from visual representations
 back to the original information.
 
-We will talk about the conversion of data values to data symbols
+We will talk about the transformation of data values into data symbols
 as an **encoding** of the data values.
 Later chapters will explore many different encodings.
 In this chapter, we will consider the reverse operation:
@@ -266,7 +266,7 @@ concept of New Zealand.
     @fig-visual-model-demo is based on wind data from the
     National Oceanic and Atmospheric Administration's Operational Model Archive 
     and Distribution System ([NOMADS](https://nomads.ncep.noaa.gov/)).
-    The data were accessed and processed using 
+    The data were accessed on September 14 2024 and processed using 
     the {rNOMADS} package [@rNOMADS], with raw data interpolated to a finer
     grid.
 
@@ -489,7 +489,7 @@ from previous areas of focus.[^at-a-glance]
 
 [^at-a-glance]:
     Tufte refers to this as drawing "within the eyespan"
-    [@tufte1990envisioning, page=67]
+    [@tufte1990envisioning, p. 67]
 
     "In understanding human visual perception, an important component consists
     of what people can perceive at a glance. If that glance provides the
@@ -1186,9 +1186,9 @@ and time to perform.
     "the comprehension of visual displays tends to be easiest when
     simple pattern identification processes are substituted for complex
     cognitive processes"
-    [@carpenter1998graph, page=98]
+    [@carpenter1998graph, p. 98]
 
-## Dangers of the visual system
+## Dangers of the visual system {#sec-illusion}
 
 The value of data visualisation comes from the visual system's 
 ability to rapidly gather and process a large amount of 
@@ -1199,7 +1199,7 @@ page or screen, the visual system has evolved for the unstructured,
 messy, and three-dimensional natural environment.
 This means that the visual system will sometimes generate 
 a more sophisticated, but erroneous interpretation of an image
-from a very simple arrangement of simple shapes.
+from a very simple arrangement of basic shapes.
 In other words, we are vulnerable to visual illusions.
 
 For example, @fig-illusion shows the Muller-Lyer Illusion and the
@@ -1300,12 +1300,56 @@ grid.segments(.3, .3, .7, .3)
 popViewport()
 ```
 
-These visual illusions demonstrate that the visual system 
-can produce incorrect results for 
+@fig-3d shows two images that are composed of three 
+simple parallelograms.  The three parallelograms are arranged separately
+on the left, which means that we decode them as three simple shapes.
+However, for the arrangement of the parallelograms on the right, 
+the natural decoding is a 3-dimensional box, even though the image
+is clearly 2-dimensional.
+
+```{r}
+#| echo: false
+#| label: fig-3d
+#| fig-height: 3
+#| fig-cap: The image on the right is made up from the three simple parallelograms shown on the left.  Because of their arrangement and their shading, we are tempted to decode the three parallelograms on the right as a 3-dimensional object.
+#| fig.height: 2
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 3, 
+                                         widths=unit(c(1, 1, 1),
+                                                     c("null", "in", "null")),
+                                         respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1, angle=18,
+                      xscale=c(-.1, 1.1), yscale=c(-.1, 1.1)))
+grid.polygon(c(.2, .2, .6, .6) + .5, c(.3, .7, .6, .2) - .1,
+             gp=gpar(col="grey", fill="grey"))
+popViewport()
+pushViewport(viewport(layout.pos.col=1, angle=-5,
+                      xscale=c(-.1, 1.1), yscale=c(-.1, 1.1)))
+grid.polygon(c(.6, .6, .8, .8) - .5, c(.2, .6, .7, .3) + .1,
+             gp=gpar(col="grey40", fill="grey40"))
+popViewport()
+pushViewport(viewport(layout.pos.col=1, angle=5,
+                      xscale=c(-.1, 1.1), yscale=c(-.1, 1.1)))
+grid.polygon(c(.2, .6, .8, .4) + .2, c(.7, .6, .7, .8) - .6,
+             gp=gpar(col="grey90", fill="grey90"))
+popViewport()
+pushViewport(viewport(layout.pos.col=3,
+                      xscale=c(-.1, 1.1), yscale=c(-.1, 1.1)))
+grid.polygon(c(.2, .2, .6, .6), c(.3, .7, .6, .2),
+             gp=gpar(col=NA, fill="grey"))
+grid.polygon(c(.6, .6, .8, .8), c(.2, .6, .7, .3),
+             gp=gpar(col=NA, fill="grey40"))
+grid.polygon(c(.2, .6, .8, .4), c(.7, .6, .7, .8),
+             gp=gpar(col=NA, fill="grey90"))
+popViewport()
+```
+
+These examples demonstrate that the visual system 
+can produce incorrect or unintended results for 
 even very simple visual tasks based on very simple visual elements.
 
-> A data visualisation will be ineffective if it (even accidentally)
-  generates a visual illusion.
+> The effectiveness of a data visualisation will be compromised
+  if it (even accidentally) generates a visual illusion.
 
 ## Summary
 

@@ -209,6 +209,11 @@ reliably identify the difference between their two flags.
 > A plot that uses visual objects as data symbols may *not* be effective
   if the learned decodings have not been learned by all viewers.
 
+**TODO** 
+Refer back to @sec-rel-pos.
+Visual shapes are one way
+to decode to absolute data values (rather than just relative)
+
 ## Case study: Choropleth maps {#sec-choropleth}
 
 @fig-map shows a choropleth map of the
@@ -838,7 +843,7 @@ as children.
 grid.newpage()
 pushViewport(viewport(width=.5))
 grid.text(c("red", "green", "blue"), 1:3/4, 
-          gp=gpar(col=c("green", "blue", "red"), fontsize=20, fontface="bold"))
+          gp=gpar(col=c(3, 4, 2), fontsize=20, fontface="bold"))
 ```
 
 One issue with relying on learned decodings is that we may
@@ -912,23 +917,7 @@ learned decodings.
 > Employing a learned decoding incorrectly can at best weaken and
   at worst destroy the effectiveness of a data visualisation.
 
-## Case study: Barycentric plots (ternary plots)
-
-Main encoding is three proportions, each to oblique axis 
-(and at least two non-vertical and non-horizontal)
-=> retrieval of individual proportions difficult
-BUT get emergent feature of position within triangle
-from interaction of three position encodings
-([Combining Mappings](combine.html))
-=> overall proportion combination retrievable
-IF you can decode position within triangle
-
-Example of plot that requires learning to decode 
-(@sec-learned-danger).
-
-Could do plot of Maori vs European vs Other proportions for different years?
-
-## Dangers of visual objects
+## Dangers of visual objects {#sec-object-danger}
 
 One issue with more complex data visualisations 
 is that their effectiveness depends on a larger amount of
@@ -995,6 +984,9 @@ right?)[^evaluating]:
     of experimental results for complex data vis scenarios.
     c.f., "Testing Statistical Charts: What Makes a Good Graph?"
     Vanderplas, Cook, and Hofmann (2020) p 71.
+
+Refer back to @sec-ternary as example of plot type that experts in
+specific fields learn to read.
 
 ## Summary
 

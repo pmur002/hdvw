@@ -28,7 +28,7 @@ mapped in different ways to produce different data visualisations
 The remainder of this book explores different sorts of mappings
 and why they are more or less effective for different purposes.
 
-In this section, we start with a very simple sort of mapping.
+In this chapter, we start with a very simple sort of mapping.
 We will begin to explore data visualisations where
 each data value is **encoded** as 
 a basic **visual feature** of a data symbol.
@@ -54,7 +54,7 @@ of a data symbol.  Each data value (`x`) is mapped to a visual
 feature (`a`) of a single data symbol.
 :::
 
-## Bar plots
+## Bar plots {#sec-bar}
 
 A good example of this sort of simple mapping is a bar plot.
 In order to demonstrate bar plots,
@@ -91,7 +91,7 @@ there is a single bar in the bar plot.
 For example, each total number
 of offenders is mapped to a single bar.
 
-In terms of **decoding** (@fid-decode),
+In terms of **decoding** (@fig-decode),
 this means that we can decode individual data values from each
 data symbol.  For example, we can 
 decode a single total number of offenders from each bar.[^bijective]
@@ -264,7 +264,7 @@ We will explore each of these in more detail in the following sections.
     included as a visual channel, so we provide a
     connection to basic visual features via the early perception of patterns,
     even though there is more involved in the perception of data point shape
-    [@chen1982topological, @4906843].
+    [@chen1982topological; @4906843].
 
 ## Quantitative features {#sec-quant-features}
 
@@ -658,10 +658,10 @@ pushViewport(viewport(width=unit(1, "snpc"),
                       layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.text("position", x=0, just="right")
-grid.segments(.2, .5, .8, .5, gp=gpar(lwd=2))
-grid.segments(.2, .4, .2, .6, gp=gpar(lwd=2))
-grid.segments(.8, .4, .8, .6, gp=gpar(lwd=2))
-grid.circle(c(.3, .6), .7, r=unit(1, "mm"), gp=gpar(fill="black"))
+grid.segments(.2, c(.4, .6), .8, c(.4, .6), gp=gpar(lty="dotted"))
+grid.segments(.2, .2, .2, .8, gp=gpar(lwd=1))
+grid.segments(.8, .2, .8, .8, gp=gpar(lwd=1))
+grid.circle(c(.3, .6), c(.4, .6), r=unit(1, "mm"), gp=gpar(fill="black"))
 popViewport()
 pushViewport(viewport(layout.pos.row=2))
 grid.rect(gp=gpar(col=NA, fill="grey90"))
@@ -739,8 +739,8 @@ with the viewer able to reliably identify each separate category?
 A small number of different colours are very easy to differentiate,
 but the differences become harder to perceive with a greater number
 of colours.[^colour-capacity]
-The difficulty only increases with irregular
-arrangements,
+This difficulty only increases with irregular
+arrangements.
 
 [^colour-capacity]:
     The recommended maximum number of colours varies between sources.
@@ -749,7 +749,7 @@ arrangements,
     "Do not use more than 10 colors for coding symbols if reliable
      identification is required, especially if the symbols are to be
      used against a variety of backgrounds."
-    [@ware2021information p 126].
+    [@ware2021information, p. 126].
 
     @568118 says the effective maximum is 7.
 
@@ -757,7 +757,7 @@ arrangements,
 #| echo: false
 #| label: fig-colour-cap
 #| fig-height: 3
-#| fig-cap: Mapping qualitative data values to colour works well for a small number of colours, but less well for a large number of colours.  It is quite easy to identify which green the single dot corresponds to amongst three colours on the left and even amongst the seven colours in the middle, but it becomes harder for the eleven colours on the right.
+#| fig-cap: Mapping qualitative data values to colour works well for a small number of colours, but less well for a large number of colours.  It is quite easy to identify which green the single dot corresponds to amongst three colours on the left, but it is much harder with the seven colours in the middle, harder still for the eleven colours on the right.
 hpie <- function(n) {
     cols <- scales::hue_pal()(n)
     grid.rect(.2, .7, .2, .2, gp=gpar(col="grey40", lwd=1))
@@ -801,7 +801,8 @@ again exacerbated by less regular arrangements.[^pattern-capacity]
     For example, @cleveland1985elements recommends using the following
     set of patterns, in this order: `o`, `+`, `<`, `s`, and `w`.
 
-    Tremmel (1995) only provides guidance for three different patterns
+    @Tremmel1995VisualSeparability 
+    only provides guidance for three different patterns
     and suggests using separate plots to accommodate
     a larger number of categories (when relying on pattern).
 

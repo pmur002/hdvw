@@ -50,14 +50,16 @@ dataframe <- function(nr=4, nc=3,
                          grid.text(colnames[j], 
                                    y=unit(1, "npc") + unit(.5, "lines"))
                      }
-                     grid.rect(gp=gpar(fill=adjustcolor(cols[1], alpha=.5)))
+                     grid.rect(gp=gpar(fill=adjustcolor(colsDarker[1],
+                                                        alpha=.2)))
                      popViewport()
                 }                
             }
         }
         if (!is.null(hr)) {
             pushViewport(viewport(layout.pos.col=hc, layout.pos.row=hr))
-            grid.rect(gp=gpar(lwd=3, fill=adjustcolor(cols[1], alpha=.5)))
+            grid.rect(gp=gpar(lwd=3, fill=adjustcolor(colsDarker[1],
+                                                      alpha=.52)))
             popViewport()
         }
     }
@@ -130,7 +132,8 @@ symbols <- function(nr=4, nc=3,
                          grid.text(colnames[j], 
                                    y=unit(1, "npc") + unit(.5, "lines"))
                      }
-                     grid.rect(gp=gpar(fill=adjustcolor(cols[2], alpha=.5^k)))
+                     grid.rect(gp=gpar(fill=adjustcolor(colsDarker[2],
+                                                        alpha=.2^k)))
                      popViewport()
                 }                
             }
@@ -138,7 +141,8 @@ symbols <- function(nr=4, nc=3,
         if (!is.null(hr)) {
             pushViewport(viewport(layout.pos.col=hc,
                                   layout.pos.row=(hr - 1)*2 + 1))
-            grid.rect(gp=gpar(lwd=3, fill=adjustcolor(cols[2], alpha=.5^k)))
+            grid.rect(gp=gpar(lwd=3, fill=adjustcolor(colsDarker[2],
+                                                      alpha=.5^k)))
             popViewport()
         }
     }

@@ -25,31 +25,53 @@ in turn allows us to decode lengths to retrieve
 the counts (@fig-visual-feature-decode).
 Each raw data value (count) is mapped to the length of a bar.
 
-In this section, we explore some data visualisations that are effective 
+In this chapter, we explore some data visualisations that are effective 
 because they encode **data summaries** instead of 
 raw data values.[^info-vis-ref-model]
 
 [^info-vis-ref-model]:
-  MUST make reference to the Information Visualization Reference Model 
-  of Card et al (1999) that differentiates data transforms from visual
-  mappings from view transforms (the last particularly for interactive
-  graphics?)
+    MUST make reference to the Information Visualization Reference Model 
+    of Card et al (1999) that differentiates data transforms from visual
+    mappings from view transforms (the last particularly for interactive
+    graphics?)
 
-  PLUS the design-centric extension by Wu and Chang (2024),
-  which teases out design-specific transforms as well (the data prep
-  for a box plot being a good example).  These papers provide a formal
-  basis for some of the hand-waving that I do in this section, particularly
-  on decoding to data summaries rather than raw data.
+    PLUS the design-centric extension by Wu and Chang (2024),
+    which teases out design-specific transforms as well (the data prep
+    for a box plot being a good example).  These papers provide a formal
+    basis for some of the hand-waving that I do in this chapter, particularly
+    on decoding to data summaries rather than raw data.
 
-  Also
-  "Low-Level Components of Analytic Activity in Information Visualization"
-  Amar et al (2005)
-  Set of 10 data visualisation tasks
-  I like the way these all correspond to a numerical summary.
+    Also
+    "Low-Level Components of Analytic Activity in Information Visualization"
+    Amar et al (2005)
+    Set of 10 data visualisation tasks
+    I like the way these all correspond to a numerical summary.
 
-  PLUS of course "stats" in Wilkinson GoG
+    PLUS of course "stats" in Wilkinson GoG
+
+    Could also refer back to @fig-log.  A "data summary" could include
+    any sort of data transformation.  In a log plot, what you can
+    decode to is the logged values (although those are not usually
+    what is used for labels).
+
+    Wilke points out that log scales are appropriate for ratios(?)
+    https://clauswilke.com/dataviz/coordinate-systems-axes.html#nonlinear-axes I
+    still think that is difficult for people to decode
+
+    Wilke points out that square root scale has NO linear interpretation.
+    At least log scales is linear in terms of the exponent.
+
+    Wilke also points out that map projections are nonlinear and or non
+    cartesian.
+
+    Robbins makes similar point
+    https://www.forbes.com/sites/naomirobbins/2012/01/19/when-should-i-use-logarithmic-scales-in-my-charts-and-graphs/
 
 ## Box plots
+
+**TODO**
+Shift box plots to visual shapes ?
+Start here with histogram instead?
 
 @fig-boxplot shows box plots of the number of 
 points scored by all teams at Rugby World Cup matches
@@ -345,6 +367,10 @@ the spread and/or skewness of the data.
   of data values because it maps data summaries to basic visual features
   and those data summaries can be compared to provide information about
   the distribution of the data.
+
+**TODO**
+footnote acknowledge that bar plots are also actually
+visualisations of summaries;  counts of individual data values.
 
 ## Dangers of summaries {#sec-summary-caveats}
 

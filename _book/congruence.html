@@ -245,8 +245,9 @@ div.csl-indent {
   <li><a href="#sec-more-is-more" id="toc-sec-more-is-more" class="nav-link" data-scroll-target="#sec-more-is-more"><span class="header-section-number">7.3</span> More is more</a></li>
   <li><a href="#sec-same-same" id="toc-sec-same-same" class="nav-link" data-scroll-target="#sec-same-same"><span class="header-section-number">7.4</span> Same is same</a></li>
   <li><a href="#sec-dissonance" id="toc-sec-dissonance" class="nav-link" data-scroll-target="#sec-dissonance"><span class="header-section-number">7.5</span> Dissonant mappings</a></li>
-  <li><a href="#case-study-jittering" id="toc-case-study-jittering" class="nav-link" data-scroll-target="#case-study-jittering"><span class="header-section-number">7.6</span> Case study: Jittering</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.7</span> Summary</a></li>
+  <li><a href="#case-study-times-arrow" id="toc-case-study-times-arrow" class="nav-link" data-scroll-target="#case-study-times-arrow"><span class="header-section-number">7.6</span> Case study: Time’s arrow</a></li>
+  <li><a href="#sec-jitter" id="toc-sec-jitter" class="nav-link" data-scroll-target="#sec-jitter"><span class="header-section-number">7.7</span> Case study: Jittering</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.8</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -272,10 +273,11 @@ div.csl-indent {
 </header>
 
 
-<p>The purpose of this section is to show that we need to consider more than just the accuracy or capacity of our mappings from data values to basic visual features in order to understand the effectiveness of a data visualisation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The purpose of this chapter is to show that we need to consider more than just the accuracy or capacity of our mappings from data values to basic visual features in order to understand the effectiveness of a data visualisation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <section id="sec-implicit" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-implicit"><span class="header-section-number">7.1</span> Implicit mappings</h2>
 <p>Sort of like pre-attentive analogue of learned decodings.</p>
+<p>Refer back to <a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>? Things that the visual system does whether we want it to or not.</p>
 <p>Do a simple example - maybe just the fact that a bar twice the length of another bar is perceived as “twice” !? These implicit mappings are the basis of whether visual features are quant or qual!?</p>
 <div id="fig-implicit-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -398,7 +400,7 @@ Figure&nbsp;7.5: A bar plot and a dot plot of the total number of offenders for 
 </figcaption>
 </figure>
 </div>
-<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all-time" class="quarto-xref">Table&nbsp;<span>7.1</span></a> shows these data.[^rwc]</p>
+<p>We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all-time" class="quarto-xref">Table&nbsp;<span>7.1</span></a> shows these data.</p>
 <div class="cell">
 <div id="tbl-rwc-all-time" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -484,7 +486,7 @@ Table&nbsp;7.1: A table of the total number of points scored and conceded for Ti
 </figure>
 </div>
 </div>
-<p>Another way that <strong>length</strong> can convey information more naturally than <strong>position</strong> is visualising negative values. For example <a href="#fig-neg-bar" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> shows the total points differential (points scored minus points conceded) for Tier One nations at Rugby World Cups (see <a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>7.2</span></a>). The <em>direction</em> of the bars very clearly indicates the change from positive points differential to negative points differential.</p>
+<p>Another way that <strong>length</strong> can convey information more naturally than <strong>position</strong> is visualising negative values. For example <a href="#fig-neg-bar" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> shows the total points differential (points scored minus points conceded) for Tier One nations at Rugby World Cups (see <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>). The <em>direction</em> of the bars very clearly indicates the change from positive points differential to negative points differential.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-neg-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -612,65 +614,44 @@ Figure&nbsp;7.11: A data visualisation of the number of females aged over 100 re
 <p>A data visualisation is <em>not</em> effective if it contains mappings that are dissonant because that can cause distraction and slower and/or incorrect <strong>decoding</strong> of data values from visual features.</p>
 </blockquote>
 </section>
-<section id="case-study-jittering" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="case-study-jittering"><span class="header-section-number">7.6</span> Case study: Jittering</h2>
-<p>We have data on the number of points that were scored in every World Cup match for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>7.2</span></a> shows a sample of these data.[^rwc]</p>
+<section id="case-study-times-arrow" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="case-study-times-arrow"><span class="header-section-number">7.6</span> Case study: Time’s arrow</h2>
+<p><a href="#fig-bar-order" class="quarto-xref">Figure&nbsp;<span>7.12</span></a> shows the results of a 2025 poll that asked what was the best thing that the Trump administration had done, comparing results in February to results in September. In terms of mappings, this bar plot makes good use of (vertical) <strong>position</strong> and (horizontal) <strong>length</strong> to encode different policy issues, the difference in dates, and the percent of respondents who voted for each policy. However, when we look at the top two bars, there is a temptation to read the pairs of bars in order from top to bottom.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> If we do not attend carefully to the legend, we may perceive a <em>decrease</em> in the (relative) popularity of the immigration policy and an <em>increase</em> in the popularity of DOGE. This is a subtle example of visual dissonance.</p>
 <div class="cell">
-<div id="tbl-rwc-all" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7.2: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin. Each row represents the points scored by one team in one match. There are 294 rows in total, with just the first 6 rows shown here.
-</figcaption>
-<div aria-describedby="tbl-rwc-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">team</th>
-<th style="text-align: left;">hemisphere</th>
-<th style="text-align: right;">scored</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
-<td style="text-align: right;">8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
-<td style="text-align: right;">18</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
-<td style="text-align: right;">13</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
-<td style="text-align: right;">28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Argentina</td>
-<td style="text-align: left;">South</td>
-<td style="text-align: right;">7</td>
-</tr>
-</tbody>
-</table>
+<div id="fig-bar-order" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bar-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="congruence_files/figure-html/fig-bar-order-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
-</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.12: Bar plot of most popular Trump policies over time.
+</figcaption>
 </figure>
 </div>
 </div>
-<p><a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.12</span></a> shows a scatterplot of the number of points scored by teams from different hemispheres at Rugby World Cup matches (see <a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>7.2</span></a>). In this data visualisation, the data symbols are dots, the number of points scored is encoded as the horizontal <strong>position</strong> of the dots, and the hemisphere is encoded as the vertical <strong>position</strong> of the dots.</p>
-<p>To ameliorate the overlapping of data points, a random amount of “jitter” has been added the vertical position of the dots. The filled interior of each dot is also semitransparent so that we can see where points overlap.</p>
+</div>
+<p><a href="#fig-bar-order-vert" class="quarto-xref">Figure&nbsp;<span>7.13</span></a> shows another version of the bar plot, with the bars running vertically. In this plot, the natural reading from left to right leads to the correct interpretation: the (relative) popularity of DOGE has declined while the popularity of the immigration policy has increased. This is an example of visual congruence.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bar-order-vert" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bar-order-vert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="congruence_files/figure-html/fig-bar-order-vert-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-order-vert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.13: Bar plot of most popular Trump policies over time<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-jitter" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="sec-jitter"><span class="header-section-number">7.7</span> Case study: Jittering</h2>
+<p>We have data on the the number of points that were scored in every World Cup match by Tier One nations (the top 10 rugby-playing nations). <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a> shows a sample of these data.</p>
+<p><a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.14</span></a> shows a scatterplot of the number of points scored by teams from different hemispheres at Rugby World Cup matches. In this data visualisation, the data symbols are dots, the number of points scored is encoded as the horizontal <strong>position</strong> of the dots, and the hemisphere is encoded as the vertical <strong>position</strong> of the dots. We saw a similar visualisation of these data in <a href="position.html#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>, which demonstrated the problem of overplotting of points that share the same data value.</p>
+<p>In <a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.14</span></a>, to ameliorate the overlapping of data points, a random amount of “jitter” has been added the vertical position of the dots. The filled interior of each dot is also semitransparent so that we can see where points overlap.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-jitter" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -679,20 +660,20 @@ Table&nbsp;7.2: A table of the number of points scored by Tier One nations in Ru
 <img src="congruence_files/figure-html/fig-jitter-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.12: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
+Figure&nbsp;7.14: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The scatter plot in <a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.12</span></a> is effective for <strong>decoding</strong> to the number of points scored because each data value is encoded as the horizontal position of a single data symbol. Similarly, we can easily decode the hemisphere from each point. The proximity of the data symbols from the same hemisphere means that it is easy to perceive two “rows” of points.</p>
+<p>The scatter plot in <a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.14</span></a> is effective for <strong>decoding</strong> to the number of points scored because each data value is encoded as the horizontal position of a single data symbol. Similarly, we can easily decode the hemisphere from each point. The proximity of the data symbols from the same hemisphere means that it is easy to perceive two “rows” of points.</p>
 <p>On the other hand, the jittering means that there are visual differences between the vertical positions of the dots, within the same hemisphere, that do not correspond to any differences in data values. For example, there are two dots representing matches where a team from the Northern hemisphere scored zero points. The data values for these two dots are identical (zero points scored and northern hemisphere), but they are visually different. The randomness of the jittering may help to dilute any temptation to seek meaning from the artificial visual difference, but the addition of jittering may cause confusion.</p>
 <blockquote class="blockquote">
 <p>Jittering data symbols is effective because it reduces the amount of overlap amongst data symbols, but jittering may also reduce the effectiveness of a data visualisation because it introduces visual dissonance.</p>
 </blockquote>
 </section>
-<section id="summary" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.7</span> Summary</h2>
+<section id="summary" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.8</span> Summary</h2>
 <p>The effectiveness of a data visualisation may depend on more than just the accuracy and capacity of visual features.</p>
 <p>A <strong>congruent</strong> mapping is one where data values are <strong>explicitly</strong> encoded in a way that is consistent with an <strong>implicit</strong> decoding of the visual feature.</p>
 <p>Some data visualisations are effective because they are visually congruent: data symbols that are larger for larger data values are more effective; data symbols that only change if the data values change are more effective.</p>
@@ -725,6 +706,8 @@ Tversky, Barbara, Julie Bauer Morrison, and Mireille Betrancourt. 2002. <span>�
 <li id="fn6"><p>This data visualisation is an adaptation of a graphic shown during television coverage of the match.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>“Graph Design for the Eye and Mind” Kosslyn (2006) “Principle of Informative Changes” change in aesthetic where no change in data is BAD!<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>This plot is based on a data visualisation from the New Zealand Listener October 14-20 2023.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>The idea for this data visualisation, and whether to question the vertical ordering, comes from a <a href="https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking">PolicyViz Newsletter</a>. The original data source was a <a href="https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/">Washington Post poll</a>).<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>The idea for this data visualisation, and whether to question the vertical ordering, comes from a <a href="https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking">PolicyViz Newsletter</a>. The original data source was a <a href="https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/">Washington Post poll</a>).<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

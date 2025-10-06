@@ -7,7 +7,7 @@ source("common.R")
 
 # Congruent Mappings {#sec-congruence}
 
-The purpose of this section is to show that we need to consider more
+The purpose of this chapter is to show that we need to consider more
 than just the accuracy or capacity of our mappings from 
 data values to basic visual features in order to understand the effectiveness
 of a data visualisation.[^congruence-lit]
@@ -21,6 +21,9 @@ of a data visualisation.[^congruence-lit]
 ## Implicit mappings {#sec-implicit}
 
 Sort of like pre-attentive analogue of learned decodings.
+
+Refer back to @sec-illusion?  Things that the visual system 
+does whether we want it to or not.
 
 Do a simple example - maybe just the fact that a bar twice the length
 of another bar is perceived as "twice" !?
@@ -163,7 +166,7 @@ are appropriate for conveying the total number of offenders in
 different ethnic groups.
 
 Part of the reason why **length** and **area** work so well is because
-a **longer** bar naturally conveys the idea of **more**.[^prop-ink]
+a **longer** bar naturally conveys the idea of **more**.[^more-is-more]
 By contrast, the **position** of data points in a dot plot of the same data,
 as shown in @fig-more-is-more, do not inherently 
 convey the same sense of *more*.
@@ -171,7 +174,7 @@ In a bar plot, the data symbols that correspond to larger data values
 are actually larger data symbols;
 the presentation of larger data values is more abstract in a dot plot.
 
-[^prop-ink]:
+[^more-is-more]:
     Wilke's Principle of Proportional Ink.
     ChatGPT attributed this to Wilkinson (GoG), but I cannot find
     the reference anywhere.
@@ -220,11 +223,9 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-The Rugby World Cup is a competition that is held every four years, with the
-first event taking place in 1987.
 We have data on the total number of points that were scored and conceded in World Cup matches
 for Tier One nations (the top 10 rugby-playing nations).
-@tbl-rwc-all-time shows these data.[^rwc]
+@tbl-rwc-all-time shows these data.
 
 ```{r}
 #| echo: false
@@ -520,28 +521,108 @@ ggplot(old) +
   that are dissonant because that can cause distraction and slower and/or
   incorrect **decoding** of data values from visual features.
 
-## Case study: Jittering
+## Case study:  Time's arrow
 
-We have data on the number of points that were scored in every World Cup match
-for Tier One nations (the top 10 rugby-playing nations).
-@tbl-rwc-all shows a sample of these data.[^rwc]
+@fig-bar-order shows the results of a 2025 poll that asked what was the best
+thing that the Trump
+administration had done, comparing results in February to results in
+September.
+In terms of mappings, this bar plot makes good use of (vertical) **position** 
+and (horizontal) **length** to encode different policy issues, the
+difference in dates, and the percent of respondents who voted for
+each policy.
+However, when we look at the top two bars, there is a temptation
+to read the pairs of bars in order from top to bottom.[^bar-order]
+If we do not attend carefully to the legend, we may perceive a
+*decrease* in the (relative) popularity of the immigration policy and
+an *increase* in the popularity of DOGE.
+This is a subtle example of visual dissonance.
+
+[^bar-order]:
+    The idea for this data visualisation, and whether to question the
+    vertical ordering, comes from a 
+    [PolicyViz Newsletter](https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking).
+    The original data source was a
+    [Washington Post poll](https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/)).
 
 ```{r}
 #| echo: false
-#| message: false
-#| label: tbl-rwc-all
-#| tbl-cap: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
-kable(head(rwcAll[,c("team", "hemisphere", "scored")]), digits=0)
+#| label: fig-bar-order
+#| fig-cap: Bar plot of most popular Trump policies over time.
+poll <- data.frame(percent=c(55, 39, 7, 30, 5, 2, 5, 2, 4, 2),
+                   date=rep(c("September", "February"), 5),
+                   policy=rep(c("Immigration", "Government cuts/Musk/DOGE", 
+                                "International relations", 
+                                "Trump's personality/conduct",
+                                "Tariffs"), each=2))
+poll$policy <- reorder(poll$policy, poll$percent)
+levels(poll$policy) <- gsub(" ", "\n", levels(poll$policy))
+ggplot(poll) +
+    geom_col(aes(x=percent, y=policy, fill=date), position="dodge",
+             width=.6) +
+    annotate("segment", x=0, y=-Inf, xend=0, yend=Inf) +
+    scale_x_continuous(position="top", breaks=seq(0, 50, 10),
+                       expand=expansion(c(0, .05)), 
+                       labels=function(x) paste0(x, "%"),
+                       name=NULL) +
+    scale_y_discrete(name=NULL) +
+    scale_fill_discrete(name=NULL) +
+    theme(legend.position="top",
+          legend.location="plot",
+          legend.justification=0,
+          axis.ticks=element_blank(),
+          panel.grid.major.x=element_line(colour="grey80"),
+          aspect.ratio=2/3)
 ```
+
+@fig-bar-order-vert shows another version of the bar plot, with the bars
+running vertically. In this plot, the natural reading from left to right
+leads to the correct interpretation:  the (relative) popularity of DOGE 
+has declined while the popularity of the immigration policy has increased.
+This is an example of visual congruence.
+
+
+```{r}
+#| echo: false
+#| label: fig-bar-order-vert
+#| fig-cap: Bar plot of most popular Trump policies over time[^bar-order].
+ggplot(poll) +
+    geom_col(aes(x=policy, y=percent, fill=date), position="dodge",
+             width=.6) +
+    annotate("segment", y=0, x=-Inf, yend=0, xend=Inf) +
+    scale_y_continuous(position="left", breaks=seq(0, 50, 10),
+                       expand=expansion(c(0, .05)), 
+                       labels=function(x) paste0(x, "%"),
+                       name=NULL) +
+    scale_x_discrete(name=NULL) +
+    scale_fill_discrete(name=NULL) +
+    theme(legend.position="top",
+          legend.location="plot",
+          legend.justification=0,
+          axis.ticks=element_blank(),
+          panel.grid.major.y=element_line(colour="grey80"),
+          aspect.ratio=2/3)
+```
+
+## Case study: Jittering {#sec-jitter}
+
+We have data on the 
+the number of points that were scored in every World Cup match
+by Tier One nations (the top 10 rugby-playing nations).
+@tbl-rwc-all shows a sample of these data.
+
 @fig-jitter shows a scatterplot of the number of points scored 
-by teams from different hemispheres at Rugby World Cup matches
-(see @tbl-rwc-all).
+by teams from different hemispheres at Rugby World Cup matches.
 In this data visualisation, the data symbols are dots,
 the number of points scored is encoded as the horizontal **position** of
 the dots, and the hemisphere is encoded as the vertical **position**
 of the dots.
+We saw a similar visualisation of these data in @fig-overplot,
+which demonstrated the problem of overplotting of points
+that share the same data value.
 
-To ameliorate the overlapping of data points, a random amount of "jitter"
+In @fig-jitter,
+to ameliorate the overlapping of data points, a random amount of "jitter"
 has been
 added the vertical position
 of the dots.  The filled interior of each dot is also semitransparent

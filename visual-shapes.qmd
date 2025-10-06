@@ -7,6 +7,12 @@ source("common.R")
 
 # Visual Shapes {#sec-visual-shapes}
 
+**TODO**
+refer back to @sec-pos-scarce and mention that shapes are one solution,
+with all of the drawbacks of not being able to decode individual
+data values.
+Footnote surjective/injective?
+
 All of the data visualisations that we have considered so far
 have mapped a **single data value** from one or more variables
 to a **single data symbol** (@fig-multivariate-symbol-a).
@@ -15,10 +21,10 @@ bar.  A scatter plot like @fig-scatter maps one data value from a
 quantitative variable and one data value from another quantitative variable
 to one data point.
 
-In this section, we consider data visualisations that map **multiple
+In this chapter, we consider data visualisations that map **multiple
 data values** from one or more variables to a **single data symbol**
 (@fig-multivariate-symbol-b).
-In this section, we begin to consider more complex data symbols.
+In this chapter, we begin to consider more complex data symbols.
 
 ::: {#fig-multivariate-symbol}
 
@@ -195,10 +201,15 @@ However, in a line plot, we are not mapping a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
 is being mapped, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
-individual data values lose their individual identity.[^bijective]
+individual data values lose their individual identity.[^surjective]
 
-[^bijective]:
+**TODO** Refer back to @sec-bar where we had bijective (but only use
+that terminology in footnote), so we could decode individual data values.
+
+[^surjective]:
     citation for surjective, injective, bijective 
+
+    Refer back to @sec-pos-scarce
 
     Adam has a nice example in his thesis Figure 4.5, a simpler 
     version of which is a line or bar plot that contains a "total"
@@ -484,6 +495,41 @@ assumptions of these models, like unimodal for boxplot)
 footnote cite to Tukey for visualising phenomena rather than raw data?
 "Data-Based Graphics: Visual Display in the Decades to Come"
 Tukey (1990)
+
+## Non-linear mappings {#sec-shape-non-linear}
+
+Refer back to @sec-non-linear-pos
+
+NOTE that there ARE some situations where non-linear position.
+scales are ok, e.g., log-log.
+Length is still dodgy. 
+You DO still get ordinal info, even if cannot decode sizes of differences.
+Non-linearity might actually be ok on non-position scales, e.g., 
+a colour scale for numeric data, where differences are smaller at
+one end;  all you are after, if you are using colour, is ordinal,
+so changing colours more swiftly at one end of the scale is ok (?)
+At least some 'colorspace' functions allow non-linear palettes.
+Revisit in qualitative.Rmd to point out that non-linear ordinal scales
+are ok, e.g., jet colour scale
+
+Nice example of log-log scales in The Signal and the Noise (Nate Silver)
+See 787resources/Examples/2025-08-signal-noise-log-log
+
+Log log scales a good example of asking what is it you want to see?
+You cannot extract raw data or a compare raw data points.
+But all you want is to see the data summary of correlation so no harm no foul.
+
+Can get useful *shapes* out of non-linear scales
+
+cite the paper (cook? hofmann?) that looked at identification of curves vs
+straight lines in log-log plots?  but only in visual-shapes chapter when call
+back to non-linear scales in position chapter
+
+Nice kiwi-biased example on this thread
+https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate
+But I think the point still holds that you LOSE the ability to judge size of differences - you can only decode things like order and groups (?)
+
+The ratio plot might be more interpretable if the axis is labelled as "number of times larger" ?
 
 ## Summary
 

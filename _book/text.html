@@ -276,6 +276,7 @@ div.csl-indent {
 
 
 <p><a href="#fig-no-text" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> is a version of <a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> with all of the text removed. Although we can see that some values, or rather three sets of values, haved decreased, we cannot tell what the values are or by how much they have decreased. If there was ever any doubt, <a href="#fig-no-text" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> makes it clear that text is doing a lot of important work in a data visualisation.</p>
+<p><strong>TODO</strong> Refer back to <a href="position.html#sec-rel-pos" class="quarto-xref"><span>Section 4.1</span></a>. Text is one way to decode to absolute data values (rather than just relative)</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-no-text" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -326,7 +327,7 @@ Figure&nbsp;13.2: Eye tracking data from the MASSVIS project that shows fixation
 </figcaption>
 </figure>
 </div>
-<p>This section looks at the role that text plays in making data visualisations work.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>This chapter looks at the role that text plays in making data visualisations work.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <section id="sec-data-symbols" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="sec-data-symbols"><span class="header-section-number">13.1</span> Data symbols</h2>
 <p><a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;<span>13.3</span></a> is a version of <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> with white text added to each bar showing the exact number of offenders in each ethnic group. This is an example of using text as a <strong>data symbol</strong>.</p>
@@ -379,7 +380,7 @@ Figure&nbsp;13.4: A scatter plot of the number of times a team breaks through th
 <blockquote class="blockquote">
 <p>Large numbers of text data symbols are <em>not</em> effective because the visual system cannot decode visual summaries from the text.</p>
 </blockquote>
-<p>Why si a picture is worth a thousand words? Because 1000 words is 1000 fixations, identifying 1000 visual objects, and then interpreting their combined meaning.</p>
+<p>Why is a picture is worth a thousand words? Because 1000 words is 1000 fixations, identifying 1000 visual objects, and then interpreting their combined meaning.</p>
 </section>
 <section id="sec-guides" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="sec-guides"><span class="header-section-number">13.2</span> Guides</h2>
@@ -400,6 +401,8 @@ Figure&nbsp;13.5: A line plot of the crime rate amongst youth offenders aged 14 
 </div>
 <p>The first thing to note about the guides in <a href="#fig-crime-guides" class="quarto-xref">Figure&nbsp;<span>13.5</span></a> is that they are all composed of <strong>data symbols</strong>, with <strong>data values</strong> mapped to <strong>visual features</strong> of the data symbols (<a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a>). This is perhaps easiest to see with the grid lines. Each grid line is a data symbol where a data value, a rate of offending, has been encoded as the vertical <strong>position</strong> of the line. Similarly, each tick mark on the y-axis is a line data symbol where a rate of offending has been encoded as the vertical <strong>position</strong> of the line and each tick mark on the x-axis is a line data symbol where a year has been encoded as the horizontal <strong>position</strong> of the line. Finally, each of the tick labels on the y-axis is a text data symbol where a rate of offending has been encoded as the vertical <strong>position</strong> of the text <em>and</em> as the <strong>shape</strong> of the text. Similar mappings apply to the x-axis tick labels. The legend is also made up of line data symbols and text data symbols, this time with age data values encoded as the <strong>colour</strong> of lines and the <strong>shape</strong> of text.</p>
 <p>The <strong>decoding</strong> of the <strong>shape</strong> of the <strong>text</strong> data symbols within the guides shows the critical role that text plays within guides. If we look again at <a href="#fig-no-text" class="quarto-xref">Figure&nbsp;<span>13.1</span></a>, there are coloured lines on the plot and there are coloured lines on the legend. The fact that these lines have different colours indicates that there are three different groups, but the colours alone do not tell us what the groups are. We can decode different values from the colours of the lines, but we cannot decode exact data values. In the original <a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>, the shapes of the text labels on the legend allow us to decode the original data values—the three ages 14, 15, and 16.</p>
+<p><strong>TODO</strong> text is typically the <strong>only</strong> data symbol within a data visualisation that can be decoded to an <strong>individual</strong>, <strong>absolute</strong> data value.<br>
+Most other decoding is relative (e.g., <a href="position.html#sec-rel-pos" class="quarto-xref"><span>Section 4.1</span></a>, <a href="quantitative.html#sec-perception-relative" class="quarto-xref"><span>Section 5.4</span></a>, <a href="qualitative.html#sec-colour-relative" class="quarto-xref"><span>Section 6.3</span></a>) or to a data summary (e.g., <a href="visual-shapes.html#sec-line-plots" class="quarto-xref"><span>Section 10.1</span></a>)</p>
 <p>The proximity of the text labels in the legend to the coloured lines in the legend means that we associate each label with each coloured line (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>). So the text labels in the legend are the essential data symbols in <a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> because only they allow us to decode from the colours of the lines to the three age groups.</p>
 <p>The text labels on axes perform a similar service. For example, the numbers on the axes in <a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> are the only data symbols that provide exact decoding from positions to data values (years or rates). The lines within the plot, by themselves, only show that values are decreasing. It is only the relative position of the lines within the plot to the tick labels on the axes (and the grid lines) that allows us to decode from the lines within the plot to (approximate) data values.</p>
 <p>Text data symbols within guides are effective because guides contain only a few data values that need to be decoded precisely. This is the situation where text excels.</p>
@@ -409,6 +412,7 @@ Figure&nbsp;13.5: A line plot of the crime rate amongst youth offenders aged 14 
 </section>
 <section id="sec-labels" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="sec-labels"><span class="header-section-number">13.3</span> Labels</h2>
+<p><strong>TODO</strong> Refer back to <a href="position.html#fig-log" class="quarto-xref">Figure&nbsp;<span>4.9</span></a> from text. The labels are the confusing part on the log plot</p>
 <p><a href="#fig-crime-labels" class="quarto-xref">Figure&nbsp;<span>13.6</span></a> shows a version of <a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> with the labels highlighted in purple. In this data visualisation, the only labels are the overall plot title and the legend title. It is also common to see axis titles.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -851,7 +855,7 @@ Figure&nbsp;13.16: The title influences our perception; the message from the dat
 </section>
 <section id="alt-text" class="level2" data-number="13.9">
 <h2 data-number="13.9" class="anchored" data-anchor-id="alt-text"><span class="header-section-number">13.9</span> Alt text</h2>
-<p>Is a data visualisation effective if we cannot see it? We saw in <a href="qualitative.html#sec-CVD" class="quarto-xref"><span>Section 6.4</span></a> that a data visualisation may not be effective if a colour encoding does not take into account red-green colour blindness. But what about a low-vision or blind audience?</p>
+<p>Is a data visualisation effective if we cannot see it? We saw in <a href="qualitative.html#sec-CVD" class="quarto-xref"><span>Section 6.6</span></a> that a data visualisation may not be effective if a colour encoding does not take into account red-green colour blindness. But what about a low-vision or blind audience?</p>
 <p>Although data visualisation is based on the visual system, it is still possible to make a data visualisation effective for a low-vision or blind audience by providing a text description of the data visualisation. Alt text is a text description of a data visualisation that will be recognised and read out by a screen reader.</p>
 <p>The alt text for a data visualisation will ideally describe what variables are being displayed and how they are encoded (what sort of plot is it), data summaries like trends, clusters, outliers, and correlations, and include the main message of the visualisation, including causal explanations and wider implications.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
 <p>Another option sometimes employed is to provide tables of data in addition to the data visualisation, though this will not always be possible or practical.</p>
@@ -876,6 +880,9 @@ Brath, Richard, and Ebad Banissi. 2014. <span>“The Design Space of Typeface.�
 <div id="ref-schwabish" class="csl-entry" role="listitem">
 Schwabish, Jonathan A. 2020. <span>“Ten Guidelines for Better Tables.”</span> <em>Journal of Benefit-Cost Analysis</em> 11 (2): 151–78.
 </div>
+<div id="ref-graphs-and-tables" class="csl-entry" role="listitem">
+Wainer, Howard. 1992. <span>“UNDERSTANDING GRAPHS AND TABLES.”</span> <em>ETS Research Report Series</em> 1992 (1): 4–20. https://doi.org/<a href="https://doi.org/10.1002/j.2333-8504.1992.tb01443.x">https://doi.org/10.1002/j.2333-8504.1992.tb01443.x</a>.
+</div>
 <div id="ref-wiki-rwc" class="csl-entry" role="listitem">
 Wikipedia. 2024. <span>“<span>Rugby World Cup</span>: <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="http://en.wikipedia.org/w/index.php?title=Rugby%20World%20Cup" class="uri">http://en.wikipedia.org/w/index.php?title=Rugby%20World%20Cup</a>.
 </div>
@@ -891,7 +898,7 @@ Wikipedia. 2024. <span>“<span>Rugby World Cup</span>: <span>W</span>ikipedia<s
 <li id="fn5"><p><a href="https://en.wikipedia.org/wiki/Rugby_World_Cup"></a> <span class="citation" data-cites="wiki-rwc">(<a href="#ref-wiki-rwc" role="doc-biblioref">Wikipedia 2024</a>)</span><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>For example, <span class="citation" data-cites="schwabish">Schwabish (<a href="#ref-schwabish" role="doc-biblioref">2020</a>)</span>.</p>
 <p>Ehrenberg (1977) advice on tables</p>
-<p>“UNDERSTANDING GRAPHS AND TABLES” Wainer (1992)<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<p>“UNDERSTANDING GRAPHS AND TABLES” Wainer (1992) <span class="citation" data-cites="graphs-and-tables">(<a href="#ref-graphs-and-tables" role="doc-biblioref">Wainer 1992</a>)</span><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p><span class="citation" data-cites="brath2014design">(<a href="#ref-brath2014design" role="doc-biblioref">Brath and Banissi 2014</a>)</span> at least<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>Quote from John Tukey about stem-and-leaf plots:</p>
 <div class="actual-quote">

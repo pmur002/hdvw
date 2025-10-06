@@ -7,6 +7,11 @@ source("common.R")
 
 # Multiple Mappings
 
+**TODO** 
+a side-by-side bar plot and even a stacked bar plot both
+use nested position!!!
+Also stacked dot plots like fig-rwc-dotplot.
+
 @fig-multiple shows a data visualisation of the performance measures
 for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
 This visualisation is different from anything we have seen previously
@@ -60,7 +65,7 @@ large and relatively dark in colour, which suggests that there is a
 group of teams that run more, make more clean breaks, score more tries,
 and score more points compared to the other teams.
 
-This section looks at some of the different approaches to visualising
+This chapter looks at some of the different approaches to visualising
 several variables at once.  How do we perceive multivariate relationships?
 And can we still perceive individual data values at the same time?
 
@@ -78,7 +83,16 @@ An alternative approach is to map more of the data variables
 to the same visual feature.  For example, @fig-parallel shows 
 a parallel coordinates plot of the data from @fig-multiple.
 In this visualisation, all of the quantitative variables have been
-encoded as **position**, with just hemisphere (qualitative) encoded as colour.
+encoded as **position**, with just hemisphere (qualitative) encoded as 
+colour.[^reuse-pos]
+
+[^reuse-pos]:
+    "GoFish: A Grammar of More Graphics!"
+    Pollock and Satyanarayan (2025)
+    Cite this as a grammar that allows more explicit reuse of position
+    (via "geometric operators").
+    NOTE that the stacking of bars in a stacked bar plot is also a simple
+    version of the reuse of position.
 
 ```{r}
 #| echo: false
@@ -375,7 +389,7 @@ ggplot(all) +
 Parallel plots is actually an example of this, so can just
 refer back to @sec-parallel
 
-Refer back to @sec-non-linear
+Refer back to @sec-cartesian
 
 ## Case study: kiviat plots or radar plots or spider plots
 

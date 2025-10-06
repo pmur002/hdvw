@@ -9,9 +9,11 @@ source("common.R")
 
 @fig-bar-district shows a bar plot of the total number of offenders
 in each police district in New Zealand (for ages 14 to 16 and
-from 2011 to 2021).  For the reasons outlined in @sec-mapping-visual-features,
+from 2011 to 2021).  For the reasons outlined in @sec-mapping-visual-features
+and @sec-position),
 this data visualisation is effective for
-comparing the number of offenders in different police districts.
+decoding the number of offenders in different police districts
+and making comparisons between them.
 
 ```{r}
 #| echo: false
@@ -61,15 +63,15 @@ The fact that two data visualisations with the same mappings
 can have a different effectiveness suggests that there is more to know about
 how different visual features work.
 
-This section covers some more details about how the **length**
-visual feature works.
+This chapter covers some more details about mappings that encode data values
+as **length**.
 
 ## The distance effect {#sec-distance-effect}
 
 In @sec-accuracy, we saw that **position** and **length** were the most
-accurate visual features (see @fig-accuracy).  However, this accuracy
+accurate visual features (@fig-accuracy).  However, this accuracy
 decreases if the two visual features that are being compared are
-not in close proximity (see @fig-distance-effect).[^distance-effect]
+not in close proximity (@fig-distance-effect).[^distance-effect]
 
 [^distance-effect]:
     The first demonstration of the "distance effect" is attributed to 
@@ -151,8 +153,9 @@ horizontally.[^stacking-as-position]
   lengths of the bars.
 
 Although the total number of offenders has been encoded as the same
-visual feature in both @fig-stacked-bar and @fig-bar, the **lengths**
-of the bars, comparing those lengths is much harder in @fig-stacked-bar
+visual feature in both @fig-stacked-bar and @fig-bar---in both cases,
+the number of offenders is encoded as the **lengths**
+of the bars---comparing those lengths is much harder in @fig-stacked-bar
 because the lengths are **unaligned**.
 
 ```{r}
@@ -201,7 +204,12 @@ the lengths of the bars, the years are mapped to the horizontal
 the colours of the bars, and the bars are stacked vertically.
 
 The problem that we face in this situation is that there are 
-four bars to show for each year.  Stacking the bars is one solution, but 
+four bars to show for each year. 
+If we simply encode the year as the horizontal position of each bar,
+the bars will overlap and we will have great difficulty 
+decoding data values from the bars (@sec-pos-scarce).
+
+Stacking the bars is one solution, but 
 as we have just seen, this makes some comparisons more difficult.
 For example, we can easily see that the number of offenders in the 
 unknown group increased after 2016, but it is much harder to see what

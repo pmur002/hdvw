@@ -246,9 +246,8 @@ div.csl-indent {
   <li><a href="#case-study-pictograms" id="toc-case-study-pictograms" class="nav-link" data-scroll-target="#case-study-pictograms"><span class="header-section-number">12.4</span> Case study: Pictograms</a></li>
   <li><a href="#case-study-chernoff-faces" id="toc-case-study-chernoff-faces" class="nav-link" data-scroll-target="#case-study-chernoff-faces"><span class="header-section-number">12.5</span> Case study: Chernoff faces</a></li>
   <li><a href="#sec-learned-danger" id="toc-sec-learned-danger" class="nav-link" data-scroll-target="#sec-learned-danger"><span class="header-section-number">12.6</span> Dangers of learned mappings</a></li>
-  <li><a href="#case-study-barycentric-plots-ternary-plots" id="toc-case-study-barycentric-plots-ternary-plots" class="nav-link" data-scroll-target="#case-study-barycentric-plots-ternary-plots"><span class="header-section-number">12.7</span> Case study: Barycentric plots (ternary plots)</a></li>
-  <li><a href="#dangers-of-visual-objects" id="toc-dangers-of-visual-objects" class="nav-link" data-scroll-target="#dangers-of-visual-objects"><span class="header-section-number">12.8</span> Dangers of visual objects</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">12.9</span> Summary</a></li>
+  <li><a href="#sec-object-danger" id="toc-sec-object-danger" class="nav-link" data-scroll-target="#sec-object-danger"><span class="header-section-number">12.7</span> Dangers of visual objects</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">12.8</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -372,6 +371,7 @@ Figure&nbsp;12.6: A scatter plot with a different shape per country
 <blockquote class="blockquote">
 <p>A plot that uses visual objects as data symbols may <em>not</em> be effective if the learned decodings have not been learned by all viewers.</p>
 </blockquote>
+<p><strong>TODO</strong> Refer back to <a href="position.html#sec-rel-pos" class="quarto-xref"><span>Section 4.1</span></a>. Visual shapes are one way to decode to absolute data values (rather than just relative)</p>
 </section>
 <section id="sec-choropleth" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="sec-choropleth"><span class="header-section-number">12.2</span> Case study: Choropleth maps</h2>
@@ -708,14 +708,8 @@ Figure&nbsp;12.16: A visual feature may have more than one learned decoding, whi
 <p>Employing a learned decoding incorrectly can at best weaken and at worst destroy the effectiveness of a data visualisation.</p>
 </blockquote>
 </section>
-<section id="case-study-barycentric-plots-ternary-plots" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="case-study-barycentric-plots-ternary-plots"><span class="header-section-number">12.7</span> Case study: Barycentric plots (ternary plots)</h2>
-<p>Main encoding is three proportions, each to oblique axis (and at least two non-vertical and non-horizontal) =&gt; retrieval of individual proportions difficult BUT get emergent feature of position within triangle from interaction of three position encodings (<a href="combine.html">Combining Mappings</a>) =&gt; overall proportion combination retrievable IF you can decode position within triangle</p>
-<p>Example of plot that requires learning to decode (<a href="#sec-learned-danger" class="quarto-xref"><span>Section 12.6</span></a>).</p>
-<p>Could do plot of Maori vs European vs Other proportions for different years?</p>
-</section>
-<section id="dangers-of-visual-objects" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="dangers-of-visual-objects"><span class="header-section-number">12.8</span> Dangers of visual objects</h2>
+<section id="sec-object-danger" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="sec-object-danger"><span class="header-section-number">12.7</span> Dangers of visual objects</h2>
 <p>One issue with more complex data visualisations is that their effectiveness depends on a larger amount of learning and experience. If the viewer does not have the knowledge required to decode a visual object, then the data visualisation will fail. We saw an example of this in <a href="#fig-flags-direct" class="quarto-xref">Figure&nbsp;<span>12.5</span></a>, where the familiarity of different country flags will vary with nationality and age, for example.</p>
 <p>An extreme version of this problem is the use of not just complex or unusual data symbols, but entirely novel data visualisations.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
 <p>Andrews curve of RWCperGame statistics (analogue of <a href="multiple.html#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>). <strong>Cite Andrews article.</strong> Can see the three distinct groups of countries more easily in this than in parallel plot, but hard to understand exactly what you are seeing. Plus NO chance of recovering original data values (another example of visualising data summary).</p>
@@ -735,9 +729,10 @@ Figure&nbsp;12.17: An Andrews plot of the performance measures for teams in the 
 </div>
 <p>Another example of this problem are the hurrican “cones of uncertainty” that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).</p>
 <p>Mention that little is known about the accuracy of visual objects (though they must have good capacity because they are more abstract, right?)<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>:</p>
+<p>Refer back to <a href="position.html#sec-ternary" class="quarto-xref"><span>Section 4.6</span></a> as example of plot type that experts in specific fields learn to read.</p>
 </section>
-<section id="summary" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">12.9</span> Summary</h2>
+<section id="summary" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">12.8</span> Summary</h2>
 <p>If we encode data values as familiar visual objects, it becomes possible to decode more complex concepts based on prior learning and experience.</p>
 <p>This may obviate the need for legends.</p>
 <hr>

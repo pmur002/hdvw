@@ -270,7 +270,7 @@ div.csl-indent {
 </header>
 
 
-<p><a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> shows a bar plot of the total number of offenders in each police district in New Zealand (for ages 14 to 16 and from 2011 to 2021). For the reasons outlined in <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a>, this data visualisation is effective for comparing the number of offenders in different police districts.</p>
+<p><a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> shows a bar plot of the total number of offenders in each police district in New Zealand (for ages 14 to 16 and from 2011 to 2021). For the reasons outlined in <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> and <a href="position.html" class="quarto-xref"><span>Chapter 4</span></a>), this data visualisation is effective for decoding the number of offenders in different police districts and making comparisons between them.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-district" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -301,10 +301,10 @@ Figure&nbsp;5.2: A bar plot of the number of offenders for different police dist
 </div>
 </div>
 <p>However, <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is <em>more</em> effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons. For example, it is easier to compare the Northland district with the Tasman district in <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a>. The fact that two data visualisations with the same mappings can have a different effectiveness suggests that there is more to know about how different visual features work.</p>
-<p>This section covers some more details about how the <strong>length</strong> visual feature works.</p>
+<p>This chapter covers some more details about mappings that encode data values as <strong>length</strong>.</p>
 <section id="sec-distance-effect" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-distance-effect"><span class="header-section-number">5.1</span> The distance effect</h2>
-<p>In <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>, we saw that <strong>position</strong> and <strong>length</strong> were the most accurate visual features (see <a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). However, this accuracy decreases if the two visual features that are being compared are not in close proximity (see <a href="#fig-distance-effect" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>In <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>, we saw that <strong>position</strong> and <strong>length</strong> were the most accurate visual features (<a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). However, this accuracy decreases if the two visual features that are being compared are not in close proximity (<a href="#fig-distance-effect" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>This helps to explain why <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is more effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons (e.g., Northland versus Tasman).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -342,7 +342,7 @@ Figure&nbsp;5.4: It is easier to compare the lengths of the two bars on the left
 </div>
 </div>
 <p><a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> shows an alternative visualisation of the data on the total number of offenders in different ethnic groups. The bar plot of these data that we saw in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> encoded ethnic groups as the <strong>positions</strong> of the bars so that the bars were arranged vertically with a common left-hand edge. In <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>, the ethnic groups are encoded as different <strong>colours</strong> and the bars are “stacked” horizontally.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Although the total number of offenders has been encoded as the same visual feature in both <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> and <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, the <strong>lengths</strong> of the bars, comparing those lengths is much harder in <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> because the lengths are <strong>unaligned</strong>.</p>
+<p>Although the total number of offenders has been encoded as the same visual feature in both <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> and <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>—in both cases, the number of offenders is encoded as the <strong>lengths</strong> of the bars—comparing those lengths is much harder in <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> because the lengths are <strong>unaligned</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-stacked-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -426,7 +426,8 @@ Table&nbsp;5.1: A table of the number of offenders per year aged 14 to 16 for di
 </div>
 </div>
 <p><a href="#fig-stacked-bar-year" class="quarto-xref">Figure&nbsp;<span>5.6</span></a> shows the number of offenders (quantitative) for each ethnic group (qualitative) and for each year from 2011 to 2021 (treated here as qualitative, or at least discrete). In this data visualisation, the number of offenders is mapped to the lengths of the bars, the years are mapped to the horizontal <strong>position</strong> of the bars, the ethnic groups are mapped to the colours of the bars, and the bars are stacked vertically.</p>
-<p>The problem that we face in this situation is that there are four bars to show for each year. Stacking the bars is one solution, but as we have just seen, this makes some comparisons more difficult. For example, we can easily see that the number of offenders in the unknown group increased after 2016, but it is much harder to see what has happened to the European/Other group since 2016.</p>
+<p>The problem that we face in this situation is that there are four bars to show for each year. If we simply encode the year as the horizontal position of each bar, the bars will overlap and we will have great difficulty decoding data values from the bars (<a href="position.html#sec-pos-scarce" class="quarto-xref"><span>Section 4.3</span></a>).</p>
+<p>Stacking the bars is one solution, but as we have just seen, this makes some comparisons more difficult. For example, we can easily see that the number of offenders in the unknown group increased after 2016, but it is much harder to see what has happened to the European/Other group since 2016.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-stacked-bar-year" class="quarto-float quarto-figure quarto-figure-center anchored">

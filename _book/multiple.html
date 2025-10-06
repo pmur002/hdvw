@@ -255,6 +255,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>TODO</strong> a side-by-side bar plot and even a stacked bar plot both use nested position!!! Also stacked dot plots like fig-rwc-dotplot.</p>
 <p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> shows a data visualisation of the performance measures for teams in the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>). This visualisation is different from anything we have seen previously because it involves multiple mappings. The data symbol in this case is a simple data point, but we have mapped data values to <em>five</em> different visual features of each data point. The number of clean breaks is encoded as the horizontal <strong>position</strong> of the data points and the number of tries is encoded as the vertical <strong>position</strong> of the data points. The number of points scored is encoded as the <strong>size</strong> of the points, the hemisphere is encoded as the <strong>shape</strong> of the points, and the number of runs is encoded as the <strong>colour</strong> of the points.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -273,11 +274,11 @@ Figure&nbsp;11.1: A data visualisation of the performance measures for teams in 
 <p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> is effective in some ways because some of the mappings involve effective visual features. For example, we can easily decode the number of clean breaks and the number of tries from horizontal and vertical positions. We can also decode a correlation between clean breaks and tries from the emergent feature of <strong>position in space</strong> (<a href="combine.html#sec-integral" class="quarto-xref"><span>Section 9.2</span></a>).</p>
 <p>However, other mappings are less effective. For example, it is less easy to accurately decode number of points scored from size and even harder to decode the number of runs from colour. In addition, we are hampered by the fact that many different visual features are changing at once, so it is harder to perceive individual differences (see <a href="visual-model.html#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>).</p>
 <p>One goal of visualising multiple variables like we have in <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> is to discover or display multivariate relationships between the variables. For example, we can see that there are four teams in the top-right corner of the plot that are all relatively large and relatively dark in colour, which suggests that there is a group of teams that run more, make more clean breaks, score more tries, and score more points compared to the other teams.</p>
-<p>This section looks at some of the different approaches to visualising several variables at once. How do we perceive multivariate relationships? And can we still perceive individual data values at the same time?</p>
+<p>This chapter looks at some of the different approaches to visualising several variables at once. How do we perceive multivariate relationships? And can we still perceive individual data values at the same time?</p>
 <section id="sec-parallel" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="sec-parallel"><span class="header-section-number">11.1</span> Parallel coordinates plots</h2>
 <p>One issue with <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> is that it attempts to map each data variable to a separate visual feature. Once we have used both horizontal and vertical <strong>position</strong>, we have to start using less accurate and less appropriate visual features, like <strong>area</strong> and <strong>colour</strong> for quantitative data values (see <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a>). If we attempted to map all of the variables in <a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>, we could actually run out of visual features to use (<a href="mapping-visual-features.html#fig-visual-features" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>).</p>
-<p>An alternative approach is to map more of the data variables to the same visual feature. For example, <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> shows a parallel coordinates plot of the data from <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>11.1</span></a>. In this visualisation, all of the quantitative variables have been encoded as <strong>position</strong>, with just hemisphere (qualitative) encoded as colour.</p>
+<p>An alternative approach is to map more of the data variables to the same visual feature. For example, <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> shows a parallel coordinates plot of the data from <a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>11.1</span></a>. In this visualisation, all of the quantitative variables have been encoded as <strong>position</strong>, with just hemisphere (qualitative) encoded as colour.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-parallel" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -292,7 +293,7 @@ Figure&nbsp;11.2: A data visualisation of the performance measures for teams in 
 </div>
 </div>
 </div>
-<p>A parallel coordinates plot maps data summaries rather than raw data values (<a href="summaries.html" class="quarto-xref"><span>Chapter 8</span></a>). For example, all data values are standardised to a range between 0 and 1.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#tbl-parallel-stats" class="quarto-xref">Table&nbsp;<span>11.1</span></a> shows some of the values that are actually mapped to visual features in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>. Each variable is encoded as a different horizontal <strong>position</strong> and the values within each variable are encoded as vertical <strong>position</strong>. In this way, all quantitative data values are encoded as <strong>position</strong>.</p>
+<p>A parallel coordinates plot maps data summaries rather than raw data values (<a href="summaries.html" class="quarto-xref"><span>Chapter 8</span></a>). For example, all data values are standardised to a range between 0 and 1.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <a href="#tbl-parallel-stats" class="quarto-xref">Table&nbsp;<span>11.1</span></a> shows some of the values that are actually mapped to visual features in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>. Each variable is encoded as a different horizontal <strong>position</strong> and the values within each variable are encoded as vertical <strong>position</strong>. In this way, all quantitative data values are encoded as <strong>position</strong>.</p>
 <div class="cell">
 <div id="tbl-parallel-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -381,7 +382,7 @@ Figure&nbsp;11.3: In a parallel coordinates plot, a single row of data—one dat
 <p>Provide some better options.</p>
 </section>
 <section id="small-multiplessmall-multiples" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">11.3</span> Small multiples<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h2>
+<h2 data-number="11.3" class="anchored" data-anchor-id="small-multiplessmall-multiples"><span class="header-section-number">11.3</span> Small multiples<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></h2>
 <p>One difficulty with <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> is that many of the lines overlap each other, which makes it difficult to separately perceive individual visual shapes. <a href="#fig-profile" class="quarto-xref">Figure&nbsp;<span>11.4</span></a> shows an alternative approach to visualising the same data, called a profile plot. Similar to a parallel coordinates plot, a visual shape is drawn for each country, but the shape in this case is a filled in polygon, effectively the lines in <a href="#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> with the area below them (down to zero) filled in.</p>
 <p>Again, this sort of data visualisation can be effective because of the overall shapes. For example, we can see a group of four shapes that are larger than the others. We can also see that Argentina and Fiji appear very similar, which was not apparent in previous plots.</p>
 <div class="cell">
@@ -403,7 +404,7 @@ Figure&nbsp;11.4: A data visualisation of the performance measures for teams in 
 <p>The cluster of four larger shapes in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;<span>11.4</span></a> is also easier to see because the countries have been ordered by the number of points scored (the right-hand height of the shape). As we have seen before, ordering data symbols can make a big difference (<a href="quantitative.html#sec-distance-effect" class="quarto-xref"><span>Section 5.1</span></a>).</p>
 </section>
 <section id="sec-facetting" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">11.4</span> Facetting<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></h2>
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">11.4</span> Facetting<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
 <p><a href="#fig-facet-before" class="quarto-xref">Figure&nbsp;<span>11.5</span></a> shows a line plot of the number of youth offenders per year in different Police Districts of New Zealand. This visualisation makes use of several effective mappings. For example, we encode year as horizontal <strong>position</strong> and we encode count as vertical <strong>position</strong>. However, there is also a weaker mapping: the Police District. We encode districts as <strong>colour</strong>, but because there are 12 different districts, we are exceeding the capacity of colour (<a href="mapping-visual-features.html#sec-capacity" class="quarto-xref"><span>Section 3.6</span></a>). It is not easy to differentiate all of the different colours (not helped by overplotting of the lines).</p>
 <p>A better mapping for Police District would be <strong>position</strong>, which has a much higher capacity, but position has already been taken by year and count.</p>
 <div class="cell">
@@ -463,7 +464,7 @@ Figure&nbsp;11.7: A scatter plot matrix of the quantitative performance measures
 <section id="non-cartesian-mappings" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="non-cartesian-mappings"><span class="header-section-number">11.6</span> Non-cartesian mappings</h2>
 <p>Parallel plots is actually an example of this, so can just refer back to <a href="#sec-parallel" class="quarto-xref"><span>Section 11.1</span></a></p>
-<p>Refer back to <a href="position.html#sec-non-linear" class="quarto-xref"><span>Section 4.4</span></a></p>
+<p>Refer back to <a href="position.html#sec-cartesian" class="quarto-xref"><span>Section 4.5</span></a></p>
 </section>
 <section id="case-study-kiviat-plots-or-radar-plots-or-spider-plots" class="level2" data-number="11.7">
 <h2 data-number="11.7" class="anchored" data-anchor-id="case-study-kiviat-plots-or-radar-plots-or-spider-plots"><span class="header-section-number">11.7</span> Case study: kiviat plots or radar plots or spider plots</h2>
@@ -478,7 +479,7 @@ Figure&nbsp;11.7: A scatter plot matrix of the quantitative performance measures
 <section id="dangers-of-multiple-mappings" class="level2" data-number="11.9">
 <h2 data-number="11.9" class="anchored" data-anchor-id="dangers-of-multiple-mappings"><span class="header-section-number">11.9</span> Dangers of multiple mappings</h2>
 <p><a href="#fig-multiple" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> showed that the naive approach of just using a separate visual feature for each data variable leads to complex data visualisations that are difficult to decode. Although there are better options, like small multiple and facetting, there is still a limit to how much information can effectively be displayed at once within a static data visualisation.</p>
-<p>This is one area where dynamic and interactive graphics can be useful because the viewer is able to rapidly switch between multiple views of the data, which means that each individual view can be simpler.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>This is one area where dynamic and interactive graphics can be useful because the viewer is able to rapidly switch between multiple views of the data, which means that each individual view can be simpler.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 </section>
 <section id="summary" class="level2" data-number="11.10">
 <h2 data-number="11.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">11.10</span> Summary</h2>
@@ -491,10 +492,11 @@ Figure&nbsp;11.7: A scatter plot matrix of the quantitative performance measures
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Acknowledge and point to different ways that the data values can be transformed (or summarised).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Tufte’s small multiples<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Cite again the classic interactive lit ? Point to some tools that might help, like GGobi?<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>“GoFish: A Grammar of More Graphics!” Pollock and Satyanarayan (2025) Cite this as a grammar that allows more explicit reuse of position (via “geometric operators”). NOTE that the stacking of bars in a stacked bar plot is also a simple version of the reuse of position.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Acknowledge and point to different ways that the data values can be transformed (or summarised).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Tufte’s small multiples<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>trellis multi-panels, ggplot2 facets, GoG ??<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Cite again the classic interactive lit ? Point to some tools that might help, like GGobi?<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

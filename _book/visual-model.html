@@ -249,7 +249,7 @@ div.csl-indent {
   <li><a href="#sec-visual-model-groups" id="toc-sec-visual-model-groups" class="nav-link" data-scroll-target="#sec-visual-model-groups"><span class="header-section-number">2.7</span> Visual similarities</a></li>
   <li><a href="#sec-simplicity" id="toc-sec-simplicity" class="nav-link" data-scroll-target="#sec-simplicity"><span class="header-section-number">2.8</span> Visual simplicity</a></li>
   <li><a href="#sec-tasks" id="toc-sec-tasks" class="nav-link" data-scroll-target="#sec-tasks"><span class="header-section-number">2.9</span> Visual tasks</a></li>
-  <li><a href="#dangers-of-the-visual-system" id="toc-dangers-of-the-visual-system" class="nav-link" data-scroll-target="#dangers-of-the-visual-system"><span class="header-section-number">2.10</span> Dangers of the visual system</a></li>
+  <li><a href="#sec-illusion" id="toc-sec-illusion" class="nav-link" data-scroll-target="#sec-illusion"><span class="header-section-number">2.10</span> Dangers of the visual system</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">2.11</span> Summary</a></li>
   </ul>
 </nav>
@@ -277,7 +277,7 @@ div.csl-indent {
 
 
 <p>Understanding why some mappings are more effective than others will depend upon an understanding of how the human visual system works. In order to understand the effectiveness of a mapping from information to a visual representation, we need to know how we get from visual representations back to the original information.</p>
-<p>We will talk about the conversion of data values to data symbols as an <strong>encoding</strong> of the data values. Later chapters will explore many different encodings. In this chapter, we will consider the reverse operation: the <strong>decoding</strong> of data symbols back to data values (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). The effectiveness of an encoding from data values to data symbols will depend on how well we can decode from the data symbols back to data values.</p>
+<p>We will talk about the transformation of data values into data symbols as an <strong>encoding</strong> of the data values. Later chapters will explore many different encodings. In this chapter, we will consider the reverse operation: the <strong>decoding</strong> of data symbols back to data values (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). The effectiveness of an encoding from data values to data symbols will depend on how well we can decode from the data symbols back to data values.</p>
 <p>In this chapter we will establish a very simple model of the visual system, which will help us to understand the effectiveness of the different mappings that we consider throughout the book.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div id="fig-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1087,9 +1087,9 @@ Figure&nbsp;2.20: On the left is a simple visual task, to estimate the relative 
 <p>A data visualisation will be effective if it relies on automatic and rapid visual processing rather than requiring conscious mental effort.<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></p>
 </blockquote>
 </section>
-<section id="dangers-of-the-visual-system" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="dangers-of-the-visual-system"><span class="header-section-number">2.10</span> Dangers of the visual system</h2>
-<p>The value of data visualisation comes from the visual system’s ability to rapidly gather and process a large amount of visual information. However, while data visualisations usually consist of artificial and simple images presented on a two-dimensional page or screen, the visual system has evolved for the unstructured, messy, and three-dimensional natural environment. This means that the visual system will sometimes generate a more sophisticated, but erroneous interpretation of an image from a very simple arrangement of simple shapes. In other words, we are vulnerable to visual illusions.</p>
+<section id="sec-illusion" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="sec-illusion"><span class="header-section-number">2.10</span> Dangers of the visual system</h2>
+<p>The value of data visualisation comes from the visual system’s ability to rapidly gather and process a large amount of visual information. However, while data visualisations usually consist of artificial and simple images presented on a two-dimensional page or screen, the visual system has evolved for the unstructured, messy, and three-dimensional natural environment. This means that the visual system will sometimes generate a more sophisticated, but erroneous interpretation of an image from a very simple arrangement of basic shapes. In other words, we are vulnerable to visual illusions.</p>
 <p>For example, <a href="#fig-illusion" class="quarto-xref">Figure&nbsp;<span>2.21</span></a> shows the Muller-Lyer Illusion and the Ebbinghaus Illusion. In the former, two horizontal lines of the same length appear to have different lengths and, in the latter, two orange circles of the same size appear to have different sizes.<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1120,9 +1120,24 @@ Figure&nbsp;2.22: All of the horizontal and vertical line segments in this image
 </div>
 </div>
 </div>
-<p>These visual illusions demonstrate that the visual system can produce incorrect results for even very simple visual tasks based on very simple visual elements.</p>
+<p><a href="#fig-3d" class="quarto-xref">Figure&nbsp;<span>2.23</span></a> shows two images that are composed of three simple parallelograms. The three parallelograms are arranged separately on the left, which means that we decode them as three simple shapes. However, for the arrangement of the parallelograms on the right, the natural decoding is a 3-dimensional box, even though the image is clearly 2-dimensional.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-3d" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-model_files/figure-html/fig-3d-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.23: The image on the right is made up from the three simple parallelograms shown on the left. Because of their arrangement and their shading, we are tempted to decode the three parallelograms on the right as a 3-dimensional object.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>These examples demonstrate that the visual system can produce incorrect or unintended results for even very simple visual tasks based on very simple visual elements.</p>
 <blockquote class="blockquote">
-<p>A data visualisation will be ineffective if it (even accidentally) generates a visual illusion.</p>
+<p>The effectiveness of a data visualisation will be compromised if it (even accidentally) generates a visual illusion.</p>
 </blockquote>
 </section>
 <section id="summary" class="level2" data-number="2.11">
@@ -1229,7 +1244,7 @@ Wolfe, Jeremy M., and Todd S. Horowitz. 2017. <span>“Five Factors That Guide A
 <li id="fn3"><p>Low-level visual processing involves the creation of <em>feature maps</em> that identify colours, edges, and orientations, along with the spatial arrangement of those basic features within the field of view.<span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021, 146</a>)</span></p>
 <p>Patterns, or <em>textures</em>, are perceived at a slightly higher level, based on low-level perception of spatial frequencies (fine detail versus coarse detail).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>A slightly more detailed overview is provided in <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> (page 20).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.5</span></a> is based on wind data from the National Oceanic and Atmospheric Administration’s Operational Model Archive and Distribution System (<a href="https://nomads.ncep.noaa.gov/">NOMADS</a>). The data were accessed and processed using the {rNOMADS} package <span class="citation" data-cites="rNOMADS">(<a href="#ref-rNOMADS" role="doc-biblioref">Bowman and Lees 2015</a>)</span>, with raw data interpolated to a finer grid.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.5</span></a> is based on wind data from the National Oceanic and Atmospheric Administration’s Operational Model Archive and Distribution System (<a href="https://nomads.ncep.noaa.gov/">NOMADS</a>). The data were accessed on September 14 2024 and processed using the {rNOMADS} package <span class="citation" data-cites="rNOMADS">(<a href="#ref-rNOMADS" role="doc-biblioref">Bowman and Lees 2015</a>)</span>, with raw data interpolated to a finer grid.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>This is not to say that peripheral vision is useless. Peripheral vision contributes significantly to our field of view <span class="citation" data-cites="10.1167/jov.20.12.2 annurev:/content/journals/10.1146/annurev-vision-082114-035733">(<a href="#ref-10.1167/jov.20.12.2" role="doc-biblioref">Stewart, Valsecchi, and Schütz 2020</a>; <a href="#ref-annurev:/content/journals/10.1146/annurev-vision-082114-035733" role="doc-biblioref">Rosenholtz 2016</a>)</span>, and is as capable as foveal vision at detecting motion <span class="citation" data-cites="MCKEE198425">(<a href="#ref-MCKEE198425" role="doc-biblioref">Mckee and Nakayama 1984</a>)</span>. However, our ability to perceive fine details is limited to a relatively small area of focus.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>The extinction illusion is related to the Hermann grid illusion <span class="citation" data-cites="doi:10.1068/p2985">(<a href="#ref-doi:10.1068/p2985" role="doc-biblioref">Ninio and Stevens 2000</a>)</span>.</p>
 <p>This illusion is not explained simply by differences in foveal versus peripheral perception—there is currently no complete explanation for the effect—but it serves to show that we are getting different information from different regions of the field of view.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1237,7 +1252,7 @@ Wolfe, Jeremy M., and Todd S. Horowitz. 2017. <span>“Five Factors That Guide A
 <li id="fn9"><p>Some limitations of visual memory are briefly mentioned in <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> (pages 397-405 and pages 423-425).</p>
 <p>“A … severely limited capacity is the restricted number of stimuli that can be held in VSTM [visual short-term memory]” <span class="citation" data-cites="MAROIS2005296">(<a href="#ref-MAROIS2005296" role="doc-biblioref">Marois and Ivanoff 2005</a>)</span></p>
 <p>And footnote that acknowledges some controversy (different models and number of items limit vs continuous resource limit), with ref to e.g., “Psychophysical scaling reveals a unified theory of visual memory strength” Schurgin et al (2020) and the binary map model<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>Tufte refers to this as drawing “within the eyespan” <span class="citation" data-cites="tufte1990envisioning">(<a href="#ref-tufte1990envisioning" role="doc-biblioref">Tufte 1990, page=67</a>)</span></p>
+<li id="fn10"><p>Tufte refers to this as drawing “within the eyespan” <span class="citation" data-cites="tufte1990envisioning">(<a href="#ref-tufte1990envisioning" role="doc-biblioref">Tufte 1990, 67</a>)</span></p>
 <p>“In understanding human visual perception, an important component consists of what people can perceive at a glance. If that glance provides the observer with sufficient task-relevant information, this affords efficient processing. If not, one must move one’s eyes and integrate information across glances and over time, which is necessarily slower and limited by both working memory and the ability to integrate that information.” <span class="citation" data-cites="PeripheralVisionACriticalComponentofManyVisualTasks">(<a href="#ref-PeripheralVisionACriticalComponentofManyVisualTasks" role="doc-biblioref">Rosenholtz 2023</a>)</span>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>Miller’s famous paper “The Magical Number Seven, Plus or Minus Two: Some Limits on Our Capacity for Processing Information” <span class="citation" data-cites="miller1956magical">(<a href="#ref-miller1956magical" role="doc-biblioref">Miller 1956</a>)</span> talks about limits on working memory, but also how to “escape” those limits, for example, by chunking information.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12"><p>The ability to detect features without conscious effort is called <em>pre-attentive</em> processing or <em>pop out</em> <span class="citation" data-cites="TREISMAN1985156">(<a href="#ref-TREISMAN1985156" role="doc-biblioref">Treisman 1985</a>)</span>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1249,7 +1264,7 @@ Wolfe, Jeremy M., and Todd S. Horowitz. 2017. <span>“Five Factors That Guide A
 <li id="fn18"><p>This is the Gestalt Continuity Principle <span class="citation" data-cites="Todorovic:2008">(<a href="#ref-Todorovic:2008" role="doc-biblioref">Todorovic 2008</a>)</span>: Items that lie along a smooth curve form a group.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn19"><p>This is the Gestalt Prägnanz Principle <span class="citation" data-cites="Todorovic:2008">(<a href="#ref-Todorovic:2008" role="doc-biblioref">Todorovic 2008</a>)</span>: The tendency to seek simplifying structure and to find order within the chaos of an image.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn20"><p>This is the Gestalt Symmetry Principle <span class="citation" data-cites="Todorovic:2008">(<a href="#ref-Todorovic:2008" role="doc-biblioref">Todorovic 2008</a>)</span>: Items that exhibit symmetry will form a group (in preference to items that do not exhibit symmetry).<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn21"><p>“the comprehension of visual displays tends to be easiest when simple pattern identification processes are substituted for complex cognitive processes” <span class="citation" data-cites="carpenter1998graph">(<a href="#ref-carpenter1998graph" role="doc-biblioref">Carpenter and Shah 1998, page=98</a>)</span><a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>“the comprehension of visual displays tends to be easiest when simple pattern identification processes are substituted for complex cognitive processes” <span class="citation" data-cites="carpenter1998graph">(<a href="#ref-carpenter1998graph" role="doc-biblioref">Carpenter and Shah 1998, 98</a>)</span><a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn22"><p>The original publication of the Muller-Lyer illusion (in German) is <span class="citation" data-cites="muller1889optische">Müller-Lyer (<a href="#ref-muller1889optische" role="doc-biblioref">1889</a>)</span>, though in that, the stimulus described is a single line with three sets of arrows, as shown below.</p>
 <p><img src="Images/muller-lyer.png" class="img-fluid"></p>
 <p>The Ebbinghaus Illusion is also known as the Titchener Illusion after its English-language populariser <span class="citation" data-cites="titchener1901experimental">(<a href="#ref-titchener1901experimental" role="doc-biblioref">Titchener 1916</a>)</span>.</p>

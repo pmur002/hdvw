@@ -246,7 +246,8 @@ div.csl-indent {
   <li><a href="#case-study-interaction-plots" id="toc-case-study-interaction-plots" class="nav-link" data-scroll-target="#case-study-interaction-plots"><span class="header-section-number">9.4</span> Case study: Interaction plots</a></li>
   <li><a href="#dangers-of-combining-mappings" id="toc-dangers-of-combining-mappings" class="nav-link" data-scroll-target="#dangers-of-combining-mappings"><span class="header-section-number">9.5</span> Dangers of combining mappings</a></li>
   <li><a href="#sec-redundant" id="toc-sec-redundant" class="nav-link" data-scroll-target="#sec-redundant"><span class="header-section-number">9.6</span> Redundant mappings</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9.7</span> Summary</a></li>
+  <li><a href="#case-study-log-log-plots" id="toc-case-study-log-log-plots" class="nav-link" data-scroll-target="#case-study-log-log-plots"><span class="header-section-number">9.7</span> Case study: log-log plots</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9.8</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -275,7 +276,7 @@ div.csl-indent {
 <p>Most data visualisations involve more than one data variable. For example, the bar plot in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> involves data on the <strong>ethnic group</strong> of offenders and data on the <strong>count</strong> of offenders in each ethnic group.</p>
 <p>In <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, each data value is mapped to a <strong>visual feature</strong> of a data symbol (<a href="mapping-visual-features.html#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>). For example, the ethnic group is encoded as the vertical <strong>position</strong> of the bars and the count of offenders is encoded as the <strong>length</strong> of the bars.</p>
 <p>We have so far only looked at mappings from data values to visual features in isolation. For example, we know that the mapping from ethnic group to position is effective because position is appropriate for qualitative data and position has sufficient capacity to differentiate between four ethnic groups. We also know that mapping the count of offenders to length is effective because length is appropriate for quantitative data and length provides an accurate decoding. Furthermore, the lengths of the bars are all aligned (they have a common baseline) and the bars only differ in ways that reflect differences in the data (the bars all have the same width and colour).</p>
-<p>In this section, we begin to consider what happens when mappings are used in combination. For a start, we will just extend our thinking to data visualisations that involve mapping <strong>two</strong> data variables to <strong>two</strong> visual features, like ethnic group and count to position and length. Furthermore, we will restrict ourselves to mappings where each pair of data values are encoded as a single data symbol (<a href="#fig-two-visual-features" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>). For example, each combination of ethnic group and count produces a single bar.</p>
+<p>In this chapter, we begin to consider what happens when mappings are used in combination. For a start, we will just extend our thinking to data visualisations that involve mapping <strong>two</strong> data variables to <strong>two</strong> visual features, like ethnic group and count to position and length. Furthermore, we will restrict ourselves to mappings where each pair of data values are encoded as a single data symbol (<a href="#fig-two-visual-features" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>). For example, each combination of ethnic group and count produces a single bar.</p>
 <div id="fig-two-visual-features" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-two-visual-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -295,6 +296,7 @@ Figure&nbsp;9.1: A simple data visualisation maps <strong>two</strong> data valu
 </div>
 <section id="independent-visual-features" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="independent-visual-features"><span class="header-section-number">9.1</span> Independent visual features</h2>
+<p><strong>TODO</strong> refer back to <a href="position.html#sec-cartesian" class="quarto-xref"><span>Section 4.5</span></a> and <a href="position.html#sec-ternary" class="quarto-xref"><span>Section 4.6</span></a>. Get emergent feature of position within triangle from interaction of three position encodings (<a href="combine.html">Combining Mappings</a>) =&gt; overall proportion combination retrievable IF you can decode position within triangle</p>
 <p>A bar plot involves encoding a qualitative variable as bar <strong>position</strong> and a quantitative variable as bar <strong>length</strong> (e.g., <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). We know that each visual feature is effective on its own—we can decode from positions to qualitative values and we can decode from lengths to quantitative values—but another reason why the bar plot is effective overall is because the two visual features act independently.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Our perception of the horizontal <strong>length</strong> of the bars is not affected by the vertical <strong>position</strong> of the bars.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p><a href="#fig-bar-colour" class="quarto-xref">Figure&nbsp;<span>9.2</span></a> demonstrates that we can also add <strong>colour</strong> to the mix without creating any interactions between visual features. The fact that the bottom two bars are blue and red does not affect our ability to perceive that they have different lengths.</p>
 <div class="cell">
@@ -1035,7 +1037,7 @@ Figure&nbsp;9.14: A plot showing the differences in health spending for successi
 </div>
 </div>
 <p><strong>There is also the problem of separable when integral would be appropriate (reduce to separate effects inappropriately?)</strong> Is there an example?</p>
-<p><strong>Must</strong> say that chroma and luminance and hue are all integral. Is this an example of integrating ineffectively?</p>
+<p><strong>Must</strong> say that chroma and luminance and hue are all integral. Especially chroma and luminance. Can successfully vary hue separately from the others (<a href="qualitative.html#sec-divergent" class="quarto-xref"><span>Section 6.10</span></a>). Is this an example of integrating ineffectively? Refer back to <a href="qualitative.html#sec-escape" class="quarto-xref"><span>Section 6.8</span></a>.</p>
 </section>
 <section id="sec-redundant" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="sec-redundant"><span class="header-section-number">9.6</span> Redundant mappings</h2>
@@ -1059,10 +1061,15 @@ Figure&nbsp;9.15: A redundant encoding maps a single data value to multiple visu
 </figcaption>
 </figure>
 </div>
-<p>One useful application of redundant encoding is to accommodate viewers with CVD (<a href="qualitative.html#sec-CVD" class="quarto-xref"><span>Section 6.4</span></a>). Having a secondary decoding alongside colour allows for the fact that the colour decoding may fail for some viewers.</p>
+<p>One useful application of redundant encoding is to accommodate viewers with CVD (<a href="qualitative.html#sec-CVD" class="quarto-xref"><span>Section 6.6</span></a>). Having a secondary decoding alongside colour allows for the fact that the colour decoding may fail for some viewers.</p>
 </section>
-<section id="summary" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">9.7</span> Summary</h2>
+<section id="case-study-log-log-plots" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="case-study-log-log-plots"><span class="header-section-number">9.7</span> Case study: log-log plots</h2>
+<p>Involves non-linear scales, but the point is the shape that you (hope to) get.</p>
+<p>Could also do q-q plots?</p>
+</section>
+<section id="summary" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">9.8</span> Summary</h2>
 <p>The mappings involved in a bar plot—quantitative data values encoded as lengths and qualitative values encoded as position—are effective because we are able to perceive some combinations of visual features, such as length, position, and colour <strong>independently</strong>.</p>
 <p>A scatter plot is effective for perceiving relationships between variables because the mappings of quantitative data values to both horizontal and vertical positions <strong>interact</strong> to produce <strong>position in space</strong> and our visual system is capable of producing useful <strong>visual summaries</strong> of position in space, such as correlation.</p>
 <p>The effectiveness of a mosaic plot also depends upon the <strong>interaction</strong> of visual features: marginal and conditional proportions are mapped to widths and heights, which produce <strong>area</strong> to represent overall proportions.</p>
