@@ -7,28 +7,51 @@ source("common.R")
 
 # Congruent Mappings {#sec-congruence}
 
-The purpose of this chapter is to show that we need to consider more
+In previous chapters, we have seen that,
+part of the reason why some well-known plots, like
+bar plots, are effective is because they 
+map data values to the basic visual features of a data symbol.
+For example, encoding the number of youth offenders as the 
+**length** of a bar in a bar plot (@fig-bar-district).
+We have also seen that basic visual features like **length**
+are effective because we can accurately decode data values
+from those visual features.
+
+The purpose of this chapter is to show that,
+in order to understand the effectiveness
+of a data visualisation, we need to consider more
 than just the accuracy or capacity of our mappings from 
-data values to basic visual features in order to understand the effectiveness
-of a data visualisation.[^congruence-lit]
+data values to basic visual features.
 
-[^congruence-lit]:
-  @TVERSKY2002247 discusses congruence at least in the sense of 
-  matching the spatial properties of data values to the spatial
-  arrangement of visual features.  The concept is also discussed in
-  @DBLP:journals/corr/abs-2008-11310.
+## Implicit decodings {#sec-implicit}
 
-## Implicit mappings {#sec-implicit}
+@fig-line-implicit shows two lines, one longer than the other.
+We can decode information from these lines without any explicit
+encoding of data values.
+For example, we can decode that one line is twice as long as the 
+other without knowing anything about what "twice" represents
+in terms of data values.
+In other words, there is an **implicit decoding** from the lengths
+of the lines to data values (@fig-implicit-decode).[^visual-type-callback]
 
-Sort of like pre-attentive analogue of learned decodings.
+[^visual-type-callback]:
+    These implicit mappings are part of the reason why different visual
+    features are appropriate for encoding quantitative verus
+    qualitative data values.  The length of a data symbol is appropriate
+    for encoding quantitative data values because we implicitly 
+    decode amounts from length.
 
-Refer back to @sec-illusion?  Things that the visual system 
-does whether we want it to or not.
-
-Do a simple example - maybe just the fact that a bar twice the length
-of another bar is perceived as "twice" !?
-These implicit mappings are the basis of whether visual features
-are quant or qual!?
+```{r}
+#| echo: false
+#| label: fig-line-implicit
+#| fig-height: 1
+#| fig-cap: We can decode the fact that one line is twice the length of another line without there having to be any explicit encoding of data values to the lengths of the two lines.
+grid.newpage()
+grid.circle(c(.3, .5), 2/3, unit(1, "mm"), gp=gpar(fill="black"))
+grid.segments(.3, 2/3, .5, 2/3, gp=gpar(lwd=2))
+grid.circle(c(.3, .7), 1/3, unit(1, "mm"), gp=gpar(fill="black"))
+grid.segments(.3, 1/3, .7, 1/3, gp=gpar(lwd=2))
+```
 
 ::: {#fig-implicit-decode}
 ::: {.content-visible when-format=pdf}
@@ -40,18 +63,37 @@ are quant or qual!?
 :::
 
 Some visual features have implicit encodings, which means that we
-can decode values from the visual features without having explicitly
-encoded values as visual features.
+can decode information from the visual features without having explicitly
+encoded any data values.
 :::
 
-When an implicit encoding exists,
+When an implicit decoding exists,
 we can produce a more effective mapping by building upon
 the implicit decoding.
 We can explicitly encode data values as visual features in such a way that
 the decoding is **congruent** with the implicit decoding, in the sense
-that the implicit decoding leads back to the original data values
+that the implicit decoding leads back to the same data values
 that we explicitly encoded
-(@fig-congruent-decode).
+(@fig-congruent-decode).[^congruence-lit]
+
+[^congruence-lit]:
+    @TVERSKY2002247 describe a *congruence principle*: 
+    "the structure and content of the external representation 
+    should correspond to the desired
+    structure and content of the internal representation," where
+    the "external representation" is a data visualisation and
+    the "internal representation" corresponds to an implicit decoding.
+
+    @all-scatterplots discuss measures of effectiveness beyond 
+    accuracy and capacity and refers to 
+    the congruence principle above as well as the idea of
+    *congnitive fit*: "performance on a task will be enhanced when there is a
+    cognitive fit (match) between the information emphasized in the
+    representation type and that required by the task type" [@cognitive-fit].
+    The latter was focused on a comparison of plots versus tables
+    (plots for spatial comparisons and tables for more complex
+    cognitive tasks involving symbolic reasoning),
+    but it is analogous to the idea of congruent mappings.
 
 ::: {#fig-congruent-decode}
 ::: {.content-visible when-format=pdf}
@@ -62,8 +104,8 @@ that we explicitly encoded
 ![](Diagrams/congruent-decode.png)
 :::
 
-If we explicitly map data values to visual features in a way that
-is consistent with an implicit mapping, we can more effectively
+If we explicitly encode data values as visual features in a way that
+is consistent with an implicit decoding, we can more effectively
 decode data values from visual features.
 :::
 
@@ -73,14 +115,13 @@ decode data values from visual features.
 offenders between 2011 and 2021 in 
 different ethnic groups and a bar plot of the same data.
 We learned in @sec-accuracy that encoding
-**quantitative** proportions as **lengths**, like in the
+**quantitative** data values, like proportions, as **lengths**, like in the
 bar plot, is more accurate than encoding the proportions as **angles**
 or **areas**, like in the pie chart.
 
-However, the superior represenation of the
+However, the superior representation of the
 fact that Māori offenders make up approximately 50% of the total is
 the pie chart rather than the bar plot.
-
 Although it is easy to determine from the length of the bar and the scale 
 on the x-axis in the bar plot that the bar for Māori is just below 0.5, 
 it is even easier, without any guides at all, to see that the light blue
@@ -89,10 +130,9 @@ It is also easy to see that the red wedge is close to a third of a
 circle.[^part-to-whole]
 
 [^part-to-whole]:
-    Simkin and Hastie (1987) 
-    found empirical evidence that people judge proportions better on 
-    pie charts than bar charts.
-    So did @78044e4a-01f4-3942-91fb-a9f8dacb4e28.
+    This defence of pie charts has existed for a very long time
+    [@merits-of-circles] and continues to receive empirical support
+    in more recent times [@Simkin01061987].
 
 ```{r}
 #| echo: false
@@ -166,7 +206,7 @@ are appropriate for conveying the total number of offenders in
 different ethnic groups.
 
 Part of the reason why **length** and **area** work so well is because
-a **longer** bar naturally conveys the idea of **more**.[^more-is-more]
+a **longer** bar implicitly conveys the idea of *more*.[^more-is-more]
 By contrast, the **position** of data points in a dot plot of the same data,
 as shown in @fig-more-is-more, do not inherently 
 convey the same sense of *more*.
@@ -175,22 +215,13 @@ are actually larger data symbols;
 the presentation of larger data values is more abstract in a dot plot.
 
 [^more-is-more]:
-    Wilke's Principle of Proportional Ink.
-    ChatGPT attributed this to Wilkinson (GoG), but I cannot find
-    the reference anywhere.
-    Wilke attributes this to 
-    Bergstrom, C. T., and J. West. 2016. 
-    "The Principle of Proportional Ink."
-    http://callingbullshit.org/tools/tools_proportional_ink.html.
-    A corollary is that bars should start at zero.
-
-    Kosslyn (2006)
-    "Graph Design for the Eye and Mind"
-    ./Resources/Graph-Design-for-the-Eye-and-Mind/appendix-3.pdf
-    Principle of Compatibility says
+    Kosslyn's Principle of Compatibility states that
     "A message is easiest to understand if its form is compatible with its 
-    meaning", plus explicitly "more is more"
-
+    meaning", plus explicitly "More Is More" [@eye-and-mind].
+    
+    @wilke2019fundamentals has a similar Principle of Proportional Ink,
+    which he attributes to @bergstrom_west_proportional_ink.
+    A corollary is that bars in a bar plot should start at zero.
 
 ```{r}
 #| echo: false
@@ -221,18 +252,6 @@ grid.newpage()
 pushViewport(viewport(width=.9, height=.9))
 print(gg, newpage=FALSE)
 popViewport()
-```
-
-We have data on the total number of points that were scored and conceded in World Cup matches
-for Tier One nations (the top 10 rugby-playing nations).
-@tbl-rwc-all-time shows these data.
-
-```{r}
-#| echo: false
-#| message: false
-#| label: tbl-rwc-all-time
-#| tbl-cap: A table of the total number of points scored and conceded for Tier One nations in Rugby World Cup matches.  
-kable(rwcAlltime[,c("team", "scored", "conceded", "diff")], digits=0)
 ```
 
 Another way that **length** can convey information more naturally than
@@ -281,9 +300,9 @@ the vertical bars are more natural for conveying count data like this
 because of the natural correspondence with stacks of items.[^vertical-bars]
 
 [^vertical-bars]:
-  horizontal bars (distances) versus vertical bars (amounts) 
-  look up Tversky and kosslyn
-  OTOH, horizontal bars are more accurate than vertical bars (citation please!)
+    Several authors make an argument for vertical bars being preferred 
+    because they correspond naturally to accumulation and growth
+    [e.g., @few2004show].
 
 ```{r}
 #| echo: false
@@ -314,8 +333,8 @@ ggplot(temp) +
 ## Same is same {#sec-same-same}
 
 In @sec-differences we saw that the visual system is very
-sensitive to **differences**, 
-particularly when everything else remains the **same**.
+sensitive to *differences*, 
+particularly when everything else remains the *same*.
 This means that mapping *changes* in data values to *changes* in 
 data symbols 
 will be effective because the visual system will notice the differences
@@ -323,14 +342,11 @@ in the data symbols.
 More specifically, if a **visual feature** of a data symbol
 changes then the visual system will notice that change.
 Furthermore, if a visual feature of a data symbol
-changes while all other visual features of the data symbol remain the **same**,
-the visual system will notice the change more easily.[^kosslyn-informative]
-
-[^kosslyn-informative]:
-    Sort of relates to Kosslyn's
-    "Principle of Informative Changes"
-    "Graph Design for the Eye and Mind"
-    Kosslyn (2006)
+changes while all other visual features of the data symbol remain the *same*,
+the visual system will notice the change more easily (@sec-differences).
+Put another way, visual differences are implicitly decoded as
+changes in the data values *and* visual constancy is implicitly decoded as
+no change in the data values.
 
 For example, 
 in a bar plot like @fig-bar, the data symbols are bars
@@ -344,28 +360,39 @@ the same.
 
 ## Dissonant mappings {#sec-dissonance}
 
-The fact that **length** and **area** naturally convey amounts means
-that care must be taken *not* to confuse that association.
+The fact that **length** and **area** implicitly convey amounts means
+that care must be taken *not* to confuse that association.[^dissonant-illusion]
 For example, @fig-bar-not-zero shows the number of times each team
 entered the opposition's final third during a match at the 
-2023 Women's World Cup.
+2023 Women's World Cup.[^final-third]
 The final third of the pitch is shown as darker green regions, broken
 into five different zones, with a number of entries for each zone
-and for each team represented by a line with an arrow.
+and each team represented by a line with an arrow.
+
+[^dissonant-illusion]:
+    This is related to visual illusions (@sec-illusion).
+    There are decodings that the visual system 
+    performs whether we want it to or not,
+    so we want to avoid conflicting with what the visual system
+    does automatically.
+
+[^final-third]:
+    This data visualisation is an adaptation of a graphic shown during 
+    the live television coverage of the match.
 
 In @fig-bar-not-zero, longer lines correspond to a larger number of 
 entries.  However, the bars start at the halfway line on the pitch
 rather than at the final third of the pitch.
 This means that the zero entries by South Africa into the second-from-right
-zone is represented by a non-zero-length line.
+zone is encoded as a non-zero-length line.
 Apart from making comparisons of the line lengths very inaccurate,
 this creates a confusing visual effect because the viewer
-is expected to associate a non-zero length with a value of zero.
+is expected to decode a non-zero length to a value of zero.
 
 ```{r}
 #| echo: false
 #| label: fig-bar-not-zero
-#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.[^final-third]
+#| fig-cap: The number of times each team entered the opposition's final third in the Women's World Cup match between the Netherlands and South Africa.
 entries <- data.frame(team=rep(c("Netherlands", "South Africa"), each=5),
                       region=rep(1:5, 2),
                       count=c(10, 4, 1, 2, 3, 
@@ -419,25 +446,28 @@ grid.text(c("Netherlands", "South Africa"),
 popViewport()
 ```
 
-[^final-third]:
-  This data visualisation is an adaptation of a graphic shown during 
-  television coverage of the match.
-
 For any example of **congruence**, 
-where a visual feature naturally corresponds to
+where a visual feature implicitly decodes to
 a property of the data,
 there is an opportunity for **dissonance** if the visual feature
 is used inappropriately.  We can improve the effectiveness of 
 a data visualisation by taking advantage of visual congruence
 and we can reduce the effectiveness of a data visualisation 
-if we create visual dissonance.
+if we create visual dissonance.[^dissonance]
+
+[^dissonance]:
+    The idea of visual dissonance is just a logical inversion of
+    the idea of visual congruence.
+    This idea is not named in any literature that I could find,
+    though *semantic clashes* [@bertini_semantic_clashes] perhaps comes closest.
 
 If we fail to make our explicit encodings 
-congruent with any implicit encodings - if we create a
-**dissonant** mapping - we can make it harder
+congruent with any implicit encodings---if we create a
+**dissonant** mapping---we can make it harder
 and more confusing to decode a data visualisation because
 there is more than one possible decoding
 (@fig-dissonant-decode).
+
 
 ::: {#fig-dissonant-decode}
 ::: {.content-visible when-format=pdf}
@@ -464,13 +494,12 @@ visual features *without* any underlying
 change in the data values.[^kosslyn-same]
 
 [^kosslyn-same]:
-    "Graph Design for the Eye and Mind"
-    Kosslyn (2006)
-    "Principle of Informative Changes"
-    change in aesthetic where no change in data is BAD!
+    Kosslyn's *Principle of Informative Changes*
+    states that "People expect changes in properties to carry information"
+    [@eye-and-mind].
 
 @fig-listener-cakes shows a data visualisation of the relative number of 
-people aged over 100 for females versus males.
+people aged over 100 for females versus males.[^listener-cakes]
 There are numerous problems with this data visualisation, but here
 we will just focus on the horizontal **position** of the cake images.
 The cakes for females are positioned to the left of the cakes for males,
@@ -485,7 +514,7 @@ the left-to-right staggering of the cakes when no meaning exists.
 ```{r}
 #| echo: false
 #| label: fig-listener-cakes
-#| fig-cap:  A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.[^listener-cakes]
+#| fig-cap:  A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.
 #| warning: false
 cake <- readPNG("Images/birthday-cake-cropped.png")
 old <- data.frame(gender=c("Male", "Female"),
@@ -503,7 +532,7 @@ cakes <- function(data, coords) {
 ggplot(old) +
     geom_col(aes(x=gender, y=count), fill="transparent") +
     grid_panel(cakes, aes(x=gender, y=count - 1)) +
-    scale_x_discrete(name=NULL, labels=c("Males 100+", "Females 100+")) +
+    scale_x_discrete(name=NULL, labels=c("Females 100+", "Males 100+")) +
     scale_y_continuous(expand=expansion(0, .05)) +
     theme(axis.title.y=element_blank(),
           axis.text.y=element_blank(),
@@ -585,7 +614,7 @@ This is an example of visual congruence.
 ```{r}
 #| echo: false
 #| label: fig-bar-order-vert
-#| fig-cap: Bar plot of most popular Trump policies over time[^bar-order].
+#| fig-cap: Bar plot of most popular Trump policies over time.
 ggplot(poll) +
     geom_col(aes(x=policy, y=percent, fill=date), position="dodge",
              width=.6) +
@@ -611,7 +640,7 @@ the number of points that were scored in every World Cup match
 by Tier One nations (the top 10 rugby-playing nations).
 @tbl-rwc-all shows a sample of these data.
 
-@fig-jitter shows a scatterplot of the number of points scored 
+@fig-jitter shows a dot plot of the number of points scored 
 by teams from different hemispheres at Rugby World Cup matches.
 In this data visualisation, the data symbols are dots,
 the number of points scored is encoded as the horizontal **position** of
@@ -626,7 +655,7 @@ to ameliorate the overlapping of data points, a random amount of "jitter"
 has been
 added the vertical position
 of the dots.  The filled interior of each dot is also semitransparent
-so that we can see where points overlap.
+so that we can see where some points still overlap.
 
 ```{r}
 #| echo: false
@@ -637,12 +666,12 @@ ggplot(rwcAll) +
     scale_x_continuous(name="points scored")
 ```
 
-The scatter plot in @fig-jitter is effective for **decoding** to 
+The dot plot in @fig-jitter is effective for **decoding** to 
 the number of points scored because each data value is encoded as the
 horizontal position of a single data symbol.
 Similarly, we can easily decode the hemisphere from each point.
 The proximity of the data symbols from the same hemisphere means
-that it is easy to perceive two "rows" of points.
+that it is easy to perceive two "rows" of points (@sec-visual-model-groups).
 
 On the other hand, the jittering means that there are visual differences
 between the vertical positions of the dots, within the same hemisphere,
@@ -653,7 +682,7 @@ The data values for these two dots are identical (zero points scored and
 northern hemisphere), but they are visually different.
 The randomness of the jittering may help to dilute any temptation
 to seek meaning from the artificial visual difference, but the
-addition of jittering may cause confusion.
+addition of jittering is a potential source of confusion.
 
 > Jittering data symbols is effective because it reduces the amount of overlap
   amongst data
@@ -666,17 +695,18 @@ addition of jittering may cause confusion.
 The effectiveness of a data visualisation may depend on more than
 just the accuracy and capacity of visual features.
 
-A **congruent** mapping is one where data values are **explicitly** encoded in
-a way that is consistent with an **implicit** decoding of the visual feature.
+A **congruent** mapping is one where data values are *explicitly* encoded in
+a way that is consistent with an *implicit* decoding of the visual feature.
 
-Some data visualisations are effective because they are visually congruent:
-data symbols that are larger for larger data values are more effective;
-data symbols that only change if the data values change are more effective.
+A data visualisation will be more effective if it is visually congruent, for
+example,
+data symbols are larger for larger data values or 
+data symbols only change if the data values change.
 
-A **dissonant** mapping is one where data values are **explicitly**
-encoded in a way that is inconsistent with an **implicit** decoding.
+A **dissonant** mapping is one where data values are *explicitly*
+encoded in a way that is *inconsistent* with an *implicit* decoding.
 
-Some data visualisations are *not* effective because they are visually
+A data visualisations will be less effective if it is visually
 dissonant.
 
 ---

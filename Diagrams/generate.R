@@ -24,7 +24,8 @@ grad1to3 <- grad(1, 3)
 grad3to2 <- grad(3, 2)
 grad2to3 <- grad(2, 3)
 grad0to2 <- grad("black", 2)
-
+grad2to5 <- grad(2, 5)
+    
 graphDefault <- "  graph [ rankdir=LR; margin=.2; nodesep=.5 ];"
 nodeDefault <- '  node [ fontsize=20; fontname="sans bold"; margin=.2 ];'
 
@@ -46,6 +47,13 @@ visualNode <- function(name, label, level=1) {
 }
 
 lieNode <- function(name, label) {
+    paste0("  ", name,
+           ' [ label="', label, '"; ',
+           'shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; ',
+           'fillcolor="', cols[5], '" ]')
+}
+
+dissNode <- function(name, label) {
     paste0("  ", name,
            ' [ label="', label, '"; ',
            'shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; ',
@@ -105,9 +113,9 @@ backEdge <- function(from, to, grad=grad2to1) {
            ' [ style="dashed", color="', grad, '" ]')
 }
 
-implicitEdge <- function(from, to) {
+implicitEdge <- function(from, to, grad=grad2to1) {
     paste0("  ", from, ' -> ', to,
-           ' [ style="solid", color="', grad2to1, '" ]')
+           ' [ style="solid", color="', grad, '" ]')
 }
 
 ## Edges between model nodes
@@ -139,6 +147,7 @@ data2 <- dataNode("data2", "data\\nvalues")
 stat <- dataNode("stat", "data\\nsummaries", level=2)
 stat2 <- dataNode("stat2", "summary\\nsummaries", level=3)
 lie <- lieNode("lie", "garbage\\nand lies")
+diss <- dissNode("diss", "data\\nvalues")
 meta <- dataNode("meta", "metadata /\\nbackground")
 org <- dataNode("org", "structure /\\norganisation")
 imp <- dataNode("imp", "importance /\\nsignificance")
@@ -146,6 +155,7 @@ dataData2Same <- sameRank("data", "data2")
 dataStatSame <- sameRank("data", "stat")
 dataStat2Same <- sameRank("data", "stat2")
 dataLieSame <- sameRank("data", "lie")
+dataDissSame <- sameRank("data", "diss")
 
 ## Visual nodes
 sym <- visualNode("sym", "data\\nsymbols")
@@ -200,7 +210,8 @@ visData2Edge2 <- implicitEdge("vis:n", "data2:ne")
 visDataEdge3 <- backEdge("vis:sw", "data:se")
 visDataEdge4 <- backEdge("vis:n", "data:ne")
 visStatEdge <- backEdge("vis:s", "stat:se", grad=grad(2, 1, level1=1, level2=2))
-visLieEdge <- backEdge("vis:s", "lie:se", grad=grad2to3)
+visLieEdge <- backEdge("vis:s", "lie:se", grad=grad2to5)
+visDissEdge <- implicitEdge("vis:n", "diss:ne", grad=grad2to3)
 visSumEdge <- procEdge("vis", "sum")
 visVisEdge <- procEdge("vis", "add", level1=1, level2=2)
 addDataEdge <- backEdge("add:sw", "data:s", grad=grad(2, 1, level1=2, level2=1))
@@ -276,13 +287,13 @@ graph(data,
       visDataEdge2,
       file="congruent-decode.dot")
 
-graph(data,
-      data2,
+graph(diss,
+      data,
       vis,
-      data2VisEdge,
-      visDataEdge2,
-      visData2Edge,
-      dataData2Same,
+      dataVisEdge,
+      visDissEdge,
+      visDataEdge,
+      dataDissSame,
       file="dissonant-decode.dot")
 
 graph(data,

@@ -240,7 +240,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-implicit" id="toc-sec-implicit" class="nav-link active" data-scroll-target="#sec-implicit"><span class="header-section-number">7.1</span> Implicit mappings</a></li>
+  <li><a href="#sec-implicit" id="toc-sec-implicit" class="nav-link active" data-scroll-target="#sec-implicit"><span class="header-section-number">7.1</span> Implicit decodings</a></li>
   <li><a href="#sec-part-to-whole" id="toc-sec-part-to-whole" class="nav-link" data-scroll-target="#sec-part-to-whole"><span class="header-section-number">7.2</span> Part-to-whole</a></li>
   <li><a href="#sec-more-is-more" id="toc-sec-more-is-more" class="nav-link" data-scroll-target="#sec-more-is-more"><span class="header-section-number">7.3</span> More is more</a></li>
   <li><a href="#sec-same-same" id="toc-sec-same-same" class="nav-link" data-scroll-target="#sec-same-same"><span class="header-section-number">7.4</span> Same is same</a></li>
@@ -273,39 +273,51 @@ div.csl-indent {
 </header>
 
 
-<p>The purpose of this chapter is to show that we need to consider more than just the accuracy or capacity of our mappings from data values to basic visual features in order to understand the effectiveness of a data visualisation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>In previous chapters, we have seen that, part of the reason why some well-known plots, like bar plots, are effective is because they map data values to the basic visual features of a data symbol. For example, encoding the number of youth offenders as the <strong>length</strong> of a bar in a bar plot (<a href="quantitative.html#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>). We have also seen that basic visual features like <strong>length</strong> are effective because we can accurately decode data values from those visual features.</p>
+<p>The purpose of this chapter is to show that, in order to understand the effectiveness of a data visualisation, we need to consider more than just the accuracy or capacity of our mappings from data values to basic visual features.</p>
 <section id="sec-implicit" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="sec-implicit"><span class="header-section-number">7.1</span> Implicit mappings</h2>
-<p>Sort of like pre-attentive analogue of learned decodings.</p>
-<p>Refer back to <a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>? Things that the visual system does whether we want it to or not.</p>
-<p>Do a simple example - maybe just the fact that a bar twice the length of another bar is perceived as “twice” !? These implicit mappings are the basis of whether visual features are quant or qual!?</p>
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-implicit"><span class="header-section-number">7.1</span> Implicit decodings</h2>
+<p><a href="#fig-line-implicit" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> shows two lines, one longer than the other. We can decode information from these lines without any explicit encoding of data values. For example, we can decode that one line is twice as long as the other without knowing anything about what “twice” represents in terms of data values. In other words, there is an <strong>implicit decoding</strong> from the lengths of the lines to data values (<a href="#fig-implicit-decode" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-line-implicit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-line-implicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="congruence_files/figure-html/fig-line-implicit-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-line-implicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: We can decode the fact that one line is twice the length of another line without there having to be any explicit encoding of data values to the lengths of the two lines.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <div id="fig-implicit-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-implicit-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Diagrams/implicit-decode.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-implicit-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.1: Some visual features have implicit encodings, which means that we can decode values from the visual features without having explicitly encoded values as visual features.
+Figure&nbsp;7.2: Some visual features have implicit encodings, which means that we can decode information from the visual features without having explicitly encoded any data values.
 </figcaption>
 </figure>
 </div>
-<p>When an implicit encoding exists, we can produce a more effective mapping by building upon the implicit decoding. We can explicitly encode data values as visual features in such a way that the decoding is <strong>congruent</strong> with the implicit decoding, in the sense that the implicit decoding leads back to the original data values that we explicitly encoded (<a href="#fig-congruent-decode" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>).</p>
+<p>When an implicit decoding exists, we can produce a more effective mapping by building upon the implicit decoding. We can explicitly encode data values as visual features in such a way that the decoding is <strong>congruent</strong> with the implicit decoding, in the sense that the implicit decoding leads back to the same data values that we explicitly encoded (<a href="#fig-congruent-decode" class="quarto-xref">Figure&nbsp;<span>7.3</span></a>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div id="fig-congruent-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-congruent-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Diagrams/congruent-decode.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-congruent-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.2: If we explicitly map data values to visual features in a way that is consistent with an implicit mapping, we can more effectively decode data values from visual features.
+Figure&nbsp;7.3: If we explicitly encode data values as visual features in a way that is consistent with an implicit decoding, we can more effectively decode data values from visual features.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="sec-part-to-whole" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="sec-part-to-whole"><span class="header-section-number">7.2</span> Part-to-whole</h2>
-<p><a href="#fig-prop" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> shows a pie chart of the proportions of total youth offenders between 2011 and 2021 in different ethnic groups and a bar plot of the same data. We learned in <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a> that encoding <strong>quantitative</strong> proportions as <strong>lengths</strong>, like in the bar plot, is more accurate than encoding the proportions as <strong>angles</strong> or <strong>areas</strong>, like in the pie chart.</p>
-<p>However, the superior represenation of the fact that Māori offenders make up approximately 50% of the total is the pie chart rather than the bar plot.</p>
-<p>Although it is easy to determine from the length of the bar and the scale on the x-axis in the bar plot that the bar for Māori is just below 0.5, it is even easier, without any guides at all, to see that the light blue wedge in the pie chart is just under half a circle. It is also easy to see that the red wedge is close to a third of a circle.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><a href="#fig-prop" class="quarto-xref">Figure&nbsp;<span>7.4</span></a> shows a pie chart of the proportions of total youth offenders between 2011 and 2021 in different ethnic groups and a bar plot of the same data. We learned in <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a> that encoding <strong>quantitative</strong> data values, like proportions, as <strong>lengths</strong>, like in the bar plot, is more accurate than encoding the proportions as <strong>angles</strong> or <strong>areas</strong>, like in the pie chart.</p>
+<p>However, the superior representation of the fact that Māori offenders make up approximately 50% of the total is the pie chart rather than the bar plot. Although it is easy to determine from the length of the bar and the scale on the x-axis in the bar plot that the bar for Māori is just below 0.5, it is even easier, without any guides at all, to see that the light blue wedge in the pie chart is just under half a circle. It is also easy to see that the red wedge is close to a third of a circle.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <div id="fig-prop" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-prop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -337,15 +349,15 @@ Figure&nbsp;7.2: If we explicitly map data values to visual features in a way th
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.3: Data visualisations of the proportion of offenders from different ethnic groups.
+Figure&nbsp;7.4: Data visualisations of the proportion of offenders from different ethnic groups.
 </figcaption>
 </figure>
 </div>
-<p>The reason why the pie chart in <a href="#fig-prop" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> is more effective than a bar plot for conveying simple proportions like a quarter or a third or a half is because the wedges in a pie chart have an implicit decoding to fractions of a whole. A semi-circle has a strong visual association with <em>half</em> of a circle and thirds and quarters are similarly evocative.</p>
+<p>The reason why the pie chart in <a href="#fig-prop" class="quarto-xref">Figure&nbsp;<span>7.4</span></a> is more effective than a bar plot for conveying simple proportions like a quarter or a third or a half is because the wedges in a pie chart have an implicit decoding to fractions of a whole. A semi-circle has a strong visual association with <em>half</em> of a circle and thirds and quarters are similarly evocative.</p>
 <blockquote class="blockquote">
 <p>One reason why a pie chart can be effective is because segments of a pie vividly convey simple fractions of a whole.</p>
 </blockquote>
-<p><a href="#fig-bar-part" class="quarto-xref">Figure&nbsp;<span>7.4</span></a> shows that if we place a bar representing a proportion bar within a reference rectangle that corresponds to a proportion of 1, then we can also create a part-to-whole congruence with bars, though the effect is not as strong as it is for pie wedges.</p>
+<p><a href="#fig-bar-part" class="quarto-xref">Figure&nbsp;<span>7.5</span></a> shows that if we place a bar representing a proportion bar within a reference rectangle that corresponds to a proportion of 1, then we can also create a part-to-whole congruence with bars, though the effect is not as strong as it is for pie wedges.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-part" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -354,7 +366,7 @@ Figure&nbsp;7.3: Data visualisations of the proportion of offenders from differe
 <img src="congruence_files/figure-html/fig-bar-part-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-part-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.4: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.
+Figure&nbsp;7.5: A bar plot of the proportion of offenders from different ethnic groups with reference rectangles to enhance the part-to-whole relationship.
 </figcaption>
 </figure>
 </div>
@@ -363,8 +375,8 @@ Figure&nbsp;7.4: A bar plot of the proportion of offenders from different ethnic
 </section>
 <section id="sec-more-is-more" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="sec-more-is-more"><span class="header-section-number">7.3</span> More is more</h2>
-<p>We saw in <a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a> that visual features like <strong>length</strong> and <strong>area</strong> are appropriate for conveying quantitative values. For example, in <a href="#fig-more-is-more" class="quarto-xref">Figure&nbsp;<span>7.5</span></a>, the lengths of the bars are appropriate for conveying the total number of offenders in different ethnic groups.</p>
-<p>Part of the reason why <strong>length</strong> and <strong>area</strong> work so well is because a <strong>longer</strong> bar naturally conveys the idea of <strong>more</strong>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> By contrast, the <strong>position</strong> of data points in a dot plot of the same data, as shown in <a href="#fig-more-is-more" class="quarto-xref">Figure&nbsp;<span>7.5</span></a>, do not inherently convey the same sense of <em>more</em>. In a bar plot, the data symbols that correspond to larger data values are actually larger data symbols; the presentation of larger data values is more abstract in a dot plot.</p>
+<p>We saw in <a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a> that visual features like <strong>length</strong> and <strong>area</strong> are appropriate for conveying quantitative values. For example, in <a href="#fig-more-is-more" class="quarto-xref">Figure&nbsp;<span>7.6</span></a>, the lengths of the bars are appropriate for conveying the total number of offenders in different ethnic groups.</p>
+<p>Part of the reason why <strong>length</strong> and <strong>area</strong> work so well is because a <strong>longer</strong> bar implicitly conveys the idea of <em>more</em>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> By contrast, the <strong>position</strong> of data points in a dot plot of the same data, as shown in <a href="#fig-more-is-more" class="quarto-xref">Figure&nbsp;<span>7.6</span></a>, do not inherently convey the same sense of <em>more</em>. In a bar plot, the data symbols that correspond to larger data values are actually larger data symbols; the presentation of larger data values is more abstract in a dot plot.</p>
 <div id="fig-more-is-more" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-more-is-more-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -396,97 +408,11 @@ Figure&nbsp;7.4: A bar plot of the proportion of offenders from different ethnic
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-more-is-more-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.5: A bar plot and a dot plot of the total number of offenders for different ethnic groups.
+Figure&nbsp;7.6: A bar plot and a dot plot of the total number of offenders for different ethnic groups.
 </figcaption>
 </figure>
 </div>
-<p>We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all-time" class="quarto-xref">Table&nbsp;<span>7.1</span></a> shows these data.</p>
-<div class="cell">
-<div id="tbl-rwc-all-time" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-all-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7.1: A table of the total number of points scored and conceded for Tier One nations in Rugby World Cup matches.
-</figcaption>
-<div aria-describedby="tbl-rwc-all-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">team</th>
-<th style="text-align: right;">scored</th>
-<th style="text-align: right;">conceded</th>
-<th style="text-align: right;">diff</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Argentina</td>
-<td style="text-align: right;">535</td>
-<td style="text-align: right;">719</td>
-<td style="text-align: right;">-184</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Australia</td>
-<td style="text-align: right;">779</td>
-<td style="text-align: right;">594</td>
-<td style="text-align: right;">185</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">New Zealand</td>
-<td style="text-align: right;">1568</td>
-<td style="text-align: right;">673</td>
-<td style="text-align: right;">895</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">South Africa</td>
-<td style="text-align: right;">609</td>
-<td style="text-align: right;">441</td>
-<td style="text-align: right;">168</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">England</td>
-<td style="text-align: right;">695</td>
-<td style="text-align: right;">624</td>
-<td style="text-align: right;">71</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">France</td>
-<td style="text-align: right;">716</td>
-<td style="text-align: right;">674</td>
-<td style="text-align: right;">42</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Ireland</td>
-<td style="text-align: right;">442</td>
-<td style="text-align: right;">566</td>
-<td style="text-align: right;">-124</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Italy</td>
-<td style="text-align: right;">220</td>
-<td style="text-align: right;">894</td>
-<td style="text-align: right;">-674</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Scotland</td>
-<td style="text-align: right;">305</td>
-<td style="text-align: right;">571</td>
-<td style="text-align: right;">-266</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Wales</td>
-<td style="text-align: right;">497</td>
-<td style="text-align: right;">610</td>
-<td style="text-align: right;">-113</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<p>Another way that <strong>length</strong> can convey information more naturally than <strong>position</strong> is visualising negative values. For example <a href="#fig-neg-bar" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> shows the total points differential (points scored minus points conceded) for Tier One nations at Rugby World Cups (see <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>). The <em>direction</em> of the bars very clearly indicates the change from positive points differential to negative points differential.</p>
+<p>Another way that <strong>length</strong> can convey information more naturally than <strong>position</strong> is visualising negative values. For example <a href="#fig-neg-bar" class="quarto-xref">Figure&nbsp;<span>7.7</span></a> shows the total points differential (points scored minus points conceded) for Tier One nations at Rugby World Cups (see <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>). The <em>direction</em> of the bars very clearly indicates the change from positive points differential to negative points differential.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-neg-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -495,13 +421,13 @@ Table&nbsp;7.1: A table of the total number of points scored and conceded for Ti
 <img src="congruence_files/figure-html/fig-neg-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-neg-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.6: A bar plot of the total points differential for Tier One nations at Rugby World Cups.
+Figure&nbsp;7.7: A bar plot of the total points differential for Tier One nations at Rugby World Cups.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>By comparison, the change from positive to negative points differential is much more abstract in a dot plot of the same data (<a href="#fig-neg-dot" class="quarto-xref">Figure&nbsp;<span>7.7</span></a>).</p>
+<p>By comparison, the change from positive to negative points differential is much more abstract in a dot plot of the same data (<a href="#fig-neg-dot" class="quarto-xref">Figure&nbsp;<span>7.8</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-neg-dot" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -510,7 +436,7 @@ Figure&nbsp;7.6: A bar plot of the total points differential for Tier One nation
 <img src="congruence_files/figure-html/fig-neg-dot-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-neg-dot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.7: A dot plot of the total points differential for Tier One nations at Rugby World Cups.
+Figure&nbsp;7.8: A dot plot of the total points differential for Tier One nations at Rugby World Cups.
 </figcaption>
 </figure>
 </div>
@@ -519,7 +445,7 @@ Figure&nbsp;7.7: A dot plot of the total points differential for Tier One nation
 <blockquote class="blockquote">
 <p>One reason why bar plots are effective is because larger data values are represented by larger data symbols.</p>
 </blockquote>
-<p>A more subtle effect can be seen in <a href="#fig-bar-orientation" class="quarto-xref">Figure&nbsp;<span>7.8</span></a>, which shows two different bar plots of the total number of offenders in different ethnic groups. In this case, the vertical bars are more natural for conveying count data like this because of the natural correspondence with stacks of items.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>A more subtle effect can be seen in <a href="#fig-bar-orientation" class="quarto-xref">Figure&nbsp;<span>7.9</span></a>, which shows two different bar plots of the total number of offenders in different ethnic groups. In this case, the vertical bars are more natural for conveying count data like this because of the natural correspondence with stacks of items.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div id="fig-bar-orientation" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bar-orientation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -551,14 +477,14 @@ Figure&nbsp;7.7: A dot plot of the total points differential for Tier One nation
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-orientation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.8: Data visualisations of the number of offenders from different ethnic groups.
+Figure&nbsp;7.9: Data visualisations of the number of offenders from different ethnic groups.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="sec-same-same" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="sec-same-same"><span class="header-section-number">7.4</span> Same is same</h2>
-<p>In <a href="visual-model.html#sec-differences" class="quarto-xref"><span>Section 2.5</span></a> we saw that the visual system is very sensitive to <strong>differences</strong>, particularly when everything else remains the <strong>same</strong>. This means that mapping <em>changes</em> in data values to <em>changes</em> in data symbols will be effective because the visual system will notice the differences in the data symbols. More specifically, if a <strong>visual feature</strong> of a data symbol changes then the visual system will notice that change. Furthermore, if a visual feature of a data symbol changes while all other visual features of the data symbol remain the <strong>same</strong>, the visual system will notice the change more easily.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>In <a href="visual-model.html#sec-differences" class="quarto-xref"><span>Section 2.5</span></a> we saw that the visual system is very sensitive to <em>differences</em>, particularly when everything else remains the <em>same</em>. This means that mapping <em>changes</em> in data values to <em>changes</em> in data symbols will be effective because the visual system will notice the differences in the data symbols. More specifically, if a <strong>visual feature</strong> of a data symbol changes then the visual system will notice that change. Furthermore, if a visual feature of a data symbol changes while all other visual features of the data symbol remain the <em>same</em>, the visual system will notice the change more easily (<a href="visual-model.html#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>). Put another way, visual differences are implicitly decoded as changes in the data values <em>and</em> visual constancy is implicitly decoded as no change in the data values.</p>
 <p>For example, in a bar plot like <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, the data symbols are bars and only the <strong>lengths</strong> of the bars and the vertical <strong>positions</strong> of the bars are different. The “widths” of the bars and the <strong>colours</strong> of the bars remain the same.</p>
 <blockquote class="blockquote">
 <p>Another reason why bar plots are effective is because the bars differ in length, but are otherwise the same.</p>
@@ -566,8 +492,8 @@ Figure&nbsp;7.8: Data visualisations of the number of offenders from different e
 </section>
 <section id="sec-dissonance" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="sec-dissonance"><span class="header-section-number">7.5</span> Dissonant mappings</h2>
-<p>The fact that <strong>length</strong> and <strong>area</strong> naturally convey amounts means that care must be taken <em>not</em> to confuse that association. For example, <a href="#fig-bar-not-zero" class="quarto-xref">Figure&nbsp;<span>7.9</span></a> shows the number of times each team entered the opposition’s final third during a match at the 2023 Women’s World Cup. The final third of the pitch is shown as darker green regions, broken into five different zones, with a number of entries for each zone and for each team represented by a line with an arrow.</p>
-<p>In <a href="#fig-bar-not-zero" class="quarto-xref">Figure&nbsp;<span>7.9</span></a>, longer lines correspond to a larger number of entries. However, the bars start at the halfway line on the pitch rather than at the final third of the pitch. This means that the zero entries by South Africa into the second-from-right zone is represented by a non-zero-length line. Apart from making comparisons of the line lengths very inaccurate, this creates a confusing visual effect because the viewer is expected to associate a non-zero length with a value of zero.</p>
+<p>The fact that <strong>length</strong> and <strong>area</strong> implicitly convey amounts means that care must be taken <em>not</em> to confuse that association.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> For example, <a href="#fig-bar-not-zero" class="quarto-xref">Figure&nbsp;<span>7.10</span></a> shows the number of times each team entered the opposition’s final third during a match at the 2023 Women’s World Cup.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The final third of the pitch is shown as darker green regions, broken into five different zones, with a number of entries for each zone and each team represented by a line with an arrow.</p>
+<p>In <a href="#fig-bar-not-zero" class="quarto-xref">Figure&nbsp;<span>7.10</span></a>, longer lines correspond to a larger number of entries. However, the bars start at the halfway line on the pitch rather than at the final third of the pitch. This means that the zero entries by South Africa into the second-from-right zone is encoded as a non-zero-length line. Apart from making comparisons of the line lengths very inaccurate, this creates a confusing visual effect because the viewer is expected to decode a non-zero length to a value of zero.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-not-zero" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -576,26 +502,26 @@ Figure&nbsp;7.8: Data visualisations of the number of offenders from different e
 <img src="congruence_files/figure-html/fig-bar-not-zero-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-not-zero-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.9: The number of times each team entered the opposition’s final third in the Women’s World Cup match between the Netherlands and South Africa.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>
+Figure&nbsp;7.10: The number of times each team entered the opposition’s final third in the Women’s World Cup match between the Netherlands and South Africa.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>For any example of <strong>congruence</strong>, where a visual feature naturally corresponds to a property of the data, there is an opportunity for <strong>dissonance</strong> if the visual feature is used inappropriately. We can improve the effectiveness of a data visualisation by taking advantage of visual congruence and we can reduce the effectiveness of a data visualisation if we create visual dissonance.</p>
-<p>If we fail to make our explicit encodings congruent with any implicit encodings - if we create a <strong>dissonant</strong> mapping - we can make it harder and more confusing to decode a data visualisation because there is more than one possible decoding (<a href="#fig-dissonant-decode" class="quarto-xref">Figure&nbsp;<span>7.10</span></a>).</p>
+<p>For any example of <strong>congruence</strong>, where a visual feature implicitly decodes to a property of the data, there is an opportunity for <strong>dissonance</strong> if the visual feature is used inappropriately. We can improve the effectiveness of a data visualisation by taking advantage of visual congruence and we can reduce the effectiveness of a data visualisation if we create visual dissonance.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>If we fail to make our explicit encodings congruent with any implicit encodings—if we create a <strong>dissonant</strong> mapping—we can make it harder and more confusing to decode a data visualisation because there is more than one possible decoding (<a href="#fig-dissonant-decode" class="quarto-xref">Figure&nbsp;<span>7.11</span></a>).</p>
 <div id="fig-dissonant-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dissonant-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Diagrams/dissonant-decode.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dissonant-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.10: If we explicitly map data values to visual features, but the visual features have an implicit mapping to different data values, we can cause confusion and make it harder to effectively decode data values from visual features.
+Figure&nbsp;7.11: If we explicitly map data values to visual features, but the visual features have an implicit mapping to different data values, we can cause confusion and make it harder to effectively decode data values from visual features.
 </figcaption>
 </figure>
 </div>
-<p>We saw in <a href="#sec-same-same" class="quarto-xref"><span>Section 7.4</span></a> that we want to map differences in data values to differences in visual features <em>and</em> keep everything else the same. Failing to follow that approach will make it harder to perceive changes in the data values. However, a worse error, and another source of visual dissonance arises if we change visual features <em>without</em> any underlying change in the data values.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<p><a href="#fig-listener-cakes" class="quarto-xref">Figure&nbsp;<span>7.11</span></a> shows a data visualisation of the relative number of people aged over 100 for females versus males. There are numerous problems with this data visualisation, but here we will just focus on the horizontal <strong>position</strong> of the cake images. The cakes for females are positioned to the left of the cakes for males, which is acceptable because that difference in position reflects a difference in the data—males versus females. However, within each gender, the cakes are also staggered a small amount to the left then to the right. This visual difference in the cake positions does not correspond to any difference in the data values. We are tempted to seek meaning from the the left-to-right staggering of the cakes when no meaning exists.</p>
+<p>We saw in <a href="#sec-same-same" class="quarto-xref"><span>Section 7.4</span></a> that we want to map differences in data values to differences in visual features <em>and</em> keep everything else the same. Failing to follow that approach will make it harder to perceive changes in the data values. However, a worse error, and another source of visual dissonance arises if we change visual features <em>without</em> any underlying change in the data values.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p><a href="#fig-listener-cakes" class="quarto-xref">Figure&nbsp;<span>7.12</span></a> shows a data visualisation of the relative number of people aged over 100 for females versus males.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> There are numerous problems with this data visualisation, but here we will just focus on the horizontal <strong>position</strong> of the cake images. The cakes for females are positioned to the left of the cakes for males, which is acceptable because that difference in position reflects a difference in the data—males versus females. However, within each gender, the cakes are also staggered a small amount to the left then to the right. This visual difference in the cake positions does not correspond to any difference in the data values. We are tempted to seek meaning from the the left-to-right staggering of the cakes when no meaning exists.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-listener-cakes" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -604,7 +530,7 @@ Figure&nbsp;7.10: If we explicitly map data values to visual features, but the v
 <img src="congruence_files/figure-html/fig-listener-cakes-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-listener-cakes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.11: A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>
+Figure&nbsp;7.12: A data visualisation of the number of females aged over 100 relative to the number of makes aged over 100.
 </figcaption>
 </figure>
 </div>
@@ -616,7 +542,7 @@ Figure&nbsp;7.11: A data visualisation of the number of females aged over 100 re
 </section>
 <section id="case-study-times-arrow" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="case-study-times-arrow"><span class="header-section-number">7.6</span> Case study: Time’s arrow</h2>
-<p><a href="#fig-bar-order" class="quarto-xref">Figure&nbsp;<span>7.12</span></a> shows the results of a 2025 poll that asked what was the best thing that the Trump administration had done, comparing results in February to results in September. In terms of mappings, this bar plot makes good use of (vertical) <strong>position</strong> and (horizontal) <strong>length</strong> to encode different policy issues, the difference in dates, and the percent of respondents who voted for each policy. However, when we look at the top two bars, there is a temptation to read the pairs of bars in order from top to bottom.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> If we do not attend carefully to the legend, we may perceive a <em>decrease</em> in the (relative) popularity of the immigration policy and an <em>increase</em> in the popularity of DOGE. This is a subtle example of visual dissonance.</p>
+<p><a href="#fig-bar-order" class="quarto-xref">Figure&nbsp;<span>7.13</span></a> shows the results of a 2025 poll that asked what was the best thing that the Trump administration had done, comparing results in February to results in September. In terms of mappings, this bar plot makes good use of (vertical) <strong>position</strong> and (horizontal) <strong>length</strong> to encode different policy issues, the difference in dates, and the percent of respondents who voted for each policy. However, when we look at the top two bars, there is a temptation to read the pairs of bars in order from top to bottom.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> If we do not attend carefully to the legend, we may perceive a <em>decrease</em> in the (relative) popularity of the immigration policy and an <em>increase</em> in the popularity of DOGE. This is a subtle example of visual dissonance.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-order" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -625,13 +551,13 @@ Figure&nbsp;7.11: A data visualisation of the number of females aged over 100 re
 <img src="congruence_files/figure-html/fig-bar-order-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.12: Bar plot of most popular Trump policies over time.
+Figure&nbsp;7.13: Bar plot of most popular Trump policies over time.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-bar-order-vert" class="quarto-xref">Figure&nbsp;<span>7.13</span></a> shows another version of the bar plot, with the bars running vertically. In this plot, the natural reading from left to right leads to the correct interpretation: the (relative) popularity of DOGE has declined while the popularity of the immigration policy has increased. This is an example of visual congruence.</p>
+<p><a href="#fig-bar-order-vert" class="quarto-xref">Figure&nbsp;<span>7.14</span></a> shows another version of the bar plot, with the bars running vertically. In this plot, the natural reading from left to right leads to the correct interpretation: the (relative) popularity of DOGE has declined while the popularity of the immigration policy has increased. This is an example of visual congruence.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-order-vert" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -640,7 +566,7 @@ Figure&nbsp;7.12: Bar plot of most popular Trump policies over time.
 <img src="congruence_files/figure-html/fig-bar-order-vert-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-order-vert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.13: Bar plot of most popular Trump policies over time<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>.
+Figure&nbsp;7.14: Bar plot of most popular Trump policies over time.
 </figcaption>
 </figure>
 </div>
@@ -650,8 +576,8 @@ Figure&nbsp;7.13: Bar plot of most popular Trump policies over time<a href="#fn1
 <section id="sec-jitter" class="level2" data-number="7.7">
 <h2 data-number="7.7" class="anchored" data-anchor-id="sec-jitter"><span class="header-section-number">7.7</span> Case study: Jittering</h2>
 <p>We have data on the the number of points that were scored in every World Cup match by Tier One nations (the top 10 rugby-playing nations). <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a> shows a sample of these data.</p>
-<p><a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.14</span></a> shows a scatterplot of the number of points scored by teams from different hemispheres at Rugby World Cup matches. In this data visualisation, the data symbols are dots, the number of points scored is encoded as the horizontal <strong>position</strong> of the dots, and the hemisphere is encoded as the vertical <strong>position</strong> of the dots. We saw a similar visualisation of these data in <a href="position.html#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>, which demonstrated the problem of overplotting of points that share the same data value.</p>
-<p>In <a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.14</span></a>, to ameliorate the overlapping of data points, a random amount of “jitter” has been added the vertical position of the dots. The filled interior of each dot is also semitransparent so that we can see where points overlap.</p>
+<p><a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.15</span></a> shows a dot plot of the number of points scored by teams from different hemispheres at Rugby World Cup matches. In this data visualisation, the data symbols are dots, the number of points scored is encoded as the horizontal <strong>position</strong> of the dots, and the hemisphere is encoded as the vertical <strong>position</strong> of the dots. We saw a similar visualisation of these data in <a href="position.html#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>, which demonstrated the problem of overplotting of points that share the same data value.</p>
+<p>In <a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.15</span></a>, to ameliorate the overlapping of data points, a random amount of “jitter” has been added the vertical position of the dots. The filled interior of each dot is also semitransparent so that we can see where some points still overlap.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-jitter" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -660,14 +586,14 @@ Figure&nbsp;7.13: Bar plot of most popular Trump policies over time<a href="#fn1
 <img src="congruence_files/figure-html/fig-jitter-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.14: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
+Figure&nbsp;7.15: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The scatter plot in <a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.14</span></a> is effective for <strong>decoding</strong> to the number of points scored because each data value is encoded as the horizontal position of a single data symbol. Similarly, we can easily decode the hemisphere from each point. The proximity of the data symbols from the same hemisphere means that it is easy to perceive two “rows” of points.</p>
-<p>On the other hand, the jittering means that there are visual differences between the vertical positions of the dots, within the same hemisphere, that do not correspond to any differences in data values. For example, there are two dots representing matches where a team from the Northern hemisphere scored zero points. The data values for these two dots are identical (zero points scored and northern hemisphere), but they are visually different. The randomness of the jittering may help to dilute any temptation to seek meaning from the artificial visual difference, but the addition of jittering may cause confusion.</p>
+<p>The dot plot in <a href="#fig-jitter" class="quarto-xref">Figure&nbsp;<span>7.15</span></a> is effective for <strong>decoding</strong> to the number of points scored because each data value is encoded as the horizontal position of a single data symbol. Similarly, we can easily decode the hemisphere from each point. The proximity of the data symbols from the same hemisphere means that it is easy to perceive two “rows” of points (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
+<p>On the other hand, the jittering means that there are visual differences between the vertical positions of the dots, within the same hemisphere, that do not correspond to any differences in data values. For example, there are two dots representing matches where a team from the Northern hemisphere scored zero points. The data values for these two dots are identical (zero points scored and northern hemisphere), but they are visually different. The randomness of the jittering may help to dilute any temptation to seek meaning from the artificial visual difference, but the addition of jittering is a potential source of confusion.</p>
 <blockquote class="blockquote">
 <p>Jittering data symbols is effective because it reduces the amount of overlap amongst data symbols, but jittering may also reduce the effectiveness of a data visualisation because it introduces visual dissonance.</p>
 </blockquote>
@@ -675,39 +601,62 @@ Figure&nbsp;7.14: The number of points scored in Rugby World Cup games by teams 
 <section id="summary" class="level2" data-number="7.8">
 <h2 data-number="7.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.8</span> Summary</h2>
 <p>The effectiveness of a data visualisation may depend on more than just the accuracy and capacity of visual features.</p>
-<p>A <strong>congruent</strong> mapping is one where data values are <strong>explicitly</strong> encoded in a way that is consistent with an <strong>implicit</strong> decoding of the visual feature.</p>
-<p>Some data visualisations are effective because they are visually congruent: data symbols that are larger for larger data values are more effective; data symbols that only change if the data values change are more effective.</p>
-<p>A <strong>dissonant</strong> mapping is one where data values are <strong>explicitly</strong> encoded in a way that is inconsistent with an <strong>implicit</strong> decoding.</p>
-<p>Some data visualisations are <em>not</em> effective because they are visually dissonant.</p>
+<p>A <strong>congruent</strong> mapping is one where data values are <em>explicitly</em> encoded in a way that is consistent with an <em>implicit</em> decoding of the visual feature.</p>
+<p>A data visualisation will be more effective if it is visually congruent, for example, data symbols are larger for larger data values or data symbols only change if the data values change.</p>
+<p>A <strong>dissonant</strong> mapping is one where data values are <em>explicitly</em> encoded in a way that is <em>inconsistent</em> with an <em>implicit</em> decoding.</p>
+<p>A data visualisations will be less effective if it is visually dissonant.</p>
 <hr>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-DBLP:journals/corr/abs-2008-11310" class="csl-entry" role="listitem">
+<div id="ref-bergstrom_west_proportional_ink" class="csl-entry" role="listitem">
+Bergstrom, Carl, and Jevin West. 2017. <span>“The Principle of Proportional Ink.”</span> <a href="https://callingbullshit.org/tools/tools_proportional_ink.html" class="uri">https://callingbullshit.org/tools/tools_proportional_ink.html</a>. 2017.
+</div>
+<div id="ref-bertini_semantic_clashes" class="csl-entry" role="listitem">
+Bertini, Enrico. 2024. <span>“Semantic Clashes in Data Visualization.”</span> <a href="https://filwd.substack.com/p/semantic-clashes-in-data-visualization" class="uri">https://filwd.substack.com/p/semantic-clashes-in-data-visualization</a>. 2024.
+</div>
+<div id="ref-all-scatterplots" class="csl-entry" role="listitem">
 Bertini, Enrico, Michael Correll, and Steven Franconeri. 2020. <span>“Why Shouldn’t All Charts Be Scatter Plots? Beyond Precision-Driven Visualizations.”</span> <em>CoRR</em> abs/2008.11310. <a href="https://arxiv.org/abs/2008.11310">https://arxiv.org/abs/2008.11310</a>.
 </div>
-<div id="ref-78044e4a-01f4-3942-91fb-a9f8dacb4e28" class="csl-entry" role="listitem">
+<div id="ref-merits-of-circles" class="csl-entry" role="listitem">
 Eells, Walter Crosby. 1926. <span>“The Relative Merits of Circles and Bars for Representing Component Parts.”</span> <em>Journal of the American Statistical Association</em> 21 (154): 119–32. <a href="http://www.jstor.org/stable/2277140">http://www.jstor.org/stable/2277140</a>.
+</div>
+<div id="ref-few2004show" class="csl-entry" role="listitem">
+Few, Stephen. 2004. <em>Show Me the Numbers: Designing Tables and Graphs to Enlighten</em>. 1st ed. Berkeley, CA: Analytics Press.
+</div>
+<div id="ref-eye-and-mind" class="csl-entry" role="listitem">
+Kosslyn, Stephen M. 2006. <em>Graph Design for the Eye and Mind</em>. Oxford University Press. <a href="https://doi.org/10.1093/acprof:oso/9780195311846.001.0001">https://doi.org/10.1093/acprof:oso/9780195311846.001.0001</a>.
+</div>
+<div id="ref-Simkin01061987" class="csl-entry" role="listitem">
+Simkin, David, and Reid Hastie. 1987. <span>“An Information-Processing Analysis of Graph Perception.”</span> <em>Journal of the American Statistical Association</em> 82 (398): 454–65. <a href="https://doi.org/10.1080/01621459.1987.10478448">https://doi.org/10.1080/01621459.1987.10478448</a>.
 </div>
 <div id="ref-TVERSKY2002247" class="csl-entry" role="listitem">
 Tversky, Barbara, Julie Bauer Morrison, and Mireille Betrancourt. 2002. <span>“Animation: Can It Facilitate?”</span> <em>International Journal of Human-Computer Studies</em> 57 (4): 247–62. https://doi.org/<a href="https://doi.org/10.1006/ijhc.2002.1017">https://doi.org/10.1006/ijhc.2002.1017</a>.
+</div>
+<div id="ref-cognitive-fit" class="csl-entry" role="listitem">
+Vessey, Iris. 1991. <span>“Cognitive Fit: A Theory-Based Analysis of the Graphs Versus Tables Literature.”</span> <em>Decision Sciences</em> 22 (2): 219–40. https://doi.org/<a href="https://doi.org/10.1111/j.1540-5915.1991.tb00344.x">https://doi.org/10.1111/j.1540-5915.1991.tb00344.x</a>.
+</div>
+<div id="ref-wilke2019fundamentals" class="csl-entry" role="listitem">
+Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em>. Sebastopol, CA: O’Reilly Media.
 </div>
 </div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p><span class="citation" data-cites="TVERSKY2002247">Tversky, Morrison, and Betrancourt (<a href="#ref-TVERSKY2002247" role="doc-biblioref">2002</a>)</span> discusses congruence at least in the sense of matching the spatial properties of data values to the spatial arrangement of visual features. The concept is also discussed in <span class="citation" data-cites="DBLP:journals/corr/abs-2008-11310">Bertini, Correll, and Franconeri (<a href="#ref-DBLP:journals/corr/abs-2008-11310" role="doc-biblioref">2020</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Simkin and Hastie (1987) found empirical evidence that people judge proportions better on pie charts than bar charts. So did <span class="citation" data-cites="78044e4a-01f4-3942-91fb-a9f8dacb4e28">Eells (<a href="#ref-78044e4a-01f4-3942-91fb-a9f8dacb4e28" role="doc-biblioref">1926</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Wilke’s Principle of Proportional Ink. ChatGPT attributed this to Wilkinson (GoG), but I cannot find the reference anywhere. Wilke attributes this to Bergstrom, C. T., and J. West. 2016. “The Principle of Proportional Ink.” http://callingbullshit.org/tools/tools_proportional_ink.html. A corollary is that bars should start at zero.</p>
-<p>Kosslyn (2006) “Graph Design for the Eye and Mind” ./Resources/Graph-Design-for-the-Eye-and-Mind/appendix-3.pdf Principle of Compatibility says “A message is easiest to understand if its form is compatible with its meaning”, plus explicitly “more is more”<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>horizontal bars (distances) versus vertical bars (amounts) look up Tversky and kosslyn OTOH, horizontal bars are more accurate than vertical bars (citation please!)<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Sort of relates to Kosslyn’s “Principle of Informative Changes” “Graph Design for the Eye and Mind” Kosslyn (2006)<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>This data visualisation is an adaptation of a graphic shown during television coverage of the match.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>“Graph Design for the Eye and Mind” Kosslyn (2006) “Principle of Informative Changes” change in aesthetic where no change in data is BAD!<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>This plot is based on a data visualisation from the New Zealand Listener October 14-20 2023.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>The idea for this data visualisation, and whether to question the vertical ordering, comes from a <a href="https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking">PolicyViz Newsletter</a>. The original data source was a <a href="https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/">Washington Post poll</a>).<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>The idea for this data visualisation, and whether to question the vertical ordering, comes from a <a href="https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking">PolicyViz Newsletter</a>. The original data source was a <a href="https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/">Washington Post poll</a>).<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>These implicit mappings are part of the reason why different visual features are appropriate for encoding quantitative verus qualitative data values. The length of a data symbol is appropriate for encoding quantitative data values because we implicitly decode amounts from length.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="citation" data-cites="TVERSKY2002247">Tversky, Morrison, and Betrancourt (<a href="#ref-TVERSKY2002247" role="doc-biblioref">2002</a>)</span> describe a <em>congruence principle</em>: “the structure and content of the external representation should correspond to the desired structure and content of the internal representation,” where the “external representation” is a data visualisation and the “internal representation” corresponds to an implicit decoding.</p>
+<p><span class="citation" data-cites="all-scatterplots">Bertini, Correll, and Franconeri (<a href="#ref-all-scatterplots" role="doc-biblioref">2020</a>)</span> discuss measures of effectiveness beyond accuracy and capacity and refers to the congruence principle above as well as the idea of <em>congnitive fit</em>: “performance on a task will be enhanced when there is a cognitive fit (match) between the information emphasized in the representation type and that required by the task type” <span class="citation" data-cites="cognitive-fit">(<a href="#ref-cognitive-fit" role="doc-biblioref">Vessey 1991</a>)</span>. The latter was focused on a comparison of plots versus tables (plots for spatial comparisons and tables for more complex cognitive tasks involving symbolic reasoning), but it is analogous to the idea of congruent mappings.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This defence of pie charts has existed for a very long time <span class="citation" data-cites="merits-of-circles">(<a href="#ref-merits-of-circles" role="doc-biblioref">Eells 1926</a>)</span> and continues to receive empirical support in more recent times <span class="citation" data-cites="Simkin01061987">(<a href="#ref-Simkin01061987" role="doc-biblioref">Simkin and Hastie 1987</a>)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Kosslyn’s Principle of Compatibility states that “A message is easiest to understand if its form is compatible with its meaning”, plus explicitly “More Is More” <span class="citation" data-cites="eye-and-mind">(<a href="#ref-eye-and-mind" role="doc-biblioref">Kosslyn 2006</a>)</span>.</p>
+<p><span class="citation" data-cites="wilke2019fundamentals">Wilke (<a href="#ref-wilke2019fundamentals" role="doc-biblioref">2019</a>)</span> has a similar Principle of Proportional Ink, which he attributes to <span class="citation" data-cites="bergstrom_west_proportional_ink">Bergstrom and West (<a href="#ref-bergstrom_west_proportional_ink" role="doc-biblioref">2017</a>)</span>. A corollary is that bars in a bar plot should start at zero.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Several authors make an argument for vertical bars being preferred because they correspond naturally to accumulation and growth <span class="citation" data-cites="few2004show">(e.g., <a href="#ref-few2004show" role="doc-biblioref">Few 2004</a>)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>This is related to visual illusions (<a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>). There are decodings that the visual system performs whether we want it to or not, so we want to avoid conflicting with what the visual system does automatically.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>This data visualisation is an adaptation of a graphic shown during the live television coverage of the match.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>The idea of visual dissonance is just a logical inversion of the idea of visual congruence. This idea is not named in any literature that I could find, though <em>semantic clashes</em> <span class="citation" data-cites="bertini_semantic_clashes">(<a href="#ref-bertini_semantic_clashes" role="doc-biblioref">Bertini 2024</a>)</span> perhaps comes closest.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Kosslyn’s <em>Principle of Informative Changes</em> states that “People expect changes in properties to carry information” <span class="citation" data-cites="eye-and-mind">(<a href="#ref-eye-and-mind" role="doc-biblioref">Kosslyn 2006</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>This plot is based on a data visualisation from the New Zealand Listener October 14-20 2023.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>The idea for this data visualisation, and whether to question the vertical ordering, comes from a <a href="https://jschwabish.substack.com/p/when-time-gets-flipped-rethinking">PolicyViz Newsletter</a>. The original data source was a <a href="https://www.washingtonpost.com/politics/interactive/2025/trump-best-worst-policies-positions-poll/">Washington Post poll</a>).<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
