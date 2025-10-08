@@ -24,7 +24,9 @@ grad1to3 <- grad(1, 3)
 grad3to2 <- grad(3, 2)
 grad2to3 <- grad(2, 3)
 grad0to2 <- grad("black", 2)
+grad1to5 <- grad(1, 5)
 grad2to5 <- grad(2, 5)
+grad5to2 <- grad(5, 2)
     
 graphDefault <- "  graph [ rankdir=LR; margin=.2; nodesep=.5 ];"
 nodeDefault <- '  node [ fontsize=20; fontname="sans bold"; margin=.2 ];'
@@ -91,9 +93,9 @@ compEdge <- function(from, to, level1=1, level2=1) {
            ' [ color="', col, '" ]')
 }
 
-lieEdge <- function(from, to) {
+lieEdge <- function(from, to, grad=grad1to2) {
     paste0("  ", from, ' -> ', to,
-           ' [ color="', grad1to3, '" ]')
+           ' [ color="', grad, '" ]')
 }
 
 ## visual processing
@@ -190,8 +192,8 @@ dataVisEdge2 <- mapEdge("data:e", "vis:w")
 data2VisEdge <- mapEdge("data2", "vis")
 data2VisEdge2 <- mapEdge("data2:e", "vis:w")
 dataStatEdge <- compEdge("data", "stat", level1=1, level2=2)
-dataLieEdge <- lieEdge("data", "lie")
-lieVisEdge <- mapEdge("lie", "vis", grad=grad3to2)
+dataLieEdge <- lieEdge("data", "lie", grad=grad1to5)
+lieVisEdge <- mapEdge("lie", "vis", grad=grad5to2)
 statSymEdge <- mapEdge("stat", "sym", grad=grad(1, 2, level1=2, level2=1))
 statVisEdge <- mapEdge("stat", "vis", grad=grad(1, 2, level1=2, level2=1))
 dataObjEdge <- mapEdge("data", "obj", grad=grad(1, 2, level1=1, level2=3))

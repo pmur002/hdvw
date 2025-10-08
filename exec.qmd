@@ -3,6 +3,12 @@
 
 ```{r}
 #| echo: false
+#| message: false
+source("colours.R")
+```
+
+```{r}
+#| echo: false
 #| purl: false
 enc <- function(x) {
     paste0('<span class="encode">', x, '</span>')
@@ -10,62 +16,68 @@ enc <- function(x) {
 dec <- function(x) {
     paste0('<span class="decode">', x, '</span>')
 }
+data <- function(x) {
+    paste0('<span style="color: ', cols[1], '">', x, '</span>')
+}
+feature <- function(x) {
+    paste0('<span style="color: ', cols[2], '">', x, '</span>')
+}
 ```
 
 ::: {.exec-summary}
 
 * Creating a data visualisation involves an 
   `r enc("**encoding**")` of
-  <span style="color: #1A6000">**data values**</span> 
-  as <span style="color: #005A8F">**visual features**</span>.
+  `r data("**data values**")` 
+  as `r feature("**visual features**")`.
 
-  For example, numeric <span style="color: #1A6000">**counts**</span> 
+  For example, numeric `r data("**counts**")` 
   are `r enc("**encoded**")` 
-  as the <span style="color: #005A8F">**heights of bars**</span>
+  as the `r feature("**heights of bars**")`
   to create a bar plot.
 
 * Reading a data visualisation involves a 
   `r dec("**decoding**")` of
-  <span style="color: #005A8F">**visual features**</span> 
-  to obtain <span style="color: #1A6000">**data values**</span>.
+  `r feature("**visual features**")` 
+  to obtain `r data("**data values**")`.
 
-  For example, the <span style="color: #005A8F">**heights**</span> of bars
+  For example, the `r feature("**heights**")` of bars
   in a bar plot
   are `r dec("**decoded**")` 
-  to obtain <span style="color: #1A6000">**counts**</span>.
+  to obtain `r data("**counts**")`.
 
 * The <span style="color: #8D324A">**effectiveness**</span> 
   of a data visualisation depends on the
   effectiveness of the `r dec("**decoding**")`.
 
   For example, a bar plot is effective for comparing 
-  <span style="color: #1A6000">**counts**</span>
+  `r data("**counts**")`
   because the visual system is effective at comparing the 
-  <span style="color: #005A8F">**heights**</span> of bars.
+  `r feature("**heights**")` of bars.
 
 * More `r enc("**complex encodings**")` produce more 
-  <span style="color: #005A8F">**complex visual features**</span>.
+  `r feature("**complex visual features**")`.
 
   For example, a scatter plot `r enc("**encodes**")`
-  <span style="color: #1A6000">**two numeric variables**</span>
+  `r data("**two numeric variables**")`
   as the x- and y-locations of points, 
   which produces the 
-  <span style="color: #005A8F">**position in space**</span> of points.
+  `r feature("**position in space**")` of points.
 
-* More <span style="color: #005A8F">**complex visual features**</span> 
+* More `r feature("**complex visual features**")` 
   lead to more `r dec("**complex decodings**")`.
 
   For example, the 
-  <span style="color: #005A8F">**position in space**</span> of points
+  `r feature("**position in space**")` of points
   in a scatter plot
   is `r dec("**decoded**")` 
-  as the <span style="color: #1A6000">**correlation**</span> 
+  as the `r data("**correlation**")` 
   between two numeric variables.
   
 * An <span style="color: #8D324A">**effective data visualisation**</span>
-  <span class="encode">**encodes**</span> data values to
+  `r enc("**encodes**")` data values to
   visual features that facilitate an effective 
-  <span class="decode">**decoding**</span> from visual features
+  `r dec("**decoding**")` from visual features
   back to information about the data.
 
 :::
