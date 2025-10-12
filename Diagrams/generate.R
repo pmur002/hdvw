@@ -44,8 +44,7 @@ visualNode <- function(name, label, level=1) {
     paste0("  ", name,
            ' [ label="', label, '"; shape=box;\n',
            "  ", paste(rep(" ", nchar(name)), collapse=""), 
-           'style="filled, rounded"; penwidth=0; fontcolor=white; ',
-           'fillcolor="', col, '" ]')
+           'style="rounded"; color="', col, '"; fontcolor="', col, '" ]')
 }
 
 lieNode <- function(name, label) {
@@ -79,7 +78,7 @@ textNode <- function(name, label=name) {
 ## data to visual
 mapEdge <- function(from, to, grad=grad1to2) {
     paste0("  ", from, ' -> ', to,
-           ' [ color="', grad, '" ]')
+           ' [ style="bold"; penwidth=1; color="', grad, '" ]')
 }
 
 ## computational processing
@@ -90,12 +89,12 @@ compEdge <- function(from, to, level1=1, level2=1) {
         col <- grad(1, 1, level1, level2)
     }
     paste0("  ", from, ' -> ', to,
-           ' [ color="', col, '" ]')
+           ' [ style="solid"; penwidth=1; color="', col, '" ]')
 }
 
 lieEdge <- function(from, to, grad=grad1to2) {
     paste0("  ", from, ' -> ', to,
-           ' [ color="', grad, '" ]')
+           ' [ style="solid"; penwidth=1; color="', grad, '" ]')
 }
 
 ## visual processing
@@ -106,13 +105,13 @@ procEdge <- function(from, to, level1=1, level2=1) {
         col <- grad(2, 2, level1, level2)
     }
     paste0("  ", from, ' -> ', to,
-           ' [ color="', col, '" ]')
+           ' [ style="solid", color="', col, '" ]')
 }
 
 ## visual to data
 backEdge <- function(from, to, grad=grad2to1) {
     paste0("  ", from, ' -> ', to,
-           ' [ style="dashed", color="', grad, '" ]')
+           ' [ style="solid", color="', grad, '" ]')
 }
 
 implicitEdge <- function(from, to, grad=grad2to1) {
@@ -123,7 +122,7 @@ implicitEdge <- function(from, to, grad=grad2to1) {
 ## Edges between model nodes
 modelEdge <- function(from, to) {
     paste0("  ", from, ' -> ', to,
-           ' [ color="', grad0to2, '" ]')
+           ' [ style="solid", color="', grad0to2, '" ]')
 }
     
 invis <- function(edge) {
@@ -298,13 +297,13 @@ graph(diss,
       dataDissSame,
       file="dissonant-decode.dot")
 
-graph(data,
-      data2,
+graph(diss,
+      data,
       vis,
-      invis(data2VisEdge),
+      invis(dataVisEdge),
+      visDissEdge,
       visDataEdge2,
-      visData2Edge2,
-      dataData2Same,
+      dataDissSame,
       file="ambiguous-decode.dot")
 
 graph(data,
@@ -348,6 +347,15 @@ graph(data,
       visStatEdge,
       dataStatSame,
       file="data-vis-stat-decode.dot")
+
+graph(data,
+      stat,
+      vis,
+      dataVisEdge,
+      invis(visDataEdge3),
+      visStatEdge,
+      dataStatSame,
+      file="data-vis-stat.dot")
 
 graph(data,
       lie,

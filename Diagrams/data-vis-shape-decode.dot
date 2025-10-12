@@ -4,12 +4,12 @@ digraph {
   data [ label="data\nvalues"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#FD8D3C" ]
   stat [ label="data\nsummaries"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#E6550D" ]
   vis [ label="visual\nfeatures"; shape=box;
-     style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#74C476" ]
+     style="rounded"; color="#74C476"; fontcolor="#74C476" ]
   shape [ label="visual\nshapes"; shape=box;
-       style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#31A354" ]
-  data -> vis [ color="#FD8D3C;0.1:#EE9342;0.1:#DF9949;0.1:#CF9F4F;0.1:#C0A556;0.1:#B1AC5C;0.1:#A2B263;0.1:#92B869;0.1:#83BE70;0.1:#74C476;0.1" ]
-  vis -> shape [ color="#74C476;0.1:#6DC072;0.1:#65BD6E;0.1:#5EB96B;0.1:#56B567;0.1:#4FB263;0.1:#47AE5F;0.1:#40AA5C;0.1:#38A758;0.1:#31A354;0.1" ]
-  shape:s -> stat:se [ style="dashed", color="#31A354;0.1:#459A4C;0.1:#599244;0.1:#6D893C;0.1:#818034;0.1:#96782D;0.1:#AA6F25;0.1:#BE661D;0.1:#D25E15;0.1:#E6550D;0.1" ]
+       style="rounded"; color="#31A354"; fontcolor="#31A354" ]
+  data -> vis [ style="bold"; penwidth=1; color="#FD8D3C;0.1:#EE9342;0.1:#DF9949;0.1:#CF9F4F;0.1:#C0A556;0.1:#B1AC5C;0.1:#A2B263;0.1:#92B869;0.1:#83BE70;0.1:#74C476;0.1" ]
+  vis -> shape [ style="solid", color="#74C476;0.1:#6DC072;0.1:#65BD6E;0.1:#5EB96B;0.1:#56B567;0.1:#4FB263;0.1:#47AE5F;0.1:#40AA5C;0.1:#38A758;0.1:#31A354;0.1" ]
+  shape:s -> stat:se [ style="solid", color="#31A354;0.1:#459A4C;0.1:#599244;0.1:#6D893C;0.1:#818034;0.1:#96782D;0.1:#AA6F25;0.1:#BE661D;0.1:#D25E15;0.1:#E6550D;0.1" ]
 { rank=same; data, stat }
 { rank=same; vis, shape }
 }
