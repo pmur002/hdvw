@@ -9,30 +9,36 @@ grad <- function(i1, i2, level1=1, level2=1) {
         col1 <- switch(level1, cols[i1], colsDarker[i1], colsDarkest[i1])
     }
     col2 <- switch(level2, cols[i2], colsDarker[i2], colsDarkest[i2])
-    paste0(apply(colorRamp(c(col1,
-                             col2))(seq(0, 1, length=n)),
-                 1,
-                 function(x) {
-                     do.call(rgb, as.list(x/255))
-                 }),
-           ";", round(1/n, 2), collapse=":")
+    if (col1 == col2) {
+        col1
+    } else {
+        paste0(apply(colorRamp(c(col1,
+                                 col2))(seq(0, 1, length=n)),
+                     1,
+                     function(x) {
+                         do.call(rgb, as.list(x/255))
+                     }),
+               ";", round(1/n, 2), collapse=":")
+    }
 }
 
-grad1to2 <- grad(1, 2)
-grad2to1 <- grad(2, 1)
+grad1to2 <- grad(2, 2)
+grad2to1 <- grad(2, 2)
 grad1to3 <- grad(1, 3)
 grad3to2 <- grad(3, 2)
-grad2to3 <- grad(2, 3)
+grad2to3 <- grad(2, 2)
+grad2to4 <- grad(2, 4)
 grad0to2 <- grad("black", 2)
-grad1to5 <- grad(1, 5)
+grad1to5 <- grad(2, 5)
 grad2to5 <- grad(2, 5)
+grad4to2 <- grad(4, 2)
 grad5to2 <- grad(5, 2)
     
 graphDefault <- "  graph [ rankdir=LR; margin=.2; nodesep=.5 ];"
 nodeDefault <- '  node [ fontsize=20; fontname="sans bold"; margin=.2 ];'
 
-dataNode <- function(name, label, level=1) {
-    col <- switch(level, cols[1], colsDarker[1], colsDarkest[1])
+dataNode <- function(name, label, level=1, col=2) {
+    col <- switch(level, cols[col], colsDarker[col], colsDarkest[col])
     paste0("  ", name,
            ' [ label="', label, '"; ',
            'shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; ',
@@ -58,14 +64,14 @@ dissNode <- function(name, label) {
     paste0("  ", name,
            ' [ label="', label, '"; ',
            'shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; ',
-           'fillcolor="', cols[3], '" ]')
+           'fillcolor="', cols[4], '" ]')
 }
 
 ggplotNode <- function(name, label=name, data=FALSE) {
     paste0("  ", name,
            ' [ label="', label, '"; shape=box; style=rounded; ',
-           'color="', if (data) cols[1] else cols[2], '"; ',
-           'fontcolor="', if (data) cols[1] else cols[2], '" ]')
+           'color="', if (data) cols[2] else cols[2], '"; ',
+           'fontcolor="', if (data) cols[2] else cols[2], '" ]')
 }
 
 modelNode <- visualNode
@@ -84,9 +90,9 @@ mapEdge <- function(from, to, grad=grad1to2) {
 ## computational processing
 compEdge <- function(from, to, level1=1, level2=1) {
     if (level1 == 1 && level2 == 1) {
-        col <- cols[1]
+        col <- cols[2]
     } else {
-        col <- grad(1, 1, level1, level2)
+        col <- grad(2, 2, level1, level2)
     }
     paste0("  ", from, ' -> ', to,
            ' [ style="solid"; penwidth=1; color="', col, '" ]')
@@ -111,7 +117,7 @@ procEdge <- function(from, to, level1=1, level2=1) {
 ## visual to data
 backEdge <- function(from, to, grad=grad2to1) {
     paste0("  ", from, ' -> ', to,
-           ' [ style="solid", color="', grad, '" ]')
+           ' [ style="dashed", color="', grad, '" ]')
 }
 
 implicitEdge <- function(from, to, grad=grad2to1) {
@@ -144,12 +150,12 @@ graph <- function(..., file) {
 
 ## Data nodes
 data <- dataNode("data", "data\\nvalues")
-data2 <- dataNode("data2", "data\\nvalues")
+data2 <- dataNode("data2", "data\\nvalues", col=4)
 stat <- dataNode("stat", "data\\nsummaries", level=2)
 stat2 <- dataNode("stat2", "summary\\nsummaries", level=3)
 lie <- lieNode("lie", "garbage\\nand lies")
 diss <- dissNode("diss", "data\\nvalues")
-meta <- dataNode("meta", "metadata /\\nbackground")
+meta <- dataNode("meta", "metadata /\\nbackground", level=3)
 org <- dataNode("org", "structure /\\norganisation")
 imp <- dataNode("imp", "importance /\\nsignificance")
 dataData2Same <- sameRank("data", "data2")
@@ -189,51 +195,51 @@ dataSymEdge <- mapEdge("data", "sym")
 dataVisEdge <- mapEdge("data", "vis")
 dataVisEdge2 <- mapEdge("data:e", "vis:w")
 data2VisEdge <- mapEdge("data2", "vis")
-data2VisEdge2 <- mapEdge("data2:e", "vis:w")
+data2VisEdge2 <- mapEdge("data2:e", "vis:w", grad=grad4to2)
 dataStatEdge <- compEdge("data", "stat", level1=1, level2=2)
-dataLieEdge <- lieEdge("data", "lie", grad=grad1to5)
+dataLieEdge <- lieEdge("data", "lie", grad=grad2to5)
 lieVisEdge <- mapEdge("lie", "vis", grad=grad5to2)
-statSymEdge <- mapEdge("stat", "sym", grad=grad(1, 2, level1=2, level2=1))
-statVisEdge <- mapEdge("stat", "vis", grad=grad(1, 2, level1=2, level2=1))
-dataObjEdge <- mapEdge("data", "obj", grad=grad(1, 2, level1=1, level2=3))
-statLabelEdge <- mapEdge("stat", "label", grad=grad(1, 2, level1=2, level2=3))
-metaLabelEdge <- mapEdge("meta", "label", grad=grad(1, 2, level1=1, level2=3))
+statSymEdge <- mapEdge("stat", "sym", grad=grad(2, 2, level1=2, level2=1))
+statVisEdge <- mapEdge("stat", "vis", grad=grad(2, 2, level1=2, level2=1))
+dataObjEdge <- mapEdge("data", "obj", grad=grad(2, 2, level1=1, level2=3))
+statLabelEdge <- mapEdge("stat", "label", grad=grad(2, 2, level1=2, level2=3))
+metaLabelEdge <- mapEdge("meta", "label", grad=grad(2, 2, level1=1, level2=3))
 orgVisEdge <- mapEdge("org", "vis")
 impVisEdge <- mapEdge("imp", "vis")
 
 ## Edges from visual
 symDataEdge <- backEdge("sym:s", "data:se")
-symStatEdge <- backEdge("sym:s", "stat:se", grad=grad(2, 1, level1=1, level2=2))
+symStatEdge <- backEdge("sym:s", "stat:se", grad=grad(2, 2, level1=1, level2=2))
 visDataEdge <- backEdge("vis:s", "data:se")
 visDataEdge2 <- implicitEdge("vis:n", "data:ne")
-visData2Edge <- backEdge("vis:s", "data2:se")
+visData2Edge <- backEdge("vis:s", "data2:se", grad=grad2to4)
 visData2Edge2 <- implicitEdge("vis:n", "data2:ne")
 visDataEdge3 <- backEdge("vis:sw", "data:se")
 visDataEdge4 <- backEdge("vis:n", "data:ne")
-visStatEdge <- backEdge("vis:s", "stat:se", grad=grad(2, 1, level1=1, level2=2))
+visStatEdge <- backEdge("vis:s", "stat:se", grad=grad(2, 2, level1=1, level2=2))
 visLieEdge <- backEdge("vis:s", "lie:se", grad=grad2to5)
-visDissEdge <- implicitEdge("vis:n", "diss:ne", grad=grad2to3)
+visDissEdge <- implicitEdge("vis:n", "diss:ne", grad=grad2to4)
 visSumEdge <- procEdge("vis", "sum")
 visVisEdge <- procEdge("vis", "add", level1=1, level2=2)
-addDataEdge <- backEdge("add:sw", "data:s", grad=grad(2, 1, level1=2, level2=1))
-addStatEdge <- backEdge("add:s", "stat:se", grad=grad(2, 1, level1=2, level2=2))
-addLieEdge <- backEdge("add:s", "lie:se", grad=grad(2, 3, level1=2, level2=1))
+addDataEdge <- backEdge("add:sw", "data:s", grad=grad(2, 2, level1=2, level2=1))
+addStatEdge <- backEdge("add:s", "stat:se", grad=grad(2, 2, level1=2, level2=2))
+addLieEdge <- backEdge("add:s", "lie:se", grad=grad(2, 5, level1=2, level2=1))
 visShapeEdge <- procEdge("vis", "shape", level1=1, level2=2)
 shapeObjEdge <- procEdge("shape", "obj", level1=2, level2=3)
 visObjEdge <- procEdge("vis", "obj", level1=1, level2=3)
 sumStatEdge <- backEdge("sum:s", "stat:se")
 shapeStatEdge <- backEdge("shape:s", "stat:se",
-                          grad=grad(2, 1, level1=2, level2=2))
+                          grad=grad(2, 2, level1=2, level2=2))
 shapeLieEdge <- backEdge("shape:s", "lie:se",
-                         grad=grad(2, 3, level1=2, level2=1))
+                         grad=grad(2, 5, level1=2, level2=1))
 shapeStat2Edge <- backEdge("shape:s", "stat2:se",
-                           grad=grad(2, 1, level1=2, level2=3))
-objDataEdge <- backEdge("obj:s", "data:se", grad=grad(2, 1, level1=3, level2=1))
-objStatEdge <- backEdge("obj:s", "stat:se", grad=grad(2, 1, level1=3, level2=2))
+                           grad=grad(2, 2, level1=2, level2=3))
+objDataEdge <- backEdge("obj:s", "data:se", grad=grad(2, 2, level1=3, level2=1))
+objStatEdge <- backEdge("obj:s", "stat:se", grad=grad(2, 2, level1=3, level2=2))
 labelMetaEdge <- backEdge("label:s", "meta:se",
-                          grad=grad(2, 1, level1=3, level2=1))
+                          grad=grad(2, 2, level1=3, level2=3))
 labelStatEdge <- backEdge("label:s", "stat:se",
-                          grad=grad(2, 1, level1=3, level2=2))
+                          grad=grad(2, 2, level1=3, level2=2))
 visOrgEdge <- backEdge("vis:s", "org:se")
 visImpEdge <- backEdge("vis:s", "imp:se")
 
@@ -574,7 +580,7 @@ graph(data,
 graph(data,
       data2,
       vis,
-      invis(data2VisEdge),
+      invis(dataVisEdge),
       dataVisEdge2,
       data2VisEdge2,
       visDataEdge,
