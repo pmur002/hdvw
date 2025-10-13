@@ -430,11 +430,23 @@ popViewport()
 
 ## Colours in space {#sec-colour-spaces}
 
-@fig-colour-spaces shows the set of visible colours arranged so
-that if we move the same distance in any direction from any one colour, 
-the perceived difference between the original colour and
-the new colour is constant.[^cie-luv]
-This provides insight into what sorts of colours and what sorts
+@fig-colour-spaces shows two-dimensional 
+slices of the set of visible colours arranged 
+in three dimensions.[^cie-luv]
+The centre three coloured regions (surrounded by white circles)
+show slices of constant luminance. 
+Chroma increases from the centre (indicated by a white dot)
+and hue changes with angle.
+We can see the familiar rainbow of colours from red, through orange, yellow,
+green, blue, indigo, and violet, back around to red.
+The top slice is for high luminance (light) colours and the bottom slice
+is for low luminance (dark) colours.
+The coloured regions to the left and to the right (surrounded by semicircles)
+show slices of constant hue. 
+Luminance increases from bottom to top and chroma increases
+away from the flat side of the semicircle.
+
+@fig-colour-spaces provides insight into what sorts of colours and what sorts
 of differences between colours are possible.
 For example, we can see that it is not possible to produce colours that
 have a high chroma *and* are very dark.
@@ -521,6 +533,60 @@ Slices through the set of colours that it is possible to produce on a typical co
   the choice of hue, luminance, and chroma affects 
   the capacity of decoding---how many different colours
   can be effectively decoded.
+
+## Colour harmony {#sec-harmony}
+
+We have seen that hue is an appropriate visual feature
+for encoding qualitative data values because
+we can decode differences between hues without any
+ordering between hues.  For example, blue is not larger than red.
+
+However, it is not entirely true that there is no sense of *distance*
+between different hues.
+The left image in @fig-colour-wheel shows a colour wheel of hues for a constant
+luminance and chroma.
+Hues that are close together on this colour wheel are decoded
+as more similar than hues that are on opposite sides of the wheel.
+For example, the top two circles on the right of @fig-colour-wheel have
+hues that are from the left side of the colour wheel so they appear similar,
+but the bottom two circles have hues from the left and the right side of the 
+colour wheel so they have a greater contrast.[^colour-theory]
+
+[^colour-theory]:
+    In colour theory, 
+    hues that are close together on a colour wheel are referred
+    to as *analogous* and hues that are opposite each other are
+    *complementary*.
+
+```{r}
+#| echo: false
+#| label: fig-colour-wheel
+#| dev: png
+#| fig-cap: On the left, a colour wheel that shows differet hues for a constant chroma and luminance.  At top-right is a pair of hues from the left side of the colour wheel and bottom-right is a pair of hues from opposite sides of the colour wheel.  There is greater contrast between the bottom pair of colours and less contrast between the top pair of colours.
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 2, respect=TRUE)))
+pushViewport(viewport(layout.pos.col=1))
+grid.rect(width=unit(.9, "snpc"), height=.9, gp=gpar(fill="grey20"))
+mask <- circleGrob(r=.3, gp=gpar(fill=NA, lwd=20))
+pushViewport(viewport(mask=mask))
+n <- 1000
+t <- seq(0, 2*pi, length.out=n)[-n]
+chrom <- 50
+lum <- 70
+grid.segments(.5, .5, .5 + .5*cos(t), .5 + .5*sin(t),
+              gp=gpar(col=hcl(180*t/pi, chrom, lum), lwd=2))
+popViewport(2)
+pushViewport(viewport(layout.pos.col=2))
+grid.rect(width=unit(.9, "snpc"), height=.9, gp=gpar(fill="grey20"))
+anal <- c(180, 240)
+grid.circle(c(.4, .6), 3/4, unit(3, "mm"), 
+            gp=gpar(col=hcl(anal, chrom, lum), fill=hcl(anal, chrom, lum)))
+opp <- c(180, 0)
+grid.circle(c(.4, .6), 1/4, unit(3, "mm"), 
+            gp=gpar(col=hcl(opp, chrom, lum), fill=hcl(opp, chrom, lum)))
+grid.rect(height=.1, gp=gpar(col=NA, fill=figbg))
+popViewport()
+```
 
 ## Colour vision deficiency {#sec-CVD}
 
@@ -818,7 +884,7 @@ grid.text(escape1$district,
           hjust=0, vjust=1.5)
 ```
 
-## Colour palettes
+## Colour palettes {#sec-palettes}
 
 When we encode nominal or ordinal data values as colours,
 we have to choose a set of colours, or a **colour palette**.
@@ -1076,7 +1142,7 @@ ggplot(rwcAllyear) +
   visual features:  a nominal hue to differentiate between two groups and 
   changes in chroma and/or luminance to encode ordinal values within each group.
 
-## Case study: The rainbow
+## Case study: The rainbow {#sec-rainbow}
 
 In some fields of research, for example medical imaging and geographic
 imaging, a common problem is to visualise numeric data values on a regular
@@ -1114,8 +1180,7 @@ However, there are several problems with this approach.[^rainbow]
 A snapshot of wind strength in the vicinity of New Zealand on September 14 2024.
 This uses the same data as 
 @fig-visual-model-demo, but does not show wind direction.
-The image on the left encodes wind strength as shades of grey 
-(darker is stronger) and the image on the right uses a rainbow colour
+The image uses a rainbow colour
 palette (from red through green and blue to violet;  see @fig-rainbow).
 :::
 
@@ -1208,7 +1273,7 @@ grid.rect(1:6/7, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
 popViewport()
 ```
 
-## Case study: Viridis
+## Case study: Viridis {#sec-viridis}
 
 One of the arguments for using a rainbow colour palette is that
 viewers like that it is colourful.
@@ -1250,7 +1315,12 @@ in low wind strength (the yellows) over New Zealand.
 ![](Data/Weather/NOMADS-viridis.png)
 :::
 
-A visualisation of wind strength 
+A snapshot of wind strength in the vicinity of New Zealand on September 14 2024.
+This uses the same data as 
+@fig-visual-model-demo, but does not show wind direction.
+The image on the left encodes wind strength as shades of grey 
+(darker is stronger) and the image on the right uses a viridis colour
+palette (@fig-viridis).
 :::
 
 @fig-viridis shows the spectrum for viridis colour palettes.[^viridis]

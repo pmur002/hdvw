@@ -23,6 +23,6 @@ reds <- scales::pal_brewer(palette="Reds")(5)[3:5]
 blues <- scales::pal_brewer(palette="Blues")(5)[3:5]
 greys <- scales::pal_brewer(palette="Greys")(5)[3:5]
 
-cols <- c(oranges[1], greens[1], reds[1], blues[1], greys[1])
+cols <- c(oranges[3], greens[3], reds[3], blues[3], greys[1])
 colsDarker <- c(oranges[2], greens[2], reds[2], blues[2], greys[2])
-colsDarkest <- c(oranges[3], greens[3], reds[3], blues[3], greys[3])
+colsDarkest <- c(oranges[1], greens[1], reds[1], blues[1], greys[3])

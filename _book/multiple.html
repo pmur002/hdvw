@@ -410,7 +410,8 @@ Figure&nbsp;11.4: A data visualisation of the performance measures for teams in 
 <p>The cluster of four larger shapes in <a href="#fig-profile" class="quarto-xref">Figure&nbsp;<span>11.4</span></a> is also easier to see because the countries have been ordered by the number of points scored (the right-hand height of the shape). As we have seen before, ordering data symbols can make a big difference (<a href="quantitative.html#sec-distance-effect" class="quarto-xref"><span>Section 5.1</span></a>).</p>
 </section>
 <section id="sec-facetting" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">11.4</span> Facetting<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-facetting"><span class="header-section-number">11.4</span> Facetting</h2>
+<p><strong>TODO</strong> refer back to enclosure in visual-model.Rmd</p>
 <p><a href="#fig-facet-before" class="quarto-xref">Figure&nbsp;<span>11.5</span></a> shows a line plot of the number of youth offenders per year in different Police Districts of New Zealand. This visualisation makes use of several effective mappings. For example, we encode year as horizontal <strong>position</strong> and we encode count as vertical <strong>position</strong>. However, there is also a weaker mapping: the Police District. We encode districts as <strong>colour</strong>, but because there are 12 different districts, we are exceeding the capacity of colour (<a href="mapping-visual-features.html#sec-capacity" class="quarto-xref"><span>Section 3.6</span></a>). It is not easy to differentiate all of the different colours (not helped by overplotting of the lines).</p>
 <p>A better mapping for Police District would be <strong>position</strong>, which has a much higher capacity, but position has already been taken by year and count.</p>
 <div class="cell">
@@ -427,7 +428,7 @@ Figure&nbsp;11.5: A data visualisation of the number of offenders per year in di
 </div>
 </div>
 </div>
-<p><a href="#fig-facet-after" class="quarto-xref">Figure&nbsp;<span>11.6</span></a> shows one solution: a facetted plot. Each district has been encoded as a <strong>position in space</strong> and we draw a separate plot for each district. This makes it very easy to distinguish the individual districts.</p>
+<p><a href="#fig-facet-after" class="quarto-xref">Figure&nbsp;<span>11.6</span></a> shows one solution: a facetted plot.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Each district has been encoded as a <strong>position in space</strong> and we draw a separate plot for each district. This makes it very easy to distinguish the individual districts.</p>
 <p>One downside is that comparisons between districts are more difficult because counts and/or years are <strong>unaligned</strong> (<a href="position.html#sec-unaligned-pos" class="quarto-xref"><span>Section 4.2</span></a>). In this case, we have mitigated that problem by drawing a grey line for all districts in each plot. Similar to grid lines, this makes it easier to compare the line for each district to other districts (<a href="quantitative.html#sec-perception-relative" class="quarto-xref"><span>Section 5.4</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">

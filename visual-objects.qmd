@@ -221,19 +221,12 @@ to decode to absolute data values (rather than just relative)
 ## Case study: Choropleth maps {#sec-choropleth}
 
 @fig-map shows a choropleth map of the
-average crime rate, over the period from 2011 to 2021, 
+crime rate for 2021
 in each police district of New Zealand.[^choropleth]
 The data values for this map are shown in @tbl-map-data.
 
 [^choropleth]:
     Add citations to MacEachren and Bertin and Dan Carr ? 
-
-```{r}
-#| echo: false
-#| label: tbl-map-data
-#| tbl-cap: The average crime rate over the period 2011 to 2021 for each police district of New Zealand.
-kable(crimeDistrictTotal[c("district", "rate")], digits=2)
-```
 
 The data symbol in @fig-map is a polygon representing the geographic
 boundary of each police district.  This implicitly entails an encoding of
@@ -260,7 +253,7 @@ districts <-
 centroids <- st_coordinates(st_centroid(st_geometry(districts)))
 districts$X <- centroids[,1]
 districts$Y <- centroids[,2]
-districts <- inner_join(districts, crimeDistrictTotal,
+districts <- inner_join(districts, subset(crimeDistrict, year == 2021),
                         by=join_by(D_MACRON == district))
 ggplot(districts) +
     geom_sf(aes(fill=rate)) +
@@ -518,9 +511,22 @@ that such annotations improve the memorability of a data
 visualisation.[^junk-pro]
 
 [^junk-pro]:
-  Links to studies that try to show benefits of chart junk.
-  Rahman et al (2024)
-  Mention affect (emotion) study?
+    Links to studies that try to show benefits of chart junk.
+    Rahman et al (2024)
+    Mention affect (emotion) study?
+  
+    "Chart and Graphs"
+    Karsten (1925)
+  
+    This is the source of the "insult to man's intelligence" remark about 
+    pie charts, though note the full quote:
+  
+    "In a sense, it might be construed as an insult to a man’s intelligence to
+    show him a pie-chart, but the insult is not often resented. For if your main
+    object be to get a story across, you are justified in taking that means
+    which will encounter least resistance, and in making your story as simple as
+    possible. For publicity purposes, the pie-chart is therefore almost
+    invariably better than the bar."  [p98]
 
 > Chart junk can be effective because it has a greater
   emotional impact and is more memorable.

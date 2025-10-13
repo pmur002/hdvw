@@ -89,6 +89,8 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="style.css">
@@ -251,7 +253,7 @@ div.csl-indent {
   <li><a href="#case-study-histograms" id="toc-case-study-histograms" class="nav-link" data-scroll-target="#case-study-histograms"><span class="header-section-number">8.3</span> Case study: Histograms</a></li>
   <li><a href="#sec-summary-caveats" id="toc-sec-summary-caveats" class="nav-link" data-scroll-target="#sec-summary-caveats"><span class="header-section-number">8.4</span> Dangers of summaries</a></li>
   <li><a href="#case-study-how-charts-lie" id="toc-case-study-how-charts-lie" class="nav-link" data-scroll-target="#case-study-how-charts-lie"><span class="header-section-number">8.5</span> Case study: How charts lie</a></li>
-  <li><a href="#simplification" id="toc-simplification" class="nav-link" data-scroll-target="#simplification"><span class="header-section-number">8.6</span> Simplification</a></li>
+  <li><a href="#sec-downgrade" id="toc-sec-downgrade" class="nav-link" data-scroll-target="#sec-downgrade"><span class="header-section-number">8.6</span> Visual downgrades</a></li>
   <li><a href="#case-study-heatmaps" id="toc-case-study-heatmaps" class="nav-link" data-scroll-target="#case-study-heatmaps"><span class="header-section-number">8.7</span> Case study: Heatmaps</a></li>
   <li><a href="#cognitive-load" id="toc-cognitive-load" class="nav-link" data-scroll-target="#cognitive-load"><span class="header-section-number">8.8</span> Cognitive load</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.9</span> Summary</a></li>
@@ -281,13 +283,12 @@ div.csl-indent {
 
 
 <p>In <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> we described a data visualisation as a mapping that <strong>encodes</strong> data values as the visual features of a data symbol (<a href="mapping-visual-features.html#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>). For example, a bar plot, like <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, maps the total number of youth offenders to the <strong>lengths</strong> of bars.</p>
-<p>We also emphasised the importance of the <strong>decoding</strong> from visual features to data values. For example, the effectiveness of the bar plot in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> relies on our ability to accurately perceive the lengths of the bars, particularly relative to each other.</p>
-<p>In the simple scenario of a bar plot, the data values are counts (e.g., <a href="mapping-visual-features.html#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a>), which are encoded as the lengths of bars, which in turn allows us to decode lengths to retrieve the counts (<a href="mapping-visual-features.html#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>). Each raw data value (count) is mapped to the length of a bar.</p>
+<p>We also emphasised the importance of the <strong>decoding</strong> from visual features to data values. For example, the effectiveness of the bar plot in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> relies on our ability to accurately decode the lengths of the bars, particularly relative to each other.</p>
+<p>In the simple scenario of a bar plot, the data values are counts (<a href="mapping-visual-features.html#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a>), which are encoded as the lengths of bars, which in turn allows us to decode lengths to retrieve the counts (<a href="mapping-visual-features.html#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>). Each <strong>raw data value</strong> (count) is mapped to the length of a bar.</p>
 <p>In this chapter, we explore some data visualisations that are effective because they encode <strong>data summaries</strong> instead of raw data values.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <section id="box-plots" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="box-plots"><span class="header-section-number">8.1</span> Box plots</h2>
-<p><strong>TODO</strong> Shift box plots to visual shapes ? Start here with histogram instead?</p>
-<p><a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> shows box plots of the number of points scored by all teams at Rugby World Cup matches (<a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>), with a separate box plot for teams from different hemispheres. This is an effective data visualisation for comparing the distributions of points scored between hemispheres because we are able to easily see differences between the median values of the countries (the thick vertical lines) and differences between the interquartile ranges of the countries (the horizontal rectangles). For example, we can see that the median points scored by southern hemisphere teams is larger than the median for northern hemisphere teams and the interquartile range of points scored is also wider for southern hemisphere teams.</p>
+<p><a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> shows box plots of the number of points scored by Tier One nations at Rugby World Cup matches (<a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>), with a separate box plot for teams from different hemispheres.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> This is an effective data visualisation for comparing the distributions of points scored between hemispheres because we are able to easily see differences between the median values of the countries (the thick vertical lines) and differences between the interquartile ranges of the countries (the horizontal rectangles). For example, we can see that the median points scored by southern hemisphere teams is larger than the median for northern hemisphere teams and the interquartile range of points scored is also wider for southern hemisphere teams.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -302,7 +303,7 @@ Figure&nbsp;8.1: Box plots of the number of points scored in all Rugby World Cup
 </div>
 </div>
 </div>
-<p>Box plots are quite different from bar plots and dot plots because the data symbol is a much more complicated shape: there is a vertical line to represent the median, a rectangle to represent the interquartile range (lower quartile to upper quartile), and horizontal lines to represent the extremes of the data values, from the the quartiles to the minimum and maximum values. Points are also included for “outliers” if data values lie further than 1.5 times the interquartile range beyond the quartiles.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Box plots are quite different from bar plots and dot plots because the data symbol is a much more complicated shape: there is a vertical line to represent the median, a rectangle to represent the interquartile range (lower quartile to upper quartile), and horizontal lines to represent the extremes of the data values, from the the quartiles to the minimum and maximum values. Points are also included for “outliers” if data values lie further than 1.5 times the interquartile range beyond the quartiles.</p>
 <p>Another important difference with a box plot is that it maps <strong>data summaries</strong>, rather than raw data values, to visual features of the data symbol (<a href="#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;<span>8.2</span></a>). For example, the median values are mapped to the horizontal <strong>positions</strong> of thick vertical lines and the interquartile ranges are mapped to the <strong>lengths</strong> of horizontal rectangles.</p>
 <div id="fig-stat-vis-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -314,7 +315,7 @@ Figure&nbsp;8.2: A data visualisation may encode data summaries, rather than the
 </figcaption>
 </figure>
 </div>
-<p>To be explicit, the data values that are being <strong>encoded</strong> as visual features in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> are <em>not</em> the raw data values in <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>; the values that are being encoded to visual features in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> are the <strong>data summaries</strong> shown in <a href="#tbl-rwc-all-stats" class="quarto-xref">Table&nbsp;<span>8.1</span></a>. These are the values that we can <strong>decode</strong> from the boxplots in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.</p>
+<p>To be explicit, the data values that are being <strong>encoded</strong> as visual features in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> are <em>not</em> the raw data values in <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>; the values that are being encoded to visual features in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> are the <strong>data summaries</strong> shown in <a href="#tbl-rwc-all-stats" class="quarto-xref">Table&nbsp;<span>8.1</span></a>. The data summaries in <a href="#tbl-rwc-all-stats" class="quarto-xref">Table&nbsp;<span>8.1</span></a> are the values that we can <strong>decode</strong> from the boxplots in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.</p>
 <div class="cell">
 <div id="tbl-rwc-all-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -366,7 +367,8 @@ Table&nbsp;8.1: A table of the five-number summaries for the number of points sc
 </section>
 <section id="sec-visual-summaries" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-visual-summaries"><span class="header-section-number">8.2</span> Visual summaries</h2>
-<p><a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows stacked dot plots of the number of points scored by countries from the different hemispheres in Rugby World Cup matches.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> This data visualisation uses the same data as <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, but it maps raw data values rather than data summaries and it uses much simpler data symbols (data points). This data visualisation encodes the number of points scored maps as the horizontal <strong>position</strong> of a data point and it encodes the hemisphere as the vertical <strong>position</strong> of a data point.</p>
+<p><a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows a dot plot of the number of points scored by countries from the different hemispheres in Rugby World Cup matches.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> This data visualisation uses the same data as <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, but it maps raw data values rather than data summaries and it uses much simpler data symbols (data points). This data visualisation encodes the number of points scored maps as the horizontal <strong>position</strong> of a data point and it encodes the hemisphere as the vertical <strong>position</strong> of a data point.</p>
+<p>There is an overplotting problem (<a href="position.html#sec-overplot" class="quarto-xref"><span>Section 4.4</span></a>), which is solved in this case by offsetting data symbols vertically for repeated data values.</p>
 <p>Because this data visualisation encodes raw data values as visual features, it is possible to decode raw data values from the visual features (<a href="mapping-visual-features.html#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>). For example, it is possible to see that the lowest score (zero points) for a northern hemisphere team ocurred twice. It is also possible to see that there are scores that have never occurred in any matches: 1, 2, 4, and 5. These features are not visible in the boxplots in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -383,8 +385,8 @@ Figure&nbsp;8.3: Stacked dotplots of the number of points scored by Tier One nat
 </div>
 </div>
 <p>The fact that we can decode raw data values from a dot plot is not news. That is easy because we have encoded raw data values as accurate visual features (see <a href="mapping-visual-features.html#sec-dot-plots" class="quarto-xref"><span>Section 3.7</span></a>). However, <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> also demonstrates that, in addition to decoding raw data values from visual features, our visual system allows us to decode <strong>data summaries</strong> from visual features.</p>
-<p>For example, we can see that the southern hemisphere teams score slightly more points on average than the northern hemisphere teams; the data symbols for southern-hemisphere teams appear shifted to the right of the data symbols for northern-hemisphere teams. In other words, we can perceive <strong>visual summaries</strong>; we can perceive <strong>data summaries</strong> from collections of visual features. For example, we can visually average the <strong>positions</strong> of the data points.</p>
-<p>In <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a>, we have encoded raw data values as visual features, which has enabled us to decode raw data values from individual visual features. In addition, <strong>visual summaries</strong> of the visual features enable us to decode <strong>data summaries</strong> from collections of visual features (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;<span>8.4</span></a>).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>For example, we can see that the southern hemisphere teams score slightly more points on average than the northern hemisphere teams; the data symbols for southern-hemisphere teams appear shifted to the right of the data symbols for northern-hemisphere teams. In other words, we can perceive <strong>visual summaries</strong>; we can perceive <strong>data summaries</strong> from collections of visual features. For example, we can visually average the <strong>positions</strong> of the data points.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>In <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a>, we have encoded raw data values as visual features, which has enabled us to decode raw data values from individual visual features. In addition, <strong>visual summaries</strong> of the visual features enable us to decode <strong>data summaries</strong> from collections of visual features (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;<span>8.4</span></a>).</p>
 <div id="fig-data-vis-stat-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-stat-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -398,11 +400,10 @@ Figure&nbsp;8.4: A data visualisation that encodes data values as visual feature
 <blockquote class="blockquote">
 <p>A dot plot is effective not just for perceiving raw data values, but also for perceving data summaries like clusters and outliers, and central tendency and spread.</p>
 </blockquote>
-<p><strong>ALSO MENTION</strong> textures here? Ware 4th ~p212 Large numbers of data symbols, especially in regular arrangement effectively create a set of textures that the visual system can identify and differentiate into regions(?) Refer back to <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>. May need to add something about texture as low-ish level visual feature back in visual model? NOTE that only small number of <em>distint</em> textures are possible.</p>
 </section>
 <section id="case-study-histograms" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="case-study-histograms"><span class="header-section-number">8.3</span> Case study: Histograms</h2>
-<p><a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> shows a histogram of the number of points scored by Tier One nations at the Rugby World Cups (<a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>). A histogram is similar to a box plot in two ways: a histogram is a data visualisation that can be used to convey the distribution of a variable; and a histogram is a data visualisation that maps data summaries, rather than raw values, to visual features (<a href="#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;<span>8.2</span></a>).</p>
+<p><a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> shows a histogram of the number of points scored by Tier One nations at the Rugby World Cups (<a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>). A histogram is similar to a box plot in two ways: a histogram is a data visualisation that can be used to convey the distribution of a variable; and a histogram is a data visualisation that maps <strong>data summaries</strong>, rather than raw values, to visual features (<a href="#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;<span>8.2</span></a>).</p>
 <p>However, a histogram differs from a box plot in two main ways: the data symbol for a histogram is simpler than a box plot, because it consists of just rectangles or bars; and the data summaries for a histogram are more complicated than those for a box plot.</p>
 <p>The raw data values for the histogram in <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> are the points scored in each game by each country (<a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a>). To get the data summaries for the histogram, the raw data values are binned; we break the range of the data into equal-sized intervals and count how many data values lie in each interval. The centre of each interval is then encoded as the horizontal <strong>position</strong> of a bar and the count of data values in each interval is encoded as the <strong>length</strong> of a bar.</p>
 <div class="cell">
@@ -419,40 +420,34 @@ Figure&nbsp;8.5: A histogram of the points scored per game by Tier One nations a
 </div>
 </div>
 </div>
-<p>To be explicit, the values that are being mapped to visual features in <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> are not raw data values, but data summaries—intervals and counts—as shown in <a href="#tbl-hist-stats" class="quarto-xref">Table&nbsp;<span>8.2</span></a>.</p>
+<p>To be explicit, the values that are being mapped to visual features in <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> are not raw data values, but data summaries—intervals and counts—as shown in <a href="#tbl-hist-stats" class="quarto-xref">Table&nbsp;<span>8.2</span></a>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="cell">
 <div id="tbl-hist-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-hist-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8.2: A table of intervals the cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval. These data summaries are the values that are mapped to visual features to produce the histogram in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.
+Table&nbsp;8.2: A table of intervals that cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval. These data summaries are the values that are mapped to visual features to produce the histogram in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>. Not all intervals are shown for reasons of space.
 </figcaption>
 <div aria-describedby="tbl-hist-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 2%">
-<col style="width: 3%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 5%">
-<col style="width: 5%">
-</colgroup>
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">interval</td>
@@ -469,14 +464,6 @@ Table&nbsp;8.2: A table of intervals the cover the range of the number of points
 <td style="text-align: right;">50-55</td>
 <td style="text-align: right;">55-60</td>
 <td style="text-align: right;">60-65</td>
-<td style="text-align: right;">65-70</td>
-<td style="text-align: right;">70-75</td>
-<td style="text-align: right;">75-80</td>
-<td style="text-align: right;">80-85</td>
-<td style="text-align: right;">85-90</td>
-<td style="text-align: right;">90-95</td>
-<td style="text-align: right;">95-100</td>
-<td style="text-align: right;">100-105</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">count</td>
@@ -493,14 +480,6 @@ Table&nbsp;8.2: A table of intervals the cover the range of the number of points
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
 </tr>
 </tbody>
 </table>
@@ -509,11 +488,10 @@ Table&nbsp;8.2: A table of intervals the cover the range of the number of points
 </figure>
 </div>
 </div>
-<p>As with a box plot, encoding data summaries as accurate visual features means that we can easily decode data summaries from the visual features. For a histogram, this means that we can easily compare the lengths of the bars, which means we can easily compare the relative counts of data values within each interval. For example, the longest bars represent the intervals that contain a relatively large count of data values, which tells us about the mode of the data (or the number of modes in the data). In <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> we can see that the largest number of data values occur around 15 to 20 points and we can see that the number of data values in each interval drops more rapidly above the highest bar than below the highest bar. The latter tells us about the spread and/or skewness of the data.</p>
+<p>As with a box plot, encoding data summaries as accurate visual features, in this case <strong>position</strong> and <strong>length</strong>, means that we can easily decode data summaries from the visual features. For a histogram, this means that we can easily compare the lengths of the bars, which means we can easily compare the counts of data values within each interval. For example, the longest bars represent the intervals that contain a relatively large count of data values, which tells us about the mode of the data (or the number of modes in the data). In <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> we can see that the largest number of data values occur around 15 to 20 points and we can see that the number of data values in each interval drops more rapidly above the highest bar than below the highest bar. The latter tells us about the spread and/or skewness of the data.</p>
 <blockquote class="blockquote">
 <p>A histogram is effective at conveying information about the distribution of data values because it maps data summaries to basic visual features and those data summaries can be compared to provide information about the distribution of the data.</p>
 </blockquote>
-<p><strong>TODO</strong> footnote acknowledge that bar plots are also actually visualisations of summaries; counts of individual data values.</p>
 </section>
 <section id="sec-summary-caveats" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="sec-summary-caveats"><span class="header-section-number">8.4</span> Dangers of summaries</h2>
@@ -522,7 +500,7 @@ Table&nbsp;8.2: A table of intervals the cover the range of the number of points
 <blockquote class="blockquote">
 <p>Box plots and histograms are <em>not</em> effective at conveying raw data values because they do not map raw data values to data symbols.</p>
 </blockquote>
-<p>Another point to consider with a data visualisation that is based on data summaries is whether the data summaries provide reasonable summaries of the data.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> For example, <a href="#fig-boxplot-concede" class="quarto-xref">Figure&nbsp;<span>8.6</span></a> shows box plots of the number of points <em>conceded</em> by each team in Rugby World Cup games. The box plot for southern hemisphere teams suggests a unimodal distribution with a slight right skew.</p>
+<p>Another point to consider with a data visualisation that is based on data summaries is whether the data summaries provide reasonable summaries of the data.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> For example, <a href="#fig-boxplot-concede" class="quarto-xref">Figure&nbsp;<span>8.6</span></a> shows box plots of the number of points <em>conceded</em> by each team in Rugby World Cup games. The box plot for southern hemisphere teams suggests a unimodal distribution with a slight right skew.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-boxplot-concede" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -555,9 +533,11 @@ Figure&nbsp;8.7: Stacked dotplots of the number of points conceded by Tier One n
 <blockquote class="blockquote">
 <p>A data visualisation that is based on data summaries can only be effective if the data summaries are sensible summaries of the data.</p>
 </blockquote>
+<blockquote class="blockquote">
 <p>A box plot is <em>not</em> effective if a five-number summary is not a sensible summary of the data values.</p>
+</blockquote>
 <p>A further complication arises with histograms because we have to <em>choose</em> the intervals that are used to calculate the data summaries and that choice can have a large influence on the data summaries. For example, <a href="#fig-hist-thin" class="quarto-xref">Figure&nbsp;<span>8.8</span></a> shows a histogram of the same data that we used for <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a>, but with a greater number of narrower intervals. This visualisation tells a slightly different story than <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a>. The most common score is now 6 points (rather than between 15 and 20 points) and we see features like gaps at 1, 2, 4, and 5 points and a stronger suggestion of bimodality. There are also point totals that appear strangely low, like 11 and 14.</p>
-<p>Unlike a box plot, where the data summaries are essentially fixed calculations, for a histogram we get to choose the data summaries to some extent, which means that we get to choose the story that the data visualisation tells. <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> tells a simpler story, but <a href="#fig-hist-thin" class="quarto-xref">Figure&nbsp;<span>8.8</span></a> tells a story that includes some important details.</p>
+<p>Unlike a box plot, where the data summaries are essentially fixed calculations,<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> for a histogram we get to choose the data summaries to some extent, which means that we get to choose the story that the data visualisation tells. <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> tells a simpler story, but <a href="#fig-hist-thin" class="quarto-xref">Figure&nbsp;<span>8.8</span></a> tells a story that includes some important details.</p>
 <p>When using a histogram for exploring a data set, it is a good idea to try out more than one choice of intervals in order to avoid missing an important story. When using a histogram to present a story about a data set, there is a responsibility to present a story that does not exclude important details.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -576,9 +556,8 @@ Figure&nbsp;8.8: A histogram of the points scored per game by Tier One nations a
 </section>
 <section id="case-study-how-charts-lie" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="case-study-how-charts-lie"><span class="header-section-number">8.5</span> Case study: How charts lie</h2>
-<p>In this document, we assume that the purpose of a data visualisation is to faithfully and honestly encode data values and the goal is to produce a data visualisation that provides the most effective decoding of visual features (see <a href="intro.html#sec-scope" class="quarto-xref"><span>Section 1.3</span></a>).</p>
-<p>Nevertheless, less honest representations of data can also be described in terms of mappings, particularly mappings of data summaries.</p>
-<p>For example, … <a href="#fig-bars-at-zero" class="quarto-xref">Figure&nbsp;<span>8.9</span></a><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> This does not encode the raw data as the lengths of the bars, but the raw data - 34. The top rate under Obama would be 39.6. Also does not help that the y-axis scale is not shown!</p>
+<p>In this book, we assume that the purpose of a data visualisation is to faithfully and honestly encode data values and the goal is to produce a data visualisation that provides the most effective decoding (<a href="intro.html#sec-scope" class="quarto-xref"><span>Section 1.3</span></a>). Nevertheless, even less honest representations of data can also be thought of in terms of mappings, particularly mappings of data summaries.</p>
+<p>For example, <a href="#fig-bars-at-zero" class="quarto-xref">Figure&nbsp;<span>8.9</span></a> shows a bar plot of the predicted impact on the top tax rate in the United States from President George W. Bush to President Barack Obama.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> One problem with this data visualisation is that it does not encode raw data values—the actual predicted top tax rates are 35 and 39.6. Instead, a “data summary” of the tax rate <em>minus 34</em> (the values 1 and 5.6) are encoded as the lengths of the two bars. We are unable to decode the raw data from this bar plot—we can only decode the data values that have been encoded—and this leads to an extreme exaggeration of the difference between the two top tax rates.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bars-at-zero" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -593,7 +572,7 @@ Figure&nbsp;8.9: A bar plot of the increase in the top tax rate in the United St
 </div>
 </div>
 </div>
-<p>A data visualisation that encodes distorted data or one that leaves out an important subset of the data is encoding unhelpful values to visual features. It is only then possible to decode from visual features to unhelpful data values.</p>
+<p>A data visualisation that encodes a data summary that is a distortion of the data or an inappropriate subset of the data is encoding unhelpful information to visual features. It is only then possible to decode unhelpful information from the data visualisation (<a href="#fig-lie-vis-decode" class="quarto-xref">Figure&nbsp;<span>8.10</span></a>).</p>
 <div id="fig-lie-vis-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lie-vis-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -605,39 +584,154 @@ Figure&nbsp;8.10: A data visualisation may map an unrepresentative or “cooked�
 </figure>
 </div>
 </section>
-<section id="simplification" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="simplification"><span class="header-section-number">8.6</span> Simplification</h2>
-<p>deliberately losing information (e.g., luminance scale for quant)</p>
-<p>“Why Shouldn’t All Charts Be Scatter Plots? Beyond Precision-Driven Visualizations” Bertini et al (2021) Claims that ordinal comparisons more common in practice than quantitative comparisons (?)</p>
-<p>This nice quote …</p>
-<blockquote class="blockquote">
-<p>Graphics are for comparison - comparison of one kind or another - not for access to individual amounts. (Tukey 1993)</p>
-</blockquote>
-<p>… points out that reading individual values off a plot is not usually the point of a data vis, though it is still a precursor to making a comparison. In some ways, ordinal comparisons are more important than interval or ratio?</p>
-<ul>
-<li><p>For a footnote …</p>
-<p>“Chart and Graphs” Karsten (1925)</p>
-<p>This is the source of the “insult to man’s intelligence” remark about pie charts, though note the full quote:</p>
-<p>“In a sense, it might be construed as an insult to a man’s intelligence to show him a pie-chart, but the insult is not often resented. For if your main object be to get a story across, you are justified in taking that means which will encounter least resistance, and in making your story as simple as possible. For publicity purposes, the pie-chart is therefore almost invariably better than the bar.” [p98]</p></li>
-</ul>
+<section id="sec-downgrade" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="sec-downgrade"><span class="header-section-number">8.6</span> Visual downgrades</h2>
+<p>We have seen that a downside to mapping data summaries, rather than raw data values, is that we lose the ability to decode raw data values from data symbols. However, we pay this price in order to improve our ability to decode data summaries from the data symbols. For example, a boxplot makes it easier to decode the median of a set of data values.</p>
+<p>By mapping data summaries, we deliberately lose the ability to decode raw data values in order to gain the ability to decode data summaries.</p>
+<p>Another way that we may deliberately lose information is by selecting a visual feature that does not allow complete decoding of the original data values.</p>
+<p>For example, <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.11</span></a> shows the crime rate for 2021 in each police district of New Zealand. The data values for this map are shown in <a href="#tbl-map-data" class="quarto-xref">Table&nbsp;<span>8.3</span></a>.</p>
+<div class="cell">
+<div id="tbl-map-data" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-map-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.3: The average crime rate over the period 2011 to 2021 for each police district of New Zealand.
+</figcaption>
+<div aria-describedby="tbl-map-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">district</th>
+<th style="text-align: right;">rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Auckland City</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bay of Plenty</td>
+<td style="text-align: right;">0.62</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Canterbury</td>
+<td style="text-align: right;">0.38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Central</td>
+<td style="text-align: right;">0.56</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Counties/Manukau</td>
+<td style="text-align: right;">0.39</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Eastern</td>
+<td style="text-align: right;">0.66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Northland</td>
+<td style="text-align: right;">0.61</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Southern</td>
+<td style="text-align: right;">0.49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tasman</td>
+<td style="text-align: right;">0.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Waikato</td>
+<td style="text-align: right;">0.46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Waitematā</td>
+<td style="text-align: right;">0.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wellington</td>
+<td style="text-align: right;">0.33</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The data symbols in <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.11</span></a> are circles with the geographic location of the (centre of the) police district mapped to the position of the circles and the crime rate mapped to the (fill) colour, particularly the luminance, of the circles. Darker circles represent higher crime rates.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-downgrade" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-downgrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="summaries_files/figure-html/fig-downgrade-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-downgrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.11: A map of New Zealand with .
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We know that encoding the crime rate as luminance is not an appropriate encoding for quantitative data values (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). The best we can decode is ordinal data values from the luminance of the circles (<a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a>).</p>
+<p>However, we may accept this loss of information in order to gain the ability to decode the geographic position of the police districts. For example, although we cannot decode exact crime rates, we are able to see that the higher crime rates correspond to more rural areas; the lighter circles appear in the urban regions that include New Zealand’s largest cities: Auckland, Wellington, and Christchurch.</p>
+<p>In <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.11</span></a>, we can only decode to <strong>data summaries</strong> of the crime rate because we an only decode the <strong>ranking</strong> of the crime rates, not individual numeric crime rates and not numeric differences between crime rates (<a href="#fig-data-vis-stat" class="quarto-xref">Figure&nbsp;<span>8.12</span></a>).</p>
+<div id="fig-data-vis-stat" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-vis-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="Diagrams/data-vis-stat.png" class="img-fluid figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.12: A data visualisation may encode data values as a visual feature that does not allow decoding back to the original data values. Instead, it is only possible to decode summaries of the data.
+</figcaption>
+</figure>
+</div>
+<p>On the other hand, this loss of information is acceptable if the decoding still allows us to make useful comparisons. Put more strongly, the numeric comparisons that we lose access to may not be the most important decodings, so the loss may not be that important.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p>For comparison, <a href="#fig-no-downgrade" class="quarto-xref">Figure&nbsp;<span>8.13</span></a> shows a simple bar plot of the same crime rates. In this data visualisation, although we can decode and compare the numeric crime rates much more accurately, the rural/urban comparison is much more difficult.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-no-downgrade" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-no-downgrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="summaries_files/figure-html/fig-no-downgrade-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-no-downgrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.13: A bar plot of the crime rate for 2021 in each police district of New Zealand.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="case-study-heatmaps" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="case-study-heatmaps"><span class="header-section-number">8.7</span> Case study: Heatmaps</h2>
-<p>Heatmaps are a common way of representing three-dimensional data where two of the data variables are either qualitative or have been measured on a regular grid. The latter two variables naturally map to horizontal and vertical <strong>position</strong> to produce an array of rectangles, while the third variable maps to <strong>colour</strong> (see <a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>).</p>
-<p>The mappings from data values to visual features for a heatmap are …</p>
-<p>colour is not quant but can convey trends</p>
-<p>using luminance for quant, but not trying for accurate decoding of individual data values, BUT mention effectiveness of luminance in heatmap for ensemble perception of regions?</p>
-<p>get contrast effect but again not typically trying to match cells</p>
-<p>get regions/shapes of colour =&gt; higher-level structures</p>
-<p>talk about colour palettes that have deliberate colour boundaries to emphasise structure - combination of order and category</p>
+<p>Heatmaps are a common way of representing three-dimensional data where two of the data variables are either qualitative or have been measured on a regular grid and the third variable is <strong>quantitative</strong>. The first two variables naturally map to horizontal and vertical <strong>position</strong> to produce an array of rectangles, while the third variable maps to <strong>colour</strong>.</p>
+<p>We saw an example of a heatmap in <a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> and <a href="#fig-nomads-purple" class="quarto-xref">Figure&nbsp;<span>8.14</span></a> shows another example that is a variation on <a href="qualitative.html#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a> and <a href="qualitative.html#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.24</span></a>.</p>
+<div id="fig-nomads-purple" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nomads-purple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="Data/Weather/NOMADS-purple.png" class="img-fluid figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nomads-purple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.14: A snapshot of wind strength in the vicinity of New Zealand on September 14 2024. This uses the same data as <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>, but does not show wind direction.
+</figcaption>
+</figure>
+</div>
+<p>The use of colour to encode quantitative data values is not optimal for accuracy (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). However, as we saw in <a href="#sec-downgrade" class="quarto-xref"><span>Section 8.6</span></a>, as long as the colour scheme has monotonic luminance and/or chroma changes, it is still possible to decode ordinal values.</p>
+<p>Furthermore, we are able to decode useful visual summaries from the multiple rectangle data symbols on a heat map (<a href="#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>). For example, we can identify regions of darker or lighter colours, not just individual dark or light rectangles.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>On the downside, because each rectangle in a heatmap is surrounded by other rectangles of differing colours, it is difficult to accurately decode the colours of individual rectangles (<a href="qualitative.html#sec-colour-relative" class="quarto-xref"><span>Section 6.3</span></a>).</p>
+<p>In the case of a heatmap, ordinal comparisons are typically what is of most importance. The aim is <em>not</em> to be able to decode individual quantitative data values and this moderates the damage that is done by relative perception of the heatmap rectangles.</p>
 </section>
 <section id="cognitive-load" class="level2" data-number="8.8">
 <h2 data-number="8.8" class="anchored" data-anchor-id="cognitive-load"><span class="header-section-number">8.8</span> Cognitive load</h2>
-<p>On page 46 of his book “How the World Really Works” <span class="citation" data-cites="smil2022how">(<a href="#ref-smil2022how" role="doc-biblioref">Smil 2022</a>)</span>, Vaclav Smil writes that:</p>
+<p>Consider the following sentence about changes in global malnutrition rates:<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
 <div class="actual-quote">
 <p>“rising food production reduced the malnutrition rate from 2 in 3 people in 1950 to 1 in 11 by 2019”</p>
 </div>
-<p>In order to comprehend the change in malnutrition rate, we are required to compare “2 in 3” to “1 in 11”. This requires mental effort to calculate the ratios or fractions and then compare them. It is easier to compare the rates if we hold the denominator constant, comparing “2 in 3” to “2 in 22”. It is easier still if we calculate the fractions, comparing 0.667 to 0.091. And it is easier still to compare those fractions visually (<a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.11</span></a>).</p>
+<p>In order to comprehend the change in malnutrition rate, we are required to compare “2 in 3” to “1 in 11”. This requires mental effort to calculate the ratios or fractions and then compare them. It is easier to compare the rates if we hold the denominator constant, comparing “2 in 3” to “2 in 22”. It is easier still if we calculate the fractions, comparing 0.667 to 0.091. And it is easier still to compare those fractions visually (<a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.15</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cog-load" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -646,14 +740,15 @@ Figure&nbsp;8.10: A data visualisation may map an unrepresentative or “cooked�
 <img src="summaries_files/figure-html/fig-cog-load-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cog-load-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.11: A bar plot comparing two fractions.
+Figure&nbsp;8.15: A bar plot comparing two fractions.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>The point is that we can reduce the cognitive load that is required of the viewer if we make the mental calculations that are required easier. We can reduce the cognitive load further if we present the results of the calculation directly and even further if we encode the results of the calculation as simple visual features.</p>
-<p>Conversely, we can add to the cognitive load if we make the visual calculations harder. For example, <a href="#fig-cog-load-hi" class="quarto-xref">Figure&nbsp;<span>8.12</span></a> shows a bar plot of the original “2 in 3” versus “1 in 11” data values. We now need to perceive the proportion of blue bars relative to red bars and compare those proportions, which is clearly more work than just comparing the two bars in <a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.11</span></a>.</p>
+<p>In other words, we can calculate <strong>data summaries</strong> or we can force the viewer to perform <strong>visual summaries</strong>.</p>
+<p>Conversely, we can add to the cognitive load if we make the visual calculations harder. For example, <a href="#fig-cog-load-hi" class="quarto-xref">Figure&nbsp;<span>8.16</span></a> shows a bar plot of the original “2 in 3” versus “1 in 11” data values. We now need to perceive the proportion of blue bars relative to red bars and compare those proportions, which is clearly more work than just comparing the two bars in <a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.15</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cog-load-hi" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -662,13 +757,13 @@ Figure&nbsp;8.11: A bar plot comparing two fractions.
 <img src="summaries_files/figure-html/fig-cog-load-hi-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cog-load-hi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.12: A bar plot comparing two fractions.
+Figure&nbsp;8.16: A bar plot comparing two fractions.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>We ideally want to present data in a way that imposes the least cognitive load on the viewer. In terms of <a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>, we want to present the viewer with simple <strong>visual tasks</strong>.</p>
+<p>We ideally want to present data in a way that imposes the least cognitive load on the viewer. In terms of <a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>, we want to present the viewer with simple <strong>visual tasks</strong>.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <p>The best data visualisation will be different for different questions of interest, but if the question of interest involves comparing data summaries, then one way that we can make the viewer’s life easier is by calculating summaries of the data and encoding data summaries as visual features, rather than encoding raw data values and asking the viewer to perform visual summaries.</p>
 <blockquote class="blockquote">
 <p>It is possible in some cases to rely on visual summaries, but we need to be careful not to set a visual task that requires too much mental effort.</p>
@@ -677,39 +772,93 @@ Figure&nbsp;8.12: A bar plot comparing two fractions.
 <section id="summary" class="level2" data-number="8.9">
 <h2 data-number="8.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.9</span> Summary</h2>
 <p>Data summaries, such as measures of central tendency, measures of variability, and tables of counts, provide information about the distribution of a set of data values.</p>
-<p>Some data visualisations, like box plots and histograms, are effective because they map <strong>data summaries</strong> to visual features. This makes it easy to perceive and compare data summaries.</p>
+<p>Some data visualisations, like box plots and histograms, are effective because they map <strong>data summaries</strong> to visual features. This makes it easy to decode and compare data summaries.</p>
 <p>Care must be taken to use data summaries that appropriately summarise the data values.</p>
-<p>When we map raw data values to visual features, like in a dot plot, the perception of individual visual features allows us to perceive and compare raw data values, but, in addition, <strong>visual summaries</strong> of <em>collections</em> of visual features allow us to perceive and compare data summaries.</p>
+<p>When we map raw data values to visual features, like in a dot plot, the encoding to individual visual features allows us to decode and compare raw data values, but, in addition, <strong>visual summaries</strong> of <em>collections</em> of visual features allow us to decode and compare data summaries.</p>
 <p>A box plot that maps data summaries to visual features is more effective for perceiving data summaries than a dot plot that relies on visual summaries. However, a dot plot is more effective for perceiving raw data values.</p>
 <hr>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-amar-taxonomy" class="csl-entry" role="listitem">
+Amar, Robert, James Eagan, and John Stasko. 2005. <span>“Low-Level Components of Analytic Activity in Information Visualization.”</span> In <em>Proceedings of the Proceedings of the 2005 IEEE Symposium on Information Visualization</em>, 15. INFOVIS ’05. USA: IEEE Computer Society. <a href="https://doi.org/10.1109/INFOVIS.2005.24">https://doi.org/10.1109/INFOVIS.2005.24</a>.
+</div>
+<div id="ref-Anscombe1973" class="csl-entry" role="listitem">
+Anscombe, Francis J. 1973. <span>“Graphs in Statistical Analysis.”</span> <em>The American Statistician</em> 27 (1): 17–21. <a href="https://doi.org/10.1080/00031305.1973.10478966">https://doi.org/10.1080/00031305.1973.10478966</a>.
+</div>
+<div id="ref-all-scatterplots" class="csl-entry" role="listitem">
+Bertini, Enrico, Michael Correll, and Steven Franconeri. 2020. <span>“Why Shouldn’t All Charts Be Scatter Plots? Beyond Precision-Driven Visualizations.”</span> <em>CoRR</em> abs/2008.11310. <a href="https://arxiv.org/abs/2008.11310">https://arxiv.org/abs/2008.11310</a>.
+</div>
+<div id="ref-datasaurus" class="csl-entry" role="listitem">
+Cairo, Alberto. 2016. <span>“Download the Datasaurus: Never Trust Summary Statistics Alone; Always Visualize Your Data.”</span> <a href="http://www.thefunctionalart.com/2016/08/downloaddatasaurus-never-trust-summary.html" class="uri">http://www.thefunctionalart.com/2016/08/downloaddatasaurus-never-trust-summary.html</a>.
+</div>
+<div id="ref-card1999readings" class="csl-entry" role="listitem">
+Card, Stuart K., Jock D. Mackinlay, and Ben Shneiderman. 1999. <em>Readings in Information Visualization: Using Vision to Think</em>. San Francisco, CA: Morgan Kaufmann.
+</div>
+<div id="ref-correll-heatmap-ensemble" class="csl-entry" role="listitem">
+Correll, Michael, Danielle Albers, Steven Franconeri, and Michael Gleicher. 2012. <span>“Comparing Averages in Time Series Data.”</span> In <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</em>, 1095–1104. CHI ’12. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/2207676.2208556">https://doi.org/10.1145/2207676.2208556</a>.
+</div>
+<div id="ref-cui2021synergy" class="csl-entry" role="listitem">
+Cui, Lucy, and Zili Liu. 2021. <span>“Synergy Between Research on Ensemble Perception, Data Visualization, and Statistics Education: A Tutorial Review.”</span> <em>Attention, Perception, and Psychophysics</em> 83 (3): 1290–1311. <a href="https://doi.org/10.3758/s13414-020-02212-x">https://doi.org/10.3758/s13414-020-02212-x</a>.
+</div>
+<div id="ref-letter-value" class="csl-entry" role="listitem">
+Hofmann, Heike, Hadley Wickham, and Karen Kafadar. 2017. <span>“Letter-Value Plots: Boxplots for Large Data.”</span> <em>Journal of Computational and Graphical Statistics</em> 26 (3): 469–77. <a href="https://doi.org/10.1080/10618600.2017.1305277">https://doi.org/10.1080/10618600.2017.1305277</a>.
+</div>
+<div id="ref-MatejkaFitzmaurice2017" class="csl-entry" role="listitem">
+Matejka, Justin, and George Fitzmaurice. 2017. <span>“Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics Through Simulated Annealing.”</span> In <em>Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</em>, 1290–94. ACM. <a href="https://doi.org/10.1145/3025453.3025912">https://doi.org/10.1145/3025453.3025912</a>.
+</div>
+<div id="ref-boxplot-variations" class="csl-entry" role="listitem">
+McGill, Robert, John W. Tukey, and Wayne A. Larsen. 1978. <span>“Variations of Box Plots.”</span> <em>The American Statistician</em> 32 (1): 12–16. <a href="http://www.jstor.org/stable/2683468">http://www.jstor.org/stable/2683468</a>.
+</div>
+<div id="ref-rosanbalm2014beeswarm" class="csl-entry" role="listitem">
+Rosanbalm, Shane. 2014. <span>“A Strip Plot Gets Jittered into a Beeswarm.”</span> In <em>Proceedings of the SouthEast SAS Users Group (SESUG) Conference</em>. Myrtle Beach, SC.
+</div>
 <div id="ref-smil2022how" class="csl-entry" role="listitem">
 Smil, Vaclav. 2022. <em>How the World Really Works: The Science Behind How We Got Here and Where We’re Going</em>. New York: Viking.
 </div>
+<div id="ref-tukey1977eda" class="csl-entry" role="listitem">
+Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Reading, MA: Addison-Wesley.
+</div>
+<div id="ref-graphic-comparisons" class="csl-entry" role="listitem">
+———. 1993. <span>“Graphic Comparisons of Several Linked Aspects: Alternatives and Suggested Principles.”</span> <em>Journal of Computational and Graphical Statistics</em> 2 (1): 1–33. <a href="https://doi.org/10.1080/10618600.1993.10474595">https://doi.org/10.1080/10618600.1993.10474595</a>.
+</div>
+<div id="ref-ware2021information" class="csl-entry" role="listitem">
+Ware, Colin. 2021. <em>Information Visualization: Perception for Design</em>. 4th ed. Morgan Kaufmann.
+</div>
 <div id="ref-Wilkinson01081999" class="csl-entry" role="listitem">
 Wilkinson, Leland. 1999. <span>“Dot Plots.”</span> <em>The American Statistician</em> 53 (3): 276–81. <a href="https://doi.org/10.1080/00031305.1999.10474474">https://doi.org/10.1080/00031305.1999.10474474</a>.
+</div>
+<div id="ref-wilkinson2005" class="csl-entry" role="listitem">
+———. 2005. <em>The Grammar of Graphics</em>. Second edition. New York: Springer.
+</div>
+<div id="ref-wu2024designspecifictransformationsvisualization" class="csl-entry" role="listitem">
+Wu, Eugene, and Remco Chang. 2024. <span>“Design-Specific Transformations in Visualization.”</span> <a href="https://arxiv.org/abs/2407.06404">https://arxiv.org/abs/2407.06404</a>.
 </div>
 </div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>MUST make reference to the Information Visualization Reference Model of Card et al (1999) that differentiates data transforms from visual mappings from view transforms (the last particularly for interactive graphics?)</p>
-<p>PLUS the design-centric extension by Wu and Chang (2024), which teases out design-specific transforms as well (the data prep for a box plot being a good example). These papers provide a formal basis for some of the hand-waving that I do in this chapter, particularly on decoding to data summaries rather than raw data.</p>
-<p>Also “Low-Level Components of Analytic Activity in Information Visualization” Amar et al (2005) Set of 10 data visualisation tasks I like the way these all correspond to a numerical summary.</p>
-<p>PLUS of course “stats” in Wilkinson GoG</p>
-<p>Could also refer back to <a href="position.html#fig-log" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>. A “data summary” could include any sort of data transformation. In a log plot, what you can decode to is the logged values (although those are not usually what is used for labels).</p>
-<p>Wilke points out that log scales are appropriate for ratios(?) https://clauswilke.com/dataviz/coordinate-systems-axes.html#nonlinear-axes I still think that is difficult for people to decode</p>
-<p>Wilke points out that square root scale has NO linear interpretation. At least log scales is linear in terms of the exponent.</p>
-<p>Wilke also points out that map projections are nonlinear and or non cartesian.</p>
-<p>Robbins makes similar point https://www.forbes.com/sites/naomirobbins/2012/01/19/when-should-i-use-logarithmic-scales-in-my-charts-and-graphs/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Need to acknowledge that there are many variations, even on the simple box plot, e.g., notches, definitions of the box, let alone violin plots, etc.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><span class="citation" data-cites="Wilkinson01081999">Wilkinson (<a href="#ref-Wilkinson01081999" role="doc-biblioref">1999</a>)</span><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Need some references to articles about ensembles in data vis lit (ideally NOT the scatter plot one cos want to use that later for scatter plots). Mention “subitizing” (rapid identification of counts below a certain threshold) Ware 4th p 173. ALSO must relate this to Gestalt section in visual model ?<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Cite Anscombe’s quartet and the dinosaur one.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>This is a reproduction of a chart from Alberto Cairo’s “How Charts Lie” (p12-13), which itself was a reproduction of a chart shown by Fox News. (plus mention other classic how charts lie books like Huff’s How to Lie With Statistics ?) Also link to Wilke’s Principle of Proportional Ink?<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>In this book, we use <em>data summary</em> to cover a broad range of transformations of the data. These are transformations that occur prior to the mapping of data values to visual features.</p>
+<p>There are several more sophisticated break downs of the pipeline from data values to visual representations. For example, the Information Visualization Reference Model <span class="citation" data-cites="card1999readings">(<a href="#ref-card1999readings" role="doc-biblioref">Card, Mackinlay, and Shneiderman 1999</a>)</span> includes the transformation of data into a standard format (<em>data transformations</em>) prior to mapping data values to visual features and also includes the subsequent transformation and scaling of visual features to positions and shapes on the screen or page (<em>view transformations</em>).</p>
+<p><span class="citation" data-cites="wu2024designspecifictransformationsvisualization">Wu and Chang (<a href="#ref-wu2024designspecifictransformationsvisualization" role="doc-biblioref">2024</a>)</span> differentiates between <em>data transformations</em> and <em>design-specific transformations</em>, such as the calculation of summaries for a box plot.</p>
+<p>The idea of a <em>data summary</em> corresponds well with the idea of a <em>statistic</em> in the <em>Grammar of Graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>, although in this book, because we only consider static data visualisations, the connection with the raw data is lost. The <em>Grammar of Graphics</em> also includes transformations in the form of <em>scales</em> and <em>coordinates</em>, which roughly correspond to the <em>view transformations</em> of the Information Visualization Reference Model.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>John W. Tukey is credited as the inventor of the box plot <span class="citation" data-cites="tukey1977eda">(<a href="#ref-tukey1977eda" role="doc-biblioref">Tukey 1977</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The general idea of arranging overlapping dots so that they are all visible, not just jittering them (<a href="congruence.html#sec-jitter" class="quarto-xref"><span>Section 7.7</span></a>), goes back to <span class="citation" data-cites="Wilkinson01081999">Wilkinson (<a href="#ref-Wilkinson01081999" role="doc-biblioref">1999</a>)</span> and <span class="citation" data-cites="tukey1977eda">Tukey (<a href="#ref-tukey1977eda" role="doc-biblioref">1977</a>)</span>. The vertically-centred arrangement used here is also known as a <em>beeswarm plot</em> <span class="citation" data-cites="rosanbalm2014beeswarm">(<a href="#ref-rosanbalm2014beeswarm" role="doc-biblioref">Rosanbalm 2014</a>)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The ability to decode summary statistics from multiple visual objects is known as <em>ensemble perception</em>. <span class="citation" data-cites="cui2021synergy">Cui and Liu (<a href="#ref-cui2021synergy" role="doc-biblioref">2021</a>)</span> provides a modern review.</p>
+<p>A related concept is <em>subitizing</em>, which is the ability to rapidly identify the number of visual objects, though that only works for very small numbers of objects <span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>A bar plot can also be thought of in terms of mapping data summaries rather than raw data. The data values that are encoded as the lengths of bars in a bar plot are tables of counts of raw data values; the raw data values are individual observations of a single qualitative variable, such as the ethnicity of a single youth offender.</p>
+<p>See this way, there are raw data values that cannot be decoded from a bar plot. For example, information about an individual offender cannot be decoded from a bar plot because all similar individuals are represented together by a single bar data symbol.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>The classic demonstration of the idea that numerical summaries may not satisfactorily summarise the raw data is Anscombe’s quartet <span class="citation" data-cites="Anscombe1973">(<a href="#ref-Anscombe1973" role="doc-biblioref">Anscombe 1973</a>)</span>. <span class="citation" data-cites="MatejkaFitzmaurice2017">Matejka and Fitzmaurice (<a href="#ref-MatejkaFitzmaurice2017" role="doc-biblioref">2017</a>)</span> provide a more modern update, including Alberto Cairo’s <em>datasaurus</em> <span class="citation" data-cites="datasaurus">(<a href="#ref-datasaurus" role="doc-biblioref">Cairo 2016</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>It is not true that there is only one way to generate the data summaries for a box plot. <span class="citation" data-cites="boxplot-variations">McGill, Tukey, and Larsen (<a href="#ref-boxplot-variations" role="doc-biblioref">1978</a>)</span> describe several early variants and <em>letter-value plots</em> are an example of a more modern adaptation <span class="citation" data-cites="letter-value">(<a href="#ref-letter-value" role="doc-biblioref">Hofmann, Wickham, and Kafadar 2017</a>)</span>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>This is a reproduction of a chart from Alberto Cairo’s “How Charts Lie” (p12-13), which itself was a reproduction of a chart shown by Fox News.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><span class="citation" data-cites="all-scatterplots">Bertini, Correll, and Franconeri (<a href="#ref-all-scatterplots" role="doc-biblioref">2020</a>)</span> argue that ordinal comparisons are more commonly useful in practice than quantitative comparisons.</p>
+<p>“1. Graphics are for the qualitative/descriptive—conceivably the semiquantitative—never for the carefully quantitative.”</p>
+<p>“2. Graphics are for comparison-comparison of one kind or another - not for access to individual amounts.”</p>
+<p><span class="citation" data-cites="graphic-comparisons">Tukey (<a href="#ref-graphic-comparisons" role="doc-biblioref">1993</a>)</span><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><span class="citation" data-cites="correll-heatmap-ensemble">Correll et al. (<a href="#ref-correll-heatmap-ensemble" role="doc-biblioref">2012</a>)</span> provide evidence for superior ensemble perception of “high” regions within a time series from “colour fields” (heatmaps) compared to traditional time series line plots.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><span class="citation" data-cites="smil2022how">(<a href="#ref-smil2022how" role="doc-biblioref">Smil 2022, 46</a>)</span><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>The 10 data visualisation tasks in <span class="citation" data-cites="amar-taxonomy">Amar, Eagan, and Stasko (<a href="#ref-amar-taxonomy" role="doc-biblioref">2005</a>)</span> all correspond to some sort of numerical summary of the data. We can choose to perform the numerical summary and then visualise the result, or we can choose to present the raw data and ask the viewer to perform a visual summary. We should choose whichever will be easier for the viewer.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

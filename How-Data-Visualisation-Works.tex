@@ -701,7 +701,7 @@ on data visualisation. We will not, for example, address the ethical use
 of data visualisation, beyond a basic assumption that we want to
 faithfully represent the properties of the data.\footnote{Alberto
   Cairo's writing often includes the ethical dimensions of data
-  visualisation, e.g., Cairo (2014) and Cairo (2016).
+  visualisation, e.g., Cairo (2014) and Cairo (2016b).
 
   The \emph{Data by Design} project is a striking example of work with a
   focus on ethical data visualisation (Emory Digital Humanities Lab
@@ -3752,15 +3752,13 @@ sizes of data symbols.
 
 \section{Colours in space}\label{sec-colour-spaces}
 
-Figure~\ref{fig-colour-spaces} shows the set of visible colours arranged
-so that if we move the same distance in any direction from any one
-colour, the perceived difference between the original colour and the new
-colour is constant.\footnote{Figure~\ref{fig-colour-spaces} shows the
-  extent of the \emph{optimal colour solid}, which is essentially the
-  colours that it is possible to produce by reflecting a light source
-  off a surface that has perfect reflectance. This colour solid was
-  determined assuming specific illumination conditions (D65), and
-  assuming a standard human observer.
+Figure~\ref{fig-colour-spaces} shows two-dimensional slices of the set
+of visible colours arranged in three dimensions.\footnote{Figure~\ref{fig-colour-spaces}
+  shows the extent of the \emph{optimal colour solid}, which is
+  essentially the colours that it is possible to produce by reflecting a
+  light source off a surface that has perfect reflectance. This colour
+  solid was determined assuming specific illumination conditions (D65),
+  and assuming a standard human observer.
 
   The colours are shown in CIE \(L^*u^*v^*\) space (\emph{aka} HCL
   space), which is (roughly) \emph{perceptually uniform} so that
@@ -3769,12 +3767,24 @@ colour is constant.\footnote{Figure~\ref{fig-colour-spaces} shows the
   visual difference.
 
   The colours shown are produced using sRGB specifications, so many of
-  the colours, especially at high chroma, are not realistic.} This
-provides insight into what sorts of colours and what sorts of
-differences between colours are possible. For example, we can see that
-it is not possible to produce colours that have a high chroma \emph{and}
-are very dark. In other words, there is no such thing as a very
-colourful black. This is also true for colours that are very light.
+  the colours, especially at high chroma, are not realistic.} The centre
+three coloured regions (surrounded by white circles) show slices of
+constant luminance. Chroma increases from the centre (indicated by a
+white dot) and hue changes with angle. We can see the familiar rainbow
+of colours from red, through orange, yellow, green, blue, indigo, and
+violet, back around to red. The top slice is for high luminance (light)
+colours and the bottom slice is for low luminance (dark) colours. The
+coloured regions to the left and to the right (surrounded by
+semicircles) show slices of constant hue. Luminance increases from
+bottom to top and chroma increases away from the flat side of the
+semicircle.
+
+Figure~\ref{fig-colour-spaces} provides insight into what sorts of
+colours and what sorts of differences between colours are possible. For
+example, we can see that it is not possible to produce colours that have
+a high chroma \emph{and} are very dark. In other words, there is no such
+thing as a very colourful black. This is also true for colours that are
+very light.
 
 We can also see that the range of possible chroma values depends on both
 the hue and the luminance of colours. For example, it is possible to
@@ -3840,6 +3850,43 @@ If we encode data values as the colour of data symbols, the choice of
 hue, luminance, and chroma affects the capacity of decoding---how many
 different colours can be effectively decoded.
 \end{quote}
+
+\section{Colour harmony}\label{sec-harmony}
+
+We have seen that hue is an appropriate visual feature for encoding
+qualitative data values because we can decode differences between hues
+without any ordering between hues. For example, blue is not larger than
+red.
+
+However, it is not entirely true that there is no sense of
+\emph{distance} between different hues. The left image in
+Figure~\ref{fig-colour-wheel} shows a colour wheel of hues for a
+constant luminance and chroma. Hues that are close together on this
+colour wheel are decoded as more similar than hues that are on opposite
+sides of the wheel. For example, the top two circles on the right of
+Figure~\ref{fig-colour-wheel} have hues that are from the left side of
+the colour wheel so they appear similar, but the bottom two circles have
+hues from the left and the right side of the colour wheel so they have a
+greater contrast.\footnote{In colour theory, hues that are close
+  together on a colour wheel are referred to as \emph{analogous} and
+  hues that are opposite each other are \emph{complementary}.}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{qualitative_files/figure-pdf/fig-colour-wheel-1.png}
+
+}
+
+\caption{\label{fig-colour-wheel}On the left, a colour wheel that shows
+differet hues for a constant chroma and luminance. At top-right is a
+pair of hues from the left side of the colour wheel and bottom-right is
+a pair of hues from opposite sides of the colour wheel. There is greater
+contrast between the bottom pair of colours and less contrast between
+the top pair of colours.}
+
+\end{figure}%
 
 \section{Colour vision deficiency}\label{sec-CVD}
 
@@ -4045,7 +4092,7 @@ so that adjacent hues are more distant from each other.}
 
 \end{figure}%
 
-\section{Colour palettes}\label{colour-palettes}
+\section{Colour palettes}\label{sec-palettes}
 
 When we encode nominal or ordinal data values as colours, we have to
 choose a set of colours, or a \textbf{colour palette}. For example, in
@@ -4228,7 +4275,7 @@ changes in chroma and/or luminance to encode ordinal values within each
 group.
 \end{quote}
 
-\section{Case study: The rainbow}\label{case-study-the-rainbow}
+\section{Case study: The rainbow}\label{sec-rainbow}
 
 In some fields of research, for example medical imaging and geographic
 imaging, a common problem is to visualise numeric data values on a
@@ -4258,9 +4305,8 @@ with this approach.\footnote{The problems with rainbow palettes have
 \caption{\label{fig-nomads-rainbow}A snapshot of wind strength in the
 vicinity of New Zealand on September 14 2024. This uses the same data as
 Figure~\ref{fig-visual-model-demo}, but does not show wind direction.
-The image on the left encodes wind strength as shades of grey (darker is
-stronger) and the image on the right uses a rainbow colour palette (from
-red through green and blue to violet; see Figure~\ref{fig-rainbow}).}
+The image uses a rainbow colour palette (from red through green and blue
+to violet; see Figure~\ref{fig-rainbow}).}
 
 \end{figure}%
 
@@ -4331,7 +4377,7 @@ spectrum.}
 
 \end{figure}%
 
-\section{Case study: Viridis}\label{case-study-viridis}
+\section{Case study: Viridis}\label{sec-viridis}
 
 One of the arguments for using a rainbow colour palette is that viewers
 like that it is colourful. We also saw in Section~\ref{sec-escape} that
@@ -4373,7 +4419,12 @@ wind strength (the yellows) over New Zealand.
 
 }
 
-\caption{\label{fig-nomads-viridis}A visualisation of wind strength}
+\caption{\label{fig-nomads-viridis}A snapshot of wind strength in the
+vicinity of New Zealand on September 14 2024. This uses the same data as
+Figure~\ref{fig-visual-model-demo}, but does not show wind direction.
+The image on the left encodes wind strength as shades of grey (darker is
+stronger) and the image on the right uses a viridis colour palette
+(Figure~\ref{fig-viridis}).}
 
 \end{figure}%
 
@@ -5051,64 +5102,54 @@ youth offenders to the \textbf{lengths} of bars.
 
 We also emphasised the importance of the \textbf{decoding} from visual
 features to data values. For example, the effectiveness of the bar plot
-in Figure~\ref{fig-bar} relies on our ability to accurately perceive the
+in Figure~\ref{fig-bar} relies on our ability to accurately decode the
 lengths of the bars, particularly relative to each other.
 
-In the simple scenario of a bar plot, the data values are counts (e.g.,
-Table~\ref{tbl-crime-group-total}), which are encoded as the lengths of
+In the simple scenario of a bar plot, the data values are counts
+(Table~\ref{tbl-crime-group-total}), which are encoded as the lengths of
 bars, which in turn allows us to decode lengths to retrieve the counts
-(Figure~\ref{fig-visual-feature-decode}). Each raw data value (count) is
-mapped to the length of a bar.
+(Figure~\ref{fig-visual-feature-decode}). Each \textbf{raw data value}
+(count) is mapped to the length of a bar.
 
 In this chapter, we explore some data visualisations that are effective
 because they encode \textbf{data summaries} instead of raw data
-values.\footnote{MUST make reference to the Information Visualization
-  Reference Model of Card et al (1999) that differentiates data
-  transforms from visual mappings from view transforms (the last
-  particularly for interactive graphics?)
+values.\footnote{In this book, we use \emph{data summary} to cover a
+  broad range of transformations of the data. These are transformations
+  that occur prior to the mapping of data values to visual features.
 
-  PLUS the design-centric extension by Wu and Chang (2024), which teases
-  out design-specific transforms as well (the data prep for a box plot
-  being a good example). These papers provide a formal basis for some of
-  the hand-waving that I do in this chapter, particularly on decoding to
-  data summaries rather than raw data.
+  There are several more sophisticated break downs of the pipeline from
+  data values to visual representations. For example, the Information
+  Visualization Reference Model (Card, Mackinlay, and Shneiderman 1999)
+  includes the transformation of data into a standard format (\emph{data
+  transformations}) prior to mapping data values to visual features and
+  also includes the subsequent transformation and scaling of visual
+  features to positions and shapes on the screen or page (\emph{view
+  transformations}).
 
-  Also ``Low-Level Components of Analytic Activity in Information
-  Visualization'' Amar et al (2005) Set of 10 data visualisation tasks I
-  like the way these all correspond to a numerical summary.
+  Wu and Chang (2024) differentiates between \emph{data transformations}
+  and \emph{design-specific transformations}, such as the calculation of
+  summaries for a box plot.
 
-  PLUS of course ``stats'' in Wilkinson GoG
-
-  Could also refer back to Figure~\ref{fig-log}. A ``data summary''
-  could include any sort of data transformation. In a log plot, what you
-  can decode to is the logged values (although those are not usually
-  what is used for labels).
-
-  Wilke points out that log scales are appropriate for ratios(?)
-  https://clauswilke.com/dataviz/coordinate-systems-axes.html\#nonlinear-axes
-  I still think that is difficult for people to decode
-
-  Wilke points out that square root scale has NO linear interpretation.
-  At least log scales is linear in terms of the exponent.
-
-  Wilke also points out that map projections are nonlinear and or non
-  cartesian.
-
-  Robbins makes similar point
-  https://www.forbes.com/sites/naomirobbins/2012/01/19/when-should-i-use-logarithmic-scales-in-my-charts-and-graphs/}
+  The idea of a \emph{data summary} corresponds well with the idea of a
+  \emph{statistic} in the \emph{Grammar of Graphics} (Wilkinson 2005),
+  although in this book, because we only consider static data
+  visualisations, the connection with the raw data is lost. The
+  \emph{Grammar of Graphics} also includes transformations in the form
+  of \emph{scales} and \emph{coordinates}, which roughly correspond to
+  the \emph{view transformations} of the Information Visualization
+  Reference Model.}
 
 \section{Box plots}\label{box-plots}
 
-\textbf{TODO} Shift box plots to visual shapes ? Start here with
-histogram instead?
-
 Figure~\ref{fig-boxplot} shows box plots of the number of points scored
-by all teams at Rugby World Cup matches (Table~\ref{tbl-rwc-all}), with
-a separate box plot for teams from different hemispheres. This is an
-effective data visualisation for comparing the distributions of points
-scored between hemispheres because we are able to easily see differences
-between the median values of the countries (the thick vertical lines)
-and differences between the interquartile ranges of the countries (the
+by Tier One nations at Rugby World Cup matches
+(Table~\ref{tbl-rwc-all}), with a separate box plot for teams from
+different hemispheres.\footnote{John W. Tukey is credited as the
+  inventor of the box plot (Tukey 1977).} This is an effective data
+visualisation for comparing the distributions of points scored between
+hemispheres because we are able to easily see differences between the
+median values of the countries (the thick vertical lines) and
+differences between the interquartile ranges of the countries (the
 horizontal rectangles). For example, we can see that the median points
 scored by southern hemisphere teams is larger than the median for
 northern hemisphere teams and the interquartile range of points scored
@@ -5134,9 +5175,7 @@ range (lower quartile to upper quartile), and horizontal lines to
 represent the extremes of the data values, from the the quartiles to the
 minimum and maximum values. Points are also included for ``outliers'' if
 data values lie further than 1.5 times the interquartile range beyond
-the quartiles.\footnote{Need to acknowledge that there are many
-  variations, even on the simple box plot, e.g., notches, definitions of
-  the box, let alone violin plots, etc.}
+the quartiles.
 
 Another important difference with a box plot is that it maps
 \textbf{data summaries}, rather than raw data values, to visual features
@@ -5164,9 +5203,9 @@ To be explicit, the data values that are being \textbf{encoded} as
 visual features in Figure~\ref{fig-boxplot} are \emph{not} the raw data
 values in Table~\ref{tbl-rwc-all}; the values that are being encoded to
 visual features in Figure~\ref{fig-boxplot} are the \textbf{data
-summaries} shown in Table~\ref{tbl-rwc-all-stats}. These are the values
-that we can \textbf{decode} from the boxplots in
-Figure~\ref{fig-boxplot}.
+summaries} shown in Table~\ref{tbl-rwc-all-stats}. The data summaries in
+Table~\ref{tbl-rwc-all-stats} are the values that we can \textbf{decode}
+from the boxplots in Figure~\ref{fig-boxplot}.
 
 \begin{longtable}[]{@{}lrrrrr@{}}
 
@@ -5215,14 +5254,22 @@ features.
 
 \section{Visual summaries}\label{sec-visual-summaries}
 
-Figure~\ref{fig-rwc-dotplot} shows stacked dot plots of the number of
-points scored by countries from the different hemispheres in Rugby World
-Cup matches.\footnote{Wilkinson (1999)} This data visualisation uses the
-same data as Figure~\ref{fig-boxplot}, but it maps raw data values
+Figure~\ref{fig-rwc-dotplot} shows a dot plot of the number of points
+scored by countries from the different hemispheres in Rugby World Cup
+matches.\footnote{The general idea of arranging overlapping dots so that
+  they are all visible, not just jittering them
+  (Section~\ref{sec-jitter}), goes back to Wilkinson (1999) and Tukey
+  (1977). The vertically-centred arrangement used here is also known as
+  a \emph{beeswarm plot} (Rosanbalm 2014).} This data visualisation uses
+the same data as Figure~\ref{fig-boxplot}, but it maps raw data values
 rather than data summaries and it uses much simpler data symbols (data
 points). This data visualisation encodes the number of points scored
 maps as the horizontal \textbf{position} of a data point and it encodes
 the hemisphere as the vertical \textbf{position} of a data point.
+
+There is an overplotting problem (Section~\ref{sec-overplot}), which is
+solved in this case by offsetting data symbols vertically for repeated
+data values.
 
 Because this data visualisation encodes raw data values as visual
 features, it is possible to decode raw data values from the visual
@@ -5258,19 +5305,20 @@ data symbols for southern-hemisphere teams appear shifted to the right
 of the data symbols for northern-hemisphere teams. In other words, we
 can perceive \textbf{visual summaries}; we can perceive \textbf{data
 summaries} from collections of visual features. For example, we can
-visually average the \textbf{positions} of the data points.
+visually average the \textbf{positions} of the data points.\footnote{The
+  ability to decode summary statistics from multiple visual objects is
+  known as \emph{ensemble perception}. Cui and Liu (2021) provides a
+  modern review.
+
+  A related concept is \emph{subitizing}, which is the ability to
+  rapidly identify the number of visual objects, though that only works
+  for very small numbers of objects (Ware 2021).}
 
 In Figure~\ref{fig-rwc-dotplot}, we have encoded raw data values as
 visual features, which has enabled us to decode raw data values from
 individual visual features. In addition, \textbf{visual summaries} of
 the visual features enable us to decode \textbf{data summaries} from
-collections of visual features
-(Figure~\ref{fig-data-vis-stat-decode}).\footnote{Need some references
-  to articles about ensembles in data vis lit (ideally NOT the scatter
-  plot one cos want to use that later for scatter plots). Mention
-  ``subitizing'' (rapid identification of counts below a certain
-  threshold) Ware 4th p 173. ALSO must relate this to Gestalt section in
-  visual model ?}
+collections of visual features (Figure~\ref{fig-data-vis-stat-decode}).
 
 \begin{figure}
 
@@ -5293,22 +5341,15 @@ also for perceving data summaries like clusters and outliers, and
 central tendency and spread.
 \end{quote}
 
-\textbf{ALSO MENTION} textures here? Ware 4th \textasciitilde p212 Large
-numbers of data symbols, especially in regular arrangement effectively
-create a set of textures that the visual system can identify and
-differentiate into regions(?) Refer back to
-Figure~\ref{fig-visual-model-demo}. May need to add something about
-texture as low-ish level visual feature back in visual model? NOTE that
-only small number of \emph{distint} textures are possible.
-
 \section{Case study: Histograms}\label{case-study-histograms}
 
 Figure~\ref{fig-hist} shows a histogram of the number of points scored
 by Tier One nations at the Rugby World Cups (Table~\ref{tbl-rwc-all}). A
 histogram is similar to a box plot in two ways: a histogram is a data
 visualisation that can be used to convey the distribution of a variable;
-and a histogram is a data visualisation that maps data summaries, rather
-than raw values, to visual features (Figure~\ref{fig-stat-vis-decode}).
+and a histogram is a data visualisation that maps \textbf{data
+summaries}, rather than raw values, to visual features
+(Figure~\ref{fig-stat-vis-decode}).
 
 However, a histogram differs from a box plot in two main ways: the data
 symbol for a histogram is simpler than a box plot, because it consists
@@ -5340,64 +5381,55 @@ Tier One nations at Rugby World Cups.}
 To be explicit, the values that are being mapped to visual features in
 Figure~\ref{fig-hist} are not raw data values, but data
 summaries---intervals and counts---as shown in
-Table~\ref{tbl-hist-stats}.
+Table~\ref{tbl-hist-stats}.\footnote{A bar plot can also be thought of
+  in terms of mapping data summaries rather than raw data. The data
+  values that are encoded as the lengths of bars in a bar plot are
+  tables of counts of raw data values; the raw data values are
+  individual observations of a single qualitative variable, such as the
+  ethnicity of a single youth offender.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0667}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0296}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0370}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0519}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 42\tabcolsep) * \real{0.0593}}@{}}
+  See this way, there are raw data values that cannot be decoded from a
+  bar plot. For example, information about an individual offender cannot
+  be decoded from a bar plot because all similar individuals are
+  represented together by a single bar data symbol.}
 
-\caption{\label{tbl-hist-stats}A table of intervals the cover the range
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{longtable}[t]{lrrrrrrrrrrrrr}
+
+\caption{\label{tbl-hist-stats}A table of intervals that cover the range
 of the number of points scored by Tier One nations in Rugby World Cup
 matches, along with the count of the number of points scored that fall
 within each interval. These data summaries are the values that are
 mapped to visual features to produce the histogram in
-Figure~\ref{fig-boxplot}.}
+Figure~\ref{fig-boxplot}. Not all intervals are shown for reasons of
+space.}
 
 \tabularnewline
 
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-interval & 0-5 & 5-10 & 10-15 & 15-20 & 20-25 & 25-30 & 30-35 & 35-40 &
-40-45 & 45-50 & 50-55 & 55-60 & 60-65 & 65-70 & 70-75 & 75-80 & 80-85 &
-85-90 & 90-95 & 95-100 & 100-105 \\
-count & 11 & 51 & 44 & 63 & 38 & 29 & 19 & 15 & 7 & 7 & 2 & 1 & 1 & 3 &
-0 & 1 & 0 & 0 & 0 & 1 & 1 \\
+\toprule
+ &  &  &  &  &  &  &  &  &  &  &  &  & \\
+\midrule
+interval & 0-5 & 5-10 & 10-15 & 15-20 & 20-25 & 25-30 & 30-35 & 35-40 & 40-45 & 45-50 & 50-55 & 55-60 & 60-65\\
+count & 11 & 51 & 44 & 63 & 38 & 29 & 19 & 15 & 7 & 7 & 2 & 1 & 1\\
+\bottomrule
 
 \end{longtable}
 
-As with a box plot, encoding data summaries as accurate visual features
-means that we can easily decode data summaries from the visual features.
-For a histogram, this means that we can easily compare the lengths of
-the bars, which means we can easily compare the relative counts of data
-values within each interval. For example, the longest bars represent the
-intervals that contain a relatively large count of data values, which
-tells us about the mode of the data (or the number of modes in the
-data). In Figure~\ref{fig-hist} we can see that the largest number of
-data values occur around 15 to 20 points and we can see that the number
-of data values in each interval drops more rapidly above the highest bar
-than below the highest bar. The latter tells us about the spread and/or
+\endgroup{}
+
+As with a box plot, encoding data summaries as accurate visual features,
+in this case \textbf{position} and \textbf{length}, means that we can
+easily decode data summaries from the visual features. For a histogram,
+this means that we can easily compare the lengths of the bars, which
+means we can easily compare the counts of data values within each
+interval. For example, the longest bars represent the intervals that
+contain a relatively large count of data values, which tells us about
+the mode of the data (or the number of modes in the data). In
+Figure~\ref{fig-hist} we can see that the largest number of data values
+occur around 15 to 20 points and we can see that the number of data
+values in each interval drops more rapidly above the highest bar than
+below the highest bar. The latter tells us about the spread and/or
 skewness of the data.
 
 \begin{quote}
@@ -5406,9 +5438,6 @@ of data values because it maps data summaries to basic visual features
 and those data summaries can be compared to provide information about
 the distribution of the data.
 \end{quote}
-
-\textbf{TODO} footnote acknowledge that bar plots are also actually
-visualisations of summaries; counts of individual data values.
 
 \section{Dangers of summaries}\label{sec-summary-caveats}
 
@@ -5434,11 +5463,15 @@ values because they do not map raw data values to data symbols.
 
 Another point to consider with a data visualisation that is based on
 data summaries is whether the data summaries provide reasonable
-summaries of the data.\footnote{Cite Anscombe's quartet and the dinosaur
-  one.} For example, Figure~\ref{fig-boxplot-concede} shows box plots of
-the number of points \emph{conceded} by each team in Rugby World Cup
-games. The box plot for southern hemisphere teams suggests a unimodal
-distribution with a slight right skew.
+summaries of the data.\footnote{The classic demonstration of the idea
+  that numerical summaries may not satisfactorily summarise the raw data
+  is Anscombe's quartet (Anscombe 1973). Matejka and Fitzmaurice (2017)
+  provide a more modern update, including Alberto Cairo's
+  \emph{datasaurus} (Cairo 2016a).} For example,
+Figure~\ref{fig-boxplot-concede} shows box plots of the number of points
+\emph{conceded} by each team in Rugby World Cup games. The box plot for
+southern hemisphere teams suggests a unimodal distribution with a slight
+right skew.
 
 \begin{figure}
 
@@ -5479,8 +5512,10 @@ A data visualisation that is based on data summaries can only be
 effective if the data summaries are sensible summaries of the data.
 \end{quote}
 
+\begin{quote}
 A box plot is \emph{not} effective if a five-number summary is not a
 sensible summary of the data values.
+\end{quote}
 
 A further complication arises with histograms because we have to
 \emph{choose} the intervals that are used to calculate the data
@@ -5494,7 +5529,11 @@ gaps at 1, 2, 4, and 5 points and a stronger suggestion of bimodality.
 There are also point totals that appear strangely low, like 11 and 14.
 
 Unlike a box plot, where the data summaries are essentially fixed
-calculations, for a histogram we get to choose the data summaries to
+calculations,\footnote{It is not true that there is only one way to
+  generate the data summaries for a box plot. McGill, Tukey, and Larsen
+  (1978) describe several early variants and \emph{letter-value plots}
+  are an example of a more modern adaptation (Hofmann, Wickham, and
+  Kafadar 2017).} for a histogram we get to choose the data summaries to
 some extent, which means that we get to choose the story that the data
 visualisation tells. Figure~\ref{fig-hist} tells a simpler story, but
 Figure~\ref{fig-hist-thin} tells a story that includes some important
@@ -5523,22 +5562,25 @@ intervals.}
 
 \section{Case study: How charts lie}\label{case-study-how-charts-lie}
 
-In this document, we assume that the purpose of a data visualisation is
-to faithfully and honestly encode data values and the goal is to produce
-a data visualisation that provides the most effective decoding of visual
-features (see Section~\ref{sec-scope}).
+In this book, we assume that the purpose of a data visualisation is to
+faithfully and honestly encode data values and the goal is to produce a
+data visualisation that provides the most effective decoding
+(Section~\ref{sec-scope}). Nevertheless, even less honest
+representations of data can also be thought of in terms of mappings,
+particularly mappings of data summaries.
 
-Nevertheless, less honest representations of data can also be described
-in terms of mappings, particularly mappings of data summaries.
-
-For example, \ldots{} Figure~\ref{fig-bars-at-zero}\footnote{This is a
+For example, Figure~\ref{fig-bars-at-zero} shows a bar plot of the
+predicted impact on the top tax rate in the United States from President
+George W. Bush to President Barack Obama.\footnote{This is a
   reproduction of a chart from Alberto Cairo's ``How Charts Lie''
   (p12-13), which itself was a reproduction of a chart shown by Fox
-  News. (plus mention other classic how charts lie books like Huff's How
-  to Lie With Statistics ?) Also link to Wilke's Principle of
-  Proportional Ink?} This does not encode the raw data as the lengths of
-the bars, but the raw data - 34. The top rate under Obama would be 39.6.
-Also does not help that the y-axis scale is not shown!
+  News.} One problem with this data visualisation is that it does not
+encode raw data values---the actual predicted top tax rates are 35 and
+39.6. Instead, a ``data summary'' of the tax rate \emph{minus 34} (the
+values 1 and 5.6) are encoded as the lengths of the two bars. We are
+unable to decode the raw data from this bar plot---we can only decode
+the data values that have been encoded---and this leads to an extreme
+exaggeration of the difference between the two top tax rates.
 
 \begin{figure}
 
@@ -5554,10 +5596,11 @@ to President Barack Obama.}
 
 \end{figure}%
 
-A data visualisation that encodes distorted data or one that leaves out
-an important subset of the data is encoding unhelpful values to visual
-features. It is only then possible to decode from visual features to
-unhelpful data values.
+A data visualisation that encodes a data summary that is a distortion of
+the data or an inappropriate subset of the data is encoding unhelpful
+information to visual features. It is only then possible to decode
+unhelpful information from the data visualisation
+(Figure~\ref{fig-lie-vis-decode}).
 
 \begin{figure}
 
@@ -5574,73 +5617,194 @@ than the real data.}
 
 \end{figure}%
 
-\section{Simplification}\label{simplification}
+\section{Visual downgrades}\label{sec-downgrade}
 
-deliberately losing information (e.g., luminance scale for quant)
+We have seen that a downside to mapping data summaries, rather than raw
+data values, is that we lose the ability to decode raw data values from
+data symbols. However, we pay this price in order to improve our ability
+to decode data summaries from the data symbols. For example, a boxplot
+makes it easier to decode the median of a set of data values.
 
-``Why Shouldn't All Charts Be Scatter Plots? Beyond Precision-Driven
-Visualizations'' Bertini et al (2021) Claims that ordinal comparisons
-more common in practice than quantitative comparisons (?)
+By mapping data summaries, we deliberately lose the ability to decode
+raw data values in order to gain the ability to decode data summaries.
 
-This nice quote \ldots{}
+Another way that we may deliberately lose information is by selecting a
+visual feature that does not allow complete decoding of the original
+data values.
 
-\begin{quote}
-Graphics are for comparison - comparison of one kind or another - not
-for access to individual amounts. (Tukey 1993)
-\end{quote}
+For example, Figure~\ref{fig-downgrade} shows the crime rate for 2021 in
+each police district of New Zealand. The data values for this map are
+shown in Table~\ref{tbl-map-data}.
 
-\ldots{} points out that reading individual values off a plot is not
-usually the point of a data vis, though it is still a precursor to
-making a comparison. In some ways, ordinal comparisons are more
-important than interval or ratio?
+\begin{longtable}[]{@{}lr@{}}
 
-\begin{itemize}
-\item
-  For a footnote \ldots{}
+\caption{\label{tbl-map-data}The average crime rate over the period 2011
+to 2021 for each police district of New Zealand.}
 
-  ``Chart and Graphs'' Karsten (1925)
+\tabularnewline
 
-  This is the source of the ``insult to man's intelligence'' remark
-  about pie charts, though note the full quote:
+\toprule\noalign{}
+district & rate \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Auckland City & 0.32 \\
+Bay of Plenty & 0.62 \\
+Canterbury & 0.38 \\
+Central & 0.56 \\
+Counties/Manukau & 0.39 \\
+Eastern & 0.66 \\
+Northland & 0.61 \\
+Southern & 0.49 \\
+Tasman & 0.62 \\
+Waikato & 0.46 \\
+Waitematā & 0.28 \\
+Wellington & 0.33 \\
 
-  ``In a sense, it might be construed as an insult to a man's
-  intelligence to show him a pie-chart, but the insult is not often
-  resented. For if your main object be to get a story across, you are
-  justified in taking that means which will encounter least resistance,
-  and in making your story as simple as possible. For publicity
-  purposes, the pie-chart is therefore almost invariably better than the
-  bar.'' {[}p98{]}
-\end{itemize}
+\end{longtable}
+
+The data symbols in Figure~\ref{fig-downgrade} are circles with the
+geographic location of the (centre of the) police district mapped to the
+position of the circles and the crime rate mapped to the (fill) colour,
+particularly the luminance, of the circles. Darker circles represent
+higher crime rates.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/summaries_files/figure-pdf/fig-downgrade-1.pdf}
+
+}
+
+\caption{\label{fig-downgrade}A map of New Zealand with .}
+
+\end{figure}%
+
+We know that encoding the crime rate as luminance is not an appropriate
+encoding for quantitative data values
+(Section~\ref{sec-quant-features}). The best we can decode is ordinal
+data values from the luminance of the circles
+(Section~\ref{sec-qual-features}).
+
+However, we may accept this loss of information in order to gain the
+ability to decode the geographic position of the police districts. For
+example, although we cannot decode exact crime rates, we are able to see
+that the higher crime rates correspond to more rural areas; the lighter
+circles appear in the urban regions that include New Zealand's largest
+cities: Auckland, Wellington, and Christchurch.
+
+In Figure~\ref{fig-downgrade}, we can only decode to \textbf{data
+summaries} of the crime rate because we an only decode the
+\textbf{ranking} of the crime rates, not individual numeric crime rates
+and not numeric differences between crime rates
+(Figure~\ref{fig-data-vis-stat}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/data-vis-stat.png}
+
+}
+
+\caption{\label{fig-data-vis-stat}A data visualisation may encode data
+values as a visual feature that does not allow decoding back to the
+original data values. Instead, it is only possible to decode summaries
+of the data.}
+
+\end{figure}%
+
+On the other hand, this loss of information is acceptable if the
+decoding still allows us to make useful comparisons. Put more strongly,
+the numeric comparisons that we lose access to may not be the most
+important decodings, so the loss may not be that important.\footnote{Bertini,
+  Correll, and Franconeri (2020) argue that ordinal comparisons are more
+  commonly useful in practice than quantitative comparisons.
+
+  ``1. Graphics are for the qualitative/descriptive---conceivably the
+  semiquantitative---never for the carefully quantitative.''
+
+  ``2. Graphics are for comparison-comparison of one kind or another -
+  not for access to individual amounts.''
+
+  Tukey (1993)}
+
+For comparison, Figure~\ref{fig-no-downgrade} shows a simple bar plot of
+the same crime rates. In this data visualisation, although we can decode
+and compare the numeric crime rates much more accurately, the
+rural/urban comparison is much more difficult.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/summaries_files/figure-pdf/fig-no-downgrade-1.pdf}
+
+}
+
+\caption{\label{fig-no-downgrade}A bar plot of the crime rate for 2021
+in each police district of New Zealand.}
+
+\end{figure}%
 
 \section{Case study: Heatmaps}\label{case-study-heatmaps}
 
 Heatmaps are a common way of representing three-dimensional data where
 two of the data variables are either qualitative or have been measured
-on a regular grid. The latter two variables naturally map to horizontal
-and vertical \textbf{position} to produce an array of rectangles, while
-the third variable maps to \textbf{colour} (see
-Figure~\ref{fig-crime-heatmap}).
+on a regular grid and the third variable is \textbf{quantitative}. The
+first two variables naturally map to horizontal and vertical
+\textbf{position} to produce an array of rectangles, while the third
+variable maps to \textbf{colour}.
 
-The mappings from data values to visual features for a heatmap are
-\ldots{}
+We saw an example of a heatmap in Figure~\ref{fig-crime-heatmap} and
+Figure~\ref{fig-nomads-purple} shows another example that is a variation
+on Figure~\ref{fig-nomads-rainbow} and Figure~\ref{fig-nomads-viridis}.
 
-colour is not quant but can convey trends
+\begin{figure}
 
-using luminance for quant, but not trying for accurate decoding of
-individual data values, BUT mention effectiveness of luminance in
-heatmap for ensemble perception of regions?
+\centering{
 
-get contrast effect but again not typically trying to match cells
+\includegraphics[width=.5\textwidth]{Data/Weather/NOMADS-purple.png}
 
-get regions/shapes of colour =\textgreater{} higher-level structures
+}
 
-talk about colour palettes that have deliberate colour boundaries to
-emphasise structure - combination of order and category
+\caption{\label{fig-nomads-purple}A snapshot of wind strength in the
+vicinity of New Zealand on September 14 2024. This uses the same data as
+Figure~\ref{fig-visual-model-demo}, but does not show wind direction.}
+
+\end{figure}%
+
+The use of colour to encode quantitative data values is not optimal for
+accuracy (Section~\ref{sec-quant-features}). However, as we saw in
+Section~\ref{sec-downgrade}, as long as the colour scheme has monotonic
+luminance and/or chroma changes, it is still possible to decode ordinal
+values.
+
+Furthermore, we are able to decode useful visual summaries from the
+multiple rectangle data symbols on a heat map
+(Section~\ref{sec-visual-summaries}). For example, we can identify
+regions of darker or lighter colours, not just individual dark or light
+rectangles.\footnote{Correll et al. (2012) provide evidence for superior
+  ensemble perception of ``high'' regions within a time series from
+  ``colour fields'' (heatmaps) compared to traditional time series line
+  plots.}
+
+On the downside, because each rectangle in a heatmap is surrounded by
+other rectangles of differing colours, it is difficult to accurately
+decode the colours of individual rectangles
+(Section~\ref{sec-colour-relative}).
+
+In the case of a heatmap, ordinal comparisons are typically what is of
+most importance. The aim is \emph{not} to be able to decode individual
+quantitative data values and this moderates the damage that is done by
+relative perception of the heatmap rectangles.
 
 \section{Cognitive load}\label{cognitive-load}
 
-On page 46 of his book ``How the World Really Works'' (Smil 2022),
-Vaclav Smil writes that:
+Consider the following sentence about changes in global malnutrition
+rates:\footnote{(Smil 2022, 46)}
 
 ``rising food production reduced the malnutrition rate from 2 in 3
 people in 1950 to 1 in 11 by 2019''
@@ -5671,6 +5835,9 @@ We can reduce the cognitive load further if we present the results of
 the calculation directly and even further if we encode the results of
 the calculation as simple visual features.
 
+In other words, we can calculate \textbf{data summaries} or we can force
+the viewer to perform \textbf{visual summaries}.
+
 Conversely, we can add to the cognitive load if we make the visual
 calculations harder. For example, Figure~\ref{fig-cog-load-hi} shows a
 bar plot of the original ``2 in 3'' versus ``1 in 11'' data values. We
@@ -5692,7 +5859,13 @@ comparing the two bars in Figure~\ref{fig-cog-load}.
 
 We ideally want to present data in a way that imposes the least
 cognitive load on the viewer. In terms of Section~\ref{sec-tasks}, we
-want to present the viewer with simple \textbf{visual tasks}.
+want to present the viewer with simple \textbf{visual tasks}.\footnote{The
+  10 data visualisation tasks in Amar, Eagan, and Stasko (2005) all
+  correspond to some sort of numerical summary of the data. We can
+  choose to perform the numerical summary and then visualise the result,
+  or we can choose to present the raw data and ask the viewer to perform
+  a visual summary. We should choose whichever will be easier for the
+  viewer.}
 
 The best data visualisation will be different for different questions of
 interest, but if the question of interest involves comparing data
@@ -5715,15 +5888,15 @@ distribution of a set of data values.
 
 Some data visualisations, like box plots and histograms, are effective
 because they map \textbf{data summaries} to visual features. This makes
-it easy to perceive and compare data summaries.
+it easy to decode and compare data summaries.
 
 Care must be taken to use data summaries that appropriately summarise
 the data values.
 
 When we map raw data values to visual features, like in a dot plot, the
-perception of individual visual features allows us to perceive and
-compare raw data values, but, in addition, \textbf{visual summaries} of
-\emph{collections} of visual features allow us to perceive and compare
+encoding to individual visual features allows us to decode and compare
+raw data values, but, in addition, \textbf{visual summaries} of
+\emph{collections} of visual features allow us to decode and compare
 data summaries.
 
 A box plot that maps data summaries to visual features is more effective
@@ -6565,6 +6738,11 @@ with CVD (Section~\ref{sec-CVD}). Having a secondary decoding alongside
 colour allows for the fact that the colour decoding may fail for some
 viewers.
 
+\textbf{TODO} one argument against redundancy is that each individual
+feature may not be as effective as it would be on its own because it is
+not the ONLY change happening. Example is the colour and size used in
+Fig 2 of letter-value plots Hofmann et al
+
 \section{Case study: log-log plots}\label{case-study-log-log-plots}
 
 Involves non-linear scales, but the point is the shape that you (hope
@@ -7078,6 +7256,10 @@ he/she is''
 
 And other variations on boxplots
 
+First point out that a boxplot is really a visual shape: multiple data
+summaries generate a single ``box'' data symbol. Although it is still
+very easy to decode individual data summaries from the box shape.
+
 \begin{itemize}
 \tightlist
 \item
@@ -7412,8 +7594,9 @@ points scored (the right-hand height of the shape). As we have seen
 before, ordering data symbols can make a big difference
 (Section~\ref{sec-distance-effect}).
 
-\section[Facetting]{\texorpdfstring{Facetting\footnote{trellis
-  multi-panels, ggplot2 facets, GoG ??}}{Facetting}}\label{sec-facetting}
+\section{Facetting}\label{sec-facetting}
+
+\textbf{TODO} refer back to enclosure in visual-model.Rmd
 
 Figure~\ref{fig-facet-before} shows a line plot of the number of youth
 offenders per year in different Police Districts of New Zealand. This
@@ -7443,7 +7626,8 @@ offenders per year in different Police Districts of New Zealand, from
 
 \end{figure}%
 
-Figure~\ref{fig-facet-after} shows one solution: a facetted plot. Each
+Figure~\ref{fig-facet-after} shows one solution: a facetted
+plot.\footnote{trellis multi-panels, ggplot2 facets, GoG ??} Each
 district has been encoded as a \textbf{position in space} and we draw a
 separate plot for each district. This makes it very easy to distinguish
 the individual districts.
@@ -7743,38 +7927,10 @@ one way to decode to absolute data values (rather than just relative)
 
 \section{Case study: Choropleth maps}\label{sec-choropleth}
 
-Figure~\ref{fig-map} shows a choropleth map of the average crime rate,
-over the period from 2011 to 2021, in each police district of New
-Zealand.\footnote{Add citations to MacEachren and Bertin and Dan Carr ?}
-The data values for this map are shown in Table~\ref{tbl-map-data}.
-
-\begin{longtable}[]{@{}lr@{}}
-
-\caption{\label{tbl-map-data}The average crime rate over the period 2011
-to 2021 for each police district of New Zealand.}
-
-\tabularnewline
-
-\toprule\noalign{}
-district & rate \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Auckland City & 0.32 \\
-Bay of Plenty & 0.62 \\
-Canterbury & 0.38 \\
-Central & 0.56 \\
-Counties/Manukau & 0.39 \\
-Eastern & 0.66 \\
-Northland & 0.61 \\
-Southern & 0.49 \\
-Tasman & 0.62 \\
-Waikato & 0.46 \\
-Waitematā & 0.28 \\
-Wellington & 0.33 \\
-
-\end{longtable}
+Figure~\ref{fig-map} shows a choropleth map of the crime rate for 2021
+in each police district of New Zealand.\footnote{Add citations to
+  MacEachren and Bertin and Dan Carr ?} The data values for this map are
+shown in Table~\ref{tbl-map-data}.
 
 The data symbol in Figure~\ref{fig-map} is a polygon representing the
 geographic boundary of each police district. This implicitly entails an
@@ -7966,7 +8122,20 @@ complex and interesting images may attract attention to the data
 visualisation as a whole and there is some evidence that such
 annotations improve the memorability of a data visualisation.\footnote{Links
   to studies that try to show benefits of chart junk. Rahman et al
-  (2024) Mention affect (emotion) study?}
+  (2024) Mention affect (emotion) study?
+
+  ``Chart and Graphs'' Karsten (1925)
+
+  This is the source of the ``insult to man's intelligence'' remark
+  about pie charts, though note the full quote:
+
+  ``In a sense, it might be construed as an insult to a man's
+  intelligence to show him a pie-chart, but the insult is not often
+  resented. For if your main object be to get a story across, you are
+  justified in taking that means which will encounter least resistance,
+  and in making your story as simple as possible. For publicity
+  purposes, the pie-chart is therefore almost invariably better than the
+  bar.'' {[}p98{]}}
 
 \begin{quote}
 Chart junk can be effective because it has a greater emotional impact
@@ -9380,6 +9549,9 @@ Figure~\ref{fig-map-alt-2}, is the distracting complexity that results.
 
 \section{Consistent mappings}\label{consistent-mappings}
 
+\textbf{TODO} Refer back to congruence and dissonance in congruence.Rmd
+and differences and similarities in visual-model.Rmd
+
 Figure~\ref{fig-rep-none} shows a variation on
 Figure~\ref{fig-rep-guide} with a modified legend. In this plot, the
 hemisphere of a country is encoded using orange and green within the
@@ -9496,7 +9668,11 @@ data symbols in the main plot and in the legend, and de-emphasises the
 axes and labels. Our attention is drawn to the darker and more saturated
 elements first (Section~\ref{sec-attention}), with the other elements in
 the background, which we can focus on if we need the additional
-information.\footnote{CRAP contrast}
+information.\footnote{CRAP contrast A larger difference is better
+  because it suggests a larger difference in importance. A small
+  difference suggests a less important difference. Also, a small
+  difference is more confusing, distracting, and unpleasant. Like a
+  background hum (c.f. Robbins)}
 
 By comparison, in Figure~\ref{fig-rep-double} there is a similar visual
 impact from all elements of the plot, so it is less clear where to look
@@ -9559,9 +9735,15 @@ World Cup.}
 
 \end{figure}%
 
+\textbf{TODO} an example of complementary colours providing greater
+contrast than analogous colours (Section~\ref{sec-harmony}).
+
 Section~\ref{sec-differences}
 
-\section{Distractions}\label{distractions}
+\section{Dangers of mapping
+importance}\label{dangers-of-mapping-importance}
+
+Distractions
 
 Add examples of making the WRONG thing important (e.g., use thick lines
 on bar borders or bright colours on unimportant elements) ?
@@ -9595,6 +9777,16 @@ Position is especially important
 
 \markboth{Review}{Review}
 
+Do two versions (at least):
+
+\begin{itemize}
+\item
+  Set of questions for when you already have a plot and want to
+  understand why it works or not
+\item
+  Another set for if you want to create a data vis
+\end{itemize}
+
 Add review at the end that reinforces the threads like visual feature,
 visual shape, visual object and mappings
 
@@ -9606,13 +9798,18 @@ Basic questions:
   What are you asking the visual system to do?
 \item
   Is the visual system good at that task?
+\item
+  Are you asking the viewer to produce visual summaries when it would be
+  easier to produce data summaries?
 \end{itemize}
 
 Present process by which a data vis can be broken down. What data
 symbols are being used? (simple or complex) What mappings are being
 used? What do we want to decode? (data or summaries) If mapping back to
 raw data, are the mappings accurate? What can be mapped back to? Are
-mappings congruent with data? \ldots{}
+mappings congruent with data?
+
+\ldots{}
 
 \begin{itemize}
 \item
@@ -9630,6 +9827,10 @@ mappings congruent with data? \ldots{}
 List of questions to evaluate a data vis (maybe nest these a bit):
 
 \begin{itemize}
+\item
+  What do you want the viewer to be able to decode?
+\item
+  Do the mappings support that goal?
 \item
   What are the data variables
 \item
@@ -9682,6 +9883,11 @@ Components of Analytic Activity in Information Visualization.''} In
 \emph{Proceedings of the Proceedings of the 2005 IEEE Symposium on
 Information Visualization}, 15. INFOVIS '05. USA: IEEE Computer Society.
 \url{https://doi.org/10.1109/INFOVIS.2005.24}.
+
+\bibitem[\citeproctext]{ref-Anscombe1973}
+Anscombe, Francis J. 1973. {``Graphs in Statistical Analysis.''}
+\emph{The American Statistician} 27 (1): 17--21.
+\url{https://doi.org/10.1080/00031305.1973.10478966}.
 
 \bibitem[\citeproctext]{ref-Appelle1972}
 Appelle, Stuart. 1972. {``Perception and Discrimination as a Function of
@@ -9756,13 +9962,23 @@ Information Graphics and Visualization}. New Riders.
 ---------. 2014. {``Ethical Infographics: In Data Visualization,
 Journalism Meets Engineering.''} \emph{The IRE Journal} 37 (2): 25.
 
+\bibitem[\citeproctext]{ref-datasaurus}
+---------. 2016a. {``Download the Datasaurus: Never Trust Summary
+Statistics Alone; Always Visualize Your Data.''}
+\url{http://www.thefunctionalart.com/2016/08/downloaddatasaurus-never-trust-summary.html}.
+
 \bibitem[\citeproctext]{ref-cairo2016truthful}
----------. 2016. \emph{The Truthful Art: Data, Charts, and Maps for
+---------. 2016b. \emph{The Truthful Art: Data, Charts, and Maps for
 Communication}. 1st ed. San\,Francisco, CA: New Riders.
 
 \bibitem[\citeproctext]{ref-cairo2019howchartslie}
 ---------. 2019. \emph{How Charts Lie: Getting Smarter about Visual
 Information}. First. New York: W.~W. Norton \& Company.
+
+\bibitem[\citeproctext]{ref-card1999readings}
+Card, Stuart K., Jock D. Mackinlay, and Ben Shneiderman. 1999.
+\emph{Readings in Information Visualization: Using Vision to Think}. San
+Francisco, CA: Morgan Kaufmann.
 
 \bibitem[\citeproctext]{ref-carpenter1998graph}
 Carpenter, Patricia A., and Priti Shah. 1998. {``A Model of the
@@ -9807,6 +10023,19 @@ contributors, Wikipedia. 2025. {``Visual System.''} In \emph{Wikipedia}.
 Cook, Dianne, and Deborah F. Swayne. 2007. \emph{Interactive and Dynamic
 Graphics for Data Analysis: With r and GGobi}. 1st ed. Use r! Springer
 New York. \url{https://doi.org/10.1007/978-0-387-71762-3}.
+
+\bibitem[\citeproctext]{ref-correll-heatmap-ensemble}
+Correll, Michael, Danielle Albers, Steven Franconeri, and Michael
+Gleicher. 2012. {``Comparing Averages in Time Series Data.''} In
+\emph{Proceedings of the SIGCHI Conference on Human Factors in Computing
+Systems}, 1095--1104. CHI '12. New York, NY, USA: Association for
+Computing Machinery. \url{https://doi.org/10.1145/2207676.2208556}.
+
+\bibitem[\citeproctext]{ref-cui2021synergy}
+Cui, Lucy, and Zili Liu. 2021. {``Synergy Between Research on Ensemble
+Perception, Data Visualization, and Statistics Education: A Tutorial
+Review.''} \emph{Attention, Perception, and Psychophysics} 83 (3):
+1290--1311. \url{https://doi.org/10.3758/s13414-020-02212-x}.
 
 \bibitem[\citeproctext]{ref-10.1109ux2fTVCG.2022.3226463}
 Davis, Russell, Xiaoying Pu, Yiren Ding, Brian D. Hall, Karen Bonilla,
@@ -9895,6 +10124,12 @@ Both Area and Height to Extract Information.''} \emph{Information
 Visualization} 24 (3): 227--45.
 \url{https://doi.org/10.1177/14738716251315912}.
 
+\bibitem[\citeproctext]{ref-letter-value}
+Hofmann, Heike, Hadley Wickham, and Karen Kafadar. 2017. {``Letter-Value
+Plots: Boxplots for Large Data.''} \emph{Journal of Computational and
+Graphical Statistics} 26 (3): 469--77.
+\url{https://doi.org/10.1080/10618600.2017.1305277}.
+
 \bibitem[\citeproctext]{ref-howe2005muller}
 Howe, Piers D. L., and Dale Purves. 2005. {``The m{ü}ller-Lyer Illusion
 Explained by the Statistics of Image--Source Relationships.''}
@@ -9982,6 +10217,13 @@ Processing in the Brain.''} \emph{Trends in Cognitive Sciences} 9 (6):
 296--305.
 https://doi.org/\url{https://doi.org/10.1016/j.tics.2005.04.010}.
 
+\bibitem[\citeproctext]{ref-MatejkaFitzmaurice2017}
+Matejka, Justin, and George Fitzmaurice. 2017. {``Same Stats, Different
+Graphs: Generating Datasets with Varied Appearance and Identical
+Statistics Through Simulated Annealing.''} In \emph{Proceedings of the
+2017 CHI Conference on Human Factors in Computing Systems}, 1290--94.
+ACM. \url{https://doi.org/10.1145/3025453.3025912}.
+
 \bibitem[\citeproctext]{ref-DVS}
 Matzen, Laura E., Michael J. Haass, Kristin M. Divis, Zhiyuan Wang, and
 Andrew T. Wilson. 2018. {``Data Visualization Saliency Model: A Tool for
@@ -9994,6 +10236,11 @@ McColeman, Caitlyn M., Fumeng Yang, Timothy F. Brady, and Steven
 Franconeri. 2022. {``Rethinking the Ranks of Visual Channels.''}
 \emph{IEEE Transactions on Visualization and Computer Graphics} 28 (1):
 707--17. \url{https://doi.org/10.1109/TVCG.2021.3114684}.
+
+\bibitem[\citeproctext]{ref-boxplot-variations}
+McGill, Robert, John W. Tukey, and Wayne A. Larsen. 1978. {``Variations
+of Box Plots.''} \emph{The American Statistician} 32 (1): 12--16.
+\url{http://www.jstor.org/stable/2683468}.
 
 \bibitem[\citeproctext]{ref-MCKEE198425}
 Mckee, Suzanne P., and Ken Nakayama. 1984. {``The Detection of Motion in
@@ -10069,6 +10316,11 @@ NJ: Wiley-Interscience.
 Robinson, Arthur H., and Barbara Bartz Petchenik. 1976. \emph{The Nature
 of Maps: Essays Toward Understanding Maps and Mapping}. Chicago:
 University of Chicago Press.
+
+\bibitem[\citeproctext]{ref-rosanbalm2014beeswarm}
+Rosanbalm, Shane. 2014. {``A Strip Plot Gets Jittered into a
+Beeswarm.''} In \emph{Proceedings of the SouthEast SAS Users Group
+(SESUG) Conference}. Myrtle Beach, SC.
 
 \bibitem[\citeproctext]{ref-annurev:ux2fcontentux2fjournalsux2f10.1146ux2fannurev-vision-082114-035733}
 Rosenholtz, Ruth. 2016. {``Capabilities and Limitations of Peripheral
@@ -10198,10 +10450,20 @@ Evidence and Narrative}. Cheshire, CT: Graphics Press.
 ---------. 2006. \emph{Beautiful Evidence}. Cheshire, CT: Graphics
 Press.
 
+\bibitem[\citeproctext]{ref-tukey1977eda}
+Tukey, John W. 1977. \emph{Exploratory Data Analysis}. Reading, MA:
+Addison-Wesley.
+
 \bibitem[\citeproctext]{ref-tukey-1990}
-Tukey, John W. 1990. {``Data-Based Graphics: Visual Display in the
-Decades to Come.''} \emph{Statistical Science} 5 (3): 327--39.
+---------. 1990. {``Data-Based Graphics: Visual Display in the Decades
+to Come.''} \emph{Statistical Science} 5 (3): 327--39.
 \url{http://www.jstor.org/stable/2245820}.
+
+\bibitem[\citeproctext]{ref-graphic-comparisons}
+---------. 1993. {``Graphic Comparisons of Several Linked Aspects:
+Alternatives and Suggested Principles.''} \emph{Journal of Computational
+and Graphical Statistics} 2 (1): 1--33.
+\url{https://doi.org/10.1080/10618600.1993.10474595}.
 
 \bibitem[\citeproctext]{ref-TVERSKY2002247}
 Tversky, Barbara, Julie Bauer Morrison, and Mireille Betrancourt. 2002.
@@ -10270,6 +10532,10 @@ York: Springer.
 Wolfe, Jeremy M., and Todd S. Horowitz. 2017. {``Five Factors That Guide
 Attention in Visual Search.''} \emph{Nature Human Behaviour} 1 (3):
 0058. \url{https://doi.org/10.1038/s41562-017-0058}.
+
+\bibitem[\citeproctext]{ref-wu2024designspecifictransformationsvisualization}
+Wu, Eugene, and Remco Chang. 2024. {``Design-Specific Transformations in
+Visualization.''} \url{https://arxiv.org/abs/2407.06404}.
 
 \bibitem[\citeproctext]{ref-RJ-2023-071}
 Zeileis, Achim, and Paul Murrell. 2023. {``Coloring in r's Blind
