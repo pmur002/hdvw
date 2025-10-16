@@ -8,37 +8,49 @@ source("common.R")
 # Combining Mappings
 
 Most data visualisations involve more than one data variable.
-For example, the bar plot in @fig-bar involves data on the **ethnic
-group** of offenders and data on the **count** of
-offenders in each ethnic group.
+For example, the bar plot in @fig-bar-gender involves data on the **gender** 
+of offenders and data on the **count** of
+offenders for each gender.
 
-In @fig-bar, each data value is mapped to a **visual feature** of a data symbol
+```{r}
+#| echo: false
+#| label: fig-bar-gender
+#| fig-cap: A bar plot of the total number of male offenders and the total number of female offenders in New Zealand from 2011 to 2021.
+ggplot(crimeGenderTotal) + 
+    geom_col(aes(y=total, x=gender)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    labs(title="Youth Offenders in New Zealand",
+         subtitle="2011 to 2021") +
+    theme(aspect.ratio=1,
+          axis.title=element_blank())
+```
+
+In @fig-bar-gender, 
+each data value is mapped to a **visual feature** of a data symbol
 (@fig-visual-feature).  For example, 
-the ethnic group is encoded as the vertical **position** of the bars
+the gender is encoded as the horizontal **position** of the bars
 and the count of offenders is encoded as the **length** of the bars.
 
 We have so far only looked at mappings from data values to visual features
-in isolation.  For example, we know that the mapping from ethnic group to 
+in isolation.  For example, we know that the mapping from gender to 
 position is effective because position is 
 appropriate for qualitative data and position has sufficient capacity
-to differentiate between four ethnic groups.
+to differentiate between two genders.
 We also know that mapping the count
 of offenders to length is effective because length
 is appropriate for quantitative data and length provides an accurate
 decoding.
-Furthermore, the lengths of the bars are all aligned (they
-have a common baseline) and the bars only differ in ways that
-reflect differences in the data (the bars all have the same width and colour).
 
 In this chapter, we begin to consider what happens when mappings are
 used in combination.  For a start, we will just extend our 
 thinking to data visualisations that involve mapping **two** data variables
-to **two** visual features, like ethnic group and count to position and
+to **two** visual features, like gender and count to position and
 length.
 Furthermore, we will restrict ourselves to mappings 
 where each pair of data values 
 are encoded as a single data symbol (@fig-two-visual-features).
-For example, each combination of ethnic group and count produces a single
+For example, in @fig-bar-gender,
+each combination of gender and count produces a single
 bar.
 
 ::: {#fig-two-visual-features}
@@ -62,14 +74,6 @@ features (`a` and `b`) of a **single** data symbol.
 
 ## Independent visual features
 
-**TODO** 
-refer back to @sec-cartesian and @sec-ternary.
-Get emergent feature of position within triangle
-from interaction of three position encodings
-([Combining Mappings](combine.html))
-=> overall proportion combination retrievable
-IF you can decode position within triangle
-
 A bar plot involves encoding a qualitative variable as bar **position**
 and a quantitative variable as bar **length** (e.g., @fig-bar).
 We know that each visual feature is effective on its own---we can 
@@ -81,15 +85,25 @@ Our perception of the horizontal **length** of the bars is not
 affected by the vertical **position** of the bars.[^independent-lie]
 
 [^separable]:
-    Refer to the literature that talks about separable and integral AND 
-    configural visual features.
-    e.g., carswell and wickens (1990) looks at configural
+    Independent visual features are called *separable*, in contrast to
+    *integral* features that interact.
+    An early use of these terms in the context of data visualisation
+    (or at least *statistical graphics*) 
+    is @carswell-wickens-88.
+
+    A further distinction is made for *configural* visual features, which are
+    combinations that interact, but still allow decoding of the
+    individual visual features [@carswell1990perceptual].
+
+    These ideas can be traced back to the much less readable 
+    @garner1974processing.
 
 [^independent-lie]:
-    Technically, there is an interaction because lengths that are further apart
-    from each other vertically are harder to compare (see @sec-distance-effect).
+    To be honest, there is an interaction between position and length
+    because lengths that are further apart
+    from each other vertically are harder to compare (@sec-distance-effect).
     However, compared to visual features that strongly interact, length
-    and position are reasonably independent.
+    and position are relatively independent.
 
 @fig-bar-colour demonstrates that we can also add **colour** to the mix 
 without creating any interactions between visual features.
@@ -99,11 +113,14 @@ affect our ability to perceive that they have different lengths.
 ```{r}
 #| echo: false
 #| label: fig-bar-colour
-#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot come from mapping ethnic group to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
-ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total, y=group, fill=group)) +
-    scale_x_continuous(expand=expansion(c(0, .05))) +
+#| fig-cap: A bar plot of the total number of male offenders and the total number of female offenders. The data symbols in this plot come from mapping gender to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
+ggplot(crimeGenderTotal) + 
+    geom_col(aes(x=gender, y=total, fill=gender)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    labs(title="Youth Offenders in New Zealand",
+         subtitle="2011 to 2021") +
     theme(aspect.ratio=1,
+          axis.title=element_blank(),
           legend.position="none")
 ```
 
@@ -123,8 +140,8 @@ team was weak and was always being attacked;  and more disciplinary **cards**
 #| echo: false
 #| message: false
 #| label: tbl-rwc-2023
-#| tbl-cap: Performance measures for all twenty teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.
-kable(RWCperGame, digits=1, row.names=FALSE)
+#| tbl-cap: Performance measures for teams at the 2023 Rugby World Cup. Each measure is a per-game average because some teams played more games than others.  There are 20 teams in total, with only the first 6 shown here.
+kable(head(RWCperGame), digits=1, row.names=FALSE)
 ```
 
 @fig-scatter shows a scatter plot of the number of "clean breaks" per game
@@ -164,37 +181,29 @@ For example, we can easily see that one team scored a little over
 
 However, there is something else going on in the scatter plot.
 The two explicit encodings---horizontal and vertical position---**interact** 
-to create an additional visual feature:[^integral]
+to create an additional **emergent** visual feature:
 **position in space** (@fig-interact).[^emergent-features]
 For example, we can perceive not only horizontal and vertical
 distances between data points, but also euclidean distances between
 data points ("as the crow flies").
 
 [^emergent-features]:
-    Relate this to mentions in literature of "emergent features", e.g.,
-    @pomerantz1994emergent.  Acknowledge that my use is a little loose
-    because the use in the literature is really about separate data symbols
-    combining to create emergent features (like clusters?).
-    MacEachren 1995 uses emergent as "configural"
-    (integral, but still also separable) 
-    "Vision Science: Photons to Phenomenology" Stephen Palmer,
-    Figure 2.1.5 caption "The arrangement of several dots in a line give
+    The use of *emergent* visual features in this book, to describe
+    the result of *integral* (or *configural*) 
+    visual features interacting, 
+    corresponds loosely to various usages of *emergent* in the literature.
+    
+    @maceachren1995how uses *emergent* in this way, but,
+    for example, @Cragin2015-CRAEFA and @palmer1999vision 
+    use *emergent* more to describe
+    visual features that arise from combinations of separate visual
+    objects (data symbols).
+
+    "The arrangement of several dots in a line give
     rise to emergent properties, such as length, orientation, and
     curvature, that are different from the properties of the dots that
-    compose it."
+    compose it." [@palmer1999vision, fig. 2.1.5]
   
-    NOTE that 
-    "Emergent features and feature combination"
-    Pomerantz and Cragin (2014)
-    (is this the same as @pomerantz1994emergent ???)
-    explicitly differentiate between (fast) emergent features and
-    "normal" (slow) feature integration that I am loosely using here.
-
-[^integral]:
-    Need citations to literature that mention integral visual features.
-    Admit a range rather than a dichotomy.
-    Munzner has good examples?
-
 ::: {#fig-interact}
 ::: {.content-visible when-format=pdf layout-ncol=2}
 \includegraphics[scale=0.5]{Diagrams/data-vis-vis.png}
@@ -221,19 +230,18 @@ Furthermore, our visual system allows us to decode **visual summaries**
 (see @fig-visual-corr).[^ensemble-corr]
 For example, in @fig-scatter we can easily see a positive 
 **correlation** between the number of clean breaks and the number of
-tries scored.  We can also easily see **clusters** of data points;
+tries scored.  The points lie roughly along a line from bottom-left to
+top-right.
+
+We can also easily see **clusters** of data points;
 the four data points in the top-right corner of the plot appear separate 
 from the other data points because they share a similar
-position in space (see @sec-visual-model-groups).
+position in space (@sec-visual-model-groups).
 
 [^ensemble-corr]:
-  Citations to literature on ensembles again, this time specifically to
-  correlation in scatter plots.
-  Talk about how, although there is some experimental support for reasonable
-  accuracy of correlation from scatter plot (with some bias - 
-  specifically underestimation),
-  there is not much experimental evidence for which is best 
-  for perceiving correlations Eg scatter plot vs parallel coords etc
+    The ability to decode correlations from scatter plots is 
+    another example of *ensemble* perception [@ensemble-scatter; 
+    @rensink2017nature].
 
 ::: {#fig-visual-corr}
 ::: {.content-visible when-format=pdf layout-ncol=2}
@@ -250,6 +258,10 @@ allow us to decode raw data values and the emergent features
 allow us to decode data summaries.
 :::
 
+> One reason why a scatter plot is effective at conveying relationships
+  between variables is because we are able to decode visual summaries from
+  a collection of positions in space.
+
 Although a scatter plot is similar to a bar plot because they both
 involve two encodings---position and length for a bar plot and 
 horizontal position and vertical position for a scatter plot---there 
@@ -257,9 +269,67 @@ are additional decodings possible from the data symbols in a
 scatterplot because the additional visual feature of position in space
 emerges from the combination of horizontal and vertical position.
 
-> One reason why a scatter plot is effective at conveying relationships
-  between variables is because we are able to decode visual summaries from
-  a collection of positions in space.
+## Visual features that interact
+
+We have seen that some combinations of 
+visual features, such as **position** and **length**
+(@fig-bar-gender) and **position** and **hue** (@fig-bar-colour)
+do not interact, while other combinations of features, such as
+horizontal and vertical **position** (@fig-scatter) do interact.
+What about other combinations of visual features?
+@fig-separable shows all pairwise combinations of visual features
+that we have considered (@fig-visual-features).[^separable-features]
+
+[^separable-features]:
+    @munzner2014visualization provides some examples of combinations
+    of *visual channels* in Figure 5.10.
+    @ware2021information gives a broader selection of combinations
+    of *display attributes* in Figure 5.24.
+
+The top row of @fig-separable 
+shows that **position** can be combined independently with
+every other visual feature, except itself (@sec-integral),
+even when we vary both visual features at once.
+
+For other combinations, we have an array of data symbols, with one
+visual feature changing down rows and another visual feature changing
+across columns.
+If the visual features are independent, we should be able to decode
+one visual feature from the rows and one visual feature from the columns.
+For example, for the combination of **hue** and **pattern**,
+we can clearly see columns of the same hue and rows of the same pattern.
+
+If the visual features interact, we should not be able decode separate
+visual features.  For example, for the combination of **chroma** and 
+**luminance**, all we can see is an array of different shades;
+there are no clear rows of different chroma or columns of different
+luminance.
+
+There are also combinations that
+are not fully independent and have weak interactions between visual features.
+For example,
+the decoding of hue, chroma, and luminance is somewhat
+affected by the area of the data symbol.
+@size-matters provides a clearer demonstration of this effect.
+Another weak interaction is between hue and luminance;  this still
+allows for diverging colour palettes (@sec-divergent).
+
+One clear message from @fig-separable is that all visual features
+interact with themselves.  If we try to encode two separate data variables
+as the same visual feature, it will be difficult to decode the
+individual data variables.
+We can also see that combinations of length, angle, area, and pattern 
+produce interations, as do combinations of area, hue, chroma, and luminance.
+However, combinations of one of hue, chroma, or luminance with any of 
+position, length, angle, area, or pattern are independent.
+
+```{r}
+#| echo: false
+#| label: fig-separable
+#| fig-height: 8
+#| fig-cap: All pairwise combinations of basic visual features.  Combinations that strongly interact have a thick black border, combinations that are clearly independent have no border, and combinations where there is weak interaction have a thin black border.
+source("separable.R")
+```
 
 ## Case study: Mosaic plots {#sec-mosaic}
 
@@ -285,9 +355,15 @@ and the overall proportions of combinations of sex and action against
 offenders.
 
 [^mosaic]:
-  This two-dimensional mosaic plot could also be called a spine plot.
-  Mosaic plot is the more general term that includes plots of more than
-  two qualitative variables.
+    This two-dimensional mosaic plot could also be called a spine plot.
+    Mosaic plot is the more general term that includes plots of more than
+    two qualitative variables.
+
+    Mosaic plots also provide a simple visual check for independence between
+    factors.  For example, in @fig-spine we can see that the action taken is
+    reasonably independent of the sex of the offender because the heights of the
+    rectangles are similar for both Male and Female offenders (the conditional
+    proportions are roughly the same).
 
 For example, we can see that there are more male offenders than female
 offenders, court action is more common than non-court action for both males and
@@ -363,12 +439,6 @@ each combination of sex and action taken.
   to length and height interact to produce area, which represents
   overall proportions.
 
-Mosaic plots also provide a simple visual check for independence
-between factors.  For example, in @fig-spine we can see that the action taken
-is reasonably independent of the sex of the offender because the heights
-of the rectangles are similar for both Male and Female offenders
-(the conditional proportions are roughly the same).
-
 One weakness of mosaic plots is that area is not the most
 accurate visual feature (@sec-accuracy), so we are not able to decode
 overall proportions from the rectangle areas as accurately 
@@ -390,7 +460,7 @@ offences that result in "Formal Warnings" in younger age groups versus
 older age groups, we are hampered by the fact that the pink rectangles
 do not have a common vertical baseline.  As a side note, we are also
 hampered in that case by the distance and distractors between the rectangles
-(see @sec-distance-effect); the ordering of the variables and the
+(@sec-distance-effect); the ordering of the variables and the
 ordering of categories can have an impact on the effectiveness of a mosaic
 plot just like ordering the bars of a bar plot.
 
@@ -461,7 +531,6 @@ A final weakness with mosaic plots is that the **shape** of the rectangles
 changes as well as the **area**.
 In @sec-dissonance we saw that changes in visual features should only 
 reflect changes in the data.
-
 @fig-area-shape shows that we can create different rectangles with the
 same area, but different shapes.  There can be
 rectangles within a mosaic plot with the same area, which
@@ -472,7 +541,7 @@ of differences in the data when in reality no difference exists.
 ```{r}
 #| echo: false
 #| label: fig-area-shape
-#| fig-cap: Three different shapes that all have the same area.
+#| fig-cap: Three different rectangles that all have the same area.
 #| fig-height: 3
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(1, 3, respect=TRUE)))
@@ -544,17 +613,18 @@ of offenders between 2011 and 2021 (see @fig-visual-corr).
   allows us to decode changes in the data values from
   the angles of the lines.
 
-It is more difficult to perceive the *change* in the number of offenders
+It is more difficult to decode and compare
+the *change* in the number of offenders
 for each ethnic group in
 a bar plot like the one shown in @fig-interaction-bar.
 Partly this is because we have to decode the lengths of two bars
 for each ethnic group rather than the slope of a single line.[^pinker]
 
 [^pinker]:
-    Pinker 1990, p. 111 talks about the difficulty of extracting
-    different sorts of information from different data symbols
-    (bars vs lines).
-
+    Pinker1990GraphComprehension (p. 111)
+    discusses the problem of extracting
+    different sorts of information from different data symbols,
+    in particular bars versus lines.
 
 ```{r}
 #| echo: false
@@ -566,6 +636,20 @@ ggplot(crimeGroupSub) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
     theme(aspect.ratio=1)
 ```
+
+## Decoding combinations of visual features
+
+Although there is some experimental support for reasonable
+accuracy of correlation from scatter plot (with some bias - 
+specifically underestimation),
+there is not much experimental evidence for which is best 
+for perceiving correlations Eg scatter plot vs parallel coords etc
+[^emergent-accuracy]
+
+[^emergent-accuracy]:
+    Examples of studies that demonstrate a tendency to 
+    underestimate correlation coefficient
+    are @perception-correlation and @cui2024drawn.
 
 ## Dangers of combining mappings
 
@@ -584,7 +668,7 @@ what does a percent multiplied by a number of years mean?
 The areas of the bars do not correspond to any property of the data values.
 
 [^nz-doctor]:
-  @fig-nz-doctor-bar is based on Figure 2 from @nz-doctor.
+    @fig-nz-doctor-bar is based on Figure 2 from @nz-doctor.
 
 ```{r}
 #| echo: false
@@ -642,20 +726,23 @@ print(ggDoctor, newpage=FALSE)
 
 The interaction of visual features can be a boon when the interaction
 produces an emergent feature that can be decoded to properties
-of the data (as in a scatter plot, or mosaic plot, or interaction plot).  
+of the data (as in a scatter plot, or mosaic plot, or interaction plot).
 However, it is possible to create a poor data visualisation
 if we produce an emergent feature that has no correspondence with 
 data values (@fig-data-vis-vis-lie).[^compatibility-principle]
 
 [^compatibility-principle]:
-    This is the "proximity compatibility principle" ? of Carswell and Wickens ?
+    The idea that combining visual features that interact 
+    is more appropriate for decoding data summaries (and vice versa)
+    is similar to the *proximity compatibility principle* 
+    [@proximity-compatibility].
 
-    "Review of Graph Comprehension Research: Implications for Instruction" 
-    Shah and Hoeffner (2002) 
+    @Shah2002GraphComprehension use the following nice quote from earlier
+    work [@MelodyCarswell01031987]:
+
     "Integrated, object-like displays (e.g., a line graph) are better for
     integrative tasks, whereas more separable formats (e.g., bar graphs) are
-    better for less integrative or synthetic tasks such as point reading
-    (Carswell and Wickens, 1987)."
+    better for less integrative or synthetic tasks such as point reading."
 
 ::: {#fig-data-vis-vis-lie}
 ::: {.content-visible when-format=pdf layout-ncol=2}
@@ -672,6 +759,12 @@ appropriate if the emergent features
 correspond to some property of the data.
 Otherwise, the decoding may lead to unhelpful and misleading interpretations.
 :::
+
+> A data visualisation can be misleading 
+  if we encode data values using a combination of visual features that
+  have a strong interaction, but the values that we 
+  decode from the resulting emergent feature
+  do not correspond to any meaningful summary of the data.
 
 @fig-nz-doctor-line shows a different representation of the data.
 In this case, the average change in health spending is encoded as the (vertical)
@@ -746,54 +839,124 @@ pushViewport(viewport(width=.9, height=.9),
 print(ggDoctorLine, newpage=FALSE)
 ```
 
-**There is also the problem of separable when integral would be appropriate
-(reduce to separate effects inappropriately?)** Is there an example?
+## Case study: Redundant mappings {#sec-redundant}
 
-**Must** say that chroma and luminance and hue are all integral.
-Especially chroma and luminance.
-Can successfully vary hue separately from the others (@sec-divergent).
-Is this an example of integrating ineffectively?
-Refer back to @sec-escape.
+@fig-fbref shows a bar plot of various performance metrics for the 
+football player Lamine Yamal from July 2024.[^fbref]
+The percentile values show how Yamal ranked against other similar players
+on each metric.  He is a relatively good football player.
 
-## Redundant mappings {#sec-redundant}
+[^fbref]:
+    @fig-fbref is based on an image produced by 
+    the [FBREF](https://fbref.com/en/)
+    web site for football statistics and history.
 
-In @sec-mosaic, we focused on the encoding of quantitative values
-(proportions)
-as the widths and heights of the rectangular data symbols in a
-mosaic plot, for example, @fig-spine.  There are also qualitative
-values encoded in a mosaic plot:  the different categories, like 
-Male and Female.
+@fig-fbref is a typical bar plot in that it encodes
+qualitative data values as the (vertical) position of the bars
+and quantitative data values as the lengths of the bars.
+However, there is also a third encoding in @fig-fbref:
+the percentile values are also encoded as the colour of the bars.[^four-encode]
 
-The main encoding of the categories in a mosaic plot
-is as the **position** of the
-rectangles.  For example, in @fig-spine, the rectangles for 
-Female are to the left and the rectangles for Male are to the right
-and the rectangles for different court actions are 
-stacked vertically, with Not Proceeded With at the bottom, 
-Non-Court Action in the middle, and Court Action at the top.
+[^four-encode]:
+    In fact, because the colours are from a diverging colour palette
+    (@sec-divergent), there are arguably four encodings:
+    whether the percentile is below 50 or above 50 is encoded as 
+    a red or green hue and the amount above or below 50 is encoded as the 
+    luminance/chroma of the bar.
 
-In addition, different court actions are encoded as different **colours**.
-This additional encoding is **redundant** in the sense that we can already
-decode the court action from the vertical position of the bars.
+```{r}
+#| echo: false
+#| label: fig-fbref
+#| fig-cap: FBREF statistics for Lamine Yamal from July 2024.
+stats <- c("Non-Penalty Goals",
+           "npxG: Non-Penalty xG",
+           "Shots Total",
+           "Assists",
+           "xAG: Exp. Assisted Goals",
+           "npxG + xAG",
+           "Shot-Creating Actions")
+fbref <- data.frame(Statistic=factor(stats, levels=rev(stats)),
+                    "Per 90"=c(0.16, 0.22, 2.56, 0.23, 0.27, 0.49, 4.44),
+                    Percentile=c(29, 57, 68, 64, 84, 74, 71),
+                    check.names=FALSE)
+fbrefPlot <- function(cols, deutan=FALSE) {
+    if (deutan) {
+        red <- deutan(2)
+        cols <- deutan(cols)
+    } else {
+        red <- 2
+    }
+    grid.newpage()
+    layout <- grid.layout(8, 4,
+                          widths=unit.c(max(stringWidth(paste0("   ", 
+                                                               stats, " "))),
+                                        stringWidth("  Per 90  "),
+                                        stringWidth("    000"),
+                                        unit(1, "null")),
+                          heights=unit(1.8, "lines"))
+    pushViewport(viewport(width=.8, height=.95, layout=layout))
+    pushViewport(viewport(layout.pos.row=1:8))
+    grid.rect(gp=gpar(fill="white"))
+    popViewport()
+    pushViewport(viewport(layout.pos.row=1))
+    grid.rect(gp=gpar(fill="grey95"))
+    popViewport()
+    pushViewport(viewport(layout.pos.col=1, layout.pos.row=1))
+    grid.text("Statistic", gp=gpar(col=red, fontface="bold"))
+    popViewport()
+    pushViewport(viewport(layout.pos.col=2, layout.pos.row=1))
+    grid.text("Per 90", gp=gpar(col=red, fontface="bold"))
+    popViewport()
+    pushViewport(viewport(layout.pos.col=4, layout.pos.row=1))
+    grid.text("Percentile", gp=gpar(col=red, fontface="bold"))
+    popViewport()
+    for (i in 1:nrow(fbref)) {
+        pushViewport(viewport(layout.pos.row=i))
+        grid.segments(0, 0, 1, 0, gp=gpar(col="grey", lwd=.5))
+        popViewport()
+        pushViewport(viewport(layout.pos.col=1, layout.pos.row=i + 1))
+        grid.text(fbref$Statistic[i], unit(1, "npc") - unit(1, "mm"),
+                  just="right",
+                  gp=gpar(col=1))
+        popViewport()
+        pushViewport(viewport(layout.pos.col=2, layout.pos.row=i + 1))
+        grid.text(fbref[["Per 90"]][i], unit(1, "npc") - unit(1, "mm"),
+                  just="right",
+                  gp=gpar(col=1))
+        popViewport()
+        pushViewport(viewport(layout.pos.col=3, layout.pos.row=i + 1))
+        grid.text(fbref$Percentile[i], unit(1, "npc") - unit(2, "mm"), 
+                  just="right",
+                  gp=gpar(col=red))
+        popViewport()
+        pushViewport(viewport(layout.pos.col=4, layout.pos.row=i + 1,
+                              xscale=c(0, 100)))
+        grid.rect(0, .5, width=unit(fbref$Percentile[i], "native"), height=.6,
+                  just="left",
+                  gp=gpar(col=NA, fill=cols[fbref$Percentile[i]]))
+        popViewport()
+    }
+    pushViewport(viewport(layout.pos.col=1))
+    grid.segments(1, 0, 1, 1, gp=gpar(col="grey", lwd=.5))
+    popViewport()
+    pushViewport(viewport(layout.pos.col=2))
+    grid.segments(1, 0, 1, 1, gp=gpar(col="grey", lwd=.5))
+    popViewport()
+    pushViewport(viewport(layout.pos.row=1:8))
+    grid.rect(gp=gpar(fill=NA))
+    popViewport()
+}
+cols <- hcl.colors(100, palette="Red-Green")
+cols <- diverging_hcl(100, c(0, 160))
+fbrefPlot(cols)
+```
+
+The additional encoding of percentile 
+is **redundant** in the sense that we can already
+decode the perentile from the length of the bars.
 However, having the additional encoding means that we have two
-ways to decode the court action:  from the vertical position and from
-the colour.
-This becomes much more useful when there are more categories
-(@fig-spine-weak) or more variables (@fig-mosaic).[^redundant]
-
-[^redundant]:
-    "Clusters Beat Trend!? Testing Feature Hierarchy in Statistical Graphics"
-    VanderPlas and Hofmann (2017)
-    says redundancy helps
-
-    "Beyond Memorability: Visualization Recognition and Recall"
-    Borkin et al (2015)
-    also says redundancy helps
-
-    "The Science of Visual Data Communication: What Works"
-    Franconeri et al (2021)
-    says it doesn't (though only with expert opinion like Tukey to back it up.
-    Exception is to allow for colour-blind viewers.
+ways to decode the percentile:  from the length and from
+the colour (@fig-data-vis-redundant).
 
 ::: {#fig-data-vis-redundant}
 ::: {.content-visible when-format=pdf layout-ncol=2}
@@ -815,45 +978,93 @@ If we encode data values using multiple visual features,
 then multiple decodings are possible. 
 :::
 
+The effectiveness of a redundant encoding partially depends upon 
+the independence of the two visual features.
+The features are only redundant if we are able to decode data values
+from the two features separately, as we can with colour and length.
+
 One useful application of redundant encoding is to accommodate
 viewers with CVD (@sec-CVD).  Having a secondary decoding
 alongside colour allows for the fact that the colour decoding
 may fail for some viewers.
+For example, @fig-fbref-cvd shows what @fig-fbref might look like to
+a viewer with severe red-green colour blindness.
+The distinction between red and green bars is gone and that
+in turn confuses the decoding of the bar luminance (changes in luminance
+are not monotonic with changes in length).
+However, thanks to the redundant encoding, 
+the simple comparison between bar lengths remains.
 
-**TODO**
-one argument against redundancy is that each individual feature
+```{r}
+#| echo: false
+#| label: fig-fbref-cvd
+#| fig-cap: FBREF statistics for Lamine Yamal from July 2024.  This is a version of @fig-fbref with the colours adjusted to simulate severe red-green colour blindness.
+cols <- cols <- diverging_hcl(100, c(0, 160))
+fbrefPlot(cols, deutan=TRUE)
+```
+
+One argument against using a redundant encoding is that we are 
+introducing additional visual complexity.
+Each individual visual feature
 may not be as effective as it would be on its own because
-it is not the ONLY change happening.
-Example is the colour and size used in Fig 2 of letter-value plots
-Hofmann et al
+it is not the *only* visual change (@sec-differences).
+For example, @fig-fbref-simple shows a variation on @fig-fbref with
+the redundant encoding removed---all of the bars are just the same dark grey.
+It is arguably easier to decode the lengths of the bars in @fig-fbref
+because the bars are less complex visual objects.
+This is even more true when comparing with the confusing changes in
+luminance of the bars in @fig-fbref-cvd.[^redundant]
 
-## Case study:  log-log plots
+[^redundant]:
+    Redundant encodings are not universally supported in the
+    literature either.
+    For example, @VanderPlas03042017 provide evidence that 
+    additional cues improve plot perception
+    and @beyond-memorability report that 
+    "redundancy helps effectively communicate the message".
+    However, @what-works are less in favour:
+    "redundant encoding should be avoided
+    in most cases, except when used to make visualizations
+    accessible for viewers with color-vision impairments."
 
-Involves non-linear scales, but the point is the shape that you (hope to) get.
-
-Could also do q-q plots?
+```{r}
+#| echo: false
+#| label: fig-fbref-simple
+#| fig-cap: FBREF statistics for Lamine Yamal from July 2024.  This is a version of @fig-fbref with the redundant colour encoding removed.
+cols <- rep("grey20", 100)
+fbrefPlot(cols)
+```
 
 ## Summary
+
+Almost all data visualisations involve *combinations* of mappings.
+More than one set of data values are encoded as more than one
+visual feature of data symbols.
 
 The mappings involved in a bar plot---quantitative data values encoded as
 lengths
 and qualitative values encoded as position---are effective because we
 are able to perceive some combinations of visual features,
-such as length, position, and colour **independently**.
+such as length, position, and colour **independently**,
+which means that we can effectively decode both position and length
+from a bar plot.
 
 A scatter plot is effective for perceiving relationships between
 variables because the mappings of quantitative data values to both
 horizontal and vertical positions **interact** to produce **position in space**
 and our visual system is capable of producing useful **visual summaries**
-of position in space, such as correlation.
+from position in space, such as correlation.
 
-The effectiveness of a mosaic plot also depends upon the **interaction**
-of visual features:  marginal and conditional
-proportions are mapped to widths and heights,
-which produce **area** to represent overall proportions.
+Independence between visual features is useful when we want to decode
+separate data values.
+Interactions between visual features is useful when we want to produce 
+an emergent feature that allows us to decode data summaries.
 
-Care must be taken to avoid generating emergent features that do not
-represent any meaningful property of the data.
+Conversely, independence between visual features is of no help if we
+want to produce an emergent feature.
+Furthermore, interaction between visual
+features is unhelpful, or even misleading, if we cannot decode
+any meaningful information from the emergent feature.
 
 ---
 

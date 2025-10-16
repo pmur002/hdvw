@@ -572,25 +572,17 @@ One concept that we will lean on very heavily is the idea of
 \textbf{mappings}: how is information being converted into a visual
 representation?\footnote{The idea of characterising a data visualisation
   as a set of \emph{mappings} from data values to visual representations
-  is based on ideas within the \emph{Grammar of Graphics} (Wilkinson
+  aligns with ideas from the \emph{Grammar of Graphics} (Wilkinson
   2005).}
 
-The most obvious mapping in a data visualisation involves the conversion
-of \textbf{data values} to \textbf{data symbols}
+The most obvious mapping in a data visualisation involves the mapping of
+\textbf{data values} to \textbf{data symbols}
 (Figure~\ref{fig-mappings}). For example, in Figure~\ref{fig-crime}, all
 of the data values for 14-year-olds, the number of offenders for each
 year, have been mapped to an orange line. The data values for
 15-year-olds have been mapped to a blue line and the data values for
 16-year-olds have been mapped to a green line. In other words, each row
 of Table~\ref{tbl-crime} is mapped to a separate coloured line.
-
-The heatmap of the same data (see Figure~\ref{fig-crime-heatmap})
-provides a different visual representation because it employs a
-different mapping. In this case, the data symbol is a rectangle, with
-one data symbol for each combination of age and year, and with the
-colour of the rectangle reflecting the number of offenders of that age
-for that year. In other words, each cell of Table~\ref{tbl-crime} is
-mapped to its own coloured rectangle.
 
 \begin{figure}
 
@@ -601,10 +593,17 @@ mapped to its own coloured rectangle.
 }
 
 \caption{\label{fig-mappings}A data visualisation can be described by
-the \textbf{mappings} that it uses to represent \textbf{data values} as
-\textbf{data symbols}.}
+the mappings that it employs to represent data values as data symbols.}
 
 \end{figure}%
+
+The heatmap of the same data (Figure~\ref{fig-crime-heatmap}) provides a
+different visual representation because it employs a different mapping.
+In this case, the data symbol is a rectangle, with one data symbol for
+each combination of age and year, and with the colour of the rectangle
+reflecting the number of offenders of that age for that year. In other
+words, each cell of Table~\ref{tbl-crime} is mapped to its own coloured
+rectangle.
 
 The journey that we take throughout this book will involve exploring a
 variety of different ways that information can be mapped to a visual
@@ -665,11 +664,11 @@ Understanding how data visualisation works will enable us to:
 \begin{itemize}
 \tightlist
 \item
+  Critically analyse data visualisations created by others.
+\item
   Decide which data visualisations we should use.
 \item
   Justify our choice of data visualisation.
-\item
-  Critically analyse data visualisations created by others.
 \item
   Reason about how to improve the effectiveness of a data visualisation.
 \item
@@ -785,9 +784,9 @@ system, which will help us to understand the effectiveness of the
 different mappings that we consider throughout the book.\footnote{Simple
   descriptions of the human visual system can be found in many articles
   and books on data visualisation, for example, Sönning (2023),
-  Franconeri et al. (2021), and Cairo (2012). See Ware (2021) for a more
-  in-depth, but still very accessible description. The contributors
-  (2025) is also good.}
+  Franconeri et al. (2021a), and Cairo (2012). See Ware (2021) for a
+  more in-depth, but still very accessible description. Wikipedia also
+  has some very helpful content (Wikipedia contributors 2025).}
 
 \begin{figure}
 
@@ -1803,7 +1802,7 @@ bar.\footnote{This one-to-one mapping between data values and data
 This allows us to answer simple questions about individual data values.
 For example, what is the largest total number of offenders?
 
-\section{Visual features}\label{visual-features}
+\section{Visual features}\label{sec-visual-features}
 
 The data symbols in Figure~\ref{fig-bar} are a set of bars or, put more
 simply, rectangles. We have seen that each data value from
@@ -5205,7 +5204,9 @@ values in Table~\ref{tbl-rwc-all}; the values that are being encoded to
 visual features in Figure~\ref{fig-boxplot} are the \textbf{data
 summaries} shown in Table~\ref{tbl-rwc-all-stats}. The data summaries in
 Table~\ref{tbl-rwc-all-stats} are the values that we can \textbf{decode}
-from the boxplots in Figure~\ref{fig-boxplot}.
+from the boxplots in Figure~\ref{fig-boxplot}.\footnote{Ziemkiewicz and
+  Kosara (2009) refer to this as the \emph{readability} of
+  \emph{aggregations}.}
 
 \begin{longtable}[]{@{}lrrrrr@{}}
 
@@ -5307,8 +5308,8 @@ can perceive \textbf{visual summaries}; we can perceive \textbf{data
 summaries} from collections of visual features. For example, we can
 visually average the \textbf{positions} of the data points.\footnote{The
   ability to decode summary statistics from multiple visual objects is
-  known as \emph{ensemble perception}. Cui and Liu (2021) provides a
-  modern review.
+  known as \emph{ensemble perception}. Cui and Liu (2021) and Whitney
+  and Yamanashi Leib (2018) provide modern overviews.
 
   A related concept is \emph{subitizing}, which is the ability to
   rapidly identify the number of visual objects, though that only works
@@ -5913,35 +5914,47 @@ values.
 \chapter{Combining Mappings}\label{combining-mappings}
 
 Most data visualisations involve more than one data variable. For
-example, the bar plot in Figure~\ref{fig-bar} involves data on the
-\textbf{ethnic group} of offenders and data on the \textbf{count} of
-offenders in each ethnic group.
+example, the bar plot in Figure~\ref{fig-bar-gender} involves data on
+the \textbf{gender} of offenders and data on the \textbf{count} of
+offenders for each gender.
 
-In Figure~\ref{fig-bar}, each data value is mapped to a \textbf{visual
-feature} of a data symbol (Figure~\ref{fig-visual-feature}). For
-example, the ethnic group is encoded as the vertical \textbf{position}
-of the bars and the count of offenders is encoded as the \textbf{length}
-of the bars.
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/combine_files/figure-pdf/fig-bar-gender-1.pdf}
+
+}
+
+\caption{\label{fig-bar-gender}A bar plot of the total number of male
+offenders and the total number of female offenders in New Zealand from
+2011 to 2021.}
+
+\end{figure}%
+
+In Figure~\ref{fig-bar-gender}, each data value is mapped to a
+\textbf{visual feature} of a data symbol
+(Figure~\ref{fig-visual-feature}). For example, the gender is encoded as
+the horizontal \textbf{position} of the bars and the count of offenders
+is encoded as the \textbf{length} of the bars.
 
 We have so far only looked at mappings from data values to visual
-features in isolation. For example, we know that the mapping from ethnic
-group to position is effective because position is appropriate for
-qualitative data and position has sufficient capacity to differentiate
-between four ethnic groups. We also know that mapping the count of
-offenders to length is effective because length is appropriate for
-quantitative data and length provides an accurate decoding. Furthermore,
-the lengths of the bars are all aligned (they have a common baseline)
-and the bars only differ in ways that reflect differences in the data
-(the bars all have the same width and colour).
+features in isolation. For example, we know that the mapping from gender
+to position is effective because position is appropriate for qualitative
+data and position has sufficient capacity to differentiate between two
+genders. We also know that mapping the count of offenders to length is
+effective because length is appropriate for quantitative data and length
+provides an accurate decoding.
 
 In this chapter, we begin to consider what happens when mappings are
 used in combination. For a start, we will just extend our thinking to
 data visualisations that involve mapping \textbf{two} data variables to
-\textbf{two} visual features, like ethnic group and count to position
-and length. Furthermore, we will restrict ourselves to mappings where
-each pair of data values are encoded as a single data symbol
-(Figure~\ref{fig-two-visual-features}). For example, each combination of
-ethnic group and count produces a single bar.
+\textbf{two} visual features, like gender and count to position and
+length. Furthermore, we will restrict ourselves to mappings where each
+pair of data values are encoded as a single data symbol
+(Figure~\ref{fig-two-visual-features}). For example, in
+Figure~\ref{fig-bar-gender}, each combination of gender and count
+produces a single bar.
 
 \begin{figure}
 
@@ -5969,29 +5982,30 @@ mapped to two visual features (\texttt{a} and \texttt{b}) of a
 
 \section{Independent visual features}\label{independent-visual-features}
 
-\textbf{TODO} refer back to Section~\ref{sec-cartesian} and
-Section~\ref{sec-ternary}. Get emergent feature of position within
-triangle from interaction of three position encodings
-(\href{combine.html}{Combining Mappings}) =\textgreater{} overall
-proportion combination retrievable IF you can decode position within
-triangle
-
 A bar plot involves encoding a qualitative variable as bar
 \textbf{position} and a quantitative variable as bar \textbf{length}
 (e.g., Figure~\ref{fig-bar}). We know that each visual feature is
 effective on its own---we can decode from positions to qualitative
 values and we can decode from lengths to quantitative values---but
 another reason why the bar plot is effective overall is because the two
-visual features act independently.\footnote{Refer to the literature that
-  talks about separable and integral AND configural visual features.
-  e.g., carswell and wickens (1990) looks at configural} Our perception
-of the horizontal \textbf{length} of the bars is not affected by the
-vertical \textbf{position} of the bars.\footnote{Technically, there is
-  an interaction because lengths that are further apart from each other
-  vertically are harder to compare (see
-  Section~\ref{sec-distance-effect}). However, compared to visual
-  features that strongly interact, length and position are reasonably
-  independent.}
+visual features act independently.\footnote{Independent visual features
+  are called \emph{separable}, in contrast to \emph{integral} features
+  that interact. An early use of these terms in the context of data
+  visualisation (or at least \emph{statistical graphics}) is Carswell
+  and Wickens (1988).
+
+  A further distinction is made for \emph{configural} visual features,
+  which are combinations that interact, but still allow decoding of the
+  individual visual features (Carswell and Wickens 1990).
+
+  These ideas can be traced back to the much less readable Garner
+  (1974).} Our perception of the horizontal \textbf{length} of the bars
+is not affected by the vertical \textbf{position} of the
+bars.\footnote{To be honest, there is an interaction between position
+  and length because lengths that are further apart from each other
+  vertically are harder to compare (Section~\ref{sec-distance-effect}).
+  However, compared to visual features that strongly interact, length
+  and position are relatively independent.}
 
 Figure~\ref{fig-bar-colour} demonstrates that we can also add
 \textbf{colour} to the mix without creating any interactions between
@@ -6006,11 +6020,11 @@ not affect our ability to perceive that they have different lengths.
 
 }
 
-\caption{\label{fig-bar-colour}A bar plot of the total number of
-offenders for different ethnic groups. The data symbols in this plot
-come from mapping ethnic group to the vertical positions and colours of
-the bars and mapping the total number of offenders to the lengths of the
-bars.}
+\caption{\label{fig-bar-colour}A bar plot of the total number of male
+offenders and the total number of female offenders. The data symbols in
+this plot come from mapping gender to the vertical positions and colours
+of the bars and mapping the total number of offenders to the lengths of
+the bars.}
 
 \end{figure}%
 
@@ -6030,21 +6044,22 @@ was weak and was always being attacked; and more disciplinary
 bad sign.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.1512}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0814}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0814}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0814}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0814}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0930}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0814}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.1047}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.1047}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0698}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0698}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.1205}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0843}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0843}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0843}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0843}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0964}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0843}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.1084}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.1084}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0723}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 20\tabcolsep) * \real{0.0723}}@{}}
 
-\caption{\label{tbl-rwc-2023}Performance measures for all twenty teams
-at the 2023 Rugby World Cup. Each measure is a per-game average because
-some teams played more games than others.}
+\caption{\label{tbl-rwc-2023}Performance measures for teams at the 2023
+Rugby World Cup. Each measure is a per-game average because some teams
+played more games than others. There are 20 teams in total, with only
+the first 6 shown here.}
 
 \tabularnewline
 
@@ -6088,34 +6103,6 @@ Australia & South & 0.5 & 0.0 & 5.2 & 108.2 & 22.5 & 1.8 & 7.8 & 2.8 &
 110.8 \\
 Georgia & North & 0.5 & 0.0 & 5.2 & 149.8 & 16.0 & 1.0 & 8.0 & 1.8 &
 114.0 \\
-Uruguay & South & 0.5 & 0.0 & 5.2 & 126.8 & 16.2 & 1.5 & 3.0 & 2.2 &
-99.2 \\
-South Africa & South & 0.4 & 0.0 & 5.4 & 139.1 & 29.7 & 2.7 & 5.4 & 3.9
-& 95.1 \\
-England & North & 0.0 & 0.1 & 5.6 & 124.9 & 31.6 & 2.3 & 3.9 & 3.0 &
-100.3 \\
-Fiji & South & 1.0 & 0.0 & 5.6 & 99.8 & 22.4 & 2.2 & 8.8 & 2.4 &
-138.0 \\
-Wales & North & 0.6 & 0.0 & 5.6 & 167.4 & 32.0 & 3.2 & 7.6 & 3.8 &
-109.4 \\
-Japan & North & 0.8 & 0.0 & 6.0 & 166.2 & 27.2 & 2.8 & 4.8 & 3.0 &
-89.5 \\
-Tonga & South & 0.5 & 0.2 & 6.0 & 141.2 & 24.0 & 2.0 & 8.2 & 3.2 &
-107.5 \\
-Argentina & South & 0.3 & 0.0 & 6.3 & 111.7 & 26.4 & 2.6 & 6.0 & 2.7 &
-131.3 \\
-Italy & North & 0.5 & 0.0 & 6.8 & 138.2 & 28.5 & 3.8 & 7.0 & 3.8 &
-116.0 \\
-Portugal & North & 0.5 & 0.2 & 7.8 & 148.0 & 16.0 & 1.5 & 9.2 & 2.0 &
-118.2 \\
-Ireland & North & 0.2 & 0.0 & 8.8 & 126.4 & 42.8 & 5.0 & 9.4 & 6.0 &
-137.6 \\
-France & North & 0.2 & 0.0 & 11.0 & 115.2 & 47.6 & 5.0 & 10.6 & 6.0 &
-126.0 \\
-Scotland & North & 0.2 & 0.0 & 11.2 & 123.0 & 36.5 & 4.8 & 13.8 & 5.2 &
-151.2 \\
-New Zealand & South & 0.7 & 0.3 & 12.6 & 123.4 & 48.0 & 5.0 & 8.3 & 7.0
-& 139.3 \\
 
 \end{longtable}
 
@@ -6156,28 +6143,24 @@ scored about 6 tries per game.
 
 However, there is something else going on in the scatter plot. The two
 explicit encodings---horizontal and vertical
-position---\textbf{interact} to create an additional visual
-feature:\footnote{Need citations to literature that mention integral
-  visual features. Admit a range rather than a dichotomy. Munzner has
-  good examples?} \textbf{position in space}
-(Figure~\ref{fig-interact}).\footnote{Relate this to mentions in
-  literature of ``emergent features'', e.g., Pomerantz and Cragin
-  (1994). Acknowledge that my use is a little loose because the use in
-  the literature is really about separate data symbols combining to
-  create emergent features (like clusters?). MacEachren 1995 uses
-  emergent as ``configural'' (integral, but still also separable)
-  ``Vision Science: Photons to Phenomenology'' Stephen Palmer, Figure
-  2.1.5 caption ``The arrangement of several dots in a line give rise to
-  emergent properties, such as length, orientation, and curvature, that
-  are different from the properties of the dots that compose it.''
+position---\textbf{interact} to create an additional \textbf{emergent}
+visual feature: \textbf{position in space}
+(Figure~\ref{fig-interact}).\footnote{The use of \emph{emergent} visual
+  features in this book, to describe the result of \emph{integral} (or
+  \emph{configural}) visual features interacting, corresponds loosely to
+  various usages of \emph{emergent} in the literature.
 
-  NOTE that ``Emergent features and feature combination'' Pomerantz and
-  Cragin (2014) (is this the same as Pomerantz and Cragin (1994) ???)
-  explicitly differentiate between (fast) emergent features and
-  ``normal'' (slow) feature integration that I am loosely using here.}
-For example, we can perceive not only horizontal and vertical distances
-between data points, but also euclidean distances between data points
-(``as the crow flies'').
+  MacEachren (1995) uses \emph{emergent} in this way, but, for example,
+  Cragin and Pomerantz (2015) and Palmer (1999) use \emph{emergent} more
+  to describe visual features that arise from combinations of separate
+  visual objects (data symbols).
+
+  ``The arrangement of several dots in a line give rise to emergent
+  properties, such as length, orientation, and curvature, that are
+  different from the properties of the dots that compose it.'' (Palmer
+  1999, fig. 2.1.5)} For example, we can perceive not only horizontal
+and vertical distances between data points, but also euclidean distances
+between data points (``as the crow flies'').
 
 \begin{figure}
 
@@ -6210,19 +6193,18 @@ produce an additional visual feature: position in space.
 Furthermore, our visual system allows us to decode \textbf{visual
 summaries} (see Section~\ref{sec-visual-summaries}) from
 \textbf{position in space} (see
-Figure~\ref{fig-visual-corr}).\footnote{Citations to literature on
-  ensembles again, this time specifically to correlation in scatter
-  plots. Talk about how, although there is some experimental support for
-  reasonable accuracy of correlation from scatter plot (with some bias -
-  specifically underestimation), there is not much experimental evidence
-  for which is best for perceiving correlations Eg scatter plot vs
-  parallel coords etc} For example, in Figure~\ref{fig-scatter} we can
-easily see a positive \textbf{correlation} between the number of clean
-breaks and the number of tries scored. We can also easily see
-\textbf{clusters} of data points; the four data points in the top-right
-corner of the plot appear separate from the other data points because
-they share a similar position in space (see
-Section~\ref{sec-visual-model-groups}).
+Figure~\ref{fig-visual-corr}).\footnote{The ability to decode
+  correlations from scatter plots is another example of \emph{ensemble}
+  perception (Szafir et al. 2016; Rensink 2017).} For example, in
+Figure~\ref{fig-scatter} we can easily see a positive
+\textbf{correlation} between the number of clean breaks and the number
+of tries scored. The points lie roughly along a line from bottom-left to
+top-right.
+
+We can also easily see \textbf{clusters} of data points; the four data
+points in the top-right corner of the plot appear separate from the
+other data points because they share a similar position in space
+(Section~\ref{sec-visual-model-groups}).
 
 \begin{figure}
 
@@ -6245,6 +6227,12 @@ summaries.}
 
 \end{figure}%
 
+\begin{quote}
+One reason why a scatter plot is effective at conveying relationships
+between variables is because we are able to decode visual summaries from
+a collection of positions in space.
+\end{quote}
+
 Although a scatter plot is similar to a bar plot because they both
 involve two encodings---position and length for a bar plot and
 horizontal position and vertical position for a scatter plot---there are
@@ -6252,11 +6240,70 @@ additional decodings possible from the data symbols in a scatterplot
 because the additional visual feature of position in space emerges from
 the combination of horizontal and vertical position.
 
-\begin{quote}
-One reason why a scatter plot is effective at conveying relationships
-between variables is because we are able to decode visual summaries from
-a collection of positions in space.
-\end{quote}
+\section{Visual features that
+interact}\label{visual-features-that-interact}
+
+We have seen that some combinations of visual features, such as
+\textbf{position} and \textbf{length} (Figure~\ref{fig-bar-gender}) and
+\textbf{position} and \textbf{hue} (Figure~\ref{fig-bar-colour}) do not
+interact, while other combinations of features, such as horizontal and
+vertical \textbf{position} (Figure~\ref{fig-scatter}) do interact. What
+about other combinations of visual features? Figure~\ref{fig-separable}
+shows all pairwise combinations of visual features that we have
+considered (Figure~\ref{fig-visual-features}).\footnote{Munzner (2014)
+  provides some examples of combinations of \emph{visual channels} in
+  Figure 5.10. Ware (2021) gives a broader selection of combinations of
+  \emph{display attributes} in Figure 5.24.}
+
+The top row of Figure~\ref{fig-separable} shows that \textbf{position}
+can be combined independently with every other visual feature, except
+itself (Section~\ref{sec-integral}), even when we vary both visual
+features at once.
+
+For other combinations, we have an array of data symbols, with one
+visual feature changing down rows and another visual feature changing
+across columns. If the visual features are independent, we should be
+able to decode one visual feature from the rows and one visual feature
+from the columns. For example, for the combination of \textbf{hue} and
+\textbf{pattern}, we can clearly see columns of the same hue and rows of
+the same pattern.
+
+If the visual features interact, we should not be able decode separate
+visual features. For example, for the combination of \textbf{chroma} and
+\textbf{luminance}, all we can see is an array of different shades;
+there are no clear rows of different chroma or columns of different
+luminance.
+
+There are also combinations that are not fully independent and have weak
+interactions between visual features. For example, the decoding of hue,
+chroma, and luminance is somewhat affected by the area of the data
+symbol. Stone (2012) provides a clearer demonstration of this effect.
+Another weak interaction is between hue and luminance; this still allows
+for diverging colour palettes (Section~\ref{sec-divergent}).
+
+One clear message from Figure~\ref{fig-separable} is that all visual
+features interact with themselves. If we try to encode two separate data
+variables as the same visual feature, it will be difficult to decode the
+individual data variables. We can also see that combinations of length,
+angle, area, and pattern produce interations, as do combinations of
+area, hue, chroma, and luminance. However, combinations of one of hue,
+chroma, or luminance with any of position, length, angle, area, or
+pattern are independent.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/combine_files/figure-pdf/fig-separable-1.pdf}
+
+}
+
+\caption{\label{fig-separable}All pairwise combinations of basic visual
+features. Combinations that strongly interact have a thick black border,
+combinations that are clearly independent have no border, and
+combinations where there is weak interaction have a thin black border.}
+
+\end{figure}%
 
 \section{Case study: Mosaic plots}\label{sec-mosaic}
 
@@ -6287,12 +6334,18 @@ Not Proceeded With & 381 & 933 \\
 Figure~\ref{fig-spine} shows a mosaic plot of the data in
 Table~\ref{tbl-offenders}.\footnote{This two-dimensional mosaic plot
   could also be called a spine plot. Mosaic plot is the more general
-  term that includes plots of more than two qualitative variables.} This
-is an effective data visualisation for making several comparisons: the
-overall proportion of male versus female offenders; within each sex, the
-proportion of different actions against offenders; between sexes, the
-distribution of different actions; and the overall proportions of
-combinations of sex and action against offenders.
+  term that includes plots of more than two qualitative variables.
+
+  Mosaic plots also provide a simple visual check for independence
+  between factors. For example, in Figure~\ref{fig-spine} we can see
+  that the action taken is reasonably independent of the sex of the
+  offender because the heights of the rectangles are similar for both
+  Male and Female offenders (the conditional proportions are roughly the
+  same).} This is an effective data visualisation for making several
+comparisons: the overall proportion of male versus female offenders;
+within each sex, the proportion of different actions against offenders;
+between sexes, the distribution of different actions; and the overall
+proportions of combinations of sex and action against offenders.
 
 For example, we can see that there are more male offenders than female
 offenders, court action is more common than non-court action for both
@@ -6392,12 +6445,6 @@ to length and height interact to produce area, which represents overall
 proportions.
 \end{quote}
 
-Mosaic plots also provide a simple visual check for independence between
-factors. For example, in Figure~\ref{fig-spine} we can see that the
-action taken is reasonably independent of the sex of the offender
-because the heights of the rectangles are similar for both Male and
-Female offenders (the conditional proportions are roughly the same).
-
 One weakness of mosaic plots is that area is not the most accurate
 visual feature (Section~\ref{sec-accuracy}), so we are not able to
 decode overall proportions from the rectangle areas as accurately as we
@@ -6417,10 +6464,10 @@ compare the proportion of offences that result in ``Formal Warnings'' in
 younger age groups versus older age groups, we are hampered by the fact
 that the pink rectangles do not have a common vertical baseline. As a
 side note, we are also hampered in that case by the distance and
-distractors between the rectangles (see
-Section~\ref{sec-distance-effect}); the ordering of the variables and
-the ordering of categories can have an impact on the effectiveness of a
-mosaic plot just like ordering the bars of a bar plot.
+distractors between the rectangles (Section~\ref{sec-distance-effect});
+the ordering of the variables and the ordering of categories can have an
+impact on the effectiveness of a mosaic plot just like ordering the bars
+of a bar plot.
 
 \begin{figure}
 
@@ -6459,14 +6506,12 @@ rectangles, and distractors.
 A final weakness with mosaic plots is that the \textbf{shape} of the
 rectangles changes as well as the \textbf{area}. In
 Section~\ref{sec-dissonance} we saw that changes in visual features
-should only reflect changes in the data.
-
-Figure~\ref{fig-area-shape} shows that we can create different
-rectangles with the same area, but different shapes. There can be
-rectangles within a mosaic plot with the same area, which represents the
-same overall probability data value, but with different shapes. The
-different shapes are a visual signal of differences in the data when in
-reality no difference exists.
+should only reflect changes in the data. Figure~\ref{fig-area-shape}
+shows that we can create different rectangles with the same area, but
+different shapes. There can be rectangles within a mosaic plot with the
+same area, which represents the same overall probability data value, but
+with different shapes. The different shapes are a visual signal of
+differences in the data when in reality no difference exists.
 
 \begin{figure}
 
@@ -6476,8 +6521,8 @@ reality no difference exists.
 
 }
 
-\caption{\label{fig-area-shape}Three different shapes that all have the
-same area.}
+\caption{\label{fig-area-shape}Three different rectangles that all have
+the same area.}
 
 \end{figure}%
 
@@ -6559,13 +6604,14 @@ An interaction plot is effective because it allows us to decode changes
 in the data values from the angles of the lines.
 \end{quote}
 
-It is more difficult to perceive the \emph{change} in the number of
-offenders for each ethnic group in a bar plot like the one shown in
-Figure~\ref{fig-interaction-bar}. Partly this is because we have to
-decode the lengths of two bars for each ethnic group rather than the
-slope of a single line.\footnote{Pinker 1990, p.~111 talks about the
-  difficulty of extracting different sorts of information from different
-  data symbols (bars vs lines).}
+It is more difficult to decode and compare the \emph{change} in the
+number of offenders for each ethnic group in a bar plot like the one
+shown in Figure~\ref{fig-interaction-bar}. Partly this is because we
+have to decode the lengths of two bars for each ethnic group rather than
+the slope of a single line.\footnote{Pinker1990GraphComprehension
+  (p.~111) discusses the problem of extracting different sorts of
+  information from different data symbols, in particular bars versus
+  lines.}
 
 \begin{figure}
 
@@ -6579,6 +6625,17 @@ slope of a single line.\footnote{Pinker 1990, p.~111 talks about the
 offenders in different ethnic groups in 2011 and in 2021.}
 
 \end{figure}%
+
+\section{Decoding combinations of visual
+features}\label{decoding-combinations-of-visual-features}
+
+Although there is some experimental support for reasonable accuracy of
+correlation from scatter plot (with some bias - specifically
+underestimation), there is not much experimental evidence for which is
+best for perceiving correlations Eg scatter plot vs parallel coords etc
+\footnote{Examples of studies that demonstrate a tendency to
+  underestimate correlation coefficient are Rensink and Baldridge (2010)
+  and Cui, Kini, and Liu (2024).}
 
 \section{Dangers of combining
 mappings}\label{dangers-of-combining-mappings}
@@ -6611,18 +6668,21 @@ bars.}
 
 The interaction of visual features can be a boon when the interaction
 produces an emergent feature that can be decoded to properties of the
-data (as in a scatter plot, or mosaic plot, or interaction plot).\\
+data (as in a scatter plot, or mosaic plot, or interaction plot).
 However, it is possible to create a poor data visualisation if we
 produce an emergent feature that has no correspondence with data values
-(Figure~\ref{fig-data-vis-vis-lie}).\footnote{This is the ``proximity
-  compatibility principle'' ? of Carswell and Wickens ?
+(Figure~\ref{fig-data-vis-vis-lie}).\footnote{The idea that combining
+  visual features that interact is more appropriate for decoding data
+  summaries (and vice versa) is similar to the \emph{proximity
+  compatibility principle} (Wickens and Carswell 1995).
 
-  ``Review of Graph Comprehension Research: Implications for
-  Instruction'' Shah and Hoeffner (2002) ``Integrated, object-like
-  displays (e.g., a line graph) are better for integrative tasks,
-  whereas more separable formats (e.g., bar graphs) are better for less
-  integrative or synthetic tasks such as point reading (Carswell and
-  Wickens, 1987).''}
+  Shah and Hoeffner (2002a) use the following nice quote from earlier
+  work (Carswell and Wickens 1987):
+
+  ``Integrated, object-like displays (e.g., a line graph) are better for
+  integrative tasks, whereas more separable formats (e.g., bar graphs)
+  are better for less integrative or synthetic tasks such as point
+  reading.''}
 
 \begin{figure}
 
@@ -6645,6 +6705,13 @@ decoding may lead to unhelpful and misleading interpretations.}
 
 \end{figure}%
 
+\begin{quote}
+A data visualisation can be misleading if we encode data values using a
+combination of visual features that have a strong interaction, but the
+values that we decode from the resulting emergent feature do not
+correspond to any meaningful summary of the data.
+\end{quote}
+
 Figure~\ref{fig-nz-doctor-line} shows a different representation of the
 data. In this case, the average change in health spending is encoded as
 the (vertical) \textbf{position} of a line and the duration is encoded
@@ -6665,48 +6732,45 @@ lines.}
 
 \end{figure}%
 
-\textbf{There is also the problem of separable when integral would be
-appropriate (reduce to separate effects inappropriately?)} Is there an
-example?
+\section{Case study: Redundant mappings}\label{sec-redundant}
 
-\textbf{Must} say that chroma and luminance and hue are all integral.
-Especially chroma and luminance. Can successfully vary hue separately
-from the others (Section~\ref{sec-divergent}). Is this an example of
-integrating ineffectively? Refer back to Section~\ref{sec-escape}.
+Figure~\ref{fig-fbref} shows a bar plot of various performance metrics
+for the football player Lamine Yamal from July 2024.\footnote{Figure~\ref{fig-fbref}
+  is based on an image produced by the
+  \href{https://fbref.com/en/}{FBREF} web site for football statistics
+  and history.} The percentile values show how Yamal ranked against
+other similar players on each metric. He is a relatively good football
+player.
 
-\section{Redundant mappings}\label{sec-redundant}
+Figure~\ref{fig-fbref} is a typical bar plot in that it encodes
+qualitative data values as the (vertical) position of the bars and
+quantitative data values as the lengths of the bars. However, there is
+also a third encoding in Figure~\ref{fig-fbref}: the percentile values
+are also encoded as the colour of the bars.\footnote{In fact, because
+  the colours are from a diverging colour palette
+  (Section~\ref{sec-divergent}), there are arguably four encodings:
+  whether the percentile is below 50 or above 50 is encoded as a red or
+  green hue and the amount above or below 50 is encoded as the
+  luminance/chroma of the bar.}
 
-In Section~\ref{sec-mosaic}, we focused on the encoding of quantitative
-values (proportions) as the widths and heights of the rectangular data
-symbols in a mosaic plot, for example, Figure~\ref{fig-spine}. There are
-also qualitative values encoded in a mosaic plot: the different
-categories, like Male and Female.
+\begin{figure}
 
-The main encoding of the categories in a mosaic plot is as the
-\textbf{position} of the rectangles. For example, in
-Figure~\ref{fig-spine}, the rectangles for Female are to the left and
-the rectangles for Male are to the right and the rectangles for
-different court actions are stacked vertically, with Not Proceeded With
-at the bottom, Non-Court Action in the middle, and Court Action at the
-top.
+\centering{
 
-In addition, different court actions are encoded as different
-\textbf{colours}. This additional encoding is \textbf{redundant} in the
-sense that we can already decode the court action from the vertical
-position of the bars. However, having the additional encoding means that
-we have two ways to decode the court action: from the vertical position
-and from the colour. This becomes much more useful when there are more
-categories (Figure~\ref{fig-spine-weak}) or more variables
-(Figure~\ref{fig-mosaic}).\footnote{``Clusters Beat Trend!? Testing
-  Feature Hierarchy in Statistical Graphics'' VanderPlas and Hofmann
-  (2017) says redundancy helps
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/combine_files/figure-pdf/fig-fbref-1.pdf}
 
-  ``Beyond Memorability: Visualization Recognition and Recall'' Borkin
-  et al (2015) also says redundancy helps
+}
 
-  ``The Science of Visual Data Communication: What Works'' Franconeri et
-  al (2021) says it doesn't (though only with expert opinion like Tukey
-  to back it up. Exception is to allow for colour-blind viewers.}
+\caption{\label{fig-fbref}FBREF statistics for Lamine Yamal from July
+2024.}
+
+\end{figure}%
+
+The additional encoding of percentile is \textbf{redundant} in the sense
+that we can already decode the perentile from the length of the bars.
+However, having the additional encoding means that we have two ways to
+decode the percentile: from the length and from the colour
+(Figure~\ref{fig-data-vis-redundant}).
 
 \begin{figure}
 
@@ -6733,44 +6797,97 @@ decodings are possible.}
 
 \end{figure}%
 
+The effectiveness of a redundant encoding partially depends upon the
+independence of the two visual features. The features are only redundant
+if we are able to decode data values from the two features separately,
+as we can with colour and length.
+
 One useful application of redundant encoding is to accommodate viewers
 with CVD (Section~\ref{sec-CVD}). Having a secondary decoding alongside
 colour allows for the fact that the colour decoding may fail for some
-viewers.
+viewers. For example, Figure~\ref{fig-fbref-cvd} shows what
+Figure~\ref{fig-fbref} might look like to a viewer with severe red-green
+colour blindness. The distinction between red and green bars is gone and
+that in turn confuses the decoding of the bar luminance (changes in
+luminance are not monotonic with changes in length). However, thanks to
+the redundant encoding, the simple comparison between bar lengths
+remains.
 
-\textbf{TODO} one argument against redundancy is that each individual
-feature may not be as effective as it would be on its own because it is
-not the ONLY change happening. Example is the colour and size used in
-Fig 2 of letter-value plots Hofmann et al
+\begin{figure}
 
-\section{Case study: log-log plots}\label{case-study-log-log-plots}
+\centering{
 
-Involves non-linear scales, but the point is the shape that you (hope
-to) get.
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/combine_files/figure-pdf/fig-fbref-cvd-1.pdf}
 
-Could also do q-q plots?
+}
+
+\caption{\label{fig-fbref-cvd}FBREF statistics for Lamine Yamal from
+July 2024. This is a version of Figure~\ref{fig-fbref} with the colours
+adjusted to simulate severe red-green colour blindness.}
+
+\end{figure}%
+
+One argument against using a redundant encoding is that we are
+introducing additional visual complexity. Each individual visual feature
+may not be as effective as it would be on its own because it is not the
+\emph{only} visual change (Section~\ref{sec-differences}). For example,
+Figure~\ref{fig-fbref-simple} shows a variation on
+Figure~\ref{fig-fbref} with the redundant encoding removed---all of the
+bars are just the same dark grey. It is arguably easier to decode the
+lengths of the bars in Figure~\ref{fig-fbref} because the bars are less
+complex visual objects. This is even more true when comparing with the
+confusing changes in luminance of the bars in
+Figure~\ref{fig-fbref-cvd}.\footnote{Redundant encodings are not
+  universally supported in the literature either. For example,
+  VanderPlas and Hofmann (2017) provide evidence that additional cues
+  improve plot perception and Borkin et al. (2016) report that
+  ``redundancy helps effectively communicate the message''. However,
+  Franconeri et al. (2021b) are less in favour: ``redundant encoding
+  should be avoided in most cases, except when used to make
+  visualizations accessible for viewers with color-vision impairments.''}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/combine_files/figure-pdf/fig-fbref-simple-1.pdf}
+
+}
+
+\caption{\label{fig-fbref-simple}FBREF statistics for Lamine Yamal from
+July 2024. This is a version of Figure~\ref{fig-fbref} with the
+redundant colour encoding removed.}
+
+\end{figure}%
 
 \section{Summary}\label{summary-8}
+
+Almost all data visualisations involve \emph{combinations} of mappings.
+More than one set of data values are encoded as more than one visual
+feature of data symbols.
 
 The mappings involved in a bar plot---quantitative data values encoded
 as lengths and qualitative values encoded as position---are effective
 because we are able to perceive some combinations of visual features,
-such as length, position, and colour \textbf{independently}.
+such as length, position, and colour \textbf{independently}, which means
+that we can effectively decode both position and length from a bar plot.
 
 A scatter plot is effective for perceiving relationships between
 variables because the mappings of quantitative data values to both
 horizontal and vertical positions \textbf{interact} to produce
 \textbf{position in space} and our visual system is capable of producing
-useful \textbf{visual summaries} of position in space, such as
+useful \textbf{visual summaries} from position in space, such as
 correlation.
 
-The effectiveness of a mosaic plot also depends upon the
-\textbf{interaction} of visual features: marginal and conditional
-proportions are mapped to widths and heights, which produce
-\textbf{area} to represent overall proportions.
+Independence between visual features is useful when we want to decode
+separate data values. Interactions between visual features is useful
+when we want to produce an emergent feature that allows us to decode
+data summaries.
 
-Care must be taken to avoid generating emergent features that do not
-represent any meaningful property of the data.
+Conversely, independence between visual features is of no help if we
+want to produce an emergent feature. Furthermore, interaction between
+visual features is unhelpful, or even misleading, if we cannot decode
+any meaningful information from the emergent feature.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -7347,6 +7464,13 @@ size of differences - you can only decode things like order and groups
 
 The ratio plot might be more interpretable if the axis is labelled as
 ``number of times larger'' ?
+
+\section{Case study: log-log plots}\label{case-study-log-log-plots}
+
+Involves non-linear scales, but the point is the shape that you (hope
+to) get.
+
+Could also do q-q plots?
 
 \section{Summary}\label{summary-9}
 
@@ -8426,7 +8550,7 @@ unusual data symbols, but entirely novel data visualisations.\footnote{Kosslyn's
   Could mention Pinker's (1990) ``graph schema'' (prior knowledge about
   a graph type).
 
-  Shah and Hoeffner (2002) provides several examples of young students
+  Shah and Hoeffner (2002b) provides several examples of young students
   misinterpreting the message from line plots, which suggests that we
   need to \emph{learn} how to make effective use of even basic data
   visualisation formats.
@@ -9936,6 +10060,14 @@ Visualizations.''} \emph{CoRR} abs/2008.11310.
 Boring, Edwin G. 1942. \emph{Sensation and Perception in the History of
 Experimental Psychology}. Appleton-Century-Crofts.
 
+\bibitem[\citeproctext]{ref-beyond-memorability}
+Borkin, Michelle A., Zoya Bylinskii, Nam Wook Kim, Constance May
+Bainbridge, Chelsea S. Yeh, Daniel Borkin, Hanspeter Pfister, and Aude
+Oliva. 2016. {``Beyond Memorability: Visualization Recognition and
+Recall.''} \emph{IEEE Transactions on Visualization and Computer
+Graphics} 22 (1): 519--28.
+\url{https://doi.org/10.1109/TVCG.2015.2467732}.
+
 \bibitem[\citeproctext]{ref-rainbow-harmful}
 Borland, David, and Russell M. Taylor Ii. 2007. {``Rainbow Color Map
 (Still) Considered Harmful.''} \emph{IEEE Computer Graphics and
@@ -9986,6 +10118,24 @@ Perceptual and Conceptual Processes in Graph Comprehension.''}
 \emph{Journal of Experimental Psychology: Applied} 4 (2): 75--100.
 \url{https://doi.org/10.1037/1076-898X.4.2.75}.
 
+\bibitem[\citeproctext]{ref-MelodyCarswell01031987}
+Carswell, C. Melody, and Christopher D. Wickens. 1987. {``Information
+Integration and the Object Display an Interaction of Task Demands and
+Display Superiority.''} \emph{Ergonomics} 30 (3): 511--27.
+\url{https://doi.org/10.1080/00140138708969741}.
+
+\bibitem[\citeproctext]{ref-carswell-wickens-88}
+---------. 1988. {``Comparative Graphics: History and Applications of
+Perceptual Integrality Theory and the Proximity Compatibility
+Hypothesis.''} \url{https://apps.dtic.mil/sti/citations/ADA202370}; U.S.
+Army Human Engineering Laboratory.
+
+\bibitem[\citeproctext]{ref-carswell1990perceptual}
+---------. 1990. {``The Perceptual Interaction of Graphical Attributes:
+Configurality, Stimulus Homogeneity, and Object Integration.''}
+\emph{Perception \& Psychophysics} 47 (2): 157--68.
+\url{https://doi.org/10.3758/BF03205980}.
+
 \bibitem[\citeproctext]{ref-chen1982topological}
 Chen, Lin. 1982. {``Topological Structure in Visual Perception.''}
 \emph{Science} 218 (4573): 699--700.
@@ -10015,10 +10165,6 @@ Theory, Experimentation, and Application to the Development of Graphical
 Methods.''} \emph{Journal of the American Statistical Association} 79
 (387): 531--54.
 
-\bibitem[\citeproctext]{ref-wikipedia-visual-system}
-contributors, Wikipedia. 2025. {``Visual System.''} In \emph{Wikipedia}.
-\url{https://en.wikipedia.org/wiki/Visual_system}.
-
 \bibitem[\citeproctext]{ref-cookSwayne2007}
 Cook, Dianne, and Deborah F. Swayne. 2007. \emph{Interactive and Dynamic
 Graphics for Data Analysis: With r and GGobi}. 1st ed. Use r! Springer
@@ -10030,6 +10176,17 @@ Gleicher. 2012. {``Comparing Averages in Time Series Data.''} In
 \emph{Proceedings of the SIGCHI Conference on Human Factors in Computing
 Systems}, 1095--1104. CHI '12. New York, NY, USA: Association for
 Computing Machinery. \url{https://doi.org/10.1145/2207676.2208556}.
+
+\bibitem[\citeproctext]{ref-Cragin2015-CRAEFA}
+Cragin, Anna I., and James R. Pomerantz. 2015. {``Emergent Features and
+Feature Combination.''} In \emph{The Oxford Handbook of Perceptual
+Organization}, edited by Johan Wagemans. Oxford University Press.
+
+\bibitem[\citeproctext]{ref-cui2024drawn}
+Cui, Lucy, Medha Kini, and Zili Liu. 2024. {``Drawn Correlations
+Consistent with Underestimation of Perceived Correlations from
+Scatterplots.''} \emph{Journal of Vision} 24 (10): 781--81.
+\url{https://doi.org/10.1167/jov.24.10.781}.
 
 \bibitem[\citeproctext]{ref-cui2021synergy}
 Cui, Lucy, and Zili Liu. 2021. {``Synergy Between Research on Ensemble
@@ -10072,9 +10229,18 @@ Graphs to Enlighten}. 1st ed. Berkeley, CA: Analytics Press.
 
 \bibitem[\citeproctext]{ref-franconeri2021}
 Franconeri, Steven L., Lace M. Padilla, Priti Shah, Jeffrey M. Zacks,
-and Jessica Hullman. 2021. {``The Science of Visual Data Communication:
+and Jessica Hullman. 2021a. {``The Science of Visual Data Communication:
 What Works.''} \emph{Psychological Science in the Public Interest} 22
 (3): 110--61. \url{https://doi.org/10.1177/15291006211051956}.
+
+\bibitem[\citeproctext]{ref-what-works}
+---------. 2021b. {``The Science of Visual Data Communication: What
+Works.''} \emph{Psychological Science in the Public Interest} 22 (3):
+110--61. \url{https://doi.org/10.1177/15291006211051956}.
+
+\bibitem[\citeproctext]{ref-garner1974processing}
+Garner, Richard. 1974. \emph{The Processing of Information and
+Structure}. Hillsdale, NJ: Lawrence Erlbaum Associates.
 
 \bibitem[\citeproctext]{ref-wrong-rainbow}
 Gołębiowska, Izabela, and Arzu Çöltekin. 2022. {``What's Wrong with the
@@ -10293,20 +10459,30 @@ Beatriz Sousa Santos. 1999. {``Definitions and Rationale for
 Visualization.''}
 \url{https://education.siggraph.org/static/HyperVis/visgoals/visgoal2.htm}.
 
+\bibitem[\citeproctext]{ref-palmer1999vision}
+Palmer, Stephen E. 1999. \emph{Vision Science: Photons to
+Phenomenology}. Cambridge, MA: MIT Press.
+
 \bibitem[\citeproctext]{ref-pointer-attridge-1998}
 Pointer, M. R., and G. G. Attridge. n.d. {``The Number of Discernible
 Colours.''} \emph{Color Research \& Application} 23 (1): 52--54.
 https://doi.org/\url{https://doi.org/10.1002/(SICI)1520-6378(199802)23:1\%3C52::AID-COL8\%3E3.0.CO;2-2}.
 
-\bibitem[\citeproctext]{ref-pomerantz1994emergent}
-Pomerantz, James R., and Anna I. Cragin. 1994. {``Emergent Features and
-Feature Combination.''} \emph{Attention, Perception, \& Psychophysics}
-55 (1): 48--55.
-
 \bibitem[\citeproctext]{ref-Rlang}
 R Core Team. 2025. \emph{R: A Language and Environment for Statistical
 Computing}. Vienna, Austria: R Foundation for Statistical Computing.
 \url{https://www.R-project.org/}.
+
+\bibitem[\citeproctext]{ref-rensink2017nature}
+Rensink, Ronald A. 2017. {``The Nature of Correlation Perception in
+Scatterplots.''} \emph{Psychonomic Bulletin \& Review} 24 (3): 776--97.
+\url{https://doi.org/10.3758/s13423-016-1174-7}.
+
+\bibitem[\citeproctext]{ref-perception-correlation}
+Rensink, Ronald A., and Gideon Baldridge. 2010. {``The Perception of
+Correlation in Scatterplots.''} \emph{Computer Graphics Forum} 29 (3):
+1203--10.
+https://doi.org/\url{https://doi.org/10.1111/j.1467-8659.2009.01694.x}.
 
 \bibitem[\citeproctext]{ref-robbins2005creating}
 Robbins, Naomi B. 2005. \emph{Creating More Effective Graphs}. Hoboken,
@@ -10350,9 +10526,14 @@ Schwabish, Jonathan A. 2020. {``Ten Guidelines for Better Tables.''}
 \emph{Journal of Benefit-Cost Analysis} 11 (2): 151--78.
 
 \bibitem[\citeproctext]{ref-Shah2002}
-Shah, Priti, and James Hoeffner. 2002. {``Review of Graph Comprehension
+Shah, Priti, and James Hoeffner. 2002b. {``Review of Graph Comprehension
 Research: Implications for Instruction.''} \emph{Educational Psychology
 Review} 14 (1): 47--69. \url{https://doi.org/10.1023/A:1013180410169}.
+
+\bibitem[\citeproctext]{ref-Shah2002GraphComprehension}
+---------. 2002a. {``Review of Graph Comprehension Research:
+Implications for Instruction.''} \emph{Educational Psychology Review} 14
+(1): 47--69. \url{https://doi.org/10.1023/A:1013180410169}.
 
 \bibitem[\citeproctext]{ref-Sidiropoulos03072018}
 Sidiropoulos, Nikos, Sina Hadi Sohi, Thomas Lin Pedersen, Bo Torben
@@ -10402,6 +10583,12 @@ Stewart, Emma E. M., Matteo Valsecchi, and Alexander C. Schütz. 2020.
 Stone, Maureen. 2012. {``In Color Perception, Size Matters.''}
 \emph{IEEE Comput. Graph. Appl.} 32 (2): 8--13.
 \url{https://doi.org/10.1109/MCG.2012.37}.
+
+\bibitem[\citeproctext]{ref-ensemble-scatter}
+Szafir, Danielle Albers, Steve Haroz, Michael Gleicher, and Steven
+Franconeri. 2016. {``Four Types of Ensemble Coding in Data
+Visualizations.''} \emph{Journal of Vision} 16 (5): 11--11.
+\url{https://doi.org/10.1167/16.5.11}.
 
 \bibitem[\citeproctext]{ref-talbot2014four}
 Talbot, Justin, Heidi Lam, Jock MacKinlay, and Jeffrey Heer. 2014.
@@ -10489,6 +10676,12 @@ Statistical Charts: What Makes a Good Graph?''} \emph{Annual Review of
 Statistics and Its Application} 7 (Volume 7, 2020): 61--88.
 https://doi.org/\url{https://doi.org/10.1146/annurev-statistics-031219-041252}.
 
+\bibitem[\citeproctext]{ref-VanderPlas03042017}
+VanderPlas, Susan, and Heike Hofmann. 2017. {``Clusters Beat Trend!?
+Testing Feature Hierarchy in Statistical Graphics.''} \emph{Journal of
+Computational and Graphical Statistics} 26 (2): 231--42.
+\url{https://doi.org/10.1080/10618600.2016.1209116}.
+
 \bibitem[\citeproctext]{ref-cognitive-fit}
 Vessey, Iris. 1991. {``Cognitive Fit: A Theory-Based Analysis of the
 Graphs Versus Tables Literature.''} \emph{Decision Sciences} 22 (2):
@@ -10509,10 +10702,26 @@ Weber, Ernst Heinrich. 1846. {``Der Tastsinn Und Das Gemeingef{ü}hl.''}
 \emph{Rudolf Wagner (Hg.): Handw{ö}rterbuch Der Physiologie.
 Braunschweig} 3: 481--588.
 
+\bibitem[\citeproctext]{ref-ensemble-perception}
+Whitney, David, and Allison Yamanashi Leib. 2018. {``Ensemble
+Perception.''} Journal Article. \emph{Annual Review of Psychology} 69
+(Volume 69, 2018): 105--29.
+https://doi.org/\url{https://doi.org/10.1146/annurev-psych-010416-044232}.
+
+\bibitem[\citeproctext]{ref-proximity-compatibility}
+Wickens, Christopher D., and C. Melody Carswell. 1995. {``The Proximity
+Compatibility Principle: Its Psychological Foundation and Relevance to
+Display Design.''} \emph{Human Factors} 37 (3): 473--94.
+\url{https://doi.org/10.1518/001872095779049408}.
+
 \bibitem[\citeproctext]{ref-wiki-rwc}
 Wikipedia. 2024. {``{Rugby World Cup}: {W}ikipedia{,} the Free
 Encyclopedia.''}
 \url{http://en.wikipedia.org/w/index.php?title=Rugby\%20World\%20Cup}.
+
+\bibitem[\citeproctext]{ref-wikipedia-visual-system}
+Wikipedia contributors. 2025. {``Visual System.''} In \emph{Wikipedia}.
+\url{https://en.wikipedia.org/wiki/Visual_system}.
 
 \bibitem[\citeproctext]{ref-wilke2019fundamentals}
 Wilke, Claus O. 2019. \emph{Fundamentals of Data Visualization: A Primer

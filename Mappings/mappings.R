@@ -22,7 +22,7 @@ dataframe <- function(nr=4, nc=3,
         popViewport()
         for (j in 1:nc) {
             pushViewport(viewport(layout.pos.row=i, layout.pos.col=j))
-            grid.rect(gp=gpar(col=basecol))
+            grid.rect(gp=gpar(col=basecol, fill=figbg))
             if (i == 1) {
                 grid.text(colnames[j], y=unit(1, "npc") + unit(.5, "lines"),
                           rot=colrot[j], just=coljust[j], gp=gpar(col=basecol))
@@ -50,16 +50,14 @@ dataframe <- function(nr=4, nc=3,
                          grid.text(colnames[j], 
                                    y=unit(1, "npc") + unit(.5, "lines"))
                      }
-                     grid.rect(gp=gpar(fill=adjustcolor(colsDarker[1],
-                                                        alpha=.2)))
+                     grid.rect(gp=gpar(col="black", fill=cols[2]))
                      popViewport()
                 }                
             }
         }
         if (!is.null(hr)) {
             pushViewport(viewport(layout.pos.col=hc, layout.pos.row=hr))
-            grid.rect(gp=gpar(lwd=3, fill=adjustcolor(colsDarker[1],
-                                                      alpha=.52)))
+            grid.rect(gp=gpar(lwd=3, col="black", fill=NA))
             popViewport()
         }
     }
@@ -103,7 +101,7 @@ symbols <- function(nr=4, nc=3,
         for (j in 1:nc) {
             pushViewport(viewport(layout.pos.row=(i - 1)*2 + 1,
                                   layout.pos.col=j))
-            grid.rect(gp=gpar(col=basecol))
+            grid.rect(gp=gpar(col=basecol, fill=figbg))
             if (i == 1) {
                 grid.text(colnames[j], y=unit(1, "npc") + unit(.5, "lines"),
                           rot=colrot[j], just=coljust[j], gp=gpar(col=basecol))
@@ -132,8 +130,8 @@ symbols <- function(nr=4, nc=3,
                          grid.text(colnames[j], 
                                    y=unit(1, "npc") + unit(.5, "lines"))
                      }
-                     grid.rect(gp=gpar(fill=adjustcolor(colsDarker[2],
-                                                        alpha=.2^k)))
+                     grid.rect(gp=gpar(col=cols[2],
+                                       fill="white"))
                      popViewport()
                 }                
             }
@@ -141,8 +139,7 @@ symbols <- function(nr=4, nc=3,
         if (!is.null(hr)) {
             pushViewport(viewport(layout.pos.col=hc,
                                   layout.pos.row=(hr - 1)*2 + 1))
-            grid.rect(gp=gpar(lwd=3, fill=adjustcolor(colsDarker[2],
-                                                      alpha=.5^k)))
+            grid.rect(gp=gpar(lwd=3, col=cols[2], fill=NA))
             popViewport()
         }
     }
