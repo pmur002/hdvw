@@ -192,6 +192,8 @@ This data visualisation encodes the
 number of points scored maps as the horizontal **position** of
 a data point and it encodes the hemisphere as the vertical
 **position** of a data point.
+There is an overplotting problem (@sec-overplot), which is solved in this
+case by offsetting data symbols vertically for repeated data values.
 
 [^dotplot]:
     The general idea of arranging
@@ -200,9 +202,6 @@ a data point and it encodes the hemisphere as the vertical
     @Wilkinson01081999 and @tukey1977eda.
     The vertically-centred arrangement used here is also
     known as a *beeswarm plot* [@rosanbalm2014beeswarm].
-
-There is an overplotting problem (@sec-overplot), which is solved in this
-case by offsetting data symbols vertically for repeated data values.
 
 Because this data visualisation encodes raw data values as visual features, 
 it is possible to decode raw data values from the visual features
@@ -381,6 +380,65 @@ the spread and/or skewness of the data.
   of data values because it maps data summaries to basic visual features
   and those data summaries can be compared to provide information about
   the distribution of the data.
+
+## Decoding summaries
+
+When we encode a data summary as a visual feature, like the position
+of the median line of a boxplot (@fig-boxplot), we know from
+previous chapters how effective the decoding is going to be.
+For example, because the median is encoded as position, we should be
+able to decode the median very accurately (@sec-accuracy).
+
+However, if we rely on a visual summary to decode a data summary, for example,
+comparing the 
+average points scored by teams from different hemispheres based on
+a collection of data points for each hemisphere (@fig-rwc-dotplot),
+we are no longer dealing with just the decoding of a single visual feature.
+How well can we decode the average from the positions of several data symbols
+compared to decoding a single data value from a single data symbol?
+How effective is the decoding from visual features to
+a data summary (@fig-data-vis-stat-decode)?
+
+One issue that arises is that there are many possible visual summaries.
+For example, we might be interested in the average data value, or the
+variability of data values, whether there are unusual data values (outliers),
+or whether there are groups of data values (clusters).[^strict-ensemble]
+
+[^strict-ensemble]:
+    In the visual perception literature, the strict definition of 
+    *ensemble* encoding is limited to *statistical moments*
+    (means and variances) [@ensemble-perception],
+    but the data visualisation literature takes a more relaxed
+    approach [@ensemble-scatter].
+
+Furthermore, we can produce each sort of visual summary for each
+possible visual feature.
+For example, we can decode the average position of data symbols, or
+the average luminance of data symbols, or the average area of data symbols.
+We can decode unusual positions, unusual colours, or unusual angles.
+
+Although it is well-established that our visual system is capable of
+generating visual summaries, less is known about the accuracy of those
+summaries, partly because the range of possible visual summaries
+is so large.
+However, we know that
+estimating averages from the positions of multiple data symbols
+is quite accurate
+and estimating averages from the luminance and/or chroma
+of multiple data symbols can also be effective.[^visual-average]
+
+[^visual-average]:
+    @visual-average show that the average position of data points
+    in a scatterplot can be accurately determined and that this is robust
+    to a number of variations in context, such as the number of data points
+    and the presence of distractors.
+
+    @time-series-ensemble show that the average luminance of rectangles
+    in a colour field can be determined reasonably well.  This study
+    is also a good demonstration of both the multitude of visual
+    summaries that can be studied and the variability of 
+    performance across different combinations of visual summaries
+    and visual features.
 
 ## Dangers of summaries {#sec-summary-caveats}
 

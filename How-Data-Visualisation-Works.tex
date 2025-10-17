@@ -5266,11 +5266,10 @@ the same data as Figure~\ref{fig-boxplot}, but it maps raw data values
 rather than data summaries and it uses much simpler data symbols (data
 points). This data visualisation encodes the number of points scored
 maps as the horizontal \textbf{position} of a data point and it encodes
-the hemisphere as the vertical \textbf{position} of a data point.
-
-There is an overplotting problem (Section~\ref{sec-overplot}), which is
-solved in this case by offsetting data symbols vertically for repeated
-data values.
+the hemisphere as the vertical \textbf{position} of a data point. There
+is an overplotting problem (Section~\ref{sec-overplot}), which is solved
+in this case by offsetting data symbols vertically for repeated data
+values.
 
 Because this data visualisation encodes raw data values as visual
 features, it is possible to decode raw data values from the visual
@@ -5439,6 +5438,58 @@ of data values because it maps data summaries to basic visual features
 and those data summaries can be compared to provide information about
 the distribution of the data.
 \end{quote}
+
+\section{Decoding summaries}\label{decoding-summaries}
+
+When we encode a data summary as a visual feature, like the position of
+the median line of a boxplot (Figure~\ref{fig-boxplot}), we know from
+previous chapters how effective the decoding is going to be. For
+example, because the median is encoded as position, we should be able to
+decode the median very accurately (Section~\ref{sec-accuracy}).
+
+However, if we rely on a visual summary to decode a data summary, for
+example, comparing the average points scored by teams from different
+hemispheres based on a collection of data points for each hemisphere
+(Figure~\ref{fig-rwc-dotplot}), we are no longer dealing with just the
+decoding of a single visual feature. How well can we decode the average
+from the positions of several data symbols compared to decoding a single
+data value from a single data symbol? How effective is the decoding from
+a visual summary to a data summary
+(Figure~\ref{fig-data-vis-stat-decode})?
+
+One issue that arises is that there are many possible visual summaries.
+For example, we might be interested in the average data value, or the
+variability of data values, whether there are unusual data values
+(outliers), or whether there are groups of data values
+(clusters).\footnote{In the visual perception literature, the strict
+  definition of \emph{ensemble} encoding is limited to \emph{statistical
+  moments} (means and variances) (Whitney and Yamanashi Leib 2018), but
+  the data visualisation literature takes a more relaxed approach
+  (Szafir et al. 2016).}
+
+Furthermore, we can produce each sort of visual summary for each
+possible visual feature. For example, we can decode the average position
+of data symbols, or the average luminance of data symbols, or the
+average area of data symbols. We can decode unusual positions, unusual
+colours, or unusual angles.
+
+Although it is well-established that our visual system is capable of
+generating visual summaries, less is known about the accuracy of those
+summaries, partly because the range of possible visual summaries is so
+large. However, we know that estimating averages from the positions of
+multiple data symbols is quite accurate and estimating averages from the
+luminance and/or chroma of multiple data symbols can also be
+effective.\footnote{Gleicher et al. (2013) show that the average
+  position of data points in a scatterplot can be accurately determined
+  and that this is robust to a number of variations in context, such as
+  the number of data points and the presence of distractors.
+
+  Albers, Correll, and Gleicher (2014) show that the average luminance
+  of rectangles in a colour field can be determined reasonably well.
+  This study is also a good demonstration of both the multitude of
+  visual summaries that can be studied and the variability of
+  performance across different combinations of visual summaries and
+  visual features.}
 
 \section{Dangers of summaries}\label{sec-summary-caveats}
 
@@ -6628,6 +6679,13 @@ offenders in different ethnic groups in 2011 and in 2021.}
 
 \section{Decoding combinations of visual
 features}\label{decoding-combinations-of-visual-features}
+
+Independent features reduce to the effectiveness of the individual
+features.
+
+Interactions less clear. Interaction of width and height produce known
+feature, but interaction of x and y produce new feature. What do we know
+about position in space?
 
 Although there is some experimental support for reasonable accuracy of
 correlation from scatter plot (with some bias - specifically
@@ -9901,6 +9959,39 @@ Position is especially important
 
 \markboth{Review}{Review}
 
+Add review at the end that reinforces the threads like visual feature,
+visual shape, visual object and mappings
+
+Possible encoding end points:
+
+\begin{itemize}
+\tightlist
+\item
+  visual feature
+\item
+  visual summary
+\item
+  emergent feature
+\item
+  visual shape
+\item
+  visual object
+\item
+  text
+\end{itemize}
+
+Possible decodings from encoding end points:
+
+\begin{itemize}
+\tightlist
+\item
+  qual/quant data value
+\item
+  data summary
+\item
+  higher level information/knowledge/wisdom
+\end{itemize}
+
 Do two versions (at least):
 
 \begin{itemize}
@@ -9910,9 +10001,6 @@ Do two versions (at least):
 \item
   Another set for if you want to create a data vis
 \end{itemize}
-
-Add review at the end that reinforces the threads like visual feature,
-visual shape, visual object and mappings
 
 Basic questions:
 
@@ -10001,6 +10089,14 @@ And so on \ldots{}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-time-series-ensemble}
+Albers, Danielle, Michael Correll, and Michael Gleicher. 2014.
+{``Task-Driven Evaluation of Aggregation in Time Series
+Visualization.''} In \emph{Proceedings of the SIGCHI Conference on Human
+Factors in Computing Systems}, 551--60. CHI '14. New York, NY, USA:
+Association for Computing Machinery.
+\url{https://doi.org/10.1145/2556288.2557200}.
+
 \bibitem[\citeproctext]{ref-amar-taxonomy}
 Amar, Robert, James Eagan, and John Stasko. 2005. {``Low-Level
 Components of Analytic Activity in Information Visualization.''} In
@@ -10241,6 +10337,13 @@ Works.''} \emph{Psychological Science in the Public Interest} 22 (3):
 \bibitem[\citeproctext]{ref-garner1974processing}
 Garner, Richard. 1974. \emph{The Processing of Information and
 Structure}. Hillsdale, NJ: Lawrence Erlbaum Associates.
+
+\bibitem[\citeproctext]{ref-visual-average}
+Gleicher, Michael, Michael Correll, Christine Nothelfer, and Steven
+Franconeri. 2013. {``Perception of Average Value in Multiclass
+Scatterplots.''} \emph{IEEE Transactions on Visualization and Computer
+Graphics} 19 (12): 2316--25.
+\url{https://doi.org/10.1109/TVCG.2013.183}.
 
 \bibitem[\citeproctext]{ref-wrong-rainbow}
 Gołębiowska, Izabela, and Arzu Çöltekin. 2022. {``What's Wrong with the
