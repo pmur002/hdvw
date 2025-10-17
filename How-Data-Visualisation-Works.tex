@@ -5439,7 +5439,7 @@ and those data summaries can be compared to provide information about
 the distribution of the data.
 \end{quote}
 
-\section{Decoding summaries}\label{decoding-summaries}
+\section{Decoding summaries}\label{sec-summary-decode}
 
 When we encode a data summary as a visual feature, like the position of
 the median line of a boxplot (Figure~\ref{fig-boxplot}), we know from
@@ -5454,7 +5454,7 @@ hemispheres based on a collection of data points for each hemisphere
 decoding of a single visual feature. How well can we decode the average
 from the positions of several data symbols compared to decoding a single
 data value from a single data symbol? How effective is the decoding from
-a visual summary to a data summary
+visual features to a data summary
 (Figure~\ref{fig-data-vis-stat-decode})?
 
 One issue that arises is that there are many possible visual summaries.
@@ -6680,20 +6680,50 @@ offenders in different ethnic groups in 2011 and in 2021.}
 \section{Decoding combinations of visual
 features}\label{decoding-combinations-of-visual-features}
 
-Independent features reduce to the effectiveness of the individual
-features.
+When we combine visual features that are independent, each visual
+feature can can be decoded separately. In that case, the decoding of the
+combination be reduced to the decoding of the individual features. This
+means that we can determine the effectiveness of a combination of
+features based on the effectiveness of the individual features. For
+example, the combination of length and position in a bar plot like
+Figure~\ref{fig-bar-gender} is effective because length is an effective
+encoding (for quantitative data) and position is an effective encoding
+(for qualitative data).
 
-Interactions less clear. Interaction of width and height produce known
-feature, but interaction of x and y produce new feature. What do we know
-about position in space?
+When we combine visual features that interact, the situation is more
+complicated. There are two parts to consider: the individual features
+that are being combined and the emergent feature that results from the
+interaction between the individual features.
 
-Although there is some experimental support for reasonable accuracy of
-correlation from scatter plot (with some bias - specifically
-underestimation), there is not much experimental evidence for which is
-best for perceiving correlations Eg scatter plot vs parallel coords etc
-\footnote{Examples of studies that demonstrate a tendency to
-  underestimate correlation coefficient are Rensink and Baldridge (2010)
-  and Cui, Kini, and Liu (2024).}
+One issue is that the individual features may be difficult to decode on
+their own (Section~\ref{sec-mosaic}). In that case, the effectiveness of
+the combination is dependent mainly on the emergent feature.
+
+The effectiveness of the emergent feature is straightforward to
+determine when the emergent feature is one the basic features that we
+already know about. Examples of this case are combinations of length
+producing area, as in a mosaic plot (Figure~\ref{fig-spine}), and
+combinations of position producing angle, as in an interaction plot
+(Figure~\ref{fig-interaction}). Figure~\ref{fig-separable} shows several
+other cases. For example, the combinations of colour features---hue,
+chroma, and luminance---all just produce different colours.
+
+However, when the emergent feature is not one of the basic features, we
+need more information to know how that emergent feature will perform. An
+example of this situation is when a combination of horizontal and
+vertical positions in a scatter plot produce position in space
+(Figure~\ref{fig-scatter}).
+
+Even when the emergent feature is known, another issue is that the
+emergent feature decodes to a data summary, rather than the raw data
+values. As we saw in Section~\ref{sec-summary-decode} this creates a
+problem because there are many possible data summaries to consider.
+
+However, in the specific case of decoding correlation from a scatter
+plot, experiments have shown that decoding is reasonably
+accurate.\footnote{Examples of studies that demonstrate accuracy for
+  decoding correlation, althouhg with a tendency to underestimate, are
+  Rensink and Baldridge (2010) and Cui, Kini, and Liu (2024).}
 
 \section{Dangers of combining
 mappings}\label{dangers-of-combining-mappings}
@@ -7392,6 +7422,15 @@ Also use of white space around points in scatter plot ?
 Cite Cleveland (1994) for white space margin affecting strength of
 relation?
 
+\section{Decoding visual shapes}\label{decoding-visual-shapes}
+
+Decoding to data summaries, so problem of many possible decodings again.
+
+Congruence comes into play - peaks and valleys etc.
+
+Refer to the aspect ratio problem: the shape you are decoding is
+vulnerable to context!
+
 \section{Dangers of visual shapes}\label{dangers-of-visual-shapes}
 
 Need a caveat that more complex shapes does NOT necessarily mean useful
@@ -7550,6 +7589,10 @@ symbol like a bar.
 
 \textbf{TODO} a side-by-side bar plot and even a stacked bar plot both
 use nested position!!! Also stacked dot plots like fig-rwc-dotplot.
+
+\textbf{TODO} add 3d section. Accuracy of decoding raw data values is
+low, but more to decode shapes (i.e., summaries) from surfaces etc,
+anyway
 
 Figure~\ref{fig-multiple} shows a data visualisation of the performance
 measures for teams in the 2023 Rugby World Cup
@@ -7934,6 +7977,11 @@ allows us to use \textbf{position} for more than just two variables.
 \bookmarksetup{startatroot}
 
 \chapter{Visual Objects}\label{visual-objects}
+
+\textbf{TODO} Need diagram showing encoding congruent with learned
+decoding (Section~\ref{sec-learned}?) and one showing encoding dissonant
+with learned encoding e.g., use wrong flag for country!
+(Section~\ref{sec-learned-danger})
 
 Figure~\ref{fig-scatter-country} shows a scatter plot of the number of
 clean breaks and the number of tries for countries at the 2023 Rugby
@@ -8506,7 +8554,13 @@ relationships because the data symbol is a familiar visual object from
 which we can easily perceive simple human emotions.
 \end{quote}
 
-\section{Dangers of learned mappings}\label{sec-learned-danger}
+\section{Decoding visual objects}\label{decoding-visual-objects}
+
+Decoding to data summaries, so problem of many possible decodings again.
+
+Congruence comes into play - big time!
+
+\section{Dangers of learned decodings}\label{sec-learned-danger}
 
 Figure~\ref{fig-stroop} provides a demonstration of the Stroop
 Effect.\footnote{citation please!} The task is to name the colour of
@@ -8664,6 +8718,11 @@ This may obviate the need for legends.
 \bookmarksetup{startatroot}
 
 \chapter{Text}\label{text}
+
+\textbf{TODO} Need to add a Decoding Text section. Need to shift
+evaluation of text decoding out of Section~\ref{sec-data-symbols}? Can
+it wait until just before Dangers of Text? Once we have covered labels
+as well?
 
 Figure~\ref{fig-no-text} is a version of Figure~\ref{fig-crime} with all
 of the text removed. Although we can see that some values, or rather

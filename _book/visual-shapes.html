@@ -250,13 +250,14 @@ div.csl-indent {
   <li><a href="#case-study-scatter-plots-with-lines" id="toc-case-study-scatter-plots-with-lines" class="nav-link" data-scroll-target="#case-study-scatter-plots-with-lines"><span class="header-section-number">10.2</span> Case study: Scatter plots with lines</a></li>
   <li><a href="#sec-density" id="toc-sec-density" class="nav-link" data-scroll-target="#sec-density"><span class="header-section-number">10.3</span> Case study: Density plots</a></li>
   <li><a href="#aspect-ratio" id="toc-aspect-ratio" class="nav-link" data-scroll-target="#aspect-ratio"><span class="header-section-number">10.4</span> Aspect ratio</a></li>
-  <li><a href="#dangers-of-visual-shapes" id="toc-dangers-of-visual-shapes" class="nav-link" data-scroll-target="#dangers-of-visual-shapes"><span class="header-section-number">10.5</span> Dangers of visual shapes</a></li>
-  <li><a href="#case-study-violin-plots" id="toc-case-study-violin-plots" class="nav-link" data-scroll-target="#case-study-violin-plots"><span class="header-section-number">10.6</span> Case study: Violin plots</a></li>
-  <li><a href="#case-study-loess-curves" id="toc-case-study-loess-curves" class="nav-link" data-scroll-target="#case-study-loess-curves"><span class="header-section-number">10.7</span> Case study: loess curves</a></li>
-  <li><a href="#case-study-line-of-best-fit" id="toc-case-study-line-of-best-fit" class="nav-link" data-scroll-target="#case-study-line-of-best-fit"><span class="header-section-number">10.8</span> Case study: Line of best fit</a></li>
-  <li><a href="#sec-shape-non-linear" id="toc-sec-shape-non-linear" class="nav-link" data-scroll-target="#sec-shape-non-linear"><span class="header-section-number">10.9</span> Non-linear mappings</a></li>
-  <li><a href="#case-study-log-log-plots" id="toc-case-study-log-log-plots" class="nav-link" data-scroll-target="#case-study-log-log-plots"><span class="header-section-number">10.10</span> Case study: log-log plots</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.11</span> Summary</a></li>
+  <li><a href="#decoding-visual-shapes" id="toc-decoding-visual-shapes" class="nav-link" data-scroll-target="#decoding-visual-shapes"><span class="header-section-number">10.5</span> Decoding visual shapes</a></li>
+  <li><a href="#dangers-of-visual-shapes" id="toc-dangers-of-visual-shapes" class="nav-link" data-scroll-target="#dangers-of-visual-shapes"><span class="header-section-number">10.6</span> Dangers of visual shapes</a></li>
+  <li><a href="#case-study-violin-plots" id="toc-case-study-violin-plots" class="nav-link" data-scroll-target="#case-study-violin-plots"><span class="header-section-number">10.7</span> Case study: Violin plots</a></li>
+  <li><a href="#case-study-loess-curves" id="toc-case-study-loess-curves" class="nav-link" data-scroll-target="#case-study-loess-curves"><span class="header-section-number">10.8</span> Case study: loess curves</a></li>
+  <li><a href="#case-study-line-of-best-fit" id="toc-case-study-line-of-best-fit" class="nav-link" data-scroll-target="#case-study-line-of-best-fit"><span class="header-section-number">10.9</span> Case study: Line of best fit</a></li>
+  <li><a href="#sec-shape-non-linear" id="toc-sec-shape-non-linear" class="nav-link" data-scroll-target="#sec-shape-non-linear"><span class="header-section-number">10.10</span> Non-linear mappings</a></li>
+  <li><a href="#case-study-log-log-plots" id="toc-case-study-log-log-plots" class="nav-link" data-scroll-target="#case-study-log-log-plots"><span class="header-section-number">10.11</span> Case study: log-log plots</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.12</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -522,8 +523,14 @@ Figure&nbsp;10.9: Histograms of the points scored per game by Tier One nations a
 <p>Also use of white space around points in scatter plot ?</p>
 <p>Cite Cleveland (1994) for white space margin affecting strength of relation?</p>
 </section>
-<section id="dangers-of-visual-shapes" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="dangers-of-visual-shapes"><span class="header-section-number">10.5</span> Dangers of visual shapes</h2>
+<section id="decoding-visual-shapes" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="decoding-visual-shapes"><span class="header-section-number">10.5</span> Decoding visual shapes</h2>
+<p>Decoding to data summaries, so problem of many possible decodings again.</p>
+<p>Congruence comes into play - peaks and valleys etc.</p>
+<p>Refer to the aspect ratio problem: the shape you are decoding is vulnerable to context!</p>
+</section>
+<section id="dangers-of-visual-shapes" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="dangers-of-visual-shapes"><span class="header-section-number">10.6</span> Dangers of visual shapes</h2>
 <p>Need a caveat that more complex shapes does NOT necessarily mean useful mappings back to data summaries - could just end up with a mess (<a href="#fig-data-vis-shape-lie" class="quarto-xref">Figure&nbsp;<span>10.10</span></a>).</p>
 <div id="fig-data-vis-shape-lie" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -542,8 +549,8 @@ Figure&nbsp;10.10: Mapping data values to the visual features of a complex shape
 <p>Lines imply continuity (at least) if not linear interpolation so do example where connecting with lines not such a great idea. Refer back to <a href="congruence.html" class="quarto-xref"><span>Chapter 7</span></a> (congruence).</p>
 <p>Example from “Bars and lines: A study of graphic communication” Zacks and Tversky (1999) (Fig 2) of inappropriate line plot: line connecting males and females =&gt; some subjects made trend interpretation, the worst being “The more male a person is, the taller he/she is”</p>
 </section>
-<section id="case-study-violin-plots" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="case-study-violin-plots"><span class="header-section-number">10.6</span> Case study: Violin plots</h2>
+<section id="case-study-violin-plots" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="case-study-violin-plots"><span class="header-section-number">10.7</span> Case study: Violin plots</h2>
 <p>And other variations on boxplots</p>
 <p>First point out that a boxplot is really a visual shape: multiple data summaries generate a single “box” data symbol. Although it is still very easy to decode individual data summaries from the box shape.</p>
 <ul>
@@ -565,19 +572,19 @@ Figure&nbsp;10.11: A SinaPlot of the points scored per game by Tier One nations 
 </div>
 </div>
 </section>
-<section id="case-study-loess-curves" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="case-study-loess-curves"><span class="header-section-number">10.7</span> Case study: loess curves</h2>
+<section id="case-study-loess-curves" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="case-study-loess-curves"><span class="header-section-number">10.8</span> Case study: loess curves</h2>
 <p>Another example of data -&gt; summary -&gt; features -&gt; shapes -&gt; summaries</p>
 </section>
-<section id="case-study-line-of-best-fit" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="case-study-line-of-best-fit"><span class="header-section-number">10.8</span> Case study: Line of best fit</h2>
+<section id="case-study-line-of-best-fit" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="case-study-line-of-best-fit"><span class="header-section-number">10.9</span> Case study: Line of best fit</h2>
 <p>Nice example of a complex calculation, the results of which are what gets visualised. Also example of performing the calculation numerically rather than asking the viewer to perform it visually. This was in summaries.qmd, but it cannot be there because it requires scatter plots, which come in the next section. Add this after mention of visualising models?</p>
 <p>Add footnote to Hadley’s more complex model visualisation paper https://vita.had.co.nz/papers/model-vis.pdf https://dl.acm.org/doi/10.1002/sam.11271</p>
 <p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models? also talk about failing assumptions of these models, like unimodal for boxplot)</p>
 <p>footnote cite to Tukey for visualising phenomena rather than raw data? “Data-Based Graphics: Visual Display in the Decades to Come” Tukey (1990)</p>
 </section>
-<section id="sec-shape-non-linear" class="level2" data-number="10.9">
-<h2 data-number="10.9" class="anchored" data-anchor-id="sec-shape-non-linear"><span class="header-section-number">10.9</span> Non-linear mappings</h2>
+<section id="sec-shape-non-linear" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="sec-shape-non-linear"><span class="header-section-number">10.10</span> Non-linear mappings</h2>
 <p>Refer back to <a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a></p>
 <p>NOTE that there ARE some situations where non-linear position. scales are ok, e.g., log-log. Length is still dodgy. You DO still get ordinal info, even if cannot decode sizes of differences. Non-linearity might actually be ok on non-position scales, e.g., a colour scale for numeric data, where differences are smaller at one end; all you are after, if you are using colour, is ordinal, so changing colours more swiftly at one end of the scale is ok (?) At least some ‘colorspace’ functions allow non-linear palettes. Revisit in qualitative.Rmd to point out that non-linear ordinal scales are ok, e.g., jet colour scale</p>
 <p>Nice example of log-log scales in The Signal and the Noise (Nate Silver) See 787resources/Examples/2025-08-signal-noise-log-log</p>
@@ -587,13 +594,13 @@ Figure&nbsp;10.11: A SinaPlot of the points scored per game by Tier One nations 
 <p>Nice kiwi-biased example on this thread https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate But I think the point still holds that you LOSE the ability to judge size of differences - you can only decode things like order and groups (?)</p>
 <p>The ratio plot might be more interpretable if the axis is labelled as “number of times larger” ?</p>
 </section>
-<section id="case-study-log-log-plots" class="level2" data-number="10.10">
-<h2 data-number="10.10" class="anchored" data-anchor-id="case-study-log-log-plots"><span class="header-section-number">10.10</span> Case study: log-log plots</h2>
+<section id="case-study-log-log-plots" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="case-study-log-log-plots"><span class="header-section-number">10.11</span> Case study: log-log plots</h2>
 <p>Involves non-linear scales, but the point is the shape that you (hope to) get.</p>
 <p>Could also do q-q plots?</p>
 </section>
-<section id="summary" class="level2" data-number="10.11">
-<h2 data-number="10.11" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.11</span> Summary</h2>
+<section id="summary" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.12</span> Summary</h2>
 <p>Mapping multiple data values to a single data symbol produces a <strong>visual shape</strong>, like a line on a line plot.</p>
 <p>Data summaries, such as trends over time, can can be decoded from a visual shape. However, decoding raw data values from a visual shape may be harder, cmopared to decoding raw data values from a simple data symbol like a bar.</p>
 <hr>
