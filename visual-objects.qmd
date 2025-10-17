@@ -18,7 +18,8 @@ e.g., use wrong flag for country!
 number of tries for countries
 at the 2023 Rugby World Cup (@tbl-rwc-2023).
 This data visualisation is similar to @fig-scatter, but it adds an
-extra mapping.  Country names are encoded as the **shape** of the data symbols.
+extra mapping.  Country names are encoded as the **pattern** 
+of the data symbols.
 This is a reasonable mapping, despite the large number of different
 countries, because each different shape only appears once.
 We are able to distinguish all countries from each other and,
@@ -34,25 +35,35 @@ ggplot(RWCperGame) +
                        guide=guide_legend(ncol=2), name=NULL) +
     theme(aspect.ratio=2/3)
 ```
-
 @fig-flags shows another scatter plot of the number of clean breaks and the
 number of tries for countries
 at the 2023 Rugby World Cup, but this time with flags as the data symbols.
 In one sense, this is just a variation on @fig-scatter-country
 because the country
-names are encoded as the **shape** of a data symbol. 
-Each data symbol is a shape that allows us to distinguish between the
+names are encoded as the **pattern** of a data symbol. 
+Each data symbol is a pattern that allows us to distinguish between the
 different countries.
 
 The difference between the data symbols in @fig-scatter-country and 
 the data symbols on @fig-flags is that the flags are not only more
-complicated shapes, but they are familiar shapes.
+complicated data symbols, but they are familiar symbols.
 The flags convey differences, but they
 also convey the more sophisticated concept of the country
 names.
 In the terms of @sec-visual-processing, 
-the flags are **visual objects** that might take longer to
-process, but convey more information.
+the flags are **visual objects** (@fig-data-obj).
+
+::: {#fig-data-obj}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/data-obj.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/data-obj.png)
+:::
+
+We can encode data values using data symbols that are complex visual objects.
+:::
 
 ```{r}
 #| echo: false
@@ -130,7 +141,7 @@ rather than due to an implicit encoding (@fig-learned-decode).[^inferred]
 ![](Diagrams/learned-decode.png)
 :::
 
-Some visual features have learned encodings, which means that we
+Some visual objects have learned decodings, which means that we
 can decode values from the visual features without having explicitly
 encoded values as visual features.
 :::
@@ -158,11 +169,39 @@ grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
 The flags in @fig-flags provide examples of learned decodings.
 We associate each flag with a particular country because we have
 seen these flags before and they have learned the decoding from flag
-to country.
+to country (@fig-data-obj-decode).
+
+::: {#fig-data-obj-decode}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/data-obj-decode.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/data-obj-decode.png)
+:::
+
+Some visual objects have learned decodings, which means that 
+encoding data values as the visual objects, will be effective.
+:::
+
 @fig-flags-direct demonstrates this point by repeating the scatter plot,
 but removing the legend.  We are still able to identify not only 
 that the data symbols represent different countries, but we can identify
-(at least some of) the country names as well.
+(at least some of) the country names as well (@fig-obj-decode).
+
+::: {#fig-obj-decode}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/obj-decode.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/obj-decode.png)
+:::
+
+Some visual objects have learned decodings, which means that 
+if we encode data values as the visual objects, decoding will be automatic.
+:::
+
 
 ```{r}
 #| echo: false
@@ -224,6 +263,29 @@ reliably identify the difference between their two flags.
 Refer back to @sec-rel-pos.
 Visual shapes are one way
 to decode to absolute data values (rather than just relative)
+
+## Decoding visual objects
+
+Visual objects may decode to data values or data summaries (or
+more abstract/conceptual) so there are a few things to consider.
+
+Decoding to data summaries, so problem of many possible decodings again ?
+
+Missing decoding a problem!
+
+Learned decoding conflict a problem!
+
+Congruence comes into play - big time!
+
+Mention that little is known about the accuracy of visual objects
+(though they must have good capacity because they are more abstract, 
+right?)[^evaluating]:
+
+[^evaluating]:
+    in general, there needs to be more explicit acknowledgement of the lack
+    of experimental results for complex data vis scenarios.
+    c.f., "Testing Statistical Charts: What Makes a Good Graph?"
+    Vanderplas, Cook, and Hofmann (2020) p 71.
 
 ## Case study: Choropleth maps {#sec-choropleth}
 
@@ -778,7 +840,8 @@ ggplot(pets) +
 Chernoff faces.[^chernoff]
 The data symbol in this visualisation is a little unusual; each
 country is represented by a combination of circles, curves, and lines
-that together produce a **visual object** that resembles a face.
+that together produce a **visual object** that resembles a face
+(@fig-data-vis-obj-stat-decode).
 The mappings in this visualisation are also a little unusual.
 The number of points scored is encoded as the **curvature** of the
 smile, the number of tries is encoded as the **angle** of the eye brows,
@@ -788,9 +851,24 @@ the eyes.
 [^chernoff]:
     @chernoff1973faces
 
+::: {#fig-data-vis-obj-stat-decode}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/data-vis-obj-stat-decode.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/data-vis-obj-stat-decode.png)
+:::
+
+We can encode data values as the visual features of a complex data symbols that 
+produces a complex visual objects.
+:::
+
+
 ```{r}
 #| echo: false
 #| label: fig-chernoff
+#| warning: false
 #| fig-cap: A Chernoff faces plot of the ...
 rwcChernoff <- RWCperGame
 rwcChernoff$country <- reorder(rwcChernoff$country, rwcChernoff$points)
@@ -836,12 +914,6 @@ The resulting proximity helps with perceiving groups of similar faces.
 > A Chernoff face is effective at conveying multi-dimensional relationships
   because the data symbol is a familiar visual object from which we can
   easily perceive simple human emotions.
-
-## Decoding visual objects
-
-Decoding to data summaries, so problem of many possible decodings again.
-
-Congruence comes into play - big time!
 
 ## Dangers of learned decodings {#sec-learned-danger}
 
@@ -924,9 +996,23 @@ The problem is much worse if the learned decoding(s) conflict with
 an explicit encoding of data values.  For example,
 in @fig-flags, if we use the incorrect flag for a country,
 for example, by swapping the Australian and New Zealand flags,
-we not only introduce confusion, but a misleading decoding.
+we not only introduce confusion, but a misleading decoding 
+(@fig-obj-dissonant-decode).
 This is similar to the problem of
 dissonant mappings (@sec-dissonance and @fig-dissonant-decode).
+
+::: {#fig-obj-dissonant-decode}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/obj-dissonant-decode.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/obj-dissonant-decode.png)
+:::
+
+A visual feature may have more than one learned decoding, which means that we
+may decode more than one value from the visual feature.
+:::
 
 Suppose that we made a similar change to @fig-scatter-country,
 swapping the open triangle for Australia and the square-with-a-plus symbol
@@ -946,10 +1032,24 @@ One issue with more complex data visualisations
 is that their effectiveness depends on a larger amount of
 learning and experience. 
 If the viewer does not have the knowledge required to 
-decode a visual object, then the data visualisation will fail.
+decode a visual object, then the data visualisation will fail
+(@fig-not-learned-decode).
 We saw an example of this in @fig-flags-direct, where the 
 familiarity of different country
 flags will vary with nationality and age, for example.
+
+::: {#fig-not-learned-decode}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/not-learned-decode.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/not-learned-decode.png)
+:::
+
+If we encode data values using data symbols that are complex visual objects,
+but there is no learned decoding, the mapping will be ineffective.
+:::
 
 An extreme version of this problem is the use of not just complex
 or unusual
@@ -1001,16 +1101,6 @@ popViewport()
 
 Another example of this problem are the hurrican "cones of uncertainty"
 that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).
-
-Mention that little is known about the accuracy of visual objects
-(though they must have good capacity because they are more abstract, 
-right?)[^evaluating]:
-
-[^evaluating]:
-    in general, there needs to be more explicit acknowledgement of the lack
-    of experimental results for complex data vis scenarios.
-    c.f., "Testing Statistical Charts: What Makes a Good Graph?"
-    Vanderplas, Cook, and Hofmann (2020) p 71.
 
 Refer back to @sec-ternary as example of plot type that experts in
 specific fields learn to read.

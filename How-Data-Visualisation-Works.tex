@@ -7987,7 +7987,7 @@ Figure~\ref{fig-scatter-country} shows a scatter plot of the number of
 clean breaks and the number of tries for countries at the 2023 Rugby
 World Cup (Table~\ref{tbl-rwc-2023}). This data visualisation is similar
 to Figure~\ref{fig-scatter}, but it adds an extra mapping. Country names
-are encoded as the \textbf{shape} of the data symbols. This is a
+are encoded as the \textbf{pattern} of the data symbols. This is a
 reasonable mapping, despite the large number of different countries,
 because each different shape only appears once. We are able to
 distinguish all countries from each other and, thanks to the legend, we
@@ -8010,18 +8010,30 @@ Figure~\ref{fig-flags} shows another scatter plot of the number of clean
 breaks and the number of tries for countries at the 2023 Rugby World
 Cup, but this time with flags as the data symbols. In one sense, this is
 just a variation on Figure~\ref{fig-scatter-country} because the country
-names are encoded as the \textbf{shape} of a data symbol. Each data
-symbol is a shape that allows us to distinguish between the different
+names are encoded as the \textbf{pattern} of a data symbol. Each data
+symbol is a pattern that allows us to distinguish between the different
 countries.
 
 The difference between the data symbols in
 Figure~\ref{fig-scatter-country} and the data symbols on
 Figure~\ref{fig-flags} is that the flags are not only more complicated
-shapes, but they are familiar shapes. The flags convey differences, but
-they also convey the more sophisticated concept of the country names. In
-the terms of Section~\ref{sec-visual-processing}, the flags are
-\textbf{visual objects} that might take longer to process, but convey
-more information.
+data symbols, but they are familiar symbols. The flags convey
+differences, but they also convey the more sophisticated concept of the
+country names. In the terms of Section~\ref{sec-visual-processing}, the
+flags are \textbf{visual objects} (Figure~\ref{fig-data-obj}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/data-obj.png}
+
+}
+
+\caption{\label{fig-data-obj}We can encode data values using data
+symbols that are complex visual objects.}
+
+\end{figure}%
 
 \begin{figure}
 
@@ -8067,8 +8079,8 @@ and learning, rather than due to an implicit encoding
 
 }
 
-\caption{\label{fig-learned-decode}Some visual features have learned
-encodings, which means that we can decode values from the visual
+\caption{\label{fig-learned-decode}Some visual objects have learned
+decodings, which means that we can decode values from the visual
 features without having explicitly encoded values as visual features.}
 
 \end{figure}%
@@ -8095,11 +8107,41 @@ pre-existing, learned decodings.}
 The flags in Figure~\ref{fig-flags} provide examples of learned
 decodings. We associate each flag with a particular country because we
 have seen these flags before and they have learned the decoding from
-flag to country. Figure~\ref{fig-flags-direct} demonstrates this point
-by repeating the scatter plot, but removing the legend. We are still
-able to identify not only that the data symbols represent different
-countries, but we can identify (at least some of) the country names as
-well.
+flag to country (Figure~\ref{fig-data-obj-decode}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/data-obj-decode.png}
+
+}
+
+\caption{\label{fig-data-obj-decode}Some visual objects have learned
+decodings, which means that encoding data values as the visual objects,
+will be effective.}
+
+\end{figure}%
+
+Figure~\ref{fig-flags-direct} demonstrates this point by repeating the
+scatter plot, but removing the legend. We are still able to identify not
+only that the data symbols represent different countries, but we can
+identify (at least some of) the country names as well
+(Figure~\ref{fig-obj-decode}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/obj-decode.png}
+
+}
+
+\caption{\label{fig-obj-decode}Some visual objects have learned
+decodings, which means that if we encode data values as the visual
+objects, decoding will be automatic.}
+
+\end{figure}%
 
 \begin{figure}
 
@@ -8154,6 +8196,17 @@ effective if the learned decodings have not been learned by all viewers.
 
 \textbf{TODO} Refer back to Section~\ref{sec-rel-pos}. Visual shapes are
 one way to decode to absolute data values (rather than just relative)
+
+\section{Decoding visual objects}\label{decoding-visual-objects}
+
+Decoding to data summaries, so problem of many possible decodings again
+?
+
+Missing decoding a problem!
+
+Learned decoding conflict a problem!
+
+Congruence comes into play - big time!
 
 \section{Case study: Choropleth maps}\label{sec-choropleth}
 
@@ -8504,16 +8557,25 @@ Figure~\ref{fig-chernoff} visualises the 2023 Rugby World Cup data
   (1973)} The data symbol in this visualisation is a little unusual;
 each country is represented by a combination of circles, curves, and
 lines that together produce a \textbf{visual object} that resembles a
-face. The mappings in this visualisation are also a little unusual. The
-number of points scored is encoded as the \textbf{curvature} of the
-smile, the number of tries is encoded as the \textbf{angle} of the eye
-brows, and the number of clean breaks is encoded as the horizontal
-\textbf{position} of the eyes.
+face (Figure~\ref{fig-data-vis-obj-stat-decode}). The mappings in this
+visualisation are also a little unusual. The number of points scored is
+encoded as the \textbf{curvature} of the smile, the number of tries is
+encoded as the \textbf{angle} of the eye brows, and the number of clean
+breaks is encoded as the horizontal \textbf{position} of the eyes.
 
-\begin{verbatim}
-Warning: The `scale_name` argument of `continuous_scale()` is deprecated as of ggplot2
-3.5.0.
-\end{verbatim}
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/data-vis-obj-stat-decode.png}
+
+}
+
+\caption{\label{fig-data-vis-obj-stat-decode}We can encode data values
+as the visual features of a complex data symbols that produces a complex
+visual objects.}
+
+\end{figure}%
 
 \begin{figure}
 
@@ -8553,12 +8615,6 @@ A Chernoff face is effective at conveying multi-dimensional
 relationships because the data symbol is a familiar visual object from
 which we can easily perceive simple human emotions.
 \end{quote}
-
-\section{Decoding visual objects}\label{decoding-visual-objects}
-
-Decoding to data summaries, so problem of many possible decodings again.
-
-Congruence comes into play - big time!
 
 \section{Dangers of learned decodings}\label{sec-learned-danger}
 
@@ -8630,9 +8686,24 @@ The problem is much worse if the learned decoding(s) conflict with an
 explicit encoding of data values. For example, in
 Figure~\ref{fig-flags}, if we use the incorrect flag for a country, for
 example, by swapping the Australian and New Zealand flags, we not only
-introduce confusion, but a misleading decoding. This is similar to the
-problem of dissonant mappings (Section~\ref{sec-dissonance} and
+introduce confusion, but a misleading decoding
+(Figure~\ref{fig-obj-dissonant-decode}). This is similar to the problem
+of dissonant mappings (Section~\ref{sec-dissonance} and
 Figure~\ref{fig-dissonant-decode}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/obj-dissonant-decode.png}
+
+}
+
+\caption{\label{fig-obj-dissonant-decode}A visual feature may have more
+than one learned decoding, which means that we may decode more than one
+value from the visual feature.}
+
+\end{figure}%
 
 Suppose that we made a similar change to
 Figure~\ref{fig-scatter-country}, swapping the open triangle for
@@ -8651,9 +8722,24 @@ destroy the effectiveness of a data visualisation.
 One issue with more complex data visualisations is that their
 effectiveness depends on a larger amount of learning and experience. If
 the viewer does not have the knowledge required to decode a visual
-object, then the data visualisation will fail. We saw an example of this
-in Figure~\ref{fig-flags-direct}, where the familiarity of different
+object, then the data visualisation will fail
+(Figure~\ref{fig-not-learned-decode}). We saw an example of this in
+Figure~\ref{fig-flags-direct}, where the familiarity of different
 country flags will vary with nationality and age, for example.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/not-learned-decode.png}
+
+}
+
+\caption{\label{fig-not-learned-decode}If we encode data values using
+data symbols that are complex visual objects, but there is no learned
+decoding, the mapping will be ineffective.}
+
+\end{figure}%
 
 An extreme version of this problem is the use of not just complex or
 unusual data symbols, but entirely novel data visualisations.\footnote{Kosslyn's

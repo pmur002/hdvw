@@ -1,0 +1,12 @@
+digraph {
+  graph [ rankdir=LR; margin=.2; nodesep=.5 ];
+  node [ fontsize=20; fontname="sans bold"; margin=.2 ];
+  diss [ label="data\nvalues"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#08519C" ]
+  data [ label="data\nvalues"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#006D2C" ]
+  obj [ label="visual\nobjects"; shape=box;
+     style="rounded"; color="#74C476"; fontcolor="#74C476" ]
+  data -> obj [ style="bold"; penwidth=1; color="#006D2C;0.1:#0D7734;0.1:#1A803C;0.1:#278A45;0.1:#34944D;0.1:#409D55;0.1:#4DA75D;0.1:#5AB166;0.1:#67BA6E;0.1:#74C476;0.1" ]
+  obj:n -> diss:ne [ style="solid", color="#006D2C;0.1:#016A38;0.1:#026745;0.1:#036451;0.1:#04615E;0.1:#045D6A;0.1:#055A77;0.1:#065783;0.1:#075490;0.1:#08519C;0.1" ]
+  obj:s -> data:se [ style="dashed", color="#74C476;0.1:#67BA6E;0.1:#5AB166;0.1:#4DA75D;0.1:#409D55;0.1:#34944D;0.1:#278A45;0.1:#1A803C;0.1:#0D7734;0.1:#006D2C;0.1" ]
+{ rank=same; data, diss }
+}

@@ -235,7 +235,10 @@ shapeLieEdge <- backEdge("shape:s", "lie:se",
 shapeStat2Edge <- backEdge("shape:s", "stat2:se",
                            grad=grad(2, 2, level1=2, level2=3))
 objDataEdge <- backEdge("obj:s", "data:se", grad=grad(2, 2, level1=3, level2=1))
+objDataEdge2 <- implicitEdge("obj:n", "data:ne",
+                             grad=grad(2, 2, level1=3, level2=1))
 objStatEdge <- backEdge("obj:s", "stat:se", grad=grad(2, 2, level1=3, level2=2))
+objDissEdge <- implicitEdge("obj:n", "diss:ne", grad=grad2to4)
 labelMetaEdge <- backEdge("label:s", "meta:se",
                           grad=grad(2, 2, level1=3, level2=3))
 labelStatEdge <- backEdge("label:s", "stat:se",
@@ -457,8 +460,29 @@ graph(data,
 graph(data,
       obj,
       dataObjEdge,
+      file="data-obj.dot")
+
+graph(data,
+      obj,
+      dataObjEdge,
       objDataEdge,
+      objDataEdge2,
       file="data-obj-decode.dot")
+
+graph(data,
+      obj,
+      dataObjEdge,
+      objDataEdge2,
+      file="obj-decode.dot")
+
+graph(data,
+      stat,
+      obj,
+      dataObjEdge,
+      invis(objDataEdge),
+      objStatEdge,
+      dataStatSame,
+      file="data-obj-stat-decode.dot")
 
 graph(data,
       stat,
@@ -483,6 +507,26 @@ graph(data,
       dataStatSame,
       visObjSame,
       file="data-vis-obj.dot")
+
+graph(diss,
+      data,
+      obj,
+      dataObjEdge,
+      objDissEdge,
+      objDataEdge,
+      dataDissSame,
+      file="obj-dissonant-decode.dot")
+
+graph(data,
+      stat,
+      vis,
+      obj,
+      dataVisEdge,
+      visObjEdge,
+      objStatEdge,
+      dataStatSame,
+      visObjSame,
+      file="data-vis-obj-stat-decode.dot")
 
 graph(data,
       vis,
@@ -572,10 +616,15 @@ graph(eye,
       file="visual-processing.dot")
 
 graph(data,
-      vis,
-      invis(dataVisEdge),
-      visDataEdge2,
+      obj,
+      invis(dataObjEdge),
+      objDataEdge2,
       file="learned-decode.dot")
+
+graph(data,
+      obj,
+      dataObjEdge,
+      file="not-learned-decode.dot")
 
 graph(data,
       data2,
