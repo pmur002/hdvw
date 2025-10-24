@@ -49,17 +49,6 @@ Are mappings congruent with data?
 
 ...
 
-* Use heatmap as case study?
-
-* do the side-by-side pie chart idea as an example of reasoning your
-  way to a new visualisation.
-
-* Move the discussion/revisit of tables from text section to here ?
-
-* Another possible application of data vis knowledge:
-  Analyse one of the weird boxplot variations that look a bit like a ziggurat?
-
-
 List of questions to evaluate a data vis (maybe nest these a bit):
 
 * What do you want the viewer to be able to decode?
@@ -91,4 +80,144 @@ List of questions to evaluate a data vis (maybe nest these a bit):
 
 
 And so on ...
+
+## Examples
+
+* Use heatmap as case study?
+
+* do the side-by-side pie chart idea as an example of reasoning your
+  way to a new visualisation.
+
+* Move the discussion/revisit of tables from text section to here ?
+
+* Another possible application of data vis knowledge:
+  Analyse one of the weird boxplot variations that look a bit like a ziggurat?
+  
+  This is letter-value plot:
+
+  + "Letter-Value Plots: Boxplots for Large Data"
+    Hofmann et al (2015)
+
+  + Nice explanation of calculations ...
+
+    24  Beyond the Boxplot: Tukey’s Letter-Value Summaries – Exploratory Data Analysis in R https://share.google/M2qXCsIxsSsqM7jFQ 
+
+  + Labelling is an example of a text encoding that has no learned decoding
+    For most people
+    So the text is just a symbol like a pch
+    You get difference but that is all
+
+  + {lvplot}
+
+    This line suggests that width is calculated to be proportional
+    Or at least can be ...
+
+    https://github.com/hadley/lvplot/blob/51ad401be5e017d37883ec5d149bc1818246b6f5/R/draw.r#L43
+
+## Case study: Lines of best fit
+
+@fig-lm-smooth shows a scatter plot of the winning margin
+versus the winning score for Tier One nations at Rugby World Cup matches.
+The hemisphere of the losing team is encoded as the colour of the data
+points and a trend line has been added for each hemisphere.
+
+The trend lines are mappings of data summaries, least-squares
+regressions, to line data symbols.  The data summaries consist
+of intercept and slope values, which are encoded as the vertical positions
+and the angles of the lines, respectively (@fig-stat-vis-decode).
+
+The data symbol is very simple and decoding the data summaries is
+also simple because it just involves decoding angle and vertical position.
+For example, we can see that, in general, the winning margin is larger
+when the winning score is larger, but 
+the trend lines suggest that the increase in the winning margin
+is slower for southern-hemisphere teams (they fight harder in defeat).
+
+```{r}
+#| echo: false
+#| label: fig-lm-smooth
+#| fig-cap: A scatter plot of the winning margin versus the winning score for matches between Tier One nations at Rugby World Cups.  There is a light shading of the lower-right diagonal to indicate that the winning margin cannot exceed the winning score.  In addition, points on the diagonal represent matches where the losing team failed to score any points.  The straight lines represent a least-squares regression model fit.
+#| warning: false
+rwcWinner <- do.call(rbind, lapply(split(rwcAll, rwcAll$match), 
+                                   function(x) {
+                                       if (all(x$scored == x$conceded)) {
+                                           winner <- 1
+                                           loser <- 2
+                                       } else {
+                                           winner <- x$scored > x$conceded
+                                           loser <- !winner
+                                       }
+                                       x$oppSphere <- x$hemisphere[loser]
+                                       x[winner, ]
+                                   }))
+ggplot(rwcWinner, aes(scored, scored - conceded, colour=oppSphere)) +
+    annotate("polygon", x=c(0, Inf, Inf), y=c(0, Inf, 0), fill="grey97") +
+    geom_smooth(method="lm", se=FALSE) +
+    geom_point(alpha=.2) +
+    scale_x_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
+                       name="winning score") +
+    scale_y_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
+                       name="winning margin") +
+    scale_colour_discrete(guide=guide_legend(title="opposition\nhemisphere")) +
+    coord_cartesian(clip="off") +
+    theme(aspect.ratio=1)
+```
+
+@fig-loess-smooth shows the same data as @fig-lm-smooth, but this time
+there are curved trend lines added rather than straight trend lines.[^loess]
+The curves are mappings of data summaries again, but this time 
+loess model fits.  This means that the mapping involves a series
+of predicted values encoded as horizontal and vertical positions for
+the curve.  In other words, the data summaries are encoded as visual features
+that produce a visual shape
+
+[^loess]:
+    These are *loess* model fits (locally-estimated scatterplot smoothing).
+
+```{r}
+#| echo: false
+#| label: fig-loess-smooth
+#| fig-cap: Scatter plot
+#| warning: false
+ggplot(rwcWinner, aes(scored, scored - conceded, colour=oppSphere)) +
+    annotate("polygon", x=c(0, Inf, Inf), y=c(0, Inf, 0), fill="white") +
+    geom_smooth(method="loess", se=FALSE, span=1) +
+    geom_point(alpha=.2) +
+    scale_x_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
+                       name="winning score") +
+    scale_y_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
+                       name="winning margin") +
+    scale_colour_discrete(guide=guide_legend(title="opposition\nhemisphere")) +
+    coord_cartesian(clip="off") +
+    theme(aspect.ratio=1)
+```
+
+Nice example of a complex calculation, the results of which are what gets
+visualised.  Also example of performing the calculation numerically rather
+than asking the viewer to perform it visually.  This was in summaries.qmd,
+but it cannot be there because it requires scatter plots, which come in
+the next section.
+Add this after mention of visualising models?
+
+Add footnote to Hadley's more complex model visualisation paper
+https://vita.had.co.nz/papers/model-vis.pdf
+https://dl.acm.org/doi/10.1002/sam.11271
+
+model fits like lm straight line and ref Hadley's data-space vs model-space
+"data models" to mirror "data statistics"
+(revisit box plots as VERY simple models? also talk about failing
+assumptions of these models, like unimodal for boxplot)
+
+footnote cite to Tukey for visualising phenomena rather than raw data?
+"Data-Based Graphics: Visual Display in the Decades to Come"
+Tukey (1990)
+
++ "Beware of Validation by Eye:
+   Visual Validation of Linear Trends in Scatterplots"
+  Braun et al (2024)
+  People are biased towards orthogonal distance to line rather than
+  vertical distance.
+
+loess curves
+Another example of data -> summary -> features -> shapes -> summaries
 

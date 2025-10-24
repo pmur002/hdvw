@@ -688,6 +688,13 @@ data visualisation will not be addressed.\footnote{Some examples of
   Swayne (2007), Theus and Urbanek (2008), and Unwin, Theus, and Hofmann
   (2006).}
 
+There is also an emphasis on \textbf{statistical graphics} in this book,
+which is characterised by the use of abstract geometric symbols, such as
+circles and rectangles, to represent data values, as opposed to
+scientific graphics, which is focused more on realistic representations
+of physical objects, or cartography, which is focused on the geographic
+context of data values.
+
 This document is also focused on what \textbf{vision science} has to
 tell us about effective data visualisation. We will consider factors
 that influence how rapidly and how accurately information can be
@@ -1904,9 +1911,13 @@ visualisation.\footnote{In this book, we use \emph{visual feature} to
   \emph{slope} and the underlying visual feature is typically referred
   to as \emph{orientation}.
 
-  The use of pattern for data point \emph{shape} is the most tenuous
-  connection. Data point shape is commonly included as a visual channel,
-  so we provide a connection to basic visual features via the early
+  The use of \emph{pattern} for what is more commonly referred to as
+  data point \emph{shape} is perhaps the most daring terminological
+  divergence. Data point shape is commonly included as a visual channel,
+  but we would like to avoid confusion with the concept of \emph{visual
+  shape} that we use to represent later stages of visual processing
+  (Section~\ref{sec-visual-processing}). The use of \emph{pattern}
+  provides a connection to basic visual features via the early
   perception of patterns, even though there is more involved in the
   perception of data point shape (Chen 1982; J. Li, Wijk, and Martens
   2009).} We will explore each of these in more detail in the following
@@ -2099,7 +2110,7 @@ the difference between the length of two bars?\footnote{The pioneering
   \emph{effectiveness}.
 
   An argument for ranking the accuracy of visual features can also be
-  made from Steven's Law (Stevens 1957), which states that the
+  made from Steven's Law (S. S. Stevens 1957), which states that the
   perception of the magnitude of different stimuli follows a power law.
   For example, the perception of length has a power of approximately one
   (linear), which suggests that we accurately perceive the magnitude of
@@ -2621,8 +2632,8 @@ For example, in Figure~\ref{fig-no-pos}, we use the same position for
 all four circles that represent different ethnic groups, so the circles
 are drawn on top of each other. The total number of youth offenders for
 each ethnic group is encoded as the \textbf{area} of a circle. The
-largest number of offenders is for the Māori ethnic group--the orange
-circle---with European/Other the next largest---the light blue circle.
+largest number of offenders is for the Māori ethnic group (the orange
+circle) with European/Other the next largest (the light blue circle).
 However, because the light blue circle is drawn on top of the orange
 circle, all that we can actually see is the part of the orange circle
 that extends beyond the light blue circle.
@@ -5138,7 +5149,7 @@ values.\footnote{In this book, we use \emph{data summary} to cover a
   the \emph{view transformations} of the Information Visualization
   Reference Model.}
 
-\section{Box plots}\label{box-plots}
+\section{Box plots}\label{sec-box-plot}
 
 Figure~\ref{fig-boxplot} shows box plots of the number of points scored
 by Tier One nations at Rugby World Cup matches
@@ -5464,8 +5475,9 @@ variability of data values, whether there are unusual data values
 (clusters).\footnote{In the visual perception literature, the strict
   definition of \emph{ensemble} encoding is limited to \emph{statistical
   moments} (means and variances) (Whitney and Yamanashi Leib 2018), but
-  the data visualisation literature takes a more relaxed approach
-  (Szafir et al. 2016).}
+  the data visualisation literature takes a more relaxed approach and
+  includes the identification of clusters and outliers (Szafir et al.
+  2016). In this book, we embrace the latter, looser terminology.}
 
 Furthermore, we can produce each sort of visual summary for each
 possible visual feature. For example, we can decode the average position
@@ -5476,13 +5488,15 @@ colours, or unusual angles.
 Although it is well-established that our visual system is capable of
 generating visual summaries, less is known about the accuracy of those
 summaries, partly because the range of possible visual summaries is so
-large. However, we know that estimating averages from the positions of
-multiple data symbols is quite accurate and estimating averages from the
-luminance and/or chroma of multiple data symbols can also be
-effective.\footnote{Gleicher et al. (2013) show that the average
-  position of data points in a scatterplot can be accurately determined
-  and that this is robust to a number of variations in context, such as
-  the number of data points and the presence of distractors.
+large. However, there are a few well-established results. For example,
+we know that estimating averages from the positions of multiple data
+symbols is quite accurate, as in Figure~\ref{fig-rwc-dotplot}. We also
+know that estimating averages from the luminance and/or chroma of
+multiple data symbols can also be effective.\footnote{Gleicher et al.
+  (2013) show that the average position of data points in a scatterplot
+  can be accurately determined and that this is robust to a number of
+  variations in context, such as the number of data points and the
+  presence of distractors.
 
   Albers, Correll, and Gleicher (2014) show that the average luminance
   of rectangles in a colour field can be determined reasonably well.
@@ -5490,6 +5504,12 @@ effective.\footnote{Gleicher et al. (2013) show that the average
   visual summaries that can be studied and the variability of
   performance across different combinations of visual summaries and
   visual features.}
+
+For more qualitative summaries, such as identifying clusters and
+outliers, we know that performance will be good because these decodings
+rely on fundamental properties of our visual system that identify
+unusual items (Section~\ref{sec-differences}) and identify groups of
+items (Section~\ref{sec-visual-model-groups}).
 
 \section{Dangers of summaries}\label{sec-summary-caveats}
 
@@ -6031,7 +6051,7 @@ mapped to two visual features (\texttt{a} and \texttt{b}) of a
 
 \end{figure}%
 
-\section{Independent visual features}\label{independent-visual-features}
+\section{Independent visual features}\label{sec-separable}
 
 A bar plot involves encoding a qualitative variable as bar
 \textbf{position} and a quantitative variable as bar \textbf{length}
@@ -6678,12 +6698,12 @@ offenders in different ethnic groups in 2011 and in 2021.}
 \end{figure}%
 
 \section{Decoding combinations of visual
-features}\label{decoding-combinations-of-visual-features}
+features}\label{sec-decode-combine}
 
 When we combine visual features that are independent, each visual
 feature can can be decoded separately. In that case, the decoding of the
-combination be reduced to the decoding of the individual features. This
-means that we can determine the effectiveness of a combination of
+combination can be reduced to the decoding of the individual features.
+This means that we can determine the effectiveness of a combination of
 features based on the effectiveness of the individual features. For
 example, the combination of length and position in a bar plot like
 Figure~\ref{fig-bar-gender} is effective because length is an effective
@@ -6705,8 +6725,9 @@ already know about. Examples of this case are combinations of length
 producing area, as in a mosaic plot (Figure~\ref{fig-spine}), and
 combinations of position producing angle, as in an interaction plot
 (Figure~\ref{fig-interaction}). Figure~\ref{fig-separable} shows several
-other cases. For example, the combinations of colour features---hue,
-chroma, and luminance---all just produce different colours.
+other cases of this sort. For example, the combinations of colour
+features---hue, chroma, and luminance---all just produce different
+colours.
 
 However, when the emergent feature is not one of the basic features, we
 need more information to know how that emergent feature will perform. An
@@ -6717,16 +6738,24 @@ vertical positions in a scatter plot produce position in space
 Even when the emergent feature is known, another issue is that the
 emergent feature decodes to a data summary, rather than the raw data
 values. As we saw in Section~\ref{sec-summary-decode} this creates a
-problem because there are many possible data summaries to consider.
+problem because there are many possible data summaries to consider and
+there is less known about how well these decodings perform.
 
-However, in the specific case of decoding correlation from a scatter
-plot, experiments have shown that decoding is reasonably
-accurate.\footnote{Examples of studies that demonstrate accuracy for
-  decoding correlation, althouhg with a tendency to underestimate, are
-  Rensink and Baldridge (2010) and Cui, Kini, and Liu (2024).}
+However, in the specific case of decoding a data summary from the
+positions of multiple data symbols within a scatter plot---decoding
+correlation from position in space---experiments have shown that the
+decoding is reasonably accurate. We are quite good at decoding the
+strength of a linear relationship from a scatter plot.\footnote{Examples
+  of studies that demonstrate accuracy for decoding correlation,
+  although with a tendency to underestimate, are Rensink and Baldridge
+  (2010) and Cui, Kini, and Liu (2024).
 
-\section{Dangers of combining
-mappings}\label{dangers-of-combining-mappings}
+  On the other hand, Braun et al. (2025) claim that we are more likely
+  to fit a line to a scatter plot based on orthogonal distances from
+  line to points, rather than vertical, and hence more likely to
+  over-estimate a slope.}
+
+\section{Dangers of combining mappings}\label{sec-danger-combine}
 
 Figure~\ref{fig-nz-doctor-bar} shows a plot of changes in health
 spending by successive New Zealand governments.\footnote{Figure~\ref{fig-nz-doctor-bar}
@@ -6972,10 +7001,11 @@ separate data values. Interactions between visual features is useful
 when we want to produce an emergent feature that allows us to decode
 data summaries.
 
-Conversely, independence between visual features is of no help if we
-want to produce an emergent feature. Furthermore, interaction between
-visual features is unhelpful, or even misleading, if we cannot decode
-any meaningful information from the emergent feature.
+Conversely, independence between visual features is of no help if what
+we want is to decode a data summary from an emergent feature.
+Furthermore, interaction between visual features is unhelpful, or even
+misleading, if we cannot decode any meaningful information from the
+emergent feature that results from the interaction.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -6985,22 +7015,27 @@ any meaningful information from the emergent feature.
 
 \chapter{Visual Shapes}\label{sec-visual-shapes}
 
-\textbf{TODO} refer back to Section~\ref{sec-pos-scarce} and mention
-that shapes are one solution, with all of the drawbacks of not being
-able to decode individual data values. Footnote surjective/injective?
-
 All of the data visualisations that we have considered so far have
 mapped a \textbf{single data value} from one or more variables to a
 \textbf{single data symbol} (Figure~\ref{fig-multivariate-symbol-a}).
-For example, a bar plot like Figure~\ref{fig-bar} maps one category and
-one count to one bar. A scatter plot like Figure~\ref{fig-scatter} maps
-one data value from a quantitative variable and one data value from
-another quantitative variable to one data point.
+For example, a bar plot like Figure~\ref{fig-bar} maps the number of
+offenders for one ethnic group to one bar. A scatter plot like
+Figure~\ref{fig-scatter} maps the number of clean breaks and the number
+of tries for one team to one data point.
 
 In this chapter, we consider data visualisations that map
 \textbf{multiple data values} from one or more variables to a
 \textbf{single data symbol} (Figure~\ref{fig-multivariate-symbol-b}). In
-this chapter, we begin to consider more complex data symbols.
+this chapter, we begin to consider more complex data symbols that
+produce \textbf{visual shapes}.\footnote{In this chapter, we focus on
+  data symbols that represent multiple sets of data values, like lines.
+  It could be argued that there are data symbols that are visual shapes
+  that arise from mapping a single, qualitative data value to a data
+  symbol, for example, different data points---circles versus triangles
+  versus squares---in a scatter plot. However, in this book, that case
+  is referred to as a mapping from qualitative data value to the
+  \emph{pattern}---a basic visual feature---of a data symbol
+  (Section~\ref{sec-visual-features}).}
 
 \begin{figure}
 
@@ -7038,23 +7073,23 @@ this chapter, we begin to consider more complex data symbols.
 
 \caption{\label{fig-multivariate-symbol}(a) A simple data symbol, like a
 bar in a bar plot or a data point in a scatter plot involves mapping
-\textbf{one} data value from each of two variables to two visual
-features of \textbf{one} data symbol; a single pair of data values
-produces a single data symbol (this is a reproduction of the diagram in
+\textbf{one} row of data values to the visual features of \textbf{one}
+data symbol; a single pair of data values produces a single data symbol
+(this is a reproduction of the diagram in
 Figure~\ref{fig-two-visual-features}). (b) A more complex data symbol is
-produced if we map \textbf{multiple} data values from each of two
-variables to two visual features of a \textbf{single} data symbol.
-Multiple data values from \texttt{x} and \texttt{y} are mapped to the
-visual features, \texttt{a} and \texttt{b}, of a single data symbol.
-Multiple pairs of values produce a single data symbol.}
+produced if we map \textbf{multiple} rows of data values to the visual
+features of \textbf{one} data symbol. Multiple data values from
+\texttt{x} and \texttt{y} are mapped to the visual features, \texttt{a}
+and \texttt{b}, of a single data symbol. Multiple pairs of values
+produce a single data symbol.}
 
 \end{figure}%
 
 \section{Line plots}\label{sec-line-plots}
 
 Figure~\ref{fig-line} shows a line plot of the number of offenders per
-year in different ethnic groups from 2011 to 2021 (see
-Table~\ref{tbl-crime-group-year}). This data visualisation is very
+year in different ethnic groups from 2011 to 2021
+(Table~\ref{tbl-crime-group-year}). This data visualisation is very
 effective for perceiving changes over time in the number of offenders
 within each group as well as comparing the changes over time between
 groups.
@@ -7084,16 +7119,16 @@ pairs of year and count values.
 
 This contrasts with visualisations like bar plots that use simpler data
 symbols. For example, the bar plot of the same data in
-Figure~\ref{fig-side-bar-year} has 44 bars.
+Figure~\ref{fig-side-bar-year} has 44 data symbols (44 bars).
 
 Figure~\ref{fig-line} is effective at conveying changes over time
 because the coloured lines create \textbf{visual shapes}
 (Figure~\ref{fig-data-vis-shape}) and those visual shapes convey
 information about collections of data values. For example, we can
 perceive slopes and curves and peaks and valleys in each of the coloured
-lines.\footnote{``VISUAL PATTERN RECOGNITION'' Few (2006) Makes this
-  same point {[}p 10{]} Demonstration of difference between density plot
-  (mostly see a shape) and histogram (mostly see bar heights).}
+lines.\footnote{Few (2006, 10) discusses this difference in a comparison
+  between a density plot (mostly see a shape) and a histogram (mostly
+  see bar heights).}
 
 \begin{figure}
 
@@ -7115,23 +7150,42 @@ shapes}, that contain a larger amount of information.}
 
 \end{figure}%
 
+By comparison, in Figure~\ref{fig-no-line}, which maps each data value
+to its own data symbol, it is much harder to decode the slopes, curves,
+peaks, and valleys. Despite the colours of the data symbols, it is even
+harder to group the different sets of data symbols together; the
+connecting lines between the data values in Figure~\ref{fig-line} are a
+very strong encoding that the data values belong to the same ethnic
+group (Section~\ref{sec-visual-model-groups}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-no-line-1.pdf}
+
+}
+
+\caption{\label{fig-no-line}A scatter plot of the number of offenders
+per year in different ethnic groups from 2011 to 2021.}
+
+\end{figure}%
+
 In terms of the simple visual processing model from
 Section~\ref{sec-visual-processing}, these more complicated shapes can
-convey more sophisticated information, at the expense of more cognitive
-effort, and with a limit on how many shapes we can process
-simultaneously (see Figure~\ref{fig-visual-model}). In other words, the
-more complex data symbols allow us to decode \textbf{data summaries}
+convey higher-level information, at the expense of a little more visual
+processing, and with a limit on how many shapes we can process
+simultaneously (Figure~\ref{fig-visual-model}). In terms of
+\href{summaries.html}{Chapter 8}, the more complex data symbols create
+visual shapes that allow us to decode \textbf{data summaries}
 (Figure~\ref{fig-data-vis-shape-decode}). For example, in
-Figure~\ref{fig-line} we are able to perceive overall trends in the
-number of offenders, periods of more rapid change versus periods of
-slower change, and local maxima and minima.\footnote{``Understanding
-  Charts and Graphs'' Kosslyn (1989) {[}somewhere after p 205{]} Lines
-  are objects ``For example, if one wants a reader to see an
-  interaction, a line graph is better than a bar graph: not only is a
-  line a single perceptual unit, and hence there will be less to hold in
-  short-term memory, but we are good at detecting slope
-  differences-which convey the relevant information (see Pinker,
-  1988).''}
+Figure~\ref{fig-line} we are able to decode data summaries such as the
+overall trends in the number of offenders, periods of more rapid change
+versus periods of slower change, and local maxima and minima.\footnote{``not
+  only is a line a single perceptual unit, and hence there will be less
+  to hold in short-term memory, but we are good at detecting slope
+  differences---which convey the relevant information'' (Kosslyn 1989,
+  211)}
 
 \begin{figure}
 
@@ -7148,22 +7202,22 @@ slower change, and local maxima and minima.\footnote{``Understanding
 
 \caption{\label{fig-data-vis-shape-decode}If we map data values to a
 \textbf{visual shape} that contains a large amount of information, then
-we may be able to decode more sophisticated \textbf{data summaries}.}
+we may be able to decode higher-level \textbf{data summaries}.}
 
 \end{figure}%
 
-This ability to perceive data summaries, such as peaks and slopes, when
-we use lines as data symbols is even more apparent if we compare
+This ability to decode data summaries, such as peaks and slopes, when we
+use lines as data symbols is even more apparent if we compare
 Figure~\ref{fig-line} with Figure~\ref{fig-side-bar-year}. When we have
 bars as data symbols, these data summaries are much less apparent.
 
 In terms of Chapter~\ref{sec-congruence}, the use of lines for data
 symbols is also \textbf{congruent} with trends in the data; we naturally
 associate slopes with increases and decreases in data values.\footnote{According
-  to Zacks and Tversky 1999 people use ``trend words''
-  (increasing/decreasing) versus ``discrete words'' (higher/lower than)
-  AND are faster to judge absolute values from bars but angle from line
-  graphs.}
+  to Zacks and Tversky (1999) people use \emph{trend words}
+  (increasing/decreasing) versus \emph{discrete words} (higher/lower
+  than) \emph{and} are faster to judge absolute values from bars but
+  angle from line graphs.}
 
 \begin{quote}
 One reason why line plots are effective is because they encode multiple
@@ -7171,16 +7225,19 @@ data values into a complex data symbol that creates a visual shape, from
 which we are able to decode data summaries.
 \end{quote}
 
-On the other hand, the more complex data symbols in a line plot, that
-contain multiple data values, are less effective at conveying the
-\emph{individual} raw data values. The coloured lines in
+On the other hand, the more complex data symbols in a line plot, where
+each data symbol contains multiple data values, are less effective at
+encoding the \emph{individual} raw data values. The coloured lines in
 Figure~\ref{fig-line} are not simple shapes from which it is easy to
-perceive basic \textbf{visual features}. This means that, although we
-may be able to decode data summaries, it is not easy to decode the raw
+decode basic \textbf{visual features}. This means that, although we may
+be able to decode data summaries, it is not as easy to decode the raw
 data values (Figure~\ref{fig-data-vis-shape-decode}). For example,
 compare the ease with which we can determine the number of
 European/Other offenders in 2013 from Figure~\ref{fig-line} versus
-Figure~\ref{fig-side-bar-year}.
+Figure~\ref{fig-side-bar-year}. Figure~\ref{fig-side-bar-year} has
+simple data symbols that encode a single data value as a basic visual
+feature of a single data symbol---the length of a bar---so we can easily
+decode the individual raw data values from the bars.
 
 This deficiency is significant because the main mappings in a line plot
 are from \textbf{quantitative} data values to (horizontal and vertical)
@@ -7191,20 +7248,28 @@ values. However, in a line plot, we are not mapping a single data value
 to a basic visual feature of a single, simple shape. Instead, a single
 data value is being mapped, along with many other values, to a basic
 visual feature of a complicated shape. In effect, the individual data
-values lose their individual identity.\footnote{citation for surjective,
-  injective, bijective
+values lose their individual identity.\footnote{Ziemkiewicz and Kosara
+  (2009) refer to this as a \emph{non-injective} encoding and point out
+  that it makes it impossible for there to be a decoding, because
+  multiple data values map to the same data symbol. This is in contrast
+  to a \emph{bijective} mapping, which is one-to-one between data values
+  and data symbols (Section~\ref{sec-bar}).
 
-  Refer back to Section~\ref{sec-pos-scarce}
+  This problem also relates to the issue of drawing data symbols on top
+  of each other (Section~\ref{sec-pos-scarce}). If two data symbols
+  completely overlap, for example if two data points on a scatterplot
+  overlap, then it is impossible to decode both individual data values.
 
-  Adam has a nice example in his thesis Figure 4.5, a simpler version of
-  which is a line or bar plot that contains a ``total'' line or bar -
-  the visual objects do not map neatly, and disjointly to subsets of the
-  data - there is overlap. This makes mapping back to the data harder or
-  at least more ambiguous ?}
-
-\textbf{TODO} Refer back to Section~\ref{sec-bar} where we had bijective
-(but only use that terminology in footnote), so we could decode
-individual data values.
+  Figure 4.5 of Bartonicek (2023) has an interesting, if pathological,
+  demonstration of this problem using a simple bar plot. The bar plot
+  has a single bar that represents the sum of counts for two categories.
+  In this demonstration there is also a bar just for one of the counts,
+  so that, with unnecessary mental effort, it is possible to recover the
+  ``hidden'' data value, but we can imagine an even more pathological
+  demonstration which would map two data values to a single bar, without
+  mapping one of the data values to its own bar. In that case it would
+  be completely impossible to decode the two data values from the single
+  bar.}
 
 \begin{quote}
 One reason why a line plot is \emph{less} effective for decoding raw
@@ -7212,36 +7277,31 @@ data values is because each raw data value is not mapped to its own data
 symbol.
 \end{quote}
 
-The creation of complex data symbols from multiple data values bears
-some similarity to the creation of emergent features by combining visual
+The creation of visual shapes from multiple data values bears some
+similarity to the creation of emergent features by combining visual
 features (Section~\ref{sec-integral}). In both cases, we have
 \emph{explicit} encodings from data values to basic visual features, but
 we also produce an \emph{implicit} additional visual effect. The
-difference here is that with complex data symbols, we are collapsing
-multiple data values into a data symbol, so we run a higher risk of
-losing the ability to perceive individual data values.\footnote{Also
-  link to ``configural displays'' (David Peebles (2008)) and ``display
-  proximity'' (Barnett \& Wickens, 1988; Carswell \& Wickens, 1987;
-  Wickens \& Andre, 1990) ``According to the proximity compatibility
-  principle (Wickens \& Carswell, 1995), representations with high
-  display proximity facilitate high mental proximity tasks requiring the
-  integration of information from multiple sources. The relationship
-  between display and mental proximity has been revealed in several
-  studies (e.g., Barnett \& Wickens, 1988; Bennett \& Flach, 1992;
-  Bennett, Toms, \& Woods, 1993; Carswell \& Wickens, 1987; Wickens \&
-  Andre, 1990; Wickens \& Carswell, 1995) and it is argued that the
-  advantage comes when emergent features (Pomerantz \& Pristach, 1989)
-  of the representation indicate additional information about the
-  domain.'' He also mentions line plots as being in between separable
-  bar plots and configural radar plots.}
+difference here is that, with visual shapes, we are collapsing multiple
+data values into a data symbol, so we run a higher risk of losing the
+ability to perceive individual data values.\footnote{Peebles (2008)
+  describes a line plot as \emph{configural}---rather than either
+  \emph{separable} (Section~\ref{sec-separable}) or \emph{integral}
+  (Section~\ref{sec-integral})---which means that it is possible to
+  decode individual data values and data summaries, but that configural
+  displays lead to poorer decoding of individual data values. This also
+  links to the \emph{display proximity principal} (Wickens and Carswell
+  1995).}
 
-There is also a similarity between complex data symbols and visual
-summaries (Section~\ref{sec-visual-summaries}). In both cases, we gain
-the ability to decode data summaries from collections of data values.
-Again, the difference is that with visual summaries, we are summarising
-many simple data symbols that each represent individual data values,
-whereas with a complex data symbol we decode the data summary from a
-single data symbol that obscures the individual data values.
+There is also a similarity between visual shapes and visual summaries
+(Section~\ref{sec-visual-summaries}). In both cases, we gain the ability
+to decode data summaries from collections of data values. The difference
+is that, with visual summaries, we are summarising many simple data
+symbols that each represent individual data values, whereas with a
+visual shape we decode the data summary from a single data symbol that
+obscures the individual data values. In the case of a visual summary,
+the individual data values can still be decoded, but with a visual shape
+that is more difficult.
 
 \section{Case study: Scatter plots with
 lines}\label{case-study-scatter-plots-with-lines}
@@ -7250,12 +7310,15 @@ Figure~\ref{fig-line-points} shows a data visualisation of the number of
 offenders per year in different ethnic groups
 (Table~\ref{tbl-crime-group-year}). This is very similar to
 Figure~\ref{fig-line}, but we have added a data point at every
-horizontal and vertical \textbf{position}.
+horizontal and vertical \textbf{position} as well as the lines between
+positions.
 
 Like Figure~\ref{fig-line}, we can decode overall trends from the line
 data symbols, but we can also decode individual data values more easily
 because now every individual data value is also mapped to its own data
-symbol.
+symbol. By employing both simple data symbols that encode individual
+data values and complex data symbols that encode multiple data values as
+visual shapes, we get the best of both worlds.
 
 \begin{figure}
 
@@ -7277,7 +7340,7 @@ Figure~\ref{fig-density} shows a density plot of the number of points
 scored by Tier One nations at the Rugby World Cups
 (Table~\ref{tbl-rwc-all}). As with a histogram (Figure~\ref{fig-hist}),
 this data visualisation is effective for conveying the distribution of
-data values. For example, we can perceive that there is evidence of a
+data values. For example, we can decode that there is evidence of a
 single mode and right skew.
 
 \begin{figure}
@@ -7293,16 +7356,16 @@ by Tier One nations at Rugby World Cups.}
 
 \end{figure}%
 
-Also like a histogram, a density plot actually maps \textbf{data
-summaries}, density estimates rather than raw data values, to visual
-features (see Table~\ref{tbl-density-stats}). In the case of a
-histogram, the data summary values are counts within bins (see
-Table~\ref{tbl-hist-stats}) and each data summary produces a separate
-bar. However, a density plot encodes all of the data summary values to a
-single data symbol, a line, to create a \textbf{visual shape}. The
+Also like a histogram, a density plot maps \textbf{data summaries},
+rather than raw data values, to visual features
+(Table~\ref{tbl-density-stats}). In the case of a histogram, the data
+summary values are counts within bins (Table~\ref{tbl-hist-stats}) and
+each data summary produces a separate bar. In the case of a density
+plot, the data summary produces density estimates and these are mapped
+to a single data symbol, a line, to create a \textbf{visual shape}. The
 density estimates are mapped to the horizontal and vertical
 \textbf{positions} of a single line data symbol. The visual shape allows
-us to perceive summaries of the density estimates. For example, whether
+us to decode summaries of the density estimates. For example, whether
 there is a single maximum density and how the density changes to either
 side of that peak.
 
@@ -7369,10 +7432,37 @@ density estimates of the raw data.
 
 Another commonality between density plots and histograms is that we get
 to choose how the data summaries are calculated from the raw data
-values. In the case of a density plot, we must choose a ``kernel'' and a
-``bandwidth'', both of which affect the smoothness of the density
-estimates. This means that we may need to explore more than one kernel
-and bandwidth (see Section~\ref{sec-summary-caveats}).
+values. In the case of a density plot, we must choose a \emph{kernel}
+and a \emph{bandwidth}, both of which affect the smoothness of the
+density estimates. In other words, the choice of kernel and bandwidth
+affects the shape of the line data symbol and that affects the data
+summaries that we will decode (peaks, slopes, etc). In a histogram, we
+may need to explore multiple choices of bin width and in a density plot
+we may need to explore more than one kernel and bandwidth
+(Section~\ref{sec-summary-caveats}).
+
+For example, Figure~\ref{fig-density-bandwidth} shows a density plot of
+the same data as Figure~\ref{fig-density}, but with a smaller bandwidth.
+The resulting density curve is much less smooth and so different data
+summaries can be decoded from the visual shape. This density curve looks
+a lot more like the histogram with a narrow bin width in
+Figure~\ref{fig-hist-thin}; we can decode a possible second mode and we
+can even begin to decode peaks at individual numbers of points scored.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-density-bandwidth-1.pdf}
+
+}
+
+\caption{\label{fig-density-bandwidth}A density plot of the points
+scored per game by Tier One nations at Rugby World Cups. This is a
+variation of Figure~\ref{fig-density} using a much narrower bandwidth,
+so the density curve is much less smooth.}
+
+\end{figure}%
 
 A final point about density plots, especially in comparison to
 histograms is that it is more effective to present multiple density
@@ -7383,7 +7473,7 @@ perceive the separate histograms and this is not satisfactorily solved
 by adding semitransparency. By comparison, multiple density curves
 create very little overlap, and even though the orange curve passes
 ``under'' the blue curve, we effortlessly perceive the orange curve as a
-single, coherent shape (see Section~\ref{sec-visual-model-groups}).
+single, coherent shape (Section~\ref{sec-visual-model-groups}).
 
 \begin{figure}
 
@@ -7413,28 +7503,211 @@ hemisphere.}
 
 \end{figure}%
 
-\section{Aspect ratio}\label{aspect-ratio}
+\section{Aspect ratio}\label{sec-aspect-ratio}
 
-How aspect ratio affects ability to detect features in lines
+Figure~\ref{fig-aspect} shows a variation on Figure~\ref{fig-line} using
+a different \textbf{aspect ratio}---the height of the plot divided by
+the width of the plot. Figure~\ref{fig-line} has an aspect ratio of 1
+(the plot region is square), but Figure~\ref{fig-aspect} has an aspect
+ratio of only 0.2 (the plot region is much shorter than it is wide).
 
-Also use of white space around points in scatter plot ?
+Figure~\ref{fig-aspect} shows that the aspect ratio of the plot has a
+large effect on the visual shapes of the data symbols, which means that
+the aspect ratio has a large effect on the data summaries that we decode
+from the visual shapes. For example, in Figure~\ref{fig-aspect}, we can
+still see a general downward trend in three of the lines, with one line
+increasing. However, the peak or jump in values at 2020 is much less
+obvious. In other words, we decode different data summaries from
+Figure~\ref{fig-aspect} compared to Figure~\ref{fig-line} purely because
+of the difference in aspect ratio.
 
-Cite Cleveland (1994) for white space margin affecting strength of
-relation?
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-aspect-1.pdf}
+
+}
+
+\caption{\label{fig-aspect}A line plot of the number of offenders per
+year in different ethnic groups from 2011 to 2021.}
+
+\end{figure}%
+
+There is no single rule for what the correct aspect ratio should
+be,\footnote{The \emph{median-absolute-slope criterion} suggests
+  choosing an aspect ratio such that the median absolute slope of the
+  line segments between points is \(45^{\circ}\) (also known as the
+  \emph{45 degree banking rule}) (William S. Cleveland, McGill, and
+  McGill 1988). This is shown to produce the most accurate decoding of
+  slopes.} so we may need to experiment with more than one aspect ratio
+to check what visual shapes are produced and whether it is possible to
+decode the features of interest.
+
+Figure~\ref{fig-scatter-aspect} demonstrates that a similar problem
+exists for decoding data summaries from scatter plots
+(Section~\ref{sec-integral}). These plots encode the number of offloads
+(a fancy pass under pressure in rugby) as the horizontal position of
+data points and the number of tries (scoring actions) as the vertical
+position. The correlation between the two measures can be decoded from
+the emergent position in space of the data points. The data is exactly
+the same for all four plots.
+
+The decoding of trends in the points on a scatter plot has similarities
+to the decoding of trends from visual shapes in a line plot\footnote{William
+  S. Cleveland, McGill, and McGill (1988) draws on the idea of
+  \emph{virtual lines} between the data points, from Marr (1982) and K.
+  A. Stevens (1978), to relate the decoding of trends from lines in a
+  line plot with the decoding of trends from data points in a scatter
+  plot.} and the shapes that we decode from a collection of data points
+are also affected by the aspect ratio of a plot. For example, the
+top-left plot in Figure~\ref{fig-scatter-aspect} suggests a stronger
+relationship between offloads and tries than the bottom-left plot simply
+because the trend appears flatter in the bottom-left plot and that is
+solely thanks to the lower aspect ratio of the bottom-left plot.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-scatter-aspect-1.pdf}
+
+}
+
+\caption{\label{fig-scatter-aspect}A scatter plot of the number of times
+a team breaks through the opposition defence and the number of tries
+that a team scores (both are per-game averages) for teams at the 2023
+Rugby World Cup.}
+
+\end{figure}%
+
+A related issue is the amount of empty space around the data points in a
+scatter plot. IN Figure~\ref{fig-scatter-aspect}, the relationship
+appears stronger in the top-right plot compared to the top-left plot
+simply because the data points are clustered more densely thanks to the
+different ranges on the plot axes.\footnote{William S. Cleveland (1994)
+  states that ``our estimation of correlation is strongly affected by
+  the area of the data rectangle relative to the area of the scale-line
+  rectangle'' and provides demonstrations (Figure 4.15 and 4.16).}
 
 \section{Decoding visual shapes}\label{decoding-visual-shapes}
 
-Decoding to data summaries, so problem of many possible decodings again.
+Decoding from a visual shape results in a data summary
+(Figure~\ref{fig-data-vis-shape-decode}), for example peaks and valleys,
+and, as we saw in Section~\ref{sec-summary-decode} and
+Section~\ref{sec-decode-combine}, less is known about how well we can
+perform this sort of decoding.
 
-Congruence comes into play - peaks and valleys etc.
+However, there is experimental support for the intuitive sense that we
+can perform well at decoding qualitative features from shapes, such as
+peaks and valleys, as well as decoding ordinal comparisons, such as
+steeper and shallower.\footnote{Proma et al. (2025) showed that people
+  are good at reproducing (therefore identifying) trends, peaks, and
+  valleys, if less so at reproducing periodicity, noise/variability.
 
-Refer to the aspect ratio problem: the shape you are decoding is
-vulnerable to context!
+  Correll and Heer (2017) showed that decoding of trends from line plots
+  (and scatter plots) is quite accurate, at least relative to
+  ordinary-least-squares models.} However, as
+Section~\ref{sec-aspect-ratio} demonstrated, decodings of slopes is are
+limited to physical slopes, which are dependent on the aspect ratio,
+rather than decoding absolute rates of change in the data.\footnote{William
+  S. Cleveland, McGill, and McGill (1988) points out that the accuracy
+  of decoding slopes is only relevant to comparing the \emph{relative
+  steepness} of different regions of a line. This is not accuracy in
+  terms of decoding the actual rate of change in the data. For that
+  purpose, we should encode the actual rate of change directly.}
+
+\section{Case study: Box plots}\label{case-study-box-plots}
+
+Figure~\ref{fig-box-shape} shows box plots of the number of points
+scored by Tier One nations at Rugby World Cup matches. We have discussed
+box plots previously as examples of data visualisations that map data
+summaries to data symbols (Section~\ref{sec-box-plot}). For example, the
+median points scored is encoded as the horizontal position of a thick
+vertical line for each team. The only raw data values that are directly
+mapped are the outliers, which are encoded as the horizontal position of
+data points for a few teams. A box plot is effective for decoding the
+median for each team because the median has been encoded as basic visual
+features of simple data symbol.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-box-shape-1.pdf}
+
+}
+
+\caption{\label{fig-box-shape}Box plots of the number of points scored
+by Tier One nations at Rugby World Cups.}
+
+\end{figure}%
+
+Box plots are also examples of mapping more than one data value (or data
+summary) to a single data symbol. For each team, we have a complex data
+symbol made up of a rectangle and horizontal and vertical lines, plus
+possibly some data points. This creates a visual shape that allows us to
+decode additional data summaries. For example, some box plots, like the
+one for England, are symmetric, with the median line at the center of
+the rectangle and with horizontal lines of similar lengths to either
+side. Other box plots, like the one for Argentina, are asymmetric, with
+the median towards one end of the rectangle and a longer horizontal line
+to one side. In other words, we can decode information about the
+skewness of the data from the visual shape
+(Figure~\ref{fig-data-vis-shape-decode}).
 
 \section{Dangers of visual shapes}\label{dangers-of-visual-shapes}
 
-Need a caveat that more complex shapes does NOT necessarily mean useful
-mappings back to data summaries - could just end up with a mess
+Figure~\ref{fig-zacks} shows two data visualisations of average heights
+for males and females. We have already discussed that it is easier to
+decode the individual average height values from the bar plot because
+each average height is encoded as its own visual feature---the height of
+one bar. We have also discussed that it is easier to decode trends from
+a line plot (Section~\ref{sec-line-plots}).
+
+However, in Figure~\ref{fig-zacks}, the temptation to decode a trend
+from the line plot is in fact misleading. A line implies continuity, in
+this case even a linear trend. However, the data values on the x-axis
+are qualitative categories (biological sex), rather than a continuum.
+This means that decoding a trend from females to males does not actually
+make sense.\footnote{The data visualisations are based on Figure 2 from
+  Zacks and Tversky (1999). An example of one subject's decoding of the
+  line plot was: ``The more male a person is, the taller he/she is''}
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-zacks-1.pdf}
+
+}
+
+\subcaption{\label{fig-zacks-1}A bar plot supports decoding individual
+values.}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-zacks-2.pdf}
+
+}
+
+\subcaption{\label{fig-zacks-2}A line plot supports decoding trends.}
+
+\end{minipage}%
+
+\caption{\label{fig-zacks}Two data visualisations of average heights of
+females and males.}
+
+\end{figure}%
+
+A visual shape can be decoded to a data summary, but that is only useful
+if the data summary is appropriate and not misleading
 (Figure~\ref{fig-data-vis-shape-lie}).
 
 \begin{figure}
@@ -7456,128 +7729,220 @@ decodes to unhelpful or misleading information.}
 
 \end{figure}%
 
-Lines imply continuity (at least) if not linear interpolation so do
-example where connecting with lines not such a great idea. Refer back to
-Chapter~\ref{sec-congruence} (congruence).
+Figure~\ref{fig-gap} shows another example of an undesirable shape
+decoding. The two curves in Figure~\ref{fig-gap} are identical except
+that one has been shifted vertically. In other words, the vertical
+distance between the two lines is constant. In a data visualisation, we
+are typically interested in that vertical distance: what is the
+difference in \emph{y} between the two lines?
 
-Example from ``Bars and lines: A study of graphic communication'' Zacks
-and Tversky (1999) (Fig 2) of inappropriate line plot: line connecting
-males and females =\textgreater{} some subjects made trend
-interpretation, the worst being ``The more male a person is, the taller
-he/she is''
+However, the natural decoding of the distance between the lines focuses
+on the perpendicular distance, so the two lines appear to be
+converging.\footnote{This decoding of the difference between lines is
+  described in William S. Cleveland and McGill (1985). The recommended
+  solution is to encode the difference between the lines, rather than
+  requiring the viewer to perform the subtraction visually. Gleicher et
+  al. (2011) call that solution \emph{explicit encoding}.
 
-\section{Case study: Violin plots}\label{case-study-violin-plots}
-
-And other variations on boxplots
-
-First point out that a boxplot is really a visual shape: multiple data
-summaries generate a single ``box'' data symbol. Although it is still
-very easy to decode individual data summaries from the box shape.
-
-\begin{itemize}
-\tightlist
-\item
-  Case study: SinaPlots
-\end{itemize}
-
-A SinaPlot is a nice combination of decode for raw data and visual shape
-for data summary.\footnote{Sidiropoulos et al. (2018)}
-Figure~\ref{fig-sina} is actually a combination of a SinaPlot and a
-violin plot.
+  Braun et al. (2025) describe a similar issue with estimating the line
+  of best fit from data points in a scatter plot. Their results showed a
+  bias towards orthogonal distance to the line of best fit rather than
+  vertical distance.} In other words, we decode the shape of the gap
+between the lines to be a narrowing gap.
 
 \begin{figure}
 
 \centering{
 
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-sina-1.pdf}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-gap-1.pdf}
 
 }
 
-\caption{\label{fig-sina}A SinaPlot of the points scored per game by
-Tier One nations at Rugby World Cups.}
+\caption{\label{fig-gap}The two lines in this plot are just the same
+curve shifted vertically, but we decode a decrease in the gap between
+the lines.}
 
 \end{figure}%
 
-\section{Case study: loess curves}\label{case-study-loess-curves}
-
-Another example of data -\textgreater{} summary -\textgreater{} features
--\textgreater{} shapes -\textgreater{} summaries
-
-\section{Case study: Line of best
-fit}\label{case-study-line-of-best-fit}
-
-Nice example of a complex calculation, the results of which are what
-gets visualised. Also example of performing the calculation numerically
-rather than asking the viewer to perform it visually. This was in
-summaries.qmd, but it cannot be there because it requires scatter plots,
-which come in the next section. Add this after mention of visualising
-models?
-
-Add footnote to Hadley's more complex model visualisation paper
-https://vita.had.co.nz/papers/model-vis.pdf
-https://dl.acm.org/doi/10.1002/sam.11271
-
-model fits like lm straight line and ref Hadley's data-space vs
-model-space ``data models'' to mirror ``data statistics'' (revisit box
-plots as VERY simple models? also talk about failing assumptions of
-these models, like unimodal for boxplot)
-
-footnote cite to Tukey for visualising phenomena rather than raw data?
-``Data-Based Graphics: Visual Display in the Decades to Come'' Tukey
-(1990)
-
 \section{Non-linear mappings}\label{sec-shape-non-linear}
 
-Refer back to Section~\ref{sec-non-linear-pos}
+Figure~\ref{fig-arrivals} shows time series plots of the number of
+international arrivals to New Zealand over the last century.\footnote{These
+  plots are based on plots posted by Peter Ellis on a
+  \href{https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate}{StackExchange
+  thread}. The data are from
+  \href{https://infoshare.stats.govt.nz/}{Stats NZ} and licensed by
+  Stats NZ for reuse under the
+  \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International} licence.} Figure~\ref{fig-arrivals-1}
+employs a linear scale on the y-axis and, because the amount of
+international travel has changed so dramatically over time, it is
+impossible to decode any detail from the first half of the twentieth
+century.
 
-NOTE that there ARE some situations where non-linear position. scales
-are ok, e.g., log-log. Length is still dodgy. You DO still get ordinal
-info, even if cannot decode sizes of differences. Non-linearity might
-actually be ok on non-position scales, e.g., a colour scale for numeric
-data, where differences are smaller at one end; all you are after, if
-you are using colour, is ordinal, so changing colours more swiftly at
-one end of the scale is ok (?) At least some `colorspace' functions
-allow non-linear palettes. Revisit in qualitative.Rmd to point out that
-non-linear ordinal scales are ok, e.g., jet colour scale
+We saw in Section~\ref{sec-non-linear-pos} that one approach in this
+sort of situation is to use a non-linear scale.
+Figure~\ref{fig-arrivals-2} uses this approach by employing a log (base
+10) scale on the y-axis. The advantage of the non-linear scale is clear:
+it is now possible to see details in the data for the first half of the
+twentieth century. For example, we can now see the effect of the Second
+World War (1939--1945), in addition to the effect of the COVID pandemic
+(2020--2021), and we can see that the seasonal patterns are similar over
+time.
 
-Nice example of log-log scales in The Signal and the Noise (Nate Silver)
-See 787resources/Examples/2025-08-signal-noise-log-log
+\begin{figure}
 
-Log log scales a good example of asking what is it you want to see? You
-cannot extract raw data or a compare raw data points. But all you want
-is to see the data summary of correlation so no harm no foul.
+\begin{minipage}{\linewidth}
 
-Can get useful \emph{shapes} out of non-linear scales
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-arrivals-1.pdf}
+
+}
+
+\subcaption{\label{fig-arrivals-1}linear y-axis scale}
+
+\end{minipage}%
+\newline
+\begin{minipage}{\linewidth}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-arrivals-2.pdf}
+
+}
+
+\subcaption{\label{fig-arrivals-2}log (base 10) y-axis scale}
+
+\end{minipage}%
+
+\caption{\label{fig-arrivals}Figures reproduced from Zacks and Tversky
+(1999)}
+
+\end{figure}%
+
+An important point is that \emph{all} of these decodings are from the
+visual shapes in Figure~\ref{fig-arrivals-2}. We are able to decode an
+overall trend, local dips within the trend, and regular spikes within
+the overall trend.
+
+However, as we pointed out in Section~\ref{sec-non-linear-pos}, the
+decoding of simple visual features is compromised by the use of a
+non-linear scale. For example, it is very difficult to decode the final
+value of the time series in Figure~\ref{fig-arrivals-2} because the same
+distance between the tick marks on the y-axis does not represent the
+same difference in data values (as emphasised by the choice of tick mark
+labels). As we can see from Figure~\ref{fig-arrivals-1}, the final data
+value in the time series is \emph{not} half-way between 100,000 and
+500,000.
+
+It is \emph{possible} to decode quantitative values from
+Figure~\ref{fig-arrivals-2}. For example, the height of the seasonal
+changes remained fairly constant over time. However, that is an
+observation about the \emph{logged} data, not the raw data
+values.\footnote{This observation does have a sensible interpretation:
+  the consistent difference in logged values sugests that the size of
+  seasonal changes is consistent \emph{relative to} the absolute size of
+  arrivals. In other words the seasonal change in arrivals \emph{divided
+  by} the absolute number of arrivals is consistent over time. However,
+  that interpretation is not a simple, sub-conscious decoding of visual
+  features; it requires a more sophisticated mental effort and a
+  self-discipline to ignore the more naive decoding.} The danger of a
+log scale is that our natural decoding of position and length is now
+incorrect. For example, (in the absence of Figure~\ref{fig-arrivals-1})
+we might be tempted to incorrectly decode from
+Figure~\ref{fig-arrivals-2} that the absolute seasonal change in
+arrivals has remained constant over time. In other words, the natural
+decoding of simple visual features can be misleading in the presence of
+a non-linear scale.
+
+\section{Case study: log-log plots}\label{case-study-log-log-plots}
+
+Figure~\ref{fig-log-log-1} shows a scatter plot of metabolic rate versus
+body mass for a wide range of lifeforms.\footnote{These data are from
+  Castro (2025).} Because of the very wide range of body mass values and
+metabolic rates, with the largest animals being many orders of magnitude
+larger than the smallest bacteria, almost all of the data is crushed
+into the bottom-left corner.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-log-log-1-1.pdf}
+
+}
+
+\caption{\label{fig-log-log-1}Body mass versus metabolic rate for a wide
+variety of lifeforms.}
+
+\end{figure}%
+
+Figure~\ref{fig-log-log-2} shows the same data, but this time with log
+(base 10) scales on both axes. While there is still considerable
+overlap, thanks to the large number of observations, we can now see data
+for the other Kingdoms beyond Animalia.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-log-log-2-1.pdf}
+
+}
+
+\caption{\label{fig-log-log-2}Body mass versus metabolic rate for a wide
+variety of lifeforms. Log (base 10) scales.}
+
+\end{figure}%
+
+What we can also see in Figure~\ref{fig-log-log-2} is a clear
+\textbf{visual shape} amongst the data symbols---a strong linear
+relationship. It is useful to be able to decode this linear shape from a
+plot with log scales because it indicates a power relationship between
+the two variables, in this case metabolic rate and body mass.\footnote{This
+  power relationship between metabolic rate and body mass is known as
+  \emph{Kleiber's Law} (Kleiber 1947).} It is also possible to decode
+ordinal information, such as the fact that animals are larger and use
+more energy than bacteria.
+
+However, decoding the basic \textbf{position} of data symbols from a
+plot with log scales is very difficult because equal steps along either
+axis do \emph{not} decode to equal steps between data values (as
+indicated by the axis labels).\\
+For example, we cannot easily decode \emph{how much} bigger animals are
+than bacteria. There is even danger, for the uninitiated, in decoding
+the linear \textbf{visual shape} because it does \emph{not} decode to a
+linear relationship between the raw data values.
+
+Once again, we have a data visualisation that can be usefully decoded in
+a particular way, but which also contains encodings that are difficult
+and potentially misleading.
 
 cite the paper (cook? hofmann?) that looked at identification of curves
 vs straight lines in log-log plots? but only in visual-shapes chapter
 when call back to non-linear scales in position chapter
 
-Nice kiwi-biased example on this thread
-https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate
-But I think the point still holds that you LOSE the ability to judge
-size of differences - you can only decode things like order and groups
-(?)
-
-The ratio plot might be more interpretable if the axis is labelled as
-``number of times larger'' ?
-
-\section{Case study: log-log plots}\label{case-study-log-log-plots}
-
-Involves non-linear scales, but the point is the shape that you (hope
-to) get.
-
-Could also do q-q plots?
-
 \section{Summary}\label{summary-9}
 
-Mapping multiple data values to a single data symbol produces a
+Mapping multiple rows of data values to a single data symbol produces a
 \textbf{visual shape}, like a line on a line plot.
 
-Data summaries, such as trends over time, can can be decoded from a
-visual shape. However, decoding raw data values from a visual shape may
-be harder, cmopared to decoding raw data values from a simple data
-symbol like a bar.
+The main benefit of a data symbol that is a visual shape is that data
+summaries, such as modes, skewness, local maxima and minima, and trends
+over time, can can be decoded from a visual shape. On the downside,
+decoding raw data values from a visual shape may be harder, compared to
+decoding raw data values from a simple data symbol like a bar.
+
+One danger with visual shapes is that they depend on aspect ratio and
+scale. The same mappings can be made to decode to different data
+summaries, so we are responsible for selecting an appropriate aspect
+ratio and scale.
+
+Another danger is that a visual shape may not necessarily convey a
+useful data summary. We need to only create visual shapes in a
+purposeful manner and avoid accidentally creating visual shapes that may
+confuse or mislead.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -7945,6 +8310,10 @@ Compare with visual summary of density of points
 
 Different pros for each approach
 
+refer back to Section~\ref{sec-pos-scarce} (overplotting) and mention
+that shapes are one solution, with all of the drawbacks of not being
+able to decode individual data values. Footnote surjective/injective?
+
 \section{Dangers of multiple
 mappings}\label{dangers-of-multiple-mappings}
 
@@ -8199,14 +8568,28 @@ one way to decode to absolute data values (rather than just relative)
 
 \section{Decoding visual objects}\label{decoding-visual-objects}
 
+Visual objects may decode to data values or data summaries (or more
+abstract/conceptual) so there are a few things to consider.
+
+Can get visual summaries of visual objects! Whitney 2018
+
 Decoding to data summaries, so problem of many possible decodings again
 ?
+
+Think about qual ? e.g., clusters and outliers
 
 Missing decoding a problem!
 
 Learned decoding conflict a problem!
 
 Congruence comes into play - big time!
+
+Mention that little is known about the accuracy of visual objects
+(though they must have good capacity because they are more abstract,
+right?)\footnote{in general, there needs to be more explicit
+  acknowledgement of the lack of experimental results for complex data
+  vis scenarios. c.f., ``Testing Statistical Charts: What Makes a Good
+  Graph?'' Vanderplas, Cook, and Hofmann (2020) p 71.}:
 
 \section{Case study: Choropleth maps}\label{sec-choropleth}
 
@@ -8780,13 +9163,6 @@ Another example of this problem are the hurrican ``cones of
 uncertainty'' that Cairo highlights in Chapter 5 of How Charts Lie
 (footnote!).
 
-Mention that little is known about the accuracy of visual objects
-(though they must have good capacity because they are more abstract,
-right?)\footnote{in general, there needs to be more explicit
-  acknowledgement of the lack of experimental results for complex data
-  vis scenarios. c.f., ``Testing Statistical Charts: What Makes a Good
-  Graph?'' Vanderplas, Cook, and Hofmann (2020) p 71.}:
-
 Refer back to Section~\ref{sec-ternary} as example of plot type that
 experts in specific fields learn to read.
 
@@ -8805,10 +9181,14 @@ This may obviate the need for legends.
 
 \chapter{Text}\label{text}
 
-\textbf{TODO} Need to add a Decoding Text section. Need to shift
+\textbf{TODO} Need to add a Decoding Text section. Decoding text is just
+reading! Decoding text is definitely a learned encoding. Need to shift
 evaluation of text decoding out of Section~\ref{sec-data-symbols}? Can
 it wait until just before Dangers of Text? Once we have covered labels
 as well?
+
+\textbf{TODO} Useful font selection tool?
+https://pimpmytype.com/font-matrix/
 
 Figure~\ref{fig-no-text} is a version of Figure~\ref{fig-crime} with all
 of the text removed. Although we can see that some values, or rather
@@ -10168,19 +10548,6 @@ mappings congruent with data?
 
 \ldots{}
 
-\begin{itemize}
-\item
-  Use heatmap as case study?
-\item
-  do the side-by-side pie chart idea as an example of reasoning your way
-  to a new visualisation.
-\item
-  Move the discussion/revisit of tables from text section to here ?
-\item
-  Another possible application of data vis knowledge: Analyse one of the
-  weird boxplot variations that look a bit like a ziggurat?
-\end{itemize}
-
 List of questions to evaluate a data vis (maybe nest these a bit):
 
 \begin{itemize}
@@ -10232,6 +10599,143 @@ List of questions to evaluate a data vis (maybe nest these a bit):
 
 And so on \ldots{}
 
+\section*{Examples}\label{examples}
+\addcontentsline{toc}{section}{Examples}
+
+\markright{Examples}
+
+\begin{itemize}
+\item
+  Use heatmap as case study?
+\item
+  do the side-by-side pie chart idea as an example of reasoning your way
+  to a new visualisation.
+\item
+  Move the discussion/revisit of tables from text section to here ?
+\item
+  Another possible application of data vis knowledge: Analyse one of the
+  weird boxplot variations that look a bit like a ziggurat?
+
+  This is letter-value plot:
+
+  \begin{itemize}
+  \item
+    ``Letter-Value Plots: Boxplots for Large Data'' Hofmann et al (2015)
+  \item
+    Nice explanation of calculations \ldots{}
+
+    24 Beyond the Boxplot: Tukey's Letter-Value Summaries -- Exploratory
+    Data Analysis in R https://share.google/M2qXCsIxsSsqM7jFQ
+  \item
+    Labelling is an example of a text encoding that has no learned
+    decoding For most people So the text is just a symbol like a pch You
+    get difference but that is all
+  \item
+    \{lvplot\}
+
+    This line suggests that width is calculated to be proportional Or at
+    least can be \ldots{}
+
+    https://github.com/hadley/lvplot/blob/51ad401be5e017d37883ec5d149bc1818246b6f5/R/draw.r\#L43
+  \end{itemize}
+\end{itemize}
+
+\section*{Case study: Lines of best
+fit}\label{case-study-lines-of-best-fit}
+\addcontentsline{toc}{section}{Case study: Lines of best fit}
+
+\markright{Case study: Lines of best fit}
+
+Figure~\ref{fig-lm-smooth} shows a scatter plot of the winning margin
+versus the winning score for Tier One nations at Rugby World Cup
+matches. The hemisphere of the losing team is encoded as the colour of
+the data points and a trend line has been added for each hemisphere.
+
+The trend lines are mappings of data summaries, least-squares
+regressions, to line data symbols. The data summaries consist of
+intercept and slope values, which are encoded as the vertical positions
+and the angles of the lines, respectively
+(Figure~\ref{fig-stat-vis-decode}).
+
+The data symbol is very simple and decoding the data summaries is also
+simple because it just involves decoding angle and vertical position.
+For example, we can see that, in general, the winning margin is larger
+when the winning score is larger, but the trend lines suggest that the
+increase in the winning margin is slower for southern-hemisphere teams
+(they fight harder in defeat).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/review_files/figure-pdf/fig-lm-smooth-1.pdf}
+
+}
+
+\caption{\label{fig-lm-smooth}A scatter plot of the winning margin
+versus the winning score for matches between Tier One nations at Rugby
+World Cups. There is a light shading of the lower-right diagonal to
+indicate that the winning margin cannot exceed the winning score. In
+addition, points on the diagonal represent matches where the losing team
+failed to score any points. The straight lines represent a least-squares
+regression model fit.}
+
+\end{figure}%
+
+Figure~\ref{fig-loess-smooth} shows the same data as
+Figure~\ref{fig-lm-smooth}, but this time there are curved trend lines
+added rather than straight trend lines.\footnote{These are \emph{loess}
+  model fits (locally-estimated scatterplot smoothing).} The curves are
+mappings of data summaries again, but this time loess model fits. This
+means that the mapping involves a series of predicted values encoded as
+horizontal and vertical positions for the curve. In other words, the
+data summaries are encoded as visual features that produce a visual
+shape
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/review_files/figure-pdf/fig-loess-smooth-1.pdf}
+
+}
+
+\caption{\label{fig-loess-smooth}Scatter plot}
+
+\end{figure}%
+
+Nice example of a complex calculation, the results of which are what
+gets visualised. Also example of performing the calculation numerically
+rather than asking the viewer to perform it visually. This was in
+summaries.qmd, but it cannot be there because it requires scatter plots,
+which come in the next section. Add this after mention of visualising
+models?
+
+Add footnote to Hadley's more complex model visualisation paper
+https://vita.had.co.nz/papers/model-vis.pdf
+https://dl.acm.org/doi/10.1002/sam.11271
+
+model fits like lm straight line and ref Hadley's data-space vs
+model-space ``data models'' to mirror ``data statistics'' (revisit box
+plots as VERY simple models? also talk about failing assumptions of
+these models, like unimodal for boxplot)
+
+footnote cite to Tukey for visualising phenomena rather than raw data?
+``Data-Based Graphics: Visual Display in the Decades to Come'' Tukey
+(1990)
+
+\begin{itemize}
+\tightlist
+\item
+  ``Beware of Validation by Eye: Visual Validation of Linear Trends in
+  Scatterplots'' Braun et al (2024) People are biased towards orthogonal
+  distance to line rather than vertical distance.
+\end{itemize}
+
+loess curves Another example of data -\textgreater{} summary
+-\textgreater{} features -\textgreater{} shapes -\textgreater{}
+summaries
+
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-time-series-ensemble}
@@ -10265,6 +10769,11 @@ Bartolomeo, Sara Di, Raphael Buchmüller, Alexander Frings, Johannes
 Fuchs, and Daniel Keim. 2025. {``Reflections on the Uses and Available
 Choices of Categorical Colorschemes.''} INSTICC; SciTePress.
 \url{https://doi.org/10.5220/0013109400003912}.
+
+\bibitem[\citeproctext]{ref-Bartonicek_thesis2023}
+Bartonicek, Adam. 2023. {``The Fabric of Interactive Visualization: From
+the Algebra of Graphics, Statistics, and Interaction to Practical
+Implementation.''} Online at https://bartonicek.github.io/thesis/.
 
 \bibitem[\citeproctext]{ref-Begbie2022_irugby_results_1871_2022}
 Begbie, Lyle. 2022. {``International Rugby Union Results from
@@ -10327,6 +10836,13 @@ Typeface.''} In \emph{18th International Conference on Information
 Visualisation (IV)}, 41--50. Paris, France: IEEE.
 \url{https://doi.org/10.1109/IV.2014.17}.
 
+\bibitem[\citeproctext]{ref-validation-by-eye}
+Braun, Daniel, Remco Chang, Michael Gleicher, and Tatiana von
+Landesberger. 2025. {``Beware of Validation by Eye: Visual Validation of
+Linear Trends in Scatterplots.''} \emph{IEEE Transactions on
+Visualization and Computer Graphics} 31 (1): 787--97.
+\url{https://doi.org/10.1109/TVCG.2024.3456305}.
+
 \bibitem[\citeproctext]{ref-cairo2012functional}
 Cairo, Alberto. 2012. \emph{The Functional Art: An Introduction to
 Information Graphics and Visualization}. New Riders.
@@ -10377,6 +10893,11 @@ Configurality, Stimulus Homogeneity, and Object Integration.''}
 \emph{Perception \& Psychophysics} 47 (2): 157--68.
 \url{https://doi.org/10.3758/BF03205980}.
 
+\bibitem[\citeproctext]{ref-deCastro2025}
+Castro, Francisco de. 2025. {``FmrBT: A Comprehensive Data Set of Field
+Metabolic Rates, Body Mass and Ambient Temperature.''} \emph{Scientific
+Data} 12 (1): 1589. \url{https://doi.org/10.1038/s41597-025-05868-y}.
+
 \bibitem[\citeproctext]{ref-chen1982topological}
 Chen, Lin. 1982. {``Topological Structure in Visual Perception.''}
 \emph{Science} 218 (4573): 699--700.
@@ -10400,6 +10921,21 @@ Monterey, CA: Wadsworth Advanced Books; Software.
 \bibitem[\citeproctext]{ref-cleveland1993visualizing}
 ---------. 1993. \emph{Visualizing Data}. Summit, NJ: Hobart Press.
 
+\bibitem[\citeproctext]{ref-cleveland1994elements}
+Cleveland, William S. 1994. \emph{The Elements of Graphing Data}. 2nd
+ed. Summit, NJ: Hobart Press.
+
+\bibitem[\citeproctext]{ref-Cleveland-banking}
+Cleveland, William S., Marylyn E. McGill, and Robert McGill. 1988.
+{``The Shape Parameter of a Two-Variable Graph.''} \emph{Journal of the
+American Statistical Association} 83 (402): 289--300.
+\url{https://doi.org/10.1080/01621459.1988.10478598}.
+
+\bibitem[\citeproctext]{ref-cleveland-science}
+Cleveland, William S., and Robert McGill. 1985. {``Graphical Perception
+and Graphical Methods for Analyzing Scientific Data.''} \emph{Science}
+229 (4716): 828--33. \url{https://doi.org/10.1126/science.229.4716.828}.
+
 \bibitem[\citeproctext]{ref-cleveland1984graphical}
 Cleveland, William S, and Robert McGill. 1984. {``Graphical Perception:
 Theory, Experimentation, and Application to the Development of Graphical
@@ -10417,6 +10953,13 @@ Gleicher. 2012. {``Comparing Averages in Time Series Data.''} In
 \emph{Proceedings of the SIGCHI Conference on Human Factors in Computing
 Systems}, 1095--1104. CHI '12. New York, NY, USA: Association for
 Computing Machinery. \url{https://doi.org/10.1145/2207676.2208556}.
+
+\bibitem[\citeproctext]{ref-regression-by-eye}
+Correll, Michael, and Jeffrey Heer. 2017. {``Regression by Eye:
+Estimating Trends in Bivariate Visualizations.''} In \emph{Proceedings
+of the 2017 CHI Conference on Human Factors in Computing Systems},
+1387--96. CHI '17. New York, NY, USA: Association for Computing
+Machinery. \url{https://doi.org/10.1145/3025453.3025922}.
 
 \bibitem[\citeproctext]{ref-Cragin2015-CRAEFA}
 Cragin, Anna I., and James R. Pomerantz. 2015. {``Emergent Features and
@@ -10468,6 +11011,11 @@ History of Data Visualization.''} \url{https://dev.dataxdesign.io/}.
 Few, Stephen. 2004. \emph{Show Me the Numbers: Designing Tables and
 Graphs to Enlighten}. 1st ed. Berkeley, CA: Analytics Press.
 
+\bibitem[\citeproctext]{ref-Few2006}
+---------. 2006. {``Visual Pattern Recognition: Meaningful Patterns in
+Quantitative Business Information.''} Seattle,\,WA: Perceptual\,Edge.
+\url{/url\%7Bhttps://www.perceptualedge.com/articles/Whitepapers/Visual_Pattern_Rec.pdf\%7D}.
+
 \bibitem[\citeproctext]{ref-franconeri2021}
 Franconeri, Steven L., Lace M. Padilla, Priti Shah, Jeffrey M. Zacks,
 and Jessica Hullman. 2021a. {``The Science of Visual Data Communication:
@@ -10482,6 +11030,12 @@ Works.''} \emph{Psychological Science in the Public Interest} 22 (3):
 \bibitem[\citeproctext]{ref-garner1974processing}
 Garner, Richard. 1974. \emph{The Processing of Information and
 Structure}. Hillsdale, NJ: Lawrence Erlbaum Associates.
+
+\bibitem[\citeproctext]{ref-gleicher-2011}
+Gleicher, Michael, Danielle Albers, Rick Walker, Ilir Jusufi, Charles D.
+Hansen, and Jonathan C. Roberts. 2011. {``Visual Comparison for
+Information Visualization.''} \emph{Information Visualization} 10 (4):
+289--309. \url{https://doi.org/10.1177/1473871611416549}.
 
 \bibitem[\citeproctext]{ref-visual-average}
 Gleicher, Michael, Michael Correll, Christine Nothelfer, and Steven
@@ -10573,6 +11127,11 @@ Pattern Analysis and Machine Intelligence} 20 (11): 1254--59.
 \bibitem[\citeproctext]{ref-karstenChartsAndGraphs}
 Karsten, Karl G. 1925. \emph{Charts and Graphs}. Prentice-Hall.
 
+\bibitem[\citeproctext]{ref-kleiber}
+Kleiber, Max. 1947. {``Body Size and Metabolic Rate.''}
+\emph{Physiological Reviews} 27 (4): 511--41.
+\url{https://doi.org/10.1152/physrev.1947.27.4.511}.
+
 \bibitem[\citeproctext]{ref-Knudsen2020EvolutionOfNeuralProcessing}
 Knudsen, Eric I. 2020. {``Evolution of Neural Processing for Visual
 Perception in Vertebrates.''} \emph{Journal of Comparative Neurology}
@@ -10630,6 +11189,11 @@ Marois, René, and Jason Ivanoff. 2005. {``Capacity Limits of Information
 Processing in the Brain.''} \emph{Trends in Cognitive Sciences} 9 (6):
 296--305.
 https://doi.org/\url{https://doi.org/10.1016/j.tics.2005.04.010}.
+
+\bibitem[\citeproctext]{ref-marr1982vision}
+Marr, David. 1982. \emph{Vision: A Computational Investigation into the
+Human Representation and Processing of Visual Information}. San
+Francisco: W.H. Freeman; Company.
 
 \bibitem[\citeproctext]{ref-MatejkaFitzmaurice2017}
 Matejka, Justin, and George Fitzmaurice. 2017. {``Same Stats, Different
@@ -10711,10 +11275,22 @@ Visualization.''}
 Palmer, Stephen E. 1999. \emph{Vision Science: Photons to
 Phenomenology}. Cambridge, MA: MIT Press.
 
+\bibitem[\citeproctext]{ref-Peebles2008}
+Peebles, David. 2008. {``The Effect of Emergent Features on Judgments of
+Quantity in Configural and Separable Displays.''} \emph{Journal of
+Experimental Psychology: Applied} 14 (2): 85--100.
+\url{https://doi.org/10.1037/1076-898X.14.2.85}.
+
 \bibitem[\citeproctext]{ref-pointer-attridge-1998}
 Pointer, M. R., and G. G. Attridge. n.d. {``The Number of Discernible
 Colours.''} \emph{Color Research \& Application} 23 (1): 52--54.
 https://doi.org/\url{https://doi.org/10.1002/(SICI)1520-6378(199802)23:1\%3C52::AID-COL8\%3E3.0.CO;2-2}.
+
+\bibitem[\citeproctext]{ref-proma2025visualstenographyfeaturerecreation}
+Proma, Rifat Ara, Michael Correll, Ghulam Jilani Quadri, and Paul Rosen.
+2025. {``Visual Stenography: Feature Recreation and Preservation in
+Sketches of Noisy Line Charts.''}
+\url{https://arxiv.org/abs/2510.11927}.
 
 \bibitem[\citeproctext]{ref-Rlang}
 R Core Team. 2025. \emph{R: A Language and Environment for Statistical
@@ -10783,14 +11359,6 @@ Review} 14 (1): 47--69. \url{https://doi.org/10.1023/A:1013180410169}.
 Implications for Instruction.''} \emph{Educational Psychology Review} 14
 (1): 47--69. \url{https://doi.org/10.1023/A:1013180410169}.
 
-\bibitem[\citeproctext]{ref-Sidiropoulos03072018}
-Sidiropoulos, Nikos, Sina Hadi Sohi, Thomas Lin Pedersen, Bo Torben
-Porse, Ole Winther, Nicolas Rapin, and Frederik Otzen Bagger and. 2018.
-{``SinaPlot: An Enhanced Chart for Simple and Truthful Representation of
-Single Observations over Multiple Classes.''} \emph{Journal of
-Computational and Graphical Statistics} 27 (3): 673--76.
-\url{https://doi.org/10.1080/10618600.2017.1366914}.
-
 \bibitem[\citeproctext]{ref-Simkin01061987}
 Simkin, David, and Reid Hastie. 1987. {``An Information-Processing
 Analysis of Graph Perception.''} \emph{Journal of the American
@@ -10816,6 +11384,11 @@ Plot.''} In \emph{Data Visualization in Corpus Linguistics: Critical
 Reflections and Future Directions}, edited by Lukas Sönning and Ole
 Schützler. Studies in Variation, Contacts and Change in English 22.
 Helsinki: VARIENG. \url{https://urn.fi/URN:NBN:fi:varieng:series-22-2}.
+
+\bibitem[\citeproctext]{ref-stevens1978computation}
+Stevens, K. A. 1978. {``Computation of Locally Parallel Structure.''}
+\emph{Biological Cybernetics} 29 (1): 19--28.
+\url{https://doi.org/10.1007/BF00365232}.
 
 \bibitem[\citeproctext]{ref-stevens1957psychophysics}
 Stevens, Stanley Smith. 1957. {``On the Psychophysical Law.''}
@@ -10993,6 +11566,11 @@ Attention in Visual Search.''} \emph{Nature Human Behaviour} 1 (3):
 \bibitem[\citeproctext]{ref-wu2024designspecifictransformationsvisualization}
 Wu, Eugene, and Remco Chang. 2024. {``Design-Specific Transformations in
 Visualization.''} \url{https://arxiv.org/abs/2407.06404}.
+
+\bibitem[\citeproctext]{ref-Zacks1999}
+Zacks, Jeff, and Barbara Tversky. 1999. {``Bars and Lines: A Study of
+Graphic Communication.''} \emph{Memory \& Cognition} 27 (6): 1073--79.
+\url{https://doi.org/10.3758/BF03201236}.
 
 \bibitem[\citeproctext]{ref-RJ-2023-071}
 Zeileis, Achim, and Paul Murrell. 2023. {``Coloring in r's Blind

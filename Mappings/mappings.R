@@ -50,7 +50,7 @@ dataframe <- function(nr=4, nc=3,
                          grid.text(colnames[j], 
                                    y=unit(1, "npc") + unit(.5, "lines"))
                      }
-                     grid.rect(gp=gpar(col="black", fill=cols[2]))
+                     grid.rect(gp=gpar(col="black", fill=colsDarker[2]))
                      popViewport()
                 }                
             }

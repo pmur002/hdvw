@@ -220,8 +220,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#examples" id="toc-examples" class="nav-link active" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#case-study-lines-of-best-fit" id="toc-case-study-lines-of-best-fit" class="nav-link" data-scroll-target="#case-study-lines-of-best-fit">Case study: Lines of best fit</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -274,12 +281,6 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Present process by which a data vis can be broken down. What data symbols are being used? (simple or complex) What mappings are being used? What do we want to decode? (data or summaries) If mapping back to raw data, are the mappings accurate? What can be mapped back to? Are mappings congruent with data?</p>
 <p>…</p>
-<ul>
-<li><p>Use heatmap as case study?</p></li>
-<li><p>do the side-by-side pie chart idea as an example of reasoning your way to a new visualisation.</p></li>
-<li><p>Move the discussion/revisit of tables from text section to here ?</p></li>
-<li><p>Another possible application of data vis knowledge: Analyse one of the weird boxplot variations that look a bit like a ziggurat?</p></li>
-</ul>
 <p>List of questions to evaluate a data vis (maybe nest these a bit):</p>
 <ul>
 <li><p>What do you want the viewer to be able to decode?</p></li>
@@ -305,8 +306,76 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Do multiple data values map to a single data symbol If not, data summaries may be difficult to decode</p></li>
 </ul>
 <p>And so on …</p>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<ul>
+<li><p>Use heatmap as case study?</p></li>
+<li><p>do the side-by-side pie chart idea as an example of reasoning your way to a new visualisation.</p></li>
+<li><p>Move the discussion/revisit of tables from text section to here ?</p></li>
+<li><p>Another possible application of data vis knowledge: Analyse one of the weird boxplot variations that look a bit like a ziggurat?</p>
+<p>This is letter-value plot:</p>
+<ul>
+<li><p>“Letter-Value Plots: Boxplots for Large Data” Hofmann et al (2015)</p></li>
+<li><p>Nice explanation of calculations …</p>
+<p>24 Beyond the Boxplot: Tukey’s Letter-Value Summaries – Exploratory Data Analysis in R https://share.google/M2qXCsIxsSsqM7jFQ</p></li>
+<li><p>Labelling is an example of a text encoding that has no learned decoding For most people So the text is just a symbol like a pch You get difference but that is all</p></li>
+<li><p>{lvplot}</p>
+<p>This line suggests that width is calculated to be proportional Or at least can be …</p>
+<p>https://github.com/hadley/lvplot/blob/51ad401be5e017d37883ec5d149bc1818246b6f5/R/draw.r#L43</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="case-study-lines-of-best-fit" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-lines-of-best-fit">Case study: Lines of best fit</h2>
+<p><a href="#fig-lm-smooth" class="quarto-xref">Figure&nbsp;<span>1</span></a> shows a scatter plot of the winning margin versus the winning score for Tier One nations at Rugby World Cup matches. The hemisphere of the losing team is encoded as the colour of the data points and a trend line has been added for each hemisphere.</p>
+<p>The trend lines are mappings of data summaries, least-squares regressions, to line data symbols. The data summaries consist of intercept and slope values, which are encoded as the vertical positions and the angles of the lines, respectively (<a href="summaries.html#fig-stat-vis-decode" class="quarto-xref">Figure&nbsp;<span>8.2</span></a>).</p>
+<p>The data symbol is very simple and decoding the data summaries is also simple because it just involves decoding angle and vertical position. For example, we can see that, in general, the winning margin is larger when the winning score is larger, but the trend lines suggest that the increase in the winning margin is slower for southern-hemisphere teams (they fight harder in defeat).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-lm-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lm-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="review_files/figure-html/fig-lm-smooth-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lm-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A scatter plot of the winning margin versus the winning score for matches between Tier One nations at Rugby World Cups. There is a light shading of the lower-right diagonal to indicate that the winning margin cannot exceed the winning score. In addition, points on the diagonal represent matches where the losing team failed to score any points. The straight lines represent a least-squares regression model fit.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-loess-smooth" class="quarto-xref">Figure&nbsp;<span>2</span></a> shows the same data as <a href="#fig-lm-smooth" class="quarto-xref">Figure&nbsp;<span>1</span></a>, but this time there are curved trend lines added rather than straight trend lines.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The curves are mappings of data summaries again, but this time loess model fits. This means that the mapping involves a series of predicted values encoded as horizontal and vertical positions for the curve. In other words, the data summaries are encoded as visual features that produce a visual shape</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-loess-smooth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loess-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="review_files/figure-html/fig-loess-smooth-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loess-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Scatter plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Nice example of a complex calculation, the results of which are what gets visualised. Also example of performing the calculation numerically rather than asking the viewer to perform it visually. This was in summaries.qmd, but it cannot be there because it requires scatter plots, which come in the next section. Add this after mention of visualising models?</p>
+<p>Add footnote to Hadley’s more complex model visualisation paper https://vita.had.co.nz/papers/model-vis.pdf https://dl.acm.org/doi/10.1002/sam.11271</p>
+<p>model fits like lm straight line and ref Hadley’s data-space vs model-space “data models” to mirror “data statistics” (revisit box plots as VERY simple models? also talk about failing assumptions of these models, like unimodal for boxplot)</p>
+<p>footnote cite to Tukey for visualising phenomena rather than raw data? “Data-Based Graphics: Visual Display in the Decades to Come” Tukey (1990)</p>
+<ul>
+<li>“Beware of Validation by Eye: Visual Validation of Linear Trends in Scatterplots” Braun et al (2024) People are biased towards orthogonal distance to line rather than vertical distance.</li>
+</ul>
+<p>loess curves Another example of data -&gt; summary -&gt; features -&gt; shapes -&gt; summaries</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>These are <em>loess</em> model fits (locally-estimated scatterplot smoothing).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

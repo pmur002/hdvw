@@ -7,24 +7,31 @@ source("common.R")
 
 # Visual Shapes {#sec-visual-shapes}
 
-**TODO**
-refer back to @sec-pos-scarce and mention that shapes are one solution,
-with all of the drawbacks of not being able to decode individual
-data values.
-Footnote surjective/injective?
-
 All of the data visualisations that we have considered so far
 have mapped a **single data value** from one or more variables
 to a **single data symbol** (@fig-multivariate-symbol-a).
-For example, a bar plot like @fig-bar maps one category and one count to one
-bar.  A scatter plot like @fig-scatter maps one data value from a
-quantitative variable and one data value from another quantitative variable
-to one data point.
+For example, a bar plot like @fig-bar maps the number of offenders
+for one ethnic group to one
+bar.  A scatter plot like @fig-scatter maps the number of clean breaks
+and the number of tries for one team to one data point.
 
 In this chapter, we consider data visualisations that map **multiple
 data values** from one or more variables to a **single data symbol**
 (@fig-multivariate-symbol-b).
-In this chapter, we begin to consider more complex data symbols.
+In this chapter, we begin to consider more complex data symbols
+that produce **visual shapes**.[^point-shape]
+
+[^point-shape]:
+    In this chapter, we focus on data symbols that represent multiple
+    sets of data values, like lines.
+    It could be argued that there are data symbols that are visual shapes
+    that arise from mapping a single, qualitative data value 
+    to a data symbol, for example,
+    different data points---circles versus triangles versus squares---in 
+    a scatter plot.
+    However, in this book, that case is referred to as a mapping
+    from qualitative data value to the *pattern*---a basic visual
+    feature---of a data symbol (@sec-visual-features).
 
 ::: {#fig-multivariate-symbol}
 
@@ -44,14 +51,14 @@ In this chapter, we begin to consider more complex data symbols.
 :::
 
 \(a) A simple data symbol, like a bar in a bar plot or a data point in a
-scatter plot involves mapping **one** data value from each of two variables 
-to two visual features of 
+scatter plot involves mapping **one** row of data values
+to the visual features of 
 **one** data symbol;  a single pair of data values
 produces a single data symbol (this is a reproduction of the diagram in 
 @fig-two-visual-features).
 \(b) A more complex data symbol is produced if we map
-**multiple** data values from each of two variables
-to two visual features of a **single** data symbol.
+**multiple** rows of data values to the 
+visual features of **one** data symbol.
 Multiple data values from `x` and `y` are mapped to the visual
 features, `a` and `b`, of a single data symbol.
 Multiple pairs of values produce a single data symbol.
@@ -61,7 +68,7 @@ Multiple pairs of values produce a single data symbol.
 
 @fig-line shows a line plot of the number of offenders per year 
 in different ethnic 
-groups from 2011 to 2021 (see @tbl-crime-group-year).
+groups from 2011 to 2021 (@tbl-crime-group-year).
 This data visualisation is very effective for perceiving changes
 over time in the number of offenders within each group as well as
 comparing the changes over time between groups.
@@ -73,6 +80,7 @@ comparing the changes over time between groups.
 gg <- ggplot(crimeGroup) +
     geom_line(aes(year, count, colour=group)) +
     scale_x_continuous(name=NULL, breaks=seq(2012, 2020, 2)) +    
+    scale_y_continuous(expand=expansion(c(0, .05))) +
     scale_colour_npg(name="ethnic group") +
     theme(aspect.ratio=1)
 pushViewport(viewport(width=.8, height=.8))
@@ -93,7 +101,7 @@ Each coloured line in @fig-line represents 11 pairs of year and count values.
 
 This contrasts with visualisations like bar plots that use simpler data symbols.
 For example, the bar plot of the same data in @fig-side-bar-year has
-44 bars.
+44 data symbols (44 bars).
 
 @fig-line is effective at conveying changes over time because the
 coloured lines create **visual shapes** (@fig-data-vis-shape)
@@ -103,11 +111,8 @@ For example, we can perceive slopes and curves and peaks and valleys
 in each of the coloured lines.[^Visual_Pattern_Rec]
 
 [^Visual_Pattern_Rec]:
-    "VISUAL PATTERN RECOGNITION"
-    Few (2006)
-    Makes this same point
-    [p 10]
-    Demonstration of difference between density plot (mostly see a shape) and
+    @Few2006 [p. 10] discusses this difference in a comparison between 
+    a density plot (mostly see a shape) and a
     histogram (mostly see bar heights).
 
 ::: {#fig-data-vis-shape}
@@ -125,27 +130,47 @@ we create a smaller number of more complex data symbols, **visual shapes**,
 that contain a larger amount of information.
 :::
 
+By comparison, in @fig-no-line, 
+which maps each data value to its own data symbol,
+it is much harder to decode the slopes, curves, peaks, and valleys.
+Despite the colours of the data symbols, it is even harder
+to group the different sets of data symbols together;
+the connecting lines between the data values in @fig-line are a very strong
+encoding that the data values belong to the same ethnic group 
+(@sec-visual-model-groups).
+
+```{r}
+#| echo: false
+#| label: fig-no-line
+#| fig-cap: A scatter plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
+gg <- ggplot(crimeGroup) +
+    geom_point(aes(year, count, colour=group)) +
+    scale_x_continuous(name=NULL, breaks=seq(2012, 2020, 2)) +    
+    scale_colour_npg(name="ethnic group") +
+    theme(aspect.ratio=1)
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
 In terms of the simple visual processing model from @sec-visual-processing,
-these more complicated shapes can convey more sophisticated information,
-at the expense of more cognitive effort, and with a limit on how many
+these more complicated shapes can convey higher-level information,
+at the expense of a little more visual processing, and with a limit on how many
 shapes we can process simultaneously
-(see @fig-visual-model).
-In other words, the more complex data symbols allow us to decode
+(@fig-visual-model).
+In terms of [Chapter 8](summaries.html), 
+the more complex data symbols create visual shapes that allow us to decode
 **data summaries** (@fig-data-vis-shape-decode).
-For example, in @fig-line we are able to perceive overall trends in the number
+For example, in @fig-line we are able to decode
+data summaries such as the overall trends in the number
 of offenders, periods of more rapid change versus periods of slower
 change, and local maxima and minima.[^lines-as-shapes]
 
 [^lines-as-shapes]:
-    "Understanding Charts and Graphs"
-    Kosslyn (1989)
-    [somewhere after p 205]
-    Lines are objects
-    "For example, if one wants a reader to see an interaction, a line graph is
-     better than a bar graph: not only is a line a single perceptual unit, and
-     hence there will be less to hold in short-term memory, but we are good at
-     detecting slope differences-which convey the relevant information (see
-     Pinker, 1988)."
+    "not only is a line a single perceptual unit, and
+    hence there will be less to hold in short-term memory, but we are good at
+    detecting slope differences---which convey the relevant information"
+    [@kosslyn1989understanding, p. 211] 
 
 ::: {#fig-data-vis-shape-decode}
 ::: {.content-visible when-format=pdf layout-ncol=2}
@@ -158,10 +183,10 @@ change, and local maxima and minima.[^lines-as-shapes]
 
 If we map data values to a **visual shape**
 that contains a large amount of information,
-then we may be able to decode more sophisticated **data summaries**.
+then we may be able to decode higher-level **data summaries**.
 :::
 
-This ability to perceive data summaries, such as peaks and slopes,
+This ability to decode data summaries, such as peaks and slopes,
 when we use lines as data symbols is even more apparent if we
 compare @fig-line with @fig-side-bar-year.  When we have bars as
 data symbols, these data summaries are much less apparent.
@@ -172,26 +197,31 @@ trends in the data;  we naturally associate slopes with increases
 and decreases in data values.[^line-trends]
 
 [^line-trends]:
-  According to Zacks and Tversky 1999
-  people use "trend words" (increasing/decreasing) versus "discrete words"
-  (higher/lower than) AND are faster to judge absolute values from bars
-  but angle from line graphs.
+    According to @Zacks1999
+    people use *trend words* (increasing/decreasing) versus *discrete words*
+    (higher/lower than) *and* are faster to judge absolute values from bars
+    but angle from line graphs.
 
 > One reason why line plots are effective is because they encode multiple
   data values into a complex data symbol that creates a visual shape,
   from which we are able to decode data summaries.
 
 On the other hand, the more complex data symbols in a line plot,
-that contain multiple data values, are less effective at conveying
+where each data symbol
+contains multiple data values, are less effective at encoding
 the *individual* raw data values. 
 The coloured lines in @fig-line are not simple shapes
-from which it is easy to perceive basic **visual features**.
+from which it is easy to decode basic **visual features**.
 This means that, although we may be able to decode data summaries,
-it is not easy to decode the raw data values
+it is not as easy to decode the raw data values
 (@fig-data-vis-shape-decode).
 For example, compare the ease with which we can
 determine the number of European/Other
 offenders in 2013 from @fig-line versus @fig-side-bar-year.
+@fig-side-bar-year has simple data symbols that encode a single
+data value as a basic visual feature of a single data symbol---the
+length of a bar---so we can easily decode the individual raw data values
+from the bars.
 
 This deficiency is significant because the main mappings in a line plot
 are from **quantitative** data values to (horizontal and vertical) **position**.
@@ -201,68 +231,83 @@ However, in a line plot, we are not mapping a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
 is being mapped, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
-individual data values lose their individual identity.[^surjective]
+individual data values lose their individual identity.[^non-injective]
 
-**TODO** Refer back to @sec-bar where we had bijective (but only use
-that terminology in footnote), so we could decode individual data values.
+[^non-injective]:
+    @Ziemkiewicz2009 refer to this as a *non-injective* encoding
+    and point out that it makes it impossible for there to be a
+    decoding, because multiple data values map to the same
+    data symbol.  This is in contrast to a *bijective* mapping,
+    which is one-to-one between data values and data symbols
+    (@sec-bar).
 
-[^surjective]:
-    citation for surjective, injective, bijective 
+    This problem also relates to the issue of drawing data symbols 
+    on top of each other (@sec-pos-scarce).
+    If two data symbols completely overlap, for example if two
+    data points on a scatterplot overlap, then it is impossible to
+    decode both individual data values.
 
-    Refer back to @sec-pos-scarce
-
-    Adam has a nice example in his thesis Figure 4.5, a simpler 
-    version of which is a line or bar plot that contains a "total"
-    line or bar - the visual objects do not map neatly, and disjointly
-    to subsets of the data - there is overlap.  This makes mapping 
-    back to the data harder or at least more ambiguous ?
+    Figure 4.5 of 
+    @Bartonicek_thesis2023 has an interesting, if pathological, demonstration
+    of this problem using a simple bar plot.
+    The bar plot has a single bar that represents the sum of counts for two
+    categories.
+    In this demonstration 
+    there is also a bar just for one of the counts, so that, with
+    unnecessary mental effort, it is possible to recover the "hidden"
+    data value, but we can imagine 
+    an even more pathological demonstration which would 
+    map two data values to a single bar, without mapping one of the data
+    values to its own bar.  In that case it would be
+    completely impossible to decode the two data values from the 
+    single bar.
 
 > One reason why a line plot is *less* effective for decoding
   raw data values is because each raw data value is not mapped to its
   own data symbol.
 
-The creation of complex data symbols from multiple data values
+The creation of visual shapes from multiple data values
 bears some similarity to the creation of emergent features by
 combining visual features (@sec-integral).  In both cases,
 we have *explicit* encodings from data values to basic visual features,
 but we also produce an *implicit* additional visual effect.
-The difference here is that with complex data symbols, we are collapsing
+The difference here is that, with visual shapes, we are collapsing
 multiple data values into a data symbol, so we run a higher risk
 of losing the ability to perceive individual data values.[^lines-configural]
 
 [^lines-configural]:
-    Also link to "configural displays" (David Peebles (2008)) and "display
-    proximity" (Barnett & Wickens, 1988; Carswell & Wickens, 1987; Wickens &
-    Andre, 1990) "According to the proximity compatibility principle (Wickens &
-    Carswell, 1995), representations with high display proximity facilitate
-    high mental proximity tasks requiring the integration of information from
-    multiple sources. The relationship between display and mental proximity
-    has been revealed in several studies (e.g., Barnett & Wickens, 1988; Bennett
-    & Flach, 1992; Bennett, Toms, & Woods, 1993; Carswell & Wickens, 1987;
-    Wickens & Andre, 1990; Wickens & Carswell, 1995) and it is argued that the
-    advantage comes when emergent features (Pomerantz & Pristach, 1989) of the
-    representation indicate additional information about the domain."  He also
-    mentions line plots as being in between separable bar plots and configural
-    radar plots.
+    @Peebles2008 describes a line plot as *configural*---rather than either
+    *separable* (@sec-separable) or *integral* (@sec-integral)---which 
+    means that it is possible to decode individual data values and
+    data summaries, but that configural displays
+    lead to poorer decoding of individual data values.
+    This also 
+    links to the *display proximity principal* [@proximity-compatibility].
 
-There is also a similarity between complex data symbols and visual summaries 
+There is also a similarity between visual shapes and visual summaries 
 (@sec-visual-summaries).  In both cases, we gain the ability to decode
 data summaries from collections of data values.
-Again, the difference is that with visual summaries, we are summarising
+The difference is that, with visual summaries, we are summarising
 many simple data symbols that each represent individual data values, 
-whereas with a complex data symbol we decode the
+whereas with a visual shape we decode the
 data summary from a single data symbol that obscures the individual data values.
+In the case of a visual summary, the individual data values can still be 
+decoded, but with a visual shape that is more difficult.
 
 ## Case study:  Scatter plots with lines
 
 @fig-line-points shows a data visualisation of the number of offenders
 per year in different ethnic groups (@tbl-crime-group-year).
 This is very similar to @fig-line, but we have added a data point
-at every horizontal and vertical **position**.
+at every horizontal and vertical **position** as well as the lines
+between positions.
 
 Like @fig-line, we can decode overall trends from the line data symbols,
 but we can also decode individual data values more easily because
 now every individual data value is also mapped to its own data symbol.
+By employing both simple data symbols that encode individual data values
+and complex data symbols that encode multiple data values as visual
+shapes, we get the best of both worlds.
 
 ```{r}
 #| echo: false
@@ -286,7 +331,7 @@ popViewport()
 nations at the Rugby World Cups (@tbl-rwc-all).
 As with a histogram (@fig-hist), this data visualisation is effective
 for conveying the distribution of data values.
-For example, we can perceive that there is evidence of 
+For example, we can decode that there is evidence of 
 a single mode and right skew.
 
 ```{r}
@@ -304,18 +349,17 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-Also like a histogram, a density plot actually maps **data summaries**,
-density estimates
+Also like a histogram, a density plot maps **data summaries**,
 rather than raw data values,
-to visual features (see @tbl-density-stats).
+to visual features (@tbl-density-stats).
 In the case of a histogram, the data summary values are counts within bins
-(see @tbl-hist-stats) and each data summary produces a separate bar.
-However, a density plot encodes
-all of the data summary values to a single data symbol, a line, to create
+(@tbl-hist-stats) and each data summary produces a separate bar.
+In the case of a density plot, the data summary produces density estimates
+and these are mapped to a single data symbol, a line, to create
 a **visual shape**.
 The density estimates are mapped to the horizontal and vertical **positions**
 of a single line data symbol.
-The visual shape allows us to perceive summaries of the density estimates.
+The visual shape allows us to decode summaries of the density estimates.
 For example, whether there is a single maximum density and how the density
 changes to either side of that peak.
 
@@ -360,10 +404,37 @@ shape from which we can decode **summaries** of the data summaries.
 
 Another commonality between density plots and histograms is that we get to
 choose how the data summaries are calculated from the raw data values.
-In the case of a density plot, we must choose a "kernel" and a "bandwidth",
+In the case of a density plot, we must choose a *kernel* and a *bandwidth*,
 both of which affect the smoothness of the density estimates.
-This means that we may need to explore more than one kernel
-and bandwidth (see @sec-summary-caveats).
+In other words, the choice of kernel and bandwidth
+affects the shape of the line data symbol and that affects
+the data summaries that we will decode (peaks, slopes, etc).
+In a histogram, we may need to explore multiple choices of bin width
+and in a density plot we may need to explore more than one kernel
+and bandwidth (@sec-summary-caveats).
+
+For example, @fig-density-bandwidth shows a density plot of the same data 
+as @fig-density, but with a smaller bandwidth.  The resulting density
+curve is much less smooth and so different data summaries can be decoded
+from the visual shape.  This density curve looks a lot more like
+the histogram with a narrow bin width in @fig-hist-thin;  we can decode
+a possible second mode and we can even begin to 
+decode peaks at individual numbers of points scored.
+
+```{r}
+#| echo: false
+#| label: fig-density-bandwidth
+#| fig-cap: A density plot of the points scored per game by Tier One nations at Rugby World Cups.  This is a variation of @fig-density using a much narrower bandwidth, so the density curve is much less smooth.
+gg <- ggplot(rwcAll) +
+    geom_density(aes(scored), colour="black", linewidth=1, adjust=.25) +
+    scale_x_continuous(name="points scored") +
+    theme(axis.title.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank())
+pushViewport(viewport(height=.8, width=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
 
 A final point about density plots, especially in comparison to histograms
 is that it is more effective to present multiple density curves,
@@ -375,7 +446,7 @@ solved by adding semitransparency.
 By comparison, multiple density curves create very little
 overlap, and even though the orange curve passes "under" the blue curve,
 we effortlessly perceive the orange curve as a single, coherent shape
-(see @sec-visual-model-groups).
+(@sec-visual-model-groups).
 
 ```{r}
 #| echo: false
@@ -384,6 +455,7 @@ we effortlessly perceive the orange curve as a single, coherent shape
 gg <- ggplot(rwcAll) +
     geom_density(aes(scored, colour=hemisphere), linewidth=1) +
     scale_x_continuous(name="points scored") +
+    scale_colour_discrete(guide=guide_legend(reverse=TRUE)) +
     theme(axis.title.y=element_blank(),
           axis.text.y=element_blank(),
           axis.ticks.y=element_blank())
@@ -399,6 +471,8 @@ breaks <- seq(0, 105, by=5)
 gg <- ggplot(rwcAll) +
     geom_histogram(aes(scored, colour=hemisphere, fill=hemisphere), 
                    breaks=breaks, alpha=.2, position="identity") +
+    scale_colour_discrete(guide=guide_legend(reverse=TRUE)) +
+    scale_fill_discrete(guide=guide_legend(reverse=TRUE)) +
     scale_x_continuous(name="points scored") +
     scale_y_continuous(expand=expansion(c(0, .05)))
 pushViewport(viewport(height=.8, width=.8))
@@ -406,27 +480,245 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-## Aspect ratio
+## Aspect ratio {#sec-aspect-ratio}
 
-How aspect ratio affects ability to detect features in lines
+@fig-aspect shows a variation on @fig-line using a different 
+**aspect ratio**---the height of the plot divided by the width of the plot.
+@fig-line has an aspect ratio of 1 (the plot region is square), but 
+@fig-aspect has an aspect ratio of only 0.2 (the plot region
+is much shorter than it is wide).
 
-Also use of white space around points in scatter plot ?
+@fig-aspect shows that the aspect ratio of the plot has a large
+effect on the visual shapes of the data symbols, 
+which means that the aspect ratio has
+a large effect on the data summaries that we decode from the visual 
+shapes.  For example, in @fig-aspect, we can still see a general downward
+trend in three of the lines, with one line increasing.
+However, the peak or jump in values at 2020 is much less obvious.
+In other words, we decode different data summaries from @fig-aspect 
+compared to @fig-line purely because of the difference in aspect ratio.
 
-Cite Cleveland (1994) for white space margin affecting strength of relation?
+```{r}
+#| echo: false
+#| label: fig-aspect
+#| fig-height: 1.5
+#| fig-cap: A line plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
+gg <- ggplot(crimeGroup) +
+    geom_line(aes(year, count, colour=group)) +
+    scale_x_continuous(name=NULL, breaks=seq(2012, 2020, 2)) +    
+    scale_y_continuous(expand=expansion(c(.2, .2))) +
+    scale_colour_npg(name="ethnic group")
+pushViewport(viewport(width=.8, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+There is no single rule for what the correct aspect ratio should be,[^banking]
+so we may need to experiment with more than one aspect ratio 
+to check what visual shapes are produced and whether 
+it is possible to decode the features of interest.
+
+[^banking]:
+    The *median-absolute-slope criterion* suggests choosing 
+    an aspect ratio such that the median absolute slope of the line segments
+    between points is $45^{\circ}$
+    (also known as the *45 degree banking rule*)
+    [@Cleveland-banking].
+    This is shown to produce the most accurate decoding of slopes.    
+
+@fig-scatter-aspect demonstrates that a similar problem exists for
+decoding data summaries from scatter plots (@sec-integral).
+These plots encode the number of offloads (a fancy pass under
+pressure in rugby) as the horizontal position of data points and
+the number of tries (scoring actions) as the vertical position.
+The correlation between the two measures can be decoded from the
+emergent position in space of the data points.
+The data is exactly the same for all four plots.
+
+The decoding of trends in the points on a scatter plot has similarities
+to the decoding of trends from visual shapes in a line plot[^virtual-lines]
+and the shapes that we decode from a collection of data points are also
+affected by the aspect ratio of a plot.
+For example, the top-left plot in @fig-scatter-aspect suggests a stronger
+relationship between offloads and tries than the bottom-left plot
+simply because the trend appears flatter in the bottom-left plot
+and that is solely thanks to the lower aspect ratio of the bottom-left plot.
+
+[^virtual-lines]:
+    @Cleveland-banking draws on the idea of *virtual lines* between the
+    data points, from
+    @marr1982vision and @stevens1978computation,
+    to relate the decoding of trends from lines in a line plot with 
+    the decoding of trends from data points in a scatter plot.
+
+```{r}
+#| echo: false
+#| label: fig-scatter-aspect
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+gg1 <- ggplot(RWCperGame) +
+    geom_point(aes(offloads, tries))
+gg2 <- ggplot(RWCperGame) +
+    geom_point(aes(offloads, tries)) +
+    scale_x_continuous(expand=expansion(.4)) +
+    scale_y_continuous(expand=expansion(.4))
+grid.newpage()
+pushViewport(viewport(width=.8, layout=grid.layout(2, 2, heights=c(3, 1))))
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=1))
+print(gg1,
+      newpage=FALSE)
+popViewport()
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=1))
+print(gg2,
+      newpage=FALSE)
+popViewport()
+pushViewport(viewport(layout.pos.col=1, layout.pos.row=2))
+print(gg1, newpage=FALSE)
+popViewport()
+pushViewport(viewport(layout.pos.col=2, layout.pos.row=2))
+print(gg2,
+      newpage=FALSE)
+popViewport()
+```
+
+A related issue is the amount of empty space around the data points in
+a scatter plot.  IN @fig-scatter-aspect, 
+the relationship appears stronger in the top-right
+plot compared to the top-left plot simply because the data points
+are clustered more densely thanks to the different ranges on the plot 
+axes.[^white-space]
+
+[^white-space]: 
+    @cleveland1994elements states that "our estimation of
+    correlation is strongly affected by the area of the data rectangle relative
+    to the area of the scale-line rectangle" and provides
+    demonstrations (Figure 4.15 and 4.16).
 
 ## Decoding visual shapes
 
-Decoding to data summaries, so problem of many possible decodings again.
+Decoding from a visual shape results in a 
+data summary (@fig-data-vis-shape-decode),
+for example peaks and valleys, and,
+as we saw in @sec-summary-decode and @sec-decode-combine,
+less is known about how well we can perform this sort of decoding.
 
-Congruence comes into play - peaks and valleys etc.
+However, there is experimental support for the 
+intuitive sense that we can perform well at 
+decoding qualitative features from
+shapes, such as peaks and valleys, as well as decoding ordinal 
+comparisons, such as steeper and shallower.[^trends]
+However, as @sec-aspect-ratio demonstrated, decodings of slopes is
+are limited to physical slopes,
+which are dependent on the aspect ratio, rather than 
+decoding absolute rates of change in the data.[^slope-accuracy]
 
-Refer to the aspect ratio problem:  the shape you are decoding 
-is vulnerable to context!
+[^trends]:
+    @proma2025visualstenographyfeaturerecreation showed that
+    people are good at reproducing (therefore identifying) trends, 
+    peaks, and valleys, if less so at reproducing 
+    periodicity, noise/variability.
+        
+    @regression-by-eye showed that decoding of trends from line plots
+    (and scatter plots) is quite accurate, at least
+    relative to ordinary-least-squares models.
+
+[^slope-accuracy]:    
+    @Cleveland-banking points out that
+    the accuracy of decoding slopes is only relevant to comparing the
+    *relative steepness* of different regions of a line.  This is not
+    accuracy in terms of decoding the actual rate of change in the
+    data.  For that purpose, we should encode the actual rate of change
+    directly.
+
+**TODO**
+cite the paper (cook? hofmann?) that looked at identification of curves vs
+straight lines in log-log plots?  
+
+## Case study: Box plots
+
+@fig-box-shape shows box plots of the number of points scored by
+Tier One nations at Rugby World Cup matches.
+We have discussed box plots previously as examples of data visualisations
+that map data summaries to data symbols (@sec-box-plot).
+For example, the median points scored is encoded as the horizontal position of
+a thick vertical line for each team.
+The only raw data values that are directly mapped are the outliers,
+which are encoded as the horizontal position of data points for a few teams.
+A box plot is effective for decoding the median for each team
+because the median has been encoded as basic visual features of 
+simple data symbol.
+
+```{r}
+#| echo: false
+#| label: fig-box-shape
+#| fig-cap: Box plots of the number of points scored by Tier One nations at Rugby World Cups.
+rwcScored <- rwcAll
+rwcScored$team <- reorder(rwcScored$team, rwcScored$scored, median)
+ggplot(rwcScored) +
+    geom_boxplot(aes(scored, team))
+```
+
+Box plots are also examples of mapping more than one data value 
+(or data summary) to a single data symbol.
+For each team, we have a complex data symbol made up of a rectangle and
+horizontal and vertical lines, plus possibly some data points.
+This creates a visual shape that allows us to decode additional
+data summaries.  For example, some box plots, like the one for England, 
+are symmetric, with the median
+line at the center of the rectangle and with horizontal lines 
+of similar lengths to either side.
+Other box plots, like the one for Argentina, are asymmetric,
+with the median towards one end of the rectangle and a longer horizontal
+line to one side.
+In other words, we can decode information about the skewness of the data
+from the visual shape (@fig-data-vis-shape-decode).
 
 ## Dangers of visual shapes
 
-Need a caveat that more complex shapes does NOT necessarily mean 
-useful mappings back to data summaries - could just end up with a mess
+@fig-zacks shows two data visualisations of average heights for males and 
+females.  We have already discussed that it is easier to decode the
+individual average height values from the bar plot because each average 
+height is encoded as its own visual feature---the height of one bar.
+We have also discussed that it is easier to decode trends from
+a line plot (@sec-line-plots).
+
+However, in @fig-zacks, the temptation to decode a trend from 
+the line plot is in fact misleading. 
+A line implies continuity, in this case even a linear trend.
+However, the data values on the x-axis 
+are qualitative categories (biological sex), rather than a continuum.
+This means that decoding a trend from females to males
+does not actually make sense.[^zacks]
+
+[^zacks]:
+    The data visualisations are based on Figure 2 from @Zacks1999.
+    An example of one subject's decoding of the line plot was:
+    "The more male a person is, the taller he/she is"    
+
+```{r}
+#| echo: false
+#| label: fig-zacks
+#| layout-ncol: 2
+#| fig.width: 4
+#| fig-cap: Two data visualisations of average heights of females and males.
+#| fig-subcap:
+#|   - A bar plot supports decoding individual values.
+#|   - A line plot supports decoding trends.
+zacks <- data.frame(sex=c("Female", "Male"), height=c(45, 55))
+gg <- ggplot(zacks, aes(sex, height)) +
+    scale_y_continuous(name="Height (inches)", limits=c(0, 60),
+                       expand=expansion(c(0, .1))) +
+    scale_x_discrete(name=NULL)
+gg1 <- gg +
+    geom_col()
+gg2 <- gg +
+    geom_point() +
+    geom_line(group=1)
+gg1
+gg2
+```
+
+A visual shape can be decoded to a data summary, but that is only
+useful if the data summary is appropriate and not misleading 
 (@fig-data-vis-shape-lie).
 
 ::: {#fig-data-vis-shape-lie}
@@ -443,123 +735,290 @@ may not be effective if the complex shape decodes to unhelpful
 or misleading information.
 :::
 
-Lines imply continuity (at least) if not linear interpolation
-so do example where connecting with lines not such a great idea.
-Refer back to @sec-congruence (congruence).
+@fig-gap shows another example of an undesirable shape decoding.
+The two curves in @fig-gap are identical except that one has been
+shifted vertically.  In other words, the vertical distance between
+the two lines is constant.
+In a data visualisation, we are typically interested in that
+vertical distance:  what is the difference in *y* between
+the two lines?
 
-Example from "Bars and lines: A study of graphic communication"
-Zacks and Tversky (1999) (Fig 2) of inappropriate line plot:
-line connecting males and females
-=> some subjects made trend interpretation, the worst being
-"The more male a person is, the taller he/she is"
+However, the natural decoding of the distance between the lines
+focuses on the perpendicular distance, so the two lines appear
+to be converging.[^gap-decode]  In other words, we decode the shape of the gap
+between the lines to be a narrowing gap.
 
-## Case study: Violin plots
+[^gap-decode]:
+    This decoding of the difference between lines is described in
+    @cleveland-science.  The recommended solution is to encode the
+    difference between the lines, rather than requiring the viewer
+    to perform the subtraction visually. 
+    @gleicher-2011 call that solution *explicit encoding*.
 
-And other variations on boxplots
-
-First point out that a boxplot is really a visual shape:
-multiple data summaries generate a single "box" data symbol.
-Although it is still very easy to decode individual data summaries from
-the box shape.
-
-* Case study: SinaPlots
-
-A SinaPlot is a nice combination of decode for raw data and 
-visual shape for data summary.[^sina]
-@fig-sina is actually a combination of a SinaPlot and a violin plot.
-
-[^sina]:
-    @Sidiropoulos03072018
+    @validation-by-eye describe a similar issue with estimating 
+    the line of best fit from data points in a scatter plot.
+    Their results showed a bias towards orthogonal distance to the line 
+    of best fit rather than vertical distance.
 
 ```{r}
 #| echo: false
-#| label: fig-sina
-#| fig-cap: A SinaPlot of the points scored per game by Tier One nations at Rugby World Cups.
-gg <- ggplot(rwcAll, aes(scored, y="")) +
-    geom_violin() +
-    geom_sina() +
-    scale_x_continuous(name="points scored")
-pushViewport(viewport(height=.8, width=.8))
-print(gg, newpage=FALSE)
-popViewport()
+#| label: fig-gap
+#| fig-cap: The two lines in this plot are just the same curve shifted vertically---the vertical distance between the lines in constant.  However, we decode the visual shape between the lines as a decrease in the gap between the lines.
+df <- data.frame(x=1:100, y=(1:100)^3, y2=(1:100)^3+100000)
+ggplot(df) +
+    geom_line(aes(x, y)) +
+    geom_line(aes(x, y2)) +
+    theme(axis.title=element_blank(),
+          axis.text=element_blank(),
+          axis.ticks=element_blank(),
+          aspect.ratio=1)
 ```
-
-## Case study: loess curves
-
-Another example of data -> summary -> features -> shapes -> summaries
-
-## Case study: Line of best fit
-
-Nice example of a complex calculation, the results of which are what gets
-visualised.  Also example of performing the calculation numerically rather
-than asking the viewer to perform it visually.  This was in summaries.qmd,
-but it cannot be there because it requires scatter plots, which come in
-the next section.
-Add this after mention of visualising models?
-
-Add footnote to Hadley's more complex model visualisation paper
-https://vita.had.co.nz/papers/model-vis.pdf
-https://dl.acm.org/doi/10.1002/sam.11271
-
-model fits like lm straight line and ref Hadley's data-space vs model-space
-"data models" to mirror "data statistics"
-(revisit box plots as VERY simple models? also talk about failing
-assumptions of these models, like unimodal for boxplot)
-
-footnote cite to Tukey for visualising phenomena rather than raw data?
-"Data-Based Graphics: Visual Display in the Decades to Come"
-Tukey (1990)
 
 ## Non-linear mappings {#sec-shape-non-linear}
 
-Refer back to @sec-non-linear-pos
+@fig-arrivals shows time series plots of the number of 
+international arrivals to New Zealand over the last century.[^peter-ellis]
+@fig-arrivals-1 employs a linear scale on the y-axis and, because
+the amount of international travel has changed so dramatically over time,
+it is impossible to decode any detail from the first half of the 
+twentieth century.
 
-NOTE that there ARE some situations where non-linear position.
-scales are ok, e.g., log-log.
-Length is still dodgy. 
-You DO still get ordinal info, even if cannot decode sizes of differences.
-Non-linearity might actually be ok on non-position scales, e.g., 
-a colour scale for numeric data, where differences are smaller at
-one end;  all you are after, if you are using colour, is ordinal,
-so changing colours more swiftly at one end of the scale is ok (?)
-At least some 'colorspace' functions allow non-linear palettes.
-Revisit in qualitative.Rmd to point out that non-linear ordinal scales
-are ok, e.g., jet colour scale
+[^peter-ellis]:
+    These plots are based on plots posted by Peter Ellis on a
+    [StackExchange thread](https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate).
+    The data are from [Stats NZ](https://infoshare.stats.govt.nz/)
+    and licensed by Stats NZ for reuse under the 
+    [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) licence.
 
-Nice example of log-log scales in The Signal and the Noise (Nate Silver)
-See 787resources/Examples/2025-08-signal-noise-log-log
+We saw in @sec-non-linear-pos that one approach in this sort of situation
+is to use a non-linear scale.
+@fig-arrivals-2 uses this approach by employing a 
+log (base 10) scale on the y-axis.
+The advantage of the non-linear scale is clear:  it is now possible to
+see details in the data for the first half of the twentieth century.
+For example, we can now see the effect of the Second World War (1939--1945),
+in addition to the effect of the COVID pandemic (2020--2021),
+and we can see that the seasonal patterns are similar
+over time.
 
-Log log scales a good example of asking what is it you want to see?
-You cannot extract raw data or a compare raw data points.
-But all you want is to see the data summary of correlation so no harm no foul.
+```{r}
+#| echo: false
+#| label: fig-arrivals
+#| layout-nrow: 2
+#| fig-height: 3
+#| fig-cap: Figures reproduced from @Zacks1999
+#| fig-subcap:
+#|   - linear y-axis scale
+#|   - log (base 10) y-axis scale
+arrivals <- read.csv("Data/ITM330701_20251022_043600_58.csv", skip=2,
+                     header=FALSE, col.names=c("month", "count"))
+arrivals$date <- as.Date(paste0(arrivals$month, "-01"),
+                         format="%YM%m-%d")
+ticks <- seq(0, 500000, 100000)
+ggplot(arrivals) +
+    geom_line(aes(date, count), linewidth=.5) +
+    scale_y_continuous(breaks=ticks, 
+                       labels=format(ticks, scientific=FALSE, big.mark=","),
+                       name=NULL,
+                       sec.axis=dup_axis(labels=format(ticks, scientific=FALSE,
+                                                       big.mark=",", 
+                                                       trim=TRUE)))
+ticks <- c(50, 100, 500, 1000, 5000, 10000, 
+           50000, 100000, 500000)
+ggplot(arrivals) +
+    geom_line(aes(date, count), linewidth=.5) +
+    scale_y_continuous(trans="log10",
+                       breaks=ticks,
+                       labels=format(ticks, scientific=FALSE, big.mark=","),
+                       name=NULL,
+                       sec.axis=dup_axis(labels=format(ticks, scientific=FALSE,
+                                                       big.mark=",", 
+                                                       trim=TRUE)))
+```
 
-Can get useful *shapes* out of non-linear scales
+An important point is that 
+*all* of these decodings are from the visual shapes in @fig-arrivals-2.
+We are able to decode an overall trend, local dips within the trend, and
+regular spikes within the overall trend.
 
-cite the paper (cook? hofmann?) that looked at identification of curves vs
-straight lines in log-log plots?  but only in visual-shapes chapter when call
-back to non-linear scales in position chapter
+However, as we pointed out in @sec-non-linear-pos, the decoding of 
+simple visual features is compromised by the use of a non-linear scale.
+For example, it is very difficult to decode the final value of the 
+time series in @fig-arrivals-2 because the same distance between
+the tick marks on the y-axis does not represent the same difference in
+data values (as emphasised by the choice of tick mark labels).
+As we can see from @fig-arrivals-1, the final data value in the time
+series is *not* half-way between 100,000 and 500,000.
 
-Nice kiwi-biased example on this thread
-https://stats.stackexchange.com/questions/27951/when-are-log-scales-appropriate
-But I think the point still holds that you LOSE the ability to judge size of differences - you can only decode things like order and groups (?)
+It is *possible* to decode quantitative values from @fig-arrivals-2.
+For example, the height of the seasonal changes remained fairly constant
+over time.
+However, that is an observation about the *logged* data, not the raw data 
+values.[^log-ratio]
+The danger of a log scale is that our natural decoding of position
+and length is now incorrect.
+For example, (in the absence of @fig-arrivals-1) we might be tempted to 
+incorrectly decode 
+from @fig-arrivals-2 that the absolute seasonal change in arrivals 
+has remained constant over time.
+In other words, the natural decoding of simple visual features can be
+misleading in the presence of a non-linear scale.
 
-The ratio plot might be more interpretable if the axis is labelled as "number of times larger" ?
+[^log-ratio]:
+    This observation does have a sensible interpretation: the consistent
+    difference in logged values sugests that the size of seasonal changes is
+    consistent *relative to* the absolute size of arrivals.  In other words the
+    seasonal change in arrivals *divided by* the absolute number of arrivals is
+    consistent over time.  However, that interpretation is not a simple,
+    sub-conscious decoding of visual features; it requires a more sophisticated
+    mental effort and a self-discipline to ignore the more naive
+    decoding.
+
 
 ## Case study:  log-log plots
 
-Involves non-linear scales, but the point is the shape that you (hope to) get.
+@fig-log-log-1 shows a scatter plot of metabolic rate versus body mass
+for a wide range of lifeforms.[^kleibers-data]
+Because of the very wide range of body mass values and metabolic rates,
+with the largest animals being many orders of magnitude larger than
+the smallest bacteria, almost all of the data is crushed into the
+bottom-left corner.
 
-Could also do q-q plots?
+[^kleibers-data]:
+    These data are from @deCastro2025.
+
+```{r}
+#| echo: false
+#| label: fig-log-log-1
+#| fig-cap: Body mass versus metabolic rate for a wide variety of lifeforms. 
+FieldMR <- read.csv("Data/FieldMR_SciDataPub.csv")
+FieldMR <- subset(FieldMR, !(Kingdom %in% c("", "Unknown")) & !is.na(FMR_kJ_d))
+kleiber <- read.table("Data/kleiber-mass-rate.txt", col.names=c("mass", "rate"))
+template <- ggplot(FieldMR) +
+    geom_point(aes(Mass_g, FMR_kJ_d, colour=Kingdom), alpha=.2) +
+    scale_colour_discrete(guide=guide_legend(ncol=1, 
+                                             override.aes=list(alpha=.8))) +
+    grid_panel(textGrob("metabolic rate\n(kJ/day)", 
+                        x=unit(-2, "mm"), 
+                        y=1, just=c("right", "top"),
+                        gp=gpar(fontfamily="mono", fontsize=10, lineheight=1)))+
+    grid_panel(textGrob("mass (g)", 
+                        x=1, just=c("left", "top"),
+                        y=unit(-2, "mm"),
+                        rot=-90,
+                        gp=gpar(fontfamily="mono", fontsize=10))) +
+    coord_cartesian(clip="off") +
+    theme(aspect.ratio=1,
+          text=element_text(family="mono"),
+          axis.title=element_blank(),
+          axis.text.x=element_text(angle=-90, hjust=0, vjust=.5, size=8),
+          legend.title=element_blank(),
+          legend.key.size=unit(4, "mm"),
+          legend.position="right",
+          legend.justification="top")
+template + 
+    scale_x_continuous(name="mass (g)") +
+    scale_y_continuous(name="metabolic rate", breaks=seq(0, 40000, 10000)) +
+    theme(plot.margin=margin(5, 0, 30, 0))
+```
+
+@fig-log-log-2 shows the same data, but this time with log (base 10) scales
+on both axes.  While there is still considerable overlap, thanks
+to the large number of observations, we can now see data for the
+other Kingdoms beyond Animalia.
+
+```{r}
+#| echo: false
+#| label: fig-log-log-2
+#| fig-cap: Body mass versus metabolic rate for a wide variety of lifeforms.  Log (base 10) scales.
+ticksy <- 10^(seq(-7, 1, 4))
+formatTicks <- function(ticks) {
+    labels <- format(ticks, scientific=FALSE, big.mark=",")
+    startZero <- grepl(" 0[.]", labels)
+    labels <- ifelse(startZero, 
+                      gsub(" 0[.]", " .", labels),
+                      labels)
+    endZeros <- gregexpr("0+$", labels)
+    endZero <- sapply(endZeros, function(x) x != -1)
+    endSpace <- ifelse(endZero,
+                       sapply(endZeros, 
+                              function(x) {
+                                  if (x == -1) {
+                                      ""
+                                  } else {
+                                      paste(rep(" ", attr(x, "match.length")),
+                                            collapse="")
+                                  }
+                              }),
+                       "")
+    labels <- ifelse(endZero,
+                      paste0(gsub("0+$", "", labels), endSpace),
+                      labels)
+    gsub("[.] ", "  ", labels)
+}
+labelsy <- formatTicks(ticksy)
+labelsx <- formatTicks(ticksy)
+template + 
+    scale_x_continuous(name="mass", transform="log10",
+                       breaks=ticksy,
+                       labels=labelsx) +
+    scale_y_continuous(name="metabolic rate", transform="log10",
+                       breaks=ticksy,
+                       labels=labelsy)
+    ## kg vs g and kcal vs kJ
+    ## geom_point(aes(mass*1000, rate*4.2), data=kleiber, alpha=.5)
+```
+
+What we can also see in @fig-log-log-2
+is a clear **visual shape** amongst the data symbols---a
+strong linear relationship.
+It is useful to be able to decode this linear shape
+from a plot with log scales because it indicates a
+power relationship between the two variables, in this case
+metabolic rate and body mass.[^kleibers-law]
+It is also possible to decode ordinal information, such as the fact that
+animals are larger and use more energy than bacteria.
+
+[^kleibers-law]:
+    This power relationship between metabolic rate and body mass
+    is known as *Kleiber's Law* [@kleiber].
+
+However, decoding the basic **position** of data symbols from a plot
+with log scales is very difficult because equal steps
+along either axis do *not* decode to equal steps between data values
+(as indicated by the axis labels).  
+For example, we cannot easily decode *how much* bigger animals are than 
+bacteria.
+There is even danger, for the
+uninitiated, in decoding the linear **visual shape** because it does *not*
+decode to a linear relationship between the raw data values.
+
+Once again, we have a data visualisation that can be usefully decoded in a 
+particular way, but which also contains encodings that are difficult
+and potentially misleading.
 
 ## Summary
 
-Mapping multiple data values to a single data symbol produces
+Mapping multiple rows of data values to a single data symbol produces
 a **visual shape**, like a line on a line plot.
 
-Data summaries, such as trends over time, can can be decoded 
+The main benefit of a data symbol that is a visual shape
+is that data summaries, such as modes, skewness, local maxima and minima,
+and trends over time, can can be decoded 
 from a visual shape.
-However, decoding raw data values from a visual shape may be harder, cmopared
+On the downside, 
+decoding raw data values from a visual shape may be harder, compared
 to decoding raw data values from a simple data symbol like a bar.
+
+One danger with visual shapes is that they depend on aspect ratio 
+and scale.
+The same mappings can be made to decode to different data summaries,
+so we are responsible for selecting an appropriate aspect ratio and scale.
+
+Another danger is that a visual shape may not necessarily convey 
+a useful data summary.
+We need to only create visual shapes in a purposeful manner
+and avoid accidentally creating visual shapes that may confuse or mislead.
 
 ---
 

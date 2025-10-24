@@ -269,7 +269,11 @@ to decode to absolute data values (rather than just relative)
 Visual objects may decode to data values or data summaries (or
 more abstract/conceptual) so there are a few things to consider.
 
+Can get visual summaries of visual objects!  Whitney 2018
+
 Decoding to data summaries, so problem of many possible decodings again ?
+
+Think about qual ?  e.g., clusters and outliers
 
 Missing decoding a problem!
 
@@ -403,7 +407,7 @@ are unaligned; see @sec-accuracy).
 #|   - Dots as data symbols.
 #|   - Bars as data symbols.
 ggplot(districts) +
-    geom_sf() +
+    geom_sf(colour=figbg) +
     geom_point(aes(X, Y, size=rate)) +
     scale_fill_continuous(name="crime rate") +
     theme(axis.title=element_blank(),
@@ -460,7 +464,7 @@ thermKey <- function(data, coords) {
              childrenvp=vp)
 }
 ggplot(districts) +
-    geom_sf() +
+    geom_sf(colour=figbg) +
     grid_panel(therm, aes(X, Y, height=rate)) +
     grid_panel(thermKey) +
     scale_fill_continuous(name="crime rate") +

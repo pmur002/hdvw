@@ -152,7 +152,7 @@ graph <- function(..., file) {
 data <- dataNode("data", "data\\nvalues")
 data2 <- dataNode("data2", "data\\nvalues", col=4)
 stat <- dataNode("stat", "data\\nsummaries", level=2)
-stat2 <- dataNode("stat2", "summary\\nsummaries", level=3)
+stat2 <- dataNode("stat2", "summary of\\nsummaries", level=3)
 lie <- lieNode("lie", "garbage\\nand lies")
 diss <- dissNode("diss", "data\\nvalues")
 meta <- dataNode("meta", "metadata /\\nbackground", level=3)

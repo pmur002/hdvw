@@ -414,14 +414,18 @@ Figure&nbsp;12.9: A scatter plot with a different shape per country
 </section>
 <section id="decoding-visual-objects" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="decoding-visual-objects"><span class="header-section-number">12.2</span> Decoding visual objects</h2>
+<p>Visual objects may decode to data values or data summaries (or more abstract/conceptual) so there are a few things to consider.</p>
+<p>Can get visual summaries of visual objects! Whitney 2018</p>
 <p>Decoding to data summaries, so problem of many possible decodings again ?</p>
+<p>Think about qual ? e.g., clusters and outliers</p>
 <p>Missing decoding a problem!</p>
 <p>Learned decoding conflict a problem!</p>
 <p>Congruence comes into play - big time!</p>
+<p>Mention that little is known about the accuracy of visual objects (though they must have good capacity because they are more abstract, right?)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
 </section>
 <section id="sec-choropleth" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="sec-choropleth"><span class="header-section-number">12.3</span> Case study: Choropleth maps</h2>
-<p><a href="#fig-map" class="quarto-xref">Figure&nbsp;<span>12.10</span></a> shows a choropleth map of the crime rate for 2021 in each police district of New Zealand.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The data values for this map are shown in <a href="summaries.html#tbl-map-data" class="quarto-xref">Table&nbsp;<span>8.3</span></a>.</p>
+<p><a href="#fig-map" class="quarto-xref">Figure&nbsp;<span>12.10</span></a> shows a choropleth map of the crime rate for 2021 in each police district of New Zealand.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The data values for this map are shown in <a href="summaries.html#tbl-map-data" class="quarto-xref">Table&nbsp;<span>8.3</span></a>.</p>
 <p>The data symbol in <a href="#fig-map" class="quarto-xref">Figure&nbsp;<span>12.10</span></a> is a polygon representing the geographic boundary of each police district. This implicitly entails an encoding of a police district as the <strong>position</strong> of a polygon. Crime rate is encoded as the fill colour of each polygon.</p>
 <p>The use of polygons as data symbols is effective because the polygons form familiar shapes with familiar spatial arrangements (familiar to a New Zealand audience at least). The polygons are <strong>visual objects</strong> that convey the concepts of districts within New Zealand. The spatial arrangements are also a form of visual <strong>congruence</strong>; the arrangements mirror the real-world spatial relationships between the regions (see <a href="congruence.html" class="quarto-xref"><span>Chapter 7</span></a>).</p>
 <div class="cell">
@@ -500,7 +504,7 @@ Figure&nbsp;12.12: Alternative map-based representations of the average crime ra
 </section>
 <section id="sec-junk" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="sec-junk"><span class="header-section-number">12.4</span> Chart junk and clutter</h2>
-<p><a href="#fig-junk" class="quarto-xref">Figure&nbsp;<span>12.13</span></a> shows a version of <a href="#fig-map" class="quarto-xref">Figure&nbsp;<span>12.10</span></a> with two cartoon villians added in the top-left and bottom-right corners.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> These sorts of annotations are often, derisively, referred to as <strong>chart junk</strong>, with the suggestion that they add no value and make it harder to extract the important information.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><a href="#fig-junk" class="quarto-xref">Figure&nbsp;<span>12.13</span></a> shows a version of <a href="#fig-map" class="quarto-xref">Figure&nbsp;<span>12.10</span></a> with two cartoon villians added in the top-left and bottom-right corners.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> These sorts of annotations are often, derisively, referred to as <strong>chart junk</strong>, with the suggestion that they add no value and make it harder to extract the important information.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-junk" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -521,15 +525,15 @@ Figure&nbsp;12.13: A choropleth map of the average crime rate over the period 20
 <p>Chart junk is <em>not</em> effective because it is impossible to decode data values from chart junk (no data values have been encoded) and because chart junk distracts from the visual elements that do represent data values.</p>
 </blockquote>
 <p>However, it is important to point out that not all <strong>visual objects</strong> are chart junk. For example, the data symbols in <a href="#fig-junk" class="quarto-xref">Figure&nbsp;<span>12.13</span></a>, the map regions, are also <strong>visual objects</strong>, but they differ from the cartoon villians because they are related to the data values.</p>
-<p>Furthermore, <strong>visual objects</strong> that have no connection to the raw data may still have some positive effects. For example, the cartoon villians are not devoid of information; they convey the concept of crime more dramatically than the simple text label “crime rate”. The more complex and interesting images may attract attention to the data visualisation as a whole and there is some evidence that such annotations improve the memorability of a data visualisation.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>Furthermore, <strong>visual objects</strong> that have no connection to the raw data may still have some positive effects. For example, the cartoon villians are not devoid of information; they convey the concept of crime more dramatically than the simple text label “crime rate”. The more complex and interesting images may attract attention to the data visualisation as a whole and there is some evidence that such annotations improve the memorability of a data visualisation.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <blockquote class="blockquote">
 <p>Chart junk can be effective because it has a greater emotional impact and is more memorable.</p>
 </blockquote>
-<p>Overall, visual objects that are not related to data values are <em>not</em> effective for decoding data values, so any other benefits have to be weighed against that cost.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>Overall, visual objects that are not related to data values are <em>not</em> effective for decoding data values, so any other benefits have to be weighed against that cost.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 </section>
 <section id="case-study-pictograms" class="level2" data-number="12.5">
 <h2 data-number="12.5" class="anchored" data-anchor-id="case-study-pictograms"><span class="header-section-number">12.5</span> Case study: Pictograms</h2>
-<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;<span>12.14</span></a> shows a pictogram of the number of pet dogs and pet cats globally.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The data symbols in this plot are images, or <strong>icons</strong>, of a cat and a dog, with the number of pets encoded as the height of each icon.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Icons are an example of <strong>visual objects</strong>; they are effective at conveying categories because they visually resemble physical objects, in this case, cats and dogs.</p>
+<p><a href="#fig-pic" class="quarto-xref">Figure&nbsp;<span>12.14</span></a> shows a pictogram of the number of pet dogs and pet cats globally.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> The data symbols in this plot are images, or <strong>icons</strong>, of a cat and a dog, with the number of pets encoded as the height of each icon.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Icons are an example of <strong>visual objects</strong>; they are effective at conveying categories because they visually resemble physical objects, in this case, cats and dogs.</p>
 <p>Unfortunately, because the cat and dog images are not simple shapes, it is harder to accurately perceive the heights of the images, so it is harder to decode the number of cats and dogs. Even worse, we actually perceive the size, or <strong>area</strong>, of the images. The dog image is wider than the cat image so the number of dogs is visually over-emphasised.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -583,7 +587,7 @@ Figure&nbsp;12.15: Two alternative uses of icons.
 </figure>
 </div>
 <p><a href="#fig-pic-icon" class="quarto-xref">Figure&nbsp;<span>12.16</span></a> shows two more alternatives to <a href="#fig-pic" class="quarto-xref">Figure&nbsp;<span>12.14</span></a>. <a href="#fig-pic-icon-2" class="quarto-xref">Figure&nbsp;<span>12.16 (b)</span></a> is just a standard bar plot. We know that this is effective for decoding the number of pets.</p>
-<p><a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;<span>12.16 (a)</span></a> uses repetitions of the icons to represent the number of pets, still within a bar. In this case, each icon represents 100 million pets. The ability to count icons is effective for decoding the overall counts.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p><a href="#fig-pic-icon-1" class="quarto-xref">Figure&nbsp;<span>12.16 (a)</span></a> uses repetitions of the icons to represent the number of pets, still within a bar. In this case, each icon represents 100 million pets. The ability to count icons is effective for decoding the overall counts.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
 <div id="fig-pic-icon" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pic-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -622,7 +626,7 @@ Figure&nbsp;12.16: Two more alternative data visualisations of the pet data.
 </section>
 <section id="case-study-chernoff-faces" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="case-study-chernoff-faces"><span class="header-section-number">12.6</span> Case study: Chernoff faces</h2>
-<p><a href="#fig-chernoff" class="quarto-xref">Figure&nbsp;<span>12.18</span></a> visualises the 2023 Rugby World Cup data (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>) using Chernoff faces.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> The data symbol in this visualisation is a little unusual; each country is represented by a combination of circles, curves, and lines that together produce a <strong>visual object</strong> that resembles a face (<a href="#fig-data-vis-obj-stat-decode" class="quarto-xref">Figure&nbsp;<span>12.17</span></a>). The mappings in this visualisation are also a little unusual. The number of points scored is encoded as the <strong>curvature</strong> of the smile, the number of tries is encoded as the <strong>angle</strong> of the eye brows, and the number of clean breaks is encoded as the horizontal <strong>position</strong> of the eyes.</p>
+<p><a href="#fig-chernoff" class="quarto-xref">Figure&nbsp;<span>12.18</span></a> visualises the 2023 Rugby World Cup data (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>) using Chernoff faces.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> The data symbol in this visualisation is a little unusual; each country is represented by a combination of circles, curves, and lines that together produce a <strong>visual object</strong> that resembles a face (<a href="#fig-data-vis-obj-stat-decode" class="quarto-xref">Figure&nbsp;<span>12.17</span></a>). The mappings in this visualisation are also a little unusual. The number of points scored is encoded as the <strong>curvature</strong> of the smile, the number of tries is encoded as the <strong>angle</strong> of the eye brows, and the number of clean breaks is encoded as the horizontal <strong>position</strong> of the eyes.</p>
 <div id="fig-data-vis-obj-stat-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-obj-stat-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -647,7 +651,7 @@ Figure&nbsp;12.18: A Chernoff faces plot of the …
 </div>
 </div>
 </div>
-<p>The mappings in a Chernoff face are <em>not</em> very accurate (see <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>; <strong>curvature</strong> is ranked <em>below</em> colour in terms of accuracy),<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> so Cheroff faces are <em>not</em> very effective for decoding raw data values.</p>
+<p>The mappings in a Chernoff face are <em>not</em> very accurate (see <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>; <strong>curvature</strong> is ranked <em>below</em> colour in terms of accuracy),<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> so Cheroff faces are <em>not</em> very effective for decoding raw data values.</p>
 <p>However, the familiarity of Chernoff faces means that we are easily able to perceive common combinations of the facial features. For example, we can see several sad, worried faces at the top-left of <a href="#fig-chernoff" class="quarto-xref">Figure&nbsp;<span>12.18</span></a> and several happy, perhaps even smug, faces at the bottom-right. We can perceive countries that share similar combinations of performance measures. In other words, we can perceive multi-dimensional correlations and multi-dimensional groupings in the data.</p>
 <p>In this case, the happier faces have been arranged to correspond to the more successful teams and the teams have been ordered from least points scored to most points scored. The resulting proximity helps with perceiving groups of similar faces.</p>
 <blockquote class="blockquote">
@@ -656,7 +660,7 @@ Figure&nbsp;12.18: A Chernoff faces plot of the …
 </section>
 <section id="sec-learned-danger" class="level2" data-number="12.7">
 <h2 data-number="12.7" class="anchored" data-anchor-id="sec-learned-danger"><span class="header-section-number">12.7</span> Dangers of learned decodings</h2>
-<p><a href="#fig-stroop" class="quarto-xref">Figure&nbsp;<span>12.19</span></a> provides a demonstration of the Stroop Effect.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> The task is to name the colour of each word. This task is difficult to do because there are two decodings involved and the two decodings are inconsistent. Each set of letters has a learned decoding based on the <strong>shape</strong> of the letters—the word that the letters spell out—but there is also a learned decoding based on the actual <strong>colour</strong> of the letters—the colour names that we learn as children.</p>
+<p><a href="#fig-stroop" class="quarto-xref">Figure&nbsp;<span>12.19</span></a> provides a demonstration of the Stroop Effect.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> The task is to name the colour of each word. This task is difficult to do because there are two decodings involved and the two decodings are inconsistent. Each set of letters has a learned decoding based on the <strong>shape</strong> of the letters—the word that the letters spell out—but there is also a learned decoding based on the actual <strong>colour</strong> of the letters—the colour names that we learn as children.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-stroop" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -671,7 +675,7 @@ Figure&nbsp;12.19: The Stroop effect. Try to name the <em>colour</em> of each wo
 </div>
 </div>
 </div>
-<p>One issue with relying on learned decodings is that we may learn more than one association for the same visual feature. For example, the colour red is commonly associated with hot (versus blue for cold), but also with stop (versus green for go), plus also passion, or even anger.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> Furthermore, many associations are specific to a particular culture. For example, red is associated with luck and prosperity in Chinese culture, among other things.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<p>One issue with relying on learned decodings is that we may learn more than one association for the same visual feature. For example, the colour red is commonly associated with hot (versus blue for cold), but also with stop (versus green for go), plus also passion, or even anger.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> Furthermore, many associations are specific to a particular culture. For example, red is associated with luck and prosperity in Chinese culture, among other things.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
 <p>Relying on a learned decoding can cause confusion if there are multiple possible decodings. It may not be clear which data value should be decoded from the visual feature (<a href="#fig-ambiguous-decode" class="quarto-xref">Figure&nbsp;<span>12.20</span></a>).</p>
 <div id="fig-ambiguous-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -712,7 +716,7 @@ Figure&nbsp;12.22: If we encode data values using data symbols that are complex 
 </figcaption>
 </figure>
 </div>
-<p>An extreme version of this problem is the use of not just complex or unusual data symbols, but entirely novel data visualisations.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
+<p>An extreme version of this problem is the use of not just complex or unusual data symbols, but entirely novel data visualisations.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
 <p>Andrews curve of RWCperGame statistics (analogue of <a href="multiple.html#fig-parallel" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>). <strong>Cite Andrews article.</strong> Can see the three distinct groups of countries more easily in this than in parallel plot, but hard to understand exactly what you are seeing. Plus NO chance of recovering original data values (another example of visualising data summary).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -729,7 +733,6 @@ Figure&nbsp;12.23: An Andrews plot of the performance measures for teams in the 
 </div>
 </div>
 <p>Another example of this problem are the hurrican “cones of uncertainty” that Cairo highlights in Chapter 5 of How Charts Lie (footnote!).</p>
-<p>Mention that little is known about the accuracy of visual objects (though they must have good capacity because they are more abstract, right?)<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>:</p>
 <p>Refer back to <a href="position.html#sec-ternary" class="quarto-xref"><span>Section 4.6</span></a> as example of plot type that experts in specific fields learn to read.</p>
 </section>
 <section id="summary" class="level2" data-number="12.9">
@@ -753,33 +756,33 @@ Shah, Priti, and James Hoeffner. 2002. <span>“Review of Graph Comprehension Re
 <ol>
 <li id="fn1"><p>“Mapping Color to Meaning in Colormap Data Visualizations” Schloss et al (2018) They call this an “inferred mapping”</p>
 <p>“Affective Congruence in Visualization Design: Influences on Reading Categorical Maps” Anderson and Robinson (2021)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Add citations to MacEachren and Bertin and Dan Carr ?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Attribution for the original public domain image.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Mention Tufte (data-ink ratio), Stephen Few? see DataVis/README for links to the debate.</p>
+<li id="fn2"><p>in general, there needs to be more explicit acknowledgement of the lack of experimental results for complex data vis scenarios. c.f., “Testing Statistical Charts: What Makes a Good Graph?” Vanderplas, Cook, and Hofmann (2020) p 71.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Add citations to MacEachren and Bertin and Dan Carr ?<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Attribution for the original public domain image.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Mention Tufte (data-ink ratio), Stephen Few? see DataVis/README for links to the debate.</p>
 <ul>
 <li>“Declutter and Focus: Empirically Evaluating Design Guidelines for Effective Data Communication” Ajani et al (2021) says that “The visualization practitioner community prescribes two popular guidelines for creating clear and efficient visualizations: declutter and focus.”</li>
 </ul>
-<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></li>
-<li id="fn5"><p>Links to studies that try to show benefits of chart junk. Rahman et al (2024) Mention affect (emotion) study?</p>
+<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn6"><p>Links to studies that try to show benefits of chart junk. Rahman et al (2024) Mention affect (emotion) study?</p>
 <p>“Chart and Graphs” Karsten (1925)</p>
 <p>This is the source of the “insult to man’s intelligence” remark about pie charts, though note the full quote:</p>
-<p>“In a sense, it might be construed as an insult to a man’s intelligence to show him a pie-chart, but the insult is not often resented. For if your main object be to get a story across, you are justified in taking that means which will encounter least resistance, and in making your story as simple as possible. For publicity purposes, the pie-chart is therefore almost invariably better than the bar.” [p98]<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>There is a really nice summary of when chart junk might be acceptable somewhere in DataVis/README<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>different terminology: icons, glyphs, pictograms Vehement opposition to these from some quarters<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>cite the study that reckons using icons can help with perceiving counts. More effective when each icon represents 1 (and so there are no fractional icons) ?<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p><span class="citation" data-cites="chernoff1973faces">Chernoff (<a href="#ref-chernoff1973faces" role="doc-biblioref">1973</a>)</span><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>Link to a resource that has a comprehensive list of visual channels and includes curvature.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12"><p>citation please!<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13"><p>Cite “Sometimes more is more: iterative participatory design of infographics for engagement of community members with varying levels of health literacy” Arcia et al (2016) where people interpret icons in multiple ways, e.g.&nbsp;specifically “pineapple” rather than generic “fruit”.</p>
+<p>“In a sense, it might be construed as an insult to a man’s intelligence to show him a pie-chart, but the insult is not often resented. For if your main object be to get a story across, you are justified in taking that means which will encounter least resistance, and in making your story as simple as possible. For publicity purposes, the pie-chart is therefore almost invariably better than the bar.” [p98]<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>There is a really nice summary of when chart junk might be acceptable somewhere in DataVis/README<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>reference to Statista https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>different terminology: icons, glyphs, pictograms Vehement opposition to these from some quarters<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>cite the study that reckons using icons can help with perceiving counts. More effective when each icon represents 1 (and so there are no fractional icons) ?<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><span class="citation" data-cites="chernoff1973faces">Chernoff (<a href="#ref-chernoff1973faces" role="doc-biblioref">1973</a>)</span><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Link to a resource that has a comprehensive list of visual channels and includes curvature.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>citation please!<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>Cite “Sometimes more is more: iterative participatory design of infographics for engagement of community members with varying levels of health literacy” Arcia et al (2016) where people interpret icons in multiple ways, e.g.&nbsp;specifically “pineapple” rather than generic “fruit”.</p>
 <p>Also cite something about cultural differences in perception. e.g., “More of what? Dissociating effects of conceptual and numeric mappings on interpreting colormap data visualizations” Soto et al (2023)</p>
-<p>“Review of Graph Comprehension Research: Implications for Instruction” Shah and Hoeffner (2002) Give example of ambiguous colour association “green means profitable for financial managers but infected for health care workers (Brockmann, 1991)”<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn14"><p>“A Study on the Metaphor of “Red” in Chinese Culture” Qiang (2011)<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p>Kosslyn’s Principle of appropriate knowledge ?</p>
+<p>“Review of Graph Comprehension Research: Implications for Instruction” Shah and Hoeffner (2002) Give example of ambiguous colour association “green means profitable for financial managers but infected for health care workers (Brockmann, 1991)”<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>“A Study on the Metaphor of “Red” in Chinese Culture” Qiang (2011)<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>Kosslyn’s Principle of appropriate knowledge ?</p>
 <p>Could mention Pinker’s (1990) “graph schema” (prior knowledge about a graph type).</p>
 <p><span class="citation" data-cites="Shah2002">Shah and Hoeffner (<a href="#ref-Shah2002" role="doc-biblioref">2002</a>)</span> provides several examples of young students misinterpreting the message from line plots, which suggests that we need to <em>learn</em> how to make effective use of even basic data visualisation formats.</p>
-<p>“Bars and lines: A study of graphic communication” Zacks and Tversky (1999) speculates on the development of graphical conventions.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn16"><p>in general, there needs to be more explicit acknowledgement of the lack of experimental results for complex data vis scenarios. c.f., “Testing Statistical Charts: What Makes a Good Graph?” Vanderplas, Cook, and Hofmann (2020) p 71.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<p>“Bars and lines: A study of graphic communication” Zacks and Tversky (1999) speculates on the development of graphical conventions.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

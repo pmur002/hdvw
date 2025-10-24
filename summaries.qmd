@@ -59,7 +59,7 @@ raw data values.[^info-vis-ref-model]
     to the *view transformations* of the Information Visualization
     Reference Model.
 
-## Box plots
+## Box plots {#sec-box-plot}
 
 @fig-boxplot shows box plots of the number of 
 points scored by Tier One nations at Rugby World Cup matches
@@ -409,7 +409,9 @@ or whether there are groups of data values (clusters).[^strict-ensemble]
     *ensemble* encoding is limited to *statistical moments*
     (means and variances) [@ensemble-perception],
     but the data visualisation literature takes a more relaxed
-    approach [@ensemble-scatter].
+    approach and includes the identification of clusters and outliers
+    [@ensemble-scatter].  In this book, we embrace the latter,
+    looser terminology.
 
 Furthermore, we can produce each sort of visual summary for each
 possible visual feature.
@@ -421,10 +423,11 @@ Although it is well-established that our visual system is capable of
 generating visual summaries, less is known about the accuracy of those
 summaries, partly because the range of possible visual summaries
 is so large.
-However, we know that
-estimating averages from the positions of multiple data symbols
-is quite accurate
-and estimating averages from the luminance and/or chroma
+However, there are a few well-established results.
+For example, we know that
+estimating averages from the positions of multiple data symbols 
+is quite accurate, as in @fig-rwc-dotplot.
+We also know that estimating averages from the luminance and/or chroma
 of multiple data symbols can also be effective.[^visual-average]
 
 [^visual-average]:
@@ -439,6 +442,12 @@ of multiple data symbols can also be effective.[^visual-average]
     summaries that can be studied and the variability of 
     performance across different combinations of visual summaries
     and visual features.
+
+For more qualitative summaries, such as identifying clusters
+and outliers, we know that performance will be good because
+these decodings rely on fundamental properties of our visual system
+that identify unusual items (@sec-differences) and identify groups of items 
+(@sec-visual-model-groups).
 
 ## Dangers of summaries {#sec-summary-caveats}
 
