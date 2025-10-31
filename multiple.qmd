@@ -7,28 +7,20 @@ source("common.R")
 
 # Multiple Mappings
 
-**TODO** 
-a side-by-side bar plot and even a stacked bar plot both
-use nested position!!!
-Also stacked dot plots like fig-rwc-dotplot.
-
-**TODO** 
-add 3d section.
-Accuracy of decoding raw data values is low, but
-more to decode shapes (i.e., summaries) from surfaces etc, anyway
-
 @fig-multiple shows a data visualisation of the performance measures
 for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
 This visualisation is different from anything we have seen previously
-because it involves multiple mappings.
+because it involves **multiple mappings**.
 The data symbol in this case is a simple data point, but we have
 mapped data values to *five* different visual features of each data point.
+
 The number of clean breaks is encoded as the horizontal **position** of 
 the data points and
 the number of tries is encoded as the vertical **position** of the data points.
-The number of points scored is encoded as the **size** of the points, the
-hemisphere is encoded as the **shape** of the points, and the number of runs
-is encoded as the **colour** of the points.
+The number of points scored is encoded as the **area** of the data points, the
+hemisphere is encoded as the **shape** of the data points, 
+and the number of runs
+made is encoded as the **colour** of the data points.
 
 ```{r}
 #| echo: false
@@ -57,10 +49,18 @@ in space** (@sec-integral).
 However, other mappings are less effective.  For example, it is 
 less easy to accurately decode number of points scored from size 
 and even
-harder to decode the number of runs from colour.
+harder to decode the number of runs made from colour.
+These are poor encodings for quantitative data values.
+
 In addition, we are hampered by the fact that many different
 visual features are changing at once, so it is harder
-to perceive individual differences (see @sec-differences).
+to decode changes in any one visual feature (@sec-differences),
+plus there are interactions between some visual features,
+which can affect the decoding of individual features 
+(@sec-configural).  For example, the comparison of data points
+in terms of their **size** is made harder by the concurrent changes 
+in **pattern**;  it is difficult to tell whether a triangle has the
+same area as a circle.
 
 One goal of visualising multiple variables like we have in 
 @fig-multiple is to discover or display multivariate relationships
@@ -69,52 +69,498 @@ teams in the top-right corner of the plot that are all relatively
 large and relatively dark in colour, which suggests that there is a
 group of teams that run more, make more clean breaks, score more tries,
 and score more points compared to the other teams.
+However, the decoding of multivariate relationships
+is not necessarily immediate
+nor effortless from @fig-multiple.
 
 This chapter looks at some of the different approaches to visualising
-several variables at once.  How do we perceive multivariate relationships?
-And can we still perceive individual data values at the same time?
+several variables at once.  How do we encode multiple
+variables so that we can decode multivariate relationships?
+And can we still decode individual data values from
+individual variables at the same time?
 
-## Parallel coordinates plots {#sec-parallel}
+## Scatter plot matrices {#sec-splom}
 
 One issue with @fig-multiple is that it attempts to map each data variable
 to a separate visual feature.  Once we have used both horizontal
 and vertical **position**, we have to start using less accurate and less
 appropriate visual features, like **area** and **colour** for
-quantitative data values (see @sec-mapping-visual-features).
+quantitative data values (@sec-accuracy).
 If we attempted to map all of the variables in @tbl-rwc-2023, we could
 actually run out of visual features to use (@fig-visual-features).
 
 An alternative approach is to map more of the data variables
-to the same visual feature.  For example, @fig-parallel shows 
-a parallel coordinates plot of the data from @fig-multiple.
-In this visualisation, all of the quantitative variables have been
-encoded as **position**, with just hemisphere (qualitative) encoded as 
-colour.[^reuse-pos]
+to the *same* visual feature. 
+In particular, we can map more variables to **position**.[^reuse-pos]
 
 [^reuse-pos]:
-    "GoFish: A Grammar of More Graphics!"
-    Pollock and Satyanarayan (2025)
-    Cite this as a grammar that allows more explicit reuse of position
-    (via "geometric operators").
-    NOTE that the stacking of bars in a stacked bar plot is also a simple
-    version of the reuse of position.
+    The reuse of position is handled in a variety of ways within
+    data visualisation frameworks.  For example, the 
+    Grammar of Graphics [@wilkinson2005] allows for *collision modifiers*
+    to solve overlapping
+    and separately allows for *facets*.
+    GoFish [@2026-gofish] introduces the idea of *geometric operators*, such as 
+    stacking, to the visualisation grammar.
+
+    In this book, we will just talk about encoding more than two
+    variables to position.
+
+@fig-splom shows a scatter plot matrix 
+of the performance measures
+for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
+These are the same data values that are encoded in the complicated 
+scatter plot in @fig-multiple.
+Apart from hemisphere,
+each different variable is encoded as a horizontal and vertical position
+and a scatter plot is created for each combination of variables.
+For example, the number of runs is encoded as the top row and the left 
+column of scatter plots.
+Within each scatter plot, two variables are encoded as horizontal
+and vertical position.
+For example, the second plot in the first row is a scatter plot
+of the number runs versus the number of clean breaks.
+
+We can decode which variables are being combined because this is
+just a qualitative decoding from position.
+Within each scatter plot, 
+the encoding of data values as position 
+allows us to decode and compare individual data values
+and this provides a superior decoding for most variables compared 
+to @fig-multiple.
+For example, it is easy to decode from the position of data points in
+the second scatter plot on the top row that the lowest number of runs 
+made was about 80.  This decoding is much more difficult from the
+colour of the data points in @fig-multiple.
+We can also identify clusters and outliers within each scatter plot,
+which is another improvement over @fig-multiple.
 
 ```{r}
 #| echo: false
-#| label: fig-parallel
-#| fig-cap: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.
-gg <- ggparcoord(RWCperGame, 
-           columns=c(11, 5, 10, 7), groupColumn="sphere",
-           scale="uniminmax", alpha=.5) +
-    scale_x_discrete(expand=expansion(.02)) +
-    scale_colour_discrete(guide=guide_legend(reverse=TRUE))
-pushViewport(viewport(width=.8, height=.8))
+#| label: fig-splom
+#| fig-height: 5
+#| fig-keep: last
+#| fig-cap: A scatter plot matrix of the quantitative performance measures for teams in the 2023 Rugby World Cup.
+quants <- c("runs", "breaks", "tries", "points")
+mat <- subset(RWCperGame, 
+              select=c(quants, "sphere"))
+## https://stackoverflow.com/questions/3735286/create-a-matrix-of-scatterplots-pairs-equivalent-in-ggplot2
+mat <- mutate(mat, id = rownames(mat)) 
+
+## Prepare data to be plotted on the x axis
+x_vars <- pivot_longer(data = mat,
+             cols = 1:4,
+             names_to = "variable_x",
+             values_to = "x")
+
+## Prepare data to be plotted on the y axis  
+y_vars <- pivot_longer(data = mat,
+                       cols = 1:4,
+                       names_to = "variable_y",
+                       values_to = "y") 
+
+## Join data for x and y axes and make plot
+all <- full_join(x_vars, y_vars, 
+          by = c("id", "sphere"),
+          relationship = "many-to-many")
+all$variable_x <- factor(all$variable_x, levels=quants)
+all$variable_y <- factor(all$variable_y, levels=quants)
+all <- subset(all, 
+              variable_x != variable_y) ## &
+              ## variable_x != "runs" &
+              ## variable_y != "points" &
+              ## !(variable_y == "tries" & variable_x == "breaks"))
+ggplot(all, aes(x = x, y = y, color = sphere)) +
+    geom_point() +
+    scale_x_continuous(expand=expansion(.2)) +
+    scale_y_continuous(expand=expansion(.2)) +
+    facet_grid(variable_y ~ variable_x, scales="free") +
+    theme(axis.title=element_blank(),
+          aspect.ratio=1,
+          strip.background=element_blank(),
+          strip.text=element_blank())
+grid.force()
+for (i in 1:4) {
+    downViewport(grid.grep(paste0("panel-", i, "-", i), 
+                           grep=TRUE, viewports=TRUE))
+    grid.text(quants[i])
+    upViewport(0)
+}
+```
+
+The emergent feature of position in
+space within each scatter plot allows us to decode the correlation between each
+pair of variables (@sec-integral) and
+we can also get a glimpse of 
+multivariate correlations by comparing multiple scatterplots.
+
+For example,
+looking down the scatter plots just above the diagonal of the matrix,
+we can see that: the number of runs is correlated loosely with
+the number of clean breaks; the number of clean breaks is more
+strongly correlated with the number of tries; and the number of tries is
+very strongly correlated with the number of points.
+This suggests a multivariate correlation between all four of these 
+variables.
+
+If we look down the first column of the matrix, we
+can see that:  the number of runs is correlated loosely
+with the number of clean breaks, a little more loosely with the number
+of tries, and a little more loosely still with the number of points.
+
+One negative, however, is that this decoding of multivariate relationships
+requires significant cognitive effort (@sec-tasks).
+A scatter plot matrix is not particularly effective at allowing
+us to *effortlessly* decode multivariate relationships.
+
+> A scatter plot matrix is effective for decoding individual data values
+  from multiple variables at once, plus pairwise correlations.
+  However, scatter plot matrices are less effective for 
+  decoding multivariate relationships.
+
+## Facetting {#sec-facetting}
+
+@fig-facet-before shows a line plot of the number of youth offenders per year
+in different Police Districts of New Zealand.
+This visualisation makes use of several effective mappings. 
+For example, we encode
+year as horizontal position and we encode count as
+vertical position, although the line data symbols are 
+**visual shapes** (@sec-line-plots), so the most effective decoding 
+is to **data summaries**, like the overall downward trend for all
+districts.
+
+The encoding of police district in @fig-facet-before
+is less effective.
+The district is 
+encoded as **colour**, but because there are 12 different districts,
+we are exceeding the capacity of colour (@sec-capacity).  It is not
+easy to identify all of the different districts from the 
+colours of the lines (not helped by the
+overplotting of the lines).
+
+A better encoding for Police District would be **position**, which has
+a much higher capacity, but, similar to @fig-multiple, we have been 
+forced to use colour because position
+has already been taken by year and the number of offenders.
+
+```{r}
+#| echo: false
+#| label: fig-facet-before
+#| fig-cap: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+ggplot(crimeDistrict) +
+    geom_line(aes(year, count, colour=district)) +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
+    scale_colour_manual(values=carto_pal(12, "Safe")) +
+    theme(aspect.ratio=1)
+```
+
+@fig-facet-after shows a solution---a **facetted plot**---that, like
+a scatter plot matrix, 
+reuses position to encode additional variables.[^facetting]
+In @fig-facet-after, each district is encoded as a **position in space**
+and we draw a separate plot for each district.  This makes
+it very easy to decode the individual districts, much easier
+than it is with @fig-facet-before.
+
+[^facetting]: 
+    This method of producing a sub-plot for each level of 
+    a qualitative variable (or for each combination of levels
+    for multiple qualitative variables) is called *facetting*
+    in the Grammar of Graphics [@wilkinson2005], but
+    it is also known as *multipanel* *conditioning* plots
+    or *trellis plots* [@Becker01061996].
+
+The plot for each district also has an enclosing border,
+which helps to visually differentiate between districts
+(@sec-visual-model-groups) and
+we have ordered the panels so that districts are near to other districts
+with a similar starting count of offenders (@sec-distance-effect).
+
+```{r}
+#| echo: false
+#| label: fig-facet-after
+#| fig-cap: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
+crimeDistrict$district <- 
+    reorder(crimeDistrict$district, crimeDistrict$count, max)
+crime2 <- crimeDistrict
+crime2$district2 <- crime2$district
+crime2$district <- NULL
+ggplot(crimeDistrict) +
+    geom_line(aes(year, count, group=district2), data=crime2, 
+              col="grey", linewidth=.2) +
+    geom_line(aes(year, count)) +
+    scale_x_continuous(breaks=seq(2012, 2020, 4)) +    
+    facet_wrap(vars(district)) +
+    theme(aspect.ratio=.8)
+```
+
+One downside to @fig-facet-after
+is that decoding and comparison of the number of offenders
+between districts and/or years is more difficult
+because the vertical and horizontal positions
+are **unaligned** for some comparisons (@sec-unaligned-pos).
+In this case, we have mitigated that problem by drawing a grey line
+for all districts in each plot.  Similar to grid
+lines, this makes it easier to compare the line for each district
+to other districts (@sec-perception-relative).
+
+## Case study: Bar plots
+
+@fig-bar-pos-stack shows a stacked bar plot of the youth crime rate
+in New Zealand over time, broken down by age group.
+The data symbols are bars.
+The crime rate is encoded as the (vertical) **length** of the bars
+and the year is encoded as the horizontal **position** of the bars.
+These mappings are supplemented by an additional encoding of
+age as the vertical **position** of the bars.
+In effect, the final vertical position of each bar is
+a complicated encoding of crime rate
+plus age group.  
+
+```{r}
+#| echo: false
+#| label: fig-bar-pos-stack
+#| fig-cap: A bar plot of the number of offenders in each age group over time.
+gg <- ggplot(crimeAge) +
+    geom_col(aes(year, rate, fill=ageFactor, group=factor(year)), 
+             position="stack") +
+    scale_x_continuous(breaks=seq(2012, 2020, 2), name=NULL) +
+    scale_y_continuous(expand=expansion(c(0, .05)), name=NULL) +
+    scale_fill_discrete(name="age") +
+    crimeAgeLineTitle
+pushViewport(viewport(width=.9, height=.9))
 print(gg, newpage=FALSE)
 popViewport()
 ```
 
-A parallel coordinates plot maps data summaries rather than raw data values
-(@sec-summaries).  For example, all data values are standardised to a range
+An alternative is shown in @fig-bar-pos-dodge, where we have the
+same data, but in the form of a side-by-side bar plot.
+This simple-seeming plot demonstrates another example of 
+reusing position to encode multiple data values.
+
+The crime rate is again encoded as the lengths of the bars and
+the year is encoded as the horizontal position of the bars.
+These mappings are supplemented by an additional encoding of
+age as the horizontal position of the bars.
+
+```{r}
+#| echo: false
+#| label: fig-bar-pos-dodge
+#| fig-cap: A bar plot of the number of offenders in each age group over time.
+gg <- ggplot(crimeAge) +
+    geom_col(aes(year, rate, fill=ageFactor), 
+             colour=figbg,
+             position="dodge") +
+    scale_x_continuous(breaks=seq(2012, 2020, 2), name=NULL) +
+    scale_y_continuous(expand=expansion(c(0, .05)), name=NULL) +
+    scale_fill_discrete(name="Age") +
+    crimeAgeLineTitle
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+In effect, the side-by-side bar plot is like a facetted plot, 
+where each year is its own bar plot, with age group encoded
+as horizontal position and crime rate encoded as length.
+For example,
+@fig-bar-pos-facet shows the same data in a plot with one facet
+per year.
+
+```{r}
+#| echo: false
+#| label: fig-bar-pos-facet
+#| fig-cap: A bar plot of the number of offenders in each age group over time.
+gg <- ggplot(crimeAge) +
+    geom_col(aes(ageFactor, rate, fill=ageFactor), 
+             colour=figbg) +
+    scale_x_discrete(breaks=NULL, name=NULL) +
+    scale_y_continuous(expand=expansion(c(0, .05)), name=NULL) +
+    scale_fill_discrete(name="Age") +
+    crimeAgeLineTitle +
+    facet_wrap(vars(year), nrow=1) +
+    theme(panel.spacing.x=unit(0, "mm"))
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+## Non-cartesian mappings {#sec-non-cartesian}
+
+Another way to encode more variables using **position** is to
+abandon the standard cartesian coordinate system (@sec-cartesian).
+For example, @fig-3d-scatter shows a 3D scatter plot of three of 
+the performance measures for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
+
+@fig-3d-scatter takes advantage of the visual system's ability to
+interpret a 2D image as a 3D scene (@sec-illusion).
+For example,
+we can see that the spheres in @fig-3d-scatter appear to lie roughly along
+a line in space and this decodes to a multivariate correlation
+between the three variables.[^3d-interactive]
+It is also possible to see that there are four teams somewhat separate
+in 3D space (not just in a 2D plane, as we saw in @fig-scatter).
+
+[^3d-interactive]:
+    This visual shape is more apparent if we are able to animate 
+    the image.  In the online version of this book it should be possible
+    to click and drag the mouse to rotate the image in space.
+
+```{r}
+#| echo: false
+#| label: fig-3d-scatter
+#| results: hide
+#| fig-cap: A data visualisation of three RWC variables
+setupKnitr(autoprint=TRUE)
+cols <- pal_npg()(2)
+mat <- matrix(c(0.916227459907532, 0.189996436238289, -0.352744400501251, 
+                0, -0.39954274892807, 0.498933911323547, -0.769045233726501, 
+                0, 0.0298802461475134, 0.845556795597076, 0.533048689365387, 
+                0, 0, 0, 0, 1), ncol=4)
+open3d(userMatrix=mat)
+plot3d(RWCperGame$breaks, RWCperGame$tries, RWCperGame$points,
+       xlab="breaks", ylab="tries", zlab="points",
+       type="n")
+spheres3d(RWCperGame$breaks, RWCperGame$tries, RWCperGame$points,
+          col=cols[(RWCperGame$sphere == "North") + 1])
+```
+
+The value of a 3D scatter plot lies in this ability to decode 
+multivariate **data summaries** from 3D 
+**visual shapes**.
+Decoding individual data values is extremely difficult from 
+a 3D scatter plot because data values are encoded as positions
+along dimensions that are not perpendicular (@sec-cartesian), 
+may not be linear (@sec-non-linear-pos),
+and are not aligned (@sec-unaligned-pos).
+However, that should not be the goal of such a data visualisation;
+a 3D scatter plot is effective for decoding data summaries rather than
+raw data values.
+
+@fig-3d-heatmap shows another example of a 3D plot.
+This is a 3D version of the heatmap from @fig-crime-heatmap,
+which shows the rate of offending for different age groups 
+across different years.
+The crime rate is encoded both as colour and as the height of a
+3D bar.
+
+Again, the decoding of positions to individual data values is 
+not very accurate with this sort of 3D plot,
+although because there is a regular grid of bars, and there are not
+too many bars, we do not require much accuracy to decode year and age.
+
+The decoding of the bar heights is also inaccurate, again because 
+of non-linear and unaligned scales, but also because many bars
+are partially obscured.[^3d-obscure] 
+This means that
+we cannot accurately decode the ratio of the highest bar to the heights
+of other bars;  we are limited to ordinal comparisons at best.
+However, data summaries can be decoded from the overall visual shapes.
+For example, the general downward trend for all ages over time
+is much clearer in @fig-3d-heatmap than it was in @fig-crime-heatmap.
+The implicit visual congruence with a descending stairway 
+(@sec-implicit) strongly
+supports the decoding of decreasing crime rates over time.
+
+[^3d-obscure]:
+    The problem of elements being obscured is a significant one.
+    The angle of view for @fig-3d-heatmap and the placement of the plot
+    elements was carefully chosen.
+    As with the 3D scatter plot, this problem can be removed by allowing
+    the 3D scene to be rotated interactively.
+
+```{r}
+#| echo: false
+#| label: fig-3d-heatmap
+#| fig-height: 4
+#| fig-cap: A data visualisation of youth crime by age
+gg <- ggplot(crimeAgeSimple) +
+    geom_tile(aes(year, age, fill=rate), colour=NA) +
+    ggtitle("Youth Crime in New Zealand",
+            "Distinct offenders per 10,000 pop.") +
+    scale_x_continuous(expand=expansion(0), breaks=seq(2012, 2020, 2)) + 
+    scale_y_continuous(expand=expansion(0), breaks=14:16, position="right") +
+    theme(aspect.ratio=1,
+          plot.title=element_text(hjust=1),
+          plot.subtitle=element_text(hjust=1, margin=margin(0, 0, 20, 0)),
+          plot.title.position="plot",
+          axis.title.y.right=element_text(angle=90),
+          legend.position="bottom")
+plot_gg(gg, width = 5, height = 5, multicore = TRUE, scale = 150, 
+        zoom = .6, theta = 30, phi = 35, windowsize = c(1600, 800))
+render_snapshot()
+```
+
+> A 3D plot is not effective for decoding raw data values, but
+  it may be effective because the data symbols generate visual shapes
+  in space, which can decode to three-dimensional data summaries,
+  such as clusters, trends, and multivariate correlations.
+
+A significant limitation of 3D plots is that they can only encode
+three variables using position.  Although it is possible to
+produce views of more than three dimensions on a 2D page or screen,
+the implicit decoding of visual shapes is limited to
+three dimensions.[^projection]
+
+[^projection]:
+    A 3D plot is just a *projection* of three dimensions into
+    2D.  More than three dimensions can also be projected to 2D and
+    this can result in recognisable visual shapes in 2D or 3D, 
+    but decoding a meaningful data summary from those shapes 
+    becomes more difficult.
+    This is another case where dynamic and interactive 
+    data visualisation can be very helpful
+    [@grand-tour-projection-pursuit].
+
+## Case study: Parallel coordinates plots {#sec-parallel}
+
+@fig-parallel shows 
+a parallel coordinates plot of the data from @fig-multiple.
+This is another example of a non-cartesian coordinate system.
+In @fig-parallel, all of the quantitative variables have been
+encoded as **position**, but those positions are along a series
+of vertical parallel axes, rather than just the normal two perpendicular
+axes.[^parallel]
+
+[^parallel]:
+    At a deeper level, a parallel coordinates plot represents
+    a single *point* in $n$-dimensional space with a *line*
+    through $n$ vertices on the parallel coordinates plot
+    and several points that lie on the same line in $n$-dimensional space
+    translate to several lines that meet at the same point on
+    a parallel coordinate plot (or a set of lines that are parallel).
+
+    @wegman-parallel provides a discussion from the
+    point of view of statistical analysis.
+
+    @Inselberg2009 provides an extremely thorough explanation, derivation,
+    and series of demonstrations, from a more abstract
+    computational geometry perspective.  
+    The early parts of Chapter 10 provide some accessible comments
+    relevant to data visualisation.  
+
+```{r}
+#| echo: false
+#| label: fig-parallel
+#| fig-cap: A parallel coordinates plot of the performance measures for teams in the 2023 Rugby World Cup.  The data values from five quantitative variables are encoded as positions along five vertical, parallel axes.  For each team, the data symbol is a line connecting the positions on the axes.
+gg <- ggparcoord(RWCperGame, 
+           columns=c(9, 11, 5, 10, 7), groupColumn="sphere",
+           scale="uniminmax", alpha=.5) +
+    scale_x_discrete(expand=expansion(.02)) +
+    scale_y_continuous(guide=guide_none()) +
+    scale_colour_discrete(guide=guide_legend(reverse=TRUE),
+                          name="hemisphere") +
+    theme(axis.title=element_blank(),
+          panel.grid.major.x=element_line())
+grid.newpage()
+pushViewport(viewport(width=.9, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+The parallel coordinates plot in @fig-parallel
+maps data summaries rather than raw data values
+(@sec-summaries).  All data values are standardised to a range
 between 0 and 1.[^parallel-coords]
 @tbl-parallel-stats shows some of the values that
 are actually mapped to visual features in @fig-parallel.
@@ -124,8 +570,17 @@ vertical **position**.  In this way, all quantitative data values
 are encoded as **position**.
 
 [^parallel-coords]:
-  Acknowledge and point to different ways that the data values can
-  be transformed (or summarised).
+    It is possible to use unscaled axes on a parallel coordinates plot,
+    though that becomes untenable if the range of the values on different
+    variables varies widely.
+    There are also other ways to perform the scaling, for example,
+    standardisation (in the sense of subtracting the mean and dividing
+    by the standard deviation).
+
+In addition, the hemisphere is encoded as **colour** and a 
+separate line data symbol is drawn for each country.
+This means that a visual shape is drawn for each country
+(@sec-visual-shapes).
 
 ```{r}
 #| echo: false
@@ -144,20 +599,6 @@ long <- melt(vars, id.vars=1:2)
 kable(head(long), digits=2)
 ```
 
-In addition, the hemisphere is encoded as **colour** and a 
-separate line data symbol is drawn for each country.
-This means that a visual shape is drawn for each country
-(@fig-mappings-1-n-1-n; @sec-visual-shapes).
-
-::: {#fig-mappings-1-n-1-n layout-ncol=2}
-
-![](Mappings/mapping-1-n-1-n.png)
-
-In a parallel coordinates plot, a single row of data---one data value from 
-each of several variables---is mapped to
-a visual shape (a line).
-:::
-
 On one hand, a parallel coordinates plot appears to
 makes sense because it encodes multiple
 data values to **position**, which is an accurate visual feature
@@ -171,49 +612,161 @@ multiple data values (@sec-line-plots), which makes it difficult to decode
 even individual data summary values from the lines.
 
 The effectiveness of a parallel coordinates plot comes from the visual
-shapes produced by the lines.  For example, in @fig-parallel,
+shapes of the line data symbols, which allow us to decode
+data summaries.  For example, in @fig-parallel,
 we are able to identify a group of four lines at the top of the plot
-that are separate from the other lines.  This grouping across
+that are separate from the other lines, plus a group of three
+lines at the bottom.  This grouping across
 at least three variables (clean breaks, tries, and points) is easier
 to see compared to @fig-multiple.  We can also more clearly see
 that there are two teams that have similar numbers of runs to the top four,
 but then are mixed in with the other teams on the other variables.
 Furthermore, the fact that many of the lines are reasonably horizontal
-rather than criss-crossing each other wildly suggests that there is 
-an overall correlation between all four quantitative variables, not
-just in the top four teams.
+rather than criss-crossing each other suggests that there is 
+an overall correlation between all four quantitative variables,
+especially the last three variables, and not
+just amongst the top four teams.
+
+Compared to @fig-splom, it is easier to decode multivariate
+correlations from @fig-parallel and it is easier to decode
+multivariate clusters and outliers.
+A parallel coordinates plot can also cope with a larger number
+of variables;  we just add another vertical axis rather than
+having to add an entire new row and column to a scatter plot matrix.
 
 > A parallel coordinates plot can be effective at identifying 
   high-dimensional groups or correlations
   because it maps multiple data values from different variables
   to a single visual shape.
 
-## Case study:  Bubble plots
+One major issue with a parallel coordinates plot is that the
+visual shapes created by the lines are extremely dependent on
+the order of the variables along the x-axis.
+For example, @fig-parallel-order shows exactly the same
+data as @fig-parallel, but with a different ordering of the
+variables.
+It is now much harder to identify a group of four teams at the top
+and a group of three teams at the bottom.
+There is also now no clear decoding of parallel lines between variables,
+so no sense of correlation between variables
+(all neighbouring pairs of variables are less correlated).
 
-An example of using area/size for third variable.
+```{r}
+#| echo: false
+#| label: fig-parallel-order
+#| fig-cap: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.  The order of the axes matters.
+gg <- ggparcoord(RWCperGame, 
+           columns=c(5, 11, 10, 9, 7), groupColumn="sphere",
+           scale="uniminmax", alpha=.5) +
+    scale_x_discrete(expand=expansion(.02)) +
+    scale_y_continuous(guide=guide_none()) +
+    scale_colour_discrete(guide=guide_legend(reverse=TRUE),
+                          name="hemisphere") +
+    theme(axis.title=element_blank(),
+          panel.grid.major.x=element_line())
+grid.newpage()
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
 
-Provide some better options.
+We can also have a large influence on the shapes in a parallel
+coordinates plot by inverting the direction of the axes.
+For example, @fig-parallel-neg shows the same data as @fig-parallel
+and with the same ordering of the variables, but with the axes
+for line breaks and 
+points inverted so that higher values are at the bottom and lower
+values are at the top.
+In other words, the positive relationships between runs and line breaks,
+between line breaks and tries,
+and between tries and points are now negative relationships
+(a higher number of tries correlates with a lower number of negative points).
 
-## Small multiples[^small-multiples]
+The arrangement in @fig-parallel-neg shows that a negative correlation between
+two adjacent variables shows up as many crossings of lines
+at a very tight location (rather than lots of mostly parallel lines
+with few crossings for positive correlation).
+This demonstrates that 
+it can be easier to identify a negative relationship than a
+positive one with a parallel coordinates plot.
+For example, the tight crossing of lines between runs and (negative) 
+line breaks 
+and between (negative) line breaks and tries stands out
+more in this plot than the roughly parallel lines for the same
+pairs of variables in @fig-parallel.[^parallel-perception]
+On the downside, it is now much harder to identify clusters.
+For example, it is more difficult to identify 
+the group of four teams that all have
+high numbers of line breaks, tries, and points.
 
-[^small-multiples]:
-  Tufte's small multiples
+[^parallel-perception]:
+    There are many variations on parallel coordinates plots that
+    attempt to mitigate some of the visual artifacts that can occur.
+    For example, @slope-dependent-parallel
+    suggest a way to reduce the 
+    higher visual impact of steeper, intersecting lines in a parallel 
+    coordinates plot.
+
+```{r}
+#| echo: false
+#| label: fig-parallel-neg
+#| fig-cap: A data visualisation of the performance measures for teams in the 2023 Rugby World Cup.  The direction of the axes matters.
+temp <- RWCperGame
+temp$negpoints <- -temp$points
+temp$negbreaks <- -temp$breaks
+gg <- ggparcoord(temp, 
+           columns=c(9, 11, 13, 10, 12), groupColumn="sphere",
+           scale="uniminmax", alpha=.5) +
+    scale_x_discrete(expand=expansion(.02)) +
+    scale_y_continuous(guide=guide_none()) +
+    scale_colour_discrete(guide=guide_legend(reverse=TRUE),
+                          name="hemisphere") +
+    theme(axis.title=element_blank(),
+          panel.grid.major.x=element_line())
+grid.newpage()
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+Parallel coordinates plots are often used on much larger data sets,
+in which case overplotting becomes a serious problem 
+(@sec-overplot).  The use of colour for different groups 
+and the use of semitransparent colours for the lines can
+be helpful.[^parallel-interactive]
+
+[^parallel-interactive]:
+    Parallel coordinates plots are an example of a data visualisation
+    that benefits a lot from interactivity.  The ability to select 
+    subsets of the lines can help with overplotting and the ability to
+    rapidly experiment with different orderings 
+    and directions of the axes can help with determining the
+    most effective view of the data.
+
+## Case study: Profile plots
 
 One difficulty with @fig-parallel is that many of the lines overlap
-each other, which makes it difficult to separately perceive 
-individual visual shapes.  @fig-profile shows an alternative
+each other, which makes it difficult to decode the separate
+visual shapes.  @fig-profile shows an alternative
 approach to visualising the same data, called 
-a profile plot.  Similar to a parallel coordinates plot, 
-a visual shape is drawn for each country, but 
-the shape in this case is a filled in polygon, effectively the lines
-in @fig-parallel with the area below them (down to zero) filled in.
+a profile plot.[^small-multiples]  Similar to a parallel coordinates plot, 
+a visual shape is drawn for each country, but each shape
+is drawn at its own position in space and
+the shape a filled polygon, effectively the lines
+in @fig-parallel with the area below them filled in.
 
-Again, this sort of data visualisation 
+[^small-multiples]:
+    The idea of drawing lots of small repeated plots,
+    with a consistent scale and style is referred to by
+    @tufte1983visual as *small multiples*.
+    This corresponds strongly with the idea of facetting (@sec-facetting).
+
+Like the parallel coordinates plot, this sort of data visualisation 
 can be effective because of the overall shapes.
 For example, we can see a group of
 four shapes that are larger than the others.
 We can also see that Argentina and Fiji appear
-very similar, which was not apparent in previous plots.
+very similar, which was not easily apparent in previous plots.
 
 ```{r}
 #| echo: false
@@ -253,199 +806,129 @@ the countries have been ordered by the number of points scored
 (the right-hand height of the shape).  As we have seen before,
 ordering data symbols can make a big difference (@sec-distance-effect).
 
-## Facetting {#sec-facetting}
-
-**TODO**
-refer back to enclosure in visual-model.Rmd
-
-@fig-facet-before shows a line plot of the number of youth offenders per year
-in different Police Districts of New Zealand.
-This visualisation makes use of several effective mappings. 
-For example, we encode
-year as horizontal **position** and we encode count as
-vertical **position**.
-However, there is also a weaker mapping:  the Police District.
-We encode districts as **colour**, but because there are 12 different districts,
-we are exceeding the capacity of colour (@sec-capacity).  It is not
-easy to differentiate all of the different colours (not helped by 
-overplotting of the lines).
-
-A better mapping for Police District would be **position**, which has
-a much higher capacity, but position
-has already been taken by year and count.
-
-```{r}
-#| echo: false
-#| label: fig-facet-before
-#| fig-cap: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
-ggplot(crimeDistrict) +
-    geom_line(aes(year, count, colour=district)) +
-    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
-    scale_colour_manual(values=carto_pal(12, "Safe")) +
-    theme(aspect.ratio=1)
-```
-
-@fig-facet-after shows one solution: a facetted plot.[^facetting]
-Each district has been encoded as a **position in space**
-and we draw a separate plot for each district.  This makes
-it very easy to distinguish the individual districts.
-
-[^facetting]: 
-  trellis multi-panels, ggplot2 facets, GoG ??
-
-One downside is that comparisons between districts are more difficult
-because counts and/or years are **unaligned** (@sec-unaligned-pos).
-In this case, we have mitigated that problem by drawing a grey line
-for all districts in each plot.  Similar to grid
-lines, this makes it easier to compare the line for each district
-to other districts (@sec-perception-relative).
-
-```{r}
-#| echo: false
-#| label: fig-facet-after
-#| fig-cap: A data visualisation of the number of offenders per year in different Police Districts of New Zealand, from 2011 to 2021.
-crimeDistrict$district <- 
-    reorder(crimeDistrict$district, crimeDistrict$count, max)
-crime2 <- crimeDistrict
-crime2$district2 <- crime2$district
-crime2$district <- NULL
-ggplot(crimeDistrict) +
-    geom_line(aes(year, count, group=district2), data=crime2, 
-              col="grey", linewidth=.2) +
-    geom_line(aes(year, count)) +
-    scale_x_continuous(breaks=seq(2012, 2020, 4)) +    
-    facet_wrap(vars(district)) +
-    theme(aspect.ratio=.8)
-```
-
-We have again ordered the panels so that districts are near to other districts
-with a similar starting count of offenders (@sec-distance-effect).
-
-## Case study: Scatterplot matrices
-
-@fig-splom shows a scatter plot matrix 
-of the performance measures
-for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
-
-This is another example of reusing **position** to encode data values.
-Each combination of variables is encoded as a separate scatter plot
-at a different position in space
-and, within each scatter plot, two variables are encoded as horizontal
-and vertical position.
-
-Within each scatter plot, there is an emergent feature of position in
-space, which allows us to decode the correlation between different
-pairs of variables.  Although this only allows us to see pairwise
-correlations between variables, we can also get a glimpse of 
-higher-level correlations across several of the scatterplots.
-
-For example,
-looking down the diagonal of the matrix,
-we can see that: the number of runs is correlated loosely with
-the number of clean breaks; the number of clean breaks is more
-strongly correlated with the number of tries; and the number of tries is
-very strongly correlated with the number of points.
-
-If we look down the first column of the matrix, we
-can see that:  the number of runs is correlated loosely
-with the number of clean breaks, a little more loosely with the number
-of tries and a little more loosely still with the number of points.
-
-```{r}
-#| echo: false
-#| label: fig-splom
-#| fig-cap: A scatter plot matrix of the quantitative performance measures for teams in the 2023 Rugby World Cup.
-quants <- c("runs", "breaks", "tries", "points")
-mat <- subset(RWCperGame, 
-              select=c(quants, "sphere"))
-## https://stackoverflow.com/questions/3735286/create-a-matrix-of-scatterplots-pairs-equivalent-in-ggplot2
-mat <- mutate(mat, id = rownames(mat)) 
-
-## Prepare data to be plotted on the x axis
-x_vars <- pivot_longer(data = mat,
-             cols = 1:4,
-             names_to = "variable_x",
-             values_to = "x")
-
-## Prepare data to be plotted on the y axis  
-y_vars <- pivot_longer(data = mat,
-                       cols = 1:4,
-                       names_to = "variable_y",
-                       values_to = "y") 
-
-## Join data for x and y axes and make plot
-all <- full_join(x_vars, y_vars, 
-          by = c("id", "sphere"),
-          relationship = "many-to-many")
-all$variable_x <- factor(all$variable_x, levels=quants)
-all$variable_y <- factor(all$variable_y, levels=quants)
-all <- subset(all, 
-              variable_x != variable_y &
-              variable_x != "points" &
-              variable_y != "runs" &
-              !(variable_x == "tries" & variable_y == "breaks"))
-ggplot(all) + 
-    aes(x = x, y = y, color = sphere) +
-    geom_point() +
-    facet_grid(variable_y ~ variable_x, scales="free") +
-    theme(axis.title=element_blank(),
-          aspect.ratio=1)
-```
-
-## Non-cartesian mappings
-
-Parallel plots is actually an example of this, so can just
-refer back to @sec-parallel
-
-Refer back to @sec-cartesian
-
-## Case study: kiviat plots or radar plots or spider plots
-
-  (David Peebles (2008))
-
-## Case study: 2D density plots
-
-Stat summary visualised 
-
-Compare with visual summary of density of points
-
-Different pros for each approach
-
-refer back to @sec-pos-scarce (overplotting)
-and mention that shapes are one solution,
-with all of the drawbacks of not being able to decode individual
-data values.
-Footnote surjective/injective?
+A major weakness with a profile plot like @fig-profile is that it
+does not scale well to large data sets.  For example,
+adding another country to @fig-profile would take up additional space,
+but no more space would be necessary for a parallel coordinates plot
+like @fig-parallel because we would just add another line.
 
 ## Dangers of multiple mappings
 
 @fig-multiple showed that the naive approach of just using 
 a separate visual feature for each data variable leads to
 complex data visualisations that are difficult to decode.
-Although there are better options, like small multiple and facetting,
-there is still a limit to how much information can effectively be displayed at
-once within a static data visualisation.
 
-This is one area where dynamic and interactive graphics can be useful
-because the viewer is able to rapidly switch between multiple views
-of the data, which means that each individual view can be 
-simpler.[^multiple-interactive]
+We have explored some alternative data visualisations
+of multiple variables that provide better decoding of
+individual data values, like facetting and scatter plot matrices,
+but they do not provide effortless decoding of multivariate data summaries,
+like correlation and clusters.
 
-[^multiple-interactive]:
-  Cite again the classic interactive lit ?
-  Point to some tools that might help, like GGobi?
+The alternatives that provide better decoding of multivariate data summaries,
+like 3D plots and parallel coordinate plots, rely on visual shapes that can
+be decoded to data summaries, but sacrifice the ability to accurately decode
+individual data values.
+One danger is that there is still a temptation to
+decode individual data values, which can result in erroneous or
+misleading conclusions.
+
+For example, in @fig-3d-scatter, we may be tempted to decode and compare
+the number of clean breaks for different teams based on the positions
+of the data points and the labels on the axes, but that is unlikely
+to result in an accurate decoding, even for ordinal comparisons.
+
+It is perhaps safer to make it clear that only visual shapes should be
+decoded from the 3D scatter plot by removing the axis scales
+altogether, as in @fig-3d-scatter-no-ticks.
+
+```{r}
+#| echo: false
+#| label: fig-3d-scatter-no-ticks
+#| results: hide
+#| fig-cap: A data visualisation of three RWC variables
+cols <- pal_npg()(2)
+mat <- matrix(c(0.916227459907532, 0.189996436238289, -0.352744400501251, 
+                0, -0.39954274892807, 0.498933911323547, -0.769045233726501, 
+                0, 0.0298802461475134, 0.845556795597076, 0.533048689365387, 
+                0, 0, 0, 0, 1), ncol=4)
+open3d(userMatrix=mat)
+plot3d(RWCperGame$breaks, RWCperGame$tries, RWCperGame$points,
+       type="n", decorate=FALSE)
+decorate3d(xlab="breaks", ylab="tries", zlab="points",
+           axes=FALSE, aspect=1)
+bbox3d(xlen=0, ylen=0, zlen=0, color=c("white"))
+spheres3d(RWCperGame$breaks, RWCperGame$tries, RWCperGame$points,
+          col=cols[(RWCperGame$sphere == "North") + 1])
+```
+
+Given the problems with 
+decoding individual data values, the classic
+objection to 3D plots is justified:  if only two dimensions are
+required, then nothing is gained by adding a third dimension.
+There are really no arguments in favour of @fig-bar-3d-bad-1
+over @fig-bar-3d-bad-2.
+
+```{r}
+#| echo: false
+#| label: fig-bar-3d-bad
+#| layout-ncol: 2
+#| fig-width: 4
+#| fig-cap: A data visualisation of youth crime by age for 2021
+#| fig-subcap:
+#|   - 3D bar plot 
+#|   - 2D bar plot
+notrun <- function() {
+    gg <- ggplot(subset(crimeAge, year == 2021)) +
+        geom_col(aes(x=ageFactor, y=1, fill=rate)) +
+        ggtitle("Youth Crime in New Zealand",
+                "Distinct offenders per 10,000 pop.") +
+        scale_x_discrete(name="age") + 
+        scale_y_continuous(guide=FALSE, name=NULL) +
+        scale_fill_continuous(limits=c(0, NA), guide=FALSE) +
+        theme(aspect.ratio=1/3,
+              plot.subtitle=element_text(margin=margin(0, 0, 50, 0)),
+              plot.title.position="plot")
+    plot_gg(gg, width = 5, height = 5, multicore = TRUE, scale = 500, 
+            zoom = .6, theta = 30, phi = 35, windowsize = c(1600, 800))
+    render_snapshot()
+}
+df <- subset(crimeAge, year == 2021)
+cloud(rate ~ factor(age) + factor(year), df, panel.3d.cloud=panel.3dbars,
+      zlim=c(0, max(df$rate)), xbase=.5, ybase=.5,
+      scales=list(arrows=FALSE), xlab="age", ylab="year",
+      col.facet="grey")
+ggplot(df) +
+    geom_col(aes(age, rate))
+```
 
 ## Summary
 
-When we need to visualise multiple variables at once, it is not
-effective to map each different variable to a different visual feature.
+When we visualise multiple variables at once, it is not
+effective to map each different variable to a different visual feature
+because that usually forces us to make use of a visual feature that is
+either inappropriate or inaccurate.
 
 An alternative is to reuse the same visual feature for multiple
 different variables.
-In particular, small multiples, or facetting, allows us
-to use **position** for more than 
-just two variables.
+In particular, we can reuse **position** for more than 
+just two variables, for example, to create a scatter plot matrix
+or a facetted plot.
+This at least allows us to accurately decode individual variables.
 
+Another alternative is to use non-cartesian coordinates, for
+example 3D plots or parallel coordinates plots.
+These generate visual shapes that allow us to decode multivariate
+data summaries, like multivariate clusters and multivariate correlations.
+However, in order to gain multivariate data summaries,
+we typically have to sacrifice the ability to accurately decode individual
+data values.
+
+No matter which approach we use,
+there is still a limit to how much information can effectively be displayed at
+once within a static data visualisation.
+This is one area where dynamic and interactive graphics can be useful
+because the viewer is able to rapidly switch between multiple views
+of the data.  
 
 ---
 

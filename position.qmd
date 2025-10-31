@@ -18,6 +18,10 @@ with high capacity (@fig-pos-cap).[^pos-fundamental]
     It can be argued that position is a visual feature that is 
     fundamental to our perception of any image.
 
+    @bertin1967semiologie separates the *planar dimensions*
+    (horizontal and vertical position)
+    from the *retinal variables* (colour, area, angle, etc).
+
     "There is fairly widespread philosophical agreement, which certainly accords
     with commonsense, that the spatial aspects of all existence are
     fundamental. Before an awareness of time, there is an awareness of relations
@@ -576,10 +580,13 @@ from the difference between two data symbols.
 #| fig-cap: A ternary plot of the data in @tbl-crime-level-tern.  We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
 #| message: false
 ggplot(crimeLevel3, aes(High, Low, Medium)) + 
-    geom_point(aes(colour=as.factor(year))) +
-    scale_colour_manual(values=grey(.8 - 1:11/14), name="") +
+    geom_point(aes(fill=as.factor(year)), colour="black", shape=21, size=2) +
+    scale_fill_discrete_sequential(palette="Greens") + ## manual(values=grey(.8 - 1:11/14), name="") +
     coord_tern() +
-    theme(tern.panel.expand=.3)
+    theme(tern.panel.expand=.3,
+          tern.panel.background=element_rect(fill=figbg),
+          tern.panel.grid.major=element_line(colour="white"),
+          tern.panel.grid.minor=element_line(colour="white"))
 ```
 
 ## Non-linear mappings {#sec-non-linear-pos}

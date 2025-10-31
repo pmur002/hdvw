@@ -2436,6 +2436,10 @@ with high accuracy (Figure~\ref{fig-accuracy}) and with high capacity
 (Figure~\ref{fig-pos-cap}).\footnote{It can be argued that position is a
   visual feature that is fundamental to our perception of any image.
 
+  Bertin (1967) separates the \emph{planar dimensions} (horizontal and
+  vertical position) from the \emph{retinal variables} (colour, area,
+  angle, etc).
+
   ``There is fairly widespread philosophical agreement, which certainly
   accords with commonsense, that the spatial aspects of all existence
   are fundamental. Before an awareness of time, there is an awareness of
@@ -6311,8 +6315,7 @@ additional decodings possible from the data symbols in a scatterplot
 because the additional visual feature of position in space emerges from
 the combination of horizontal and vertical position.
 
-\section{Visual features that
-interact}\label{visual-features-that-interact}
+\section{Visual features that interact}\label{sec-configural}
 
 We have seen that some combinations of visual features, such as
 \textbf{position} and \textbf{length} (Figure~\ref{fig-bar-gender}) and
@@ -7503,6 +7506,26 @@ hemisphere.}
 
 \end{figure}%
 
+\section{Visual features of visual shapes}\label{sec-vis-shape-feature}
+
+We have emphasised that a data symbol like a line in a line plot is the
+result of encoding multiple data values as the \textbf{positions} that
+the line is drawn between. This results in a \textbf{visual shape} that
+is more effective for decoding \textbf{data summaries} rather than
+decoding the individual data values.
+
+However, the examples that we have seen in Figure~\ref{fig-line} and
+Figure~\ref{fig-multiple-density} also involve another mapping:
+qualitative data values, like ethnic group or hemisphere, are encoded as
+the \textbf{colour} of the lines. This encoding is consistent across the
+entire data symbol. In effect, there is a simple encoding of qualitative
+data values to a basic \textbf{visual feature} of the visual shape.
+
+This means that it is possible to decode individual data values, such as
+ethnic group or hemisphere, from a visual shape if the data values have
+been encoded as a single consistent visual feature of the visual shape
+(Figure~\ref{fig-visual-feature-decode}).
+
 \section{Aspect ratio}\label{sec-aspect-ratio}
 
 Figure~\ref{fig-aspect} shows a variation on Figure~\ref{fig-line} using
@@ -7592,30 +7615,47 @@ different ranges on the plot axes.\footnote{William S. Cleveland (1994)
 
 \section{Decoding visual shapes}\label{decoding-visual-shapes}
 
-Decoding from a visual shape results in a data summary
-(Figure~\ref{fig-data-vis-shape-decode}), for example peaks and valleys,
-and, as we saw in Section~\ref{sec-summary-decode} and
-Section~\ref{sec-decode-combine}, less is known about how well we can
-perform this sort of decoding.
+As we saw in Section~\ref{sec-vis-shape-feature}, if data values are
+encoded as a single, consistent visual feature of a visual shape, for
+example the colour of a line, then the original data values can be
+decoded from the basic visual feature, as described in earlier chapters
+for simpler data symbols like bars.
 
-However, there is experimental support for the intuitive sense that we
-can perform well at decoding qualitative features from shapes, such as
-peaks and valleys, as well as decoding ordinal comparisons, such as
-steeper and shallower.\footnote{Proma et al. (2025) showed that people
-  are good at reproducing (therefore identifying) trends, peaks, and
-  valleys, if less so at reproducing periodicity, noise/variability.
+For data values that are encoded as different values of a visual
+feature, such as the positions that a line is drawn between, decoding
+from a visual shape results in data summaries
+(Figure~\ref{fig-data-vis-shape-decode}), for example peaks and valleys.
+The visual system's ability to rapidly and effortlessly identify a wide
+range of data summaries is part of why data visualisation is so
+effective. It is difficult to calculate data summaries numerically from
+the raw data with the same flexibility.\footnote{The survey of
+  anomaly-detection techniques by Chandola, Banerjee, and Kumar (2009)
+  gives a sense of how difficult it is to provide a general-purpose
+  numerical technique for detecting features of interest in data values.}
+On the downside, as we saw in Section~\ref{sec-summary-decode} and
+Section~\ref{sec-decode-combine}, the huge range of possible data
+summaries means that less is known about how accurately we can decode
+any particular data summary.
+
+There is experimental support for the intuitive sense that we can
+perform well at decoding qualitative features from shapes, such as peaks
+and valleys, as well as decoding ordinal comparisons, such as steeper
+and shallower.\footnote{Proma et al. (2025) showed that people are good
+  at reproducing (therefore identifying) trends, peaks, and valleys, if
+  less so at reproducing periodicity, noise/variability.
 
   Correll and Heer (2017) showed that decoding of trends from line plots
   (and scatter plots) is quite accurate, at least relative to
   ordinary-least-squares models.} However, as
-Section~\ref{sec-aspect-ratio} demonstrated, decodings of slopes is are
-limited to physical slopes, which are dependent on the aspect ratio,
-rather than decoding absolute rates of change in the data.\footnote{William
-  S. Cleveland, McGill, and McGill (1988) points out that the accuracy
-  of decoding slopes is only relevant to comparing the \emph{relative
-  steepness} of different regions of a line. This is not accuracy in
-  terms of decoding the actual rate of change in the data. For that
-  purpose, we should encode the actual rate of change directly.}
+Section~\ref{sec-aspect-ratio} demonstrated, the decoding of slopes is
+limited to \emph{physical} slopes, which are dependent on the aspect
+ratio, rather than decoding absolute rates of change in the
+data.\footnote{William S. Cleveland, McGill, and McGill (1988) points
+  out that the accuracy of decoding slopes is only relevant to comparing
+  the \emph{relative steepness} of different regions of a line. This is
+  not accuracy in terms of decoding the actual rate of change in the
+  data. For that purpose, we should encode the actual rate of change
+  directly.}
 
 \section{Case study: Box plots}\label{case-study-box-plots}
 
@@ -7759,8 +7799,9 @@ between the lines to be a narrowing gap.
 }
 
 \caption{\label{fig-gap}The two lines in this plot are just the same
-curve shifted vertically, but we decode a decrease in the gap between
-the lines.}
+curve shifted vertically---the vertical distance between the lines in
+constant. However, we decode the visual shape between the lines as a
+decrease in the gap between the lines.}
 
 \end{figure}%
 
@@ -7919,10 +7960,6 @@ Once again, we have a data visualisation that can be usefully decoded in
 a particular way, but which also contains encodings that are difficult
 and potentially misleading.
 
-cite the paper (cook? hofmann?) that looked at identification of curves
-vs straight lines in log-log plots? but only in visual-shapes chapter
-when call back to non-linear scales in position chapter
-
 \section{Summary}\label{summary-9}
 
 Mapping multiple rows of data values to a single data symbol produces a
@@ -7952,25 +7989,21 @@ confuse or mislead.
 
 \chapter{Multiple Mappings}\label{multiple-mappings}
 
-\textbf{TODO} a side-by-side bar plot and even a stacked bar plot both
-use nested position!!! Also stacked dot plots like fig-rwc-dotplot.
-
-\textbf{TODO} add 3d section. Accuracy of decoding raw data values is
-low, but more to decode shapes (i.e., summaries) from surfaces etc,
-anyway
-
 Figure~\ref{fig-multiple} shows a data visualisation of the performance
 measures for teams in the 2023 Rugby World Cup
 (Table~\ref{tbl-rwc-2023}). This visualisation is different from
-anything we have seen previously because it involves multiple mappings.
-The data symbol in this case is a simple data point, but we have mapped
-data values to \emph{five} different visual features of each data point.
+anything we have seen previously because it involves \textbf{multiple
+mappings}. The data symbol in this case is a simple data point, but we
+have mapped data values to \emph{five} different visual features of each
+data point.
+
 The number of clean breaks is encoded as the horizontal
 \textbf{position} of the data points and the number of tries is encoded
 as the vertical \textbf{position} of the data points. The number of
-points scored is encoded as the \textbf{size} of the points, the
-hemisphere is encoded as the \textbf{shape} of the points, and the
-number of runs is encoded as the \textbf{colour} of the points.
+points scored is encoded as the \textbf{area} of the data points, the
+hemisphere is encoded as the \textbf{shape} of the data points, and the
+number of runs made is encoded as the \textbf{colour} of the data
+points.
 
 \begin{figure}
 
@@ -7994,10 +8027,17 @@ between clean breaks and tries from the emergent feature of
 
 However, other mappings are less effective. For example, it is less easy
 to accurately decode number of points scored from size and even harder
-to decode the number of runs from colour. In addition, we are hampered
-by the fact that many different visual features are changing at once, so
-it is harder to perceive individual differences (see
-Section~\ref{sec-differences}).
+to decode the number of runs made from colour. These are poor encodings
+for quantitative data values.
+
+In addition, we are hampered by the fact that many different visual
+features are changing at once, so it is harder to decode changes in any
+one visual feature (Section~\ref{sec-differences}), plus there are
+interactions between some visual features, which can affect the decoding
+of individual features (Section~\ref{sec-configural}). For example, the
+comparison of data points in terms of their \textbf{size} is made harder
+by the concurrent changes in \textbf{pattern}; it is difficult to tell
+whether a triangle has the same area as a circle.
 
 One goal of visualising multiple variables like we have in
 Figure~\ref{fig-multiple} is to discover or display multivariate
@@ -8005,34 +8045,375 @@ relationships between the variables. For example, we can see that there
 are four teams in the top-right corner of the plot that are all
 relatively large and relatively dark in colour, which suggests that
 there is a group of teams that run more, make more clean breaks, score
-more tries, and score more points compared to the other teams.
+more tries, and score more points compared to the other teams. However,
+the decoding of multivariate relationships is not necessarily immediate
+nor effortless from Figure~\ref{fig-multiple}.
 
 This chapter looks at some of the different approaches to visualising
-several variables at once. How do we perceive multivariate
-relationships? And can we still perceive individual data values at the
-same time?
+several variables at once. How do we encode multiple variables so that
+we can decode multivariate relationships? And can we still decode
+individual data values from individual variables at the same time?
 
-\section{Parallel coordinates plots}\label{sec-parallel}
+\section{Scatter plot matrices}\label{sec-splom}
 
 One issue with Figure~\ref{fig-multiple} is that it attempts to map each
 data variable to a separate visual feature. Once we have used both
 horizontal and vertical \textbf{position}, we have to start using less
 accurate and less appropriate visual features, like \textbf{area} and
-\textbf{colour} for quantitative data values (see
-Chapter~\ref{sec-mapping-visual-features}). If we attempted to map all
-of the variables in Table~\ref{tbl-rwc-2023}, we could actually run out
-of visual features to use (Figure~\ref{fig-visual-features}).
+\textbf{colour} for quantitative data values
+(Section~\ref{sec-accuracy}). If we attempted to map all of the
+variables in Table~\ref{tbl-rwc-2023}, we could actually run out of
+visual features to use (Figure~\ref{fig-visual-features}).
 
-An alternative approach is to map more of the data variables to the same
-visual feature. For example, Figure~\ref{fig-parallel} shows a parallel
-coordinates plot of the data from Figure~\ref{fig-multiple}. In this
-visualisation, all of the quantitative variables have been encoded as
-\textbf{position}, with just hemisphere (qualitative) encoded as
-colour.\footnote{``GoFish: A Grammar of More Graphics!'' Pollock and
-  Satyanarayan (2025) Cite this as a grammar that allows more explicit
-  reuse of position (via ``geometric operators''). NOTE that the
-  stacking of bars in a stacked bar plot is also a simple version of the
-  reuse of position.}
+An alternative approach is to map more of the data variables to the
+\emph{same} visual feature. In particular, we can map more variables to
+\textbf{position}.\footnote{The reuse of position is handled in a
+  variety of ways within data visualisation frameworks. For example, the
+  Grammar of Graphics (Wilkinson 2005) allows for \emph{collision
+  modifiers} to solve overlapping and separately allows for
+  \emph{facets}. GoFish (Satyanarayan 2026) introduces the idea of
+  \emph{geometric operators}, such as stacking, to the visualisation
+  grammar.
+
+  In this book, we will just talk about encoding more than two variables
+  to position.}
+
+Figure~\ref{fig-splom} shows a scatter plot matrix of the performance
+measures for teams in the 2023 Rugby World Cup
+(Table~\ref{tbl-rwc-2023}). These are the same data values that are
+encoded in the complicated scatter plot in Figure~\ref{fig-multiple}.
+Apart from hemisphere, each different variable is encoded as a
+horizontal and vertical position and a scatter plot is created for each
+combination of variables. For example, the number of runs is encoded as
+the top row and the left column of scatter plots. Within each scatter
+plot, two variables are encoded as horizontal and vertical position. For
+example, the second plot in the first row is a scatter plot of the
+number runs versus the number of clean breaks.
+
+We can decode which variables are being combined because this is just a
+qualitative decoding from position. Within each scatter plot, the
+encoding of data values as position allows us to decode and compare
+individual data values and this provides a superior decoding for most
+variables compared to Figure~\ref{fig-multiple}. For example, it is easy
+to decode from the position of data points in the second scatter plot on
+the top row that the lowest number of runs made was about 80. This
+decoding is much more difficult from the colour of the data points in
+Figure~\ref{fig-multiple}. We can also identify clusters and outliers
+within each scatter plot, which is another improvement over
+Figure~\ref{fig-multiple}.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-splom-1.pdf}
+
+}
+
+\caption{\label{fig-splom}A scatter plot matrix of the quantitative
+performance measures for teams in the 2023 Rugby World Cup.}
+
+\end{figure}%
+
+The emergent feature of position in space within each scatter plot
+allows us to decode the correlation between each pair of variables
+(Section~\ref{sec-integral}) and we can also get a glimpse of
+multivariate correlations by comparing multiple scatterplots.
+
+For example, looking down the scatter plots just above the diagonal of
+the matrix, we can see that: the number of runs is correlated loosely
+with the number of clean breaks; the number of clean breaks is more
+strongly correlated with the number of tries; and the number of tries is
+very strongly correlated with the number of points. This suggests a
+multivariate correlation between all four of these variables.
+
+If we look down the first column of the matrix, we can see that: the
+number of runs is correlated loosely with the number of clean breaks, a
+little more loosely with the number of tries, and a little more loosely
+still with the number of points.
+
+One negative, however, is that this decoding of multivariate
+relationships requires significant cognitive effort
+(Section~\ref{sec-tasks}). A scatter plot matrix is not particularly
+effective at allowing us to \emph{effortlessly} decode multivariate
+relationships.
+
+\begin{quote}
+A scatter plot matrix is effective for decoding individual data values
+from multiple variables at once, plus pairwise correlations. However,
+scatter plot matrices are less effective for decoding multivariate
+relationships.
+\end{quote}
+
+\section{Facetting}\label{sec-facetting}
+
+Figure~\ref{fig-facet-before} shows a line plot of the number of youth
+offenders per year in different Police Districts of New Zealand. This
+visualisation makes use of several effective mappings. For example, we
+encode year as horizontal position and we encode count as vertical
+position, although the line data symbols are \textbf{visual shapes}
+(Section~\ref{sec-line-plots}), so the most effective decoding is to
+\textbf{data summaries}, like the overall downward trend for all
+districts.
+
+The encoding of police district in Figure~\ref{fig-facet-before} is less
+effective. The district is encoded as \textbf{colour}, but because there
+are 12 different districts, we are exceeding the capacity of colour
+(Section~\ref{sec-capacity}). It is not easy to identify all of the
+different districts from the colours of the lines (not helped by the
+overplotting of the lines).
+
+A better encoding for Police District would be \textbf{position}, which
+has a much higher capacity, but, similar to Figure~\ref{fig-multiple},
+we have been forced to use colour because position has already been
+taken by year and the number of offenders.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-facet-before-1.pdf}
+
+}
+
+\caption{\label{fig-facet-before}A data visualisation of the number of
+offenders per year in different Police Districts of New Zealand, from
+2011 to 2021.}
+
+\end{figure}%
+
+Figure~\ref{fig-facet-after} shows a solution---a \textbf{facetted
+plot}---that, like a scatter plot matrix, reuses position to encode
+additional variables.\footnote{This method of producing a sub-plot for
+  each level of a qualitative variable (or for each combination of
+  levels for multiple qualitative variables) is called \emph{facetting}
+  in the Grammar of Graphics (Wilkinson 2005), but it is also known as
+  \emph{multipanel} \emph{conditioning} plots or \emph{trellis plots}
+  (Becker, Cleveland, and Shyu 1996).} In Figure~\ref{fig-facet-after},
+each district is encoded as a \textbf{position in space} and we draw a
+separate plot for each district. This makes it very easy to decode the
+individual districts, much easier than it is with
+Figure~\ref{fig-facet-before}.
+
+The plot for each district also has an enclosing border, which helps to
+visually differentiate between districts
+(Section~\ref{sec-visual-model-groups}) and we have ordered the panels
+so that districts are near to other districts with a similar starting
+count of offenders (Section~\ref{sec-distance-effect}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-facet-after-1.pdf}
+
+}
+
+\caption{\label{fig-facet-after}A data visualisation of the number of
+offenders per year in different Police Districts of New Zealand, from
+2011 to 2021.}
+
+\end{figure}%
+
+One downside to Figure~\ref{fig-facet-after} is that decoding and
+comparison of the number of offenders between districts and/or years is
+more difficult because the vertical and horizontal positions are
+\textbf{unaligned} for some comparisons
+(Section~\ref{sec-unaligned-pos}). In this case, we have mitigated that
+problem by drawing a grey line for all districts in each plot. Similar
+to grid lines, this makes it easier to compare the line for each
+district to other districts (Section~\ref{sec-perception-relative}).
+
+\section{Case study: Bar plots}\label{case-study-bar-plots}
+
+Figure~\ref{fig-bar-pos-stack} shows a stacked bar plot of the youth
+crime rate in New Zealand over time, broken down by age group. The data
+symbols are bars. The crime rate is encoded as the (vertical)
+\textbf{length} of the bars and the year is encoded as the horizontal
+\textbf{position} of the bars. These mappings are supplemented by an
+additional encoding of age as the vertical \textbf{position} of the
+bars. In effect, the final vertical position of each bar is a
+complicated encoding of crime rate plus age group.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-bar-pos-stack-1.pdf}
+
+}
+
+\caption{\label{fig-bar-pos-stack}A bar plot of the number of offenders
+in each age group over time.}
+
+\end{figure}%
+
+An alternative is shown in Figure~\ref{fig-bar-pos-dodge}, where we have
+the same data, but in the form of a side-by-side bar plot. This
+simple-seeming plot demonstrates another example of reusing position to
+encode multiple data values.
+
+The crime rate is again encoded as the lengths of the bars and the year
+is encoded as the horizontal position of the bars. These mappings are
+supplemented by an additional encoding of age as the horizontal position
+of the bars.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-bar-pos-dodge-1.pdf}
+
+}
+
+\caption{\label{fig-bar-pos-dodge}A bar plot of the number of offenders
+in each age group over time.}
+
+\end{figure}%
+
+In effect, the side-by-side bar plot is like a facetted plot, where each
+year is its own bar plot, with age group encoded as horizontal position
+and crime rate encoded as length. For example,
+Figure~\ref{fig-bar-pos-facet} shows the same data in a plot with one
+facet per year.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-bar-pos-facet-1.pdf}
+
+}
+
+\caption{\label{fig-bar-pos-facet}A bar plot of the number of offenders
+in each age group over time.}
+
+\end{figure}%
+
+\section{Non-cartesian mappings}\label{sec-non-cartesian}
+
+Another way to encode more variables using \textbf{position} is to
+abandon the standard cartesian coordinate system
+(Section~\ref{sec-cartesian}). For example, Figure~\ref{fig-3d-scatter}
+shows a 3D scatter plot of three of the performance measures for teams
+in the 2023 Rugby World Cup (Table~\ref{tbl-rwc-2023}).
+
+Figure~\ref{fig-3d-scatter} takes advantage of the visual system's
+ability to interpret a 2D image as a 3D scene
+(Section~\ref{sec-illusion}). For example, we can see that the spheres
+in Figure~\ref{fig-3d-scatter} appear to lie roughly along a line in
+space and this decodes to a multivariate correlation between the three
+variables.\footnote{This visual shape is more apparent if we are able to
+  animate the image. In the online version of this book it should be
+  possible to click and drag the mouse to rotate the image in space.} It
+is also possible to see that there are four teams somewhat separate in
+3D space (not just in a 2D plane, as we saw in
+Figure~\ref{fig-scatter}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{multiple_files/figure-pdf/fig-3d-scatter-1.-rgl.png}
+
+}
+
+\caption{\label{fig-3d-scatter}A data visualisation of three RWC
+variables}
+
+\end{figure}%
+
+The value of a 3D scatter plot lies in this ability to decode
+multivariate \textbf{data summaries} from 3D \textbf{visual shapes}.
+Decoding individual data values is extremely difficult from a 3D scatter
+plot because data values are encoded as positions along dimensions that
+are not perpendicular (Section~\ref{sec-cartesian}), may not be linear
+(Section~\ref{sec-non-linear-pos}), and are not aligned
+(Section~\ref{sec-unaligned-pos}). However, that should not be the goal
+of such a data visualisation; a 3D scatter plot is effective for
+decoding data summaries rather than raw data values.
+
+Figure~\ref{fig-3d-heatmap} shows another example of a 3D plot. This is
+a 3D version of the heatmap from Figure~\ref{fig-crime-heatmap}, which
+shows the rate of offending for different age groups across different
+years. The crime rate is encoded both as colour and as the height of a
+3D bar.
+
+Again, the decoding of positions to individual data values is not very
+accurate with this sort of 3D plot, although because there is a regular
+grid of bars, and there are not too many bars, we do not require much
+accuracy to decode year and age.
+
+The decoding of the bar heights is also inaccurate, again because of
+non-linear and unaligned scales, but also because many bars are
+partially obscured.\footnote{The problem of elements being obscured is a
+  significant one. The angle of view for Figure~\ref{fig-3d-heatmap} and
+  the placement of the plot elements was carefully chosen. As with the
+  3D scatter plot, this problem can be removed by allowing the 3D scene
+  to be rotated interactively.} This means that we cannot accurately
+decode the ratio of the highest bar to the heights of other bars; we are
+limited to ordinal comparisons at best. However, data summaries can be
+decoded from the overall visual shapes. For example, the general
+downward trend for all ages over time is much clearer in
+Figure~\ref{fig-3d-heatmap} than it was in
+Figure~\ref{fig-crime-heatmap}. The implicit visual congruence with a
+descending stairway (Section~\ref{sec-implicit}) strongly supports the
+decoding of decreasing crime rates over time.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-3d-heatmap-1.pdf}
+
+}
+
+\caption{\label{fig-3d-heatmap}A data visualisation of youth crime by
+age}
+
+\end{figure}%
+
+\begin{quote}
+A 3D plot is not effective for decoding raw data values, but it may be
+effective because the data symbols generate visual shapes in space,
+which can decode to three-dimensional data summaries, such as clusters,
+trends, and multivariate correlations.
+\end{quote}
+
+A significant limitation of 3D plots is that they can only encode three
+variables using position. Although it is possible to produce views of
+more than three dimensions on a 2D page or screen, the implicit decoding
+of visual shapes is limited to three dimensions.\footnote{A 3D plot is
+  just a \emph{projection} of three dimensions into 2D. More than three
+  dimensions can also be projected to 2D and this can result in
+  recognisable visual shapes in 2D or 3D, but decoding a meaningful data
+  summary from those shapes becomes more difficult. This is another case
+  where dynamic and interactive data visualisation can be very helpful
+  (Cook et al. 1995).}
+
+\section{Case study: Parallel coordinates plots}\label{sec-parallel}
+
+Figure~\ref{fig-parallel} shows a parallel coordinates plot of the data
+from Figure~\ref{fig-multiple}. This is another example of a
+non-cartesian coordinate system. In Figure~\ref{fig-parallel}, all of
+the quantitative variables have been encoded as \textbf{position}, but
+those positions are along a series of vertical parallel axes, rather
+than just the normal two perpendicular axes.\footnote{At a deeper level,
+  a parallel coordinates plot represents a single \emph{point} in
+  \(n\)-dimensional space with a \emph{line} through \(n\) vertices on
+  the parallel coordinates plot and several points that lie on the same
+  line in \(n\)-dimensional space translate to several lines that meet
+  at the same point on a parallel coordinate plot (or a set of lines
+  that are parallel).
+
+  Wegman (1990) provides a discussion from the point of view of
+  statistical analysis.
+
+  Inselberg (2009) provides an extremely thorough explanation,
+  derivation, and series of demonstrations, from a more abstract
+  computational geometry perspective.\\
+  The early parts of Chapter 10 provide some accessible comments
+  relevant to data visualisation.}
 
 \begin{figure}
 
@@ -8042,21 +8423,32 @@ colour.\footnote{``GoFish: A Grammar of More Graphics!'' Pollock and
 
 }
 
-\caption{\label{fig-parallel}A data visualisation of the performance
-measures for teams in the 2023 Rugby World Cup.}
+\caption{\label{fig-parallel}A parallel coordinates plot of the
+performance measures for teams in the 2023 Rugby World Cup. The data
+values from five quantitative variables are encoded as positions along
+five vertical, parallel axes. For each team, the data symbol is a line
+connecting the positions on the axes.}
 
 \end{figure}%
 
-A parallel coordinates plot maps data summaries rather than raw data
-values (Chapter~\ref{sec-summaries}). For example, all data values are
-standardised to a range between 0 and 1.\footnote{Acknowledge and point
-  to different ways that the data values can be transformed (or
-  summarised).} Table~\ref{tbl-parallel-stats} shows some of the values
-that are actually mapped to visual features in
-Figure~\ref{fig-parallel}. Each variable is encoded as a different
-horizontal \textbf{position} and the values within each variable are
-encoded as vertical \textbf{position}. In this way, all quantitative
-data values are encoded as \textbf{position}.
+The parallel coordinates plot in Figure~\ref{fig-parallel} maps data
+summaries rather than raw data values (Chapter~\ref{sec-summaries}). All
+data values are standardised to a range between 0 and 1.\footnote{It is
+  possible to use unscaled axes on a parallel coordinates plot, though
+  that becomes untenable if the range of the values on different
+  variables varies widely. There are also other ways to perform the
+  scaling, for example, standardisation (in the sense of subtracting the
+  mean and dividing by the standard deviation).}
+Table~\ref{tbl-parallel-stats} shows some of the values that are
+actually mapped to visual features in Figure~\ref{fig-parallel}. Each
+variable is encoded as a different horizontal \textbf{position} and the
+values within each variable are encoded as vertical \textbf{position}.
+In this way, all quantitative data values are encoded as
+\textbf{position}.
+
+In addition, the hemisphere is encoded as \textbf{colour} and a separate
+line data symbol is drawn for each country. This means that a visual
+shape is drawn for each country (Chapter~\ref{sec-visual-shapes}).
 
 \begin{longtable}[]{@{}lllr@{}}
 
@@ -8080,25 +8472,6 @@ Georgia & North & runs & 0.47 \\
 
 \end{longtable}
 
-In addition, the hemisphere is encoded as \textbf{colour} and a separate
-line data symbol is drawn for each country. This means that a visual
-shape is drawn for each country (Figure~\ref{fig-mappings-1-n-1-n};
-Chapter~\ref{sec-visual-shapes}).
-
-\begin{figure}
-
-\begin{minipage}{0.50\linewidth}
-
-\pandocbounded{\includegraphics[keepaspectratio]{Mappings/mapping-1-n-1-n.png}}
-
-\end{minipage}%
-
-\caption{\label{fig-mappings-1-n-1-n}In a parallel coordinates plot, a
-single row of data---one data value from each of several variables---is
-mapped to a visual shape (a line).}
-
-\end{figure}%
-
 On one hand, a parallel coordinates plot appears to makes sense because
 it encodes multiple data values to \textbf{position}, which is an
 accurate visual feature for quantitative data. However, this advantage
@@ -8111,17 +8484,26 @@ which makes it difficult to decode even individual data summary values
 from the lines.
 
 The effectiveness of a parallel coordinates plot comes from the visual
-shapes produced by the lines. For example, in Figure~\ref{fig-parallel},
-we are able to identify a group of four lines at the top of the plot
-that are separate from the other lines. This grouping across at least
-three variables (clean breaks, tries, and points) is easier to see
-compared to Figure~\ref{fig-multiple}. We can also more clearly see that
-there are two teams that have similar numbers of runs to the top four,
-but then are mixed in with the other teams on the other variables.
-Furthermore, the fact that many of the lines are reasonably horizontal
-rather than criss-crossing each other wildly suggests that there is an
-overall correlation between all four quantitative variables, not just in
-the top four teams.
+shapes of the line data symbols, which allow us to decode data
+summaries. For example, in Figure~\ref{fig-parallel}, we are able to
+identify a group of four lines at the top of the plot that are separate
+from the other lines, plus a group of three lines at the bottom. This
+grouping across at least three variables (clean breaks, tries, and
+points) is easier to see compared to Figure~\ref{fig-multiple}. We can
+also more clearly see that there are two teams that have similar numbers
+of runs to the top four, but then are mixed in with the other teams on
+the other variables. Furthermore, the fact that many of the lines are
+reasonably horizontal rather than criss-crossing each other suggests
+that there is an overall correlation between all four quantitative
+variables, especially the last three variables, and not just amongst the
+top four teams.
+
+Compared to Figure~\ref{fig-splom}, it is easier to decode multivariate
+correlations from Figure~\ref{fig-parallel} and it is easier to decode
+multivariate clusters and outliers. A parallel coordinates plot can also
+cope with a larger number of variables; we just add another vertical
+axis rather than having to add an entire new row and column to a scatter
+plot matrix.
 
 \begin{quote}
 A parallel coordinates plot can be effective at identifying
@@ -8129,28 +8511,103 @@ high-dimensional groups or correlations because it maps multiple data
 values from different variables to a single visual shape.
 \end{quote}
 
-\section{Case study: Bubble plots}\label{case-study-bubble-plots}
+One major issue with a parallel coordinates plot is that the visual
+shapes created by the lines are extremely dependent on the order of the
+variables along the x-axis. For example, Figure~\ref{fig-parallel-order}
+shows exactly the same data as Figure~\ref{fig-parallel}, but with a
+different ordering of the variables. It is now much harder to identify a
+group of four teams at the top and a group of three teams at the bottom.
+There is also now no clear decoding of parallel lines between variables,
+so no sense of correlation between variables (all neighbouring pairs of
+variables are less correlated).
 
-An example of using area/size for third variable.
+\begin{figure}
 
-Provide some better options.
+\centering{
 
-\section[Small multiples]{\texorpdfstring{Small
-multiples\footnote{Tufte's small multiples}}{Small multiples}}\label{small-multiplessmall-multiples}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-parallel-order-1.pdf}
+
+}
+
+\caption{\label{fig-parallel-order}A data visualisation of the
+performance measures for teams in the 2023 Rugby World Cup. The order of
+the axes matters.}
+
+\end{figure}%
+
+We can also have a large influence on the shapes in a parallel
+coordinates plot by inverting the direction of the axes. For example,
+Figure~\ref{fig-parallel-neg} shows the same data as
+Figure~\ref{fig-parallel} and with the same ordering of the variables,
+but with the axes for line breaks and points inverted so that higher
+values are at the bottom and lower values are at the top. In other
+words, the positive relationships between runs and line breaks, between
+line breaks and tries, and between tries and points are now negative
+relationships (a higher number of tries correlates with a lower number
+of negative points).
+
+The arrangement in Figure~\ref{fig-parallel-neg} shows that a negative
+correlation between two adjacent variables shows up as many crossings of
+lines at a very tight location (rather than lots of mostly parallel
+lines with few crossings for positive correlation). This demonstrates
+that it can be easier to identify a negative relationship than a
+positive one with a parallel coordinates plot. For example, the tight
+crossing of lines between runs and (negative) line breaks and between
+(negative) line breaks and tries stands out more in this plot than the
+roughly parallel lines for the same pairs of variables in
+Figure~\ref{fig-parallel}.\footnote{There are many variations on
+  parallel coordinates plots that attempt to mitigate some of the visual
+  artifacts that can occur. For example, Pomerenke et al. (2019) suggest
+  a way to reduce the higher visual impact of steeper, intersecting
+  lines in a parallel coordinates plot.} On the downside, it is now much
+harder to identify clusters. For example, it is more difficult to
+identify the group of four teams that all have high numbers of line
+breaks, tries, and points.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-parallel-neg-1.pdf}
+
+}
+
+\caption{\label{fig-parallel-neg}A data visualisation of the performance
+measures for teams in the 2023 Rugby World Cup. The direction of the
+axes matters.}
+
+\end{figure}%
+
+Parallel coordinates plots are often used on much larger data sets, in
+which case overplotting becomes a serious problem
+(Section~\ref{sec-overplot}). The use of colour for different groups and
+the use of semitransparent colours for the lines can be
+helpful.\footnote{Parallel coordinates plots are an example of a data
+  visualisation that benefits a lot from interactivity. The ability to
+  select subsets of the lines can help with overplotting and the ability
+  to rapidly experiment with different orderings and directions of the
+  axes can help with determining the most effective view of the data.}
+
+\section{Case study: Profile plots}\label{case-study-profile-plots}
 
 One difficulty with Figure~\ref{fig-parallel} is that many of the lines
-overlap each other, which makes it difficult to separately perceive
-individual visual shapes. Figure~\ref{fig-profile} shows an alternative
-approach to visualising the same data, called a profile plot. Similar to
-a parallel coordinates plot, a visual shape is drawn for each country,
-but the shape in this case is a filled in polygon, effectively the lines
-in Figure~\ref{fig-parallel} with the area below them (down to zero)
-filled in.
+overlap each other, which makes it difficult to decode the separate
+visual shapes. Figure~\ref{fig-profile} shows an alternative approach to
+visualising the same data, called a profile plot.\footnote{The idea of
+  drawing lots of small repeated plots, with a consistent scale and
+  style is referred to by Tufte (1983) as \emph{small multiples}. This
+  corresponds strongly with the idea of facetting
+  (Section~\ref{sec-facetting}).} Similar to a parallel coordinates
+plot, a visual shape is drawn for each country, but each shape is drawn
+at its own position in space and the shape a filled polygon, effectively
+the lines in Figure~\ref{fig-parallel} with the area below them filled
+in.
 
-Again, this sort of data visualisation can be effective because of the
-overall shapes. For example, we can see a group of four shapes that are
-larger than the others. We can also see that Argentina and Fiji appear
-very similar, which was not apparent in previous plots.
+Like the parallel coordinates plot, this sort of data visualisation can
+be effective because of the overall shapes. For example, we can see a
+group of four shapes that are larger than the others. We can also see
+that Argentina and Fiji appear very similar, which was not easily
+apparent in previous plots.
 
 \begin{figure}
 
@@ -8184,160 +8641,117 @@ points scored (the right-hand height of the shape). As we have seen
 before, ordering data symbols can make a big difference
 (Section~\ref{sec-distance-effect}).
 
-\section{Facetting}\label{sec-facetting}
-
-\textbf{TODO} refer back to enclosure in visual-model.Rmd
-
-Figure~\ref{fig-facet-before} shows a line plot of the number of youth
-offenders per year in different Police Districts of New Zealand. This
-visualisation makes use of several effective mappings. For example, we
-encode year as horizontal \textbf{position} and we encode count as
-vertical \textbf{position}. However, there is also a weaker mapping: the
-Police District. We encode districts as \textbf{colour}, but because
-there are 12 different districts, we are exceeding the capacity of
-colour (Section~\ref{sec-capacity}). It is not easy to differentiate all
-of the different colours (not helped by overplotting of the lines).
-
-A better mapping for Police District would be \textbf{position}, which
-has a much higher capacity, but position has already been taken by year
-and count.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-facet-before-1.pdf}
-
-}
-
-\caption{\label{fig-facet-before}A data visualisation of the number of
-offenders per year in different Police Districts of New Zealand, from
-2011 to 2021.}
-
-\end{figure}%
-
-Figure~\ref{fig-facet-after} shows one solution: a facetted
-plot.\footnote{trellis multi-panels, ggplot2 facets, GoG ??} Each
-district has been encoded as a \textbf{position in space} and we draw a
-separate plot for each district. This makes it very easy to distinguish
-the individual districts.
-
-One downside is that comparisons between districts are more difficult
-because counts and/or years are \textbf{unaligned}
-(Section~\ref{sec-unaligned-pos}). In this case, we have mitigated that
-problem by drawing a grey line for all districts in each plot. Similar
-to grid lines, this makes it easier to compare the line for each
-district to other districts (Section~\ref{sec-perception-relative}).
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-facet-after-1.pdf}
-
-}
-
-\caption{\label{fig-facet-after}A data visualisation of the number of
-offenders per year in different Police Districts of New Zealand, from
-2011 to 2021.}
-
-\end{figure}%
-
-We have again ordered the panels so that districts are near to other
-districts with a similar starting count of offenders
-(Section~\ref{sec-distance-effect}).
-
-\section{Case study: Scatterplot
-matrices}\label{case-study-scatterplot-matrices}
-
-Figure~\ref{fig-splom} shows a scatter plot matrix of the performance
-measures for teams in the 2023 Rugby World Cup
-(Table~\ref{tbl-rwc-2023}).
-
-This is another example of reusing \textbf{position} to encode data
-values. Each combination of variables is encoded as a separate scatter
-plot at a different position in space and, within each scatter plot, two
-variables are encoded as horizontal and vertical position.
-
-Within each scatter plot, there is an emergent feature of position in
-space, which allows us to decode the correlation between different pairs
-of variables. Although this only allows us to see pairwise correlations
-between variables, we can also get a glimpse of higher-level
-correlations across several of the scatterplots.
-
-For example, looking down the diagonal of the matrix, we can see that:
-the number of runs is correlated loosely with the number of clean
-breaks; the number of clean breaks is more strongly correlated with the
-number of tries; and the number of tries is very strongly correlated
-with the number of points.
-
-If we look down the first column of the matrix, we can see that: the
-number of runs is correlated loosely with the number of clean breaks, a
-little more loosely with the number of tries and a little more loosely
-still with the number of points.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-splom-1.pdf}
-
-}
-
-\caption{\label{fig-splom}A scatter plot matrix of the quantitative
-performance measures for teams in the 2023 Rugby World Cup.}
-
-\end{figure}%
-
-\section{Non-cartesian mappings}\label{non-cartesian-mappings}
-
-Parallel plots is actually an example of this, so can just refer back to
-Section~\ref{sec-parallel}
-
-Refer back to Section~\ref{sec-cartesian}
-
-\section{Case study: kiviat plots or radar plots or spider
-plots}\label{case-study-kiviat-plots-or-radar-plots-or-spider-plots}
-
-(David Peebles (2008))
-
-\section{Case study: 2D density
-plots}\label{case-study-2d-density-plots}
-
-Stat summary visualised
-
-Compare with visual summary of density of points
-
-Different pros for each approach
-
-refer back to Section~\ref{sec-pos-scarce} (overplotting) and mention
-that shapes are one solution, with all of the drawbacks of not being
-able to decode individual data values. Footnote surjective/injective?
+A major weakness with a profile plot like Figure~\ref{fig-profile} is
+that it does not scale well to large data sets. For example, adding
+another country to Figure~\ref{fig-profile} would take up additional
+space, but no more space would be necessary for a parallel coordinates
+plot like Figure~\ref{fig-parallel} because we would just add another
+line.
 
 \section{Dangers of multiple
 mappings}\label{dangers-of-multiple-mappings}
 
 Figure~\ref{fig-multiple} showed that the naive approach of just using a
 separate visual feature for each data variable leads to complex data
-visualisations that are difficult to decode. Although there are better
-options, like small multiple and facetting, there is still a limit to
-how much information can effectively be displayed at once within a
-static data visualisation.
+visualisations that are difficult to decode.
 
-This is one area where dynamic and interactive graphics can be useful
-because the viewer is able to rapidly switch between multiple views of
-the data, which means that each individual view can be
-simpler.\footnote{Cite again the classic interactive lit ? Point to some
-  tools that might help, like GGobi?}
+We have explored some alternative data visualisations of multiple
+variables that provide better decoding of individual data values, like
+facetting and scatter plot matrices, but they do not provide effortless
+decoding of multivariate data summaries, like correlation and clusters.
+
+The alternatives that provide better decoding of multivariate data
+summaries, like 3D plots and parallel coordinate plots, rely on visual
+shapes that can be decoded to data summaries, but sacrifice the ability
+to accurately decode individual data values. One danger is that there is
+still a temptation to decode individual data values, which can result in
+erroneous or misleading conclusions.
+
+For example, in Figure~\ref{fig-3d-scatter}, we may be tempted to decode
+and compare the number of clean breaks for different teams based on the
+positions of the data points and the labels on the axes, but that is
+unlikely to result in an accurate decoding, even for ordinal
+comparisons.
+
+It is perhaps safer to make it clear that only visual shapes should be
+decoded from the 3D scatter plot by removing the axis scales altogether,
+as in Figure~\ref{fig-3d-scatter-no-ticks}.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{multiple_files/figure-pdf/fig-3d-scatter-no-ticks-2.-rgl.png}
+
+}
+
+\caption{\label{fig-3d-scatter-no-ticks}A data visualisation of three
+RWC variables}
+
+\end{figure}%
+
+Given the problems with decoding individual data values, the classic
+objection to 3D plots is justified: if only two dimensions are required,
+then nothing is gained by adding a third dimension. There are really no
+arguments in favour of Figure~\ref{fig-bar-3d-bad-1} over
+Figure~\ref{fig-bar-3d-bad-2}.
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-bar-3d-bad-1.pdf}
+
+}
+
+\subcaption{\label{fig-bar-3d-bad-1}3D bar plot}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-bar-3d-bad-2.pdf}
+
+}
+
+\subcaption{\label{fig-bar-3d-bad-2}2D bar plot}
+
+\end{minipage}%
+
+\caption{\label{fig-bar-3d-bad}A data visualisation of youth crime by
+age for 2021}
+
+\end{figure}%
 
 \section{Summary}\label{summary-10}
 
-When we need to visualise multiple variables at once, it is not
-effective to map each different variable to a different visual feature.
+When we visualise multiple variables at once, it is not effective to map
+each different variable to a different visual feature because that
+usually forces us to make use of a visual feature that is either
+inappropriate or inaccurate.
 
 An alternative is to reuse the same visual feature for multiple
-different variables. In particular, small multiples, or facetting,
-allows us to use \textbf{position} for more than just two variables.
+different variables. In particular, we can reuse \textbf{position} for
+more than just two variables, for example, to create a scatter plot
+matrix or a facetted plot. This at least allows us to accurately decode
+individual variables.
+
+Another alternative is to use non-cartesian coordinates, for example 3D
+plots or parallel coordinates plots. These generate visual shapes that
+allow us to decode multivariate data summaries, like multivariate
+clusters and multivariate correlations. However, in order to gain
+multivariate data summaries, we typically have to sacrifice the ability
+to accurately decode individual data values.
+
+No matter which approach we use, there is still a limit to how much
+information can effectively be displayed at once within a static data
+visualisation. This is one area where dynamic and interactive graphics
+can be useful because the viewer is able to rapidly switch between
+multiple views of the data.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -8346,11 +8760,6 @@ allows us to use \textbf{position} for more than just two variables.
 \bookmarksetup{startatroot}
 
 \chapter{Visual Objects}\label{visual-objects}
-
-\textbf{TODO} Need diagram showing encoding congruent with learned
-decoding (Section~\ref{sec-learned}?) and one showing encoding dissonant
-with learned encoding e.g., use wrong flag for country!
-(Section~\ref{sec-learned-danger})
 
 Figure~\ref{fig-scatter-country} shows a scatter plot of the number of
 clean breaks and the number of tries for countries at the 2023 Rugby
@@ -8476,7 +8885,14 @@ pre-existing, learned decodings.}
 The flags in Figure~\ref{fig-flags} provide examples of learned
 decodings. We associate each flag with a particular country because we
 have seen these flags before and they have learned the decoding from
-flag to country (Figure~\ref{fig-data-obj-decode}).
+flag to country (Figure~\ref{fig-learned-decode}).
+
+In terms of visual congruence (Chapter~\ref{sec-congruence}), a learned
+decoding strengthens the effectiveness of the explicit encoding because
+the learned decoding leads back to the same data values that we
+explicitly encoded (Figure~\ref{fig-data-obj-decode}). This is similar
+to having a congruent \emph{implicit} decoding
+(Figure~\ref{fig-congruent-decode}).
 
 \begin{figure}
 
@@ -8484,21 +8900,11 @@ flag to country (Figure~\ref{fig-data-obj-decode}).
 
 \includegraphics[scale=0.5]{Diagrams/data-obj-decode.png}
 
-}
-
-\caption{\label{fig-data-obj-decode}Some visual objects have learned
-decodings, which means that encoding data values as the visual objects,
-will be effective.}
-
-\end{figure}%
-
 Figure~\ref{fig-flags-direct} demonstrates this point by repeating the
 scatter plot, but removing the legend. We are still able to identify not
 only that the data symbols represent different countries, but we can
 identify (at least some of) the country names as well
 (Figure~\ref{fig-obj-decode}).
-
-\begin{figure}
 
 \centering{
 
@@ -8506,13 +8912,9 @@ identify (at least some of) the country names as well
 
 }
 
-\caption{\label{fig-obj-decode}Some visual objects have learned
+\subcaption{\label{fig-obj-decode}Some visual objects have learned
 decodings, which means that if we encode data values as the visual
 objects, decoding will be automatic.}
-
-\end{figure}%
-
-\begin{figure}
 
 \centering{
 
@@ -8520,8 +8922,14 @@ objects, decoding will be automatic.}
 
 }
 
-\caption{\label{fig-flags-direct}A scatter plot with flags as data
+\subcaption{\label{fig-flags-direct}A scatter plot with flags as data
 symbols}
+
+}
+
+\caption{\label{fig-data-obj-decode}Some visual objects have learned
+decodings, which means that encoding data values as the visual objects,
+will be effective.}
 
 \end{figure}%
 
@@ -8566,7 +8974,19 @@ effective if the learned decodings have not been learned by all viewers.
 \textbf{TODO} Refer back to Section~\ref{sec-rel-pos}. Visual shapes are
 one way to decode to absolute data values (rather than just relative)
 
+\section{Visual features of visual
+objects}\label{sec-vis-object-feature}
+
+\textbf{TODO} Talk about how visual objects can also have basic visual
+features like colour and area. Refer back to
+Section~\ref{sec-vis-shape-feature}
+
 \section{Decoding visual objects}\label{decoding-visual-objects}
+
+If data values have been encoded as a single consistent feature of a
+visual object, such as the colour or area of a visual object
+(Section~\ref{sec-vis-object-feature}), then decoding proceeds as for
+simpler data symbols.
 
 Visual objects may decode to data values or data summaries (or more
 abstract/conceptual) so there are a few things to consider.
@@ -9001,6 +9421,9 @@ which we can easily perceive simple human emotions.
 
 \section{Dangers of learned decodings}\label{sec-learned-danger}
 
+\textbf{TODO} Refer back to pcp Correlation as tightly crossing lines
+needs to be learned
+
 Figure~\ref{fig-stroop} provides a demonstration of the Stroop
 Effect.\footnote{citation please!} The task is to name the colour of
 each word. This task is difficult to do because there are two decodings
@@ -9139,6 +9562,8 @@ unusual data symbols, but entirely novel data visualisations.\footnote{Kosslyn's
   ``Bars and lines: A study of graphic communication'' Zacks and Tversky
   (1999) speculates on the development of graphical conventions.}
 
+Refer back to (reading of) parallel coordinates plots.
+
 Andrews curve of RWCperGame statistics (analogue of
 Figure~\ref{fig-parallel}). \textbf{Cite Andrews article.} Can see the
 three distinct groups of countries more easily in this than in parallel
@@ -9256,7 +9681,10 @@ visualisations work.\footnote{Provide citation to Brath book at least.
   Perhaps cite my text article, however that gets to see the light of
   day.}
 
-\section{Data symbols}\label{sec-data-symbols}
+\section{Visual features of text}\label{sec-data-symbols}
+
+\textbf{TODO} Refer back to Section~\ref{sec-vis-shape-feature} and
+Section~\ref{sec-vis-object-feature}
 
 Figure~\ref{fig-bar-text} is a version of Figure~\ref{fig-bar} with
 white text added to each bar showing the exact number of offenders in
@@ -9286,7 +9714,7 @@ number of offenders in each ethnic group are encoded as the
 \textbf{length} of the bars \emph{and} as the horizontal
 \textbf{position} of the text. Furthermore, the data values for the
 number of offenders in each ethnic group are encoded as the
-\textbf{shape} of the text---the letters and digits that make up the
+\textbf{pattern} of the text---the letters and digits that make up the
 text.
 
 Just as we can decode data values from the visual features of the bars
@@ -9309,11 +9737,11 @@ angle to create visual connections between associated terms within a
 bullet-point list.
 
 However, the unique power of text comes from \textbf{decoding} the
-\textbf{shape} of the text. Text is the ultimate example of a
+\textbf{pattern} of the text. Text is the ultimate example of a
 \textbf{learned mapping} (Section~\ref{sec-learned}). We all learn to
 read text (and numbers), which means that, when we are presented with a
-text shape, there is a pre-existing decoding to the semantic content of
-the text (Figure~\ref{fig-learned-decode}). For example, in
+text pattern, there is a pre-existing decoding to the semantic content
+of the text (Figure~\ref{fig-learned-decode}). For example, in
 Figure~\ref{fig-bar-text}, we are able to decode the data value
 \texttt{41787} (the count for Māori) from the text ``41787''.
 Furthermore, this decoding is extremely accurate and very flexible.
@@ -9388,91 +9816,6 @@ visual system cannot decode visual summaries from the text.
 Why is a picture is worth a thousand words? Because 1000 words is 1000
 fixations, identifying 1000 visual objects, and then interpreting their
 combined meaning.
-
-\section{Guides}\label{sec-guides}
-
-Figure~\ref{fig-crime-guides} is a version of Figure~\ref{fig-crime}
-with the guides highlighted in purple. There are tick marks and tick
-labels on the x-axis and y-axis, there are horizontal grid lines, and
-there are legend elements to show the mapping from the different ages to
-different colours.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/text_files/figure-pdf/fig-crime-guides-1.pdf}
-
-}
-
-\caption{\label{fig-crime-guides}A line plot of the crime rate amongst
-youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot
-have been highlighted in purple.}
-
-\end{figure}%
-
-The first thing to note about the guides in
-Figure~\ref{fig-crime-guides} is that they are all composed of
-\textbf{data symbols}, with \textbf{data values} mapped to
-\textbf{visual features} of the data symbols
-(Chapter~\ref{sec-mapping-visual-features}). This is perhaps easiest to
-see with the grid lines. Each grid line is a data symbol where a data
-value, a rate of offending, has been encoded as the vertical
-\textbf{position} of the line. Similarly, each tick mark on the y-axis
-is a line data symbol where a rate of offending has been encoded as the
-vertical \textbf{position} of the line and each tick mark on the x-axis
-is a line data symbol where a year has been encoded as the horizontal
-\textbf{position} of the line. Finally, each of the tick labels on the
-y-axis is a text data symbol where a rate of offending has been encoded
-as the vertical \textbf{position} of the text \emph{and} as the
-\textbf{shape} of the text. Similar mappings apply to the x-axis tick
-labels. The legend is also made up of line data symbols and text data
-symbols, this time with age data values encoded as the \textbf{colour}
-of lines and the \textbf{shape} of text.
-
-The \textbf{decoding} of the \textbf{shape} of the \textbf{text} data
-symbols within the guides shows the critical role that text plays within
-guides. If we look again at Figure~\ref{fig-no-text}, there are coloured
-lines on the plot and there are coloured lines on the legend. The fact
-that these lines have different colours indicates that there are three
-different groups, but the colours alone do not tell us what the groups
-are. We can decode different values from the colours of the lines, but
-we cannot decode exact data values. In the original
-Figure~\ref{fig-crime}, the shapes of the text labels on the legend
-allow us to decode the original data values---the three ages 14, 15, and
-16.
-
-\textbf{TODO} text is typically the \textbf{only} data symbol within a
-data visualisation that can be decoded to an \textbf{individual},
-\textbf{absolute} data value.\\
-Most other decoding is relative (e.g., Section~\ref{sec-rel-pos},
-Section~\ref{sec-perception-relative},
-Section~\ref{sec-colour-relative}) or to a data summary (e.g.,
-Section~\ref{sec-line-plots})
-
-The proximity of the text labels in the legend to the coloured lines in
-the legend means that we associate each label with each coloured line
-(Section~\ref{sec-visual-model-groups}). So the text labels in the
-legend are the essential data symbols in Figure~\ref{fig-crime} because
-only they allow us to decode from the colours of the lines to the three
-age groups.
-
-The text labels on axes perform a similar service. For example, the
-numbers on the axes in Figure~\ref{fig-crime} are the only data symbols
-that provide exact decoding from positions to data values (years or
-rates). The lines within the plot, by themselves, only show that values
-are decreasing. It is only the relative position of the lines within the
-plot to the tick labels on the axes (and the grid lines) that allows us
-to decode from the lines within the plot to (approximate) data values.
-
-Text data symbols within guides are effective because guides contain
-only a few data values that need to be decoded precisely. This is the
-situation where text excels.
-
-\begin{quote}
-Guides are effective because they encode known data values as text data
-symbols as well as the data symbols used in the main plot.
-\end{quote}
 
 \section{Labels}\label{sec-labels}
 
@@ -9596,11 +9939,11 @@ the Wikipedia page for the Rugby World Cup.}
 
 This data visualisation is unusual because it consists entirely of text
 \textbf{data symbols}. The mappings in Figure~\ref{fig-wordcloud}
-include encoding each word as the \textbf{shape} of a text data symbol
+include encoding each word as the \textbf{pattern} of a text data symbol
 and encoding frequency as the \textbf{size} of a text data symbol. There
-is no need for a guide for the mapping from words to text shape because
-there is a learned decoding (Figure~\ref{fig-learned-decode}); we can
-decode each text data symbol into a word data value because that
+is no need for a guide for the mapping from words to text pattern
+because there is a learned decoding (Figure~\ref{fig-learned-decode});
+we can decode each text data symbol into a word data value because that
 decoding has already been learned.
 
 There is no guide for the mapping from word frequency to text size, so
@@ -9866,7 +10209,7 @@ data values as well. Furthermore, because the data symbols are text
 digits, we are able to decode individual data values very accurately.
 
 In summary, Figure~\ref{fig-tries-stem} combines standard decodings
-(\textbf{length}) with \textbf{learned decodings} (text shape) to
+(\textbf{length}) with \textbf{learned decodings} (text pattern) to
 provide access to both high-level features of data summaries \emph{and}
 raw data values.
 
@@ -10044,7 +10387,7 @@ should!).
 Data values can be encoded as the visual features of text, such as
 position and colour, just like for other data symbols.
 
-The shape of text---the characters used in text---is particularly
+The pattern of text---the characters used in text---is particularly
 important because we have a learned decoding of text. We can read data
 values from text.
 
@@ -10055,14 +10398,6 @@ values from text extremely accurately.
 On the other hand, decoding a large number of data values from text is
 very slow and we cannot generate visual summaries from text.
 
-Guides are really just collections of data symbols, with specific data
-values encoded as the visual features to demonstrate how data values
-have been encoded.
-
-The text elements within guides are essential because they provide the
-only precise decoding of exact data values. This is what allows the
-decoding of the main data symbols within a data visualisation.
-
 Overall, text is very valuable in a data visualisation for accurately
 encoding a small number of data values, or to express complex
 information. But text is not appropriate for representing a large number
@@ -10072,6 +10407,113 @@ of raw data values.\footnote{Acknowledge Ware 4th Ed: G8.18 (p327)
   G8.19 (p327) ``Use words directly on the chart where the number of
   symbolic objects in each category is relatively few and where space is
   available.''}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\theendnotes
+
+\bookmarksetup{startatroot}
+
+\chapter{Guides}\label{sec-guides}
+
+Figure~\ref{fig-crime-guides} is a version of Figure~\ref{fig-crime}
+with the guides highlighted in purple. There are tick marks and tick
+labels on the x-axis and y-axis, there are horizontal grid lines, and
+there are legend elements to show the mapping from the different ages to
+different colours.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/guides_files/figure-pdf/fig-crime-guides-1.pdf}
+
+}
+
+\caption{\label{fig-crime-guides}A line plot of the crime rate amongst
+youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot
+have been highlighted in purple.}
+
+\end{figure}%
+
+The first thing to note about the guides in
+Figure~\ref{fig-crime-guides} is that they are all composed of
+\textbf{data symbols}, with \textbf{data values} mapped to
+\textbf{visual features} of the data symbols
+(Chapter~\ref{sec-mapping-visual-features}). This is perhaps easiest to
+see with the grid lines. Each grid line is a data symbol where a data
+value, a rate of offending, has been encoded as the vertical
+\textbf{position} of the line. Similarly, each tick mark on the y-axis
+is a line data symbol where a rate of offending has been encoded as the
+vertical \textbf{position} of the line and each tick mark on the x-axis
+is a line data symbol where a year has been encoded as the horizontal
+\textbf{position} of the line. Finally, each of the tick labels on the
+y-axis is a text data symbol where a rate of offending has been encoded
+as the vertical \textbf{position} of the text \emph{and} as the
+\textbf{shape} of the text. Similar mappings apply to the x-axis tick
+labels. The legend is also made up of line data symbols and text data
+symbols, this time with age data values encoded as the \textbf{colour}
+of lines and the \textbf{shape} of text.
+
+The \textbf{decoding} of the \textbf{shape} of the \textbf{text} data
+symbols within the guides shows the critical role that text plays within
+guides. If we look again at Figure~\ref{fig-no-text}, there are coloured
+lines on the plot and there are coloured lines on the legend. The fact
+that these lines have different colours indicates that there are three
+different groups, but the colours alone do not tell us what the groups
+are. We can decode different values from the colours of the lines, but
+we cannot decode exact data values. In the original
+Figure~\ref{fig-crime}, the shapes of the text labels on the legend
+allow us to decode the original data values---the three ages 14, 15, and
+16.
+
+\textbf{TODO} text is typically the \textbf{only} data symbol within a
+data visualisation that can be decoded to an \textbf{individual},
+\textbf{absolute} data value.\\
+Most other decoding is relative (e.g., Section~\ref{sec-rel-pos},
+Section~\ref{sec-perception-relative},
+Section~\ref{sec-colour-relative}) or to a data summary (e.g.,
+Section~\ref{sec-line-plots})
+
+The proximity of the text labels in the legend to the coloured lines in
+the legend means that we associate each label with each coloured line
+(Section~\ref{sec-visual-model-groups}). So the text labels in the
+legend are the essential data symbols in Figure~\ref{fig-crime} because
+only they allow us to decode from the colours of the lines to the three
+age groups.
+
+The text labels on axes perform a similar service. For example, the
+numbers on the axes in Figure~\ref{fig-crime} are the only data symbols
+that provide exact decoding from positions to data values (years or
+rates). The lines within the plot, by themselves, only show that values
+are decreasing. It is only the relative position of the lines within the
+plot to the tick labels on the axes (and the grid lines) that allows us
+to decode from the lines within the plot to (approximate) data values.
+
+Text data symbols within guides are effective because guides contain
+only a few data values that need to be decoded precisely. This is the
+situation where text excels.
+
+\begin{quote}
+Guides are effective because they encode known data values as text data
+symbols as well as the data symbols used in the main plot.
+\end{quote}
+
+\section{Case studies}\label{case-studies}
+
+Revisit lots of plots and add interesting guides
+
+Do variation of pcp with mini plots of corr 1 0 and -1 ?
+
+\section{Summary}\label{summary-13}
+
+Guides are really just collections of data symbols, with specific data
+values encoded as the visual features to demonstrate how data values
+have been encoded.
+
+The text elements within guides are essential because they provide the
+only precise decoding of exact data values. This is what allows the
+decoding of the main data symbols within a data visualisation.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -10141,7 +10583,7 @@ hemisphere for each country as the colour of the data points.
 
 The legend (guide) in Figure~\ref{fig-rep-guide} demonstrates the scale
 for the colour encoding: which colour is used to encode each hemisphere.
-In Section~\ref{sec-guides}, we described how the proximity of the
+In Chapter~\ref{sec-guides}, we described how the proximity of the
 labels ``South'' and ``North'' to the coloured points in the legend
 allow us to associate the colours with the different hemispheres. The
 different values of hemisphere are encoded as the vertical positions of
@@ -10457,7 +10899,7 @@ on bar borders or bright colours on unimportant elements) ?
 
 Refer back to chart junk and clutter (Section~\ref{sec-junk}).
 
-\section{Summary}\label{summary-13}
+\section{Summary}\label{summary-14}
 
 Just as we can map data values to visual features, to communicate
 information about the data, we can map non-data information to visual
@@ -10736,6 +11178,37 @@ loess curves Another example of data -\textgreater{} summary
 -\textgreater{} features -\textgreater{} shapes -\textgreater{}
 summaries
 
+\section*{Case study: 2D density
+plots}\label{case-study-2d-density-plots}
+\addcontentsline{toc}{section}{Case study: 2D density plots}
+
+\markright{Case study: 2D density plots}
+
+Stat summary visualised
+
+Compare with visual summary of density of points
+
+Different pros for each approach
+
+refer back to Section~\ref{sec-pos-scarce} (overplotting) and mention
+that shapes are one solution, with all of the drawbacks of not being
+able to decode individual data values. Footnote surjective/injective?
+
+\section*{Case study: kiviat plots or radar plots or spider
+plots}\label{case-study-kiviat-plots-or-radar-plots-or-spider-plots}
+\addcontentsline{toc}{section}{Case study: kiviat plots or radar plots
+or spider plots}
+
+\markright{Case study: kiviat plots or radar plots or spider plots}
+
+(David Peebles (2008))
+
+\section*{Case study: letter-value
+boxplots}\label{case-study-letter-value-boxplots}
+\addcontentsline{toc}{section}{Case study: letter-value boxplots}
+
+\markright{Case study: letter-value boxplots}
+
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-time-series-ensemble}
@@ -10775,6 +11248,12 @@ Bartonicek, Adam. 2023. {``The Fabric of Interactive Visualization: From
 the Algebra of Graphics, Statistics, and Interaction to Practical
 Implementation.''} Online at https://bartonicek.github.io/thesis/.
 
+\bibitem[\citeproctext]{ref-Becker01061996}
+Becker, Richard A., William S. Cleveland, and Ming-Jen Shyu. 1996.
+{``The Visual Design and Control of Trellis Display.''} \emph{Journal of
+Computational and Graphical Statistics} 5 (2): 123--55.
+\url{https://doi.org/10.1080/10618600.1996.10474701}.
+
 \bibitem[\citeproctext]{ref-Begbie2022_irugby_results_1871_2022}
 Begbie, Lyle. 2022. {``International Rugby Union Results from
 1871‑2022.''}
@@ -10787,9 +11266,13 @@ Ink.''}
 \url{https://callingbullshit.org/tools/tools_proportional_ink.html}.
 2017.
 
+\bibitem[\citeproctext]{ref-bertin1967semiologie}
+Bertin, Jacques. 1967. \emph{S{é}miologie Graphique: Les Diagrammes, Les
+r{é}seaux, Les Cartes}. Paris: Gauthier-Villars.
+
 \bibitem[\citeproctext]{ref-bertin1983semiology}
-Bertin, Jacques. 1983. \emph{Semiology of Graphics: Diagrams, Networks,
-Maps}. Madison, WI: University of Wisconsin Press.
+---------. 1983. \emph{Semiology of Graphics: Diagrams, Networks, Maps}.
+Madison, WI: University of Wisconsin Press.
 
 \bibitem[\citeproctext]{ref-bertini_semantic_clashes}
 Bertini, Enrico. 2024. {``Semantic Clashes in Data Visualization.''}
@@ -10898,6 +11381,11 @@ Castro, Francisco de. 2025. {``FmrBT: A Comprehensive Data Set of Field
 Metabolic Rates, Body Mass and Ambient Temperature.''} \emph{Scientific
 Data} 12 (1): 1589. \url{https://doi.org/10.1038/s41597-025-05868-y}.
 
+\bibitem[\citeproctext]{ref-anomaly-detection}
+Chandola, Varun, Arindam Banerjee, and Vipin Kumar. 2009. {``Anomaly
+Detection: A Survey.''} \emph{ACM Comput. Surv.} 41 (3).
+\url{https://doi.org/10.1145/1541880.1541882}.
+
 \bibitem[\citeproctext]{ref-chen1982topological}
 Chen, Lin. 1982. {``Topological Structure in Visual Perception.''}
 \emph{Science} 218 (4573): 699--700.
@@ -10941,6 +11429,12 @@ Cleveland, William S, and Robert McGill. 1984. {``Graphical Perception:
 Theory, Experimentation, and Application to the Development of Graphical
 Methods.''} \emph{Journal of the American Statistical Association} 79
 (387): 531--54.
+
+\bibitem[\citeproctext]{ref-grand-tour-projection-pursuit}
+Cook, Dianne, Andreas Buja, Javier Cabrera, and Catherine Hurley. 1995.
+{``Grand Tour and Projection Pursuit.''} \emph{Journal of Computational
+and Graphical Statistics} 4 (3): 155--72.
+\url{https://doi.org/10.1080/10618600.1995.10474674}.
 
 \bibitem[\citeproctext]{ref-cookSwayne2007}
 Cook, Dianne, and Deborah F. Swayne. 2007. \emph{Interactive and Dynamic
@@ -11118,6 +11612,11 @@ edited by Reiner Eschbach, Gabriel G. Marcu, and Shoji Tominaga,
 6807:68070O. International Society for Optics; Photonics; SPIE.
 \url{https://doi.org/10.1117/12.765420}.
 
+\bibitem[\citeproctext]{ref-Inselberg2009}
+Inselberg, Alfred. 2009. \emph{Parallel Coordinates: Visual
+Multidimensional Geometry and Its Applications}. Springer New York, NY.
+\url{https://doi.org/10.1007/978-0-387-68628-8}.
+
 \bibitem[\citeproctext]{ref-itti-koch-niebur}
 Itti, L., C. Koch, and E. Niebur. 1998. {``A Model of Saliency-Based
 Visual Attention for Rapid Scene Analysis.''} \emph{IEEE Transactions on
@@ -11286,6 +11785,13 @@ Pointer, M. R., and G. G. Attridge. n.d. {``The Number of Discernible
 Colours.''} \emph{Color Research \& Application} 23 (1): 52--54.
 https://doi.org/\url{https://doi.org/10.1002/(SICI)1520-6378(199802)23:1\%3C52::AID-COL8\%3E3.0.CO;2-2}.
 
+\bibitem[\citeproctext]{ref-slope-dependent-parallel}
+Pomerenke, David, Frederik L. Dennig, Daniel A. Keim, Johannes Fuchs,
+and Michael Blumenschein. 2019. {``Slope-Dependent Rendering of Parallel
+Coordinates to Reduce Density Distortion and Ghost Clusters.''} In
+\emph{2019 IEEE Visualization Conference (VIS)}, 86--90.
+\url{https://doi.org/10.1109/VISUAL.2019.8933706}.
+
 \bibitem[\citeproctext]{ref-proma2025visualstenographyfeaturerecreation}
 Proma, Rifat Ara, Michael Correll, Ghulam Jilani Quadri, and Paul Rosen.
 2025. {``Visual Stenography: Feature Recreation and Preservation in
@@ -11332,6 +11838,11 @@ https://doi.org/\url{https://doi.org/10.1146/annurev-vision-082114-035733}.
 ---------. 2023. {``Peripheral Vision: A Critical Component of Many
 Visual Tasks.''} Oxford University Press.
 \url{https://doi.org/10.1093/acrefore/9780190236557.013.878}.
+
+\bibitem[\citeproctext]{ref-2026-gofish}
+Satyanarayan, Josh Pollock AND Arvind. 2026. {``{GoFish: A Grammar of
+More Graphics!}''} \emph{IEEE Transactions on Visualization \& Computer
+Graphics (Proc. IEEE VIS)}. \url{https://vis.csail.mit.edu/pubs/gofish}.
 
 \bibitem[\citeproctext]{ref-Schloss2023MoreOfWhat}
 Schloss, Karen B. et al. 2023. {``More of What? Dissociating Effects of
@@ -11522,6 +12033,11 @@ Design}. 4th ed. Morgan Kaufmann.
 Weber, Ernst Heinrich. 1846. {``Der Tastsinn Und Das Gemeingef{ü}hl.''}
 \emph{Rudolf Wagner (Hg.): Handw{ö}rterbuch Der Physiologie.
 Braunschweig} 3: 481--588.
+
+\bibitem[\citeproctext]{ref-wegman-parallel}
+Wegman, Edward J. 1990. {``Hyperdimensional Data Analysis Using Parallel
+Coordinates.''} \emph{Journal of the American Statistical Association}
+85 (411): 664--75. \url{http://www.jstor.org/stable/2290001}.
 
 \bibitem[\citeproctext]{ref-ensemble-perception}
 Whitney, David, and Allison Yamanashi Leib. 2018. {``Ensemble

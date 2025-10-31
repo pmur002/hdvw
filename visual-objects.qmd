@@ -7,13 +7,6 @@ source("common.R")
 
 # Visual Objects
 
-**TODO**
-Need diagram showing encoding congruent with learned decoding
-(@sec-learned?)
-and one showing encoding dissonant with learned encoding
-e.g., use wrong flag for country!
-(@sec-learned-danger)
-
 @fig-scatter-country shows a scatter plot of the number of clean breaks and the
 number of tries for countries
 at the 2023 Rugby World Cup (@tbl-rwc-2023).
@@ -169,7 +162,14 @@ grid.circle(y=c(.75, .5, .25), r=unit(2, "mm"),
 The flags in @fig-flags provide examples of learned decodings.
 We associate each flag with a particular country because we have
 seen these flags before and they have learned the decoding from flag
-to country (@fig-data-obj-decode).
+to country (@fig-learned-decode).
+
+In terms of visual congruence (@sec-congruence), 
+a learned decoding strengthens the effectiveness of the 
+explicit encoding because the learned decoding leads back to the
+same data values that we explicitly encoded (@fig-data-obj-decode).
+This is similar to having a congruent *implicit* decoding 
+(@fig-congruent-decode).
 
 ::: {#fig-data-obj-decode}
 ::: {.content-visible when-format=pdf}
@@ -178,10 +178,6 @@ to country (@fig-data-obj-decode).
 
 ::: {.content-visible when-format=html}
 ![](Diagrams/data-obj-decode.png)
-:::
-
-Some visual objects have learned decodings, which means that 
-encoding data values as the visual objects, will be effective.
 :::
 
 @fig-flags-direct demonstrates this point by repeating the scatter plot,
@@ -226,6 +222,10 @@ ggplot(rwcFlags) +
     theme(aspect.ratio=2/3)
 ```
 
+Some visual objects have learned decodings, which means that 
+encoding data values as the visual objects, will be effective.
+:::
+
 Just to make the point completely clear, @fig-scatter-country-no-legend
 shows @fig-scatter-country without a legend.
 Although we can still perceive that the data symbols are different
@@ -264,7 +264,19 @@ Refer back to @sec-rel-pos.
 Visual shapes are one way
 to decode to absolute data values (rather than just relative)
 
+## Visual features of visual objects {#sec-vis-object-feature}
+
+**TODO**
+Talk about how visual objects can also have basic visual features
+like colour and area.
+Refer back to @sec-vis-shape-feature
+
 ## Decoding visual objects
+
+If data values have been encoded as a single consistent feature
+of a visual object, such as the colour or area of a visual
+object (@sec-vis-object-feature), 
+then decoding proceeds as for simpler data symbols.
 
 Visual objects may decode to data values or data summaries (or
 more abstract/conceptual) so there are a few things to consider.
@@ -921,6 +933,10 @@ The resulting proximity helps with perceiving groups of similar faces.
 
 ## Dangers of learned decodings {#sec-learned-danger}
 
+**TODO**
+Refer back to pcp 
+Correlation as tightly crossing lines needs to be learned
+
 @fig-stroop provides a demonstration of the Stroop Effect.[^stroop]
 The task is to name the colour of each word.
 This task is difficult to do because there are two decodings involved and 
@@ -1058,6 +1074,8 @@ but there is no learned decoding, the mapping will be ineffective.
 An extreme version of this problem is the use of not just complex
 or unusual
 data symbols, but entirely novel data visualisations.[^novel-plot]
+
+Refer back to (reading of) parallel coordinates plots.
 
 [^novel-plot]:
     Kosslyn's Principle of appropriate knowledge ?

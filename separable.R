@@ -283,9 +283,8 @@ for (j in 1:4) {
 popViewport(3)
 pushViewport(viewport(layout.pos.col=5, layout.pos.row=4),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white", col=NA))
+grid.rect(gp=gpar(fill="white", lwd=1))
 pushViewport(viewport(width=.9, height=.9))
-cols <- hcl(0, 50, 4:1/5*100)
 w <- seq(1, 2, length.out=4)
 grid.points(rep(1:4/5, 4), rep(4:1/5, each=4), size=rep(unit(w, "mm"), 4),
             pch=rep(pch, each=4), gp=gpar(lwd=1))

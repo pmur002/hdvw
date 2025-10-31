@@ -239,7 +239,7 @@ draw("mapping-1-2-1-2-reuse",
 draw("mapping-1-n-1-n",
      list(list(hr=1, hc=1:3)), ## , list(hr=2, hc=1:3)),
      list(list(hr=1, hc=1:3)), ## , list(hr=2, hc=1:3)),
-     cnSymbol=rep("x", 3))
+     cnSymbol=rep("a", 3))
 
 
 png("mappings-1.png", width=800, height=200, res=200)

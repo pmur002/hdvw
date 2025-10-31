@@ -480,6 +480,27 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
+## Visual features of visual shapes {#sec-vis-shape-feature}
+
+We have emphasised that a data symbol like a line in a line plot
+is the result of encoding multiple data values as the **positions**
+that the line is drawn between.  This results in a **visual shape** that
+is more effective for decoding **data summaries** rather than decoding
+the individual data values.
+
+However, the examples that we have seen in @fig-line and 
+@fig-multiple-density also involve another mapping: qualitative
+data values, like ethnic group or hemisphere, are encoded as the
+**colour** of the lines.
+This encoding is consistent across the entire data symbol.
+In effect, there is a simple encoding of qualitative data values
+to a basic **visual feature** of the visual shape.
+
+This means that it is possible to decode individual data values,
+such as ethnic group or hemisphere, from a visual shape
+if the data values have been encoded as a single consistent
+visual feature of the visual shape (@fig-visual-feature-decode).
+
 ## Aspect ratio {#sec-aspect-ratio}
 
 @fig-aspect shows a variation on @fig-line using a different 
@@ -595,19 +616,39 @@ axes.[^white-space]
 
 ## Decoding visual shapes
 
-Decoding from a visual shape results in a 
-data summary (@fig-data-vis-shape-decode),
-for example peaks and valleys, and,
-as we saw in @sec-summary-decode and @sec-decode-combine,
-less is known about how well we can perform this sort of decoding.
+As we saw in @sec-vis-shape-feature, if data values are encoded
+as a single, consistent visual feature of a visual shape, 
+for example the colour of a line, then the original data values
+can be decoded from the basic visual feature, as described in earlier
+chapters for simpler data symbols like bars.
 
-However, there is experimental support for the 
+For data values that are encoded as different values of a visual
+feature, such as the positions that a line is drawn between,
+decoding from a visual shape results in
+data summaries (@fig-data-vis-shape-decode),
+for example peaks and valleys.
+The visual system's ability to rapidly and effortlessly identify a wide range
+of data summaries is part of why data visualisation is so effective.
+It is difficult to calculate data summaries numerically from the raw data
+with the same flexibility.[^anomaly-detection]
+On the downside, as we saw in @sec-summary-decode and @sec-decode-combine,
+the huge range of possible data summaries means that
+less is known about how accurately we can decode
+any particular data summary.
+
+[^anomaly-detection]:
+    The survey of anomaly-detection techniques by 
+    @anomaly-detection gives a sense of how difficult it
+    is to provide a general-purpose numerical technique
+    for detecting features of interest in data values.
+
+There is experimental support for the 
 intuitive sense that we can perform well at 
 decoding qualitative features from
 shapes, such as peaks and valleys, as well as decoding ordinal 
 comparisons, such as steeper and shallower.[^trends]
-However, as @sec-aspect-ratio demonstrated, decodings of slopes is
-are limited to physical slopes,
+However, as @sec-aspect-ratio demonstrated, the decoding of slopes is
+limited to *physical* slopes,
 which are dependent on the aspect ratio, rather than 
 decoding absolute rates of change in the data.[^slope-accuracy]
 
@@ -628,10 +669,6 @@ decoding absolute rates of change in the data.[^slope-accuracy]
     accuracy in terms of decoding the actual rate of change in the
     data.  For that purpose, we should encode the actual rate of change
     directly.
-
-**TODO**
-cite the paper (cook? hofmann?) that looked at identification of curves vs
-straight lines in log-log plots?  
 
 ## Case study: Box plots
 
