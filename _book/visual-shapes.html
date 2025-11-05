@@ -255,14 +255,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./guides.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Guides</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mapping Structure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mapping Structure</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -286,7 +280,7 @@ window.Quarto = {
   <li><a href="#sec-density" id="toc-sec-density" class="nav-link" data-scroll-target="#sec-density"><span class="header-section-number">10.3</span> Case study: Density plots</a></li>
   <li><a href="#sec-vis-shape-feature" id="toc-sec-vis-shape-feature" class="nav-link" data-scroll-target="#sec-vis-shape-feature"><span class="header-section-number">10.4</span> Visual features of visual shapes</a></li>
   <li><a href="#sec-aspect-ratio" id="toc-sec-aspect-ratio" class="nav-link" data-scroll-target="#sec-aspect-ratio"><span class="header-section-number">10.5</span> Aspect ratio</a></li>
-  <li><a href="#decoding-visual-shapes" id="toc-decoding-visual-shapes" class="nav-link" data-scroll-target="#decoding-visual-shapes"><span class="header-section-number">10.6</span> Decoding visual shapes</a></li>
+  <li><a href="#sec-vis-shape-decode" id="toc-sec-vis-shape-decode" class="nav-link" data-scroll-target="#sec-vis-shape-decode"><span class="header-section-number">10.6</span> Decoding visual shapes</a></li>
   <li><a href="#case-study-box-plots" id="toc-case-study-box-plots" class="nav-link" data-scroll-target="#case-study-box-plots"><span class="header-section-number">10.7</span> Case study: Box plots</a></li>
   <li><a href="#dangers-of-visual-shapes" id="toc-dangers-of-visual-shapes" class="nav-link" data-scroll-target="#dangers-of-visual-shapes"><span class="header-section-number">10.8</span> Dangers of visual shapes</a></li>
   <li><a href="#sec-shape-non-linear" id="toc-sec-shape-non-linear" class="nav-link" data-scroll-target="#sec-shape-non-linear"><span class="header-section-number">10.9</span> Non-linear mappings</a></li>
@@ -622,8 +616,8 @@ Figure&nbsp;10.13: A scatter plot of the number of times a team breaks through t
 </div>
 <p>A related issue is the amount of empty space around the data points in a scatter plot. IN <a href="#fig-scatter-aspect" class="quarto-xref">Figure&nbsp;<span>10.13</span></a>, the relationship appears stronger in the top-right plot compared to the top-left plot simply because the data points are clustered more densely thanks to the different ranges on the plot axes.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
 </section>
-<section id="decoding-visual-shapes" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="decoding-visual-shapes"><span class="header-section-number">10.6</span> Decoding visual shapes</h2>
+<section id="sec-vis-shape-decode" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-vis-shape-decode"><span class="header-section-number">10.6</span> Decoding visual shapes</h2>
 <p>As we saw in <a href="#sec-vis-shape-feature" class="quarto-xref"><span>Section 10.4</span></a>, if data values are encoded as a single, consistent visual feature of a visual shape, for example the colour of a line, then the original data values can be decoded from the basic visual feature, as described in earlier chapters for simpler data symbols like bars.</p>
 <p>For data values that are encoded as different values of a visual feature, such as the positions that a line is drawn between, decoding from a visual shape results in data summaries (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;<span>10.5</span></a>), for example peaks and valleys. The visual system’s ability to rapidly and effortlessly identify a wide range of data summaries is part of why data visualisation is so effective. It is difficult to calculate data summaries numerically from the raw data with the same flexibility.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> On the downside, as we saw in <a href="summaries.html#sec-summary-decode" class="quarto-xref"><span>Section 8.4</span></a> and <a href="combine.html#sec-decode-combine" class="quarto-xref"><span>Section 9.6</span></a>, the huge range of possible data summaries means that less is known about how accurately we can decode any particular data summary.</p>
 <p>There is experimental support for the intuitive sense that we can perform well at decoding qualitative features from shapes, such as peaks and valleys, as well as decoding ordinal comparisons, such as steeper and shallower.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> However, as <a href="#sec-aspect-ratio" class="quarto-xref"><span>Section 10.5</span></a> demonstrated, the decoding of slopes is limited to <em>physical</em> slopes, which are dependent on the aspect ratio, rather than decoding absolute rates of change in the data.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>

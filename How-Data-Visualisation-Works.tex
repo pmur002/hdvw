@@ -2876,7 +2876,7 @@ from the difference between two data symbols.
 
 \centering{
 
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-ternary-1.pdf}
+\includegraphics[scale=0.7]{ggtern/fig-ternary.pdf}
 
 }
 
@@ -5725,18 +5725,18 @@ district & rate \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Auckland City & 0.32 \\
-Bay of Plenty & 0.62 \\
-Canterbury & 0.38 \\
-Central & 0.56 \\
-Counties/Manukau & 0.39 \\
-Eastern & 0.66 \\
-Northland & 0.61 \\
-Southern & 0.49 \\
-Tasman & 0.62 \\
-Waikato & 0.46 \\
-Waitematā & 0.28 \\
-Wellington & 0.33 \\
+Northland & 372.63 \\
+Waitematā & 171.37 \\
+Auckland City & 191.53 \\
+Counties/Manukau & 191.43 \\
+Waikato & 282.42 \\
+Bay of Plenty & 411.96 \\
+Eastern & 355.56 \\
+Central & 393.59 \\
+Wellington & 217.47 \\
+Tasman & 390.83 \\
+Canterbury & 190.70 \\
+Southern & 312.89 \\
 
 \end{longtable}
 
@@ -6796,7 +6796,7 @@ produce an emergent feature that has no correspondence with data values
   summaries (and vice versa) is similar to the \emph{proximity
   compatibility principle} (Wickens and Carswell 1995).
 
-  Shah and Hoeffner (2002a) use the following nice quote from earlier
+  Shah and Hoeffner (2002) use the following nice quote from earlier
   work (Carswell and Wickens 1987):
 
   ``Integrated, object-like displays (e.g., a line graph) are better for
@@ -7613,7 +7613,7 @@ different ranges on the plot axes.\footnote{William S. Cleveland (1994)
   the area of the data rectangle relative to the area of the scale-line
   rectangle'' and provides demonstrations (Figure 4.15 and 4.16).}
 
-\section{Decoding visual shapes}\label{decoding-visual-shapes}
+\section{Decoding visual shapes}\label{sec-vis-shape-decode}
 
 As we saw in Section~\ref{sec-vis-shape-feature}, if data values are
 encoded as a single, consistent visual feature of a visual shape, for
@@ -8788,17 +8788,35 @@ Figure~\ref{fig-flags} shows another scatter plot of the number of clean
 breaks and the number of tries for countries at the 2023 Rugby World
 Cup, but this time with flags as the data symbols. In one sense, this is
 just a variation on Figure~\ref{fig-scatter-country} because the country
-names are encoded as the \textbf{pattern} of a data symbol. Each data
-symbol is a pattern that allows us to distinguish between the different
-countries.
+names are encoded as the \textbf{pattern} of a data symbol. We can
+decode from the pattern of each data symbol to the relevant country.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-objects_files/figure-pdf/fig-flags-1.pdf}
+
+}
+
+\caption{\label{fig-flags}A scatter plot with flags as data symbols}
+
+\end{figure}%
 
 The difference between the data symbols in
 Figure~\ref{fig-scatter-country} and the data symbols on
 Figure~\ref{fig-flags} is that the flags are not only more complicated
-data symbols, but they are familiar symbols. The flags convey
-differences, but they also convey the more sophisticated concept of the
-country names. In the terms of Section~\ref{sec-visual-processing}, the
-flags are \textbf{visual objects} (Figure~\ref{fig-data-obj}).
+data symbols, but they are familiar symbols. We can decode that the
+flags are different, but we can also decode country names from the
+flags. In the terms of Section~\ref{sec-visual-processing}, the flags
+are \textbf{visual objects} because they represent visual information
+that is combined with prior knowledge at a higher level of visual
+processing.
+
+Rather than encoding the country name as the \textbf{pattern} of a
+simple data symbol (Figure~\ref{fig-scatter-country}), in
+Figure~\ref{fig-flags} we have encoded each country name as a different
+\textbf{visual object} (Figure~\ref{fig-data-obj}).
 
 \begin{figure}
 
@@ -8813,18 +8831,6 @@ symbols that are complex visual objects.}
 
 \end{figure}%
 
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-objects_files/figure-pdf/fig-flags-1.pdf}
-
-}
-
-\caption{\label{fig-flags}A scatter plot with flags as data symbols}
-
-\end{figure}%
-
 \section{Learned decodings}\label{sec-learned}
 
 We \textbf{encode} data values as visual features so that the viewers of
@@ -8832,22 +8838,25 @@ a data visualisation can \textbf{decode} the data values from the visual
 features (Figure~\ref{fig-visual-feature-decode}).
 
 In Section~\ref{sec-implicit}, we saw that some encodings are effective
-because there are implicit decodings. For example, a longer bar in a bar
-plot naturally corresponds to a larger quantity. Basic visual features,
-like length, are effective thanks to \textbf{pre-existing} decodings
-that are built-in features of our visual system.
+because there are \textbf{implicit decodings}. For example, a longer bar
+in a bar plot naturally corresponds to a larger quantity. Basic visual
+features, like length, are effective thanks to \emph{pre-existing}
+decodings that are built-in features of our visual system
+(Figure~\ref{fig-implicit-decode}).
 
 Part of the power of \textbf{visual objects} also comes from
-pre-existing decodings. However, these decodings are \textbf{learned}
+pre-existing decodings. However, these decodings are \emph{learned}
 rather than being built-in. In some cases, we are able to
 \textbf{decode} values from a visual feature based on prior experience
-and learning, rather than due to an implicit encoding
-(Figure~\ref{fig-learned-decode}).\footnote{``Mapping Color to Meaning
-  in Colormap Data Visualizations'' Schloss et al (2018) They call this
-  an ``inferred mapping''
+and learning---via a \textbf{learned decoding}---rather than due to an
+implicit encoding (Figure~\ref{fig-learned-decode}).\footnote{Schloss et
+  al. (2019) refer to \emph{inferred mappings}, in particular from
+  colours to quantities, though this relates more to \emph{implicit
+  decodings} (Section~\ref{sec-implicit}) than learned decodings.
 
-  ``Affective Congruence in Visualization Design: Influences on Reading
-  Categorical Maps'' Anderson and Robinson (2021)}
+  Anderson and Robinson (2022) explore the affective, or emotional,
+  response to colours. It is unclear whether the decoding of colours to
+  emotions is implicit or learned or some combination.}
 
 \begin{figure}
 
@@ -8858,8 +8867,10 @@ and learning, rather than due to an implicit encoding
 }
 
 \caption{\label{fig-learned-decode}Some visual objects have learned
-decodings, which means that we can decode values from the visual
-features without having explicitly encoded values as visual features.}
+decodings, which means that we can decode values from the visual objects
+without having explicitly encoded values as visual features. This is
+similar to the idea of implicit encoding
+(Figure~\ref{fig-implicit-decode}).}
 
 \end{figure}%
 
@@ -8884,8 +8895,8 @@ pre-existing, learned decodings.}
 
 The flags in Figure~\ref{fig-flags} provide examples of learned
 decodings. We associate each flag with a particular country because we
-have seen these flags before and they have learned the decoding from
-flag to country (Figure~\ref{fig-learned-decode}).
+have seen these flags before and we have learned the decoding from flag
+to country (Figure~\ref{fig-learned-decode}).
 
 In terms of visual congruence (Chapter~\ref{sec-congruence}), a learned
 decoding strengthens the effectiveness of the explicit encoding because
@@ -8900,21 +8911,21 @@ to having a congruent \emph{implicit} decoding
 
 \includegraphics[scale=0.5]{Diagrams/data-obj-decode.png}
 
+}
+
+\caption{\label{fig-data-obj-decode}If we explicitly encode data values
+as visual objects in a way that is consistent with a learned decoding,
+we can more effectively decode data values from the visual objects.}
+
+\end{figure}%
+
 Figure~\ref{fig-flags-direct} demonstrates this point by repeating the
 scatter plot, but removing the legend. We are still able to identify not
 only that the data symbols represent different countries, but we can
-identify (at least some of) the country names as well
-(Figure~\ref{fig-obj-decode}).
+identify (at least some of) the country names as well because of the
+learned decoding of the flags (Figure~\ref{fig-obj-decode}).
 
-\centering{
-
-\includegraphics[scale=0.5]{Diagrams/obj-decode.png}
-
-}
-
-\subcaption{\label{fig-obj-decode}Some visual objects have learned
-decodings, which means that if we encode data values as the visual
-objects, decoding will be automatic.}
+\begin{figure}
 
 \centering{
 
@@ -8922,14 +8933,22 @@ objects, decoding will be automatic.}
 
 }
 
-\subcaption{\label{fig-flags-direct}A scatter plot with flags as data
+\caption{\label{fig-flags-direct}A scatter plot with flags as data
 symbols}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/obj-decode.png}
 
 }
 
-\caption{\label{fig-data-obj-decode}Some visual objects have learned
-decodings, which means that encoding data values as the visual objects,
-will be effective.}
+\caption{\label{fig-obj-decode}Some visual objects have learned
+decodings, which means that if we encode data values as the visual
+objects, decoding will be automatic.}
 
 \end{figure}%
 
@@ -8937,10 +8956,11 @@ Just to make the point completely clear,
 Figure~\ref{fig-scatter-country-no-legend} shows
 Figure~\ref{fig-scatter-country} without a legend. Although we can still
 perceive that the data symbols are different from each other, there is
-nothing about the shape of the data symbols in
-Figure~\ref{fig-scatter-country-no-legend} that conveys the country
-names. We can clearly see that Figure~\ref{fig-flags-direct} contains
-more information than Figure~\ref{fig-scatter-country-no-legend}.
+no learned decoding for the shape of the data symbols in
+Figure~\ref{fig-scatter-country-no-legend}, so they do not, by
+themselves decode to the country names. We can clearly see that
+Figure~\ref{fig-flags-direct} contains more information than
+Figure~\ref{fig-scatter-country-no-legend}.
 
 \begin{figure}
 
@@ -8951,7 +8971,7 @@ more information than Figure~\ref{fig-scatter-country-no-legend}.
 }
 
 \caption{\label{fig-scatter-country-no-legend}A scatter plot with a
-different shape per country}
+different data symbol pattern per country}
 
 \end{figure}%
 
@@ -8968,55 +8988,199 @@ reliably identify the difference between their two flags.
 
 \begin{quote}
 A plot that uses visual objects as data symbols may \emph{not} be
-effective if the learned decodings have not been learned by all viewers.
+effective if the learned decodings have not been learned by the viewer.
 \end{quote}
 
-\textbf{TODO} Refer back to Section~\ref{sec-rel-pos}. Visual shapes are
-one way to decode to absolute data values (rather than just relative)
+Another significant problem is that the data symbols in
+Figure~\ref{fig-flags-direct} are relatively complex. One of the reasons
+why data visualisations that use simple data symbols are effective, like
+bars in a bar plot or data points in a scatter plot, is because changes
+in the data are encoded as simple changes to visual features in the data
+symbols, like a change in the length of a bar
+(Section~\ref{sec-differences}). The flags in
+Figure~\ref{fig-flags-direct} contain many different visual features,
+like different colours, within the data symbol itself \emph{and} differ
+from each other on many visual features at once, like differences in
+colours, patterns, and so on.
+
+\begin{quote}
+A plot that uses visual objects as data symbols may \emph{not} be
+effective if the data symbols contain many different visual features
+that all change at once.
+\end{quote}
+
+\section{Case study: Chernoff faces}\label{case-study-chernoff-faces}
+
+Figure~\ref{fig-chernoff} visualises the 2023 Rugby World Cup data
+(Table~\ref{tbl-rwc-2023}) using Chernoff faces.\footnote{Chernoff faces
+  were invented by Herman Chernoff as a way to visualise
+  high-dimensional data (Chernoff 1973).} The data symbol in this
+visualisation is a little unusual; each country is represented by a
+combination of circles, curves, and lines that together produce a
+\textbf{visual object} that resembles a face
+(Figure~\ref{fig-data-vis-obj-stat-decode}). The mappings in this
+visualisation are also a little unusual. The number of points scored is
+encoded as the \textbf{curvature} of the smile, the number of tries is
+encoded as the \textbf{angle} of the eye brows, and the number of clean
+breaks is encoded as the horizontal \textbf{position} of the eyes.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-objects_files/figure-pdf/fig-chernoff-1.pdf}
+
+}
+
+\caption{\label{fig-chernoff}A Chernoff faces plot of the \ldots{}}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/data-vis-obj-stat-decode.png}
+
+}
+
+\caption{\label{fig-data-vis-obj-stat-decode}We can encode data values
+as the visual features of a complex data symbols that produces a complex
+visual objects.}
+
+\end{figure}%
+
+The mappings in a Chernoff face are \emph{not} very accurate (see
+Section~\ref{sec-accuracy}; \textbf{curvature} is ranked \emph{below}
+colour in terms of accuracy),\footnote{William S. Cleveland and McGill
+  (1984) ranked curvature below area, but above colour in terms of
+  accuracy for decoding quantitative data values
+  (Figure~\ref{fig-accuracy}).} so Cheroff faces are \emph{not} very
+effective for decoding raw data values.
+
+However, the familiarity of Chernoff faces means that we are easily able
+to decode common combinations of the facial features. For example, we
+can see several sad, worried faces at the top-left of
+Figure~\ref{fig-chernoff} and several happy, perhaps even smug, faces at
+the bottom-right. We can decode clusters of countries that share similar
+combinations of performance measures. In other words, we can decode
+multivariate correlations and multi-dimensional groupings in the data.
+
+In this case, the happier faces have been arranged to correspond to the
+more successful teams and the teams have been ordered from least points
+scored to most points scored (Section~\ref{sec-distance-effect}). The
+resulting proximity helps with perceiving groups of similar faces.
+
+\begin{quote}
+A Chernoff face is effective at conveying multi-dimensional
+relationships because the data symbol is a familiar visual object from
+which we can easily decode simple human emotions.
+\end{quote}
+
+On the downside, Chernoff faces suffer from the same problem as profile
+plots (Figure~\ref{fig-profile}): they are only effective for a small
+amount of data. Furthermore, the faces that result is highly dependent
+on which variables are encoded as which features. This is similar to the
+problem that we saw with selecting the order and direction of axes in
+parallel coordinate plots (Section~\ref{sec-parallel}).
 
 \section{Visual features of visual
 objects}\label{sec-vis-object-feature}
 
-\textbf{TODO} Talk about how visual objects can also have basic visual
-features like colour and area. Refer back to
-Section~\ref{sec-vis-shape-feature}
+Figure~\ref{fig-chernoff-colour} shows a variation of
+Figure~\ref{fig-chernoff}. In this plot, the hemisphere of each country
+is encoded as the \textbf{colour} of the flag (large or small).
+Figure~\ref{fig-chernoff-colour} shows that visual objects, although
+they are complex data symbols, can still have basic visual features,
+like \textbf{colour}.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-objects_files/figure-pdf/fig-chernoff-colour-1.pdf}
+
+}
+
+\caption{\label{fig-chernoff-colour}A Chernoff faces plot of the
+\ldots{}}
+
+\end{figure}%
+
+This means that it is still possible to encode data values as basic
+visual features of visual objects, just as we can with much simpler data
+symbols, like data points. We saw in Section~\ref{sec-vis-shape-feature}
+that we can do this with other complex data symbols, visual shapes, as
+well.
+
+Figure~\ref{fig-flags-size} shows another example, this time with a
+variation of Figure~\ref{fig-flags-direct}. In
+Figure~\ref{fig-flags-size}, the hemisphere of each country is encoded
+as the \textbf{area} of the flag (large versus small). We can decode the
+hemisphere for each country just from this basic visual feature,
+separately from decoding the country name from the visual object.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-objects_files/figure-pdf/fig-flags-size-1.pdf}
+
+}
+
+\caption{\label{fig-flags-size}A scatter plot with flags as data
+symbols}
+
+\end{figure}%
 
 \section{Decoding visual objects}\label{decoding-visual-objects}
 
 If data values have been encoded as a single consistent feature of a
 visual object, such as the colour or area of a visual object
 (Section~\ref{sec-vis-object-feature}), then decoding proceeds as for
-simpler data symbols.
+simpler data symbols like bars.
 
-Visual objects may decode to data values or data summaries (or more
-abstract/conceptual) so there are a few things to consider.
+In Figure~\ref{fig-flags}, we saw an example of encoding individual data
+values to visual objects: each country name is encoded as a separate
+flag. In this case, it is possible to decode an individual data value
+from each visual object. Assessing the accuracy of the decoding of
+quantitative data values from visual objects is difficult because there
+are very many possible visual objects. \footnote{Vanderplas, Cook, and
+  Hofmann (2020) allude to the difficulty of experimentally testing
+  ``rich, complex graphics that may require domain expertise in addition
+  to the ability to read information from a visual display.''} On the
+other hand, the decoding of qualitative data values from visual objects,
+thanks to the very large range of possible objects, clearly has a very
+large capacity (Section~\ref{sec-capacity}). For example, there is no
+confusion between the large number of different flags in
+Figure~\ref{fig-flags-direct} (apart from those silly Australian and New
+Zealand flags).
 
-Can get visual summaries of visual objects! Whitney 2018
+Figure~\ref{fig-chernoff} showed a different situation, where multiple
+data values are encoded within a single visual object. The result in
+this case is similar to when we encode multiple data values within a
+visual shape (Section~\ref{sec-vis-shape-decode}). We are less able to
+decode individual data values, but we gain the ability to decode
+multivariate data summaries, such as multivariate clusters and
+multivariate correlations.
 
-Decoding to data summaries, so problem of many possible decodings again
-?
-
-Think about qual ? e.g., clusters and outliers
-
-Missing decoding a problem!
-
-Learned decoding conflict a problem!
-
-Congruence comes into play - big time!
-
-Mention that little is known about the accuracy of visual objects
-(though they must have good capacity because they are more abstract,
-right?)\footnote{in general, there needs to be more explicit
-  acknowledgement of the lack of experimental results for complex data
-  vis scenarios. c.f., ``Testing Statistical Charts: What Makes a Good
-  Graph?'' Vanderplas, Cook, and Hofmann (2020) p 71.}:
+In some cases, it is also possible to obtain \textbf{visual summaries}
+of visual objects, similar to what is possible for much simpler data
+symbols, like data points in a scatter plot
+(Section~\ref{sec-visual-summaries}). For example, in
+Figure~\ref{fig-chernoff}, we can decode a trend of emotions from the
+rows of Chernoff faces, from more sad at the top to more happy at the
+bottom.\footnote{Whitney and Yamanashi Leib (2018) point to a study that
+  demonstrates the ability to summarise crowds of faces for ``average
+  emotional expression and gender.''}
 
 \section{Case study: Choropleth maps}\label{sec-choropleth}
 
 Figure~\ref{fig-map} shows a choropleth map of the crime rate for 2021
-in each police district of New Zealand.\footnote{Add citations to
-  MacEachren and Bertin and Dan Carr ?} The data values for this map are
-shown in Table~\ref{tbl-map-data}.
+in each police district of New Zealand.\footnote{Choropleth maps are a
+  very old form of data visualisation. There are examples from more than
+  200 years ago! (Dupin and Collon 1826)} The crime rate data values for
+this map are shown in Table~\ref{tbl-map-data}.
 
 The data symbol in Figure~\ref{fig-map} is a polygon representing the
 geographic boundary of each police district. This implicitly entails an
@@ -9026,10 +9190,10 @@ Crime rate is encoded as the fill colour of each polygon.
 The use of polygons as data symbols is effective because the polygons
 form familiar shapes with familiar spatial arrangements (familiar to a
 New Zealand audience at least). The polygons are \textbf{visual objects}
-that convey the concepts of districts within New Zealand. The spatial
-arrangements are also a form of visual \textbf{congruence}; the
+that have a learned decoding to districts within New Zealand. The
+spatial arrangements are also a form of visual \textbf{congruence}; the
 arrangements mirror the real-world spatial relationships between the
-regions (see Chapter~\ref{sec-congruence}).
+regions (Chapter~\ref{sec-congruence}).
 
 \begin{figure}
 
@@ -9039,8 +9203,8 @@ regions (see Chapter~\ref{sec-congruence}).
 
 }
 
-\caption{\label{fig-map}A choropleth map of the average crime rate over
-the period 2011 to 2021 for each police district.}
+\caption{\label{fig-map}A choropleth map of the crime rate for each
+police district for 2021.}
 
 \end{figure}%
 
@@ -9052,10 +9216,10 @@ familiar visual objects that resemble the real world regions.
 A weakness of Figure~\ref{fig-map} is that it encodes the
 \textbf{quantitative} crime rate as colour (chroma and/or luminance).
 This means that we can only decode ordinal comparisons between regions
-(see Section~\ref{sec-ordinal}). For example, we can see that the
-highest crime rate occurs in the district to the east of the North
-Island, but it is difficult to perceive how much higher that crime rate
-is compared to the next highest crime rate.
+(Section~\ref{sec-ordinal}). For example, we can see that the highest
+crime rate occurs in the Bay of Plenty (the darkest region), but it is
+difficult to decode how much higher that crime rate is compared to the
+next highest crime rate.
 
 \begin{quote}
 A choropleth map is \emph{only} effective for making ordinal comparisons
@@ -9081,7 +9245,8 @@ the regions in the real world.
 
 }
 
-\caption{\label{fig-district-bar}}
+\caption{\label{fig-district-bar}A bar plot of the data from
+Figure~\ref{fig-map}}
 
 \end{figure}%
 
@@ -9100,7 +9265,7 @@ symbols have a spatial arrangement that corresponds to the real-world
 arrangement of police districts and they provide a better decoding of
 crime rates from data symbols compared to the colours in the choropleth
 map (although area is still not the most accurate visual feature and the
-lengths are unaligned; see Section~\ref{sec-accuracy}).
+lengths are unaligned; Section~\ref{sec-accuracy}).
 
 \begin{figure}
 
@@ -9129,8 +9294,7 @@ lengths are unaligned; see Section~\ref{sec-accuracy}).
 \end{minipage}%
 
 \caption{\label{fig-map-alt}Alternative map-based representations of the
-average crime rate over the period 2011 to 2021 for each police
-district.}
+crime rate in each police district for 2021.}
 
 \end{figure}%
 
@@ -9138,22 +9302,23 @@ district.}
 
 Figure~\ref{fig-junk} shows a version of Figure~\ref{fig-map} with two
 cartoon villians added in the top-left and bottom-right
-corners.\footnote{Attribution for the original public domain image.}
-These sorts of annotations are often, derisively, referred to as
-\textbf{chart junk}, with the suggestion that they add no value and make
-it harder to extract the important information.\footnote{Mention Tufte
-  (data-ink ratio), Stephen Few? see DataVis/README for links to the
-  debate.
+corners.\footnote{Image by
+  \href{https://www.rawpixel.com/image/10104122/vector-person-cartoon-illustrations}{rawpixel.com}.
+  Free for Personal and Business use.} These sorts of annotations are
+often, derisively, referred to as \textbf{chart junk}, with the
+suggestion that they add no value and make it harder to extract the
+important information.\footnote{There have been quite passionate
+  arguments against the use of visual embellishments in data
+  visualisation. Tufte's exhortation to minimise the \emph{data-ink
+  ratio} (the proportion of ink that represents data values) is the
+  prime example (Tufte 1983, chap. 4).
 
-  \begin{itemize}
-  \tightlist
-  \item
-    ``Declutter and Focus: Empirically Evaluating Design Guidelines for
-    Effective Data Communication'' Ajani et al (2021) says that ``The
-    visualization practitioner community prescribes two popular
-    guidelines for creating clear and efficient visualizations:
-    declutter and focus.''
-  \end{itemize}}
+  Stephen Few has also had quite a bit to say on the matter (e.g., Few
+  2011).
+
+  Ajani et al. (2022) summarise the general mood: ``The visualization
+  practitioner community prescribes two popular guidelines for creating
+  clear and efficient visualizations: declutter and focus.''}
 
 \begin{figure}
 
@@ -9163,21 +9328,35 @@ it harder to extract the important information.\footnote{Mention Tufte
 
 }
 
-\caption{\label{fig-junk}A choropleth map of the average crime rate over
-the period 2011 to 2021 for each police district (like
-Figure~\ref{fig-map}), with cartoon villian images added.}
+\caption{\label{fig-junk}A choropleth map of the crime rate for each
+police district in 2021 (like Figure~\ref{fig-map}), with cartoon
+villian images added.}
 
 \end{figure}%
 
-The cartoon villians are an example of \textbf{visual objects}. They
-(crudely) convey the concepts of crime and criminals. However, they are
-\emph{not} \textbf{data symbols} because there is no mapping from the
-raw data to the cartoon villians. Their position is unrelated to the
+The cartoon villians are another example of \textbf{visual objects}.
+They (crudely) convey the concepts of crime and criminals. However, they
+are \emph{not} \textbf{data symbols} because there is no mapping from
+the raw data to the cartoon villians. Their position is unrelated to the
 data, their colour is unrelated to the data, and their size is unrelated
-to the data. The best that can be said is that they relate to the
-\textbf{metadata}, the general topic of the data visualisation.
-Annotations like this are closer in purpose to \textbf{labels} (see
-Section~\ref{sec-labels}).
+to the data. No information has been encoded in the visual objects, so
+no useful information can be decoded (Figure~\ref{fig-vis-clutter}). The
+best that can be said is that they relate to the \textbf{metadata}, the
+general topic of the data visualisation.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/vis-clutter.png}
+
+}
+
+\caption{\label{fig-vis-clutter}Chart junk is a visual object that is
+\emph{not} the result of encoding data values. It cannot provide any
+decoding to data values.}
+
+\end{figure}%
 
 In Section~\ref{sec-differences} we learned that we should keep things
 simple and only present visual changes that correspond to changes in the
@@ -9206,52 +9385,63 @@ villians are not devoid of information; they convey the concept of crime
 more dramatically than the simple text label ``crime rate''. The more
 complex and interesting images may attract attention to the data
 visualisation as a whole and there is some evidence that such
-annotations improve the memorability of a data visualisation.\footnote{Links
-  to studies that try to show benefits of chart junk. Rahman et al
-  (2024) Mention affect (emotion) study?
+annotations improve the memorability of a data visualisation.\footnote{The
+  arguments in favour of visual embellishments mostly relate to
+  assessing the effectiveness of data visualisation by measures
+  \emph{other than} accuracy and efficiency.
 
-  ``Chart and Graphs'' Karsten (1925)
+  For example, Borgo et al. (2012) found evidence that \emph{visual
+  embellishments} improved memorability and a survey by Rahman et al.
+  (2025) concluded that \emph{annotations} could lead to improved
+  comprehension, memorability, and recall.
 
-  This is the source of the ``insult to man's intelligence'' remark
-  about pie charts, though note the full quote:
+  Even arch-enemies of chart junk make some concessions: ``Graphical
+  embellishments can support the effectiveness of a data visualization
+  in three potential ways: 1) by engaging the interest of the reader
+  (i.e., getting them to read the content), 2) by drawing the reader's
+  attention to particular items that merit emphasis, and 3) by making
+  the message more memorable. Embellishments only enhance effectiveness,
+  however, if they refrain from undermining the message by significantly
+  distracting from it or misrepresenting it'' (Few 2011).
 
-  ``In a sense, it might be construed as an insult to a man's
-  intelligence to show him a pie-chart, but the insult is not often
-  resented. For if your main object be to get a story across, you are
-  justified in taking that means which will encounter least resistance,
-  and in making your story as simple as possible. For publicity
-  purposes, the pie-chart is therefore almost invariably better than the
-  bar.'' {[}p98{]}}
+  There is also some evidence that visual objects may perform better on
+  standard measures under some circumstances. For example, Haroz,
+  Kosara, and Franconeri (2015) found evidence that encoding data values
+  as pictographs rather than simple shapes produced \emph{better}
+  accuracy when cognitive load was higher (when the task was recall of a
+  plot \emph{prior} to the last observed plot).}
 
 \begin{quote}
-Chart junk can be effective because it has a greater emotional impact
-and is more memorable.
+Visual objects that are not directly related to the data can still be
+effective because they can have a greater emotional impact and they can
+be more memorable.
 \end{quote}
 
 Overall, visual objects that are not related to data values are
 \emph{not} effective for decoding data values, so any other benefits
-have to be weighed against that cost.\footnote{There is a really nice
-  summary of when chart junk might be acceptable somewhere in
-  DataVis/README}
+have to be weighed against that cost.
 
-\section{Case study: Pictograms}\label{case-study-pictograms}
+\section{Case study: Icons}\label{case-study-icons}
 
-Figure~\ref{fig-pic} shows a pictogram of the number of pet dogs and pet
-cats globally.\footnote{reference to Statista
-  https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/}
+Figure~\ref{fig-pic} shows a data visualisation of the number of pet
+dogs and pet cats globally.\footnote{These counts were obtained from
+  \href{https://www.statista.com/statistics/1044386/dog-and-cat-pet-population-worldwide/}{Statista}.}
 The data symbols in this plot are images, or \textbf{icons}, of a cat
 and a dog, with the number of pets encoded as the height of each
-icon.\footnote{different terminology: icons, glyphs, pictograms Vehement
-  opposition to these from some quarters} Icons are an example of
-\textbf{visual objects}; they are effective at conveying categories
-because they visually resemble physical objects, in this case, cats and
-dogs.
+icon.\footnote{We use the term \emph{icon} to describe a small
+  recognisable image. These are also also known as \emph{pictograms}
+  (Haroz, Kosara, and Franconeri 2015; Brewer and Campbell 1998). Borgo
+  et al. (2013) make further fine distinctions between \emph{icons},
+  \emph{indices}, \emph{symbols}, \emph{pictograms}, and
+  \emph{ideograms}.} Icons are an example of \textbf{visual objects};
+they are effective for decoding categories because they visually
+resemble physical objects, in this case, cats and dogs.
 
 Unfortunately, because the cat and dog images are not simple shapes, it
-is harder to accurately perceive the heights of the images, so it is
-harder to decode the number of cats and dogs. Even worse, we actually
-perceive the size, or \textbf{area}, of the images. The dog image is
-wider than the cat image so the number of dogs is visually
+is harder to accurately decode the heights of the images, so it is
+harder to decode the number of cats and dogs. Even worse, we are likely
+to decode the the size, or \textbf{area}, of the images. The dog image
+is wider than the cat image so the number of dogs is visually
 over-emphasised.
 
 \begin{figure}
@@ -9270,15 +9460,15 @@ and pet dogs worldwide.}
 Figure~\ref{fig-pic-alt} shows two alternative uses of icons that
 attempt to resolve some of the problems in Figure~\ref{fig-pic}. In
 Figure~\ref{fig-pic-alt-1}, the images are distorted so that they have
-the same width and so that only the height of the images changes. There
-is also a bar to help with the perception of \textbf{length}. While the
-bar makes it much easier to decode the number of pets, the distortion is
-not effective because it hinders the perception of the icon.
+the same width and so that only the height of the images changes. While
+the fixed width helps with decoding the number of pets from the heights
+of the icons, this sort of distortion can remove the learned decoding of
+the icons if they become unrecognisable.
 
 Figure~\ref{fig-pic-alt-2} uses a bar to represent the number of pets
 and just has a small version of the icon at the base of each bar. We
 know that the bar is effective for decoding the number of pets and the
-small icons are effective as labels for the bars.
+small icons are effective for decoding the categories of cat and dog.
 
 \begin{figure}
 
@@ -9311,15 +9501,22 @@ small icons are effective as labels for the bars.
 \end{figure}%
 
 Figure~\ref{fig-pic-icon} shows two more alternatives to
-Figure~\ref{fig-pic}. Figure~\ref{fig-pic-icon-2} is just a standard bar
-plot. We know that this is effective for decoding the number of pets.
-
-Figure~\ref{fig-pic-icon-1} uses repetitions of the icons to represent
-the number of pets, still within a bar. In this case, each icon
-represents 100 million pets. The ability to count icons is effective for
-decoding the overall counts.\footnote{cite the study that reckons using
-  icons can help with perceiving counts. More effective when each icon
-  represents 1 (and so there are no fractional icons) ?}
+Figure~\ref{fig-pic}. Figure~\ref{fig-pic-icon-1} uses repetitions of
+the icons to represent the number of pets, still within a bar. In this
+case, each icon represents 100 million pets. The ability to count
+individual icons can improve the decoding of the overall data
+totals.\footnote{Haroz, Kosara, and Franconeri (2015) refer to the
+  ability to rapidly count small numbers of items (\emph{subitizing})
+  and recommend breaking bars into (a small number of) countable chunks
+  to improve the decoding of overall height (as in
+  Figure~\ref{fig-pic-icon-2}). This is similar to the use of grid
+  lines, but appears to rely on a different visual effect.}
+Figure~\ref{fig-pic-icon-2} is a standard bar plot, but with each bar
+broken into chunks.\\
+We need the labels ``cat'' and ``dog'' to replace the icons, but it is
+possible to count the bar chunks in a similar way to counting the icons
+in Figure~\ref{fig-pic-icon-1}, as well as decode the overall bar
+height, which we know is effective for decoding the number of pets.
 
 \begin{figure}
 
@@ -9344,7 +9541,8 @@ number of pets.}
 
 }
 
-\subcaption{\label{fig-pic-icon-2}A basic bar plot}
+\subcaption{\label{fig-pic-icon-2}A basic bar plot, but with each bar
+broken into chunks.}
 
 \end{minipage}%
 
@@ -9353,84 +9551,19 @@ the pet data.}
 
 \end{figure}%
 
-\section{Case study: Chernoff faces}\label{case-study-chernoff-faces}
-
-Figure~\ref{fig-chernoff} visualises the 2023 Rugby World Cup data
-(Table~\ref{tbl-rwc-2023}) using Chernoff faces.\footnote{Chernoff
-  (1973)} The data symbol in this visualisation is a little unusual;
-each country is represented by a combination of circles, curves, and
-lines that together produce a \textbf{visual object} that resembles a
-face (Figure~\ref{fig-data-vis-obj-stat-decode}). The mappings in this
-visualisation are also a little unusual. The number of points scored is
-encoded as the \textbf{curvature} of the smile, the number of tries is
-encoded as the \textbf{angle} of the eye brows, and the number of clean
-breaks is encoded as the horizontal \textbf{position} of the eyes.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[scale=0.5]{Diagrams/data-vis-obj-stat-decode.png}
-
-}
-
-\caption{\label{fig-data-vis-obj-stat-decode}We can encode data values
-as the visual features of a complex data symbols that produces a complex
-visual objects.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-objects_files/figure-pdf/fig-chernoff-1.pdf}
-
-}
-
-\caption{\label{fig-chernoff}A Chernoff faces plot of the \ldots{}}
-
-\end{figure}%
-
-The mappings in a Chernoff face are \emph{not} very accurate (see
-Section~\ref{sec-accuracy}; \textbf{curvature} is ranked \emph{below}
-colour in terms of accuracy),\footnote{Link to a resource that has a
-  comprehensive list of visual channels and includes curvature.} so
-Cheroff faces are \emph{not} very effective for decoding raw data
-values.
-
-However, the familiarity of Chernoff faces means that we are easily able
-to perceive common combinations of the facial features. For example, we
-can see several sad, worried faces at the top-left of
-Figure~\ref{fig-chernoff} and several happy, perhaps even smug, faces at
-the bottom-right. We can perceive countries that share similar
-combinations of performance measures. In other words, we can perceive
-multi-dimensional correlations and multi-dimensional groupings in the
-data.
-
-In this case, the happier faces have been arranged to correspond to the
-more successful teams and the teams have been ordered from least points
-scored to most points scored. The resulting proximity helps with
-perceiving groups of similar faces.
-
-\begin{quote}
-A Chernoff face is effective at conveying multi-dimensional
-relationships because the data symbol is a familiar visual object from
-which we can easily perceive simple human emotions.
-\end{quote}
-
 \section{Dangers of learned decodings}\label{sec-learned-danger}
 
-\textbf{TODO} Refer back to pcp Correlation as tightly crossing lines
-needs to be learned
-
 Figure~\ref{fig-stroop} provides a demonstration of the Stroop
-Effect.\footnote{citation please!} The task is to name the colour of
-each word. This task is difficult to do because there are two decodings
+Effect.\footnote{The effect was demonstrated by Stroop (1935).
+  Interestingly, there was little effect on response time for reading
+  words that named colours that were coloured with conflicting colours,
+  but a much larger effect for naming colours of words that had
+  conflicting colour names.} The task is to name the colour of each
+word. This task is difficult to do because there are two decodings
 involved and the two decodings are inconsistent. Each set of letters has
-a learned decoding based on the \textbf{shape} of the letters---the word
-that the letters spell out---but there is also a learned decoding based
-on the actual \textbf{colour} of the letters---the colour names that we
+a learned decoding based on the semantics of the letters---the word that
+the letters spell out---but there is also a learned decoding based on
+the actual \textbf{colour} of the letters---the colour names that we
 learn as children.
 
 \begin{figure}
@@ -9450,25 +9583,20 @@ One issue with relying on learned decodings is that we may learn more
 than one association for the same visual feature. For example, the
 colour red is commonly associated with hot (versus blue for cold), but
 also with stop (versus green for go), plus also passion, or even
-anger.\footnote{Cite ``Sometimes more is more: iterative participatory
-  design of infographics for engagement of community members with
-  varying levels of health literacy'' Arcia et al (2016) where people
-  interpret icons in multiple ways, e.g.~specifically ``pineapple''
-  rather than generic ``fruit''.
+anger.\footnote{Brockmann (1991) gives the following examples of
+  ambiguous colour association (attributed to Thorell and Smith (1990)):
 
-  Also cite something about cultural differences in perception. e.g.,
-  ``More of what? Dissociating effects of conceptual and numeric
-  mappings on interpreting colormap data visualizations'' Soto et al
-  (2023)
+  green for process control engineers means ``nominal or safe,'' for
+  financial managers it means ``profitable,'' and for health care
+  workers it means ``infected.''
 
-  ``Review of Graph Comprehension Research: Implications for
-  Instruction'' Shah and Hoeffner (2002) Give example of ambiguous
-  colour association ``green means profitable for financial managers but
-  infected for health care workers (Brockmann, 1991)''} Furthermore,
-many associations are specific to a particular culture. For example, red
-is associated with luck and prosperity in Chinese culture, among other
-things.\footnote{``A Study on the Metaphor of ``Red'' in Chinese
-  Culture'' Qiang (2011)}
+  Arcia et al. (2016) report examples of viewers interpreting icons too
+  literally. For example, a picture of an apple as ``apple'' rather than
+  the intended general category of ``fruit''.} Furthermore, many
+associations are specific to a particular culture. For example, red is
+associated with luck and prosperity in Chinese culture, among other
+things.\footnote{Huang (2011) describes multiple associations in Chinese
+  culture with the colour red.}
 
 Relying on a learned decoding can cause confusion if there are multiple
 possible decodings. It may not be clear which data value should be
@@ -9482,17 +9610,17 @@ decoded from the visual feature (Figure~\ref{fig-ambiguous-decode}).
 
 }
 
-\caption{\label{fig-ambiguous-decode}A visual feature may have more than
+\caption{\label{fig-ambiguous-decode}A visual object may have more than
 one learned decoding, which means that we may decode more than one value
-from the visual feature.}
+from the visual object.}
 
 \end{figure}%
 
 The problem is much worse if the learned decoding(s) conflict with an
 explicit encoding of data values. For example, in
-Figure~\ref{fig-flags}, if we use the incorrect flag for a country, for
-example, by swapping the Australian and New Zealand flags, we not only
-introduce confusion, but a misleading decoding
+Figure~\ref{fig-flags}, if we use the incorrect flag for a country---we
+could swap the Australian and New Zealand flags---we not only introduce
+confusion, but a misleading decoding
 (Figure~\ref{fig-obj-dissonant-decode}). This is similar to the problem
 of dissonant mappings (Section~\ref{sec-dissonance} and
 Figure~\ref{fig-dissonant-decode}).
@@ -9505,9 +9633,9 @@ Figure~\ref{fig-dissonant-decode}).
 
 }
 
-\caption{\label{fig-obj-dissonant-decode}A visual feature may have more
-than one learned decoding, which means that we may decode more than one
-value from the visual feature.}
+\caption{\label{fig-obj-dissonant-decode}An explicit encoding may
+conflict with a learned decoding. This will lead to confusion and/or
+incorrect decoding of the visual object.}
 
 \end{figure}%
 
@@ -9543,33 +9671,49 @@ country flags will vary with nationality and age, for example.
 
 \caption{\label{fig-not-learned-decode}If we encode data values using
 data symbols that are complex visual objects, but there is no learned
-decoding, the mapping will be ineffective.}
+decoding, the mapping will be ineffective because there is no decoding
+back to the data value.}
 
 \end{figure}%
 
 An extreme version of this problem is the use of not just complex or
-unusual data symbols, but entirely novel data visualisations.\footnote{Kosslyn's
-  Principle of appropriate knowledge ?
+unusual data symbols, but entirely novel data visualisations.\footnote{This
+  relates to Kosslyn's \emph{Principle of Appropriate Knowledge}
+  (Kosslyn 2006): ``Readers can interpret a display only if it builds on
+  appropriate information that they have already stored in memory.''
 
-  Could mention Pinker's (1990) ``graph schema'' (prior knowledge about
-  a graph type).
+  Pinker (1990) talks about the necessity of having a \emph{graph
+  schema} in order to be able to decode information from a graph.
 
-  Shah and Hoeffner (2002b) provides several examples of young students
+  Shah and Hoeffner (2002) provide multiple examples of young students
   misinterpreting the message from line plots, which suggests that we
   need to \emph{learn} how to make effective use of even basic data
-  visualisation formats.
+  visualisation formats.}
 
-  ``Bars and lines: A study of graphic communication'' Zacks and Tversky
-  (1999) speculates on the development of graphical conventions.}
+For example, Figure~\ref{fig-andrews} shows an Andrews curves
+plot.\footnote{Andrews curves were invented as a way to visualise
+  high-dimensional data by David F. Andrews (Andrews 1972). The curve is
+  a sum of sine and cosine waves with coefficients based on the data
+  values.} This data visualisation encodes each row of data to a line
+data symbol, similar to a parallel coordinates plot. However, the line
+for an Andrews curve is a more complex data summary and one that has no
+simple interpretation. In other words, it is not possible to decode even
+the individual data summaries from the data symbols on an Andrews curve.
+The x-axis and y-axis on an Andrews curve are of no real value, which is
+why they have not been labelled on Figure~\ref{fig-andrews}.
 
-Refer back to (reading of) parallel coordinates plots.
+The value of an Andrews curve lies in the visual shapes that are
+produced by each line. If two rows of data are similar, then they will
+produce an Andrews curve with a similar visual shape. This means that we
+can decode clusters from lines that appear similar on an Andrews curve
+plot.
 
-Andrews curve of RWCperGame statistics (analogue of
-Figure~\ref{fig-parallel}). \textbf{Cite Andrews article.} Can see the
-three distinct groups of countries more easily in this than in parallel
-plot, but hard to understand exactly what you are seeing. Plus NO chance
-of recovering original data values (another example of visualising data
-summary).
+For example, there are four curves in Figure~\ref{fig-andrews} that form
+a much higher peak than the other curves. The horizontal position of the
+peak and the vertical height of the peak is of no value, but the fact
+that the four lines all have a similar peak suggests that there are four
+countries that are similar to each other and different from all other
+teams on at least one performance measure.
 
 \begin{figure}
 
@@ -9584,19 +9728,37 @@ for teams in the 2023 Rugby World Cup.}
 
 \end{figure}%
 
-Another example of this problem are the hurrican ``cones of
-uncertainty'' that Cairo highlights in Chapter 5 of How Charts Lie
-(footnote!).
+An andrews curve plot like Figure~\ref{fig-andrews} is an example of a
+data visualisation that is difficult to decode without having learned
+how to decode the plot. Even if the decoding of similar lines as
+clusters of data rows is fairly intuitive, ignoring the position and
+height of peaks and valleys is not.
 
-Refer back to Section~\ref{sec-ternary} as example of plot type that
-experts in specific fields learn to read.
+Parallel coordinates plots (Section~\ref{sec-parallel}) are another
+example of a data visualisation that requires learning in order to
+decode properly. In particular, decoding a tight crossing of lines as a
+negative correlation between variables is not necessarily an intuitive
+decoding. Ternary plots (Section~\ref{sec-ternary}) is yet another
+example of this sort. In this case, it is necessary to learn how to
+decode positions relative to the oblique axes.
 
 \section{Summary}\label{summary-11}
 
-If we encode data values as familiar visual objects, it becomes possible
-to decode more complex concepts based on prior learning and experience.
+Visual objects are relatively complex data symbols that have a learned
+decoding.
 
-This may obviate the need for legends.
+Encoding data values as visual objects is effective because the learned
+decoding provides a pre-existing decoding from the data symbol to data
+values. This can support an explicit encoding and can remove the need
+for axes and legends to explain the decoding.
+
+However, visual objects may be distracting if they are not related to
+any encoding of data values and the increased complexity can make
+decoding more difficult.
+
+It is also important not to create a conflict between an explicit
+encoding and a learned decoding. That will result in confusion or
+incorrect decoding of the data symbols.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -9817,10 +9979,112 @@ Why is a picture is worth a thousand words? Because 1000 words is 1000
 fixations, identifying 1000 visual objects, and then interpreting their
 combined meaning.
 
-\section{Labels}\label{sec-labels}
+\bookmarksetup{startatroot}
+
+\chapter{Mapping scales}\label{sec-guides}
+
+\textbf{TODO} Footnote ``guides'' terminology (vs axes, legends, etc)
+
+\textbf{TODO} refer back to Section~\ref{sec-rel-pos}. We NEED the axes
+to decode absolute values. ALSO, we can decode ABSOLUTE values from the
+text labels. The decoding of text is NOT relative.
+
+Figure~\ref{fig-crime-guides} is a version of Figure~\ref{fig-crime}
+with the guides highlighted in purple. There are tick marks and tick
+labels on the x-axis and y-axis, there are horizontal grid lines, and
+there are legend elements to show the mapping from the different ages to
+different colours.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/text_files/figure-pdf/fig-crime-guides-1.pdf}
+
+}
+
+\caption{\label{fig-crime-guides}A line plot of the crime rate amongst
+youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot
+have been highlighted in purple.}
+
+\end{figure}%
+
+The first thing to note about the guides in
+Figure~\ref{fig-crime-guides} is that they are all composed of
+\textbf{data symbols}, with \textbf{data values} mapped to
+\textbf{visual features} of the data symbols
+(Chapter~\ref{sec-mapping-visual-features}). This is perhaps easiest to
+see with the grid lines. Each grid line is a data symbol where a data
+value, a rate of offending, has been encoded as the vertical
+\textbf{position} of the line. Similarly, each tick mark on the y-axis
+is a line data symbol where a rate of offending has been encoded as the
+vertical \textbf{position} of the line and each tick mark on the x-axis
+is a line data symbol where a year has been encoded as the horizontal
+\textbf{position} of the line. Finally, each of the tick labels on the
+y-axis is a text data symbol where a rate of offending has been encoded
+as the vertical \textbf{position} of the text \emph{and} as the
+\textbf{shape} of the text. Similar mappings apply to the x-axis tick
+labels. The legend is also made up of line data symbols and text data
+symbols, this time with age data values encoded as the \textbf{colour}
+of lines and the \textbf{shape} of text.
+
+The \textbf{decoding} of the \textbf{shape} of the \textbf{text} data
+symbols within the guides shows the critical role that text plays within
+guides. If we look again at Figure~\ref{fig-no-text}, there are coloured
+lines on the plot and there are coloured lines on the legend. The fact
+that these lines have different colours indicates that there are three
+different groups, but the colours alone do not tell us what the groups
+are. We can decode different values from the colours of the lines, but
+we cannot decode exact data values. In the original
+Figure~\ref{fig-crime}, the shapes of the text labels on the legend
+allow us to decode the original data values---the three ages 14, 15, and
+16.
+
+\textbf{TODO} text is typically the \textbf{only} data symbol within a
+data visualisation that can be decoded to an \textbf{individual},
+\textbf{absolute} data value.\\
+Most other decoding is relative (e.g., Section~\ref{sec-rel-pos},
+Section~\ref{sec-perception-relative},
+Section~\ref{sec-colour-relative}) or to a data summary (e.g.,
+Section~\ref{sec-line-plots})
+
+The proximity of the text labels in the legend to the coloured lines in
+the legend means that we associate each label with each coloured line
+(Section~\ref{sec-visual-model-groups}). So the text labels in the
+legend are the essential data symbols in Figure~\ref{fig-crime} because
+only they allow us to decode from the colours of the lines to the three
+age groups.
+
+The text labels on axes perform a similar service. For example, the
+numbers on the axes in Figure~\ref{fig-crime} are the only data symbols
+that provide exact decoding from positions to data values (years or
+rates). The lines within the plot, by themselves, only show that values
+are decreasing. It is only the relative position of the lines within the
+plot to the tick labels on the axes (and the grid lines) that allows us
+to decode from the lines within the plot to (approximate) data values.
+
+Text data symbols within guides are effective because guides contain
+only a few data values that need to be decoded precisely. This is the
+situation where text excels.
+
+\begin{quote}
+Guides are effective because they encode known data values as text data
+symbols as well as the data symbols used in the main plot.
+\end{quote}
+
+\section{Case studies}\label{case-studies}
+
+Revisit lots of plots and add interesting guides
+
+Do variation of pcp with mini plots of corr 1 0 and -1 ?
+
+\section{Mapping information}\label{sec-labels}
 
 \textbf{TODO} Refer back to Figure~\ref{fig-log} from text. The labels
 are the confusing part on the log plot
+
+\textbf{TODO} Refer back to Figure~\ref{fig-junk} Visual objects can
+encode/decode metadata just like labels
 
 Figure~\ref{fig-crime-labels} shows a version of Figure~\ref{fig-crime}
 with the labels highlighted in purple. In this data visualisation, the
@@ -10398,6 +10662,14 @@ values from text extremely accurately.
 On the other hand, decoding a large number of data values from text is
 very slow and we cannot generate visual summaries from text.
 
+Guides are really just collections of data symbols, with specific data
+values encoded as the visual features to demonstrate how data values
+have been encoded.
+
+The text elements within guides are essential because they provide the
+only precise decoding of exact data values. This is what allows the
+decoding of the main data symbols within a data visualisation.
+
 Overall, text is very valuable in a data visualisation for accurately
 encoding a small number of data values, or to express complex
 information. But text is not appropriate for representing a large number
@@ -10407,113 +10679,6 @@ of raw data values.\footnote{Acknowledge Ware 4th Ed: G8.18 (p327)
   G8.19 (p327) ``Use words directly on the chart where the number of
   symbolic objects in each category is relatively few and where space is
   available.''}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\theendnotes
-
-\bookmarksetup{startatroot}
-
-\chapter{Guides}\label{sec-guides}
-
-Figure~\ref{fig-crime-guides} is a version of Figure~\ref{fig-crime}
-with the guides highlighted in purple. There are tick marks and tick
-labels on the x-axis and y-axis, there are horizontal grid lines, and
-there are legend elements to show the mapping from the different ages to
-different colours.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/guides_files/figure-pdf/fig-crime-guides-1.pdf}
-
-}
-
-\caption{\label{fig-crime-guides}A line plot of the crime rate amongst
-youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot
-have been highlighted in purple.}
-
-\end{figure}%
-
-The first thing to note about the guides in
-Figure~\ref{fig-crime-guides} is that they are all composed of
-\textbf{data symbols}, with \textbf{data values} mapped to
-\textbf{visual features} of the data symbols
-(Chapter~\ref{sec-mapping-visual-features}). This is perhaps easiest to
-see with the grid lines. Each grid line is a data symbol where a data
-value, a rate of offending, has been encoded as the vertical
-\textbf{position} of the line. Similarly, each tick mark on the y-axis
-is a line data symbol where a rate of offending has been encoded as the
-vertical \textbf{position} of the line and each tick mark on the x-axis
-is a line data symbol where a year has been encoded as the horizontal
-\textbf{position} of the line. Finally, each of the tick labels on the
-y-axis is a text data symbol where a rate of offending has been encoded
-as the vertical \textbf{position} of the text \emph{and} as the
-\textbf{shape} of the text. Similar mappings apply to the x-axis tick
-labels. The legend is also made up of line data symbols and text data
-symbols, this time with age data values encoded as the \textbf{colour}
-of lines and the \textbf{shape} of text.
-
-The \textbf{decoding} of the \textbf{shape} of the \textbf{text} data
-symbols within the guides shows the critical role that text plays within
-guides. If we look again at Figure~\ref{fig-no-text}, there are coloured
-lines on the plot and there are coloured lines on the legend. The fact
-that these lines have different colours indicates that there are three
-different groups, but the colours alone do not tell us what the groups
-are. We can decode different values from the colours of the lines, but
-we cannot decode exact data values. In the original
-Figure~\ref{fig-crime}, the shapes of the text labels on the legend
-allow us to decode the original data values---the three ages 14, 15, and
-16.
-
-\textbf{TODO} text is typically the \textbf{only} data symbol within a
-data visualisation that can be decoded to an \textbf{individual},
-\textbf{absolute} data value.\\
-Most other decoding is relative (e.g., Section~\ref{sec-rel-pos},
-Section~\ref{sec-perception-relative},
-Section~\ref{sec-colour-relative}) or to a data summary (e.g.,
-Section~\ref{sec-line-plots})
-
-The proximity of the text labels in the legend to the coloured lines in
-the legend means that we associate each label with each coloured line
-(Section~\ref{sec-visual-model-groups}). So the text labels in the
-legend are the essential data symbols in Figure~\ref{fig-crime} because
-only they allow us to decode from the colours of the lines to the three
-age groups.
-
-The text labels on axes perform a similar service. For example, the
-numbers on the axes in Figure~\ref{fig-crime} are the only data symbols
-that provide exact decoding from positions to data values (years or
-rates). The lines within the plot, by themselves, only show that values
-are decreasing. It is only the relative position of the lines within the
-plot to the tick labels on the axes (and the grid lines) that allows us
-to decode from the lines within the plot to (approximate) data values.
-
-Text data symbols within guides are effective because guides contain
-only a few data values that need to be decoded precisely. This is the
-situation where text excels.
-
-\begin{quote}
-Guides are effective because they encode known data values as text data
-symbols as well as the data symbols used in the main plot.
-\end{quote}
-
-\section{Case studies}\label{case-studies}
-
-Revisit lots of plots and add interesting guides
-
-Do variation of pcp with mini plots of corr 1 0 and -1 ?
-
-\section{Summary}\label{summary-13}
-
-Guides are really just collections of data symbols, with specific data
-values encoded as the visual features to demonstrate how data values
-have been encoded.
-
-The text elements within guides are essential because they provide the
-only precise decoding of exact data values. This is what allows the
-decoding of the main data symbols within a data visualisation.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -10700,6 +10865,10 @@ Figure~\ref{fig-map-alt-2}, is the distracting complexity that results.
 
 \textbf{TODO} Refer back to congruence and dissonance in congruence.Rmd
 and differences and similarities in visual-model.Rmd
+
+\textbf{TODO} Do case study of repeating data symbol structure in main
+plot in legend (e.g., the bar plot examples Figure~\ref{fig-pie-order}
+and Figure~\ref{fig-pie} repeat)
 
 Figure~\ref{fig-rep-none} shows a variation on
 Figure~\ref{fig-rep-guide} with a modified legend. In this plot, the
@@ -10899,7 +11068,7 @@ on bar borders or bright colours on unimportant elements) ?
 
 Refer back to chart junk and clutter (Section~\ref{sec-junk}).
 
-\section{Summary}\label{summary-14}
+\section{Summary}\label{summary-13}
 
 Just as we can map data values to visual features, to communicate
 information about the data, we can map non-data information to visual
@@ -10928,6 +11097,8 @@ Position is especially important
 
 Add review at the end that reinforces the threads like visual feature,
 visual shape, visual object and mappings
+
+If we encode X using Y encoding what can we decode?
 
 Possible encoding end points:
 
@@ -11211,6 +11382,13 @@ boxplots}\label{case-study-letter-value-boxplots}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-Ajani2022DeclutterFocus}
+Ajani, Kiran, Elsie Lee, Cindy Xiong, Cole Nussbaumer Knaflic, William
+Kemper, and Steven Franconeri. 2022. {``Declutter and Focus: Empirically
+Evaluating Design Guidelines for Effective Data Communication.''}
+\emph{IEEE Transactions on Visualization and Computer Graphics} 28 (10):
+3351--64. \url{https://doi.org/10.1109/TVCG.2021.3068337}.
+
 \bibitem[\citeproctext]{ref-time-series-ensemble}
 Albers, Danielle, Michael Correll, and Michael Gleicher. 2014.
 {``Task-Driven Evaluation of Aggregation in Time Series
@@ -11226,6 +11404,17 @@ Components of Analytic Activity in Information Visualization.''} In
 Information Visualization}, 15. INFOVIS '05. USA: IEEE Computer Society.
 \url{https://doi.org/10.1109/INFOVIS.2005.24}.
 
+\bibitem[\citeproctext]{ref-affective-congruence}
+Anderson, Cary L., and Anthony C. Robinson. 2022. {``Affective
+Congruence in Visualization Design: Influences on Reading Categorical
+Maps.''} \emph{IEEE Transactions on Visualization and Computer Graphics}
+28 (8): 2867--78. \url{https://doi.org/10.1109/TVCG.2021.3050118}.
+
+\bibitem[\citeproctext]{ref-andrews-curves}
+Andrews, D. F. 1972. {``Plots of High-Dimensional Data.''}
+\emph{Biometrics} 28 (1): 125--36.
+\url{http://www.jstor.org/stable/2528964}.
+
 \bibitem[\citeproctext]{ref-Anscombe1973}
 Anscombe, Francis J. 1973. {``Graphs in Statistical Analysis.''}
 \emph{The American Statistician} 27 (1): 17--21.
@@ -11236,6 +11425,15 @@ Appelle, Stuart. 1972. {``Perception and Discrimination as a Function of
 Stimulus Orientation: The "Oblique Effect" in Man and Animals.''}
 \emph{Psychological Bulletin} 78 (4): 266--78.
 \url{https://doi.org/10.1037/h0033117}.
+
+\bibitem[\citeproctext]{ref-Arcia2016MoreIsMore}
+Arcia, Adriana, Niurka Suero-Tejeda, Michael E. Bales, Jacqueline A.
+Merrill, Sunmoo Yoon, Janet Woollen, and Suzanne Bakken. 2016.
+{``Sometimes More Is More: Iterative Participatory Design of
+Infographics for Engagement of Community Members with Varying Levels of
+Health Literacy.''} \emph{Journal of the American Medical Informatics
+Association} 23 (1): 174--83.
+\url{https://doi.org/10.1093/jamia/ocv079}.
 
 \bibitem[\citeproctext]{ref-ivapp25}
 Bartolomeo, Sara Di, Raphael Buchmüller, Alexander Frings, Johannes
@@ -11289,6 +11487,21 @@ Shouldn't All Charts Be Scatter Plots? Beyond Precision-Driven
 Visualizations.''} \emph{CoRR} abs/2008.11310.
 \url{https://arxiv.org/abs/2008.11310}.
 
+\bibitem[\citeproctext]{ref-visual-embellishments}
+Borgo, Rita, Alfie Abdul-Rahman, Farhan Mohamed, Philip W. Grant, Irene
+Reppa, Luciano Floridi, and Min Chen. 2012. {``An Empirical Study on
+Using Visual Embellishments in Visualization.''} \emph{IEEE Transactions
+on Visualization and Computer Graphics} 18 (12): 2759--68.
+\url{https://doi.org/10.1109/TVCG.2012.197}.
+
+\bibitem[\citeproctext]{ref-borgo-2013-gly}
+Borgo, Rita, Johannes Kehrer, David H. S. Chung, Eamonn Maguire, Robert
+S. Laramee, Helwig Hauser, Matthew Ward, and Min Chen. 2013.
+{``Glyph-Based Visualization: Foundations, Design Guidelines, Techniques
+and Applications.''} \emph{Eurographics State of the Art Reports}, EG
+STARs, May, 39--63.
+\url{https://www.cg.tuwien.ac.at/research/publications/2013/borgo-2013-gly/}.
+
 \bibitem[\citeproctext]{ref-boring1942sensation}
 Boring, Edwin G. 1942. \emph{Sensation and Perception in the History of
 Experimental Psychology}. Appleton-Century-Crofts.
@@ -11325,6 +11538,17 @@ Landesberger. 2025. {``Beware of Validation by Eye: Visual Validation of
 Linear Trends in Scatterplots.''} \emph{IEEE Transactions on
 Visualization and Computer Graphics} 31 (1): 787--97.
 \url{https://doi.org/10.1109/TVCG.2024.3456305}.
+
+\bibitem[\citeproctext]{ref-Brewer_Campbell_1998}
+Brewer, Cynthia, and Andrew J. Campbell. 1998. {``Beyond Graduated
+Circles: Varied Point Symbols for Representing Quantitative Data on
+Maps.''} \emph{Cartographic Perspectives}, no. 29: 6--25.
+\url{https://doi.org/10.14714/CP29.672}.
+
+\bibitem[\citeproctext]{ref-brockmann-1991}
+Brockmann, R. J. 1991. {``The Unbearable Distraction of Color.''}
+\emph{IEEE Transactions on Professional Communication} 34 (3): 153--59.
+\url{https://doi.org/10.1109/47.84109}.
 
 \bibitem[\citeproctext]{ref-cairo2012functional}
 Cairo, Alberto. 2012. \emph{The Functional Art: An Introduction to
@@ -11480,6 +11704,12 @@ Visualization Performance.''} \emph{IEEE Transactions on Visualization
 and Computer Graphics} 30 (3): 1756--71.
 \url{https://doi.org/10.1109/TVCG.2022.3226463}.
 
+\bibitem[\citeproctext]{ref-dupin1826carte}
+Dupin, Charles, and J. Collon. 1826. {``Carte Figurative de
+l'instruction Populaire de La France.''} Still image. Bruxelles:
+\url{http://catalogue.bnf.fr/ark:/12148/cb407408419}; {[}s.n.{]}.
+\url{https://gallica.bnf.fr/ark:/12148/btv1b530830640}.
+
 \bibitem[\citeproctext]{ref-merits-of-circles}
 Eells, Walter Crosby. 1926a. {``The Relative Merits of Circles and Bars
 for Representing Component Parts.''} \emph{Journal of the American
@@ -11509,6 +11739,12 @@ Graphs to Enlighten}. 1st ed. Berkeley, CA: Analytics Press.
 ---------. 2006. {``Visual Pattern Recognition: Meaningful Patterns in
 Quantitative Business Information.''} Seattle,\,WA: Perceptual\,Edge.
 \url{/url\%7Bhttps://www.perceptualedge.com/articles/Whitepapers/Visual_Pattern_Rec.pdf\%7D}.
+
+\bibitem[\citeproctext]{ref-Few2011ChartjunkDebate}
+---------. 2011. {``The Chartjunk Debate: A Close Examination of Recent
+Findings.''} \emph{Visual Business Intelligence Newsletter}
+April/May/June (2011).
+\url{https://www.perceptualedge.com/articles/visual_business_intelligence/the_chartjunk_debate.pdf}.
 
 \bibitem[\citeproctext]{ref-franconeri2021}
 Franconeri, Steven L., Lace M. Padilla, Priti Shah, Jeffrey M. Zacks,
@@ -11549,6 +11785,14 @@ https://doi.org/\url{https://doi.org/10.1016/j.isprsjprs.2022.10.002}.
 Gregory, Richard L. 1963. {``Distortion of Visual Space as Inappropriate
 Constancy Scaling.''} \emph{Nature} 199 (4894): 678--80.
 \url{https://doi.org/10.1038/199678a0}.
+
+\bibitem[\citeproctext]{ref-ISOTYPE}
+Haroz, Steve, Robert Kosara, and Steven L. Franconeri. 2015. {``ISOTYPE
+Visualization: Working Memory, Performance, and Engagement with
+Pictographs.''} In \emph{Proceedings of the 33rd Annual ACM Conference
+on Human Factors in Computing Systems}, 1191--1200. CHI '15. New York,
+NY, USA: Association for Computing Machinery.
+\url{https://doi.org/10.1145/2702123.2702275}.
 
 \bibitem[\citeproctext]{ref-Harrower2003ColorBrewerorg}
 Harrower, Mark, and Cynthia A. Brewer. 2003. {``ColorBrewer.org: An
@@ -11597,6 +11841,11 @@ Howe, Piers D. L., and Dale Purves. 2005. {``The m{ü}ller-Lyer Illusion
 Explained by the Statistics of Image--Source Relationships.''}
 \emph{Proceedings of the National Academy of Sciences} 102 (4):
 1234--39. \url{https://doi.org/10.1073/pnas.0409314102}.
+
+\bibitem[\citeproctext]{ref-red-china}
+Huang, Qiang. 2011. {``A Study on the Metaphor of {`Red'} in Chinese
+Culture.''} \emph{American International Journal of Contemporary
+Research} 1 (3).
 
 \bibitem[\citeproctext]{ref-nz-doctor}
 Huskinson, Peter. 2024. {``Follow the Money to See What Budget 2024
@@ -11780,6 +12029,11 @@ Quantity in Configural and Separable Displays.''} \emph{Journal of
 Experimental Psychology: Applied} 14 (2): 85--100.
 \url{https://doi.org/10.1037/1076-898X.14.2.85}.
 
+\bibitem[\citeproctext]{ref-Pinker1990GraphComprehension}
+Pinker, Steven. 1990. {``A Theory of Graph Comprehension.''} In
+\emph{Artificial Intelligence and the Future of Testing}, edited by Roy
+Freedle, 73--126. Hillsdale, NJ, US: Lawrence Erlbaum Associates, Inc.
+
 \bibitem[\citeproctext]{ref-pointer-attridge-1998}
 Pointer, M. R., and G. G. Attridge. n.d. {``The Number of Discernible
 Colours.''} \emph{Color Research \& Application} 23 (1): 52--54.
@@ -11802,6 +12056,13 @@ Sketches of Noisy Line Charts.''}
 R Core Team. 2025. \emph{R: A Language and Environment for Statistical
 Computing}. Vienna, Austria: R Foundation for Statistical Computing.
 \url{https://www.R-project.org/}.
+
+\bibitem[\citeproctext]{ref-Rahman2025AnnotationsSurvey}
+Rahman, Md Dilshadur, Bhavana Doppalapudi, Ghulam Jilani Quadri, and
+Paul Rosen. 2025. {``A Survey on Annotations in Information
+Visualization: Empirical Studies, Applications and Challenges.''}
+\emph{IEEE Transactions on Visualization and Computer Graphics}.
+\url{https://doi.org/10.1109/TVCG.2025.3600957}.
 
 \bibitem[\citeproctext]{ref-rensink2017nature}
 Rensink, Ronald A. 2017. {``The Nature of Correlation Perception in
@@ -11850,6 +12111,13 @@ Conceptual and Numeric Mappings on Interpreting Colormap Data
 Visualizations.''} \emph{Cognitive Research: Principles and
 Implications} 8 (38). \url{https://doi.org/10.1186/s41235-023-00482-1}.
 
+\bibitem[\citeproctext]{ref-inferred-mappings}
+Schloss, Karen B., Connor C. Gramazio, Allison T. Silverman, Madeline L.
+Parker, and Audrey S. Wang. 2019. {``Mapping Color to Meaning in
+Colormap Data Visualizations.''} \emph{IEEE Transactions on
+Visualization and Computer Graphics} 25 (1): 810--19.
+\url{https://doi.org/10.1109/TVCG.2018.2865147}.
+
 \bibitem[\citeproctext]{ref-semantic-discrim}
 Schloss, Karen B., Zachary Leggon, and Laurent Lessard. 2021.
 {``Semantic Discriminability for Visual Communication.''} \emph{IEEE
@@ -11860,15 +12128,10 @@ Transactions on Visualization and Computer Graphics} 27 (2): 1022--31.
 Schwabish, Jonathan A. 2020. {``Ten Guidelines for Better Tables.''}
 \emph{Journal of Benefit-Cost Analysis} 11 (2): 151--78.
 
-\bibitem[\citeproctext]{ref-Shah2002}
-Shah, Priti, and James Hoeffner. 2002b. {``Review of Graph Comprehension
+\bibitem[\citeproctext]{ref-Shah2002GraphComprehension}
+Shah, Priti, and James Hoeffner. 2002. {``Review of Graph Comprehension
 Research: Implications for Instruction.''} \emph{Educational Psychology
 Review} 14 (1): 47--69. \url{https://doi.org/10.1023/A:1013180410169}.
-
-\bibitem[\citeproctext]{ref-Shah2002GraphComprehension}
----------. 2002a. {``Review of Graph Comprehension Research:
-Implications for Instruction.''} \emph{Educational Psychology Review} 14
-(1): 47--69. \url{https://doi.org/10.1023/A:1013180410169}.
 
 \bibitem[\citeproctext]{ref-Simkin01061987}
 Simkin, David, and Reid Hastie. 1987. {``An Information-Processing
@@ -11916,6 +12179,11 @@ Stone, Maureen. 2012. {``In Color Perception, Size Matters.''}
 \emph{IEEE Comput. Graph. Appl.} 32 (2): 8--13.
 \url{https://doi.org/10.1109/MCG.2012.37}.
 
+\bibitem[\citeproctext]{ref-stroop1935studies}
+Stroop, J. R. 1935. {``Studies of Interference in Serial Verbal
+Reactions.''} \emph{Journal of Experimental Psychology} 18 (6): 643--62.
+\url{https://doi.org/10.1037/h0054651}.
+
 \bibitem[\citeproctext]{ref-ensemble-scatter}
 Szafir, Danielle Albers, Steve Haroz, Michael Gleicher, and Steven
 Franconeri. 2016. {``Four Types of Ensemble Coding in Data
@@ -11932,6 +12200,11 @@ IEEE.
 Theus, Martin, and Simon Urbanek. 2008. \emph{Interactive Graphics for
 Data Analysis: Principles and Examples}. 1st ed. Boca Raton, FL: Chapman
 \& Hall/CRC.
+
+\bibitem[\citeproctext]{ref-ThorellSmith1990}
+Thorell, Lisa G., and W. J. Smith. 1990. \emph{Using Computer Color
+Effectively: An Illustrated Reference}. Englewood Cliffs, NJ: Prentice
+Hall PTR.
 
 \bibitem[\citeproctext]{ref-titchener1901experimental}
 Titchener, Edward Bradford. 1916. \emph{Experimental Psychology: A

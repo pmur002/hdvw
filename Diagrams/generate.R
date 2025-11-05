@@ -238,7 +238,7 @@ objDataEdge <- backEdge("obj:s", "data:se", grad=grad(2, 2, level1=3, level2=1))
 objDataEdge2 <- implicitEdge("obj:n", "data:ne",
                              grad=grad(2, 2, level1=3, level2=1))
 objStatEdge <- backEdge("obj:s", "stat:se", grad=grad(2, 2, level1=3, level2=2))
-objDissEdge <- implicitEdge("obj:n", "diss:ne", grad=grad2to4)
+objDissEdge <- implicitEdge("obj:n", "diss:ne", grad=grad(2, 4, level1=3))
 labelMetaEdge <- backEdge("label:s", "meta:se",
                           grad=grad(2, 2, level1=3, level2=3))
 labelStatEdge <- backEdge("label:s", "stat:se",
@@ -308,10 +308,10 @@ graph(diss,
 
 graph(diss,
       data,
-      vis,
-      invis(dataVisEdge),
-      visDissEdge,
-      visDataEdge2,
+      obj,
+      invis(dataObjEdge),
+      objDissEdge,
+      objDataEdge2,
       dataDissSame,
       file="ambiguous-decode.dot")
 
@@ -529,8 +529,8 @@ graph(data,
       file="data-vis-obj-stat-decode.dot")
 
 graph(data,
-      vis,
-      invis(dataVisEdge),
+      obj,
+      invis(dataObjEdge),
       file="vis-clutter.dot")
 
 graph(data,

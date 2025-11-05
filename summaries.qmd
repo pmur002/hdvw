@@ -694,7 +694,8 @@ The data values for this map are shown in @tbl-map-data.
 #| echo: false
 #| label: tbl-map-data
 #| tbl-cap: The average crime rate over the period 2011 to 2021 for each police district of New Zealand.
-kable(crimeDistrictTotal[c("district", "rate")], digits=2)
+kable(subset(crimeDistrict, year == 2021)[c("district", "rate")], digits=2,
+      row.names=FALSE)
 ```
 
 The data symbols in @fig-downgrade are circles with the 

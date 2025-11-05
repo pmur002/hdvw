@@ -227,11 +227,137 @@ Why is a picture is worth a thousand words?
 Because 1000 words is 1000 fixations, identifying 1000 visual objects,
 and then interpreting their combined meaning.
 
-## Labels {#sec-labels}
+
+# Mapping scales {#sec-guides}
+
+**TODO**
+Footnote "guides" terminology (vs axes, legends, etc)
+
+**TODO**
+refer back to @sec-rel-pos.  We NEED the axes to decode absolute values.
+ALSO, we can decode ABSOLUTE values from the text labels.
+The decoding of text is NOT relative.
+
+@fig-crime-guides is a version of @fig-crime with the guides highlighted
+in purple.  There are tick marks and tick labels on the x-axis and y-axis,
+there are horizontal grid lines, and there are legend elements to show the
+mapping from the different ages to different colours.
+
+```{r}
+#| echo: false
+#| label: fig-crime-guides
+#| fig-cap: A line plot of the crime rate amongst youth offenders aged 14 to 16 from 2011 to 2021. The guides in this plot have been highlighted in purple.
+#| fig-keep: last
+ggCrimeGuides <- ggplot(crimeAgeSimple) +
+    geom_line(aes(x=year, y=rate, colour=ageFactor), linewidth=.1) +
+    crimeAgeLineTitle +
+    crimeAgeLineXlab +
+    crimeAgeLineYlab +
+    geom_line(aes(x=year, y=rate, group=ageFactor), colour="grey90") +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +    
+    scale_colour_manual(name="age",
+                        values=pal_brewer(palette="Purples")(5)[-(1:2)]) +
+    theme(panel.border=element_rect(colour="grey"),
+          plot.title=element_text(colour="grey"),
+          plot.subtitle=element_text(colour="grey"),
+          panel.grid.major.y=element_line(colour=highlight),
+          axis.line=element_line(colour="grey"),
+          axis.ticks=element_line(colour=highlight),
+          axis.text=element_text(colour=highlight, face="bold"),          
+          axis.title=element_text(colour="grey"),
+          legend.text=element_text(colour=highlight, face="bold"),
+          legend.title=element_text(colour="grey"),
+          aspect.ratio=1)
+pushViewport(viewport(width=.9, height=.9))
+print(ggCrimeGuides, newpage=FALSE)
+popViewport()
+grid.force()
+grid.edit("key::segments", grep=TRUE, global=TRUE,
+          gp=gpar(lwd=2))
+```
+
+The first thing to note about the guides in @fig-crime-guides is that they
+are all composed of **data symbols**, with **data values** mapped to
+**visual features** of the data symbols (@sec-mapping-visual-features).
+This is perhaps easiest to see with
+the grid lines.  Each grid line is a data symbol where a data value,
+a rate of offending, 
+has been encoded as the vertical **position** of the line.
+Similarly, each tick mark on the y-axis
+is a line data symbol where a rate of offending
+has been encoded as the vertical **position** of the line
+and each tick mark on the x-axis is a line data symbol where a 
+year has been encoded as the horizontal **position** of the line.
+Finally, each of the tick labels on the y-axis is a text data symbol
+where a rate of offending has been encoded as the vertical **position**
+of the text *and* as the **shape** of the text.  Similar mappings
+apply to the
+x-axis tick labels.
+The legend is also made up of line data symbols and text data symbols,
+this time with age data values encoded as the **colour** of lines
+and the **shape** of text.
+
+The **decoding** of the **shape** of the **text** data symbols 
+within the guides shows the
+critical role that text plays within guides.
+If we look again at @fig-no-text, there are coloured lines on the plot
+and there are coloured lines on the legend.
+The fact that these lines have different colours indicates that
+there are three different groups, but the colours alone
+do not tell us what the groups are.  We can decode different values
+from the colours of the lines, but we cannot decode exact data values.
+In the original @fig-crime, the shapes of the text labels on the legend
+allow us to decode the original data values---the three ages 14, 15, and 16.
+
+**TODO** text is typically the **only** data symbol within a data visualisation
+that can be decoded to an **individual**, **absolute** data value.  
+Most other decoding is 
+relative (e.g., @sec-rel-pos, @sec-perception-relative, @sec-colour-relative)
+or to a data summary (e.g., @sec-line-plots)
+
+The proximity of the text labels in the legend to the coloured lines
+in the legend means that we associate each label with each
+coloured line (@sec-visual-model-groups).
+So the text labels in the legend are the essential data symbols
+in @fig-crime because only they allow us to decode from the colours of the lines
+to the three age groups.
+
+The text labels on axes perform a similar service.
+For example, the numbers on the axes in @fig-crime
+are the only data symbols that provide exact decoding from
+positions to data values (years or rates).
+The lines within the plot, by themselves, only show that values 
+are decreasing.
+It is only the relative position of the lines within the plot
+to the tick labels on the axes
+(and the grid lines)
+that allows us to decode from the lines within the plot
+to (approximate) data values.
+
+Text data symbols within guides are effective because 
+guides contain only a few data values that need to be decoded 
+precisely.
+This is the situation where text excels.   
+
+> Guides are effective because they encode known data values 
+  as text data symbols as well as the data symbols used in the main plot.
+
+## Case studies
+
+Revisit lots of plots and add interesting guides
+
+Do variation of pcp with mini plots of corr 1 0 and -1 ?
+
+
+## Mapping information {#sec-labels}
 
 **TODO**
 Refer back to @fig-log from text.
 The labels are the confusing part on the log plot
+
+**TODO**
+Refer back to @fig-junk
+Visual objects can encode/decode metadata just like labels
 
 @fig-crime-labels shows a version of @fig-crime with the labels 
 highlighted in purple.  In this data visualisation, the only
@@ -1109,6 +1235,14 @@ and we can decode individual data values from text extremely accurately.
 
 On the other hand, decoding a large number of data values
 from text is very slow and we cannot generate visual summaries from text.
+
+Guides are really just collections of data symbols, with specific
+data values encoded as the visual features to demonstrate
+how data values have been encoded.
+
+The text elements within guides are essential because they provide the
+only precise decoding of exact data values.  This is what allows the
+decoding of the main data symbols within a data visualisation.
 
 Overall, text is very valuable in a data visualisation for accurately
 encoding a small number of data values, or to express complex information.
