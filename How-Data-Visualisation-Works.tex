@@ -2861,16 +2861,17 @@ year & Low & Medium & High \\
 Figure~\ref{fig-ternary} shows a ternary plot of these data.\footnote{Ternary
   plots, also known as barycentric plots, are common in specific areas
   of science, for example, Earth science where the composition of rocks
-  or soils is studied.} In this data visualisation, there are three
-variables (three proportions that sum to 1), and the data values from
-each variable has been encoded as position. However, the positions are
-along axes that are not perpendicular. This means that it is not as easy
-to decode individual data values or compare data values because we are
-poorer at decoding positions that are not horizontal or vertical.
-Furthermore, because the three proportions sum to 1, a change in one
-proportion necessitates a change in at least one of the others. In other
-words, we cannot easily decode the difference between two data values
-from the difference between two data symbols.
+  or soils is studied. (Howarth 1996) provides a history of the
+  development of ternary diagrams.} In this data visualisation, there
+are three variables (three proportions that sum to 1), and the data
+values from each variable has been encoded as position. However, the
+positions are along axes that are not perpendicular. This means that it
+is not as easy to decode individual data values or compare data values
+because we are poorer at decoding positions that are not horizontal or
+vertical. Furthermore, because the three proportions sum to 1, a change
+in one proportion necessitates a change in at least one of the others.
+In other words, we cannot easily decode the difference between two data
+values from the difference between two data symbols.
 
 \begin{figure}
 
@@ -11094,10 +11095,7 @@ Position is especially important
 
 \bookmarksetup{startatroot}
 
-\chapter*{Review}\label{sec-review}
-\addcontentsline{toc}{chapter}{Review}
-
-\markboth{Review}{Review}
+\chapter{Review}\label{sec-review}
 
 Add review at the end that reinforces the threads like visual feature,
 visual shape, visual object and mappings
@@ -11216,10 +11214,7 @@ List of questions to evaluate a data vis (maybe nest these a bit):
 
 And so on \ldots{}
 
-\section*{Examples}\label{examples}
-\addcontentsline{toc}{section}{Examples}
-
-\markright{Examples}
+\section{Examples}\label{examples}
 
 \begin{itemize}
 \item
@@ -11257,11 +11252,8 @@ And so on \ldots{}
   \end{itemize}
 \end{itemize}
 
-\section*{Case study: Lines of best
+\section{Case study: Lines of best
 fit}\label{case-study-lines-of-best-fit}
-\addcontentsline{toc}{section}{Case study: Lines of best fit}
-
-\markright{Case study: Lines of best fit}
 
 Figure~\ref{fig-lm-smooth} shows a scatter plot of the winning margin
 versus the winning score for Tier One nations at Rugby World Cup
@@ -11353,11 +11345,8 @@ loess curves Another example of data -\textgreater{} summary
 -\textgreater{} features -\textgreater{} shapes -\textgreater{}
 summaries
 
-\section*{Case study: 2D density
+\section{Case study: 2D density
 plots}\label{case-study-2d-density-plots}
-\addcontentsline{toc}{section}{Case study: 2D density plots}
-
-\markright{Case study: 2D density plots}
 
 Stat summary visualised
 
@@ -11369,20 +11358,13 @@ refer back to Section~\ref{sec-pos-scarce} (overplotting) and mention
 that shapes are one solution, with all of the drawbacks of not being
 able to decode individual data values. Footnote surjective/injective?
 
-\section*{Case study: kiviat plots or radar plots or spider
+\section{Case study: kiviat plots or radar plots or spider
 plots}\label{case-study-kiviat-plots-or-radar-plots-or-spider-plots}
-\addcontentsline{toc}{section}{Case study: kiviat plots or radar plots
-or spider plots}
-
-\markright{Case study: kiviat plots or radar plots or spider plots}
 
 (David Peebles (2008))
 
-\section*{Case study: Letter-value
+\section{Case study: Letter-value
 plots}\label{case-study-letter-value-plots}
-\addcontentsline{toc}{section}{Case study: Letter-value plots}
-
-\markright{Case study: Letter-value plots}
 
 Figure~\ref{fig-lv-default} shows a letter-value plot of taxi time for
 over 450,000 flights within the United States, broken down by
@@ -11447,8 +11429,7 @@ is an effective mapping of information.\footnote{In order to incorporate
   unfair attack on letter-value plots in general and the \{lvplot\}
   package in particular.}
 
-\subsection*{Letter values}\label{letter-values}
-\addcontentsline{toc}{subsection}{Letter values}
+\subsection{Letter values}\label{letter-values}
 
 A boxplot is based on the median and the upper and lower quartiles of a
 data set. These statistics are just the first two levels of a more
@@ -11471,8 +11452,7 @@ down to A for one-hundred and twenth-eighths, then starting again at the
 end of the alphabet, in reverse alphabetic order, Z for two-hundred and
 fifty-sixths, Y for five-hundred and twelfths, and so on.
 
-\subsection*{Data symbols}\label{data-symbols}
-\addcontentsline{toc}{subsection}{Data symbols}
+\subsection{Data symbols}\label{data-symbols}
 
 There are two types of data symbol in a letter-value plot: complex data
 symbols consisting of multiple rectangles, which we will call
@@ -11480,8 +11460,7 @@ symbols consisting of multiple rectangles, which we will call
 values; and very simple data points, which represent the outliers (if
 any).
 
-\subsection*{Mapping visual features}\label{mapping-visual-features}
-\addcontentsline{toc}{subsection}{Mapping visual features}
+\subsection{Mapping visual features}\label{mapping-visual-features}
 
 In Figure~\ref{fig-lv-default}, the airline (Carrier), qualitative data
 values, are encoded as the horizontal \textbf{position} of the
@@ -11511,6 +11490,10 @@ rectangle. This is effective for decoding individual letter values for
 an airline. For example, we can see that one of the letter values for
 the AA airline is just over 50.
 
+\textbf{TODO} Explain that a variable number of letter values are used
+for each airline - only letter values that can be estimated from the
+data.
+
 The \emph{depth} of each letter value is encoded as the width
 (\textbf{length}) of a rectangle within the letter-value symbol. The
 depth is how many data values lie beyond that letter value; for example,
@@ -11525,15 +11508,15 @@ ordinal information about the depth of the letter values (because that
 is all that we encoded).
 
 The \emph{data density}---the number of data values between adjacent
-letter values---is encoded as the colour of a rectangle. The luminance
-of the rectangle varies from darkest for the highest density
-(approximately one quarter of the data values lie between the median and
-the upper quartile) to lightest for lowest density (approximately one
-ten-thousandth of the data values between the most extreme letter
-values). In addition, the hue/chroma of a rectangle encodes a
-categorisation of the letter values (yet another data summary); every
-fourth letter value is orange, while all the other letter values are
-grey.
+letter values---is encoded as the \textbf{colour} of a rectangle. The
+\textbf{luminance} of the rectangle varies from darkest for the highest
+density (approximately one quarter of the data values lie between the
+median and the upper quartile) to lightest for lowest density
+(approximately one ten-thousandth of the data values between the most
+extreme letter values). In addition, the \textbf{hue}/\textbf{chroma} of
+a rectangle encodes a categorisation of the letter values (yet another
+data summary); every fourth letter value is orange, while all the other
+letter values are grey.
 
 The luminance encoding of density only allows us to decode ordinal
 information about the data density between letter values.\\
@@ -11620,8 +11603,7 @@ fourth letter value & summary of letter value & qualitative & colour
 (chroma) \\
 \end{longtable}
 
-\subsection*{Combining mappings}\label{combining-mappings-1}
-\addcontentsline{toc}{subsection}{Combining mappings}
+\subsection{Combining mappings}\label{combining-mappings-1}
 
 There is one obvious interaction between encodings in
 Figure~\ref{fig-lv-default}. The width of the rectangles (letter-value
@@ -11659,8 +11641,7 @@ However, given that we have already identified that there are a large
 number of encodings in Figure~\ref{fig-lv-default}, this may be a luxury
 that we can ill afford.
 
-\subsection*{Non-linear scales}\label{non-linear-scales}
-\addcontentsline{toc}{subsection}{Non-linear scales}
+\subsection{Non-linear scales}\label{non-linear-scales}
 
 An extra complication with the encoding of vertical position in
 Figure~\ref{fig-lv-default} is that the vertical scale is non-linear; it
@@ -11679,8 +11660,7 @@ letter-value data symbols provide no useful information and are
 potentially misleading. The non-linear scale only makes that potentially
 misleading information even more misleading.
 
-\subsection*{Visual shapes}\label{visual-shapes}
-\addcontentsline{toc}{subsection}{Visual shapes}
+\subsection{Visual shapes}\label{visual-shapes}
 
 The letter-value data symbols encode multiple letter values within a
 single data symbol, which produces a \textbf{visual shape}
@@ -11706,8 +11686,7 @@ qualitative features. For example, we can decode \emph{whether} the
 distribution is symmetric or skewed, but we cannot decode \emph{how}
 skewed the distribution is.
 
-\subsection*{Mapping scales}\label{mapping-scales}
-\addcontentsline{toc}{subsection}{Mapping scales}
+\subsection{Mapping scales}\label{mapping-scales}
 
 We have already discussed that the y-axis scale is non-linear. The
 square root of taxi times, rather then the raw taxi times, are encoded
@@ -11772,8 +11751,7 @@ letter-value data symbols. There is no guide that explains how the depth
 of the letter values is encoded as the width of the letter-value data
 symbols.
 
-\subsection*{Mapping structure}\label{mapping-structure-1}
-\addcontentsline{toc}{subsection}{Mapping structure}
+\subsection{Mapping structure}\label{mapping-structure-1}
 
 Another problem with the legend in Figure~\ref{fig-lv-default} is that
 the squares within the legend are not consistent with the rectangles in
@@ -11798,9 +11776,7 @@ restricted to ordinal comparisons. The large number of grid lines also
 adds to the overall visual complexity of Figure~\ref{fig-lv-default}
 that we discussed earlier.
 
-\subsection*{Building something
-better?}\label{building-something-better}
-\addcontentsline{toc}{subsection}{Building something better?}
+\subsection{Building something better?}\label{building-something-better}
 
 Having used the information in this book to identify a number of
 problems with the mappings in Figure~\ref{fig-lv-default}, we now
@@ -11814,9 +11790,12 @@ Figure~\ref{fig-lv-default} would be to avoid multiple encodings by
 producing several, simpler data visualisations for different purposes.
 For example, one data visualisation that just shows the distribution
 shapes and another that shows the location of specific letter-value taxi
-times. Figure~\ref{fig-lv-zoom} still attempts to fit all of the
-information from Figure~\ref{fig-lv-default} into a single data
+times. However, Figure~\ref{fig-lv-zoom} still attempts to fit all of
+the information from Figure~\ref{fig-lv-default} into a single data
 visualisation.
+
+This is unlikely to be the optimal solution, but we can at least provide
+justifications for the design choices that are being made.
 
 \begin{figure}
 
@@ -11880,6 +11859,10 @@ visualisation.
   letter values are placed at the borders of the bars. The data density
   is encoded as vulgear-fraction text labels.
 \end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\theendnotes
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
@@ -12336,6 +12319,11 @@ Hofmann, Heike, Hadley Wickham, and Karen Kafadar. 2017. {``Letter-Value
 Plots: Boxplots for Large Data.''} \emph{Journal of Computational and
 Graphical Statistics} 26 (3): 469--77.
 \url{https://doi.org/10.1080/10618600.2017.1305277}.
+
+\bibitem[\citeproctext]{ref-ternary-history}
+Howarth, Richard J. 1996. {``Sources for a History of the Ternary
+Diagram.''} \emph{The British Journal for the History of Science} 29
+(3): 337--56. \url{http://www.jstor.org/stable/4027737}.
 
 \bibitem[\citeproctext]{ref-howe2005muller}
 Howe, Piers D. L., and Dale Purves. 2005. {``The m{ü}ller-Lyer Illusion

@@ -5,7 +5,7 @@
 source("common.R")
 ```
 
-# Review {#sec-review .unnumbered}
+# Review {#sec-review}
 
 Add review at the end that reinforces the threads like visual feature, 
 visual shape, visual object and mappings
@@ -385,6 +385,11 @@ a rectangle.  This is effective for decoding individual letter values
 for an airline.  For example, we can see that one of the letter values
 for the AA airline is just over 50.
 
+**TODO**
+Explain that a variable number of letter values are used for
+each airline - only letter values that can be estimated from
+the data.
+
 The *depth* of each letter value is encoded as the width (**length**)
 of a rectangle within the letter-value symbol.
 The depth is how many data values lie beyond that letter value;
@@ -402,13 +407,13 @@ ordinal information about the depth of the letter values
 (because that is all that we encoded).
 
 The *data density*---the number of data values between adjacent letter 
-values---is encoded as the colour of a rectangle.
-The luminance of the rectangle varies from darkest for the highest density
+values---is encoded as the **colour** of a rectangle.
+The **luminance** of the rectangle varies from darkest for the highest density
 (approximately one quarter of the data values lie between the median and
 the upper quartile) to lightest for lowest density
 (approximately one ten-thousandth of the data values between the most
 extreme letter values).
-In addition, the hue/chroma of a rectangle encodes a categorisation 
+In addition, the **hue**/**chroma** of a rectangle encodes a categorisation 
 of the letter values (yet another data summary);
 every fourth letter value is orange, while all the other letter values
 are grey.
@@ -681,8 +686,12 @@ would be to avoid multiple encodings by
 producing several, simpler data visualisations for different purposes.
 For example, one data visualisation that just shows the distribution
 shapes and another that shows the location of specific letter-value taxi times.
-@fig-lv-zoom still attempts to fit all of the information
+However, @fig-lv-zoom still attempts to fit all of the information
 from @fig-lv-default into a single data visualisation.
+
+This is unlikely to be the optimal solution, but we can at least 
+provide justifications for
+the design choices that are being made.
 
 ```{r}
 #| echo: false
