@@ -106,9 +106,9 @@ ggplot(crimeGroupTotal) +
           axis.title.y=element_blank())
 ```
 
-Just as data values are mapped to the visual features of the
+Just as data values are encoded to the visual features of the
 bar data symbols in @fig-bar-text, 
-data values are also mapped to the
+data values are also encoded to the
 visual features of the text data symbols.
 For example, 
 the ethnic groups are encoded as the vertical **position** of the bars
@@ -142,7 +142,7 @@ between associated terms within a bullet-point list.
 
 However, the unique power of text comes from **decoding** the
 **pattern** of the text.
-Text is the ultimate example of a **learned mapping** (@sec-learned).
+Text is the ultimate example of a **learned encoding** (@sec-learned).
 We all learn to read text (and numbers), which means that, 
 when we are presented with
 a text pattern, there is a pre-existing decoding to the semantic content
@@ -172,7 +172,7 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-In terms of the criteria that we discussed in @sec-mapping-visual-features,
+In terms of the criteria that we discussed in @sec-encoding-visual-features,
 the value of text data symbols is that they allow us to decode
 data values very **accurately** (@fig-decode).
 Text is also very flexible because it is
@@ -211,7 +211,7 @@ the lengths of the bars,
 but those comparisons are slower and take more conscious effort
 using the text data symbols in @fig-bar-text.
 
-> It is harder to compare data values that are mapped to 
+> It is harder to compare data values that are encoded to 
   text because it requires more effort to decode data 
   values and to perform mental calculations.
 
@@ -227,13 +227,13 @@ Why is a picture is worth a thousand words?
 Because 1000 words is 1000 fixations, identifying 1000 visual objects,
 and then interpreting their combined meaning.
 
-## Learned mappings of text {#sec-learned-text}
+## Learned encodings of text {#sec-learned-text}
 
 Link to @sec-learned.
 Discuss how having learned to read allows us to decode information
 from text, when the text forms known words and expressions.
 
-## Mapping scales {#sec-guides}
+## Encoding encodings {#sec-guides}
 
 **TODO**
 Footnote "guides" terminology (vs axes, legends, etc)
@@ -246,7 +246,7 @@ The decoding of text is NOT relative.
 @fig-crime-guides is a version of @fig-crime with the guides highlighted
 in purple.  There are tick marks and tick labels on the x-axis and y-axis,
 there are horizontal grid lines, and there are legend elements to show the
-mapping from the different ages to different colours.
+encoding from the different ages to different colours.
 
 ```{r}
 #| echo: false
@@ -282,8 +282,8 @@ grid.edit("key::segments", grep=TRUE, global=TRUE,
 ```
 
 The first thing to note about the guides in @fig-crime-guides is that they
-are all composed of **data symbols**, with **data values** mapped to
-**visual features** of the data symbols (@sec-mapping-visual-features).
+are all composed of **data symbols**, with **data values** encoded to
+**visual features** of the data symbols (@sec-encoding-visual-features).
 This is perhaps easiest to see with
 the grid lines.  Each grid line is a data symbol where a data value,
 a rate of offending, 
@@ -295,7 +295,7 @@ and each tick mark on the x-axis is a line data symbol where a
 year has been encoded as the horizontal **position** of the line.
 Finally, each of the tick labels on the y-axis is a text data symbol
 where a rate of offending has been encoded as the vertical **position**
-of the text *and* as the **shape** of the text.  Similar mappings
+of the text *and* as the **shape** of the text.  Similar encodings
 apply to the
 x-axis tick labels.
 The legend is also made up of line data symbols and text data symbols,
@@ -354,7 +354,7 @@ Revisit lots of plots and add interesting guides
 Do variation of pcp with mini plots of corr 1 0 and -1 ?
 
 
-## Mapping information {#sec-labels}
+## Encoding information {#sec-labels}
 
 **TODO**
 Refer back to @fig-log from text.
@@ -400,10 +400,10 @@ popViewport()
 The difference between labels and the other components of a data visualisation,
 the data symbols and the guides, is that labels relate to **metadata** 
 rather than raw data values.  We can still
-consider this a mapping, just one that involves encoding metadata
-rather than data values (@fig-label-mapping).
+consider this a encoding, just one that involves encoding metadata
+rather than data values (@fig-label-encoding).
 
-::: {#fig-label-mapping}
+::: {#fig-label-encoding}
 ::: {.content-visible when-format=pdf layout-ncol=2}
 \includegraphics[scale=0.5]{Diagrams/meta-label.png}
 :::
@@ -564,15 +564,15 @@ A word cloud of the frequency of words in the Wikipedia page for the Rugby World
 
 This data visualisation is unusual because it consists entirely of text
 **data symbols**.
-The mappings in @fig-wordcloud include encoding each word as the **pattern** of 
+The encodings in @fig-wordcloud include encoding each word as the **pattern** of 
 a text data symbol and encoding frequency as the **size**
 of a text data symbol.
-There is no need for a guide for the mapping from words to text pattern because
+There is no need for a guide for the encoding from words to text pattern because
 there is a learned decoding (@fig-learned-decode);
 we can decode each text data symbol
 into a word data value because that decoding has already been learned.
 
-There is no guide for the mapping from word frequency to text size,
+There is no guide for the encoding from word frequency to text size,
 so we cannot decode exact word frequencies.
 @tbl-wiki-rwc shows the six most frequent words.
 However, the visualisation is still effective at conveying the *relative* 
@@ -600,24 +600,24 @@ between pairs of words, and we cannot easily perceive the distribution
 of frequencies across words.
 A word cloud is only effective
 for approximate 
-ordinal comparisons of word frequencies (@sec-mapping-visual-features).
+ordinal comparisons of word frequencies (@sec-encoding-visual-features).
 
-Frequency is also mapped to **position in space**, with more frequent
+Frequency is also encoded to **position in space**, with more frequent
 words placed towards the centre of the word cloud.
-This is an example of redundant mapping; more frequent words are both
+This is an example of redundant encoding; more frequent words are both
 larger *and* more central (@sec-redundant).
 
 > A word cloud is effective for conveying words 
-  because it maps words to text data symbols.
+  because it encodes words to text data symbols.
   It is also partially effective for conveying relative frequencies of words
-  because it maps word frequency
+  because it encodes word frequency
   to both size and position in space.
 
 Another benefit of encoding frequency as position in space
 is the efficient use of space.
 For example, @fig-wordcloud-bar shows 
 the same data presented as a bar plot with 
-the frequency of each word mapped to a separate bar.  Although 
+the frequency of each word encoded to a separate bar.  Although 
 the accuracy is improved for comparing frequencies, the bar plot
 does not have as much room for the words themselves.
 
@@ -650,7 +650,7 @@ ggplot(temp) +
 
 One weakness of the word cloud is that the **angle** of words changes
 with no corresponding change in the data values.
-This is an example of a **dissonant** mapping, which can cause confusion
+This is an example of a **dissonant** encoding, which can cause confusion
 (@sec-dissonance).  The viewer will notice the differences in angle
 and attempt to decode that difference to a difference in data values
 that does not exist.
@@ -736,10 +736,10 @@ kable(rwc8tidy, digits=1, row.names=FALSE)
 
 For comparison, @fig-rwc-table shows a scatter plot of the data from 
 @tbl-rwc-table.  The data symbol is a circle,
-with the number of tries mapped to horizontal **position**,
-the number of points mapped to vertical **position**,
-the number of clean breaks mapped to **size**,
-and the number of runs mapped to **colour** (shade).
+with the number of tries encoded to horizontal **position**,
+the number of points encoded to vertical **position**,
+the number of clean breaks encoded to **size**,
+and the number of runs encoded to **colour** (shade).
 The relationships between tries and points and between
 breaks and both tries and points are still easier to perceive
 in this plot than in @tbl-rwc-table-tidy, but @tbl-rwc-table-tidy,
@@ -1188,7 +1188,7 @@ the viewer takes away.[^text-danger]
 @fig-text-danger is an example of a deliberately misleading
 data visualisation, which we obviously want to avoid.
 However, the broader point is that we need to be at least as careful with
-our choice of text content as we are with our selection of mappings
+our choice of text content as we are with our selection of encodings
 from data values to visual features and we have a responsibility to
 work hard to make
 sure that the message from data symbols and from text labels

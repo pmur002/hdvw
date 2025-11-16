@@ -5,13 +5,13 @@
 source("common.R")
 ```
 
-# Mapping Summaries {#sec-summaries}
+# Encoding Summaries {#sec-summaries}
 
-In @sec-mapping-visual-features we described a data visualisation as
-a mapping that **encodes** data values as the visual features of a data symbol
+In @sec-encoding-visual-features we described a data visualisation as
+a encoding that **encodes** data values as the visual features of a data symbol
 (@fig-visual-feature).
 For example, a bar plot,
-like @fig-bar, maps the total number of youth offenders to the **lengths**
+like @fig-bar, encodes the total number of youth offenders to the **lengths**
 of bars.
 
 We also emphasised the importance of the **decoding** from visual 
@@ -23,7 +23,7 @@ In the simple scenario of a bar plot, the data values are counts
 (@tbl-crime-group-total), which are encoded as the lengths of bars, which
 in turn allows us to decode lengths to retrieve 
 the counts (@fig-visual-feature-decode).
-Each **raw data value** (count) is mapped to the length of a bar.
+Each **raw data value** (count) is encoded to the length of a bar.
 
 In this chapter, we explore some data visualisations that are effective 
 because they encode **data summaries** instead of 
@@ -33,13 +33,13 @@ raw data values.[^info-vis-ref-model]
     In this book, we use *data summary* to cover a broad range
     of transformations of the data.
     These are transformations that occur prior to the 
-    mapping of data values to visual features.
+    encoding of data values to visual features.
 
     There are several more sophisticated break downs of the pipeline
     from data values to visual representations.
     For example, the Information Visualization Reference Model 
     [@card1999readings] includes the transformation of data into a 
-    standard format (*data transformations*) prior to mapping data values
+    standard format (*data transformations*) prior to encoding data values
     to visual features 
     and also includes the subsequent transformation and scaling 
     of visual features to
@@ -108,12 +108,12 @@ values.  Points are also included for "outliers" if data values
 lie further than 1.5 times the interquartile range beyond the 
 quartiles.
 
-Another important difference with a box plot is that it maps
+Another important difference with a box plot is that it encodes
 **data summaries**, rather than raw data values,
 to visual features of the data symbol
 (@fig-stat-vis-decode).
-For example, the median values are mapped to the horizontal **positions** of 
-thick vertical lines and the interquartile ranges are mapped to the
+For example, the median values are encoded to the horizontal **positions** of 
+thick vertical lines and the interquartile ranges are encoded to the
 **lengths** of horizontal rectangles.
 
 ::: {#fig-stat-vis-decode}
@@ -147,7 +147,7 @@ in @fig-boxplot.[^readable]
 #| echo: false
 #| message: false
 #| label: tbl-rwc-all-stats
-#| tbl-cap: A table of the five-number summaries for the number of points scored by Tier One nations in Rugby World Cup matches, along with the country name.  These data summaries are the values that are mapped to visual features to produce the box plots in @fig-boxplot.
+#| tbl-cap: A table of the five-number summaries for the number of points scored by Tier One nations in Rugby World Cup matches, along with the country name.  These data summaries are the values that are encoded to visual features to produce the box plots in @fig-boxplot.
 rwcStats <- do.call(rbind, 
                     lapply(split(rwcAll, rwcAll$hemisphere), 
                            function(x) fivenum(x$scored)))
@@ -161,7 +161,7 @@ medians between different hemispheres because, although the box plot data
 symbol is relatively complicated, a box plot still just encodes the data
 summaries to simple visual features. 
 We know from 
-@sec-mapping-visual-features that
+@sec-encoding-visual-features that
 **position** and **length** 
 are effective for **decoding** the data summaries from the visual features
 (@fig-stat-vis-decode).
@@ -170,14 +170,14 @@ Notice how, even though @tbl-rwc-all-stats contains very few values,
 it is much easier to perceive the differences between the two rows of values
 using the data visualisation in @fig-boxplot rather than the table of
 values in @tbl-rwc-all-stats.
-Once again, we can see the power of mapping values to basic visual features.
+Once again, we can see the power of encoding values to basic visual features.
 The only differences from previous sections
-is that we are mapping **data summaries** rather than raw data values
-and we are mapping 
+is that we are encoding **data summaries** rather than raw data values
+and we are encoding 
 to the visual features of a more complicated data symbol.
 
 > A box plot is effective at conveying information about the
-  distribution of data values because it maps **data summaries**
+  distribution of data values because it encodes **data summaries**
   about the distribution, like the median
   and interquartile range, to basic visual features.
 
@@ -186,10 +186,10 @@ to the visual features of a more complicated data symbol.
 @fig-rwc-dotplot shows a dot plot of the number of points scored by 
 countries from the different hemispheres in Rugby World Cup matches.[^dotplot]
 This data visualisation uses the same data as @fig-boxplot, but it
-maps raw data values rather than data summaries and it uses much simpler
+encodes raw data values rather than data summaries and it uses much simpler
 data symbols (data points).
 This data visualisation encodes the
-number of points scored maps as the horizontal **position** of
+number of points scored encodes as the horizontal **position** of
 a data point and it encodes the hemisphere as the vertical
 **position** of a data point.
 There is an overplotting problem (@sec-overplot), which is solved in this
@@ -292,7 +292,7 @@ nations at the Rugby World Cups (@tbl-rwc-all).
 A histogram is similar to a box plot in two ways:
 a histogram is a data visualisation that can be used to convey the
 distribution of a variable; and
-a histogram is a data visualisation that maps **data summaries**,
+a histogram is a data visualisation that encodes **data summaries**,
 rather than raw values, to visual features (@fig-stat-vis-decode).
 
 However, a histogram differs from a box plot in two main ways:
@@ -326,13 +326,13 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-To be explicit, the values that are being mapped to visual features
+To be explicit, the values that are being encoded to visual features
 in @fig-hist
 are not raw data values, but data summaries---intervals and counts---as
 shown in @tbl-hist-stats.[^bar-summary]
 
 [^bar-summary]:
-    A bar plot can also be thought of in terms of mapping data
+    A bar plot can also be thought of in terms of encoding data
     summaries rather than raw data.  The data values that are
     encoded as the lengths of bars in a bar plot are tables of
     counts of raw data values; the raw data values are individual 
@@ -350,7 +350,7 @@ shown in @tbl-hist-stats.[^bar-summary]
 #| echo: false
 #| message: false
 #| label: tbl-hist-stats
-#| tbl-cap: A table of intervals that cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval.  These data summaries are the values that are mapped to visual features to produce the histogram in @fig-boxplot.  Not all intervals are shown for reasons of space.
+#| tbl-cap: A table of intervals that cover the range of the number of points scored by Tier One nations in Rugby World Cup matches, along with the count of the number of points scored that fall within each interval.  These data summaries are the values that are encoded to visual features to produce the histogram in @fig-boxplot.  Not all intervals are shown for reasons of space.
 hist <- hist(rwcAll$scored, breaks=breaks, plot=FALSE)
 histStats <- rbind(interval=paste0(hist$breaks[-length(hist$breaks)], "-",
                                    hist$breaks[-1]),
@@ -377,7 +377,7 @@ than below the highest bar.  The latter tells us about
 the spread and/or skewness of the data.
 
 > A histogram is effective at conveying information about the distribution
-  of data values because it maps data summaries to basic visual features
+  of data values because it encodes data summaries to basic visual features
   and those data summaries can be compared to provide information about
   the distribution of the data.
 
@@ -464,12 +464,12 @@ The flipside is that a data visualisation that encodes
 is *not* effective for decoding raw data values.
 For example, we cannot see from the box plot in
 @fig-boxplot that the scores 1, 2, 4, and 5 never occurred, while
-this is clear from @fig-rwc-dotplot because the dot plot does map
+this is clear from @fig-rwc-dotplot because the dot plot does encode
 the raw data values to data symbols.
 
 > Box plots and 
   histograms are *not* effective at conveying raw data values because they
-  do not map raw data values to data symbols.
+  do not encode raw data values to data symbols.
 
 Another point to consider with a data visualisation that is based on
 data summaries is
@@ -585,7 +585,7 @@ is to produce a data visualisation that provides the most effective decoding
 (@sec-scope).
 Nevertheless, even 
 less honest representations of data can also be 
-thought of in terms of mappings, particularly mappings of data
+thought of in terms of encodings, particularly encodings of data
 summaries.
 
 For example, @fig-bars-at-zero shows a bar plot
@@ -660,7 +660,7 @@ unhelpful information from the data visualisation (@fig-lie-vis-decode).
 ![](Diagrams/lie-vis-decode.png)
 :::
 
-A data visualisation may map an unrepresentative or "cooked" version
+A data visualisation may encode an unrepresentative or "cooked" version
 of the data, 
 rather than the raw data, to visual features.
 Visual decoding leads back to the lies rather than the real data.
@@ -668,7 +668,7 @@ Visual decoding leads back to the lies rather than the real data.
 
 ## Visual downgrades {#sec-downgrade}
 
-We have seen that a downside to mapping data summaries,
+We have seen that a downside to encoding data summaries,
 rather than raw data values, is that we lose the ability to decode
 raw data values from data symbols.
 However, we pay this price in order to improve our ability to 
@@ -676,7 +676,7 @@ decode data summaries from the data symbols.
 For example, a boxplot makes it easier to decode the median
 of a set of data values.
 
-By mapping data summaries, we deliberately lose the ability to
+By encoding data summaries, we deliberately lose the ability to
 decode raw data values in order to gain the ability to decode
 data summaries.
 
@@ -700,8 +700,8 @@ kable(subset(crimeDistrict, year == 2021)[c("district", "rate")], digits=2,
 
 The data symbols in @fig-downgrade are circles with the 
 geographic location of the (centre of the) police district
-mapped to the position of the circles and the crime rate
-mapped to the (fill) colour, particularly the luminance, of the circles.
+encoded to the position of the circles and the crime rate
+encoded to the (fill) colour, particularly the luminance, of the circles.
 Darker circles represent higher crime rates.
 
 ```{r}
@@ -806,9 +806,9 @@ are a common way of representing three-dimensional data where
 two of the data variables are either qualitative 
 or have been measured on a regular grid and the third
 variable is **quantitative**.
-The first two variables naturally map to horizontal and vertical
+The first two variables naturally encode to horizontal and vertical
 **position** to produce an array of
-rectangles, while the third variable maps to **colour**.
+rectangles, while the third variable encodes to **colour**.
 
 We saw an example of a heatmap in @fig-crime-heatmap and
 @fig-nomads-purple shows another example that is a variation on 
@@ -836,7 +836,7 @@ scheme has monotonic luminance and/or chroma changes,
 it is still possible to decode ordinal values.
 
 Furthermore, we are able to decode useful visual summaries from
-the multiple rectangle data symbols on a heat map
+the multiple rectangle data symbols on a heatmap
 (@sec-visual-summaries).
 For example, we can identify regions of darker or lighter colours,
 not just individual dark or light rectangles.[^heatmap-ensemble]
@@ -967,19 +967,19 @@ variability, and tables of counts, provide information about
 the distribution of a set of data values.
 
 Some data visualisations, like box plots and histograms,
-are effective because they map **data summaries** to visual features.
+are effective because they encode **data summaries** to visual features.
 This makes it easy to decode and compare data summaries.
 
 Care must be taken to use data summaries that appropriately summarise
 the data values.
 
-When we map raw data values to visual features, like in a dot plot,
+When we encode raw data values to visual features, like in a dot plot,
 the encoding to individual visual features allows us to 
 decode and compare raw data values, but, in addition,
 **visual summaries** of *collections* of
 visual features allow us to decode and compare data summaries.
 
-A box plot that maps data summaries to visual features is more effective
+A box plot that encodes data summaries to visual features is more effective
 for perceiving data summaries 
 than a dot plot that relies on visual summaries.
 However, a dot plot is more effective for perceiving raw data values.

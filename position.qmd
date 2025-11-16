@@ -7,9 +7,9 @@ source("common.R")
 
 # Position {#sec-position}
 
-We saw in @sec-mapping-visual-features that **position** is a very effective
-visual feature.  It is appropriate for mapping quantitative data values
-(@fig-quant-features) and it is appropriate for mapping qualitative
+We saw in @sec-encoding-visual-features that **position** is a very effective
+visual feature.  It is appropriate for encoding quantitative data values
+(@fig-quant-features) and it is appropriate for encoding qualitative
 data values (@fig-qual-features).
 **Position** is a visual feature with high accuracy (@fig-accuracy) and 
 with high capacity (@fig-pos-cap).[^pos-fundamental]
@@ -65,7 +65,7 @@ none of the data values are encoded using **position**.
     Decoding individual data values from individual data symbols
     is not the only visual task that we need to perform, so
     it is not *always* true that we should encode data values as
-    **position**.  As we explore other sorts of mappings in later
+    **position**.  As we explore other sorts of encodings in later
     chapters, we will see reasons why **position** is not 
     always best.
 
@@ -115,10 +115,10 @@ for (i in 1:4) disc(i)
 ```
 
 However, we have already seen several data visualisations that do 
-not map *all* data values to position (e.g., @fig-crime and 
+not encode *all* data values to position (e.g., @fig-crime and 
 @fig-crime-heatmap), so there must be more to learn
-about mapping data values to basic visual features.[^not-all-scatter]
-In this chapter, we look more closely at the mapping
+about encoding data values to basic visual features.[^not-all-scatter]
+In this chapter, we look more closely at the encoding
 of data values to the **position** of data symbols.
 
 [^not-all-scatter]:
@@ -168,7 +168,7 @@ of the way from the bottom to the top of the line.
 We cannot decode an absolute data value from the dot.[^rel-propn]
 
 [^rel-propn]:
-    Even if we have mapped a *proportion* data value to the position
+    Even if we have encoded a *proportion* data value to the position
     of the dot, we would need to know that the bottom of the line
     represents 0 and the top of the line represents 1 to be
     able to correctly decode the proportion from the position of the dot.
@@ -445,7 +445,7 @@ We cannot decode an individual data value from each data symbol.[^surjective-ove
 [^surjective-over]:
     In effect, more than one data value is encoded as the same data symbol,
     which means that we cannot decode back to individual data values.
-    This is called a *surjective* mapping [@Ziemkiewicz2009].
+    This is called a *surjective* encoding [@Ziemkiewicz2009].
 
 @fig-semitrans shows the same data as @fig-overplot, but
 with the data points semi-transparent
@@ -605,7 +605,7 @@ ggplot(crimeLevel3, aes(High, Low, Medium)) +
 A ternary plot of the data in @tbl-crime-level-tern.  We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
 :::
 
-## Non-linear mappings {#sec-non-linear-pos}
+## Non-linear encodings {#sec-non-linear-pos}
 
 @tbl-crime-type shows the total number of youth offenders broken down
 by type of crime.  We have one qualitative variable, crime type, and
@@ -753,7 +753,7 @@ We will see more examples in later sections
 
 ## Summary
 
-Mapping data values to the position of data symbols allows
+Encoding data values to the position of data symbols allows
 for effective decoding for both quantitative and qualitative information,
 with the following caveats:
 

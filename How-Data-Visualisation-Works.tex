@@ -559,7 +559,7 @@ What makes a data visualisation effective? Why are some data
 visualisations more effective than others? The purpose of this book is
 to provide explanations for why, when, and how data visualisation works.
 
-\section{One big idea: Mappings}\label{sec-mappings}
+\section{One big idea: Encodings}\label{sec-encodings}
 
 Figure~\ref{fig-crime} and Figure~\ref{fig-crime-heatmap} are examples
 of different types of data visualisation, a line plot and a heatmap
@@ -569,20 +569,20 @@ data visualisation on its own, we want to identify underlying concepts
 that help to explain how all data visualisations work.
 
 One concept that we will lean on very heavily is the idea of
-\textbf{mappings}: how is information being converted into a visual
+\textbf{encodings}: how is information being converted into a visual
 representation?\footnote{The idea of characterising a data visualisation
-  as a set of \emph{mappings} from data values to visual representations
-  aligns with ideas from the \emph{Grammar of Graphics} (Wilkinson
-  2005).}
+  as a set of \emph{encodings} from data values to visual
+  representations aligns with ideas from the \emph{Grammar of Graphics}
+  (Wilkinson 2005).}
 
-The most obvious mapping in a data visualisation involves the mapping of
-\textbf{data values} to \textbf{data symbols}
-(Figure~\ref{fig-mappings}). For example, in Figure~\ref{fig-crime}, all
-of the data values for 14-year-olds, the number of offenders for each
-year, have been mapped to an orange line. The data values for
-15-year-olds have been mapped to a blue line and the data values for
-16-year-olds have been mapped to a green line. In other words, each row
-of Table~\ref{tbl-crime} is mapped to a separate coloured line.
+The most obvious encoding in a data visualisation involves the encoding
+of \textbf{data values} to \textbf{data symbols}
+(Figure~\ref{fig-encodings}). For example, in Figure~\ref{fig-crime},
+all of the data values for 14-year-olds, the number of offenders for
+each year, have been encoded to an orange line. The data values for
+15-year-olds have been encoded to a blue line and the data values for
+16-year-olds have been encoded to a green line. In other words, each row
+of Table~\ref{tbl-crime} is encoded to a separate coloured line.
 
 \begin{figure}
 
@@ -592,25 +592,25 @@ of Table~\ref{tbl-crime} is mapped to a separate coloured line.
 
 }
 
-\caption{\label{fig-mappings}A data visualisation can be described by
-the mappings that it employs to represent data values as data symbols.}
+\caption{\label{fig-encodings}A data visualisation can be described by
+the encodings that it employs to represent data values as data symbols.}
 
 \end{figure}%
 
 The heatmap of the same data (Figure~\ref{fig-crime-heatmap}) provides a
-different visual representation because it employs a different mapping.
+different visual representation because it employs a different encoding.
 In this case, the data symbol is a rectangle, with one data symbol for
 each combination of age and year, and with the colour of the rectangle
 reflecting the number of offenders of that age for that year. In other
-words, each cell of Table~\ref{tbl-crime} is mapped to its own coloured
+words, each cell of Table~\ref{tbl-crime} is encoded to its own coloured
 rectangle.
 
 The journey that we take throughout this book will involve exploring a
-variety of different ways that information can be mapped to a visual
+variety of different ways that information can be encoded to a visual
 representation. As much as possible, we will attempt to reduce any data
-visualisation to a set of mappings from different pieces of information
+visualisation to a set of encodings from different pieces of information
 to visual representations of that information. By understanding the
-different mappings that we can use, we will come to understand why some
+different encodings that we can use, we will come to understand why some
 data visualisations are more effective than others.
 
 \section{How will it help?}\label{how-will-it-help}
@@ -760,9 +760,9 @@ be effective for certain data values and for certain data properties.
 The goal of this document is to explain why some data visualisations are
 more effective than others; how data visualisation works.
 
-We will focus on how information is \textbf{mapped} to a visual
+We will focus on how information is \textbf{encoded} to a visual
 representation. We can characterise a data visualisation in terms of the
-mappings that it uses to \textbf{encode} data values as data symbols.
+encodings that it uses to present data values as data symbols.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -772,10 +772,10 @@ mappings that it uses to \textbf{encode} data values as data symbols.
 
 \chapter{The Visual System}\label{sec-visual-system}
 
-Understanding why some mappings are more effective than others will
+Understanding why some encodings are more effective than others will
 depend upon an understanding of how the human visual system works. In
-order to understand the effectiveness of a mapping from information to a
-visual representation, we need to know how we get from visual
+order to understand the effectiveness of a encoding from information to
+a visual representation, we need to know how we get from visual
 representations back to the original information.
 
 We will talk about the transformation of data values into data symbols
@@ -788,7 +788,7 @@ data symbols back to data values.
 
 In this chapter we will establish a very simple model of the visual
 system, which will help us to understand the effectiveness of the
-different mappings that we consider throughout the book.\footnote{Simple
+different encodings that we consider throughout the book.\footnote{Simple
   descriptions of the human visual system can be found in many articles
   and books on data visualisation, for example, Sönning (2023),
   Franconeri et al. (2021a), and Cairo (2012). See Ware (2021) for a
@@ -1704,11 +1704,11 @@ properties of the visual system.
 
 \bookmarksetup{startatroot}
 
-\chapter{Visual Features}\label{sec-mapping-visual-features}
+\chapter{Visual Features}\label{sec-encoding-visual-features}
 
 In Chapter~\ref{sec-intro}, we described a data visualisation as a set
-of \textbf{mappings} from data values to data symbols
-(Figure~\ref{fig-mappings}). In Chapter~\ref{sec-visual-system}, we
+of \textbf{encodings} from data values to data symbols
+(Figure~\ref{fig-encodings}). In Chapter~\ref{sec-visual-system}, we
 established some basic properties of the visual system, which will help
 to explain how well the \textbf{encoding} of data values to data symbols
 can be reversed to \textbf{decode} from data symbols back to data values
@@ -1716,19 +1716,19 @@ can be reversed to \textbf{decode} from data symbols back to data values
 processing: visual features, visual shapes, and visual objects
 (Figure~\ref{fig-visual-processing}).
 
-There are many possible mappings between data values and data symbols.
-For example, in Section~\ref{sec-mappings}, we saw that the same data
-values could be mapped in different ways to produce different data
+There are many possible encodings between data values and data symbols.
+For example, in Section~\ref{sec-encodings}, we saw that the same data
+values could be encoded in different ways to produce different data
 visualisations (e.g., Figure~\ref{fig-crime} and
 Figure~\ref{fig-crime-heatmap}). The remainder of this book explores
-different sorts of mappings and why they are more or less effective for
+different sorts of encodings and why they are more or less effective for
 different purposes.
 
-In this chapter, we start with a very simple sort of mapping. We will
+In this chapter, we start with a very simple sort of encoding. We will
 begin to explore data visualisations where each data value is
 \textbf{encoded} as a basic \textbf{visual feature} of a data symbol.
 Furthermore, in these data visualisations, \textbf{one} data value is
-mapped to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
+encoded to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
 
 \begin{figure}
 
@@ -1748,17 +1748,17 @@ mapped to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
 
 \caption{\label{fig-visual-feature}A simple data visualisation encodes
 each data value as a \textbf{visual feature} of a data symbol. Each data
-value (\texttt{x}) is mapped to a visual feature (\texttt{a}) of a
+value (\texttt{x}) is encoded to a visual feature (\texttt{a}) of a
 single data symbol.}
 
 \end{figure}%
 
 \section{Bar plots}\label{sec-bar}
 
-A good example of this sort of simple mapping is a bar plot. In order to
-demonstrate bar plots, we will work with a data set containing the total
-number of offenders aged 14 to 16 in New Zealand between 2011 and 2021,
-for different ethnic groups. The data values are shown in
+A good example of this sort of simple encoding is a bar plot. In order
+to demonstrate bar plots, we will work with a data set containing the
+total number of offenders aged 14 to 16 in New Zealand between 2011 and
+2021, for different ethnic groups. The data values are shown in
 Table~\ref{tbl-crime-group-total}. A bar plot of these data is shown in
 Figure~\ref{fig-bar}.
 
@@ -1796,14 +1796,14 @@ horizontal bars.}
 
 We can see that, for each data value in
 Table~\ref{tbl-crime-group-total}, there is a single bar in the bar
-plot. For example, each total number of offenders is mapped to a single
+plot. For example, each total number of offenders is encoded to a single
 bar.
 
 In terms of \textbf{decoding} (Figure~\ref{fig-decode}), this means that
 we can decode individual data values from each data symbol. For example,
 we can decode a single total number of offenders from each
-bar.\footnote{This one-to-one mapping between data values and data
-  symbols is called a \emph{bijective} mapping (Ziemkiewicz and Kosara
+bar.\footnote{This one-to-one encoding between data values and data
+  symbols is called a \emph{bijective} encoding (Ziemkiewicz and Kosara
   2009).}
 
 This allows us to answer simple questions about individual data values.
@@ -1813,15 +1813,15 @@ For example, what is the largest total number of offenders?
 
 The data symbols in Figure~\ref{fig-bar} are a set of bars or, put more
 simply, rectangles. We have seen that each data value from
-Table~\ref{tbl-crime-group-total} is mapped to one of these rectangles.
-For example, each total number of offenders is mapped to a rectangle.
+Table~\ref{tbl-crime-group-total} is encoded to one of these rectangles.
+For example, each total number of offenders is encoded to a rectangle.
 
-However, we can look more closely at the mapping and consider how
+However, we can look more closely at the encoding and consider how
 individual data values are being \textbf{encoded} as a data symbol. For
 example, the total number of offenders for each ethnic group is encoded
 as the \textbf{length} of a rectangle (Figure~\ref{fig-length}). Each
-data value is mapped to the length of one rectangle.\footnote{Some
-  authors prefer to say that the total number of offenders is mapped to
+data value is encoded to the length of one rectangle.\footnote{Some
+  authors prefer to say that the total number of offenders is encoded to
   the \textbf{position} of the ``top'' of the rectangle (e.g., William
   S. Cleveland and McGill 1984), but the difference is not significant
   because both length and position are excellent visual features in
@@ -1841,12 +1841,12 @@ data value is mapped to the length of one rectangle.\footnote{Some
 
 \caption{\label{fig-length}A bar plot of number of crimes for different
 ethnic groups. The data values, the total number of crimes, have been
-mapped to the \textbf{lengths} of the bars (the purple lines).}
+encoded to the \textbf{lengths} of the bars (the purple lines).}
 
 \end{figure}%
 
 Each ethnic group data value in Table~\ref{tbl-crime-group-total} is
-also mapped to a rectangle in Figure~\ref{fig-bar}. In terms of
+also encoded to a rectangle in Figure~\ref{fig-bar}. In terms of
 \textbf{encodings}, each ethnic group is encoded as the vertical
 \textbf{position} of one rectangle (Figure~\ref{fig-position}).
 
@@ -1860,7 +1860,7 @@ also mapped to a rectangle in Figure~\ref{fig-bar}. In terms of
 
 \caption{\label{fig-position}A bar plot of number of crimes for
 different ethnic groups. The data values, the ethnic groups, have been
-mapped to the \textbf{positions} of the bars (the purple dots).}
+encoded to the \textbf{positions} of the bars (the purple dots).}
 
 \end{figure}%
 
@@ -1887,7 +1887,7 @@ features are \textbf{position}, \textbf{length}, \textbf{angle},
 
 \begin{quote}
 One reason why a bar plot is an effective data visualisation is because
-it involves a mapping from data values to the basic visual features of
+it involves a encoding from data values to the basic visual features of
 data symbols---the positions and lengths of bars---and basic visual
 features are processed rapidly and subconsciously by our visual system.
 \end{quote}
@@ -1928,7 +1928,7 @@ sections.
 As we discussed in Chapter~\ref{sec-visual-system}, the real purpose of
 encoding data values as data symbols is to make use of the visual system
 to \textbf{decode} back to data values from the data symbols. In this
-section, we are considering mappings from data values to basic visual
+section, we are considering encodings from data values to basic visual
 features, so we need to consider how well we are able to \textbf{decode}
 from \textbf{visual features} to \textbf{data values}
 (Figure~\ref{fig-visual-feature-decode}).
@@ -1942,7 +1942,7 @@ from \textbf{visual features} to \textbf{data values}
 }
 
 \caption{\label{fig-visual-feature-decode}When we encode data values as
-visual features, we want to map to a visual feature that allows us to
+visual features, we want to encode to a visual feature that allows us to
 decode the data values from the visual fearure.}
 
 \end{figure}%
@@ -2029,7 +2029,7 @@ values.
 \begin{quote}
 One reason why a bar plot is effective for visualising
 \textbf{quantitative data values} is because the quantitative data
-values, the counts, are mapped to a \textbf{quantitative visual
+values, the counts, are encoded to a \textbf{quantitative visual
 feature}, the lengths of the bars.
 \end{quote}
 
@@ -2087,7 +2087,7 @@ a qualitative visual feature.
 \begin{quote}
 One reason why a bar plot is effective for visualising
 \textbf{qualitative data values} is because the qualitative data values,
-the groups, are mapped to a \textbf{qualitative visual feature}, the
+the groups, are encoded to a \textbf{qualitative visual feature}, the
 positions of the bars.
 \end{quote}
 
@@ -2228,12 +2228,12 @@ increases with irregular arrangements.
 
 }
 
-\caption{\label{fig-colour-cap}Mapping qualitative data values to colour
-works well for a small number of colours, but less well for a large
-number of colours. It is quite easy to identify which green the single
-dot corresponds to amongst three colours on the left, but it is much
-harder with the seven colours in the middle, harder still for the eleven
-colours on the right.}
+\caption{\label{fig-colour-cap}Encoding qualitative data values to
+colour works well for a small number of colours, but less well for a
+large number of colours. It is quite easy to identify which green the
+single dot corresponds to amongst three colours on the left, but it is
+much harder with the seven colours in the middle, harder still for the
+eleven colours on the right.}
 
 \end{figure}%
 
@@ -2259,7 +2259,7 @@ arrangements.\footnote{The research evidence for the limited capacity of
 
 }
 
-\caption{\label{fig-pattern-cap}Mapping qualitative data values to
+\caption{\label{fig-pattern-cap}Encoding qualitative data values to
 pattern works well for a small number of patterns, but less well for a
 large number of patterns.}
 
@@ -2277,7 +2277,7 @@ even as the number of alternative locations becomes large.
 
 }
 
-\caption{\label{fig-pos-cap}Mapping qualitative data values to position
+\caption{\label{fig-pos-cap}Encoding qualitative data values to position
 works well for both a small number of positions and for a large number
 of positions.}
 
@@ -2364,22 +2364,22 @@ wedges.}
 \end{figure}%
 
 The data symbols in Figure~\ref{fig-pie} are wedges or segments of a
-circle and again we have each data value mapping to a single data
-symbol. For example, each ethnic group maps to a separate wedge of the
-pie. As with bar plots and dot plots, in a pie chart the data values are
-encoded as basic visual features of these symbols. However, a pie chart
-makes use of different visual features: The total values are encoded as
-the \textbf{angle} and/or \textbf{area} of the wedges and the group
-values are encoded as the \textbf{colour} of the wedges.\footnote{We are
-  assuming here, as is common, that the viewer will decode from the
-  \textbf{angle} of pie wedges. That is not necessarily the case, for
-  example Eells (1926b) found evidence that viewers may decode from the
-  area, arc length, or even chord length of pie wedges. Fortunately, the
-  larger point holds, because most of these alternatives are relatively
-  poor visual features in terms of decoding accuracy.} Although
-\textbf{colour} is an appropriate visual feature to represent
-\textbf{qualitative} data, and it has sufficient capacity to
-differentiate between only four groups, the encoding of quantitative
+circle and again we have each data value encoding to a single data
+symbol. For example, each ethnic group is encoded as a separate wedge of
+the pie. As with bar plots and dot plots, in a pie chart the data values
+are encoded as basic visual features of these symbols. However, a pie
+chart makes use of different visual features: The total values are
+encoded as the \textbf{angle} and/or \textbf{area} of the wedges and the
+group values are encoded as the \textbf{colour} of the
+wedges.\footnote{We are assuming here, as is common, that the viewer
+  will decode from the \textbf{angle} of pie wedges. That is not
+  necessarily the case, for example Eells (1926b) found evidence that
+  viewers may decode from the area, arc length, or even chord length of
+  pie wedges. Fortunately, the larger point holds, because most of these
+  alternatives are relatively poor visual features in terms of decoding
+  accuracy.} Although \textbf{colour} is an appropriate visual feature
+to represent \textbf{qualitative} data, and it has sufficient capacity
+to differentiate between only four groups, the encoding of quantitative
 values as \textbf{angle} and/or \textbf{area} leads to less accurate
 decoding of the total number of offenders. For example, it is much
 harder to decode the number of offenders with an unknown ethinicity from
@@ -2387,17 +2387,17 @@ the pie chart in Figure~\ref{fig-pie} compared to the bar plot in
 Figure~\ref{fig-bar} or the dot plot in Figure~\ref{fig-dot}.
 
 Although the situation seems bleak for pie charts, we have not yet seen
-all of the ways that we can assess different mappings of data values to
+all of the ways that we can assess different encodings of data values to
 data symbols. We will return to pie charts in
 Section~\ref{sec-part-to-whole} to show that all is not lost.
 
 \section{Summary}\label{summary-2}
 
-A simple mapping of data values to data symbols involves mapping
+A simple encoding of data values to data symbols involves encoding
 \textbf{each data value to a separate data symbol}. This allows the
 viewer to \textbf{decode} individual data values from the data symbols.
 
-A simple mapping of data values to data symbols also involves
+A simple encoding of data values to data symbols also involves
 \textbf{encoding} each data value as a basic \textbf{visual feature} of
 the data symbol: position, length, area, angle, colour, and pattern.
 This is effective because visual features are decoded rapidly and
@@ -2414,7 +2414,7 @@ can represent a large number of categories using position, but only a
 few categories using colours and patterns.
 
 Bar plots, dot plots, and pie charts all provide examples of simple
-mappings from data values to data symbol. We can decode bar plots and
+encodings from data values to data symbol. We can decode bar plots and
 dot plots accurately because they involve encodings of data values to
 position and length. We cannot decode pie charts as accurately because
 they involve encoding data values to angle and area.
@@ -2427,10 +2427,10 @@ they involve encoding data values to angle and area.
 
 \chapter{Position}\label{sec-position}
 
-We saw in Chapter~\ref{sec-mapping-visual-features} that
+We saw in Chapter~\ref{sec-encoding-visual-features} that
 \textbf{position} is a very effective visual feature. It is appropriate
-for mapping quantitative data values (Figure~\ref{fig-quant-features})
-and it is appropriate for mapping qualitative data values
+for encoding quantitative data values (Figure~\ref{fig-quant-features})
+and it is appropriate for encoding qualitative data values
 (Figure~\ref{fig-qual-features}). \textbf{Position} is a visual feature
 with high accuracy (Figure~\ref{fig-accuracy}) and with high capacity
 (Figure~\ref{fig-pos-cap}).\footnote{It can be argued that position is a
@@ -2467,7 +2467,7 @@ data values from the data symbols.\footnote{Decoding individual data
   values from individual data symbols is not the only visual task that
   we need to perform, so it is not \emph{always} true that we should
   encode data values as \textbf{position}. As we explore other sorts of
-  mappings in later chapters, we will see reasons why \textbf{position}
+  encodings in later chapters, we will see reasons why \textbf{position}
   is not always best.} For example, Figure~\ref{fig-no-pos} shows
 another data visualisation of the total number of offenders in New
 Zealand for different ethnic groups (Table~\ref{tbl-crime-group-total}).
@@ -2494,12 +2494,12 @@ of position.}
 \end{figure}%
 
 However, we have already seen several data visualisations that do not
-map \emph{all} data values to position (e.g., Figure~\ref{fig-crime} and
-Figure~\ref{fig-crime-heatmap}), so there must be more to learn about
-mapping data values to basic visual features.\footnote{As Bertini,
-  Correll, and Franconeri (2020) put it: ``Why Shouldn't All Charts Be
-  Scatter Plots?''} In this chapter, we look more closely at the mapping
-of data values to the \textbf{position} of data symbols.
+encode \emph{all} data values to position (e.g., Figure~\ref{fig-crime}
+and Figure~\ref{fig-crime-heatmap}), so there must be more to learn
+about encoding data values to basic visual features.\footnote{As
+  Bertini, Correll, and Franconeri (2020) put it: ``Why Shouldn't All
+  Charts Be Scatter Plots?''} In this chapter, we look more closely at
+the encoding of data values to the \textbf{position} of data symbols.
 
 \section{Perception is relative}\label{sec-rel-pos}
 
@@ -2536,7 +2536,7 @@ at a vertical positon along a dotted line. We can decode an amount from
 the position of the dot, but only relative to the ends of the dotted
 line; the dot is three-quarters of the way from the bottom to the top of
 the line. We cannot decode an absolute data value from the
-dot.\footnote{Even if we have mapped a \emph{proportion} data value to
+dot.\footnote{Even if we have encoded a \emph{proportion} data value to
   the position of the dot, we would need to know that the bottom of the
   line represents 0 and the top of the line represents 1 to be able to
   correctly decode the proportion from the position of the dot.}
@@ -2764,7 +2764,7 @@ match, it is not possible to decode whether that was just one team or
 just one match. We cannot decode an individual data value from each data
 symbol.\footnote{In effect, more than one data value is encoded as the
   same data symbol, which means that we cannot decode back to individual
-  data values. This is called a \emph{surjective} mapping (Ziemkiewicz
+  data values. This is called a \emph{surjective} encoding (Ziemkiewicz
   and Kosara 2009).}
 
 Figure~\ref{fig-semitrans} shows the same data as
@@ -2888,7 +2888,7 @@ low severity, and only 10\% of high severity.}
 
 \end{figure}%
 
-\section{Non-linear mappings}\label{sec-non-linear-pos}
+\section{Non-linear encodings}\label{sec-non-linear-pos}
 
 Table~\ref{tbl-crime-type} shows the total number of youth offenders
 broken down by type of crime. We have one qualitative variable, crime
@@ -3040,9 +3040,9 @@ only effective for decoding quantitative data if the encoding is linear.
 
 \section{Summary}\label{summary-3}
 
-Mapping data values to the position of data symbols allows for effective
-decoding for both quantitative and qualitative information, with the
-following caveats:
+Encoding data values to the position of data symbols allows for
+effective decoding for both quantitative and qualitative information,
+with the following caveats:
 
 \begin{itemize}
 \item
@@ -3076,7 +3076,7 @@ following caveats:
 Figure~\ref{fig-bar-district} shows a bar plot of the total number of
 offenders in each police district in New Zealand (for ages 14 to 16 and
 from 2011 to 2021). For the reasons outlined in
-Chapter~\ref{sec-mapping-visual-features} and
+Chapter~\ref{sec-encoding-visual-features} and
 Chapter~\ref{sec-position}), this data visualisation is effective for
 decoding the number of offenders in different police districts and
 making comparisons between them.
@@ -3097,7 +3097,7 @@ South.}
 
 Figure~\ref{fig-bar-district-ordered} shows a bar plot of the same data,
 but with the bars ordered from longest to shortest. This data
-visualisation uses the same mappings as
+visualisation uses the same encodings as
 Figure~\ref{fig-bar-district}---police districts are encoded as the
 vertical positions of the bars and the total counts are encoded as the
 lengths of the bars---which means that it is also effective for
@@ -3121,11 +3121,11 @@ However, Figure~\ref{fig-bar-district-ordered} is \emph{more} effective
 than Figure~\ref{fig-bar-district} for some comparisons. For example, it
 is easier to compare the Northland district with the Tasman district in
 Figure~\ref{fig-bar-district-ordered}. The fact that two data
-visualisations with the same mappings can have a different effectiveness
-suggests that there is more to know about how different visual features
-work.
+visualisations with the same encodings can have a different
+effectiveness suggests that there is more to know about how different
+visual features work.
 
-This chapter covers some more details about mappings that encode data
+This chapter covers some more details about encodings that encode data
 values as \textbf{length}.
 
 \section{The distance effect}\label{sec-distance-effect}
@@ -3264,9 +3264,9 @@ There are 44 rows of data, but just the first 6 rows are shown here.}
 Figure~\ref{fig-stacked-bar-year} shows the number of offenders
 (quantitative) for each ethnic group (qualitative) and for each year
 from 2011 to 2021 (treated here as qualitative, or at least discrete).
-In this data visualisation, the number of offenders is mapped to the
-lengths of the bars, the years are mapped to the horizontal
-\textbf{position} of the bars, the ethnic groups are mapped to the
+In this data visualisation, the number of offenders is encoded to the
+lengths of the bars, the years are encoded to the horizontal
+\textbf{position} of the bars, the ethnic groups are encoded to the
 colours of the bars, and the bars are stacked vertically.
 
 The problem that we face in this situation is that there are four bars
@@ -3507,7 +3507,7 @@ offenders for different levels of crime seriousness.}
 
 The fact that there can be two data visualisations,
 Figure~\ref{fig-pie-hue} and Figure~\ref{fig-pie-ordinal}, with the same
-mapping---the \textbf{qualitative} level of crime is encoded as the
+encoding---the \textbf{qualitative} level of crime is encoded as the
 \textbf{colour} of the wedges---but the two data visualisations have
 different effectiveness suggests that there is still more to learn about
 how different visual features work.
@@ -3607,7 +3607,7 @@ data when there are very few different groups to represent.
 
 }
 
-\caption{\label{fig-lum-cap}Mapping qualitative values to luminance and
+\caption{\label{fig-lum-cap}Encoding qualitative values to luminance and
 chroma works well for representing nominal data values, but only for a
 very small number of values. It is possible to identify which shade of
 purple the single dot corresponds to amongst the three shades on the
@@ -3668,7 +3668,7 @@ the same shade.}
 
 This effect also applies to the perception of hue.
 Figure~\ref{fig-pie-contrast} shows a pie chart of the number of
-offenders in each police district, with police district mapped to the
+offenders in each police district, with police district encoded to the
 \textbf{colour} of the wedges. There are two issues with the perception
 of the wedge colours: each wedge is affected by its neighbour so that,
 for example, some of the blue wedges look more green at the boundary
@@ -3959,10 +3959,10 @@ will have difficulty decoding the colours if we do not take into account
 common forms of colour vision deficiency.
 \end{quote}
 
-\section{Non-linear mappings}\label{sec-col-non-linear}
+\section{Non-linear encodings}\label{sec-col-non-linear}
 
 The top row of Figure~\ref{fig-non-linear-lum} shows a linear luminance
-mapping; we have a set of rectangles that change luminance in equal
+encoding; we have a set of rectangles that change luminance in equal
 steps. The two rectangles on the left of this row appear very similar,
 while the two rectangles on the right of this row appear quite
 different. The darker rectangles appear to change more slowly and the
@@ -3978,8 +3978,8 @@ lighter rectangles appear to change more rapidly. In other words, the
 }
 
 \caption{\label{fig-non-linear-lum}The two rows of purple values begin
-and end at the same level of luminance. The top row maps luminance
-linearly, but the bottom row uses a cube-root mapping.}
+and end at the same level of luminance. The top row encodes luminance
+linearly, but the bottom row uses a cube-root encoding.}
 
 \end{figure}%
 
@@ -3987,33 +3987,33 @@ We saw in Section~\ref{sec-non-linear-pos} that accurate decoding of
 data values from \textbf{position} relies on using a linear encoding.
 That was because the decoding of position is linear. A linear encoding
 from data values to position, followed by a linear decoding from
-position to data values, leads to an accurate mapping. And that is
-particularly important for mapping quantitative data values.
+position to data values, leads to an accurate encoding. And that is
+particularly important for encoding quantitative data values.
 
-Part of the reason why it is not appropriate to map quantitative data
+Part of the reason why it is not appropriate to encode quantitative data
 values to luminance is that the decoding of luminance is \emph{not}
 linear. This makes it difficult to accurately decode quantitative data
 values from the luminance of a data symbol.
 
-However, we can use luminance to map ordinal data values
+However, we can use luminance to encode ordinal data values
 (Section~\ref{sec-ordinal}). In this case, all that we need is to be
 able to identify that a data symbol is lighter or darker than another
 data symbol.
 
 The bottom row of Figure~\ref{fig-non-linear-lum} shows a luminance
-mapping that takes larger steps for darker colours and smaller steps for
-lighter colours. In this row, the purples appear to change more evenly.
-We can see differences between the darker rectangles as well as between
-the lighter rectangles.
+encoding that takes larger steps for darker colours and smaller steps
+for lighter colours. In this row, the purples appear to change more
+evenly. We can see differences between the darker rectangles as well as
+between the lighter rectangles.
 
-In other words, a \emph{non-linear} mapping from data values to
+In other words, a \emph{non-linear} encoding from data values to
 luminance can be used to generate a larger set of luminance levels that
-can be differentiated from each other. A non-linear luminance mapping
+can be differentiated from each other. A non-linear luminance encoding
 leads to increased \textbf{capacity} for decoding data values from
 luminance.
 
 \begin{quote}
-When we are mapping nominal or ordinal data values, and we are encoding
+When we are encoding nominal or ordinal data values, and we are encoding
 to a visual feature that has a non-linear decoding, a non-linear
 \emph{encoding} can be effective for increasing the capacity of the
 visual feature.
@@ -4115,11 +4115,11 @@ Figure~\ref{fig-pie-hue} we have to choose a different colour to
 represent each level of crime.
 
 This choice is difficult because there are many different colours to
-choose from and often there is no obvious mapping from a data value to a
-particular colour. For example, what specific hue, chroma, and luminance
-should we choose to represent a ``high'' crime level? As we have seen in
-the preceding sections, there are also many, sometimes competing,
-criteria involved in selecting effective colours.
+choose from and often there is no obvious encoding from a data value to
+a particular colour. For example, what specific hue, chroma, and
+luminance should we choose to represent a ``high'' crime level? As we
+have seen in the preceding sections, there are also many, sometimes
+competing, criteria involved in selecting effective colours.
 
 As an example, we can consider the problem of selecting a set of 5
 different hues to represent 5 different categorical data values, like
@@ -4251,14 +4251,15 @@ Figure~\ref{fig-neg-tile} shows a heatmap of the points differential
 each Rugby World Cup. The data symbols are rectangles, the teams are
 encoded as the vertical \textbf{positions} of the rectangles, and the
 years are encoded as the horizontal \textbf{positions} of the
-rectangles. These are both effective mappings and we can easily
+rectangles. These are both effective encodings and we can easily
 \textbf{decode} to teams or years. The points differentials are encoded
 as the \textbf{colour} of the rectangles, but in a slightly complicated
-way. Positive data values map to a shade of green, while negative values
-map to a shade of brown. In both cases, we have a constant \textbf{hue},
-with increasing \textbf{chroma} and decreasing \textbf{luminance} as the
-data values get further away from zero.\footnote{This colour palette is
-  based on the \emph{BrBG} diverging palette from ColorBrewer.}
+way. Positive data values encode to a shade of green, while negative
+values encode to a shade of brown. In both cases, we have a constant
+\textbf{hue}, with increasing \textbf{chroma} and decreasing
+\textbf{luminance} as the data values get further away from
+zero.\footnote{This colour palette is based on the \emph{BrBG} diverging
+  palette from ColorBrewer.}
 
 The use of two \textbf{hues} creates two different groups (positive and
 negative values), while the changes in \textbf{chroma} and
@@ -4520,11 +4521,11 @@ problems.
 
 \bookmarksetup{startatroot}
 
-\chapter{Congruent Mappings}\label{sec-congruence}
+\chapter{Congruent Encodings}\label{sec-congruence}
 
 In previous chapters, we have seen that, part of the reason why some
-well-known plots, like bar plots, are effective is because they map data
-values to the basic visual features of a data symbol. For example,
+well-known plots, like bar plots, are effective is because they encode
+data values to the basic visual features of a data symbol. For example,
 encoding the number of youth offenders as the \textbf{length} of a bar
 in a bar plot (Figure~\ref{fig-bar-district}). We have also seen that
 basic visual features like \textbf{length} are effective because we can
@@ -4532,7 +4533,7 @@ accurately decode data values from those visual features.
 
 The purpose of this chapter is to show that, in order to understand the
 effectiveness of a data visualisation, we need to consider more than
-just the accuracy or capacity of our mappings from data values to basic
+just the accuracy or capacity of our encodings from data values to basic
 visual features.
 
 \section{Implicit decodings}\label{sec-implicit}
@@ -4543,10 +4544,10 @@ encoding of data values. For example, we can decode that one line is
 twice as long as the other without knowing anything about what ``twice''
 represents in terms of data values. In other words, there is an
 \textbf{implicit decoding} from the lengths of the lines to data values
-(Figure~\ref{fig-implicit-decode}).\footnote{These implicit mappings are
-  part of the reason why different visual features are appropriate for
-  encoding quantitative verus qualitative data values. The length of a
-  data symbol is appropriate for encoding quantitative data values
+(Figure~\ref{fig-implicit-decode}).\footnote{These implicit encodings
+  are part of the reason why different visual features are appropriate
+  for encoding quantitative verus qualitative data values. The length of
+  a data symbol is appropriate for encoding quantitative data values
   because we implicitly decode amounts from length.}
 
 \begin{figure}
@@ -4578,8 +4579,8 @@ features without having explicitly encoded any data values.}
 \end{figure}%
 
 When an implicit decoding exists, we can produce a more effective
-mapping by building upon the implicit decoding. We can explicitly encode
-data values as visual features in such a way that the decoding is
+encoding by building upon the implicit decoding. We can explicitly
+encode data values as visual features in such a way that the decoding is
 \textbf{congruent} with the implicit decoding, in the sense that the
 implicit decoding leads back to the same data values that we explicitly
 encoded (Figure~\ref{fig-congruent-decode}).\footnote{Tversky, Morrison,
@@ -4598,7 +4599,7 @@ encoded (Figure~\ref{fig-congruent-decode}).\footnote{Tversky, Morrison,
   1991). The latter was focused on a comparison of plots versus tables
   (plots for spatial comparisons and tables for more complex cognitive
   tasks involving symbolic reasoning), but it is analogous to the idea
-  of congruent mappings.}
+  of congruent encodings.}
 
 \begin{figure}
 
@@ -4838,7 +4839,7 @@ offenders from different ethnic groups.}
 
 In Section~\ref{sec-differences} we saw that the visual system is very
 sensitive to \emph{differences}, particularly when everything else
-remains the \emph{same}. This means that mapping \emph{changes} in data
+remains the \emph{same}. This means that encoding \emph{changes} in data
 values to \emph{changes} in data symbols will be effective because the
 visual system will notice the differences in the data symbols. More
 specifically, if a \textbf{visual feature} of a data symbol changes then
@@ -4860,7 +4861,7 @@ Another reason why bar plots are effective is because the bars differ in
 length, but are otherwise the same.
 \end{quote}
 
-\section{Dissonant mappings}\label{sec-dissonance}
+\section{Dissonant encodings}\label{sec-dissonance}
 
 The fact that \textbf{length} and \textbf{area} implicitly convey
 amounts means that care must be taken \emph{not} to confuse that
@@ -4910,7 +4911,7 @@ data visualisation if we create visual dissonance.\footnote{The idea of
   closest.}
 
 If we fail to make our explicit encodings congruent with any implicit
-encodings---if we create a \textbf{dissonant} mapping---we can make it
+encodings---if we create a \textbf{dissonant} encoding---we can make it
 harder and more confusing to decode a data visualisation because there
 is more than one possible decoding (Figure~\ref{fig-dissonant-decode}).
 
@@ -4922,21 +4923,22 @@ is more than one possible decoding (Figure~\ref{fig-dissonant-decode}).
 
 }
 
-\caption{\label{fig-dissonant-decode}If we explicitly map data values to
-visual features, but the visual features have an implicit mapping to
+\caption{\label{fig-dissonant-decode}If we explicitly encode data values
+to visual features, but the visual features have an implicit encoding to
 different data values, we can cause confusion and make it harder to
 effectively decode data values from visual features.}
 
 \end{figure}%
 
-We saw in Section~\ref{sec-same-same} that we want to map differences in
-data values to differences in visual features \emph{and} keep everything
-else the same. Failing to follow that approach will make it harder to
-perceive changes in the data values. However, a worse error, and another
-source of visual dissonance arises if we change visual features
-\emph{without} any underlying change in the data values.\footnote{Kosslyn's
-  \emph{Principle of Informative Changes} states that ``People expect
-  changes in properties to carry information'' (Kosslyn 2006).}
+We saw in Section~\ref{sec-same-same} that we want to encode differences
+in data values to differences in visual features \emph{and} keep
+everything else the same. Failing to follow that approach will make it
+harder to perceive changes in the data values. However, a worse error,
+and another source of visual dissonance arises if we change visual
+features \emph{without} any underlying change in the data
+values.\footnote{Kosslyn's \emph{Principle of Informative Changes}
+  states that ``People expect changes in properties to carry
+  information'' (Kosslyn 2006).}
 
 Figure~\ref{fig-listener-cakes} shows a data visualisation of the
 relative number of people aged over 100 for females versus
@@ -4966,7 +4968,7 @@ females aged over 100 relative to the number of makes aged over 100.}
 \end{figure}%
 
 \begin{quote}
-A data visualisation is \emph{not} effective if it contains mappings
+A data visualisation is \emph{not} effective if it contains encodings
 that are dissonant because that can cause distraction and slower and/or
 incorrect \textbf{decoding} of data values from visual features.
 \end{quote}
@@ -4976,7 +4978,7 @@ incorrect \textbf{decoding} of data values from visual features.
 Figure~\ref{fig-bar-order} shows the results of a 2025 poll that asked
 what was the best thing that the Trump administration had done,
 comparing results in February to results in September. In terms of
-mappings, this bar plot makes good use of (vertical) \textbf{position}
+encodings, this bar plot makes good use of (vertical) \textbf{position}
 and (horizontal) \textbf{length} to encode different policy issues, the
 difference in dates, and the percent of respondents who voted for each
 policy. However, when we look at the top two bars, there is a temptation
@@ -5086,7 +5088,7 @@ dissonance.
 The effectiveness of a data visualisation may depend on more than just
 the accuracy and capacity of visual features.
 
-A \textbf{congruent} mapping is one where data values are
+A \textbf{congruent} encoding is one where data values are
 \emph{explicitly} encoded in a way that is consistent with an
 \emph{implicit} decoding of the visual feature.
 
@@ -5094,7 +5096,7 @@ A data visualisation will be more effective if it is visually congruent,
 for example, data symbols are larger for larger data values or data
 symbols only change if the data values change.
 
-A \textbf{dissonant} mapping is one where data values are
+A \textbf{dissonant} encoding is one where data values are
 \emph{explicitly} encoded in a way that is \emph{inconsistent} with an
 \emph{implicit} decoding.
 
@@ -5107,13 +5109,13 @@ dissonant.
 
 \bookmarksetup{startatroot}
 
-\chapter{Mapping Summaries}\label{sec-summaries}
+\chapter{Encoding Summaries}\label{sec-summaries}
 
-In Chapter~\ref{sec-mapping-visual-features} we described a data
-visualisation as a mapping that \textbf{encodes} data values as the
+In Chapter~\ref{sec-encoding-visual-features} we described a data
+visualisation as a encoding that \textbf{encodes} data values as the
 visual features of a data symbol (Figure~\ref{fig-visual-feature}). For
-example, a bar plot, like Figure~\ref{fig-bar}, maps the total number of
-youth offenders to the \textbf{lengths} of bars.
+example, a bar plot, like Figure~\ref{fig-bar}, encodes the total number
+of youth offenders to the \textbf{lengths} of bars.
 
 We also emphasised the importance of the \textbf{decoding} from visual
 features to data values. For example, the effectiveness of the bar plot
@@ -5124,19 +5126,19 @@ In the simple scenario of a bar plot, the data values are counts
 (Table~\ref{tbl-crime-group-total}), which are encoded as the lengths of
 bars, which in turn allows us to decode lengths to retrieve the counts
 (Figure~\ref{fig-visual-feature-decode}). Each \textbf{raw data value}
-(count) is mapped to the length of a bar.
+(count) is encoded to the length of a bar.
 
 In this chapter, we explore some data visualisations that are effective
 because they encode \textbf{data summaries} instead of raw data
 values.\footnote{In this book, we use \emph{data summary} to cover a
   broad range of transformations of the data. These are transformations
-  that occur prior to the mapping of data values to visual features.
+  that occur prior to the encoding of data values to visual features.
 
   There are several more sophisticated break downs of the pipeline from
   data values to visual representations. For example, the Information
   Visualization Reference Model (Card, Mackinlay, and Shneiderman 1999)
   includes the transformation of data into a standard format (\emph{data
-  transformations}) prior to mapping data values to visual features and
+  transformations}) prior to encoding data values to visual features and
   also includes the subsequent transformation and scaling of visual
   features to positions and shapes on the screen or page (\emph{view
   transformations}).
@@ -5192,11 +5194,11 @@ minimum and maximum values. Points are also included for ``outliers'' if
 data values lie further than 1.5 times the interquartile range beyond
 the quartiles.
 
-Another important difference with a box plot is that it maps
+Another important difference with a box plot is that it encodes
 \textbf{data summaries}, rather than raw data values, to visual features
 of the data symbol (Figure~\ref{fig-stat-vis-decode}). For example, the
-median values are mapped to the horizontal \textbf{positions} of thick
-vertical lines and the interquartile ranges are mapped to the
+median values are encoded to the horizontal \textbf{positions} of thick
+vertical lines and the interquartile ranges are encoded to the
 \textbf{lengths} of horizontal rectangles.
 
 \begin{figure}
@@ -5229,7 +5231,7 @@ from the boxplots in Figure~\ref{fig-boxplot}.\footnote{Ziemkiewicz and
 \caption{\label{tbl-rwc-all-stats}A table of the five-number summaries
 for the number of points scored by Tier One nations in Rugby World Cup
 matches, along with the country name. These data summaries are the
-values that are mapped to visual features to produce the box plots in
+values that are encoded to visual features to produce the box plots in
 Figure~\ref{fig-boxplot}.}
 
 \tabularnewline
@@ -5249,7 +5251,7 @@ Figure~\ref{fig-boxplot} is effective for allowing us to compare
 summaries like the medians between different hemispheres because,
 although the box plot data symbol is relatively complicated, a box plot
 still just encodes the data summaries to simple visual features. We know
-from Chapter~\ref{sec-mapping-visual-features} that \textbf{position}
+from Chapter~\ref{sec-encoding-visual-features} that \textbf{position}
 and \textbf{length} are effective for \textbf{decoding} the data
 summaries from the visual features (Figure~\ref{fig-stat-vis-decode}).
 
@@ -5257,14 +5259,14 @@ Notice how, even though Table~\ref{tbl-rwc-all-stats} contains very few
 values, it is much easier to perceive the differences between the two
 rows of values using the data visualisation in Figure~\ref{fig-boxplot}
 rather than the table of values in Table~\ref{tbl-rwc-all-stats}. Once
-again, we can see the power of mapping values to basic visual features.
-The only differences from previous sections is that we are mapping
-\textbf{data summaries} rather than raw data values and we are mapping
+again, we can see the power of encoding values to basic visual features.
+The only differences from previous sections is that we are encoding
+\textbf{data summaries} rather than raw data values and we are encoding
 to the visual features of a more complicated data symbol.
 
 \begin{quote}
 A box plot is effective at conveying information about the distribution
-of data values because it maps \textbf{data summaries} about the
+of data values because it encodes \textbf{data summaries} about the
 distribution, like the median and interquartile range, to basic visual
 features.
 \end{quote}
@@ -5278,14 +5280,14 @@ matches.\footnote{The general idea of arranging overlapping dots so that
   (Section~\ref{sec-jitter}), goes back to Wilkinson (1999) and Tukey
   (1977). The vertically-centred arrangement used here is also known as
   a \emph{beeswarm plot} (Rosanbalm 2014).} This data visualisation uses
-the same data as Figure~\ref{fig-boxplot}, but it maps raw data values
-rather than data summaries and it uses much simpler data symbols (data
-points). This data visualisation encodes the number of points scored
-maps as the horizontal \textbf{position} of a data point and it encodes
-the hemisphere as the vertical \textbf{position} of a data point. There
-is an overplotting problem (Section~\ref{sec-overplot}), which is solved
-in this case by offsetting data symbols vertically for repeated data
-values.
+the same data as Figure~\ref{fig-boxplot}, but it encodes raw data
+values rather than data summaries and it uses much simpler data symbols
+(data points). This data visualisation encodes the number of points
+scored encodes as the horizontal \textbf{position} of a data point and
+it encodes the hemisphere as the vertical \textbf{position} of a data
+point. There is an overplotting problem (Section~\ref{sec-overplot}),
+which is solved in this case by offsetting data symbols vertically for
+repeated data values.
 
 Because this data visualisation encodes raw data values as visual
 features, it is possible to decode raw data values from the visual
@@ -5363,7 +5365,7 @@ Figure~\ref{fig-hist} shows a histogram of the number of points scored
 by Tier One nations at the Rugby World Cups (Table~\ref{tbl-rwc-all}). A
 histogram is similar to a box plot in two ways: a histogram is a data
 visualisation that can be used to convey the distribution of a variable;
-and a histogram is a data visualisation that maps \textbf{data
+and a histogram is a data visualisation that encodes \textbf{data
 summaries}, rather than raw values, to visual features
 (Figure~\ref{fig-stat-vis-decode}).
 
@@ -5394,11 +5396,11 @@ Tier One nations at Rugby World Cups.}
 
 \end{figure}%
 
-To be explicit, the values that are being mapped to visual features in
+To be explicit, the values that are being encoded to visual features in
 Figure~\ref{fig-hist} are not raw data values, but data
 summaries---intervals and counts---as shown in
 Table~\ref{tbl-hist-stats}.\footnote{A bar plot can also be thought of
-  in terms of mapping data summaries rather than raw data. The data
+  in terms of encoding data summaries rather than raw data. The data
   values that are encoded as the lengths of bars in a bar plot are
   tables of counts of raw data values; the raw data values are
   individual observations of a single qualitative variable, such as the
@@ -5417,7 +5419,7 @@ Table~\ref{tbl-hist-stats}.\footnote{A bar plot can also be thought of
 of the number of points scored by Tier One nations in Rugby World Cup
 matches, along with the count of the number of points scored that fall
 within each interval. These data summaries are the values that are
-mapped to visual features to produce the histogram in
+encoded to visual features to produce the histogram in
 Figure~\ref{fig-boxplot}. Not all intervals are shown for reasons of
 space.}
 
@@ -5450,9 +5452,9 @@ skewness of the data.
 
 \begin{quote}
 A histogram is effective at conveying information about the distribution
-of data values because it maps data summaries to basic visual features
-and those data summaries can be compared to provide information about
-the distribution of the data.
+of data values because it encodes data summaries to basic visual
+features and those data summaries can be compared to provide information
+about the distribution of the data.
 \end{quote}
 
 \section{Decoding summaries}\label{sec-summary-decode}
@@ -5531,11 +5533,11 @@ summaries} as visual features is \emph{not} effective for decoding raw
 data values. For example, we cannot see from the box plot in
 Figure~\ref{fig-boxplot} that the scores 1, 2, 4, and 5 never occurred,
 while this is clear from Figure~\ref{fig-rwc-dotplot} because the dot
-plot does map the raw data values to data symbols.
+plot does encode the raw data values to data symbols.
 
 \begin{quote}
 Box plots and histograms are \emph{not} effective at conveying raw data
-values because they do not map raw data values to data symbols.
+values because they do not encode raw data values to data symbols.
 \end{quote}
 
 Another point to consider with a data visualisation that is based on
@@ -5643,8 +5645,8 @@ In this book, we assume that the purpose of a data visualisation is to
 faithfully and honestly encode data values and the goal is to produce a
 data visualisation that provides the most effective decoding
 (Section~\ref{sec-scope}). Nevertheless, even less honest
-representations of data can also be thought of in terms of mappings,
-particularly mappings of data summaries.
+representations of data can also be thought of in terms of encodings,
+particularly encodings of data summaries.
 
 For example, Figure~\ref{fig-bars-at-zero} shows a bar plot of the
 predicted impact on the top tax rate in the United States from President
@@ -5687,7 +5689,7 @@ unhelpful information from the data visualisation
 
 }
 
-\caption{\label{fig-lie-vis-decode}A data visualisation may map an
+\caption{\label{fig-lie-vis-decode}A data visualisation may encode an
 unrepresentative or ``cooked'' version of the data, rather than the raw
 data, to visual features. Visual decoding leads back to the lies rather
 than the real data.}
@@ -5696,13 +5698,13 @@ than the real data.}
 
 \section{Visual downgrades}\label{sec-downgrade}
 
-We have seen that a downside to mapping data summaries, rather than raw
+We have seen that a downside to encoding data summaries, rather than raw
 data values, is that we lose the ability to decode raw data values from
 data symbols. However, we pay this price in order to improve our ability
 to decode data summaries from the data symbols. For example, a boxplot
 makes it easier to decode the median of a set of data values.
 
-By mapping data summaries, we deliberately lose the ability to decode
+By encoding data summaries, we deliberately lose the ability to decode
 raw data values in order to gain the ability to decode data summaries.
 
 Another way that we may deliberately lose information is by selecting a
@@ -5742,10 +5744,10 @@ Southern & 312.89 \\
 \end{longtable}
 
 The data symbols in Figure~\ref{fig-downgrade} are circles with the
-geographic location of the (centre of the) police district mapped to the
-position of the circles and the crime rate mapped to the (fill) colour,
-particularly the luminance, of the circles. Darker circles represent
-higher crime rates.
+geographic location of the (centre of the) police district encoded to
+the position of the circles and the crime rate encoded to the (fill)
+colour, particularly the luminance, of the circles. Darker circles
+represent higher crime rates.
 
 \begin{figure}
 
@@ -5831,9 +5833,9 @@ in each police district of New Zealand.}
 Heatmaps are a common way of representing three-dimensional data where
 two of the data variables are either qualitative or have been measured
 on a regular grid and the third variable is \textbf{quantitative}. The
-first two variables naturally map to horizontal and vertical
+first two variables naturally encode to horizontal and vertical
 \textbf{position} to produce an array of rectangles, while the third
-variable maps to \textbf{colour}.
+variable encodes to \textbf{colour}.
 
 We saw an example of a heatmap in Figure~\ref{fig-crime-heatmap} and
 Figure~\ref{fig-nomads-purple} shows another example that is a variation
@@ -5860,7 +5862,7 @@ luminance and/or chroma changes, it is still possible to decode ordinal
 values.
 
 Furthermore, we are able to decode useful visual summaries from the
-multiple rectangle data symbols on a heat map
+multiple rectangle data symbols on a heatmap
 (Section~\ref{sec-visual-summaries}). For example, we can identify
 regions of darker or lighter colours, not just individual dark or light
 rectangles.\footnote{Correll et al. (2012) provide evidence for superior
@@ -5964,22 +5966,22 @@ variability, and tables of counts, provide information about the
 distribution of a set of data values.
 
 Some data visualisations, like box plots and histograms, are effective
-because they map \textbf{data summaries} to visual features. This makes
-it easy to decode and compare data summaries.
+because they encode \textbf{data summaries} to visual features. This
+makes it easy to decode and compare data summaries.
 
 Care must be taken to use data summaries that appropriately summarise
 the data values.
 
-When we map raw data values to visual features, like in a dot plot, the
-encoding to individual visual features allows us to decode and compare
-raw data values, but, in addition, \textbf{visual summaries} of
+When we encode raw data values to visual features, like in a dot plot,
+the encoding to individual visual features allows us to decode and
+compare raw data values, but, in addition, \textbf{visual summaries} of
 \emph{collections} of visual features allow us to decode and compare
 data summaries.
 
-A box plot that maps data summaries to visual features is more effective
-for perceiving data summaries than a dot plot that relies on visual
-summaries. However, a dot plot is more effective for perceiving raw data
-values.
+A box plot that encodes data summaries to visual features is more
+effective for perceiving data summaries than a dot plot that relies on
+visual summaries. However, a dot plot is more effective for perceiving
+raw data values.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -5987,7 +5989,7 @@ values.
 
 \bookmarksetup{startatroot}
 
-\chapter{Combining Mappings}\label{combining-mappings}
+\chapter{Combining Encodings}\label{combining-encodings}
 
 Most data visualisations involve more than one data variable. For
 example, the bar plot in Figure~\ref{fig-bar-gender} involves data on
@@ -6008,25 +6010,25 @@ offenders and the total number of female offenders in New Zealand from
 
 \end{figure}%
 
-In Figure~\ref{fig-bar-gender}, each data value is mapped to a
+In Figure~\ref{fig-bar-gender}, each data value is encoded to a
 \textbf{visual feature} of a data symbol
 (Figure~\ref{fig-visual-feature}). For example, the gender is encoded as
 the horizontal \textbf{position} of the bars and the count of offenders
 is encoded as the \textbf{length} of the bars.
 
-We have so far only looked at mappings from data values to visual
-features in isolation. For example, we know that the mapping from gender
-to position is effective because position is appropriate for qualitative
-data and position has sufficient capacity to differentiate between two
-genders. We also know that mapping the count of offenders to length is
-effective because length is appropriate for quantitative data and length
-provides an accurate decoding.
+We have so far only looked at encodings from data values to visual
+features in isolation. For example, we know that the encoding from
+gender to position is effective because position is appropriate for
+qualitative data and position has sufficient capacity to differentiate
+between two genders. We also know that encoding the count of offenders
+to length is effective because length is appropriate for quantitative
+data and length provides an accurate decoding.
 
-In this chapter, we begin to consider what happens when mappings are
+In this chapter, we begin to consider what happens when encodings are
 used in combination. For a start, we will just extend our thinking to
-data visualisations that involve mapping \textbf{two} data variables to
+data visualisations that involve encoding \textbf{two} data variables to
 \textbf{two} visual features, like gender and count to position and
-length. Furthermore, we will restrict ourselves to mappings where each
+length. Furthermore, we will restrict ourselves to encodings where each
 pair of data values are encoded as a single data symbol
 (Figure~\ref{fig-two-visual-features}). For example, in
 Figure~\ref{fig-bar-gender}, each combination of gender and count
@@ -6048,11 +6050,11 @@ produces a single bar.
 
 }
 
-\caption{\label{fig-two-visual-features}A simple data visualisation maps
-\textbf{two} data values to \textbf{two} visual features to create a
-data symbol. Each pair of data values (\texttt{x} and \texttt{y}) is
-mapped to two visual features (\texttt{a} and \texttt{b}) of a
-\textbf{single} data symbol.}
+\caption{\label{fig-two-visual-features}A simple data visualisation
+encodes \textbf{two} data values to \textbf{two} visual features to
+create a data symbol. Each pair of data values (\texttt{x} and
+\texttt{y}) is encoded to two visual features (\texttt{a} and
+\texttt{b}) of a \textbf{single} data symbol.}
 
 \end{figure}%
 
@@ -6098,9 +6100,9 @@ not affect our ability to perceive that they have different lengths.
 
 \caption{\label{fig-bar-colour}A bar plot of the total number of male
 offenders and the total number of female offenders. The data symbols in
-this plot come from mapping gender to the vertical positions and colours
-of the bars and mapping the total number of offenders to the lengths of
-the bars.}
+this plot come from encoding gender to the vertical positions and
+colours of the bars and encoding the total number of offenders to the
+lengths of the bars.}
 
 \end{figure}%
 
@@ -6205,16 +6207,16 @@ World Cup.}
 \end{figure}%
 
 The data symbol in a scatter plot is a data point, in this case a
-circle. There are two mappings in the scatter plot in
+circle. There are two encodings in the scatter plot in
 Figure~\ref{fig-scatter}: the \textbf{quantitative} number of clean
 breaks is encoded as the horizontal \textbf{position} of the data points
 and the \textbf{quantitative} number of tries scored is encoded as the
 vertical \textbf{position} of the data points.
 
-We know from Chapter~\ref{sec-mapping-visual-features} that we should be
-able to accurately decode the original data values from the positions of
-the data points. For example, we can easily see that one team scored a
-little over 7.5 clean breaks per game and we can see that two teams
+We know from Chapter~\ref{sec-encoding-visual-features} that we should
+be able to accurately decode the original data values from the positions
+of the data points. For example, we can easily see that one team scored
+a little over 7.5 clean breaks per game and we can see that two teams
 scored about 6 tries per game.
 
 However, there is something else going on in the scatter plot. The two
@@ -6261,7 +6263,7 @@ original visual features.}
 
 \begin{quote}
 One reason why a scatter plot is effective at conveying relationships
-between variables is because the mappings of data values to visual
+between variables is because the encodings of data values to visual
 features---horizontal position and vertical position---interact to
 produce an additional visual feature: position in space.
 \end{quote}
@@ -6440,7 +6442,7 @@ involve male offenders and result in court action.
 
 \end{figure}%
 
-A mosaic plot is another example of a data visualisation that maps
+A mosaic plot is another example of a data visualisation that encodes
 \textbf{data summaries} to data symbols rather than raw data. The data
 symbols are rectangles, the proportions of male versus female offenders
 are encoded as the widths of the rectangles, and the proportions of
@@ -6492,30 +6494,30 @@ Not Proceeded With & 0.02 & 0.02\\
 \end{table}%
 
 \begin{quote}
-One reason why a mosaic plot is effective is because it maps proportions
-and conditional proportions, rather than raw counts, to the visual
-features of rectangles.
+One reason why a mosaic plot is effective is because it encodes
+proportions and conditional proportions, rather than raw counts, to the
+visual features of rectangles.
 \end{quote}
 
-A mosaic plot is also an example of a data visualisation that maps to
-visual features that \textbf{interact}. The explicit mappings involve
+A mosaic plot is also an example of a data visualisation that encodes to
+visual features that \textbf{interact}. The explicit encodings involve
 encoding proportions as the widths and heights of the rectangles and we
 know from Section~\ref{sec-quant-features} that this will allow accurate
 decoding from lengths to proportions.
 
 \begin{quote}
-One reason why a mosaic plot is effective is because it maps proportions
-to lengths.
+One reason why a mosaic plot is effective is because it encodes
+proportions to lengths.
 \end{quote}
 
-However, the interaction of these mappings produces an \textbf{emergent
+However, the interaction of these encodings produces an \textbf{emergent
 feature}, which is the \textbf{area} of the rectangles
 (Figure~\ref{fig-interact}). Importantly, these areas correspond to
 additional data summaries, in this case, the overall proportion of
 offences in each combination of sex and action taken.
 
 \begin{quote}
-One reason why a mosaic plot is effective is because the mappings\\
+One reason why a mosaic plot is effective is because the encodings\\
 to length and height interact to produce area, which represents overall
 proportions.
 \end{quote}
@@ -6663,12 +6665,12 @@ The data symbols in Figure~\ref{fig-interaction} are straight line
 segments. The year is encoded as the horizontal start and end
 \textbf{position} of the lines and the number of offenders is encoded as
 the vertical start and end \textbf{position} of the lines. The ethnic
-group is encoded as the \textbf{colour} of the lines. These mappings are
-effective for decoding the raw data values in
+group is encoded as the \textbf{colour} of the lines. These encodings
+are effective for decoding the raw data values in
 Table~\ref{tbl-interaction} from the end points and the colours of the
 lines.
 
-In addition, the explicit mappings generate an \textbf{emergent
+In addition, the explicit encodings generate an \textbf{emergent
 feature}: the \textbf{angle} of the lines. Furthermore, the angle of the
 lines allow us to decode a \textbf{data summary}: the \emph{change} in
 the number of offenders between 2011 and 2021 (see
@@ -6759,7 +6761,7 @@ strength of a linear relationship from a scatter plot.\footnote{Examples
   line to points, rather than vertical, and hence more likely to
   over-estimate a slope.}
 
-\section{Dangers of combining mappings}\label{sec-danger-combine}
+\section{Dangers of combining encodings}\label{sec-danger-combine}
 
 Figure~\ref{fig-nz-doctor-bar} shows a plot of changes in health
 spending by successive New Zealand governments.\footnote{Figure~\ref{fig-nz-doctor-bar}
@@ -6853,7 +6855,7 @@ lines.}
 
 \end{figure}%
 
-\section{Case study: Redundant mappings}\label{sec-redundant}
+\section{Case study: Redundant encodings}\label{sec-redundant}
 
 Figure~\ref{fig-fbref} shows a bar plot of various performance metrics
 for the football player Lamine Yamal from July 2024.\footnote{Figure~\ref{fig-fbref}
@@ -6909,9 +6911,9 @@ decode the percentile: from the length and from the colour
 
 }
 
-\caption{\label{fig-data-vis-redundant}A redundant encoding maps a
+\caption{\label{fig-data-vis-redundant}A redundant encoding encodes a
 single data value to multiple visual features. Each data value
-(\texttt{x}) is mapped to not just one visual feature (\texttt{a}), but
+(\texttt{x}) is encoded to not just one visual feature (\texttt{a}), but
 also a second visual feature (\texttt{b}), of a single data symbol. If
 we encode data values using multiple visual features, then multiple
 decodings are possible.}
@@ -6983,18 +6985,18 @@ redundant colour encoding removed.}
 
 \section{Summary}\label{summary-8}
 
-Almost all data visualisations involve \emph{combinations} of mappings.
+Almost all data visualisations involve \emph{combinations} of encodings.
 More than one set of data values are encoded as more than one visual
 feature of data symbols.
 
-The mappings involved in a bar plot---quantitative data values encoded
+The encodings involved in a bar plot---quantitative data values encoded
 as lengths and qualitative values encoded as position---are effective
 because we are able to perceive some combinations of visual features,
 such as length, position, and colour \textbf{independently}, which means
 that we can effectively decode both position and length from a bar plot.
 
 A scatter plot is effective for perceiving relationships between
-variables because the mappings of quantitative data values to both
+variables because the encodings of quantitative data values to both
 horizontal and vertical positions \textbf{interact} to produce
 \textbf{position in space} and our visual system is capable of producing
 useful \textbf{visual summaries} from position in space, such as
@@ -7020,24 +7022,24 @@ emergent feature that results from the interaction.
 \chapter{Visual Shapes}\label{sec-visual-shapes}
 
 All of the data visualisations that we have considered so far have
-mapped a \textbf{single data value} from one or more variables to a
+encoded a \textbf{single data value} from one or more variables to a
 \textbf{single data symbol} (Figure~\ref{fig-multivariate-symbol-a}).
-For example, a bar plot like Figure~\ref{fig-bar} maps the number of
+For example, a bar plot like Figure~\ref{fig-bar} encodes the number of
 offenders for one ethnic group to one bar. A scatter plot like
-Figure~\ref{fig-scatter} maps the number of clean breaks and the number
-of tries for one team to one data point.
+Figure~\ref{fig-scatter} encodes the number of clean breaks and the
+number of tries for one team to one data point.
 
-In this chapter, we consider data visualisations that map
+In this chapter, we consider data visualisations that encode
 \textbf{multiple data values} from one or more variables to a
 \textbf{single data symbol} (Figure~\ref{fig-multivariate-symbol-b}). In
 this chapter, we begin to consider more complex data symbols that
 produce \textbf{visual shapes}.\footnote{In this chapter, we focus on
   data symbols that represent multiple sets of data values, like lines.
   It could be argued that there are data symbols that are visual shapes
-  that arise from mapping a single, qualitative data value to a data
+  that arise from encoding a single, qualitative data value to a data
   symbol, for example, different data points---circles versus triangles
   versus squares---in a scatter plot. However, in this book, that case
-  is referred to as a mapping from qualitative data value to the
+  is referred to as a encoding from qualitative data value to the
   \emph{pattern}---a basic visual feature---of a data symbol
   (Section~\ref{sec-visual-features}).}
 
@@ -7076,14 +7078,14 @@ produce \textbf{visual shapes}.\footnote{In this chapter, we focus on
 }
 
 \caption{\label{fig-multivariate-symbol}(a) A simple data symbol, like a
-bar in a bar plot or a data point in a scatter plot involves mapping
+bar in a bar plot or a data point in a scatter plot involves encoding
 \textbf{one} row of data values to the visual features of \textbf{one}
 data symbol; a single pair of data values produces a single data symbol
 (this is a reproduction of the diagram in
 Figure~\ref{fig-two-visual-features}). (b) A more complex data symbol is
-produced if we map \textbf{multiple} rows of data values to the visual
-features of \textbf{one} data symbol. Multiple data values from
-\texttt{x} and \texttt{y} are mapped to the visual features, \texttt{a}
+produced if we encode \textbf{multiple} rows of data values to the
+visual features of \textbf{one} data symbol. Multiple data values from
+\texttt{x} and \texttt{y} are encoded to the visual features, \texttt{a}
 and \texttt{b}, of a single data symbol. Multiple pairs of values
 produce a single data symbol.}
 
@@ -7111,10 +7113,10 @@ in different ethnic groups from 2011 to 2021.}
 
 \end{figure}%
 
-There are some familiar mappings in this data visualisation: year is
-mapped to horizontal \textbf{position}, the number of offenders is
-mapped to vertical \textbf{position}, and the ethnic group is mapped to
-\textbf{colour}. However, the \textbf{data symbols} in this data
+There are some familiar encodings in this data visualisation: year is
+encoded to horizontal \textbf{position}, the number of offenders is
+encoded to vertical \textbf{position}, and the ethnic group is encoded
+to \textbf{colour}. However, the \textbf{data symbols} in this data
 visualisation, the coloured lines, are different from any previous
 examples that we have seen. Although there are 44 rows of data, there
 are only 4 data symbols. Multiple rows of data are used to create each
@@ -7147,17 +7149,17 @@ lines.\footnote{Few (2006, 10) discusses this difference in a comparison
 
 }
 
-\caption{\label{fig-data-vis-shape}If we map multiple data values to
+\caption{\label{fig-data-vis-shape}If we encode multiple data values to
 multiple visual features of a single data symbol, like in a line plot,
 we create a smaller number of more complex data symbols, \textbf{visual
 shapes}, that contain a larger amount of information.}
 
 \end{figure}%
 
-By comparison, in Figure~\ref{fig-no-line}, which maps each data value
-to its own data symbol, it is much harder to decode the slopes, curves,
-peaks, and valleys. Despite the colours of the data symbols, it is even
-harder to group the different sets of data symbols together; the
+By comparison, in Figure~\ref{fig-no-line}, which encodes each data
+value to its own data symbol, it is much harder to decode the slopes,
+curves, peaks, and valleys. Despite the colours of the data symbols, it
+is even harder to group the different sets of data symbols together; the
 connecting lines between the data values in Figure~\ref{fig-line} are a
 very strong encoding that the data values belong to the same ethnic
 group (Section~\ref{sec-visual-model-groups}).
@@ -7204,7 +7206,7 @@ versus periods of slower change, and local maxima and minima.\footnote{``not
 
 }
 
-\caption{\label{fig-data-vis-shape-decode}If we map data values to a
+\caption{\label{fig-data-vis-shape-decode}If we encode data values to a
 \textbf{visual shape} that contains a large amount of information, then
 we may be able to decode higher-level \textbf{data summaries}.}
 
@@ -7243,21 +7245,21 @@ simple data symbols that encode a single data value as a basic visual
 feature of a single data symbol---the length of a bar---so we can easily
 decode the individual raw data values from the bars.
 
-This deficiency is significant because the main mappings in a line plot
+This deficiency is significant because the main encodings in a line plot
 are from \textbf{quantitative} data values to (horizontal and vertical)
 \textbf{position}. We know from
-Chapter~\ref{sec-mapping-visual-features} that these should be very
-effective mappings that allow us to accurately decode the raw data
-values. However, in a line plot, we are not mapping a single data value
+Chapter~\ref{sec-encoding-visual-features} that these should be very
+effective encodings that allow us to accurately decode the raw data
+values. However, in a line plot, we are not encoding a single data value
 to a basic visual feature of a single, simple shape. Instead, a single
-data value is being mapped, along with many other values, to a basic
+data value is being encoded, along with many other values, to a basic
 visual feature of a complicated shape. In effect, the individual data
 values lose their individual identity.\footnote{Ziemkiewicz and Kosara
   (2009) refer to this as a \emph{non-injective} encoding and point out
   that it makes it impossible for there to be a decoding, because
-  multiple data values map to the same data symbol. This is in contrast
-  to a \emph{bijective} mapping, which is one-to-one between data values
-  and data symbols (Section~\ref{sec-bar}).
+  multiple data values encode to the same data symbol. This is in
+  contrast to a \emph{bijective} encoding, which is one-to-one between
+  data values and data symbols (Section~\ref{sec-bar}).
 
   This problem also relates to the issue of drawing data symbols on top
   of each other (Section~\ref{sec-pos-scarce}). If two data symbols
@@ -7270,15 +7272,15 @@ values lose their individual identity.\footnote{Ziemkiewicz and Kosara
   In this demonstration there is also a bar just for one of the counts,
   so that, with unnecessary mental effort, it is possible to recover the
   ``hidden'' data value, but we can imagine an even more pathological
-  demonstration which would map two data values to a single bar, without
-  mapping one of the data values to its own bar. In that case it would
-  be completely impossible to decode the two data values from the single
-  bar.}
+  demonstration which would encode two data values to a single bar,
+  without encoding one of the data values to its own bar. In that case
+  it would be completely impossible to decode the two data values from
+  the single bar.}
 
 \begin{quote}
 One reason why a line plot is \emph{less} effective for decoding raw
-data values is because each raw data value is not mapped to its own data
-symbol.
+data values is because each raw data value is not encoded to its own
+data symbol.
 \end{quote}
 
 The creation of visual shapes from multiple data values bears some
@@ -7319,7 +7321,7 @@ positions.
 
 Like Figure~\ref{fig-line}, we can decode overall trends from the line
 data symbols, but we can also decode individual data values more easily
-because now every individual data value is also mapped to its own data
+because now every individual data value is also encoded to its own data
 symbol. By employing both simple data symbols that encode individual
 data values and complex data symbols that encode multiple data values as
 visual shapes, we get the best of both worlds.
@@ -7360,14 +7362,14 @@ by Tier One nations at Rugby World Cups.}
 
 \end{figure}%
 
-Also like a histogram, a density plot maps \textbf{data summaries},
+Also like a histogram, a density plot encodes \textbf{data summaries},
 rather than raw data values, to visual features
 (Table~\ref{tbl-density-stats}). In the case of a histogram, the data
 summary values are counts within bins (Table~\ref{tbl-hist-stats}) and
 each data summary produces a separate bar. In the case of a density
-plot, the data summary produces density estimates and these are mapped
+plot, the data summary produces density estimates and these are encoded
 to a single data symbol, a line, to create a \textbf{visual shape}. The
-density estimates are mapped to the horizontal and vertical
+density estimates are encoded to the horizontal and vertical
 \textbf{positions} of a single line data symbol. The visual shape allows
 us to decode summaries of the density estimates. For example, whether
 there is a single maximum density and how the density changes to either
@@ -7378,8 +7380,8 @@ side of that peak.
 \caption{\label{tbl-density-stats}A table of density estimates at a
 sample of values over the range of the number of points scored by Tier
 One nations in Rugby World Cup matches. These data summaries are the
-values that are mapped to visual features to produce the density plot in
-Figure~\ref{fig-density}. There are 512 rows of values, but only the
+values that are encoded to visual features to produce the density plot
+in Figure~\ref{fig-density}. There are 512 rows of values, but only the
 first 6 are shown here.}
 
 \tabularnewline
@@ -7423,7 +7425,7 @@ number of peaks and where the peaks occur).
 
 }
 
-\caption{\label{fig-data-stat-vis-shape-stat}A density plot maps data
+\caption{\label{fig-data-stat-vis-shape-stat}A density plot encodes data
 summaries to visual features to create a visual shape from which we can
 decode \textbf{summaries} of the data summaries.}
 
@@ -7516,7 +7518,7 @@ is more effective for decoding \textbf{data summaries} rather than
 decoding the individual data values.
 
 However, the examples that we have seen in Figure~\ref{fig-line} and
-Figure~\ref{fig-multiple-density} also involve another mapping:
+Figure~\ref{fig-multiple-density} also involve another encoding:
 qualitative data values, like ethnic group or hemisphere, are encoded as
 the \textbf{colour} of the lines. This encoding is consistent across the
 entire data symbol. In effect, there is a simple encoding of qualitative
@@ -7662,12 +7664,12 @@ data.\footnote{William S. Cleveland, McGill, and McGill (1988) points
 
 Figure~\ref{fig-box-shape} shows box plots of the number of points
 scored by Tier One nations at Rugby World Cup matches. We have discussed
-box plots previously as examples of data visualisations that map data
+box plots previously as examples of data visualisations that encode data
 summaries to data symbols (Section~\ref{sec-box-plot}). For example, the
 median points scored is encoded as the horizontal position of a thick
 vertical line for each team. The only raw data values that are directly
-mapped are the outliers, which are encoded as the horizontal position of
-data points for a few teams. A box plot is effective for decoding the
+encoded are the outliers, which are encoded as the horizontal position
+of data points for a few teams. A box plot is effective for decoding the
 median for each team because the median has been encoded as basic visual
 features of simple data symbol.
 
@@ -7684,17 +7686,17 @@ by Tier One nations at Rugby World Cups.}
 
 \end{figure}%
 
-Box plots are also examples of mapping more than one data value (or data
-summary) to a single data symbol. For each team, we have a complex data
-symbol made up of a rectangle and horizontal and vertical lines, plus
-possibly some data points. This creates a visual shape that allows us to
-decode additional data summaries. For example, some box plots, like the
-one for England, are symmetric, with the median line at the center of
-the rectangle and with horizontal lines of similar lengths to either
-side. Other box plots, like the one for Argentina, are asymmetric, with
-the median towards one end of the rectangle and a longer horizontal line
-to one side. In other words, we can decode information about the
-skewness of the data from the visual shape
+Box plots are also examples of encoding more than one data value (or
+data summary) to a single data symbol. For each team, we have a complex
+data symbol made up of a rectangle and horizontal and vertical lines,
+plus possibly some data points. This creates a visual shape that allows
+us to decode additional data summaries. For example, some box plots,
+like the one for England, are symmetric, with the median line at the
+center of the rectangle and with horizontal lines of similar lengths to
+either side. Other box plots, like the one for Argentina, are
+asymmetric, with the median towards one end of the rectangle and a
+longer horizontal line to one side. In other words, we can decode
+information about the skewness of the data from the visual shape
 (Figure~\ref{fig-data-vis-shape-decode}).
 
 \section{Dangers of visual shapes}\label{dangers-of-visual-shapes}
@@ -7764,9 +7766,9 @@ if the data summary is appropriate and not misleading
 
 }
 
-\caption{\label{fig-data-vis-shape-lie}Mapping data values to the visual
-features of a complex shape may not be effective if the complex shape
-decodes to unhelpful or misleading information.}
+\caption{\label{fig-data-vis-shape-lie}Encoding data values to the
+visual features of a complex shape may not be effective if the complex
+shape decodes to unhelpful or misleading information.}
 
 \end{figure}%
 
@@ -7806,7 +7808,7 @@ decrease in the gap between the lines.}
 
 \end{figure}%
 
-\section{Non-linear mappings}\label{sec-shape-non-linear}
+\section{Non-linear encodings}\label{sec-shape-non-linear}
 
 Figure~\ref{fig-arrivals} shows time series plots of the number of
 international arrivals to New Zealand over the last century.\footnote{These
@@ -7963,7 +7965,7 @@ and potentially misleading.
 
 \section{Summary}\label{summary-9}
 
-Mapping multiple rows of data values to a single data symbol produces a
+Encoding multiple rows of data values to a single data symbol produces a
 \textbf{visual shape}, like a line on a line plot.
 
 The main benefit of a data symbol that is a visual shape is that data
@@ -7973,7 +7975,7 @@ decoding raw data values from a visual shape may be harder, compared to
 decoding raw data values from a simple data symbol like a bar.
 
 One danger with visual shapes is that they depend on aspect ratio and
-scale. The same mappings can be made to decode to different data
+scale. The same encodings can be made to decode to different data
 summaries, so we are responsible for selecting an appropriate aspect
 ratio and scale.
 
@@ -7988,15 +7990,15 @@ confuse or mislead.
 
 \bookmarksetup{startatroot}
 
-\chapter{Multiple Mappings}\label{multiple-mappings}
+\chapter{Multiple Encodings}\label{multiple-encodings}
 
 Figure~\ref{fig-multiple} shows a data visualisation of the performance
 measures for teams in the 2023 Rugby World Cup
 (Table~\ref{tbl-rwc-2023}). This visualisation is different from
 anything we have seen previously because it involves \textbf{multiple
-mappings}. The data symbol in this case is a simple data point, but we
-have mapped data values to \emph{five} different visual features of each
-data point.
+encodings}. The data symbol in this case is a simple data point, but we
+have encoded data values to \emph{five} different visual features of
+each data point.
 
 The number of clean breaks is encoded as the horizontal
 \textbf{position} of the data points and the number of tries is encoded
@@ -8020,16 +8022,16 @@ measures for teams in the 2023 Rugby World Cup.}
 \end{figure}%
 
 Figure~\ref{fig-multiple} is effective in some ways because some of the
-mappings involve effective visual features. For example, we can easily
+encodings involve effective visual features. For example, we can easily
 decode the number of clean breaks and the number of tries from
 horizontal and vertical positions. We can also decode a correlation
 between clean breaks and tries from the emergent feature of
 \textbf{position in space} (Section~\ref{sec-integral}).
 
-However, other mappings are less effective. For example, it is less easy
-to accurately decode number of points scored from size and even harder
-to decode the number of runs made from colour. These are poor encodings
-for quantitative data values.
+However, other encodings are less effective. For example, it is less
+easy to accurately decode number of points scored from size and even
+harder to decode the number of runs made from colour. These are poor
+encodings for quantitative data values.
 
 In addition, we are hampered by the fact that many different visual
 features are changing at once, so it is harder to decode changes in any
@@ -8057,18 +8059,18 @@ individual data values from individual variables at the same time?
 
 \section{Scatter plot matrices}\label{sec-splom}
 
-One issue with Figure~\ref{fig-multiple} is that it attempts to map each
-data variable to a separate visual feature. Once we have used both
+One issue with Figure~\ref{fig-multiple} is that it attempts to encode
+each data variable to a separate visual feature. Once we have used both
 horizontal and vertical \textbf{position}, we have to start using less
 accurate and less appropriate visual features, like \textbf{area} and
 \textbf{colour} for quantitative data values
-(Section~\ref{sec-accuracy}). If we attempted to map all of the
+(Section~\ref{sec-accuracy}). If we attempted to encode all of the
 variables in Table~\ref{tbl-rwc-2023}, we could actually run out of
 visual features to use (Figure~\ref{fig-visual-features}).
 
-An alternative approach is to map more of the data variables to the
-\emph{same} visual feature. In particular, we can map more variables to
-\textbf{position}.\footnote{The reuse of position is handled in a
+An alternative approach is to encode more of the data variables to the
+\emph{same} visual feature. In particular, we can encode more variables
+to \textbf{position}.\footnote{The reuse of position is handled in a
   variety of ways within data visualisation frameworks. For example, the
   Grammar of Graphics (Wilkinson 2005) allows for \emph{collision
   modifiers} to solve overlapping and separately allows for
@@ -8150,7 +8152,7 @@ relationships.
 
 Figure~\ref{fig-facet-before} shows a line plot of the number of youth
 offenders per year in different Police Districts of New Zealand. This
-visualisation makes use of several effective mappings. For example, we
+visualisation makes use of several effective encodings. For example, we
 encode year as horizontal position and we encode count as vertical
 position, although the line data symbols are \textbf{visual shapes}
 (Section~\ref{sec-line-plots}), so the most effective decoding is to
@@ -8231,7 +8233,7 @@ Figure~\ref{fig-bar-pos-stack} shows a stacked bar plot of the youth
 crime rate in New Zealand over time, broken down by age group. The data
 symbols are bars. The crime rate is encoded as the (vertical)
 \textbf{length} of the bars and the year is encoded as the horizontal
-\textbf{position} of the bars. These mappings are supplemented by an
+\textbf{position} of the bars. These encodings are supplemented by an
 additional encoding of age as the vertical \textbf{position} of the
 bars. In effect, the final vertical position of each bar is a
 complicated encoding of crime rate plus age group.
@@ -8255,7 +8257,7 @@ simple-seeming plot demonstrates another example of reusing position to
 encode multiple data values.
 
 The crime rate is again encoded as the lengths of the bars and the year
-is encoded as the horizontal position of the bars. These mappings are
+is encoded as the horizontal position of the bars. These encodings are
 supplemented by an additional encoding of age as the horizontal position
 of the bars.
 
@@ -8291,7 +8293,7 @@ in each age group over time.}
 
 \end{figure}%
 
-\section{Non-cartesian mappings}\label{sec-non-cartesian}
+\section{Non-cartesian encodings}\label{sec-non-cartesian}
 
 Another way to encode more variables using \textbf{position} is to
 abandon the standard cartesian coordinate system
@@ -8432,7 +8434,7 @@ connecting the positions on the axes.}
 
 \end{figure}%
 
-The parallel coordinates plot in Figure~\ref{fig-parallel} maps data
+The parallel coordinates plot in Figure~\ref{fig-parallel} encodes data
 summaries rather than raw data values (Chapter~\ref{sec-summaries}). All
 data values are standardised to a range between 0 and 1.\footnote{It is
   possible to use unscaled axes on a parallel coordinates plot, though
@@ -8441,7 +8443,7 @@ data values are standardised to a range between 0 and 1.\footnote{It is
   scaling, for example, standardisation (in the sense of subtracting the
   mean and dividing by the standard deviation).}
 Table~\ref{tbl-parallel-stats} shows some of the values that are
-actually mapped to visual features in Figure~\ref{fig-parallel}. Each
+actually encoded to visual features in Figure~\ref{fig-parallel}. Each
 variable is encoded as a different horizontal \textbf{position} and the
 values within each variable are encoded as vertical \textbf{position}.
 In this way, all quantitative data values are encoded as
@@ -8453,8 +8455,8 @@ shape is drawn for each country (Chapter~\ref{sec-visual-shapes}).
 
 \begin{longtable}[]{@{}lllr@{}}
 
-\caption{\label{tbl-parallel-stats}The data summaries that are mapped to
-visual features in Figure~\ref{fig-parallel}.}
+\caption{\label{tbl-parallel-stats}The data summaries that are encoded
+to visual features in Figure~\ref{fig-parallel}.}
 
 \tabularnewline
 
@@ -8508,7 +8510,7 @@ plot matrix.
 
 \begin{quote}
 A parallel coordinates plot can be effective at identifying
-high-dimensional groups or correlations because it maps multiple data
+high-dimensional groups or correlations because it encodes multiple data
 values from different variables to a single visual shape.
 \end{quote}
 
@@ -8625,10 +8627,10 @@ measures for teams in the 2023 Rugby World Cup.}
 
 Figure~\ref{fig-profile} uses the same data summaries as
 Figure~\ref{fig-parallel} (Table~\ref{tbl-parallel-stats}), and similar
-mappings: each variable is encoded as a different horizontal
+encodings: each variable is encoded as a different horizontal
 \textbf{position} and the values within each variable are encoded as
-vertical \textbf{position} and hemisphere is mapped to \textbf{colour}.
-The data symbol is also similar: multiple data values are mapped to a
+vertical \textbf{position} and hemisphere is encoded to \textbf{colour}.
+The data symbol is also similar: multiple data values are encoded to a
 single data symbol, in this case a polygon.
 
 The difference in Figure~\ref{fig-profile} is that, rather than having
@@ -8650,7 +8652,7 @@ plot like Figure~\ref{fig-parallel} because we would just add another
 line.
 
 \section{Dangers of multiple
-mappings}\label{dangers-of-multiple-mappings}
+encodings}\label{dangers-of-multiple-encodings}
 
 Figure~\ref{fig-multiple} showed that the naive approach of just using a
 separate visual feature for each data variable leads to complex data
@@ -8730,9 +8732,9 @@ age for 2021}
 
 \section{Summary}\label{summary-10}
 
-When we visualise multiple variables at once, it is not effective to map
-each different variable to a different visual feature because that
-usually forces us to make use of a visual feature that is either
+When we visualise multiple variables at once, it is not effective to
+encode each different variable to a different visual feature because
+that usually forces us to make use of a visual feature that is either
 inappropriate or inaccurate.
 
 An alternative is to reuse the same visual feature for multiple
@@ -8765,9 +8767,9 @@ multiple views of the data.
 Figure~\ref{fig-scatter-country} shows a scatter plot of the number of
 clean breaks and the number of tries for countries at the 2023 Rugby
 World Cup (Table~\ref{tbl-rwc-2023}). This data visualisation is similar
-to Figure~\ref{fig-scatter}, but it adds an extra mapping. Country names
-are encoded as the \textbf{pattern} of the data symbols. This is a
-reasonable mapping, despite the large number of different countries,
+to Figure~\ref{fig-scatter}, but it adds an extra encoding. Country
+names are encoded as the \textbf{pattern} of the data symbols. This is a
+reasonable encoding, despite the large number of different countries,
 because each different shape only appears once. We are able to
 distinguish all countries from each other and, thanks to the legend, we
 can identify individual countries.
@@ -9019,7 +9021,7 @@ Figure~\ref{fig-chernoff} visualises the 2023 Rugby World Cup data
 visualisation is a little unusual; each country is represented by a
 combination of circles, curves, and lines that together produce a
 \textbf{visual object} that resembles a face
-(Figure~\ref{fig-data-vis-obj-stat-decode}). The mappings in this
+(Figure~\ref{fig-data-vis-obj-stat-decode}). The encodings in this
 visualisation are also a little unusual. The number of points scored is
 encoded as the \textbf{curvature} of the smile, the number of tries is
 encoded as the \textbf{angle} of the eye brows, and the number of clean
@@ -9051,7 +9053,7 @@ visual objects.}
 
 \end{figure}%
 
-The mappings in a Chernoff face are \emph{not} very accurate (see
+The encodings in a Chernoff face are \emph{not} very accurate (see
 Section~\ref{sec-accuracy}; \textbf{curvature} is ranked \emph{below}
 colour in terms of accuracy),\footnote{William S. Cleveland and McGill
   (1984) ranked curvature below area, but above colour in terms of
@@ -9210,7 +9212,7 @@ police district for 2021.}
 \end{figure}%
 
 \begin{quote}
-A choropleth map is effective because it maps geographic regions to
+A choropleth map is effective because it encodes geographic regions to
 familiar visual objects that resemble the real world regions.
 \end{quote}
 
@@ -9260,7 +9262,7 @@ there is potential for larger polygons to be erroneously decoded as
 larger crime rates.
 
 Two alternative approaches are shown in Figure~\ref{fig-map-alt}. These
-both retain the region shapes of the map, but map crime rates to the
+both retain the region shapes of the map, but encode crime rates to the
 \textbf{area} of circles or the \textbf{length} of bars. These data
 symbols have a spatial arrangement that corresponds to the real-world
 arrangement of police districts and they provide a better decoding of
@@ -9337,7 +9339,7 @@ villian images added.}
 
 The cartoon villians are another example of \textbf{visual objects}.
 They (crudely) convey the concepts of crime and criminals. However, they
-are \emph{not} \textbf{data symbols} because there is no mapping from
+are \emph{not} \textbf{data symbols} because there is no encoding from
 the raw data to the cartoon villians. Their position is unrelated to the
 data, their colour is unrelated to the data, and their size is unrelated
 to the data. No information has been encoded in the visual objects, so
@@ -9623,7 +9625,7 @@ Figure~\ref{fig-flags}, if we use the incorrect flag for a country---we
 could swap the Australian and New Zealand flags---we not only introduce
 confusion, but a misleading decoding
 (Figure~\ref{fig-obj-dissonant-decode}). This is similar to the problem
-of dissonant mappings (Section~\ref{sec-dissonance} and
+of dissonant encodings (Section~\ref{sec-dissonance} and
 Figure~\ref{fig-dissonant-decode}).
 
 \begin{figure}
@@ -9672,7 +9674,7 @@ country flags will vary with nationality and age, for example.
 
 \caption{\label{fig-not-learned-decode}If we encode data values using
 data symbols that are complex visual objects, but there is no learned
-decoding, the mapping will be ineffective because there is no decoding
+decoding, the encoding will be ineffective because there is no decoding
 back to the data value.}
 
 \end{figure}%
@@ -9868,13 +9870,13 @@ horizontal bars \emph{and} the text values at the end of each bar.}
 
 \end{figure}%
 
-Just as data values are mapped to the visual features of the bar data
-symbols in Figure~\ref{fig-bar-text}, data values are also mapped to the
-visual features of the text data symbols. For example, the ethnic groups
-are encoded as the vertical \textbf{position} of the bars \emph{and} as
-the vertical \textbf{position} of the text. The data values for the
-number of offenders in each ethnic group are encoded as the
-\textbf{length} of the bars \emph{and} as the horizontal
+Just as data values are encoded to the visual features of the bar data
+symbols in Figure~\ref{fig-bar-text}, data values are also encoded to
+the visual features of the text data symbols. For example, the ethnic
+groups are encoded as the vertical \textbf{position} of the bars
+\emph{and} as the vertical \textbf{position} of the text. The data
+values for the number of offenders in each ethnic group are encoded as
+the \textbf{length} of the bars \emph{and} as the horizontal
 \textbf{position} of the text. Furthermore, the data values for the
 number of offenders in each ethnic group are encoded as the
 \textbf{pattern} of the text---the letters and digits that make up the
@@ -9901,7 +9903,7 @@ bullet-point list.
 
 However, the unique power of text comes from \textbf{decoding} the
 \textbf{pattern} of the text. Text is the ultimate example of a
-\textbf{learned mapping} (Section~\ref{sec-learned}). We all learn to
+\textbf{learned encoding} (Section~\ref{sec-learned}). We all learn to
 read text (and numbers), which means that, when we are presented with a
 text pattern, there is a pre-existing decoding to the semantic content
 of the text (Figure~\ref{fig-learned-decode}). For example, in
@@ -9927,7 +9929,7 @@ World Cup.}
 \end{figure}%
 
 In terms of the criteria that we discussed in
-Chapter~\ref{sec-mapping-visual-features}, the value of text data
+Chapter~\ref{sec-encoding-visual-features}, the value of text data
 symbols is that they allow us to decode data values very
 \textbf{accurately} (Figure~\ref{fig-decode}). Text is also very
 flexible because it is appropriate for both \textbf{quantitative} and
@@ -9961,7 +9963,7 @@ conscious effort using the text data symbols in
 Figure~\ref{fig-bar-text}.
 
 \begin{quote}
-It is harder to compare data values that are mapped to text because it
+It is harder to compare data values that are encoded to text because it
 requires more effort to decode data values and to perform mental
 calculations.
 \end{quote}
@@ -9980,13 +9982,13 @@ Why is a picture is worth a thousand words? Because 1000 words is 1000
 fixations, identifying 1000 visual objects, and then interpreting their
 combined meaning.
 
-\section{Learned mappings of text}\label{sec-learned-text}
+\section{Learned encodings of text}\label{sec-learned-text}
 
 Link to Section~\ref{sec-learned}. Discuss how having learned to read
 allows us to decode information from text, when the text forms known
 words and expressions.
 
-\section{Mapping scales}\label{sec-guides}
+\section{Encoding encodings}\label{sec-guides}
 
 \textbf{TODO} Footnote ``guides'' terminology (vs axes, legends, etc)
 
@@ -9997,8 +9999,8 @@ text labels. The decoding of text is NOT relative.
 Figure~\ref{fig-crime-guides} is a version of Figure~\ref{fig-crime}
 with the guides highlighted in purple. There are tick marks and tick
 labels on the x-axis and y-axis, there are horizontal grid lines, and
-there are legend elements to show the mapping from the different ages to
-different colours.
+there are legend elements to show the encoding from the different ages
+to different colours.
 
 \begin{figure}
 
@@ -10016,9 +10018,9 @@ have been highlighted in purple.}
 
 The first thing to note about the guides in
 Figure~\ref{fig-crime-guides} is that they are all composed of
-\textbf{data symbols}, with \textbf{data values} mapped to
+\textbf{data symbols}, with \textbf{data values} encoded to
 \textbf{visual features} of the data symbols
-(Chapter~\ref{sec-mapping-visual-features}). This is perhaps easiest to
+(Chapter~\ref{sec-encoding-visual-features}). This is perhaps easiest to
 see with the grid lines. Each grid line is a data symbol where a data
 value, a rate of offending, has been encoded as the vertical
 \textbf{position} of the line. Similarly, each tick mark on the y-axis
@@ -10028,7 +10030,7 @@ is a line data symbol where a year has been encoded as the horizontal
 \textbf{position} of the line. Finally, each of the tick labels on the
 y-axis is a text data symbol where a rate of offending has been encoded
 as the vertical \textbf{position} of the text \emph{and} as the
-\textbf{shape} of the text. Similar mappings apply to the x-axis tick
+\textbf{shape} of the text. Similar encodings apply to the x-axis tick
 labels. The legend is also made up of line data symbols and text data
 symbols, this time with age data values encoded as the \textbf{colour}
 of lines and the \textbf{shape} of text.
@@ -10083,7 +10085,7 @@ Revisit lots of plots and add interesting guides
 
 Do variation of pcp with mini plots of corr 1 0 and -1 ?
 
-\section{Mapping information}\label{sec-labels}
+\section{Encoding information}\label{sec-labels}
 
 \textbf{TODO} Refer back to Figure~\ref{fig-log} from text. The labels
 are the confusing part on the log plot
@@ -10113,8 +10115,8 @@ have been highlighted in purple.}
 The difference between labels and the other components of a data
 visualisation, the data symbols and the guides, is that labels relate to
 \textbf{metadata} rather than raw data values. We can still consider
-this a mapping, just one that involves encoding metadata rather than
-data values (Figure~\ref{fig-label-mapping}).
+this a encoding, just one that involves encoding metadata rather than
+data values (Figure~\ref{fig-label-encoding}).
 
 \begin{figure}
 
@@ -10129,8 +10131,8 @@ data values (Figure~\ref{fig-label-mapping}).
 
 }
 
-\caption{\label{fig-label-mapping}Labels can be viewed as an encoding of
-metadata as text. We can encode complex information using text and we
+\caption{\label{fig-label-encoding}Labels can be viewed as an encoding
+of metadata as text. We can encode complex information using text and we
 can decode text with extremely high fidelity.}
 
 \end{figure}%
@@ -10207,15 +10209,15 @@ the Wikipedia page for the Rugby World Cup.}
 \end{figure}%
 
 This data visualisation is unusual because it consists entirely of text
-\textbf{data symbols}. The mappings in Figure~\ref{fig-wordcloud}
+\textbf{data symbols}. The encodings in Figure~\ref{fig-wordcloud}
 include encoding each word as the \textbf{pattern} of a text data symbol
 and encoding frequency as the \textbf{size} of a text data symbol. There
-is no need for a guide for the mapping from words to text pattern
+is no need for a guide for the encoding from words to text pattern
 because there is a learned decoding (Figure~\ref{fig-learned-decode});
 we can decode each text data symbol into a word data value because that
 decoding has already been learned.
 
-There is no guide for the mapping from word frequency to text size, so
+There is no guide for the encoding from word frequency to text size, so
 we cannot decode exact word frequencies. Table~\ref{tbl-wiki-rwc} shows
 the six most frequent words. However, the visualisation is still
 effective at conveying the \emph{relative} frequencies. The larger words
@@ -10255,24 +10257,24 @@ frequency of any one word, we cannot identify the quantitative
 difference in frequency between pairs of words, and we cannot easily
 perceive the distribution of frequencies across words. A word cloud is
 only effective for approximate ordinal comparisons of word frequencies
-(Chapter~\ref{sec-mapping-visual-features}).
+(Chapter~\ref{sec-encoding-visual-features}).
 
-Frequency is also mapped to \textbf{position in space}, with more
+Frequency is also encoded to \textbf{position in space}, with more
 frequent words placed towards the centre of the word cloud. This is an
-example of redundant mapping; more frequent words are both larger
+example of redundant encoding; more frequent words are both larger
 \emph{and} more central (Section~\ref{sec-redundant}).
 
 \begin{quote}
-A word cloud is effective for conveying words because it maps words to
-text data symbols. It is also partially effective for conveying relative
-frequencies of words because it maps word frequency to both size and
-position in space.
+A word cloud is effective for conveying words because it encodes words
+to text data symbols. It is also partially effective for conveying
+relative frequencies of words because it encodes word frequency to both
+size and position in space.
 \end{quote}
 
 Another benefit of encoding frequency as position in space is the
 efficient use of space. For example, Figure~\ref{fig-wordcloud-bar}
 shows the same data presented as a bar plot with the frequency of each
-word mapped to a separate bar. Although the accuracy is improved for
+word encoded to a separate bar. Although the accuracy is improved for
 comparing frequencies, the bar plot does not have as much room for the
 words themselves.
 
@@ -10291,7 +10293,7 @@ different words in the Wikipedia page for the Rugby World Cup.}
 
 One weakness of the word cloud is that the \textbf{angle} of words
 changes with no corresponding change in the data values. This is an
-example of a \textbf{dissonant} mapping, which can cause confusion
+example of a \textbf{dissonant} encoding, which can cause confusion
 (Section~\ref{sec-dissonance}). The viewer will notice the differences
 in angle and attempt to decode that difference to a difference in data
 values that does not exist.
@@ -10398,9 +10400,9 @@ Fiji & South & 138 & 5.6 & 2.4 & 22.4 \\
 
 For comparison, Figure~\ref{fig-rwc-table} shows a scatter plot of the
 data from Table~\ref{tbl-rwc-table}. The data symbol is a circle, with
-the number of tries mapped to horizontal \textbf{position}, the number
-of points mapped to vertical \textbf{position}, the number of clean
-breaks mapped to \textbf{size}, and the number of runs mapped to
+the number of tries encoded to horizontal \textbf{position}, the number
+of points encoded to vertical \textbf{position}, the number of clean
+breaks encoded to \textbf{size}, and the number of runs encoded to
 \textbf{colour} (shade). The relationships between tries and points and
 between breaks and both tries and points are still easier to perceive in
 this plot than in Table~\ref{tbl-rwc-table-tidy}, but
@@ -10618,7 +10620,7 @@ the message that the viewer takes away.\footnote{``Trust and Recall of
 Figure~\ref{fig-text-danger} is an example of a deliberately misleading
 data visualisation, which we obviously want to avoid. However, the
 broader point is that we need to be at least as careful with our choice
-of text content as we are with our selection of mappings from data
+of text content as we are with our selection of encodings from data
 values to visual features and we have a responsibility to work hard to
 make sure that the message from data symbols and from text labels is
 completely consistent.
@@ -10691,7 +10693,7 @@ of raw data values.\footnote{Acknowledge Ware 4th Ed: G8.18 (p327)
 
 \bookmarksetup{startatroot}
 
-\chapter{Mapping Structure}\label{mapping-structure}
+\chapter{Encoding Structure}\label{encoding-structure}
 
 Figure~\ref{fig-yji} shows a line plot of the rate of youth crime in New
 Zealand for different ethnic groups and a pie chart showing the
@@ -10743,7 +10745,7 @@ the elements of a data visualisation.\footnote{Acknowledge that many of
   these ideas align with the ideas of contrast, repetition, alignment,
   and proximity that are espoused in Naomi Robbins book.}
 
-\section{Mapping organisation}\label{sec-map-org}
+\section{Encoding organisation}\label{sec-map-org}
 
 Figure~\ref{fig-rep-guide} shows a scatter plot of the number of clean
 breaks and the number of tries for countries at the 2023 Rugby World Cup
@@ -10866,7 +10868,7 @@ everything else the same in order to champion the changes in the data.
 Conversely, another weakness of placing data symbols on maps, like in
 Figure~\ref{fig-map-alt-2}, is the distracting complexity that results.
 
-\section{Consistent mappings}\label{sec-repetition}
+\section{Consistent encodings}\label{sec-repetition}
 
 \textbf{TODO} Refer back to congruence and dissonance in congruence.Rmd
 and differences and similarities in visual-model.Rmd
@@ -10880,7 +10882,7 @@ Figure~\ref{fig-rep-guide} with a modified legend. In this plot, the
 hemisphere of a country is encoded using orange and green within the
 main plot, but then hemisphere is encoded using light blue and brown in
 the legend. This is clearly an ineffective data visualisation, but it
-highlights the importance of maintaining consistent mappings between
+highlights the importance of maintaining consistent encodings between
 different elements of a plot.\footnote{This particularly echoes the
   repetition part of CRAP design.}
 
@@ -10900,7 +10902,7 @@ World Cup.}
 \end{figure}%
 
 Figure~\ref{fig-rep-double} demonstrates that we can harness consistent
-mappings to improve upon the original Figure~\ref{fig-rep-guide}. In
+encodings to improve upon the original Figure~\ref{fig-rep-guide}. In
 this plot, the encoding of hemisphere as the colour of points is not
 only consistent between the main plot and the legend, but it has been
 extended to the colour of legend text. The visual grouping of elements
@@ -10924,7 +10926,7 @@ World Cup.}
 \end{figure}%
 
 \section{Dangers of inconsistent
-mappings}\label{dangers-of-inconsistent-mappings}
+encodings}\label{dangers-of-inconsistent-encodings}
 
 Figure~\ref{fig-trump-bill} shows a bar plot of the impact of a proposed
 tax bill during the second Trump administration.\footnote{Based on plot
@@ -10981,7 +10983,7 @@ of Trump's ``Big, Beautiful Bill''.\footnotemark{}}
   source: Penn Wharton Budget Model
   https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15}
 
-\section{Mapping importance}\label{mapping-importance}
+\section{Encoding importance}\label{encoding-importance}
 
 Figure~\ref{fig-contrast} shows a variation on
 Figure~\ref{fig-rep-double} with many elements of the plot drawn in
@@ -11063,8 +11065,8 @@ contrast than analogous colours (Section~\ref{sec-harmony}).
 
 Section~\ref{sec-differences}
 
-\section{Dangers of mapping
-importance}\label{dangers-of-mapping-importance}
+\section{Dangers of encoding
+importance}\label{dangers-of-encoding-importance}
 
 Distractions
 
@@ -11075,8 +11077,8 @@ Refer back to chart junk and clutter (Section~\ref{sec-junk}).
 
 \section{Summary}\label{summary-13}
 
-Just as we can map data values to visual features, to communicate
-information about the data, we can map non-data information to visual
+Just as we can encode data values to visual features, to communicate
+information about the data, we can encode non-data information to visual
 features, to communicate important aspects of the structure of a data
 visualisation.
 
@@ -11098,7 +11100,7 @@ Position is especially important
 \chapter{Review}\label{sec-review}
 
 Add review at the end that reinforces the threads like visual feature,
-visual shape, visual object and mappings
+visual shape, visual object and encodings
 
 If we encode X using Y encoding what can we decode?
 
@@ -11156,10 +11158,10 @@ Basic questions:
 \end{itemize}
 
 Present process by which a data vis can be broken down. What data
-symbols are being used? (simple or complex) What mappings are being
-used? What do we want to decode? (data or summaries) If mapping back to
-raw data, are the mappings accurate? What can be mapped back to? Are
-mappings congruent with data?
+symbols are being used? (simple or complex) What encodings are being
+used? What do we want to decode? (data or summaries) If encoding back to
+raw data, are the encodings accurate? What can be encoded back to? Are
+encodings congruent with data?
 
 \ldots{}
 
@@ -11169,11 +11171,11 @@ List of questions to evaluate a data vis (maybe nest these a bit):
 \item
   What do you want the viewer to be able to decode?
 \item
-  Do the mappings support that goal?
+  Do the encodings support that goal?
 \item
   What are the data variables
 \item
-  What visual features are they mapped to
+  What visual features are they encoded to
 \item
   What type of data
 \item
@@ -11183,9 +11185,9 @@ List of questions to evaluate a data vis (maybe nest these a bit):
 \item
   How accurate are the decodings
 \item
-  Is there congruence or dissonance in the mapping
+  Is there congruence or dissonance in the encoding
 \item
-  Mapping data or data summary
+  Encoding data or data summary
 \item
   Do visual features interact
 \item
@@ -11199,16 +11201,16 @@ List of questions to evaluate a data vis (maybe nest these a bit):
 \item
   Is that appropriate
 \item
-  Learned mappings somehow (distinct from implicit mappings)
+  Learned encodings somehow (distinct from implicit encodings)
 \item
   Do all visual differences correspond to differences in the data?
 \item
   Are all differences in the data represented by visual differences?
 \item
-  Does each data value map to its own data symbol If not, individual
+  Does each data value encode to its own data symbol If not, individual
   data values may be difficult to decode
 \item
-  Do multiple data values map to a single data symbol If not, data
+  Do multiple data values encode to a single data symbol If not, data
   summaries may be difficult to decode
 \end{itemize}
 
@@ -11260,7 +11262,7 @@ versus the winning score for Tier One nations at Rugby World Cup
 matches. The hemisphere of the losing team is encoded as the colour of
 the data points and a trend line has been added for each hemisphere.
 
-The trend lines are mappings of data summaries, least-squares
+The trend lines are encodings of data summaries, least-squares
 regressions, to line data symbols. The data summaries consist of
 intercept and slope values, which are encoded as the vertical positions
 and the angles of the lines, respectively
@@ -11295,8 +11297,8 @@ Figure~\ref{fig-loess-smooth} shows the same data as
 Figure~\ref{fig-lm-smooth}, but this time there are curved trend lines
 added rather than straight trend lines.\footnote{These are \emph{loess}
   model fits (locally-estimated scatterplot smoothing).} The curves are
-mappings of data summaries again, but this time loess model fits. This
-means that the mapping involves a series of predicted values encoded as
+encodings of data summaries again, but this time loess model fits. This
+means that the encoding involves a series of predicted values encoded as
 horizontal and vertical positions for the curve. In other words, the
 data summaries are encoded as visual features that produce a visual
 shape
@@ -11374,8 +11376,8 @@ airline.\footnote{This plot reproduces Figure 2 from Hofmann, Wickham,
 
 We will use the information in this book to analyse the data
 visualisation in Figure~\ref{fig-lv-default}. We will break
-Figure~\ref{fig-lv-default} down into the mappings that are being used
-and the effectiveness of those mappings.
+Figure~\ref{fig-lv-default} down into the encodings that are being used
+and the effectiveness of those encodings.
 
 \begin{figure}
 
@@ -11421,13 +11423,13 @@ shown as outliers.
 
 The letter-value plot is an example of a novel data visualisation, so
 this provides a good opportunity to analyse whether a letter-value plot
-is an effective mapping of information.\footnote{In order to incorporate
-  as many points as possible, this analysis just focuses on the default
-  \{lvplot\} settings that are used in Figure~\ref{fig-lv-default} and
-  even sinks to the level of critiquing the specific data set (and
-  non-linear scales) that are used in this specific plot. It is a very
-  unfair attack on letter-value plots in general and the \{lvplot\}
-  package in particular.}
+is an effective encoding of information.\footnote{In order to
+  incorporate as many points as possible, this analysis just focuses on
+  the default \{lvplot\} settings that are used in
+  Figure~\ref{fig-lv-default} and even sinks to the level of critiquing
+  the specific data set (and non-linear scales) that are used in this
+  specific plot. It is a very unfair attack on letter-value plots in
+  general and the \{lvplot\} package in particular.}
 
 \subsection{Letter values}\label{letter-values}
 
@@ -11460,7 +11462,7 @@ symbols consisting of multiple rectangles, which we will call
 values; and very simple data points, which represent the outliers (if
 any).
 
-\subsection{Mapping visual features}\label{mapping-visual-features}
+\subsection{Encoding visual features}\label{encoding-visual-features}
 
 In Figure~\ref{fig-lv-default}, the airline (Carrier), qualitative data
 values, are encoded as the horizontal \textbf{position} of the
@@ -11468,7 +11470,7 @@ letter-value symbols. The encoding of airline as the position of data
 symbols is very effective; we can easily differentiate between the
 airlines.
 
-The other data values, the taxi times, are mapped to the letter-value
+The other data values, the taxi times, are encoded to the letter-value
 data symbols within the plot. However, the letter-value plot encodes
 \textbf{data summaries}---letter values---rather than raw data
 values.\footnote{Letter values are an interesting data summary in the
@@ -11547,12 +11549,12 @@ decodings. It is even possible to rapidly decode numbers of outliers
 thanks to the small number of data symbols involved
 (Section~\ref{sec-visual-summaries}).
 
-Table~\ref{tbl-lv-encodings} summarises the mappings that are involved
+Table~\ref{tbl-lv-encodings} summarises the encodings that are involved
 in a letter-value plot. There are several effective encodings for both
 quantitative and qualitative data values, but the encoding of data
 density and the encoding of letter-value depth both lose some
 information. One overall point is that this is quite a large number of
-encodings for a single data visualisation. This means that the mappings
+encodings for a single data visualisation. This means that the encodings
 in Figure~\ref{fig-lv-default} produce a relatively complex data
 visualisation. There are many visual features changing, which makes each
 individual encoding in Figure~\ref{fig-lv-default} more difficult to
@@ -11565,7 +11567,7 @@ data visualisation because it involves fewer changes in visual features.
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3750}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1562}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2812}}@{}}
-\caption{The mappings involved in a letter-value
+\caption{The encodings involved in a letter-value
 plot.}\label{tbl-lv-encodings}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -11603,7 +11605,7 @@ fourth letter value & summary of letter value & qualitative & colour
 (chroma) \\
 \end{longtable}
 
-\subsection{Combining mappings}\label{combining-mappings-1}
+\subsection{Combining encodings}\label{combining-encodings-1}
 
 There is one obvious interaction between encodings in
 Figure~\ref{fig-lv-default}. The width of the rectangles (letter-value
@@ -11631,7 +11633,7 @@ value is actually over sixteen thousand times more than the proportion
 of the data that lies between the top two letter values. In other words,
 the area of the rectangles is actually \emph{misleading}.
 
-There is also a \textbf{redundant mapping} in
+There is also a \textbf{redundant encoding} in
 Figure~\ref{fig-lv-default} (Section~\ref{sec-redundant}). Because the
 depth of a letter value is related to the order of the letter value,
 both the luminance of each rectangle in the letter-value symbol and the
@@ -11686,7 +11688,7 @@ qualitative features. For example, we can decode \emph{whether} the
 distribution is symmetric or skewed, but we cannot decode \emph{how}
 skewed the distribution is.
 
-\subsection{Mapping scales}\label{mapping-scales}
+\subsection{Encoding encodings}\label{encoding-encodings}
 
 We have already discussed that the y-axis scale is non-linear. The
 square root of taxi times, rather then the raw taxi times, are encoded
@@ -11751,7 +11753,7 @@ letter-value data symbols. There is no guide that explains how the depth
 of the letter values is encoded as the width of the letter-value data
 symbols.
 
-\subsection{Mapping structure}\label{mapping-structure-1}
+\subsection{Encoding structure}\label{encoding-structure-1}
 
 Another problem with the legend in Figure~\ref{fig-lv-default} is that
 the squares within the legend are not consistent with the rectangles in
@@ -11779,13 +11781,13 @@ that we discussed earlier.
 \subsection{Building something better?}\label{building-something-better}
 
 Having used the information in this book to identify a number of
-problems with the mappings in Figure~\ref{fig-lv-default}, we now
+problems with the encodings in Figure~\ref{fig-lv-default}, we now
 attempt to use the information to make improvements to
 Figure~\ref{fig-lv-default}.
 
 Figure~\ref{fig-lv-zoom} shows a data visualisation that is based on the
 same data taxi data as Figure~\ref{fig-lv-default}, but uses a different
-set of mappings. One solution to the complexity of
+set of encodings. One solution to the complexity of
 Figure~\ref{fig-lv-default} would be to avoid multiple encodings by
 producing several, simpler data visualisations for different purposes.
 For example, one data visualisation that just shows the distribution
@@ -11834,7 +11836,7 @@ justifications for the design choices that are being made.
   shows the distribution below the median with a higher-resolution
   scale.
 \item
-  Taxi times are mapped to a letter-value data symbol for each airline
+  Taxi times are encoded to a letter-value data symbol for each airline
   based on the letter values and the data density. The total area of
   each letter-value data symbol is the same and the narrowness of the
   data symbol properly encodes the amount of data between different

@@ -50,7 +50,7 @@ ggplot(crimeLevelTotal) +
 
 The fact that there can be two data visualisations,
 @fig-pie-hue and @fig-pie-ordinal,
-with the same mapping---the **qualitative**
+with the same encoding---the **qualitative**
 level of crime is encoded as the **colour** of the wedges---but 
 the two data visualisations 
 have different effectiveness suggests that there is still
@@ -207,7 +207,7 @@ are very few different groups to represent.
 #| echo: false
 #| label: fig-lum-cap
 #| fig-height: 3
-#| fig-cap: Mapping qualitative values to luminance and chroma works well for representing nominal data values, but only for a very small number of values. It is possible to identify which shade of purple the single dot corresponds to amongst the three shades on the left, but it is much harder with the seven shades in the middle, harder still for the eleven shades on the right. This figure can be compared with @fig-colour-cap, which demonstrates the capacity of hue for representing nominal data values.
+#| fig-cap: Encoding qualitative values to luminance and chroma works well for representing nominal data values, but only for a very small number of values. It is possible to identify which shade of purple the single dot corresponds to amongst the three shades on the left, but it is much harder with the seven shades in the middle, harder still for the eleven shades on the right. This figure can be compared with @fig-colour-cap, which demonstrates the capacity of hue for representing nominal data values.
 clpie <- function(n) {
     t <- rev(seq(0, 2*pi, length.out=100*n) + pi/2)
     cols <- hcl.colors(n+1, "Purples")[-(n+1)]
@@ -310,7 +310,7 @@ popViewport()
 
 This effect also applies to the perception of hue.
 @fig-pie-contrast shows a pie chart of the number of offenders in each
-police district, with police district mapped to the **colour** of the
+police district, with police district encoded to the **colour** of the
 wedges.  There are two issues with the perception of the wedge colours:
 each wedge is affected by its neighbour so that, for example, some of 
 the blue wedges look more green at the boundary with their more blue 
@@ -648,9 +648,9 @@ ggplot(crimeLevelTotal) +
   if we do not take into account common forms of 
   colour vision deficiency.
 
-## Non-linear mappings {#sec-col-non-linear}
+## Non-linear encodings {#sec-col-non-linear}
 
-The top row of @fig-non-linear-lum shows a linear luminance mapping;
+The top row of @fig-non-linear-lum shows a linear luminance encoding;
 we have a set of rectangles
 that change luminance in equal steps.  The 
 two rectangles on the left of this row appear very similar, while
@@ -663,7 +663,7 @@ In other words, the *decoding* of luminance is *not* linear.
 #| echo: false
 #| label: fig-non-linear-lum
 #| fig-height: 2
-#| fig-cap: The two rows of purple values begin and end at the same level of luminance.  The top row maps luminance linearly, but the bottom row uses a cube-root mapping.
+#| fig-cap: The two rows of purple values begin and end at the same level of luminance.  The top row encodes luminance linearly, but the bottom row uses a cube-root encoding.
 grid.newpage()
 ## Same start and end, but even steps vs cubed root steps
 pushViewport(viewport(width=.8, layout=grid.layout(2, 1)))
@@ -687,32 +687,32 @@ from **position** relies
 on using a linear encoding. That was because the decoding of position
 is linear.  A linear encoding from data values to position, followed
 by a linear decoding from position to data values, leads to an
-accurate mapping.  And that is particularly important for 
-mapping quantitative data values.
+accurate encoding.  And that is particularly important for 
+encoding quantitative data values.
 
-Part of the reason why it is not appropriate to map quantitative
+Part of the reason why it is not appropriate to encode quantitative
 data values to luminance is that the decoding of luminance is *not*
 linear.  This makes it difficult to accurately decode quantitative 
 data values from the luminance of a data symbol. 
 
-However, we can use luminance to map ordinal data values 
+However, we can use luminance to encode ordinal data values 
 (@sec-ordinal).
 In this case, all that we need is to be able to identify 
 that a data symbol is lighter or darker than another data symbol.
 
-The bottom row of @fig-non-linear-lum shows a luminance mapping
+The bottom row of @fig-non-linear-lum shows a luminance encoding
 that takes larger steps for darker colours and smaller steps
 for lighter colours.  In this row, the purples appear to 
 change more evenly.  We can see differences between the darker
 rectangles as well as between the lighter rectangles.
 
-In other words, a *non-linear* mapping from data values to
+In other words, a *non-linear* encoding from data values to
 luminance can be used 
 to generate a larger set of luminance levels that can be differentiated
-from each other.  A non-linear luminance mapping leads to increased
+from each other.  A non-linear luminance encoding leads to increased
 **capacity** for decoding data values from luminance.
 
-> When we are mapping nominal or ordinal data values,
+> When we are encoding nominal or ordinal data values,
   and we are encoding to a visual feature that has a non-linear decoding,
   a non-linear *encoding* can be effective for increasing the
   capacity of the visual feature.
@@ -892,7 +892,7 @@ For example, in @fig-pie-hue we have to choose a different colour
 to represent each level of crime.
 
 This choice is difficult because there are many different colours 
-to choose from and often there is no obvious mapping 
+to choose from and often there is no obvious encoding 
 from a data value to a particular
 colour.  For example, what specific hue, chroma, and luminance
 should we choose to represent a "high" crime level?
@@ -1087,11 +1087,11 @@ kable(head(rwcAllyear[,c("team", "year", "scored", "conceded", "diff")]), digits
 nations at each Rugby World Cup.  The data symbols are rectangles,
 the teams are encoded as the vertical **positions** of the rectangles, and
 the years are encoded as the horizontal **positions** of the rectangles.
-These are both effective mappings and we can easily **decode** to
+These are both effective encodings and we can easily **decode** to
 teams or years.
 The points differentials are encoded as the **colour** of the rectangles,
-but in a slightly complicated way.  Positive data values map to a shade
-of green, while negative values map to a shade of brown.
+but in a slightly complicated way.  Positive data values encode to a shade
+of green, while negative values encode to a shade of brown.
 In both cases, we have a constant **hue**, with increasing **chroma** and
 decreasing **luminance** as the data values get further away from 
 zero.[^green-brown]

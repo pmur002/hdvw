@@ -5,11 +5,11 @@
 source("common.R")
 ```
 
-# Visual Features {#sec-mapping-visual-features}
+# Visual Features {#sec-encoding-visual-features}
 
 In @sec-intro, we described a data visualisation as
-a set of **mappings** from data values to data symbols
-(@fig-mappings).
+a set of **encodings** from data values to data symbols
+(@fig-encodings).
 In @sec-visual-system, 
 we established some basic properties of
 the visual system, which will help to explain how well the **encoding** of
@@ -21,19 +21,19 @@ three levels of visual processing:  visual features, visual shapes,
 and visual objects (@fig-visual-processing).
 
 There are many 
-possible mappings between data values and data symbols.
-For example, in @sec-mappings, we saw that the same data values could be
-mapped in different ways to produce different data visualisations
+possible encodings between data values and data symbols.
+For example, in @sec-encodings, we saw that the same data values could be
+encoded in different ways to produce different data visualisations
 (e.g., @fig-crime and @fig-crime-heatmap).
-The remainder of this book explores different sorts of mappings
+The remainder of this book explores different sorts of encodings
 and why they are more or less effective for different purposes.
 
-In this chapter, we start with a very simple sort of mapping.
+In this chapter, we start with a very simple sort of encoding.
 We will begin to explore data visualisations where
 each data value is **encoded** as 
 a basic **visual feature** of a data symbol.
 Furthermore, in these data visualisations,
-**one** data value is mapped to **one** data symbol
+**one** data value is encoded to **one** data symbol
 (@fig-visual-feature).  
 
 ::: {#fig-visual-feature}
@@ -50,13 +50,13 @@ Furthermore, in these data visualisations,
 :::
 
 A simple data visualisation encodes each data value as a **visual feature**
-of a data symbol.  Each data value (`x`) is mapped to a visual
+of a data symbol.  Each data value (`x`) is encoded to a visual
 feature (`a`) of a single data symbol.
 :::
 
 ## Bar plots {#sec-bar}
 
-A good example of this sort of simple mapping is a bar plot.
+A good example of this sort of simple encoding is a bar plot.
 In order to demonstrate bar plots,
 we will work with a data set containing 
 the total number of offenders aged 14 to 16
@@ -89,7 +89,7 @@ ggplot(crimeGroupTotal) +
 We can see that, for each data value in @tbl-crime-group-total,
 there is a single bar in the bar plot.
 For example, each total number
-of offenders is mapped to a single bar.
+of offenders is encoded to a single bar.
 
 In terms of **decoding** (@fig-decode),
 this means that we can decode individual data values from each
@@ -97,8 +97,8 @@ data symbol.  For example, we can
 decode a single total number of offenders from each bar.[^bijective]
 
 [^bijective]:
-    This one-to-one mapping between data values and data symbols
-    is called a *bijective* mapping 
+    This one-to-one encoding between data values and data symbols
+    is called a *bijective* encoding 
     [@Ziemkiewicz2009].
 
 This allows us to answer simple questions about individual data values.
@@ -109,20 +109,20 @@ For example, what is the largest total number of offenders?
 The data symbols in @fig-bar 
 are a set of bars or, put more simply, rectangles.
 We have seen that 
-each data value from @tbl-crime-group-total is mapped to one
+each data value from @tbl-crime-group-total is encoded to one
 of these rectangles.
-For example, each total number of offenders is mapped to a rectangle.
+For example, each total number of offenders is encoded to a rectangle.
 
-However, we can look more closely at the mapping and consider how individual 
+However, we can look more closely at the encoding and consider how individual 
 data values are being **encoded** as a data symbol.
 For example, the total number of offenders for each ethnic group
 is encoded as the **length** of a rectangle
 (@fig-length). Each data value
-is mapped to the length of one rectangle.[^length-vs-position]
+is encoded to the length of one rectangle.[^length-vs-position]
 
 [^length-vs-position]:
     Some authors prefer to say that the total number of offenders 
-    is mapped to the **position** of the "top" of the rectangle
+    is encoded to the **position** of the "top" of the rectangle
     [e.g., @cleveland1984graphical], but the difference is not
     significant because both length and position are excellent
     visual features in terms of decoding (@sec-accuracy).
@@ -135,7 +135,7 @@ is mapped to the length of one rectangle.[^length-vs-position]
 ```{r}
 #| echo: false
 #| label: fig-length
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the total number of crimes, have been mapped to the **lengths** of the bars (the purple lines).
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the total number of crimes, have been encoded to the **lengths** of the bars (the purple lines).
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
@@ -152,7 +152,7 @@ ggplot(crimeGroupTotal) +
 ```
 
 Each ethnic group data value in @tbl-crime-group-total is also
-mapped to a rectangle in @fig-bar.
+encoded to a rectangle in @fig-bar.
 In terms of **encodings**,
 each ethnic group is encoded as the vertical **position** of one rectangle
 (@fig-position).  
@@ -160,7 +160,7 @@ each ethnic group is encoded as the vertical **position** of one rectangle
 ```{r}
 #| echo: false
 #| label: fig-position
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic groups, have been mapped to the **positions** of the bars (the purple dots).
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic groups, have been encoded to the **positions** of the bars (the purple dots).
 ggplot(crimeGroupTotal) + 
     geom_col(aes(x=total, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
@@ -229,7 +229,7 @@ popViewport()
 ```
 
 > One reason why a bar plot is an effective data visualisation is 
-  because it involves a mapping from data values
+  because it involves a encoding from data values
   to the basic visual features of data symbols---the
   positions and lengths of bars---and basic visual features 
   are processed rapidly and subconsciously by our visual system.
@@ -275,7 +275,7 @@ As we discussed in @sec-visual-system, the real purpose of encoding
 data values as data symbols is to make use of the visual system
 to **decode** back to data values from the data symbols.
 In this section, we are considering
-mappings from data values to basic visual features, so we
+encodings from data values to basic visual features, so we
 need to consider how well we are able to **decode** from 
 **visual features** to **data values** (@fig-visual-feature-decode).
 
@@ -288,7 +288,7 @@ need to consider how well we are able to **decode** from
 ![](Diagrams/data-vis-decode.png)
 :::
 
-When we encode data values as visual features, we want to map 
+When we encode data values as visual features, we want to encode
 to a visual feature that allows us to decode the data values from
 the visual fearure.
 :::
@@ -438,7 +438,7 @@ conveying all of the information in quantitative values.
 > One reason why a bar plot is effective for visualising
   **quantitative data values** is because the quantitative data values,
   the counts,
-  are mapped to a **quantitative visual feature**, the lengths of the bars.
+  are encoded to a **quantitative visual feature**, the lengths of the bars.
 
 ## Qualitative features {#sec-qual-features}
 
@@ -551,7 +551,7 @@ a qualitative visual feature.
 > One reason why a bar plot is effective for visualising
   **qualitative data values** is because the qualitative data values,
   the groups, 
-  are mapped to a **qualitative visual feature**, the positions of the bars.
+  are encoded to a **qualitative visual feature**, the positions of the bars.
 
 ## Accuracy {#sec-accuracy}
 
@@ -760,7 +760,7 @@ arrangements.
 #| echo: false
 #| label: fig-colour-cap
 #| fig-height: 3
-#| fig-cap: Mapping qualitative data values to colour works well for a small number of colours, but less well for a large number of colours.  It is quite easy to identify which green the single dot corresponds to amongst three colours on the left, but it is much harder with the seven colours in the middle, harder still for the eleven colours on the right.
+#| fig-cap: Encoding qualitative data values to colour works well for a small number of colours, but less well for a large number of colours.  It is quite easy to identify which green the single dot corresponds to amongst three colours on the left, but it is much harder with the seven colours in the middle, harder still for the eleven colours on the right.
 hpie <- function(n) {
     cols <- scales::hue_pal()(n)
     grid.rect(.2, .7, .2, .2, gp=gpar(col="grey40", lwd=1))
@@ -813,7 +813,7 @@ again exacerbated by less regular arrangements.[^pattern-capacity]
 #| echo: false
 #| label: fig-pattern-cap
 #| fig-height: 3
-#| fig-cap: Mapping qualitative data values to pattern works well for a small number of patterns, but less well for a large number of patterns.
+#| fig-cap: Encoding qualitative data values to pattern works well for a small number of patterns, but less well for a large number of patterns.
 patterns <- function(n) {
     grid.rect(.2, .7, .2, .2, gp=gpar(col="grey40", lwd=1))
     regpoly(unit(.2, "npc"), unit(.7, "npc"), sample(1:n, 1) + 2, 
@@ -848,7 +848,7 @@ number of alternative locations becomes large.
 #| echo: false
 #| label: fig-pos-cap
 #| fig-height: 3
-#| fig-cap: Mapping qualitative data values to position works well for both a small number of positions and for a large number of positions.
+#| fig-cap: Encoding qualitative data values to position works well for both a small number of positions and for a large number of positions.
 bars <- function(n) {
     pushViewport(viewport(.1, .5, .1, .8))
     grid.rect(gp=gpar(col="grey40", lwd=1))     
@@ -960,8 +960,8 @@ ggplot(crimeGroupTotal) +
 ```
 
 The data symbols in @fig-pie are wedges or segments of a circle
-and again we have each data value mapping to a single data symbol.
-For example, each ethnic group maps to a separate wedge of the pie.
+and again we have each data value encoding to a single data symbol.
+For example, each ethnic group is encoded as a separate wedge of the pie.
 As with bar plots and dot plots, in a pie chart
 the data values are encoded as basic
 visual features of these symbols.
@@ -985,19 +985,19 @@ compared to the bar plot in @fig-bar or the dot plot in @fig-dot.
     are relatively poor visual features in terms of decoding accuracy.
 
 Although the situation seems bleak for pie charts, we have not
-yet seen all of the ways that we can assess different mappings 
+yet seen all of the ways that we can assess different encodings 
 of data values to 
 data symbols.  We will return
 to pie charts in @sec-part-to-whole to show that all is not lost.
 
 ## Summary
 
-A simple mapping of data values to data symbols involves
-mapping **each data value to a separate data symbol**.
+A simple encoding of data values to data symbols involves
+encoding **each data value to a separate data symbol**.
 This allows the viewer to **decode** individual data values from
 the data symbols.
 
-A simple mapping of data values to data symbols also involves
+A simple encoding of data values to data symbols also involves
 **encoding** each data value as a basic **visual feature** of 
 the data symbol:  position, length, area, angle, colour, and pattern.
 This is effective because 
@@ -1014,7 +1014,7 @@ We can represent a large number of categories using position,
 but only a few categories using colours and patterns.
 
 Bar plots, dot plots, and pie charts all provide examples of 
-simple mappings from data values to data symbol.
+simple encodings from data values to data symbol.
 We can decode bar plots and dot plots accurately
 because they involve encodings of data values to position and length.
 We cannot decode pie charts as accurately because they

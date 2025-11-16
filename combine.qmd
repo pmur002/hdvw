@@ -5,7 +5,7 @@
 source("common.R")
 ```
 
-# Combining Mappings
+# Combining Encodings
 
 Most data visualisations involve more than one data variable.
 For example, the bar plot in @fig-bar-gender involves data on the **gender** 
@@ -26,27 +26,27 @@ ggplot(crimeGenderTotal) +
 ```
 
 In @fig-bar-gender, 
-each data value is mapped to a **visual feature** of a data symbol
+each data value is encoded to a **visual feature** of a data symbol
 (@fig-visual-feature).  For example, 
 the gender is encoded as the horizontal **position** of the bars
 and the count of offenders is encoded as the **length** of the bars.
 
-We have so far only looked at mappings from data values to visual features
-in isolation.  For example, we know that the mapping from gender to 
+We have so far only looked at encodings from data values to visual features
+in isolation.  For example, we know that the encoding from gender to 
 position is effective because position is 
 appropriate for qualitative data and position has sufficient capacity
 to differentiate between two genders.
-We also know that mapping the count
+We also know that encoding the count
 of offenders to length is effective because length
 is appropriate for quantitative data and length provides an accurate
 decoding.
 
-In this chapter, we begin to consider what happens when mappings are
+In this chapter, we begin to consider what happens when encodings are
 used in combination.  For a start, we will just extend our 
-thinking to data visualisations that involve mapping **two** data variables
+thinking to data visualisations that involve encoding **two** data variables
 to **two** visual features, like gender and count to position and
 length.
-Furthermore, we will restrict ourselves to mappings 
+Furthermore, we will restrict ourselves to encodings 
 where each pair of data values 
 are encoded as a single data symbol (@fig-two-visual-features).
 For example, in @fig-bar-gender,
@@ -66,9 +66,9 @@ bar.
 ![](Mappings/mapping-1-2-1-2.png)
 :::
 
-A simple data visualisation maps **two** data values to
+A simple data visualisation encodes **two** data values to
 **two** visual features to create a data symbol.
-Each pair of data values (`x` and `y`) is mapped to two visual
+Each pair of data values (`x` and `y`) is encoded to two visual
 features (`a` and `b`) of a **single** data symbol.
 :::
 
@@ -113,7 +113,7 @@ affect our ability to perceive that they have different lengths.
 ```{r}
 #| echo: false
 #| label: fig-bar-colour
-#| fig-cap: A bar plot of the total number of male offenders and the total number of female offenders. The data symbols in this plot come from mapping gender to the vertical positions and colours of the bars and mapping the total number of offenders to the lengths of the bars.
+#| fig-cap: A bar plot of the total number of male offenders and the total number of female offenders. The data symbols in this plot come from encoding gender to the vertical positions and colours of the bars and encoding the total number of offenders to the lengths of the bars.
 ggplot(crimeGenderTotal) + 
     geom_col(aes(x=gender, y=total, fill=gender)) +
     scale_y_continuous(expand=expansion(c(0, .05))) +
@@ -167,12 +167,12 @@ popViewport()
 ```
 
 The data symbol in a scatter plot is a data point, in this case a circle.
-There are two mappings in the scatter plot in @fig-scatter:
+There are two encodings in the scatter plot in @fig-scatter:
 the **quantitative** number of clean breaks is encoded as the horizontal
 **position** of the data points and the **quantitative** number of tries 
 scored is encoded as the vertical **position** of the data points.
 
-We know from @sec-mapping-visual-features 
+We know from @sec-encoding-visual-features 
 that we should be able to accurately decode the original data values
 from the positions of the data points.
 For example, we can easily see that one team scored a little over 
@@ -220,7 +220,7 @@ features or even to obscure the original visual features.
 :::
 
 > One reason why a scatter plot is effective at conveying relationships
-  between variables is because the mappings of data values to visual
+  between variables is because the encodings of data values to visual
   features---horizontal 
   position and vertical position---interact to produce an additional
   visual feature: position in space.
@@ -392,7 +392,7 @@ popViewport()
 ```
 
 A mosaic plot is another example of a data visualisation that 
-maps **data summaries** to data symbols rather than raw data.
+encodes **data summaries** to data symbols rather than raw data.
 The data symbols are rectangles, the proportions 
 of male versus female offenders 
 are encoded as the widths of the rectangles, and
@@ -416,26 +416,26 @@ kable(props[,1:2], digits=2)
 kable(props[,3:4], digits=2)
 ```
 
-> One reason why a mosaic plot is effective is because it maps proportions
+> One reason why a mosaic plot is effective is because it encodes proportions
   and conditional proportions, rather than raw counts,
   to the visual features of rectangles.
 
 A mosaic plot is also an example of a data visualisation 
-that maps to visual features that **interact**.
-The explicit mappings involve encoding proportions as the widths and heights
+that encodes to visual features that **interact**.
+The explicit encodings involve encoding proportions as the widths and heights
 of the rectangles and we know from @sec-quant-features that 
 this will allow accurate decoding from lengths to proportions.
 
-> One reason why a mosaic plot is effective is because it maps 
+> One reason why a mosaic plot is effective is because it encodes
   proportions to lengths.
 
-However, the interaction of these mappings produces
+However, the interaction of these encodings produces
 an **emergent feature**, which is the **area** of the rectangles
 (@fig-interact).  Importantly, these areas correspond to 
 additional data summaries, in this case, the overall proportion of offences in
 each combination of sex and action taken.
 
-> One reason why a mosaic plot is effective is because the mappings     
+> One reason why a mosaic plot is effective is because the encodings     
   to length and height interact to produce area, which represents
   overall proportions.
 
@@ -599,11 +599,11 @@ The data symbols in @fig-interaction are straight line segments.
 The year is encoded as the horizontal start and end **position** of the lines
 and the number of offenders is encoded as the vertical start and end
 **position** of the lines.  The ethnic group is encoded as the **colour**
-of the lines.  These mappings are effective for decoding the
+of the lines.  These encodings are effective for decoding the
 raw data values in @tbl-interaction from the end points and the colours
 of the lines.
 
-In addition, the explicit mappings generate
+In addition, the explicit encodings generate
 an **emergent feature**: the **angle** of the lines.
 Furthermore, the angle of the lines allow us to decode
 a **data summary**: the *change* in the number
@@ -701,7 +701,7 @@ from a scatter plot.[^emergent-accuracy]
     from line to points, rather than vertical, and hence more 
     likely to over-estimate a slope.
 
-## Dangers of combining mappings {#sec-danger-combine}
+## Dangers of combining encodings {#sec-danger-combine}
 
 @fig-nz-doctor-bar shows a plot of changes in 
 health spending by successive New Zealand 
@@ -889,7 +889,7 @@ pushViewport(viewport(width=.9, height=.9),
 print(ggDoctorLine, newpage=FALSE)
 ```
 
-## Case study: Redundant mappings {#sec-redundant}
+## Case study: Redundant encodings {#sec-redundant}
 
 @fig-fbref shows a bar plot of various performance metrics for the 
 football player Lamine Yamal from July 2024.[^fbref]
@@ -1021,8 +1021,8 @@ the colour (@fig-data-vis-redundant).
 ![](Mappings/mapping-1-1-1-2.png)
 :::
 
-A redundant encoding maps a single data value to multiple visual features.
-Each data value (`x`) is mapped to not just one visual
+A redundant encoding encodes a single data value to multiple visual features.
+Each data value (`x`) is encoded to not just one visual
 feature (`a`), but also a second visual feature (`b`), of a single data symbol.
 If we encode data values using multiple visual features,
 then multiple decodings are possible. 
@@ -1087,11 +1087,11 @@ fbrefPlot(cols)
 
 ## Summary
 
-Almost all data visualisations involve *combinations* of mappings.
+Almost all data visualisations involve *combinations* of encodings.
 More than one set of data values are encoded as more than one
 visual feature of data symbols.
 
-The mappings involved in a bar plot---quantitative data values encoded as
+The encodings involved in a bar plot---quantitative data values encoded as
 lengths
 and qualitative values encoded as position---are effective because we
 are able to perceive some combinations of visual features,
@@ -1100,7 +1100,7 @@ which means that we can effectively decode both position and length
 from a bar plot.
 
 A scatter plot is effective for perceiving relationships between
-variables because the mappings of quantitative data values to both
+variables because the encodings of quantitative data values to both
 horizontal and vertical positions **interact** to produce **position in space**
 and our visual system is capable of producing useful **visual summaries**
 from position in space, such as correlation.

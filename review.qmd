@@ -8,7 +8,7 @@ source("common.R")
 # Review {#sec-review}
 
 Add review at the end that reinforces the threads like visual feature, 
-visual shape, visual object and mappings
+visual shape, visual object and encodings
 
 If we encode X using Y encoding what can we decode?
 
@@ -43,41 +43,41 @@ Basic questions:
 
 Present process by which a data vis can be broken down.
 What data symbols are being used?  (simple or complex)
-What mappings are being used? 
+What encodings are being used? 
 What do we want to decode? (data or summaries)
-If mapping back to raw data, are the mappings accurate?
-What can be mapped back to?
-Are mappings congruent with data?
+If encoding back to raw data, are the encodings accurate?
+What can be encoded back to?
+Are encodings congruent with data?
 
 ...
 
 List of questions to evaluate a data vis (maybe nest these a bit):
 
 * What do you want the viewer to be able to decode?
-* Do the mappings support that goal?
+* Do the encodings support that goal?
 
 * What are the data variables
-* What visual features are they mapped to
+* What visual features are they encoded to
 * What type of data
 * Can the visual features represent the data
 * Is there the capacity to represent all categories
 * How accurate are the decodings
-* Is there congruence or dissonance in the mapping
-* Mapping data or data summary
+* Is there congruence or dissonance in the encoding
+* Encoding data or data summary
 * Do visual features interact
 * Are there emergent features
 * Is the data symbol a visual shape
 * Is that appropriate
 * A visual object
 * Is that appropriate
-* Learned mappings somehow (distinct from implicit mappings)
+* Learned encodings somehow (distinct from implicit encodings)
 
 * Do all visual differences correspond to differences in the data?
 * Are all differences in the data represented by visual differences? 
 
-* Does each data value map to its own data symbol
+* Does each data value encode to its own data symbol
   If not, individual data values may be difficult to decode 
-* Do multiple data values map to a single data symbol
+* Do multiple data values encode to a single data symbol
   If not, data summaries may be difficult to decode 
 
 
@@ -123,7 +123,7 @@ versus the winning score for Tier One nations at Rugby World Cup matches.
 The hemisphere of the losing team is encoded as the colour of the data
 points and a trend line has been added for each hemisphere.
 
-The trend lines are mappings of data summaries, least-squares
+The trend lines are encodings of data summaries, least-squares
 regressions, to line data symbols.  The data summaries consist
 of intercept and slope values, which are encoded as the vertical positions
 and the angles of the lines, respectively (@fig-stat-vis-decode).
@@ -167,8 +167,8 @@ ggplot(rwcWinner, aes(scored, scored - conceded, colour=oppSphere)) +
 
 @fig-loess-smooth shows the same data as @fig-lm-smooth, but this time
 there are curved trend lines added rather than straight trend lines.[^loess]
-The curves are mappings of data summaries again, but this time 
-loess model fits.  This means that the mapping involves a series
+The curves are encodings of data summaries again, but this time 
+loess model fits.  This means that the encoding involves a series
 of predicted values encoded as horizontal and vertical positions for
 the curve.  In other words, the data summaries are encoded as visual features
 that produce a visual shape
@@ -254,7 +254,7 @@ broken down by airline.[^lvplot]
 
 We will use the information in this book to analyse the data visualisation
 in @fig-lv-default.  We will break @fig-lv-default down into 
-the mappings that are being used and the effectiveness of those mappings.
+the encodings that are being used and the effectiveness of those encodings.
 
 ```{r}
 #| echo: false
@@ -307,7 +307,7 @@ those limits shown as outliers.
 
 The letter-value plot is an example of a novel data visualisation, so
 this provides a good opportunity to analyse whether a letter-value plot
-is an effective mapping of information.[^strawman]
+is an effective encoding of information.[^strawman]
 
 [^strawman]:
     In order to incorporate as many points as possible,
@@ -350,7 +350,7 @@ we will call *letter-value* symbols, to
 represent the distribution of the data values; and
 very simple data points, which represent the outliers (if any).
 
-### Mapping visual features
+### Encoding visual features
 
 In @fig-lv-default, the airline (Carrier), qualitative data values,
 are encoded as the horizontal **position** of the letter-value symbols.
@@ -358,7 +358,7 @@ The encoding of airline as the position of data symbols
 is very effective;  we can easily differentiate between the
 airlines.
 
-The other data values, the taxi times, are mapped to the
+The other data values, the taxi times, are encoded to the
 letter-value data symbols within the plot.
 However, the letter-value plot encodes **data summaries**---letter 
 values---rather 
@@ -452,14 +452,14 @@ It is even possible to rapidly decode numbers of outliers
 thanks to the small number of data symbols involved
 (@sec-visual-summaries).
 
-@tbl-lv-encodings summarises the mappings that are involved in a 
+@tbl-lv-encodings summarises the encodings that are involved in a 
 letter-value plot.
 There are several effective encodings for both quantitative and qualitative
 data values, but the encoding of data density and the encoding of
 letter-value depth both lose some information.
 One overall point is that this is quite a large
 number of encodings for a single data visualisation.  This means that
-the mappings in @fig-lv-default produce a relatively complex data
+the encodings in @fig-lv-default produce a relatively complex data
 visualisation.  There are many visual features changing, which
 makes each individual encoding in @fig-lv-default more
 difficult to decode (@sec-differences).  Compare this with
@@ -477,10 +477,10 @@ simpler data visualisation because it involves fewer changes in visual features.
 | taxi density | summary of taxi | quantitative | colour (luminance) |
 | fourth letter value | summary of letter value | qualitative | colour (chroma) |
 
-The mappings involved in a letter-value plot.
+The encodings involved in a letter-value plot.
 :::
 
-### Combining mappings
+### Combining encodings
 
 There is one obvious interaction between encodings in @fig-lv-default.
 The width of the rectangles (letter-value depth) and the height of the
@@ -512,7 +512,7 @@ more than the proportion of the data that lies between the top two letter
 values.
 In other words, the area of the rectangles is actually *misleading*.
 
-There is also a **redundant mapping** in @fig-lv-default (@sec-redundant).
+There is also a **redundant encoding** in @fig-lv-default (@sec-redundant).
 Because the depth of a letter value is related to the 
 order of the letter value,
 both the luminance of each rectangle in the letter-value symbol
@@ -574,7 +574,7 @@ features.
 For example, we can decode *whether* the distribution is symmetric or skewed,
 but we cannot decode *how* skewed the distribution is.
 
-### Mapping scales
+### Encoding encodings
 
 We have already discussed that the y-axis scale is non-linear.
 The square root of taxi times, rather then the raw taxi times, are encoded 
@@ -646,7 +646,7 @@ letter-value data symbols.  There is no guide that explains how
 the depth of the letter values is encoded as the width of the 
 letter-value data symbols.
 
-### Mapping structure
+### Encoding structure
 
 Another problem with the legend in @fig-lv-default is that
 the squares within the legend are not consistent with the
@@ -675,12 +675,12 @@ of @fig-lv-default that we discussed earlier.
 ### Building something better?
 
 Having used the information in this book to
-identify a number of problems with the mappings in @fig-lv-default,
+identify a number of problems with the encodings in @fig-lv-default,
 we now attempt to use the information 
 to make improvements to @fig-lv-default.
 
 @fig-lv-zoom shows a data visualisation that is based on the same data
-taxi data as @fig-lv-default, but uses a different set of mappings.
+taxi data as @fig-lv-default, but uses a different set of encodings.
 One solution to the complexity of @fig-lv-default
 would be to avoid multiple encodings by 
 producing several, simpler data visualisations for different purposes.
@@ -809,7 +809,7 @@ popViewport()
   that shows the distribution below the median with a higher-resolution
   scale.
 
-* Taxi times are mapped to a letter-value data symbol for each airline
+* Taxi times are encoded to a letter-value data symbol for each airline
   based on the letter values and the 
   data density.  The total area of each 
   letter-value data symbol is the same and the narrowness of the data

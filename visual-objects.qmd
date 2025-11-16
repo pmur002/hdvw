@@ -11,9 +11,9 @@ source("common.R")
 number of tries for countries
 at the 2023 Rugby World Cup (@tbl-rwc-2023).
 This data visualisation is similar to @fig-scatter, but it adds an
-extra mapping.  Country names are encoded as the **pattern** 
+extra encoding.  Country names are encoded as the **pattern** 
 of the data symbols.
-This is a reasonable mapping, despite the large number of different
+This is a reasonable encoding, despite the large number of different
 countries, because each different shape only appears once.
 We are able to distinguish all countries from each other and,
 thanks to the legend, we can identify individual countries.
@@ -301,7 +301,7 @@ The data symbol in this visualisation is a little unusual; each
 country is represented by a combination of circles, curves, and lines
 that together produce a **visual object** that resembles a face
 (@fig-data-vis-obj-stat-decode).
-The mappings in this visualisation are also a little unusual.
+The encodings in this visualisation are also a little unusual.
 The number of points scored is encoded as the **curvature** of the
 smile, the number of tries is encoded as the **angle** of the eye brows,
 and the number of clean breaks is encoded as the horizontal **position** of 
@@ -346,7 +346,7 @@ We can encode data values as the visual features of a complex data symbols that
 produces a complex visual objects.
 :::
 
-The mappings in a Chernoff face are *not* very accurate (see @sec-accuracy;
+The encodings in a Chernoff face are *not* very accurate (see @sec-accuracy;
 **curvature** is ranked *below* colour in terms of accuracy),[^curvature] so
 Cheroff faces are *not* very effective for 
 decoding raw data values.
@@ -571,7 +571,7 @@ ggplot(districts) +
           axis.text=element_blank())
 ```
 
-> A choropleth map is effective because it maps geographic regions to
+> A choropleth map is effective because it encodes geographic regions to
   familiar visual objects that resemble the real world regions.
 
 A weakness of @fig-map is that it encodes the **quantitative** crime rate
@@ -622,7 +622,7 @@ but there is potential for larger polygons
 to be erroneously decoded as larger crime rates.
 
 Two alternative approaches are shown in @fig-map-alt.
-These both retain the region shapes of the map, but map
+These both retain the region shapes of the map, but encode
 crime rates to the **area** of circles or the **length** of bars.
 These data symbols have a spatial arrangement that corresponds 
 to the real-world arrangement of police districts
@@ -785,7 +785,7 @@ ggplot(districts) +
 
 The cartoon villians are another example of **visual objects**.
 They (crudely) convey the concepts of crime and criminals.
-However, they are *not* **data symbols** because there is no mapping 
+However, they are *not* **data symbols** because there is no encoding 
 from the raw data to the cartoon villians.  Their position is
 unrelated to the data, their colour is unrelated to the data, and
 their size is unrelated to the data.
@@ -1191,7 +1191,7 @@ swap the Australian and New Zealand flags---we not only
 introduce confusion, but a misleading decoding 
 (@fig-obj-dissonant-decode).
 This is similar to the problem of
-dissonant mappings (@sec-dissonance and @fig-dissonant-decode).
+dissonant encodings (@sec-dissonance and @fig-dissonant-decode).
 
 ::: {#fig-obj-dissonant-decode}
 ::: {.content-visible when-format=pdf}
@@ -1240,7 +1240,7 @@ flags will vary with nationality and age, for example.
 :::
 
 If we encode data values using data symbols that are complex visual objects,
-but there is no learned decoding, the mapping will be ineffective
+but there is no learned decoding, the encoding will be ineffective
 because there is no decoding back to the data value.
 :::
 

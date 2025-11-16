@@ -8,14 +8,14 @@ source("common.R")
 # Visual Shapes {#sec-visual-shapes}
 
 All of the data visualisations that we have considered so far
-have mapped a **single data value** from one or more variables
+have encoded a **single data value** from one or more variables
 to a **single data symbol** (@fig-multivariate-symbol-a).
-For example, a bar plot like @fig-bar maps the number of offenders
+For example, a bar plot like @fig-bar encodes the number of offenders
 for one ethnic group to one
-bar.  A scatter plot like @fig-scatter maps the number of clean breaks
+bar.  A scatter plot like @fig-scatter encodes the number of clean breaks
 and the number of tries for one team to one data point.
 
-In this chapter, we consider data visualisations that map **multiple
+In this chapter, we consider data visualisations that encode **multiple
 data values** from one or more variables to a **single data symbol**
 (@fig-multivariate-symbol-b).
 In this chapter, we begin to consider more complex data symbols
@@ -25,11 +25,11 @@ that produce **visual shapes**.[^point-shape]
     In this chapter, we focus on data symbols that represent multiple
     sets of data values, like lines.
     It could be argued that there are data symbols that are visual shapes
-    that arise from mapping a single, qualitative data value 
+    that arise from encoding a single, qualitative data value 
     to a data symbol, for example,
     different data points---circles versus triangles versus squares---in 
     a scatter plot.
-    However, in this book, that case is referred to as a mapping
+    However, in this book, that case is referred to as a encoding
     from qualitative data value to the *pattern*---a basic visual
     feature---of a data symbol (@sec-visual-features).
 
@@ -45,21 +45,21 @@ that produce **visual shapes**.[^point-shape]
 :::
 
 ::: {.content-visible when-format=html layout-ncol=2}
-![Each row of data values maps to one data symbol.](Mappings/mapping-1-2-1-2.png){#fig-multivariate-symbol-a}
+![Each row of data values encodes to one data symbol.](Mappings/mapping-1-2-1-2.png){#fig-multivariate-symbol-a}
 
-![Multiple rows of data values map to one data symbol.](Mappings/mapping-2-2-1-2.png){#fig-multivariate-symbol-b}
+![Multiple rows of data values encode to one data symbol.](Mappings/mapping-2-2-1-2.png){#fig-multivariate-symbol-b}
 :::
 
 \(a) A simple data symbol, like a bar in a bar plot or a data point in a
-scatter plot involves mapping **one** row of data values
+scatter plot involves encoding **one** row of data values
 to the visual features of 
 **one** data symbol;  a single pair of data values
 produces a single data symbol (this is a reproduction of the diagram in 
 @fig-two-visual-features).
-\(b) A more complex data symbol is produced if we map
+\(b) A more complex data symbol is produced if we encode
 **multiple** rows of data values to the 
 visual features of **one** data symbol.
-Multiple data values from `x` and `y` are mapped to the visual
+Multiple data values from `x` and `y` are encoded to the visual
 features, `a` and `b`, of a single data symbol.
 Multiple pairs of values produce a single data symbol.
 :::
@@ -88,9 +88,9 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-There are some familiar mappings in this data visualisation: year
-is mapped to horizontal **position**, the number of offenders
-is mapped to vertical **position**, and the ethnic group is mapped
+There are some familiar encodings in this data visualisation: year
+is encoded to horizontal **position**, the number of offenders
+is encoded to vertical **position**, and the ethnic group is encoded
 to **colour**.
 However, the **data symbols** in this data visualisation, the coloured lines,
 are different
@@ -124,14 +124,14 @@ in each of the coloured lines.[^Visual_Pattern_Rec]
 ![](Diagrams/data-vis-shape.png)
 :::
 
-If we map multiple data values to multiple visual features of
+If we encode multiple data values to multiple visual features of
 a single data symbol, like in a line plot, 
 we create a smaller number of more complex data symbols, **visual shapes**,
 that contain a larger amount of information.
 :::
 
 By comparison, in @fig-no-line, 
-which maps each data value to its own data symbol,
+which encodes each data value to its own data symbol,
 it is much harder to decode the slopes, curves, peaks, and valleys.
 Despite the colours of the data symbols, it is even harder
 to group the different sets of data symbols together;
@@ -181,7 +181,7 @@ change, and local maxima and minima.[^lines-as-shapes]
 ![](Diagrams/data-vis-shape-decode.png)
 :::
 
-If we map data values to a **visual shape**
+If we encode data values to a **visual shape**
 that contains a large amount of information,
 then we may be able to decode higher-level **data summaries**.
 :::
@@ -223,21 +223,21 @@ data value as a basic visual feature of a single data symbol---the
 length of a bar---so we can easily decode the individual raw data values
 from the bars.
 
-This deficiency is significant because the main mappings in a line plot
+This deficiency is significant because the main encodings in a line plot
 are from **quantitative** data values to (horizontal and vertical) **position**.
-We know from @sec-mapping-visual-features that these should be very
-effective mappings that allow us to accurately decode the raw data values.
-However, in a line plot, we are not mapping a single data value to a
+We know from @sec-encoding-visual-features that these should be very
+effective encodings that allow us to accurately decode the raw data values.
+However, in a line plot, we are not encoding a single data value to a
 basic visual feature of a single, simple shape.  Instead, a single data value 
-is being mapped, along with many other values,
+is being encoded, along with many other values,
 to a basic visual feature of a complicated shape.  In effect, the
 individual data values lose their individual identity.[^non-injective]
 
 [^non-injective]:
     @Ziemkiewicz2009 refer to this as a *non-injective* encoding
     and point out that it makes it impossible for there to be a
-    decoding, because multiple data values map to the same
-    data symbol.  This is in contrast to a *bijective* mapping,
+    decoding, because multiple data values encode to the same
+    data symbol.  This is in contrast to a *bijective* encoding,
     which is one-to-one between data values and data symbols
     (@sec-bar).
 
@@ -257,13 +257,13 @@ individual data values lose their individual identity.[^non-injective]
     unnecessary mental effort, it is possible to recover the "hidden"
     data value, but we can imagine 
     an even more pathological demonstration which would 
-    map two data values to a single bar, without mapping one of the data
+    encode two data values to a single bar, without encoding one of the data
     values to its own bar.  In that case it would be
     completely impossible to decode the two data values from the 
     single bar.
 
 > One reason why a line plot is *less* effective for decoding
-  raw data values is because each raw data value is not mapped to its
+  raw data values is because each raw data value is not encoded to its
   own data symbol.
 
 The creation of visual shapes from multiple data values
@@ -304,7 +304,7 @@ between positions.
 
 Like @fig-line, we can decode overall trends from the line data symbols,
 but we can also decode individual data values more easily because
-now every individual data value is also mapped to its own data symbol.
+now every individual data value is also encoded to its own data symbol.
 By employing both simple data symbols that encode individual data values
 and complex data symbols that encode multiple data values as visual
 shapes, we get the best of both worlds.
@@ -349,15 +349,15 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-Also like a histogram, a density plot maps **data summaries**,
+Also like a histogram, a density plot encodes **data summaries**,
 rather than raw data values,
 to visual features (@tbl-density-stats).
 In the case of a histogram, the data summary values are counts within bins
 (@tbl-hist-stats) and each data summary produces a separate bar.
 In the case of a density plot, the data summary produces density estimates
-and these are mapped to a single data symbol, a line, to create
+and these are encoded to a single data symbol, a line, to create
 a **visual shape**.
-The density estimates are mapped to the horizontal and vertical **positions**
+The density estimates are encoded to the horizontal and vertical **positions**
 of a single line data symbol.
 The visual shape allows us to decode summaries of the density estimates.
 For example, whether there is a single maximum density and how the density
@@ -367,7 +367,7 @@ changes to either side of that peak.
 #| echo: false
 #| message: false
 #| label: tbl-density-stats
-#| tbl-cap: A table of density estimates at a sample of values over the range of the number of points scored by Tier One nations in Rugby World Cup matches.  These data summaries are the values that are mapped to visual features to produce the density plot in @fig-density.  There are 512 rows of values, but only the first 6 are shown here.
+#| tbl-cap: A table of density estimates at a sample of values over the range of the number of points scored by Tier One nations in Rugby World Cup matches.  These data summaries are the values that are encoded to visual features to produce the density plot in @fig-density.  There are 512 rows of values, but only the first 6 are shown here.
 d <- density(rwcAll$scored, from=min(rwcAll$scored), to=max(rwcAll$scored))
 dStats <- cbind(scored=d$x, density=d$y)
 kable(head(dStats), digits=c(2, 4))
@@ -395,7 +395,7 @@ and where the peaks occur).
 ![](Diagrams/data-stat-vis-shape-stat.png)
 :::
 
-A density plot maps data summaries to visual features to create a visual
+A density plot encodes data summaries to visual features to create a visual
 shape from which we can decode **summaries** of the data summaries.
 :::
 
@@ -489,7 +489,7 @@ is more effective for decoding **data summaries** rather than decoding
 the individual data values.
 
 However, the examples that we have seen in @fig-line and 
-@fig-multiple-density also involve another mapping: qualitative
+@fig-multiple-density also involve another encoding: qualitative
 data values, like ethnic group or hemisphere, are encoded as the
 **colour** of the lines.
 This encoding is consistent across the entire data symbol.
@@ -675,10 +675,10 @@ decoding absolute rates of change in the data.[^slope-accuracy]
 @fig-box-shape shows box plots of the number of points scored by
 Tier One nations at Rugby World Cup matches.
 We have discussed box plots previously as examples of data visualisations
-that map data summaries to data symbols (@sec-box-plot).
+that encode data summaries to data symbols (@sec-box-plot).
 For example, the median points scored is encoded as the horizontal position of
 a thick vertical line for each team.
-The only raw data values that are directly mapped are the outliers,
+The only raw data values that are directly encoded are the outliers,
 which are encoded as the horizontal position of data points for a few teams.
 A box plot is effective for decoding the median for each team
 because the median has been encoded as basic visual features of 
@@ -694,7 +694,7 @@ ggplot(rwcScored) +
     geom_boxplot(aes(scored, team))
 ```
 
-Box plots are also examples of mapping more than one data value 
+Box plots are also examples of encoding more than one data value 
 (or data summary) to a single data symbol.
 For each team, we have a complex data symbol made up of a rectangle and
 horizontal and vertical lines, plus possibly some data points.
@@ -767,7 +767,7 @@ useful if the data summary is appropriate and not misleading
 ![](Diagrams/data-vis-shape-lie.png)
 :::
 
-Mapping data values to the visual features of a complex shape 
+Encoding data values to the visual features of a complex shape 
 may not be effective if the complex shape decodes to unhelpful
 or misleading information.
 :::
@@ -811,7 +811,7 @@ ggplot(df) +
           aspect.ratio=1)
 ```
 
-## Non-linear mappings {#sec-shape-non-linear}
+## Non-linear encodings {#sec-shape-non-linear}
 
 @fig-arrivals shows time series plots of the number of 
 international arrivals to New Zealand over the last century.[^peter-ellis]
@@ -1036,7 +1036,7 @@ and potentially misleading.
 
 ## Summary
 
-Mapping multiple rows of data values to a single data symbol produces
+Encoding multiple rows of data values to a single data symbol produces
 a **visual shape**, like a line on a line plot.
 
 The main benefit of a data symbol that is a visual shape
@@ -1049,7 +1049,7 @@ to decoding raw data values from a simple data symbol like a bar.
 
 One danger with visual shapes is that they depend on aspect ratio 
 and scale.
-The same mappings can be made to decode to different data summaries,
+The same encodings can be made to decode to different data summaries,
 so we are responsible for selecting an appropriate aspect ratio and scale.
 
 Another danger is that a visual shape may not necessarily convey 

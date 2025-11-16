@@ -5,12 +5,12 @@
 source("common.R")
 ```
 
-# Congruent Mappings {#sec-congruence}
+# Congruent Encodings {#sec-congruence}
 
 In previous chapters, we have seen that,
 part of the reason why some well-known plots, like
 bar plots, are effective is because they 
-map data values to the basic visual features of a data symbol.
+encode data values to the basic visual features of a data symbol.
 For example, encoding the number of youth offenders as the 
 **length** of a bar in a bar plot (@fig-bar-district).
 We have also seen that basic visual features like **length**
@@ -20,7 +20,7 @@ from those visual features.
 The purpose of this chapter is to show that,
 in order to understand the effectiveness
 of a data visualisation, we need to consider more
-than just the accuracy or capacity of our mappings from 
+than just the accuracy or capacity of our encodings from 
 data values to basic visual features.
 
 ## Implicit decodings {#sec-implicit}
@@ -35,7 +35,7 @@ In other words, there is an **implicit decoding** from the lengths
 of the lines to data values (@fig-implicit-decode).[^visual-type-callback]
 
 [^visual-type-callback]:
-    These implicit mappings are part of the reason why different visual
+    These implicit encodings are part of the reason why different visual
     features are appropriate for encoding quantitative verus
     qualitative data values.  The length of a data symbol is appropriate
     for encoding quantitative data values because we implicitly 
@@ -68,7 +68,7 @@ encoded any data values.
 :::
 
 When an implicit decoding exists,
-we can produce a more effective mapping by building upon
+we can produce a more effective encoding by building upon
 the implicit decoding.
 We can explicitly encode data values as visual features in such a way that
 the decoding is **congruent** with the implicit decoding, in the sense
@@ -93,7 +93,7 @@ that we explicitly encoded
     The latter was focused on a comparison of plots versus tables
     (plots for spatial comparisons and tables for more complex
     cognitive tasks involving symbolic reasoning),
-    but it is analogous to the idea of congruent mappings.
+    but it is analogous to the idea of congruent encodings.
 
 ::: {#fig-congruent-decode}
 ::: {.content-visible when-format=pdf}
@@ -335,7 +335,7 @@ ggplot(temp) +
 In @sec-differences we saw that the visual system is very
 sensitive to *differences*, 
 particularly when everything else remains the *same*.
-This means that mapping *changes* in data values to *changes* in 
+This means that encoding *changes* in data values to *changes* in 
 data symbols 
 will be effective because the visual system will notice the differences
 in the data symbols.
@@ -358,7 +358,7 @@ the same.
 > Another reason why bar plots are effective is because the bars
   differ in length, but are otherwise the same.
 
-## Dissonant mappings {#sec-dissonance}
+## Dissonant encodings {#sec-dissonance}
 
 The fact that **length** and **area** implicitly convey amounts means
 that care must be taken *not* to confuse that association.[^dissonant-illusion]
@@ -463,7 +463,7 @@ if we create visual dissonance.[^dissonance]
 
 If we fail to make our explicit encodings 
 congruent with any implicit encodings---if we create a
-**dissonant** mapping---we can make it harder
+**dissonant** encoding---we can make it harder
 and more confusing to decode a data visualisation because
 there is more than one possible decoding
 (@fig-dissonant-decode).
@@ -478,13 +478,13 @@ there is more than one possible decoding
 ![](Diagrams/dissonant-decode.png)
 :::
 
-If we explicitly map data values to visual features, but the
-visual features have an implicit mapping to different data values,
+If we explicitly encode data values to visual features, but the
+visual features have an implicit encoding to different data values,
 we can cause confusion and make it harder to effectively
 decode data values from visual features.
 :::
 
-We saw in @sec-same-same that we want to map differences in data values
+We saw in @sec-same-same that we want to encode differences in data values
 to differences in visual features *and* keep everything else the
 same.  Failing to follow that approach will make it harder to 
 perceive changes in the data values.
@@ -546,7 +546,7 @@ ggplot(old) +
   This plot is based on a data visualisation from the New Zealand Listener 
   October 14-20 2023.
 
-> A data visualisation is *not* effective if it contains mappings
+> A data visualisation is *not* effective if it contains encodings
   that are dissonant because that can cause distraction and slower and/or
   incorrect **decoding** of data values from visual features.
 
@@ -556,7 +556,7 @@ ggplot(old) +
 thing that the Trump
 administration had done, comparing results in February to results in
 September.
-In terms of mappings, this bar plot makes good use of (vertical) **position** 
+In terms of encodings, this bar plot makes good use of (vertical) **position** 
 and (horizontal) **length** to encode different policy issues, the
 difference in dates, and the percent of respondents who voted for
 each policy.
@@ -695,7 +695,7 @@ addition of jittering is a potential source of confusion.
 The effectiveness of a data visualisation may depend on more than
 just the accuracy and capacity of visual features.
 
-A **congruent** mapping is one where data values are *explicitly* encoded in
+A **congruent** encoding is one where data values are *explicitly* encoded in
 a way that is consistent with an *implicit* decoding of the visual feature.
 
 A data visualisation will be more effective if it is visually congruent, for
@@ -703,7 +703,7 @@ example,
 data symbols are larger for larger data values or 
 data symbols only change if the data values change.
 
-A **dissonant** mapping is one where data values are *explicitly*
+A **dissonant** encoding is one where data values are *explicitly*
 encoded in a way that is *inconsistent* with an *implicit* decoding.
 
 A data visualisations will be less effective if it is visually

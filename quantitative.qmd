@@ -9,7 +9,7 @@ source("common.R")
 
 @fig-bar-district shows a bar plot of the total number of offenders
 in each police district in New Zealand (for ages 14 to 16 and
-from 2011 to 2021).  For the reasons outlined in @sec-mapping-visual-features
+from 2011 to 2021).  For the reasons outlined in @sec-encoding-visual-features
 and @sec-position),
 this data visualisation is effective for
 decoding the number of offenders in different police districts
@@ -37,7 +37,7 @@ ggplot(crimeTemp) +
 
 @fig-bar-district-ordered shows a bar plot of the same data, but with the
 bars ordered from longest to shortest.  This data visualisation uses
-the same mappings as @fig-bar-district---police districts are encoded
+the same encodings as @fig-bar-district---police districts are encoded
 as the vertical positions of the bars and the total counts
 are encoded as the lengths of the bars---which means that it is also
 effective for comparing the total number of offenders between 
@@ -59,11 +59,11 @@ ggplot(crimeDistrictTotal) +
 However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
 for some comparisons.  For example, it is easier to compare the Northland
 district with the Tasman district in @fig-bar-district-ordered.
-The fact that two data visualisations with the same mappings
+The fact that two data visualisations with the same encodings
 can have a different effectiveness suggests that there is more to know about
 how different visual features work.
 
-This chapter covers some more details about mappings that encode data values
+This chapter covers some more details about encodings that encode data values
 as **length**.
 
 ## The distance effect {#sec-distance-effect}
@@ -198,9 +198,9 @@ kable(head(crimeGroupTable, row.names=FALSE))
 for each ethnic group (qualitative) and
 for each year from 2011 to 2021 (treated here as
 qualitative, or at least discrete).
-In this data visualisation, the number of offenders is mapped to 
-the lengths of the bars, the years are mapped to the horizontal
-**position** of the bars, the ethnic groups are mapped to 
+In this data visualisation, the number of offenders is encoded to 
+the lengths of the bars, the years are encoded to the horizontal
+**position** of the bars, the ethnic groups are encoded to 
 the colours of the bars, and the bars are stacked vertically.
 
 The problem that we face in this situation is that there are 

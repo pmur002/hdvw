@@ -5,14 +5,14 @@
 source("common.R")
 ```
 
-# Multiple Mappings
+# Multiple Encodings
 
 @fig-multiple shows a data visualisation of the performance measures
 for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
 This visualisation is different from anything we have seen previously
-because it involves **multiple mappings**.
+because it involves **multiple encodings**.
 The data symbol in this case is a simple data point, but we have
-mapped data values to *five* different visual features of each data point.
+encoded data values to *five* different visual features of each data point.
 
 The number of clean breaks is encoded as the horizontal **position** of 
 the data points and
@@ -37,7 +37,7 @@ ggplot(RWCperGame) +
           legend.frame=element_rect(colour="black", linewidth=.2))
 ```
 
-@fig-multiple is effective in some ways because some of the mappings
+@fig-multiple is effective in some ways because some of the encodings
 involve effective visual features. For example, we can easily decode
 the number of clean breaks and the
 number of tries from
@@ -46,7 +46,7 @@ We can also decode a correlation between clean breaks and tries
 from the emergent feature of **position
 in space** (@sec-integral).
 
-However, other mappings are less effective.  For example, it is 
+However, other encodings are less effective.  For example, it is 
 less easy to accurately decode number of points scored from size 
 and even
 harder to decode the number of runs made from colour.
@@ -81,17 +81,17 @@ individual variables at the same time?
 
 ## Scatter plot matrices {#sec-splom}
 
-One issue with @fig-multiple is that it attempts to map each data variable
+One issue with @fig-multiple is that it attempts to encode each data variable
 to a separate visual feature.  Once we have used both horizontal
 and vertical **position**, we have to start using less accurate and less
 appropriate visual features, like **area** and **colour** for
 quantitative data values (@sec-accuracy).
-If we attempted to map all of the variables in @tbl-rwc-2023, we could
+If we attempted to encode all of the variables in @tbl-rwc-2023, we could
 actually run out of visual features to use (@fig-visual-features).
 
-An alternative approach is to map more of the data variables
+An alternative approach is to encode more of the data variables
 to the *same* visual feature. 
-In particular, we can map more variables to **position**.[^reuse-pos]
+In particular, we can encode more variables to **position**.[^reuse-pos]
 
 [^reuse-pos]:
     The reuse of position is handled in a variety of ways within
@@ -221,7 +221,7 @@ us to *effortlessly* decode multivariate relationships.
 
 @fig-facet-before shows a line plot of the number of youth offenders per year
 in different Police Districts of New Zealand.
-This visualisation makes use of several effective mappings. 
+This visualisation makes use of several effective encodings. 
 For example, we encode
 year as horizontal position and we encode count as
 vertical position, although the line data symbols are 
@@ -311,7 +311,7 @@ in New Zealand over time, broken down by age group.
 The data symbols are bars.
 The crime rate is encoded as the (vertical) **length** of the bars
 and the year is encoded as the horizontal **position** of the bars.
-These mappings are supplemented by an additional encoding of
+These encodings are supplemented by an additional encoding of
 age as the vertical **position** of the bars.
 In effect, the final vertical position of each bar is
 a complicated encoding of crime rate
@@ -340,7 +340,7 @@ reusing position to encode multiple data values.
 
 The crime rate is again encoded as the lengths of the bars and
 the year is encoded as the horizontal position of the bars.
-These mappings are supplemented by an additional encoding of
+These encodings are supplemented by an additional encoding of
 age as the horizontal position of the bars.
 
 ```{r}
@@ -385,7 +385,7 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-## Non-cartesian mappings {#sec-non-cartesian}
+## Non-cartesian encodings {#sec-non-cartesian}
 
 Another way to encode more variables using **position** is to
 abandon the standard cartesian coordinate system (@sec-cartesian).
@@ -560,11 +560,11 @@ popViewport()
 ```
 
 The parallel coordinates plot in @fig-parallel
-maps data summaries rather than raw data values
+encodes data summaries rather than raw data values
 (@sec-summaries).  All data values are standardised to a range
 between 0 and 1.[^parallel-coords]
 @tbl-parallel-stats shows some of the values that
-are actually mapped to visual features in @fig-parallel.
+are actually encoded to visual features in @fig-parallel.
 Each variable is encoded as a different 
 horizontal **position** and the values within each variable are encoded as
 vertical **position**.  In this way, all quantitative data values
@@ -587,7 +587,7 @@ This means that a visual shape is drawn for each country
 #| echo: false
 #| message: false
 #| label: tbl-parallel-stats
-#| tbl-cap: The data summaries that are mapped to visual features in @fig-parallel.
+#| tbl-cap: The data summaries that are encoded to visual features in @fig-parallel.
 vars <- subset(RWCperGame, 
                select=c("country", "sphere", 
                         "runs", "breaks", "tries", "points"))
@@ -637,7 +637,7 @@ having to add an entire new row and column to a scatter plot matrix.
 
 > A parallel coordinates plot can be effective at identifying 
   high-dimensional groups or correlations
-  because it maps multiple data values from different variables
+  because it encodes multiple data values from different variables
   to a single visual shape.
 
 One major issue with a parallel coordinates plot is that the
@@ -791,11 +791,11 @@ popViewport()
 ```
 
 @fig-profile uses the same data summaries as @fig-parallel
-(@tbl-parallel-stats), and similar mappings: each variable is encoded as
+(@tbl-parallel-stats), and similar encodings: each variable is encoded as
 a different horizontal **position** and the values within each variable
-are encoded as vertical **position** and hemisphere is mapped to 
+are encoded as vertical **position** and hemisphere is encoded to 
 **colour**.  The data symbol is also similar:  multiple data values 
-are mapped to a single data symbol, in this case a polygon.
+are encoded to a single data symbol, in this case a polygon.
 
 The difference in @fig-profile is that, rather than having all of the
 data symbols on the same plot, each data symbol is drawn in its
@@ -813,7 +813,7 @@ adding another country to @fig-profile would take up additional space,
 but no more space would be necessary for a parallel coordinates plot
 like @fig-parallel because we would just add another line.
 
-## Dangers of multiple mappings
+## Dangers of multiple encodings
 
 @fig-multiple showed that the naive approach of just using 
 a separate visual feature for each data variable leads to
@@ -905,7 +905,7 @@ ggplot(df) +
 ## Summary
 
 When we visualise multiple variables at once, it is not
-effective to map each different variable to a different visual feature
+effective to encode each different variable to a different visual feature
 because that usually forces us to make use of a visual feature that is
 either inappropriate or inaccurate.
 

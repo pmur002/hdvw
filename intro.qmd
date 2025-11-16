@@ -116,7 +116,7 @@ Why are some data visualisations more effective than others?
 The purpose of this book is to provide explanations for
 why, when, and how data visualisation works.  
 
-## One big idea: Mappings {#sec-mappings}
+## One big idea: Encodings {#sec-encodings}
 
 @fig-crime and @fig-crime-heatmap are examples of different
 types of data visualisation, a line plot and a heatmap respectively.
@@ -126,26 +126,26 @@ data visualisation on its own, we want to identify underlying
 concepts that help to explain how all data visualisations work.
 
 One concept that we will lean on very heavily is
-the idea of **mappings**:
+the idea of **encodings**:
 how is information being converted 
-into a visual representation?[^mappings]
+into a visual representation?[^encodings]
 
-[^mappings]: 
+[^encodings]: 
     The idea of characterising a data visualisation as a set
-    of *mappings* from data values to visual representations aligns
+    of *encodings* from data values to visual representations aligns
     with ideas from the *Grammar of Graphics* [@wilkinson2005].
 
-The most obvious mapping in a data visualisation involves the
-mapping of **data values** to **data symbols** (@fig-mappings).
+The most obvious encoding in a data visualisation involves the
+encoding of **data values** to **data symbols** (@fig-encodings).
 For example, in @fig-crime, all of the data values for 14-year-olds,
-the number of offenders for each year, have been mapped to an orange 
-line.  The data values for 15-year-olds have been mapped to 
-a blue line and the data values for 16-year-olds have been mapped 
+the number of offenders for each year, have been encoded to an orange 
+line.  The data values for 15-year-olds have been encoded to 
+a blue line and the data values for 16-year-olds have been encoded 
 to a green line. 
-In other words, each row of @tbl-crime is mapped to a 
+In other words, each row of @tbl-crime is encoded to a 
 separate coloured line.
 
-::: {#fig-mappings}
+::: {#fig-encodings}
 ::: {.content-visible when-format=pdf}
 \includegraphics[scale=0.5]{Diagrams/data-sym.png}
 :::
@@ -154,24 +154,24 @@ separate coloured line.
 ![](Diagrams/data-sym.png)
 :::
 
-A data visualisation can be described by the mappings that it employs
+A data visualisation can be described by the encodings that it employs
 to represent data values as data symbols.
 :::
 
 The heatmap of the same data (@fig-crime-heatmap) provides a different
-visual representation because it employs a different mapping.
+visual representation because it employs a different encoding.
 In this case, the data symbol is a rectangle, with one data symbol
 for each combination of age and year, and with the colour of the rectangle
 reflecting the number of offenders of that age for that year.
-In other words, each cell of @tbl-crime is mapped to its own coloured rectangle.
+In other words, each cell of @tbl-crime is encoded to its own coloured rectangle.
 
 The journey that we take throughout this book will involve
 exploring a variety of different ways that information can
-be mapped to a visual representation. 
+be encoded to a visual representation. 
 As much as possible, we will attempt to reduce any data visualisation
-to a set of mappings from different pieces of information 
+to a set of encodings from different pieces of information 
 to visual representations of that information.
-By understanding the different mappings that we can use,
+By understanding the different encodings that we can use,
 we will come to understand why
 some data visualisations are more effective than others.
 
@@ -342,9 +342,9 @@ properties.
 The goal of this document is to explain why some data visualisations
 are more effective than others;  how data visualisation works. 
 
-We will focus on how information is **mapped** to a visual representation.
-We can characterise a data visualisation in terms of the mappings
-that it uses to **encode** data values as data symbols.
+We will focus on how information is **encoded** to a visual representation.
+We can characterise a data visualisation in terms of the encodings
+that it uses to present data values as data symbols.
 
 ---
 

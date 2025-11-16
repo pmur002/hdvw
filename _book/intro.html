@@ -185,19 +185,19 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./congruence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Congruent Mappings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Congruent Encodings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summaries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mapping Summaries</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Encoding Summaries</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./combine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Combining Mappings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Combining Encodings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -209,7 +209,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Mappings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Encodings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -227,7 +227,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mapping Structure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Encoding Structure</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -246,7 +246,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-mappings" id="toc-sec-mappings" class="nav-link active" data-scroll-target="#sec-mappings"><span class="header-section-number">1.1</span> One big idea: Mappings</a></li>
+  <li><a href="#sec-encodings" id="toc-sec-encodings" class="nav-link active" data-scroll-target="#sec-encodings"><span class="header-section-number">1.1</span> One big idea: Encodings</a></li>
   <li><a href="#how-will-it-help" id="toc-how-will-it-help" class="nav-link" data-scroll-target="#how-will-it-help"><span class="header-section-number">1.2</span> How will it help?</a></li>
   <li><a href="#sec-scope" id="toc-sec-scope" class="nav-link" data-scroll-target="#sec-scope"><span class="header-section-number">1.3</span> Scope</a></li>
   <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software"><span class="header-section-number">1.4</span> Software</a></li>
@@ -385,23 +385,23 @@ Figure&nbsp;1.2: A heatmap of the crime rate amongst youth offenders aged 14 to 
 <p>Although <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> is very effective for the questions that we have considered so far, it is far less effective if we are interested in a different question, for example, whether the <em>total</em> crime rate is completely monotonic. Does the <em>sum</em> of the red, blue, and green lines always decrease year on year? In other words, a single data visualisation cannot be effective for all possible questions.</p>
 <p>Suppose that we are interested in what the <em>exact</em> crime rate was for 16-year-olds in 2011. Neither <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> nor <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> is the best option for answering this quesion. The best option in this case is actually <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a>.</p>
 <p>What makes a data visualisation effective? Why are some data visualisations more effective than others? The purpose of this book is to provide explanations for why, when, and how data visualisation works.</p>
-<section id="sec-mappings" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="sec-mappings"><span class="header-section-number">1.1</span> One big idea: Mappings</h2>
+<section id="sec-encodings" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-encodings"><span class="header-section-number">1.1</span> One big idea: Encodings</h2>
 <p><a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> and <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> are examples of different types of data visualisation, a line plot and a heatmap respectively. We will explore many different types of data visualisations throughout the book, but rather than address each type of data visualisation on its own, we want to identify underlying concepts that help to explain how all data visualisations work.</p>
-<p>One concept that we will lean on very heavily is the idea of <strong>mappings</strong>: how is information being converted into a visual representation?<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>The most obvious mapping in a data visualisation involves the mapping of <strong>data values</strong> to <strong>data symbols</strong> (<a href="#fig-mappings" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). For example, in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>, all of the data values for 14-year-olds, the number of offenders for each year, have been mapped to an orange line. The data values for 15-year-olds have been mapped to a blue line and the data values for 16-year-olds have been mapped to a green line. In other words, each row of <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a> is mapped to a separate coloured line.</p>
-<div id="fig-mappings" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>One concept that we will lean on very heavily is the idea of <strong>encodings</strong>: how is information being converted into a visual representation?<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The most obvious encoding in a data visualisation involves the encoding of <strong>data values</strong> to <strong>data symbols</strong> (<a href="#fig-encodings" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). For example, in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>, all of the data values for 14-year-olds, the number of offenders for each year, have been encoded to an orange line. The data values for 15-year-olds have been encoded to a blue line and the data values for 16-year-olds have been encoded to a green line. In other words, each row of <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a> is encoded to a separate coloured line.</p>
+<div id="fig-encodings" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mappings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-encodings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Diagrams/data-sym.png" class="img-fluid figure-img"></p>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mappings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.3: A data visualisation can be described by the mappings that it employs to represent data values as data symbols.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-encodings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: A data visualisation can be described by the encodings that it employs to represent data values as data symbols.
 </figcaption>
 </figure>
 </div>
-<p>The heatmap of the same data (<a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>) provides a different visual representation because it employs a different mapping. In this case, the data symbol is a rectangle, with one data symbol for each combination of age and year, and with the colour of the rectangle reflecting the number of offenders of that age for that year. In other words, each cell of <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a> is mapped to its own coloured rectangle.</p>
-<p>The journey that we take throughout this book will involve exploring a variety of different ways that information can be mapped to a visual representation. As much as possible, we will attempt to reduce any data visualisation to a set of mappings from different pieces of information to visual representations of that information. By understanding the different mappings that we can use, we will come to understand why some data visualisations are more effective than others.</p>
+<p>The heatmap of the same data (<a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>) provides a different visual representation because it employs a different encoding. In this case, the data symbol is a rectangle, with one data symbol for each combination of age and year, and with the colour of the rectangle reflecting the number of offenders of that age for that year. In other words, each cell of <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a> is encoded to its own coloured rectangle.</p>
+<p>The journey that we take throughout this book will involve exploring a variety of different ways that information can be encoded to a visual representation. As much as possible, we will attempt to reduce any data visualisation to a set of encodings from different pieces of information to visual representations of that information. By understanding the different encodings that we can use, we will come to understand why some data visualisations are more effective than others.</p>
 </section>
 <section id="how-will-it-help" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="how-will-it-help"><span class="header-section-number">1.2</span> How will it help?</h2>
@@ -436,7 +436,7 @@ Figure&nbsp;1.3: A data visualisation can be described by the mappings that it e
 <h2 data-number="1.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.5</span> Summary</h2>
 <p>Data visualisations can be incredibly effective for presenting important properties of data values. However, any one data visualisation may only be effective for certain data values and for certain data properties.</p>
 <p>The goal of this document is to explain why some data visualisations are more effective than others; how data visualisation works.</p>
-<p>We will focus on how information is <strong>mapped</strong> to a visual representation. We can characterise a data visualisation in terms of the mappings that it uses to <strong>encode</strong> data values as data symbols.</p>
+<p>We will focus on how information is <strong>encoded</strong> to a visual representation. We can characterise a data visualisation in terms of the encodings that it uses to present data values as data symbols.</p>
 <hr>
 
 
@@ -500,7 +500,7 @@ Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Second edition. New Y
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>The idea of characterising a data visualisation as a set of <em>mappings</em> from data values to visual representations aligns with ideas from the <em>Grammar of Graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The idea of characterising a data visualisation as a set of <em>encodings</em> from data values to visual representations aligns with ideas from the <em>Grammar of Graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>In fact, pie charts have received a lot of hate from all quarters for over a century:</p>
 <p>“In a sense, it might be construed as an insult to a man’s intelligence to show him a pie chart” <span class="citation" data-cites="karstenChartsAndGraphs">Karsten (<a href="#ref-karstenChartsAndGraphs" role="doc-biblioref">1925, p98</a>)</span>.</p>
 <p>“the only worse design than a pie chart is several of them … pie charts should never be used.” <span class="citation" data-cites="tufte1983visual">Tufte (<a href="#ref-tufte1983visual" role="doc-biblioref">1983, p178</a>)</span>.</p>
