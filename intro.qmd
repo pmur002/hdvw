@@ -7,6 +7,17 @@ source("common.R")
 
 # Introduction {#sec-intro}
 
+::: {.actual-quote}
+
+*Visualization is essentially a mapping process from computer representations
+to perceptual representations, choosing encoding techniques to maximize human
+understanding and communication.*[^definition]
+:::
+
+[^definition]:
+    This quote is from an early web resource on data visualisation
+    that was produced by the ACM SIGGRAPH Education Committee [@owen1999].
+
 A data visualisation presents data values in a visual
 format.  In an effective data visualisation, this allows
 properties of the data to be perceived very rapidly and without 
@@ -29,8 +40,8 @@ kable(crimeTable, digits=0)
 ```
 
 By contrast, with a simple line 
-plot data visualisation like @fig-crime we can perceive the trends
-in crime rates easily and immediately.
+plot data visualisation like @fig-crime we can perceive the trends like
+the decrease in crime rates easily and immediately.
 It is also easy to perceive more detailed properties like the fact that
 the trend in crime rates for 16-year-olds is not completely monotonic
 and the fact that
@@ -69,7 +80,7 @@ popViewport()
 this time a heatmap.
 If we use a data visualisation
 like @fig-crime-heatmap, 
-while very basic trends are apparent,
+while very basic trends are apparent, like an overall decrease in crime rate,
 perceiving detailed changes in the crime rates is very much harder
 compared to @fig-crime.
 In other words,
@@ -98,8 +109,9 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-Although @fig-crime is very effective for the questions
-that we have considered so far, it is far less effective if we are interested
+Although @fig-crime is very effective for perceiving 
+trends in crime rates for each age group, 
+it may be less effective if we are interested
 in a different question, for example, whether the *total* crime
 rate is completely monotonic.  Does the *sum* of the red, blue, and green
 lines always decrease year on year?
@@ -116,14 +128,14 @@ Why are some data visualisations more effective than others?
 The purpose of this book is to provide explanations for
 why, when, and how data visualisation works.  
 
-## One big idea: Encodings {#sec-encodings}
+## Two big ideas: Encoding and decoding {#sec-encodings}
 
 @fig-crime and @fig-crime-heatmap are examples of different
 types of data visualisation, a line plot and a heatmap respectively.
 We will explore many different types of data visualisations
 throughout the book, but rather than address each type of 
 data visualisation on its own, we want to identify underlying 
-concepts that help to explain how all data visualisations work.
+concepts that will help to explain how all data visualisations work.
 
 One concept that we will lean on very heavily is
 the idea of **encodings**:
@@ -133,7 +145,7 @@ into a visual representation?[^encodings]
 [^encodings]: 
     The idea of characterising a data visualisation as a set
     of *encodings* from data values to visual representations aligns
-    with ideas from the *Grammar of Graphics* [@wilkinson2005].
+    with the idea of *mappings* from @layered-grammar.
 
 The most obvious encoding in a data visualisation involves the
 encoding of **data values** to **data symbols** (@fig-encodings).
@@ -163,15 +175,53 @@ visual representation because it employs a different encoding.
 In this case, the data symbol is a rectangle, with one data symbol
 for each combination of age and year, and with the colour of the rectangle
 reflecting the number of offenders of that age for that year.
-In other words, each cell of @tbl-crime is encoded to its own coloured rectangle.
+In other words, each cell of @tbl-crime is encoded to its own coloured 
+rectangle.
+
+The second concept that we will lean on heavily is the idea
+of **decoding**:  how is a visual representation converted
+back into information?
+
+The purpose of encoding data values to a particular
+visual representation is to enable the viewer to 
+extract properties of the data very rapidly and very easily.
+For example, if we want the viewer to be able to perceive a decrease in
+crime, it is more effective to 
+encode the data values as lines (@fig-crime),
+rather than a table of numbers (@tbl-crime),
+because the viewer is able to **decode** the decrease in crime
+much more easily from the lines.
+
+In order to produce an effective data visualisation, 
+we need to **encode** data values to data symbols in a way
+that facilitates **decoding** data values from the
+data symbols (@fig-decode).
+
+::: {#fig-decode}
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.5]{Diagrams/data-sym-decode.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Diagrams/data-sym-decode.png)
+:::
+
+The effectiveness of a data visualisation will depend on how
+well our visual system can **decode** from the data symbols to the
+properties of the data.
+:::
 
 The journey that we take throughout this book will involve
 exploring a variety of different ways that information can
-be encoded to a visual representation. 
-As much as possible, we will attempt to reduce any data visualisation
+be **encoded** to a visual representation. 
+We will attempt to reduce any data visualisation
 to a set of encodings from different pieces of information 
 to visual representations of that information.
+
+The effectiveness of a data visualisation will depend on
+how well information can be **decoded** from the visual representation.
 By understanding the different encodings that we can use,
+and how well those encodings can be decoded,
 we will come to understand why
 some data visualisations are more effective than others.
 
@@ -233,7 +283,7 @@ Understanding how data visualisation works will enable us to:
 
 * Critically analyse data visualisations created by others.
 * Decide which data visualisations we should use.
-* Justify our choice of data visualisation.
+* Justify our own choice of data visualisation.
 * Reason about how to improve the effectiveness of a data visualisation.
 * Reason about whether a novel visualisation will be effective.
 
@@ -344,7 +394,12 @@ are more effective than others;  how data visualisation works.
 
 We will focus on how information is **encoded** to a visual representation.
 We can characterise a data visualisation in terms of the encodings
-that it uses to present data values as data symbols.
+that it uses to represent data values as data symbols.
+
+The effectiveness of an encoding depends on how well we can
+**decode** information from a visual representation.
+We will judge a data visualisation in terms of how well
+data values can be recovered from the data symbols.
 
 ---
 

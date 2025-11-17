@@ -246,7 +246,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-encodings" id="toc-sec-encodings" class="nav-link active" data-scroll-target="#sec-encodings"><span class="header-section-number">1.1</span> One big idea: Encodings</a></li>
+  <li><a href="#sec-encodings" id="toc-sec-encodings" class="nav-link active" data-scroll-target="#sec-encodings"><span class="header-section-number">1.1</span> Two big ideas: Encoding and decoding</a></li>
   <li><a href="#how-will-it-help" id="toc-how-will-it-help" class="nav-link" data-scroll-target="#how-will-it-help"><span class="header-section-number">1.2</span> How will it help?</a></li>
   <li><a href="#sec-scope" id="toc-sec-scope" class="nav-link" data-scroll-target="#sec-scope"><span class="header-section-number">1.3</span> Scope</a></li>
   <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software"><span class="header-section-number">1.4</span> Software</a></li>
@@ -276,6 +276,9 @@ div.csl-indent {
 </header>
 
 
+<div class="actual-quote">
+<p><em>Visualization is essentially a mapping process from computer representations to perceptual representations, choosing encoding techniques to maximize human understanding and communication.</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</div>
 <p>A data visualisation presents data values in a visual format. In an effective data visualisation, this allows properties of the data to be perceived very rapidly and without conscious effort. For example, <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a> shows data on the crime rate for youth offenders in New Zealand, for the ages 14 to 16, for each year from 2011 to 2021. With this purely text-based, tabular presentation of the data, it requires considerable time and effort to determine any trends in the crime rates.</p>
 <div class="cell">
 <div id="tbl-crime" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -352,7 +355,7 @@ Table&nbsp;1.1: A table of the number of distinct youth offenders, per 10,000 of
 </figure>
 </div>
 </div>
-<p>By contrast, with a simple line plot data visualisation like <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> we can perceive the trends in crime rates easily and immediately. It is also easy to perceive more detailed properties like the fact that the trend in crime rates for 16-year-olds is not completely monotonic and the fact that the crime rate for 15-year-olds (the blue line) is always greater than the crime rate for 14-year-olds (the red line) and less than the crime rate for 16-year-olds (the green line).</p>
+<p>By contrast, with a simple line plot data visualisation like <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> we can perceive the trends like the decrease in crime rates easily and immediately. It is also easy to perceive more detailed properties like the fact that the trend in crime rates for 16-year-olds is not completely monotonic and the fact that the crime rate for 15-year-olds (the blue line) is always greater than the crime rate for 14-year-olds (the red line) and less than the crime rate for 16-year-olds (the green line).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-crime" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -367,7 +370,7 @@ Figure&nbsp;1.1: A line plot of the crime rate amongst youth offenders aged 14 t
 </div>
 </div>
 </div>
-<p><a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> shows a different data visualisation of the same data, this time a heatmap. If we use a data visualisation like <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>, while very basic trends are apparent, perceiving detailed changes in the crime rates is very much harder compared to <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>. In other words, not all data visualisations are equally effective.</p>
+<p><a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> shows a different data visualisation of the same data, this time a heatmap. If we use a data visualisation like <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>, while very basic trends are apparent, like an overall decrease in crime rate, perceiving detailed changes in the crime rates is very much harder compared to <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>. In other words, not all data visualisations are equally effective.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-crime-heatmap" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -382,13 +385,13 @@ Figure&nbsp;1.2: A heatmap of the crime rate amongst youth offenders aged 14 to 
 </div>
 </div>
 </div>
-<p>Although <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> is very effective for the questions that we have considered so far, it is far less effective if we are interested in a different question, for example, whether the <em>total</em> crime rate is completely monotonic. Does the <em>sum</em> of the red, blue, and green lines always decrease year on year? In other words, a single data visualisation cannot be effective for all possible questions.</p>
+<p>Although <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> is very effective for perceiving trends in crime rates for each age group, it may be less effective if we are interested in a different question, for example, whether the <em>total</em> crime rate is completely monotonic. Does the <em>sum</em> of the red, blue, and green lines always decrease year on year? In other words, a single data visualisation cannot be effective for all possible questions.</p>
 <p>Suppose that we are interested in what the <em>exact</em> crime rate was for 16-year-olds in 2011. Neither <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> nor <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> is the best option for answering this quesion. The best option in this case is actually <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a>.</p>
 <p>What makes a data visualisation effective? Why are some data visualisations more effective than others? The purpose of this book is to provide explanations for why, when, and how data visualisation works.</p>
 <section id="sec-encodings" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="sec-encodings"><span class="header-section-number">1.1</span> One big idea: Encodings</h2>
-<p><a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> and <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> are examples of different types of data visualisation, a line plot and a heatmap respectively. We will explore many different types of data visualisations throughout the book, but rather than address each type of data visualisation on its own, we want to identify underlying concepts that help to explain how all data visualisations work.</p>
-<p>One concept that we will lean on very heavily is the idea of <strong>encodings</strong>: how is information being converted into a visual representation?<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-encodings"><span class="header-section-number">1.1</span> Two big ideas: Encoding and decoding</h2>
+<p><a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> and <a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> are examples of different types of data visualisation, a line plot and a heatmap respectively. We will explore many different types of data visualisations throughout the book, but rather than address each type of data visualisation on its own, we want to identify underlying concepts that will help to explain how all data visualisations work.</p>
+<p>One concept that we will lean on very heavily is the idea of <strong>encodings</strong>: how is information being converted into a visual representation?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>The most obvious encoding in a data visualisation involves the encoding of <strong>data values</strong> to <strong>data symbols</strong> (<a href="#fig-encodings" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). For example, in <a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>, all of the data values for 14-year-olds, the number of offenders for each year, have been encoded to an orange line. The data values for 15-year-olds have been encoded to a blue line and the data values for 16-year-olds have been encoded to a green line. In other words, each row of <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a> is encoded to a separate coloured line.</p>
 <div id="fig-encodings" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -401,42 +404,57 @@ Figure&nbsp;1.3: A data visualisation can be described by the encodings that it 
 </figure>
 </div>
 <p>The heatmap of the same data (<a href="#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>) provides a different visual representation because it employs a different encoding. In this case, the data symbol is a rectangle, with one data symbol for each combination of age and year, and with the colour of the rectangle reflecting the number of offenders of that age for that year. In other words, each cell of <a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a> is encoded to its own coloured rectangle.</p>
-<p>The journey that we take throughout this book will involve exploring a variety of different ways that information can be encoded to a visual representation. As much as possible, we will attempt to reduce any data visualisation to a set of encodings from different pieces of information to visual representations of that information. By understanding the different encodings that we can use, we will come to understand why some data visualisations are more effective than others.</p>
+<p>The second concept that we will lean on heavily is the idea of <strong>decoding</strong>: how is a visual representation converted back into information?</p>
+<p>The purpose of encoding data values to a particular visual representation is to enable the viewer to extract properties of the data very rapidly and very easily. For example, if we want the viewer to be able to perceive a decrease in crime, it is more effective to encode the data values as lines (<a href="#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>), rather than a table of numbers (<a href="#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a>), because the viewer is able to <strong>decode</strong> the decrease in crime much more easily from the lines.</p>
+<p>In order to produce an effective data visualisation, we need to <strong>encode</strong> data values to data symbols in a way that facilitates <strong>decoding</strong> data values from the data symbols (<a href="#fig-decode" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>).</p>
+<div id="fig-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="Diagrams/data-sym-decode.png" class="img-fluid figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: The effectiveness of a data visualisation will depend on how well our visual system can <strong>decode</strong> from the data symbols to the properties of the data.
+</figcaption>
+</figure>
+</div>
+<p>The journey that we take throughout this book will involve exploring a variety of different ways that information can be <strong>encoded</strong> to a visual representation. We will attempt to reduce any data visualisation to a set of encodings from different pieces of information to visual representations of that information.</p>
+<p>The effectiveness of a data visualisation will depend on how well information can be <strong>decoded</strong> from the visual representation. By understanding the different encodings that we can use, and how well those encodings can be decoded, we will come to understand why some data visualisations are more effective than others.</p>
 </section>
 <section id="how-will-it-help" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="how-will-it-help"><span class="header-section-number">1.2</span> How will it help?</h2>
-<p>You may have heard that statisticians hate pie charts.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> But do you know why? Do pie charts have any redeeming features?</p>
+<p>You may have heard that statisticians hate pie charts.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> But do you know why? Do pie charts have any redeeming features?</p>
 <p>Conversely, bar plots are extremely popular, but why are they so good? Knowing more about why different plots work for different situations will help us to make better decisions about when to use what sort of data visualisation.</p>
-<p>There is a lot of useful information and understanding about how data visualisations work, but it is distributed throughout and embedded within a very broad, deep, and detailed data visualisation literature. This book aims to produce a simple, coherent explanation that is accessible to a less expert audience.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>There is a lot of useful information and understanding about how data visualisations work, but it is distributed throughout and embedded within a very broad, deep, and detailed data visualisation literature. This book aims to produce a simple, coherent explanation that is accessible to a less expert audience.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>Understanding how data visualisation works will enable us to:</p>
 <ul>
 <li>Critically analyse data visualisations created by others.</li>
 <li>Decide which data visualisations we should use.</li>
-<li>Justify our choice of data visualisation.</li>
+<li>Justify our own choice of data visualisation.</li>
 <li>Reason about how to improve the effectiveness of a data visualisation.</li>
 <li>Reason about whether a novel visualisation will be effective.</li>
 </ul>
 </section>
 <section id="sec-scope" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="sec-scope"><span class="header-section-number">1.3</span> Scope</h2>
-<p>The focus of this document is <strong>static</strong> data visualisations for <strong>presentation</strong>. The assumption is that our data values have an interesting property and we want to produce a display that makes it easy and efficient for viewers to perceive that property. Some of the information that we cover will also apply to interactive graphics and to exploratory graphics, but the specific requirements of those types of data visualisation will not be addressed.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>The focus of this document is <strong>static</strong> data visualisations for <strong>presentation</strong>. The assumption is that our data values have an interesting property and we want to produce a display that makes it easy and efficient for viewers to perceive that property. Some of the information that we cover will also apply to interactive graphics and to exploratory graphics, but the specific requirements of those types of data visualisation will not be addressed.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <p>There is also an emphasis on <strong>statistical graphics</strong> in this book, which is characterised by the use of abstract geometric symbols, such as circles and rectangles, to represent data values, as opposed to scientific graphics, which is focused more on realistic representations of physical objects, or cartography, which is focused on the geographic context of data values.</p>
 <p>This document is also focused on what <strong>vision science</strong> has to tell us about effective data visualisation. We will consider factors that influence how rapidly and how accurately information can be extracted from a data visualisation. This will include findings from a broad range of research, encompassing Statistics, Computer Science, Psychology, and Cartography.</p>
-<p>However, this document does not cover all fields of research that impact on data visualisation. We will not, for example, address the ethical use of data visualisation, beyond a basic assumption that we want to faithfully represent the properties of the data.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
-<p>This document is also aimed at a numerate audience, so we assume an appreciation of the importance of collecting the right data in the right way for the questions that we hope to answer.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>However, this document does not cover all fields of research that impact on data visualisation. We will not, for example, address the ethical use of data visualisation, beyond a basic assumption that we want to faithfully represent the properties of the data.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>This document is also aimed at a numerate audience, so we assume an appreciation of the importance of collecting the right data in the right way for the questions that we hope to answer.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <p>It is also important to acknowledge that vision science cannot yet tell us everything about how data visualisation works. However, what is known will help us to have some understanding of why some data visualisations are so effective and others are less effective.</p>
 <p>As well as being a synthesis of a large range of data visualisation research, this document is also a simplification of that research. Some details are smoothed over and some details are just left out. The goal is to provide a framework that is easy to understand by non-experts and easy to apply to a broad range of data visualisations. References to the relevant literature are provided in footnotes so that the interested, or sceptical, reader can dig deeper.</p>
 </section>
 <section id="software" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="software"><span class="header-section-number">1.4</span> Software</h2>
 <p>This book is about the choices that go into <em>designing</em> a data visualisation. It does not cover how to use software to implement those design choices and <em>create</em> a data visualisation.</p>
-<p>All data visualisations in this book were created with R.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The code for all data visualisations is available in the github repository for this book.</p>
+<p>All data visualisations in this book were created with R.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> The code for all data visualisations is available in the github repository for this book.</p>
 </section>
 <section id="summary" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.5</span> Summary</h2>
 <p>Data visualisations can be incredibly effective for presenting important properties of data values. However, any one data visualisation may only be effective for certain data values and for certain data properties.</p>
 <p>The goal of this document is to explain why some data visualisations are more effective than others; how data visualisation works.</p>
-<p>We will focus on how information is <strong>encoded</strong> to a visual representation. We can characterise a data visualisation in terms of the encodings that it uses to present data values as data symbols.</p>
+<p>We will focus on how information is <strong>encoded</strong> to a visual representation. We can characterise a data visualisation in terms of the encodings that it uses to represent data values as data symbols.</p>
+<p>The effectiveness of an encoding depends on how well we can <strong>decode</strong> information from a visual representation. We will judge a data visualisation in terms of how well data values can be recovered from the data symbols.</p>
 <hr>
 
 
@@ -474,6 +492,9 @@ Kosslyn, Stephen M. 1989. <span>“Understanding Charts and Graphs.”</span> <e
 <div id="ref-munzner2014visualization" class="csl-entry" role="listitem">
 Munzner, Tamara. 2014. <em>Visualization Analysis and Design</em>. CRC Press.
 </div>
+<div id="ref-owen1999" class="csl-entry" role="listitem">
+Owen, G. Scott, Gitta Domik, Theresa-Marie Rhyne, Ken W. Brodlie, and Beatriz Sousa Santos. 1999. <span>“Definitions and Rationale for Visualization.”</span> <a href="https://education.siggraph.org/static/HyperVis/visgoals/visgoal2.htm">https://education.siggraph.org/static/HyperVis/visgoals/visgoal2.htm</a>.
+</div>
 <div id="ref-Rlang" class="csl-entry" role="listitem">
 R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </div>
@@ -492,29 +513,30 @@ Unwin, Antony, Martin Theus, and Heike Hofmann. 2006. <em>Graphics of Large Data
 <div id="ref-annurev-statistics-031219-041252" class="csl-entry" role="listitem">
 Vanderplas, Susan, Dianne Cook, and Heike Hofmann. 2020. <span>“Testing Statistical Charts: What Makes a Good Graph?”</span> <em>Annual Review of Statistics and Its Application</em> 7 (Volume 7, 2020): 61–88. https://doi.org/<a href="https://doi.org/10.1146/annurev-statistics-031219-041252">https://doi.org/10.1146/annurev-statistics-031219-041252</a>.
 </div>
-<div id="ref-wilkinson2005" class="csl-entry" role="listitem">
-Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Second edition. New York: Springer.
+<div id="ref-layered-grammar" class="csl-entry" role="listitem">
+Wickham, Hadley. 2010. <span>“A Layered Grammar of Graphics.”</span> <em>Journal of Computational and Graphical Statistics</em> 19 (1): 3–28. <a href="https://doi.org/10.1198/jcgs.2009.07098">https://doi.org/10.1198/jcgs.2009.07098</a>.
 </div>
 </div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>The idea of characterising a data visualisation as a set of <em>encodings</em> from data values to visual representations aligns with ideas from the <em>Grammar of Graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>In fact, pie charts have received a lot of hate from all quarters for over a century:</p>
+<li id="fn1"><p>This quote is from an early web resource on data visualisation that was produced by the ACM SIGGRAPH Education Committee <span class="citation" data-cites="owen1999">(<a href="#ref-owen1999" role="doc-biblioref">Owen et al. 1999</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The idea of characterising a data visualisation as a set of <em>encodings</em> from data values to visual representations aligns with the idea of <em>mappings</em> from <span class="citation" data-cites="layered-grammar">Wickham (<a href="#ref-layered-grammar" role="doc-biblioref">2010</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In fact, pie charts have received a lot of hate from all quarters for over a century:</p>
 <p>“In a sense, it might be construed as an insult to a man’s intelligence to show him a pie chart” <span class="citation" data-cites="karstenChartsAndGraphs">Karsten (<a href="#ref-karstenChartsAndGraphs" role="doc-biblioref">1925, p98</a>)</span>.</p>
 <p>“the only worse design than a pie chart is several of them … pie charts should never be used.” <span class="citation" data-cites="tufte1983visual">Tufte (<a href="#ref-tufte1983visual" role="doc-biblioref">1983, p178</a>)</span>.</p>
-<p>For some counter-arguments, see <a href="congruence.html#sec-part-to-whole" class="quarto-xref"><span>Section 7.2</span></a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Besides scratching the author’s itch, this book addresses an identified need. For example, <span class="citation" data-cites="sönning_2022">Sönning (<a href="#ref-sönning_2022" role="doc-biblioref">2022</a>)</span> deconstructs how a line plot works in great detail, but there is a market for something that is more accessible to and applicable by a less-expert audience.</p>
+<p>For some counter-arguments, see <a href="congruence.html#sec-part-to-whole" class="quarto-xref"><span>Section 7.2</span></a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Besides scratching the author’s itch, this book addresses an identified need. For example, <span class="citation" data-cites="sönning_2022">Sönning (<a href="#ref-sönning_2022" role="doc-biblioref">2022</a>)</span> deconstructs how a line plot works in great detail, but there is a market for something that is more accessible to and applicable by a less-expert audience.</p>
 <p>“Going forward, we must do a better job of translating the academic research into practice, making it easier for academics and nonacademics alike to create useful, well-designed graphics.” <span class="citation" data-cites="annurev-statistics-031219-041252">(<a href="#ref-annurev-statistics-031219-041252" role="doc-biblioref">Vanderplas, Cook, and Hofmann 2020</a>)</span></p>
-<p>The aim is to provide an overview that is similar in scope to more expert frameworks like <span class="citation" data-cites="kosslyn1989understanding">(<a href="#ref-kosslyn1989understanding" role="doc-biblioref">Kosslyn 1989</a>)</span>, but more consumable by a less expert audience. The goal of this document is to provide a description that is sufficiently straightforward for the non-expert to consume, hopefully without making too many experts roll in their graves or send them to an early one. In most cases, it will be easy to see for ourselves that a visual effect is real through a simple diagram or data visualisation, but references to the relevant theories and experimental results in the literature will be provided in footnotes like this one.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Some examples of books that include a discussion of interactive graphics are <span class="citation" data-cites="cookSwayne2007">Cook and Swayne (<a href="#ref-cookSwayne2007" role="doc-biblioref">2007</a>)</span>, <span class="citation" data-cites="theus_urbanek_2008_interactive">Theus and Urbanek (<a href="#ref-theus_urbanek_2008_interactive" role="doc-biblioref">2008</a>)</span>, and <span class="citation" data-cites="unwinTheusHofmann2006">Unwin, Theus, and Hofmann (<a href="#ref-unwinTheusHofmann2006" role="doc-biblioref">2006</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Alberto Cairo’s writing often includes the ethical dimensions of data visualisation, e.g., <span class="citation" data-cites="CairoAlberto2014Eiid">Cairo (<a href="#ref-CairoAlberto2014Eiid" role="doc-biblioref">2014</a>)</span> and <span class="citation" data-cites="cairo2016truthful">Cairo (<a href="#ref-cairo2016truthful" role="doc-biblioref">2016</a>)</span>.</p>
-<p>The <em>Data by Design</em> project is a striking example of work with a focus on ethical data visualisation <span class="citation" data-cites="data_by_design_emory2021">(<a href="#ref-data_by_design_emory2021" role="doc-biblioref">Emory Digital Humanities Lab 2021</a>)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>We are assuming that the data we have is sufficient for the question(s) of interest and contains no <em>substantive</em> problems, in the sense of <span class="citation" data-cites="healy2018data">Healy (<a href="#ref-healy2018data" role="doc-biblioref">2018</a>)</span>.</p>
+<p>The aim is to provide an overview that is similar in scope to more expert frameworks like <span class="citation" data-cites="kosslyn1989understanding">(<a href="#ref-kosslyn1989understanding" role="doc-biblioref">Kosslyn 1989</a>)</span>, but more consumable by a less expert audience. The goal of this document is to provide a description that is sufficiently straightforward for the non-expert to consume, hopefully without making too many experts roll in their graves or send them to an early one. In most cases, it will be easy to see for ourselves that a visual effect is real through a simple diagram or data visualisation, but references to the relevant theories and experimental results in the literature will be provided in footnotes like this one.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Some examples of books that include a discussion of interactive graphics are <span class="citation" data-cites="cookSwayne2007">Cook and Swayne (<a href="#ref-cookSwayne2007" role="doc-biblioref">2007</a>)</span>, <span class="citation" data-cites="theus_urbanek_2008_interactive">Theus and Urbanek (<a href="#ref-theus_urbanek_2008_interactive" role="doc-biblioref">2008</a>)</span>, and <span class="citation" data-cites="unwinTheusHofmann2006">Unwin, Theus, and Hofmann (<a href="#ref-unwinTheusHofmann2006" role="doc-biblioref">2006</a>)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Alberto Cairo’s writing often includes the ethical dimensions of data visualisation, e.g., <span class="citation" data-cites="CairoAlberto2014Eiid">Cairo (<a href="#ref-CairoAlberto2014Eiid" role="doc-biblioref">2014</a>)</span> and <span class="citation" data-cites="cairo2016truthful">Cairo (<a href="#ref-cairo2016truthful" role="doc-biblioref">2016</a>)</span>.</p>
+<p>The <em>Data by Design</em> project is a striking example of work with a focus on ethical data visualisation <span class="citation" data-cites="data_by_design_emory2021">(<a href="#ref-data_by_design_emory2021" role="doc-biblioref">Emory Digital Humanities Lab 2021</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>We are assuming that the data we have is sufficient for the question(s) of interest and contains no <em>substantive</em> problems, in the sense of <span class="citation" data-cites="healy2018data">Healy (<a href="#ref-healy2018data" role="doc-biblioref">2018</a>)</span>.</p>
 <p>Examples of books that provide a more comprehensive treatment of the entire data visualisation process are <span class="citation" data-cites="cairo2019howchartslie">Cairo (<a href="#ref-cairo2019howchartslie" role="doc-biblioref">2019</a>)</span> and <span class="citation" data-cites="munzner2014visualization">Munzner (<a href="#ref-munzner2014visualization" role="doc-biblioref">2014</a>)</span>.</p>
-<p>An example of a much shorter, but still broader view of the data visualisation process is <span class="citation" data-cites="bertini-how-not-to-lie">Bertini (<a href="#ref-bertini-how-not-to-lie" role="doc-biblioref">2025</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>Many of the diagrams in this book were also created with R <span class="citation" data-cites="Rlang">(<a href="#ref-Rlang" role="doc-biblioref">R Core Team 2025</a>)</span>, but some of diagrams were created using graphviz <span class="citation" data-cites="ellson2002graphviz">(<a href="#ref-ellson2002graphviz" role="doc-biblioref">Ellson et al. 2002</a>)</span>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<p>An example of a much shorter, but still broader view of the data visualisation process is <span class="citation" data-cites="bertini-how-not-to-lie">Bertini (<a href="#ref-bertini-how-not-to-lie" role="doc-biblioref">2025</a>)</span>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Many of the diagrams in this book were also created with R <span class="citation" data-cites="Rlang">(<a href="#ref-Rlang" role="doc-biblioref">R Core Team 2025</a>)</span>, but some of diagrams were created using graphviz <span class="citation" data-cites="ellson2002graphviz">(<a href="#ref-ellson2002graphviz" role="doc-biblioref">Ellson et al. 2002</a>)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

@@ -261,13 +261,6 @@
 
 \markboth{Preface}{Preface}
 
-\emph{Visualization is essentially a mapping process from computer
-representations to perceptual representations, choosing encoding
-techniques to maximize human understanding and
-communication.}\footnote{This quote is from an early web resource on
-  data visualisation that was produced by the ACM SIGGRAPH Education
-  Committee (Owen et al. 1999).}
-
 This is a book about data visualisation.
 
 Like many books, it scratches an author's itch.
@@ -331,8 +324,8 @@ creating effective data visualisations.\footnote{For example,
   Informative and Compelling Figures} (Wilke 2019).} These eschew much
 of the gory detail in favour of simple, applicable advice. The problem
 here is that, without the underlying explanations, the guidelines can
-become just a long laundry list to commit to memory. It is useful to
-know that bars should always start at zero, but is more satisfying to
+become just a long laundry list to commit to memory. Rather than being
+told that bars should always start at zero, it is more satisfying to
 know why.
 
 For some of us there is a need for a middle path. We would like to
@@ -396,6 +389,8 @@ number of footnotes, which provide the links between what is being
 described in the main text and the underlying research, and those
 footnotes contain proper citations. The real work is not being ignored,
 it is just being hidden from view.
+
+I am also contractually obliged to thank my wife, Julia.
 
 This book has been generated using the \href{https://quarto.org/}{Quarto
 publishing system}. If any parts of the book look nice to you it is
@@ -467,6 +462,13 @@ Attribution-NonCommercial-ShareAlike 4.0 International License.
 
 \chapter{Introduction}\label{sec-intro}
 
+\emph{Visualization is essentially a mapping process from computer
+representations to perceptual representations, choosing encoding
+techniques to maximize human understanding and
+communication.}\footnote{This quote is from an early web resource on
+  data visualisation that was produced by the ACM SIGGRAPH Education
+  Committee (Owen et al. 1999).}
+
 A data visualisation presents data values in a visual format. In an
 effective data visualisation, this allows properties of the data to be
 perceived very rapidly and without conscious effort. For example,
@@ -499,13 +501,13 @@ age & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 &
 \end{longtable}
 
 By contrast, with a simple line plot data visualisation like
-Figure~\ref{fig-crime} we can perceive the trends in crime rates easily
-and immediately. It is also easy to perceive more detailed properties
-like the fact that the trend in crime rates for 16-year-olds is not
-completely monotonic and the fact that the crime rate for 15-year-olds
-(the blue line) is always greater than the crime rate for 14-year-olds
-(the red line) and less than the crime rate for 16-year-olds (the green
-line).
+Figure~\ref{fig-crime} we can perceive the trends like the decrease in
+crime rates easily and immediately. It is also easy to perceive more
+detailed properties like the fact that the trend in crime rates for
+16-year-olds is not completely monotonic and the fact that the crime
+rate for 15-year-olds (the blue line) is always greater than the crime
+rate for 14-year-olds (the red line) and less than the crime rate for
+16-year-olds (the green line).
 
 \begin{figure}
 
@@ -524,9 +526,9 @@ rates is very fast and easy with this data visualisation.}
 Figure~\ref{fig-crime-heatmap} shows a different data visualisation of
 the same data, this time a heatmap. If we use a data visualisation like
 Figure~\ref{fig-crime-heatmap}, while very basic trends are apparent,
-perceiving detailed changes in the crime rates is very much harder
-compared to Figure~\ref{fig-crime}. In other words, not all data
-visualisations are equally effective.
+like an overall decrease in crime rate, perceiving detailed changes in
+the crime rates is very much harder compared to Figure~\ref{fig-crime}.
+In other words, not all data visualisations are equally effective.
 
 \begin{figure}
 
@@ -543,12 +545,13 @@ Figure~\ref{fig-crime}.}
 
 \end{figure}%
 
-Although Figure~\ref{fig-crime} is very effective for the questions that
-we have considered so far, it is far less effective if we are interested
-in a different question, for example, whether the \emph{total} crime
-rate is completely monotonic. Does the \emph{sum} of the red, blue, and
-green lines always decrease year on year? In other words, a single data
-visualisation cannot be effective for all possible questions.
+Although Figure~\ref{fig-crime} is very effective for perceiving trends
+in crime rates for each age group, it may be less effective if we are
+interested in a different question, for example, whether the
+\emph{total} crime rate is completely monotonic. Does the \emph{sum} of
+the red, blue, and green lines always decrease year on year? In other
+words, a single data visualisation cannot be effective for all possible
+questions.
 
 Suppose that we are interested in what the \emph{exact} crime rate was
 for 16-year-olds in 2011. Neither Figure~\ref{fig-crime} nor
@@ -559,21 +562,21 @@ What makes a data visualisation effective? Why are some data
 visualisations more effective than others? The purpose of this book is
 to provide explanations for why, when, and how data visualisation works.
 
-\section{One big idea: Encodings}\label{sec-encodings}
+\section{Two big ideas: Encoding and decoding}\label{sec-encodings}
 
 Figure~\ref{fig-crime} and Figure~\ref{fig-crime-heatmap} are examples
 of different types of data visualisation, a line plot and a heatmap
 respectively. We will explore many different types of data
 visualisations throughout the book, but rather than address each type of
 data visualisation on its own, we want to identify underlying concepts
-that help to explain how all data visualisations work.
+that will help to explain how all data visualisations work.
 
 One concept that we will lean on very heavily is the idea of
 \textbf{encodings}: how is information being converted into a visual
 representation?\footnote{The idea of characterising a data visualisation
   as a set of \emph{encodings} from data values to visual
-  representations aligns with ideas from the \emph{Grammar of Graphics}
-  (Wilkinson 2005).}
+  representations aligns with the idea of \emph{mappings} from Wickham
+  (2010).}
 
 The most obvious encoding in a data visualisation involves the encoding
 of \textbf{data values} to \textbf{data symbols}
@@ -605,13 +608,48 @@ reflecting the number of offenders of that age for that year. In other
 words, each cell of Table~\ref{tbl-crime} is encoded to its own coloured
 rectangle.
 
+The second concept that we will lean on heavily is the idea of
+\textbf{decoding}: how is a visual representation converted back into
+information?
+
+The purpose of encoding data values to a particular visual
+representation is to enable the viewer to extract properties of the data
+very rapidly and very easily. For example, if we want the viewer to be
+able to perceive a decrease in crime, it is more effective to encode the
+data values as lines (Figure~\ref{fig-crime}), rather than a table of
+numbers (Table~\ref{tbl-crime}), because the viewer is able to
+\textbf{decode} the decrease in crime much more easily from the lines.
+
+In order to produce an effective data visualisation, we need to
+\textbf{encode} data values to data symbols in a way that facilitates
+\textbf{decoding} data values from the data symbols
+(Figure~\ref{fig-decode}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/data-sym-decode.png}
+
+}
+
+\caption{\label{fig-decode}The effectiveness of a data visualisation
+will depend on how well our visual system can \textbf{decode} from the
+data symbols to the properties of the data.}
+
+\end{figure}%
+
 The journey that we take throughout this book will involve exploring a
-variety of different ways that information can be encoded to a visual
-representation. As much as possible, we will attempt to reduce any data
-visualisation to a set of encodings from different pieces of information
-to visual representations of that information. By understanding the
-different encodings that we can use, we will come to understand why some
-data visualisations are more effective than others.
+variety of different ways that information can be \textbf{encoded} to a
+visual representation. We will attempt to reduce any data visualisation
+to a set of encodings from different pieces of information to visual
+representations of that information.
+
+The effectiveness of a data visualisation will depend on how well
+information can be \textbf{decoded} from the visual representation. By
+understanding the different encodings that we can use, and how well
+those encodings can be decoded, we will come to understand why some data
+visualisations are more effective than others.
 
 \section{How will it help?}\label{how-will-it-help}
 
@@ -668,7 +706,7 @@ Understanding how data visualisation works will enable us to:
 \item
   Decide which data visualisations we should use.
 \item
-  Justify our choice of data visualisation.
+  Justify our own choice of data visualisation.
 \item
   Reason about how to improve the effectiveness of a data visualisation.
 \item
@@ -762,7 +800,12 @@ more effective than others; how data visualisation works.
 
 We will focus on how information is \textbf{encoded} to a visual
 representation. We can characterise a data visualisation in terms of the
-encodings that it uses to present data values as data symbols.
+encodings that it uses to represent data values as data symbols.
+
+The effectiveness of an encoding depends on how well we can
+\textbf{decode} information from a visual representation. We will judge
+a data visualisation in terms of how well data values can be recovered
+from the data symbols.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -794,20 +837,6 @@ different encodings that we consider throughout the book.\footnote{Simple
   Franconeri et al. (2021a), and Cairo (2012). See Ware (2021) for a
   more in-depth, but still very accessible description. Wikipedia also
   has some very helpful content (Wikipedia contributors 2025).}
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[scale=0.5]{Diagrams/data-sym-decode.png}
-
-}
-
-\caption{\label{fig-decode}The effectiveness of a data visualisation
-will depend on how well our visual system can \textbf{decode} from the
-data symbols to the properties of the data.}
-
-\end{figure}%
 
 \section{The eye}\label{sec-eye}
 
@@ -10693,7 +10722,7 @@ of raw data values.\footnote{Acknowledge Ware 4th Ed: G8.18 (p327)
 
 \bookmarksetup{startatroot}
 
-\chapter{Encoding Structure}\label{encoding-structure}
+\chapter{Encoding Structure}\label{sec-design}
 
 Figure~\ref{fig-yji} shows a line plot of the rate of youth crime in New
 Zealand for different ethnic groups and a pie chart showing the
@@ -11753,7 +11782,7 @@ letter-value data symbols. There is no guide that explains how the depth
 of the letter values is encoded as the width of the letter-value data
 symbols.
 
-\subsection{Encoding structure}\label{encoding-structure-1}
+\subsection{Encoding structure}\label{encoding-structure}
 
 Another problem with the legend in Figure~\ref{fig-lv-default} is that
 the squares within the legend are not consistent with the rectangles in
@@ -12814,6 +12843,11 @@ Wickens, Christopher D., and C. Melody Carswell. 1995. {``The Proximity
 Compatibility Principle: Its Psychological Foundation and Relevance to
 Display Design.''} \emph{Human Factors} 37 (3): 473--94.
 \url{https://doi.org/10.1518/001872095779049408}.
+
+\bibitem[\citeproctext]{ref-layered-grammar}
+Wickham, Hadley. 2010. {``A Layered Grammar of Graphics.''}
+\emph{Journal of Computational and Graphical Statistics} 19 (1): 3--28.
+\url{https://doi.org/10.1198/jcgs.2009.07098}.
 
 \bibitem[\citeproctext]{ref-lvplot}
 Wickham, Hadley, and Heike Hofmann. 2025. \emph{{lvplot}: Letter Value
