@@ -282,9 +282,8 @@ div.csl-indent {
 </header>
 
 
-<p>Understanding why some encodings are more effective than others will depend upon an understanding of how the human visual system works. In order to understand the effectiveness of a encoding from information to a visual representation, we need to know how we get from visual representations back to the original information.</p>
-<p>We will talk about the transformation of data values into data symbols as an <strong>encoding</strong> of the data values. Later chapters will explore many different encodings. In this chapter, we will consider the reverse operation: the <strong>decoding</strong> of data symbols back to data values (<a href="intro.html#fig-decode" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>). The effectiveness of an encoding from data values to data symbols will depend on how well we can decode from the data symbols back to data values.</p>
-<p>In this chapter we will establish a very simple model of the visual system, which will help us to understand the effectiveness of the different encodings that we consider throughout the book.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Understanding why some encodings are more effective than others will depend upon an understanding of how the human visual system works. In order to understand the effectiveness of an <strong>encoding</strong> from information to a visual representation, we need to know how we get from visual representations back to the original information—a <strong>decoding</strong>.</p>
+<p>We describe the transformation of data values into data symbols as <strong>encoding</strong> the data values and later chapters will explore many different encodings. In this chapter, we focus on the reverse operation: the <strong>decoding</strong> of data symbols back to data values (<a href="intro.html#fig-decode" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>). In this chapter we will establish a very simple model of the visual system, which will help us to understand the effectiveness of the different encodings that we consider throughout the book.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <section id="sec-eye" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-eye"><span class="header-section-number">2.1</span> The eye</h2>
 <p>In order for us to perceive a data visualisation, light must emit from a computer screen or reflect off a page and enter the eye. Light passes through the pupil, is focused by the lens, and is projected onto the retina at the back of the eye. The retina contains around 100 million light-sensitive nerve cells and signals from those are combined into about 1 million nerve fibres in the optic nerve, which passes signals on to the brain (see <a href="#fig-eye" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). A very large amount of visual information is gathered by the eye and passed on to the brain.</p>
@@ -299,7 +298,7 @@ Figure&nbsp;2.1: A very simple diagram of the human eye. Light enters via the pu
 </figure>
 </div>
 <blockquote class="blockquote">
-<p>One reason why data visualisation is effective is because the visual system gathers an enormous amount of information.</p>
+<p>One reason why data visualisation is effective is because our visual system gathers an enormous amount of information.</p>
 </blockquote>
 </section>
 <section id="sec-visual-processing" class="level2" data-number="2.2">
@@ -311,23 +310,23 @@ Figure&nbsp;2.1: A very simple diagram of the human eye. Light enters via the pu
 <p><img src="Diagrams/visual-processing.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-processing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.2: A very simple model of visual processing.
+Figure&nbsp;2.2: A very simple model of visual processing. Basic visual features like position, angle, and colour are identified first, then collections of those features are combined into visual shapes, and, finally, some shapes are recognised as familiar visual objects.
 </figcaption>
 </figure>
 </div>
-<p>Lower-level processing occurs subconsciously and more rapidly than higher-level processing, which can require conscious effort. Furthermore, lower-level processing occurs in parallel and can involve many instances of visual features at once, whereas higher-level processing will only focus on a small number of items or a single item at once. On the other hand, lower-level visual features are rapidly discarded as our attention shifts, while higher-level visual objects are more persistent and may even become part of long-term memory (see <a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>).</p>
+<p>Lower-level processing occurs subconsciously and more rapidly than higher-level processing, which can require conscious effort. Furthermore, lower-level processing occurs in parallel and can involve many instances of visual features at once, whereas higher-level processing will only focus on a small number of items or a single item at once. On the other hand, lower-level visual features are rapidly discarded as our attention shifts, while higher-level visual objects are more persistent and may even become part of long-term memory (<a href="#fig-visual-model" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>).</p>
 <div id="fig-visual-model" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Model/model.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.3: Some of the properties of visual processing.
+Figure&nbsp;2.3: Early visual processing identifies large numbers of simple visual features very rapidly and without conscious effort. Subsequent processing takes longer, involves fewer, more complex visual shapes and visual objects, and may involve conscious mental effort, but the result can represent more complex information that is more memorable.
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> shows an image that is made up of many small items: tiny triangles with different <strong>positions</strong>, <strong>lengths</strong>, <strong>angles</strong>, and <strong>colours</strong>. The angles of the triangles represents wind direction and the length of the triangles represents wind strength. Blue triangles are over the sea and green triangles are over land.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> The visual system can very quickly perceive many small <strong>visual features</strong> at once. There is no need to concentrate separately on every individual triangle in the image. At a higher level of processing, darker and lighter <strong>shapes</strong> are identified as well as regions of different colours. For example, a band of lighter wind forms a line from the top-left corner at a roughly 45-degree angle. At a higher level of processing again, at least for the denizens of Oceania, the green regions are recognised as a very familiar <strong>object</strong>: the outline of New Zealand.</p>
-<p>The small lines in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> convey a lot of simple pieces of information—what is the wind strength and direction at each location—though we have to focus on a particular spot in order to extract a single piece of information. The shapes of darker and lighter regions convey several more complex ideas like areas of stronger and lighter winds. The green regions combine to convey the single complex and abstract concept of New Zealand.</p>
+<p><a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> shows an image that is made up of many small items: tiny triangles with different <strong>positions</strong>, <strong>lengths</strong>, <strong>angles</strong>, and <strong>colours</strong>. The angles of the triangles represents wind direction and the length of the triangles represents wind strength. Blue triangles are over the sea and green triangles are over land.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> The visual system can very quickly perceive many small <strong>visual features</strong> at once. There is no need to concentrate separately on every individual triangle in the image. At a higher level of processing, darker and lighter <strong>shapes</strong> are identified as well as regions of different colours. For example, a band of lighter wind forms a line from the top-left corner down and to the right at a roughly 45-degree angle. At a higher level of processing again, at least for the denizens of Oceania, the green regions are recognised as a very familiar <strong>object</strong>: the outline of New Zealand.</p>
+<p>The small lines in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> convey a lot of simple pieces of information—what is the wind strength and direction at each location—though we have to focus on a particular spot in order to extract a single piece of information. The shapes of darker and lighter regions convey several more complex ideas like areas of stronger and lighter winds. The green regions combine to convey the single complex and abstract idea of New Zealand.</p>
 <div id="fig-visual-model-demo" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-model-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -374,7 +373,7 @@ Figure&nbsp;2.6: The extinction illusion. Look at one corner of the image and th
 </div>
 </div>
 </div>
-<p><a href="#fig-fixations" class="quarto-xref">Figure&nbsp;<span>2.7</span></a> shows eye-tracking data from one person viewing an image for 10 seconds.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> The original image is shown on the left and eye-tracking data is shown on the right, with hollow black circles showing the position of the coloured circles in the original image. In the eye-tracking image, the fixations are shown as purple circles and the saccades are shown as lines between the circles. For example, we can see that the viewer has fixated multiple times upon the large, colourful circles in the original image and also text at the top and bottom of the image.</p>
+<p>This means that, in order to decode detailed information from a data visualisation, we will need to switch focus between different areas of detail. For example, <a href="#fig-fixations" class="quarto-xref">Figure&nbsp;<span>2.7</span></a> shows eye-tracking data from one person viewing an image for 10 seconds.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> The original image is shown on the left and eye-tracking data is shown on the right, with hollow black circles showing the position of the coloured circles in the original image. In the eye-tracking image, the fixations are shown as purple circles and the saccades are shown as lines between the circles. For example, we can see that the viewer has fixated multiple times upon the large, colourful circles in the original image and has also fixated on the text at the top and bottom of the image.</p>
 <div id="fig-fixations" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fixations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -411,12 +410,13 @@ Figure&nbsp;2.7: Eye tracking data (on the right) from the MASSVIS project that 
 </figure>
 </div>
 <blockquote class="blockquote">
-<p>A data visualisation may fail if it requires the viewer to constantly switch focus.</p>
+<p>A data visualisation will be slower to decode and require more effort to decode if it requires the viewer to constantly switch focus.</p>
 </blockquote>
 </section>
 <section id="visual-memory" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="visual-memory"><span class="header-section-number">2.4</span> Visual memory</h2>
-<p>When we switch focus to different areas of an image, we are likely to need to remember information from a previous area of focus. How well can we hold visual information in memory? The most important feature of visual memory is that it is very limited. We can only hold in memory a small number of items at once.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> <a href="#fig-memory" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> provides a simple demonstration of the limitations of visual memory.</p>
+<p>When we switch focus between different areas of an image, we need to remember information from a previous area of focus. How well can we hold visual information in memory? The most important feature of visual memory is that it is very limited. We can only hold in memory a small number of items at once.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p><a href="#fig-memory" class="quarto-xref">Figure&nbsp;<span>2.8</span></a> provides a simple demonstration of the limitations of visual memory.</p>
 <div id="fig-memory" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-memory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -797,12 +797,12 @@ function(nstim) {
 </svg>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-memory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.9: Three memory tasks. The task is to remember the colours of the circles. Within each box, click on each of the coloured circles, which will produce a colour wheel. Click (in the same order) on the colour wheel where it matches the colour of the original circles. This will present the results as small black dots representing the original circle colours and open dots representing the matching clicks, plus a (maximum) error (in degrees). The task should be harder (and less accurate) with more circles, which reflects the limits on visual memory.
+Figure&nbsp;2.8: Three memory tasks. The task is to remember the colours of the circles. Within each box, click on each of the coloured circles, which will produce a colour wheel. Click (in the same order) on the colour wheel where it matches the colour of the original circles. This will present the results as small black dots representing the original circle colours and open dots representing the matching clicks, plus a (maximum) error (in degrees). The task should be harder (and less accurate) with more circles, which reflects the limits on visual memory.
 </figcaption>
 </figure>
 </div>
 <p>It is easier and faster to decode information from visual elements if they lie within the scope of a single visual focus. If we have to switch focus, it not only takes longer to decode information, but we may hit limits on our ability to remember visual elements from previous areas of focus.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
-<p>The limits on visual memory reflect well-known limits on working memory and those limits can also be worked around via familiar mechanisms such as chunking.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> For example, we may only be able to hold in memory a small number of basic visual features such as the colours of circles (<a href="#fig-memory" class="quarto-xref">Figure&nbsp;<span>2.9</span></a>), but we can effectively hold many more basic visual features if we memorise more complex visual elements that are composed of many basic visual features. In other words, can remember several <strong>visual shapes</strong> or <strong>visual objects</strong> even if we cannot remember all of the individual visual features within those visual shapes or visual objects (<a href="#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>). For example, can hold in memory multiple country flags even though we cannot necessarily hold in memory all of the invidual colours on those flags.</p>
+<p>The limits on visual memory reflect well-known limits on working memory and those limits can also be worked around via familiar mechanisms such as chunking.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> For example, we may only be able to hold in memory a small number of basic visual features such as the colours of circles, but we can effectively hold many more basic visual features if we memorise more complex visual elements that are composed of many basic visual features. In other words, we can remember several <strong>visual shapes</strong> or <strong>visual objects</strong> even if we cannot remember all of the individual <strong>visual features</strong> within those visual shapes or visual objects (<a href="#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>). For example, we can hold in memory multiple country flags even though we cannot necessarily hold in memory all of the invidual colours on those flags.</p>
 <blockquote class="blockquote">
 <p>A data visualisation will require more effort to decode if the viewer is required to switch focus and remember visual information across multiple areas of visual focus.</p>
 </blockquote>
@@ -810,7 +810,7 @@ Figure&nbsp;2.9: Three memory tasks. The task is to remember the colours of the 
 <section id="sec-differences" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="sec-differences"><span class="header-section-number">2.5</span> Visual differences</h2>
 <p>The ability to gather a large amount of basic features from an image very quickly (<a href="#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>) is supplemented by rapid visual processing that combines and summarises the information. These subconscious processes extract some properties from an image without any mental effort.</p>
-<p>For example, in <a href="#fig-pop-colour-1" class="quarto-xref">Figure&nbsp;<span>2.10 (a)</span></a> we can detect the one teal dot amongst the 24 orange dots without effort. <a href="#fig-pop-colour-2" class="quarto-xref">Figure&nbsp;<span>2.10 (b)</span></a> shows that this task remains effortless even if the number of dots is much larger.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p>For example, in <a href="#fig-pop-colour-1" class="quarto-xref">Figure&nbsp;<span>2.9 (a)</span></a> we can detect the one teal dot amongst the 24 orange dots without effort. <a href="#fig-pop-colour-2" class="quarto-xref">Figure&nbsp;<span>2.9 (b)</span></a> shows that this task remains effortless even if the number of dots is much larger.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <div id="fig-pop-colour" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pop-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -842,11 +842,11 @@ Figure&nbsp;2.9: Three memory tasks. The task is to remember the colours of the 
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pop-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.10: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
+Figure&nbsp;2.9: Amongst a collection of dots, we effortlessly perceive one dot that has a different colour.
 </figcaption>
 </figure>
 </div>
-<p>This ability to identify an item that is different from all other items within an image also applies to other basic features like size, as shown in <a href="#fig-diff-size" class="quarto-xref">Figure&nbsp;<span>2.11</span></a>.</p>
+<p>This ability to identify an item that is different from all other items within an image also applies to other basic features like size, as shown in <a href="#fig-diff-size" class="quarto-xref">Figure&nbsp;<span>2.10</span></a>.</p>
 <div id="fig-diff-size" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-size-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -878,11 +878,11 @@ Figure&nbsp;2.10: Amongst a collection of dots, we effortlessly perceive one dot
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-size-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.11: Amongst a collection of dots, we effortlessly perceive one dot that differs only by size.
+Figure&nbsp;2.10: Amongst a collection of dots, we effortlessly perceive one dot that differs only by size.
 </figcaption>
 </figure>
 </div>
-<p>If an item differs on more than one visual feature, the effect is even stronger (<a href="#fig-diff-salience" class="quarto-xref">Figure&nbsp;<span>2.12</span></a>). This means that the visual system is very sensitive to items that are <strong>different</strong> in terms of basic <strong>visual features</strong>.</p>
+<p>If an item differs on more than one visual feature, the effect is even stronger (<a href="#fig-diff-salience" class="quarto-xref">Figure&nbsp;<span>2.11</span></a>). This means that the visual system is very sensitive to items that are <strong>different</strong> in terms of basic <strong>visual features</strong>.</p>
 <div id="fig-diff-salience" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-salience-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -914,11 +914,11 @@ Figure&nbsp;2.11: Amongst a collection of dots, we effortlessly perceive one dot
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-salience-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.12: Amongst a collection of dots, we effortlessly perceive one dot that differs by both colour and size.
+Figure&nbsp;2.11: Amongst a collection of dots, we effortlessly perceive one dot that differs by both colour and size.
 </figcaption>
 </figure>
 </div>
-<p>On the other hand, if the distractor items are similar on one visual feature, but different on another, and if the arrangement of the items is less structured, then finding a particular item of interest becomes much harder. For example, if we look for the single larger teal dot in <a href="#fig-diff-serial" class="quarto-xref">Figure&nbsp;<span>2.13</span></a>, it is much harder to find than it is in <a href="#fig-diff-salience" class="quarto-xref">Figure&nbsp;<span>2.12</span></a>. The visual system’s sensitivity to <strong>different</strong> items is much greater when all other items are the <strong>same</strong>.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<p>On the other hand, if the distractor items are similar on one visual feature, but different on another, and if the arrangement of the items is less structured, then finding a particular item of interest becomes much harder. For example, if we look for the single larger teal dot in <a href="#fig-diff-serial" class="quarto-xref">Figure&nbsp;<span>2.12</span></a>, it is much harder to find than it is in <a href="#fig-diff-salience" class="quarto-xref">Figure&nbsp;<span>2.11</span></a>. The visual system’s sensitivity to <strong>different</strong> items is much greater when all other items are the <strong>same</strong>.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
 <div id="fig-diff-serial" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-serial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -950,7 +950,7 @@ Figure&nbsp;2.12: Amongst a collection of dots, we effortlessly perceive one dot
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-serial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.13: We have to work much harder when there is more going on.
+Figure&nbsp;2.12: We have to work much harder to identify a unique item when there is more going on.
 </figcaption>
 </figure>
 </div>
@@ -964,16 +964,16 @@ Figure&nbsp;2.13: We have to work much harder when there is more going on.
 <blockquote class="blockquote">
 <p>A data visualisation will be effective if it uses basic visual features like colour to draw the viewer’s attention to important features.</p>
 </blockquote>
-<p>Where we focus within an image, and what information we extract, is also affected by conscious goals—what are we looking for?<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> For example, when you were looking for the larger teal dot in <a href="#fig-diff-serial" class="quarto-xref">Figure&nbsp;<span>2.13</span></a>, did you notice that there was also a single small orange dot? Now that your attention has been drawn to that task, it will be easier to find the smaller orange dot.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
+<p>Where we focus within an image, and what information we extract, is also affected by conscious goals—what are we looking for?<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> For example, when you were looking for the larger teal dot in <a href="#fig-diff-serial" class="quarto-xref">Figure&nbsp;<span>2.12</span></a>, did you notice that there was also a single small orange dot? Now that your attention has been drawn to that task, it will be easier to find the smaller orange dot.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
 <blockquote class="blockquote">
 <p>A data visualisation will be effective if it includes instructions that direct the reader’s attention to important features.</p>
 </blockquote>
 </section>
 <section id="sec-visual-model-groups" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="sec-visual-model-groups"><span class="header-section-number">2.7</span> Visual similarities</h2>
-<p>In <a href="#fig-diff-serial" class="quarto-xref">Figure&nbsp;<span>2.13</span></a>, we can see several groups of items: orange dots, teal dots, large dots, and small dots. These separate groups of items are identified based on their <strong>similarity</strong>—each group of items have the same size and the same colour. The flip side of being able to easily identify items that are different (<a href="#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>) is that we can easily identify items that are the same.</p>
-<p>The grouping of similar items within an image also happens automatically and without conscious effort. <a href="#fig-gestalt-group" class="quarto-xref">Figure&nbsp;<span>2.14</span></a> shows pairs of dot matrices that are very similar, but in one matrix of each pair we see rows and in the other matrix we see columns. For example, in the middle pair, items that are the same colour produce groups that are either rows or columns.</p>
-<p>Furthermore, there are other visual properties that mean we automatically perceive items as groups: items that are close together (items that have similar <strong>positions</strong>) are seen as a group so we see either rows of black dots or columns of black dots on the left of <a href="#fig-gestalt-group" class="quarto-xref">Figure&nbsp;<span>2.14</span></a>; items that are connected by lines are also seen as a group so we see either connected rows or connected columns on the right of <a href="#fig-gestalt-group" class="quarto-xref">Figure&nbsp;<span>2.14</span></a>.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
+<p>In <a href="#fig-diff-serial" class="quarto-xref">Figure&nbsp;<span>2.12</span></a>, we can see several groups of items: orange dots, teal dots, large dots, and small dots. These separate groups of items are identified based on their <strong>similarity</strong>—each group of items have the same size and the same colour. The flip side of being able to easily identify items that are different (<a href="#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>) is that we can easily identify items that are the same.</p>
+<p>The grouping of similar items within an image also happens automatically and without conscious effort. <a href="#fig-gestalt-group" class="quarto-xref">Figure&nbsp;<span>2.13</span></a> shows pairs of dot matrices that are very similar, but in one matrix of each pair we see rows and in the other matrix we see columns. For example, in the middle pair, items that are the same colour produce groups that are either rows or columns.</p>
+<p>There are other visual properties that mean we automatically perceive items as groups: items that are close together (items that have similar <strong>positions</strong>) are seen as a group so we see either rows of black dots or columns of black dots on the left of <a href="#fig-gestalt-group" class="quarto-xref">Figure&nbsp;<span>2.13</span></a>; items that are connected by lines are also seen as a group so we see either connected rows or connected columns on the right of <a href="#fig-gestalt-group" class="quarto-xref">Figure&nbsp;<span>2.13</span></a>.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-gestalt-group" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -982,13 +982,13 @@ Figure&nbsp;2.13: We have to work much harder when there is more going on.
 <img src="visual-model_files/figure-html/fig-gestalt-group-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gestalt-group-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.14: In each matrix of dots, we clearly see either rows or columns. In the pair of matrices on the left, making the dots slightly closer together horizontally produces rows, and making the dots slightly closer vertically produces columns. In the middle pair of matrices, using the same colour on each row produces rows, and using the same colour on each column produces columns. In the pair of matrices on the right, drawing vertical lines produces columns and drawing horizontal lines produces rows.
+Figure&nbsp;2.13: In each matrix of dots, we clearly see either rows or columns. In the pair of matrices on the left, making the dots slightly closer together horizontally produces rows, and making the dots slightly closer vertically produces columns. In the middle pair of matrices, using the same colour on each row produces rows, and using the same colour on each column produces columns. In the pair of matrices on the right, drawing vertical lines produces columns and drawing horizontal lines produces rows.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>These grouping effects are very powerful and can even be used to override each other in some combinations. <a href="#fig-gestalt-order" class="quarto-xref">Figure&nbsp;<span>2.15</span></a> shows that an enclosing border can be stronger than a connecting line, connecting lines can be stronger than proximity, and proximity can be stronger than similarity.</p>
+<p>These grouping effects are very powerful and can even be used to override each other in some combinations. <a href="#fig-gestalt-order" class="quarto-xref">Figure&nbsp;<span>2.14</span></a> shows that an enclosing border can be stronger than a connecting line, connecting lines can be stronger than proximity, and proximity can be stronger than similarity.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-gestalt-order" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -997,13 +997,13 @@ Figure&nbsp;2.14: In each matrix of dots, we clearly see either rows or columns.
 <img src="visual-model_files/figure-html/fig-gestalt-order-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gestalt-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.15: For each set of four dots, we automatically perceive two pairs of dots. On the left, the enclosing grey rectangles produce an upper pair and a lower pair, despite the fact that the left and right pair of dots are connected by lines. Second from left, the connecting lines produce a left pair and a right pair, despite the fact that the top pair and the bottom pair are closer to each other. Second from right, the positions of the dots (their proximity) produces an upper pair and a lower pair, despite the fact that the left and right pairs are coloured the same. On the right, the same colours produce a left pair and a right pair.
+Figure&nbsp;2.14: For each set of four dots, we automatically perceive two pairs of dots. On the left, the enclosing grey rectangles produce an upper pair and a lower pair, despite the fact that the left and right pair of dots are connected by lines. Second from left, the connecting lines produce a left pair and a right pair, despite the fact that the top pair and the bottom pair are closer to each other. Second from right, the positions of the dots (their proximity) produces an upper pair and a lower pair, despite the fact that the left and right pairs are coloured the same. On the right, the same colours produce a left pair and a right pair.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Another type of automatic grouping is demonstrated in <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.16</span></a>. On the left is a collection of dots. We naturally perceive a horizontal line and a circle from these dots, as shown in the centre of <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.16</span></a>. We automatically complete lines, particularly smooth curves, even when the curve is broken, as in the central set of dots. We do not tend to complete lines with sharp corners, as indicated on the right of <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.16</span></a>.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></p>
+<p>Another type of automatic grouping is demonstrated in <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.15</span></a>. On the left is a collection of dots. We naturally perceive a horizontal line and a circle from these dots, as shown in the centre of <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.15</span></a>. We automatically complete lines, particularly smooth curves, even when the curve is broken, as in the central set of dots. We do not tend to complete lines with sharp corners, as indicated on the right of <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.15</span></a>.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-continuity" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1012,20 +1012,20 @@ Figure&nbsp;2.15: For each set of four dots, we automatically perceive two pairs
 <img src="visual-model_files/figure-html/fig-continuity-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-continuity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.16: We automatically complete curves.
+Figure&nbsp;2.15: We automatically complete curves.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>When we visualise qualitative data, we will be able to rely on the automatic identification of different groups of data symbols based on visual similarities.</p>
+<p>All of this means that the visual system automatically decodes groups of items from an image.</p>
 <blockquote class="blockquote">
-<p>A data visualisation of qualitative data may be effective if it relies on the automatic identification of visual groups (proximity, similarity, etc).</p>
+<p>One way that a data visualisation can be effective is by relying on on the automatic decoding of visual groups (proximity, similarity, etc).</p>
 </blockquote>
 </section>
 <section id="sec-simplicity" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="sec-simplicity"><span class="header-section-number">2.8</span> Visual simplicity</h2>
-<p><a href="#fig-simplicity" class="quarto-xref">Figure&nbsp;<span>2.17</span></a> shows an arrangement of dots, similar to <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.16</span></a>. The collection of dots on the left has an ambiguous interpretation. Is this a single shape, or two overlapping shapes (as indicated in the centre of <a href="#fig-simplicity" class="quarto-xref">Figure&nbsp;<span>2.17</span></a>), or some complex combination of multiple shapes (as indicated on the right of <a href="#fig-simplicity" class="quarto-xref">Figure&nbsp;<span>2.17</span></a>)?</p>
+<p><a href="#fig-simplicity" class="quarto-xref">Figure&nbsp;<span>2.16</span></a> shows an arrangement of dots, similar to <a href="#fig-continuity" class="quarto-xref">Figure&nbsp;<span>2.15</span></a>. The collection of dots on the left has an ambiguous interpretation. Is this a single shape, or two overlapping shapes (as indicated in the centre of <a href="#fig-simplicity" class="quarto-xref">Figure&nbsp;<span>2.16</span></a>), or some complex combination of multiple shapes (as indicated on the right of <a href="#fig-simplicity" class="quarto-xref">Figure&nbsp;<span>2.16</span></a>)?</p>
 <p>Our visual system has a preference for the simple interpretation. Given an ambiguous arrangement of visual elements, we will tend to perceive whatever is most orderly, regular, and coherent.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1035,13 +1035,13 @@ Figure&nbsp;2.16: We automatically complete curves.
 <img src="visual-model_files/figure-html/fig-simplicity-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simplicity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.17: We automatically perceive simple shapes over more complex interpretations.
+Figure&nbsp;2.16: We automatically perceive simple shapes over more complex interpretations.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-symmetry" class="quarto-xref">Figure&nbsp;<span>2.18</span></a> shows that we also perceive groups when items have a symmetric arrangement.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></p>
+<p><a href="#fig-symmetry" class="quarto-xref">Figure&nbsp;<span>2.17</span></a> shows that we also perceive groups when items have a symmetric arrangement.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-symmetry" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1050,7 +1050,7 @@ Figure&nbsp;2.17: We automatically perceive simple shapes over more complex inte
 <img src="visual-model_files/figure-html/fig-symmetry-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-symmetry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.18: We automatically perceive groups from symmetric arrangements.
+Figure&nbsp;2.17: We automatically perceive groups from symmetric arrangements.
 </figcaption>
 </figure>
 </div>
@@ -1063,7 +1063,7 @@ Figure&nbsp;2.18: We automatically perceive groups from symmetric arrangements.
 </section>
 <section id="sec-tasks" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="sec-tasks"><span class="header-section-number">2.9</span> Visual tasks</h2>
-<p>Identifying whether visual elements are the same or different (<a href="#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>) is an example of a very simple visual task. <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> (on the left) shows another simple visual task: judging the ratio of two different lengths. However, on the right of <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> is an example of a task that is much more difficult. In this task, we have to identify which of the four shapes in the bottom row is <em>not</em> a rotated version of the shape at the top.</p>
+<p>Identifying whether visual elements are the same or different (<a href="#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>) is an example of a very simple visual task. <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.18</span></a> (on the left) shows another simple visual task: judging the ratio of two different lengths. However, on the right of <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.18</span></a> is an example of a task that is much more difficult. In this task, we have to identify which of the four shapes in the bottom row is <em>not</em> a rotated version of the shape at the top.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-visual-task" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1072,21 +1072,21 @@ Figure&nbsp;2.18: We automatically perceive groups from symmetric arrangements.
 <img src="visual-model_files/figure-html/fig-visual-task-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-task-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.19: On the left is a simple visual task, to estimate the relative length of the two lines. On the right is a more complicated visual task, to decide which of the four bottom shapes is <em>not</em> a rotated version of the top shape.
+Figure&nbsp;2.18: On the left is a simple visual task, to estimate the relative length of the two lines. On the right is a more complicated visual task, to decide which of the four bottom shapes is <em>not</em> a rotated version of the top shape.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The left-hand task in <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> is effortless and can be performed immediately. The right-hand task in <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> requires much more deliberate effort and time to perform.</p>
+<p>The left-hand task in <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.18</span></a> is effortless and can be performed immediately. The right-hand task in <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.18</span></a> requires much more deliberate effort and time to perform.<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></p>
 <blockquote class="blockquote">
-<p>A data visualisation will be effective if it relies on automatic and rapid visual processing rather than requiring conscious mental effort.<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></p>
+<p>A data visualisation will be effective if it relies on automatic and rapid visual processing rather than requiring conscious mental effort.</p>
 </blockquote>
 </section>
 <section id="sec-illusion" class="level2" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="sec-illusion"><span class="header-section-number">2.10</span> Dangers of the visual system</h2>
 <p>The value of data visualisation comes from the visual system’s ability to rapidly gather and process a large amount of visual information. However, while data visualisations usually consist of artificial and simple images presented on a two-dimensional page or screen, the visual system has evolved for the unstructured, messy, and three-dimensional natural environment. This means that the visual system will sometimes generate a more sophisticated, but erroneous interpretation of an image from a very simple arrangement of basic shapes. In other words, we are vulnerable to visual illusions.</p>
-<p>For example, <a href="#fig-illusion" class="quarto-xref">Figure&nbsp;<span>2.20</span></a> shows the Muller-Lyer Illusion and the Ebbinghaus Illusion. In the former, two horizontal lines of the same length appear to have different lengths and, in the latter, two orange circles of the same size appear to have different sizes.<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></p>
+<p>For example, <a href="#fig-illusion" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> shows the Muller-Lyer Illusion and the Ebbinghaus Illusion. In the former, two horizontal lines of the same length appear to have different lengths and, in the latter, two orange circles of the same size appear to have different sizes.<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-illusion" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1095,13 +1095,13 @@ Figure&nbsp;2.19: On the left is a simple visual task, to estimate the relative 
 <img src="visual-model_files/figure-html/fig-illusion-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-illusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.20: The two horizonal lines in the Muller-Lyer illusion on the left have exactly the same physical length, but the top line appears longer. The two inner circles in the Ebbinghaus illusion on the right have exactly the same physical radius, but they appear to be different sizes.
+Figure&nbsp;2.19: The two horizonal lines in the Muller-Lyer illusion on the left have exactly the same physical length, but the top line appears longer. The two inner circles in the Ebbinghaus illusion on the right have exactly the same physical radius, but they appear to be different sizes.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-vert-horiz" class="quarto-xref">Figure&nbsp;<span>2.21</span></a> shows another illusions involving simple lines. Every line segment in this image is the same physical length, but we perceive some segments as longer than others.<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></p>
+<p><a href="#fig-vert-horiz" class="quarto-xref">Figure&nbsp;<span>2.20</span></a> shows another illusions involving simple lines. Every line segment in this image is the same physical length, but we perceive some segments as longer than others.<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-vert-horiz" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1110,13 +1110,13 @@ Figure&nbsp;2.20: The two horizonal lines in the Muller-Lyer illusion on the lef
 <img src="visual-model_files/figure-html/fig-vert-horiz-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vert-horiz-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.21: All of the horizontal and vertical line segments in this image are exactly the same physical length, but our visual system perceives some segments as longer than others.
+Figure&nbsp;2.20: All of the horizontal and vertical line segments in this image are exactly the same physical length, but our visual system perceives some segments as longer than others.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-3d" class="quarto-xref">Figure&nbsp;<span>2.22</span></a> shows two images that are composed of three simple parallelograms. The three parallelograms are arranged separately on the left, which means that we decode them as three simple shapes. However, for the arrangement of the parallelograms on the right, the natural decoding is a 3-dimensional box, even though the image is clearly 2-dimensional.</p>
+<p><a href="#fig-3d" class="quarto-xref">Figure&nbsp;<span>2.21</span></a> shows two images that are composed of three simple parallelograms. The three parallelograms are arranged separately on the left, which means that we decode them as three simple shapes. However, for the arrangement of the parallelograms on the right, the natural decoding is a 3-dimensional box, even though the image is clearly 2-dimensional.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-3d" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1125,7 +1125,7 @@ Figure&nbsp;2.21: All of the horizontal and vertical line segments in this image
 <img src="visual-model_files/figure-html/fig-3d-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.22: The image on the right is made up from the three simple parallelograms shown on the left. Because of their arrangement and their shading, we are tempted to decode the three parallelograms on the right as a 3-dimensional object.
+Figure&nbsp;2.21: The image on the right is made up from the three simple parallelograms shown on the left. Because of their arrangement and their shading, we are tempted to decode the three parallelograms on the right as a 3-dimensional object.
 </figcaption>
 </figure>
 </div>
@@ -1138,13 +1138,26 @@ Figure&nbsp;2.22: The image on the right is made up from the three simple parall
 </section>
 <section id="summary" class="level2" data-number="2.11">
 <h2 data-number="2.11" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.11</span> Summary</h2>
+<div class="content-block" style="font-style: italic;">
+<p>Data visualisations can be incredibly effective for presenting important properties of data values. However, any one data visualisation may only be effective for certain data values and for certain data properties.</p>
+<p>The goal of this document is to explain why some data visualisations are more effective than others; how data visualisation works.</p>
+<p>We will focus on how information is <strong>encoded</strong> to a visual representation. We can characterise a data visualisation in terms of the encodings that it uses to represent data values as data symbols.</p>
+<p>The effectiveness of an encoding depends on how well we can <strong>decode</strong> information from a visual representation. We will judge a data visualisation in terms of how well data values can be recovered from the data symbols.</p>
+</div>
 <p>The human visual system captures a very large amount of information from the visual field.</p>
 <p>Detailed information is only available at the centre of the visual field so multiple fixations are required to capture detailed information from multiple locations within an image.</p>
 <p>Large numbers of simple features are rapidly extracted, while more complex visual items take longer and require more congnitive effort.</p>
 <p>Large, bright, colourful items automatically stand out.</p>
 <p>Items are automatically differentiated and grouped based on basic visual features.</p>
-<p>The main point is that the visual system is <em>very</em> good at perceiving certain visual properties.</p>
-<p>An effective data visualisation will make use of the advantageous properties of the visual system and it will avoid the undesirable properties of the visual system.</p>
+<p>In other words, we can <strong>decode</strong> some information from a data visualisation very rapidly and without any effort.</p>
+<p>An effective data visualisation will make use of the automatic decoding that occurs within the visual system. At the same time, we may need to avoid some properties of the visual system they lead us to an incorrect or undesirable decoding.</p>
+<p>The human visual system captures a very large amount of information from the visual field.</p>
+<p>Detailed information is only available at the centre of the visual field so multiple fixations are required to capture detailed information from multiple locations within an image.</p>
+<p>Large numbers of simple features are rapidly extracted, while more complex visual items take longer and require more congnitive effort.</p>
+<p>Large, bright, colourful items automatically stand out.</p>
+<p>Items are automatically differentiated and grouped based on basic visual features.</p>
+<p>In other words, we can <strong>decode</strong> some information from a data visualisation very rapidly and without any effort.</p>
+<p>An effective data visualisation will make use of the automatic decoding that occurs within the visual system. At the same time, we may need to avoid some properties of the visual system they lead us to an incorrect or undesirable decoding.</p>
 <hr>
 
 
@@ -1237,12 +1250,12 @@ Wolfe, Jeremy M., and Todd S. Horowitz. 2017. <span>“Five Factors That Guide A
 <ol>
 <li id="fn1"><p>Simple descriptions of the human visual system can be found in many articles and books on data visualisation, for example, <span class="citation" data-cites="Sönning2023">Sönning (<a href="#ref-Sönning2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="franconeri2021">Franconeri et al. (<a href="#ref-franconeri2021" role="doc-biblioref">2021</a>)</span>, and <span class="citation" data-cites="cairo2012functional">Cairo (<a href="#ref-cairo2012functional" role="doc-biblioref">2012</a>)</span>. See <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> for a more in-depth, but still very accessible description. Wikipedia also has some very helpful content <span class="citation" data-cites="wikipedia-visual-system">(<a href="#ref-wikipedia-visual-system" role="doc-biblioref">Wikipedia contributors 2025</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>A rough estimate is that more than 50% of the brain is involved in visual processing <span class="citation" data-cites="vanessen1992information">(<a href="#ref-vanessen1992information" role="doc-biblioref">Van Essen, Anderson, and Felleman 1992</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Low-level visual processing involves the creation of <em>feature maps</em> that identify colours, edges, and orientations, along with the spatial arrangement of those basic features within the field of view.<span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021, 146</a>)</span></p>
+<li id="fn3"><p>Low-level visual processing involves the creation of <em>feature maps</em> that identify colours, edges, and orientations, along with the spatial arrangement of those basic features within the field of view <span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021, 146</a>)</span>.</p>
 <p>Patterns, or <em>textures</em>, are perceived at a slightly higher level, based on low-level perception of spatial frequencies (fine detail versus coarse detail).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>A slightly more detailed overview is provided in <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> (page 20).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>A slightly more detailed overview is provided in <span class="citation" data-cites="ware2021information ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>; <a href="#ref-ware2021information" role="doc-biblioref">2021, 20</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p><a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> is based on wind data from the National Oceanic and Atmospheric Administration’s Operational Model Archive and Distribution System (<a href="https://nomads.ncep.noaa.gov/">NOMADS</a>). The data were accessed on September 14 2024 and processed using the {rNOMADS} package <span class="citation" data-cites="rNOMADS">(<a href="#ref-rNOMADS" role="doc-biblioref">Bowman and Lees 2015</a>)</span>, with raw data interpolated to a finer grid.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>This is not to say that peripheral vision is useless. Peripheral vision contributes significantly to our field of view <span class="citation" data-cites="10.1167/jov.20.12.2 annurev:/content/journals/10.1146/annurev-vision-082114-035733">(<a href="#ref-10.1167/jov.20.12.2" role="doc-biblioref">Stewart, Valsecchi, and Schütz 2020</a>; <a href="#ref-annurev:/content/journals/10.1146/annurev-vision-082114-035733" role="doc-biblioref">Rosenholtz 2016</a>)</span>, and is as capable as foveal vision at detecting motion <span class="citation" data-cites="MCKEE198425">(<a href="#ref-MCKEE198425" role="doc-biblioref">Mckee and Nakayama 1984</a>)</span>. However, our ability to perceive fine details is limited to a relatively small area of focus.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>The extinction illusion is related to the Hermann grid illusion <span class="citation" data-cites="doi:10.1068/p2985">(<a href="#ref-doi:10.1068/p2985" role="doc-biblioref">Ninio and Stevens 2000</a>)</span>.</p>
+<li id="fn7"><p>This image is a demonstration of the extinction illusion, which is related to the better-known Hermann grid illusion <span class="citation" data-cites="doi:10.1068/p2985">(<a href="#ref-doi:10.1068/p2985" role="doc-biblioref">Ninio and Stevens 2000</a>)</span>.</p>
 <p>This illusion is not explained simply by differences in foveal versus peripheral perception—there is currently no complete explanation for the effect—but it serves to show that we are getting different information from different regions of the field of view.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>The plot was originally from The Economist, but this image was taken from the resources provided on the <a href="http://massvis.mit.edu/">MASSVIS project web site</a>. The eye tracking data were taken from the same web site. Cite MASSVIS article. Only a thumbnail version of the original image is shown in <a href="#fig-fixations" class="quarto-xref">Figure&nbsp;<span>2.7</span></a> in order to comply with terms of use of the MASSVIS data set.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p>Some limitations of visual memory are briefly mentioned in <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span> (pages 397-405 and pages 423-425).</p>

@@ -23,8 +23,8 @@ switch(1,
                        c(y0[i],
                          y0[i] - mult*dy + pd*dx,
                          y0[i] - mult*dy - pd*dx),
-                       col=ifelse(onland[i], 4, 5),
-                       border=ifelse(onland[i], 4, 5),
+                       col=ifelse(onland[i], 4, 3),
+                       border=ifelse(onland[i], 4, 3),
                        lwd=.5,
                        ljoin="mitre")
            }

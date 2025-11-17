@@ -817,26 +817,24 @@ from the data symbols.
 
 Understanding why some encodings are more effective than others will
 depend upon an understanding of how the human visual system works. In
-order to understand the effectiveness of a encoding from information to
-a visual representation, we need to know how we get from visual
-representations back to the original information.
+order to understand the effectiveness of an \textbf{encoding} from
+information to a visual representation, we need to know how we get from
+visual representations back to the original information---a
+\textbf{decoding}.
 
-We will talk about the transformation of data values into data symbols
-as an \textbf{encoding} of the data values. Later chapters will explore
-many different encodings. In this chapter, we will consider the reverse
-operation: the \textbf{decoding} of data symbols back to data values
-(Figure~\ref{fig-decode}). The effectiveness of an encoding from data
-values to data symbols will depend on how well we can decode from the
-data symbols back to data values.
-
-In this chapter we will establish a very simple model of the visual
-system, which will help us to understand the effectiveness of the
-different encodings that we consider throughout the book.\footnote{Simple
-  descriptions of the human visual system can be found in many articles
-  and books on data visualisation, for example, Sönning (2023),
-  Franconeri et al. (2021a), and Cairo (2012). See Ware (2021) for a
-  more in-depth, but still very accessible description. Wikipedia also
-  has some very helpful content (Wikipedia contributors 2025).}
+We describe the transformation of data values into data symbols as
+\textbf{encoding} the data values and later chapters will explore many
+different encodings. In this chapter, we focus on the reverse operation:
+the \textbf{decoding} of data symbols back to data values
+(Figure~\ref{fig-decode}). In this chapter we will establish a very
+simple model of the visual system, which will help us to understand the
+effectiveness of the different encodings that we consider throughout the
+book.\footnote{Simple descriptions of the human visual system can be
+  found in many articles and books on data visualisation, for example,
+  Sönning (2023), Franconeri et al. (2021a), and Cairo (2012). See Ware
+  (2021) for a more in-depth, but still very accessible description.
+  Wikipedia also has some very helpful content (Wikipedia contributors
+  2025).}
 
 \section{The eye}\label{sec-eye}
 
@@ -865,7 +863,7 @@ to the brain.}
 \end{figure}%
 
 \begin{quote}
-One reason why data visualisation is effective is because the visual
+One reason why data visualisation is effective is because our visual
 system gathers an enormous amount of information.
 \end{quote}
 
@@ -879,7 +877,7 @@ first, such as \textbf{position}, \textbf{angle}, \textbf{colour}, and
 \textbf{patterns}.\footnote{Low-level visual processing involves the
   creation of \emph{feature maps} that identify colours, edges, and
   orientations, along with the spatial arrangement of those basic
-  features within the field of view.(Ware 2021, 146)
+  features within the field of view (Ware 2021, 146).
 
   Patterns, or \emph{textures}, are perceived at a slightly higher
   level, based on low-level perception of spatial frequencies (fine
@@ -888,7 +886,7 @@ and built upon to produce higher-level visual elements, such as regions
 and \textbf{shapes}. Information is then also integrated from prior
 knowledge to assist with the identification of \textbf{objects}---things
 like trees, animals, and faces.\footnote{A slightly more detailed
-  overview is provided in Ware (2021) (page 20).}
+  overview is provided in Ware (2021; 2021, 20).}
 
 \begin{figure}
 
@@ -899,7 +897,10 @@ like trees, animals, and faces.\footnote{A slightly more detailed
 }
 
 \caption{\label{fig-visual-processing}A very simple model of visual
-processing.}
+processing. Basic visual features like position, angle, and colour are
+identified first, then collections of those features are combined into
+visual shapes, and, finally, some shapes are recognised as familiar
+visual objects.}
 
 \end{figure}%
 
@@ -910,8 +911,8 @@ many instances of visual features at once, whereas higher-level
 processing will only focus on a small number of items or a single item
 at once. On the other hand, lower-level visual features are rapidly
 discarded as our attention shifts, while higher-level visual objects are
-more persistent and may even become part of long-term memory (see
-Figure~\ref{fig-visual-model}).
+more persistent and may even become part of long-term memory
+(Figure~\ref{fig-visual-model}).
 
 \begin{figure}
 
@@ -921,8 +922,12 @@ Figure~\ref{fig-visual-model}).
 
 }
 
-\caption{\label{fig-visual-model}Some of the properties of visual
-processing.}
+\caption{\label{fig-visual-model}Early visual processing identifies
+large numbers of simple visual features very rapidly and without
+conscious effort. Subsequent processing takes longer, involves fewer,
+more complex visual shapes and visual objects, and may involve conscious
+mental effort, but the result can represent more complex information
+that is more memorable.}
 
 \end{figure}%
 
@@ -942,10 +947,10 @@ features} at once. There is no need to concentrate separately on every
 individual triangle in the image. At a higher level of processing,
 darker and lighter \textbf{shapes} are identified as well as regions of
 different colours. For example, a band of lighter wind forms a line from
-the top-left corner at a roughly 45-degree angle. At a higher level of
-processing again, at least for the denizens of Oceania, the green
-regions are recognised as a very familiar \textbf{object}: the outline
-of New Zealand.
+the top-left corner down and to the right at a roughly 45-degree angle.
+At a higher level of processing again, at least for the denizens of
+Oceania, the green regions are recognised as a very familiar
+\textbf{object}: the outline of New Zealand.
 
 The small lines in Figure~\ref{fig-visual-model-demo} convey a lot of
 simple pieces of information---what is the wind strength and direction
@@ -953,7 +958,7 @@ at each location---though we have to focus on a particular spot in order
 to extract a single piece of information. The shapes of darker and
 lighter regions convey several more complex ideas like areas of stronger
 and lighter winds. The green regions combine to convey the single
-complex and abstract concept of New Zealand.
+complex and abstract idea of New Zealand.
 
 \begin{figure}
 
@@ -1023,8 +1028,9 @@ and see everything. Instead, we perform a series of \textbf{fixations},
 which are brief periods of focus on one area of the image, with
 \textbf{saccades} in between, which are rapid changes in the location of
 our focus. Figure~\ref{fig-extinction} demonstrates that where we look
-within an image makes a difference.\footnote{The extinction illusion is
-  related to the Hermann grid illusion (Ninio and Stevens 2000).
+within an image makes a difference.\footnote{This image is a
+  demonstration of the extinction illusion, which is related to the
+  better-known Hermann grid illusion (Ninio and Stevens 2000).
 
   This illusion is not explained simply by differences in foveal versus
   peripheral perception---there is currently no complete explanation for
@@ -1047,21 +1053,23 @@ white dots in our peripheral vision.}
 
 \end{figure}%
 
-Figure~\ref{fig-fixations} shows eye-tracking data from one person
-viewing an image for 10 seconds.\footnote{The plot was originally from
-  The Economist, but this image was taken from the resources provided on
-  the \href{http://massvis.mit.edu/}{MASSVIS project web site}. The eye
-  tracking data were taken from the same web site. Cite MASSVIS article.
-  Only a thumbnail version of the original image is shown in
-  Figure~\ref{fig-fixations} in order to comply with terms of use of the
-  MASSVIS data set.} The original image is shown on the left and
-eye-tracking data is shown on the right, with hollow black circles
-showing the position of the coloured circles in the original image. In
-the eye-tracking image, the fixations are shown as purple circles and
-the saccades are shown as lines between the circles. For example, we can
-see that the viewer has fixated multiple times upon the large, colourful
-circles in the original image and also text at the top and bottom of the
-image.
+This means that, in order to decode detailed information from a data
+visualisation, we will need to switch focus between different areas of
+detail. For example, Figure~\ref{fig-fixations} shows eye-tracking data
+from one person viewing an image for 10 seconds.\footnote{The plot was
+  originally from The Economist, but this image was taken from the
+  resources provided on the \href{http://massvis.mit.edu/}{MASSVIS
+  project web site}. The eye tracking data were taken from the same web
+  site. Cite MASSVIS article. Only a thumbnail version of the original
+  image is shown in Figure~\ref{fig-fixations} in order to comply with
+  terms of use of the MASSVIS data set.} The original image is shown on
+the left and eye-tracking data is shown on the right, with hollow black
+circles showing the position of the coloured circles in the original
+image. In the eye-tracking image, the fixations are shown as purple
+circles and the saccades are shown as lines between the circles. For
+example, we can see that the viewer has fixated multiple times upon the
+large, colourful circles in the original image and has also fixated on
+the text at the top and bottom of the image.
 
 \begin{figure}
 
@@ -1090,19 +1098,18 @@ thumbnail of the original image is shown on the left.}
 \end{figure}%
 
 \begin{quote}
-A data visualisation may fail if it requires the viewer to constantly
-switch focus.
+A data visualisation will be slower to decode and require more effort to
+decode if it requires the viewer to constantly switch focus.
 \end{quote}
 
 \section{Visual memory}\label{visual-memory}
 
-When we switch focus to different areas of an image, we are likely to
-need to remember information from a previous area of focus. How well can
-we hold visual information in memory? The most important feature of
-visual memory is that it is very limited. We can only hold in memory a
-small number of items at once.\footnote{Some limitations of visual
-  memory are briefly mentioned in Ware (2021) (pages 397-405 and pages
-  423-425).
+When we switch focus between different areas of an image, we need to
+remember information from a previous area of focus. How well can we hold
+visual information in memory? The most important feature of visual
+memory is that it is very limited. We can only hold in memory a small
+number of items at once.\footnote{Some limitations of visual memory are
+  briefly mentioned in Ware (2021) (pages 397-405 and pages 423-425).
 
   ``A \ldots{} severely limited capacity is the restricted number of
   stimuli that can be held in VSTM {[}visual short-term memory{]}''
@@ -1112,12 +1119,9 @@ small number of items at once.\footnote{Some limitations of visual
   number of items limit vs continuous resource limit), with ref to e.g.,
   ``Psychophysical scaling reveals a unified theory of visual memory
   strength'' Schurgin et al (2020) and the binary map model}
-Figure~\ref{fig-memory} provides a simple demonstration of the
-limitations of visual memory.
 
-\begin{figure}
-
-\centering{
+Figures \ref{fig-memory-static-1} and \ref{fig-memory-static-2} provide
+a simple demonstration of the limitations of visual memory.
 
 \afterpage{
 \begin{figure}[t]
@@ -1126,7 +1130,7 @@ limitations of visual memory.
 \caption{\label{fig-memory-static-1}
 A memory task.  Focus on the circles in one of the three squares
 then turn the page and try to tell how many of the circles have
-changed colour in the corresponding square in @fig-memory-static-2.
+changed colour in the corresponding square in \ref{fig-memory-static-2}.
 The task should be obviously harder when there are more circles
 to remember, which reflects the limits on visual memory.}
 \end{figure}
@@ -1138,19 +1142,13 @@ to remember, which reflects the limits on visual memory.}
 
 \caption{\label{fig-memory-static-2}
 A memory task.  Look at the circles in one of the squares
-in @fig-memory-static-1 on the previous page and then come
+in \ref{fig-memory-static-1} on the previous page and then come
 back here and try to tell how many circles have changed colour
 in the corresponding square.
 The task should be obviously harder when there are more circles
 to remember, which reflects the limits on visual memory.}
 \end{figure}
 }
-
-}
-
-\caption{\label{fig-memory}}
-
-\end{figure}%
 
 It is easier and faster to decode information from visual elements if
 they lie within the scope of a single visual focus. If we have to switch
@@ -1174,16 +1172,15 @@ as chunking.\footnote{Miller's famous paper ``The Magical Number Seven,
   Information'' (Miller 1956) talks about limits on working memory, but
   also how to ``escape'' those limits, for example, by chunking
   information.} For example, we may only be able to hold in memory a
-small number of basic visual features such as the colours of circles
-(Figure~\ref{fig-memory}), but we can effectively hold many more basic
-visual features if we memorise more complex visual elements that are
-composed of many basic visual features. In other words, can remember
-several \textbf{visual shapes} or \textbf{visual objects} even if we
-cannot remember all of the individual visual features within those
-visual shapes or visual objects (Section~\ref{sec-visual-processing}).
-For example, can hold in memory multiple country flags even though we
-cannot necessarily hold in memory all of the invidual colours on those
-flags.
+small number of basic visual features such as the colours of circles,
+but we can effectively hold many more basic visual features if we
+memorise more complex visual elements that are composed of many basic
+visual features. In other words, we can remember several \textbf{visual
+shapes} or \textbf{visual objects} even if we cannot remember all of the
+individual \textbf{visual features} within those visual shapes or visual
+objects (Section~\ref{sec-visual-processing}). For example, we can hold
+in memory multiple country flags even though we cannot necessarily hold
+in memory all of the invidual colours on those flags.
 
 \begin{quote}
 A data visualisation will require more effort to decode if the viewer is
@@ -1355,8 +1352,8 @@ that differ by colour and/or size.}
 
 \end{minipage}%
 
-\caption{\label{fig-diff-serial}We have to work much harder when there
-is more going on.}
+\caption{\label{fig-diff-serial}We have to work much harder to identify
+a unique item when there is more going on.}
 
 \end{figure}%
 
@@ -1418,10 +1415,10 @@ see rows and in the other matrix we see columns. For example, in the
 middle pair, items that are the same colour produce groups that are
 either rows or columns.
 
-Furthermore, there are other visual properties that mean we
-automatically perceive items as groups: items that are close together
-(items that have similar \textbf{positions}) are seen as a group so we
-see either rows of black dots or columns of black dots on the left of
+There are other visual properties that mean we automatically perceive
+items as groups: items that are close together (items that have similar
+\textbf{positions}) are seen as a group so we see either rows of black
+dots or columns of black dots on the left of
 Figure~\ref{fig-gestalt-group}; items that are connected by lines are
 also seen as a group so we see either connected rows or connected
 columns on the right of Figure~\ref{fig-gestalt-group}.\footnote{These
@@ -1503,14 +1500,12 @@ Figure~\ref{fig-continuity}.\footnote{This is the Gestalt Continuity
 
 \end{figure}%
 
-When we visualise qualitative data, we will be able to rely on the
-automatic identification of different groups of data symbols based on
-visual similarities.
+All of this means that the visual system automatically decodes groups of
+items from an image.
 
 \begin{quote}
-A data visualisation of qualitative data may be effective if it relies
-on the automatic identification of visual groups (proximity, similarity,
-etc).
+One way that a data visualisation can be effective is by relying on on
+the automatic decoding of visual groups (proximity, similarity, etc).
 \end{quote}
 
 \section{Visual simplicity}\label{sec-simplicity}
@@ -1598,14 +1593,14 @@ complicated visual task, to decide which of the four bottom shapes is
 The left-hand task in Figure~\ref{fig-visual-task} is effortless and can
 be performed immediately. The right-hand task in
 Figure~\ref{fig-visual-task} requires much more deliberate effort and
-time to perform.
+time to perform.\footnote{``the comprehension of visual displays tends
+  to be easiest when simple pattern identification processes are
+  substituted for complex cognitive processes'' (Carpenter and Shah
+  1998, 98)}
 
 \begin{quote}
 A data visualisation will be effective if it relies on automatic and
-rapid visual processing rather than requiring conscious mental
-effort.\footnote{``the comprehension of visual displays tends to be
-  easiest when simple pattern identification processes are substituted
-  for complex cognitive processes'' (Carpenter and Shah 1998, 98)}
+rapid visual processing rather than requiring conscious mental effort.
 \end{quote}
 
 \section{Dangers of the visual system}\label{sec-illusion}
@@ -1705,6 +1700,22 @@ The effectiveness of a data visualisation will be compromised if it
 
 \section{Summary}\label{summary-1}
 
+Data visualisations can be incredibly effective for presenting important
+properties of data values. However, any one data visualisation may only
+be effective for certain data values and for certain data properties.
+
+The goal of this document is to explain why some data visualisations are
+more effective than others; how data visualisation works.
+
+We will focus on how information is \textbf{encoded} to a visual
+representation. We can characterise a data visualisation in terms of the
+encodings that it uses to represent data values as data symbols.
+
+The effectiveness of an encoding depends on how well we can
+\textbf{decode} information from a visual representation. We will judge
+a data visualisation in terms of how well data values can be recovered
+from the data symbols.
+
 The human visual system captures a very large amount of information from
 the visual field.
 
@@ -1720,12 +1731,36 @@ Large, bright, colourful items automatically stand out.
 Items are automatically differentiated and grouped based on basic visual
 features.
 
-The main point is that the visual system is \emph{very} good at
-perceiving certain visual properties.
+In other words, we can \textbf{decode} some information from a data
+visualisation very rapidly and without any effort.
 
-An effective data visualisation will make use of the advantageous
-properties of the visual system and it will avoid the undesirable
-properties of the visual system.
+An effective data visualisation will make use of the automatic decoding
+that occurs within the visual system. At the same time, we may need to
+avoid some properties of the visual system they lead us to an incorrect
+or undesirable decoding.
+
+The human visual system captures a very large amount of information from
+the visual field.
+
+Detailed information is only available at the centre of the visual field
+so multiple fixations are required to capture detailed information from
+multiple locations within an image.
+
+Large numbers of simple features are rapidly extracted, while more
+complex visual items take longer and require more congnitive effort.
+
+Large, bright, colourful items automatically stand out.
+
+Items are automatically differentiated and grouped based on basic visual
+features.
+
+In other words, we can \textbf{decode} some information from a data
+visualisation very rapidly and without any effort.
+
+An effective data visualisation will make use of the automatic decoding
+that occurs within the visual system. At the same time, we may need to
+avoid some properties of the visual system they lead us to an incorrect
+or undesirable decoding.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -9815,6 +9850,10 @@ three sets of values, haved decreased, we cannot tell what the values
 are or by how much they have decreased. If there was ever any doubt,
 Figure~\ref{fig-no-text} makes it clear that text is doing a lot of
 important work in a data visualisation.
+
+\textbf{TODO} refer back to Section~\ref{sec-attention} (in encoding
+information?);\\
+it helps to direct attention to what you want the viewer to see!
 
 \textbf{TODO} Refer back to Section~\ref{sec-rel-pos}. Text is one way
 to decode to absolute data values (rather than just relative)

@@ -48,9 +48,9 @@ model <- function(verbal=FALSE) {
     label("\nslower", col, 1)
 
     col <- 3
-    label("parallel\n", col, 5)
+    label("many\n", col, 5)
     pointer(col, 2:4)
-    label("\nserial", col, 1)
+    label("\nfew", col, 1)
 
     col <- 6
     label("simple\n", col, 5)
@@ -58,9 +58,9 @@ model <- function(verbal=FALSE) {
     label("\ncomplex", col, 1)
 
     col <- 4
-    label("preattentive\n", col, 5)
+    label("subconscious\n", col, 5)
     pointer(col, 2:4)
-    label("\nattentive", col, 1)
+    label("\nconscious", col, 1)
 
     col <- 5
     label("fleeting\n", col, 5)
