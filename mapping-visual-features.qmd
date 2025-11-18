@@ -17,24 +17,31 @@ data values to data symbols can be reversed to **decode**
 from data symbols back to data values 
 (@fig-decode).
 We also identified
-three levels of visual processing:  visual features, visual shapes,
-and visual objects (@fig-visual-processing).
+three levels of visual processing:  **visual features**, **visual shapes**,
+and **visual objects** (@fig-visual-processing).
 
 There are many 
-possible encodings between data values and data symbols.
-For example, in @sec-encodings, we saw that the same data values could be
-encoded in different ways to produce different data visualisations
-(e.g., @fig-crime and @fig-crime-heatmap).
+possible ways to encode data values to data symbols.
+For example, in @sec-encodings, we saw that exactly 
+the same data values could be
+encoded in different ways to produce a line plot (@fig-crime)
+and a heatmap (@fig-crime-heatmap).
+We also saw that different data visualisations made some decodings
+easier and others more difficult.
 The remainder of this book explores different sorts of encodings
-and why they are more or less effective for different purposes.
+and why they they lead to more or less effective decodings.
 
-In this chapter, we start with a very simple sort of encoding.
-We will begin to explore data visualisations where
+In this chapter, we start with a very simple sort of encoding;
+we will begin to explore data visualisations where
 each data value is **encoded** as 
 a basic **visual feature** of a data symbol.
+For example, we can encode a number as the length of a bar
+in a bar plot.
 Furthermore, in these data visualisations,
 **one** data value is encoded to **one** data symbol
-(@fig-visual-feature).  
+(@fig-visual-feature).
+For example, we can encode each separate number as the length
+of a separate bar in a bar plot.
 
 ::: {#fig-visual-feature}
 ::: {.content-visible when-format=pdf layout-ncol=2}
@@ -50,28 +57,38 @@ Furthermore, in these data visualisations,
 :::
 
 A simple data visualisation encodes each data value as a **visual feature**
-of a data symbol.  Each data value (`x`) is encoded to a visual
-feature (`a`) of a single data symbol.
+of a data symbol.  Each data value (`x`) is encoded to one visual
+feature (`a`) of a single data symbol.  For example, if there are four
+data values, we end up with four data symbols, each of which encodes a
+single data value.
 :::
+
+Data visualisations that make use of this sort of encoding
+are useful for decoding and comparing
+individual data values.
+For example, we can decode a number from the length of a bar in a bar plot
+and we can compare two numbers by decoding the lengths of two bars
+in a bar plot.
 
 ## Bar plots {#sec-bar}
 
-A good example of this sort of simple encoding is a bar plot.
+A bar plot is a good example of a data visualisation 
+that encodes data values as simple visual features.
 In order to demonstrate bar plots,
 we will work with a data set containing 
 the total number of offenders aged 14 to 16
-in New Zealand 
-between 2011 and 2021, for different ethnic groups.  The data values are shown
-in @tbl-crime-group-total.
-A bar plot of these data is shown in @fig-bar.
+in New Zealand in 2021, 
+for different ethnic groups.  The data values are shown
+in @tbl-crime-group-total and
+a bar plot of these data is shown in @fig-bar.
 
 ```{r}
 #| echo: false
 #| message: false
 #| label: tbl-crime-group-total
-#| tbl-cap: A table of the total number of offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.  
-crimeGroupTotalTable <- subset(crimeGroupTotal, select=c("group", "total"))
-kable_styling(kable(crimeGroupTotalTable),
+#| tbl-cap: A table of the total number of offenders aged 14 to 16 in 2021 for different ethnic groups.  
+crimeGroup2021Table <- subset(crimeGroup2021, select=c("group", "count"))
+kable_styling(kable(crimeGroup2021Table[c(4, 2, 1, 3), ]),
               bootstrap_options=c("basic", "hover"), 
               full_width=FALSE)
 ```
@@ -79,21 +96,22 @@ kable_styling(kable(crimeGroupTotalTable),
 ```{r}
 #| echo: false
 #| label: fig-bar
-#| fig-cap: A bar plot of the total number of offenders for different ethnic groups. The data symbols in this plot are the horizontal bars.
-ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total, y=group)) +
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups in 2021. The data symbols in this plot are the horizontal bars.
+ggplot(crimeGroup2021) + 
+    geom_col(aes(x=count, y=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
+    scale_y_discrete(name=NULL) +
     theme(aspect.ratio=1)
 ```
 
 We can see that, for each data value in @tbl-crime-group-total,
 there is a single bar in the bar plot.
-For example, each total number
+Each total number
 of offenders is encoded to a single bar.
 
 In terms of **decoding** (@fig-decode),
 this means that we can decode individual data values from each
-data symbol.  For example, we can 
+data symbol.  We can 
 decode a single total number of offenders from each bar.[^bijective]
 
 [^bijective]:
@@ -102,7 +120,8 @@ decode a single total number of offenders from each bar.[^bijective]
     [@Ziemkiewicz2009].
 
 This allows us to answer simple questions about individual data values.
-For example, what is the largest total number of offenders?
+For example, what is the largest total number of offenders
+and is the total larger for Māori or European/Other offenders?
 
 ## Visual features {#sec-visual-features}
 
@@ -111,11 +130,11 @@ are a set of bars or, put more simply, rectangles.
 We have seen that 
 each data value from @tbl-crime-group-total is encoded to one
 of these rectangles.
-For example, each total number of offenders is encoded to a rectangle.
+Each total number of offenders is encoded to a rectangle.
 
-However, we can look more closely at the encoding and consider how individual 
-data values are being **encoded** as a data symbol.
-For example, the total number of offenders for each ethnic group
+However, we can specify more precisely how individual 
+data values are being encoded as a **visual feature** of a data symbol.
+In this case, the total number of offenders for each ethnic group
 is encoded as the **length** of a rectangle
 (@fig-length). Each data value
 is encoded to the length of one rectangle.[^length-vs-position]
@@ -124,7 +143,7 @@ is encoded to the length of one rectangle.[^length-vs-position]
     Some authors prefer to say that the total number of offenders 
     is encoded to the **position** of the "top" of the rectangle
     [e.g., @cleveland1984graphical], but the difference is not
-    significant because both length and position are excellent
+    hugely significant because both length and position are excellent
     visual features in terms of decoding (@sec-accuracy).
 
     It is also worth noting that there can be a discrepancy between
@@ -135,11 +154,11 @@ is encoded to the length of one rectangle.[^length-vs-position]
 ```{r}
 #| echo: false
 #| label: fig-length
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the total number of crimes, have been encoded to the **lengths** of the bars (the purple lines).
-ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total, y=group), fill="grey") +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups in 2021. The data values, the total number of crimes, have been encoded to the **lengths** of the bars (the green lines).
+ggplot(crimeGroup2021) + 
+    geom_col(aes(x=count, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
-    geom_segment(aes(xend=total, y=group, yend=group), x=0, 
+    geom_segment(aes(xend=count, y=group, yend=group), x=0, 
                  color=cols[2], linewidth=1,
                  arrow=arrow(angle=15, length=unit(3, "mm"), ends="both")) +
     theme(panel.border=element_rect(colour="grey", fill=NA),
@@ -151,18 +170,18 @@ ggplot(crimeGroupTotal) +
           aspect.ratio=1)
 ```
 
+There is another encoding happening in @fig-bar.
 Each ethnic group data value in @tbl-crime-group-total is also
 encoded to a rectangle in @fig-bar.
-In terms of **encodings**,
-each ethnic group is encoded as the vertical **position** of one rectangle
+Each ethnic group is encoded as the vertical **position** of one rectangle
 (@fig-position).  
 
 ```{r}
 #| echo: false
 #| label: fig-position
-#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic groups, have been encoded to the **positions** of the bars (the purple dots).
-ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total, y=group), fill="grey") +
+#| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic groups, have been encoded to the **positions** of the bars (the green dots).
+ggplot(crimeGroup2021) + 
+    geom_col(aes(x=count, y=group), fill="grey") +
     scale_x_continuous(expand=expansion(c(0, .05))) +
     geom_point(aes(y=group), x=0, color=cols[2], size=3) +
     coord_cartesian(clip="off") +
@@ -175,7 +194,7 @@ ggplot(crimeGroupTotal) +
           aspect.ratio=1)
 ```
 
-**Length** and **position** are examples of basic visual features
+**Length** and **position** are examples of basic **visual features**
 (@sec-visual-processing).
 One way to make an effective data visualisation is to encode
 data values as the basic visual features of a data symbol.
@@ -224,7 +243,7 @@ grid.rect(gp=gpar(col=NA, fill="grey90"))
 popViewport()
 pushViewport(viewport(layout.pos.row=6, layout.pos.col=2))
 grid.text("pattern", x=0, just="right")
-grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), pch=3:4, gp=gpar(lwd=2))
+grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), pch=c(1, 8), gp=gpar(lwd=2))
 popViewport()
 ```
 
@@ -269,6 +288,11 @@ We will explore each of these in more detail in the following sections.
     even though there is more involved in the perception of data point shape
     [@chen1982topological; @4906843].
 
+    Much longer lists of basic visual features have been proposed
+    [e.g., @anal-info-viz], but we restrict ourselves in this book
+    to a set that has some correspondence with the visual features
+    that are extracted early on in visual processing.
+
 ## Quantitative features {#sec-quant-features}
 
 As we discussed in @sec-visual-system, the real purpose of encoding
@@ -290,12 +314,12 @@ need to consider how well we are able to **decode** from
 
 When we encode data values as visual features, we want to encode
 to a visual feature that allows us to decode the data values from
-the visual fearure.
+the visual feature.
 :::
 
 One issue to consider is whether a visual feature is able to
 represent all of the information in the data values.[^matching-data-type]
-Some types of data contain more information than others:
+Some types of data contain more information than others.
 
 [^matching-data-type]:
     The idea of matching the type of data---nominal, ordinal, interval, or
@@ -304,25 +328,25 @@ Some types of data contain more information than others:
     following @mackinlay1986automatic,
     refers to this idea as *expressiveness*.
 
-* **Quantitative** data consists of numeric values, which naturally
-  possess not only an ordering, but information about the size
-  of differences between values.  For example, 
-  the year 2020 comes after the year 2010 and there is a gap
-  of 10 years in between.  This is also referred to as **interval** data.
-  **Ratio** data is quantitative data that also contains a 
-  "zero" reference value, so there is also information
-  about absolute size and ratios of differences.
-  For example, 200 offenders is twice as many as 100 offenders.
+For example, **quantitative** data consist of numeric values, which naturally
+possess not only an ordering, but information about the size
+of differences between values.  For example, 
+the year 2020 comes after the year 2010 and there is a gap
+of 10 years in between.  This is also referred to as **interval** data.
+**Ratio** data is quantitative data that also contains a 
+"zero" reference value, so there is also information
+about absolute size and ratios of differences.
+For example, 200 offenders is twice as many as 100 offenders.
 
-* **Qualitative** data consists of categorical values.
-  **Ordinal** data consists of categories that
-  are ordered, but there is no information about the size of differences.
-  For example, a "high" crime level is more severe than a "medium"
-  crime level, which is more severe than a "low" crime level, but 
-  we cannot measure the size of the differences.
-  **Nominal** data consists of just group labels,
-  e.g., ethnic groups, and the only information we have is that the
-  categories are different from each other.
+By comparison, **qualitative** data consist of categorical values.
+**Ordinal** data consists of categories that
+are ordered, but there is no information about the size of differences.
+For example, a "high" crime level is more severe than a "medium"
+crime level, which is more severe than a "low" crime level, but 
+we cannot measure the size of the differences.
+**Nominal** data consists of just group labels,
+e.g., ethnic groups, and the only information we have is that the
+categories are different from each other.
 
 @fig-quant-features shows that **position**, **length**, **angle**,
 and **area** are visual features that are capable of representing
@@ -389,7 +413,7 @@ popViewport(2)
 By contrast, @fig-not-quant shows that **colour** and **pattern** are
 *not* capable of representing quantitative values.  For example,
 the colour blue is not twice the colour green and
-a plus sign is not 10 more than a triangle.
+a circle is not 20 more than a triangle.
 We can tell that there are three *different* values, but
 in effect, these visual representations *lose* information.
 It is not possible to decode the data values from the visual represenations.
@@ -423,7 +447,7 @@ grid.text("colour", y=unit(-2, "lines"))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3),
              vp2)
-grid.points(rep(.5, 3), c(0, .5, 1), pch=2:4, size=unit(5, "mm"),
+grid.points(rep(.5, 3), c(0, .5, 1), pch=c(1, 8, 5), size=unit(5, "mm"),
             gp=gpar(lwd=2))
 grid.text("pattern", y=unit(-2, "lines"))
 popViewport(2)
@@ -545,7 +569,7 @@ popViewport(2)
 ```
 
 The bar plot in @fig-bar encodes the ethnic groups, which are
-qualitative data values, as the **position** of bars, which is
+qualitative (nominal) data values, as the **position** of bars, which is
 a qualitative visual feature.
 
 > One reason why a bar plot is effective for visualising
@@ -617,7 +641,7 @@ regpoly <- function(x, y, n, size=.125, offset=0) {
     y1 <- y + sin(t)*size
     x2 <- x 
     y2 <- y 
-    grid.segments(x1, y1, x2, y2)
+    grid.segments(x1, y1, x2, y2, gp=gpar(lwd=3))
     ## grid.polygon(x, y, gp=gpar(fill=NA))
 }
 regpoly(.25, .1, 3, offset=0)
@@ -631,9 +655,9 @@ This issue has been studied experimentally and
 of basic visual features,
 with more accurate visual features at the top.[^candm]
 A data visualisation that encodes
-data values as visual features near the top of this
+data values to visual features that are near the top of this
 ranking will be more effective than one that encodes data values
-as visual features near the bottom.
+to visual features that are near the bottom.
 
 [^candm]:
     In @cleveland1984graphical, 
@@ -734,15 +758,15 @@ out of a set of known colours, is this one?[^identify]
     colours.
 
 The issue in this scenario is the **capacity** of a visual feature:
-how many different categories can be represented?
-In particular, how many different categories can be represented
-with the viewer able to reliably identify each separate category?
+how many different categories can be encoded effectively?
+In particular, how many different categories can be encoded
+with the viewer able to reliably decode each separate category?
 
 @fig-colour-cap shows that **colour** has a limited capacity.
 A small number of different colours are very easy to differentiate,
 but the differences become harder to perceive with a greater number
 of colours.[^colour-capacity]
-This difficulty only increases with irregular
+This difficulty only increases with more irregular
 arrangements.
 
 [^colour-capacity]:
@@ -793,7 +817,7 @@ popViewport()
 ```
 
 **Pattern** also has a very limited capacity (@fig-pattern-cap),
-again exacerbated by less regular arrangements.[^pattern-capacity]
+and again this gets worse with less regular arrangements.[^pattern-capacity]
 
 [^pattern-capacity]:
     The research evidence for the limited capacity of pattern
@@ -841,7 +865,8 @@ popViewport()
 ```
 
 By contrast, @fig-pos-cap shows that **position** has a greater
-capacity.  We can easily identify the location of the single dot even as the
+capacity than both colour and pattern.
+We can easily identify the location of the single dot even as the
 number of alternative locations becomes large.
 
 ```{r}
@@ -877,14 +902,15 @@ popViewport()
 ```
 
 The bar plot in @fig-bar encodes the ethnic group as the
-vertical **position** of bars, which makes it easy to identify
+vertical **position** of bars, which makes it easy to decode
 the different ethnic groups.
 
 > One reason why a bar plot is effective for visualising
   **qualitative data values** is because the qualitative data values,
   the groups,
   are encoded as a visual feature that has excellent **capacity**, 
-  the positions of the bars.
+  the positions of the bars, so we are able to encode, and decode,
+  a large number of different groups.
 
 ## Case study: Dot plots {#sec-dot-plots}
 
@@ -904,11 +930,11 @@ form of a dot plot[^dot-plot]
 #| echo: false
 #| label: fig-dot
 #| fig-cap: A dot plot of the number of crimes for different ethnic groups. The data symbols in this plot are the data points.
-ggplot(crimeGroupTotal) + 
+ggplot(crimeGroup2021) + 
     geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
                  linetype="dotted") +
-    geom_point(aes(x=total, y=group), size=3) +
-    scale_x_continuous(name="total") +
+    geom_point(aes(x=count, y=group), size=3) +
+    scale_x_continuous(name="count") +
     theme(aspect.ratio=1)
 ```
 
@@ -933,16 +959,17 @@ is a visual feature that is capable of representing qualitive data
 and is a visual feature with a high capacity.
 
 It could be argued that the dot plot in @fig-dot is even *more* effective
-than the bar plot in @fig-bar for perceiving the differences 
+than the bar plot in @fig-bar for decoding the differences 
 between totals because **position** ranks higher than **length**
-in @fig-accuracy.  On the other hand, if we want to compare 
+in terms of decoding accuracy (@fig-accuracy).
+On the other hand, if we want to compare 
 totals in terms of their ratios, @fig-bar is superior because it
 includes a representation of zero.
 
 ## Case study: Pie charts
 
 @fig-pie shows yet another visualisation of the total number of offenders
-for different ethnic groups, this time a pie chart.
+for different ethnic groups, this time in the form of a pie chart.
 This is a less effective representation of the data than the
 bar plot in @fig-bar or the dot plot in @fig-dot and we can use
 familiar reasoning to see why.
@@ -950,13 +977,25 @@ familiar reasoning to see why.
 ```{r}
 #| echo: false
 #| label: fig-pie
+#| fig-keep: last
 #| fig-cap: A pie chart of the number of crimes for different ethnic groups. The data symbols in this plot are the pie wedges.
-ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total, y="", fill=group), colour="black") +
+ggplot(crimeGroup2021) + 
+    geom_col(aes(x=count, y="", fill=group), colour="black") +
     coord_polar() +
+    scale_x_continuous(breaks=seq(0, 6000, 1000)) +
     theme(aspect.ratio=1,
-          axis.title.y=element_blank(),
+          panel.grid.major.x=element_line(colour="black"),
+          axis.title=element_blank(),
+          axis.text.y=element_blank(),
           axis.ticks.y=element_blank())
+grid.force()
+tickPath <- grid.grep("panel::gTree::titleGrob::text", grep=TRUE)
+ticks <- grid.get(tickPath)
+newTicks <- grobTree(circleGrob(ticks$x, ticks$y, unit(4, "mm"), 
+                                gp=gpar(col=NA, fill=figbg)),
+                     ticks,
+                     name=ticks$name)
+grid.set(tickPath, newTicks)
 ```
 
 The data symbols in @fig-pie are wedges or segments of a circle
@@ -966,14 +1005,16 @@ As with bar plots and dot plots, in a pie chart
 the data values are encoded as basic
 visual features of these symbols.
 However, a pie chart makes use of different visual features:
-The total values are encoded as the **angle** and/or **area** of the wedges
-and the group values are encoded as the **colour** of the wedges.[^pie-encoding]
+The number of offenders for each ethnic group
+is encoded as the **angle** and/or **area** of a wedge
+and each ethnic groups 
+is encoded as the **colour** of a wedge.[^pie-encoding]
 Although **colour** is an appropriate visual feature to represent
 **qualitative** data, and it has sufficient capacity to differentiate
 between only four groups, the encoding of quantitative values as **angle**
 and/or **area** leads to less accurate decoding of the total number of 
 offenders.  For example, it is much harder to decode the number of
-offenders with an unknown ethinicity from the pie chart in @fig-pie
+offenders with an unknown ethnicity from the pie chart in @fig-pie
 compared to the bar plot in @fig-bar or the dot plot in @fig-dot.
 
 [^pie-encoding]:
@@ -992,33 +1033,15 @@ to pie charts in @sec-part-to-whole to show that all is not lost.
 
 ## Summary
 
-A simple encoding of data values to data symbols involves
-encoding **each data value to a separate data symbol**.
-This allows the viewer to **decode** individual data values from
-the data symbols.
+::: {.old-summary}
+ 
+{{< include intro-summary.md >}}
 
-A simple encoding of data values to data symbols also involves
-**encoding** each data value as a basic **visual feature** of 
-the data symbol:  position, length, area, angle, colour, and pattern.
-This is effective because 
-visual features are decoded rapidly and without conscious effort.
+{{< include visual-model-summary.md >}}
 
-Position, length, area, and angle are appropriate for encoding quantitative data
-because we can decode amounts from these
-visual features.
-We can decode position and length more accurately than area and angle.
+:::
 
-Position, colour, and pattern are appropriate for encoding qualitative
-data because we can decode differences from these visual features.
-We can represent a large number of categories using position,
-but only a few categories using colours and patterns.
-
-Bar plots, dot plots, and pie charts all provide examples of 
-simple encodings from data values to data symbol.
-We can decode bar plots and dot plots accurately
-because they involve encodings of data values to position and length.
-We cannot decode pie charts as accurately because they
-involve encoding data values to angle and area.
+{{< include mapping-visual-features-summary.md >}}
 
 ---
 

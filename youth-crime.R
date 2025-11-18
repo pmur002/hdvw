@@ -82,6 +82,7 @@ crimeGroupTotal <- group_by(crimeGroup, group) |>
     summarise(total = sum(count))
 crimeGroupTotal$groupFactor <- as.factor(crimeGroupTotal$group)
 crimeGroupTotal$groupNumeric <- as.numeric(crimeGroupTotal$groupFactor)
+crimeGroup2021 <- subset(crimeGroup, year == 2021)
 
 crimeEthnicity <- read.csv("Data/YouthCrime/crime-ethnicity.csv")
 crimeEthnicity$yearDate <- as.Date(paste0(crimeEthnicity$year, "-06-30"))

@@ -795,14 +795,14 @@ Data visualisations can be incredibly effective for presenting important
 properties of data values. However, any one data visualisation may only
 be effective for certain data values and for certain data properties.
 
-The goal of this document is to explain why some data visualisations are
-more effective than others; how data visualisation works.
+The goal of this book is to explain why some data visualisations are
+more effective than others---how data visualisation works.
 
 We will focus on how information is \textbf{encoded} to a visual
 representation. We can characterise a data visualisation in terms of the
-encodings that it uses to represent data values as data symbols.
+encodings that it uses to convert data values into data symbols.
 
-The effectiveness of an encoding depends on how well we can
+The effectiveness of an encoding will depend on how well we can
 \textbf{decode} information from a visual representation. We will judge
 a data visualisation in terms of how well data values can be recovered
 from the data symbols.
@@ -1704,14 +1704,14 @@ Data visualisations can be incredibly effective for presenting important
 properties of data values. However, any one data visualisation may only
 be effective for certain data values and for certain data properties.
 
-The goal of this document is to explain why some data visualisations are
-more effective than others; how data visualisation works.
+The goal of this book is to explain why some data visualisations are
+more effective than others---how data visualisation works.
 
 We will focus on how information is \textbf{encoded} to a visual
 representation. We can characterise a data visualisation in terms of the
-encodings that it uses to represent data values as data symbols.
+encodings that it uses to convert data values into data symbols.
 
-The effectiveness of an encoding depends on how well we can
+The effectiveness of an encoding will depend on how well we can
 \textbf{decode} information from a visual representation. We will judge
 a data visualisation in terms of how well data values can be recovered
 from the data symbols.
@@ -1723,44 +1723,23 @@ Detailed information is only available at the centre of the visual field
 so multiple fixations are required to capture detailed information from
 multiple locations within an image.
 
-Large numbers of simple features are rapidly extracted, while more
-complex visual items take longer and require more congnitive effort.
+Large numbers of simple \textbf{visual features} like positions,
+lengths, and colours are rapidly extracted, while more complex
+\textbf{visual shapes} and \textbf{visual objects} take longer and
+require more congnitive effort.
 
-Large, bright, colourful items automatically stand out.
+Large, bright, colourful items automatically get our attention.
 
-Items are automatically differentiated and grouped based on basic visual
-features.
+We automatically identify groups of items within an image based on basic
+visual features.
 
-In other words, we can \textbf{decode} some information from a data
-visualisation very rapidly and without any effort.
-
-An effective data visualisation will make use of the automatic decoding
-that occurs within the visual system. At the same time, we may need to
-avoid some properties of the visual system they lead us to an incorrect
-or undesirable decoding.
-
-The human visual system captures a very large amount of information from
-the visual field.
-
-Detailed information is only available at the centre of the visual field
-so multiple fixations are required to capture detailed information from
-multiple locations within an image.
-
-Large numbers of simple features are rapidly extracted, while more
-complex visual items take longer and require more congnitive effort.
-
-Large, bright, colourful items automatically stand out.
-
-Items are automatically differentiated and grouped based on basic visual
-features.
-
-In other words, we can \textbf{decode} some information from a data
-visualisation very rapidly and without any effort.
+In other words, we automatically \textbf{decode} some information from a
+data visualisation very rapidly and without any effort.
 
 An effective data visualisation will make use of the automatic decoding
-that occurs within the visual system. At the same time, we may need to
-avoid some properties of the visual system they lead us to an incorrect
-or undesirable decoding.
+that occurs within the visual system. At the same time, we need to watch
+out for automatic decoding if it leads us to an incorrect or undesirable
+result.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1777,22 +1756,26 @@ established some basic properties of the visual system, which will help
 to explain how well the \textbf{encoding} of data values to data symbols
 can be reversed to \textbf{decode} from data symbols back to data values
 (Figure~\ref{fig-decode}). We also identified three levels of visual
-processing: visual features, visual shapes, and visual objects
-(Figure~\ref{fig-visual-processing}).
+processing: \textbf{visual features}, \textbf{visual shapes}, and
+\textbf{visual objects} (Figure~\ref{fig-visual-processing}).
 
-There are many possible encodings between data values and data symbols.
-For example, in Section~\ref{sec-encodings}, we saw that the same data
-values could be encoded in different ways to produce different data
-visualisations (e.g., Figure~\ref{fig-crime} and
-Figure~\ref{fig-crime-heatmap}). The remainder of this book explores
-different sorts of encodings and why they are more or less effective for
-different purposes.
+There are many possible ways to encode data values to data symbols. For
+example, in Section~\ref{sec-encodings}, we saw that exactly the same
+data values could be encoded in different ways to produce a line plot
+(Figure~\ref{fig-crime}) and a heatmap (Figure~\ref{fig-crime-heatmap}).
+We also saw that different data visualisations made some decodings
+easier and others more difficult. The remainder of this book explores
+different sorts of encodings and why they they lead to more or less
+effective decodings.
 
-In this chapter, we start with a very simple sort of encoding. We will
+In this chapter, we start with a very simple sort of encoding; we will
 begin to explore data visualisations where each data value is
 \textbf{encoded} as a basic \textbf{visual feature} of a data symbol.
-Furthermore, in these data visualisations, \textbf{one} data value is
-encoded to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
+For example, we can encode a number as the length of a bar in a bar
+plot. Furthermore, in these data visualisations, \textbf{one} data value
+is encoded to \textbf{one} data symbol
+(Figure~\ref{fig-visual-feature}). For example, we can encode each
+separate number as the length of a separate bar in a bar plot.
 
 \begin{figure}
 
@@ -1812,34 +1795,40 @@ encoded to \textbf{one} data symbol (Figure~\ref{fig-visual-feature}).
 
 \caption{\label{fig-visual-feature}A simple data visualisation encodes
 each data value as a \textbf{visual feature} of a data symbol. Each data
-value (\texttt{x}) is encoded to a visual feature (\texttt{a}) of a
-single data symbol.}
+value (\texttt{x}) is encoded to one visual feature (\texttt{a}) of a
+single data symbol. For example, if there are four data values, we end
+up with four data symbols, each of which encodes a single data value.}
 
 \end{figure}%
 
+Data visualisations that make use of this sort of encoding are useful
+for decoding and comparing individual data values. For example, we can
+decode a number from the length of a bar in a bar plot and we can
+compare two numbers by decoding the lengths of two bars in a bar plot.
+
 \section{Bar plots}\label{sec-bar}
 
-A good example of this sort of simple encoding is a bar plot. In order
-to demonstrate bar plots, we will work with a data set containing the
-total number of offenders aged 14 to 16 in New Zealand between 2011 and
-2021, for different ethnic groups. The data values are shown in
-Table~\ref{tbl-crime-group-total}. A bar plot of these data is shown in
-Figure~\ref{fig-bar}.
+A bar plot is a good example of a data visualisation that encodes data
+values as simple visual features. In order to demonstrate bar plots, we
+will work with a data set containing the total number of offenders aged
+14 to 16 in New Zealand in 2021, for different ethnic groups. The data
+values are shown in Table~\ref{tbl-crime-group-total} and a bar plot of
+these data is shown in Figure~\ref{fig-bar}.
 
-\begin{longtable}[t]{lr}
+\begin{longtable}[t]{llr}
 
 \caption{\label{tbl-crime-group-total}A table of the total number of
-offenders aged 14 to 16 from 2011 to 2021 for different ethnic groups.}
+offenders aged 14 to 16 in 2021 for different ethnic groups.}
 
 \tabularnewline
 
 \toprule
-group & total\\
+ & group & count\\
 \midrule
-European/Other & 31274\\
-Māori & 41787\\
-Pasifika & 6993\\
-Unknown & 5632\\
+54 & Unknown & 1589\\
+52 & Pasifika & 328\\
+51 & Māori & 2869\\
+53 & European/Other & 1833\\
 \bottomrule
 
 \end{longtable}
@@ -1853,43 +1842,42 @@ Unknown & 5632\\
 }
 
 \caption{\label{fig-bar}A bar plot of the total number of offenders for
-different ethnic groups. The data symbols in this plot are the
+different ethnic groups in 2021. The data symbols in this plot are the
 horizontal bars.}
 
 \end{figure}%
 
 We can see that, for each data value in
 Table~\ref{tbl-crime-group-total}, there is a single bar in the bar
-plot. For example, each total number of offenders is encoded to a single
-bar.
+plot. Each total number of offenders is encoded to a single bar.
 
 In terms of \textbf{decoding} (Figure~\ref{fig-decode}), this means that
-we can decode individual data values from each data symbol. For example,
-we can decode a single total number of offenders from each
-bar.\footnote{This one-to-one encoding between data values and data
-  symbols is called a \emph{bijective} encoding (Ziemkiewicz and Kosara
-  2009).}
+we can decode individual data values from each data symbol. We can
+decode a single total number of offenders from each bar.\footnote{This
+  one-to-one encoding between data values and data symbols is called a
+  \emph{bijective} encoding (Ziemkiewicz and Kosara 2009).}
 
 This allows us to answer simple questions about individual data values.
-For example, what is the largest total number of offenders?
+For example, what is the largest total number of offenders and is the
+total larger for Māori or European/Other offenders?
 
 \section{Visual features}\label{sec-visual-features}
 
 The data symbols in Figure~\ref{fig-bar} are a set of bars or, put more
 simply, rectangles. We have seen that each data value from
 Table~\ref{tbl-crime-group-total} is encoded to one of these rectangles.
-For example, each total number of offenders is encoded to a rectangle.
+Each total number of offenders is encoded to a rectangle.
 
-However, we can look more closely at the encoding and consider how
-individual data values are being \textbf{encoded} as a data symbol. For
-example, the total number of offenders for each ethnic group is encoded
-as the \textbf{length} of a rectangle (Figure~\ref{fig-length}). Each
-data value is encoded to the length of one rectangle.\footnote{Some
-  authors prefer to say that the total number of offenders is encoded to
-  the \textbf{position} of the ``top'' of the rectangle (e.g., William
-  S. Cleveland and McGill 1984), but the difference is not significant
-  because both length and position are excellent visual features in
-  terms of decoding (Section~\ref{sec-accuracy}).
+However, we can specify more precisely how individual data values are
+being encoded as a \textbf{visual feature} of a data symbol. In this
+case, the total number of offenders for each ethnic group is encoded as
+the \textbf{length} of a rectangle (Figure~\ref{fig-length}). Each data
+value is encoded to the length of one rectangle.\footnote{Some authors
+  prefer to say that the total number of offenders is encoded to the
+  \textbf{position} of the ``top'' of the rectangle (e.g., William S.
+  Cleveland and McGill 1984), but the difference is not hugely
+  significant because both length and position are excellent visual
+  features in terms of decoding (Section~\ref{sec-accuracy}).
 
   It is also worth noting that there can be a discrepancy between the
   encoding that the creator of a data visualisation employs and the
@@ -1904,15 +1892,15 @@ data value is encoded to the length of one rectangle.\footnote{Some
 }
 
 \caption{\label{fig-length}A bar plot of number of crimes for different
-ethnic groups. The data values, the total number of crimes, have been
-encoded to the \textbf{lengths} of the bars (the purple lines).}
+ethnic groups in 2021. The data values, the total number of crimes, have
+been encoded to the \textbf{lengths} of the bars (the green lines).}
 
 \end{figure}%
 
-Each ethnic group data value in Table~\ref{tbl-crime-group-total} is
-also encoded to a rectangle in Figure~\ref{fig-bar}. In terms of
-\textbf{encodings}, each ethnic group is encoded as the vertical
-\textbf{position} of one rectangle (Figure~\ref{fig-position}).
+There is another encoding happening in Figure~\ref{fig-bar}. Each ethnic
+group data value in Table~\ref{tbl-crime-group-total} is also encoded to
+a rectangle in Figure~\ref{fig-bar}. Each ethnic group is encoded as the
+vertical \textbf{position} of one rectangle (Figure~\ref{fig-position}).
 
 \begin{figure}
 
@@ -1924,16 +1912,16 @@ also encoded to a rectangle in Figure~\ref{fig-bar}. In terms of
 
 \caption{\label{fig-position}A bar plot of number of crimes for
 different ethnic groups. The data values, the ethnic groups, have been
-encoded to the \textbf{positions} of the bars (the purple dots).}
+encoded to the \textbf{positions} of the bars (the green dots).}
 
 \end{figure}%
 
-\textbf{Length} and \textbf{position} are examples of basic visual
-features (Section~\ref{sec-visual-processing}). One way to make an
-effective data visualisation is to encode data values as the basic
-visual features of a data symbol. This is effective because basic visual
-features are identified rapidly and without conscious effort by our
-visual system.
+\textbf{Length} and \textbf{position} are examples of basic
+\textbf{visual features} (Section~\ref{sec-visual-processing}). One way
+to make an effective data visualisation is to encode data values as the
+basic visual features of a data symbol. This is effective because basic
+visual features are identified rapidly and without conscious effort by
+our visual system.
 
 \begin{figure}
 
@@ -1983,9 +1971,14 @@ visualisation.\footnote{In this book, we use \emph{visual feature} to
   (Section~\ref{sec-visual-processing}). The use of \emph{pattern}
   provides a connection to basic visual features via the early
   perception of patterns, even though there is more involved in the
-  perception of data point shape (Chen 1982; J. Li, Wijk, and Martens
-  2009).} We will explore each of these in more detail in the following
-sections.
+  perception of data point shape (L. Chen 1982; J. Li, Wijk, and Martens
+  2009).
+
+  Much longer lists of basic visual features have been proposed (e.g.,
+  M. Chen and Floridi 2013), but we restrict ourselves in this book to a
+  set that has some correspondence with the visual features that are
+  extracted early on in visual processing.} We will explore each of
+these in more detail in the following sections.
 
 \section{Quantitative features}\label{sec-quant-features}
 
@@ -2007,7 +2000,7 @@ from \textbf{visual features} to \textbf{data values}
 
 \caption{\label{fig-visual-feature-decode}When we encode data values as
 visual features, we want to encode to a visual feature that allows us to
-decode the data values from the visual fearure.}
+decode the data values from the visual feature.}
 
 \end{figure}%
 
@@ -2017,29 +2010,25 @@ all of the information in the data values.\footnote{The idea of matching
   the categorisation of visual feature types is described in Zhang
   (1996). Munzner (2014), following Mackinlay (1986), refers to this
   idea as \emph{expressiveness}.} Some types of data contain more
-information than others:
+information than others.
 
-\begin{itemize}
-\item
-  \textbf{Quantitative} data consists of numeric values, which naturally
-  possess not only an ordering, but information about the size of
-  differences between values. For example, the year 2020 comes after the
-  year 2010 and there is a gap of 10 years in between. This is also
-  referred to as \textbf{interval} data. \textbf{Ratio} data is
-  quantitative data that also contains a ``zero'' reference value, so
-  there is also information about absolute size and ratios of
-  differences. For example, 200 offenders is twice as many as 100
-  offenders.
-\item
-  \textbf{Qualitative} data consists of categorical values.
-  \textbf{Ordinal} data consists of categories that are ordered, but
-  there is no information about the size of differences. For example, a
-  ``high'' crime level is more severe than a ``medium'' crime level,
-  which is more severe than a ``low'' crime level, but we cannot measure
-  the size of the differences. \textbf{Nominal} data consists of just
-  group labels, e.g., ethnic groups, and the only information we have is
-  that the categories are different from each other.
-\end{itemize}
+For example, \textbf{quantitative} data consist of numeric values, which
+naturally possess not only an ordering, but information about the size
+of differences between values. For example, the year 2020 comes after
+the year 2010 and there is a gap of 10 years in between. This is also
+referred to as \textbf{interval} data. \textbf{Ratio} data is
+quantitative data that also contains a ``zero'' reference value, so
+there is also information about absolute size and ratios of differences.
+For example, 200 offenders is twice as many as 100 offenders.
+
+By comparison, \textbf{qualitative} data consist of categorical values.
+\textbf{Ordinal} data consists of categories that are ordered, but there
+is no information about the size of differences. For example, a ``high''
+crime level is more severe than a ``medium'' crime level, which is more
+severe than a ``low'' crime level, but we cannot measure the size of the
+differences. \textbf{Nominal} data consists of just group labels, e.g.,
+ethnic groups, and the only information we have is that the categories
+are different from each other.
 
 Figure~\ref{fig-quant-features} shows that \textbf{position},
 \textbf{length}, \textbf{angle}, and \textbf{area} are visual features
@@ -2065,10 +2054,10 @@ quantitative data values.}
 By contrast, Figure~\ref{fig-not-quant} shows that \textbf{colour} and
 \textbf{pattern} are \emph{not} capable of representing quantitative
 values. For example, the colour blue is not twice the colour green and a
-plus sign is not 10 more than a triangle. We can tell that there are
-three \emph{different} values, but in effect, these visual
-representations \emph{lose} information. It is not possible to decode
-the data values from the visual represenations.
+circle is not 20 more than a triangle. We can tell that there are three
+\emph{different} values, but in effect, these visual representations
+\emph{lose} information. It is not possible to decode the data values
+from the visual represenations.
 
 \begin{figure}
 
@@ -2145,8 +2134,8 @@ that have no inherent order.}
 \end{figure}%
 
 The bar plot in Figure~\ref{fig-bar} encodes the ethnic groups, which
-are qualitative data values, as the \textbf{position} of bars, which is
-a qualitative visual feature.
+are qualitative (nominal) data values, as the \textbf{position} of bars,
+which is a qualitative visual feature.
 
 \begin{quote}
 One reason why a bar plot is effective for visualising
@@ -2219,9 +2208,9 @@ with more accurate visual features at the top.\footnote{In William S.
   differ for other sorts of decoding (McColeman et al. 2022). There is
   also some evidence that the rankings may differ between individuals
   even for simple relative judgements (Davis et al. 2024).} A data
-visualisation that encodes data values as visual features near the top
-of this ranking will be more effective than one that encodes data values
-as visual features near the bottom.
+visualisation that encodes data values to visual features that are near
+the top of this ranking will be more effective than one that encodes
+data values to visual features that are near the bottom.
 
 \begin{figure}
 
@@ -2266,9 +2255,9 @@ set of known colours, is this one?\footnote{The question ``Which one is
   absolute judgements with up to 10 different colours.}
 
 The issue in this scenario is the \textbf{capacity} of a visual feature:
-how many different categories can be represented? In particular, how
-many different categories can be represented with the viewer able to
-reliably identify each separate category?
+how many different categories can be encoded effectively? In particular,
+how many different categories can be encoded with the viewer able to
+reliably decode each separate category?
 
 Figure~\ref{fig-colour-cap} shows that \textbf{colour} has a limited
 capacity. A small number of different colours are very easy to
@@ -2282,7 +2271,7 @@ greater number of colours.\footnote{The recommended maximum number of
   against a variety of backgrounds.'' (Ware 2021, 126).
 
   Healey (1996) says the effective maximum is 7.} This difficulty only
-increases with irregular arrangements.
+increases with more irregular arrangements.
 
 \begin{figure}
 
@@ -2302,10 +2291,10 @@ eleven colours on the right.}
 \end{figure}%
 
 \textbf{Pattern} also has a very limited capacity
-(Figure~\ref{fig-pattern-cap}), again exacerbated by less regular
-arrangements.\footnote{The research evidence for the limited capacity of
-  pattern is suggestive rather than conclusive. The recommendations of
-  experts only extend to very small sets of patterns.
+(Figure~\ref{fig-pattern-cap}), and again this gets worse with less
+regular arrangements.\footnote{The research evidence for the limited
+  capacity of pattern is suggestive rather than conclusive. The
+  recommendations of experts only extend to very small sets of patterns.
 
   For example, William S. Cleveland (1985b) recommends using the
   following set of patterns, in this order: \texttt{o}, \texttt{+},
@@ -2330,8 +2319,9 @@ large number of patterns.}
 \end{figure}%
 
 By contrast, Figure~\ref{fig-pos-cap} shows that \textbf{position} has a
-greater capacity. We can easily identify the location of the single dot
-even as the number of alternative locations becomes large.
+greater capacity than both colour and pattern. We can easily identify
+the location of the single dot even as the number of alternative
+locations becomes large.
 
 \begin{figure}
 
@@ -2348,14 +2338,15 @@ of positions.}
 \end{figure}%
 
 The bar plot in Figure~\ref{fig-bar} encodes the ethnic group as the
-vertical \textbf{position} of bars, which makes it easy to identify the
+vertical \textbf{position} of bars, which makes it easy to decode the
 different ethnic groups.
 
 \begin{quote}
 One reason why a bar plot is effective for visualising
 \textbf{qualitative data values} is because the qualitative data values,
 the groups, are encoded as a visual feature that has excellent
-\textbf{capacity}, the positions of the bars.
+\textbf{capacity}, the positions of the bars, so we are able to encode,
+and decode, a large number of different groups.
 \end{quote}
 
 \section{Case study: Dot plots}\label{sec-dot-plots}
@@ -2399,19 +2390,19 @@ qualitive data and is a visual feature with a high capacity.
 
 It could be argued that the dot plot in Figure~\ref{fig-dot} is even
 \emph{more} effective than the bar plot in Figure~\ref{fig-bar} for
-perceiving the differences between totals because \textbf{position}
-ranks higher than \textbf{length} in Figure~\ref{fig-accuracy}. On the
-other hand, if we want to compare totals in terms of their ratios,
-Figure~\ref{fig-bar} is superior because it includes a representation of
-zero.
+decoding the differences between totals because \textbf{position} ranks
+higher than \textbf{length} in terms of decoding accuracy
+(Figure~\ref{fig-accuracy}). On the other hand, if we want to compare
+totals in terms of their ratios, Figure~\ref{fig-bar} is superior
+because it includes a representation of zero.
 
 \section{Case study: Pie charts}\label{case-study-pie-charts}
 
 Figure~\ref{fig-pie} shows yet another visualisation of the total number
-of offenders for different ethnic groups, this time a pie chart. This is
-a less effective representation of the data than the bar plot in
-Figure~\ref{fig-bar} or the dot plot in Figure~\ref{fig-dot} and we can
-use familiar reasoning to see why.
+of offenders for different ethnic groups, this time in the form of a pie
+chart. This is a less effective representation of the data than the bar
+plot in Figure~\ref{fig-bar} or the dot plot in Figure~\ref{fig-dot} and
+we can use familiar reasoning to see why.
 
 \begin{figure}
 
@@ -2432,23 +2423,24 @@ circle and again we have each data value encoding to a single data
 symbol. For example, each ethnic group is encoded as a separate wedge of
 the pie. As with bar plots and dot plots, in a pie chart the data values
 are encoded as basic visual features of these symbols. However, a pie
-chart makes use of different visual features: The total values are
-encoded as the \textbf{angle} and/or \textbf{area} of the wedges and the
-group values are encoded as the \textbf{colour} of the
-wedges.\footnote{We are assuming here, as is common, that the viewer
-  will decode from the \textbf{angle} of pie wedges. That is not
-  necessarily the case, for example Eells (1926b) found evidence that
-  viewers may decode from the area, arc length, or even chord length of
-  pie wedges. Fortunately, the larger point holds, because most of these
-  alternatives are relatively poor visual features in terms of decoding
-  accuracy.} Although \textbf{colour} is an appropriate visual feature
-to represent \textbf{qualitative} data, and it has sufficient capacity
-to differentiate between only four groups, the encoding of quantitative
-values as \textbf{angle} and/or \textbf{area} leads to less accurate
-decoding of the total number of offenders. For example, it is much
-harder to decode the number of offenders with an unknown ethinicity from
-the pie chart in Figure~\ref{fig-pie} compared to the bar plot in
-Figure~\ref{fig-bar} or the dot plot in Figure~\ref{fig-dot}.
+chart makes use of different visual features: The number of offenders
+for each ethnic group is encoded as the \textbf{angle} and/or
+\textbf{area} of a wedge and each ethnic groups is encoded as the
+\textbf{colour} of a wedge.\footnote{We are assuming here, as is common,
+  that the viewer will decode from the \textbf{angle} of pie wedges.
+  That is not necessarily the case, for example Eells (1926b) found
+  evidence that viewers may decode from the area, arc length, or even
+  chord length of pie wedges. Fortunately, the larger point holds,
+  because most of these alternatives are relatively poor visual features
+  in terms of decoding accuracy.} Although \textbf{colour} is an
+appropriate visual feature to represent \textbf{qualitative} data, and
+it has sufficient capacity to differentiate between only four groups,
+the encoding of quantitative values as \textbf{angle} and/or
+\textbf{area} leads to less accurate decoding of the total number of
+offenders. For example, it is much harder to decode the number of
+offenders with an unknown ethnicity from the pie chart in
+Figure~\ref{fig-pie} compared to the bar plot in Figure~\ref{fig-bar} or
+the dot plot in Figure~\ref{fig-dot}.
 
 Although the situation seems bleak for pie charts, we have not yet seen
 all of the ways that we can assess different encodings of data values to
@@ -2457,28 +2449,70 @@ Section~\ref{sec-part-to-whole} to show that all is not lost.
 
 \section{Summary}\label{summary-2}
 
+Data visualisations can be incredibly effective for presenting important
+properties of data values. However, any one data visualisation may only
+be effective for certain data values and for certain data properties.
+
+The goal of this book is to explain why some data visualisations are
+more effective than others---how data visualisation works.
+
+We will focus on how information is \textbf{encoded} to a visual
+representation. We can characterise a data visualisation in terms of the
+encodings that it uses to convert data values into data symbols.
+
+The effectiveness of an encoding will depend on how well we can
+\textbf{decode} information from a visual representation. We will judge
+a data visualisation in terms of how well data values can be recovered
+from the data symbols.
+
+The human visual system captures a very large amount of information from
+the visual field.
+
+Detailed information is only available at the centre of the visual field
+so multiple fixations are required to capture detailed information from
+multiple locations within an image.
+
+Large numbers of simple \textbf{visual features} like positions,
+lengths, and colours are rapidly extracted, while more complex
+\textbf{visual shapes} and \textbf{visual objects} take longer and
+require more congnitive effort.
+
+Large, bright, colourful items automatically get our attention.
+
+We automatically identify groups of items within an image based on basic
+visual features.
+
+In other words, we automatically \textbf{decode} some information from a
+data visualisation very rapidly and without any effort.
+
+An effective data visualisation will make use of the automatic decoding
+that occurs within the visual system. At the same time, we need to watch
+out for automatic decoding if it leads us to an incorrect or undesirable
+result.
+
 A simple encoding of data values to data symbols involves encoding
 \textbf{each data value to a separate data symbol}. This allows the
-viewer to \textbf{decode} individual data values from the data symbols.
+viewer to \textbf{decode} and compare individual data values from the
+data symbols.
 
 A simple encoding of data values to data symbols also involves
 \textbf{encoding} each data value as a basic \textbf{visual feature} of
-the data symbol: position, length, area, angle, colour, and pattern.
-This is effective because visual features are decoded rapidly and
-without conscious effort.
+the data symbol, e.g., position, length, area, angle, colour, or
+pattern. This is effective because visual features are decoded rapidly
+and without conscious effort.
 
 Position, length, area, and angle are appropriate for encoding
-quantitative data because we can decode amounts from these visual
+quantitative data because we can decode numeric values from these visual
 features. We can decode position and length more accurately than area
 and angle.
 
 Position, colour, and pattern are appropriate for encoding qualitative
-data because we can decode differences from these visual features. We
-can represent a large number of categories using position, but only a
-few categories using colours and patterns.
+data because we can decode groups from these visual features. We can
+represent a large number of categories if we use position, but only a
+few categories if we use colours and patterns.
 
 Bar plots, dot plots, and pie charts all provide examples of simple
-encodings from data values to data symbol. We can decode bar plots and
+encodings from data values to data symbols. We can decode bar plots and
 dot plots accurately because they involve encodings of data values to
 position and length. We cannot decode pie charts as accurately because
 they involve encoding data values to angle and area.
@@ -4766,9 +4800,9 @@ part-to-whole relationship.}
 \section{More is more}\label{sec-more-is-more}
 
 We saw in Section~\ref{sec-quant-features} that visual features like
-\textbf{length} and \textbf{area} are appropriate for conveying
+\textbf{length} and \textbf{area} are appropriate for decoding
 quantitative values. For example, in Figure~\ref{fig-more-is-more}, the
-lengths of the bars are appropriate for conveying the total number of
+lengths of the bars are appropriate for decoding the total number of
 offenders in different ethnic groups.
 
 Part of the reason why \textbf{length} and \textbf{area} work so well is
@@ -11294,32 +11328,6 @@ And so on \ldots{}
   to a new visualisation.
 \item
   Move the discussion/revisit of tables from text section to here ?
-\item
-  Another possible application of data vis knowledge: Analyse one of the
-  weird boxplot variations that look a bit like a ziggurat?
-
-  This is letter-value plot:
-
-  \begin{itemize}
-  \item
-    ``Letter-Value Plots: Boxplots for Large Data'' Hofmann et al (2015)
-  \item
-    Nice explanation of calculations \ldots{}
-
-    24 Beyond the Boxplot: Tukey's Letter-Value Summaries -- Exploratory
-    Data Analysis in R https://share.google/M2qXCsIxsSsqM7jFQ
-  \item
-    Labelling is an example of a text encoding that has no learned
-    decoding For most people So the text is just a symbol like a pch You
-    get difference but that is all
-  \item
-    \{lvplot\}
-
-    This line suggests that width is calculated to be proportional Or at
-    least can be \ldots{}
-
-    https://github.com/hadley/lvplot/blob/51ad401be5e017d37883ec5d149bc1818246b6f5/R/draw.r\#L43
-  \end{itemize}
 \end{itemize}
 
 \section{Case study: Lines of best
@@ -11439,13 +11447,22 @@ plots}\label{case-study-letter-value-plots}
 Figure~\ref{fig-lv-default} shows a letter-value plot of taxi time for
 over 450,000 flights within the United States, broken down by
 airline.\footnote{This plot reproduces Figure 2 from Hofmann, Wickham,
-  and Kafadar (2017). This is the default letter-value plot produced by
-  the R package \{lvplot\} (Wickham and Hofmann 2025).}
+  and Kafadar (2017), which was produced with the R package \{lvplot\}
+  (Wickham and Hofmann 2025).} The letter-value plot is an example of a
+novel data visualisation, so this provides a good opportunity to analyse
+whether a letter-value plot is an effective encoding of
+information.\footnote{In order to incorporate as many points as
+  possible, this analysis just focuses on the default \{lvplot\}
+  settings that are used in Figure~\ref{fig-lv-default} and even sinks
+  to the level of critiquing the specific data set (and non-linear
+  scales) that are used in this specific plot. This is neither an attack
+  on letter-value plots in general nor an attack on the \{lvplot\}
+  package in particular.}
 
-We will use the information in this book to analyse the data
-visualisation in Figure~\ref{fig-lv-default}. We will break
+We will use the framework that we have developed in this book to analyse
+the data visualisation in Figure~\ref{fig-lv-default}. We will break
 Figure~\ref{fig-lv-default} down into the encodings that are being used
-and the effectiveness of those encodings.
+and evaluate the effectiveness of those encodings.
 
 \begin{figure}
 
@@ -11455,7 +11472,8 @@ and the effectiveness of those encodings.
 
 }
 
-\caption{\label{fig-lv-default}A letter-value plot}
+\caption{\label{fig-lv-default}A letter-value plot of taxi times for
+over 450,000 flights within the United States.}
 
 \end{figure}%
 
@@ -11489,38 +11507,29 @@ This is achieved by displaying as many letter values as are supported by
 the amount of data, with only individual data values beyond those limits
 shown as outliers.
 
-The letter-value plot is an example of a novel data visualisation, so
-this provides a good opportunity to analyse whether a letter-value plot
-is an effective encoding of information.\footnote{In order to
-  incorporate as many points as possible, this analysis just focuses on
-  the default \{lvplot\} settings that are used in
-  Figure~\ref{fig-lv-default} and even sinks to the level of critiquing
-  the specific data set (and non-linear scales) that are used in this
-  specific plot. It is a very unfair attack on letter-value plots in
-  general and the \{lvplot\} package in particular.}
-
 \subsection{Letter values}\label{letter-values}
 
-A boxplot is based on the median and the upper and lower quartiles of a
-data set. These statistics are just the first two levels of a more
-general concept of \emph{letter values} introduced in ``Exploratory Data
-Analysis'' by Tukey (1977).
+THe well-known boxplot is based on the median and the upper and lower
+quartiles of a data set, but these data summaries are just the first two
+levels of a more general concept of \emph{letter values} introduced in
+``Exploratory Data Analysis'' by Tukey (1977).
 
 Letter values are order statistics, where the \(i\)th letter value
-approximates the quantile corresponding to a tail area of \(2^{−i}\).
-The first letter value is the median, which splits the data into halves
-(\(2^{-1}\)), the second letter values are the upper and lower
-quartiles, which leave a quarter of the data in each tail (\(2^{-2}\)),
-and so on. The amount of data between letter value \(i\) and letter
-value \((i+1)\) is \(2^{-(i+1)}\). For example, the amount of data
-between the upper quartile (letter value 2) and letter value 3 is an
-eighth (\(2^{-3}\)).
+approximates the quantile corresponding to a tail area that contains
+\(2^{−i}\) of the observations in the data set. The first letter value
+is the median, which splits the data into halves (\(2^{-1}\)), the
+second letter values are the upper and lower quartiles, which leave a
+quarter of the data in each tail (\(2^{-2}\)), and so on. The amount of
+data between letter value \(i\) and letter value \((i+1)\) is
+\(2^{-(i+1)}\). For example, the amount of data between the upper
+quartile (letter value 2) and letter value 3 is an eighth (\(2^{-3}\)).
 
 The letter values are named M for median, F for fourths, E for eighths,
-then, following the alphabet, D for sixteenths, C for thirty-seconds,
-down to A for one-hundred and twenth-eighths, then starting again at the
-end of the alphabet, in reverse alphabetic order, Z for two-hundred and
-fifty-sixths, Y for five-hundred and twelfths, and so on.
+then, following the alphabet in reverse, D for sixteenths, C for
+thirty-seconds, down to A for one-hundred and twenth-eighths, then
+starting again at the end of the alphabet, in reverse alphabetic order,
+Z for two-hundred and fifty-sixths, Y for five-hundred and twelfths, and
+so on.
 
 \subsection{Data symbols}\label{data-symbols}
 
@@ -11532,26 +11541,41 @@ any).
 
 \subsection{Encoding visual features}\label{encoding-visual-features}
 
-In Figure~\ref{fig-lv-default}, the airline (Carrier), qualitative data
-values, are encoded as the horizontal \textbf{position} of the
-letter-value symbols. The encoding of airline as the position of data
-symbols is very effective; we can easily differentiate between the
+In Figure~\ref{fig-lv-default}, the airlines (Carrier), which are
+qualitative data values, are encoded as the horizontal \textbf{position}
+of the letter-value symbols. The encoding of airline as the position of
+data symbols is very effective; we can easily differentiate between the
 airlines.
 
 The other data values, the taxi times, are encoded to the letter-value
 data symbols within the plot. However, the letter-value plot encodes
-\textbf{data summaries}---letter values---rather than raw data
-values.\footnote{Letter values are an interesting data summary in the
-  sense that each letter value corresponds to a raw data value. In other
-  words, letter values are a subset of the original raw data values,
-  chosen to represent boundaries beyond which a certain proportion of
-  the raw data values lie.
+\textbf{data summaries}---letter values---rather than raw data values
+(Chapter~\ref{sec-summaries}).\footnote{Letter values are an interesting
+  data summary in the sense that each letter value can correspond to a
+  raw data value. In other words, letter values are a subset of the
+  original raw data values, chosen to represent boundaries beyond which
+  a certain proportion of the raw data values lie.
 
-  This is not entirely true because a letter value may fall between two
-  raw data values.} Consequently, all that we can expect to decode from
-the plot is information about the letter values, such as the location of
-specific letter values, plus possibly data summaries of letter values,
-such as the spread of letter values.
+  This is not true for all letter values because a letter value may fall
+  between two raw data values.} Consequently, all that we can expect to
+decode from the plot is information about the letter values, such as the
+location of specific letter values, plus possibly data summaries of
+letter values, such as the spread of letter values.
+
+The number of letter values that are displayed (before resorting to
+showing individual points for outliers) is based on the amount of data
+values, so there are fewer rectangles for airlines with fewer tax times.
+For example, airline HA has fewer taxi times than airline AA, so ten
+letter values are displayed for airline HA, but thirteen letter values
+are displayed for airline AA.\footnote{The calculation of the number of
+  letter values to display is based on the uncertainty in the estimate
+  of the letter values (assuming Gaussian data). We stop once a 95\%
+  confidence interval for a letter value overlaps with the neighbouring
+  letter value.
+
+  This calculation is relevant only for the default letter-value plot.
+  Variations of the letter-value plot design allow for different
+  calculations of the number of letter values to display.}
 
 Each letter value is encoded as the vertical \textbf{position} of the
 top (or bottom) of a rectangle within the letter-value symbol. The
@@ -11559,10 +11583,6 @@ median (letter value 1) is marked as a single white line rather than a
 rectangle. This is effective for decoding individual letter values for
 an airline. For example, we can see that one of the letter values for
 the AA airline is just over 50.
-
-\textbf{TODO} Explain that a variable number of letter values are used
-for each airline - only letter values that can be estimated from the
-data.
 
 The \emph{depth} of each letter value is encoded as the width
 (\textbf{length}) of a rectangle within the letter-value symbol. The
@@ -11574,8 +11594,15 @@ regular decrements from widest at the median (letter value 1) to
 narrowest at the final letter value (e.g., letter value 13 for airline
 AA). In effect, we are encoding a summary of a data summary. Using
 \textbf{length} for the encoding is effective, but we can only decode
-ordinal information about the depth of the letter values (because that
-is all that we encoded).
+ordinal information about the depth of the letter values because that is
+all that we have encoded. For example, the width of the rectangle that
+encodes the depth of the fifth letter value (the bright orange
+rectangle) for the AA airline is just the fourth-widest rectangle. In
+particular, that rectangle is \emph{not} proportional to the actual
+depth of the fifth letter value. There is approximately one
+thirty-second of the data values beyond the fifth letter value, so this
+rectangle would have to be sixteen times narrower than the median for
+the widths to be proportional to the depth of the letter values.
 
 The \emph{data density}---the number of data values between adjacent
 letter values---is encoded as the \textbf{colour} of a rectangle. The
@@ -11589,46 +11616,56 @@ data summary); every fourth letter value is orange, while all the other
 letter values are grey.
 
 The luminance encoding of density only allows us to decode ordinal
-information about the data density between letter values.\\
-Like the widths of the rectangles, the shades of the rectangles steadily
-decrease upwards from the median and downwards from the median. We can
-also identify rectangles that represent the same letter value for
-different airlines by finding rectangles with the same shade in the
-letter-value symbols for two airlines. This is less effective due to the
-relatively limited capacity of luminance encoding
-(Section~\ref{sec-ordinal}). The different shades of grey are much more
-difficult to identify than, for example, the different horizontal
-locations for different airlines.
+information about the data density between letter values. Like the
+widths of the rectangles, the shades of the rectangles steadily decrease
+upwards from the median and downwards from the median. We can also
+identify rectangles that represent the same letter value for different
+airlines by finding rectangles with the same shade in the letter-value
+symbols for two airlines. This is less effective due to the relatively
+limited capacity of luminance encoding (Section~\ref{sec-ordinal}). For
+example, the different shades of grey are much more difficult to
+identify and compare between different airlines than, for example, the
+different horizontal locations for different airlines.
 
 The chroma encoding of every fourth letter value is very effective for
 decoding between those letter values and all of the others, which is
-essentually an encoding of two groups (orange versus grey).\\
-It is also very effective for identifying the same letter value across
-different airlines. The difference in chroma between the oranges and the
-greys makes the oranges easy to identify and there are only three
-different luminances for the orange rectangles, so they are more easily
-differentiated.
+essentually an encoding of two groups (orange versus grey). It is also
+very effective for identifying the same letter value across different
+airlines. The difference in chroma between the oranges and the greys
+makes the oranges easy to identify and there are only three different
+luminances for the orange rectangles, so they are more easily
+differentiated. For example, it is easy to identify the rectangle for
+the fifth letter value for all airlines; these are the brightest orange
+rectangles.
 
 The outliers in a letter-value plot are encoded differently. The
 individual taxi times for outliers are encoded as the vertical position
 of data points, with the airline encoded as the horizontal position, as
 for the letter-value symbols. These allow for very simple and effective
-decodings. It is even possible to rapidly decode numbers of outliers
-thanks to the small number of data symbols involved
+decodings. It is even possible to rapidly decode the number of outliers
+for each airline thanks to the small number of data symbols involved
 (Section~\ref{sec-visual-summaries}).
 
 Table~\ref{tbl-lv-encodings} summarises the encodings that are involved
-in a letter-value plot. There are several effective encodings for both
-quantitative and qualitative data values, but the encoding of data
-density and the encoding of letter-value depth both lose some
-information. One overall point is that this is quite a large number of
-encodings for a single data visualisation. This means that the encodings
-in Figure~\ref{fig-lv-default} produce a relatively complex data
+in a letter-value plot and what we can decode from them. There are
+several effective encodings for both quantitative and qualitative data
+values, but the encoding of data density and the encoding of
+letter-value depth both lose some information. Those are quantitative
+data summaries that have only ordinal encodings. One overall point is
+that this is quite a large number of encodings for a single data
+visualisation. This means that the encodings in
+Figure~\ref{fig-lv-default} produce a relatively complex data
 visualisation. There are many visual features changing, which makes each
 individual encoding in Figure~\ref{fig-lv-default} more difficult to
 decode (Section~\ref{sec-differences}). Compare this with
 Figure~\ref{fig-box-plot} which, for all its faults, is a much simpler
 data visualisation because it involves fewer changes in visual features.
+
+In defence of Figure~\ref{fig-lv-default}, these decodings of individual
+data values and data summaries, while potentially useful, are not the
+primary aim of the data visualisation, so they are less important than
+how well we can decode the distribution of the data values, which we
+will come to later.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1875}}
@@ -11675,15 +11712,15 @@ fourth letter value & summary of letter value & qualitative & colour
 
 \subsection{Combining encodings}\label{combining-encodings-1}
 
-There is one obvious interaction between encodings in
+There is one obvious interaction between the encodings in
 Figure~\ref{fig-lv-default}. The width of the rectangles (letter-value
-depth) and the height of the rectangles (difference between adjacent
-letter values) together produce the emergent feature of \textbf{area}
-for the rectangles.
+depth order) and the height of the rectangles (difference between
+adjacent letter values) together produce the emergent feature of
+\textbf{area} for the rectangles.
 
 Unfortunately, this area does not correspond to any data value or
-summary of the data. Letter value depth multiplied by difference between
-letter values does not give a meaningful value. This makes
+summary of the data. Letter value depth order multiplied by difference
+between letter values does not give a meaningful value. This makes
 Figure~\ref{fig-lv-default} confusing because the rectangles areas do
 not decode to anything useful
 (Section~\ref{sec-danger-combine}).\footnote{This criticism is only
@@ -11692,7 +11729,7 @@ not decode to anything useful
   that the area of the rectangle reflects the proportion of the data
   between the letter values.}
 
-Even worse, the \textbf{implicit decoding} of the areas of the
+Furthermore, the \textbf{implicit decoding} of the areas of the
 rectangles in the letter-value data symbols suggests that, for example,
 the (darkest) rectangle just above the mean is about five times the size
 of the highest (lightest) rectangle for the ``AA'' airline. However, the
@@ -11703,27 +11740,29 @@ the area of the rectangles is actually \emph{misleading}.
 
 There is also a \textbf{redundant encoding} in
 Figure~\ref{fig-lv-default} (Section~\ref{sec-redundant}). Because the
-depth of a letter value is related to the order of the letter value,
-both the luminance of each rectangle in the letter-value symbol and the
-width of the rectangle encode essentially the same information. This has
-the benefit of providing more than one way to decode this information.
-However, given that we have already identified that there are a large
-number of encodings in Figure~\ref{fig-lv-default}, this may be a luxury
-that we can ill afford.
+order of a letter value is related to the data density order, both the
+luminance of each rectangle in the letter-value symbol and the width of
+the rectangle decode to essentially the same information. For example,
+the bright orange rectangles, which correspond to the data density of
+the fifth letter value, all have exactly the same width. This has the
+benefit of providing more than one way to decode information. However,
+given that we have already identified that there are a large number of
+encodings in Figure~\ref{fig-lv-default}, this may be a luxury that we
+can ill afford.
 
 \subsection{Non-linear scales}\label{non-linear-scales}
 
 An extra complication with the encoding of vertical position in
-Figure~\ref{fig-lv-default} is that the vertical scale is non-linear; it
-is actually the \emph{square root} of the letter values that are encoded
-as the vertical position of the tops (or bottoms) of the rectangles in
-the letter-value data symbols. This makes the decoding of letter values
-and the comparison of letter values much more difficult because the same
-physical difference does not decode to the same difference between
-letter values. For example, for the AA airline, although most of the
-letter values appear to be similar distances apart, in terms of taxi
-data values, the letter values are further apart for more extreme letter
-values (Section~\ref{sec-non-linear-pos}).
+Figure~\ref{fig-lv-default} is that the vertical scale is non-linear
+(Section~\ref{sec-non-linear-pos}); it is actually the \emph{square
+root} of the letter values that are encoded as the vertical position of
+the tops (or bottoms) of the rectangles in the letter-value data
+symbols. This makes the decoding of letter values and the comparison of
+letter values much more difficult because the same physical difference
+does not decode to the same difference between letter values. For
+example, for the AA airline, although most of the letter values appear
+to be similar distances apart, in terms of taxi data values, the letter
+values are in reality further apart for more extreme letter values.
 
 We have already established that the areas of the rectangles in the
 letter-value data symbols provide no useful information and are
@@ -11740,17 +11779,24 @@ at the median of the data values and narrows towards either extreme.
 This allows us to decode useful data summaries about the distribution of
 the taxi times. For example, the fact that all of the letter-value data
 symbols narrow more rapidly below the mean than they do above the mean
-suggests a skewed distribution of taxi times for all airlines.
+suggests a skewed distribution of taxi times for all airlines (or at
+least a skewed distribution of the square root of taxi times).
 
-It is also possible to identify airlines that have similar distributions
-based on similar visual shapes. These are examples of effective
-decodings of data summaries from the visual shapes produced by the
-letter-value data symbols.
+It is also possible to identify airlines that have either similar or
+different distributions based on similar or different visual shapes. For
+example, the letter-value data symbol for the HA airline is clearly
+shorter than the other data symbols, which tells us that the range of
+taxi times is smaller for the HA airline.
+
+These are examples of effective decodings of data summaries from the
+visual shapes that are produced by the letter-value data symbols. This
+effectiveness is important because decoding information about the
+distribution of taxi times is the main purpose of a letter-value plot.
 
 One caveat is that the widths of the visual shapes are potentially
 misleading because they do not narrow anywhere near as fast as the
 distribution of taxi times. In other words, the shape of the
-letter-value data symbols does not provide accurate decoding of
+letter-value data symbols does not provide an accurate decoding of
 quantitative features of the distribution of taxi times, only broad
 qualitative features. For example, we can decode \emph{whether} the
 distribution is symmetric or skewed, but we cannot decode \emph{how}
@@ -11761,9 +11807,11 @@ skewed the distribution is.
 We have already discussed that the y-axis scale is non-linear. The
 square root of taxi times, rather then the raw taxi times, are encoded
 as the vertical position of the tops (or bottoms) of rectangles. This
-creates the usual problems for encoding a non-linear scale as tick marks
+creates the usual problems to encode a non-linear scale as tick marks
 and text labels. For example, the square-root taxi time of 10 is encoded
-as a position about two-thirds of the way up the y-axis, but this is
+as a position about two-thirds of the way up the y-axis, which
+accurately reflects the fact that 10 is approximately two-thirds of the
+range of square-root taxi times. However, this value of 10 is also
 encoded as the text ``100''.
 
 On one hand, this is a valuable encoding of the value 10 because it
@@ -11774,9 +11822,9 @@ taxi time 100.
 
 On the other hand, encoding the square root taxi times as text that
 corresponds to the taxi times causes problems because we cannot linearly
-interpolate between the text values. Yes, we can correctly decode the
-precise taxi time 100 from the text ``100'', and 50 from ``50'', but it
-is very difficult to decode any taxi times in between.
+interpolate between the text values. We can correctly decode the precise
+taxi time 100 from the text ``100'', and 50 from ``50'', but it is very
+difficult to decode any taxi times in between.
 
 The x-axis is more straightforward because it reflects a simpler
 encoding. Each airline is encoded as the horizontal position of a
@@ -11794,32 +11842,35 @@ effect, the x-axis tick labels only involve an encoding of airline as
 the \textbf{pattern} of the text. We can only tell that there are
 different airlines because they use different combinations of letters.
 
-The legend provides information about the colour encoding of letter
-values. The data density is encoded as the luminance of a stack of
-squares, with every fourth square having a different hue/chroma
-(orange). In addition, the letter values are encoded as individual text
-characters alongside the squares.
+The legend provides information about the colour encoding of the data
+density between letter values. The data density is encoded as the
+luminance of a stack of squares, with every fourth square having a
+different hue/chroma (orange). In addition, the letter values are
+encoded as individual text characters alongside the squares.
 
 One problem is that there is no learned decoding for the letter values.
 For example, a letter value of ``Z'' is not immediately decoded as a
-meaningful data value. As with the x-axis, the encoding only provides us
-with a different text pattern for each letter value. We can identify
-that the letter values are different from each other, but nothing more.
+meaningful data value. Not all viewers will immediately decode ``Z'' to
+a tail area of \(2^{-8}\). As with the x-axis, the encoding only
+provides us with a different text pattern for each letter value. We can
+identify that the letter values are different from each other, but
+little more.
 
 In particular, there is no way to decode the absolute data density from
-the legend. The luminance of the squares gives an indication of relative
-data density (darker squares are higher density)
+the legend. The luminance of the squares only gives an indication of the
+data density order thanks to the implicit decoding of darker to more
+(darker squares are higher density; Section~\ref{sec-ordinal})
 
 Another minor problem is that the letter values are placed alongside
 each rectangle, but they really correspond to the boundaries between the
 rectangles in the letter-value data symbols. For example, the true
-position of letter value ``F'' is at the top (and bottom) of the black
+position of letter value ``F'' is at the top (or bottom) of the black
 rectangle in each letter-value data symbol.
 
 Finally, there is no explanation of the width of the rectangles in the
-letter-value data symbols. There is no guide that explains how the depth
-of the letter values is encoded as the width of the letter-value data
-symbols.
+letter-value data symbols. There is no legend that explains how the
+depth order of the letter values is encoded as the width of the
+letter-value data symbols.
 
 \subsection{Encoding structure}\label{encoding-structure}
 
@@ -11846,15 +11897,14 @@ restricted to ordinal comparisons. The large number of grid lines also
 adds to the overall visual complexity of Figure~\ref{fig-lv-default}
 that we discussed earlier.
 
-\subsection{Building something better?}\label{building-something-better}
+\subsection{Building an alternative}\label{building-an-alternative}
 
-Having used the information in this book to identify a number of
-problems with the encodings in Figure~\ref{fig-lv-default}, we now
-attempt to use the information to make improvements to
-Figure~\ref{fig-lv-default}.
+Having used the framework in this book to identify a number of problems
+with the encodings in Figure~\ref{fig-lv-default}, we now attempt to use
+the information to make improvements to Figure~\ref{fig-lv-default}.
 
 Figure~\ref{fig-lv-zoom} shows a data visualisation that is based on the
-same data taxi data as Figure~\ref{fig-lv-default}, but uses a different
+same taxi time data as Figure~\ref{fig-lv-default}, but uses a different
 set of encodings. One solution to the complexity of
 Figure~\ref{fig-lv-default} would be to avoid multiple encodings by
 producing several, simpler data visualisations for different purposes.
@@ -11864,8 +11914,10 @@ times. However, Figure~\ref{fig-lv-zoom} still attempts to fit all of
 the information from Figure~\ref{fig-lv-default} into a single data
 visualisation.
 
-This is unlikely to be the optimal solution, but we can at least provide
-justifications for the design choices that are being made.
+Figure~\ref{fig-lv-zoom} does not aim to be an optimal solution, but
+rather a demonstration that we can use this framework to suggest changes
+based on deliberate reasoning and that we can provide some justification
+for.
 
 \begin{figure}
 
@@ -12168,6 +12220,11 @@ Detection: A Survey.''} \emph{ACM Comput. Surv.} 41 (3).
 Chen, Lin. 1982. {``Topological Structure in Visual Perception.''}
 \emph{Science} 218 (4573): 699--700.
 \url{https://doi.org/10.1126/science.7134969}.
+
+\bibitem[\citeproctext]{ref-anal-info-viz}
+Chen, Min, and Luciano Floridi. 2013. {``An Analysis of Information
+Visualisation.''} \emph{Synthese} 190 (16): 3421--38.
+\url{https://www.proquest.com/scholarly-journals/analysis-information-visualisation/docview/1459330184/se-2}.
 
 \bibitem[\citeproctext]{ref-chernoff1973faces}
 Chernoff, Herman. 1973. {``The Use of Faces to Represent Points in
