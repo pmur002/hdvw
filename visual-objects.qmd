@@ -1041,6 +1041,7 @@ is effective for decoding the number of pets.
 #| fig-subcap: 
 #|   - Icons are repeated to represent the number of pets.
 #|   - A basic bar plot, but with each bar broken into chunks.
+forceGpar <- function(gp) gpar(col="black", fill=figbg, lwd=.5)
 petIcon <- function(data, coords) {
     height <- .2
     ncat <- coords$y[2] %/% height + 1
@@ -1060,8 +1061,16 @@ petIcon <- function(data, coords) {
                                                     height=height, 
                                                     just="bottom",
                                                     expansion=0,
+                                                    gpFUN=forceGpar),
+                                        grImport2::pictureGrob(cat, 
+                                                    coords$x[2], 
+                                                    (i - 1)*height, 
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
                                                     clip="inherit"))
                            }))
+    catBg <- grobTree(cats)
     catPile <- grobTree(cats,
                         vp=viewport(clip=rectGrob(y=0, height=coords$y[2], 
                                     just="bottom")))
@@ -1080,12 +1089,19 @@ petIcon <- function(data, coords) {
                                                     height=height, 
                                                     just="bottom",
                                                     expansion=0,
+                                                    gpFUN=forceGpar),
+                                        grImport2::pictureGrob(dog, 
+                                                    coords$x[1], 
+                                                    (i - 1)*height,  
+                                                    height=height, 
+                                                    just="bottom",
+                                                    expansion=0,
                                                     clip="inherit"))
                            }))
     dogPile <- grobTree(dogs,
                         vp=viewport(clip=rectGrob(y=0, height=coords$y[1], 
                                     just="bottom")))
-    grobTree(catPile, dogPile)
+    grobTree(catBg, catPile, dogPile)
 }
 ggplot(pets) + 
     grid_panel(petIcon, aes(x=pet, y=count)) +
