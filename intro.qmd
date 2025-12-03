@@ -22,10 +22,12 @@ A data visualisation presents data values in a visual
 format.  In an effective data visualisation, this allows
 properties of the data to be perceived very rapidly and without 
 conscious effort.
-For example, @tbl-crime shows data on the crime rate for
+As an example, consider the data shown in @tbl-crime, which
+shows the crime rate for
 youth offenders in New Zealand, for the ages 14 to 16, for 
-each year from 2011 to 2021.  With this purely text-based, tabular
-presentation of the data, it requires considerable time and effort
+each year from 2011 to 2021.  With the purely text-based, tabular
+presentation of the data in @tbl-crime, 
+it requires considerable time and effort
 to determine any trends in the crime rates.
 
 ```{r}
@@ -40,14 +42,16 @@ kable(crimeTable, digits=0)
 ```
 
 By contrast, with a simple line 
-plot data visualisation like @fig-crime we can perceive the trends like
-the decrease in crime rates easily and immediately.
+plot data visualisation like @fig-crime we can perceive trends like
+the decrease in crime rates over time easily and immediately.
 It is also easy to perceive more detailed properties like the fact that
 the trend in crime rates for 16-year-olds is not completely monotonic
 and the fact that
 the crime rate for 15-year-olds (the blue line) is always greater than
 the crime rate for 14-year-olds (the red line) 
 and less than the crime rate for 16-year-olds (the green line).
+The right choice of visual display can result in a very effective
+communication of information.
 
 ```{r}
 #| echo: false
@@ -77,14 +81,14 @@ popViewport()
 ```
 
 @fig-crime-heatmap shows a different data visualisation of the same data,
-this time a heatmap.
-If we use a data visualisation
-like @fig-crime-heatmap, 
+this time a heatmap.  As in @fig-crime, we are representing data values
+using shapes, rectangles this time, rather than the pure text in @tbl-crime.
+However, with @fig-crime-heatmap, 
 while very basic trends are apparent, like an overall decrease in crime rate,
 perceiving detailed changes in the crime rates is very much harder
 compared to @fig-crime.
-In other words,
-not all data visualisations are equally effective.
+This shows that choosing the right visual display is not just
+a matter of using shapes instead of text.
 
 ```{r}
 #| echo: false
@@ -112,23 +116,73 @@ popViewport()
 Although @fig-crime is very effective for perceiving 
 trends in crime rates for each age group, 
 it may be less effective if we are interested
-in a different question, for example, whether the *total* crime
+in a different question.
+For example, we might be interested in whether the *total* crime
 rate is completely monotonic.  Does the *sum* of the red, blue, and green
 lines always decrease year on year?
-In other words,
-a single data visualisation cannot be effective for all possible questions.
+This shows that choosing the right data visualisation depends
+very much on what information we want to communicate.
 
 Suppose that we are interested in what the *exact* crime rate was 
 for 16-year-olds in 2011.  Neither @fig-crime nor @fig-crime-heatmap is
-the best option for answering this quesion.  The best option in this
-case is actually @tbl-crime. 
+the best option for answering this question.  The best option in this
+case is actually @tbl-crime.
+Sometimes 
+text rather than shapes is the most effective visual display.
 
-What makes a data visualisation effective?
-Why are some data visualisations more effective than others?
-The purpose of this book is to provide explanations for
-why, when, and how data visualisation works.  
+## Understanding why
 
-## Two big ideas: Encoding and decoding {#sec-encodings}
+This book is about how to choose the right data visualisation.
+As we have already seen, this depends heavily on what information we want
+the data visualisation to communicate.
+
+One way to help people to choose a data visualisation
+is to list the types of information
+that we want to communicate and, for each situation, provide a
+data visualisation to use.
+For example, if we have time series data and wish to observe trends over time
+then we should choose a line plot like @fig-crime.
+If we want to communicate individual data values precisely, then
+we should choose a table like @tbl-crime.
+There are many examples of this sort of "directory" 
+of visualisations[^directory],
+which is one reason why this book takes a difference approach.
+
+[^directory]:
+    For example, see Part I of @wilke2019fundamentals, particularly Chapter 5.
+
+Rather than providing a directory of visualisations, we will
+be looking deeper at the building blocks of data visualisation 
+and we will seek an understanding of why different building blocks
+work better than others at communicating different sorts of information.
+For example, why do the lines in @fig-crime communicate trends more
+effectively than the rectangles in @fig-crime-heatmap?
+
+This understanding of building blocks will provide us with a way to
+*reason* about the effectiveness of a data visualisation.
+We will be able to justify the choice of a particular data visualisation.
+You may have heard that statisticians hate pie charts.[^pie-chart-hate]
+But do you know why?  Do pie charts have any redeeming features?
+Conversely, bar plots are extremely popular, but why are they so good?
+Knowing more about why different plots work for different situations
+will help us to make better decisions about when to use what sort of
+data visualisation.
+
+[^pie-chart-hate]:
+    In fact, pie charts have received a lot of hate from all quarters
+    for over a century:  
+
+    "In a sense, it might be construed as an insult to a man's intelligence 
+    to show him a pie chart"
+    @karstenChartsAndGraphs [p98].
+    
+    "the only worse design than a pie chart is several of them ... pie charts
+    should never be used." 
+    @tufte1983visual [p178].
+
+    For some counter-arguments, see @sec-part-to-whole.
+
+## Encoding and decoding {#sec-encodings}
 
 @fig-crime and @fig-crime-heatmap are examples of different
 types of data visualisation, a line plot and a heatmap respectively.
@@ -178,6 +232,9 @@ reflecting the number of offenders of that age for that year.
 In other words, each cell of @tbl-crime is encoded to its own coloured 
 rectangle.
 
+Choosing which data visualisation to use can be thought of in terms
+of choosing how to encode data values.
+
 The second concept that we will lean on heavily is the idea
 of **decoding**:  how is a visual representation converted
 back into information?
@@ -185,14 +242,14 @@ back into information?
 The purpose of encoding data values to a particular
 visual representation is to enable the viewer to 
 extract properties of the data very rapidly and very easily.
-For example, if we want the viewer to be able to perceive a decrease in
+For example, if we want the viewer to be able to perceive a decreasing trend in
 crime, it is more effective to 
 encode the data values as lines (@fig-crime),
-rather than a table of numbers (@tbl-crime),
-because the viewer is able to **decode** the decrease in crime
-much more easily from the lines.
+rather than a table of text (@tbl-crime),
+because the viewer is able to **decode** the decreasing trend 
+much more easily from the lines than from the text.
 
-In order to produce an effective data visualisation, 
+In order to produce an effective data visualisation,
 we need to **encode** data values to data symbols in a way
 that facilitates **decoding** data values from the
 data symbols (@fig-decode).
@@ -214,40 +271,17 @@ properties of the data.
 The journey that we take throughout this book will involve
 exploring a variety of different ways that information can
 be **encoded** to a visual representation. 
-We will attempt to reduce any data visualisation
-to a set of encodings from different pieces of information 
-to visual representations of that information.
+We will encounter many different data visualisations, but we will
+analyse them in terms of the way that they encode information.
 
 The effectiveness of a data visualisation will depend on
 how well information can be **decoded** from the visual representation.
-By understanding the different encodings that we can use,
-and how well those encodings can be decoded,
+By identifying the different encodings that we can use,
+and understanding how well those encodings can be decoded,
 we will come to understand why
 some data visualisations are more effective than others.
 
-## How will it help?
-
-You may have heard that statisticians hate pie charts.[^pie-chart-hate]
-But do you know why?  Do pie charts have any redeeming features?
-
-[^pie-chart-hate]:
-    In fact, pie charts have received a lot of hate from all quarters
-    for over a century:  
-
-    "In a sense, it might be construed as an insult to a man's intelligence 
-    to show him a pie chart"
-    @karstenChartsAndGraphs [p98].
-    
-    "the only worse design than a pie chart is several of them ... pie charts
-    should never be used." 
-    @tufte1983visual [p178].
-
-    For some counter-arguments, see @sec-part-to-whole.
-
-Conversely, bar plots are extremely popular, but why are they so good?
-Knowing more about why different plots work for different situations
-will help us to make better decisions about when to use what sort of
-data visualisation.
+## Scope {#sec-scope}
 
 There is a lot of useful information and understanding about how data
 visualisations work, but it is distributed throughout and embedded within a very
@@ -278,16 +312,6 @@ audience.[^need-for-simple]
     references to the relevant theories and experimental results
     in the literature will
     be provided in footnotes like this one.
-
-Understanding how data visualisation works will enable us to:
-
-* Critically analyse data visualisations created by others.
-* Decide which data visualisations we should use.
-* Justify our own choice of data visualisation.
-* Reason about how to improve the effectiveness of a data visualisation.
-* Reason about whether a novel visualisation will be effective.
-
-## Scope {#sec-scope}
 
 The focus of this document is **static** data visualisations for
 **presentation**.  The assumption is that our data values have 

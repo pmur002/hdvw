@@ -1,26 +1,22 @@
-The human visual system captures a very large amount of information from the
-visual field.  
+There are features of the human visual system that mean that we can decode
+some information extremely rapidly and without effort:
 
-Detailed information is only available at the centre of the visual field
-so multiple fixations are required to capture detailed information
-from multiple locations within an image.
+* A very large amount of basic information is gathered at once
+  about simple visual features like positions, lengths, and colours.
 
-Large numbers of simple **visual features** like positions, lengths, and colours
-are rapidly extracted,
-while more complex **visual shapes** and **visual objects**
-take longer and require more 
-congnitive effort.
+* Large, bright, colourful items automatically attract attention.
 
-Large, bright, colourful items automatically get our attention.
+* We automatically identify groups of items within an image
+  based on similarity of basic visual features like position and colour,
+  plus connecting lines and enclosing borders.
 
-We automatically identify groups of items within an image
-based on basic visual features.
+On the other hand, there are limitations of the visual system
+that suggest encodings that we should avoid:
 
-In other words, we automatically 
-**decode** some information from a data visualisation
-very rapidly and without any effort.
+* Detailed information is only available at the centre of the visual field.
 
-An effective data visualisation will make use of the automatic decoding
-that occurs within the visual system.
-At the same time, we need to watch out for automatic decoding
-if it leads us to an incorrect or undesirable result.
+* Visual memory is extremely limited.
+
+These features suggest that creating simple, orderly data visualisations
+will lead to rapid and effortless decoding of information.
+

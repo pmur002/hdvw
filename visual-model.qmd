@@ -7,19 +7,28 @@ source("common.R")
 
 # The Visual System {#sec-visual-system}
 
-Understanding why some encodings are more effective than others will
-depend upon an understanding of how the human visual system works.
-In order to understand the effectiveness of an **encoding**
-from information to a visual representation,
-we need to know how we get from visual representations
-back to the original information---a **decoding**.
+In this book, we are going to explore a range of ways that
+information can be **encoded** to create different data visualisations.
+For example, we can encode data values as different-coloured lines 
+to create a line plot (@fig-crime)
+and we can encode data values as different-coloured rectangles to
+create a heatmap (@fig-crime-heatmap).
 
-We describe the transformation of data values into data symbols
-as **encoding** the data values and
-later chapters will explore many different encodings.
-In this chapter, we focus on the reverse operation:
-the **decoding** of data symbols back to data values
-(@fig-decode).
+The choice of encoding depends on how well information can be
+**decoded* from the data visualisation.
+For example, if we want to communicate trends then encoding data
+values as lines will be more effective than encoding data values
+as rectangles because it is easier to decode trends from lines.
+
+Understanding why some encodings are more effective than others will
+require an understanding of how the human visual system works.
+In order to understand the effectiveness of an encoding
+from information to a visual representation,
+we need to know how well information can be decoded from 
+the visual representation.
+
+In this chapter, we focus on the **decoding** of information from
+a visual representation.
 In this chapter we will establish a very simple model of the visual system, 
 which will help us to understand the effectiveness of the
 different encodings that we consider throughout the book.[^simple-visual-models]
@@ -27,8 +36,8 @@ different encodings that we consider throughout the book.[^simple-visual-models]
 [^simple-visual-models]:
   Simple descriptions of the human visual system can be found in many articles
   and books on
-  data visualisation, for example, @Sönning2023, 
-  @franconeri2021, and @cairo2012functional.
+  data visualisation, for example, @cairo2012functional, 
+  @franconeri2021, and @Sönning2023.
   See @ware2021information for a more in-depth,
   but still very accessible description.
   Wikipedia also has some very helpful content
@@ -36,7 +45,8 @@ different encodings that we consider throughout the book.[^simple-visual-models]
 
 ## The eye {#sec-eye}
 
-In order for us to perceive a data visualisation, light must emit from 
+In order for us to decode a data visualisation, we first have to see it.
+Light must emit from 
 a computer screen or reflect off a page
 and enter the eye.  Light passes through the pupil, 
 is focused by the lens, and is projected onto the retina at the back of
@@ -162,7 +172,7 @@ signals via the optic nerve to the brain.
 Processing of the 
 signals from the optic nerve occurs in several areas of the brain.[^essen]
 Very basic **visual features** are extracted first, such as 
-**position**, **angle**, **colour**, and **patterns**.[^feature-maps]
+**position**, **length**, **angle**, **colour**, and **pattern**.[^feature-maps]
 This low-level information is passed on and built upon 
 to produce higher-level visual elements, such as regions and **shapes**.
 Information is then also integrated from prior knowledge to assist with
@@ -225,14 +235,23 @@ the result can represent more complex information that is more
 memorable.
 :::
 
+This means that, if we **encode** data values as simple **visual features**,
+like length, angle, and colour,
+then it will be possible to rapidly **decode** large amounts of 
+simple information.
+In addition, a smaller amount of 
+more complex information will be decoded from
+higher-level processing of those low-level visual features.
+
+For example,
 @fig-visual-model-demo shows an image that is made up of
 many small items:  tiny triangles with different **positions**, **lengths**,
 **angles**, and **colours**.
-The angles of the triangles represents wind direction and the 
+The angle of the triangles represents wind direction and the 
 length of the triangles represents wind strength. Blue triangles
 are over the sea and green triangles are over land.[^NOMADS]
 The visual system can very quickly
-perceive many small **visual features** at once.
+process many small **visual features** at once.
 There is no need to concentrate separately
 on every individual triangle in the image.
 At a higher level of processing, darker and lighter **shapes** are
@@ -242,16 +261,6 @@ corner down and to the right at a roughly 45-degree angle.
 At a higher level of processing again, at least for the denizens of Oceania,
 the green regions are recognised as a very familiar **object**: the
 outline of New Zealand.
-
-The small lines in @fig-visual-model-demo
-convey a lot of simple pieces of information---what
-is the wind strength and direction at each location---though
-we have to focus on a particular spot in order to extract 
-a single piece of information.
-The shapes of darker and lighter regions convey several more complex ideas like
-areas of stronger and lighter winds.
-The green regions combine to convey the single complex and abstract
-idea of New Zealand.
 
 [^NOMADS]:
     @fig-visual-model-demo is based on wind data from the
@@ -275,11 +284,39 @@ that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
 
+On the other hand, if we directly **encode** information as **visual shapes**
+or **visual objects**, then it will be possible to decode a smaller 
+amount of information, but that information may be more complex.
+
+For example, @fig-visual-model-demo-2 shows an image that is made
+up of regions of different colours and a grey map of New Zealand.
+This is based on the same data as @fig-visual-model and
+the colour of the regions represent different ranges of 
+wind strength (darker is stronger).
+The
+grey map **visual object** decodes very easily to the country of New Zealand 
+(especially for Kiwis) and the **visual shapes**
+of the coloured regions decode to areas of
+similar wind strength.
+
+::: {#fig-visual-model-demo-2}
+::: {.content-visible when-format=pdf}
+\includegraphics[width=.5\textwidth]{Data/Weather/NOMADS-high.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Data/Weather/NOMADS-high.png)
+:::
+
+A visualisation of wind strength 
+that is made up of a small number of visual shapes and visual objects.
+:::
+
 > Encoding data values as simple visual features is effective
   at conveying large amounts of simple information
   because the visual system decodes simple visual features rapidly
   and all at once.
-
+>
 > Encoding data values as more complex visual shapes or visual objects
   is effective because more complex information 
   can be decoded from
@@ -402,18 +439,22 @@ saccades (lines between circles) for one person viewing an image for
 the original image is shown on the left.
 :::
 
+This is effectively an argument for keeping things simple.
+If we can only decode information from an image in a piecemeal fashion,
+then the fewer locations that we are required to focus on the better.
+
 > A data visualisation will be slower to decode and require more effort
   to decode if it requires the viewer
   to constantly switch focus.
 
-## Visual memory
+## Visual memory {#sec-memory}
 
 When we switch focus between different areas of an image, 
 we need to remember information from a previous area of focus.
 How well can we hold visual information in memory?
 The most important feature of visual memory is that it is 
-very limited.  We can only hold in memory a small number of 
-items at once.[^memory-limits]
+very limited.  We can only hold in memory a small amount of information
+at once.[^memory-limits]
 
 ::: {.content-visible when-format=pdf}
 Figures \ref{fig-memory-static-1} and \ref{fig-memory-static-2}
@@ -430,17 +471,21 @@ limitations of visual memory.
     Some limitations of visual memory are briefly mentioned in
     @ware2021information (pages 397-405 and pages 423-425).
 
-    "A ... severely limited capacity is the restricted number of stimuli that
-    can be held in VSTM [visual short-term memory]" 
-    [@MAROIS2005296]
+    @Schurgin2020 mentions a limit of only "three or four items"!
 
-    And footnote that acknowledges 
-    some controversy (different models and number of items limit
-    vs continuous resource limit), with ref to e.g.,
-    "Psychophysical scaling reveals a unified theory of visual memory strength"
-    Schurgin et al (2020)
-    and the binary map model 
+    The limitations of visual memory are also more complex than
+    just a number of visual items [@MAROIS2005296]:
 
+    "The first limitation concerns the time it takes to consciously identify and
+    consolidate a visual stimulus in visual short-term memory (VSTM), as
+    revealed by the attentional blink paradigm.  This process can take more than
+    half a second before it is free to identify a second stimulus. A second,
+    severely limited capacity is the restricted number of stimuli that can be
+    held in VSTM, as exemplified by the change detection paradigm. Finally, a
+    third bottleneck arises when one must choose an appropriate response to each
+    stimulus. Selecting an appropriate response for one stimulus delays by
+    several hundred milliseconds the ability to select a response for a second
+    stimulus (the 'psychological refractory period')"
 
 ::: {.content-visible when-format=pdf}
 \afterpage{
@@ -533,6 +578,12 @@ on those flags.
     [@miller1956magical]
     talks about limits on working memory, but also how to 
     "escape" those limits, for example, by chunking information.
+
+Once again, the obvious conclusion is to keep things simple,
+so that there is less to remember during decoding, though this
+is tempered by the fact that more complex visual shapes
+may allow more to be remembered, especially if they are recognisable
+visual objects.
 
 > A data visualisation will require more effort to decode 
   if the viewer is required to switch focus and remember
@@ -772,8 +823,13 @@ grid.newpage()
 dots(10, cols2=colsnpg, r2=c(1.5, 3), spread=TRUE, mix=TRUE)
 ```
 
-> A data visualisation will be effective if important differences
-  in the data are encoded using different colours or sizes,
+This means that encoding data values as data symbols
+that differ only in terms of basic visual features 
+will be effective for decoding unusual data values.
+
+> A data visualisation will be effective for decoding
+  unusual data values if the data are encoded using differences
+  in basic visual features,
   especially if everything else remains the same.
 
 ## Visual attention {#sec-attention}
@@ -792,9 +848,9 @@ conscious thought.[^attention]
     are based on the idea that attention is drawn to basic visual features 
     like colour, angle, and size.
 
-> A data visualisation will be effective if it uses basic visual
-  features like colour to draw the viewer's attention to
-  important features.
+> A data visualisation will be effective for decoding
+  important data values if it uses basic visual
+  features like colour to draw the viewer's attention.
 
 Where we focus within an image, and what information we extract,
 is also affected by conscious goals---what are we looking for?[^filtering]
@@ -815,8 +871,9 @@ be easier to find the smaller orange dot.[^top-down]
     @Wolfe2017FiveFactors describe "Bottom-up, stimulus-driven guidance"
     versus "Top-down, user-driven guidance".
 
-> A data visualisation will be effective if it includes instructions
-  that direct the reader's attention to important features.
+> A data visualisation will be effective for decoding
+  important data values if it includes instructions
+  that direct the reader's attention.
 
 ## Visual similarities {#sec-visual-model-groups}
 
@@ -845,7 +902,7 @@ on the right of @fig-gestalt-group.[^gestalt]
 
 [^gestalt]:
     These visual effects are known as the Gestalt Grouping 
-    Principles (wagemans2012gestalt). 
+    Principles (@wagemans2012gestalt).
     The Proximity Principle says that items that are close to 
     each other form a group.  The Similarity Principle says that items
     that have the same colour or size form a group.
@@ -1038,8 +1095,11 @@ popViewport()
 ```
 
 All of this means that
-the visual system automatically decodes groups of items 
-from an image.
+if we encode data values from the same group using the same
+position or colour, or if we connect them with lines, or if we
+enclose them within a border, then  
+the visual system will automatically decode the group
+information.
 
 > One way that a data visualisation can be effective is by relying on
   on the automatic decoding of visual groups
@@ -1094,7 +1154,7 @@ items have a symmetric arrangement.[^symmetry]
 ```{r}
 #| echo: false
 #| label: fig-symmetry
-#| fig-cap: We automatically perceive groups from symmetric arrangements.
+#| fig-cap: We automatically perceive groups from symmetric arrangements.  The pair of symmetric curves on the left naturally go together, but the pairs of curves in the middle and to the right do not.
 #| fig.height: 2
 library(vwline)
 arc <- function(angle, offset, x=.5) {
@@ -1130,12 +1190,14 @@ arc(pi/2, pi, .5)
 popViewport()
 ```
 
-These results suggest that a data visualisations will be more effective
-if it is simple and orderly.  We should lead the viewer where
-they already want to go rather than trying to force the viewer
-to perceive a more complex interpretation.
+This is another argument for simplicity in a data visualisation,
+but also for regularity and orderliness.
+These results suggest that we should design a data visualisation
+so that it leads the viewer where
+they already want to go rather than trying to force them
+to decode a more complex interpretation.
 
-> A data visualisation may be effective if it is orderly and
+> A data visualisation may be easier to decode if it is orderly and
   lends itself to a simple interpretation.
 
 ## Visual tasks {#sec-tasks}
@@ -1144,10 +1206,7 @@ Identifying whether visual elements are the same or different
 (@sec-differences) is an example of a very simple visual task.
 @fig-visual-task (on the left) shows another simple visual task:
 judging the ratio of two different lengths.
-However, on the right of @fig-visual-task is an example of a
-task that is much more difficult.
-In this task, we have to identify which of the four shapes in the
-bottom row is *not* a rotated version of the shape at the top.
+These tasks are rapid and require very little effort.
 
 ```{r}
 #| echo: false
@@ -1184,9 +1243,11 @@ popViewport()
 popViewport()
 ```
 
-The left-hand task in @fig-visual-task is effortless and can
-be performed immediately.
-The right-hand task in @fig-visual-task requires much more deliberate effort 
+However, on the right of @fig-visual-task is an example of a
+task that is much more difficult.
+In this task, we have to identify which of the four shapes in the
+bottom row is *not* a rotated version of the shape at the top.
+This task in requires much more deliberate effort 
 and time to perform.[^cog-effort]
 
 [^cog-effort]:
@@ -1194,6 +1255,13 @@ and time to perform.[^cog-effort]
     simple pattern identification processes are substituted for complex
     cognitive processes"
     [@carpenter1998graph, p. 98]
+
+The point here is that we should create data visualisations that
+can be decoded using simple visual tasks. 
+That is how we can fulfil the promise of data visualisation.
+It is far less useful to create a data visualisation 
+that forces us to expend
+significant mental effort in order to decode useful information.
 
 > A data visualisation will be effective if it relies on 
   automatic and rapid visual processing rather than requiring
@@ -1358,9 +1426,13 @@ popViewport()
 These examples demonstrate that the visual system 
 can produce incorrect or unintended results for 
 even very simple visual tasks based on very simple visual elements.
+If we encode data values in such a way that we produce a visual illusion
+then the decoding will be wrong and will not lead back to the 
+orginal data values.
 
-> The effectiveness of a data visualisation will be compromised
-  if it (even accidentally) generates a visual illusion.
+> Visual illusions can destroy the effectiveness of a 
+  data visualisation because they lead to an incorrect decoding
+  of information.
 
 ## Summary
 

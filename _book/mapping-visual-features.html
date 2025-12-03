@@ -283,7 +283,7 @@ div.csl-indent {
 
 
 <p>In <a href="intro.html" class="quarto-xref"><span>Chapter 1</span></a>, we described a data visualisation as a set of <strong>encodings</strong> from data values to data symbols (<a href="intro.html#fig-encodings" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). In <a href="visual-model.html" class="quarto-xref"><span>Chapter 2</span></a>, we established some basic properties of the visual system, which will help to explain how well the <strong>encoding</strong> of data values to data symbols can be reversed to <strong>decode</strong> from data symbols back to data values (<a href="intro.html#fig-decode" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>). We also identified three levels of visual processing: <strong>visual features</strong>, <strong>visual shapes</strong>, and <strong>visual objects</strong> (<a href="visual-model.html#fig-visual-processing" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
-<p>There are many possible ways to encode data values to data symbols. For example, in <a href="intro.html#sec-encodings" class="quarto-xref"><span>Section 1.1</span></a>, we saw that exactly the same data values could be encoded in different ways to produce a line plot (<a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>) and a heatmap (<a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>). We also saw that different data visualisations made some decodings easier and others more difficult. The remainder of this book explores different sorts of encodings and why they they lead to more or less effective decodings.</p>
+<p>There are many possible ways to encode data values to data symbols. For example, in <a href="intro.html#sec-encodings" class="quarto-xref"><span>Section 1.2</span></a>, we saw that exactly the same data values could be encoded in different ways to produce a line plot (<a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>) and a heatmap (<a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>). We also saw that different data visualisations made some decodings easier and others more difficult. The remainder of this book explores different sorts of encodings and why they they lead to more or less effective decodings.</p>
 <p>In this chapter, we start with a very simple sort of encoding; we will begin to explore data visualisations where each data value is <strong>encoded</strong> as a basic <strong>visual feature</strong> of a data symbol. For example, we can encode a number as the length of a bar in a bar plot. Furthermore, in these data visualisations, <strong>one</strong> data value is encoded to <strong>one</strong> data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>). For example, we can encode each separate number as the length of a separate bar in a bar plot.</p>
 <div id="fig-visual-feature" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -645,17 +645,23 @@ Figure&nbsp;3.17: A pie chart of the number of crimes for different ethnic group
 <section id="summary" class="level2" data-number="3.9">
 <h2 data-number="3.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.9</span> Summary</h2>
 <div class="oldsummary">
-<p>Data visualisations can be incredibly effective for presenting important properties of data values. However, any one data visualisation may only be effective for certain data values and for certain data properties.</p>
-<p>The goal of this book is to explain why some data visualisations are more effective than others—how data visualisation works.</p>
-<p>We will focus on how information is <strong>encoded</strong> to a visual representation. We can characterise a data visualisation in terms of the encodings that it uses to convert data values into data symbols.</p>
-<p>The effectiveness of an encoding will depend on how well we can <strong>decode</strong> information from a visual representation. We will judge a data visualisation in terms of how well data values can be recovered from the data symbols.</p>
-<p>The human visual system captures a very large amount of information from the visual field.</p>
-<p>Detailed information is only available at the centre of the visual field so multiple fixations are required to capture detailed information from multiple locations within an image.</p>
-<p>Large numbers of simple <strong>visual features</strong> like positions, lengths, and colours are rapidly extracted, while more complex <strong>visual shapes</strong> and <strong>visual objects</strong> take longer and require more congnitive effort.</p>
-<p>Large, bright, colourful items automatically get our attention.</p>
-<p>We automatically identify groups of items within an image based on basic visual features.</p>
-<p>In other words, we automatically <strong>decode</strong> some information from a data visualisation very rapidly and without any effort.</p>
-<p>An effective data visualisation will make use of the automatic decoding that occurs within the visual system. At the same time, we need to watch out for automatic decoding if it leads us to an incorrect or undesirable result.</p>
+<p>Data visualisations can be very effective for communicating information.</p>
+<p>However, a data visualisation that is effective for communicating one type of information may be ineffective for communicating another type of information.</p>
+<p>The goal of this book is to explain why some data visualisations are more effective than others at communicating different types of information—how data visualisation works.</p>
+<p>We will focus on how information can be <strong>encoded</strong> to create a visual representation. We will characterise a data visualisation in terms of the encodings that it uses to convert data values into data symbols.</p>
+<p>The effectiveness of an encoding will depend on how well we can <strong>decode</strong> the information that we want from a visual representation. We will judge a data visualisation in terms of how well data values can be recovered from the data symbols.</p>
+<p>There are features of the human visual system that mean that we can decode some information extremely rapidly and without effort:</p>
+<ul>
+<li><p>A very large amount of basic information is gathered at once about simple visual features like positions, lengths, and colours.</p></li>
+<li><p>Large, bright, colourful items automatically attract attention.</p></li>
+<li><p>We automatically identify groups of items within an image based on similarity of basic visual features like position and colour, plus connecting lines and enclosing borders.</p></li>
+</ul>
+<p>On the other hand, there are limitations of the visual system that suggest encodings that we should avoid:</p>
+<ul>
+<li><p>Detailed information is only available at the centre of the visual field.</p></li>
+<li><p>Visual memory is extremely limited.</p></li>
+</ul>
+<p>These features suggest that creating simple, orderly data visualisations will lead to rapid and effortless decoding of information.</p>
 </div>
 <p>A simple encoding of data values to data symbols involves encoding <strong>each data value to a separate data symbol</strong>. This allows the viewer to <strong>decode</strong> and compare individual data values from the data symbols.</p>
 <p>A simple encoding of data values to data symbols also involves <strong>encoding</strong> each data value as a basic <strong>visual feature</strong> of the data symbol, e.g., position, length, area, angle, colour, or pattern. This is effective because visual features are decoded rapidly and without conscious effort.</p>

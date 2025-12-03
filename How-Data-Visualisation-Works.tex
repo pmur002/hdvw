@@ -168,7 +168,7 @@
 ]}
 \AtEndEnvironment{quote}{\end{tcolorbox}}
 % For old summaries
-\newenvironment{oldsummary}{\color{gray}}{}
+\newenvironment{oldsummary}{\color{gray}\small}{}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -473,12 +473,12 @@ communication.}\footnote{This quote is from an early web resource on
 
 A data visualisation presents data values in a visual format. In an
 effective data visualisation, this allows properties of the data to be
-perceived very rapidly and without conscious effort. For example,
-Table~\ref{tbl-crime} shows data on the crime rate for youth offenders
-in New Zealand, for the ages 14 to 16, for each year from 2011 to 2021.
-With this purely text-based, tabular presentation of the data, it
-requires considerable time and effort to determine any trends in the
-crime rates.
+perceived very rapidly and without conscious effort. As an example,
+consider the data shown in Table~\ref{tbl-crime}, which shows the crime
+rate for youth offenders in New Zealand, for the ages 14 to 16, for each
+year from 2011 to 2021. With the purely text-based, tabular presentation
+of the data in Table~\ref{tbl-crime}, it requires considerable time and
+effort to determine any trends in the crime rates.
 
 \begin{longtable}[]{@{}rrrrrrrrrrrr@{}}
 
@@ -503,13 +503,14 @@ age & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 &
 \end{longtable}
 
 By contrast, with a simple line plot data visualisation like
-Figure~\ref{fig-crime} we can perceive the trends like the decrease in
-crime rates easily and immediately. It is also easy to perceive more
+Figure~\ref{fig-crime} we can perceive trends like the decrease in crime
+rates over time easily and immediately. It is also easy to perceive more
 detailed properties like the fact that the trend in crime rates for
 16-year-olds is not completely monotonic and the fact that the crime
 rate for 15-year-olds (the blue line) is always greater than the crime
 rate for 14-year-olds (the red line) and less than the crime rate for
-16-year-olds (the green line).
+16-year-olds (the green line). The right choice of visual display can
+result in a very effective communication of information.
 
 \begin{figure}
 
@@ -526,11 +527,14 @@ rates is very fast and easy with this data visualisation.}
 \end{figure}%
 
 Figure~\ref{fig-crime-heatmap} shows a different data visualisation of
-the same data, this time a heatmap. If we use a data visualisation like
+the same data, this time a heatmap. As in Figure~\ref{fig-crime}, we are
+representing data values using shapes, rectangles this time, rather than
+the pure text in Table~\ref{tbl-crime}. However, with
 Figure~\ref{fig-crime-heatmap}, while very basic trends are apparent,
 like an overall decrease in crime rate, perceiving detailed changes in
 the crime rates is very much harder compared to Figure~\ref{fig-crime}.
-In other words, not all data visualisations are equally effective.
+This shows that choosing the right visual display is not just a matter
+of using shapes instead of text.
 
 \begin{figure}
 
@@ -549,22 +553,63 @@ Figure~\ref{fig-crime}.}
 
 Although Figure~\ref{fig-crime} is very effective for perceiving trends
 in crime rates for each age group, it may be less effective if we are
-interested in a different question, for example, whether the
-\emph{total} crime rate is completely monotonic. Does the \emph{sum} of
-the red, blue, and green lines always decrease year on year? In other
-words, a single data visualisation cannot be effective for all possible
-questions.
+interested in a different question. For example, we might be interested
+in whether the \emph{total} crime rate is completely monotonic. Does the
+\emph{sum} of the red, blue, and green lines always decrease year on
+year? This shows that choosing the right data visualisation depends very
+much on what information we want to communicate.
 
 Suppose that we are interested in what the \emph{exact} crime rate was
 for 16-year-olds in 2011. Neither Figure~\ref{fig-crime} nor
 Figure~\ref{fig-crime-heatmap} is the best option for answering this
-quesion. The best option in this case is actually Table~\ref{tbl-crime}.
+question. The best option in this case is actually
+Table~\ref{tbl-crime}. Sometimes text rather than shapes is the most
+effective visual display.
 
-What makes a data visualisation effective? Why are some data
-visualisations more effective than others? The purpose of this book is
-to provide explanations for why, when, and how data visualisation works.
+\section{Understanding why}\label{understanding-why}
 
-\section{Two big ideas: Encoding and decoding}\label{sec-encodings}
+This book is about how to choose the right data visualisation. As we
+have already seen, this depends heavily on what information we want the
+data visualisation to communicate.
+
+One way to help people to choose a data visualisation is to list the
+types of information that we want to communicate and, for each
+situation, provide a data visualisation to use. For example, if we have
+time series data and wish to observe trends over time then we should
+choose a line plot like Figure~\ref{fig-crime}. If we want to
+communicate individual data values precisely, then we should choose a
+table like Table~\ref{tbl-crime}. There are many examples of this sort
+of ``directory'' of visualisations\footnote{For example, see Part I of
+  Wilke (2019), particularly Chapter 5.}, which is one reason why this
+book takes a difference approach.
+
+Rather than providing a directory of visualisations, we will be looking
+deeper at the building blocks of data visualisation and we will seek an
+understanding of why different building blocks work better than others
+at communicating different sorts of information. For example, why do the
+lines in Figure~\ref{fig-crime} communicate trends more effectively than
+the rectangles in Figure~\ref{fig-crime-heatmap}?
+
+This understanding of building blocks will provide us with a way to
+\emph{reason} about the effectiveness of a data visualisation. We will
+be able to justify the choice of a particular data visualisation. You
+may have heard that statisticians hate pie charts.\footnote{In fact, pie
+  charts have received a lot of hate from all quarters for over a
+  century:
+
+  ``In a sense, it might be construed as an insult to a man's
+  intelligence to show him a pie chart'' Karsten (1925, p98).
+
+  ``the only worse design than a pie chart is several of them \ldots{}
+  pie charts should never be used.'' Tufte (1983, p178).
+
+  For some counter-arguments, see Section~\ref{sec-part-to-whole}.} But
+do you know why? Do pie charts have any redeeming features? Conversely,
+bar plots are extremely popular, but why are they so good? Knowing more
+about why different plots work for different situations will help us to
+make better decisions about when to use what sort of data visualisation.
+
+\section{Encoding and decoding}\label{sec-encodings}
 
 Figure~\ref{fig-crime} and Figure~\ref{fig-crime-heatmap} are examples
 of different types of data visualisation, a line plot and a heatmap
@@ -610,6 +655,9 @@ reflecting the number of offenders of that age for that year. In other
 words, each cell of Table~\ref{tbl-crime} is encoded to its own coloured
 rectangle.
 
+Choosing which data visualisation to use can be thought of in terms of
+choosing how to encode data values.
+
 The second concept that we will lean on heavily is the idea of
 \textbf{decoding}: how is a visual representation converted back into
 information?
@@ -617,10 +665,11 @@ information?
 The purpose of encoding data values to a particular visual
 representation is to enable the viewer to extract properties of the data
 very rapidly and very easily. For example, if we want the viewer to be
-able to perceive a decrease in crime, it is more effective to encode the
-data values as lines (Figure~\ref{fig-crime}), rather than a table of
-numbers (Table~\ref{tbl-crime}), because the viewer is able to
-\textbf{decode} the decrease in crime much more easily from the lines.
+able to perceive a decreasing trend in crime, it is more effective to
+encode the data values as lines (Figure~\ref{fig-crime}), rather than a
+table of text (Table~\ref{tbl-crime}), because the viewer is able to
+\textbf{decode} the decreasing trend much more easily from the lines
+than from the text.
 
 In order to produce an effective data visualisation, we need to
 \textbf{encode} data values to data symbols in a way that facilitates
@@ -643,35 +692,17 @@ data symbols to the properties of the data.}
 
 The journey that we take throughout this book will involve exploring a
 variety of different ways that information can be \textbf{encoded} to a
-visual representation. We will attempt to reduce any data visualisation
-to a set of encodings from different pieces of information to visual
-representations of that information.
+visual representation. We will encounter many different data
+visualisations, but we will analyse them in terms of the way that they
+encode information.
 
 The effectiveness of a data visualisation will depend on how well
 information can be \textbf{decoded} from the visual representation. By
-understanding the different encodings that we can use, and how well
-those encodings can be decoded, we will come to understand why some data
-visualisations are more effective than others.
+identifying the different encodings that we can use, and understanding
+how well those encodings can be decoded, we will come to understand why
+some data visualisations are more effective than others.
 
-\section{How will it help?}\label{how-will-it-help}
-
-You may have heard that statisticians hate pie charts.\footnote{In fact,
-  pie charts have received a lot of hate from all quarters for over a
-  century:
-
-  ``In a sense, it might be construed as an insult to a man's
-  intelligence to show him a pie chart'' Karsten (1925, p98).
-
-  ``the only worse design than a pie chart is several of them \ldots{}
-  pie charts should never be used.'' Tufte (1983, p178).
-
-  For some counter-arguments, see Section~\ref{sec-part-to-whole}.} But
-do you know why? Do pie charts have any redeeming features?
-
-Conversely, bar plots are extremely popular, but why are they so good?
-Knowing more about why different plots work for different situations
-will help us to make better decisions about when to use what sort of
-data visualisation.
+\section{Scope}\label{sec-scope}
 
 There is a lot of useful information and understanding about how data
 visualisations work, but it is distributed throughout and embedded
@@ -698,24 +729,6 @@ accessible to a less expert audience.\footnote{Besides scratching the
   data visualisation, but references to the relevant theories and
   experimental results in the literature will be provided in footnotes
   like this one.}
-
-Understanding how data visualisation works will enable us to:
-
-\begin{itemize}
-\tightlist
-\item
-  Critically analyse data visualisations created by others.
-\item
-  Decide which data visualisations we should use.
-\item
-  Justify our own choice of data visualisation.
-\item
-  Reason about how to improve the effectiveness of a data visualisation.
-\item
-  Reason about whether a novel visualisation will be effective.
-\end{itemize}
-
-\section{Scope}\label{sec-scope}
 
 The focus of this document is \textbf{static} data visualisations for
 \textbf{presentation}. The assumption is that our data values have an
@@ -793,21 +806,25 @@ github repository for this book.
 
 \section{Summary}\label{summary}
 
-Data visualisations can be incredibly effective for presenting important
-properties of data values. However, any one data visualisation may only
-be effective for certain data values and for certain data properties.
+Data visualisations can be very effective for communicating information.
+
+However, a data visualisation that is effective for communicating one
+type of information may be ineffective for communicating another type of
+information.
 
 The goal of this book is to explain why some data visualisations are
-more effective than others---how data visualisation works.
+more effective than others at communicating different types of
+information---how data visualisation works.
 
-We will focus on how information is \textbf{encoded} to a visual
-representation. We can characterise a data visualisation in terms of the
-encodings that it uses to convert data values into data symbols.
+We will focus on how information can be \textbf{encoded} to create a
+visual representation. We will characterise a data visualisation in
+terms of the encodings that it uses to convert data values into data
+symbols.
 
 The effectiveness of an encoding will depend on how well we can
-\textbf{decode} information from a visual representation. We will judge
-a data visualisation in terms of how well data values can be recovered
-from the data symbols.
+\textbf{decode} the information that we want from a visual
+representation. We will judge a data visualisation in terms of how well
+data values can be recovered from the data symbols.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -817,37 +834,47 @@ from the data symbols.
 
 \chapter{The Visual System}\label{sec-visual-system}
 
-Understanding why some encodings are more effective than others will
-depend upon an understanding of how the human visual system works. In
-order to understand the effectiveness of an \textbf{encoding} from
-information to a visual representation, we need to know how we get from
-visual representations back to the original information---a
-\textbf{decoding}.
+In this book, we are going to explore a range of ways that information
+can be \textbf{encoded} to create different data visualisations. For
+example, we can encode data values as different-coloured lines to create
+a line plot (Figure~\ref{fig-crime}) and we can encode data values as
+different-coloured rectangles to create a heatmap
+(Figure~\ref{fig-crime-heatmap}).
 
-We describe the transformation of data values into data symbols as
-\textbf{encoding} the data values and later chapters will explore many
-different encodings. In this chapter, we focus on the reverse operation:
-the \textbf{decoding} of data symbols back to data values
-(Figure~\ref{fig-decode}). In this chapter we will establish a very
-simple model of the visual system, which will help us to understand the
+The choice of encoding depends on how well information can be **decoded*
+from the data visualisation. For example, if we want to communicate
+trends then encoding data values as lines will be more effective than
+encoding data values as rectangles because it is easier to decode trends
+from lines.
+
+Understanding why some encodings are more effective than others will
+require an understanding of how the human visual system works. In order
+to understand the effectiveness of an encoding from information to a
+visual representation, we need to know how well information can be
+decoded from the visual representation.
+
+In this chapter, we focus on the \textbf{decoding} of information from a
+visual representation. In this chapter we will establish a very simple
+model of the visual system, which will help us to understand the
 effectiveness of the different encodings that we consider throughout the
 book.\footnote{Simple descriptions of the human visual system can be
   found in many articles and books on data visualisation, for example,
-  Sönning (2023), Franconeri et al. (2021a), and Cairo (2012). See Ware
+  Cairo (2012), Franconeri et al. (2021a), and Sönning (2023). See Ware
   (2021) for a more in-depth, but still very accessible description.
   Wikipedia also has some very helpful content (Wikipedia contributors
   2025).}
 
 \section{The eye}\label{sec-eye}
 
-In order for us to perceive a data visualisation, light must emit from a
-computer screen or reflect off a page and enter the eye. Light passes
-through the pupil, is focused by the lens, and is projected onto the
-retina at the back of the eye. The retina contains around 100 million
-light-sensitive nerve cells and signals from those are combined into
-about 1 million nerve fibres in the optic nerve, which passes signals on
-to the brain (see Figure~\ref{fig-eye}). A very large amount of visual
-information is gathered by the eye and passed on to the brain.
+In order for us to decode a data visualisation, we first have to see it.
+Light must emit from a computer screen or reflect off a page and enter
+the eye. Light passes through the pupil, is focused by the lens, and is
+projected onto the retina at the back of the eye. The retina contains
+around 100 million light-sensitive nerve cells and signals from those
+are combined into about 1 million nerve fibres in the optic nerve, which
+passes signals on to the brain (see Figure~\ref{fig-eye}). A very large
+amount of visual information is gathered by the eye and passed on to the
+brain.
 
 \begin{figure}
 
@@ -875,11 +902,11 @@ Processing of the signals from the optic nerve occurs in several areas
 of the brain.\footnote{A rough estimate is that more than 50\% of the
   brain is involved in visual processing (Van Essen, Anderson, and
   Felleman 1992).} Very basic \textbf{visual features} are extracted
-first, such as \textbf{position}, \textbf{angle}, \textbf{colour}, and
-\textbf{patterns}.\footnote{Low-level visual processing involves the
-  creation of \emph{feature maps} that identify colours, edges, and
-  orientations, along with the spatial arrangement of those basic
-  features within the field of view (Ware 2021, 146).
+first, such as \textbf{position}, \textbf{length}, \textbf{angle},
+\textbf{colour}, and \textbf{pattern}.\footnote{Low-level visual
+  processing involves the creation of \emph{feature maps} that identify
+  colours, edges, and orientations, along with the spatial arrangement
+  of those basic features within the field of view (Ware 2021, 146).
 
   Patterns, or \emph{textures}, are perceived at a slightly higher
   level, based on low-level perception of spatial frequencies (fine
@@ -933,18 +960,25 @@ that is more memorable.}
 
 \end{figure}%
 
-Figure~\ref{fig-visual-model-demo} shows an image that is made up of
-many small items: tiny triangles with different \textbf{positions},
-\textbf{lengths}, \textbf{angles}, and \textbf{colours}. The angles of
-the triangles represents wind direction and the length of the triangles
-represents wind strength. Blue triangles are over the sea and green
-triangles are over land.\footnote{Figure~\ref{fig-visual-model-demo} is
-  based on wind data from the National Oceanic and Atmospheric
+This means that, if we \textbf{encode} data values as simple
+\textbf{visual features}, like length, angle, and colour, then it will
+be possible to rapidly \textbf{decode} large amounts of simple
+information. In addition, a smaller amount of more complex information
+will be decoded from higher-level processing of those low-level visual
+features.
+
+For example, Figure~\ref{fig-visual-model-demo} shows an image that is
+made up of many small items: tiny triangles with different
+\textbf{positions}, \textbf{lengths}, \textbf{angles}, and
+\textbf{colours}. The angle of the triangles represents wind direction
+and the length of the triangles represents wind strength. Blue triangles
+are over the sea and green triangles are over land.\footnote{Figure~\ref{fig-visual-model-demo}
+  is based on wind data from the National Oceanic and Atmospheric
   Administration's Operational Model Archive and Distribution System
   (\href{https://nomads.ncep.noaa.gov/}{NOMADS}). The data were accessed
   on September 14 2024 and processed using the \{rNOMADS\} package
   (Bowman and Lees 2015), with raw data interpolated to a finer grid.}
-The visual system can very quickly perceive many small \textbf{visual
+The visual system can very quickly process many small \textbf{visual
 features} at once. There is no need to concentrate separately on every
 individual triangle in the image. At a higher level of processing,
 darker and lighter \textbf{shapes} are identified as well as regions of
@@ -953,14 +987,6 @@ the top-left corner down and to the right at a roughly 45-degree angle.
 At a higher level of processing again, at least for the denizens of
 Oceania, the green regions are recognised as a very familiar
 \textbf{object}: the outline of New Zealand.
-
-The small lines in Figure~\ref{fig-visual-model-demo} convey a lot of
-simple pieces of information---what is the wind strength and direction
-at each location---though we have to focus on a particular spot in order
-to extract a single piece of information. The shapes of darker and
-lighter regions convey several more complex ideas like areas of stronger
-and lighter winds. The green regions combine to convey the single
-complex and abstract idea of New Zealand.
 
 \begin{figure}
 
@@ -976,13 +1002,38 @@ lengths and different angles and different colours.}
 
 \end{figure}%
 
+On the other hand, if we directly \textbf{encode} information as
+\textbf{visual shapes} or \textbf{visual objects}, then it will be
+possible to decode a smaller amount of information, but that information
+may be more complex.
+
+For example, Figure~\ref{fig-visual-model-demo-2} shows an image that is
+made up of regions of different colours and a grey map of New Zealand.
+This is based on the same data as Figure~\ref{fig-visual-model} and the
+colour of the regions represent different ranges of wind strength
+(darker is stronger). The grey map \textbf{visual object} decodes very
+easily to the country of New Zealand (especially for Kiwis) and the
+\textbf{visual shapes} of the coloured regions decode to areas of
+similar wind strength.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=.5\textwidth]{Data/Weather/NOMADS-high.png}
+
+}
+
+\caption{\label{fig-visual-model-demo-2}A visualisation of wind strength
+that is made up of a small number of visual shapes and visual objects.}
+
+\end{figure}%
+
 \begin{quote}
 Encoding data values as simple visual features is effective at conveying
 large amounts of simple information because the visual system decodes
 simple visual features rapidly and all at once.
-\end{quote}
 
-\begin{quote}
 Encoding data values as more complex visual shapes or visual objects is
 effective because more complex information can be decoded from visual
 shapes and visual objects.
@@ -1099,28 +1150,42 @@ thumbnail of the original image is shown on the left.}
 
 \end{figure}%
 
+This is effectively an argument for keeping things simple. If we can
+only decode information from an image in a piecemeal fashion, then the
+fewer locations that we are required to focus on the better.
+
 \begin{quote}
 A data visualisation will be slower to decode and require more effort to
 decode if it requires the viewer to constantly switch focus.
 \end{quote}
 
-\section{Visual memory}\label{visual-memory}
+\section{Visual memory}\label{sec-memory}
 
 When we switch focus between different areas of an image, we need to
 remember information from a previous area of focus. How well can we hold
 visual information in memory? The most important feature of visual
 memory is that it is very limited. We can only hold in memory a small
-number of items at once.\footnote{Some limitations of visual memory are
-  briefly mentioned in Ware (2021) (pages 397-405 and pages 423-425).
+amount of information at once.\footnote{Some limitations of visual
+  memory are briefly mentioned in Ware (2021) (pages 397-405 and pages
+  423-425).
 
-  ``A \ldots{} severely limited capacity is the restricted number of
-  stimuli that can be held in VSTM {[}visual short-term memory{]}''
-  (Marois and Ivanoff 2005)
+  Schurgin, Wixted, and Brady (2020) mentions a limit of only ``three or
+  four items''!
 
-  And footnote that acknowledges some controversy (different models and
-  number of items limit vs continuous resource limit), with ref to e.g.,
-  ``Psychophysical scaling reveals a unified theory of visual memory
-  strength'' Schurgin et al (2020) and the binary map model}
+  The limitations of visual memory are also more complex than just a
+  number of visual items (Marois and Ivanoff 2005):
+
+  ``The first limitation concerns the time it takes to consciously
+  identify and consolidate a visual stimulus in visual short-term memory
+  (VSTM), as revealed by the attentional blink paradigm. This process
+  can take more than half a second before it is free to identify a
+  second stimulus. A second, severely limited capacity is the restricted
+  number of stimuli that can be held in VSTM, as exemplified by the
+  change detection paradigm. Finally, a third bottleneck arises when one
+  must choose an appropriate response to each stimulus. Selecting an
+  appropriate response for one stimulus delays by several hundred
+  milliseconds the ability to select a response for a second stimulus
+  (the `psychological refractory period')''}
 
 Figures \ref{fig-memory-static-1} and \ref{fig-memory-static-2} provide
 a simple demonstration of the limitations of visual memory.
@@ -1183,6 +1248,11 @@ individual \textbf{visual features} within those visual shapes or visual
 objects (Section~\ref{sec-visual-processing}). For example, we can hold
 in memory multiple country flags even though we cannot necessarily hold
 in memory all of the invidual colours on those flags.
+
+Once again, the obvious conclusion is to keep things simple, so that
+there is less to remember during decoding, though this is tempered by
+the fact that more complex visual shapes may allow more to be
+remembered, especially if they are recognisable visual objects.
 
 \begin{quote}
 A data visualisation will require more effort to decode if the viewer is
@@ -1359,10 +1429,14 @@ a unique item when there is more going on.}
 
 \end{figure}%
 
+This means that encoding data values as data symbols that differ only in
+terms of basic visual features will be effective for decoding unusual
+data values.
+
 \begin{quote}
-A data visualisation will be effective if important differences in the
-data are encoded using different colours or sizes, especially if
-everything else remains the same.
+A data visualisation will be effective for decoding unusual data values
+if the data are encoded using differences in basic visual features,
+especially if everything else remains the same.
 \end{quote}
 
 \section{Visual attention}\label{sec-attention}
@@ -1378,8 +1452,9 @@ visual processing and without conscious thought.\footnote{Saliency maps
   angle, and size.}
 
 \begin{quote}
-A data visualisation will be effective if it uses basic visual features
-like colour to draw the viewer's attention to important features.
+A data visualisation will be effective for decoding important data
+values if it uses basic visual features like colour to draw the viewer's
+attention.
 \end{quote}
 
 Where we focus within an image, and what information we extract, is also
@@ -1396,8 +1471,8 @@ that task, it will be easier to find the smaller orange dot.\footnote{Wolfe
   versus ``Top-down, user-driven guidance''.}
 
 \begin{quote}
-A data visualisation will be effective if it includes instructions that
-direct the reader's attention to important features.
+A data visualisation will be effective for decoding important data
+values if it includes instructions that direct the reader's attention.
 \end{quote}
 
 \section{Visual similarities}\label{sec-visual-model-groups}
@@ -1424,13 +1499,13 @@ dots or columns of black dots on the left of
 Figure~\ref{fig-gestalt-group}; items that are connected by lines are
 also seen as a group so we see either connected rows or connected
 columns on the right of Figure~\ref{fig-gestalt-group}.\footnote{These
-  visual effects are known as the Gestalt Grouping Principles
-  (wagemans2012gestalt). The Proximity Principle says that items that
-  are close to each other form a group. The Similarity Principle says
-  that items that have the same colour or size form a group. The
-  Connectedness Principle says that items that are connected to each
-  other form a group. The Common Region Principle says that items within
-  the same bounded region form a group. Todorovic (2008) provides a very
+  visual effects are known as the Gestalt Grouping Principles (Wagemans
+  et al. (2012)). The Proximity Principle says that items that are close
+  to each other form a group. The Similarity Principle says that items
+  that have the same colour or size form a group. The Connectedness
+  Principle says that items that are connected to each other form a
+  group. The Common Region Principle says that items within the same
+  bounded region form a group. Todorovic (2008) provides a very
   accessible description of these principles and several others.}
 
 \begin{figure}
@@ -1502,8 +1577,10 @@ Figure~\ref{fig-continuity}.\footnote{This is the Gestalt Continuity
 
 \end{figure}%
 
-All of this means that the visual system automatically decodes groups of
-items from an image.
+All of this means that if we encode data values from the same group
+using the same position or colour, or if we connect them with lines, or
+if we enclose them within a border, then\\
+the visual system will automatically decode the group information.
 
 \begin{quote}
 One way that a data visualisation can be effective is by relying on on
@@ -1552,18 +1629,21 @@ have a symmetric arrangement.\footnote{This is the Gestalt Symmetry
 }
 
 \caption{\label{fig-symmetry}We automatically perceive groups from
-symmetric arrangements.}
+symmetric arrangements. The pair of symmetric curves on the left
+naturally go together, but the pairs of curves in the middle and to the
+right do not.}
 
 \end{figure}%
 
-These results suggest that a data visualisations will be more effective
-if it is simple and orderly. We should lead the viewer where they
-already want to go rather than trying to force the viewer to perceive a
+This is another argument for simplicity in a data visualisation, but
+also for regularity and orderliness. These results suggest that we
+should design a data visualisation so that it leads the viewer where
+they already want to go rather than trying to force them to decode a
 more complex interpretation.
 
 \begin{quote}
-A data visualisation may be effective if it is orderly and lends itself
-to a simple interpretation.
+A data visualisation may be easier to decode if it is orderly and lends
+itself to a simple interpretation.
 \end{quote}
 
 \section{Visual tasks}\label{sec-tasks}
@@ -1571,11 +1651,8 @@ to a simple interpretation.
 Identifying whether visual elements are the same or different
 (Section~\ref{sec-differences}) is an example of a very simple visual
 task. Figure~\ref{fig-visual-task} (on the left) shows another simple
-visual task: judging the ratio of two different lengths. However, on the
-right of Figure~\ref{fig-visual-task} is an example of a task that is
-much more difficult. In this task, we have to identify which of the four
-shapes in the bottom row is \emph{not} a rotated version of the shape at
-the top.
+visual task: judging the ratio of two different lengths. These tasks are
+rapid and require very little effort.
 
 \begin{figure}
 
@@ -1592,13 +1669,20 @@ complicated visual task, to decide which of the four bottom shapes is
 
 \end{figure}%
 
-The left-hand task in Figure~\ref{fig-visual-task} is effortless and can
-be performed immediately. The right-hand task in
-Figure~\ref{fig-visual-task} requires much more deliberate effort and
-time to perform.\footnote{``the comprehension of visual displays tends
-  to be easiest when simple pattern identification processes are
-  substituted for complex cognitive processes'' (Carpenter and Shah
-  1998, 98)}
+However, on the right of Figure~\ref{fig-visual-task} is an example of a
+task that is much more difficult. In this task, we have to identify
+which of the four shapes in the bottom row is \emph{not} a rotated
+version of the shape at the top. This task in requires much more
+deliberate effort and time to perform.\footnote{``the comprehension of
+  visual displays tends to be easiest when simple pattern identification
+  processes are substituted for complex cognitive processes'' (Carpenter
+  and Shah 1998, 98)}
+
+The point here is that we should create data visualisations that can be
+decoded using simple visual tasks. That is how we can fulfil the promise
+of data visualisation. It is far less useful to create a data
+visualisation that forces us to expend significant mental effort in
+order to decode useful information.
 
 \begin{quote}
 A data visualisation will be effective if it relies on automatic and
@@ -1693,58 +1777,68 @@ the right as a 3-dimensional object.}
 
 These examples demonstrate that the visual system can produce incorrect
 or unintended results for even very simple visual tasks based on very
-simple visual elements.
+simple visual elements. If we encode data values in such a way that we
+produce a visual illusion then the decoding will be wrong and will not
+lead back to the orginal data values.
 
 \begin{quote}
-The effectiveness of a data visualisation will be compromised if it
-(even accidentally) generates a visual illusion.
+Visual illusions can destroy the effectiveness of a data visualisation
+because they lead to an incorrect decoding of information.
 \end{quote}
 
 \section{Summary}\label{summary-1}
 
 \begin{oldsummary}
-Data visualisations can be incredibly effective for presenting important
-properties of data values. However, any one data visualisation may only
-be effective for certain data values and for certain data properties.
+Data visualisations can be very effective for communicating information.
+
+However, a data visualisation that is effective for communicating one
+type of information may be ineffective for communicating another type of
+information.
 
 The goal of this book is to explain why some data visualisations are
-more effective than others---how data visualisation works.
+more effective than others at communicating different types of
+information---how data visualisation works.
 
-We will focus on how information is \textbf{encoded} to a visual
-representation. We can characterise a data visualisation in terms of the
-encodings that it uses to convert data values into data symbols.
+We will focus on how information can be \textbf{encoded} to create a
+visual representation. We will characterise a data visualisation in
+terms of the encodings that it uses to convert data values into data
+symbols.
 
 The effectiveness of an encoding will depend on how well we can
-\textbf{decode} information from a visual representation. We will judge
-a data visualisation in terms of how well data values can be recovered
-from the data symbols.
+\textbf{decode} the information that we want from a visual
+representation. We will judge a data visualisation in terms of how well
+data values can be recovered from the data symbols.
 
 \end{oldsummary}
 
-The human visual system captures a very large amount of information from
-the visual field.
+There are features of the human visual system that mean that we can
+decode some information extremely rapidly and without effort:
 
-Detailed information is only available at the centre of the visual field
-so multiple fixations are required to capture detailed information from
-multiple locations within an image.
+\begin{itemize}
+\item
+  A very large amount of basic information is gathered at once about
+  simple visual features like positions, lengths, and colours.
+\item
+  Large, bright, colourful items automatically attract attention.
+\item
+  We automatically identify groups of items within an image based on
+  similarity of basic visual features like position and colour, plus
+  connecting lines and enclosing borders.
+\end{itemize}
 
-Large numbers of simple \textbf{visual features} like positions,
-lengths, and colours are rapidly extracted, while more complex
-\textbf{visual shapes} and \textbf{visual objects} take longer and
-require more congnitive effort.
+On the other hand, there are limitations of the visual system that
+suggest encodings that we should avoid:
 
-Large, bright, colourful items automatically get our attention.
+\begin{itemize}
+\item
+  Detailed information is only available at the centre of the visual
+  field.
+\item
+  Visual memory is extremely limited.
+\end{itemize}
 
-We automatically identify groups of items within an image based on basic
-visual features.
-
-In other words, we automatically \textbf{decode} some information from a
-data visualisation very rapidly and without any effort.
-
-An effective data visualisation will make use of the automatic decoding
-that occurs within the visual system. At the same time, we need to watch
-out for automatic decoding if it leads us to an incorrect or undesirable
-result.
+These features suggest that creating simple, orderly data visualisations
+will lead to rapid and effortless decoding of information.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -2455,46 +2549,54 @@ Section~\ref{sec-part-to-whole} to show that all is not lost.
 \section{Summary}\label{summary-2}
 
 \begin{oldsummary}
-Data visualisations can be incredibly effective for presenting important
-properties of data values. However, any one data visualisation may only
-be effective for certain data values and for certain data properties.
+Data visualisations can be very effective for communicating information.
+
+However, a data visualisation that is effective for communicating one
+type of information may be ineffective for communicating another type of
+information.
 
 The goal of this book is to explain why some data visualisations are
-more effective than others---how data visualisation works.
+more effective than others at communicating different types of
+information---how data visualisation works.
 
-We will focus on how information is \textbf{encoded} to a visual
-representation. We can characterise a data visualisation in terms of the
-encodings that it uses to convert data values into data symbols.
+We will focus on how information can be \textbf{encoded} to create a
+visual representation. We will characterise a data visualisation in
+terms of the encodings that it uses to convert data values into data
+symbols.
 
 The effectiveness of an encoding will depend on how well we can
-\textbf{decode} information from a visual representation. We will judge
-a data visualisation in terms of how well data values can be recovered
-from the data symbols.
+\textbf{decode} the information that we want from a visual
+representation. We will judge a data visualisation in terms of how well
+data values can be recovered from the data symbols.
 
-The human visual system captures a very large amount of information from
-the visual field.
+There are features of the human visual system that mean that we can
+decode some information extremely rapidly and without effort:
 
-Detailed information is only available at the centre of the visual field
-so multiple fixations are required to capture detailed information from
-multiple locations within an image.
+\begin{itemize}
+\item
+  A very large amount of basic information is gathered at once about
+  simple visual features like positions, lengths, and colours.
+\item
+  Large, bright, colourful items automatically attract attention.
+\item
+  We automatically identify groups of items within an image based on
+  similarity of basic visual features like position and colour, plus
+  connecting lines and enclosing borders.
+\end{itemize}
 
-Large numbers of simple \textbf{visual features} like positions,
-lengths, and colours are rapidly extracted, while more complex
-\textbf{visual shapes} and \textbf{visual objects} take longer and
-require more congnitive effort.
+On the other hand, there are limitations of the visual system that
+suggest encodings that we should avoid:
 
-Large, bright, colourful items automatically get our attention.
+\begin{itemize}
+\item
+  Detailed information is only available at the centre of the visual
+  field.
+\item
+  Visual memory is extremely limited.
+\end{itemize}
 
-We automatically identify groups of items within an image based on basic
-visual features.
-
-In other words, we automatically \textbf{decode} some information from a
-data visualisation very rapidly and without any effort.
-
-An effective data visualisation will make use of the automatic decoding
-that occurs within the visual system. At the same time, we need to watch
-out for automatic decoding if it leads us to an incorrect or undesirable
-result.
+These features suggest that creating simple, orderly data visualisations
+will lead to rapid and effortless decoding of information.
 
 \end{oldsummary}
 
@@ -4504,13 +4606,11 @@ spectrum.}
 One of the arguments for using a rainbow colour palette is that viewers
 like that it is colourful. We also saw in Section~\ref{sec-escape} that
 varying hue in addition to luminance can help to increase the capacity
-of an ordinal colour scale.{[}\^{}multi-hue{]}
-
-\begin{verbatim}
-vary in hue as well as luminance and/or chroma (multi-hue palettes) lead 
-to faster and more accurate decoding than palettes with a constant
-hue (single-hue palettes).  @rainbow-not-all-bad makes a similar argument.
-\end{verbatim}
+of an ordinal colour scale.\footnote{Liu and Heer (2018) provide
+  evidence that colour palettes that vary in hue as well as luminance
+  and/or chroma (multi-hue palettes) lead to faster and more accurate
+  decoding than palettes with a constant hue (single-hue palettes).
+  Ware, Stone, and Szafir (2023) makes a similar argument.}
 
 The \textbf{viridis} colour palette, shown in
 Figure~\ref{fig-nomads-viridis} (on the right), is an attempt to fix the
@@ -9877,6 +9977,12 @@ incorrect decoding of the data symbols.
 
 \chapter{Text}\label{text}
 
+\textbf{TODO} Add note in text and design that we have moved beyond what
+is normally considered data values and data symbols for encoding Eg
+encoding structure Eg text and guides But nothing needs to change! In
+terms of decoding Still just visual features and visual shakes and
+visual objects and congruence and learned encodings etc
+
 \textbf{TODO} Need to add a Decoding Text section. Decoding text is just
 reading! Decoding text is definitely a learned encoding. Need to shift
 evaluation of text decoding out of Section~\ref{sec-features-text}? Can
@@ -12645,6 +12751,13 @@ Li, Jing, Jarke J. van Wijk, and Jean-Bernard Martens. 2009.
 Pacific Visualization Symposium}, 97--104.
 \url{https://doi.org/10.1109/PACIFICVIS.2009.4906843}.
 
+\bibitem[\citeproctext]{ref-over-the-rainbow}
+Liu, Yang, and Jeffrey Heer. 2018. {``Somewhere over the Rainbow: An
+Empirical Assessment of Quantitative Colormaps.''} In \emph{Proceedings
+of the 2018 CHI Conference on Human Factors in Computing Systems},
+1--12. CHI '18. New York, NY, USA: Association for Computing Machinery.
+\url{https://doi.org/10.1145/3173574.3174172}.
+
 \bibitem[\citeproctext]{ref-lu2021modeling}
 Lu, Min, Joel Lanir, Chufeng Wang, Yucong Yao, Wen Zhang, Oliver
 Deussen, and Hui Huang. 2021. {``Modeling Just Noticeable Differences in
@@ -12853,6 +12966,12 @@ Schloss, Karen B., Zachary Leggon, and Laurent Lessard. 2021.
 Transactions on Visualization and Computer Graphics} 27 (2): 1022--31.
 \url{https://doi.org/10.1109/TVCG.2020.3030434}.
 
+\bibitem[\citeproctext]{ref-Schurgin2020}
+Schurgin, Mark W., John T. Wixted, and Timothy F. Brady. 2020.
+{``Psychophysical Scaling Reveals a Unified Theory of Visual Memory
+Strength.''} \emph{Nature Human Behaviour} 4 (11): 1156--72.
+\url{https://doi.org/10.1038/s41562-020-00938-0}.
+
 \bibitem[\citeproctext]{ref-schwabish}
 Schwabish, Jonathan A. 2020. {``Ten Guidelines for Better Tables.''}
 \emph{Journal of Benefit-Cost Analysis} 11 (2): 151--78.
@@ -13022,6 +13141,13 @@ Graphs Versus Tables Literature.''} \emph{Decision Sciences} 22 (2):
 219--40.
 https://doi.org/\url{https://doi.org/10.1111/j.1540-5915.1991.tb00344.x}.
 
+\bibitem[\citeproctext]{ref-wagemans2012gestalt}
+Wagemans, Johan, James H Elder, Michael Kubovy, Stephen E Palmer, Mary A
+Peterson, Manish Singh, and Rüdiger von der Heydt. 2012. {``A Century of
+Gestalt Psychology in Visual Perception: I. Perceptual Grouping and
+Figure--Ground Organization.''} \emph{Psychological Bulletin} 138 (6):
+1172--1217. \url{https://doi.org/10.1037/a0029333}.
+
 \bibitem[\citeproctext]{ref-graphs-and-tables}
 Wainer, Howard. 1992. {``UNDERSTANDING GRAPHS AND TABLES.''} \emph{ETS
 Research Report Series} 1992 (1): 4--20.
@@ -13030,6 +13156,12 @@ https://doi.org/\url{https://doi.org/10.1002/j.2333-8504.1992.tb01443.x}.
 \bibitem[\citeproctext]{ref-ware2021information}
 Ware, Colin. 2021. \emph{Information Visualization: Perception for
 Design}. 4th ed. Morgan Kaufmann.
+
+\bibitem[\citeproctext]{ref-rainbow-not-all-bad}
+Ware, Colin, Maureen Stone, and Danielle Albers Szafir. 2023.{``{Rainbow
+Colormaps Are Not All Bad }.''} \emph{IEEE Computer Graphics and
+Applications} 43 (03): 88--93.
+\url{https://doi.org/10.1109/MCG.2023.3246111}.
 
 \bibitem[\citeproctext]{ref-weber1834tastsinn}
 Weber, Ernst Heinrich. 1846. {``Der Tastsinn Und Das Gemeingef{ü}hl.''}
