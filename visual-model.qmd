@@ -250,16 +250,20 @@ many small items:  tiny triangles with different **positions**, **lengths**,
 The angle of the triangles represents wind direction and the 
 length of the triangles represents wind strength. Blue triangles
 are over the sea and green triangles are over land.[^NOMADS]
-The visual system can very quickly
-process many small **visual features** at once.
-There is no need to concentrate separately
-on every individual triangle in the image.
-At a higher level of processing, darker and lighter **shapes** are
-identified as well as regions of different colours.
+We can
+effortlessly decode the basic **visual features**---angle, 
+size, and colour---of individual triangles.
+
+The visual system can also very quickly
+process the visual features of many triangles at once.
+There is no need to consciously focus 
+on every individual triangle in the image and,
+at a higher level of processing, darker and lighter **visual shapes** are
+identified as regions of different colours.
 For example, a band of lighter wind forms a line from the top-left
 corner down and to the right at a roughly 45-degree angle.
 At a higher level of processing again, at least for the denizens of Oceania,
-the green regions are recognised as a very familiar **object**: the
+the green regions are recognised as a very familiar **visual object**: the
 outline of New Zealand.
 
 [^NOMADS]:
@@ -284,43 +288,14 @@ that is made up of lots of small lines of different
 lengths and different angles and different colours.
 :::
 
-On the other hand, if we directly **encode** information as **visual shapes**
-or **visual objects**, then it will be possible to decode a smaller 
-amount of information, but that information may be more complex.
-
-For example, @fig-visual-model-demo-2 shows an image that is made
-up of regions of different colours and a grey map of New Zealand.
-This is based on the same data as @fig-visual-model and
-the colour of the regions represent different ranges of 
-wind strength (darker is stronger).
-The
-grey map **visual object** decodes very easily to the country of New Zealand 
-(especially for Kiwis) and the **visual shapes**
-of the coloured regions decode to areas of
-similar wind strength.
-
-::: {#fig-visual-model-demo-2}
-::: {.content-visible when-format=pdf}
-\includegraphics[width=.5\textwidth]{Data/Weather/NOMADS-high.png}
-:::
-
-::: {.content-visible when-format=html}
-![](Data/Weather/NOMADS-high.png)
-:::
-
-A visualisation of wind strength 
-that is made up of a small number of visual shapes and visual objects.
-:::
-
 > Encoding data values as simple visual features is effective
-  at conveying large amounts of simple information
-  because the visual system decodes simple visual features rapidly
-  and all at once.
+  at conveying simple information
+  because the visual system decodes 
+  visual features rapidly and subconsciously.
 >
-> Encoding data values as more complex visual shapes or visual objects
-  is effective because more complex information 
-  can be decoded from
-  visual shapes and visual objects.
+> The visual system also processes many visual features at once, producing
+  more complex visual shapes or visual objects, which allow
+  more complex information to be decoded.
 
 ## Visual focus {#sec-visual-focus}
 
