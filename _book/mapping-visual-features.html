@@ -282,30 +282,12 @@ div.csl-indent {
 </header>
 
 
-<p>In <a href="intro.html" class="quarto-xref"><span>Chapter 1</span></a>, we described a data visualisation as a set of <strong>encodings</strong> from data values to data symbols (<a href="intro.html#fig-encodings" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). In <a href="visual-model.html" class="quarto-xref"><span>Chapter 2</span></a>, we established some basic properties of the visual system, which will help to explain how well the <strong>encoding</strong> of data values to data symbols can be reversed to <strong>decode</strong> from data symbols back to data values (<a href="intro.html#fig-decode" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>). We also identified three levels of visual processing: <strong>visual features</strong>, <strong>visual shapes</strong>, and <strong>visual objects</strong> (<a href="visual-model.html#fig-visual-processing" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
-<p>There are many possible ways to encode data values to data symbols. For example, in <a href="intro.html#sec-encodings" class="quarto-xref"><span>Section 1.2</span></a>, we saw that exactly the same data values could be encoded in different ways to produce a line plot (<a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>) and a heatmap (<a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>). We also saw that different data visualisations made some decodings easier and others more difficult. The remainder of this book explores different sorts of encodings and why they they lead to more or less effective decodings.</p>
-<p>In this chapter, we start with a very simple sort of encoding; we will begin to explore data visualisations where each data value is <strong>encoded</strong> as a basic <strong>visual feature</strong> of a data symbol. For example, we can encode a number as the length of a bar in a bar plot. Furthermore, in these data visualisations, <strong>one</strong> data value is encoded to <strong>one</strong> data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>). For example, we can encode each separate number as the length of a separate bar in a bar plot.</p>
-<div id="fig-visual-feature" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-visual-feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="Diagrams/data-vis.png" class="img-fluid figure-img"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="Mappings/mapping-1-1-1-1.png" class="img-fluid figure-img"></p>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-visual-feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.1: A simple data visualisation encodes each data value as a <strong>visual feature</strong> of a data symbol. Each data value (<code>x</code>) is encoded to one visual feature (<code>a</code>) of a single data symbol. For example, if there are four data values, we end up with four data symbols, each of which encodes a single data value.
-</figcaption>
-</figure>
-</div>
-<p>Data visualisations that make use of this sort of encoding are useful for decoding and comparing individual data values. For example, we can decode a number from the length of a bar in a bar plot and we can compare two numbers by decoding the lengths of two bars in a bar plot.</p>
+<p>In <a href="intro.html" class="quarto-xref"><span>Chapter 1</span></a>, we described a data visualisation as an <strong>encoding</strong> from data values to data symbols (<a href="intro.html#fig-encodings" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). In <a href="visual-model.html" class="quarto-xref"><span>Chapter 2</span></a>, we established some basic properties of the visual system, which will help to explain how well the <strong>encoding</strong> of data values to data symbols can be reversed to <strong>decode</strong> from data symbols back to data values (<a href="intro.html#fig-decode" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>). We also identified three levels of visual processing: <strong>visual features</strong>, <strong>visual shapes</strong>, and <strong>visual objects</strong> (<a href="visual-model.html#fig-visual-processing" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
+<p>There are many possible ways to encode data values to data symbols. For example, in <a href="intro.html#sec-encodings" class="quarto-xref"><span>Section 1.2</span></a>, we saw that exactly the same data values could be encoded in different ways to produce a line plot (<a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>) and a heatmap (<a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>). We also saw that different data visualisations made some decodings easier and others more difficult. For example, it is easier to decode trends from the line plot than the heatmap.</p>
+<p>The remainder of this book explores different sorts of encodings and why they they lead to more or less effective decodings.</p>
 <section id="sec-bar" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-bar"><span class="header-section-number">3.1</span> Bar plots</h2>
-<p>A bar plot is a good example of a data visualisation that encodes data values as simple visual features. In order to demonstrate bar plots, we will work with a data set containing the total number of offenders aged 14 to 16 in New Zealand in 2021, for different ethnic groups. The data values are shown in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a> and a bar plot of these data is shown in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>.</p>
+<p><a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> shows a bar plot of the total number of offenders aged 14 to 16 in New Zealand in 2021, for different ethnic groups. The data values are shown in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a>.</p>
 <div class="cell">
 <div id="tbl-crime-group-total" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -358,19 +340,38 @@ Table&nbsp;3.1: A table of the total number of offenders aged 14 to 16 in 2021 f
 <img src="mapping-visual-features_files/figure-html/fig-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.2: A bar plot of the total number of offenders for different ethnic groups in 2021. The data symbols in this plot are the horizontal bars.
+Figure&nbsp;3.1: A bar plot of the total number of offenders for different ethnic groups in 2021. The data symbols in this plot are the horizontal bars.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>We can see that, for each data value in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a>, there is a single bar in the bar plot. Each total number of offenders is encoded to a single bar.</p>
-<p>In terms of <strong>decoding</strong> (<a href="intro.html#fig-decode" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>), this means that we can decode individual data values from each data symbol. We can decode a single total number of offenders from each bar.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>A bar plot is a good example of a very simple sort of <strong>encoding</strong> where each data value is encoded as a basic <strong>visual feature</strong> of a data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). For example, every count value in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is encoded as the length of a bar in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.</p>
+<p>In addition, in a bar plot, each data value is encoded to its own data symbol (<a href="#fig-visual-feature" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). For example, every count value in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is encoded as the length of a <em>separate</em> bar in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div id="fig-visual-feature" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-visual-feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Diagrams/data-vis.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Mappings/mapping-1-1-1-1.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-visual-feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2
+</figcaption>
+</figure>
+</div>
+<p>A simple data visualisation encodes each data value as a <strong>visual feature</strong> of a data symbol. Each data value (<code>x</code>) is encoded to one visual feature (<code>a</code>) of a single data symbol. For example, if there are four data values, we end up with four data symbols, each of which encodes a single data value.</p>
+<p>Data visualisations that make use of this sort of encoding are useful for <strong>decoding</strong> and comparing individual data values. For example, we can decode a count value from the length of each bar in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> and we can compare two counts by decoding the lengths of two bars.</p>
 <p>This allows us to answer simple questions about individual data values. For example, what is the largest total number of offenders and is the total larger for Māori or European/Other offenders?</p>
 </section>
 <section id="sec-visual-features" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-visual-features"><span class="header-section-number">3.2</span> Visual features</h2>
-<p>The data symbols in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> are a set of bars or, put more simply, rectangles. We have seen that each data value from <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is encoded to one of these rectangles. Each total number of offenders is encoded to a rectangle.</p>
+<p>The data symbols in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> are a set of bars or, put more simply, rectangles. We have seen that each data value from <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is encoded to one of these rectangles. The number of offenders for each ethnic group is encoded to a rectangle.</p>
 <p>However, we can specify more precisely how individual data values are being encoded as a <strong>visual feature</strong> of a data symbol. In this case, the total number of offenders for each ethnic group is encoded as the <strong>length</strong> of a rectangle (<a href="#fig-length" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>). Each data value is encoded to the length of one rectangle.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -386,7 +387,7 @@ Figure&nbsp;3.3: A bar plot of number of crimes for different ethnic groups in 2
 </div>
 </div>
 </div>
-<p>There is another encoding happening in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>. Each ethnic group data value in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is also encoded to a rectangle in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>. Each ethnic group is encoded as the vertical <strong>position</strong> of one rectangle (<a href="#fig-position" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>).</p>
+<p>There is another encoding happening in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>. Each ethnic group data value in <a href="#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is also encoded to a rectangle in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>. Each ethnic group is encoded as the vertical <strong>position</strong> of one rectangle (<a href="#fig-position" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-position" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -402,6 +403,10 @@ Figure&nbsp;3.4: A bar plot of number of crimes for different ethnic groups. The
 </div>
 </div>
 <p><strong>Length</strong> and <strong>position</strong> are examples of basic <strong>visual features</strong> (<a href="visual-model.html#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>). One way to make an effective data visualisation is to encode data values as the basic visual features of a data symbol. This is effective because basic visual features are identified rapidly and without conscious effort by our visual system.</p>
+<blockquote class="blockquote">
+<p>One reason why a bar plot is an effective data visualisation is because it involves an encoding from data values to the basic visual features of data symbols—the positions and lengths of bars—and basic visual features are decoded rapidly and subconsciously by our visual system.</p>
+</blockquote>
+<p><a href="#fig-visual-features" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> shows some other examples of basic visual features that are commonly used to encode data values in a data visualisation.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> We will explore each of these in more detail in the following sections.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-visual-features" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -416,14 +421,10 @@ Figure&nbsp;3.5: Some examples of basic visual features are <strong>position</st
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>One reason why a bar plot is an effective data visualisation is because it involves a encoding from data values to the basic visual features of data symbols—the positions and lengths of bars—and basic visual features are processed rapidly and subconsciously by our visual system.</p>
-</blockquote>
-<p><a href="#fig-visual-features" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> shows some other examples of basic visual features that are commonly used to encode data values in a data visualisation.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> We will explore each of these in more detail in the following sections.</p>
 </section>
 <section id="sec-quant-features" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-quant-features"><span class="header-section-number">3.3</span> Quantitative features</h2>
-<p>As we discussed in <a href="visual-model.html" class="quarto-xref"><span>Chapter 2</span></a>, the real purpose of encoding data values as data symbols is to make use of the visual system to <strong>decode</strong> back to data values from the data symbols. In this section, we are considering encodings from data values to basic visual features, so we need to consider how well we are able to <strong>decode</strong> from <strong>visual features</strong> to <strong>data values</strong> (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>).</p>
+<p>As we discussed in <a href="visual-model.html" class="quarto-xref"><span>Chapter 2</span></a>, the real purpose of encoding data values as data symbols is to make use of the visual system to <strong>decode</strong> back to data values from the data symbols. In this chapter, we are considering encodings from data values to basic visual features, so we need to consider how well we are able to <strong>decode</strong> from <strong>visual features</strong> to <strong>data values</strong> (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>).</p>
 <div id="fig-visual-feature-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-feature-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -436,8 +437,8 @@ Figure&nbsp;3.6: When we encode data values as visual features, we want to encod
 </div>
 <p>One issue to consider is whether a visual feature is able to represent all of the information in the data values.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Some types of data contain more information than others.</p>
 <p>For example, <strong>quantitative</strong> data consist of numeric values, which naturally possess not only an ordering, but information about the size of differences between values. For example, the year 2020 comes after the year 2010 and there is a gap of 10 years in between. This is also referred to as <strong>interval</strong> data. <strong>Ratio</strong> data is quantitative data that also contains a “zero” reference value, so there is also information about absolute size and ratios of differences. For example, 200 offenders is twice as many as 100 offenders.</p>
-<p>By comparison, <strong>qualitative</strong> data consist of categorical values. <strong>Ordinal</strong> data consists of categories that are ordered, but there is no information about the size of differences. For example, a “high” crime level is more severe than a “medium” crime level, which is more severe than a “low” crime level, but we cannot measure the size of the differences. <strong>Nominal</strong> data consists of just group labels, e.g., ethnic groups, and the only information we have is that the categories are different from each other.</p>
-<p><a href="#fig-quant-features" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> shows that <strong>position</strong>, <strong>length</strong>, <strong>angle</strong>, and <strong>area</strong> are visual features that are capable of representing <strong>quantitative</strong> data values. For example, a bar that is twice as long as another bar comfortably represents a data value that is twice as much as another data value. All but <strong>position</strong> also possess a natural representation of zero.</p>
+<p>If we have quantitative data, we would ideally want to encode the data to a visual feature from which we can decode numeric (interval or ratio) values.</p>
+<p><a href="#fig-quant-features" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> shows that <strong>position</strong>, <strong>length</strong>, <strong>angle</strong>, and <strong>area</strong> are visual features that allow <strong>quantitative</strong> data values to be decoded. For example, a bar that is twice as long as another bar comfortably represents a data value that is twice as much as another data value. All but <strong>position</strong> also possess a natural representation of zero.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-quant-features" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -452,7 +453,8 @@ Figure&nbsp;3.7: The visual features position, length, area, and angle are all a
 </div>
 </div>
 </div>
-<p>By contrast, <a href="#fig-not-quant" class="quarto-xref">Figure&nbsp;<span>3.8</span></a> shows that <strong>colour</strong> and <strong>pattern</strong> are <em>not</em> capable of representing quantitative values. For example, the colour blue is not twice the colour green and a circle is not 20 more than a triangle. We can tell that there are three <em>different</em> values, but in effect, these visual representations <em>lose</em> information. It is not possible to decode the data values from the visual represenations.</p>
+<p>By contrast, <a href="#fig-not-quant" class="quarto-xref">Figure&nbsp;<span>3.8</span></a> shows that <strong>colour</strong> and <strong>pattern</strong> do <em>not</em> allow decoding of representing quantitative values. For example, the colour blue is not twice the colour green and a circle is not 20 more than a triangle. We can tell that there are three <em>different</em> values, but in effect, these visual representations <em>lose</em> information. It is not possible to decode the data values from the visual represenations.</p>
+<p>If we encode quantitative values as colour or pattern, we <em>lose</em> information because we cannot decode quantitative values from those visual features.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-not-quant" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -467,14 +469,15 @@ Figure&nbsp;3.8: The visual features <strong>colour</strong> and <strong>pattern
 </div>
 </div>
 </div>
-<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> visualises the total number of offenders, which are quantitative data values. These quantitative values are encoded as the <strong>lengths</strong> of bars, which is a visual feature that is capable of conveying all of the information in quantitative values.</p>
+<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> visualises the total number of offenders, which are quantitative data values. These quantitative values are encoded as the <strong>lengths</strong> of bars, which is a visual feature that allows us to decode quantitative values.</p>
 <blockquote class="blockquote">
 <p>One reason why a bar plot is effective for visualising <strong>quantitative data values</strong> is because the quantitative data values, the counts, are encoded to a <strong>quantitative visual feature</strong>, the lengths of the bars.</p>
 </blockquote>
 </section>
 <section id="sec-qual-features" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-qual-features"><span class="header-section-number">3.4</span> Qualitative features</h2>
-<p>If we have <strong>qualitative</strong> data, then we are primarily concerned with conveying whether data values are the same or different. <a href="#fig-qual-features" class="quarto-xref">Figure&nbsp;<span>3.9</span></a> shows that <strong>position</strong>, <strong>colour</strong>, and <strong>pattern</strong> are capable of representing qualitative data values. For example, blue is clearly different from green, which is clearly different from brown. In <a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a> we saw that we also easily identify visual objects that have the same visual features.</p>
+<p><strong>Qualitative</strong> data consist of categorical values rather than numeric values. <strong>Nominal</strong> data consists of just group labels, e.g., ethnic groups, and the only information we have is that the categories are different from each other. <strong>Ordinal</strong> data consists of categories that are ordered, but there is no information about the size of differences. For example, a “high” crime level is more severe than a “medium” crime level, which is more severe than a “low” crime level, but we cannot measure the size of the differences.</p>
+<p>If we have <strong>qualitative</strong> data values, then we are primarily concerned with being able to decode whether data values are the same or different. <a href="#fig-qual-features" class="quarto-xref">Figure&nbsp;<span>3.9</span></a> shows that <strong>position</strong>, <strong>colour</strong>, and <strong>pattern</strong> allow us to decode qualitative data values. For example, blue is clearly different from green, which is clearly different from brown. In <a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a> we saw that we also easily decode groups when visual items have the same visual features. For example, we can easily identify all blue items as a separate group from all green items.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-qual-features" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -489,7 +492,7 @@ Figure&nbsp;3.9: The visual features <strong>colour</strong>, <strong>pattern</s
 </div>
 </div>
 </div>
-<p>By contrast, <a href="#fig-not-qual" class="quarto-xref">Figure&nbsp;<span>3.10</span></a> shows that <strong>length</strong>, <strong>area</strong>, and <strong>angle</strong> are not appropriate for representing qualitative data values. While we can identify whether lengths or areas are different from each other, these visual features imply an inherent <em>order</em>, which is misleading because that <em>adds</em> information that is not present in the data values.</p>
+<p>By contrast, <a href="#fig-not-qual" class="quarto-xref">Figure&nbsp;<span>3.10</span></a> shows that <strong>length</strong>, <strong>area</strong>, and <strong>angle</strong> are not appropriate for decoding qualitative data values. The problem here is not a loss of information, but an <em>addition</em> of information. While we can identify whether lengths or areas are different from each other, these visual features also allow us to decode an <em>order</em> from the visual features, and even the size or ratio of the difference between visual features. This is not an effective decoding because it <em>adds</em> information that is not present in the data values.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-not-qual" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -504,7 +507,7 @@ Figure&nbsp;3.10: The visual features <strong>length</strong>, <strong>area</str
 </div>
 </div>
 </div>
-<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> encodes the ethnic groups, which are qualitative (nominal) data values, as the <strong>position</strong> of bars, which is a qualitative visual feature.</p>
+<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> encodes the ethnic groups, which are qualitative (nominal) data values, as the <strong>position</strong> of bars, which is a qualitative visual feature.</p>
 <blockquote class="blockquote">
 <p>One reason why a bar plot is effective for visualising <strong>qualitative data values</strong> is because the qualitative data values, the groups, are encoded to a <strong>qualitative visual feature</strong>, the positions of the bars.</p>
 </blockquote>
@@ -512,7 +515,7 @@ Figure&nbsp;3.10: The visual features <strong>length</strong>, <strong>area</str
 <section id="sec-accuracy" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-accuracy"><span class="header-section-number">3.5</span> Accuracy</h2>
 <p>Another issue that impacts on how well we can <strong>decode</strong> the data values from a visual feature (<a href="#fig-visual-feature-decode" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>) is the <strong>accuracy</strong> with which we can perceive quantitative values from visual features. For example, how well can we perceive the size of the difference between the length of two bars?<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
-<p>It is easy to demonstrate that judgements of this sort are harder for some visual features than others. For example, <a href="#fig-accuracy-demo" class="quarto-xref">Figure&nbsp;<span>3.11</span></a> presents sets of three bars, which differ by <strong>length</strong>, circles, which differ by <strong>area</strong>, and stars, which differ by <strong>pattern</strong> (number of spikes). Judging the relative sizes of the bars is easier than judging the relative sizes of the circles and decoding the stars is extremely difficult.</p>
+<p>It is easy to demonstrate that judgements of this sort are harder for some visual features than others. For example, <a href="#fig-accuracy-demo" class="quarto-xref">Figure&nbsp;<span>3.11</span></a> presents a set of three bars, which differ by <strong>length</strong>, a set of three circles, which differ by <strong>area</strong>, and a set of three stars, which differ by <strong>pattern</strong> (number of spikes). Decoding the relative sizes of the bars is easier than decoding the relative sizes of the circles and decoding numeric values from the stars is extremely difficult.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-accuracy-demo" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -542,9 +545,9 @@ Figure&nbsp;3.12: An ordering of basic visual features in terms of their accurac
 </div>
 </div>
 </div>
-<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> encodes the total number of offenders, which are quantitative values, as the <strong>lengths</strong> of bars, which is an <strong>accurate</strong> visual feature. This means that viewers can make accurate comparisons between the lengths of the bars.</p>
+<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> encodes the total number of offenders, which are quantitative values, as the <strong>lengths</strong> of bars, which is an <strong>accurate</strong> visual feature. This means that viewers can make accurate comparisons between the lengths of the bars.</p>
 <blockquote class="blockquote">
-<p>One reason why a bar plot is effective for visualising <strong>quantitative data values</strong> is because the quantitative data values, counts or proportions, are encoded as a very <strong>accurate visual feature</strong>, the lengths of the bars.</p>
+<p>One reason why a bar plot is effective for visualising <strong>quantitative data values</strong> is because the quantitative data values, counts or proportions, are encoded as a visual feature that can be decoded very <strong>accurately</strong>, the lengths of the bars.</p>
 </blockquote>
 </section>
 <section id="sec-capacity" class="level2" data-number="3.6">
@@ -596,14 +599,14 @@ Figure&nbsp;3.15: Encoding qualitative data values to position works well for bo
 </div>
 </div>
 </div>
-<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> encodes the ethnic group as the vertical <strong>position</strong> of bars, which makes it easy to decode the different ethnic groups.</p>
+<p>The bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> encodes the ethnic group as the vertical <strong>position</strong> of bars, which makes it easy to decode the different ethnic groups.</p>
 <blockquote class="blockquote">
 <p>One reason why a bar plot is effective for visualising <strong>qualitative data values</strong> is because the qualitative data values, the groups, are encoded as a visual feature that has excellent <strong>capacity</strong>, the positions of the bars, so we are able to encode, and decode, a large number of different groups.</p>
 </blockquote>
 </section>
 <section id="sec-dot-plots" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="sec-dot-plots"><span class="header-section-number">3.7</span> Case study: Dot plots</h2>
-<p>We have seen that, for several reasons, <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> is an effective way to visualise the total number of offenders for different ethnic groups. <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> shows an alternative representation of these data in the form of a dot plot<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>We have seen that, for several reasons, <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> is an effective way to visualise the number of offenders for different ethnic groups. <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> shows an alternative representation of these data in the form of a dot plot.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-dot" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -618,13 +621,13 @@ Figure&nbsp;3.16: A dot plot of the number of crimes for different ethnic groups
 </div>
 </div>
 </div>
-<p>Like a bar plot, a dot plot is an effective data visualisation, and for very similar reasons. Dot plots uses a different data symbol—data points instead of bars—but <strong>each data value</strong> is <strong>encoded</strong> as the basic <strong>visual feature</strong> of <strong>one data symbol</strong>. This means that we can <strong>decode</strong> individual data values from the data symbols and answer questions like: what is the difference in the number of offenders between Māori and European/Other?</p>
+<p>Like a bar plot, a dot plot is an effective data visualisation, and for very similar reasons. Dot plots uses a different data symbol—data points instead of bars—but <strong>each data value</strong> is <strong>encoded</strong> as the basic <strong>visual feature</strong> of <strong>one data symbol</strong>. This means that we can <strong>decode</strong> and compare individual data values from the data symbols and answer questions like: what is the difference in the number of offenders between Māori and European/Other?</p>
 <p>Furthermore, the quantitative data values (the totals) are encoded as the horizontal <strong>position</strong> of the points, which is a visual feature that is not only capable of representing numeric values, it is also a very accurate visual feature. The qualitative data values (the ethnic groups) are encoded as the vertical <strong>position</strong> of the points, which is a visual feature that is capable of representing qualitive data and is a visual feature with a high capacity.</p>
-<p>It could be argued that the dot plot in <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> is even <em>more</em> effective than the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> for decoding the differences between totals because <strong>position</strong> ranks higher than <strong>length</strong> in terms of decoding accuracy (<a href="#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). On the other hand, if we want to compare totals in terms of their ratios, <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> is superior because it includes a representation of zero.</p>
+<p>It could be argued that the dot plot in <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> is even <em>more</em> effective than the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> for decoding the differences between totals because <strong>position</strong> ranks higher than <strong>length</strong> in terms of decoding accuracy (<a href="#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). On the other hand, if we want to compare totals in terms of their ratios, <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> is superior because it includes a representation of zero.</p>
 </section>
 <section id="case-study-pie-charts" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="case-study-pie-charts"><span class="header-section-number">3.8</span> Case study: Pie charts</h2>
-<p><a href="#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.17</span></a> shows yet another visualisation of the total number of offenders for different ethnic groups, this time in the form of a pie chart. This is a less effective representation of the data than the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> or the dot plot in <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> and we can use familiar reasoning to see why.</p>
+<p><a href="#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.17</span></a> shows yet another visualisation of the total number of offenders for different ethnic groups, this time in the form of a pie chart. This is a less effective representation of the data than the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> or the dot plot in <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> and we can use familiar reasoning to see why.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -639,7 +642,7 @@ Figure&nbsp;3.17: A pie chart of the number of crimes for different ethnic group
 </div>
 </div>
 </div>
-<p>The data symbols in <a href="#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.17</span></a> are wedges or segments of a circle and again we have each data value encoding to a single data symbol. For example, each ethnic group is encoded as a separate wedge of the pie. As with bar plots and dot plots, in a pie chart the data values are encoded as basic visual features of these symbols. However, a pie chart makes use of different visual features: The number of offenders for each ethnic group is encoded as the <strong>angle</strong> and/or <strong>area</strong> of a wedge and each ethnic groups is encoded as the <strong>colour</strong> of a wedge.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> Although <strong>colour</strong> is an appropriate visual feature to represent <strong>qualitative</strong> data, and it has sufficient capacity to differentiate between only four groups, the encoding of quantitative values as <strong>angle</strong> and/or <strong>area</strong> leads to less accurate decoding of the total number of offenders. For example, it is much harder to decode the number of offenders with an unknown ethnicity from the pie chart in <a href="#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.17</span></a> compared to the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> or the dot plot in <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a>.</p>
+<p>The data symbols in <a href="#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.17</span></a> are wedges or segments of a circle and again we have each data value encoding to a single data symbol. For example, each ethnic group is encoded as a separate wedge of the pie. As with bar plots and dot plots, in a pie chart the data values are encoded as basic visual features of these symbols. However, a pie chart makes use of different visual features: The number of offenders for each ethnic group is encoded as the <strong>angle</strong> and/or <strong>area</strong> of a wedge and each ethnic group is encoded as the <strong>colour</strong> of a wedge.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> Although <strong>colour</strong> is an appropriate visual feature to represent <strong>qualitative</strong> data, and it has sufficient capacity to differentiate between only four groups, the encoding of quantitative values as <strong>angle</strong> and/or <strong>area</strong> leads to a less accurate decoding of the total number of offenders (<a href="#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). For example, it is much harder to decode the number of offenders with an unknown ethnicity from the pie chart in <a href="#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.17</span></a> compared to the bar plot in <a href="#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> or the dot plot in <a href="#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a>.</p>
 <p>Although the situation seems bleak for pie charts, we have not yet seen all of the ways that we can assess different encodings of data values to data symbols. We will return to pie charts in <a href="congruence.html#sec-part-to-whole" class="quarto-xref"><span>Section 7.2</span></a> to show that all is not lost.</p>
 </section>
 <section id="summary" class="level2" data-number="3.9">
@@ -721,7 +724,7 @@ Miller, George A. 1956. <span>“The Magical Number Seven, Plus or Minus Two: So
 Munzner, Tamara. 2014. <em>Visualization Analysis and Design</em>. CRC Press.
 </div>
 <div id="ref-pointer-attridge-1998" class="csl-entry" role="listitem">
-Pointer, M. R., and G. G. Attridge. n.d. <span>“The Number of Discernible Colours.”</span> <em>Color Research &amp; Application</em> 23 (1): 52–54. https://doi.org/<a href="https://doi.org/10.1002/(SICI)1520-6378(199802)23:1<52::AID-COL8>3.0.CO;2-2">https://doi.org/10.1002/(SICI)1520-6378(199802)23:1&lt;52::AID-COL8&gt;3.0.CO;2-2</a>.
+Pointer, M. R., and G. G. Attridge. 1998. <span>“The Number of Discernible Colours.”</span> <em>Color Research &amp; Application</em> 23 (1): 52–54. <a href="https://doi.org/10.1002/(SICI)1520-6378(199802)23:1<52::AID-COL8>3.0.CO;2-2">https://doi.org/10.1002/(SICI)1520-6378(199802)23:1&lt;52::AID-COL8&gt;3.0.CO;2-2</a>.
 </div>
 <div id="ref-stevens1957psychophysics" class="csl-entry" role="listitem">
 Stevens, Stanley Smith. 1957. <span>“On the Psychophysical Law.”</span> <em>Psychological Review</em> 64 (3): 153–81.
@@ -751,7 +754,7 @@ Ziemkiewicz, Caroline, and Robert Kosara. 2009. <span>“Embedding Information V
 <p>It is also worth noting that there can be a discrepancy between the encoding that the creator of a data visualisation employs and the decoding that the viewer chooses to use <span class="citation" data-cites="doi:10.1177/14738716251315912">(<a href="#ref-doi:10.1177/14738716251315912" role="doc-biblioref">Hill and Imokhai 2025</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>In this book, we use <em>visual feature</em> to describe a basic visual quality of a data symbol, in place of more established terms like <em>visual variable</em> <span class="citation" data-cites="bertin1983semiology">(<a href="#ref-bertin1983semiology" role="doc-biblioref">Bertin 1983</a>)</span>, <em>aesthetic</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2005</a>)</span>, or <em>visual channel</em> <span class="citation" data-cites="munzner2014visualization">(<a href="#ref-munzner2014visualization" role="doc-biblioref">Munzner 2014</a>)</span>.</p>
 <p>This choice of terminology is deliberate so that we can elide the basic visual quality of a data symbol with the early stages of visual processing (<a href="visual-model.html#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>). There is not a direct correspondence between these two concepts, but it is a useful simplification.</p>
-<p>There are also differences in terminology for individual visual features. For example, we use angle where others use <em>tilt</em> or <em>slope</em> and the underlying visual feature is typically referred to as <em>orientation</em>.</p>
+<p>There are also differences in terminology for individual visual features. For example, we use <em>angle</em> where others use <em>tilt</em> or <em>slope</em> and the underlying visual feature is typically referred to as <em>orientation</em>.</p>
 <p>The use of <em>pattern</em> for what is more commonly referred to as data point <em>shape</em> is perhaps the most daring terminological divergence. Data point shape is commonly included as a visual channel, but we would like to avoid confusion with the concept of <em>visual shape</em> that we use to represent later stages of visual processing (<a href="visual-model.html#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>). The use of <em>pattern</em> provides a connection to basic visual features via the early perception of patterns, even though there is more involved in the perception of data point shape <span class="citation" data-cites="chen1982topological 4906843">(<a href="#ref-chen1982topological" role="doc-biblioref">L. Chen 1982</a>; <a href="#ref-4906843" role="doc-biblioref">Li, Wijk, and Martens 2009</a>)</span>.</p>
 <p>Much longer lists of basic visual features have been proposed <span class="citation" data-cites="anal-info-viz">(e.g., <a href="#ref-anal-info-viz" role="doc-biblioref">M. Chen and Floridi 2013</a>)</span>, but we restrict ourselves in this book to a set that has some correspondence with the visual features that are extracted early on in visual processing.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>The idea of matching the type of data—nominal, ordinal, interval, or ratio—as well as the categorisation of visual feature types is described in <span class="citation" data-cites="zhang1996representational">Zhang (<a href="#ref-zhang1996representational" role="doc-biblioref">1996</a>)</span>. <span class="citation" data-cites="munzner2014visualization">Munzner (<a href="#ref-munzner2014visualization" role="doc-biblioref">2014</a>)</span>, following <span class="citation" data-cites="mackinlay1986automatic">Mackinlay (<a href="#ref-mackinlay1986automatic" role="doc-biblioref">1986</a>)</span>, refers to this idea as <em>expressiveness</em>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -760,7 +763,7 @@ Ziemkiewicz, Caroline, and Robert Kosara. 2009. <span>“Embedding Information V
 <p>An argument for ranking the accuracy of visual features can also be made from Steven’s Law <span class="citation" data-cites="stevens1957psychophysics">(<a href="#ref-stevens1957psychophysics" role="doc-biblioref">Stevens 1957</a>)</span>, which states that the perception of the magnitude of different stimuli follows a power law. For example, the perception of length has a power of approximately one (linear), which suggests that we accurately perceive the magnitude of lengths, while area has a power less than one, which suggests that we underestimate the magnitude of areas.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>In <span class="citation" data-cites="cleveland1984graphical">William S. Cleveland and McGill (<a href="#ref-cleveland1984graphical" role="doc-biblioref">1984</a>)</span>, comparisons of bars were treated as <strong>position</strong> judgements rather than <strong>length</strong> judgements, unless the bars were unaligned (see <a href="quantitative.html#sec-unaligned" class="quarto-xref"><span>Section 5.2</span></a>), so this table is a slightly fuzzy representation of their results. However, the general ordering of visual features is basically consistent with <span class="citation" data-cites="cleveland1984graphical">William S. Cleveland and McGill (<a href="#ref-cleveland1984graphical" role="doc-biblioref">1984</a>)</span>.</p>
 <p>These rankings are also based on a relative judgement (what proportion of A is B?), which is just one possible decoding task, albeit a common one, particularly for bar plots. The ranking of visual features may differ for other sorts of decoding <span class="citation" data-cites="10.1109/TVCG.2021.3114684">(<a href="#ref-10.1109/TVCG.2021.3114684" role="doc-biblioref">McColeman et al. 2022</a>)</span>. There is also some evidence that the rankings may differ between individuals even for simple relative judgements <span class="citation" data-cites="10.1109/TVCG.2022.3226463">(<a href="#ref-10.1109/TVCG.2022.3226463" role="doc-biblioref">Davis et al. 2024</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>The question “Which one is this?” is different from the question “Are these two different?”. The former involves “absolute judgements” <span class="citation" data-cites="miller1956magical">(<a href="#ref-miller1956magical" role="doc-biblioref">Miller 1956</a>)</span> to identify a stimulus from a known set of stimuli. The latter involves relative judgements and just-noticeable differences (JND), which are considerably easier and something we have a much higher sensitivity to. For example, we can differentiate between several million different colours <span class="citation" data-cites="pointer-attridge-1998">(<a href="#ref-pointer-attridge-1998" role="doc-biblioref">Pointer and Attridge, n.d.</a>)</span>, but we can only make absolute judgements with up to 10 different colours.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>The question “Which one is this?” is different from the question “Are these two different?”. The former involves “absolute judgements” <span class="citation" data-cites="miller1956magical">(<a href="#ref-miller1956magical" role="doc-biblioref">Miller 1956</a>)</span> to identify a stimulus from a known set of stimuli. The latter involves relative judgements and just-noticeable differences (JND), which are considerably easier and something we have a much higher sensitivity to. For example, we can differentiate between several million different colours <span class="citation" data-cites="pointer-attridge-1998">(<a href="#ref-pointer-attridge-1998" role="doc-biblioref">Pointer and Attridge 1998</a>)</span>, but we can only make absolute judgements with up to 10 different colours.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>The recommended maximum number of colours varies between sources. However, the consensus is that it is a quite small number.</p>
 <p>“Do not use more than 10 colors for coding symbols if reliable identification is required, especially if the symbols are to be used against a variety of backgrounds.” <span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021, 126</a>)</span>.</p>
 <p><span class="citation" data-cites="healey-colours">Healey (<a href="#ref-healey-colours" role="doc-biblioref">1996</a>)</span> says the effective maximum is 7.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

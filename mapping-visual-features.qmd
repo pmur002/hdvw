@@ -8,7 +8,7 @@ source("common.R")
 # Visual Features {#sec-encoding-visual-features}
 
 In @sec-intro, we described a data visualisation as
-a set of **encodings** from data values to data symbols
+an **encoding** from data values to data symbols
 (@fig-encodings).
 In @sec-visual-system, 
 we established some basic properties of
@@ -28,59 +28,18 @@ encoded in different ways to produce a line plot (@fig-crime)
 and a heatmap (@fig-crime-heatmap).
 We also saw that different data visualisations made some decodings
 easier and others more difficult.
+For example, it is easier to decode trends from the line plot than
+the heatmap.
+
 The remainder of this book explores different sorts of encodings
 and why they they lead to more or less effective decodings.
 
-In this chapter, we start with a very simple sort of encoding;
-we will begin to explore data visualisations where
-each data value is **encoded** as 
-a basic **visual feature** of a data symbol.
-For example, we can encode a number as the length of a bar
-in a bar plot.
-Furthermore, in these data visualisations,
-**one** data value is encoded to **one** data symbol
-(@fig-visual-feature).
-For example, we can encode each separate number as the length
-of a separate bar in a bar plot.
-
-::: {#fig-visual-feature}
-::: {.content-visible when-format=pdf layout-ncol=2}
-\includegraphics[scale=0.5]{Diagrams/data-vis.png}
-
-\includegraphics[scale=0.7]{Mappings/mapping-1-1-1-1.png}
-:::
-
-::: {.content-visible when-format=html layout-ncol=2}
-![](Diagrams/data-vis.png)
-
-![](Mappings/mapping-1-1-1-1.png)
-:::
-
-A simple data visualisation encodes each data value as a **visual feature**
-of a data symbol.  Each data value (`x`) is encoded to one visual
-feature (`a`) of a single data symbol.  For example, if there are four
-data values, we end up with four data symbols, each of which encodes a
-single data value.
-:::
-
-Data visualisations that make use of this sort of encoding
-are useful for decoding and comparing
-individual data values.
-For example, we can decode a number from the length of a bar in a bar plot
-and we can compare two numbers by decoding the lengths of two bars
-in a bar plot.
-
 ## Bar plots {#sec-bar}
 
-A bar plot is a good example of a data visualisation 
-that encodes data values as simple visual features.
-In order to demonstrate bar plots,
-we will work with a data set containing 
-the total number of offenders aged 14 to 16
+@fig-bar shows a bar plot of the total number of offenders aged 14 to 16
 in New Zealand in 2021, 
 for different ethnic groups.  The data values are shown
-in @tbl-crime-group-total and
-a bar plot of these data is shown in @fig-bar.
+in @tbl-crime-group-total.
 
 ```{r}
 #| echo: false
@@ -104,20 +63,49 @@ ggplot(crimeGroup2021) +
     theme(aspect.ratio=1)
 ```
 
-We can see that, for each data value in @tbl-crime-group-total,
-there is a single bar in the bar plot.
-Each total number
-of offenders is encoded to a single bar.
+A bar plot is a good example of a very simple sort of **encoding** where
+each data value is encoded as 
+a basic **visual feature** of a data symbol (@fig-visual-feature).
+For example, every count value in @tbl-crime-group-total
+is encoded as the length of a bar in @fig-bar.
 
-In terms of **decoding** (@fig-decode),
-this means that we can decode individual data values from each
-data symbol.  We can 
-decode a single total number of offenders from each bar.[^bijective]
+In addition, in a bar plot, each data value is encoded to its own data symbol
+(@fig-visual-feature).
+For example, every count value in @tbl-crime-group-total is
+encoded as the length
+of a *separate* bar in @fig-bar.[^bijective]
 
 [^bijective]:
     This one-to-one encoding between data values and data symbols
     is called a *bijective* encoding 
     [@Ziemkiewicz2009].
+
+::: {#fig-visual-feature}
+::: {.content-visible when-format=pdf layout-ncol=2}
+\includegraphics[scale=0.5]{Diagrams/data-vis.png}
+
+\includegraphics[scale=0.7]{Mappings/mapping-1-1-1-1.png}
+:::
+
+::: {.content-visible when-format=html layout-ncol=2}
+![](Diagrams/data-vis.png)
+
+![](Mappings/mapping-1-1-1-1.png)
+:::
+:::
+
+A simple data visualisation encodes each data value as a **visual feature**
+of a data symbol.  Each data value (`x`) is encoded to one visual
+feature (`a`) of a single data symbol.  For example, if there are four
+data values, we end up with four data symbols, each of which encodes a
+single data value.
+
+Data visualisations that make use of this sort of encoding
+are useful for **decoding** and comparing
+individual data values.
+For example, we can
+decode a count value from the length of each bar in @fig-bar
+and we can compare two counts by decoding the lengths of two bars.
 
 This allows us to answer simple questions about individual data values.
 For example, what is the largest total number of offenders
@@ -130,7 +118,8 @@ are a set of bars or, put more simply, rectangles.
 We have seen that 
 each data value from @tbl-crime-group-total is encoded to one
 of these rectangles.
-Each total number of offenders is encoded to a rectangle.
+The number of offenders for each ethnic group 
+is encoded to a rectangle.
 
 However, we can specify more precisely how individual 
 data values are being encoded as a **visual feature** of a data symbol.
@@ -201,6 +190,52 @@ data values as the basic visual features of a data symbol.
 This is effective because basic visual features are 
 identified rapidly and without conscious effort by our visual system.
 
+> One reason why a bar plot is an effective data visualisation is 
+  because it involves an encoding from data values
+  to the basic visual features of data symbols---the
+  positions and lengths of bars---and basic visual features 
+  are decoded rapidly and subconsciously by our visual system.
+
+@fig-visual-features shows some other examples of basic visual 
+features that are commonly used to encode data values in
+a data visualisation.[^visual-features]
+We will explore each of these in more detail in the following sections.
+
+[^visual-features]:
+    In this book, we use *visual feature* 
+    to describe a basic visual quality of
+    a data symbol, in place of more established terms like 
+    *visual variable* [@bertin1983semiology],
+    *aesthetic* [@wilkinson2005], or
+    *visual channel* [@munzner2014visualization].
+
+    This choice of terminology is deliberate so that we can elide 
+    the basic visual quality of a data symbol with the 
+    early stages of visual processing (@sec-visual-processing).
+    There is not a direct correspondence between these two
+    concepts, but it is a useful simplification.
+
+    There are also differences in terminology for individual visual
+    features.  For example, we use *angle* where others use
+    *tilt* or *slope* and the underlying visual feature is typically
+    referred to as *orientation*.
+
+    The use of *pattern* for what is more commonly referred to
+    as data point *shape* is perhaps the most daring terminological divergence.
+    Data point shape is commonly
+    included as a visual channel, but we would like to avoid confusion
+    with the concept of *visual shape* that we use to represent
+    later stages of visual processing (@sec-visual-processing).
+    The use of *pattern* provides a
+    connection to basic visual features via the early perception of patterns,
+    even though there is more involved in the perception of data point shape
+    [@chen1982topological; @4906843].
+
+    Much longer lists of basic visual features have been proposed
+    [e.g., @anal-info-viz], but we restrict ourselves in this book
+    to a set that has some correspondence with the visual features
+    that are extracted early on in visual processing.
+
 ```{r}
 #| echo: false
 #| label: fig-visual-features
@@ -247,58 +282,12 @@ grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), pch=c(1, 8), gp=gpar(lwd=2
 popViewport()
 ```
 
-> One reason why a bar plot is an effective data visualisation is 
-  because it involves a encoding from data values
-  to the basic visual features of data symbols---the
-  positions and lengths of bars---and basic visual features 
-  are processed rapidly and subconsciously by our visual system.
-
-@fig-visual-features shows some other examples of basic visual 
-features that are commonly used to encode data values in
-a data visualisation.[^visual-features]
-We will explore each of these in more detail in the following sections.
-
-[^visual-features]:
-    In this book, we use *visual feature* 
-    to describe a basic visual quality of
-    a data symbol, in place of more established terms like 
-    *visual variable* [@bertin1983semiology],
-    *aesthetic* [@wilkinson2005], or
-    *visual channel* [@munzner2014visualization].
-
-    This choice of terminology is deliberate so that we can elide 
-    the basic visual quality of a data symbol with the 
-    early stages of visual processing (@sec-visual-processing).
-    There is not a direct correspondence between these two
-    concepts, but it is a useful simplification.
-
-    There are also differences in terminology for individual visual
-    features.  For example, we use angle where others use
-    *tilt* or *slope* and the underlying visual feature is typically
-    referred to as *orientation*.
-
-    The use of *pattern* for what is more commonly referred to
-    as data point *shape* is perhaps the most daring terminological divergence.
-    Data point shape is commonly
-    included as a visual channel, but we would like to avoid confusion
-    with the concept of *visual shape* that we use to represent
-    later stages of visual processing (@sec-visual-processing).
-    The use of *pattern* provides a
-    connection to basic visual features via the early perception of patterns,
-    even though there is more involved in the perception of data point shape
-    [@chen1982topological; @4906843].
-
-    Much longer lists of basic visual features have been proposed
-    [e.g., @anal-info-viz], but we restrict ourselves in this book
-    to a set that has some correspondence with the visual features
-    that are extracted early on in visual processing.
-
 ## Quantitative features {#sec-quant-features}
 
 As we discussed in @sec-visual-system, the real purpose of encoding
 data values as data symbols is to make use of the visual system
 to **decode** back to data values from the data symbols.
-In this section, we are considering
+In this chapter, we are considering
 encodings from data values to basic visual features, so we
 need to consider how well we are able to **decode** from 
 **visual features** to **data values** (@fig-visual-feature-decode).
@@ -338,19 +327,13 @@ of 10 years in between.  This is also referred to as **interval** data.
 about absolute size and ratios of differences.
 For example, 200 offenders is twice as many as 100 offenders.
 
-By comparison, **qualitative** data consist of categorical values.
-**Ordinal** data consists of categories that
-are ordered, but there is no information about the size of differences.
-For example, a "high" crime level is more severe than a "medium"
-crime level, which is more severe than a "low" crime level, but 
-we cannot measure the size of the differences.
-**Nominal** data consists of just group labels,
-e.g., ethnic groups, and the only information we have is that the
-categories are different from each other.
+If we have quantitative data, we would ideally want to encode the
+data to a visual feature from which we can decode numeric (interval or ratio)
+values.
 
 @fig-quant-features shows that **position**, **length**, **angle**,
-and **area** are visual features that are capable of representing
-**quantitative** data values.
+and **area** are visual features that allow 
+**quantitative** data values to be decoded.
 For example, a bar that is twice as long as another bar 
 comfortably represents a data value that is twice as much as another
 data value.
@@ -410,13 +393,17 @@ grid.text("angle", y=unit(-1, "lines"))
 popViewport(2)
 ```
 
-By contrast, @fig-not-quant shows that **colour** and **pattern** are
-*not* capable of representing quantitative values.  For example,
+By contrast, @fig-not-quant shows that **colour** and **pattern** do
+*not* allow decoding of representing quantitative values.  For example,
 the colour blue is not twice the colour green and
 a circle is not 20 more than a triangle.
 We can tell that there are three *different* values, but
 in effect, these visual representations *lose* information.
 It is not possible to decode the data values from the visual represenations.
+
+If we encode quantitative values as colour or pattern, we *lose*
+information because we cannot decode quantitative values from
+those visual features.
 
 ```{r}
 #| echo: false
@@ -456,8 +443,8 @@ popViewport(2)
 The bar plot in @fig-bar visualises the total number of offenders, 
 which are quantitative data values.  These quantitative values are
 encoded as the
-**lengths** of bars, which is a visual feature that is capable of
-conveying all of the information in quantitative values.
+**lengths** of bars, which is a visual feature that allows us to decode
+quantitative values.
 
 > One reason why a bar plot is effective for visualising
   **quantitative data values** is because the quantitative data values,
@@ -466,13 +453,25 @@ conveying all of the information in quantitative values.
 
 ## Qualitative features {#sec-qual-features}
 
-If we have **qualitative** data, then we are primarily concerned with
-conveying whether data values are the same or different.
+**Qualitative** data consist of categorical values rather than numeric values.
+**Nominal** data consists of just group labels,
+e.g., ethnic groups, and the only information we have is that the
+categories are different from each other.
+**Ordinal** data consists of categories that
+are ordered, but there is no information about the size of differences.
+For example, a "high" crime level is more severe than a "medium"
+crime level, which is more severe than a "low" crime level, but 
+we cannot measure the size of the differences.
+
+If we have **qualitative** data values, then we are primarily concerned with
+being able to decode whether data values are the same or different.
 @fig-qual-features shows that **position**, **colour**, and **pattern**
-are capable of representing qualitative data values.  For example,
+allow us to decode qualitative data values.  For example,
 blue is clearly different from green, which is clearly different from 
 brown.  In @sec-visual-model-groups we saw that we also easily
-identify visual objects that have the same visual features.
+decode groups when visual items have the same visual features.
+For example, we can easily identify all blue items as a separate group
+from all green items.
 
 ```{r}
 #| echo: false
@@ -516,11 +515,16 @@ popViewport(2)
 ```
 
 By contrast, @fig-not-qual shows that **length**, **area**, and **angle**
-are not appropriate for representing qualitative data values.
+are not appropriate for decoding qualitative data values.
+The problem here is not a loss of information, but an
+*addition* of information.
 While we can identify whether lengths or areas are 
 different from each other, these
-visual features imply an inherent *order*, which is misleading
-because that *adds* information that is not present in the data values.
+visual features also allow us to decode an *order* from the
+visual features, and even the size or ratio 
+of the difference between visual features.
+This is not an effective decoding because it
+*adds* information that is not present in the data values.
 
 ```{r}
 #| echo: false
@@ -610,11 +614,12 @@ difference between the length of two bars?[^accuracy-research]
 
 It is easy to demonstrate that judgements of this sort are harder
 for some visual features than others.
-For example, @fig-accuracy-demo presents sets of three bars, which differ
-by **length**, circles, which differ by **area**, and stars, which
+For example, @fig-accuracy-demo presents a set of three bars, which differ
+by **length**, a set of three circles, 
+which differ by **area**, and a set of three stars, which
 differ by **pattern** (number of spikes).
-Judging the relative sizes of the bars is easier than judging the
-relative sizes of the circles and decoding the stars is 
+Decoding the relative sizes of the bars is easier than decoding the
+relative sizes of the circles and decoding numeric values from the stars is 
 extremely difficult.
 
 ```{r}
@@ -733,7 +738,8 @@ the lengths of the bars.
 > One reason why a bar plot is effective for visualising
   **quantitative data values** is because the quantitative data values,
   counts or proportions,
-  are encoded as a very **accurate visual feature**, the lengths of the bars.
+  are encoded as a visual feature that can be decoded very 
+  **accurately**, the lengths of the bars.
 
 ## Capacity {#sec-capacity}
 
@@ -916,9 +922,9 @@ the different ethnic groups.
 
 We have seen that, for several reasons,
 @fig-bar is an effective way to visualise
-the total number of offenders for different ethnic groups.
+the number of offenders for different ethnic groups.
 @fig-dot shows an alternative representation of these data in the
-form of a dot plot[^dot-plot]
+form of a dot plot.[^dot-plot]
 
 [^dot-plot]:
     Dot plots [@cleveland1985graphical]
@@ -943,7 +949,7 @@ effective data visualisation, and for very similar
 reasons.  Dot plots uses a different data symbol---data points instead of 
 bars---but **each data value** is **encoded** as the
 basic **visual feature** of **one data symbol**.
-This means that we can **decode** individual data values from the
+This means that we can **decode** and compare individual data values from the
 data symbols and answer questions like: what is the difference
 in the number of offenders between Māori and European/Other?
 
@@ -1007,13 +1013,14 @@ visual features of these symbols.
 However, a pie chart makes use of different visual features:
 The number of offenders for each ethnic group
 is encoded as the **angle** and/or **area** of a wedge
-and each ethnic groups 
+and each ethnic group
 is encoded as the **colour** of a wedge.[^pie-encoding]
 Although **colour** is an appropriate visual feature to represent
 **qualitative** data, and it has sufficient capacity to differentiate
 between only four groups, the encoding of quantitative values as **angle**
-and/or **area** leads to less accurate decoding of the total number of 
-offenders.  For example, it is much harder to decode the number of
+and/or **area** leads to a less accurate decoding of the total number of 
+offenders (@fig-accuracy).
+For example, it is much harder to decode the number of
 offenders with an unknown ethnicity from the pie chart in @fig-pie
 compared to the bar plot in @fig-bar or the dot plot in @fig-dot.
 
