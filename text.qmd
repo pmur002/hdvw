@@ -290,7 +290,7 @@ pushViewport(viewport(width=.9, height=.9))
 print(ggCrimeGuides, newpage=FALSE)
 popViewport()
 grid.force()
-grid.edit("key::segments", grep=TRUE, global=TRUE,
+grid.edit("key::gTree::segments", grep=TRUE, global=TRUE,
           gp=gpar(lwd=2))
 ```
 
@@ -813,7 +813,7 @@ ggplot(RWCperGame) +
           panel.border=element_rect(colour="black", fill=NA),
           panel.grid=element_blank())
 grid.force()
-keyRect <- grid.grep("key::rect", grep=TRUE, global=TRUE)
+keyRect <- grid.grep("key::gTree::rect", grep=TRUE, global=TRUE)
 grid.edit(keyRect[[1]], gp=gpar(col=NA, fill=NA))
 grid.edit(keyRect[[2]], gp=gpar(col=NA, fill=NA))
 ggTriesHist <- grid.grab()

@@ -454,6 +454,10 @@ Table&nbsp;4.1: A table of the number of points scored by Tier One nations in Ru
 </div>
 <p><a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a> shows a dot plot of the points scored in a match for all teams and all matches. This data visualisation has encoded the number of points scored as the horizontal <strong>position</strong> of data points. In theory, that allows us to decode from data points to a number of points scored. For example, we can see that one team from the southern hemisphere scored just over 100 points in one match.</p>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: &lt;ggplot&gt; %+% x was deprecated in ggplot2 4.0.0.
+ℹ Please use &lt;ggplot&gt; + x instead.</code></pre>
+</div>
 <div class="cell-output-display">
 <div id="fig-overplot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -613,15 +617,19 @@ Table&nbsp;4.3: A table of the proportion of crimes at different levels of sever
 </div>
 </div>
 <p><a href="#fig-ternary" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> shows a ternary plot of these data.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> In this data visualisation, there are three variables (three proportions that sum to 1), and the data values from each variable has been encoded as position. However, the positions are along axes that are not perpendicular. This means that it is not as easy to decode individual data values or compare data values because we are poorer at decoding positions that are not horizontal or vertical. Furthermore, because the three proportions sum to 1, a change in one proportion necessitates a change in at least one of the others. In other words, we cannot easily decode the difference between two data values from the difference between two data symbols.</p>
+<div class="cell">
+<div class="cell-output-display">
 <div id="fig-ternary" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ternary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<p><img src="ggtern/fig-ternary.svg" class="img-fluid figure-img"></p>
+<img src="position_files/figure-html/fig-ternary-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ternary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.7: A ternary plot of the data in <a href="#tbl-crime-level-tern" class="quarto-xref">Table&nbsp;<span>4.3</span></a>. We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
 </figcaption>
 </figure>
+</div>
+</div>
 </div>
 </section>
 <section id="sec-non-linear-pos" class="level2" data-number="4.7">

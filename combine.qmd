@@ -372,10 +372,9 @@ for female offenders, and the most common offences involve male offenders
 and result in court action.
 
 ```{r}
+#| eval: false
 #| echo: false
-#| label: fig-spine
 #| warning: false
-#| fig-cap: A spine plot
 offenders$action <- factor(offenders$Mop.Division, 
                            levels=rev(sort(unique(offenders$Mop.Division))))
 gg <- ggplot(offenders) +
@@ -390,6 +389,19 @@ pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+::: {#fig-spine}
+
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.7]{ggmosaic/fig-spine.pdf}
+:::
+
+::: {.content-visible when-format=html}
+![](ggmosaic/fig-spine.svg)
+:::
+
+A spine plot.
+:::
 
 A mosaic plot is another example of a data visualisation that 
 encodes **data summaries** to data symbols rather than raw data.
@@ -465,10 +477,9 @@ ordering of categories can have an impact on the effectiveness of a mosaic
 plot just like ordering the bars of a bar plot.
 
 ```{r}
+#| eval: false
 #| echo: false
-#| label: fig-spine-weak
 #| warning: false
-#| fig-cap: A spine plot with problems
 #| fig-keep: last
 actions <- c("Prosecution", "Formal Warning", "Informal Warning",
              "Community Justice Panel", "Alternative Action Plan",
@@ -498,6 +509,19 @@ grid.edit("axis.1-2-1-2::titleGrob::text", grep=TRUE, vjust=c(.5, .5, 1, 0, .5, 
 grid.edit("axis.3-1-3-1::titleGrob::text", grep=TRUE, hjust=c(rep(.5, 13), .3))
 ```
 
+::: {#fig-spine-weak}
+
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.7]{ggmosaic/fig-spine-weak.pdf}
+:::
+
+::: {.content-visible when-format=html}
+![](ggmosaic/fig-spine-weak.svg)
+:::
+
+A spine plot with problems
+:::
+
 These weaknesses are exacerbated for mosaic plots of more than two
 variables.  For example, the mosaic plot in @fig-mosaic shows the
 proportions of youth versus adult offenders, then, within age levels, the
@@ -508,10 +532,9 @@ our ability to compare heights and widths of rectangles is impaired
 by inconsistent baselines, distance between rectangles, and distractors.
 
 ```{r}
+#| eval: false
 #| echo: false
-#| label: fig-mosaic
 #| warning: false
-#| fig-cap: A mosaic plot of three variables
 offenders$ageCat <- ifelse(offenders$youth, "Youth", "Adult")
 gg <- ggplot(offenders) +
     geom_mosaic(aes(x=product(action, SEX, ageCat), fill=action),
@@ -526,6 +549,19 @@ pushViewport(viewport(width=1, height=1))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+::: {#fig-mosaic}
+
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.7]{ggmosaic/fig-mosaic.pdf}
+:::
+
+::: {.content-visible when-format=html}
+![](ggmosaic/fig-mosaic.svg)
+:::
+
+A mosaic plot of three variables
+:::
 
 A final weakness with mosaic plots is that the **shape** of the rectangles
 changes as well as the **area**.

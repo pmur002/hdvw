@@ -282,6 +282,10 @@ div.csl-indent {
 
 <p>Most data visualisations involve more than one data variable. For example, the bar plot in <a href="#fig-bar-gender" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> involves data on the <strong>gender</strong> of offenders and data on the <strong>count</strong> of offenders for each gender.</p>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: &lt;ggplot&gt; %+% x was deprecated in ggplot2 4.0.0.
+ℹ Please use &lt;ggplot&gt; + x instead.</code></pre>
+</div>
 <div class="cell-output-display">
 <div id="fig-bar-gender" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -586,19 +590,15 @@ Table&nbsp;9.2: Counts of offences committed in New Zealand in 2021 by the sex o
 </div>
 <p><a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>9.8</span></a> shows a mosaic plot of the data in <a href="#tbl-offenders" class="quarto-xref">Table&nbsp;<span>9.2</span></a>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> This is an effective data visualisation for making several comparisons: the overall proportion of male versus female offenders; within each sex, the proportion of different actions against offenders; between sexes, the distribution of different actions; and the overall proportions of combinations of sex and action against offenders.</p>
 <p>For example, we can see that there are more male offenders than female offenders, court action is more common than non-court action for both males and female offenders, court action is more common for male offenders than for female offenders, and the most common offences involve male offenders and result in court action.</p>
-<div class="cell">
-<div class="cell-output-display">
 <div id="fig-spine" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="combine_files/figure-html/fig-spine-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<p><img src="ggmosaic/fig-spine.svg" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.8: A spine plot
+Figure&nbsp;9.8: A spine plot.
 </figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>A mosaic plot is another example of a data visualisation that encodes <strong>data summaries</strong> to data symbols rather than raw data. The data symbols are rectangles, the proportions of male versus female offenders are encoded as the widths of the rectangles, and the proportions of different actions taken, within males and females, are encoded as the heights of the rectangles (see <a href="#tbl-offenders-summary" class="quarto-xref">Table&nbsp;<span>9.3</span></a>).</p>
 <div class="cell" data-layout-nrows="2">
@@ -700,34 +700,26 @@ to length and height interact to produce area, which represents overall proporti
 </blockquote>
 <p>One weakness of mosaic plots is that area is not the most accurate visual feature (<a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>), so we are not able to decode overall proportions from the rectangle areas as accurately as we are able to decode the proportions that are represented by the separate widths and heights of the rectangles.</p>
 <p>Another weakness is that the lengths and heights of the rectangles are unaligned (<a href="quantitative.html#sec-unaligned" class="quarto-xref"><span>Section 5.2</span></a>). This compromises the accuracy of comparisons of widths between categories or the comparisons of heights between categories. This weakness is greater if there are more categories and/or larger differences between categories than we see in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>9.8</span></a>. For example, <a href="#fig-spine-weak" class="quarto-xref">Figure&nbsp;<span>9.9</span></a> shows a mosaic plot of the proportions of offenders in different age groups and, within age groups, the proportions of actions against the offender at a finer level of detail than in <a href="#fig-spine" class="quarto-xref">Figure&nbsp;<span>9.8</span></a>. If we attempt to compare the proportion of offences that result in “Formal Warnings” in younger age groups versus older age groups, we are hampered by the fact that the pink rectangles do not have a common vertical baseline. As a side note, we are also hampered in that case by the distance and distractors between the rectangles (<a href="quantitative.html#sec-distance-effect" class="quarto-xref"><span>Section 5.1</span></a>); the ordering of the variables and the ordering of categories can have an impact on the effectiveness of a mosaic plot just like ordering the bars of a bar plot.</p>
-<div class="cell">
-<div class="cell-output-display">
 <div id="fig-spine-weak" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-spine-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="combine_files/figure-html/fig-spine-weak-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<p><img src="ggmosaic/fig-spine-weak.svg" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spine-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9.9: A spine plot with problems
 </figcaption>
 </figure>
 </div>
-</div>
-</div>
 <p>These weaknesses are exacerbated for mosaic plots of more than two variables. For example, the mosaic plot in <a href="#fig-mosaic" class="quarto-xref">Figure&nbsp;<span>9.10</span></a> shows the proportions of youth versus adult offenders, then, within age levels, the proportions of male versus female offenders, then, within combinations of age levels and sex, the proportions of different actions taken against the offender. Even though there are only very few levels for each variable, our ability to compare heights and widths of rectangles is impaired by inconsistent baselines, distance between rectangles, and distractors.</p>
-<div class="cell">
-<div class="cell-output-display">
 <div id="fig-mosaic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="combine_files/figure-html/fig-mosaic-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<p><img src="ggmosaic/fig-mosaic.svg" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9.10: A mosaic plot of three variables
 </figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>A final weakness with mosaic plots is that the <strong>shape</strong> of the rectangles changes as well as the <strong>area</strong>. In <a href="congruence.html#sec-dissonance" class="quarto-xref"><span>Section 7.5</span></a> we saw that changes in visual features should only reflect changes in the data. <a href="#fig-area-shape" class="quarto-xref">Figure&nbsp;<span>9.11</span></a> shows that we can create different rectangles with the same area, but different shapes. There can be rectangles within a mosaic plot with the same area, which represents the same overall probability data value, but with different shapes. The different shapes are a visual signal of differences in the data when in reality no difference exists.</p>
 <div class="cell">

@@ -577,9 +577,10 @@ from the difference between two data symbols.
     ternary diagrams.
 
 ```{r}
-#| eval: false
 #| echo: false
+#| label: fig-ternary
 #| message: false
+#| fig-cap: A ternary plot of the data in @tbl-crime-level-tern.  We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
 ggplot(crimeLevel3, aes(High, Low, Medium)) + 
     geom_point(aes(fill=as.factor(year)), colour="black", shape=21, size=2) +
     scale_fill_discrete_sequential(palette="Greens") + ## manual(values=grey(.8 - 1:11/14), name="") +
@@ -591,19 +592,6 @@ ggplot(crimeLevel3, aes(High, Low, Medium)) +
           tern.panel.grid.major=element_line(colour="white"),
           tern.panel.grid.minor=element_line(colour="white"))
 ```
-
-::: {#fig-ternary}
-
-::: {.content-visible when-format=pdf}
-\includegraphics[scale=0.7]{ggtern/fig-ternary.pdf}
-:::
-
-::: {.content-visible when-format=html}
-![](ggtern/fig-ternary.svg)
-:::
-
-A ternary plot of the data in @tbl-crime-level-tern.  We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
-:::
 
 ## Non-linear encodings {#sec-non-linear-pos}
 
