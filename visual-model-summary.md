@@ -17,6 +17,7 @@ that suggest encodings that we should avoid:
 
 * Visual memory is extremely limited.
 
-These features suggest that creating simple, orderly data visualisations
+These features suggest that encoding data values as basic visual features
+and generating simple, orderly data visualisations
 will lead to rapid and effortless decoding of information.
 

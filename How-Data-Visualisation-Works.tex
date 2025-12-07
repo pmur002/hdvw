@@ -1820,8 +1820,9 @@ suggest encodings that we should avoid:
   Visual memory is extremely limited.
 \end{itemize}
 
-These features suggest that creating simple, orderly data visualisations
-will lead to rapid and effortless decoding of information.
+These features suggest that encoding data values as basic visual
+features and generating simple, orderly data visualisations will lead to
+rapid and effortless decoding of information.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1875,11 +1876,6 @@ offenders aged 14 to 16 in 2021 for different ethnic groups.}
 \bottomrule
 
 \end{longtable}
-
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
 
 \begin{figure}
 
@@ -2592,8 +2588,9 @@ suggest encodings that we should avoid:
   Visual memory is extremely limited.
 \end{itemize}
 
-These features suggest that creating simple, orderly data visualisations
-will lead to rapid and effortless decoding of information.
+These features suggest that encoding data values as basic visual
+features and generating simple, orderly data visualisations will lead to
+rapid and effortless decoding of information.
 
 \end{oldsummary}
 
@@ -2605,8 +2602,7 @@ data symbols.
 A simple encoding of data values to data symbols also involves
 \textbf{encoding} each data value as a basic \textbf{visual feature} of
 the data symbol, e.g., position, length, area, angle, colour, or
-pattern. This is effective because visual features are decoded rapidly
-and without conscious effort.
+pattern.
 
 Position, length, area, and angle are appropriate for encoding
 quantitative data because we can decode numeric values from these visual
@@ -2617,12 +2613,6 @@ Position, colour, and pattern are appropriate for encoding qualitative
 data because we can decode groups from these visual features. We can
 represent a large number of categories if we use position, but only a
 few categories if we use colours and patterns.
-
-Bar plots, dot plots, and pie charts all provide examples of simple
-encodings from data values to data symbols. We can decode bar plots and
-dot plots accurately because they involve encodings of data values to
-position and length. We cannot decode pie charts as accurately because
-they involve encoding data values to angle and area.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -2704,7 +2694,8 @@ and Figure~\ref{fig-crime-heatmap}), so there must be more to learn
 about encoding data values to basic visual features.\footnote{As
   Bertini, Correll, and Franconeri (2020) put it: ``Why Shouldn't All
   Charts Be Scatter Plots?''} In this chapter, we look more closely at
-the encoding of data values to the \textbf{position} of data symbols.
+the encoding of data values to the \textbf{position} of data symbols and
+how well we can decode a data value from the position of a data symbol.
 
 \section{Perception is relative}\label{sec-rel-pos}
 
@@ -2772,8 +2763,8 @@ than absolute.}
 
 \begin{quote}
 A data visualisation that encodes a data value as the position of a data
-symbol is effective because we can decode the \emph{comparisons} between
-the positions accurately.
+symbol is effective because we can decode \emph{relative} positions
+accurately.
 \end{quote}
 
 \section{Unaligned position}\label{sec-unaligned-pos}
@@ -2783,9 +2774,9 @@ feature (Figure~\ref{fig-accuracy}), although that accuracy is for
 comparisons rather than for decoding individual values. Another
 limitation on the accuracy of \textbf{position} is that it works best
 when the comparison is between positions with a common baseline. For
-example, it is easier to compare the two positions on the left of
-Figure~\ref{fig-unaligned-pos} compared to the two positions on the
-right.
+example, it is easier to compare the two positions, relative to the ends
+of the dotted lines, on the left of Figure~\ref{fig-unaligned-pos} than
+it is to compare the two positions on the right.
 
 \begin{figure}
 
@@ -2941,7 +2932,10 @@ of points were scored by more than one team (from the same hemisphere)
 and/or in more than one match. This means that there are multiple data
 points at exactly the same position, which means that there are multiple
 data points drawn on top of each other, which in effect means that there
-are data points that we cannot see.
+are data points that we cannot see. For example, we can see that there
+is a dot at zero points in Figure~\ref{fig-overplot} (for teams from the
+northern hemisphere), but we cannot see that there are actually two dots
+at that location
 
 \begin{longtable}[]{@{}llr@{}}
 
@@ -2981,8 +2975,11 @@ Figure~\ref{fig-semitrans} shows the same data as
 Figure~\ref{fig-overplot}, but with the data points semi-transparent so
 that we can see that many of the points overlap. The same number of
 points was scored by multiple teams in multiple matches. This
-demonstrates one approach to resolving the problem of overplotting; we
-will see several other approaches in later chapters.
+demonstrates one approach to resolving the problem of overplotting,
+although it is only partially effective here; We can more easily decode
+points that have been scored many times, but we cannot easily decode the
+number of times the same set of points was scored. We will see several
+other approaches to resolving overplotting in later chapters.
 
 \begin{figure}
 
@@ -3081,13 +3078,13 @@ because we are poorer at decoding positions that are not horizontal or
 vertical. Furthermore, because the three proportions sum to 1, a change
 in one proportion necessitates a change in at least one of the others.
 In other words, we cannot easily decode the difference between two data
-values from the difference between two data symbols.
+values from the difference in the positions of two data symbols.
 
 \begin{figure}
 
 \centering{
 
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-ternary-1.pdf}
+\includegraphics[scale=0.7]{ggtern/fig-ternary.pdf}
 
 }
 
@@ -3102,29 +3099,28 @@ low severity, and only 10\% of high severity.}
 
 Table~\ref{tbl-crime-type} shows the total number of youth offenders
 broken down by type of crime. We have one qualitative variable, crime
-type, and one quantitative variable, total nunber of offenders.
+type, and one quantitative variable, total number of offenders.
 
-\begin{longtable}[]{@{}lr@{}}
+\begin{longtable}[]{@{}llr@{}}
 
-\caption{\label{tbl-crime-type}A table of the total number of youth
-offenders in New Zealand (2011 to 2021) broken down by type of crime.
-There are 16 different crime types in toral, with only the first 6 shown
-here.}
+\caption{\label{tbl-crime-type}A table of the number of youth offenders
+in New Zealand in 2021 broken down by type of crime. There are 16
+different crime types in total, with only the first 6 shown here.}
 
 \tabularnewline
 
 \toprule\noalign{}
-type & total \\
+& type & count \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Abductions, threats & 2709 \\
-Against justice & 1177 \\
-Causing injury & 11326 \\
-Dangerous acts & 3124 \\
-Deceptions & 1198 \\
-Homicides & 57 \\
+161 & Homicides & 4 \\
+162 & Causing injury & 1018 \\
+163 & Sexual offences & 190 \\
+164 & Dangerous acts & 653 \\
+165 & Abductions, threats & 273 \\
+166 & Robbery, extortion & 246 \\
 
 \end{longtable}
 
@@ -3133,8 +3129,8 @@ number of offenders encoded as the horizontal position of circles, one
 per type of crime. This plot is effective for comparing the total number
 of offenders between types of crime, both in terms of which crimes are
 more common than others and how much more common some crimes are than
-others. For example, we can see that theft is about twice as common as
-the next most common crime type.
+others. For example, we can decode that theft is about twice as common
+as the next most common crime type.
 
 \begin{figure}
 
@@ -3144,8 +3140,8 @@ the next most common crime type.
 
 }
 
-\caption{\label{fig-linear}A dot plot of the number of crimes for
-different regions of New Zealand.}
+\caption{\label{fig-linear}A dot plot of the number of offenders in New
+Zealand in 2021 for different types of crime.}
 
 \end{figure}%
 
@@ -3164,12 +3160,11 @@ majority of data values, as in Figure~\ref{fig-linear}, a non-linear
 scale is sometimes employed in order to see the differences between the
 smaller values more easily. For example, Figure~\ref{fig-log} shows the
 same data and the same encodings, but with a \emph{log scale}. Rather
-than encoding the total number of offenders as the position of the
-circles, the log (base 10) of the total number of offenders is encoded
-as the position of the circles.\footnote{The log (base 10) of the data
-  values is the power to which we must raise 10 in order to get the data
-  value. For example, if the data value is 100, the logged data value is
-  2.
+than encoding the number of offenders as the position of the circles,
+the log (base 10) of the number of offenders is encoded as the position
+of the circles.\footnote{The log (base 10) of the data values is the
+  power to which we must raise 10 in order to get the data value. For
+  example, if the data value is 100, the logged data value is 2.
 
   \(10^2 = 100 \iff log_{10}(100) = 2\)}
 
@@ -3192,13 +3187,14 @@ decode from position to data values because the same horizontal distance
 means different things in terms of data values at different locations
 along the x-axis. For example, it is difficult to decode the number of
 offenders for Miscellaneous crimes; the position of the circle data
-symbol is visually roughly half-way between 100 and 1000, but the data
-value is not half-way between 100 and 1000. It is even more difficult to
-decode the size of the difference between the number of offenders for
-Miscellaneous crimes versus Homicides. Worse still, the difference
-between Miscellaneous and Homicide is visually very similar to the
-difference between Miscellaneous and crimes Against justice, but the
-differences between those data values are very different.
+symbol is visually roughly one quarter of the distance between 10 and
+100, but the corresponding data value (18) is \emph{not} one quarter of
+the distance between 10 and 100. It is even more difficult to decode the
+size of the difference between the number of offenders for Miscellaneous
+crimes versus Homicides. Worse still, the difference between
+Miscellaneous and Homicide is visually similar to the difference between
+Miscellaneous and crimes Against justice, but the real differences
+between those data values are very different (14 versus 50).
 
 We can still decode simple ordinal information from
 Figure~\ref{fig-log}---which type of crimes are more common than
@@ -3214,11 +3210,11 @@ from the positions of the circles in Figure~\ref{fig-log-data}, but only
 to recover logged data values. If we want to compare logged data values,
 this is fine, but usually what we want is to compare the original data
 values---we need to decode to a logged value and then raise 10 to that
-power. For example, the log of the number of offenders for Deceptions is
-approximately 3, so the number of offenders is approximately 1000.
-However, this mental transformation requires much more conscious effort
-for most people, so we effectively lose the benefit of using a data
-visualisation, at least for the purpose of decoding quantitative
+power. For example, the log of the number of offenders for Causing
+injury is approximately 3, so the number of offenders is approximately
+1000. However, this mental transformation requires much more conscious
+effort for most people, so we effectively lose the benefit of using a
+data visualisation, at least for the purpose of decoding quantitative
 information (Section~\ref{sec-tasks}).
 
 \begin{figure}
@@ -3250,8 +3246,81 @@ only effective for decoding quantitative data if the encoding is linear.
 
 \section{Summary}\label{summary-3}
 
-Encoding data values to the position of data symbols allows for
-effective decoding for both quantitative and qualitative information,
+\begin{oldsummary}
+Data visualisations can be very effective for communicating information.
+
+However, a data visualisation that is effective for communicating one
+type of information may be ineffective for communicating another type of
+information.
+
+The goal of this book is to explain why some data visualisations are
+more effective than others at communicating different types of
+information---how data visualisation works.
+
+We will focus on how information can be \textbf{encoded} to create a
+visual representation. We will characterise a data visualisation in
+terms of the encodings that it uses to convert data values into data
+symbols.
+
+The effectiveness of an encoding will depend on how well we can
+\textbf{decode} the information that we want from a visual
+representation. We will judge a data visualisation in terms of how well
+data values can be recovered from the data symbols.
+
+There are features of the human visual system that mean that we can
+decode some information extremely rapidly and without effort:
+
+\begin{itemize}
+\item
+  A very large amount of basic information is gathered at once about
+  simple visual features like positions, lengths, and colours.
+\item
+  Large, bright, colourful items automatically attract attention.
+\item
+  We automatically identify groups of items within an image based on
+  similarity of basic visual features like position and colour, plus
+  connecting lines and enclosing borders.
+\end{itemize}
+
+On the other hand, there are limitations of the visual system that
+suggest encodings that we should avoid:
+
+\begin{itemize}
+\item
+  Detailed information is only available at the centre of the visual
+  field.
+\item
+  Visual memory is extremely limited.
+\end{itemize}
+
+These features suggest that encoding data values as basic visual
+features and generating simple, orderly data visualisations will lead to
+rapid and effortless decoding of information.
+
+A simple encoding of data values to data symbols involves encoding
+\textbf{each data value to a separate data symbol}. This allows the
+viewer to \textbf{decode} and compare individual data values from the
+data symbols.
+
+A simple encoding of data values to data symbols also involves
+\textbf{encoding} each data value as a basic \textbf{visual feature} of
+the data symbol, e.g., position, length, area, angle, colour, or
+pattern.
+
+Position, length, area, and angle are appropriate for encoding
+quantitative data because we can decode numeric values from these visual
+features. We can decode position and length more accurately than area
+and angle.
+
+Position, colour, and pattern are appropriate for encoding qualitative
+data because we can decode groups from these visual features. We can
+represent a large number of categories if we use position, but only a
+few categories if we use colours and patterns.
+
+\end{oldsummary}
+
+Encoding data values as the position of data symbols allows for the
+effective decoding of both quantitative and qualitative information,
 with the following caveats:
 
 \begin{itemize}
@@ -3272,7 +3341,7 @@ with the following caveats:
   horizontal and vertical positions separately.
 \item
   Decoding quantitative data values from the positions of data symbols
-  is only effective if the encoding is linear.
+  is only accurate if the encoding is linear.
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -10895,6 +10964,13 @@ values to visual features and we have a responsibility to work hard to
 make sure that the message from data symbols and from text labels is
 completely consistent.
 
+\textbf{TODO}
+
+2025-12-listener-title example where the text is just difficult to
+understand. Text still has to make sense! Just as a graphical encoding
+that requires effort is a waste of time, text that requires effort is a
+waste of time.
+
 \section{Alt text}\label{alt-text}
 
 Is a data visualisation effective if we cannot see it? We saw in
@@ -11451,6 +11527,10 @@ List of questions to evaluate a data vis (maybe nest these a bit):
   What are the data variables
 \item
   What visual features are they encoded to
+\item
+  How many encodings are there? (complexity)
+\item
+  How many encodings are there \emph{per data symbol} ?
 \item
   What type of data
 \item

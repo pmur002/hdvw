@@ -2,6 +2,8 @@
 ################################################################################
 ## Packages
 source("packages.R")
+## NOTE that {ggtern} not on the list 
+## (will load/attach as required)
 
 ################################################################################
 ## Default themes

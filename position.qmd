@@ -119,7 +119,8 @@ not encode *all* data values to position (e.g., @fig-crime and
 @fig-crime-heatmap), so there must be more to learn
 about encoding data values to basic visual features.[^not-all-scatter]
 In this chapter, we look more closely at the encoding
-of data values to the **position** of data symbols.
+of data values to the **position** of data symbols and
+how well we can decode a data value from the position of a data symbol.
 
 [^not-all-scatter]:
     As @all-scatterplots put it:
@@ -222,7 +223,7 @@ popViewport(2)
 
 > A data visualisation that encodes a data value as the position
   of a data symbol is effective because we can decode
-  the *comparisons* between the positions accurately.
+  *relative* positions accurately.
 
 ## Unaligned position {#sec-unaligned-pos}
 
@@ -231,8 +232,9 @@ accurate visual feature (@fig-accuracy), although that
 accuracy is for comparisons rather than for decoding individual values.
 Another limitation on the accuracy of **position** is that it works
 best when the comparison is between positions with a common baseline.
-For example, it is easier to compare the two positions on the left
-of @fig-unaligned-pos compared to the two positions on the right.
+For example, it is easier to compare the two positions, relative to the
+ends of the dotted lines, on the left
+of @fig-unaligned-pos than it is to compare the two positions on the right.
 
 ```{r}
 #| echo: false
@@ -394,6 +396,7 @@ by Tier One nations (the top 10 rugby-playing nations).
 ```{r}
 #| echo: false
 #| message: false
+#| warning: false
 #| label: tbl-rwc-all
 #| tbl-cap: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin.  Each row represents the points scored by one team in one match.  There are 294 rows in total, with just the first 6 rows shown here.
 kable(head(rwcAll[,c("team", "hemisphere", "scored")]), digits=0)
@@ -426,6 +429,10 @@ This means that there are multiple data points at exactly the same
 position, which means that there are multiple data points drawn on top
 of each other, which in effect means that there are data points
 that we cannot see.
+For example, we can see that there is a dot at zero points in 
+@fig-overplot (for teams from the northern hemisphere), 
+but we cannot see that there are actually two dots at that 
+location
 
 ```{r}
 #| echo: false
@@ -440,7 +447,8 @@ at least one team from the northern hemisphere
 scored zero points in at least one match,
 it is not possible to decode whether that was just one team or just one 
 match.
-We cannot decode an individual data value from each data symbol.[^surjective-over]
+We cannot decode an individual data value from each 
+data symbol.[^surjective-over]
 
 [^surjective-over]:
     In effect, more than one data value is encoded as the same data symbol,
@@ -451,8 +459,12 @@ We cannot decode an individual data value from each data symbol.[^surjective-ove
 with the data points semi-transparent
 so that we can see that many of the points overlap.
 The same number of points was scored by multiple teams in multiple matches.
-This demonstrates one approach to resolving the problem of overplotting;
-we will see several other approaches in later chapters.
+This demonstrates one approach to resolving the problem of overplotting,
+although it is only partially effective here;  We can more easily decode
+points that have been scored many times, but we cannot easily decode
+the number of times the same set of points was scored.
+We will see several other approaches to resolving overplotting
+in later chapters.
 
 ```{r}
 #| echo: false
@@ -567,7 +579,7 @@ vertical.
 Furthermore, because the three proportions sum to 1, a change in
 one proportion necessitates a change in at least one of the others.
 In other words, we cannot easily decode the difference between two data values
-from the difference between two data symbols.
+from the difference in the positions of two data symbols.
 
 [^ternary-plots]:
     Ternary plots, also known as barycentric plots,
@@ -577,10 +589,11 @@ from the difference between two data symbols.
     ternary diagrams.
 
 ```{r}
+#| eval: false
 #| echo: false
 #| label: fig-ternary
 #| message: false
-#| fig-cap: A ternary plot of the data in @tbl-crime-level-tern.  We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
+## NOT run because loading {ggtern} messes with {ggplot2} defaults
 ggplot(crimeLevel3, aes(High, Low, Medium)) + 
     geom_point(aes(fill=as.factor(year)), colour="black", shape=21, size=2) +
     scale_fill_discrete_sequential(palette="Greens") + ## manual(values=grey(.8 - 1:11/14), name="") +
@@ -593,18 +606,32 @@ ggplot(crimeLevel3, aes(High, Low, Medium)) +
           tern.panel.grid.minor=element_line(colour="white"))
 ```
 
+::: {#fig-ternary}
+
+::: {.content-visible when-format=pdf}
+\includegraphics[scale=0.7]{ggtern/fig-ternary.pdf}
+:::
+
+::: {.content-visible when-format=html}
+![](ggtern/fig-ternary.svg)
+:::
+
+A ternary plot of the data in @tbl-crime-level-tern.  We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
+:::
+
+
 ## Non-linear encodings {#sec-non-linear-pos}
 
 @tbl-crime-type shows the total number of youth offenders broken down
 by type of crime.  We have one qualitative variable, crime type, and
-one quantitative variable, total nunber of offenders.
+one quantitative variable, total number of offenders.
 
 ```{r}
 #| echo: false
 #| message: false
 #| label: tbl-crime-type
-#| tbl-cap: A table of the total number of youth offenders in New Zealand (2011 to 2021) broken down by type of crime.  There are 16 different crime types in toral, with only the first 6 shown here.
-kable(head(crimeTypeTotal[c("type", "total")]), digits=3)
+#| tbl-cap: A table of the number of youth offenders in New Zealand in 2021 broken down by type of crime.  There are 16 different crime types in total, with only the first 6 shown here.
+kable(head(crimeType2021[c("type", "count")]), digits=3)
 ```
 
 @fig-linear shows of dot plot of these data, with the total number of offenders
@@ -613,20 +640,20 @@ This plot is effective for comparing the total number of offenders
 between types of crime, both in terms of
 which crimes are more common than others and
 how much more common some crimes are than others.
-For example, we can see that theft is about twice as common as the next
+For example, we can decode that theft is about twice as common as the next
 most common crime type.
 
 ```{r}
 #| echo: false
 #| label: fig-linear
-#| fig-cap: A dot plot of the number of crimes for different regions of New Zealand.
-ct2 <- crimeTypeTotal
-ct2$type <- reorder(ct2$type, ct2$total)
+#| fig-cap: A dot plot of the number of offenders in New Zealand in 2021 for different types of crime.
+ct2 <- crimeType2021
+ct2$type <- reorder(ct2$type, ct2$count)
 ggplot(ct2) + 
     geom_segment(aes(x=-Inf, xend=Inf, y=type, yend=type), 
                  linetype="dotted") +
-    geom_point(aes(x=total, y=type), size=3) +
-    scale_x_continuous(name="total") +
+    geom_point(aes(x=count, y=type), size=3) +
+    scale_x_continuous(name="number of offenders") +
     theme(aspect.ratio=1)
 ```
 
@@ -649,9 +676,9 @@ majority of data values, as in @fig-linear, a non-linear
 scale is sometimes employed in order to see the differences
 between the smaller values more easily.  For example, @fig-log shows the same
 data and the same encodings, but with a *log scale*.
-Rather than encoding the total number of offenders as the position
+Rather than encoding the number of offenders as the position
 of the circles, 
-the log (base 10) of the total number of offenders is encoded as
+the log (base 10) of the number of offenders is encoded as
 the position of the circles.[^log]
 
 [^log]:
@@ -669,8 +696,8 @@ the position of the circles.[^log]
 ggplot(ct2) + 
     geom_segment(aes(x=0, xend=Inf, y=type, yend=type), 
                  linetype="dotted") +
-    geom_point(aes(x=total, y=type), size=3) +
-    scale_x_continuous(name="total", transform="log10") +
+    geom_point(aes(x=count, y=type), size=3) +
+    scale_x_continuous(name="number of offenders", transform="log10") +
     theme(aspect.ratio=1)
 ```
 
@@ -681,13 +708,16 @@ because the same horizontal distance means different things
 in terms of data values at different locations along the x-axis.
 For example, it is difficult to decode the number of offenders
 for Miscellaneous crimes;  the position of the circle data symbol
-is visually roughly half-way between 100 and 1000, but the data value is not 
-half-way between 100 and 1000.  It is even more difficult
+is visually roughly one quarter of the distance
+between 10 and 100, but the corresponding
+data value (18) is *not*
+one quarter of the distance between 10 and 100.  It is even more difficult
 to decode the size of the difference between the number of offenders
 for Miscellaneous crimes versus Homicides.
 Worse still, the difference between Miscellaneous and Homicide is visually
-very similar to the difference between Miscellaneous and crimes Against justice,
-but the differences between those data values are very different.
+similar to the difference between Miscellaneous and crimes Against justice,
+but the real differences between those data values are very different
+(14 versus 50).
 
 We can still decode simple ordinal information from @fig-log---which 
 type of crimes
@@ -706,7 +736,7 @@ If we want to compare logged data values, this is fine, but usually
 what we want is to compare the original data values---we need to decode
 to a logged value and then raise 10 to that power.
 For example, the log of the 
-number of offenders for Deceptions is approximately 3, so the number
+number of offenders for Causing injury is approximately 3, so the number
 of offenders is approximately 1000.
 However, this mental transformation 
 requires much more conscious effort for most people,
@@ -722,8 +752,8 @@ at least for the purpose of decoding quantitative information
 ggplot(ct2) + 
     geom_segment(aes(x=-Inf, xend=Inf, y=type, yend=type), 
                  linetype="dotted") +
-    geom_point(aes(x=log10(total), y=type), size=3) +
-    scale_x_continuous(name=expression(log[10](total))) +
+    geom_point(aes(x=log10(count), y=type), size=3) +
+    scale_x_continuous(name=expression(log[10]("number of offenders"))) +
     theme(aspect.ratio=1)
 ```
 
@@ -741,27 +771,17 @@ We will see more examples in later sections
 
 ## Summary
 
-Encoding data values to the position of data symbols allows
-for effective decoding for both quantitative and qualitative information,
-with the following caveats:
+::: {.oldsummary}
+ 
+{{< include intro-summary.md >}}
 
-* For quantitative values, 
-  what we can accurately decode are *comparisons* between quantitative 
-  values, not absolute quantitative values.
+{{< include visual-model-summary.md >}}
 
-* The decoding is most accurate for positions that share a common baseline.
+{{< include mapping-visual-features-summary.md >}}
 
-* Encoding identical data values as the positions of data symbols
-  means that the data symbols overlap, which compromises our 
-  ability to decode data values from the data symbols.
+:::
 
-* We can encode one set of data values as horizontal positions and
-  another set of data values as vertical positions because
-  we can decode horizontal
-  and vertical positions separately.
-
-* Decoding quantitative data values from the positions of data symbols
-  is only effective if the encoding is linear.
+{{< include position-summary.md >}}
 
 ---
 

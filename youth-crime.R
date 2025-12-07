@@ -44,6 +44,7 @@ crimeType$yearDate <- as.Date(paste0(crimeType$year, "-06-30"))
 crimeTypeTotal <- group_by(crimeType, type) |>
     summarise(total = sum(count)) |>
     mutate(prop = total/sum(total))
+crimeType2021 <- subset(crimeType, year == 2021)
 
 crimeDivision <- read.csv("Data/YouthCrime/crime-type.csv")
 other <- !(crimeDivision$type %in%

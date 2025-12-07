@@ -375,6 +375,7 @@ and result in court action.
 #| eval: false
 #| echo: false
 #| warning: false
+## NOT run because {ggmosaic} has not yet caught up with {ggplot2} v4
 offenders$action <- factor(offenders$Mop.Division, 
                            levels=rev(sort(unique(offenders$Mop.Division))))
 gg <- ggplot(offenders) +
@@ -481,6 +482,7 @@ plot just like ordering the bars of a bar plot.
 #| echo: false
 #| warning: false
 #| fig-keep: last
+## NOT run because {ggmosaic} has not yet caught up with {ggplot2} v4
 actions <- c("Prosecution", "Formal Warning", "Informal Warning",
              "Community Justice Panel", "Alternative Action Plan",
              "No Further Action")
@@ -535,6 +537,7 @@ by inconsistent baselines, distance between rectangles, and distractors.
 #| eval: false
 #| echo: false
 #| warning: false
+## NOT run because {ggmosaic} has not yet caught up with {ggplot2} v4
 offenders$ageCat <- ifelse(offenders$youth, "Youth", "Adult")
 gg <- ggplot(offenders) +
     geom_mosaic(aes(x=product(action, SEX, ageCat), fill=action),
