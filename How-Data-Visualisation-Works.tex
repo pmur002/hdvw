@@ -514,11 +514,6 @@ rate for 14-year-olds (the red line) and less than the crime rate for
 16-year-olds (the green line). The right choice of visual display can
 result in a very effective communication of information.
 
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
-
 \begin{figure}
 
 \centering{
@@ -2909,11 +2904,6 @@ points. In theory, that allows us to decode from data points to a number
 of points scored. For example, we can see that one team from the
 southern hemisphere scored just over 100 points in one match.
 
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
-
 \begin{figure}
 
 \centering{
@@ -3352,18 +3342,13 @@ with the following caveats:
 
 \chapter{Length}\label{sec-quantitative}
 
-Figure~\ref{fig-bar-district} shows a bar plot of the total number of
-offenders in each police district in New Zealand (for ages 14 to 16 and
-from 2011 to 2021). For the reasons outlined in
-Chapter~\ref{sec-encoding-visual-features} and
-Chapter~\ref{sec-position}), this data visualisation is effective for
-decoding the number of offenders in different police districts and
+Figure~\ref{fig-bar-district} shows a bar plot of the number of
+offenders in each police district in New Zealand in 2021 (for ages 14 to
+16).\\
+For the reasons outlined in Chapter~\ref{sec-encoding-visual-features}
+and Chapter~\ref{sec-position}), this data visualisation is effective
+for decoding the number of offenders in different police districts and
 making comparisons between them.
-
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
 
 \begin{figure}
 
@@ -3383,9 +3368,9 @@ Figure~\ref{fig-bar-district-ordered} shows a bar plot of the same data,
 but with the bars ordered from longest to shortest. This data
 visualisation uses the same encodings as
 Figure~\ref{fig-bar-district}---police districts are encoded as the
-vertical positions of the bars and the total counts are encoded as the
-lengths of the bars---which means that it is also effective for
-comparing the total number of offenders between police districts.
+vertical positions of the bars and the counts are encoded as the lengths
+of the bars---which means that it is also effective for comparing the
+number of offenders between police districts.
 
 \begin{figure}
 
@@ -3409,19 +3394,22 @@ visualisations with the same encodings can have a different
 effectiveness suggests that there is more to know about how different
 visual features work.
 
-This chapter covers some more details about encodings that encode data
-values as \textbf{length}.
+This chapter covers some more details about how well we can decode
+information when we have encoded data values as \textbf{length}.
 
 \section{The distance effect}\label{sec-distance-effect}
 
 In Section~\ref{sec-accuracy}, we saw that \textbf{position} and
 \textbf{length} were the most accurate visual features
 (Figure~\ref{fig-accuracy}). However, this accuracy decreases if the two
-visual features that are being compared are not in close proximity
-(Figure~\ref{fig-distance-effect}).\footnote{The first demonstration of
-  the ``distance effect'' is attributed to William S. Cleveland and
-  McGill (1984). It has since been replicated several times, for
-  example, by Talbot et al. (2014) and Lu et al. (2021).}
+visual features that are being compared are not in close
+proximity.\footnote{The first demonstration of the ``distance effect''
+  is attributed to William S. Cleveland and McGill (1984). It has since
+  been replicated several times, for example, by Talbot et al. (2014)
+  and Lu et al. (2021).} For example, it is more difficult to compare
+the lengths of the two black bars in the set of bars at the bottom of
+Figure~\ref{fig-distance-effect} than it is to compare the lengths of
+the two black bars at the top of \textbf{?@fig-distance}.
 
 This helps to explain why Figure~\ref{fig-bar-district-ordered} is more
 effective than Figure~\ref{fig-bar-district} for some comparisons (e.g.,
@@ -3446,9 +3434,8 @@ the right.}
 
 \begin{quote}
 One reason for ordering the bars in a bar plot from longest to shortest
-is because, for some common comparisons, the ordering places the bars
-that are being compared closer together, which improves the accuracy of
-the comparison.
+is because the ordering places bars that we want to compare closer
+together.
 \end{quote}
 
 \section{Unaligned length}\label{sec-unaligned}
@@ -3456,7 +3443,7 @@ the comparison.
 Figure~\ref{fig-unaligned-length} shows that it is harder to accurately
 compare the \textbf{lengths} of two bars if they are \textbf{unaligned}
 and do not share a common baseline (similar to the accuracy of comparing
-\textbf{positions}; Section~\ref{sec-unaligned-pos}).
+unaligned \textbf{positions}; Section~\ref{sec-unaligned-pos}).
 
 \begin{figure}
 
@@ -3474,10 +3461,10 @@ because they are \textbf{unaligned}.}
 \end{figure}%
 
 Figure~\ref{fig-stacked-bar} shows an alternative visualisation of the
-data on the total number of offenders in different ethnic groups. The
-bar plot of these data that we saw in Figure~\ref{fig-bar} encoded
-ethnic groups as the \textbf{positions} of the bars so that the bars
-were arranged vertically with a common left-hand edge. In
+data on the number of offenders in different ethnic groups. The bar plot
+of these data that we saw in Figure~\ref{fig-bar} encoded ethnic groups
+as the \textbf{positions} of the bars so that the bars were arranged
+vertically with a common left-hand edge. In
 Figure~\ref{fig-stacked-bar}, the ethnic groups are encoded as different
 \textbf{colours} and the bars are ``stacked'' horizontally.\footnote{In
   a stacked bar plot, groups are encoded as the positions of the bars
@@ -3486,8 +3473,8 @@ Figure~\ref{fig-stacked-bar}, the ethnic groups are encoded as different
   and length are horizontal). In a side-by-side bar plot, the position
   of the bars is in the opposite dimension to the lengths of the bars.}
 
-Although the total number of offenders has been encoded as the same
-visual feature in both Figure~\ref{fig-stacked-bar} and
+Although the number of offenders has been encoded as the same visual
+feature in both Figure~\ref{fig-stacked-bar} and
 Figure~\ref{fig-bar}---in both cases, the number of offenders is encoded
 as the \textbf{lengths} of the bars---comparing those lengths is much
 harder in Figure~\ref{fig-stacked-bar} because the lengths are
@@ -3501,8 +3488,8 @@ harder in Figure~\ref{fig-stacked-bar} because the lengths are
 
 }
 
-\caption{\label{fig-stacked-bar}A stacked bar plot of the total number
-of offenders in each ethnic group.}
+\caption{\label{fig-stacked-bar}A stacked bar plot of the number of
+offenders in each ethnic group.}
 
 \end{figure}%
 
@@ -3634,8 +3621,8 @@ differences when the visual features that we are comparing are
 smaller.\footnote{The idea of perception of differences being relative
   is a very old result from Psychology known as Weber's Law (Weber 1846;
   Boring 1942).} It is easier to see that the pair of bars on the left
-have different lengths and harder to see that the pair of bars on the
-right have different lengths. All three pairs of bars have different
+have different lengths and it is harder to see that the pair of bars on
+the right have different lengths. All three pairs of bars have different
 lengths, but the absolute size of the difference is the same, so the
 size of the difference relative to the bar lengths gets smaller as the
 bars get longer.
@@ -3658,15 +3645,15 @@ bars.}
 \end{figure}%
 
 Figure~\ref{fig-relative-ref} shows that we can make it easier to judge
-the differences by providing reference marks. Each pair of black bars is
-the same and each pair of bars differs in length by the same small
-amount. The difference between the bars in each pair is difficult to
-perceive because the difference is small relative to the lengths of the
-bars. The reference marks in the middle and right-hand pair of bars
-provide shorter lengths to compare, so we are able to more easily
-perceive the small differences. For example, for the pair of bars on the
-right, we can compare the lengths of the short white gaps rather than
-comparing the longer black bars.
+the differences by providing reference marks. Each pair of black bars in
+Figure~\ref{fig-relative-ref} is the same and each pair of bars differs
+in length by the same small amount. The difference between the bars in
+each pair is difficult to perceive because the difference is small
+relative to the lengths of the bars. The reference marks in the middle
+and right-hand pair of bars provide shorter lengths to compare, so we
+are able to more easily perceive the small differences. For example, for
+the pair of bars on the right, we can compare the lengths of the short
+white gaps rather than comparing the longer black bars.
 
 \begin{figure}
 
@@ -3695,7 +3682,7 @@ distractors in between (Section~\ref{sec-distance-effect}), the addition
 of the grid lines makes it easier to perform the comparison because we
 are able to compare the distances from the ends of the bars to the
 nearest grid line. Those distances are much shorter than the bars so it
-is easier to perceive the small difference.
+is easier to perceive that those two bars are very similar.
 
 \begin{figure}
 
@@ -3720,22 +3707,112 @@ easier to perceive smaller changes.
 
 \section{Summary}\label{summary-4}
 
-Bar plots are effective because they encode \textbf{quantitative} values
-as \textbf{lengths}, which are accurate visual features.
+\begin{oldsummary}
 
-However, comparisons between the bars in a bar plot can be difficult if
-the bars are far apart, especially if there are distractors in between.
+Data visualisations can be very effective for communicating information.
 
-Furthermore, \textbf{stacked bars} are more difficult to compare because
-they require comparing \textbf{unaligned} lengths.
+However, a data visualisation that is effective for communicating one
+type of information may be ineffective for communicating another type of
+information.
 
-Finally, it is easier to perceive differences between shorter bars than
-between longer bars because the perception of differences is
-\textbf{relative}.
+The goal of this book is to explain why some data visualisations are
+more effective than others at communicating different types of
+information---how data visualisation works.
 
-\textbf{Grid lines} can help with comparisons because they make the
-distances being compared smaller, so smaller differences are easier to
-detect.
+We will focus on how information can be \textbf{encoded} to create a
+visual representation. We will characterise a data visualisation in
+terms of the encodings that it uses to convert data values into data
+symbols.
+
+The effectiveness of an encoding will depend on how well we can
+\textbf{decode} the information that we want from a visual
+representation. We will judge a data visualisation in terms of how well
+data values can be recovered from the data symbols.
+
+There are features of the human visual system that mean that we can
+decode some information extremely rapidly and without effort:
+
+\begin{itemize}
+\item
+  A very large amount of basic information is gathered at once about
+  simple visual features like positions, lengths, and colours.
+\item
+  Large, bright, colourful items automatically attract attention.
+\item
+  We automatically identify groups of items within an image based on
+  similarity of basic visual features like position and colour, plus
+  connecting lines and enclosing borders.
+\end{itemize}
+
+On the other hand, there are limitations of the visual system that
+suggest encodings that we should avoid:
+
+\begin{itemize}
+\item
+  Detailed information is only available at the centre of the visual
+  field.
+\item
+  Visual memory is extremely limited.
+\end{itemize}
+
+These features suggest that encoding data values as basic visual
+features and generating simple, orderly data visualisations will lead to
+rapid and effortless decoding of information.
+
+A simple encoding of data values to data symbols involves encoding
+\textbf{each data value to a separate data symbol}. This allows the
+viewer to \textbf{decode} and compare individual data values from the
+data symbols.
+
+A simple encoding of data values to data symbols also involves
+\textbf{encoding} each data value as a basic \textbf{visual feature} of
+the data symbol, e.g., position, length, area, angle, colour, or
+pattern.
+
+Position, length, area, and angle are appropriate for encoding
+quantitative data because we can decode numeric values from these visual
+features. We can decode position and length more accurately than area
+and angle.
+
+Position, colour, and pattern are appropriate for encoding qualitative
+data because we can decode groups from these visual features. We can
+represent a large number of categories if we use position, but only a
+few categories if we use colours and patterns.
+
+Encoding data values as the position of data symbols allows for the
+effective decoding of both quantitative and qualitative information,
+with the following caveats:
+
+\begin{itemize}
+\item
+  For quantitative values, what we can accurately decode are
+  \emph{comparisons} between quantitative values, not absolute
+  quantitative values.
+\item
+  The decoding is most accurate for positions that share a common
+  baseline.
+\item
+  Encoding identical data values as the positions of data symbols means
+  that the data symbols overlap, which compromises our ability to decode
+  data values from the data symbols.
+\item
+  We can encode one set of data values as horizontal positions and
+  another set of data values as vertical positions because we can decode
+  horizontal and vertical positions separately.
+\item
+  Decoding quantitative data values from the positions of data symbols
+  is only accurate if the encoding is linear.
+\end{itemize}
+
+\end{oldsummary}
+
+Comparisons between \textbf{lengths} are more difficult if the lengths
+are far apart, especially if there are distractors in between.
+
+Comparisons between \textbf{lengths} are more difficult if the lengths
+do not have a common baseline.
+
+Comparisons between \textbf{lengths} are easier for shorter lengths.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -3753,11 +3830,6 @@ appropriate for representing qualitative values
 (Section~\ref{sec-qual-features}). It is easy to decode the crime levels
 because it is easy to identify the colour for a particular crime level
 amongst the set of colours used.
-
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
 
 \begin{figure}
 
@@ -4924,11 +4996,6 @@ circle.\footnote{This defence of pie charts has existed for a very long
   time (Eells 1926a) and continues to receive empirical support in more
   recent times (Simkin and Hastie 1987).}
 
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
-
 \begin{figure}
 
 \begin{minipage}{0.50\linewidth}
@@ -5463,11 +5530,6 @@ horizontal rectangles). For example, we can see that the median points
 scored by southern hemisphere teams is larger than the median for
 northern hemisphere teams and the interquartile range of points scored
 is also wider for southern hemisphere teams.
-
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
 
 \begin{figure}
 
@@ -6293,11 +6355,6 @@ example, the bar plot in Figure~\ref{fig-bar-gender} involves data on
 the \textbf{gender} of offenders and data on the \textbf{count} of
 offenders for each gender.
 
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
-
 \begin{figure}
 
 \centering{
@@ -7061,7 +7118,16 @@ strength of a linear relationship from a scatter plot.\footnote{Examples
   On the other hand, Braun et al. (2025) claim that we are more likely
   to fit a line to a scatter plot based on orthogonal distances from
   line to points, rather than vertical, and hence more likely to
-  over-estimate a slope.}
+  over-estimate a slope.
+
+  These results also only apply to \emph{linear} correlation, but the
+  visual system is also very capable of decoding \emph{non-linear}
+  correlations between variables. This is one example where the
+  flexibility of a visual summary makes it superior to a numerical
+  summary. There are numerical summaries of non-linear correlation, such
+  as \href{https://en.wikipedia.org/wiki/Distance_correlation}{distance
+  correlation}, but a visual summary provides much more useful
+  information about a non-linear relationship.}
 
 \section{Dangers of combining encodings}\label{sec-danger-combine}
 
@@ -7401,11 +7467,6 @@ year in different ethnic groups from 2011 to 2021
 effective for perceiving changes over time in the number of offenders
 within each group as well as comparing the changes over time between
 groups.
-
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
 
 \begin{figure}
 
@@ -8315,11 +8376,6 @@ hemisphere is encoded as the \textbf{shape} of the data points, and the
 number of runs made is encoded as the \textbf{colour} of the data
 points.
 
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
-
 \begin{figure}
 
 \centering{
@@ -9092,11 +9148,6 @@ reasonable encoding, despite the large number of different countries,
 because each different shape only appears once. We are able to
 distinguish all countries from each other and, thanks to the legend, we
 can identify individual countries.
-
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
 
 \begin{figure}
 
@@ -10124,11 +10175,6 @@ it helps to direct attention to what you want the viewer to see!
 \textbf{TODO} Refer back to Section~\ref{sec-rel-pos}. Text is one way
 to decode to absolute data values (rather than just relative)
 
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
-
 \begin{figure}
 
 \centering{
@@ -10964,12 +11010,13 @@ values to visual features and we have a responsibility to work hard to
 make sure that the message from data symbols and from text labels is
 completely consistent.
 
-\textbf{TODO}
+\textbf{TODO} 2025-12-listener-title example where the text is just
+difficult to understand. Text still has to make sense! Just as a
+graphical encoding that requires effort is a waste of time, text that
+requires effort is a waste of time.
 
-2025-12-listener-title example where the text is just difficult to
-understand. Text still has to make sense! Just as a graphical encoding
-that requires effort is a waste of time, text that requires effort is a
-waste of time.
+\textbf{TODO} R Journal submission 2024-88 Fig 4 y-axis labels are
+unreadable.
 
 \section{Alt text}\label{alt-text}
 
@@ -11052,11 +11099,6 @@ different variables (ethnicity and crime type). For example, the ethnic
 group \texttt{European/Other} is encoded as the orange colour of a line
 \emph{and} the crime type \texttt{Theft} is also encoded as an orange
 colour, in this case of a wedge.
-
-\begin{verbatim}
-Warning: <ggplot> %+% x was deprecated in ggplot2 4.0.0.
-i Please use <ggplot> + x instead.
-\end{verbatim}
 
 \begin{figure}
 

@@ -7,9 +7,9 @@ source("common.R")
 
 # Length {#sec-quantitative}
 
-@fig-bar-district shows a bar plot of the total number of offenders
-in each police district in New Zealand (for ages 14 to 16 and
-from 2011 to 2021).  For the reasons outlined in @sec-encoding-visual-features
+@fig-bar-district shows a bar plot of the number of offenders
+in each police district in New Zealand in 2021 (for ages 14 to 16).  
+For the reasons outlined in @sec-encoding-visual-features
 and @sec-position),
 this data visualisation is effective for
 decoding the number of offenders in different police districts
@@ -19,7 +19,7 @@ and making comparisons between them.
 #| echo: false
 #| label: fig-bar-district
 #| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.
-crimeTemp <- crimeDistrictTotal
+crimeTemp <- crimeDistrict2021
 crimeTemp$district <- factor(crimeTemp$district,
 		             levels=rev(c("Northland", "Waitematā",
 			              "Auckland City",
@@ -30,7 +30,7 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.9) +
+    geom_col(aes(x=count, y=district), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
     theme(aspect.ratio=1)
 ```
@@ -38,19 +38,19 @@ ggplot(crimeTemp) +
 @fig-bar-district-ordered shows a bar plot of the same data, but with the
 bars ordered from longest to shortest.  This data visualisation uses
 the same encodings as @fig-bar-district---police districts are encoded
-as the vertical positions of the bars and the total counts
+as the vertical positions of the bars and the counts
 are encoded as the lengths of the bars---which means that it is also
-effective for comparing the total number of offenders between 
+effective for comparing the number of offenders between 
 police districts.
 
 ```{r}
 #| echo: false
 #| label: fig-bar-district-ordered
 #| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from largest number of offenders to smallest.
-crimeDistrictTotal$districtOrdered <- 
-    with(crimeDistrictTotal, reorder(district, total))
-ggplot(crimeDistrictTotal) +
-    geom_col(aes(x=total, y=districtOrdered), width=.9) +
+crimeDistrict2021$districtOrdered <- 
+    with(crimeDistrict2021, reorder(district, count))
+ggplot(crimeDistrict2021) +
+    geom_col(aes(x=count, y=districtOrdered), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
     scale_y_discrete(name="district") +
     theme(aspect.ratio=1)
@@ -63,7 +63,8 @@ The fact that two data visualisations with the same encodings
 can have a different effectiveness suggests that there is more to know about
 how different visual features work.
 
-This chapter covers some more details about encodings that encode data values
+This chapter covers some more details about how well we can decode
+information when we have encoded data values
 as **length**.
 
 ## The distance effect {#sec-distance-effect}
@@ -71,7 +72,11 @@ as **length**.
 In @sec-accuracy, we saw that **position** and **length** were the most
 accurate visual features (@fig-accuracy).  However, this accuracy
 decreases if the two visual features that are being compared are
-not in close proximity (@fig-distance-effect).[^distance-effect]
+not in close proximity.[^distance-effect]
+For example, 
+it is more difficult to compare the lengths of the two black bars in the
+set of bars at the bottom of @fig-distance-effect than it is to compare
+the lengths of the two black bars at the top of @fig-distance-effect.
 
 [^distance-effect]:
     The first demonstration of the "distance effect" is attributed to 
@@ -104,16 +109,15 @@ popViewport(2)
 ```
 
 > One reason for ordering the bars in a bar plot from longest to shortest 
-  is because, for some common comparisons, 
-  the ordering places the bars that are being
-  compared closer 
-  together, which improves the accuracy of the comparison.
+  is because
+  the ordering places bars that we want to compare closer 
+  together.
 
 ## Unaligned length {#sec-unaligned}
 
 @fig-unaligned-length shows that it is harder to accurately compare
 the **lengths** of two bars if they are **unaligned** and do not share a 
-common baseline (similar to the accuracy of comparing **positions**;
+common baseline (similar to the accuracy of comparing unaligned **positions**;
 @sec-unaligned-pos).
 
 ```{r}
@@ -135,7 +139,7 @@ popViewport(2)
 ```
 
 @fig-stacked-bar shows an alternative visualisation of the data on 
-the total number of offenders in different ethnic groups.
+the number of offenders in different ethnic groups.
 The bar plot of these data that we saw in @fig-bar encoded ethnic groups
 as the **positions** of the bars so that the bars were arranged
 vertically with a common left-hand edge.
@@ -152,7 +156,7 @@ horizontally.[^stacking-as-position]
   the position of the bars is in the opposite dimension to the
   lengths of the bars.
 
-Although the total number of offenders has been encoded as the same
+Although the number of offenders has been encoded as the same
 visual feature in both @fig-stacked-bar and @fig-bar---in both cases,
 the number of offenders is encoded as the **lengths**
 of the bars---comparing those lengths is much harder in @fig-stacked-bar
@@ -161,9 +165,9 @@ because the lengths are **unaligned**.
 ```{r}
 #| echo: false
 #| label: fig-stacked-bar
-#| fig-cap: A stacked bar plot of the total number of offenders in each ethnic group.
-gg <- ggplot(crimeGroupTotal) +
-    geom_col(aes(total, y="", fill=group), position="stack") +
+#| fig-cap: A stacked bar plot of the number of offenders in each ethnic group.
+gg <- ggplot(crimeGroup2021) +
+    geom_col(aes(count, y="", fill=group), position="stack") +
     scale_x_continuous(expand=expansion(0)) +
     scale_y_discrete(name=NULL, expand=expansion(0)) +
     theme(axis.ticks.y=element_blank())
@@ -256,7 +260,7 @@ comparing between ethnicities for a specific year.
 #| label: fig-side-bar-group
 #| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
-    geom_col(aes(group, count, fill=group, group=year), position="dodge",
+    geom_col(aes(group, count, fill=year, group=year), position="dodge",
              colour=figbg) +
     scale_y_continuous(expand=expansion(c(0, .05)))
 ```
@@ -275,7 +279,7 @@ of bars is relative;
 it is easier to detect smaller differences when the visual features
 that we are comparing are smaller.[^Weber]
 It is easier to see that the pair of bars on the left have different
-lengths and harder to see that the pair of bars on the right have 
+lengths and it is harder to see that the pair of bars on the right have 
 different lengths.  All three pairs of bars have different lengths,
 but the absolute size of the difference is the same, so the size
 of the difference relative to the bar lengths gets smaller as the bars
@@ -312,7 +316,8 @@ popViewport(2)
 
 @fig-relative-ref shows that we can make it easier to judge
 the differences by providing reference marks.  Each pair
-of black bars is the same and each pair of bars differs in length
+of black bars in @fig-relative-ref
+is the same and each pair of bars differs in length
 by the same small amount.  The difference between the bars in each 
 pair is difficult to perceive because the difference is small relative
 to the lengths of the bars.  The
@@ -354,14 +359,14 @@ because they are quite far apart and there are distractors in between
 (@sec-distance-effect), the addition of the grid lines makes it easier
 to perform the comparison because we are able to compare the distances
 from the ends of the bars to the nearest grid line.  Those distances are
-much shorter than the bars so it is easier to perceive the small
-difference.
+much shorter than the bars so it is easier to perceive that those two
+bars are very similar.
 
 ```{r}
 #| echo: false
 #| label: fig-bar-district-grid
 #| fig-cap: A bar plot of the number of offenders for different police districts, with the districts ordered from North to South.  This is very similar to @fig-bar-district, just with some grid lines added.
-crimeTemp <- crimeDistrictTotal
+crimeTemp <- crimeDistrict2021
 crimeTemp$district <- factor(crimeTemp$district,
 		             levels=rev(c("Northland", "Waitematā",
 			              "Auckland City",
@@ -372,7 +377,7 @@ crimeTemp$district <- factor(crimeTemp$district,
 				      "Tasman", "Canterbury",
 				      "Southern")))
 ggplot(crimeTemp) +
-    geom_col(aes(x=total, y=district), width=.9) +
+    geom_col(aes(x=count, y=district), width=.9) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
     theme(panel.grid.major.x=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
@@ -384,21 +389,20 @@ ggplot(crimeTemp) +
 
 ## Summary
 
-Bar plots are effective because they encode
-**quantitative** values as **lengths**,
-which are accurate visual features.
+::: {.oldsummary}
+ 
+{{< include intro-summary.md >}}
 
-However, comparisons between the bars in a bar plot can be difficult if
-the bars are far apart, especially if there are distractors in between.
+{{< include visual-model-summary.md >}}
 
-Furthermore, **stacked bars** are more difficult to compare because
-they require comparing **unaligned** lengths.
+{{< include mapping-visual-features-summary.md >}}
 
-Finally, it is easier to perceive differences between shorter bars than
-between longer bars because the perception of differences is **relative**.
+{{< include position-summary.md >}}
 
-**Grid lines** can help with comparisons because they make the distances
-being compared smaller, so smaller differences are easier to detect.
+:::
+
+{{< include quantitative-summary.md >}}
+
 
 ---
 

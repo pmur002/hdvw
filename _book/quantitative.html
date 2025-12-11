@@ -276,12 +276,9 @@ div.csl-indent {
 </header>
 
 
-<p><a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> shows a bar plot of the total number of offenders in each police district in New Zealand (for ages 14 to 16 and from 2011 to 2021). For the reasons outlined in <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> and <a href="position.html" class="quarto-xref"><span>Chapter 4</span></a>), this data visualisation is effective for decoding the number of offenders in different police districts and making comparisons between them.</p>
+<p><a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> shows a bar plot of the number of offenders in each police district in New Zealand in 2021 (for ages 14 to 16).<br>
+For the reasons outlined in <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> and <a href="position.html" class="quarto-xref"><span>Chapter 4</span></a>), this data visualisation is effective for decoding the number of offenders in different police districts and making comparisons between them.</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: &lt;ggplot&gt; %+% x was deprecated in ggplot2 4.0.0.
-ℹ Please use &lt;ggplot&gt; + x instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <div id="fig-bar-district" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -295,7 +292,7 @@ Figure&nbsp;5.1: A bar plot of the number of offenders for different police dist
 </div>
 </div>
 </div>
-<p><a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> shows a bar plot of the same data, but with the bars ordered from longest to shortest. This data visualisation uses the same encodings as <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>—police districts are encoded as the vertical positions of the bars and the total counts are encoded as the lengths of the bars—which means that it is also effective for comparing the total number of offenders between police districts.</p>
+<p><a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> shows a bar plot of the same data, but with the bars ordered from longest to shortest. This data visualisation uses the same encodings as <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>—police districts are encoded as the vertical positions of the bars and the counts are encoded as the lengths of the bars—which means that it is also effective for comparing the number of offenders between police districts.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-district-ordered" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -311,10 +308,10 @@ Figure&nbsp;5.2: A bar plot of the number of offenders for different police dist
 </div>
 </div>
 <p>However, <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is <em>more</em> effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons. For example, it is easier to compare the Northland district with the Tasman district in <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a>. The fact that two data visualisations with the same encodings can have a different effectiveness suggests that there is more to know about how different visual features work.</p>
-<p>This chapter covers some more details about encodings that encode data values as <strong>length</strong>.</p>
+<p>This chapter covers some more details about how well we can decode information when we have encoded data values as <strong>length</strong>.</p>
 <section id="sec-distance-effect" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-distance-effect"><span class="header-section-number">5.1</span> The distance effect</h2>
-<p>In <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>, we saw that <strong>position</strong> and <strong>length</strong> were the most accurate visual features (<a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). However, this accuracy decreases if the two visual features that are being compared are not in close proximity (<a href="#fig-distance-effect" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>In <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>, we saw that <strong>position</strong> and <strong>length</strong> were the most accurate visual features (<a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). However, this accuracy decreases if the two visual features that are being compared are not in close proximity.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For example, it is more difficult to compare the lengths of the two black bars in the set of bars at the bottom of <a href="#fig-distance-effect" class="quarto-xref">Figure&nbsp;<span>5.3</span></a> than it is to compare the lengths of the two black bars at the top of <span class="quarto-unresolved-ref">?fig-distance</span>.</p>
 <p>This helps to explain why <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is more effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons (e.g., Northland versus Tasman).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -331,12 +328,12 @@ Figure&nbsp;5.3: Two bars are easier to compare if they are close to each other 
 </div>
 </div>
 <blockquote class="blockquote">
-<p>One reason for ordering the bars in a bar plot from longest to shortest is because, for some common comparisons, the ordering places the bars that are being compared closer together, which improves the accuracy of the comparison.</p>
+<p>One reason for ordering the bars in a bar plot from longest to shortest is because the ordering places bars that we want to compare closer together.</p>
 </blockquote>
 </section>
 <section id="sec-unaligned" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="sec-unaligned"><span class="header-section-number">5.2</span> Unaligned length</h2>
-<p><a href="#fig-unaligned-length" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> shows that it is harder to accurately compare the <strong>lengths</strong> of two bars if they are <strong>unaligned</strong> and do not share a common baseline (similar to the accuracy of comparing <strong>positions</strong>; <a href="position.html#sec-unaligned-pos" class="quarto-xref"><span>Section 4.2</span></a>).</p>
+<p><a href="#fig-unaligned-length" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> shows that it is harder to accurately compare the <strong>lengths</strong> of two bars if they are <strong>unaligned</strong> and do not share a common baseline (similar to the accuracy of comparing unaligned <strong>positions</strong>; <a href="position.html#sec-unaligned-pos" class="quarto-xref"><span>Section 4.2</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-unaligned-length" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -351,8 +348,8 @@ Figure&nbsp;5.4: It is easier to compare the lengths of the two bars on the left
 </div>
 </div>
 </div>
-<p><a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> shows an alternative visualisation of the data on the total number of offenders in different ethnic groups. The bar plot of these data that we saw in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> encoded ethnic groups as the <strong>positions</strong> of the bars so that the bars were arranged vertically with a common left-hand edge. In <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>, the ethnic groups are encoded as different <strong>colours</strong> and the bars are “stacked” horizontally.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Although the total number of offenders has been encoded as the same visual feature in both <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> and <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>—in both cases, the number of offenders is encoded as the <strong>lengths</strong> of the bars—comparing those lengths is much harder in <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> because the lengths are <strong>unaligned</strong>.</p>
+<p><a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> shows an alternative visualisation of the data on the number of offenders in different ethnic groups. The bar plot of these data that we saw in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> encoded ethnic groups as the <strong>positions</strong> of the bars so that the bars were arranged vertically with a common left-hand edge. In <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>, the ethnic groups are encoded as different <strong>colours</strong> and the bars are “stacked” horizontally.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Although the number of offenders has been encoded as the same visual feature in both <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> and <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>—in both cases, the number of offenders is encoded as the <strong>lengths</strong> of the bars—comparing those lengths is much harder in <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> because the lengths are <strong>unaligned</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-stacked-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -361,7 +358,7 @@ Figure&nbsp;5.4: It is easier to compare the lengths of the two bars on the left
 <img src="quantitative_files/figure-html/fig-stacked-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stacked-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.5: A stacked bar plot of the total number of offenders in each ethnic group.
+Figure&nbsp;5.5: A stacked bar plot of the number of offenders in each ethnic group.
 </figcaption>
 </figure>
 </div>
@@ -486,7 +483,7 @@ Figure&nbsp;5.8: A side-by-side bar plot of the number of offenders in each ethn
 </section>
 <section id="sec-perception-relative" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="sec-perception-relative"><span class="header-section-number">5.4</span> Perception is relative</h2>
-<p><a href="#fig-relative" class="quarto-xref">Figure&nbsp;<span>5.9</span></a> shows that the perception of differences between the lengths of bars is relative; it is easier to detect smaller differences when the visual features that we are comparing are smaller.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> It is easier to see that the pair of bars on the left have different lengths and harder to see that the pair of bars on the right have different lengths. All three pairs of bars have different lengths, but the absolute size of the difference is the same, so the size of the difference relative to the bar lengths gets smaller as the bars get longer.</p>
+<p><a href="#fig-relative" class="quarto-xref">Figure&nbsp;<span>5.9</span></a> shows that the perception of differences between the lengths of bars is relative; it is easier to detect smaller differences when the visual features that we are comparing are smaller.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> It is easier to see that the pair of bars on the left have different lengths and it is harder to see that the pair of bars on the right have different lengths. All three pairs of bars have different lengths, but the absolute size of the difference is the same, so the size of the difference relative to the bar lengths gets smaller as the bars get longer.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-relative" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -501,7 +498,7 @@ Figure&nbsp;5.9: A demonstration that perception of differences is relative. The
 </div>
 </div>
 </div>
-<p><a href="#fig-relative-ref" class="quarto-xref">Figure&nbsp;<span>5.10</span></a> shows that we can make it easier to judge the differences by providing reference marks. Each pair of black bars is the same and each pair of bars differs in length by the same small amount. The difference between the bars in each pair is difficult to perceive because the difference is small relative to the lengths of the bars. The reference marks in the middle and right-hand pair of bars provide shorter lengths to compare, so we are able to more easily perceive the small differences. For example, for the pair of bars on the right, we can compare the lengths of the short white gaps rather than comparing the longer black bars.</p>
+<p><a href="#fig-relative-ref" class="quarto-xref">Figure&nbsp;<span>5.10</span></a> shows that we can make it easier to judge the differences by providing reference marks. Each pair of black bars in <a href="#fig-relative-ref" class="quarto-xref">Figure&nbsp;<span>5.10</span></a> is the same and each pair of bars differs in length by the same small amount. The difference between the bars in each pair is difficult to perceive because the difference is small relative to the lengths of the bars. The reference marks in the middle and right-hand pair of bars provide shorter lengths to compare, so we are able to more easily perceive the small differences. For example, for the pair of bars on the right, we can compare the lengths of the short white gaps rather than comparing the longer black bars.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-relative-ref" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -516,7 +513,7 @@ Figure&nbsp;5.10: A demonstration that reference marks can make it easier to per
 </div>
 </div>
 </div>
-<p><a href="#fig-bar-district-grid" class="quarto-xref">Figure&nbsp;<span>5.11</span></a> shows a bar plot of the number of offenders in each police district (<a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>) with some grid lines added. Although it is difficult to compare the bars for Northland and Tasman because they are quite far apart and there are distractors in between (<a href="#sec-distance-effect" class="quarto-xref"><span>Section 5.1</span></a>), the addition of the grid lines makes it easier to perform the comparison because we are able to compare the distances from the ends of the bars to the nearest grid line. Those distances are much shorter than the bars so it is easier to perceive the small difference.</p>
+<p><a href="#fig-bar-district-grid" class="quarto-xref">Figure&nbsp;<span>5.11</span></a> shows a bar plot of the number of offenders in each police district (<a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>) with some grid lines added. Although it is difficult to compare the bars for Northland and Tasman because they are quite far apart and there are distractors in between (<a href="#sec-distance-effect" class="quarto-xref"><span>Section 5.1</span></a>), the addition of the grid lines makes it easier to perform the comparison because we are able to compare the distances from the ends of the bars to the nearest grid line. Those distances are much shorter than the bars so it is easier to perceive that those two bars are very similar.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-district-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -537,11 +534,40 @@ Figure&nbsp;5.11: A bar plot of the number of offenders for different police dis
 </section>
 <section id="summary" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.5</span> Summary</h2>
-<p>Bar plots are effective because they encode <strong>quantitative</strong> values as <strong>lengths</strong>, which are accurate visual features.</p>
-<p>However, comparisons between the bars in a bar plot can be difficult if the bars are far apart, especially if there are distractors in between.</p>
-<p>Furthermore, <strong>stacked bars</strong> are more difficult to compare because they require comparing <strong>unaligned</strong> lengths.</p>
-<p>Finally, it is easier to perceive differences between shorter bars than between longer bars because the perception of differences is <strong>relative</strong>.</p>
-<p><strong>Grid lines</strong> can help with comparisons because they make the distances being compared smaller, so smaller differences are easier to detect.</p>
+<div class="oldsummary">
+<p>Data visualisations can be very effective for communicating information.</p>
+<p>However, a data visualisation that is effective for communicating one type of information may be ineffective for communicating another type of information.</p>
+<p>The goal of this book is to explain why some data visualisations are more effective than others at communicating different types of information—how data visualisation works.</p>
+<p>We will focus on how information can be <strong>encoded</strong> to create a visual representation. We will characterise a data visualisation in terms of the encodings that it uses to convert data values into data symbols.</p>
+<p>The effectiveness of an encoding will depend on how well we can <strong>decode</strong> the information that we want from a visual representation. We will judge a data visualisation in terms of how well data values can be recovered from the data symbols.</p>
+<p>There are features of the human visual system that mean that we can decode some information extremely rapidly and without effort:</p>
+<ul>
+<li><p>A very large amount of basic information is gathered at once about simple visual features like positions, lengths, and colours.</p></li>
+<li><p>Large, bright, colourful items automatically attract attention.</p></li>
+<li><p>We automatically identify groups of items within an image based on similarity of basic visual features like position and colour, plus connecting lines and enclosing borders.</p></li>
+</ul>
+<p>On the other hand, there are limitations of the visual system that suggest encodings that we should avoid:</p>
+<ul>
+<li><p>Detailed information is only available at the centre of the visual field.</p></li>
+<li><p>Visual memory is extremely limited.</p></li>
+</ul>
+<p>These features suggest that encoding data values as basic visual features and generating simple, orderly data visualisations will lead to rapid and effortless decoding of information.</p>
+<p>A simple encoding of data values to data symbols involves encoding <strong>each data value to a separate data symbol</strong>. This allows the viewer to <strong>decode</strong> and compare individual data values from the data symbols.</p>
+<p>A simple encoding of data values to data symbols also involves <strong>encoding</strong> each data value as a basic <strong>visual feature</strong> of the data symbol, e.g., position, length, area, angle, colour, or pattern.</p>
+<p>Position, length, area, and angle are appropriate for encoding quantitative data because we can decode numeric values from these visual features. We can decode position and length more accurately than area and angle.</p>
+<p>Position, colour, and pattern are appropriate for encoding qualitative data because we can decode groups from these visual features. We can represent a large number of categories if we use position, but only a few categories if we use colours and patterns.</p>
+<p>Encoding data values as the position of data symbols allows for the effective decoding of both quantitative and qualitative information, with the following caveats:</p>
+<ul>
+<li><p>For quantitative values, what we can accurately decode are <em>comparisons</em> between quantitative values, not absolute quantitative values.</p></li>
+<li><p>The decoding is most accurate for positions that share a common baseline.</p></li>
+<li><p>Encoding identical data values as the positions of data symbols means that the data symbols overlap, which compromises our ability to decode data values from the data symbols.</p></li>
+<li><p>We can encode one set of data values as horizontal positions and another set of data values as vertical positions because we can decode horizontal and vertical positions separately.</p></li>
+<li><p>Decoding quantitative data values from the positions of data symbols is only accurate if the encoding is linear.</p></li>
+</ul>
+</div>
+<p>Comparisons between <strong>lengths</strong> are more difficult if the lengths are far apart, especially if there are distractors in between.</p>
+<p>Comparisons between <strong>lengths</strong> are more difficult if the lengths do not have a common baseline.</p>
+<p>Comparisons between <strong>lengths</strong> are easier for shorter lengths.</p>
 <hr>
 
 

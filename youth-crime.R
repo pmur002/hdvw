@@ -73,6 +73,7 @@ crimeDistrictTotal <- select(crimeDistrict, -rate) |>
     summarise(total = sum(count),
               avgPop = mean(pop),
               rate = total/avgPop)
+crimeDistrict2021 <- subset(crimeDistrict, year == 2021)
 
 crimeGroup <- read.csv("Data/YouthCrime/crime-group.csv")
 crimeGroup <- subset(crimeGroup,
