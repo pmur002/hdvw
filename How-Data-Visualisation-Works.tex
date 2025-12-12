@@ -328,14 +328,14 @@ of the gory detail in favour of simple, applicable advice. The problem
 here is that, without the underlying explanations, the guidelines can
 become just a long laundry list to commit to memory. Rather than just
 being told that bars should always start at zero, it is more satisfying
-to know why bars should always start at zero.
+to know \emph{why} bars should always start at zero.
 
 For some of us there is a need for a middle path. We would like to
 understand why we are making certain data visualisation choices, but we
 have brains that can only hold so many ideas at once. For us there is
 utility in a framework that contains a small number of core concepts,
-that covers a wide range of data visualisations, but connects them all
-with a relatively simple explanation.
+that still covers a wide range of data visualisations, but connects them
+all with a relatively simple explanation.
 
 This book attempts to provide such a framework. It is a synthesis of a
 large number of research articles and books and it is a simplification
@@ -3409,7 +3409,7 @@ proximity.\footnote{The first demonstration of the ``distance effect''
   and Lu et al. (2021).} For example, it is more difficult to compare
 the lengths of the two black bars in the set of bars at the bottom of
 Figure~\ref{fig-distance-effect} than it is to compare the lengths of
-the two black bars at the top of \textbf{?@fig-distance}.
+the two black bars at the top of Figure~\ref{fig-distance-effect}.
 
 This helps to explain why Figure~\ref{fig-bar-district-ordered} is more
 effective than Figure~\ref{fig-bar-district} for some comparisons (e.g.,
@@ -11736,6 +11736,8 @@ plots}\label{case-study-kiviat-plots-or-radar-plots-or-spider-plots}
 
 (David Peebles (2008))
 
+\newpage
+
 \section{Case study: A letter-value
 plot}\label{case-study-a-letter-value-plot}
 
@@ -11745,14 +11747,14 @@ airline.\footnote{This plot reproduces Figure 2 from Hofmann, Wickham,
   and Kafadar (2017), which was produced with the R package \{lvplot\}
   (Wickham and Hofmann 2025).} The letter-value plot is an example of a
 novel data visualisation, so this provides a good opportunity to analyse
-whether a letter-value plot is an effective encoding of
+whether this data visualisation represents an effective encoding of
 information.\footnote{In order to incorporate as many points as
   possible, this analysis just focuses on the default \{lvplot\}
   settings that are used in Figure~\ref{fig-lv-default} and even sinks
   to the level of critiquing the specific data set (and non-linear
-  scales) that are used in this specific plot. This is neither an attack
-  on letter-value plots in general nor an attack on the \{lvplot\}
-  package in particular.}
+  scales) that are used in this specific plot. Letter-value plots and
+  the \{lvplot\} package are capable of a much broader range of results
+  than the specific instance that we focus on in this section.}
 
 \begin{figure}
 
@@ -11773,11 +11775,12 @@ distribution of the data values: the average value, the spread of the
 values, the skewness, and so on.
 
 The main motivation for the letter-value plot design is that a normal
-boxplot produces \emph{way} too many outliers for such a large amount of
-data. This is shown in Figure~\ref{fig-box-plot}. Furthermore,
-alternatives to the boxplot, like violin plots, that fix the problem of
-too many outliers, are reliant on tuning parameters, like kernels and
-bandwidths (Section~\ref{sec-density}).
+boxplot produces far too many outliers for cases like this that involve
+such a large amount of data, as demonstrated in
+Figure~\ref{fig-box-plot}. Furthermore, alternatives to the boxplot,
+like violin plots, that fix the problem of too many outliers, are
+reliant on tuning parameters, like kernels and bandwidths
+(Section~\ref{sec-density}).
 
 \begin{figure}
 
@@ -11787,7 +11790,8 @@ bandwidths (Section~\ref{sec-density}).
 
 }
 
-\caption{\label{fig-box-plot}A box plot}
+\caption{\label{fig-box-plot}A box plot of taxi times for over 450,000
+flights within the United States.}
 
 \end{figure}%
 
@@ -11795,14 +11799,14 @@ The letter-value plot aims to fix the problem of outliers, while at the
 same time, like the original boxplot, remain free of tuning parameters.
 This is achieved by displaying as many letter values as are supported by
 the amount of data, with only individual data values beyond those limits
-shown as outliers.
+shown as individual data points.
 
 \subsection{Letter values}\label{letter-values}
 
 The well-known boxplot is based on the median and the upper and lower
 quartiles of a data set, but these data summaries are just the first two
-levels of a more general concept of \emph{letter values} introduced in
-``Exploratory Data Analysis'' by Tukey (1977).
+levels of a more general concept of \emph{letter values}.\footnote{The
+  invention of letter values is attributed to Tukey (1977).}
 
 Letter values are order statistics, where the \(i\)th letter value
 approximates the quantile corresponding to a tail area that contains
@@ -11821,7 +11825,7 @@ starting again at the end of the alphabet, in reverse alphabetic order,
 Z for two-hundred and fifty-sixths, Y for five-hundred and twelfths, and
 so on.
 
-\subsection{Breaking down}\label{breaking-down}
+\subsection{Tearing down}\label{tearing-down}
 
 We will use the framework that we have developed in this book to analyse
 the data visualisation in Figure~\ref{fig-lv-default}. We will break
@@ -11837,16 +11841,17 @@ symbols consisting of multiple rectangles, which we will call
 data values; and very simple data points, which represent the outliers
 (if any).
 \item[Encoding visual features]
-In Figure~\ref{fig-lv-default}, the airlines (Carrier), which are
-qualitative data values, are encoded as the horizontal \textbf{position}
-of the letter-value symbols. The encoding of airline as the position of
-data symbols is very effective; we can easily differentiate between the
+In Figure~\ref{fig-lv-default}, there is a separate letter-value symbol
+for each airline, and the airlines (Carrier), which are qualitative data
+values, are encoded as the horizontal \textbf{position} of the
+letter-value symbols. The encoding of airline as the position of data
+symbols is very effective; we can easily differentiate between the
 airlines.
 \end{description}
 
-The other data values, the taxi times, are encoded to the letter-value
-data symbols within the plot. However, the letter-value plot encodes
-\textbf{data summaries}---letter values---rather than raw data values
+The taxi times, are encoded as the letter-value data symbols within the
+plot. However, the letter-value plot encodes \textbf{data
+summaries}---letter values---rather than raw data values
 (Chapter~\ref{sec-summaries}).\footnote{Letter values are an interesting
   data summary in the sense that each letter value can correspond to a
   raw data value. In other words, letter values are a subset of the
@@ -11879,27 +11884,27 @@ top (or bottom) of a rectangle within the letter-value symbol. The
 median (letter value 1) is marked as a single white line rather than a
 rectangle. This is effective for decoding individual letter values for
 an airline. For example, we can see that one of the letter values for
-the AA airline is just over 50.
+the AA airline is slightly greater than 50.
 
-The \emph{depth} of each letter value is encoded as the width
-(\textbf{length}) of a rectangle within the letter-value symbol. The
-depth is how many data values lie beyond that letter value; for example,
-the depth of the median is half the total number of data values. This is
-also an encoding of a data summary. However, the actual encoding is only
-based on the \emph{order} of the depth of the letter values, with
-regular decrements from widest at the median (letter value 1) to
-narrowest at the final letter value (e.g., letter value 13 for airline
-AA). In effect, we are encoding a summary of a data summary. Using
-\textbf{length} for the encoding is effective, but we can only decode
-ordinal information about the depth of the letter values because that is
-all that we have encoded. For example, the width of the rectangle that
-encodes the depth of the fifth letter value (the bright orange
-rectangle) for the AA airline is just the fourth-widest rectangle. In
-particular, that rectangle is \emph{not} proportional to the actual
-depth of the fifth letter value. There is approximately one
-thirty-second of the data values beyond the fifth letter value, so this
-rectangle would have to be sixteen times narrower than the median for
-the widths to be proportional to the depth of the letter values.
+The \emph{depth} of each letter value---how many data values lie beyond
+that letter value---is encoded as the width (\textbf{length}) of a
+rectangle within the letter-value symbol. For example, the depth of the
+median is half the total number of data values. This is also an encoding
+of a data summary. However, the actual encoding is only based on the
+\emph{order} of the depth of the letter values, with regular decrements
+from widest at the median (letter value 1) to narrowest at the final
+letter value (e.g., letter value 13 for airline AA). In effect, we are
+encoding a summary of a data summary. Using \textbf{length} for the
+encoding is effective, but we can only decode ordinal information about
+the depth of the letter values because that is all that we have encoded.
+For example, the width of the rectangle that encodes the depth of the
+fifth letter value (the bright orange rectangle) for the AA airline is
+just the fourth-widest rectangle. In particular, that rectangle is
+\emph{not} proportional to the actual depth of the fifth letter value.
+There is approximately one thirty-second of the data values beyond the
+fifth letter value, so this rectangle would have to be sixteen times
+narrower than the median for the widths to be proportional to the depth
+of the letter values.
 
 The \emph{data density}---the number of data values between adjacent
 letter values---is encoded as the \textbf{colour} of a rectangle. The
@@ -11909,10 +11914,10 @@ median and the upper quartile) to lightest for lowest density
 (approximately one ten-thousandth of the data values between the most
 extreme letter values). In addition, the \textbf{hue}/\textbf{chroma} of
 a rectangle encodes a categorisation of the letter values (yet another
-data summary); every fourth letter value is orange, while all the other
+data summary): every fourth letter value is orange, while all the other
 letter values are grey.
 
-The luminance encoding of density only allows us to decode ordinal
+The luminance encoding of data density only allows us to decode ordinal
 information about the data density between letter values. Like the
 widths of the rectangles, the shades of the rectangles steadily decrease
 upwards from the median and downwards from the median. We can also
@@ -11925,8 +11930,8 @@ identify and compare between different airlines than, for example, the
 different horizontal locations for different airlines.
 
 The chroma encoding of every fourth letter value is very effective for
-decoding between those letter values and all of the others, which is
-essentually an encoding of two groups (orange versus grey). It is also
+decoding between those letter values and all of the others. This is
+essentially an encoding of two groups (orange versus grey). It is also
 very effective for identifying the same letter value across different
 airlines. The difference in chroma between the oranges and the greys
 makes the oranges easy to identify and there are only three different
@@ -11958,17 +11963,19 @@ decode (Section~\ref{sec-differences}). Compare this with
 Figure~\ref{fig-box-plot} which, for all its faults, is a much simpler
 data visualisation because it involves fewer changes in visual features.
 
-In defence of Figure~\ref{fig-lv-default}, these decodings of individual
-data values and data summaries, while potentially useful, are not the
-primary aim of the data visualisation, so they are less important than
-how well we can decode the distribution of the data values, which we
-will come to later.
+In defence of Figure~\ref{fig-lv-default}, the encoding and decoding of
+individual data values and data summaries that we have described, while
+potentially useful, are not the primary aim of the data visualisation.
+Any weaknesses of these encodings are less important than how well we
+can decode the \emph{distribution} of the data values, which we will
+come to later.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1875}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3750}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1562}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2812}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1389}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3056}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1111}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2222}}@{}}
 \caption{The encodings involved in a letter-value
 plot.}\label{tbl-lv-encodings}\tabularnewline
 \toprule\noalign{}
@@ -11980,6 +11987,8 @@ Raw/Summary
 Type
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Encoding
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Decoding
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
@@ -11992,19 +12001,24 @@ Raw/Summary
 Type
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Encoding
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Decoding
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-airline & raw data value & qualitative & position (horiz) \\
-taxi outlier & raw data value & quantitative & position (vert) \\
-taxi letter value & summary of taxi & quantitative & position (vert) \\
+airline & raw data value & qualitative & position (horiz) & airline \\
+taxi time outlier & raw data value & quantitative & position (vert) &
+taxi time \\
+taxi letter value & summary of taxi time & quantitative & position
+(vert) & taxi letter value \\
 letter value depth & summary of letter value & qualitative & length
-(width) \\
-taxi density & summary of taxi & quantitative & colour (luminance) \\
+(width) & letter value depth order \\
+taxi density & summary of taxi time & quantitative & colour (luminance)
+& taxi density order \\
 fourth letter value & summary of letter value & qualitative & colour
-(chroma) \\
+(chroma) & fourth letter value \\
 \end{longtable}
 
 \begin{description}
@@ -12041,7 +12055,7 @@ There is also a \textbf{redundant encoding} in
 Figure~\ref{fig-lv-default} (Section~\ref{sec-redundant}). Because the
 order of a letter value is related to the data density order, both the
 luminance of each rectangle in the letter-value symbol and the width of
-the rectangle decode to essentially the same information. For example,
+each rectangle decode to essentially the same information. For example,
 the bright orange rectangles, which correspond to the data density of
 the fifth letter value, all have exactly the same width. This has the
 benefit of providing more than one way to decode information. However,
@@ -12096,14 +12110,14 @@ visual shapes that are produced by the letter-value data symbols. This
 effectiveness is important because decoding information about the
 distribution of taxi times is the main purpose of a letter-value plot.
 
-One caveat is that the widths of the visual shapes are potentially
-misleading because they do not narrow anywhere near as fast as the
-distribution of taxi times. In other words, the shape of the
+One caveat is that the changes in the widths of the visual shapes are
+potentially misleading because they do not narrow anywhere near as fast
+as the density of the taxi times. In other words, the shape of the
 letter-value data symbols does not provide an accurate decoding of
-quantitative features of the distribution of taxi times, only broad
-qualitative features. For example, we can decode \emph{whether} the
-distribution is symmetric or skewed, but we cannot decode \emph{how}
-skewed the distribution is.
+quantitative features of the distribution of taxi times (actual rate of
+change), only broad qualitative features (faster or slower change). For
+example, we can decode \emph{whether} the distribution is symmetric or
+skewed, but we cannot decode \emph{how} skewed the distribution is.
 
 \begin{description}
 \tightlist
@@ -12111,25 +12125,25 @@ skewed the distribution is.
 We have already discussed that the y-axis scale is non-linear. The
 square root of taxi times, rather then the raw taxi times, are encoded
 as the vertical position of the tops (or bottoms) of rectangles. This
-creates the usual problems to encode a non-linear scale as tick marks
-and text labels. For example, the square-root taxi time of 10 is encoded
-as a position about two-thirds of the way up the y-axis, which
-accurately reflects the fact that 10 is approximately two-thirds of the
-range of square-root taxi times. However, this value of 10 is also
-encoded as the text ``100''.
+creates the usual problems when it comes to encoding this non-linear
+scale as tick marks and text labels. For example, the square-root taxi
+time of 10 is encoded as a position about two-thirds of the way up the
+y-axis, which accurately reflects the fact that 10 is approximately
+two-thirds of the range of square-root taxi times. However, this value
+of 10 is also encoded as the text ``100''.
 \end{description}
 
 On one hand, this is a valuable encoding of the value 10 because it
 saves us the mental effort of having to reverse the square root
 transformation. If we had encoded this position as the text ``10'', then
-we would be required to perform the mental calculation to decode the
-taxi time 100.
+we would be required to perform the mental calculation to decode the raw
+taxi time of 100.
 
 On the other hand, encoding the square root taxi times as text that
-corresponds to the taxi times causes problems because we cannot linearly
-interpolate between the text values. We can correctly decode the precise
-taxi time 100 from the text ``100'', and 50 from ``50'', but it is very
-difficult to decode any taxi times in between.
+corresponds to the original taxi times causes problems because we cannot
+linearly interpolate between the text values. We can correctly decode
+the precise taxi time 100 from the text ``100'', and 50 from ``50'', but
+it is very difficult to decode any taxi times in between.
 
 The x-axis is more straightforward because it reflects a simpler
 encoding. Each airline is encoded as the horizontal position of a
@@ -12137,7 +12151,7 @@ letter-value data symbol. On the x-axis, we encode each airline as the
 horizontal position of a tick mark and a text label. A vertical grid
 line connecting the letter-value data symbols and the tick marks helps
 to form a strong visual grouping of data symbols with their respective
-labels.
+labels (Section~\ref{sec-visual-model-groups}).
 
 However, the encoding of airlines to text is missing a learned encoding
 (Section~\ref{sec-learned-text}), at least for infrequent travellers
@@ -12147,11 +12161,12 @@ effect, the x-axis tick labels only involve an encoding of airline as
 the \textbf{pattern} of the text. We can only tell that there are
 different airlines because they use different combinations of letters.
 
-The legend provides information about the colour encoding of the data
-density between letter values. The data density is encoded as the
-luminance of a stack of squares, with every fourth square having a
-different hue/chroma (orange). In addition, the letter values are
-encoded as individual text characters alongside the squares.
+The legend on the right of Figure~\ref{fig-lv-default} provides
+information about the colour encoding of the data density between letter
+values. The data density is encoded as the luminance of a stack of
+squares, with every fourth square having a different chroma (orange). In
+addition, the letter values are encoded as individual text characters
+alongside the squares.
 
 One problem is that there is no learned decoding for the letter values.
 For example, a letter value of ``Z'' is not immediately decoded as a
@@ -12222,7 +12237,7 @@ the information from Figure~\ref{fig-lv-default} into a single data
 visualisation.
 
 Figure~\ref{fig-lv-zoom} does not aim to be an optimal solution, but
-rather a demonstration that we can use this framework to suggest changes
+rather a demonstration that we can use our framework to suggest changes
 based on deliberate reasoning and that we can provide justifications for
 those changes.
 
@@ -12251,7 +12266,8 @@ There are \emph{three} types of data symbols in
 Figure~\ref{fig-lv-zoom}. As in Figure~\ref{fig-lv-default}, there are
 data points to represent outliers and there is a letter-value data
 symbol to represent the distribution of taxi times. In addition, there
-are rectangles that represent the letter values.
+are light-coloured rectangles that represent the individual letter
+values.
 
 \begin{description}
 \tightlist
@@ -12282,9 +12298,10 @@ is effective for identifying the same letter values across different
 airlines.
 
 The combined encodings of letter values mean that it is easy to decode
-and compare individual letter values. For example, we can see that
-letter value E for Southwest Airlines is approximately 25 minutes and we
-can see that Envoy Air has the highest letter value B.
+and compare individual letter values. For example, we can see from
+Figure~\ref{fig-lv-zoom} that letter value E for Southwest Airlines is
+approximately 25 minutes and we can see that Envoy Air has the highest
+letter value B.
 
 \begin{description}
 \tightlist
@@ -12299,11 +12316,13 @@ different letter values. In other words, the implicit decoding of the
 area of the polygons is not misleading.
 \end{description}
 
-The polygon for each airline has little value for decoding individual
+The polygon for each airline is of little use for decoding individual
 letter values, but it produces a visual shape that allows us to decode
-data summaries of the distribution of taxi times for different airlines.
-For example, we can see that all airlines are right-skewed, but Hawaiian
-Airlines and Southwest Airlines are more skewed than the other airlines.
+data summaries of the distribution of taxi times for different airlines
+(and the coloured rectangles provide a way to decode individual letter
+values). For example, we can see from Figure~\ref{fig-lv-zoom} that all
+airlines are right-skewed, but Hawaiian Airlines and Southwest Airlines
+are more skewed than the other airlines.
 
 Detail about the spread of values within the long tails (longer taxi
 times) can be decoded from the coloured rectangles. For example, Envoy
@@ -12345,7 +12364,7 @@ labels on the y-axis. These text labels are full words with learned
 decodings. This makes it possible not only to differentiate between
 airlines, but also to decode the actual airline name for each
 letter-value data symbol. For example, we can see that the bottom
-airline is Southwest Airlines rather than WN.
+airline is Southwest Airlines rather than just WN.
 
 The airlines are also encoded as the vertical position of letter-value
 symbols, which now run horizontally rather than vertically (just a
@@ -12358,11 +12377,11 @@ in several ways: the legend has a polygon similar to the letter-value
 data symbol that is used for each airline (but based on a standard
 normal distribution); the legend has coloured rectangles corresponding
 to the rectangles in the main plot (but with widths based on a standard
-normal distribution); the letter values are placed at the coorect
+normal distribution); the letter values are placed at the correct
 positions on the borders of the bars; and examples of the data density
 between letter values is encoded as vulgar-fraction text labels. These
 changes make the decoding of letter-value names, letter-value positions,
-and data density all more accurate.
+and data density all more effective.
 
 As an additional improvement, the airlines have been ordered by median.
 This simplifies the data visualisation a little because there is a
@@ -12373,14 +12392,15 @@ similar airlines because they are now closer together
 
 Overall, the most important decoding of the distribution of taxi times
 is improved because the visual shape of the polygon provides this
-decoding while not being misleading, supplemented by the coloured
-rectangles, which show more detail about the tails of the distribution.
-In addition, thanks to linear scales and improved axes and legends, the
-decoding and comparison of individual taxi times is also more effective.
-Figure~\ref{fig-lv-zoom} is not perfect, but it demonstrates that the
-framework that we have developed allows us not only to deconstruct and
-identify issues with an existing data visualisation, but also to suggest
-ways to make improvements.
+decoding while not being misleading. This is supplemented by the
+coloured rectangles, which show more detail about the tails of the
+distribution. In addition, thanks to linear scales and improved axes and
+legends, the decoding and comparison of individual taxi times is also
+more effective. Figure~\ref{fig-lv-zoom} is not perfect, but it
+demonstrates that the framework that we have developed allows us not
+only to deconstruct and identify issues with an existing data
+visualisation, it also allows us to think of ways that we can make
+improvements.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 

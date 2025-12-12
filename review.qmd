@@ -219,6 +219,11 @@ Footnote surjective/injective?
 
   (David Peebles (2008))
 
+
+::: {.content-visible when-format=pdf}
+\newpage
+:::
+
 ## Case study:  A letter-value plot
 
 @fig-lv-default
@@ -226,8 +231,8 @@ shows a letter-value plot of
 taxi time for over 450,000 flights within the United States,
 broken down by airline.[^lvplot]
 The letter-value plot is an example of a novel data visualisation, so
-this provides a good opportunity to analyse whether a letter-value plot
-is an effective encoding of information.[^strawman]
+this provides a good opportunity to analyse whether this data visualisation
+represents an effective encoding of information.[^strawman]
 
 [^lvplot]:
     This plot reproduces Figure 2 from @letter-value, which was
@@ -239,8 +244,9 @@ is an effective encoding of information.[^strawman]
     are used in @fig-lv-default
     and even sinks to the level of critiquing the specific data set
     (and non-linear scales) that are used in this specific plot. 
-    This is neither an attack on letter-value plots in
-    general nor an attack on the {lvplot} package in particular.
+    Letter-value plots and the {lvplot} package are capable of
+    a much broader range of results than the specific instance
+    that we focus on in this section.
 
 ```{r}
 #| echo: false
@@ -263,8 +269,8 @@ of the data values:  the average value, the spread of the values,
 the skewness, and so on.
 
 The main motivation for the letter-value plot design is that a normal
-boxplot produces *way* too many outliers for such a large amount of data.
-This is shown in @fig-box-plot.
+boxplot produces far too many outliers for cases like this 
+that involve such a large amount of data, as demonstrated in @fig-box-plot.
 Furthermore, alternatives to the boxplot, like violin plots,
 that fix the problem of too many outliers, are reliant on tuning parameters,
 like kernels and bandwidths (@sec-density).
@@ -274,7 +280,7 @@ like kernels and bandwidths (@sec-density).
 #| warning: false
 #| label: fig-box-plot
 #| fig-height: 6
-#| fig-cap: A box plot
+#| fig-cap: A box plot of taxi times for over 450,000 flights within the United States.
 ggplot(ontime, aes(UniqueCarrier, TaxiOut + TaxiIn)) +
   geom_boxplot() +
   scale_y_sqrt(breaks = c(10, 50, 100, 150, 200, 250)) +
@@ -289,15 +295,17 @@ the original boxplot, remain free
 of tuning parameters.
 This is achieved by displaying as many letter values as are supported
 by the amount of data, with only individual data values beyond
-those limits shown as outliers.
+those limits shown as individual data points.
 
 ### Letter values
 
 The well-known
 boxplot is based on the median and the upper and lower quartiles of
 a data set, but these data summaries are just the first two levels of 
-a more general concept of *letter values* introduced in 
-"Exploratory Data Analysis" by @tukey1977eda.
+a more general concept of *letter values*.[^letter-values]
+
+[^letter-values]:
+    The invention of letter values is attributed to @tukey1977eda.
 
 Letter values are order statistics, where the $i$th letter value
 approximates the quantile corresponding to a tail area that contains $2^{−i}$
@@ -318,7 +326,7 @@ the alphabet, in reverse alphabetic
 order, Z for two-hundred and fifty-sixths, Y for five-hundred and twelfths,
 and so on.
 
-### Breaking down
+### Tearing down
 
 We will use the framework that we have developed
 in this book to analyse the data visualisation
@@ -334,13 +342,15 @@ Data symbols
   very simple data points, which represent the outliers (if any).
 
 Encoding visual features
-: In @fig-lv-default, the airlines (Carrier), which are qualitative data values,
+: In @fig-lv-default, 
+  there is a separate letter-value symbol for each airline,
+  and the airlines (Carrier), which are qualitative data values,
   are encoded as the horizontal **position** of the letter-value symbols.
   The encoding of airline as the position of data symbols
   is very effective;  we can easily differentiate between the
   airlines.
 
-  The other data values, the taxi times, are encoded to the
+  The taxi times, are encoded as the
   letter-value data symbols within the plot.
   However, the letter-value plot encodes **data summaries**---letter 
   values---rather 
@@ -383,12 +393,12 @@ Encoding visual features
   The median (letter value 1) is marked as a single white line rather than
   a rectangle.  This is effective for decoding individual letter values
   for an airline.  For example, we can see that one of the letter values
-  for the AA airline is just over 50.
+  for the AA airline is slightly greater than 50.
   
-  The *depth* of each letter value is encoded as the width (**length**)
+  The *depth* of each letter value---how many data values 
+  lie beyond that letter value---is encoded as the width (**length**)
   of a rectangle within the letter-value symbol.
-  The depth is how many data values lie beyond that letter value;
-  for example, the depth of the median is half the total number of 
+  For example, the depth of the median is half the total number of 
   data values.
   This is also an encoding of a data summary.
   However, the actual encoding is only based on the *order* of the
@@ -417,11 +427,12 @@ Encoding visual features
   (approximately one ten-thousandth of the data values between the most
   extreme letter values).
   In addition, the **hue**/**chroma** of a rectangle encodes a categorisation 
-  of the letter values (yet another data summary);
+  of the letter values (yet another data summary):
   every fourth letter value is orange, while all the other letter values
   are grey.
-  
-  The luminance encoding of density only allows us to decode ordinal information
+
+  The luminance encoding of data
+  density only allows us to decode ordinal information
   about the data density between letter values.
   Like the widths of the rectangles,
   the shades of the rectangles steadily
@@ -438,7 +449,7 @@ Encoding visual features
   
   The chroma encoding of every fourth letter value is very effective for
   decoding between those letter 
-  values and all of the others, which is essentually an encoding of two groups
+  values and all of the others.  This is essentially an encoding of two groups
   (orange versus grey).
   It is also very effective for identifying the same
   letter value across different airlines.
@@ -473,24 +484,27 @@ Encoding visual features
   makes each individual encoding in @fig-lv-default more
   difficult to decode (@sec-differences).  Compare this with
   @fig-box-plot which, for all its faults, is a much
-  simpler data visualisation because it involves fewer changes in visual features.
+  simpler data visualisation because it involves fewer changes in 
+  visual features.
   
-  In defence of @fig-lv-default, these decodings of individual data
-  values and data summaries, while potentially useful, are not the primary 
-  aim of the data visualisation, so they are less important
-  than how well we can decode the distribution of the data values,
+  In defence of @fig-lv-default, the encoding and decoding of individual data
+  values and data summaries that we have described, 
+  while potentially useful, are not the primary 
+  aim of the data visualisation.  Any weaknesses of these encodings
+  are less important 
+  than how well we can decode the *distribution* of the data values,
   which we will come to later.
 
 ::: {#tbl-lv-encodings}
 
 | Value | Raw/Summary | Type | Encoding | Decoding |
-| :----- | :----------- | :---- | :-------- |
+| :---- | :---------- | :--- | :------- | :------- |
 | airline | raw data value | qualitative | position (horiz) | airline |
-| taxi outlier | raw data value | quantitative | position (vert) | taxi time |
-| taxi letter value | summary of taxi | quantitative | position (vert) | letter value |
-| letter value depth | summary of letter value | qualitative | length (width) | depth order |
-| taxi density | summary of taxi | quantitative | colour (luminance) | density order |
-| fourth letter value | summary of letter value | qualitative | colour (chroma) | letter value order |
+| taxi time outlier | raw data value | quantitative | position (vert) | taxi time |
+| taxi letter value | summary of taxi time | quantitative | position (vert) | taxi letter value |
+| letter value depth | summary of letter value | qualitative | length (width) | letter value depth order |
+| taxi density | summary of taxi time | quantitative | colour (luminance) | taxi density order |
+| fourth letter value | summary of letter value | qualitative | colour (chroma) | fourth letter value |
 
 The encodings involved in a letter-value plot.
 :::
@@ -531,7 +545,7 @@ Combining encodings
   Because the order of a letter value is related to the 
   data density order,
   both the luminance of each rectangle in the letter-value symbol
-  and the width of the rectangle decode to essentially the same information.
+  and the width of each rectangle decode to essentially the same information.
   For example, the bright orange rectangles, which correspond to the data 
   density of the fifth
   letter value, all have exactly the same width.
@@ -588,13 +602,15 @@ Visual shapes
   the distribution of taxi times is the main purpose of a letter-value
   plot.
   
-  One caveat is that the widths of the visual shapes are potentially
+  One caveat is that the changes in the 
+  widths of the visual shapes are potentially
   misleading because they do not narrow anywhere near as fast as
-  the distribution of taxi times.
+  the density of the taxi times.
   In other words, the shape of the letter-value data symbols
   does not provide an accurate decoding of quantitative
-  features of the distribution of taxi times, only broad qualitative 
-  features.
+  features of the distribution of taxi times (actual rate of change), 
+  only broad qualitative 
+  features (faster or slower change).
   For example, we can decode *whether* the distribution is symmetric or skewed,
   but we cannot decode *how* skewed the distribution is.
 
@@ -602,7 +618,8 @@ Encoding encodings
 : We have already discussed that the y-axis scale is non-linear.
   The square root of taxi times, rather then the raw taxi times, are encoded 
   as the vertical position of the tops (or bottoms) of rectangles.
-  This creates the usual problems to encode a non-linear scale
+  This creates the usual problems when it comes to encoding this
+  non-linear scale
   as tick marks and text labels.
   For example, the square-root taxi time of 
   10 is encoded as a position about two-thirds
@@ -612,13 +629,14 @@ Encoding encodings
   However, this value of 10 is also encoded as the text "100".
   
   On one hand, this is a valuable encoding of the value 10 because it
-  saves us the mental effort of having to reverse the square root transformation.
+  saves us the mental effort of having to reverse the square root 
+  transformation.
   If we had encoded this position as the text "10", then we would be required
-  to perform the mental calculation to decode the 
-  taxi time 100.  
+  to perform the mental calculation to decode the raw
+  taxi time of 100.  
   
   On the other hand, encoding the square root taxi times as text that 
-  corresponds to the taxi times causes problems because we cannot 
+  corresponds to the original taxi times causes problems because we cannot 
   linearly interpolate between the text values.
   We can correctly decode the precise taxi time 100 from the
   text "100", and 50 from "50", but it is very difficult to decode
@@ -631,7 +649,7 @@ Encoding encodings
   a tick mark and a text label.
   A vertical grid line connecting the letter-value data symbols and 
   the tick marks helps to form a strong visual grouping of data symbols
-  with their respective labels.
+  with their respective labels (@sec-visual-model-groups).
   
   However, the encoding of airlines to text is missing a learned encoding
   (@sec-learned-text),
@@ -640,12 +658,14 @@ Encoding encodings
   the name "Envoy Air".
   In effect, the x-axis tick labels only involve an encoding of airline 
   as the **pattern** of the text.  We can only tell that
-  there are different airlines because they use different combinations of letters.
+  there are different airlines because they use different combinations of 
+  letters.
   
-  The legend provides information about the colour encoding of the data density
+  The legend on the right of @fig-lv-default
+  provides information about the colour encoding of the data density
   between letter values.
   The data density is encoded as the luminance of a stack of squares,
-  with every fourth square having a different hue/chroma (orange).
+  with every fourth square having a different chroma (orange).
   In addition, the letter values are encoded as individual text characters
   alongside the squares.
   
@@ -719,7 +739,7 @@ However, @fig-lv-zoom still attempts to fit all of the information
 from @fig-lv-default into a single data visualisation.
 
 @fig-lv-zoom does not aim to be an optimal solution, but rather
-a demonstration that we can use this framework to suggest changes
+a demonstration that we can use our framework to suggest changes
 based on deliberate reasoning and that we can provide justifications for
 those changes.
 
@@ -826,7 +846,8 @@ Data symbols
   As in @fig-lv-default, there are data points to represent outliers
   and there is a letter-value data symbol to represent the 
   distribution of taxi times.
-  In addition, there are rectangles that represent the letter values.
+  In addition, there are light-coloured 
+  rectangles that represent the individual letter values.
 
 Encoding visual features
 : A number of encodings are the same as before. 
@@ -861,7 +882,8 @@ Encoding visual features
   
   The combined encodings of letter values 
   mean that it is easy to decode and compare individual letter values.
-  For example, we can see that letter value E for Southwest Airlines
+  For example, we can see from @fig-lv-zoom
+  that letter value E for Southwest Airlines
   is approximately 25 minutes
   and we can see that Envoy Air has the highest letter value B.
 
@@ -878,11 +900,13 @@ Visual shapes
   In other words, the implicit decoding of the area of the 
   polygons is not misleading.
 
-  The polygon for each airline has little value for decoding individual
+  The polygon for each airline is of little use for decoding individual
   letter values, but it produces a visual shape that
   allows us to decode data summaries of the distribution
-  of taxi times for different airlines.
-  For example, we can see that all airlines are right-skewed,
+  of taxi times for different airlines
+  (and the coloured rectangles provide a way to decode individual letter
+  values).
+  For example, we can see from @fig-lv-zoom that all airlines are right-skewed,
   but Hawaiian Airlines and Southwest Airlines are more skewed than
   the other airlines.
 
@@ -925,7 +949,7 @@ Encoding encodings
   but also to decode the actual airline name for each 
   letter-value data symbol.
   For example, we can see that the bottom airline is Southwest Airlines 
-  rather than WN.
+  rather than just WN.
   
   The airlines are also encoded as the vertical position of letter-value 
   symbols, which now run horizontally rather than vertically
@@ -939,12 +963,12 @@ Encoding encodings
   that is used for each airline (but based on a standard normal distribution);
   the legend has coloured rectangles corresponding to the rectangles in the
   main plot (but with widths based on a standard normal distribution);
-  the letter values are placed at the coorect positions on the 
+  the letter values are placed at the correct positions on the 
   borders of the bars; and
   examples of the data density between letter values 
   is encoded as vulgar-fraction text labels.
   These changes make the decoding of letter-value names, letter-value positions,
-  and data density all more accurate.
+  and data density all more effective.
     
 As an additional improvement,
 the airlines have been ordered by median.  This simplifies
@@ -956,15 +980,16 @@ because they are now closer together (@sec-distance-effect).
 
 Overall, the most important decoding of the distribution of taxi times
 is improved because the visual shape of the polygon provides this
-decoding while not being misleading, supplemented by the coloured rectangles,
+decoding while not being misleading.
+This is supplemented by the coloured rectangles,
 which show more detail about the tails of the distribution.
 In addition, thanks to linear scales and improved axes and legends,
 the decoding and comparison of individual taxi times is also more
 effective.
 @fig-lv-zoom is not perfect, but it demonstrates that
 the framework that we have developed allows us not only to deconstruct 
-and identify issues with an existing data visualisation, but also 
-to suggest ways to make improvements.
+and identify issues with an existing data visualisation, it also 
+allows us to think of ways that we can make improvements.
 
 ---
 
