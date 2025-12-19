@@ -186,6 +186,22 @@
 \usepackage{xcolor}
 \KOMAoption{captions}{tableheading}
 \makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
 \makeatletter
@@ -4887,7 +4903,7 @@ change is monotonic. The bottom row shows an example viridis palette of
 
 \section{Summary}\label{summary-5}
 
-\begin{oldsummary}
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toprule=.15mm, toptitle=1mm, colback=white, left=2mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, titlerule=0mm, coltitle=black, breakable, title={precis}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm]
 
 Data visualisations can be very effective for communicating information.
 
@@ -4999,7 +5015,7 @@ caveats:
   Comparisons between \textbf{lengths} are easier for shorter lengths.
 \end{itemize}
 
-\end{oldsummary}
+\end{tcolorbox}
 
 \textbf{Colour} is really three visual features: \textbf{hue},
 \textbf{chroma}, and \textbf{luminance}.
