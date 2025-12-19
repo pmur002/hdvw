@@ -15,6 +15,7 @@ crimeLevel$yearDate <- as.Date(paste0(crimeLevel$year, "-06-30"))
 crimeLevelTotal <- group_by(crimeLevel, level) |>
     summarise(total = sum(count)) |>
     mutate(prop = total/sum(total))
+crimeLevel2021 <- subset(crimeLevel, year == 2021)
 crimeYear <- group_by(crimeLevel, yearDate) |>
     summarise(total = sum(count), year = unique(year))
 

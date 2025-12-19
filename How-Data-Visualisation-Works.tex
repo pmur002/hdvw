@@ -3806,13 +3806,20 @@ with the following caveats:
 
 \end{oldsummary}
 
-Comparisons between \textbf{lengths} are more difficult if the lengths
-are far apart, especially if there are distractors in between.
+Encoding data values as the length of data symbols allows for the
+effective decoding of quantitative information, with the following
+caveats:
 
-Comparisons between \textbf{lengths} are more difficult if the lengths
-do not have a common baseline.
-
-Comparisons between \textbf{lengths} are easier for shorter lengths.
+\begin{itemize}
+\item
+  Comparisons between \textbf{lengths} are more difficult if the lengths
+  are far apart, especially if there are distractors in between.
+\item
+  Comparisons between \textbf{lengths} are more difficult if the lengths
+  do not have a common baseline.
+\item
+  Comparisons between \textbf{lengths} are easier for shorter lengths.
+\end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -3823,13 +3830,12 @@ Comparisons between \textbf{lengths} are easier for shorter lengths.
 \chapter{Colour}\label{colour}
 
 Figure~\ref{fig-pie-hue} shows a pie chart of the number of offenders
-for different levels of crime seriousness (between 2011 and 2021). In
-this data visualisation, the crime level, which is a
-\textbf{qualitative} variable, is encoded as \textbf{colour}, which is
-appropriate for representing qualitative values
-(Section~\ref{sec-qual-features}). It is easy to decode the crime levels
-because it is easy to identify the colour for a particular crime level
-amongst the set of colours used.
+for different levels of crime seriousness in 2021. In this data
+visualisation, the crime level, which is a \textbf{qualitative}
+variable, is encoded as \textbf{colour}, which is appropriate for
+representing qualitative values (Section~\ref{sec-qual-features}). It is
+easy to decode the crime levels because it is easy to identify the
+colour for a particular crime level amongst the set of colours used.
 
 \begin{figure}
 
@@ -3847,11 +3853,10 @@ offenders for different levels of crime seriousness.}
 Figure~\ref{fig-pie-ordinal} shows another pie chart of the same data,
 again encoding the \textbf{qualitative} level as \textbf{colour}. It is
 again easy to identify each crime level because we can easily identify
-each separate wedge colour. However, Figure~\ref{fig-pie-ordinal} is
-\emph{more} effective than Figure~\ref{fig-pie-hue} because we can
-\emph{also} perceive an ordering of the wedges from more serious crimes,
-which are darker wedges, to less serious crimes, which are lighter
-wedges.
+each separate wedge colour. However, Figure~\ref{fig-pie-ordinal} has an
+advantage over Figure~\ref{fig-pie-hue} because we can \emph{also}
+decode an ordering of the wedges from more serious crimes, which are
+darker wedges, to less serious crimes, which are lighter wedges.
 
 \begin{figure}
 
@@ -3871,7 +3876,7 @@ Figure~\ref{fig-pie-hue} and Figure~\ref{fig-pie-ordinal}, with the same
 encoding---the \textbf{qualitative} level of crime is encoded as the
 \textbf{colour} of the wedges---but the two data visualisations have
 different effectiveness suggests that there is still more to learn about
-how different visual features work.
+the encoding of data values as colour.
 
 This chapter covers some more details about how the \textbf{colour}
 visual feature works.
@@ -3895,18 +3900,18 @@ be divided into three separate visual features: \textbf{hue},
   L and M cones; and blue-yellow, which represents the difference
   between S cones and the sum of L and M cones. For a more detailed
   description, see Ware (2021).} Hue describes what we normally refer to
-as the colour name: reds, oranges, yellows, greens, blues, and purples.
-Chroma describes the colourfulness, from bright to dull, and luminance
-describes the lightness, from dark to light. Our visual system is
-capable to perceiving changes in hue and changes in chroma and changes
-in luminance.
+as the colour name: reds, oranges, yellows, greens, blues, purples, and
+so on. Chroma describes the colourfulness, from bright (very colourful)
+to dull (grey), and luminance describes the lightness, from dark to
+light. Our visual system is capable of perceiving changes in hue and
+changes in chroma and changes in luminance.
 
-We have described colour as a \textbf{qualitative} visual feature so
-far, but that really strictly only applies to \textbf{hue}. For example,
-in Figure~\ref{fig-stacked-bar}, we encoded different ethnic groups as
-different hues. We are very good at decoding qualitative data values
-from different hues, subject to the capacity limits described in
-Section~\ref{sec-capacity}.
+In Section~\ref{sec-qual-features}, we treated colour as a
+\textbf{nominal} visual feature, but that really strictly only applies
+to \textbf{hue}. For example, in Figure~\ref{fig-stacked-bar}, we
+encoded different ethnic groups as different hues. We are very good at
+decoding nominal data values, or different groups, from different hues,
+subject to the capacity limits described in Section~\ref{sec-capacity}.
 
 \begin{figure}
 
@@ -3927,18 +3932,18 @@ dark.}
 \section{Ordinal visual features}\label{sec-ordinal}
 
 \textbf{Chroma} and \textbf{luminance} are both \textbf{nominal} visual
-features in that they can be used to encode different categories, but
-they are also \textbf{ordinal} visual features because we can decode an
+features in that they can be used to encode different groups, but they
+are also \textbf{ordinal} visual features because we can decode an
 ordering from a set of colours that differ in terms of either chroma or
-luminance or both. A set of colours that transitions from darker to
+luminance (or both). A set of colours that transitions from darker to
 lighter and/or brighter to duller conveys an ordering from larger to
 smaller.\footnote{Schloss, Leggon, and Lessard (2021) and Schloss et al.
-  (2023) are examples of studies that have demonstrated a dark-is-more
-  bias.}
+  (2023) are examples of studies that have demonstrated that viewers
+  naturally decode darker colours to larger values.}
 
-This helps to explain why Figure~\ref{fig-pie-ordinal} is more effective
-than Figure~\ref{fig-pie-hue}. In Figure~\ref{fig-pie-ordinal}, the
-colours differ mostly in terms of luminance and chroma so we are able to
+This helps to explain the advantage of Figure~\ref{fig-pie-ordinal} over
+Figure~\ref{fig-pie-hue}. In Figure~\ref{fig-pie-ordinal}, the colours
+differ mostly in terms of luminance and chroma so we are able to
 perceive changes from larger values to smaller values because the
 colours transition from darker to lighter.
 
@@ -3972,30 +3977,30 @@ data when there are very few different groups to represent.
 chroma works well for representing nominal data values, but only for a
 very small number of values. It is possible to identify which shade of
 purple the single dot corresponds to amongst the three shades on the
-left, but it is much harder with the seven shades in the middle, harder
-still for the eleven shades on the right. This figure can be compared
-with Figure~\ref{fig-colour-cap}, which demonstrates the capacity of hue
-for representing nominal data values.}
+left, but it is much harder with the seven shades in the middle, and
+harder still for the eleven shades on the right. This figure can be
+compared with Figure~\ref{fig-colour-cap}, which demonstrates the
+capacity of hue for representing nominal data values.}
 
 \end{figure}%
 
 \begin{quote}
-If we encode data values to the colour of data symbols, and the colours
-only differ in terms of \textbf{hue}, then we can only decode
-\textbf{nominal} information from the data symbols; do the data symbols
-represent \emph{different} groups or the \emph{same} group.
+If we encode data values to the \textbf{hue} of data symbols, then we
+can only decode \textbf{nominal} information from the data symbols; do
+the data symbols represent \emph{different} groups or the \emph{same}
+group.
 \end{quote}
 
 \begin{quote}
-If we encode data values to the colour of data symbols, and the colours
-differ in terms of \textbf{chroma} and/or \textbf{luminance}, it is also
-possible to decode \textbf{ordinal} information form the data symbols.
+If we encode data values to the \textbf{chroma} and/or
+\textbf{luminance} of data symbols, it is also possible to decode
+\textbf{ordinal} information form the data symbols.
 \end{quote}
 
 \section{Perception is relative}\label{sec-colour-relative}
 
 We saw in Section~\ref{sec-perception-relative} that perception of
-\textbf{lengths} is relative. For example, smaller differences in length
+\textbf{lengths} is relative. For example, small differences in length
 are easier to see when the lengths themselves are short
 (Figure~\ref{fig-relative}).
 
@@ -4021,7 +4026,7 @@ relative. In the top row, the inner rectangles are exactly the same
 shade of grey on the left and exactly the same shade of purple on the
 right. The perception of the inner rectangles is affected by the
 surrounding colour, so the same shade appears darker against a light
-background and darker against a light background. The bottom row draws a
+background and lighter against a dark background. The bottom row draws a
 line connecting the two inner rectangles to show that they really are
 the same shade.}
 
@@ -4029,13 +4034,13 @@ the same shade.}
 
 This effect also applies to the perception of hue.
 Figure~\ref{fig-pie-contrast} shows a pie chart of the number of
-offenders in each police district, with police district encoded to the
-\textbf{colour} of the wedges. There are two issues with the perception
-of the wedge colours: each wedge is affected by its neighbour so that,
-for example, some of the blue wedges look more green at the boundary
-with their more blue neighbour and more blue at the boundary with their
-more green neighbour; furthermore, the colours in the legend are
-perceived differently from the corresponding colours in the wedges
+offenders in each police district, with the police district encoded to
+the \textbf{colour} of the wedges. There are two issues with the
+perception of the wedge colours: each wedge is affected by its neighbour
+so that, for example, some of the blue wedges look more green at the
+boundary with their more blue neighbour and more blue at the boundary
+with their more green neighbour; furthermore, the colours in the legend
+are perceived differently from the corresponding colours in the wedges
 because the legend colours are surrounded by a light grey, rather than
 sharing a boundary with a neighbouring colour.
 
@@ -4059,16 +4064,17 @@ effective data visualisation because it encodes qualitative data values
 with many different groups as colour hue. This exceeds the
 \textbf{capacity} of the \textbf{hue} visual feature; it is difficult to
 clearly identify which wedge corresponds to which district
-(Section~\ref{sec-capacity}).
+(Section~\ref{sec-capacity}). We have just used it here to demonstrate
+the relative perception of colours.
 
 Although it does not make the use of hue any more appropriate, for the
 purposes of demonstration, we can solve the colour perception problems
 in Figure~\ref{fig-pie-contrast} by adding a white border to all of the
-wedges (see Figure~\ref{fig-pie-contrast-solved}). Now all of the wedges
-and all of the squares in the legend are perceived relative to a
-surrounding white border. This means that, not only is each wedge
-perceived as a solid block of constant colour, but it is easier to match
-the colours within the wedges with the colours in the legend.
+wedges (Figure~\ref{fig-pie-contrast-solved}). Now all of the wedges and
+all of the squares in the legend are perceived relative to a surrounding
+white border. This means that, not only is each wedge perceived as a
+solid block of constant colour, but it is easier to match the colours
+within the wedges with the colours in the legend.
 
 \begin{figure}
 
@@ -4143,38 +4149,20 @@ of visible colours arranged in three dimensions.\footnote{Figure~\ref{fig-colour
   visual difference.
 
   The colours shown are produced using sRGB specifications, so many of
-  the colours, especially at high chroma, are not realistic.} The centre
-three coloured regions (surrounded by white circles) show slices of
-constant luminance. Chroma increases from the centre (indicated by a
-white dot) and hue changes with angle. We can see the familiar rainbow
-of colours from red, through orange, yellow, green, blue, indigo, and
-violet, back around to red. The top slice is for high luminance (light)
-colours and the bottom slice is for low luminance (dark) colours. The
-coloured regions to the left and to the right (surrounded by
-semicircles) show slices of constant hue. Luminance increases from
-bottom to top and chroma increases away from the flat side of the
-semicircle.
+  the colours, especially at high chroma, are not realistic.} The
+central column of three coloured regions (surrounded by white circles)
+show slices of colours with constant luminance. Chroma increases
+outwards from the centre (indicated by a white dot) and hue changes with
+angle. In each slice, we can see the familiar rainbow of colours from
+red, through orange, yellow, green, blue, indigo, and violet, back
+around to red. The top slice is for high luminance (light) colours and
+the bottom slice is for low luminance (dark) colours.
 
-Figure~\ref{fig-colour-spaces} provides insight into what sorts of
-colours and what sorts of differences between colours are possible. For
-example, we can see that it is not possible to produce colours that have
-a high chroma \emph{and} are very dark. In other words, there is no such
-thing as a very colourful black. This is also true for colours that are
-very light.
-
-We can also see that the range of possible chroma values depends on both
-the hue and the luminance of colours. For example, it is possible to
-produce a light yellow with either a low chroma or a high chroma, but we
-can only produce a dark yellow with a low chroma. Equivalently, the
-range of possible luminance values depends on both the hue and the
-chroma of colours. For example, we can produce both dark and light
-low-chroma yellows, but we can only produce light high-chroma yellows.
-
-This means that, if we want to encode data values as the chroma of a
-data symbol, we can get a higher decoding \textbf{capacity} through
-careful selection of hue and luminance. For example, we can generate a
-wider range of light greens than dark greens and a wider range of reds
-that are neither too light nor too dark.
+The coloured regions to the left and to the right (surrounded by white
+semicircles) show slices of constant hue. In these slices, Luminance
+increases from bottom to top and chroma increases away from the flat
+side of the semicircle. For example, the top-left slice shows the same
+green hue at different levels of luminance and chroma.
 
 \begin{figure}
 
@@ -4189,9 +4177,32 @@ are visible to humans. The central images show colours that differ in
 terms of chroma and hue, but share a common luminance (from lighter at
 the top to darker at the bottom). The images to the left and right show
 colours that differ in terms of chroma and luminance, but share a common
-hue. a}
+hue.}
 
 \end{figure}%
+
+Figure~\ref{fig-colour-spaces} provides insight into what sorts of
+colours are possible and what sorts of differences between colours are
+possible. For example, from the bottom central slice we can see that it
+is not possible to produce colours that have a high chroma \emph{and}
+are very dark. In other words, there is no such thing as a very
+colourful black. This is also true for colours that are very light.
+
+We can also see that the range of possible chroma values depends on both
+the hue and the luminance of colours. For example, the top-right slice
+shows that it is possible to produce a light yellow with either a low
+chroma or a high chroma, but we can only produce a dark yellow with a
+low chroma. Equivalently, the range of possible luminance values depends
+on both the hue and the chroma of colours. For example, we can produce
+both dark and light low-chroma yellows, but we can only produce light
+high-chroma yellows.
+
+This means that, if we want to encode data values as the chroma of a
+data symbol, we can get a wider range of colours---we can get a higher
+decoding \textbf{capacity}---through careful selection of hue and
+luminance. For example, we can generate a wider range of light greens
+than dark greens (the top-left slice) and a wider range of reds that are
+neither too light nor too dark (the centre-right slice).
 
 Figure~\ref{fig-colour-spaces-srgb} is similar to
 Figure~\ref{fig-colour-spaces} except that, instead of showing the range
@@ -4229,10 +4240,10 @@ different colours can be effectively decoded.
 
 \section{Colour harmony}\label{sec-harmony}
 
-We have seen that hue is an appropriate visual feature for encoding
-qualitative data values because we can decode differences between hues
-without any ordering between hues. For example, blue is not larger than
-red.
+We have seen that \textbf{hue} is an appropriate visual feature for
+encoding \textbf{nominal} data values because we can decode differences
+between hues without any implied ordering between hues. For example,
+blue is not larger than red.
 
 However, it is not entirely true that there is no sense of
 \emph{distance} between different hues. The left image in
@@ -4264,6 +4275,11 @@ the top pair of colours.}
 
 \end{figure}%
 
+\begin{quote}
+If we encode data values as hue, it is possible to decode some hues as
+quite similar and other hues as very different.
+\end{quote}
+
 \section{Colour vision deficiency}\label{sec-CVD}
 
 Roughly 10\% of the population, primarily men, suffer from a form of
@@ -4274,9 +4290,11 @@ have difficulty distinguishing between red and green hues.\footnote{This
   are also four distinct categories of red-green colour blindness,
   though the effect on the colour perceived is similar in all cases. The
   images used in this book simulate deuteranomaly (the most common form
-  of CVD). The approximate figure of 10\% is from Ware (2021).}
+  of CVD).
+
+  The approximate figure of 10\% is from Ware (2021).}
 Figure~\ref{fig-pie-hue-cvd} simulates how the colours in
-Figure~\ref{fig-pie-hue} would appear to a person with severe CVD.
+Figure~\ref{fig-pie-contrast} would appear to a person with severe CVD.
 
 \begin{figure}
 
@@ -4297,7 +4315,9 @@ In order to avoid confusion for viewers with CVD, it may be necessary to
 vary luminance and/or chroma in addition to or instead of hue. For
 example, Figure~\ref{fig-pie-ordinal-cvd} shows how the shades of purple
 in Figure~\ref{fig-pie-ordinal} would appear to a viewer with severe
-deuteranopia. The difference in hue is of no importance in this case.
+deuteranopia. It is not important that a viewer with CVD perceives a
+different hue in this case because the more important difference is in
+the luminance and chroma of the colours.
 
 \begin{figure}
 
@@ -4354,12 +4374,19 @@ particularly important for encoding quantitative data values.
 Part of the reason why it is not appropriate to encode quantitative data
 values to luminance is that the decoding of luminance is \emph{not}
 linear. This makes it difficult to accurately decode quantitative data
-values from the luminance of a data symbol.
+values from the luminance of a data symbol, even if the encoding of the
+data values to luminance was linear.
 
 However, we can use luminance to encode ordinal data values
-(Section~\ref{sec-ordinal}). In this case, all that we need is to be
+(Section~\ref{sec-ordinal}). For this purpose, all that we need is to be
 able to identify that a data symbol is lighter or darker than another
 data symbol.
+
+\begin{quote}
+The decoding of luminance is non-linear, which means that luminance is
+not accurate for decoding quantitative data values. However, luminance
+is still effective for decoding ordinal data values.
+\end{quote}
 
 The bottom row of Figure~\ref{fig-non-linear-lum} shows a luminance
 encoding that takes larger steps for darker colours and smaller steps
@@ -4374,10 +4401,10 @@ leads to increased \textbf{capacity} for decoding data values from
 luminance.
 
 \begin{quote}
-When we are encoding nominal or ordinal data values, and we are encoding
-to a visual feature that has a non-linear decoding, a non-linear
-\emph{encoding} can be effective for increasing the capacity of the
-visual feature.
+The decoding of luminance is non-linear, which means that the capacity
+of luminance is worse for darker colours than it is for lighter colours.
+However, a non-linear encoding of data values to luminance can increase
+the capacity for darker colours.
 \end{quote}
 
 \section{Escape capacity}\label{sec-escape}
@@ -4394,10 +4421,10 @@ the top row of Figure~\ref{fig-escape-lum} shows a set of colours that
 only vary in terms of luminance---hue and chroma are held constant (this
 is the bottom row from Figure~\ref{fig-non-linear-lum}). In the second
 row of Figure~\ref{fig-escape-lum}, in addition to increasing luminance,
-we have increasing chroma, so there are larger differences between
-colours, but still a clear ordering. Similarly, in the bottom row of
-Figure~\ref{fig-non-linear-lum}, the hue changes slightly as the
-luminance increases so that the differences are more obvious.
+we have increasing \emph{chroma}, so there are larger differences
+between colours, but still a clear ordering. Similarly, in the bottom
+row of Figure~\ref{fig-non-linear-lum}, the \emph{hue} changes slightly
+as the luminance increases so that the differences are more obvious.
 
 In effect, this is another example of a non-linear encoding. We take a
 non-linear path through colour space (Section~\ref{sec-colour-spaces}).
@@ -4419,6 +4446,11 @@ a wider range of colours compared to the top row by allowing a
 different-hued starting point.}
 
 \end{figure}%
+
+\begin{quote}
+When encoding ordinal data values as colour, the capacity can be
+increased by varying more than one of hue, chroma, and luminance.
+\end{quote}
 
 Another way to expand the decoding capacity of a colour encoding is to
 reduce the number of colours that need to be directly compared. For
@@ -4468,6 +4500,12 @@ so that adjacent hues are more distant from each other.}
 
 \end{figure}%
 
+\begin{quote}
+When encoding nominal data values as colour, the capacity can be
+increased by focusing on adjacent colours rather than all pairs of
+colours.
+\end{quote}
+
 \section{Colour palettes}\label{sec-palettes}
 
 When we encode nominal or ordinal data values as colours, we have to
@@ -4478,7 +4516,7 @@ represent each level of crime.
 This choice is difficult because there are many different colours to
 choose from and often there is no obvious encoding from a data value to
 a particular colour. For example, what specific hue, chroma, and
-luminance should we choose to represent a ``high'' crime level? As we
+luminance should we choose to represent a ``high crime level''? As we
 have seen in the preceding sections, there are also many, sometimes
 competing, criteria involved in selecting effective colours.
 
@@ -4534,7 +4572,7 @@ computer displays because they cannot produce high chroma for all hues
 Figure~\ref{fig-col-naive-cvd} relative to the range of colours that are
 possible on a standard computer monitor. The palette attempts to produce
 the same chroma for different hues, but only a much lower chroma can
-actually be achieved for some hues. The result is that the brow, green,
+actually be achieved for some hues. The result is that the brown, green,
 and blue in the colour palette are less colourful than the purple and
 red.}
 
@@ -4544,10 +4582,11 @@ Given the difficulty of selecting an effective colour palette, there is
 a good argument for making use of pre-existing colour palettes that have
 been designed by experts. For example, the
 \href{https://colorbrewer2.org/}{ColorBrewer} web site provides tools
-for choosing colour palettes for nominal and ordinal encodings. The
-Okabe-Ito palette for encoding nominal data (up to 9 categories), is
-specifically designed to allow effective decoding by all types of CVD
-(Figure~\ref{fig-palettes}). \footnote{The ColorBrewer tools are
+for choosing colour palettes for nominal and ordinal encodings. Another
+example is the Okabe-Ito palette, which is specifically designed for
+encoding nominal data (up to 9 categories) using colours that allow
+effective decoding by viewers with all types of CVD
+(Figure~\ref{fig-palettes}).\footnote{The ColorBrewer tools are
   described in Harrower and Brewer (2003).
 
   Okabe and Ito established the Color Universal Design organization, but
@@ -4574,12 +4613,18 @@ Okabe-Ito. The bottom row is 7 sequential ``Greens'' from ColorBrewer.}
 
 \end{figure}%
 
+\begin{quote}
+Selecting a colour palette is a complex task so it is a good idea to
+make use of an existing colour palette that has been designed by an
+expert.
+\end{quote}
+
 \section{Case study: Diverging colour palettes}\label{sec-divergent}
 
 We have data on the total number of points that were scored and conceded
-in World Cup matches for Tier One nations (the top 10 rugby-playing
-nations) at each World Cup. Table~\ref{tbl-rwc-all-year} shows a sample
-of these data. This an aggregated version of the data set that we saw in
+in World Cup matches for Tier One nations at each World Cup.
+Table~\ref{tbl-rwc-all-year} shows a sample of these data. This an
+aggregated version of the data set that we saw in
 Table~\ref{tbl-rwc-all}.
 
 \begin{longtable}[]{@{}lrrrr@{}}
@@ -4628,7 +4673,10 @@ negative values), while the changes in \textbf{chroma} and
 ordinal comparisons).\footnote{In contrast to a \emph{diverging} colour
   palette, a colour palette for nominal data is often called a
   \emph{qualitative} palette and a palette for ordinal or qualitative
-  data is called a \emph{sequential} palette.}
+  data is called a \emph{sequential} palette.} This means that we can
+easily identify positive versus negative points differentials \emph{and}
+we can easily decode larger or smaller points differentials (within each
+of those groups).
 
 \begin{figure}
 
@@ -4655,12 +4703,12 @@ group.
 \section{Case study: The rainbow}\label{sec-rainbow}
 
 In some fields of research, for example medical imaging and geographic
-imaging, a common problem is to visualise numeric data values on a
-regular spatial grid. Figure~\ref{fig-nomads-rainbow} shows an example,
-where the grid is a set of longitudes and latitudes in the vicinity of
-New Zealand and the data values are measures of wind strength.
+imaging, a common task is to visualise numeric data values on a regular
+spatial grid. Figure~\ref{fig-nomads-rainbow} shows an example, where
+the grid is a set of longitudes and latitudes in the vicinity of New
+Zealand and the data values are measures of wind strength.
 
-A common solution is to encode the numeric data values using
+A common approach is to encode the numeric data values using
 colour\footnote{The resulting image is often referred to as a
   \emph{pseudo-colour} image.} and it is also common to use a rainbow
 colour palette for that encoding (the image on the right of
@@ -4668,7 +4716,7 @@ Figure~\ref{fig-nomads-rainbow}). However, there are several problems
 with this approach.\footnote{The problems with rainbow palettes have
   been well-known for decades and attempts have been made to stamp out
   the use of rainbow colour palettes, but they remain popular in some
-  fields of research (Borland and Taylor Ii 2007; Gołębiowska and
+  fields of research (Borland and Taylor II 2007; Gołębiowska and
   Çöltekin 2022).}
 
 \begin{figure}
@@ -4702,10 +4750,28 @@ palettes.\footnote{The rainbow palette is typically a
   colours in Figure~\ref{fig-colour-spaces-srgb}, visiting the most
   extreme points for different hues. This path clearly is not going to
   have a simple monotonic change in either luminance or chroma.} This
-shows that a rainbow palette is mostly different in terms of hue and we
-have already established that hue is not a good visual feature for
-encoding quantitative data values (Section~\ref{sec-qual-features} and
-Section~\ref{sec-colour}).
+shows that the colours within a rainbow palette differ mostly in terms
+of hue and we have already established that hue is not a good visual
+feature for encoding quantitative data values
+(Section~\ref{sec-qual-features} and Section~\ref{sec-colour}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-rainbow-1.pdf}
+
+}
+
+\caption{\label{fig-rainbow}The top row shows the spectrum of colours
+from which a classic \emph{rainbow} colour palette is taken. The middle
+row shows the changing luminance of the colours in the rainbow spectrum.
+The luminance of the blue colours is considerably less than the
+luminance of the yellows and greens and even the reds. The bottom row
+shows an example rainbow palette of 6 colours taken from the rainbow
+spectrum.}
+
+\end{figure}%
 
 At the same time, The middle row of Figure~\ref{fig-rainbow} shows that
 the rainbow palette also varies in terms of luminance. We know that
@@ -4736,24 +4802,6 @@ suggests three main regions--red-yellow, green-cyan, and
 blue-magenta---but the underlying data values vary more smoothly than
 that.
 
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/qualitative_files/figure-pdf/fig-rainbow-1.pdf}
-
-}
-
-\caption{\label{fig-rainbow}The top row shows the spectrum of colours
-from which a classic \emph{rainbow} colour palette is taken. The middle
-row shows the changing luminance of the colours in the rainbow spectrum.
-The luminance of the blue colours is considerably less than the
-luminance of the yellows and greens and even the reds. The bottom row
-shows an example rainbow palette of 6 colours taken from the rainbow
-spectrum.}
-
-\end{figure}%
-
 \section{Case study: Viridis}\label{sec-viridis}
 
 One of the arguments for using a rainbow colour palette is that viewers
@@ -4763,14 +4811,16 @@ of an ordinal colour scale.\footnote{Liu and Heer (2018) provide
   evidence that colour palettes that vary in hue as well as luminance
   and/or chroma (multi-hue palettes) lead to faster and more accurate
   decoding than palettes with a constant hue (single-hue palettes).
-  Ware, Stone, and Szafir (2023) makes a similar argument.}
+  Ware, Stone, and Szafir (2023) make a similar argument.}
 
 The \textbf{viridis} colour palette, shown in
 Figure~\ref{fig-nomads-viridis} (on the right), is an attempt to fix the
 problems of the rainbow palette, while still retaining a significant
 range of hues. Compared to Figure~\ref{fig-nomads-rainbow}, it is much
-easier to decode regions of stronger winds and regions of weaker winds
-from the darker and lighter regions of Figure~\ref{fig-nomads-viridis}.
+easier to decode regions of stronger winds and regions of weaker winds.
+This is because the regions of stronger winds are darker than the
+regions of weaker winds in Figure~\ref{fig-nomads-viridis}, rather than
+just being different hues in Figure~\ref{fig-nomads-rainbow}.
 
 At the same time, the image on the left of
 Figure~\ref{fig-nomads-viridis} shows a colour palette that only varies
@@ -4837,6 +4887,120 @@ change is monotonic. The bottom row shows an example viridis palette of
 
 \section{Summary}\label{summary-5}
 
+\begin{oldsummary}
+
+Data visualisations can be very effective for communicating information.
+
+However, a data visualisation that is effective for communicating one
+type of information may be ineffective for communicating another type of
+information.
+
+The goal of this book is to explain why some data visualisations are
+more effective than others at communicating different types of
+information---how data visualisation works.
+
+We will focus on how information can be \textbf{encoded} to create a
+visual representation. We will characterise a data visualisation in
+terms of the encodings that it uses to convert data values into data
+symbols.
+
+The effectiveness of an encoding will depend on how well we can
+\textbf{decode} the information that we want from a visual
+representation. We will judge a data visualisation in terms of how well
+data values can be recovered from the data symbols.
+
+There are features of the human visual system that mean that we can
+decode some information extremely rapidly and without effort:
+
+\begin{itemize}
+\item
+  A very large amount of basic information is gathered at once about
+  simple visual features like positions, lengths, and colours.
+\item
+  Large, bright, colourful items automatically attract attention.
+\item
+  We automatically identify groups of items within an image based on
+  similarity of basic visual features like position and colour, plus
+  connecting lines and enclosing borders.
+\end{itemize}
+
+On the other hand, there are limitations of the visual system that
+suggest encodings that we should avoid:
+
+\begin{itemize}
+\item
+  Detailed information is only available at the centre of the visual
+  field.
+\item
+  Visual memory is extremely limited.
+\end{itemize}
+
+These features suggest that encoding data values as basic visual
+features and generating simple, orderly data visualisations will lead to
+rapid and effortless decoding of information.
+
+A simple encoding of data values to data symbols involves encoding
+\textbf{each data value to a separate data symbol}. This allows the
+viewer to \textbf{decode} and compare individual data values from the
+data symbols.
+
+A simple encoding of data values to data symbols also involves
+\textbf{encoding} each data value as a basic \textbf{visual feature} of
+the data symbol, e.g., position, length, area, angle, colour, or
+pattern.
+
+Position, length, area, and angle are appropriate for encoding
+quantitative data because we can decode numeric values from these visual
+features. We can decode position and length more accurately than area
+and angle.
+
+Position, colour, and pattern are appropriate for encoding qualitative
+data because we can decode groups from these visual features. We can
+represent a large number of categories if we use position, but only a
+few categories if we use colours and patterns.
+
+Encoding data values as the position of data symbols allows for the
+effective decoding of both quantitative and qualitative information,
+with the following caveats:
+
+\begin{itemize}
+\item
+  For quantitative values, what we can accurately decode are
+  \emph{comparisons} between quantitative values, not absolute
+  quantitative values.
+\item
+  The decoding is most accurate for positions that share a common
+  baseline.
+\item
+  Encoding identical data values as the positions of data symbols means
+  that the data symbols overlap, which compromises our ability to decode
+  data values from the data symbols.
+\item
+  We can encode one set of data values as horizontal positions and
+  another set of data values as vertical positions because we can decode
+  horizontal and vertical positions separately.
+\item
+  Decoding quantitative data values from the positions of data symbols
+  is only accurate if the encoding is linear.
+\end{itemize}
+
+Encoding data values as the length of data symbols allows for the
+effective decoding of quantitative information, with the following
+caveats:
+
+\begin{itemize}
+\item
+  Comparisons between \textbf{lengths} are more difficult if the lengths
+  are far apart, especially if there are distractors in between.
+\item
+  Comparisons between \textbf{lengths} are more difficult if the lengths
+  do not have a common baseline.
+\item
+  Comparisons between \textbf{lengths} are easier for shorter lengths.
+\end{itemize}
+
+\end{oldsummary}
+
 \textbf{Colour} is really three visual features: \textbf{hue},
 \textbf{chroma}, and \textbf{luminance}.
 
@@ -4844,26 +5008,18 @@ change is monotonic. The bottom row shows an example viridis palette of
 though it has a limited capacity.
 
 \textbf{Chroma} and \textbf{luminance} can be used to encode
-\textbf{ordinal} data values, but they have even lower capacity.
+\textbf{ordinal} data values (as well as nominal data values), but they
+have even lower capacity.
 
-However, there are several complications:
+When we encode data values as colours there are several caveats:
 
 \begin{itemize}
 \item
-  The decoding of data values from hue, chroma, and luminance is
-  affected by surrounding colours and the size of the data symbol.
+  The decoding of data values from colours is affected by surrounding
+  colours and the size of the data symbol.
 \item
   Approximately 10\% of viewers are unable to differentiate between red
   and green hues with similar chroma and luminance.
-\item
-  The range of possible chroma values that can be decoded depends on
-  both hue and luminance.
-
-  The range of possible luminance values that can be decoded depends on
-  both hue and chroma.
-
-  The range of possible colours that can be produced is constrained by
-  the technological limits of standard computer monitors.
 \end{itemize}
 
 Selecting which colours should be used to encode data values is
@@ -7591,7 +7747,12 @@ associate slopes with increases and decreases in data values.\footnote{According
   to Zacks and Tversky (1999) people use \emph{trend words}
   (increasing/decreasing) versus \emph{discrete words} (higher/lower
   than) \emph{and} are faster to judge absolute values from bars but
-  angle from line graphs.}
+  angle from line graphs.} For example, it is very natural to decode a
+downward trend from the lines in a line plot like
+Figure~\ref{fig-crime}. While it is also possible to decode trends from
+the coloured rectangles in a heatmap like
+Figure~\ref{fig-crime-heatmap}, the decoding is less immediately
+obvious.
 
 \begin{quote}
 One reason why line plots are effective is because they encode multiple
@@ -12541,7 +12702,7 @@ Graphics} 22 (1): 519--28.
 \url{https://doi.org/10.1109/TVCG.2015.2467732}.
 
 \bibitem[\citeproctext]{ref-rainbow-harmful}
-Borland, David, and Russell M. Taylor Ii. 2007. {``Rainbow Color Map
+Borland, David, and Russell M. Taylor II. 2007. {``Rainbow Color Map
 (Still) Considered Harmful.''} \emph{IEEE Computer Graphics and
 Applications} 27 (2): 14--17.
 \url{https://doi.org/10.1109/MCG.2007.323435}.
