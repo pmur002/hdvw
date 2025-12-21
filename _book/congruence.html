@@ -606,6 +606,66 @@ Figure&nbsp;7.15: The number of points scored in Rugby World Cup games by teams 
 </section>
 <section id="summary" class="level2" data-number="7.8">
 <h2 data-number="7.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.8</span> Summary</h2>
+<div class="oldsummary callout callout-style-default callout-note no-icon callout-titled" title="Précis *(click to expand/contract)*">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Précis <em>(click to expand/contract)</em>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Data visualisations can be very effective for communicating information.</p>
+<p>However, a data visualisation that is effective for communicating one type of information may be ineffective for communicating another type of information.</p>
+<p>The goal of this book is to explain why some data visualisations are more effective than others at communicating different types of information—how data visualisation works.</p>
+<p>We will focus on how information can be <strong>encoded</strong> to create a visual representation. We will characterise a data visualisation in terms of the encodings that it uses to convert data values into data symbols.</p>
+<p>The effectiveness of an encoding will depend on how well we can <strong>decode</strong> the information that we want from a visual representation. We will judge a data visualisation in terms of how well data values can be recovered from the data symbols.</p>
+<p>There are features of the human visual system that mean that we can decode some information extremely rapidly and without effort:</p>
+<ul>
+<li><p>A very large amount of basic information is gathered at once about simple visual features like positions, lengths, and colours.</p></li>
+<li><p>Large, bright, colourful items automatically attract attention.</p></li>
+<li><p>We automatically identify groups of items within an image based on similarity of basic visual features like position and colour, plus connecting lines and enclosing borders.</p></li>
+</ul>
+<p>On the other hand, there are limitations of the visual system that suggest encodings that we should avoid:</p>
+<ul>
+<li><p>Detailed information is only available at the centre of the visual field.</p></li>
+<li><p>Visual memory is extremely limited.</p></li>
+</ul>
+<p>These features suggest that encoding data values as basic visual features and generating simple, orderly data visualisations will lead to rapid and effortless decoding of information.</p>
+<p>A simple encoding of data values to data symbols involves encoding <strong>each data value to a separate data symbol</strong>. This allows the viewer to <strong>decode</strong> and compare individual data values from the data symbols.</p>
+<p>A simple encoding of data values to data symbols also involves <strong>encoding</strong> each data value as a basic <strong>visual feature</strong> of the data symbol, e.g., position, length, area, angle, colour, or pattern.</p>
+<p>Position, length, area, and angle are appropriate for encoding quantitative data because we can decode numeric values from these visual features. We can decode position and length more accurately than area and angle.</p>
+<p>Position, colour, and pattern are appropriate for encoding qualitative data because we can decode groups from these visual features. We can represent a large number of categories if we use position, but only a few categories if we use colours and patterns.</p>
+<p>Encoding data values as the position of data symbols allows for the effective decoding of both quantitative and qualitative information, with the following caveats:</p>
+<ul>
+<li><p>For quantitative values, what we can accurately decode are <em>comparisons</em> between quantitative values, not absolute quantitative values.</p></li>
+<li><p>The decoding is most accurate for positions that share a common baseline.</p></li>
+<li><p>Encoding identical data values as the positions of data symbols means that the data symbols overlap, which compromises our ability to decode data values from the data symbols.</p></li>
+<li><p>We can encode one set of data values as horizontal positions and another set of data values as vertical positions because we can decode horizontal and vertical positions separately.</p></li>
+<li><p>Decoding quantitative data values from the positions of data symbols is only accurate if the encoding is linear.</p></li>
+</ul>
+<p>Encoding data values as the length of data symbols allows for the effective decoding of quantitative information, with the following caveats:</p>
+<ul>
+<li><p>Comparisons between <strong>lengths</strong> are more difficult if the lengths are far apart, especially if there are distractors in between.</p></li>
+<li><p>Comparisons between <strong>lengths</strong> are more difficult if the lengths do not have a common baseline.</p></li>
+<li><p>Comparisons between <strong>lengths</strong> are easier for shorter lengths.</p></li>
+</ul>
+<p><strong>Colour</strong> is really three visual features: <strong>hue</strong>, <strong>chroma</strong>, and <strong>luminance</strong>.</p>
+<p><strong>Hue</strong> is excellent for encoding <strong>nominal</strong> data values, though it has a limited capacity.</p>
+<p><strong>Chroma</strong> and <strong>luminance</strong> can be used to encode <strong>ordinal</strong> data values (as well as nominal data values), but they have even lower capacity.</p>
+<p>When we encode data values as colours there are several caveats:</p>
+<ul>
+<li><p>The decoding of data values from colours is affected by surrounding colours and the size of the data symbol.</p></li>
+<li><p>Approximately 10% of viewers are unable to differentiate between red and green hues with similar chroma and luminance.</p></li>
+</ul>
+<p>Selecting which colours should be used to encode data values is difficult to get right and a good solution often involves varying all of hue, chroma, and luminance at once.</p>
+<p>Consequently, it is usually a good idea to make use of pre-existing colour palettes that have been carefully designed to avoid most problems.</p>
+</div>
+</div>
+</div>
 <p>The effectiveness of a data visualisation may depend on more than just the accuracy and capacity of visual features.</p>
 <p>A <strong>congruent</strong> encoding is one where data values are <em>explicitly</em> encoded in a way that is consistent with an <em>implicit</em> decoding of the visual feature.</p>
 <p>A data visualisation will be more effective if it is visually congruent, for example, data symbols are larger for larger data values or data symbols only change if the data values change.</p>
