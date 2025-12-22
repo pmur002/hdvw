@@ -182,27 +182,16 @@ data visualisation.
 
     For some counter-arguments, see @sec-part-to-whole.
 
-## Encoding and decoding {#sec-encodings}
+## Encoding {#sec-encodings}
 
-@fig-crime and @fig-crime-heatmap are examples of different
-types of data visualisation, a line plot and a heatmap respectively.
-We will explore many different types of data visualisations
-throughout the book, but rather than address each type of 
-data visualisation on its own, we want to identify underlying 
-concepts that will help to explain how all data visualisations work.
+What is a data visualisation?
+For the purposes of this book, we define a data visualisation as
+a conversion of information 
+into a visual representation.
+We will refer to this process as **encoding** information.
 
-One concept that we will lean on very heavily is
-the idea of **encodings**:
-how is information being converted 
-into a visual representation?[^encodings]
-
-[^encodings]: 
-    The idea of characterising a data visualisation as a set
-    of *encodings* from data values to visual representations aligns
-    with the idea of *mappings* from @layered-grammar.
-
-The most obvious encoding in a data visualisation involves the
-encoding of **data values** to **data symbols** (@fig-encodings).
+The most obvious example of an encoding is the conversion 
+of **data values** into **data symbols** (@fig-encodings).
 For example, in @fig-crime, all of the data values for 14-year-olds,
 the number of offenders for each year, have been encoded to an orange 
 line.  The data values for 15-year-olds have been encoded to 
@@ -232,22 +221,34 @@ reflecting the number of offenders of that age for that year.
 In other words, each cell of @tbl-crime is encoded to its own coloured 
 rectangle.
 
-Choosing which data visualisation to use can be thought of in terms
-of choosing how to encode data values.
+Deciding on which data visualisation to use can be thought of in terms
+of deciding how to encode data values.[^encodings]
 
-The second concept that we will lean on heavily is the idea
-of **decoding**:  how is a visual representation converted
-back into information?
+[^encodings]: 
+    The idea of characterising a data visualisation as a set
+    of *encodings* from data values to visual representations aligns
+    with the idea of *mappings* from @layered-grammar.
+
+## Decoding {#sec-decodings}
+
+What is a data visualisation for?
+As we saw in the very first section of this chapter, 
+the value of a data visualisation lies in our
+ability to rapidly and effortlessly extract information.
+In other words, a data visualisation allows us to convert
+from a visual representation back to information.
+We will refer to this process as **decoding** information.
+
+A simple example of a decoding is the extraction of a single data value.
+For example, we can decode the number of 14-year-old offenders in 2011
+from @tbl-crime.
+More complex decodings involve extraction summaries of multiple data values.
+For example, we can decode the overall decline in youth crime from the lines
+in @fig-crime.
 
 The purpose of encoding data values to a particular
 visual representation is to enable the viewer to 
 extract properties of the data very rapidly and very easily.
-For example, if we want the viewer to be able to perceive a decreasing trend in
-crime, it is more effective to 
-encode the data values as lines (@fig-crime),
-rather than a table of text (@tbl-crime),
-because the viewer is able to **decode** the decreasing trend 
-much more easily from the lines than from the text.
 
 In order to produce an effective data visualisation,
 we need to **encode** data values to data symbols in a way
@@ -272,139 +273,15 @@ The journey that we take throughout this book will involve
 exploring a variety of different ways that information can
 be **encoded** to a visual representation. 
 We will encounter many different data visualisations, but we will
-analyse them in terms of the way that they encode information.
+analyse them in terms of the fundamental ways that they encode information.
 
 The effectiveness of a data visualisation will depend on
 how well information can be **decoded** from the visual representation.
 By identifying the different encodings that we can use,
-and understanding how well those encodings can be decoded,
+and understanding what information can be decoded from different encodings,
 we will come to understand why
-some data visualisations are more effective than others.
-
-## Scope {#sec-scope}
-
-There is a lot of useful information and understanding about how data
-visualisations work, but it is distributed throughout and embedded within a very
-broad, deep, and detailed data visualisation literature.  This book aims to
-produce a
-simple, coherent explanation that is accessible to a less expert
-audience.[^need-for-simple]
-
-[^need-for-simple]:
-    Besides scratching the author's itch, this book addresses an
-    identified need.  For example, @sönning_2022 
-    deconstructs how a line plot works in great detail, 
-    but there is a market for something that is more accessible to
-    and applicable by a less-expert audience.
-
-    "Going forward, we must do a better job of translating the academic research
-    into practice, making it easier for academics and nonacademics alike to
-    create useful, well-designed graphics."
-    [@annurev-statistics-031219-041252]
-
-    The aim is to provide an overview that is similar in scope to more expert
-    frameworks like [@kosslyn1989understanding], but more consumable by a less
-    expert audience.  The goal of this document is to provide a description that
-    is sufficiently straightforward for the non-expert to consume, hopefully
-    without making too many experts roll in their graves or send them to an
-    early one.  In most cases, it will be easy to see for ourselves that a
-    visual effect is real through a simple diagram or data visualisation, but
-    references to the relevant theories and experimental results
-    in the literature will
-    be provided in footnotes like this one.
-
-The focus of this document is **static** data visualisations for
-**presentation**.  The assumption is that our data values have 
-an interesting property and we want to produce a display
-that makes it easy and efficient for viewers to perceive that property.
-Some of the information that we cover will also
-apply to interactive graphics and to exploratory graphics, but the
-specific requirements of those types of data visualisation will not be 
-addressed.[^interactive]
-
-[^interactive]:
-    Some examples of books that include a discussion of 
-    interactive graphics
-    are @cookSwayne2007, @theus_urbanek_2008_interactive, and 
-    @unwinTheusHofmann2006.
-
-There is also an emphasis on **statistical graphics** in this book,
-which is characterised by the use of abstract geometric symbols, such as circles
-and rectangles, to represent data values,
-as opposed to scientific graphics, which is focused more on realistic
-representations of physical objects,
-or cartography, which is focused on the geographic context of data values.
-
-This document is also focused on what **vision science**
-has to tell us about effective data visualisation.
-We will consider factors that influence how rapidly and how
-accurately information can be extracted from a data visualisation.
-This will include findings from a broad range of research, encompassing
-Statistics, Computer Science, Psychology, and Cartography.
-
-However, this document does not cover all fields of research
-that impact on data visualisation.
-We will not, for example, address the ethical use of data visualisation,
-beyond a basic assumption that we want to faithfully represent
-the properties of the data.[^ethics]
-
-[^ethics]:
-    Alberto Cairo's writing often includes the ethical dimensions
-    of data visualisation, e.g., @CairoAlberto2014Eiid and
-    @cairo2016truthful.
-
-    The *Data by Design* project is a 
-    striking example of work with a focus on ethical data visualisation
-    [@data_by_design_emory2021].
-
-This document is also aimed at a numerate audience,
-so we assume an appreciation of the importance of collecting
-the right data in the right way for the questions that we
-hope to answer.[^bertini]
-
-[^bertini]:
-    We are assuming that the data
-    we have is sufficient for the question(s) of interest and contains
-    no *substantive* problems, in the sense of @healy2018data.
-
-    Examples of books that provide a
-    more comprehensive treatment of the entire data visualisation
-    process are @cairo2019howchartslie
-    and @munzner2014visualization.
-
-    An example of a much shorter, but still broader view
-    of the data visualisation process is
-    @bertini-how-not-to-lie.
-
-It is also important to acknowledge that vision science cannot yet tell us
-everything about how data visualisation works.
-However, what is known will help us to have some understanding of 
-why some data visualisations are so effective and others are less 
-effective.
-
-As well as being a synthesis of a large range of data visualisation
-research, this document is also a simplification of that research.
-Some details are smoothed over and some details are just left out.
-The goal is to provide a framework that is easy to understand 
-by non-experts and
-easy to apply to a broad range of data visualisations.
-References to the relevant literature are provided in footnotes so
-that the interested, or sceptical, reader can dig deeper.
-
-## Software
-
-This book is about the choices that go into *designing* a 
-data visualisation.  It does not cover how to use software to
-implement those design choices and *create* a data visualisation.
-
-All data visualisations in this book were created with 
-R.[^R]
-The code for all data visualisations is available in 
-the github repository for this book.
-
-[^R]:
-    Many of the diagrams in this book were also created with R [@Rlang],
-    but some of diagrams were created using graphviz [@ellson2002graphviz].
+some data visualisations are more effective than others
+for different tasks.
 
 ## Summary 
 
