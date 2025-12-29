@@ -244,6 +244,9 @@ Conversely, another weakness of placing data symbols on maps, like in
 @fig-map-alt-2,
 is the distracting complexity that results.
 
+**TODO**
+Add note that we have moved beyond what is normally considered data values and data symbols for encoding
+
 ## Consistent encodings {#sec-repetition}
 
 **TODO**
@@ -253,6 +256,47 @@ and differences and similarities in visual-model.Rmd
 **TODO**
 Do case study of repeating data symbol structure in main plot 
 in legend (e.g., the bar plot examples @fig-pie-order and @fig-pie repeat)
+
+**TODO**
+If use bullseye plot in text case study, repeat correlation matrix
+here, but do legend with example circles rather than colour gradient.
+
+```{r}
+#| echo: false
+#| label: fig-corr-mat-legend
+#| fig-keep: last
+#| fig-cap: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
+corr <- pair_cor(RWCperGame[-(1:4)], pal="Blue-Red 3")
+gg <- plot(corr) +
+    theme(panel.background=element_blank(),
+          legend.position="none")
+grid.newpage()
+pushViewport(viewport(y=.1, height=.9, width=unit(.9, "snpc"), just="bottom"))
+print(gg, newpage=FALSE)
+grid.force()
+grid.edit("polygon", gp=gpar(col="black"), grep=TRUE, global=TRUE)
+## Clean up circles
+polygons <- grid.grep("polygon", grep=TRUE, global=TRUE)
+for (i in seq_along(polygons)) {
+        temp <- grid.get(polygons[[i]])
+        remove <- which(as.numeric(temp$x) == .5)
+        grid.edit(polygons[[i]],
+                  x=temp$x[-remove],
+                  y=temp$y[-remove],
+                  id=NULL, redraw=FALSE)
+}
+grid.refresh()
+grid.segments(0, 0, 1, 0)
+pushViewport(viewport(y=0, height=.1/.9, just="top", width=.8))
+cols <- hcl.colors(7, "Blue-Red 3")
+grid.circle(1:7/8, r=unit(4, "mm"),
+            gp=gpar(col="black", fill=cols))
+grid.text(round(seq(-1, 1, length.out=7), 2), 1:7/8,
+          gp=gpar(col=rep(c("white", "black", "white"), c(2, 3, 2)),
+                  fontsize=8))
+popViewport(2)
+```
+
 
 @fig-rep-none shows a variation on @fig-rep-guide with a modified 
 legend.  In this plot, the hemisphere of a country is encoded using
@@ -313,6 +357,9 @@ keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
 grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
 grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
 ```
+
+**TODO**
+Do variation of pcp with mini plots of corr 1 0 and -1 ?
 
 ## Dangers of inconsistent encodings
 

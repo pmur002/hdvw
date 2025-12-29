@@ -171,6 +171,7 @@ add <- visualNode("add", "emergent\\nfeatures", level=2)
 sum <- visualNode("sum", "visual\\nsummaries", level=2)
 shape <- visualNode("shape", "visual\\nshapes", level=2)
 obj <- visualNode("obj", "visual\\nobjects", level=3)
+text <- visualNode("text", "text\\nsymbols", level=3)
 label <- visualNode("label", "text\\nlabel", level=3)
 visSumSame <- sameRank("vis", "sum")
 visVisSame <- sameRank("vis", "add")
@@ -202,6 +203,7 @@ lieVisEdge <- mapEdge("lie", "vis", grad=grad5to2)
 statSymEdge <- mapEdge("stat", "sym", grad=grad(2, 2, level1=2, level2=1))
 statVisEdge <- mapEdge("stat", "vis", grad=grad(2, 2, level1=2, level2=1))
 dataObjEdge <- mapEdge("data", "obj", grad=grad(2, 2, level1=1, level2=3))
+dataTextEdge <- mapEdge("data", "text", grad=grad(2, 2, level1=1, level2=3))
 statLabelEdge <- mapEdge("stat", "label", grad=grad(2, 2, level1=2, level2=3))
 metaLabelEdge <- mapEdge("meta", "label", grad=grad(2, 2, level1=1, level2=3))
 orgVisEdge <- mapEdge("org", "vis")
@@ -236,6 +238,8 @@ shapeStat2Edge <- backEdge("shape:s", "stat2:se",
                            grad=grad(2, 2, level1=2, level2=3))
 objDataEdge <- backEdge("obj:s", "data:se", grad=grad(2, 2, level1=3, level2=1))
 objDataEdge2 <- implicitEdge("obj:n", "data:ne",
+                             grad=grad(2, 2, level1=3, level2=1))
+textDataEdge2 <- implicitEdge("text:n", "data:ne",
                              grad=grad(2, 2, level1=3, level2=1))
 objStatEdge <- backEdge("obj:s", "stat:se", grad=grad(2, 2, level1=3, level2=2))
 objDissEdge <- implicitEdge("obj:n", "diss:ne", grad=grad(2, 4, level1=3))
@@ -620,6 +624,12 @@ graph(data,
       invis(dataObjEdge),
       objDataEdge2,
       file="learned-decode.dot")
+
+graph(data,
+      text,
+      invis(dataTextEdge),
+      textDataEdge2,
+      file="text-decode.dot")
 
 graph(data,
       obj,

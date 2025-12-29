@@ -1,0 +1,52 @@
+project:
+  type: book
+
+license: "CC BY-NC-SA"
+
+book:
+  title: How Data Visualisation Works
+  author: Paul Murrell
+  cover-image: Cover/cover.svg
+  chapters:
+    - index.qmd
+    - licence.qmd
+    - exec.qmd
+    - intro.qmd
+    - visual-model.qmd
+    - mapping-visual-features.qmd
+    - position.qmd
+    - quantitative.qmd
+    - qualitative.qmd
+    - congruence.qmd
+    - summaries.qmd
+    - combine.qmd
+    - visual-shapes.qmd
+    - multiple.qmd
+    - visual-objects.qmd
+    - text.qmd
+    - design.qmd
+    - review.qmd
+
+toc: true
+number-sections: true
+tbl-cap-location: top
+crossref:
+  chapters: true
+  sec-prefix: Section
+
+bibliography: how-data-vis-works.bib
+
+knitr:
+  opts_chunk:
+    crop: null
+
+format: 
+  html:
+    css: style.css
+  pdf: 
+    keep-tex: true
+    include-in-header: header.tex
+
+filters:
+  - latex-environment
+environments: oldsummary
