@@ -11270,15 +11270,15 @@ is not appropriate for representing a large number of raw data values.
 
 Figure~\ref{fig-yji} shows a line plot of the rate of youth crime in New
 Zealand for different ethnic groups and a pie chart showing the
-proportions of different types of crime.\footnote{Based on figures from
-  the Youth Justice Indicators Report from 2021
-  \href{https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/}{}.}
-There is a problem with this figure because the line plot and the pie
-chart share the same colour palette even though they are visualising
-different variables (ethnicity and crime type). For example, the ethnic
-group \texttt{European/Other} is encoded as the orange colour of a line
-\emph{and} the crime type \texttt{Theft} is also encoded as an orange
-colour, in this case of a wedge.
+proportions of different types of crime.\footnote{This data
+  visualisation was based on figures from the
+  \href{https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/}{Youth
+  Justice Indicators Report from 2021}.} There is a problem with this
+figure because the line plot and the pie chart share the same colour
+palette even though they are visualising different variables (ethnicity
+and crime type). For example, the ethnic group European/Other is encoded
+as the orange colour of a line \emph{and} the crime type Theft is also
+encoded as an orange colour, in this case the colour of a wedge.
 
 \begin{figure}
 
@@ -11292,11 +11292,11 @@ colour, in this case of a wedge.
 
 \end{figure}%
 
-This creates a confusing data visualisation because the same visual
-feature possesses multiple conflicting decodings
-(Figure~\ref{fig-conflict-decode}). There is nothing wrong with the
-encodings in the line plot by itself or with the encodings in the pie
-chart by itself, but the overall combination of elements within
+The conflicting encodings in Figure~\ref{fig-yji} create a confusing
+data visualisation because the same visual feature decodes to multiple
+data values (Figure~\ref{fig-conflict-decode}). There is nothing wrong
+with the encodings in the line plot by itself or with the encodings in
+the pie chart by itself, but the overall combination of elements within
 Figure~\ref{fig-yji} is ineffective.
 
 \begin{figure}
@@ -11313,10 +11313,14 @@ decoding.}
 
 \end{figure}%
 
-In this chapter we look at the overall arrangement and coordination of
-the elements of a data visualisation.\footnote{Acknowledge that many of
-  these ideas align with the ideas of contrast, repetition, alignment,
-  and proximity that are espoused in Naomi Robbins book.}
+The problem in Figure~\ref{fig-yji} involves the coordination, or lack
+thereof, between multiple elements of a data visualisation. In this
+chapter we look at the arrangement and coordination of the elements of a
+data visualisation.\footnote{We might describe the topic of this chapter
+  as the overall \emph{design} of a data visualisation. Much of what we
+  discuss will have a basis in the properties of the visual system, but
+  much will also echo the basic design principles espoused in Robin
+  Willams' CRAP design principles (Williams 2014).}
 
 \section{Encoding organisation}\label{sec-map-org}
 
@@ -11326,14 +11330,14 @@ breaks and the number of tries for countries at the 2023 Rugby World Cup
 Figure~\ref{fig-scatter}, but with an additional encoding of the
 hemisphere for each country as the colour of the data points.
 
-The legend (guide) in Figure~\ref{fig-rep-guide} demonstrates the scale
-for the colour encoding: which colour is used to encode each hemisphere.
-In Section~\ref{sec-guides}, we described how the proximity of the
-labels ``South'' and ``North'' to the coloured points in the legend
-allow us to associate the colours with the different hemispheres. The
-different values of hemisphere are encoded as the vertical positions of
-the points and the text labels; both the orange point and the label
-``South'' have the same vertical position.
+The legend in Figure~\ref{fig-rep-guide} encodes the colour encoding:
+which colour is used to encode each hemisphere. In
+Section~\ref{sec-guides}, we described how the proximity of the labels
+``South'' and ``North'' to the coloured points in the legend allow us to
+associate the colours with the different hemispheres. The different
+values of hemisphere are encoded as the vertical positions of the points
+and the text labels; both the orange point and the label ``South'' have
+the same vertical position.
 
 \begin{figure}
 
@@ -11360,29 +11364,18 @@ right of the main plot. Their proximity to each other (and separation
 from the main plot) mean that we see the legend as a separate group
 (Section~\ref{sec-visual-model-groups}). This creates a visual
 organisation for the plot, which helps the viewer to navigate and
-comprehend the different elements of the plot (could do with a CITE
-here). This is analogous to reading a body of text, which is split into
-paragraphs and sections with headings to help the reader navigate the
-text.
+comprehend the different elements of the plot.\footnote{Cabouat et al.
+  (2025) report that ``if a learner found a visualization more readable,
+  they felt it required less mental effort to parse relevant information
+  from it for learning.''} This is analogous to reading a body of text,
+which is split into paragraphs and sections with headings to help the
+reader navigate the text.
 
 One way to express this is that the \textbf{position} of the elements of
 the legend \textbf{encode} the \textbf{organisation} of the overall data
-visualisation. Our visual system \textbf{decodes} the legend as a
-separate element based on the proximity of the text and points in the
-legend.
-
-\begin{quote}
-One way in which a data visualisation can be effective is if it provides
-information about how to read the plot as well as information about the
-data itself.
-\end{quote}
-
-Another way to say it is that each element of the data visualisation in
-Figure~\ref{fig-rep-guide} belongs to one of two groups: the main plot
-or the legend. There is a \textbf{qualitative} value, \texttt{plot} or
-\texttt{legend}, associated with each element of the data visualisation.
-These qualitative values are encoded as the \textbf{position} of the
-elements within the data visualisation: on the left or on the right.
+visualisation (Figure~\ref{fig-org-vis-decode}). Our visual system
+\textbf{decodes} the legend as a separate element based on the proximity
+of the text and points in the legend.
 
 \begin{figure}
 
@@ -11397,6 +11390,25 @@ visualisation as position so that elements that are part of the same
 structure are close to each other.}
 
 \end{figure}%
+
+\begin{quote}
+One way in which a data visualisation can be effective is if it provides
+information about how to read the plot as well as information about the
+data itself.
+\end{quote}
+
+Another way to say it is that each element of the data visualisation in
+Figure~\ref{fig-rep-guide} belongs to one of two groups: the main plot
+or the legend. There is a \textbf{qualitative} value---plot or
+legend---associated with each element of the data visualisation. These
+qualitative values are encoded as the \textbf{position} of the elements
+within the data visualisation: the plot is on the left and the legend is
+on the right.
+
+Although we are no longer talking about encoding data values as data
+symbols, we are still talking about encoding. We are just encoding and
+decoding a different sort of information---the organisation of a data
+visualisation.
 
 Figure~\ref{fig-align} shows a variation of Figure~\ref{fig-rep-guide},
 with exactly the same plot elements, but in a different arrangement.
@@ -11424,86 +11436,36 @@ World Cup.}
 \end{figure}%
 
 All of these changes are aimed at making the data visualisation more
-orderly (Section~\ref{sec-simplicity}). The legend is more obviously a
-separate element from the main plot and the axis titles more obviously
-connect to the main plot. A more orderly arrangement of the visual
-elements will provide fewer distractions and lead to a more effective
-data visualisation because the important differences in the data will be
-more readily perceived (Section~\ref{sec-differences}).\footnote{``Bridging
-  Educational Theories of Cognitive Load to Visualization Design and
-  Evaluation'' Cabouat et al (2025) Shows that a more ``readable'' data
-  vis requires less mental effort to extract information. May get more
-  info from a closer reading of this paper.}
+orderly (Section~\ref{sec-simplicity}).\footnote{\emph{Alignment} is
+  also one of the CRAP design principles (Williams 2014).} The legend is
+more obviously a separate element from the main plot and the axis titles
+more obviously connect to the main plot. A more orderly arrangement of
+the visual elements will provide fewer distractions and lead to a more
+effective data visualisation because the important differences in the
+data will be more readily perceived (Section~\ref{sec-differences}).
 
 The strong alignment and regular patterns within facetted plots like
 Figure~\ref{fig-facet-after} are another effective example of keeping
 everything else the same in order to champion the changes in the data.
 Conversely, another weakness of placing data symbols on maps, like in
-Figure~\ref{fig-map-alt-2}, is the distracting complexity that results.
-
-\textbf{TODO} Add note that we have moved beyond what is normally
-considered data values and data symbols for encoding
+Figure~\ref{fig-map-alt-2}, is that the lack of regular positioning and
+alignment makes it harder to attend to the important differences between
+data symbols.
 
 \section{Consistent encodings}\label{sec-repetition}
 
-\textbf{TODO} Refer back to congruence and dissonance in congruence.Rmd
-and differences and similarities in visual-model.Rmd
-
-\textbf{TODO} Do case study of repeating data symbol structure in main
-plot in legend (e.g., the bar plot examples Figure~\ref{fig-pie-order}
-and Figure~\ref{fig-pie} repeat)
-
-\textbf{TODO} If use bullseye plot in text case study, repeat
-correlation matrix here, but do legend with example circles rather than
-colour gradient.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-corr-mat-legend-1.pdf}
-
-}
-
-\caption{\label{fig-corr-mat-legend-1}Correlations between pairs of
-measures of performance for teams in the 2023 Rugby World Cup.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-corr-mat-legend-2.pdf}
-
-}
-
-\caption{\label{fig-corr-mat-legend-2}Correlations between pairs of
-measures of performance for teams in the 2023 Rugby World Cup.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-corr-mat-legend-3.pdf}
-
-}
-
-\caption{\label{fig-corr-mat-legend-3}Correlations between pairs of
-measures of performance for teams in the 2023 Rugby World Cup.}
-
-\end{figure}%
-
 Figure~\ref{fig-rep-none} shows a variation on
-Figure~\ref{fig-rep-guide} with a modified legend. In this plot, the
-hemisphere of a country is encoded using orange and green within the
-main plot, but then hemisphere is encoded using light blue and brown in
-the legend. This is clearly an ineffective data visualisation, but it
-highlights the importance of maintaining consistent encodings between
-different elements of a plot.\footnote{This particularly echoes the
-  repetition part of CRAP design.}
+Figure~\ref{fig-rep-guide} with a modification to the legend. In this
+plot, the hemisphere of a country is encoded using orange and green
+within the main plot, but then hemisphere is encoded using light blue
+and brown in the legend. This is clearly an ineffective data
+visualisation. It is possible to decode that there are two groups of
+data symbols in the plot, but it is impossible to decode which of those
+two groups is North and which is South.{[}\^{}inconsisten-dissonant{]}
+The point of Figure~\ref{fig-rep-none} is merely to highlight the
+critical importance of maintaining consistent encodings between
+different elements of a plot.\footnote{A consistent encoding aligns with
+  the CRAP design principle of \emph{repetition} (Williams 2014).}
 
 \begin{figure}
 
@@ -11521,13 +11483,13 @@ World Cup.}
 \end{figure}%
 
 Figure~\ref{fig-rep-double} demonstrates that we can harness consistent
-encodings to improve upon the original Figure~\ref{fig-rep-guide}. In
-this plot, the encoding of hemisphere as the colour of points is not
-only consistent between the main plot and the legend, but it has been
-extended to the colour of legend text. The visual grouping of elements
-that relate to the same hemisphere is now stronger within the legend and
-across the entire data visualisation
-(Section~\ref{sec-visual-model-groups}).
+encodings to actually improve upon the original
+Figure~\ref{fig-rep-guide}. In Figure~\ref{fig-rep-double}, the encoding
+of hemisphere as the colour of points is not only consistent between the
+main plot and the legend, but it has been extended to the colour of the
+legend text as well. The visual grouping of elements that relate to the
+same hemisphere is now stronger both within the legend and across the
+entire data visualisation (Section~\ref{sec-visual-model-groups}).
 
 \begin{figure}
 
@@ -11544,46 +11506,60 @@ World Cup.}
 
 \end{figure}%
 
-\textbf{TODO} Do variation of pcp with mini plots of corr 1 0 and -1 ?
+Another consistency in Figure~\ref{fig-rep-double} (and the original
+Figure~\ref{fig-rep-guide}) is the use of the same data symbol in both
+the main plot and the legend. Circular data symbols are used in both
+cases. That consistency, like the use of consistent colours, might again
+appear obvious, but it is not always true. For example, the data symbols
+in Figure~\ref{fig-corr-mat} are circles, but the legend is a
+rectangular colour gradient.
+
+Figure~\ref{fig-corr-mat-legend} shows a variation of
+Figure~\ref{fig-corr-mat} with a legend that not only shares the same
+colour encoding, but also shares the same data symbol. It is much easier
+to compare the colour of one of the circular data symbols with the
+colours of the circles in the legend because they are all circles.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-corr-mat-legend-1.pdf}
+
+}
+
+\caption{\label{fig-corr-mat-legend}Correlations between pairs of
+measures of performance for teams in the 2023 Rugby World Cup.}
+
+\end{figure}%
+
+Figures Figure~\ref{fig-pie-order} and Figure~\ref{fig-pie-repeat} are
+other examples of this consistent encoding between legends and the main
+plot. The legends in those cases are drawn so that they mirror the
+\emph{positions} of the bars in the main plot as well as the colours of
+the bars in the main plot.
 
 \section{Dangers of inconsistent
 encodings}\label{dangers-of-inconsistent-encodings}
 
 Figure~\ref{fig-trump-bill} shows a bar plot of the impact of a proposed
-tax bill during the second Trump administration.\footnote{Based on plot
-  from ``Popular Information'' web site (Judd Legum)
-  https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful Data
-  source: Penn Wharton Budget Model
-  https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15}
-Each bar represents a change in income for a particular income bracket.
-Lower incomes are to the left and higher incomes are to the right. There
-are labels to describe each income bracket and there are labels that
-describe each change in income. Where the change in income is large, the
-label for change in income is written within the bar (at the top of the
-bar), but for smaller changes in income, the bar is too small to fit the
-label, so the label is placed just above the bar. For the two leftmost
-bars, the change in income is actually negative and the change in income
-label is placed \emph{below} the bar. The labels that describe the
-income brackets are mostly below the bars, but for the two leftmost bars
-the labels for the income brackets are placed above the bars.
-
-In summary, there are two labels for each bar, one below the bar and one
-above (or at the top of) the bar. This consistent positioning of the
-labels encourages the viewer to decode two groups of labels: one group
-above the bars and one group below the bars. This can mislead us into
-comparing, for example, ``-1K'' for the leftmost bar with ``4.3M'' for
-the rightmost bar, when the correct comparison is between ``-1K'' (for
-the lowest income bracket) and ``389.3K'' (for the highest income
-bracket).\footnote{This is precisely the mistake that was made when this
-  data visualisation was discussed on
-  \href{https://www.youtube.com/watch?v=AQiukyzB6x0}{The Majority Report
-  (\textasciitilde6:00)}.}
-
-Just as it makes no sense to change the encoding of data values within a
-data visualisation (Figure~\ref{fig-rep-none}) or across multiple data
-visualisations within the same document (Figure~\ref{fig-yji}), it makes
-no sense to change the encoding of structure within a data
-visualisation.
+tax bill during the second Trump administration.\footnote{This data
+  visualisation is based on a plot from the
+  \href{https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful}{Popular
+  Information} web site by Judd Legum. The data are from the
+  \href{https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15}{Penn
+  Wharton Budget Model}.} Each bar represents the predicted change in
+annual income for a particular income bracket. Lower incomes are to the
+left and higher incomes are to the right. There are labels to describe
+each income bracket and there are labels that describe each change in
+income. Where the change in income is large, the label for change in
+income is written within the bar (at the top of the bar), but for
+smaller changes in income, the bar is too small to fit the label, so the
+label is placed just above the bar. For the two leftmost bars, the
+change in income is actually negative and the change in income label is
+placed \emph{below} the bar. The labels that describe the income
+brackets are mostly below the bars, but for the two leftmost bars the
+labels for the income brackets are placed above the bars.
 
 \begin{figure}
 
@@ -11593,16 +11569,31 @@ visualisation.
 
 }
 
-\caption[\label{fig-trump-bill}A bar plot of the distributional effects
-of Trump's ``Big, Beautiful Bill''.]{\label{fig-trump-bill}A bar plot of the distributional effects
-of Trump's ``Big, Beautiful Bill''.\footnotemark{}}
+\caption{\label{fig-trump-bill}A bar plot of the distributional effects
+of Trump's ``Big, Beautiful Bill''.}
 
 \end{figure}%
-\footnotetext{Based on plot from
-  ``Popular Information'' web site (Judd Legum)
-  https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful Data
-  source: Penn Wharton Budget Model
-  https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15}
+
+In summary, there are two labels for each bar, one below the bar and one
+above (or at the top of) the bar. This consistent positioning of the
+labels encourages the viewer to decode two groups of labels: one group
+above the bars and one group below the bars. However, this will mislead
+us into comparing, for example, ``-1K'' (a change in income) for the
+leftmost bar with ``4.3M'' (an income bracket) for the rightmost bar.
+The correct comparison is between ``-1K'', which is the change in for
+the lowest income bracket, and ``389.3K'', which is the change in income
+for the highest income bracket.\footnote{This is precisely the mistake
+  that was made when this data visualisation was discussed on
+  \href{https://www.youtube.com/watch?v=AQiukyzB6x0}{The Majority Report
+  (\textasciitilde6:00)}.}
+
+Just as it makes no sense to change the encoding of data values within a
+data visualisation (Figure~\ref{fig-rep-none}) or across multiple data
+visualisations within the same document (Figure~\ref{fig-yji}), it makes
+no sense to change the encoding of \emph{structure} within a data
+visualisation. In this case, all labels above the bars should belong to
+the same group of labels (changes in income) and all labels below the
+bars should belong to the same group of labels (income brackets).
 
 \section{Encoding importance}\label{encoding-importance}
 
@@ -11614,36 +11605,9 @@ data symbols in the main plot and in the legend, and de-emphasises the
 axes and labels. Our attention is drawn to the darker and more saturated
 elements first (Section~\ref{sec-attention}), with the other elements in
 the background, which we can focus on if we need the additional
-information.\footnote{CRAP contrast A larger difference is better
-  because it suggests a larger difference in importance. A small
-  difference suggests a less important difference. Also, a small
-  difference is more confusing, distracting, and unpleasant. Like a
-  background hum (c.f. Robbins)}
-
-By comparison, in Figure~\ref{fig-rep-double} there is a similar visual
-impact from all elements of the plot, so it is less clear where to look
-first. All of the elements of the data visualisation compete for our
-attention.
-
-This is another example of encoding (qualitative) non-data values as
-visual features (see Section~\ref{sec-map-org}). In this case, we are
-encoding the \textbf{importance} of different visual elements as visual
-features, in this case colour. We decode the differences in colour to a
-more important group of elements and a less important group of elements.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[scale=0.5]{Diagrams/imp-vis-decode.png}
-
-}
-
-\caption{\label{fig-imp-vis-decode}We can encode the importance of
-elements within a data visualisation as visual features so that elements
-that are more important are more visible.}
-
-\end{figure}%
+information.\footnote{The idea of making a clear visual distinction
+  between different elements of a data visualisation mirrors the CRAP
+  design principle of \emph{contrast}.}
 
 \begin{figure}
 
@@ -11657,6 +11621,50 @@ that are more important are more visible.}
 team breaks through the opposition defence and the number of tries that
 a team scores (both are per-game averages) for teams at the 2023 Rugby
 World Cup.}
+
+\end{figure}%
+
+By comparison, in Figure~\ref{fig-rep-double} there is a similar visual
+impact from all elements of the plot, so it is less clear where to look
+first. All of the elements of the data visualisation compete for our
+attention. Figure~\ref{fig-distract} emphasises this point by making all
+axis and legend text black and adding black grid lines. The data symbols
+are now lost amongst the non-data elements of the plot.\footnote{This
+  also relates to Tukey's \emph{data-ink ratio} (Tufte 1983).}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-distract-1.pdf}
+
+}
+
+\caption{\label{fig-distract}A scatter plot of the number of times a
+team breaks through the opposition defence and the number of tries that
+a team scores (both are per-game averages) for teams at the 2023 Rugby
+World Cup.}
+
+\end{figure}%
+
+The use of colour in Figure~\ref{fig-contrast} is another example of
+encoding (qualitative) non-data values as visual features. In this case,
+we are encoding the \textbf{importance} of different visual elements as
+visual features (Figure~\ref{fig-imp-vis-decode}). We decode the
+differences in colour to a more important group of elements and a less
+important group of elements.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/imp-vis-decode.png}
+
+}
+
+\caption{\label{fig-imp-vis-decode}We can encode the importance of
+elements within a data visualisation as visual features so that elements
+that are more important are more visible.}
 
 \end{figure}%
 
@@ -11681,36 +11689,49 @@ World Cup.}
 
 \end{figure}%
 
-\textbf{TODO} an example of complementary colours providing greater
-contrast than analogous colours (Section~\ref{sec-harmony}).
-
-Section~\ref{sec-differences}
-
 \section{Dangers of encoding
 importance}\label{dangers-of-encoding-importance}
 
-Distractions
+When we encode importance, we are relying on basic properties of the
+visual system to draw attention to specific elements of a plot
+(Section~\ref{sec-attention}). As we saw in Section~\ref{sec-illusion},
+those basic properties of the visual system can also work against us.
+Our attention will be drawn to large and bright elements of a data
+visualisation automatically.
 
-Add examples of making the WRONG thing important (e.g., use thick lines
-on bar borders or bright colours on unimportant elements) ?
+For example, in Figure~\ref{fig-tiger}, our eye is drawn to the tiger's
+eye, which distracts us from the more important heights of the bars.
+There are clear overlaps here with the ideas of clutter and chart junk
+(Section~\ref{sec-junk}).
 
-Refer back to chart junk and clutter (Section~\ref{sec-junk}).
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-tiger-1.pdf}
+
+}
+
+\caption{\label{fig-tiger}A bar plot of the estimated population of
+Bengal Tigers in Bhutan. The background image in this plot distracts
+attention from the most important data symbols.}
+
+\end{figure}%
 
 \section{Summary}\label{summary-13}
 
-Just as we can encode data values to visual features, to communicate
-information about the data, we can encode non-data information to visual
-features, to communicate important aspects of the structure of a data
-visualisation.
+Just as we can encode data values to visual features, in order to
+communicate information about the data, we can encode non-data
+information to visual features, in order to communicate important
+aspects of the structure of a data visualisation.
 
-The structure or organisation of a data visualisation is a qualitative
-value that can be effectively encoded as the position of different
-elements.
+The structure or organisation of a data visualisation, or the importance
+of specific elements, can be effectively encoded as the position or
+colour of different elements of the data visualisation.
 
-Communicating structure helps the viewer to navigate within a data
-visualisation.
-
-Position is especially important
+Communicating structure and importance helps the viewer to navigate
+within the data visualusation, which makes it easier to decode
+information from the data symbols within a data visualisation.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -11720,251 +11741,102 @@ Position is especially important
 
 \chapter{Review}\label{sec-review}
 
-Add review at the end that reinforces the threads like visual feature,
-visual shape, visual object and encodings
+In this book, we have focused on the different ways that information can
+be encoded to create a data visualisaiton and how well information can
+be decoded from a data visualisation.
 
-If we encode X using Y encoding what can we decode?
-
-Possible encoding end points:
-
-\begin{itemize}
-\tightlist
-\item
-  visual feature
-\item
-  visual summary
-\item
-  emergent feature
-\item
-  visual shape
-\item
-  visual object
-\item
-  text
-\end{itemize}
-
-Possible decodings from encoding end points:
+There are two main ways that we can apply this knowledge: we can use it
+to evaluate the effectiveness of an existing data visualisation; or we
+can use it to design a new data visualisation. Either way, the first
+questions we should ask are:
 
 \begin{itemize}
 \tightlist
 \item
-  qual/quant data value
+  What information do we want to decode from the data visualisation?
+  \emph{and}
 \item
-  data summary
-\item
-  higher level information/knowledge/wisdom
+  Is that information present in the data (either as raw data values or
+  data summaries)?
 \end{itemize}
 
-Do two versions (at least):
+We can only hope to decode information from a data visualisation if we
+have the appropriate data.
+
+Assuming that we have the relevant data, the next questions are:
 
 \begin{itemize}
 \item
-  Set of questions for when you already have a plot and want to
-  understand why it works or not
+  What are the data symbols?
 \item
-  Another set for if you want to create a data vis
+  What is being encoded (raw data values and/or data summaries)?
+  \emph{and}
+\item
+  What encodings are being used? \emph{and}
+\item
+  How many encodings are there?
 \end{itemize}
 
-Basic questions:
+For each data value or summary and its encoding, we must then ask:
 
 \begin{itemize}
-\tightlist
 \item
-  What are you asking the visual system to do?
+  Can we decode quantitative data values and is the decoding accurate?
+  \emph{or}
+\item
+  Can we decode qualitative data values and is there enough capacity?
+\item
+  Is the encoding congruent? \emph{or}
+\item
+  Is the encoding dissonant?
+\item
+  Can we decode raw data values? \emph{or}
+\item
+  Can we decode data summaries?
+\item
+  Do encodings interact to create emergent features?
+\item
+  Does each data value or summary have its own data symbol? \emph{or}
+\item
+  Are multiple data values or summaries encoded as a single data symbol?
+\item
+  Do the encodings combine to create recognisable visual objects?
+\end{itemize}
+
+Looking beyond the data symbols, we should also identify all text
+elements and consider the overall design:
+
+\begin{itemize}
+\item
+  Can we decode absolute data values or data summaries from the text?
+\item
+  Can we decode the overall context from the text?
+\item
+  Can we decode the main message of the data visualisation from the
+  text?
+\item
+  Can we decode the structure of the data visualisation?
+\item
+  Are the encodings consistent?
+\item
+  Is our attention drawn to the most important elements?
+\end{itemize}
+
+Overall, the goal of a data visualisation is to take advantage of the
+visual system to rapidly and effortlessly communicate data values and
+data summaries:
+
+\begin{itemize}
+\item
+  What are you asking the visual system to do? \emph{and}
 \item
   Is the visual system good at that task?
 \item
-  Are you asking the viewer to produce visual summaries when it would be
-  easier to produce data summaries?
-\end{itemize}
-
-Present process by which a data vis can be broken down. What data
-symbols are being used? (simple or complex) What encodings are being
-used? What do we want to decode? (data or summaries) If encoding back to
-raw data, are the encodings accurate? What can be encoded back to? Are
-encodings congruent with data?
-
-\ldots{}
-
-List of questions to evaluate a data vis (maybe nest these a bit):
-
-\begin{itemize}
-\item
-  What do you want the viewer to be able to decode?
-\item
-  Do the encodings support that goal?
-\item
-  What are the data variables
-\item
-  What visual features are they encoded to
-\item
-  How many encodings are there? (complexity)
-\item
-  How many encodings are there \emph{per data symbol} ?
-\item
-  What type of data
-\item
-  Can the visual features represent the data
-\item
-  Is there the capacity to represent all categories
-\item
-  How accurate are the decodings
-\item
-  Is there congruence or dissonance in the encoding
-\item
-  Encoding data or data summary
-\item
-  Do visual features interact
-\item
-  Are there emergent features
-\item
-  Is the data symbol a visual shape
-\item
-  Is that appropriate
-\item
-  A visual object
-\item
-  Is that appropriate
-\item
-  Learned encodings somehow (distinct from implicit encodings)
-\item
   Do all visual differences correspond to differences in the data?
+  \emph{and}
 \item
   Are all differences in the data represented by visual differences?
-\item
-  Does each data value encode to its own data symbol If not, individual
-  data values may be difficult to decode
-\item
-  Do multiple data values encode to a single data symbol If not, data
-  summaries may be difficult to decode
 \end{itemize}
-
-And so on \ldots{}
-
-\section{Examples}\label{examples}
-
-\begin{itemize}
-\item
-  Use heatmap as case study?
-\item
-  do the side-by-side pie chart idea as an example of reasoning your way
-  to a new visualisation.
-\item
-  Move the discussion/revisit of tables from text section to here ?
-\end{itemize}
-
-\section{Case study: Lines of best
-fit}\label{case-study-lines-of-best-fit}
-
-Figure~\ref{fig-lm-smooth} shows a scatter plot of the winning margin
-versus the winning score for Tier One nations at Rugby World Cup
-matches. The hemisphere of the losing team is encoded as the colour of
-the data points and a trend line has been added for each hemisphere.
-
-The trend lines are encodings of data summaries, least-squares
-regressions, to line data symbols. The data summaries consist of
-intercept and slope values, which are encoded as the vertical positions
-and the angles of the lines, respectively
-(Figure~\ref{fig-stat-vis-decode}).
-
-The data symbol is very simple and decoding the data summaries is also
-simple because it just involves decoding angle and vertical position.
-For example, we can see that, in general, the winning margin is larger
-when the winning score is larger, but the trend lines suggest that the
-increase in the winning margin is slower for southern-hemisphere teams
-(they fight harder in defeat).
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/review_files/figure-pdf/fig-lm-smooth-1.pdf}
-
-}
-
-\caption{\label{fig-lm-smooth}A scatter plot of the winning margin
-versus the winning score for matches between Tier One nations at Rugby
-World Cups. There is a light shading of the lower-right diagonal to
-indicate that the winning margin cannot exceed the winning score. In
-addition, points on the diagonal represent matches where the losing team
-failed to score any points. The straight lines represent a least-squares
-regression model fit.}
-
-\end{figure}%
-
-Figure~\ref{fig-loess-smooth} shows the same data as
-Figure~\ref{fig-lm-smooth}, but this time there are curved trend lines
-added rather than straight trend lines.\footnote{These are \emph{loess}
-  model fits (locally-estimated scatterplot smoothing).} The curves are
-encodings of data summaries again, but this time loess model fits. This
-means that the encoding involves a series of predicted values encoded as
-horizontal and vertical positions for the curve. In other words, the
-data summaries are encoded as visual features that produce a visual
-shape
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/review_files/figure-pdf/fig-loess-smooth-1.pdf}
-
-}
-
-\caption{\label{fig-loess-smooth}Scatter plot}
-
-\end{figure}%
-
-Nice example of a complex calculation, the results of which are what
-gets visualised. Also example of performing the calculation numerically
-rather than asking the viewer to perform it visually. This was in
-summaries.qmd, but it cannot be there because it requires scatter plots,
-which come in the next section. Add this after mention of visualising
-models?
-
-Add footnote to Hadley's more complex model visualisation paper
-https://vita.had.co.nz/papers/model-vis.pdf
-https://dl.acm.org/doi/10.1002/sam.11271
-
-model fits like lm straight line and ref Hadley's data-space vs
-model-space ``data models'' to mirror ``data statistics'' (revisit box
-plots as VERY simple models? also talk about failing assumptions of
-these models, like unimodal for boxplot)
-
-footnote cite to Tukey for visualising phenomena rather than raw data?
-``Data-Based Graphics: Visual Display in the Decades to Come'' Tukey
-(1990)
-
-\begin{itemize}
-\tightlist
-\item
-  ``Beware of Validation by Eye: Visual Validation of Linear Trends in
-  Scatterplots'' Braun et al (2024) People are biased towards orthogonal
-  distance to line rather than vertical distance.
-\end{itemize}
-
-loess curves Another example of data -\textgreater{} summary
--\textgreater{} features -\textgreater{} shapes -\textgreater{}
-summaries
-
-\section{Case study: 2D density
-plots}\label{case-study-2d-density-plots}
-
-Stat summary visualised
-
-Compare with visual summary of density of points
-
-Different pros for each approach
-
-refer back to Section~\ref{sec-pos-scarce} (overplotting) and mention
-that shapes are one solution, with all of the drawbacks of not being
-able to decode individual data values. Footnote surjective/injective?
-
-\section{Case study: kiviat plots or radar plots or spider
-plots}\label{case-study-kiviat-plots-or-radar-plots-or-spider-plots}
-
-(David Peebles (2008))
-
-\newpage
 
 \section{Case study: A letter-value
 plot}\label{case-study-a-letter-value-plot}
@@ -12447,7 +12319,7 @@ restricted to ordinal comparisons. The large number of grid lines also
 adds to the overall visual complexity of Figure~\ref{fig-lv-default}
 that we discussed earlier.
 
-\subsection{Building back}\label{building-back}
+\subsection{Building up}\label{building-up}
 
 Having used the framework in this book to identify a number of problems
 with the encodings in Figure~\ref{fig-lv-default}, we now attempt to use
@@ -12812,6 +12684,14 @@ Maps.''} \emph{Cartographic Perspectives}, no. 29: 6--25.
 Brockmann, R. J. 1991. {``The Unbearable Distraction of Color.''}
 \emph{IEEE Transactions on Professional Communication} 34 (3): 153--59.
 \url{https://doi.org/10.1109/47.84109}.
+
+\bibitem[\citeproctext]{ref-cog-load}
+Cabouat, Anne-Flore, Lorenzo Ciccione, Samuel Huron, Tobias Isenberg,
+and Petra Isenberg. 2025.{``{Bridging Educational Theories of Cognitive
+Load to Visualization Design and Evaluation }.''} In \emph{2025 IEEE VIS
+Workshop on Visualization Education, Literacy, and Activities (EduVIS)},
+33--64. Los Alamitos, CA, USA: IEEE Computer Society.
+\url{https://doi.org/10.1109/EduVIS69391.2025.00009}.
 
 \bibitem[\citeproctext]{ref-cairo2012functional}
 Cairo, Alberto. 2012. \emph{The Functional Art: An Introduction to
@@ -13701,6 +13581,10 @@ Statistician} 53 (3): 276--81.
 \bibitem[\citeproctext]{ref-wilkinson2005}
 ---------. 2005. \emph{The Grammar of Graphics}. Second edition. New
 York: Springer.
+
+\bibitem[\citeproctext]{ref-williams2014nondesigners}
+Williams, Robin. 2014. \emph{The Non-Designer's Design Book}. 4th ed.
+Berkeley, CA: Peachpit Press.
 
 \bibitem[\citeproctext]{ref-Wolfe2017FiveFactors}
 Wolfe, Jeremy M., and Todd S. Horowitz. 2017. {``Five Factors That Guide

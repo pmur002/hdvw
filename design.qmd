@@ -14,14 +14,15 @@ There is a problem with this figure because
 the line plot and the pie chart share the same colour palette
 even though they are visualising different variables (ethnicity
 and crime type).
-For example, the ethnic group `European/Other` is encoded as 
-the orange colour of a line *and* the crime type `Theft` is also
+For example, the ethnic group European/Other is encoded as 
+the orange colour of a line *and* the crime type Theft is also
 encoded as an
-orange colour, in this case of a wedge.
+orange colour, in this case the colour of a wedge.
 
-[^yji]:
-  Based on figures from the Youth Justice Indicators Report from 2021
-  [](https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/).
+[^yji]:        
+    This data visualisation was 
+    based on figures from the 
+    [Youth Justice Indicators Report from 2021](https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/).
 
 ```{r}
 #| echo: false
@@ -67,8 +68,9 @@ print(gg2, newpage=FALSE)
 popViewport()
 ```
 
-This creates a confusing data visualisation because the same visual feature
-possesses multiple conflicting decodings (@fig-conflict-decode).
+The conflicting encodings in @fig-yji
+create a confusing data visualisation because the same visual feature
+decodes to multiple data values (@fig-conflict-decode).
 There is nothing wrong with the encodings in the line plot by itself
 or with the encodings in the pie chart by itself, but the overall combination of
 elements within @fig-yji is ineffective.
@@ -86,14 +88,19 @@ If we encode more than one data value to the same visual feature, it is unclear
 which is the correct decoding.
 :::
 
-In this chapter we look at the overall arrangement and coordination
+The problem in @fig-yji involves the coordination, or lack thereof,
+between multiple elements of a data visualisation.
+In this chapter we look at the arrangement and coordination
 of the elements
 of a data visualisation.[^CRAP-design]
 
 [^CRAP-design]:
-  Acknowledge that many of these ideas align with the 
-  ideas of contrast, repetition, alignment, and proximity 
-  that are espoused in Naomi Robbins book.
+    We might describe the topic of this chapter as the overall
+    *design* of a data visualisation.
+    Much of what we discuss will have a basis in the properties
+    of the visual system, but much will also echo the
+    basic design principles espoused in Robin Willams'
+    CRAP design principles [@williams2014nondesigners].
 
 ## Encoding organisation {#sec-map-org}
 
@@ -104,7 +111,7 @@ This data visualisation is similar to @fig-scatter, but with an
 additional encoding of the hemisphere for each country as the colour
 of the data points.
 
-The legend (guide) in @fig-rep-guide demonstrates the scale for the colour
+The legend in @fig-rep-guide encodes the colour
 encoding:  which colour is used to encode each hemisphere.
 In @sec-guides, we described how the proximity of the labels "South"
 and "North" to the coloured points in the legend allow us to
@@ -121,10 +128,14 @@ vertical position.
 repcols <- pal_npg()(4)
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere",
+                        guide=guide_legend(reverse=TRUE)) +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
+    theme(aspect.ratio=1,
+          legend.key.size=unit(2, "mm"),
+          legend.key.spacing.y=unit(2, "mm"))
+grid.newpage()
 pushViewport(viewport(height=.8))
 print(gg, newpage=FALSE)
 popViewport()
@@ -142,26 +153,22 @@ the main plot) mean that we see the legend as a separate
 group (@sec-visual-model-groups).
 This creates a visual organisation for the plot, which helps
 the viewer to navigate and comprehend the different elements
-of the plot (could do with a CITE here).
+of the plot.[^cog-load-theory]
 This is analogous to reading a body of text, which is split into
 paragraphs and sections with headings to help the reader
 navigate the text.
 
+[^cog-load-theory]:
+    @cog-load report that 
+    "if a learner found a visualization more readable, 
+    they felt it required less
+    mental effort to parse relevant information from it for learning."
+
 One way to express this is that the **position** of the elements of the legend 
-**encode** the **organisation** of the overall data visualisation.
+**encode** the **organisation** of the overall data visualisation
+(@fig-org-vis-decode).
 Our visual system **decodes** the legend as a separate element
 based on the proximity of the text and points in the legend.
-
-> One way in which a data visualisation can be effective is if it
-  provides information about
-  how to read the plot as well as information about the data itself.
-
-Another way to say it is that each element of the data visualisation in 
-@fig-rep-guide belongs to one of two groups:  the main plot or the legend.
-There is a **qualitative** value, `plot` or `legend`, associated with
-each element of the data visualisation.
-These qualitative values are encoded as the **position** of the elements
-within the data visualisation:  on the left or on the right.
 
 ::: {#fig-org-vis-decode}
 ::: {.content-visible when-format=pdf}
@@ -176,6 +183,23 @@ We can encode the structure of a data visualisation as position
 so that elements that are part of the same structure are close to each other.
 
 :::
+
+> One way in which a data visualisation can be effective is if it
+  provides information about
+  how to read the plot as well as information about the data itself.
+
+Another way to say it is that each element of the data visualisation in 
+@fig-rep-guide belongs to one of two groups:  the main plot or the legend.
+There is a **qualitative** value---plot or legend---associated with
+each element of the data visualisation.
+These qualitative values are encoded as the **position** of the elements
+within the data visualisation:  the plot is on the left 
+and the legend is on the right.
+
+Although we are no longer talking about encoding data values as
+data symbols, we are still talking about encoding.
+We are just encoding and decoding a different sort of information---the
+organisation of a data visualisation.
 
 @fig-align shows a variation of @fig-rep-guide, with exactly 
 the same plot elements, but in a different arrangement.
@@ -199,7 +223,8 @@ edge of the legend title.
 repcols <- pal_npg()(10)[c(1, 2, 3, 9)]
 gg <- ggplot(RWCperGame) +
     geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere",
+                        guide=guide_legend(reverse=TRUE)) +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
     theme(aspect.ratio=1,
@@ -219,7 +244,7 @@ grid.edit("ylab::title::text", grep=TRUE,
 ```
 
 All of these changes are aimed at making the data visualisation 
-more orderly (@sec-simplicity).
+more orderly (@sec-simplicity).[^alignment]
 The legend is more obviously a separate element
 from the main plot and the axis titles more obviously 
 connect to the main plot.
@@ -227,39 +252,112 @@ A more orderly arrangement of the visual elements
 will provide fewer distractions and lead to 
 a more effective data visualisation 
 because the important differences in the data
-will be more readily perceived (@sec-differences).[^cog-load-theory]
+will be more readily perceived (@sec-differences).
 
-[^cog-load-theory]:
-    "Bridging Educational Theories of Cognitive Load
-    to Visualization Design and Evaluation"
-    Cabouat et al (2025)
-    Shows that a more "readable" data vis requires less mental effort
-    to extract information.
-    May get more info from a closer reading of this paper.
+[^alignment]:
+    *Alignment* is also one of the CRAP design principles 
+    [@williams2014nondesigners].
 
 The strong alignment and regular patterns within facetted plots like
 @fig-facet-after are another effective example of keeping everything else
 the same in order to champion the changes in the data.
 Conversely, another weakness of placing data symbols on maps, like in
 @fig-map-alt-2,
-is the distracting complexity that results.
-
-**TODO**
-Add note that we have moved beyond what is normally considered data values and data symbols for encoding
+is that the lack of regular positioning and alignment 
+makes it harder to attend to the important differences between data symbols.
 
 ## Consistent encodings {#sec-repetition}
 
-**TODO**
-Refer back to congruence and dissonance in congruence.Rmd
-and differences and similarities in visual-model.Rmd
+@fig-rep-none shows a variation on @fig-rep-guide with a modification to the
+legend.  In this plot, the hemisphere of a country is encoded using
+orange and green within the main plot, but then hemisphere is encoded
+using light blue and brown in the legend.
+This is clearly an ineffective data visualisation.
+It is possible to decode that there are two groups of data symbols in the
+plot, but it is impossible to decode which of those two groups is North and
+which is South.[^inconsisten-dissonant]
+The point of @fig-rep-none is merely to
+highlight the critical importance of maintaining consistent encodings between
+different elements of a plot.[^CRAP-rep]
 
-**TODO**
-Do case study of repeating data symbol structure in main plot 
-in legend (e.g., the bar plot examples @fig-pie-order and @fig-pie repeat)
+[^inconsistent-dissonant]:
+    This *inconsistent* encoding could also be described as a 
+    *dissonant* encoding (@sec-dissonance).
 
-**TODO**
-If use bullseye plot in text case study, repeat correlation matrix
-here, but do legend with example circles rather than colour gradient.
+[^CRAP-rep]:
+    A consistent encoding aligns with 
+    the CRAP design principle of *repetition*
+    [@williams2014nondesigners].
+
+```{r}
+#| echo: false
+#| label: fig-rep-none
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere",
+                        guide=guide_legend(reverse=TRUE)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          legend.key.size=unit(2, "mm"),
+          legend.key.spacing.y=unit(2, "mm"))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyPoint <- grid.grep("key::gTree::points", grep=TRUE, global=TRUE)
+grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
+grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
+```
+
+@fig-rep-double demonstrates that we can harness consistent
+encodings to actually improve upon the original @fig-rep-guide.
+In @fig-rep-double, the encoding of hemisphere as the colour of points
+is not only consistent between the main plot and the legend,
+but it has been extended to the colour of the legend text as well.
+The visual grouping of elements that relate to the same hemisphere
+is now stronger both within the legend and across the entire data visualisation
+(@sec-visual-model-groups).
+
+```{r}
+#| echo: false
+#| label: fig-rep-double
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere",
+                        guide=guide_legend(reverse=TRUE)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          legend.key.size=unit(2, "mm"),
+          legend.key.spacing.y=unit(2, "mm"))
+grid.newpage()
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[3], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[1], fontface="bold"))
+```
+
+Another consistency in @fig-rep-double (and the original @fig-rep-guide)
+is the use of the same data symbol in both the main plot and the legend.
+Circular data symbols are used in both cases.
+That consistency, like the use of consistent colours, 
+might again appear obvious, but it is not always true.
+For example, the data symbols in @fig-corr-mat
+are circles, but the legend is a rectangular colour gradient.
+
+@fig-corr-mat-legend shows a variation of @fig-corr-mat with 
+a legend that not only shares the same colour encoding, but
+also shares the same data symbol.
+It is much easier to compare the colour of one of the circular data symbols
+with the colours of the circles in the legend because they are all circles.
 
 ```{r}
 #| echo: false
@@ -271,7 +369,8 @@ gg <- plot(corr) +
     theme(panel.background=element_blank(),
           legend.position="none")
 grid.newpage()
-pushViewport(viewport(y=.1, height=.9, width=unit(.9, "snpc"), just="bottom"))
+pushViewport(viewport(y=1/8, height=7/8, 
+                      width=unit(7/8, "snpc"), just="bottom"))
 print(gg, newpage=FALSE)
 grid.force()
 grid.edit("polygon", gp=gpar(col="black"), grep=TRUE, global=TRUE)
@@ -287,85 +386,34 @@ for (i in seq_along(polygons)) {
 }
 grid.refresh()
 grid.segments(0, 0, 1, 0)
-pushViewport(viewport(y=0, height=.1/.9, just="top", width=.8))
+pushViewport(viewport(y=0, height=(1/8)/(7/8), just="top", width=1,
+                      layout=grid.layout(1, 7)))
 cols <- hcl.colors(7, "Blue-Red 3")
-grid.circle(1:7/8, r=unit(4, "mm"),
-            gp=gpar(col="black", fill=cols))
-grid.text(round(seq(-1, 1, length.out=7), 2), 1:7/8,
-          gp=gpar(col=rep(c("white", "black", "white"), c(2, 3, 2)),
-                  fontsize=8))
+textlab <- round(seq(-1, 1, length.out=7), 2)
+textcols <- rep(c("white", "black", "white"), c(2, 3, 2))
+for (i in 1:7) {
+    pushViewport(viewport(layout.pos.col=i))
+    grid.circle(r=.4, gp=gpar(col="black", fill=cols[i]))
+    grid.text(textlab[i],
+              gp=gpar(col=textcols[i],
+                      fontsize=10))
+    popViewport()
+}
 popViewport(2)
 ```
 
-
-@fig-rep-none shows a variation on @fig-rep-guide with a modified 
-legend.  In this plot, the hemisphere of a country is encoded using
-orange and green within the main plot, but then hemisphere is encoded
-using light blue and brown in the legend.
-This is clearly an ineffective data visualisation, but
-it highlights the importance of maintaining consistent encodings between
-different elements of a plot.[^CRAP-rep]
-
-[^CRAP-rep]:
-  This particularly echoes the repetition part of CRAP design.
-
-```{r}
-#| echo: false
-#| label: fig-rep-none
-#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyPoint <- grid.grep("key::gTree::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
-grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
-```
-
-@fig-rep-double demonstrates that we can harness consistent
-encodings to improve upon the original @fig-rep-guide.
-In this plot, the encoding of hemisphere as the colour of points
-is not only consistent between the main plot and the legend,
-but it has been extended to the colour of legend text.
-The visual grouping of elements that relate to the same hemisphere
-is now stronger within the legend and across the entire data visualisation
-(@sec-visual-model-groups).
-
-```{r}
-#| echo: false
-#| label: fig-rep-double
-#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1)
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
-```
-
-**TODO**
-Do variation of pcp with mini plots of corr 1 0 and -1 ?
+Figures @fig-pie-order and @fig-pie-repeat are other examples of this
+consistent encoding between legends and the main plot.
+The legends in those cases are drawn so that they mirror the
+*positions* of the bars in the main plot as well as the 
+colours of the bars in the main plot.
 
 ## Dangers of inconsistent encodings
 
 @fig-trump-bill shows a bar plot of the impact of a proposed tax
 bill during the second Trump administration.[^trump-bill]
-Each bar represents a change in income for a particular income bracket.
+Each bar represents the predicted 
+change in annual income for a particular income bracket.
 Lower incomes are to the left and higher incomes are to the right.
 There are labels to describe each income bracket and there are
 labels that describe each change in income.
@@ -379,31 +427,17 @@ The labels that describe the income brackets are mostly below the
 bars, but for the two leftmost bars the labels for the income brackets
 are placed above the bars.
 
-In summary, there are two labels for each bar, one below the bar and one
-above (or at the top of) the bar.
-This consistent positioning of the labels encourages the viewer
-to decode two groups of labels:  one group above the bars and one 
-group below the bars.
-This can mislead us into comparing, for example, "-1K" for the
-leftmost bar with
-"4.3M" for the rightmost bar, when the correct comparison
-is between "-1K" (for the lowest income bracket) and "389.3K" 
-(for the highest income bracket).[^TMR]
-
-[^TMR]:
-  This is precisely the mistake that was made when this data visualisation
-  was discussed on [The Majority Report (~6:00)](https://www.youtube.com/watch?v=AQiukyzB6x0).  
-
-Just as it makes no sense to change the encoding of data values
-within a data visualisation (@fig-rep-none) or across multiple
-data visualisations within the same document (@fig-yji),
-it makes no sense to change the encoding of structure within a
-data visualisation.
+[^trump-bill]:
+    This data visualisation is based on a plot from the 
+    [Popular Information](https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful)
+    web site by Judd Legum.
+    The data are from the 
+    [Penn Wharton Budget Model](https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15).
 
 ```{r}
 #| echo: false
 #| label: fig-trump-bill
-#| fig-cap: A bar plot of the distributional effects of Trump's "Big, Beautiful Bill".[^trump-bill]
+#| fig-cap: A bar plot of the distributional effects of Trump's "Big, Beautiful Bill".
 bill <- read.csv("Data/trump-bill.csv")
 bill$Income.group <- factor(bill$Income.group,
                             levels=bill$Income.group)
@@ -443,11 +477,34 @@ ggplot(bill) +
           axis.text.x=element_text(colour=NA))
 ```
 
-[^trump-bill]:
-  Based on plot from "Popular Information" web site (Judd Legum)
-  https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful
-  Data source: Penn Wharton Budget Model
-  https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15
+In summary, there are two labels for each bar, one below the bar and one
+above (or at the top of) the bar.
+This consistent positioning of the labels encourages the viewer
+to decode two groups of labels:  one group above the bars and one 
+group below the bars.
+However, this will mislead us into comparing, for example, "-1K" (a change
+in income) for the
+leftmost bar with
+"4.3M" (an income bracket) for the rightmost bar.
+The correct comparison
+is between "-1K", which is
+the change in for the lowest income bracket, and "389.3K", which
+is the change in income for the highest income bracket.[^TMR]
+
+[^TMR]:
+  This is precisely the mistake that was made when this data visualisation
+  was discussed on 
+  [The Majority Report (~6:00)](https://www.youtube.com/watch?v=AQiukyzB6x0).  
+
+Just as it makes no sense to change the encoding of data values
+within a data visualisation (@fig-rep-none) or across multiple
+data visualisations within the same document (@fig-yji),
+it makes no sense to change the encoding of *structure* within a
+data visualisation.
+In this case, all labels above the bars should belong to the
+same group of labels (changes in income) 
+and all labels below the bars should belong to the same group
+of labels (income brackets).
 
 ## Encoding importance
 
@@ -462,22 +519,77 @@ elements first (@sec-attention), with the other elements in the background,
 which we can focus on if we need the additional information.[^contrast]
 
 [^contrast]: 
-  CRAP contrast
-  A larger difference is better because it suggests a larger 
-  difference in importance.
-  A small difference suggests a less important difference.
-  Also, a small difference is more confusing, distracting, and unpleasant.
-  Like a background hum (c.f. Robbins)
+    The idea of making a clear visual distinction between
+    different elements of a data visualisation mirrors
+    the CRAP design principle of *contrast*.
+
+```{r}
+#| echo: false
+#| label: fig-contrast
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+#| fig-keep: last
+subtle <- "grey"
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere",
+                        guide=guide_legend(reverse=TRUE)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          legend.key.size=unit(2, "mm"),
+          legend.key.spacing.y=unit(2, "mm"),
+          panel.border=element_rect(colour=subtle, fill=NA),
+          axis.title=element_text(colour=subtle),
+          axis.text=element_text(colour=subtle),
+          axis.ticks=element_line(colour=subtle),
+          legend.title=element_text(colour=subtle))
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+grid.force()
+keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
+grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+```
 
 By comparison, in @fig-rep-double there is a similar visual impact
 from all elements of the plot, so it is less clear where to look first.
 All of the elements of the data visualisation compete for our 
-attention.
+attention.  @fig-distract emphasises this point by making all axis and
+legend text black and adding black grid lines.  The data symbols are
+now lost amongst the non-data elements of the plot.[^data-ink-ratio]
 
-This is another example of encoding (qualitative) non-data values as visual 
-features (see @sec-map-org).
+[^data-ink-ratio]:
+    This also relates to Tukey's *data-ink ratio*
+    [@tufte1983visual].
+
+```{r}
+#| echo: false
+#| label: fig-distract
+#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+gg <- ggplot(RWCperGame) +
+    geom_point(aes(breaks, tries, colour=sphere)) +
+    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere",
+                        guide=guide_legend(reverse=TRUE)) +
+    scale_x_continuous(name="clean breaks") +
+    scale_y_continuous(name="tries scored") +
+    theme(aspect.ratio=1,
+          panel.border=element_rect(colour="black", linewidth=1),
+          panel.grid.major=element_line(colour="black"),
+          panel.grid.minor=element_line(colour="black"),
+          axis.text=element_text(colour="black"))
+grid.newpage()
+pushViewport(viewport(height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+The use of colour in @fig-contrast
+is another example of encoding (qualitative) non-data values as visual 
+features.
 In this case, we are encoding the **importance** of different
-visual elements as visual features, in this case colour.
+visual elements as visual features
+(@fig-imp-vis-decode).
 We decode the differences in colour to a more important group of elements
 and a less important group of elements.
 
@@ -494,32 +606,6 @@ We can encode the importance of elements within a data visualisation as
 visual features 
 so that elements that are more important are more visible.
 :::
-
-```{r}
-#| echo: false
-#| label: fig-contrast
-#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
-#| fig-keep: last
-subtle <- "grey"
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere") +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1,
-          panel.border=element_rect(colour=subtle, fill=NA),
-          axis.title=element_text(colour=subtle),
-          axis.text=element_text(colour=subtle),
-          axis.ticks=element_line(colour=subtle),
-          legend.title=element_text(colour=subtle))
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
-```
 
 @fig-highlight shows a similar application of importance.
 In this case, we are highlighting two data points (New Zealand
@@ -564,20 +650,81 @@ grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
 grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 ```
 
-**TODO**
-an example of complementary colours providing greater contrast
-than analogous colours (@sec-harmony).
-
-@sec-differences
-
 ## Dangers of encoding importance
 
-Distractions
+When we encode importance, we are relying on basic properties of the
+visual system to draw attention to specific elements of a plot
+(@sec-attention).
+As we saw in @sec-illusion, those basic properties of the visual
+system can also work against us.
+Our attention will be drawn to large and bright elements of a data
+visualisation automatically.
 
-Add examples of making the WRONG thing important (e.g., use thick lines
-on bar borders or bright colours on unimportant elements) ?
+For example, in @fig-tiger, our eye is drawn to the tiger's eye,
+which distracts us from the more important heights of the
+bars.  There are clear overlaps here with the ideas of clutter and
+chart junk (@sec-junk).
 
-Refer back to chart junk and clutter (@sec-junk).
+```{r}
+#| echo: false
+#| label: fig-tiger
+#| results: hide
+#| fig-cap: A bar plot of the estimated population of Bengal Tigers in Bhutan. The background image in this plot distracts attention from the most important data symbols.
+runonce <- function() {
+    PostScriptTrace("Images/tiger.ps", "Images/tiger.ps.xml")
+}
+tiger <- grImport::readPicture("Images/tiger.ps.xml")
+# drop the first element (just a bounding rect?)
+tiger <- tiger[-1]
+# Produce a plot of tiger populations with picture as background
+# Source: http://www.globaltiger.org/population.htm
+year <- c(1993, 1996, 1998, 2001)
+minpop <- c(20, 50, 50, 115)
+maxpop <- c(50, 240, 240, 150)
+tigers <- data.frame(year, maxpop)
+setGeneric("greyify",
+           function(object, ...) {
+               standardGeneric("greyify")
+           })
+setMethod("greyify", signature(object="PictureStroke"),
+          function(object, ...) {
+              linesGrob(object@x, object@y, default.units="native",
+                        gp=gpar(lwd=min(object@lwd, 1), col="grey"), ...)
+          })
+setMethod("greyify", signature(object="PictureFill"),
+          function(object, ...) {
+              rgbcol <- hex2RGB(object@rgb)
+              luvcol <- as(rgbcol, "LUV")
+              # Extract just Luminance component as grey level
+              # Rescale to [0.75, 1] to lighten "black" to "grey75"
+              greycol <- 0.75 + coords(luvcol)[,1]*0.25/100
+              polygonGrob(object@x, object@y, default.units="native",
+                          gp=gpar(col=NA, fill=grey(greycol)), ...)
+          })
+tigerbg <- function(data, coords) {
+    nudge <- .07
+    bars <- rectGrob(coords$x, 0, width=.1, height=coords$y, just="bottom",
+                     gp=gpar(fill=NA))
+    grobTree(grImport::pictureGrob(tiger, x=.5 - nudge, FUN=greyify),
+             grobTree(grImport::pictureGrob(tiger, x=.5 - nudge),
+                      vp=viewport(clip=bars)),
+             bars)
+}
+gg <- ggplot(tigers, aes(year, maxpop)) +
+    geom_col(width=1) +
+    grid_panel(tigerbg) +
+    scale_x_continuous(breaks=year) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
+    ggtitle("Population of Bengal Tigers",
+            "in Bhutan (estimated)") +
+    theme(aspect.ratio=1)
+grid.newpage()
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+```
 
 ## Summary
 

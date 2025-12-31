@@ -7,222 +7,69 @@ source("common.R")
 
 # Review {#sec-review}
 
-Add review at the end that reinforces the threads like visual feature, 
-visual shape, visual object and encodings
+In this book, we have focused on the different ways that information
+can be encoded to create a data visualisaiton and how well information
+can be decoded from a data visualisation.
 
-If we encode X using Y encoding what can we decode?
+There are two main ways that we can apply this knowledge:
+we can use it to evaluate the effectiveness of an existing data visualisation;
+or we can use it to design a new data visualisation.
+Either way, the first
+questions we should ask are:
 
-Possible encoding end points:
+* What information do we want to decode from the data visualisation? *and*
+* Is that information present in the data 
+  (either as raw data values or data summaries)?
 
-* visual feature
-* visual summary
-* emergent feature
-* visual shape 
-* visual object
-* text
+We can only hope to decode information from a data visualisation if we
+have the appropriate data.
 
-Possible decodings from encoding end points:
+Assuming that we have the relevant data, the next questions are:
 
-* qual/quant data value
-* data summary
-* higher level information/knowledge/wisdom
+* What are the data symbols?
 
-Do two versions (at least):
+* What is being encoded (raw data values and/or data summaries)? *and*
+* What encodings are being used? *and*
+* How many encodings are there?
 
-* Set of questions for when you already have a plot and want to understand why
-  it works or not
+For each data value or summary and its encoding, we must then ask:
 
-* Another set for if you want to create a data vis
+* Can we decode quantitative data values and is the decoding accurate? *or*
+* Can we decode qualitative data values and is there enough capacity?
 
-Basic questions:
+* Is the encoding congruent? *or*
+* Is the encoding dissonant?
 
-* What are you asking the visual system to do?
+* Can we decode raw data values?  *or*
+* Can we decode data summaries?
+
+* Do encodings interact to create emergent features?
+
+* Does each data value or summary have its own data symbol? *or*
+* Are multiple data values or summaries encoded as a single data symbol?
+
+* Do the encodings combine to create recognisable visual objects?
+
+Looking beyond the data symbols, we should also identify all text elements
+and consider the overall design:
+
+* Can we decode absolute data values or data summaries from the text?
+* Can we decode the overall context from the text?
+* Can we decode the main message of the data visualisation from the text?
+
+* Can we decode the structure of the data visualisation?
+* Are the encodings consistent?
+* Is our attention drawn to the most important elements?
+
+Overall, the goal of a data visualisation is to take advantage
+of the visual system to rapidly and effortlessly communicate data
+values and data summaries:
+
+* What are you asking the visual system to do? *and*
 * Is the visual system good at that task? 
-* Are you asking the viewer to produce visual summaries
-  when it would be easier to produce data summaries?
 
-Present process by which a data vis can be broken down.
-What data symbols are being used?  (simple or complex)
-What encodings are being used? 
-What do we want to decode? (data or summaries)
-If encoding back to raw data, are the encodings accurate?
-What can be encoded back to?
-Are encodings congruent with data?
-
-...
-
-List of questions to evaluate a data vis (maybe nest these a bit):
-
-* What do you want the viewer to be able to decode?
-* Do the encodings support that goal?
-
-* What are the data variables
-* What visual features are they encoded to
-* How many encodings are there? (complexity)
-* How many encodings are there *per data symbol* ?
-* What type of data
-* Can the visual features represent the data
-* Is there the capacity to represent all categories
-* How accurate are the decodings
-* Is there congruence or dissonance in the encoding
-* Encoding data or data summary
-* Do visual features interact
-* Are there emergent features
-* Is the data symbol a visual shape
-* Is that appropriate
-* A visual object
-* Is that appropriate
-* Learned encodings somehow (distinct from implicit encodings)
-
-* Do all visual differences correspond to differences in the data?
+* Do all visual differences correspond to differences in the data? *and*
 * Are all differences in the data represented by visual differences? 
-
-* Does each data value encode to its own data symbol
-  If not, individual data values may be difficult to decode 
-* Do multiple data values encode to a single data symbol
-  If not, data summaries may be difficult to decode 
-
-
-And so on ...
-
-## Examples
-
-* Use heatmap as case study?
-
-* do the side-by-side pie chart idea as an example of reasoning your
-  way to a new visualisation.
-
-* Move the discussion/revisit of tables from text section to here ?
-
-## Case study: Lines of best fit
-
-@fig-lm-smooth shows a scatter plot of the winning margin
-versus the winning score for Tier One nations at Rugby World Cup matches.
-The hemisphere of the losing team is encoded as the colour of the data
-points and a trend line has been added for each hemisphere.
-
-The trend lines are encodings of data summaries, least-squares
-regressions, to line data symbols.  The data summaries consist
-of intercept and slope values, which are encoded as the vertical positions
-and the angles of the lines, respectively (@fig-stat-vis-decode).
-
-The data symbol is very simple and decoding the data summaries is
-also simple because it just involves decoding angle and vertical position.
-For example, we can see that, in general, the winning margin is larger
-when the winning score is larger, but 
-the trend lines suggest that the increase in the winning margin
-is slower for southern-hemisphere teams (they fight harder in defeat).
-
-```{r}
-#| echo: false
-#| label: fig-lm-smooth
-#| fig-cap: A scatter plot of the winning margin versus the winning score for matches between Tier One nations at Rugby World Cups.  There is a light shading of the lower-right diagonal to indicate that the winning margin cannot exceed the winning score.  In addition, points on the diagonal represent matches where the losing team failed to score any points.  The straight lines represent a least-squares regression model fit.
-#| warning: false
-rwcWinner <- do.call(rbind, lapply(split(rwcAll, rwcAll$match), 
-                                   function(x) {
-                                       if (all(x$scored == x$conceded)) {
-                                           winner <- 1
-                                           loser <- 2
-                                       } else {
-                                           winner <- x$scored > x$conceded
-                                           loser <- !winner
-                                       }
-                                       x$oppSphere <- x$hemisphere[loser]
-                                       x[winner, ]
-                                   }))
-ggplot(rwcWinner, aes(scored, scored - conceded, colour=oppSphere)) +
-    annotate("polygon", x=c(0, Inf, Inf), y=c(0, Inf, 0), fill="grey97") +
-    geom_smooth(method="lm", se=FALSE) +
-    geom_point(alpha=.2) +
-    scale_x_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
-                       name="winning score") +
-    scale_y_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
-                       name="winning margin") +
-    scale_colour_discrete(guide=guide_legend(title="opposition\nhemisphere")) +
-    coord_cartesian(clip="off") +
-    theme(aspect.ratio=1)
-```
-
-@fig-loess-smooth shows the same data as @fig-lm-smooth, but this time
-there are curved trend lines added rather than straight trend lines.[^loess]
-The curves are encodings of data summaries again, but this time 
-loess model fits.  This means that the encoding involves a series
-of predicted values encoded as horizontal and vertical positions for
-the curve.  In other words, the data summaries are encoded as visual features
-that produce a visual shape
-
-[^loess]:
-    These are *loess* model fits (locally-estimated scatterplot smoothing).
-
-```{r}
-#| echo: false
-#| label: fig-loess-smooth
-#| fig-cap: Scatter plot
-#| warning: false
-ggplot(rwcWinner, aes(scored, scored - conceded, colour=oppSphere)) +
-    annotate("polygon", x=c(0, Inf, Inf), y=c(0, Inf, 0), fill="white") +
-    geom_smooth(method="loess", se=FALSE, span=1) +
-    geom_point(alpha=.2) +
-    scale_x_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
-                       name="winning score") +
-    scale_y_continuous(limits=c(0, 100), expand=expansion(c(0, .05)),
-                       name="winning margin") +
-    scale_colour_discrete(guide=guide_legend(title="opposition\nhemisphere")) +
-    coord_cartesian(clip="off") +
-    theme(aspect.ratio=1)
-```
-
-Nice example of a complex calculation, the results of which are what gets
-visualised.  Also example of performing the calculation numerically rather
-than asking the viewer to perform it visually.  This was in summaries.qmd,
-but it cannot be there because it requires scatter plots, which come in
-the next section.
-Add this after mention of visualising models?
-
-Add footnote to Hadley's more complex model visualisation paper
-https://vita.had.co.nz/papers/model-vis.pdf
-https://dl.acm.org/doi/10.1002/sam.11271
-
-model fits like lm straight line and ref Hadley's data-space vs model-space
-"data models" to mirror "data statistics"
-(revisit box plots as VERY simple models? also talk about failing
-assumptions of these models, like unimodal for boxplot)
-
-footnote cite to Tukey for visualising phenomena rather than raw data?
-"Data-Based Graphics: Visual Display in the Decades to Come"
-Tukey (1990)
-
-+ "Beware of Validation by Eye:
-   Visual Validation of Linear Trends in Scatterplots"
-  Braun et al (2024)
-  People are biased towards orthogonal distance to line rather than
-  vertical distance.
-
-loess curves
-Another example of data -> summary -> features -> shapes -> summaries
-
-## Case study: 2D density plots
-
-Stat summary visualised 
-
-Compare with visual summary of density of points
-
-Different pros for each approach
-
-refer back to @sec-pos-scarce (overplotting)
-and mention that shapes are one solution,
-with all of the drawbacks of not being able to decode individual
-data values.
-Footnote surjective/injective?
-
-## Case study: kiviat plots or radar plots or spider plots
-
-  (David Peebles (2008))
-
-
-::: {.content-visible when-format=pdf}
-\newpage
-:::
 
 ## Case study:  A letter-value plot
 
@@ -721,7 +568,7 @@ Encoding structure
   The large number of grid lines also adds to the overall visual complexity
   of @fig-lv-default that we discussed earlier.
 
-### Building back
+### Building up
 
 Having used the framework in this book to
 identify a number of problems with the encodings in @fig-lv-default,
