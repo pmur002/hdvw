@@ -5,7 +5,7 @@
 source("common.R")
 ```
 
-# Encoding Structure {#sec-design}
+# Composing Encodings {#sec-design}
 
 @fig-yji shows a line plot of the rate of youth crime in New Zealand
 for different ethnic groups
@@ -102,7 +102,7 @@ of a data visualisation.[^CRAP-design]
     basic design principles espoused in Robin Willams'
     CRAP design principles [@williams2014nondesigners].
 
-## Encoding organisation {#sec-map-org}
+## Encoding structure {#sec-map-org}
 
 @fig-rep-guide shows a scatter plot of the number of clean breaks and the
 number of tries for countries
@@ -266,6 +266,88 @@ Conversely, another weakness of placing data symbols on maps, like in
 is that the lack of regular positioning and alignment 
 makes it harder to attend to the important differences between data symbols.
 
+## Unintentional encodings {#sec-unintentional}
+
+One important idea in this chapter is that we can encode more than just
+data values or data summaries as visual representations.
+For example, the previous section showed that we can encode different groups
+of elements within a data visualisation using **position**---elements
+that are positioned close together and/or aligned with each other
+form visual groups.
+
+Another way to say this is that the we decode the 
+differences in the positions of different
+elements to identify distinct groups of elements.
+
+Yet another way to say this is that we decode visual differences
+regardless of whether they reflect differences in data values.
+
+In other words, all visual differences in a data visualisation matter.
+
+For example, consider the x-axis title 
+in @fig-rep-guide. Although it has a similar horizontal position to the
+rest of the x-axis, it has a unique vertical position within the 
+data visualisation.  Similarly, the horizontal position of the x-axis title
+is unique, as are the horizontal and vertical positions of the legend.
+Because these positions are unique, we are tempted to decode
+those differences---we seek the information that is encoded in those
+differences.
+Put simply, the differences make the data visualisation more complex.
+
+@fig-align is a more orderly version of @fig-rep-guide and,
+as a consequence, there are fewer visual differences,
+so there is less to decode.  The data visualisation is less complex.
+
+[^cigarette]
+
+[^cigarette]:
+    Cigarette image by [rawpixel.com](https://www.rawpixel.com/image/6482159/png-sticker-public-domain), Public Domain.
+
+    Cigarette ash by [2happy](https://www.stockvault.net/photo/119673/inffast#),
+    CC0 licence.
+
+```{r}
+#| echo: false
+#| label: fig-align
+#| fig-cap: A bar plot
+smokers <- data.frame(year=factor(c(2006, 2013, 2018, 2023)),
+                      count=c(637293, 702012, 832104, 1012422),
+                      stub=100000,
+                      white=5:2*100000)
+notrun <- function() {
+smokers$white <- smokers$count - c(5, 20, 40, 60)*10000
+cigImg <- readPNG("Images/cig-vert.png")
+ashImg <- readPNG("Images/ash.png")
+cig <- function(data, coords) {
+    clip <- rectGrob(x=coords$x, y=0, just="bottom",
+                     height=coords$y)
+    grobTree(rasterGrob(cigImg, y=-.2, just="bottom", width=unit(15, "mm")),
+             vp=viewport(x=coords$x, 
+                         clip=clip))
+}
+ash <- function(data, coords) {
+    clip <- rectGrob(x=coords$x, y=coords$y, just="bottom",
+                     height=coords$yend - coords$y)
+    grobTree(rasterGrob(ashImg, y=coords$y, just="bottom", 
+                        width=unit(15, "mm")),
+             vp=viewport(x=coords$x, 
+                         clip=clip))
+}
+ggplot(smokers) +
+    grid_group(cig, aes(year, count, yend=white, group=year)) +
+    grid_group(ash, aes(year, white, yend=count, group=year)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    theme(aspect.ratio=.5)
+}
+ggplot(smokers) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
+    geom_col(aes(year, count), fill="grey40", colour="grey40", width=.4) +
+    geom_col(aes(year, white), fill="whitesmoke", colour="grey40", width=.4) +
+    geom_col(aes(year, stub), fill="#efa033", colour="grey40", width=.4) +
+    theme(aspect.ratio=1)
+```
+
+
 ## Consistent encodings {#sec-repetition}
 
 @fig-rep-none shows a variation on @fig-rep-guide with a modification to the
@@ -275,7 +357,7 @@ using light blue and brown in the legend.
 This is clearly an ineffective data visualisation.
 It is possible to decode that there are two groups of data symbols in the
 plot, but it is impossible to decode which of those two groups is North and
-which is South.[^inconsisten-dissonant]
+which is South.[^inconsistent-dissonant]
 The point of @fig-rep-none is merely to
 highlight the critical importance of maintaining consistent encodings between
 different elements of a plot.[^CRAP-rep]
@@ -408,7 +490,7 @@ The legends in those cases are drawn so that they mirror the
 *positions* of the bars in the main plot as well as the 
 colours of the bars in the main plot.
 
-## Dangers of inconsistent encodings
+## Inconsistent encodings
 
 @fig-trump-bill shows a bar plot of the impact of a proposed tax
 bill during the second Trump administration.[^trump-bill]
@@ -650,7 +732,7 @@ grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
 grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
 ```
 
-## Dangers of encoding importance
+## Unimportant encodings
 
 When we encode importance, we are relying on basic properties of the
 visual system to draw attention to specific elements of a plot
