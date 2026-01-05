@@ -38,6 +38,7 @@ crimeGender$yearDate <- as.Date(paste0(crimeGender$year, "-06-30"))
 crimeGenderTotal <- group_by(crimeGender, gender) |>
     summarise(total = sum(count)) |>
     mutate(prop = total/sum(total))
+crimeGender2021 <- subset(crimeGender, year == 2021)
 
 crimeType <- read.csv("Data/YouthCrime/crime-type.csv")
 crimeType$typeFactor <- factor(crimeType$type)

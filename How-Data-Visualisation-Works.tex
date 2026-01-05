@@ -353,12 +353,13 @@ utility in a framework that contains a small number of core concepts,
 that still covers a wide range of data visualisations, but connects them
 all with a relatively simple explanation.
 
-This book attempts to provide such a framework. It is a synthesis of a
-large number of research articles and books and it is a simplification
-of a large amount of knowledge. It is an attempt to prune the complexity
-so that we can see the forest through the trees, while at the same time
-leaving enough foliage that we can still recognise a tree when we see
-one.
+This book attempts to provide such a framework. Rather than providing a
+list of dos and don'ts, it provides a list of \emph{reasons} why and why
+not. It is a synthesis of a large number of research articles and books
+and it is a simplification of a large amount of knowledge. It is an
+attempt to prune the complexity so that we can see the forest through
+the trees, while at the same time leaving enough foliage that we can
+still recognise a tree when we see one.
 
 I hope that it helps.
 
@@ -516,6 +517,12 @@ described in the main text and the underlying research, and those
 footnotes contain proper citations. The real work is not being ignored,
 it is just being hidden from view.
 
+Generative AI was used sparingly in the preparation of this book.
+Specifically, ChatGPT was employed to assist with the formatting of
+BibTeX references from various sources, and Google's AI Overview (Google
+Gemini) provided the initial Python code for generating the optimal
+colour solid boundary for Figure~\ref{fig-colour-spaces}.
+
 This book has been generated using the \href{https://quarto.org/}{Quarto
 publishing system}. If any parts of the book look nice to you, it is
 probably thanks to Quarto.
@@ -525,13 +532,21 @@ geunuinely indebted to Julia for the brutally honest feedback that she
 provided on early drafts of the text. If any parts of the book make
 sense to you, it is probably thanks to Julia.
 
+\section*{License}\label{license}
+\addcontentsline{toc}{section}{License}
+
+\markright{License}
+
+This work is licensed under a Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International License.
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \theendnotes
 
 \bookmarksetup{startatroot}
 
-\chapter*{License}\label{license}
+\chapter*{License}\label{license-1}
 \addcontentsline{toc}{chapter}{License}
 
 \markboth{License}{License}
@@ -10270,23 +10285,64 @@ simultaneously (Figure~\ref{fig-visual-model}).\footnote{Although text
   are involved in the learned decoding of text as language (Ware 2021,
   315--16)}
 
+One consequence of this flexibility is that, as well as being able to
+encode any data value as text, we can encode any sort of \textbf{data
+summary} as a text pattern. For example, we can use text to describe the
+size of the difference between two groups or the degree of correlation
+between two variables.
+
 \begin{quote}
 We can decode complex information from text patterns.
 \end{quote}
 
 On the other hand, one weakness of text data symbols is that it requires
-more cognitive effort to compar data values from text symbols than it
-does to compare data values from simple visual features. For example, in
-Figure~\ref{fig-bar}, it is quick and easy to approximate the ratio of
-Pasifika to Māori or European/Other to Māori from the lengths of the
-bars. Those comparisons are slower and take more conscious effort if we
-try to use the white text data symbols in Figure~\ref{fig-bar-text}.
+more cognitive effort to compare data values from text patterns than it
+does to compare data values from the simple visual features of simple
+geometric shapes. For example, in Figure~\ref{fig-bar}, it is quick and
+easy to approximate the ratio of Pasifika to Māori or European/Other to
+Māori from the lengths of the bars. Those comparisons are slower and
+take more conscious effort if we try to use the white text data symbols
+in Figure~\ref{fig-bar-text}.
 
 \begin{quote}
 It is harder to compare data values that are encoded as text patterns
 because it requires more effort to decode data values and to perform
 mental calculations.
 \end{quote}
+
+Another point is that encoding data values as a text pattern is
+\emph{not} \textbf{congruent}. Although there is a learned decoding of
+text, there is no \textbf{implicit decoding} of text. For example,
+Figure~\ref{fig-text-not-congruent} shows a bar plot of just two
+numbers, with the numbers encoded as the lengths of the bars. The bar
+lengths are congruent with the amounts (Section~\ref{sec-more-is-more}),
+so it is easier to decode the two numbers from the bars than it is from
+a text pattern like this:
+
+\begin{verbatim}
+"The crime rate for females in New Zealand is less than half the 
+crime rate for males."
+\end{verbatim}
+
+The text above does not have the same instant impact as the bars in
+Figure~\ref{fig-text-not-congruent}.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/text_files/figure-pdf/fig-text-not-congruent-1.pdf}
+
+}
+
+\caption{\label{fig-text-not-congruent}A bar plot of the crime rate in
+New Zealand in 2021 for males and female offenders.}
+
+\end{figure}%
+
+This is not to say that encoding data values as a text pattern is a
+\emph{dissonant} encoding, it is just \emph{not} a \emph{congruent}
+encoding.
 
 In addition, our visual system cannot generate \textbf{visual summaries}
 of large amounts of text (Section~\ref{sec-visual-summaries}). This is
@@ -10310,6 +10366,35 @@ perceiving groups of values or trends in values.\footnote{Ware (2021)
 Large numbers of text data symbols are \emph{not} effective because the
 visual system cannot decode visual summaries from the text.
 \end{quote}
+
+It is possible to encode a \textbf{data summary} as a text pattern, but
+again we encounter a lack of congruence. For example,
+Figure~\ref{fig-text-not-summary} shows a line plot of the crime rate in
+New Zealand over time for males and females. The downward slopes of the
+lines in Figure~\ref{fig-text-not-summary} are congruent with the
+decreases in crime rate (Section~\ref{sec-line-plots}), so it is easier
+to decode these data summaries than it is from a text pattern like this:
+
+\begin{verbatim}
+"The youth crime rate in New Zealand has decreased for both males and females
+from 2011 to 2021, though that decrease slowed from around 2018."
+\end{verbatim}
+
+The text above does not have the same instant impact as the lines in
+Figure~\ref{fig-text-not-summary}.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/text_files/figure-pdf/fig-text-not-summary-1.pdf}
+
+}
+
+\caption{\label{fig-text-not-summary}A scatter plot of the youth crime
+rate in New Zealand from 2011 to 2021.}
+
+\end{figure}%
 
 \section{Case study: Word clouds}\label{sec-word-cloud}
 
@@ -11266,7 +11351,7 @@ is not appropriate for representing a large number of raw data values.
 
 \bookmarksetup{startatroot}
 
-\chapter{Encoding Structure}\label{sec-design}
+\chapter{Composing Encodings}\label{sec-design}
 
 Figure~\ref{fig-yji} shows a line plot of the rate of youth crime in New
 Zealand for different ethnic groups and a pie chart showing the
@@ -11322,7 +11407,7 @@ data visualisation.\footnote{We might describe the topic of this chapter
   much will also echo the basic design principles espoused in Robin
   Willams' CRAP design principles (Williams 2014).}
 
-\section{Encoding organisation}\label{sec-map-org}
+\section{Encoding structure}\label{sec-map-org}
 
 Figure~\ref{fig-rep-guide} shows a scatter plot of the number of clean
 breaks and the number of tries for countries at the 2023 Rugby World Cup
@@ -11452,6 +11537,62 @@ Figure~\ref{fig-map-alt-2}, is that the lack of regular positioning and
 alignment makes it harder to attend to the important differences between
 data symbols.
 
+\section{Unintentional encodings}\label{sec-unintentional}
+
+One important idea in this chapter is that we can encode more than just
+data values or data summaries as visual representations. For example,
+the previous section showed that we can encode different groups of
+elements within a data visualisation using \textbf{position}---elements
+that are positioned close together and/or aligned with each other form
+visual groups.
+
+Another way to say this is that the we decode the differences in the
+positions of different elements to identify distinct groups of elements.
+
+Yet another way to say this is that we decode visual differences
+regardless of whether they reflect differences in data values.
+
+In other words, all visual differences in a data visualisation matter.
+
+For example, consider the x-axis title in Figure~\ref{fig-rep-guide}.
+Although it has a similar horizontal position to the rest of the x-axis,
+it has a unique vertical position within the data visualisation.
+Similarly, the horizontal position of the x-axis title is unique, as are
+the horizontal and vertical positions of the legend. Because these
+positions are unique, we are tempted to decode those differences---we
+seek the information that is encoded in those differences. Put simply,
+the differences make the data visualisation more complex.
+
+Figure~\ref{fig-align} is a more orderly version of
+Figure~\ref{fig-rep-guide} and, as a consequence, there are fewer visual
+differences, so there is less to decode. The data visualisation is less
+complex.
+
+Figure~\ref{fig-smoking} shows a more problematic example. This bar plot
+shows the number of ex-smokers in New Zealand over time, with each bar
+resembling a cigarette that is slowly burning down (the grey area
+represents ash at the end of the cigarette). The number of ex-smokers is
+encoded as the full height of each bar, so we can decode the number of
+ex-smokers. However, the grey area and the white area on each bar also
+changes each year and those changes are not associated with any data
+value. In other words, there are differences that we decode as a change
+in something, but nothing is really changing. This is at best confusing
+and could even lead to misinterpretation.\footnote{Figure~\ref{fig-smoking}
+  also contains a little easter egg bonus problem: the x-axis is uneven,
+  with a 7-year jump followed by two five-year jumps.}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-smoking-1.pdf}
+
+}
+
+\caption{\label{fig-smoking}A bar plot}
+
+\end{figure}%
+
 \section{Consistent encodings}\label{sec-repetition}
 
 Figure~\ref{fig-rep-none} shows a variation on
@@ -11461,11 +11602,13 @@ within the main plot, but then hemisphere is encoded using light blue
 and brown in the legend. This is clearly an ineffective data
 visualisation. It is possible to decode that there are two groups of
 data symbols in the plot, but it is impossible to decode which of those
-two groups is North and which is South.{[}\^{}inconsisten-dissonant{]}
-The point of Figure~\ref{fig-rep-none} is merely to highlight the
-critical importance of maintaining consistent encodings between
-different elements of a plot.\footnote{A consistent encoding aligns with
-  the CRAP design principle of \emph{repetition} (Williams 2014).}
+two groups is North and which is South.\footnote{This
+  \emph{inconsistent} encoding could also be described as a
+  \emph{dissonant} encoding (Section~\ref{sec-dissonance}).} The point
+of Figure~\ref{fig-rep-none} is merely to highlight the critical
+importance of maintaining consistent encodings between different
+elements of a plot.\footnote{A consistent encoding aligns with the CRAP
+  design principle of \emph{repetition} (Williams 2014).}
 
 \begin{figure}
 
@@ -11539,8 +11682,7 @@ plot. The legends in those cases are drawn so that they mirror the
 \emph{positions} of the bars in the main plot as well as the colours of
 the bars in the main plot.
 
-\section{Dangers of inconsistent
-encodings}\label{dangers-of-inconsistent-encodings}
+\section{Inconsistent encodings}\label{inconsistent-encodings}
 
 Figure~\ref{fig-trump-bill} shows a bar plot of the impact of a proposed
 tax bill during the second Trump administration.\footnote{This data
@@ -11689,8 +11831,7 @@ World Cup.}
 
 \end{figure}%
 
-\section{Dangers of encoding
-importance}\label{dangers-of-encoding-importance}
+\section{Unimportant encodings}\label{unimportant-encodings}
 
 When we encode importance, we are relying on basic properties of the
 visual system to draw attention to specific elements of a plot
@@ -11744,6 +11885,10 @@ information from the data symbols within a data visualisation.
 In this book, we have focused on the different ways that information can
 be encoded to create a data visualisaiton and how well information can
 be decoded from a data visualisation.
+
+This information is helpful in understanding why a data visualisation
+works well and it is even more helpful in understanding why a data
+visualisation does not work well.
 
 There are two main ways that we can apply this knowledge: we can use it
 to evaluate the effectiveness of an existing data visualisation; or we

@@ -298,55 +298,48 @@ Put simply, the differences make the data visualisation more complex.
 as a consequence, there are fewer visual differences,
 so there is less to decode.  The data visualisation is less complex.
 
-[^cigarette]
+@fig-smoking shows a more problematic example.[^listener-smoking]
+This bar plot shows the number of ex-smokers in New Zealand over time,
+with each bar resembling a cigarette that is slowly burning down
+(the grey area represents ash at the end of the cigarette).
+The number of ex-smokers is encoded as the full height of each bar,
+so we can decode the number of ex-smokers.
+However, the grey area and the white area on each bar also changes
+each year and those changes are not associated with any data value.
+In other words, there are differences that we decode as a change
+in something, but nothing is really changing.
+This is at best confusing and could even lead to misinterpretation.[^bonus]
 
-[^cigarette]:
-    Cigarette image by [rawpixel.com](https://www.rawpixel.com/image/6482159/png-sticker-public-domain), Public Domain.
+[^listener-smoking]: 
+    @fig-smoking is based on a data visualisation in the New Zealand Listener
+    January 11-17 2025.
 
-    Cigarette ash by [2happy](https://www.stockvault.net/photo/119673/inffast#),
-    CC0 licence.
+[^bonus]:
+    There is a connection between *unintentional encodings* and
+    *chart junk* (@sec-junk).
+
+    @fig-smoking also contains a little easter egg bonus problem:
+    the x-axis is uneven, with a 7-year jump followed by
+    two five-year jumps.
 
 ```{r}
 #| echo: false
-#| label: fig-align
-#| fig-cap: A bar plot
+#| label: fig-smoking
+#| fig-cap: A bar plot of the number of ex-smokers in New Zealand over time.
 smokers <- data.frame(year=factor(c(2006, 2013, 2018, 2023)),
                       count=c(637293, 702012, 832104, 1012422),
                       stub=100000,
                       white=5:2*100000)
-notrun <- function() {
-smokers$white <- smokers$count - c(5, 20, 40, 60)*10000
-cigImg <- readPNG("Images/cig-vert.png")
-ashImg <- readPNG("Images/ash.png")
-cig <- function(data, coords) {
-    clip <- rectGrob(x=coords$x, y=0, just="bottom",
-                     height=coords$y)
-    grobTree(rasterGrob(cigImg, y=-.2, just="bottom", width=unit(15, "mm")),
-             vp=viewport(x=coords$x, 
-                         clip=clip))
-}
-ash <- function(data, coords) {
-    clip <- rectGrob(x=coords$x, y=coords$y, just="bottom",
-                     height=coords$yend - coords$y)
-    grobTree(rasterGrob(ashImg, y=coords$y, just="bottom", 
-                        width=unit(15, "mm")),
-             vp=viewport(x=coords$x, 
-                         clip=clip))
-}
-ggplot(smokers) +
-    grid_group(cig, aes(year, count, yend=white, group=year)) +
-    grid_group(ash, aes(year, white, yend=count, group=year)) +
-    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
-    theme(aspect.ratio=.5)
-}
 ggplot(smokers) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05))) +
     geom_col(aes(year, count), fill="grey40", colour="grey40", width=.4) +
     geom_col(aes(year, white), fill="whitesmoke", colour="grey40", width=.4) +
     geom_col(aes(year, stub), fill="#efa033", colour="grey40", width=.4) +
+    xlab(NULL) +
+    ylab(NULL) +
+    ggtitle("Number of ex-smokers in New Zealand") +
     theme(aspect.ratio=1)
 ```
-
 
 ## Consistent encodings {#sec-repetition}
 

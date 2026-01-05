@@ -227,7 +227,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Encoding Structure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Composing Encodings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -425,32 +425,70 @@ Figure&nbsp;13.6: A scatter plot of the number of times a team breaks through th
 <p>We can decode absolute data values from a text pattern because there is a pre-existing, learned decoding of words and numbers.</p>
 </blockquote>
 <p>Compared to much simpler data symbols like the bars in a bar plot, text data symbols are much more complex shapes. In terms of the visual processing model from <a href="visual-model.html#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>, the text data symbols are similar to <strong>visual objects</strong>. This means that text can convey more sophisticated information, at the expense of more cognitive effort, and with a limit on how many shapes we can process simultaneously (<a href="visual-model.html#fig-visual-model" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>).<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>One consequence of this flexibility is that, as well as being able to encode any data value as text, we can encode any sort of <strong>data summary</strong> as a text pattern. For example, we can use text to describe the size of the difference between two groups or the degree of correlation between two variables.</p>
 <blockquote class="blockquote">
 <p>We can decode complex information from text patterns.</p>
 </blockquote>
-<p>On the other hand, one weakness of text data symbols is that it requires more cognitive effort to compar data values from text symbols than it does to compare data values from simple visual features. For example, in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>, it is quick and easy to approximate the ratio of Pasifika to Māori or European/Other to Māori from the lengths of the bars. Those comparisons are slower and take more conscious effort if we try to use the white text data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;<span>13.3</span></a>.</p>
+<p>On the other hand, one weakness of text data symbols is that it requires more cognitive effort to compare data values from text patterns than it does to compare data values from the simple visual features of simple geometric shapes. For example, in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>, it is quick and easy to approximate the ratio of Pasifika to Māori or European/Other to Māori from the lengths of the bars. Those comparisons are slower and take more conscious effort if we try to use the white text data symbols in <a href="#fig-bar-text" class="quarto-xref">Figure&nbsp;<span>13.3</span></a>.</p>
 <blockquote class="blockquote">
 <p>It is harder to compare data values that are encoded as text patterns because it requires more effort to decode data values and to perform mental calculations.</p>
 </blockquote>
+<p>Another point is that encoding data values as a text pattern is <em>not</em> <strong>congruent</strong>. Although there is a learned decoding of text, there is no <strong>implicit decoding</strong> of text. For example, <a href="#fig-text-not-congruent" class="quarto-xref">Figure&nbsp;<span>13.7</span></a> shows a bar plot of just two numbers, with the numbers encoded as the lengths of the bars. The bar lengths are congruent with the amounts (<a href="congruence.html#sec-more-is-more" class="quarto-xref"><span>Section 7.3</span></a>), so it is easier to decode the two numbers from the bars than it is from a text pattern like this:</p>
+<pre><code>"The crime rate for females in New Zealand is less than half the 
+crime rate for males."</code></pre>
+<p>The text above does not have the same instant impact as the bars in <a href="#fig-text-not-congruent" class="quarto-xref">Figure&nbsp;<span>13.7</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-text-not-congruent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-text-not-congruent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="text_files/figure-html/fig-text-not-congruent-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-text-not-congruent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.7: A bar plot of the crime rate in New Zealand in 2021 for males and female offenders.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is not to say that encoding data values as a text pattern is a <em>dissonant</em> encoding, it is just <em>not</em> a <em>congruent</em> encoding.</p>
 <p>In addition, our visual system cannot generate <strong>visual summaries</strong> of large amounts of text (<a href="summaries.html#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>). This is why a table of numbers, like <a href="intro.html#tbl-crime" class="quarto-xref">Table&nbsp;<span>1.1</span></a>, is ineffective for perceiving groups of values or trends in values.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <blockquote class="blockquote">
 <p>Large numbers of text data symbols are <em>not</em> effective because the visual system cannot decode visual summaries from the text.</p>
 </blockquote>
+<p>It is possible to encode a <strong>data summary</strong> as a text pattern, but again we encounter a lack of congruence. For example, <a href="#fig-text-not-summary" class="quarto-xref">Figure&nbsp;<span>13.8</span></a> shows a line plot of the crime rate in New Zealand over time for males and females. The downward slopes of the lines in <a href="#fig-text-not-summary" class="quarto-xref">Figure&nbsp;<span>13.8</span></a> are congruent with the decreases in crime rate (<a href="visual-shapes.html#sec-line-plots" class="quarto-xref"><span>Section 10.1</span></a>), so it is easier to decode these data summaries than it is from a text pattern like this:</p>
+<pre><code>"The youth crime rate in New Zealand has decreased for both males and females
+from 2011 to 2021, though that decrease slowed from around 2018."</code></pre>
+<p>The text above does not have the same instant impact as the lines in <a href="#fig-text-not-summary" class="quarto-xref">Figure&nbsp;<span>13.8</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-text-not-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-text-not-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="text_files/figure-html/fig-text-not-summary-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-text-not-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.8: A scatter plot of the youth crime rate in New Zealand from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="sec-word-cloud" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="sec-word-cloud"><span class="header-section-number">13.4</span> Case study: Word clouds</h2>
-<p><a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;<span>13.7</span></a> shows a word cloud data visualisation based on the text of the Wikipedia page on the Rugby World Cup.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> This visualisation shows the frequency with which different words appear on the Wikipedia page. The data values that are being visualised are shown in <a href="#tbl-wiki-rwc" class="quarto-xref">Table&nbsp;<span>13.1</span></a>.</p>
+<p><a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;<span>13.9</span></a> shows a word cloud data visualisation based on the text of the Wikipedia page on the Rugby World Cup.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> This visualisation shows the frequency with which different words appear on the Wikipedia page. The data values that are being visualised are shown in <a href="#tbl-wiki-rwc" class="quarto-xref">Table&nbsp;<span>13.1</span></a>.</p>
 <div id="fig-wordcloud" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-wordcloud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Data/RWC/WordCloud/wordcloud-trim.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wordcloud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.7: A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup.
+Figure&nbsp;13.9: A word cloud of the frequency of words in the Wikipedia page for the Rugby World Cup.
 </figcaption>
 </figure>
 </div>
-<p>This data visualisation is unusual because it consists entirely of text <strong>data symbols</strong>. The encodings in <a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;<span>13.7</span></a> include encoding each word as the <strong>pattern</strong> of a text data symbol and encoding frequency as the <strong>size</strong> of a text data symbol. There is no need for a guide for the encoding from words to text pattern because there is a learned decoding (<a href="visual-objects.html#fig-learned-decode" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>); we can decode each text data symbol into a word data value because that decoding has already been learned.</p>
+<p>This data visualisation is unusual because it consists entirely of text <strong>data symbols</strong>. The encodings in <a href="#fig-wordcloud" class="quarto-xref">Figure&nbsp;<span>13.9</span></a> include encoding each word as the <strong>pattern</strong> of a text data symbol and encoding frequency as the <strong>size</strong> of a text data symbol. There is no need for a guide for the encoding from words to text pattern because there is a learned decoding (<a href="visual-objects.html#fig-learned-decode" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>); we can decode each text data symbol into a word data value because that decoding has already been learned.</p>
 <p>There is no guide for the encoding from word frequency to text size, so we cannot decode exact word frequencies. <a href="#tbl-wiki-rwc" class="quarto-xref">Table&nbsp;<span>13.1</span></a> shows the six most frequent words. However, the visualisation is still effective at conveying the <em>relative</em> frequencies. The larger words occurred more frequently. For example, we can see the names of the teams that were most successful at the tournament, like New Zealand and South Africa, are much larger than less successful teams.</p>
 <div class="cell">
 <div id="tbl-wiki-rwc" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -504,7 +542,7 @@ Table&nbsp;13.1: A table of the number of times different words occur in the Wik
 <blockquote class="blockquote">
 <p>A word cloud is effective for conveying words because it encodes words to text data symbols. It is also partially effective for conveying relative frequencies of words because it encodes word frequency to both size and position in space.</p>
 </blockquote>
-<p>Another benefit of encoding frequency as position in space is the efficient use of space. For example, <a href="#fig-wordcloud-bar" class="quarto-xref">Figure&nbsp;<span>13.8</span></a> shows the same data presented as a bar plot with the frequency of each word encoded to a separate bar. Although the accuracy is improved for comparing frequencies, the bar plot does not have as much room for the words themselves.</p>
+<p>Another benefit of encoding frequency as position in space is the efficient use of space. For example, <a href="#fig-wordcloud-bar" class="quarto-xref">Figure&nbsp;<span>13.10</span></a> shows the same data presented as a bar plot with the frequency of each word encoded to a separate bar. Although the accuracy is improved for comparing frequencies, the bar plot does not have as much room for the words themselves.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-wordcloud-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -513,7 +551,7 @@ Table&nbsp;13.1: A table of the number of times different words occur in the Wik
 <img src="text_files/figure-html/fig-wordcloud-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wordcloud-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.8: A bar plot of the frequency of different words in the Wikipedia page for the Rugby World Cup.
+Figure&nbsp;13.10: A bar plot of the frequency of different words in the Wikipedia page for the Rugby World Cup.
 </figcaption>
 </figure>
 </div>
@@ -713,7 +751,7 @@ Table&nbsp;13.3: Performance measures for the top 8 teams at the 2023 Rugby Worl
 </figure>
 </div>
 </div>
-<p>For comparison, <a href="#fig-rwc-table" class="quarto-xref">Figure&nbsp;<span>13.9</span></a> shows a scatter plot of the data from <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;<span>13.2</span></a>. The data symbol is a circle, with the number of tries encoded to horizontal <strong>position</strong>, the number of points encoded to vertical <strong>position</strong>, the number of clean breaks encoded to <strong>size</strong>, and the number of runs encoded to <strong>colour</strong> (shade). The relationships between tries and points and between breaks and both tries and points are still easier to perceive in this plot than in <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;<span>13.3</span></a>, but <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;<span>13.3</span></a>, even with its rounding, still provides better accuracy, particularly for breaks and runs.</p>
+<p>For comparison, <a href="#fig-rwc-table" class="quarto-xref">Figure&nbsp;<span>13.11</span></a> shows a scatter plot of the data from <a href="#tbl-rwc-table" class="quarto-xref">Table&nbsp;<span>13.2</span></a>. The data symbol is a circle, with the number of tries encoded to horizontal <strong>position</strong>, the number of points encoded to vertical <strong>position</strong>, the number of clean breaks encoded to <strong>size</strong>, and the number of runs encoded to <strong>colour</strong> (shade). The relationships between tries and points and between breaks and both tries and points are still easier to perceive in this plot than in <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;<span>13.3</span></a>, but <a href="#tbl-rwc-table-tidy" class="quarto-xref">Table&nbsp;<span>13.3</span></a>, even with its rounding, still provides better accuracy, particularly for breaks and runs.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rwc-table" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -722,7 +760,7 @@ Table&nbsp;13.3: Performance measures for the top 8 teams at the 2023 Rugby Worl
 <img src="text_files/figure-html/fig-rwc-table-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rwc-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.9: A scatter plot of the performance measures for the top 8 teams at the 2023 Rugby World Cup.
+Figure&nbsp;13.11: A scatter plot of the performance measures for the top 8 teams at the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
@@ -731,7 +769,7 @@ Figure&nbsp;13.9: A scatter plot of the performance measures for the top 8 teams
 </section>
 <section id="case-study-stem-and-leaf-plots" class="level2" data-number="13.6">
 <h2 data-number="13.6" class="anchored" data-anchor-id="case-study-stem-and-leaf-plots"><span class="header-section-number">13.6</span> Case study: Stem-and-leaf plots</h2>
-<p>Figure <a href="#fig-tries-hist" class="quarto-xref">Figure&nbsp;<span>13.10</span></a> shows a histogram of the number of tries scored by teams in the 2023 Rugby World Cup. The data symbols in <a href="#fig-tries-hist" class="quarto-xref">Figure&nbsp;<span>13.10</span></a> are bars. The raw data values are the average number of tries per game for each team, but the lengths of the bars encode <strong>data summaries</strong>: the number of teams with an average number of tries within each range: 0 to 1, 1 to 2, and so on.</p>
+<p>Figure <a href="#fig-tries-hist" class="quarto-xref">Figure&nbsp;<span>13.12</span></a> shows a histogram of the number of tries scored by teams in the 2023 Rugby World Cup. The data symbols in <a href="#fig-tries-hist" class="quarto-xref">Figure&nbsp;<span>13.12</span></a> are bars. The raw data values are the average number of tries per game for each team, but the lengths of the bars encode <strong>data summaries</strong>: the number of teams with an average number of tries within each range: 0 to 1, 1 to 2, and so on.</p>
 <p>Because the borders of the bars are not drawn, we get an emergent shape from the combined bars (similar to a density plot; <a href="visual-shapes.html#sec-density" class="quarto-xref"><span>Section 10.3</span></a>).</p>
 <p>This histogram allows us to see features of the data summaries, such as a suggestion that there is a small subset of teams that score a higher number of tries than the other teams (a bimodal distribution; though in this case we have a very small amount of data). However, there is no way to decode the raw data values from this histogram.</p>
 <div class="cell">
@@ -742,16 +780,16 @@ Figure&nbsp;13.9: A scatter plot of the performance measures for the top 8 teams
 <img src="text_files/figure-html/fig-tries-hist-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tries-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.10: A histogram of the number of tries scored. The bars are horizontal for easy comparison with the stem-and-leaf plot.
+Figure&nbsp;13.12: A histogram of the number of tries scored. The bars are horizontal for easy comparison with the stem-and-leaf plot.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.11</span></a> shows a stem-and-leaf diagram of the same data (with tries scored rounded to one decimal place).<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> The data symbol in this case is a text digit. Every team is encoded as a digit from 0 to 7, which represents the first decimal place for the average number of tries scored by each team. For example, New Zealand scored 7.0 tries per game on average and that is encoded as a <code>0</code> beside the <code>7</code> on the y-axis. The number of tries is also encoded as a combination of vertical position (the whole number of tries) and horizontal position (teams with the same whole number of tries are stacked horizontally, but also ordered by the first decimal place value).</p>
+<p>Figure <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.13</span></a> shows a stem-and-leaf diagram of the same data (with tries scored rounded to one decimal place).<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> The data symbol in this case is a text digit. Every team is encoded as a digit from 0 to 7, which represents the first decimal place for the average number of tries scored by each team. For example, New Zealand scored 7.0 tries per game on average and that is encoded as a <code>0</code> beside the <code>7</code> on the y-axis. The number of tries is also encoded as a combination of vertical position (the whole number of tries) and horizontal position (teams with the same whole number of tries are stacked horizontally, but also ordered by the first decimal place value).</p>
 <p>The number of teams within each range (0 to 1, 1 to 2, etc) is encoded by the number of digits. Another way to look at it is that the data symbol is a piece of text consisting of several digits and the number of teams is encoded as the <strong>length</strong> of the piece of text.</p>
-<p>As with the histogram in <a href="#fig-tries-hist" class="quarto-xref">Figure&nbsp;<span>13.10</span></a>, there are emergent shapes with two distinct humps visible, one taller than the other. However, in <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.11</span></a> we are <em>also</em> able to decode the raw data values as well. Furthermore, because the data symbols are text digits, we are able to decode individual data values very accurately.</p>
-<p>In summary, <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.11</span></a> combines standard decodings (<strong>length</strong>) with <strong>learned decodings</strong> (text pattern) to provide access to both high-level features of data summaries <em>and</em> raw data values.</p>
+<p>As with the histogram in <a href="#fig-tries-hist" class="quarto-xref">Figure&nbsp;<span>13.12</span></a>, there are emergent shapes with two distinct humps visible, one taller than the other. However, in <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.13</span></a> we are <em>also</em> able to decode the raw data values as well. Furthermore, because the data symbols are text digits, we are able to decode individual data values very accurately.</p>
+<p>In summary, <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.13</span></a> combines standard decodings (<strong>length</strong>) with <strong>learned decodings</strong> (text pattern) to provide access to both high-level features of data summaries <em>and</em> raw data values.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-tries-stem" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -760,13 +798,13 @@ Figure&nbsp;13.10: A histogram of the number of tries scored. The bars are horiz
 <img src="text_files/figure-html/fig-tries-stem-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tries-stem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.11: A stem-and-leaf plot of the number of tries scored.
+Figure&nbsp;13.13: A stem-and-leaf plot of the number of tries scored.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-tries-stem-colour" class="quarto-xref">Figure&nbsp;<span>13.12</span></a> shows a variation on <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.11</span></a> with the hemisphere encoded as the colours of the digits. This provides another demonstration that we can use simple visual features like colour to encode data values with text data symbols.</p>
+<p><a href="#fig-tries-stem-colour" class="quarto-xref">Figure&nbsp;<span>13.14</span></a> shows a variation on <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.13</span></a> with the hemisphere encoded as the colours of the digits. This provides another demonstration that we can use simple visual features like colour to encode data values with text data symbols.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-tries-stem-colour" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -775,13 +813,13 @@ Figure&nbsp;13.11: A stem-and-leaf plot of the number of tries scored.
 <img src="text_files/figure-html/fig-tries-stem-colour-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tries-stem-colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.12: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
+Figure&nbsp;13.14: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as colour.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-tries-stem-weight" class="quarto-xref">Figure&nbsp;<span>13.13</span></a> shows another variation on <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.11</span></a>, this time with the hemisphere encoded as the <strong>weight</strong> of the digits. This demonstrates the idea that there are text-specific visual features that can be used to encode data values (<a href="#sec-text-features" class="quarto-xref"><span>Section 13.2</span></a>).</p>
+<p><a href="#fig-tries-stem-weight" class="quarto-xref">Figure&nbsp;<span>13.15</span></a> shows another variation on <a href="#fig-tries-stem" class="quarto-xref">Figure&nbsp;<span>13.13</span></a>, this time with the hemisphere encoded as the <strong>weight</strong> of the digits. This demonstrates the idea that there are text-specific visual features that can be used to encode data values (<a href="#sec-text-features" class="quarto-xref"><span>Section 13.2</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-tries-stem-weight" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -790,7 +828,7 @@ Figure&nbsp;13.12: A stem-and-leaf plot of the number of tries scored with hemis
 <img src="text_files/figure-html/fig-tries-stem-weight-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tries-stem-weight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.13: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
+Figure&nbsp;13.15: A stem-and-leaf plot of the number of tries scored with hemisphere encoded as font weight.
 </figcaption>
 </figure>
 </div>
@@ -801,8 +839,8 @@ Figure&nbsp;13.13: A stem-and-leaf plot of the number of tries scored with hemis
 </section>
 <section id="sec-guides" class="level2" data-number="13.7">
 <h2 data-number="13.7" class="anchored" data-anchor-id="sec-guides"><span class="header-section-number">13.7</span> Encoding encodings</h2>
-<p><a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a> shows a dot plot of the total number of points scored by Tier One nations at Rugby World Cups. This data visualisation contains no text data symbols. The only data symbols, in the traditional sense, are the coloured circles.</p>
-<p>However, there are text elements within <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a>, on both axes and in the legend. Most of the data visualisations that we have seen so far have contained axes and legends, but we have largely ignored them and concentrated just on the data symbols within a data visualisation. In this section, we look at the work that axes and legends, particularly the text elements of axes and legends, are doing within a data visualisation.</p>
+<p><a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> shows a dot plot of the total number of points scored by Tier One nations at Rugby World Cups. This data visualisation contains no text data symbols. The only data symbols, in the traditional sense, are the coloured circles.</p>
+<p>However, there are text elements within <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a>, on both axes and in the legend. Most of the data visualisations that we have seen so far have contained axes and legends, but we have largely ignored them and concentrated just on the data symbols within a data visualisation. In this section, we look at the work that axes and legends, particularly the text elements of axes and legends, are doing within a data visualisation.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-legend" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -811,35 +849,35 @@ Figure&nbsp;13.13: A stem-and-leaf plot of the number of tries scored with hemis
 <img src="text_files/figure-html/fig-legend-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-legend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.14: A dot plot of the total number of points scored by Tier One nations at Rugby World Cup matches.
+Figure&nbsp;13.16: A dot plot of the total number of points scored by Tier One nations at Rugby World Cup matches.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>There are very familiar encodings of data values to data symbols in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a>. The number of points is encoded as the horizontal position of the circles, The different teams are encoded as the vertical position of the circles, and the hemisphere of each team is encoded as the colour of the circles.</p>
-<p>Although we have seen these encodings many times, we have not previously addressed the fact that, in addition to producing the location and colour of the circles, all of those encodings are represented within the data visualisation as either an axis or a legend. For example, the encoding of the number of points as horizontal position is represented in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a> by the x-axis. We will now look more closely at those axes and legends.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
-<p>The x-axis in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a> consists of five text labels, typically referred to as tick labels, plus five small line segments, typically referred to as tick marks. For example, there is a tick label “400” with a corresponding tick mark.</p>
+<p>There are very familiar encodings of data values to data symbols in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a>. The number of points is encoded as the horizontal position of the circles, The different teams are encoded as the vertical position of the circles, and the hemisphere of each team is encoded as the colour of the circles.</p>
+<p>Although we have seen these encodings many times, we have not previously addressed the fact that, in addition to producing the location and colour of the circles, all of those encodings are represented within the data visualisation as either an axis or a legend. For example, the encoding of the number of points as horizontal position is represented in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> by the x-axis. We will now look more closely at those axes and legends.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p>The x-axis in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> consists of five text labels, typically referred to as tick labels, plus five small line segments, typically referred to as tick marks. For example, there is a tick label “400” with a corresponding tick mark.</p>
 <p>A key insight is that, although the tick labels and the tick marks are not usually considered to be data symbols, and the values that they represent, in this case zero to sixteen hundred in steps of four hundred, are not usually considered to be data values, both the tick labels and the tick marks are just <strong>encodings</strong> of information. For example, the tick label “400” on the x-axis is an encoding of the number four hundred: the horizontal position of the text encodes the number four hundred and the text pattern encodes the number four hundred. Similarly, the number four hundred is encoded as the horizontal position of the corresponding tick mark.</p>
-<p>In other words, the x-axis in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a> is an <strong>encoding</strong> of the information that the number of points is <strong>encoded</strong> as horizontal position.</p>
+<p>In other words, the x-axis in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> is an <strong>encoding</strong> of the information that the number of points is <strong>encoded</strong> as horizontal position.</p>
 <p>Furthermore, because the tick labels and tick marks are encodings of information, it is possible to <strong>decode</strong> information from the tick marks and tick labels. In particular, as we discussed in <a href="#sec-learned-text" class="quarto-xref"><span>Section 13.3</span></a>, it is possible to decode the number 400 very accurately from the tick label “400”. The proximity of the tick mark to the tick label means that we group the tick label, and the decoded value four hundred, with the tick mark. (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
 <blockquote class="blockquote">
 <p>Text on axes and legends are similar to data symbols because we use them to encode and decode information.</p>
 </blockquote>
-<p>The tick label “400” on the x-axis is even more important because it is the <em>only</em> way to decode the number 400 from <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a> (<a href="#sec-learned-text" class="quarto-xref"><span>Section 13.3</span></a>). The tick label is what establishes an absolute value of four hundred as a horizontal position. The horizontal position of the circle data symbols are decoded relative to that absolute position (<a href="position.html#sec-rel-pos" class="quarto-xref"><span>Section 4.1</span></a>). For example, we can decode that Ireland has scored a little over four hundred points in Rugby World Cup games based on the position of the circle for Ireland <em>relative</em> to the position of the tick label “400”. There is no way to decode the number four hundred from the horizontal position of the circle for Ireland <em>on its own</em>.</p>
+<p>The tick label “400” on the x-axis is even more important because it is the <em>only</em> way to decode the number 400 from <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> (<a href="#sec-learned-text" class="quarto-xref"><span>Section 13.3</span></a>). The tick label is what establishes an absolute value of four hundred as a horizontal position. The horizontal position of the circle data symbols are decoded relative to that absolute position (<a href="position.html#sec-rel-pos" class="quarto-xref"><span>Section 4.1</span></a>). For example, we can decode that Ireland has scored a little over four hundred points in Rugby World Cup games based on the position of the circle for Ireland <em>relative</em> to the position of the tick label “400”. There is no way to decode the number four hundred from the horizontal position of the circle for Ireland <em>on its own</em>.</p>
 <blockquote class="blockquote">
 <p>Text on axes and legends are essential because they are often the only way to decode absolute data values from a data visualisation.</p>
 </blockquote>
 <p>Similarly, although with a little more work, we can establish that New Zealand has scored approximately eight hundred more points than Australia, by comparing the horizontal positions of the relevant circles with the tick labels that decode to sixteen hundred and eight hundred (and then performing the required mental arithmetic).</p>
 <p>We can use similar reasoning to establish the role of the tick labels on the y-axis. In this case, the values that are being encoded are actually data values—the names of the teams. The tick labels might not usually be called data symbols, but they are encodings of the team names. Furthermore, the tick labels are the <em>only</em> way to decode the actual team names. All that we can decode from the vertical position of the circles is that there are different teams. It is the fact that each tick labels shares the same vertical position as a circle that allows us to decode the team names from the circles, <em>via</em> the tick labels.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
-<p>The legend in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a> also works in a similar way. The legend consists of circles and text labels, arranged in rows so that each circle forms a visual group with one of the text labels. The text labels encode the hemisphere of the teams and they are the <em>only</em> way to decode the hemisphere values. The colours of the circles, and the proximity of the circles to the text labels, allow us to decode a hemisphere from a colour and the fact that the same colour encoding is used for the circle data symbols in the plot allow us to decode a hemisphere from a data symbol.</p>
+<p>The legend in <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> also works in a similar way. The legend consists of circles and text labels, arranged in rows so that each circle forms a visual group with one of the text labels. The text labels encode the hemisphere of the teams and they are the <em>only</em> way to decode the hemisphere values. The colours of the circles, and the proximity of the circles to the text labels, allow us to decode a hemisphere from a colour and the fact that the same colour encoding is used for the circle data symbols in the plot allow us to decode a hemisphere from a data symbol.</p>
 <p>Although the circles in the legend are not usually considered data symbols, they do look a lot like the data symbols in the plot. This makes it even clearer that axes and legends are just another example of encoding and decoding information.</p>
 <p>Another point to note about the text on axes and legends is that there tends to be a small number of tick labels and legend labels, whereas the number of data symbols can be quite large. This makes sense from what we know about how well decoding works from text (<a href="#sec-learned-text" class="quarto-xref"><span>Section 13.3</span></a>). The purpose of tick labels and legend labels is to allow the decoding of absolute values with great accuracy. This is the situation where text excels.</p>
 <p>A further point is that tick labels tend to be regularly spaced and they tend to encode “nice” numbers, for example, multiples of ten. As we saw earlier, if we want to decode the difference between tick labels, in addition to decoding individual tick labels, we are also required to perform mental to obtain the difference between the decoded values. The regular sequence of “nice” values makes that mental arithmetic much easier.</p>
 </section>
 <section id="case-study-direct-labelling" class="level2" data-number="13.8">
 <h2 data-number="13.8" class="anchored" data-anchor-id="case-study-direct-labelling"><span class="header-section-number">13.8</span> Case study: Direct Labelling</h2>
-<p><a href="#fig-direct-label" class="quarto-xref">Figure&nbsp;<span>13.15</span></a> shows a line plot of the number of offenders for different ethnic groups from 2011 to 2021. The ethnic groups are encoded as the colours of the lines, but instead of a legend to explain this encoding, we have drawn labels directly on the plot, a technique sometimes described as <em>direct labelling</em>.</p>
+<p><a href="#fig-direct-label" class="quarto-xref">Figure&nbsp;<span>13.17</span></a> shows a line plot of the number of offenders for different ethnic groups from 2011 to 2021. The ethnic groups are encoded as the colours of the lines, but instead of a legend to explain this encoding, we have drawn labels directly on the plot, a technique sometimes described as <em>direct labelling</em>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-direct-label" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -848,18 +886,18 @@ Figure&nbsp;13.14: A dot plot of the total number of points scored by Tier One n
 <img src="text_files/figure-html/fig-direct-label-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-direct-label-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.15: A line plot with …
+Figure&nbsp;13.17: A line plot with …
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>As we saw in <a href="#sec-guides" class="quarto-xref"><span>Section 13.7</span></a>, the decoding of a legend requires several steps of indirection: from text label in the legend to coloured data symbol in the legend to coloured data symbol in the plot. The direct labelling in <a href="#fig-direct-label" class="quarto-xref">Figure&nbsp;<span>13.15</span></a> reduces the number of steps. The text label can be decoded to give the ethnic group, then the proximity of the label to a line, plus the common colour encoding, visually groups the line with the label (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
+<p>As we saw in <a href="#sec-guides" class="quarto-xref"><span>Section 13.7</span></a>, the decoding of a legend requires several steps of indirection: from text label in the legend to coloured data symbol in the legend to coloured data symbol in the plot. The direct labelling in <a href="#fig-direct-label" class="quarto-xref">Figure&nbsp;<span>13.17</span></a> reduces the number of steps. The text label can be decoded to give the ethnic group, then the proximity of the label to a line, plus the common colour encoding, visually groups the line with the label (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
 <p>This technique reduces the amount of cognition required and also reduces the memory load because information has to be rembered between each step. Furthermore, the proximity of labels to data symbols reduces the number of fixations required to perform the decoding (<a href="visual-model.html#sec-visual-focus" class="quarto-xref"><span>Section 2.3</span></a>), which again reduces the memory load.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
 </section>
 <section id="sec-labels" class="level2" data-number="13.9">
 <h2 data-number="13.9" class="anchored" data-anchor-id="sec-labels"><span class="header-section-number">13.9</span> Encoding information</h2>
-<p><a href="#fig-labels" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> shows a very simple bar plot of the youth crime rate in New Zealand for 2021, broken down by ethnic group. There are no text data symbols in this plot, but in addition to the text on the axes, there is text in the overall plot title and there is text in the x-axis title.</p>
+<p><a href="#fig-labels" class="quarto-xref">Figure&nbsp;<span>13.18</span></a> shows a very simple bar plot of the youth crime rate in New Zealand for 2021, broken down by ethnic group. There are no text data symbols in this plot, but in addition to the text on the axes, there is text in the overall plot title and there is text in the x-axis title.</p>
 <p>Many of the data visualisations that we have seen previously have contained titles like these, but, as with the axes and legends, we have largely ignored their role. This section looks at the important work that titles and other larger pieces of text are performing within a data visualisation.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -869,14 +907,14 @@ Figure&nbsp;13.15: A line plot with …
 <img src="text_files/figure-html/fig-labels-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.16: A bar plot of the crime rate for different ethnic groups.
+Figure&nbsp;13.18: A bar plot of the crime rate for different ethnic groups.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>The first important point is that, although we are no longer encoding data values as data symbols, there is still an encoding happening. For example, the x-axis title encodes information about the data values that are being encoded as horizontal position, in this case the crime rate. The x-axis title does not encode any particular crime rate data value, but it does encoded a description of what those data values mean.</p>
-<p>In other words, the x-axis title encodes <strong>metadata</strong> rather than raw data values (<a href="#fig-label-encoding" class="quarto-xref">Figure&nbsp;<span>13.17</span></a>).</p>
+<p>In other words, the x-axis title encodes <strong>metadata</strong> rather than raw data values (<a href="#fig-label-encoding" class="quarto-xref">Figure&nbsp;<span>13.19</span></a>).</p>
 <div id="fig-label-encoding" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-label-encoding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -887,13 +925,13 @@ Figure&nbsp;13.16: A bar plot of the crime rate for different ethnic groups.
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-label-encoding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.17: Titles can be viewed as an encoding of metadata as text. We can encode complex information using text and we can decode text with extremely high fidelity.
+Figure&nbsp;13.19: Titles can be viewed as an encoding of metadata as text. We can encode complex information using text and we can decode text with extremely high fidelity.
 </figcaption>
 </figure>
 </div>
 <p>The overall plot title is similar, though more general again. This is not an encoding of specific data values, or a description of the data values, but a description of the overall topic of the data visualisation. A title may also summarise the overall message that should be drawn from the data visualisation.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
 <p>The titles on a data visualisation contain information like descriptions of variables and units of measurement and references to data sources. These are all important pieces of information, but they are more complex, more abstract, and far fewer in number than data values. Fortunately, text is very capable of expressing complex information and works very well in small amounts, so it is ideal for this role.</p>
-<p>To emphasise the unique ability of text to encode complex information, <a href="#fig-labels-icons" class="quarto-xref">Figure&nbsp;<span>13.18</span></a> shows a variation on <a href="#fig-labels" class="quarto-xref">Figure&nbsp;<span>13.16</span></a> that uses small icons to express the plot title.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> Icons like text, have learned decodings, so that we can decode “youth”, “crime”, and “New Zealand” from the icons in the title. However, the decodings of icons are far less precise, for example, we could also decode “child” or just “person” from the first icon and we could decode “prison” or “police” from the second icon. Furthermore, it is much harder to compose pictograms in the way that text can be composed into phrases and sentences.</p>
+<p>To emphasise the unique ability of text to encode complex information, <a href="#fig-labels-icons" class="quarto-xref">Figure&nbsp;<span>13.20</span></a> shows a variation on <a href="#fig-labels" class="quarto-xref">Figure&nbsp;<span>13.18</span></a> that uses small icons to express the plot title.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> Icons like text, have learned decodings, so that we can decode “youth”, “crime”, and “New Zealand” from the icons in the title. However, the decodings of icons are far less precise, for example, we could also decode “child” or just “person” from the first icon and we could decode “prison” or “police” from the second icon. Furthermore, it is much harder to compose pictograms in the way that text can be composed into phrases and sentences.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-labels-icons" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -902,7 +940,7 @@ Figure&nbsp;13.17: Titles can be viewed as an encoding of metadata as text. We c
 <img src="text_files/figure-html/fig-labels-icons-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-labels-icons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.18: A bar plot of the crime rate for different ethnic groups.
+Figure&nbsp;13.20: A bar plot of the crime rate for different ethnic groups.
 </figcaption>
 </figure>
 </div>
@@ -911,7 +949,7 @@ Figure&nbsp;13.18: A bar plot of the crime rate for different ethnic groups.
 <blockquote class="blockquote">
 <p>Text is the only way to encode the type of complex and abstract information that is required for titles and axis labels.</p>
 </blockquote>
-<p>Another use of text in a data visualisation is to label specific points of interest.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> For example, <a href="#fig-ann" class="quarto-xref">Figure&nbsp;<span>13.19</span></a> shows a variation of <a href="combine.html#fig-scatter" class="quarto-xref">Figure&nbsp;<span>9.4</span></a>, with text added to help explain the result of the Rugby World Cup final to disillusioned New Zealanders. This demonstrates further the value of text as the only way to encode complex and nuanced information.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></p>
+<p>Another use of text in a data visualisation is to label specific points of interest.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> For example, <a href="#fig-ann" class="quarto-xref">Figure&nbsp;<span>13.21</span></a> shows a variation of <a href="combine.html#fig-scatter" class="quarto-xref">Figure&nbsp;<span>9.4</span></a>, with text added to help explain the result of the Rugby World Cup final to disillusioned New Zealanders. This demonstrates further the value of text as the only way to encode complex and nuanced information.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ann" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -920,32 +958,32 @@ Figure&nbsp;13.18: A bar plot of the crime rate for different ethnic groups.
 <img src="text_files/figure-html/fig-ann-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ann-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.19: The number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams in the 2023 Rugby World Cup.
+Figure&nbsp;13.21: The number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-ann" class="quarto-xref">Figure&nbsp;<span>13.19</span></a> also demonstrates that text is an effective way of directing attention (<a href="visual-model.html#sec-attention" class="quarto-xref"><span>Section 2.6</span></a>). Text labels can explicitly describe important areas of the data visualisation or even important information to extract from the data visualisation.</p>
+<p><a href="#fig-ann" class="quarto-xref">Figure&nbsp;<span>13.21</span></a> also demonstrates that text is an effective way of directing attention (<a href="visual-model.html#sec-attention" class="quarto-xref"><span>Section 2.6</span></a>). Text labels can explicitly describe important areas of the data visualisation or even important information to extract from the data visualisation.</p>
 </section>
 <section id="dangers-of-text" class="level2" data-number="13.10">
 <h2 data-number="13.10" class="anchored" data-anchor-id="dangers-of-text"><span class="header-section-number">13.10</span> Dangers of text</h2>
-<p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;<span>13.20</span></a> shows a data visualisation of the number of gun deaths in Florida between 1990 and 2012, covering the enactment of Florida’s “stand your ground” law that loosened the constraints on an individual’s rights to use deadly force.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a> The title of the plot points out that gun deaths <em>decreased</em> after the law was enacted, which is perhaps surprising given that use of deadly force was less constrained after the introduction of the law.</p>
+<p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;<span>13.22</span></a> shows a data visualisation of the number of gun deaths in Florida between 1990 and 2012, covering the enactment of Florida’s “stand your ground” law that loosened the constraints on an individual’s rights to use deadly force.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a> The title of the plot points out that gun deaths <em>decreased</em> after the law was enacted, which is perhaps surprising given that use of deadly force was less constrained after the introduction of the law.</p>
 <div id="fig-text-danger" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-text-danger-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/deaths-florida-contra.png" class="img-fluid figure-img" style="width:50.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-text-danger-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.20: The title influences our perception; the message from the data symbols is actually quite different.
+Figure&nbsp;13.22: The title influences our perception; the message from the data symbols is actually quite different.
 </figcaption>
 </figure>
 </div>
 <p>However, if we look closely at the plot itself, we can see that the y-axis scale is inverted. A downward trend is actually an <em>increase</em> in gun deaths, so the data shows that gun deaths actually increased after the law was enacted.</p>
 <p>The point of this example is to demonstrate that the text within a data visualisation is not only given a lot of attention, but it can have a dominant effect on the message that the viewer takes away.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></p>
-<p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;<span>13.20</span></a> is an example of a deliberately misleading data visualisation, which we obviously want to avoid. However, the broader point is that we need to be at least as careful with our encoding of information in text labels as we are with our encoding of data values to visual features. We have a responsibility to make sure that there is a consistent message from both data symbols and text labels.</p>
-<p><a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.21</span></a> shows that we are also responsible at a more fundamental level for making sure that text labels are legible and easy to understand.<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a> <a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.21</span></a> shows data on the fortunes of New Zealand political parties since the 2023 election. The title is not misleading in this case, but it is not easy to understand. The main data values that are encoded in the bars of <a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.21</span></a> are the difference between the percentage of votes that each party gained at the election and the percentage of respondents who would vote for each party according to the most recent 30-day rolling average of poll results since the election. It is not clear what the best title for this plot would be, but it is also clear that the current title is not the best.</p>
-<p>In addition, the text labels at the end of each bar in <a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.21</span></a> are complicated, quite small and congested, and they are not regularly formatted. For example, the numbers in the labels on the bars to the right do not line up, so they are not easy to read and compare (<a href="#sec-tables" class="quarto-xref"><span>Section 13.5</span></a>).</p>
+<p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;<span>13.22</span></a> is an example of a deliberately misleading data visualisation, which we obviously want to avoid. However, the broader point is that we need to be at least as careful with our encoding of information in text labels as we are with our encoding of data values to visual features. We have a responsibility to make sure that there is a consistent message from both data symbols and text labels.</p>
+<p><a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.23</span></a> shows that we are also responsible at a more fundamental level for making sure that text labels are legible and easy to understand.<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a> <a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.23</span></a> shows data on the fortunes of New Zealand political parties since the 2023 election. The title is not misleading in this case, but it is not easy to understand. The main data values that are encoded in the bars of <a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.23</span></a> are the difference between the percentage of votes that each party gained at the election and the percentage of respondents who would vote for each party according to the most recent 30-day rolling average of poll results since the election. It is not clear what the best title for this plot would be, but it is also clear that the current title is not the best.</p>
+<p>In addition, the text labels at the end of each bar in <a href="#fig-unclear" class="quarto-xref">Figure&nbsp;<span>13.23</span></a> are complicated, quite small and congested, and they are not regularly formatted. For example, the numbers in the labels on the bars to the right do not line up, so they are not easy to read and compare (<a href="#sec-tables" class="quarto-xref"><span>Section 13.5</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-unclear" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -954,7 +992,7 @@ Figure&nbsp;13.20: The title influences our perception; the message from the dat
 <img src="text_files/figure-html/fig-unclear-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unclear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.21: The changing fortunes of New Zealand political parties since the 2023 election.
+Figure&nbsp;13.23: The changing fortunes of New Zealand political parties since the 2023 election.
 </figcaption>
 </figure>
 </div>
@@ -964,7 +1002,7 @@ Figure&nbsp;13.21: The changing fortunes of New Zealand political parties since 
 </section>
 <section id="case-study-linear-pairwise-plots" class="level2" data-number="13.11">
 <h2 data-number="13.11" class="anchored" data-anchor-id="case-study-linear-pairwise-plots"><span class="header-section-number">13.11</span> Case study: Linear pairwise plots</h2>
-<p><a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>13.22</span></a> shows a correlation matrix of seven performance measures for teams in the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>). We can see that many measures have quite a strong positive correlation (dark red circles), but one measure (the number of tackles per game) is negatively correlated with all other measures (though often only very weakly).</p>
+<p><a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>13.24</span></a> shows a correlation matrix of seven performance measures for teams in the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>). We can see that many measures have quite a strong positive correlation (dark red circles), but one measure (the number of tackles per game) is negatively correlated with all other measures (though often only very weakly).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-corr-mat" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -973,13 +1011,13 @@ Figure&nbsp;13.21: The changing fortunes of New Zealand political parties since 
 <img src="text_files/figure-html/fig-corr-mat-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.22: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
+Figure&nbsp;13.24: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>When the number of variables becomes large, a correlation matrix becomes an inefficient use of space.<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a> An alternative is to produce a <em>linear</em> plot of pairwise correlations, as shown in <a href="#fig-corr-linear" class="quarto-xref">Figure&nbsp;<span>13.23</span></a>.</p>
+<p>When the number of variables becomes large, a correlation matrix becomes an inefficient use of space.<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a> An alternative is to produce a <em>linear</em> plot of pairwise correlations, as shown in <a href="#fig-corr-linear" class="quarto-xref">Figure&nbsp;<span>13.25</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-corr-linear" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -988,16 +1026,16 @@ Figure&nbsp;13.22: Correlations between pairs of measures of performance for tea
 <img src="text_files/figure-html/fig-corr-linear-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-linear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.23: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
+Figure&nbsp;13.25: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The data symbols in <a href="#fig-corr-linear" class="quarto-xref">Figure&nbsp;<span>13.23</span></a> are circular data points. The correlation between a pair of measures is encoded as the horizontal position of the circles and the vertical position encodes for different pairs of measures.</p>
+<p>The data symbols in <a href="#fig-corr-linear" class="quarto-xref">Figure&nbsp;<span>13.25</span></a> are circular data points. The correlation between a pair of measures is encoded as the horizontal position of the circles and the vertical position encodes for different pairs of measures.</p>
 <p>The different pairs of measures are also encoded as the pattern of the tick labels on the y-axis. This encoding of the tick labels is an essential encoding because we cannot decode the pairs of measures from the vertical position of the circles alone.</p>
 <p>However, the encoding of the pairs of measures is an example of a poor text encoding because it is difficult to decode the variable names from the text pattern. Each tick label consists of two measure names separated by a colon. That makes a piece of text that is not a recognisable word, or a recognisable expression, so it is more difficult for our learned decoding to extract the information about the measures.</p>
-<p><a href="#fig-corr-linear-fix" class="quarto-xref">Figure&nbsp;<span>13.24</span></a> shows improved tick labels. The formatting in these labels makes it easier to decode individual measure names for each pair of measures.</p>
+<p><a href="#fig-corr-linear-fix" class="quarto-xref">Figure&nbsp;<span>13.26</span></a> shows improved tick labels. The formatting in these labels makes it easier to decode individual measure names for each pair of measures.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-corr-linear-fix" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1006,7 +1044,7 @@ Figure&nbsp;13.23: Correlations between pairs of measures of performance for tea
 <img src="text_files/figure-html/fig-corr-linear-fix-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-linear-fix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.24: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
+Figure&nbsp;13.26: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
@@ -1212,7 +1250,7 @@ World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI). 2025. <span>
 <li id="fn10"><p>The invention of stem-and-leaf plots is attributed to <span class="citation" data-cites="tukey1977eda">Tukey (<a href="#ref-tukey1977eda" role="doc-biblioref">1977</a>)</span>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>“If we are going to make a mark, it may as well be a meaningful one. The simplest - and most useful - meaningful mark is a digit” <span class="citation" data-cites="tufte1983visual">(<a href="#ref-tufte1983visual" role="doc-biblioref">Tufte 1983</a>)</span>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12"><p>Another name for a <em>legend</em> is a <em>key</em>. <span class="citation" data-cites="wilkinson2005">Wilkinson (<a href="#ref-wilkinson2005" role="doc-biblioref">2005</a>)</span> collects all axes and legends within the single concept of a <em>guide</em>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13"><p>In the case of a dot plot, like <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.14</span></a>, the dotted lines are also a big help in associating each tick label with a circle. The dotted lines are an example of using <em>connection</em> to create a visual group (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>In the case of a dot plot, like <a href="#fig-legend" class="quarto-xref">Figure&nbsp;<span>13.16</span></a>, the dotted lines are also a big help in associating each tick label with a circle. The dotted lines are an example of using <em>connection</em> to create a visual group (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p><span class="citation" data-cites="Shah2002">Shah and Hoeffner (<a href="#ref-Shah2002" role="doc-biblioref">2002</a>)</span> include the following advice for legends: “reduce the difficulty viewers face in keeping track of graphic referents because of the demands imposed on working memory.”</p>
 <p><span class="citation" data-cites="carpenter1998graph">Carpenter and Shah (<a href="#ref-carpenter1998graph" role="doc-biblioref">1998</a>)</span> give evidence from eye tracking that there is a memory load from switching between legend and plot: “viewers must continuously reexamine the labels to refresh their memory.”<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn15"><p>Suggestions for what to include in a plot title (and exhortations that we must always include a title!) are a popular inclusion in data visualisation guidelines. For example, from <span class="citation" data-cites="cleveland1985elements">Cleveland (<a href="#ref-cleveland1985elements" role="doc-biblioref">1985</a>)</span>:</p>
@@ -1227,7 +1265,7 @@ World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI). 2025. <span>
 <p>New Zealand image by Sharon Faria from <a href="https://thenounproject.com/browse/icons/term/new-zealand/">Noun Project</a> (CC BY 3.0)<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17"><p>These sorts of text labels are often referred to as <em>annotations</em>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn18"><p>We have described data visualisations mostly in terms of encoding <em>data values</em> because that is what is encoded in data symbols. We have mostly only considered the encoding and decoding of very simple forms of information: data values or data summaries. In this chapter, the addition of text vastly expands the range of information that we can encode and decode. Text is very powerful because it can convey not just data values, but information, knowledge, understanding, and wisdom <span class="citation" data-cites="ackoff1989">(<a href="#ref-ackoff1989" role="doc-biblioref">Ackoff 1989</a>)</span>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn19"><p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;<span>13.20</span></a> is based on a <a href="https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2">Business Insider</a> data visualisation, using data from <a href="https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/">USA Facts</a>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p><a href="#fig-text-danger" class="quarto-xref">Figure&nbsp;<span>13.22</span></a> is based on a <a href="https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2">Business Insider</a> data visualisation, using data from <a href="https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/">USA Facts</a>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn20"><p><span class="citation" data-cites="kong-trust">Kong, Liu, and Karahalios (<a href="#ref-kong-trust" role="doc-biblioref">2019</a>)</span> found that titles that are inconsistent with the data symbols bias the decoded information, even more so when recalling the message of the data visualisation later on.</p>
 <p><span class="citation" data-cites="consistent-captions">Kim, Setlur, and Agrawala (<a href="#ref-consistent-captions" role="doc-biblioref">2021</a>)</span> found that captions (another form of text label) that are consistent with the message in the data symbols make the decoding of the message more effective.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn21"><p>This plot is based on a plot in the November 15-21 edition of the New Zealand Listener.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1645,8 +1683,8 @@ World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI). 2025. <span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./design.html" class="pagination-link" aria-label="Encoding Structure">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Encoding Structure</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./design.html" class="pagination-link" aria-label="Composing Encodings">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Composing Encodings</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -348,12 +348,21 @@ shapes we can process simultaneously
     that are involved in the learned decoding of text as language
     [@ware2021information, p. 315-316]
 
+One consequence of this flexibility is that, as well as being
+able to encode any data value as text, we can encode 
+any sort of **data summary** as a text pattern.
+For example, we can use text to describe the size of the difference
+between two groups or the degree of correlation between
+two variables.
+
 > We can decode complex information from text patterns.
 
 On the other hand, one weakness of text data symbols
 is that it requires more cognitive effort to 
-compar data values from text symbols
-than it does to compare data values from simple visual features.
+compare data values from text patterns
+than it does to compare data values
+from the simple visual features
+of simple geometric shapes.
 For example, in @fig-bar, it is quick and easy to approximate 
 the ratio of Pasifika to Māori or European/Other to Māori from
 the lengths of the bars.
@@ -363,6 +372,45 @@ if we try to use the white text data symbols in @fig-bar-text.
 > It is harder to compare data values that are encoded as
   text patterns because it requires more effort to decode data 
   values and to perform mental calculations.
+
+Another point is that encoding data values as
+a text pattern is *not* **congruent**.
+Although there is a learned decoding of text,
+there is no **implicit decoding** of text.
+For example, @fig-text-not-congruent shows a bar plot of just two
+numbers, with the numbers encoded as the lengths of the bars.
+The bar lengths are congruent with the amounts (@sec-more-is-more),
+so it is easier to decode the two numbers from
+the bars than it is from a text pattern like this: 
+
+```
+"The crime rate for females in New Zealand is less than half the 
+crime rate for males."
+```
+
+The text above does not have the same instant impact as the bars
+in @fig-text-not-congruent.
+
+```{r}
+#| echo: false
+#| label: fig-text-not-congruent
+#| fig-cap: A bar plot of the crime rate in New Zealand in 2021 for males and female offenders.
+gg <- ggplot(crimeGender2021) +
+    geom_col(aes(gender, rate)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    crimeAgeLineTitle +
+    xlab(NULL) +
+    ylab(NULL) +
+    theme(aspect.ratio=1)
+grid.newpage()
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+This is not to say that encoding data values as
+a text pattern is a *dissonant* encoding, it is just *not*
+a *congruent* encoding.
 
 In addition, our visual system cannot generate
 **visual summaries** of large amounts of text (@sec-visual-summaries).
@@ -387,6 +435,43 @@ is ineffective for perceiving groups of values or trends in values.[^ware-text]
 
 > Large numbers of text data symbols are *not* effective because
   the visual system cannot decode visual summaries from the text.
+
+It is possible to encode a **data summary** as a text pattern, but again
+we encounter a lack of congruence.
+For example, @fig-text-not-summary shows a line plot of the crime rate
+in New Zealand over time for males and females.
+The downward slopes of the 
+lines in @fig-text-not-summary are congruent with the 
+decreases in crime rate
+(@sec-line-plots),
+so it is easier to decode these data summaries than it is from
+a text pattern like this:
+
+```
+"The youth crime rate in New Zealand has decreased for both males and females
+from 2011 to 2021, though that decrease slowed from around 2018."
+``` 
+
+The text above does not have the same instant impact as the lines
+in @fig-text-not-summary.
+
+```{r}
+#| echo: false
+#| label: fig-text-not-summary
+#| fig-cap: A scatter plot of the youth crime rate in New Zealand from 2011 to 2021.
+gg <- ggplot(crimeGender) +
+    geom_line(aes(year, rate, colour=gender)) +
+    scale_x_continuous(breaks=seq(2012, 2020, 2)) +
+    scale_colour_discrete(guide=guide_legend(reverse=TRUE), name=NULL) +
+    crimeAgeLineTitle +
+    xlab(NULL) +
+    ylab(NULL) +
+    theme(aspect.ratio=1)
+grid.newpage()
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+```
 
 ## Case study:  Word clouds {#sec-word-cloud}
 
