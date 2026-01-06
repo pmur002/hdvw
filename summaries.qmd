@@ -711,6 +711,8 @@ Darker circles represent higher crime rates.
 districts <- 
     st_read("Data/YouthCrime/SHP/nz-police-district-boundaries-29-april-2021.shp",
             quiet=TRUE)
+## Drop unnecessary Z dimension from some geometries
+districts <- st_zm(districts)
 centroids <- st_coordinates(st_centroid(st_geometry(districts)))
 districts$X <- centroids[,1]
 districts$Y <- centroids[,2]

@@ -60,8 +60,16 @@ RUN Rscript -e 'library(devtools); install_version("ggsci", "3.2.0", repos="http
 RUN Rscript -e 'library(devtools); install_version("GGally", "2.4.0", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("ggforce", "0.5.0", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("ggChernoff", "0.3.0", repos="https://cran.rstudio.com/")'
+RUN apt-get update && apt-get install -y \
+    libmagick++-dev
 RUN Rscript -e 'library(devtools); install_version("ggimage", "0.3.3", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("ggh4x", "0.3.1", repos="https://cran.rstudio.com/")'
+RUN apt-get update && apt-get install -y \
+    gfortran \
+    cmake \
+    libudunits2-dev \
+    libabsl-dev \
+    libgdal-dev
 RUN Rscript -e 'library(devtools); install_version("sf", "1.0.21", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("grImport", "0.9.7", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("grImport2", "0.3.3", repos="https://cran.rstudio.com/")'
@@ -85,6 +93,12 @@ RUN R CMD INSTALL /tmp/drewcurves_1.0.tar.gz
 RUN apt-get update && apt-get install -y \
     bibtex2html \
     w3m
+
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.deb
+RUN dpkg -i quarto-1.8.26-linux-amd64.deb
+
+RUN apt-get update && apt-get install -y \
+    librsvg2-bin
 
 RUN apt-get install -y locales && locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
