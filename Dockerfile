@@ -1,6 +1,6 @@
 
 # Base image
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 MAINTAINER Paul Murrell <paul@stat.auckland.ac.nz>
 
 # Install R 
@@ -38,13 +38,24 @@ RUN apt install -y --no-install-recommends \
     libjpeg-dev
 
 # For building the report
-RUN Rscript -e 'install.packages(c("quarto", "devtools"), repos="https://cran.rstudio.com/")'
-
-# Tools used in the report
 RUN apt-get update && apt-get install -y \
-    texlive-full 
+    texlive-full \
+    librsvg2-bin
+RUN apt-get update && apt-get install -y \
+    bibtex2html \
+    w3m
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-amd64.deb
+RUN dpkg -i quarto-1.7.32-linux-amd64.deb
+RUN Rscript -e 'install.packages("quarto", repos="https://cran.rstudio.com/")'
 
 # Packages used in the report
+RUN apt-get update && apt-get install -y \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev \
+    libwebp-dev
+RUN Rscript -e 'install.packages("devtools", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("png", "0.1.8", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("dplyr", "1.1.4", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("reshape2", "1.4.4", repos="https://cran.rstudio.com/")'
@@ -79,26 +90,15 @@ RUN Rscript -e 'library(devtools); install_version("xdvir", "0.1.3", repos="http
 RUN Rscript -e 'library(devtools); install_version("vwline", "0.2.4", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("gridGeometry", "0.4.0", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("gridtext", "0.1.5", repos="https://cran.rstudio.com/")'
+RUN Rscript -e 'library(devtools); install_version("rayshader", "0.37.3", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("rgl", "1.3.24", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("latticeExtra", "0.6.31", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("lvplot", "0.2.2", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("ggokabeito", "0.1.0", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("bullseye", "1.0.1", repos="https://cran.rstudio.com/")'
 
-RUN Rscript -e 'library(devtools); install_version("rayshader", "0.37.3", repos="https://cran.rstudio.com/")'
-
 COPY drewcurves_1.0.tar.gz /tmp/
 RUN R CMD INSTALL /tmp/drewcurves_1.0.tar.gz
-
-RUN apt-get update && apt-get install -y \
-    bibtex2html \
-    w3m
-
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.deb
-RUN dpkg -i quarto-1.8.26-linux-amd64.deb
-
-RUN apt-get update && apt-get install -y \
-    librsvg2-bin
 
 RUN apt-get install -y locales && locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8

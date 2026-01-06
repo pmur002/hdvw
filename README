@@ -5,6 +5,12 @@
   + Commit edits that work
   + Push to github (auto publish in github pages)
   + Release on github major milestones (e.g., version 1)
+    + Change version in VERSION file
+    + Rebuild (should update version info in HTML output + Docker image)
+    + git tag with version
+    + git commit (including tag)
+    + docker push image
+    + github release
 
 
 + NOTE that with modern browsers need to run a local server to 
@@ -15,6 +21,21 @@
   Ctrl-C to shut down, or if running in bg use this to find process id
 
   lsof -i :9999
+
+
++ NOTE that building in Ubuntu 24.04 (with Cairo 1.18.0) instead
+  of Ubuntu 20.04 (with Cairo 1.16.0) generates some SVG figures (for HTML)
+  that Firefox and Chrome cannot render (although eog can).
+  The trigger appears to be including a raster image in the SVG
+  (e.g., a colour gradient colorbar legend OR a raster icon).
+  This is why the Docker build is based on Ubuntu 22.04
+  (22.04 rather than 20.04 because some R packages are getting hard to install
+   on 20.04).
+
+  The raster legend can be worked around with 
+  guide_colorbar(display="rectangles"), but explicit rasters are harder.
+  Another workaround would be to generate PNG rather than SVG (for HTML),
+  but that would produce lower quality images.
 
 
 + Note this possible approach for adding "Reference" and "Footnote" titles

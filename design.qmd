@@ -318,7 +318,7 @@ This is at best confusing and could even lead to misinterpretation.[^bonus]
     There is a connection between *unintentional encodings* and
     *chart junk* (@sec-junk).
 
-    @fig-smoking also contains a little easter egg bonus problem:
+    @fig-smoking also contains a little easter-egg bonus problem:
     the x-axis is uneven, with a 7-year jump followed by
     two five-year jumps.
 
@@ -340,6 +340,22 @@ ggplot(smokers) +
     ggtitle("Number of ex-smokers in New Zealand") +
     theme(aspect.ratio=1)
 ```
+
+A choropleth map like @fig-map provides a more subtle example of an
+unintentional encoding.  Each region in the choropleth map is different 
+in multiple ways.
+Each region has its own colour, which reflects 
+the data values that are explicitly encoded and allows a decoding
+of the crime rate for each region.
+Each region also has its own position and shape, which reflect 
+the geography of the physical world and allow a decoding of the
+region itself.
+However, each region also has its own size, which again reflects the geography
+of the physical world, but is less useful for decoding the region itself
+and permits an *unintentional* decoding of larger data values from
+larger regions.  That is either a problem if it incorrectly
+confuses the decoding of crime rate from the colour of each region
+or it is a problem if it provides a distracting decoding of region size.
 
 ## Consistent encodings {#sec-repetition}
 

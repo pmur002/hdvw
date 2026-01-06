@@ -1,7 +1,7 @@
 
 + Created docker image with (NOTE ONLY lowercase in image tag) ...
 
-  sudo docker build -t pmur002/hdvw .
+  sudo docker build -t pmur002/hdvw:$(cat VERSION) .
 
   - NOTE that this is probably best run on Uni office machine
     (e.g., 130.216.38.37)
@@ -41,7 +41,7 @@
 + To make image available on DockerHub ...
 
   sudo docker login
-  sudo docker push pmur002/hdvw
+  sudo docker push pmur002/hdvw:$(cat VERSION)
 
 + Build report with ...
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -53,15 +53,14 @@ div.csl-indent {
 <link href="./design.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-10e94b5fb938c944332594b2e130a60a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6e052200a5ff315289b52d7836046450.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -104,7 +103,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -310,39 +309,63 @@ window.Quarto = {
 <p>We can only hope to decode information from a data visualisation if we have the appropriate data.</p>
 <p>Assuming that we have the relevant data, the next questions are:</p>
 <ul>
-<li><p>What are the data symbols?</p></li>
-<li><p>What is being encoded (raw data values and/or data summaries)? <em>and</em></p></li>
-<li><p>What encodings are being used? <em>and</em></p></li>
-<li><p>How many encodings are there?</p></li>
+<li>What are the data symbols?</li>
+</ul>
+<!-- -->
+<ul>
+<li>What is being encoded (raw data values and/or data summaries)? <em>and</em></li>
+<li>What encodings are being used? <em>and</em></li>
+<li>How many encodings are there?</li>
 </ul>
 <p>For each data value or summary and its encoding, we must then ask:</p>
 <ul>
-<li><p>Can we decode quantitative data values and is the decoding accurate? <em>or</em></p></li>
-<li><p>Can we decode qualitative data values and is there enough capacity?</p></li>
-<li><p>Is the encoding congruent? <em>or</em></p></li>
-<li><p>Is the encoding dissonant?</p></li>
-<li><p>Can we decode raw data values? <em>or</em></p></li>
-<li><p>Can we decode data summaries?</p></li>
-<li><p>Do encodings interact to create emergent features?</p></li>
-<li><p>Does each data value or summary have its own data symbol? <em>or</em></p></li>
-<li><p>Are multiple data values or summaries encoded as a single data symbol?</p></li>
-<li><p>Do the encodings combine to create recognisable visual objects?</p></li>
+<li>Can we decode quantitative data values and is the decoding accurate? <em>or</em></li>
+<li>Can we decode qualitative data values and is there enough capacity?</li>
+</ul>
+<!-- -->
+<ul>
+<li>Is the encoding congruent? <em>or</em></li>
+<li>Is the encoding dissonant?</li>
+</ul>
+<!-- -->
+<ul>
+<li>Can we decode raw data values? <em>or</em></li>
+<li>Can we decode data summaries?</li>
+</ul>
+<!-- -->
+<ul>
+<li>Do encodings interact to create emergent features?</li>
+</ul>
+<!-- -->
+<ul>
+<li>Does each data value or summary have its own data symbol? <em>or</em></li>
+<li>Are multiple data values or summaries encoded as a single data symbol?</li>
+</ul>
+<!-- -->
+<ul>
+<li>Do the encodings combine to create recognisable visual objects?</li>
 </ul>
 <p>Looking beyond the data symbols, we should also identify all text elements and consider the overall design:</p>
 <ul>
-<li><p>Can we decode absolute data values or data summaries from the text?</p></li>
-<li><p>Can we decode the overall context from the text?</p></li>
-<li><p>Can we decode the main message of the data visualisation from the text?</p></li>
-<li><p>Can we decode the structure of the data visualisation?</p></li>
-<li><p>Are the encodings consistent?</p></li>
-<li><p>Is our attention drawn to the most important elements?</p></li>
+<li>Can we decode absolute data values or data summaries from the text? <em>and</em></li>
+<li>Can we decode the overall context from the text? <em>and</em></li>
+<li>Can we decode the main message of the data visualisation from the text?</li>
+</ul>
+<!-- -->
+<ul>
+<li>Can we decode the structure of the data visualisation? <em>and</em></li>
+<li>Are the encodings consistent? <em>and</em></li>
+<li>Is our attention drawn to the most important elements?</li>
 </ul>
 <p>Overall, the goal of a data visualisation is to take advantage of the visual system to rapidly and effortlessly communicate data values and data summaries:</p>
 <ul>
-<li><p>What are you asking the visual system to do? <em>and</em></p></li>
-<li><p>Is the visual system good at that task?</p></li>
-<li><p>Do all visual differences correspond to differences in the data? <em>and</em></p></li>
-<li><p>Are all differences in the data represented by visual differences?</p></li>
+<li>What are you asking the visual system to do? <em>and</em></li>
+<li>Is the visual system good at that task?</li>
+</ul>
+<!-- -->
+<ul>
+<li>Do all visual differences correspond to differences in the data? <em>and</em></li>
+<li>Are all differences in the data represented by visual differences?</li>
 </ul>
 <section id="case-study-a-letter-value-plot" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="case-study-a-letter-value-plot"><span class="header-section-number">15.1</span> Case study: A letter-value plot</h2>
@@ -671,14 +694,13 @@ Wickham, Hadley, and Heike Hofmann. 2025. <em><span class="nocase">lvplot</span>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
