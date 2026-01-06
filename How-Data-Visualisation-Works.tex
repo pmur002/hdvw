@@ -279,6 +279,8 @@
 
 \markboth{Preface}{Preface}
 
+Version 0.9 (build 2026-01-06)
+
 This is a book about data visualisation.
 
 Like many books, it scratches an author's itch.
@@ -471,10 +473,10 @@ All data visualisations in this book were created with R.\footnote{Many
   2002).} The code for all data visualisations is available in the
 github repository for this book.
 
-\section*{How to Read this Book}\label{how-to-read-this-book}
-\addcontentsline{toc}{section}{How to Read this Book}
+\section*{How to read this book}\label{how-to-read-this-book}
+\addcontentsline{toc}{section}{How to read this book}
 
-\markright{How to Read this Book}
+\markright{How to read this book}
 
 Although the goal is to provide a relatively simple conceptual framework
 for thinking about data visualisation, this is not a short book. The
@@ -503,6 +505,28 @@ hovering the mouse over a hyperlink will show a preview of the relevant
 section or figure. This is particularly effective for figures because it
 obviates the need to reproduce the same image multiple times; just hover
 over the figure link to see the image that the text is referring to.
+
+\section*{How to cite this book}\label{how-to-cite-this-book}
+\addcontentsline{toc}{section}{How to cite this book}
+
+\markright{How to cite this book}
+
+Please use the following citation:
+
+Paul Murrell. How Data Visualisation Works. The University of Auckland,
+2026. Version 0.9 (build 2026-01-06).
+
+\begin{verbatim}
+
+@book{murrell-hdvw-2026-01-06,
+title={How Data Visualisation Works},
+author={Murrell, Paul},
+note={Version 0.9 (build 2026-01-06)},
+year=2026,
+publisher={The University of Auckland}
+}
+
+\end{verbatim}
 
 \section*{Acknowledgements}\label{acknowledgements}
 \addcontentsline{toc}{section}{Acknowledgements}
@@ -543,16 +567,6 @@ Attribution-NonCommercial-ShareAlike 4.0 International License.
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \theendnotes
-
-\bookmarksetup{startatroot}
-
-\chapter*{License}\label{license-1}
-\addcontentsline{toc}{chapter}{License}
-
-\markboth{License}{License}
-
-This work is licensed under a Creative Commons
-Attribution-NonCommercial-ShareAlike 4.0 International License.
 
 \bookmarksetup{startatroot}
 
@@ -11568,18 +11582,24 @@ Figure~\ref{fig-rep-guide} and, as a consequence, there are fewer visual
 differences, so there is less to decode. The data visualisation is less
 complex.
 
-Figure~\ref{fig-smoking} shows a more problematic example. This bar plot
-shows the number of ex-smokers in New Zealand over time, with each bar
-resembling a cigarette that is slowly burning down (the grey area
-represents ash at the end of the cigarette). The number of ex-smokers is
-encoded as the full height of each bar, so we can decode the number of
-ex-smokers. However, the grey area and the white area on each bar also
-changes each year and those changes are not associated with any data
-value. In other words, there are differences that we decode as a change
-in something, but nothing is really changing. This is at best confusing
-and could even lead to misinterpretation.\footnote{Figure~\ref{fig-smoking}
-  also contains a little easter egg bonus problem: the x-axis is uneven,
-  with a 7-year jump followed by two five-year jumps.}
+Figure~\ref{fig-smoking} shows a more problematic example.\footnote{Figure~\ref{fig-smoking}
+  is based on a data visualisation in the New Zealand Listener January
+  11-17 2025.} This bar plot shows the number of ex-smokers in New
+Zealand over time, with each bar resembling a cigarette that is slowly
+burning down (the grey area represents ash at the end of the cigarette).
+The number of ex-smokers is encoded as the full height of each bar, so
+we can decode the number of ex-smokers. However, the grey area and the
+white area on each bar also changes each year and those changes are not
+associated with any data value. In other words, there are differences
+that we decode as a change in something, but nothing is really changing.
+This is at best confusing and could even lead to
+misinterpretation.\footnote{There is a connection between
+  \emph{unintentional encodings} and \emph{chart junk}
+  (Section~\ref{sec-junk}).
+
+  Figure~\ref{fig-smoking} also contains a little easter egg bonus
+  problem: the x-axis is uneven, with a 7-year jump followed by two
+  five-year jumps.}
 
 \begin{figure}
 
@@ -11589,7 +11609,8 @@ and could even lead to misinterpretation.\footnote{Figure~\ref{fig-smoking}
 
 }
 
-\caption{\label{fig-smoking}A bar plot}
+\caption{\label{fig-smoking}A bar plot of the number of ex-smokers in
+New Zealand over time.}
 
 \end{figure}%
 
