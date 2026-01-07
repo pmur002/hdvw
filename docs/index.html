@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paul Murrell">
+
+<title>How Data Visualisation Works</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./exec.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6e052200a5ff315289b52d7836046450.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">How Data Visualisation Works</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exec.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Executive Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Visual System</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mapping-visual-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visual Features</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./position.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Position</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Length</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qualitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Colour</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./congruence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Congruent Encodings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Encoding Summaries</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./combine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Combining Encodings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-shapes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visual Shapes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Encodings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visual-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visual Objects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Text</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Composing Encodings</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Review</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <ul class="collapse">
+  <li><a href="#sec-scope" id="toc-sec-scope" class="nav-link" data-scroll-target="#sec-scope">Scope</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#how-to-read-this-book" id="toc-how-to-read-this-book" class="nav-link" data-scroll-target="#how-to-read-this-book">How to read this book</a></li>
+  <li><a href="#how-to-cite-this-book" id="toc-how-to-cite-this-book" class="nav-link" data-scroll-target="#how-to-cite-this-book">How to cite this book</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">How Data Visualisation Works</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Paul Murrell </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="Cover/cover.svg" title="How Data Visualisation Works" class="quarto-cover-image nolightbox img-fluid"></p>
+<p>Version 0.9 (build 2026-01-07)</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Under construction!</p>
+</div>
+</div>
+<section id="preface" class="level1 unnumbered">
+<h1 class="unnumbered">Preface</h1>
+<p>This is a book about data visualisation.</p>
+<p>Like many books, it scratches an author’s itch.</p>
+<p>This particular itch began a long time ago, when first introduced to the works of Edward Tufte. Books like <em>The Visual Display of Quantitative Information</em> and <em>Envisioning Information</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> inspired an interest in how to produce effective graphics, but they were also frustrating.</p>
+<p>Reading a Tufte book to get better at data visualisation is a bit like watching Roger Federer play to get better at tennis. It is possible to glean fragments of insight into the master’s skill and technique, but it is difficult to come away with a clear set of rules for how to succeed on our own.</p>
+<p>At the same time, encountering the work of William S. Cleveland presented a different problem.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Here were hard experimental results with clear implications for effective data visualisations: use length not area; use bars not pies. But they only told us about a small subset of the types of data visualisations that we could create and they only told us about a small subset of the types of questions that we could answer with those data visualisations.</p>
+<p>The next decade or so were spent distracted by building tools for <em>creating</em> data visualisations<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> before returning again to the question of <em>designing</em> data visualisations. In those intervening decades, a lot has happened.</p>
+<p>Data visualisation is an area of research for psychologists, for computer scientists, for geographers, and even for statisticians. The literature is wide and deep and complex.</p>
+<p>This has significantly reduced the size of the second problem. We know a lot more about a wider range of data visualisation types and data visualisation tasks. Unfortunately, this has introduced a new problem. There are comprehensive and detailed overviews of current knowledge,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> but it is now difficult to consume and make sense of so much knowledge.</p>
+<p>At the same time, there are more accessible and practical guides for creating effective data visualisations.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> These eschew much of the gory detail in favour of simple, applicable advice. The problem here is that, without the underlying explanations, the guidelines can become just a long laundry list to commit to memory. Rather than just being told that bars should always start at zero, it is more satisfying to know <em>why</em> bars should always start at zero.</p>
+<p>For some of us there is a need for a middle path. We would like to understand why we are making certain data visualisation choices, but we have brains that can only hold so many ideas at once. For us there is utility in a framework that contains a small number of core concepts, that still covers a wide range of data visualisations, but connects them all with a relatively simple explanation.</p>
+<p>This book attempts to provide such a framework. Rather than providing a list of dos and don’ts, it provides a list of <em>reasons</em> why and why not. It is a synthesis of a large number of research articles and books and it is a simplification of a large amount of knowledge. It is an attempt to prune the complexity so that we can see the forest through the trees, while at the same time leaving enough foliage that we can still recognise a tree when we see one.</p>
+<p>I hope that it helps.</p>
+<section id="sec-scope" class="level2">
+<h2 class="anchored" data-anchor-id="sec-scope">Scope</h2>
+<p>There is a lot of useful information and understanding about how data visualisations work, but it is distributed throughout and embedded within a very broad, deep, and detailed data visualisation literature. This book aims to produce a simple, coherent explanation that is accessible to a less expert audience.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>The focus of this document is <strong>static</strong> data visualisations for <strong>presentation</strong>. The assumption is that our data values have an interesting property and we want to produce a display that makes it easy and efficient for viewers to perceive that property. Some of the information that we cover will also apply to interactive graphics and to exploratory graphics, but the specific requirements of those types of data visualisation will not be addressed.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>There is also an emphasis on <strong>statistical graphics</strong> in this book, which is characterised by the use of abstract geometric symbols, such as circles and rectangles, to represent data values, as opposed to scientific graphics, which is focused more on realistic representations of physical objects, or cartography, which is focused on the geographic context of data values.</p>
+<p>This document is also focused on what <strong>vision science</strong> has to tell us about effective data visualisation. We will consider factors that influence how rapidly and how accurately information can be extracted from a data visualisation. This will include findings from a broad range of research, encompassing Statistics, Computer Science, Psychology, and Cartography.</p>
+<p>However, this document does not cover all fields of research that impact on data visualisation. We will not, for example, address the ethical use of data visualisation, beyond a basic assumption that we want to faithfully represent the properties of the data.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>This document is also aimed at a numerate audience, so we assume an appreciation of the importance of collecting the right data in the right way for the questions that we hope to answer.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p>It is also important to acknowledge that vision science cannot yet tell us everything about how data visualisation works. However, what is known will help us to have some understanding of why some data visualisations are so effective and others are less effective.</p>
+<p>As well as being a synthesis of a large range of data visualisation research, this document is also a simplification of that research. Some details are smoothed over and some details are just left out. The goal is to provide a framework that is easy to understand by non-experts and easy to apply to a broad range of data visualisations. References to the relevant literature are provided in footnotes so that the interested, or sceptical, reader can dig deeper.</p>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<p>This book is about the choices that go into <em>designing</em> a data visualisation. It does not cover how to use software to implement those design choices and <em>create</em> a data visualisation.</p>
+<p>All data visualisations in this book were created with R.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> The code for all data visualisations is available in the github repository for this book.</p>
+</section>
+<section id="how-to-read-this-book" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-read-this-book">How to read this book</h2>
+<p>Although the goal is to provide a relatively simple conceptual framework for thinking about data visualisation, this is not a short book. The <a href="exec.html">Executive Summary</a> provides the simplest possible statement of the framework and it may be useful to resurface and revisit this summary if you become lost in the depths of one of the chapters.</p>
+<p>A slightly longer summary of the framework is provided in the <a href="review.html">Review</a>. The Review also provides some guidance on how the framework can be applied to the creation of a new data visualisation and the criticism of an existing one.</p>
+<p>Another major issue with a subject this complex and a subject that is studied from so many different angles is <em>terminology</em>. There is no consistency across all of the different sources of information from which this book was drawn, so all that we can do is attempt to be consistent with ourselves. Some of the most important terms that will be reused relentlessly throughout this book are highlighted in the <a href="exec.html">Executive Summary</a>. The meaning of these terms is hopefully approximately what you already think, but they will be made clearer as the book progresses.</p>
+<p>All section and figure cross-references are hyperlinks, so clicking them will navigate to the relevant section or figure. Even more helpfully, hovering the mouse over a hyperlink will show a preview of the relevant section or figure. This is particularly effective for figures because it obviates the need to reproduce the same image multiple times; just hover over the figure link to see the image that the text is referring to.</p>
+</section>
+<section id="how-to-cite-this-book" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-cite-this-book">How to cite this book</h2>
+<p>Please use the following citation:</p>
+<p>Paul Murrell. How Data Visualisation Works. The University of Auckland, 2026. Version 0.9 (build 2026-01-07).</p>
+<pre><code>
+@book{murrell-hdvw-2026-01-07,
+    title = {How Data Visualisation Works},
+    author = {Murrell, Paul},
+    note = {Version 0.9 (build 2026-01-07)},
+    year = 2026,
+    publisher = {The University of Auckland}
+}
+</code></pre>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This book is based upon a large number of research articles and books, but in order to make the text appear more accessible and friendly, there are no formal citations in the main text. There are, however, a large number of footnotes, which provide the links between what is being described in the main text and the underlying research, and those footnotes contain proper citations. The real work is not being ignored, it is just being hidden from view.</p>
+<p>Generative AI was used sparingly in the preparation of this book. Specifically, ChatGPT was employed to assist with the formatting of BibTeX references from various sources, and Google’s AI Overview (Google Gemini) provided the initial Python code for generating the optimal colour solid boundary for <a href="qualitative.html#fig-colour-spaces" class="quarto-xref">Figure&nbsp;<span>6.9</span></a>.</p>
+<p>This book has been generated using the <a href="https://quarto.org/">Quarto publishing system</a>. If any parts of the book look nice to you, it is probably thanks to Quarto.</p>
+<p>I am also contractually obliged to thank my wife, Julia. I am also geunuinely indebted to Julia for the brutally honest feedback that she provided on early drafts of the text. If any parts of the book make sense to you, it is probably thanks to Julia.</p>
+</section>
+<section id="license" class="level2">
+<h2 class="anchored" data-anchor-id="license">License</h2>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+<hr>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bertini-how-not-to-lie" class="csl-entry" role="listitem">
+Bertini, Enrico. 2025. <span>“How NOT to Lie with Charts.”</span> <a href="https://filwd.substack.com/p/how-not-to-lie-with-charts">https://filwd.substack.com/p/how-not-to-lie-with-charts</a>.
+</div>
+<div id="ref-CairoAlberto2014Eiid" class="csl-entry" role="listitem">
+Cairo, Alberto. 2014. <span>“Ethical Infographics: In Data Visualization, Journalism Meets Engineering.”</span> <em>The IRE Journal</em> 37 (2): 25.
+</div>
+<div id="ref-cairo2016truthful" class="csl-entry" role="listitem">
+———. 2016. <em>The Truthful Art: Data, Charts, and Maps for Communication</em>. 1st ed. San Francisco, CA: New Riders.
+</div>
+<div id="ref-cairo2019howchartslie" class="csl-entry" role="listitem">
+———. 2019. <em>How Charts Lie: Getting Smarter about Visual Information</em>. First. New York: W.&nbsp;W. Norton &amp; Company.
+</div>
+<div id="ref-cleveland1985elements" class="csl-entry" role="listitem">
+Cleveland, William S. 1985. <em>The Elements of Graphing Data</em>. Monterey, CA: Wadsworth Advanced Books; Software.
+</div>
+<div id="ref-cleveland1993visualizing" class="csl-entry" role="listitem">
+———. 1993. <em>Visualizing Data</em>. Summit, NJ: Hobart Press.
+</div>
+<div id="ref-cookSwayne2007" class="csl-entry" role="listitem">
+Cook, Dianne, and Deborah F. Swayne. 2007. <em>Interactive and Dynamic Graphics for Data Analysis: With r and GGobi</em>. 1st ed. Use r! Springer New York. <a href="https://doi.org/10.1007/978-0-387-71762-3">https://doi.org/10.1007/978-0-387-71762-3</a>.
+</div>
+<div id="ref-ellson2002graphviz" class="csl-entry" role="listitem">
+Ellson, John, Emden R Gansner, Lefteris Koutsofios, Stephen C North, and Gordon Woodhull. 2002. <span>“Graphviz—Open Source Graph Drawing Tools.”</span> <em>International Symposium on Graph Drawing</em>, 483–84.
+</div>
+<div id="ref-data_by_design_emory2021" class="csl-entry" role="listitem">
+Emory Digital Humanities Lab. 2021. <span>“Data by Design: An Interactive History of Data Visualization.”</span> <a href="https://dev.dataxdesign.io/" class="uri">https://dev.dataxdesign.io/</a>.
+</div>
+<div id="ref-healy2018data" class="csl-entry" role="listitem">
+Healy, Kieran. 2018. <em>Data Visualization: A Practical Introduction</em>. Princeton, NJ: Princeton University Press.
+</div>
+<div id="ref-kosslyn1989understanding" class="csl-entry" role="listitem">
+Kosslyn, Stephen M. 1989. <span>“Understanding Charts and Graphs.”</span> <em>Applied Cognitive Psychology</em> 3 (3): 185–225.
+</div>
+<div id="ref-munzner2014visualization" class="csl-entry" role="listitem">
+Munzner, Tamara. 2014. <em>Visualization Analysis and Design</em>. CRC Press.
+</div>
+<div id="ref-murrell2019r" class="csl-entry" role="listitem">
+Murrell, Paul. 2019. <em>R Graphics</em>. 3rd ed. Boca Raton, FL: Chapman; Hall/CRC.
+</div>
+<div id="ref-Rlang" class="csl-entry" role="listitem">
+R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-robbins2005creating" class="csl-entry" role="listitem">
+Robbins, Naomi B. 2005. <em>Creating More Effective Graphs</em>. Hoboken, NJ: Wiley-Interscience.
+</div>
+<div id="ref-sönning_2022" class="csl-entry" role="listitem">
+Sönning, Lukas. 2022. <span>“Drawing on Principles of Perception: The Line Plot.”</span> PsyArXiv. <a href="https://doi.org/10.31234/osf.io/tjfz5">https://doi.org/10.31234/osf.io/tjfz5</a>.
+</div>
+<div id="ref-theus_urbanek_2008_interactive" class="csl-entry" role="listitem">
+Theus, Martin, and Simon Urbanek. 2008. <em>Interactive Graphics for Data Analysis: Principles and Examples</em>. 1st ed. Boca Raton, FL: Chapman &amp; Hall/CRC.
+</div>
+<div id="ref-tufte1983visual" class="csl-entry" role="listitem">
+Tufte, Edward R. 1983. <em>The Visual Display of Quantitative Information</em>. Cheshire, Connecticut: Graphics Press.
+</div>
+<div id="ref-tufte1990envisioning" class="csl-entry" role="listitem">
+———. 1990. <em>Envisioning Information</em>. Cheshire, CT: Graphics Press.
+</div>
+<div id="ref-tufte1997visual" class="csl-entry" role="listitem">
+———. 1997. <em>Visual Explanations: Images and Quantities, Evidence and Narrative</em>. Cheshire, CT: Graphics Press.
+</div>
+<div id="ref-tufte2006beautiful" class="csl-entry" role="listitem">
+———. 2006. <em>Beautiful Evidence</em>. Cheshire, CT: Graphics Press.
+</div>
+<div id="ref-unwinTheusHofmann2006" class="csl-entry" role="listitem">
+Unwin, Antony, Martin Theus, and Heike Hofmann. 2006. <em>Graphics of Large Datasets: Visualizing a Million</em>. 1st ed. Statistics and Computing. New York, NY: Springer Science &amp; Business Media. <a href="https://doi.org/10.1007/0-387-37977-0">https://doi.org/10.1007/0-387-37977-0</a>.
+</div>
+<div id="ref-annurev-statistics-031219-041252" class="csl-entry" role="listitem">
+Vanderplas, Susan, Dianne Cook, and Heike Hofmann. 2020. <span>“Testing Statistical Charts: What Makes a Good Graph?”</span> <em>Annual Review of Statistics and Its Application</em> 7 (Volume 7, 2020): 61–88. https://doi.org/<a href="https://doi.org/10.1146/annurev-statistics-031219-041252">https://doi.org/10.1146/annurev-statistics-031219-041252</a>.
+</div>
+<div id="ref-ware2021information" class="csl-entry" role="listitem">
+Ware, Colin. 2021. <em>Information Visualization: Perception for Design</em>. 4th ed. Morgan Kaufmann.
+</div>
+<div id="ref-wilke2019fundamentals" class="csl-entry" role="listitem">
+Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em>. Sebastopol, CA: O’Reilly Media.
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><em>The Visual Display of Quantitative Information</em> <span class="citation" data-cites="tufte1983visual">(<a href="#ref-tufte1983visual" role="doc-biblioref">Tufte 1983</a>)</span> and <em>Envisioning Information</em> <span class="citation" data-cites="tufte1990envisioning">(<a href="#ref-tufte1990envisioning" role="doc-biblioref">Tufte 1990</a>)</span> are just two of a series of influential and visually attractive books that also includes <em>Visual Explanations</em> <span class="citation" data-cites="tufte1997visual">(<a href="#ref-tufte1997visual" role="doc-biblioref">Tufte 1997</a>)</span> and <em>Beautiful Evidence</em> <span class="citation" data-cites="tufte2006beautiful">(<a href="#ref-tufte2006beautiful" role="doc-biblioref">Tufte 2006</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>There were several studies by Cleveland, some in collaboration with Robert McGill, which were summarised and extended in two books: <em>The Elements of Graphing Data</em> <span class="citation" data-cites="cleveland1985elements">(<a href="#ref-cleveland1985elements" role="doc-biblioref">Cleveland 1985</a>)</span> and <em>Visualizing Data</em> <span class="citation" data-cites="cleveland1993visualizing">(<a href="#ref-cleveland1993visualizing" role="doc-biblioref">Cleveland 1993</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Some of that work is described in <span class="citation" data-cites="murrell2019r">Murrell (<a href="#ref-murrell2019r" role="doc-biblioref">2019</a>)</span> and some more of it is described <a href="https://www.stat.auckland.ac.nz/~paul/">here</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><em>Information Visualization: Perception for Design</em> <span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021</a>)</span> reviews a very wide range of research that has relevance to data visualisation in one way or another and <em>Visualization Analysis and Design</em> <span class="citation" data-cites="munzner2014visualization">(<a href="#ref-munzner2014visualization" role="doc-biblioref">Munzner 2014</a>)</span> provides a comprehensive and theoretical coverage of the complete process of creating effective data visualisations.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>For example, <em>Creating More Effective Graphs</em> <span class="citation" data-cites="robbins2005creating">(<a href="#ref-robbins2005creating" role="doc-biblioref">Robbins 2005</a>)</span>, <em>Data Visualization: A Practical Introduction</em> <span class="citation" data-cites="healy2018data">(<a href="#ref-healy2018data" role="doc-biblioref">Healy 2018</a>)</span>, and <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em> <span class="citation" data-cites="wilke2019fundamentals">(<a href="#ref-wilke2019fundamentals" role="doc-biblioref">Wilke 2019</a>)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Besides scratching the author’s itch, this book addresses an identified need. For example, <span class="citation" data-cites="sönning_2022">Sönning (<a href="#ref-sönning_2022" role="doc-biblioref">2022</a>)</span> deconstructs how a line plot works in great detail, but there is a market for something that is more accessible to and applicable by a less-expert audience.</p>
+<p>“Going forward, we must do a better job of translating the academic research into practice, making it easier for academics and nonacademics alike to create useful, well-designed graphics.” <span class="citation" data-cites="annurev-statistics-031219-041252">(<a href="#ref-annurev-statistics-031219-041252" role="doc-biblioref">Vanderplas, Cook, and Hofmann 2020</a>)</span></p>
+<p>The aim is to provide an overview that is similar in scope to more expert frameworks like <span class="citation" data-cites="kosslyn1989understanding">(<a href="#ref-kosslyn1989understanding" role="doc-biblioref">Kosslyn 1989</a>)</span>, but more consumable by a less expert audience. The goal of this document is to provide a description that is sufficiently straightforward for the non-expert to consume, hopefully without making too many experts roll in their graves or send them to an early one. In most cases, it will be easy to see for ourselves that a visual effect is real through a simple diagram or data visualisation, but references to the relevant theories and experimental results in the literature will be provided in footnotes like this one.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Some examples of books that include a discussion of interactive graphics are <span class="citation" data-cites="cookSwayne2007">Cook and Swayne (<a href="#ref-cookSwayne2007" role="doc-biblioref">2007</a>)</span>, <span class="citation" data-cites="theus_urbanek_2008_interactive">Theus and Urbanek (<a href="#ref-theus_urbanek_2008_interactive" role="doc-biblioref">2008</a>)</span>, and <span class="citation" data-cites="unwinTheusHofmann2006">Unwin, Theus, and Hofmann (<a href="#ref-unwinTheusHofmann2006" role="doc-biblioref">2006</a>)</span>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Alberto Cairo’s writing often includes the ethical dimensions of data visualisation, e.g., <span class="citation" data-cites="CairoAlberto2014Eiid">Cairo (<a href="#ref-CairoAlberto2014Eiid" role="doc-biblioref">2014</a>)</span> and <span class="citation" data-cites="cairo2016truthful">Cairo (<a href="#ref-cairo2016truthful" role="doc-biblioref">2016</a>)</span>.</p>
+<p>The <em>Data by Design</em> project is a striking example of work with a focus on ethical data visualisation <span class="citation" data-cites="data_by_design_emory2021">(<a href="#ref-data_by_design_emory2021" role="doc-biblioref">Emory Digital Humanities Lab 2021</a>)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>We are assuming that the data we have is sufficient for the question(s) of interest and contains no <em>substantive</em> problems, in the sense of <span class="citation" data-cites="healy2018data">Healy (<a href="#ref-healy2018data" role="doc-biblioref">2018</a>)</span>.</p>
+<p>Examples of books that provide a more comprehensive treatment of the entire data visualisation process are <span class="citation" data-cites="cairo2019howchartslie">Cairo (<a href="#ref-cairo2019howchartslie" role="doc-biblioref">2019</a>)</span> and <span class="citation" data-cites="munzner2014visualization">Munzner (<a href="#ref-munzner2014visualization" role="doc-biblioref">2014</a>)</span>.</p>
+<p>An example of a much shorter, but still broader view of the data visualisation process is <span class="citation" data-cites="bertini-how-not-to-lie">Bertini (<a href="#ref-bertini-how-not-to-lie" role="doc-biblioref">2025</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Many of the diagrams in this book were also created with R <span class="citation" data-cites="Rlang">(<a href="#ref-Rlang" role="doc-biblioref">R Core Team 2025</a>)</span>, but some of diagrams were created using graphviz <span class="citation" data-cites="ellson2002graphviz">(<a href="#ref-ellson2002graphviz" role="doc-biblioref">Ellson et al. 2002</a>)</span>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./exec.html" class="pagination-link" aria-label="Executive Summary">
+        <span class="nav-page-text">Executive Summary</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
