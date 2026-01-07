@@ -13,5 +13,5 @@ pdf:
 .PHONY: docker
 docker:
 	sudo docker build -t pmur002/hdvw:$(VERSION) .
-	sudo docker run -u "$(id -u):$(id -g)" -v "$(shell pwd)":/home/work/ -w /home/work --rm pmur002/hdvw make 
+	sudo docker run -u "$(id -u):$(id -g)" -v "$(shell pwd)":/home/work/ -w /home/work --rm pmur002/hdvw:$(VERSION) make 
 

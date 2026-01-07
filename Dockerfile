@@ -100,8 +100,24 @@ RUN Rscript -e 'library(devtools); install_version("bullseye", "1.0.1", repos="h
 COPY drewcurves_1.0.tar.gz /tmp/
 RUN R CMD INSTALL /tmp/drewcurves_1.0.tar.gz
 
-RUN apt-get install -y locales && locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
+# For snapshots of rgl plots in PDF output
+RUN Rscript -e 'library(devtools); install_version("webshot2", "0.1.2", repos="https://cran.rstudio.com/")'
+# Use google-chrome instead of chromium because the latter requires snap 
+# and that does not work within Docker container blah blah blah
+# RUN apt-get update && apt-get install -y \
+#     chromium-browser
+# Froze "current" google-chrome on 2026-01-07
+# RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+COPY google-chrome-stable_143.0.7499.192_amd64.deb /tmp/
+RUN apt-get update && apt-get install -y \
+    fonts-liberation \
+    libasound2 \
+    libvulkan1
+RUN dpkg -i /tmp/google-chrome-stable_143.0.7499.192_amd64.deb
+ENV RGL_USE_NULL=true
 
-ENV TERM dumb
+RUN apt-get install -y locales && locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
+
+ENV TERM=dumb
 
