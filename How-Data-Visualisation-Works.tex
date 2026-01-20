@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-01-12)
+Version 0.9 (build 2026-01-20)
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, breakable, titlerule=0mm, coltitle=black, leftrule=.75mm, colback=white, opacityback=0, bottomtitle=1mm, left=2mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, colbacktitle=quarto-callout-warning-color!10!white, toptitle=1mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, breakable, left=2mm, opacityback=0, arc=.35mm, bottomtitle=1mm, titlerule=0mm, coltitle=black, colback=white, rightrule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, opacitybacktitle=0.6, toptitle=1mm, toprule=.15mm, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, leftrule=.75mm]
 
 Under construction!
 
@@ -350,9 +350,11 @@ creating effective data visualisations.\footnote{For example,
   Informative and Compelling Figures} (Wilke 2019).} These eschew much
 of the gory detail in favour of simple, applicable advice. The problem
 here is that, without the underlying explanations, the guidelines can
-become just a long laundry list to commit to memory. Rather than just
-being told that bars should always start at zero, it is more satisfying
-to know \emph{why} bars should always start at zero.
+become a long laundry list of items to check off.\footnote{Examples of
+  works that contain long lists of useful guidelines include Few (2012)
+  and Kosslyn (2006).} Rather than just being told that bars should
+always start at zero, it is more satisfying to know \emph{why} bars
+should always start at zero.
 
 For some of us there is a need for a middle path. We would like to
 understand why we are making certain data visualisation choices, but we
@@ -520,14 +522,14 @@ over the figure link to see the image that the text is referring to.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-01-12).
+2026. Version 0.9 (build 2026-01-20).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-01-12,
+@book{murrell-hdvw-2026-01-20,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-01-12)},
+    note = {Version 0.9 (build 2026-01-20)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -4850,7 +4852,11 @@ that the light blue wedge in the pie chart is just under half a circle.
 It is also easy to see that the red wedge is close to a third of a
 circle.\footnote{This defence of pie charts has existed for a very long
   time (Eells 1926a) and continues to receive empirical support in more
-  recent times (Simkin and Hastie 1987).}
+  recent times (Simkin and Hastie 1987).
+
+  ``The one thing that a pie chart has going for it \ldots{} is the fact
+  that people immediately recognize a pie chart as a part-to-whole
+  display.'' (Few 2012, 114)}
 
 \begin{figure}
 
@@ -5015,9 +5021,10 @@ A more subtle effect can be seen in Figure~\ref{fig-bar-orientation},
 which shows two different bar plots of the total number of offenders in
 different ethnic groups. In this case, the vertical bars are more
 natural for conveying count data like this because of the natural
-correspondence with stacks of items.\footnote{Several authors make an
-  argument for vertical bars being preferred because they correspond
-  naturally to accumulation and growth (e.g., Few 2004).}
+correspondence with stacks of items.\footnote{Examples of mentions that
+  vertical bars are preferred because they are more familiar or
+  correspond naturally to increases include Kosslyn (1994), Fischer,
+  Dewulf, and Hill (2005), and Kerns and Wilmer (2021).}
 
 \begin{figure}
 
@@ -10818,8 +10825,14 @@ data visualisation as either an axis or a legend. For example, the
 encoding of the number of points as horizontal position is represented
 in Figure~\ref{fig-legend} by the x-axis. We will now look more closely
 at those axes and legends.\footnote{Another name for a \emph{legend} is
-  a \emph{key}. Wilkinson (2005) collects all axes and legends within
-  the single concept of a \emph{guide}.}
+  a \emph{key}.
+
+  Wilkinson (2005) collects all axes and legends within the single
+  concept of a \emph{guide}. However, axes, legends, and labels are
+  typically treated as very distinct from the data symbols within a data
+  visualisation. For example, Fygenson, Padilla, and Bertini (2025)
+  distinguish \emph{contextualizing visual elements}, which ``do
+  \emph{not} encode data directly'', from \emph{marks} (data symbols).}
 
 The x-axis in Figure~\ref{fig-legend} consists of five text labels,
 typically referred to as tick labels, plus five small line segments,
@@ -13113,13 +13126,9 @@ Gordon Woodhull. 2002. {``Graphviz---Open Source Graph Drawing Tools.''}
 Emory Digital Humanities Lab. 2021. {``Data\,by\,Design: An Interactive
 History of Data Visualization.''} \url{https://dev.dataxdesign.io/}.
 
-\bibitem[\citeproctext]{ref-few2004show}
-Few, Stephen. 2004. \emph{Show Me the Numbers: Designing Tables and
-Graphs to Enlighten}. 1st ed. Berkeley, CA: Analytics Press.
-
 \bibitem[\citeproctext]{ref-Few2006}
----------. 2006. {``Visual Pattern Recognition: Meaningful Patterns in
-Quantitative Business Information.''} Seattle,\,WA: Perceptual\,Edge.
+Few, Stephen. 2006. {``Visual Pattern Recognition: Meaningful Patterns
+in Quantitative Business Information.''} Seattle,\,WA: Perceptual\,Edge.
 \url{/url\%7Bhttps://www.perceptualedge.com/articles/Whitepapers/Visual_Pattern_Rec.pdf\%7D}.
 
 \bibitem[\citeproctext]{ref-Few2011ChartjunkDebate}
@@ -13127,6 +13136,15 @@ Quantitative Business Information.''} Seattle,\,WA: Perceptual\,Edge.
 Findings.''} \emph{Visual Business Intelligence Newsletter}
 April/May/June (2011).
 \url{https://www.perceptualedge.com/articles/visual_business_intelligence/the_chartjunk_debate.pdf}.
+
+\bibitem[\citeproctext]{ref-few2012show}
+---------. 2012. \emph{Show Me the Numbers: Designing Tables and Graphs
+to Enlighten}. 2nd ed. Burlingame, CA: Analytics Press.
+
+\bibitem[\citeproctext]{ref-bar-orientation}
+Fischer, Martin H., Nele Dewulf, and Robin L. Hill. 2005. {``Designing
+Bar Graphs: Orientation Matters.''} \emph{Applied Cognitive Psychology}
+19 (7): 953--62. https://doi.org/\url{https://doi.org/10.1002/acp.1105}.
 
 \bibitem[\citeproctext]{ref-franconeri2021}
 Franconeri, Steven L., Lace M. Padilla, Priti Shah, Jeffrey M. Zacks,
@@ -13269,6 +13287,13 @@ Pattern Analysis and Machine Intelligence} 20 (11): 1254--59.
 \bibitem[\citeproctext]{ref-karstenChartsAndGraphs}
 Karsten, Karl G. 1925. \emph{Charts and Graphs}. Prentice-Hall.
 
+\bibitem[\citeproctext]{ref-kerns2021bar_tip_limit}
+Kerns, Sarah H., and Jeremy B. Wilmer. 2021. {``Two Graphs Walk into a
+Bar: Readout-Based Measurement Reveals the Bar-Tip Limit Error, a
+Common, Categorical Misinterpretation of Mean Bar Graphs.''}
+\emph{Journal of Vision} 21 (12): 17.
+\url{https://doi.org/10.1167/jov.21.12.17}.
+
 \bibitem[\citeproctext]{ref-consistent-captions}
 Kim, Dae Hyun, Vidya Setlur, and Maneesh Agrawala. 2021. {``Towards
 Understanding How Readers Integrate Charts and Captions: A Case Study
@@ -13298,6 +13323,10 @@ Association for Computing Machinery.
 \bibitem[\citeproctext]{ref-kosslyn1989understanding}
 Kosslyn, Stephen M. 1989. {``Understanding Charts and Graphs.''}
 \emph{Applied Cognitive Psychology} 3 (3): 185--225.
+
+\bibitem[\citeproctext]{ref-kosslyn1994elements}
+---------. 1994. \emph{Elements of Graph Design}. New York: W. H.
+Freeman; Company.
 
 \bibitem[\citeproctext]{ref-eye-and-mind}
 ---------. 2006. \emph{Graph Design for the Eye and Mind}. Oxford
