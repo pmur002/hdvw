@@ -473,6 +473,50 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
+## Case study:  Text angle {#sec-text-angle}
+
+@fig-text-angle shows a bar plot of the total number of offenders aged 14 to 16
+in New Zealand in 2021, for different ethnic groups.
+This demonstrates some very common approaches to saving space in a plot.
+The title on the y-axis is rotated 90 degrees because if it had the normal
+horizontal orientation, it would produce a lot of empty space to the left of
+the plot. The tick labels on the x-axis
+are rotated 45 degrees because if they had the normal horizontal orientation
+they would overlap with each other.
+
+```{r}
+#| echo: false
+#| label: fig-text-angle
+#| fig-cap: A bar plot of the total number of offenders for different ethnic groups.
+gg <- ggplot(crimeGroup2021) + 
+    geom_col(aes(x=group, y=count)) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    ylab("Number of offenders") +
+    xlab(NULL) +
+    theme(aspect.ratio=1,
+          axis.text.x=element_text(angle=45, hjust=1))
+grid.newpage()
+pushViewport(viewport(width=.9, height=.9))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+One problem with this common practice is that text is much more difficult
+to read if it is not horizontal.[^text-angle]
+In terms of @sec-configural, the **angle** of text and the **shape** of text
+are visual features that have a very strong interaction---the 
+decoding of text shape is most effective
+when text angle is zero.
+This provides a strong argument for keeping text horizontal,
+which is why many of the figures in this book encode qualitative
+data values as vertical position. This allows room for long group
+labels to be drawn horizontally.
+
+[^text-angle]:
+    @tinker1956angular was one of the first experimental studies to 
+    demonstrate that reading becomes much slower and more difficult
+    when text is rotated.
+
 ## Case study:  Word clouds {#sec-word-cloud}
 
 @fig-wordcloud shows a word cloud data visualisation based on the
