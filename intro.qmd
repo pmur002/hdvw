@@ -108,7 +108,8 @@ gg <- ggplot(crimeAgeSimple) +
     scale_x_continuous(expand=expansion(0), breaks=seq(2012, 2020, 2)) +    
     scale_y_continuous(expand=expansion(0), breaks=14:16) +
     scale_fill_continuous() +
-    theme(aspect.ratio=1)
+    theme(aspect.ratio=1,
+          legend.frame=element_rect(colour="black", linewidth=.2))
 grid.newpage()
 pushViewport(viewport(width=.9, height=.9))
 print(gg, newpage=FALSE)
@@ -256,6 +257,11 @@ In order to produce an effective data visualisation,
 we need to **encode** data values to data symbols in a way
 that facilitates **decoding** data values from the
 data symbols (@fig-decode).
+For example, we are able to decode 
+a single value from a text label,
+like a single number in @tbl-crime, and we
+are able to decode a detailed trend from a sloping line,
+like the lines in @fig-crime.
 
 ::: {#fig-decode}
 ::: {.content-visible when-format=pdf}
@@ -270,6 +276,11 @@ The effectiveness of a data visualisation will depend on how
 well our visual system can **decode** from the data symbols to the
 properties of the data.
 :::
+
+Conversely, a data visualisation will be less effective if
+it does not support the effective decoding of data values from data symbols.
+For example, it is more difficult to detect detailed trends from
+the changing colours of the rectangles in @fig-crime-heatmap.
 
 The journey that we take throughout this book will involve
 exploring a variety of different ways that information can
