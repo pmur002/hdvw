@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-02-01)
+Version 0.9 (build 2026-02-16)
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, titlerule=0mm, breakable, colback=white, arc=.35mm, toprule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, rightrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, left=2mm, bottomtitle=1mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, colback=white, breakable, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, leftrule=.75mm, titlerule=0mm, left=2mm, toprule=.15mm, bottomtitle=1mm, bottomrule=.15mm, toptitle=1mm, colframe=quarto-callout-warning-color-frame, opacitybacktitle=0.6, opacityback=0]
 
 Under construction!
 
@@ -291,7 +291,7 @@ This is a book about data visualisation.
 
 Like many books, it scratches an author's itch.
 
-This particular itch began a long time ago, when first introduced to the
+This particular itch began a long time ago, with an introduction to the
 works of Edward Tufte. Books like \emph{The Visual Display of
 Quantitative Information} and \emph{Envisioning Information}\footnote{\emph{The
   Visual Display of Quantitative Information} (Tufte 1983) and
@@ -319,12 +319,12 @@ the types of data visualisations that we could create and they only told
 us about a small subset of the types of questions that we could answer
 with those data visualisations.
 
-The next decade or so were spent distracted by building tools for
-\emph{creating} data visualisations\footnote{Some of that work is
+The next decade or so were spent distracted by building software tools
+for \emph{creating} data visualisations\footnote{Some of that work is
   described in Murrell (2019) and some more of it is described
   \href{https://www.stat.auckland.ac.nz/~paul/}{here}.} before returning
 again to the question of \emph{designing} data visualisations. In those
-intervening decades, a lot has happened.
+intervening decades, a fair amount has happened.
 
 Data visualisation is an area of research for psychologists, for
 computer scientists, for geographers, and even for statisticians. The
@@ -368,8 +368,8 @@ list of dos and don'ts, it provides a list of \emph{reasons} why and why
 not. It is a synthesis of a large number of research articles and books
 and it is a simplification of a large amount of knowledge. It is an
 attempt to prune the complexity so that we can see the forest for the
-trees. At the same time, we attempt to leave enough foliage that we see
-a forest made up of trees rather than just a made up forest.
+trees. At the same time, enough foliage is preserved so that we see a
+forest made up of trees rather than just a made up forest.
 
 I hope that it helps.
 
@@ -382,7 +382,7 @@ There is a lot of useful information and understanding about how data
 visualisations work, but it is distributed throughout and embedded
 within a very broad, deep, and detailed data visualisation literature.
 This book aims to produce a simple, coherent explanation that is
-accessible to a less expert audience.\footnote{Besides scratching the
+accessible to a non-expert audience.\footnote{Besides scratching the
   author's itch, this book addresses an identified need. For example,
   Sönning (2022) deconstructs how a line plot works in great detail, but
   there is a market for something that is more accessible to and
@@ -475,11 +475,12 @@ This book is about the choices that go into \emph{designing} a data
 visualisation. It does not cover how to use software to implement those
 design choices and \emph{create} a data visualisation.
 
-All data visualisations in this book were created with R.\footnote{Many
-  of the diagrams in this book were also created with R (R Core Team
-  2025), but some of diagrams were created using graphviz (Ellson et al.
-  2002).} The code for all data visualisations is available in the
-github repository for this book.
+All data visualisations in this book were created with R and add-on
+packages for R.\footnote{Many of the diagrams in this book were also
+  created with R (R Core Team 2025), but some of diagrams were created
+  using graphviz (Ellson et al. 2002).} The code for all data
+visualisations is available in the
+\href{https://github.com/pmur002/hdvw}{github repository} for this book.
 
 \section*{How to read this book}\label{how-to-read-this-book}
 \addcontentsline{toc}{section}{How to read this book}
@@ -514,27 +515,6 @@ section or figure. This is particularly effective for figures because it
 obviates the need to reproduce the same image multiple times; just hover
 over the figure link to see the image that the text is referring to.
 
-\section*{How to cite this book}\label{how-to-cite-this-book}
-\addcontentsline{toc}{section}{How to cite this book}
-
-\markright{How to cite this book}
-
-Please use the following citation:
-
-Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-02-01).
-
-\begin{verbatim}
-
-@book{murrell-hdvw-2026-02-01,
-    title = {How Data Visualisation Works},
-    author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-02-01)},
-    year = 2026,
-    publisher = {The University of Auckland}
-}
-\end{verbatim}
-
 \section*{Acknowledgements}\label{acknowledgements}
 \addcontentsline{toc}{section}{Acknowledgements}
 
@@ -561,6 +541,27 @@ probably thanks to Quarto.
 I am also indebted to my wife, Julia, for the brutally honest feedback
 that she provided on early drafts of the text. If any parts of the book
 make sense to you, it is probably thanks to Julia.
+
+\section*{How to cite this book}\label{how-to-cite-this-book}
+\addcontentsline{toc}{section}{How to cite this book}
+
+\markright{How to cite this book}
+
+Please use the following citation:
+
+Paul Murrell. How Data Visualisation Works. The University of Auckland,
+2026. Version 0.9 (build 2026-02-16).
+
+\begin{verbatim}
+
+@book{murrell-hdvw-2026-02-16,
+    title = {How Data Visualisation Works},
+    author = {Murrell, Paul},
+    note = {Version 0.9 (build 2026-02-16)},
+    year = 2026,
+    publisher = {The University of Auckland}
+}
+\end{verbatim}
 
 \section*{License}\label{license}
 \addcontentsline{toc}{section}{License}
@@ -10433,6 +10434,42 @@ rate in New Zealand from 2011 to 2021.}
 
 \end{figure}%
 
+\section{Case study: Text angle}\label{sec-text-angle}
+
+Figure~\ref{fig-text-angle} shows a bar plot of the total number of
+offenders aged 14 to 16 in New Zealand in 2021, for different ethnic
+groups. This demonstrates some very common approaches to saving space in
+a plot. The title on the y-axis is rotated 90 degrees because if it had
+the normal horizontal orientation, it would produce a lot of empty space
+to the left of the plot. The tick labels on the x-axis are rotated 45
+degrees because if they had the normal horizontal orientation they would
+overlap with each other.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/text_files/figure-pdf/fig-text-angle-1.pdf}
+
+}
+
+\caption{\label{fig-text-angle}A bar plot of the total number of
+offenders for different ethnic groups.}
+
+\end{figure}%
+
+One problem with this common practice is that text is much more
+difficult to read if it is not horizontal.\footnote{Tinker (1956) was
+  one of the first experimental studies to demonstrate that reading
+  becomes much slower and more difficult when text is rotated.} In terms
+of Section~\ref{sec-configural}, the \textbf{angle} of text and the
+\textbf{shape} of text are visual features that have a very strong
+interaction---the decoding of text shape is most effective when text
+angle is zero. This provides a strong argument for keeping text
+horizontal, which is why many of the figures in this book encode
+qualitative data values as vertical position. This allows room for long
+group labels to be drawn horizontally.
+
 \section{Case study: Word clouds}\label{sec-word-cloud}
 
 Figure~\ref{fig-wordcloud} shows a word cloud data visualisation based
@@ -11610,6 +11647,13 @@ Figure~\ref{fig-align} is a more orderly version of
 Figure~\ref{fig-rep-guide} and, as a consequence, there are fewer visual
 differences, so there is less to decode. The data visualisation is less
 complex.
+
+Figure~\ref{fig-text-angle} provides another simple example of
+unintentional encoding. In this bar plot there are text labels at
+different angles---the y-axis title is rotated 90 degrees and the x-axis
+tick labels are rotated 45 degrees, but these differences in angle do
+not reflect any differences in the data. Keeping all text in a data
+visualisation horizontal removes this source of distraction.
 
 Figure~\ref{fig-smoking} shows a more problematic example.\footnote{Figure~\ref{fig-smoking}
   is based on a data visualisation in the New Zealand Listener January
@@ -13061,7 +13105,7 @@ and Graphical Statistics} 4 (3): 155--72.
 
 \bibitem[\citeproctext]{ref-cookSwayne2007}
 Cook, Dianne, and Deborah F. Swayne. 2007. \emph{Interactive and Dynamic
-Graphics for Data Analysis: With r and GGobi}. 1st ed. Use r! Springer
+Graphics for Data Analysis: With r and GGobi}. 1st ed. Use {R}! Springer
 New York. \url{https://doi.org/10.1007/978-0-387-71762-3}.
 
 \bibitem[\citeproctext]{ref-correll-heatmap-ensemble}
@@ -13688,6 +13732,11 @@ Data Analysis: Principles and Examples}. 1st ed. Boca Raton, FL: Chapman
 Thorell, Lisa G., and W. J. Smith. 1990. \emph{Using Computer Color
 Effectively: An Illustrated Reference}. Englewood Cliffs, NJ: Prentice
 Hall PTR.
+
+\bibitem[\citeproctext]{ref-tinker1956angular}
+Tinker, Miles A. 1956. {``Effects of Angular Alignment Upon Readability
+of Print.''} \emph{Journal of Educational Psychology} 47 (6): 358--63.
+\url{https://doi.org/10.1037/h0044504}.
 
 \bibitem[\citeproctext]{ref-titchener1901experimental}
 Titchener, Edward Bradford. 1916. \emph{Experimental Psychology: A

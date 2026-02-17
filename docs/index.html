@@ -245,8 +245,8 @@ div.csl-indent {
   <li><a href="#sec-scope" id="toc-sec-scope" class="nav-link" data-scroll-target="#sec-scope">Scope</a></li>
   <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
   <li><a href="#how-to-read-this-book" id="toc-how-to-read-this-book" class="nav-link" data-scroll-target="#how-to-read-this-book">How to read this book</a></li>
-  <li><a href="#how-to-cite-this-book" id="toc-how-to-cite-this-book" class="nav-link" data-scroll-target="#how-to-cite-this-book">How to cite this book</a></li>
   <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#how-to-cite-this-book" id="toc-how-to-cite-this-book" class="nav-link" data-scroll-target="#how-to-cite-this-book">How to cite this book</a></li>
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   </ul></li>
   </ul>
@@ -281,7 +281,7 @@ div.csl-indent {
 
 
 <p><img src="Cover/cover.svg" title="How Data Visualisation Works" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>Version 0.9 (build 2026-02-01)</p>
+<p>Version 0.9 (build 2026-02-16)</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -299,19 +299,19 @@ Warning
 <h1 class="unnumbered">Preface</h1>
 <p>This is a book about data visualisation.</p>
 <p>Like many books, it scratches an author’s itch.</p>
-<p>This particular itch began a long time ago, when first introduced to the works of Edward Tufte. Books like <em>The Visual Display of Quantitative Information</em> and <em>Envisioning Information</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> inspired an interest in how to produce effective graphics, but they were also frustrating.</p>
+<p>This particular itch began a long time ago, with an introduction to the works of Edward Tufte. Books like <em>The Visual Display of Quantitative Information</em> and <em>Envisioning Information</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> inspired an interest in how to produce effective graphics, but they were also frustrating.</p>
 <p>Reading a Tufte book to get better at data visualisation is a bit like watching Roger Federer play to get better at tennis. It is possible to glean fragments of insight into the master’s skill and technique, but it is difficult to come away with a clear set of rules for how to succeed on our own.</p>
 <p>At the same time, encountering the work of William S. Cleveland presented a different problem.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Here were hard experimental results with clear implications for effective data visualisations: use length not area; use bars not pies. But they only told us about a small subset of the types of data visualisations that we could create and they only told us about a small subset of the types of questions that we could answer with those data visualisations.</p>
-<p>The next decade or so were spent distracted by building tools for <em>creating</em> data visualisations<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> before returning again to the question of <em>designing</em> data visualisations. In those intervening decades, a lot has happened.</p>
+<p>The next decade or so were spent distracted by building software tools for <em>creating</em> data visualisations<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> before returning again to the question of <em>designing</em> data visualisations. In those intervening decades, a fair amount has happened.</p>
 <p>Data visualisation is an area of research for psychologists, for computer scientists, for geographers, and even for statisticians. The literature is wide and deep and complex.</p>
 <p>This has significantly reduced the size of the second problem. We know a lot more about a wider range of data visualisation types and data visualisation tasks. Unfortunately, this has introduced a new problem. There are comprehensive and detailed overviews of current knowledge,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> but it is now difficult to consume and make sense of so much knowledge.</p>
 <p>At the same time, there are more accessible and practical guides for creating effective data visualisations.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> These eschew much of the gory detail in favour of simple, applicable advice. The problem here is that, without the underlying explanations, the guidelines can become a long laundry list of items to check off.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Rather than just being told that bars should always start at zero, it is more satisfying to know <em>why</em> bars should always start at zero.</p>
 <p>For some of us there is a need for a middle path. We would like to understand why we are making certain data visualisation choices, but we have brains that can only hold so many ideas at once. For some of us there is utility in a framework that contains a small number of core concepts, that still covers a wide range of data visualisations, but connects them all with a relatively simple explanation.</p>
-<p>This book attempts to provide such a framework. Rather than providing a list of dos and don’ts, it provides a list of <em>reasons</em> why and why not. It is a synthesis of a large number of research articles and books and it is a simplification of a large amount of knowledge. It is an attempt to prune the complexity so that we can see the forest for the trees. At the same time, we attempt to leave enough foliage that we see a forest made up of trees rather than just a made up forest.</p>
+<p>This book attempts to provide such a framework. Rather than providing a list of dos and don’ts, it provides a list of <em>reasons</em> why and why not. It is a synthesis of a large number of research articles and books and it is a simplification of a large amount of knowledge. It is an attempt to prune the complexity so that we can see the forest for the trees. At the same time, enough foliage is preserved so that we see a forest made up of trees rather than just a made up forest.</p>
 <p>I hope that it helps.</p>
 <section id="sec-scope" class="level2">
 <h2 class="anchored" data-anchor-id="sec-scope">Scope</h2>
-<p>There is a lot of useful information and understanding about how data visualisations work, but it is distributed throughout and embedded within a very broad, deep, and detailed data visualisation literature. This book aims to produce a simple, coherent explanation that is accessible to a less expert audience.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>There is a lot of useful information and understanding about how data visualisations work, but it is distributed throughout and embedded within a very broad, deep, and detailed data visualisation literature. This book aims to produce a simple, coherent explanation that is accessible to a non-expert audience.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <p>The focus of this document is <strong>static</strong> data visualisations for <strong>presentation</strong>. The assumption is that our data values have an interesting property and we want to produce a display that makes it easy and efficient for viewers to perceive that property. Some of the information that we cover will also apply to interactive graphics and to exploratory graphics, but the specific requirements of those types of data visualisation will not be addressed.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
 <p>There is also an emphasis on <strong>statistical graphics</strong> in this book, which is characterised by the use of abstract geometric symbols, such as circles and rectangles, to represent data values, as opposed to scientific graphics, which is focused more on realistic representations of physical objects, or cartography, which is focused on the geographic context of data values.</p>
 <p>This document is also focused on what <strong>vision science</strong> has to tell us about effective data visualisation. We will consider factors that influence how rapidly and how accurately information can be extracted from a data visualisation. This will include findings from a broad range of research, encompassing Statistics, Computer Science, Psychology, and Cartography.</p>
@@ -323,7 +323,7 @@ Warning
 <section id="software" class="level2">
 <h2 class="anchored" data-anchor-id="software">Software</h2>
 <p>This book is about the choices that go into <em>designing</em> a data visualisation. It does not cover how to use software to implement those design choices and <em>create</em> a data visualisation.</p>
-<p>All data visualisations in this book were created with R.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> The code for all data visualisations is available in the github repository for this book.</p>
+<p>All data visualisations in this book were created with R and add-on packages for R.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> The code for all data visualisations is available in the <a href="https://github.com/pmur002/hdvw">github repository</a> for this book.</p>
 </section>
 <section id="how-to-read-this-book" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-read-this-book">How to read this book</h2>
@@ -332,26 +332,26 @@ Warning
 <p>Another major issue with a subject this complex and a subject that is studied from so many different angles is <em>terminology</em>. There is no consistency across all of the different sources of information from which this book was drawn, so all that we can do is attempt to be consistent with ourselves. Some of the most important terms that will be reused relentlessly throughout this book are highlighted in the <a href="exec.html">Executive Summary</a>. The meaning of these terms is hopefully approximately what you already think, but they will be made clearer as the book progresses.</p>
 <p>All section and figure cross-references are hyperlinks, so clicking them will navigate to the relevant section or figure. Even more helpfully, hovering the mouse over a hyperlink will show a preview of the relevant section or figure. This is particularly effective for figures because it obviates the need to reproduce the same image multiple times; just hover over the figure link to see the image that the text is referring to.</p>
 </section>
-<section id="how-to-cite-this-book" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-cite-this-book">How to cite this book</h2>
-<p>Please use the following citation:</p>
-<p>Paul Murrell. How Data Visualisation Works. The University of Auckland, 2026. Version 0.9 (build 2026-02-01).</p>
-<pre><code>
-@book{murrell-hdvw-2026-02-01,
-    title = {How Data Visualisation Works},
-    author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-02-01)},
-    year = 2026,
-    publisher = {The University of Auckland}
-}
-</code></pre>
-</section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
 <p>This book is based upon a large number of research articles and books, but in order to make the text appear more accessible and friendly, there are no formal citations in the main text. There are, however, a large number of footnotes, which provide the links between what is being described in the main text and the underlying research, and those footnotes contain proper citations. The real work is not being ignored, it is just being hidden behind a curtain.</p>
 <p>Generative AI was used sparingly in the preparation of this book. Specifically, ChatGPT was employed to assist with the formatting of BibTeX references from various sources, and Google’s AI Overview (Google Gemini) provided the initial Python code for generating the optimal colour solid boundary for <a href="qualitative.html#fig-colour-spaces" class="quarto-xref">Figure&nbsp;<span>6.9</span></a>.</p>
 <p>This book has been generated using the <a href="https://quarto.org/">Quarto publishing system</a>. If any parts of the book look nice to you, it is probably thanks to Quarto.</p>
 <p>I am also indebted to my wife, Julia, for the brutally honest feedback that she provided on early drafts of the text. If any parts of the book make sense to you, it is probably thanks to Julia.</p>
+</section>
+<section id="how-to-cite-this-book" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-cite-this-book">How to cite this book</h2>
+<p>Please use the following citation:</p>
+<p>Paul Murrell. How Data Visualisation Works. The University of Auckland, 2026. Version 0.9 (build 2026-02-16).</p>
+<pre><code>
+@book{murrell-hdvw-2026-02-16,
+    title = {How Data Visualisation Works},
+    author = {Murrell, Paul},
+    note = {Version 0.9 (build 2026-02-16)},
+    year = 2026,
+    publisher = {The University of Auckland}
+}
+</code></pre>
 </section>
 <section id="license" class="level2">
 <h2 class="anchored" data-anchor-id="license">License</h2>
