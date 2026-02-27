@@ -90,6 +90,7 @@ RUN Rscript -e 'library(devtools); install_version("xdvir", "0.1.3", repos="http
 RUN Rscript -e 'library(devtools); install_version("vwline", "0.2.4", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("gridGeometry", "0.4.0", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("gridtext", "0.1.5", repos="https://cran.rstudio.com/")'
+RUN Rscript -e 'library(devtools); install_version("rayrender", "0.38.10", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("rayshader", "0.37.3", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("rgl", "1.3.24", repos="https://cran.rstudio.com/")'
 RUN Rscript -e 'library(devtools); install_version("latticeExtra", "0.6.31", repos="https://cran.rstudio.com/")'

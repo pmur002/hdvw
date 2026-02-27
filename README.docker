@@ -6,6 +6,14 @@
   - NOTE that this is probably best run on Uni office machine
     (e.g., 130.216.38.37)
 
+  + Generating list of packages and versions for Dockerfile ...
+
+    pkgVersions <- sapply(loadedNamespaces(), 
+                          function(x) as.character(packageVersion(x)))
+    paste0('RUN Rscript -e \'library(remotes); install_version("',
+           names(pkgVersions), '", "== ', pkgVersions, 
+           '", repos="https://cran.rstudio.com/")\'')
+    
   - NOTE that I had to CREATE /etc/docker/daemon.json containing ...
 
     { 
