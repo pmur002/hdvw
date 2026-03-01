@@ -55,54 +55,20 @@ RUN apt-get update && apt-get install -y \
     libtiff5-dev \
     libjpeg-dev \
     libwebp-dev
-RUN Rscript -e 'install.packages("devtools", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("png", "0.1.8", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("dplyr", "1.1.4", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("reshape2", "1.4.4", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("tidyr", "1.3.1", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("knitr", "1.50", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("kableExtra", "1.4.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("ggplot2", "4.0.1", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("gggrid", "0.2.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("scales", "1.4.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("colorspace", "2.1.2", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("rcartocolor", "2.1.1", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("ggsci", "3.2.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("GGally", "2.4.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("ggforce", "0.5.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("ggChernoff", "0.3.0", repos="https://cran.rstudio.com/")'
 RUN apt-get update && apt-get install -y \
     libmagick++-dev
-RUN Rscript -e 'library(devtools); install_version("ggimage", "0.3.3", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("ggh4x", "0.3.1", repos="https://cran.rstudio.com/")'
 RUN apt-get update && apt-get install -y \
     gfortran \
     cmake \
     libudunits2-dev \
     libabsl-dev \
     libgdal-dev
-RUN Rscript -e 'library(devtools); install_version("sf", "1.0.21", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("grImport", "0.9.7", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("grImport2", "0.3.3", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("rsvg", "2.6.2", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("ggtext", "0.1.2", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("xdvir", "0.1.3", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("vwline", "0.2.4", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("gridGeometry", "0.4.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("gridtext", "0.1.5", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("rayrender", "0.38.10", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("rayshader", "0.37.3", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("rgl", "1.3.24", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("latticeExtra", "0.6.31", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("lvplot", "0.2.2", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("ggokabeito", "0.1.0", repos="https://cran.rstudio.com/")'
-RUN Rscript -e 'library(devtools); install_version("bullseye", "1.0.1", repos="https://cran.rstudio.com/")'
-
-COPY drewcurves_1.0.tar.gz /tmp/
-RUN R CMD INSTALL /tmp/drewcurves_1.0.tar.gz
+# Use {renv} to restore from local renv.lock
+RUN Rscript -e 'install.packages("renv", repos="https://cran.rstudio.com/")'
+COPY renv.lock .
+RUN Rscript -e 'renv::restore()'
 
 # For snapshots of rgl plots in PDF output
-RUN Rscript -e 'library(devtools); install_version("webshot2", "0.1.2", repos="https://cran.rstudio.com/")'
 # Use google-chrome instead of chromium because the latter requires snap 
 # and that does not work within Docker container blah blah blah
 # RUN apt-get update && apt-get install -y \

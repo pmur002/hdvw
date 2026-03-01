@@ -6,14 +6,6 @@
   - NOTE that this is probably best run on Uni office machine
     (e.g., 130.216.38.37)
 
-  + Generating list of packages and versions for Dockerfile ...
-
-    pkgVersions <- sapply(loadedNamespaces(), 
-                          function(x) as.character(packageVersion(x)))
-    paste0('RUN Rscript -e \'library(remotes); install_version("',
-           names(pkgVersions), '", "== ', pkgVersions, 
-           '", repos="https://cran.rstudio.com/")\'')
-    
   - NOTE that I had to CREATE /etc/docker/daemon.json containing ...
 
     { 
@@ -44,7 +36,7 @@
 
    E.G., test that the report will build !!!
 
-  sudo docker run -v $(pwd):/home/work/ -w /home/work --rm -t -i pmur002/hdvw /bin/bash
+  sudo docker run -v $(pwd):/home/work/ -w /home/work --rm -t -i pmur002/hdvw:$(cat VERSION) /bin/bash
 
 + To make image available on DockerHub ...
 

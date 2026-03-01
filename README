@@ -17,6 +17,22 @@
     + github release
 
 
++ Reproducibility
+  
+  + Use renv::init() to auto capture packages used in book
+    + Local builds will use frozen packages via {renv} library
+  + Subsequently supplement with install.packages() (auto captured by {renv})
+    + Going forward, new packages should be auto captured
+  + Use renv::snapshot(type="all") to capture packages and versions in renv.lock
+    + Re-run after new package install to update renv.lock
+      BUT ONLY after checking local build produces right result
+  + Base Dockerfile on renv.lock with call to renv::restore()
+    + Updates to renv.lock should trigger docker image rebuild
+      (quite hefty because it will install ALL packages all over again)
+  + 'make docker' just points R_LIBS to {renv} library cache 
+    (does NOT rely on renv::activate())
+
+
 + NOTE that with modern browsers need to run a local server to 
   view local files (to avoid CORS errors)
 
