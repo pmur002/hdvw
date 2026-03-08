@@ -7,15 +7,15 @@ source("common.R")
 
 # The Visual System {#sec-visual-system}
 
-In this book, we are going to explore a range of ways that
+In later chapters, we are going to explore a range of ways that
 information can be **encoded** to create different data visualisations.
 For example, we can encode data values as different-coloured lines 
 to create a line plot (@fig-crime)
 and we can encode data values as different-coloured rectangles to
 create a heatmap (@fig-crime-heatmap).
 
-The choice of encoding depends on how well information can be
-**decoded* from the data visualisation.
+The choice of a good encoding will depend on how well information can be
+**decoded** from the data visualisation (@fig-decode).
 For example, if we want to communicate trends then encoding data
 values as lines will be more effective than encoding data values
 as rectangles because it is easier to decode trends from lines.
@@ -24,7 +24,7 @@ Understanding why some encodings are more effective than others will
 require an understanding of how the human visual system works.
 In order to understand the effectiveness of an encoding
 from information to a visual representation,
-we need to know how well information can be decoded from 
+we need to know how well the visual system decodes information from 
 the visual representation.
 
 In this chapter, we focus on the **decoding** of information from
@@ -284,7 +284,7 @@ outline of New Zealand.
 :::
 
 A visualisation of wind strength and wind direction 
-that is made up of lots of small lines of different
+that is made up of lots of small triangles of different
 lengths and different angles and different colours.
 :::
 
@@ -386,7 +386,7 @@ black circles showing the position of the coloured circles
 in the original image.
 In the eye-tracking image, 
 the fixations are shown as purple circles and the saccades  are shown as lines
-between the circles.  For example, we can see that the viewer has 
+between the circles.  We can see, for example, that the viewer has 
 fixated multiple times upon the large, colourful circles in the
 original image and has also fixated on the 
 text at the top and bottom of the image.
@@ -414,7 +414,8 @@ saccades (lines between circles) for one person viewing an image for
 the original image is shown on the left.
 :::
 
-This is effectively an argument for keeping things simple.
+This feature of our visual system provides
+an argument for keeping things simple.
 If we can only decode information from an image in a piecemeal fashion,
 then the fewer locations that we are required to focus on the better.
 
@@ -427,6 +428,7 @@ then the fewer locations that we are required to focus on the better.
 When we switch focus between different areas of an image, 
 we need to remember information from a previous area of focus.
 How well can we hold visual information in memory?
+
 The most important feature of visual memory is that it is 
 very limited.  We can only hold in memory a small amount of information
 at once.[^memory-limits]
@@ -502,9 +504,9 @@ cat(readLines("Memory/memory-5.svg", warn=FALSE), sep="\n")
 ```
 
 Three memory tasks.  The task is to remember the colours of the circles.  Within
-each box, click on each of the coloured circles, which will produce a colour
+each box, click on each of the coloured circles.  This will produce a colour
 wheel.  Click (in the same order) on the colour wheel where it matches the
-colour of the original circles.  This will present the results as small black
+colours of the original circles.  This will present the results as small black
 dots representing the original circle colours and open dots representing the
 matching clicks, plus a (maximum) error (in degrees).  The task should be harder
 (and less accurate) with more circles, which reflects the limits on visual
@@ -576,6 +578,11 @@ processes extract some properties from an image without any mental effort.
 For example, in @fig-pop-colour-1 we can detect the one teal dot amongst the
 24 orange dots without effort. @fig-pop-colour-2 shows that this task remains
 effortless even if the number of dots is much larger.[^pre-attentive]
+This ability to identify an item that is different from all other items
+within an image
+also
+applies to other basic features like size, as shown
+in @fig-diff-size.
 
 [^pre-attentive]:
     The ability to detect features without conscious effort
@@ -714,12 +721,6 @@ grid.newpage()
 dots(10)
 ```
 
-This ability to identify an item that is different from all other items
-within an image
-also
-applies to other basic features like size, as shown
-in @fig-diff-size.
-
 ```{r}
 #| echo: false
 #| label: fig-diff-size
@@ -787,7 +788,7 @@ greater when all other items are the **same**.[^same-diff]
 #| label: fig-diff-serial
 #| layout-ncol: 2
 #| fig.height: 6
-#| fig-cap: We have to work much harder to identify a unique item when there is more going on.
+#| fig-cap: We have to work much harder to identify a unique item when multiple other visual features are changing within the image.
 #| fig-subcap:
 #|   - One larger teal dot amongst 24 dots that differ by colour and/or size.
 #|   - One larger teal dot amongst 99 dots that differ by colour and/or size.
@@ -855,9 +856,10 @@ be easier to find the smaller orange dot.[^top-down]
 In @fig-diff-serial, we can see several groups of items:
 orange dots, teal dots, large dots, and small dots.
 These separate groups of items are identified based on their 
-**similarity**---each group of items have the same size and the same colour.
+**similarity**---each group of items has the same size and the same colour.
 The flip side of being able to easily identify items that are different 
-(@sec-differences) is that we can easily identify items that are the same.
+(@sec-differences) is that we can 
+also easily identify items that are the same.
 
 The grouping of similar items within an image also happens automatically and
 without conscious effort.
@@ -929,18 +931,18 @@ grid.circle(unit(.2, "npc") + rep(4*unit(-2:2, "mm"), 5),
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
             gp=gpar(fill="black"))
-grid.segments(unit(.2, "npc") + 4*unit(-2:2, "mm"),
+grid.segments(unit(.8, "npc") + 4*unit(-2:2, "mm"),
               unit(.5, "npc") + 4*unit(-2, "mm"), 
-              unit(.2, "npc") + 4*unit(-2:2, "mm"),
+              unit(.8, "npc") + 4*unit(-2:2, "mm"),
               unit(.5, "npc") + 4*unit(2, "mm"),
               gp=gpar(lwd=1.5))
 grid.circle(unit(.8, "npc") + rep(4*unit(-2:2, "mm"), 5), 
             unit(.5, "npc") + rep(4*unit(-2:2, "mm"), each=5), 
             r=unit(1, "mm"), 
             gp=gpar(fill="black"))
-grid.segments(unit(.8, "npc") + 4*unit(-2, "mm"),
+grid.segments(unit(.2, "npc") + 4*unit(-2, "mm"),
               unit(.5, "npc") + 4*unit(-2:2, "mm"), 
-              unit(.8, "npc") + 4*unit(2, "mm"),
+              unit(.2, "npc") + 4*unit(2, "mm"),
               unit(.5, "npc") + 4*unit(-2:2, "mm"),
               gp=gpar(lwd=2))
 grid.text("connection", y=unit(-2, "lines"), just="top")
@@ -1018,7 +1020,7 @@ on the right of @fig-continuity.[^continuity]
 ```{r}
 #| echo: false
 #| label: fig-continuity
-#| fig-cap: We automatically complete curves.
+#| fig-cap: What shapes emerge from the collection of points on the left?  We have a preference for completing curves and straight lines (in the middle) rather than shapes with sharp corners (on the right).
 #| fig.height: 2
 library(vwline)
 curves <- function(col1="black", col2=col1, col3=col1, 
@@ -1100,7 +1102,7 @@ whatever is most orderly, regular, and coherent.[^good-gestalt]
 ```{r}
 #| echo: false
 #| label: fig-simplicity
-#| fig-cap: We automatically perceive simple shapes over more complex interpretations.
+#| fig-cap: What shapes emerge from the collection of points on the left?  We have a preference for simpler shapes (in the middle) over more complex shapes (on the right).
 #| fig.height: 2
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(1, 7, 
@@ -1129,7 +1131,7 @@ items have a symmetric arrangement.[^symmetry]
 ```{r}
 #| echo: false
 #| label: fig-symmetry
-#| fig-cap: We automatically perceive groups from symmetric arrangements.  The pair of symmetric curves on the left naturally go together, but the pairs of curves in the middle and to the right do not.
+#| fig-cap: We automatically perceive groups from symmetric arrangements.  The pair of symmetric curves on the left naturally form a group, much more so than the pairs of curves in the middle and to the right.
 #| fig.height: 2
 library(vwline)
 arc <- function(angle, offset, x=.5) {
@@ -1222,7 +1224,7 @@ However, on the right of @fig-visual-task is an example of a
 task that is much more difficult.
 In this task, we have to identify which of the four shapes in the
 bottom row is *not* a rotated version of the shape at the top.
-This task in requires much more deliberate effort 
+This task requires much more deliberate effort 
 and time to perform.[^cog-effort]
 
 [^cog-effort]:
@@ -1293,7 +1295,7 @@ dev.off()
 ```{r}
 #| echo: false
 #| label: fig-illusion
-#| fig-cap: The two horizonal lines in the Muller-Lyer illusion on the left have exactly the same physical length, but the top line appears longer.  The two inner circles in the Ebbinghaus illusion on the right have exactly the same physical radius, but they appear to be different sizes.
+#| fig-cap: The two horizonal lines in the Muller-Lyer illusion on the left have exactly the same physical length, but the top line appears longer.  The two orange circles in the Ebbinghaus illusion on the right have exactly the same physical radius, but they appear to be different sizes.
 #| fig.height: 2
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(1, 5, widths=c(.2, 1, .2, 1, 1),
