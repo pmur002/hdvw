@@ -7,31 +7,29 @@ source("common.R")
 
 # The Visual System {#sec-visual-system}
 
-In later chapters, we are going to explore a range of ways that
-information can be **encoded** to create different data visualisations.
-For example, we can encode data values as different-coloured lines 
+In @sec-intro, we established that a data visualisation can be thought
+of as an **encoding** from data values to data symbols and
+extracting information from a data visualisation involves 
+**decoding** from data symbols back to data values.
+
+We will consider many different ways to encode information in this book.
+For example, we have already seen that we
+can encode data values as different-coloured lines 
 to create a line plot (@fig-crime)
-and we can encode data values as different-coloured rectangles to
+or we can encode data values as different-coloured rectangles to
 create a heatmap (@fig-crime-heatmap).
+However, one thing that all of encodings that we consider
+will have in common is that they
+are *visual* encodings.
 
-The choice of a good encoding will depend on how well information can be
-**decoded** from the data visualisation (@fig-decode).
-For example, if we want to communicate trends then encoding data
-values as lines will be more effective than encoding data values
-as rectangles because it is easier to decode trends from lines.
-
-Understanding why some encodings are more effective than others will
-require an understanding of how the human visual system works.
-In order to understand the effectiveness of an encoding
-from information to a visual representation,
-we need to know how well the visual system decodes information from 
-the visual representation.
-
-In this chapter, we focus on the **decoding** of information from
-a visual representation.
-In this chapter we will establish a very simple model of the visual system, 
-which will help us to understand the effectiveness of the
-different encodings that we consider throughout the book.[^simple-visual-models]
+This means that the decoding of information from a data visualisation
+involves the human visual system.
+A good encoding will produce a data visualisation that
+the visual system is good at decoding.
+In this chapter, we look at some basic features
+of the visual system.[^simple-visual-models]
+If we understand how the visual system works, we will begin
+to understand how data visualisations work.
 
 [^simple-visual-models]:
   Simple descriptions of the human visual system can be found in many articles
@@ -167,6 +165,25 @@ signals via the optic nerve to the brain.
   because our visual system gathers
   an enormous amount of information.
 
+For example,
+@fig-visual-model-demo shows an image that is made up of over
+17,000 individual visual elements, but we can easily consume
+the image and identify features without any difficulty.
+
+::: {#fig-visual-model-demo}
+::: {.content-visible when-format=pdf}
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Data/Weather/NOMADS.png)
+:::
+
+A visualisation of wind strength and wind direction 
+that is made up of lots of small triangles of different
+lengths and different angles and different colours.
+:::
+
 ## Visual processing {#sec-visual-processing}
 
 Processing of the 
@@ -239,32 +256,26 @@ This means that, if we **encode** data values as simple **visual features**,
 like length, angle, and colour,
 then it will be possible to rapidly **decode** large amounts of 
 simple information.
+We will look more at the encoding of data values as visual features
+in @sec-encoding-visual-features.
+
 In addition, a smaller amount of 
 more complex information will be decoded from
-higher-level processing of those low-level visual features.
+higher-level processing of low-level visual features.
+We will look more at the decoding of multiple visual features in
+@sec-summaries.
 
-For example,
-@fig-visual-model-demo shows an image that is made up of
-many small items:  tiny triangles with different **positions**, **lengths**,
-**angles**, and **colours**.
-The angle of the triangles represents wind direction and the 
-length of the triangles represents wind strength. Blue triangles
-are over the sea and green triangles are over land.[^NOMADS]
-We can
+As an example, the image in 
+@fig-visual-model-demo shows a data visualisation that encodes
+wind data values as many small triangles.[^NOMADS]
+Wind direction is encoded as the angle of the triangles
+and wind strength is encoded as the
+length of the triangles. 
+Colour is used to encode whether the location is over the sea (blue)
+or over the land (green).
+The visual system is able to 
 effortlessly decode the basic **visual features**---angle, 
 size, and colour---of individual triangles.
-
-The visual system can also very quickly
-process the visual features of many triangles at once.
-There is no need to consciously focus 
-on every individual triangle in the image and,
-at a higher level of processing, darker and lighter **visual shapes** are
-identified as regions of different colours.
-For example, a band of lighter wind forms a line from the top-left
-corner down and to the right at a roughly 45-degree angle.
-At a higher level of processing again, at least for the denizens of Oceania,
-the green regions are recognised as a very familiar **visual object**: the
-outline of New Zealand.
 
 [^NOMADS]:
     @fig-visual-model-demo is based on wind data from the
@@ -274,47 +285,17 @@ outline of New Zealand.
     the {rNOMADS} package [@rNOMADS], with raw data interpolated to a finer
     grid.
 
-::: {#fig-visual-model-demo}
-::: {.content-visible when-format=pdf}
-\includegraphics[width=\textwidth]{Data/Weather/NOMADS.png}
-:::
-
-::: {.content-visible when-format=html}
-![](Data/Weather/NOMADS.png)
-:::
-
-A visualisation of wind strength and wind direction 
-that is made up of lots of small triangles of different
-lengths and different angles and different colours.
-:::
-
-::: {#fig-visual-model-demo}
-::: {.content-visible when-format=pdf}
-\includegraphics[width=\textwidth]{Data/Weather/NOMADS-dots.png}
-:::
-
-::: {.content-visible when-format=html}
-![](Data/Weather/NOMADS-dots.png)
-:::
-
-A visualisation of wind strength and wind direction 
-that is made up of lots of small dots of different sizes
-and different colours.
-:::
-
-::: {#fig-visual-model-demo}
-::: {.content-visible when-format=pdf}
-\includegraphics[width=\textwidth]{Data/Weather/NOMADS-barb.png}
-:::
-
-::: {.content-visible when-format=html}
-![](Data/Weather/NOMADS-barb.png)
-:::
-
-A visualisation of wind strength and wind direction 
-that is made up of lots of small wind barbs.
-:::
-
+The visual system can also very quickly
+process the visual features of many triangles at once.
+There is no need to consciously focus 
+on every individual triangle in the image.
+At a higher level of processing, darker and lighter **visual shapes** are
+identified as regions of different colours.
+For example, a band of lighter wind forms a line from the top-left
+corner down and to the right at a roughly 45-degree angle.
+At a higher level of processing again, at least for the denizens of Oceania,
+the green regions are recognised as a very familiar **visual object**: the
+outline of New Zealand.
 
 > Encoding data values as simple visual features is effective
   at conveying simple information
@@ -324,6 +305,10 @@ that is made up of lots of small wind barbs.
 > The visual system also processes many visual features at once, producing
   more complex visual shapes or visual objects, which allow
   more complex information to be decoded.
+
+We will look more at the use of visual shapes and visual objects
+in a data visualisation in 
+@sec-visual-shapes and @sec-visual-objects.
 
 ## Visual focus {#sec-visual-focus}
 
@@ -595,6 +580,54 @@ visual objects.
   visual information
   across multiple areas of visual focus.
 
+As an example, the image in @fig-visual-model-demo-dots
+is based on the same wind data as @fig-visual-model-demo.
+However, in @fig-visual-model-demo-dots the data symbol
+is a circle rather than a triangle, with the wind strength
+encoded as the size of the circle and the wind direction 
+encoded as the colour of the circle: 
+southerly winds are black, westerly winds are red, 
+easterly winds are green, and northerly winds are blue.
+This data visualisation is problematic for several reasons,
+several of which relate to the demands on visual focus
+and visual memory.
+
+::: {#fig-visual-model-demo-dots}
+::: {.content-visible when-format=pdf}
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS-dots.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Data/Weather/NOMADS-dots.png)
+:::
+
+A visualisation of wind strength and wind direction 
+that is made up of lots of small dots of different sizes
+and different colours.
+:::
+
+The encoding of wind direction in 
+@fig-visual-model-demo-dots requires a legend.
+For example, there needs to be an explanation that black dots
+represent southerly winds.
+There is no natural correspondence between the colours used for
+the encoding and the wind directions.
+This means that we have to switch focus between the dots in the main
+image and the dots in the legend.
+Furthermore, we may have to switch focus repeatedly if 
+we forget one of the encodings.
+Without looking at @fig-visual-model-demo-dots, can you recite
+the colour-to-wind-direction encodings yet?
+This requirement to switch focus and memorise encodings makes it
+more difficult to decode the wind information from the image in 
+@fig-visual-model-demo compared to the image in @fig-visual-model-demo.
+
+By contrast, in @fig-visual-model-demo, there was no need for a legend because
+we were able to decode wind direction naturally
+from the angles of the triangles.
+We will look more at this sort of automatic decoding of information
+in @sec-congruence.
+
 ## Visual differences {#sec-differences}
 
 The ability to gather a large amount of basic features from an image
@@ -832,9 +865,15 @@ that differ only in terms of basic visual features
 will be effective for decoding unusual data values.
 
 > A data visualisation will be effective for decoding
-  unusual data values if the data are encoded using differences
+  unusual or unique data values if the data are encoded using differences
   in basic visual features,
   especially if everything else remains the same.
+
+As an example, there is a single red triangle in 
+@fig-visual-model-demo
+that encodes the location of the strongest wind.
+This triangle is very easy to identify, even amongst
+more than 17,000 triangles.
 
 ## Visual attention {#sec-attention}
 
@@ -855,6 +894,10 @@ conscious thought.[^attention]
 > A data visualisation will be effective for decoding
   important data values if it uses basic visual
   features like colour to draw the viewer's attention.
+
+As an example, it is not only easy to identify the single red triangle in 
+@fig-visual-model-demo,
+it is actually quite difficult to ignore it.
 
 Where we focus within an image, and what information we extract,
 is also affected by conscious goals---what are we looking for?[^filtering]
@@ -878,6 +921,9 @@ be easier to find the smaller orange dot.[^top-down]
 > A data visualisation will be effective for decoding
   important data values if it includes instructions
   that direct the reader's attention.
+
+We will look more at the text labels on a data visualisation in
+@sec-text.
 
 ## Visual similarities {#sec-visual-model-groups}
 
@@ -1110,6 +1156,17 @@ information.
   on the automatic decoding of visual groups
   (proximity, similarity, etc).
 
+As an example,
+we automatically identify separate groups of triangles in
+@fig-visual-model-demo (land versus sea)
+and separate groups of dots in 
+@fig-visual-model-demo-dots (different wind directions),
+just based on the common colours of the triangles or dots.
+No effort is required to decode these groups.
+
+We will look more at the decoding of groups in
+@sec-qual-features.
+
 ## Visual simplicity {#sec-simplicity}
 
 @fig-simplicity shows an arrangement of dots, similar to @fig-continuity.
@@ -1205,6 +1262,38 @@ to decode a more complex interpretation.
 > A data visualisation may be easier to decode if it is orderly and
   lends itself to a simple interpretation.
 
+As an example, the image in 
+@fig-visual-model-demo-barb
+encodes a subset of the wind data from
+@fig-visual-model-demo and @fig-visual-model-demo-dots.
+The data symbol in 
+@fig-visual-model-demo-barb
+is a *wind barb*, which represents the wind direction as the angle
+of a line and the wind strength as small tick marks on the tail
+of the line.
+
+::: {#fig-visual-model-demo-barb}
+::: {.content-visible when-format=pdf}
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS-barb.png}
+:::
+
+::: {.content-visible when-format=html}
+![](Data/Weather/NOMADS-barb.png)
+:::
+
+A visualisation of wind strength and wind direction 
+that is made up of lots of small wind barbs.
+:::
+
+There is also an outline of the coast of (the North Island of) New Zealand
+in @fig-visual-model-demo-barb. 
+Although the outline of the coast overlaps with the wind barbs in many
+places, in most places
+we are able to decode the coast as a single continuous shape
+separate from the individual barbs.
+The continuous coastline crossed by smaller barbs is a simpler decoding
+than any other interpretation.
+
 ## Visual tasks {#sec-tasks}
 
 Identifying whether visual elements are the same or different
@@ -1271,6 +1360,22 @@ significant mental effort in order to decode useful information.
 > A data visualisation will be effective if it relies on 
   automatic and rapid visual processing rather than requiring
   conscious mental effort.
+
+An example of a relatively simple visual task is the decoding
+of wind direction from 
+@fig-visual-model-demo.
+For example, at the right of
+@fig-visual-model-demo,
+about half way up the image, 
+we can see a region where the wind is circling around a point.
+By contrast, identifying that location in 
+@fig-visual-model-demo-dots
+is much more difficult.
+The location is marked by a point where all four colours
+meet, but decoding that the wind is circling at that
+location requires decoding the four wind directions and
+then combining the four directions to conclude that the
+wind directions form a circle.
 
 ## Dangers of the visual system {#sec-illusion}
 
@@ -1446,6 +1551,9 @@ orginal data values.
 > Visual illusions can destroy the effectiveness of a 
   data visualisation because they lead to an incorrect decoding
   of information.
+
+We will see an example of how our visual system can sometimes work
+against us in @sec-colour-relative.
 
 ## Summary
 

@@ -15,14 +15,17 @@ NOMADS <- function(which) {
             ## cat(i, "\n")
             dx <- fine.step*(windStr[i]/max(windStr))*cos(windDir[i])
             dy <- fine.step*(windStr[i]/max(windStr))*sin(windDir[i])
+            col <- ifelse(onland[i], 4, 3)
+            if (i == which.max(windStr))
+                col <- 2
             polygon(c(x0[i], 
                       x0[i] - mult*dx - pd*dy,
                       x0[i] - mult*dx + pd*dy),
                     c(y0[i],
                       y0[i] - mult*dy + pd*dx,
                       y0[i] - mult*dy - pd*dx),
-                    col=ifelse(onland[i], 4, 3),
-                    border=ifelse(onland[i], 4, 3),
+                    col=col,
+                    border=col,
                     lwd=.5,
                     ljoin="mitre")
         }
@@ -53,10 +56,10 @@ NOMADS(1)
 dev.off()
 
 png("NOMADS-dots.png", width=800, height=800, res=200)
-par(mar=c(0, 0, 2, 0), xaxs="i", yaxs="i")
+par(mar=c(0, 0, 1, 0), xaxs="i", yaxs="i")
 NOMADS(4)
-legend(mean(x0), -33.5, xjust=.5, yjust=0,
-       c("North", "East", "West", "South"),
+legend(mean(x0), -34, xjust=.5, yjust=0,
+       c("Southerly", "Westerly", "Easterly", "Northerly"),
        col=1:4, pt.bg=1:4, pch=21, pt.cex=.25, cex=.4, bty="n",
        horiz=TRUE, xpd=NA)
 dev.off()

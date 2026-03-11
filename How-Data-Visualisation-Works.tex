@@ -281,7 +281,7 @@
 
 Version 0.9 (build 2026-03-10)
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, breakable, rightrule=.15mm, coltitle=black, colframe=quarto-callout-warning-color-frame, opacityback=0, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, breakable, colframe=quarto-callout-warning-color-frame, opacityback=0, left=2mm, coltitle=black, rightrule=.15mm, colback=white, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomtitle=1mm, colbacktitle=quarto-callout-warning-color!10!white]
 
 Under construction!
 
@@ -916,35 +916,30 @@ data values can be recovered from the data symbols.
 
 \chapter{The Visual System}\label{sec-visual-system}
 
-In later chapters, we are going to explore a range of ways that
-information can be \textbf{encoded} to create different data
-visualisations. For example, we can encode data values as
+In Chapter~\ref{sec-intro}, we established that a data visualisation can
+be thought of as an \textbf{encoding} from data values to data symbols
+and extracting information from a data visualisation involves
+\textbf{decoding} from data symbols back to data values.
+
+We will consider many different ways to encode information in this book.
+For example, we have already seen that we can encode data values as
 different-coloured lines to create a line plot (Figure~\ref{fig-crime})
-and we can encode data values as different-coloured rectangles to create
-a heatmap (Figure~\ref{fig-crime-heatmap}).
+or we can encode data values as different-coloured rectangles to create
+a heatmap (Figure~\ref{fig-crime-heatmap}). However, one thing that all
+of encodings that we consider will have in common is that they are
+\emph{visual} encodings.
 
-The choice of a good encoding will depend on how well information can be
-\textbf{decoded} from the data visualisation (Figure~\ref{fig-decode}).
-For example, if we want to communicate trends then encoding data values
-as lines will be more effective than encoding data values as rectangles
-because it is easier to decode trends from lines.
-
-Understanding why some encodings are more effective than others will
-require an understanding of how the human visual system works. In order
-to understand the effectiveness of an encoding from information to a
-visual representation, we need to know how well the visual system
-decodes information from the visual representation.
-
-In this chapter, we focus on the \textbf{decoding} of information from a
-visual representation. In this chapter we will establish a very simple
-model of the visual system, which will help us to understand the
-effectiveness of the different encodings that we consider throughout the
-book.\footnote{Simple descriptions of the human visual system can be
-  found in many articles and books on data visualisation, for example,
-  Cairo (2012), Franconeri et al. (2021a), and Sönning (2023). See Ware
-  (2021) for a more in-depth, but still very accessible description.
-  Wikipedia also has some very helpful content (Wikipedia contributors
-  2025).}
+This means that the decoding of information from a data visualisation
+involves the human visual system. A good encoding will produce a data
+visualisation that the visual system is good at decoding. In this
+chapter, we look at some basic features of the visual system.\footnote{Simple
+  descriptions of the human visual system can be found in many articles
+  and books on data visualisation, for example, Cairo (2012), Franconeri
+  et al. (2021a), and Sönning (2023). See Ware (2021) for a more
+  in-depth, but still very accessible description. Wikipedia also has
+  some very helpful content (Wikipedia contributors 2025).} If we
+understand how the visual system works, we will begin to understand how
+data visualisations work.
 
 \section{The eye}\label{sec-eye}
 
@@ -977,6 +972,24 @@ to the brain.}
 One reason why data visualisation is effective is because our visual
 system gathers an enormous amount of information.
 \end{quote}
+
+For example, Figure~\ref{fig-visual-model-demo} shows an image that is
+made up of over 17,000 individual visual elements, but we can easily
+consume the image and identify features without any difficulty.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS.png}
+
+}
+
+\caption{\label{fig-visual-model-demo}A visualisation of wind strength
+and wind direction that is made up of lots of small triangles of
+different lengths and different angles and different colours.}
+
+\end{figure}%
 
 \section{Visual processing}\label{sec-visual-processing}
 
@@ -1045,74 +1058,38 @@ that is more memorable.}
 This means that, if we \textbf{encode} data values as simple
 \textbf{visual features}, like length, angle, and colour, then it will
 be possible to rapidly \textbf{decode} large amounts of simple
-information. In addition, a smaller amount of more complex information
-will be decoded from higher-level processing of those low-level visual
-features.
+information. We will look more at the encoding of data values as visual
+features in Chapter~\ref{sec-encoding-visual-features}.
 
-For example, Figure~\ref{fig-visual-model-demo} shows an image that is
-made up of many small items: tiny triangles with different
-\textbf{positions}, \textbf{lengths}, \textbf{angles}, and
-\textbf{colours}. The angle of the triangles represents wind direction
-and the length of the triangles represents wind strength. Blue triangles
-are over the sea and green triangles are over land.\footnote{Figure~\ref{fig-visual-model-demo}
-  is based on wind data from the National Oceanic and Atmospheric
-  Administration's Operational Model Archive and Distribution System
+In addition, a smaller amount of more complex information will be
+decoded from higher-level processing of low-level visual features. We
+will look more at the decoding of multiple visual features in
+Chapter~\ref{sec-summaries}.
+
+As an example, the image in Figure~\ref{fig-visual-model-demo} shows a
+data visualisation that encodes wind data values as many small
+triangles.\footnote{Figure~\ref{fig-visual-model-demo} is based on wind
+  data from the National Oceanic and Atmospheric Administration's
+  Operational Model Archive and Distribution System
   (\href{https://nomads.ncep.noaa.gov/}{NOMADS}). The data were accessed
   on September 14 2024 and processed using the \{rNOMADS\} package
   (Bowman and Lees 2015), with raw data interpolated to a finer grid.}
-We can effortlessly decode the basic \textbf{visual features}---angle,
-size, and colour---of individual triangles.
+Wind direction is encoded as the angle of the triangles and wind
+strength is encoded as the length of the triangles. Colour is used to
+encode whether the location is over the sea (blue) or over the land
+(green). The visual system is able to effortlessly decode the basic
+\textbf{visual features}---angle, size, and colour---of individual
+triangles.
 
 The visual system can also very quickly process the visual features of
 many triangles at once. There is no need to consciously focus on every
-individual triangle in the image and, at a higher level of processing,
+individual triangle in the image. At a higher level of processing,
 darker and lighter \textbf{visual shapes} are identified as regions of
 different colours. For example, a band of lighter wind forms a line from
 the top-left corner down and to the right at a roughly 45-degree angle.
 At a higher level of processing again, at least for the denizens of
 Oceania, the green regions are recognised as a very familiar
 \textbf{visual object}: the outline of New Zealand.
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=\textwidth]{Data/Weather/NOMADS.png}
-
-}
-
-\caption{\label{fig-visual-model-demo}A visualisation of wind strength
-and wind direction that is made up of lots of small triangles of
-different lengths and different angles and different colours.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=\textwidth]{Data/Weather/NOMADS-dots.png}
-
-}
-
-\caption{\label{fig-visual-model-demo}A visualisation of wind strength
-and wind direction that is made up of lots of small dots of different
-sizes and different colours.}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=\textwidth]{Data/Weather/NOMADS-barb.png}
-
-}
-
-\caption{\label{fig-visual-model-demo}A visualisation of wind strength
-and wind direction that is made up of lots of small wind barbs.}
-
-\end{figure}%
 
 \begin{quote}
 Encoding data values as simple visual features is effective at conveying
@@ -1123,6 +1100,10 @@ The visual system also processes many visual features at once, producing
 more complex visual shapes or visual objects, which allow more complex
 information to be decoded.
 \end{quote}
+
+We will look more at the use of visual shapes and visual objects in a
+data visualisation in Chapter~\ref{sec-visual-shapes} and
+Chapter~\ref{sec-visual-objects}.
 
 \section{Visual focus}\label{sec-visual-focus}
 
@@ -1347,6 +1328,47 @@ required to switch focus and remember visual information across multiple
 areas of visual focus.
 \end{quote}
 
+As an example, the image in Figure~\ref{fig-visual-model-demo-dots} is
+based on the same wind data as Figure~\ref{fig-visual-model-demo}.
+However, in Figure~\ref{fig-visual-model-demo-dots} the data symbol is a
+circle rather than a triangle, with the wind strength encoded as the
+size of the circle and the wind direction encoded as the colour of the
+circle: southerly winds are black, westerly winds are red, easterly
+winds are green, and northerly winds are blue.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS-dots.png}
+
+}
+
+\caption{\label{fig-visual-model-demo-dots}A visualisation of wind
+strength and wind direction that is made up of lots of small dots of
+different sizes and different colours.}
+
+\end{figure}%
+
+The encoding of wind direction in
+Figure~\ref{fig-visual-model-demo-dots} requires a legend. For example,
+there needs to be an explanation that black dots represent southerly
+winds. There is no natural correspondence between the colours used for
+the encoding and the wind directions. This means that we have to switch
+focus between the dots in the main image and the dots in the legend.
+Furthermore, we may have to switch focus repeatedly if we forget one of
+the encodings. Without looking at
+Figure~\ref{fig-visual-model-demo-dots}, can you recite the
+colour-to-wind-direction encodings yet? This requirement to switch focus
+and memorise encodings makes it more difficult to decode the wind
+information from the image in Figure~\ref{fig-visual-model-demo}
+compared to the image in Figure~\ref{fig-visual-model-demo}.
+
+By contrast, in Figure~\ref{fig-visual-model-demo}, there was no need
+for a legend because we were able to decode wind direction naturally
+from the angles of the triangles. We will look more at this sort of
+automatic decoding of information in Chapter~\ref{sec-congruence}.
+
 \section{Visual differences}\label{sec-differences}
 
 The ability to gather a large amount of basic features from an image
@@ -1521,10 +1543,15 @@ terms of basic visual features will be effective for decoding unusual
 data values.
 
 \begin{quote}
-A data visualisation will be effective for decoding unusual data values
-if the data are encoded using differences in basic visual features,
-especially if everything else remains the same.
+A data visualisation will be effective for decoding unusual or unique
+data values if the data are encoded using differences in basic visual
+features, especially if everything else remains the same.
 \end{quote}
+
+As an example, there is a single red triangle in
+Figure~\ref{fig-visual-model-demo} that encodes the location of the
+strongest wind. This triangle is very easy to identify, even amongst
+more than 17,000 triangles.
 
 \section{Visual attention}\label{sec-attention}
 
@@ -1544,6 +1571,10 @@ values if it uses basic visual features like colour to draw the viewer's
 attention.
 \end{quote}
 
+As an example, it is not only easy to identify the single red triangle
+in Figure~\ref{fig-visual-model-demo}, it is actually quite difficult to
+ignore it.
+
 Where we focus within an image, and what information we extract, is also
 affected by conscious goals---what are we looking for?\footnote{Having a
   conscious target to search for not only directs our visual focus
@@ -1561,6 +1592,9 @@ that task, it will be easier to find the smaller orange dot.\footnote{Wolfe
 A data visualisation will be effective for decoding important data
 values if it includes instructions that direct the reader's attention.
 \end{quote}
+
+We will look more at the text labels on a data visualisation in
+Chapter~\ref{sec-text}.
 
 \section{Visual similarities}\label{sec-visual-model-groups}
 
@@ -1677,6 +1711,15 @@ One way that a data visualisation can be effective is by relying on on
 the automatic decoding of visual groups (proximity, similarity, etc).
 \end{quote}
 
+As an example, we automatically identify separate groups of triangles in
+Figure~\ref{fig-visual-model-demo} (land versus sea) and separate groups
+of dots in Figure~\ref{fig-visual-model-demo-dots} (different wind
+directions), just based on the common colours of the triangles or dots.
+No effort is required to decode these groups.
+
+We will look more at the decoding of groups in
+Section~\ref{sec-qual-features}.
+
 \section{Visual simplicity}\label{sec-simplicity}
 
 Figure~\ref{fig-simplicity} shows an arrangement of dots, similar to
@@ -1737,6 +1780,35 @@ A data visualisation may be easier to decode if it is orderly and lends
 itself to a simple interpretation.
 \end{quote}
 
+As an example, the image in Figure~\ref{fig-visual-model-demo-barb}
+encodes a subset of the wind data from
+Figure~\ref{fig-visual-model-demo} and
+Figure~\ref{fig-visual-model-demo-dots}. The data symbol in
+Figure~\ref{fig-visual-model-demo-barb} is a \emph{wind barb}, which
+represents the wind direction as the angle of a line and the wind
+strength as small tick marks on the tail of the line.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=\textwidth]{Data/Weather/NOMADS-barb.png}
+
+}
+
+\caption{\label{fig-visual-model-demo-barb}A visualisation of wind
+strength and wind direction that is made up of lots of small wind
+barbs.}
+
+\end{figure}%
+
+There is also an outline of the coast of (the North Island of) New
+Zealand in Figure~\ref{fig-visual-model-demo-barb}. Although the outline
+of the coast overlaps with the wind barbs in many places, in most places
+we are able to decode the coast as a single continuous shape separate
+from the individual barbs. The continuous coastline crossed by smaller
+barbs is a simpler decoding than any other interpretation.
+
 \section{Visual tasks}\label{sec-tasks}
 
 Identifying whether visual elements are the same or different
@@ -1779,6 +1851,17 @@ order to decode useful information.
 A data visualisation will be effective if it relies on automatic and
 rapid visual processing rather than requiring conscious mental effort.
 \end{quote}
+
+An example of a relatively simple visual task is the decoding of wind
+direction from Figure~\ref{fig-visual-model-demo}. For example, at the
+right of Figure~\ref{fig-visual-model-demo}, about half way up the
+image, we can see a region where the wind is circling around a point. By
+contrast, identifying that location in
+Figure~\ref{fig-visual-model-demo-dots} is much more difficult. The
+location is marked by a point where all four colours meet, but decoding
+that the wind is circling at that location requires decoding the four
+wind directions and then combining the four directions to conclude that
+the wind directions form a circle.
 
 \section{Dangers of the visual system}\label{sec-illusion}
 
@@ -1884,6 +1967,9 @@ lead back to the orginal data values.
 Visual illusions can destroy the effectiveness of a data visualisation
 because they lead to an incorrect decoding of information.
 \end{quote}
+
+We will see an example of how our visual system can sometimes work
+against us in Section~\ref{sec-colour-relative}.
 
 \section{Summary}\label{summary-1}
 
@@ -9060,7 +9146,7 @@ multiple views of the data.
 
 \bookmarksetup{startatroot}
 
-\chapter{Visual Objects}\label{visual-objects}
+\chapter{Visual Objects}\label{sec-visual-objects}
 
 Figure~\ref{fig-scatter-country} shows a scatter plot of the number of
 clean breaks and the number of tries for countries at the 2023 Rugby
@@ -10081,7 +10167,7 @@ incorrect decoding of the data symbols.
 
 \bookmarksetup{startatroot}
 
-\chapter{Text}\label{text}
+\chapter{Text}\label{sec-text}
 
 Figure~\ref{fig-no-text} is a version of Figure~\ref{fig-crime} with one
 significant modification: all of the text has been removed. Although we

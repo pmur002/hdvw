@@ -4,7 +4,7 @@ source("common.R")
 png("NOMADS-barb.png", width=800, height=800, res=200)
 dev.control("enable")
 
-par(mar=c(1, 1, 3, 1), xaxs="i", yaxs="i", xpd=NA)
+par(mar=c(1, 1, 2, 1), xaxs="i", yaxs="i", xpd=NA)
 subset <- row(u.grid.nz.fine) > 91 & row(u.grid.nz.fine) < 131 &
     col(u.grid.nz.fine) > 78 & col(u.grid.nz.fine) < 118
 xx <- x0[subset] ## rep(x, length(x))
@@ -26,9 +26,9 @@ for (i in seq_along(xx)) {
 library(gridGraphics)
 grid.echo()
 barbs <- grid.grep("segments", grep=TRUE, global=TRUE)
-grid.edit(barbs[[speedMax]], gp=gpar(col="red"))
+## grid.edit(barbs[[speedMax]], gp=gpar(col="red"))
 ## grid.edit(barbs[[speedMin]], gp=gpar(col="green"))
-grid.rect(y=1, height=unit(2, "lines"), just="top",
+grid.rect(y=1, height=unit(1, "lines"), just="top",
           gp=gpar(col=NA, fill="white"))
 key <- function(x, speed) {
     pushViewport(viewport(unit(.5, "npc") + unit(x, "lines"),
