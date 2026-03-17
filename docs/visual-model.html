@@ -278,10 +278,10 @@ div.csl-indent {
 
 <p>In <a href="intro.html" class="quarto-xref"><span>Chapter 1</span></a>, we established that a data visualisation can be thought of as an <strong>encoding</strong> from data values to data symbols and extracting information from a data visualisation involves <strong>decoding</strong> from data symbols back to data values.</p>
 <p>We will consider many different ways to encode information in this book. For example, we have already seen that we can encode data values as different-coloured lines to create a line plot (<a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>) or we can encode data values as different-coloured rectangles to create a heatmap (<a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>). However, one thing that all of encodings that we consider will have in common is that they are <em>visual</em> encodings.</p>
-<p>This means that the decoding of information from a data visualisation involves the human visual system. A good encoding will produce a data visualisation that the visual system is good at decoding. In this chapter, we look at some basic features of the visual system.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> If we understand how the visual system works, we will begin to understand how data visualisations work.</p>
+<p>This means that the decoding of information from a data visualisation involves the human visual system. A good encoding will produce a data visualisation that the visual system is good at decoding. In this chapter, we look at some basic properties of the visual system.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> If we understand how the visual system works, we will begin to understand how data visualisations work.</p>
 <section id="sec-eye" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-eye"><span class="header-section-number">2.1</span> The eye</h2>
-<p>In order for us to decode a data visualisation, we first have to see it. Light must emit from a computer screen or reflect off a page and enter the eye. Light passes through the pupil, is focused by the lens, and is projected onto the retina at the back of the eye. The retina contains around 100 million light-sensitive nerve cells and signals from those are combined into about 1 million nerve fibres in the optic nerve, which passes signals on to the brain (see <a href="#fig-eye" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). A very large amount of visual information is gathered by the eye and passed on to the brain.</p>
+<p>In order for us to decode a data visualisation, we first have to see it. Light must emit from a computer screen or reflect off a page and enter the eye. Light passes through the pupil, is focused by the lens, and is projected onto the retina at the back of the eye. The retina contains around 100 million light-sensitive nerve cells and signals from those are combined into about 1 million nerve fibres in the optic nerve, which passes signals on to the brain (<a href="#fig-eye" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>).</p>
 <div id="fig-eye" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-eye-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -292,10 +292,7 @@ Figure&nbsp;2.1: A very simple diagram of the human eye. Light enters via the pu
 </figcaption>
 </figure>
 </div>
-<blockquote class="blockquote">
-<p>One reason why data visualisation is effective is because our visual system gathers an enormous amount of information.</p>
-</blockquote>
-<p>For example, <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> shows an image that is made up of over 17,000 individual visual elements, but we can easily consume the image and identify features without any difficulty.</p>
+<p>One reason why data visualisation is effective is because our visual system gathers an enormous amount of information. For example, <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> shows an image that is made up of over 17,000 individual visual elements, but we can easily consume the image and identify features without any difficulty.</p>
 <div id="fig-visual-model-demo" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-model-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -333,13 +330,11 @@ Figure&nbsp;2.4: Early visual processing identifies large numbers of simple visu
 </div>
 <p>This means that, if we <strong>encode</strong> data values as simple <strong>visual features</strong>, like length, angle, and colour, then it will be possible to rapidly <strong>decode</strong> large amounts of simple information. We will look more at the encoding of data values as visual features in <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
 <p>In addition, a smaller amount of more complex information will be decoded from higher-level processing of low-level visual features. We will look more at the decoding of multiple visual features in <a href="summaries.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
-<p>As an example, the image in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> shows a data visualisation that encodes wind data values as many small triangles.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Wind direction is encoded as the angle of the triangles and wind strength is encoded as the length of the triangles. Colour is used to encode whether the location is over the sea (blue) or over the land (green). The visual system is able to effortlessly decode the basic <strong>visual features</strong>—angle, size, and colour—of individual triangles.</p>
-<p>The visual system can also very quickly process the visual features of many triangles at once. There is no need to consciously focus on every individual triangle in the image. At a higher level of processing, darker and lighter <strong>visual shapes</strong> are identified as regions of different colours. For example, a band of lighter wind forms a line from the top-left corner down and to the right at a roughly 45-degree angle. At a higher level of processing again, at least for the denizens of Oceania, the green regions are recognised as a very familiar <strong>visual object</strong>: the outline of New Zealand.</p>
-<blockquote class="blockquote">
+<p>As an example, the image in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> encodes wind data values as many small triangles.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Wind direction is encoded as the angle of the triangles and wind strength is encoded as the length of the triangles. Colour is used to encode whether the location is over the sea (blue) or over the land (green).</p>
+<p>The visual system is able to effortlessly decode the basic <strong>visual features</strong>—angle, size, and colour—of many triangles at once. There is no need to consciously focus on every individual triangle in the image. At a higher level of processing, darker and lighter <strong>visual shapes</strong> are identified as regions of different colours. For example, a band of lighter wind forms a line from the top-left corner down and to the right at a roughly 45-degree angle. At a higher level of processing again, at least for the denizens of Oceania, the green regions are recognised as a very familiar <strong>visual object</strong>: the outline of New Zealand.</p>
+<p>Importantly, many pieces of information, such as lighter and darker regions and even the shape of New Zealand, are decoded automatically. We do not have to deliberately search for these features and we do not have to be prompted by a question of interest to look for these features.</p>
 <p>Encoding data values as simple visual features is effective at conveying simple information because the visual system decodes visual features rapidly and subconsciously.</p>
-<p>The visual system also processes many visual features at once, producing more complex visual shapes or visual objects, which allow more complex information to be decoded.</p>
-</blockquote>
-<p>We will look more at the use of visual shapes and visual objects in a data visualisation in <a href="visual-shapes.html" class="quarto-xref"><span>Chapter 10</span></a> and <a href="visual-objects.html" class="quarto-xref"><span>Chapter 12</span></a>.</p>
+<p>The visual system also processes many visual features at once, producing more complex visual shapes or visual objects, which allow more complex information to be decoded. We will look more at the use of visual shapes and visual objects in a data visualisation in <a href="visual-shapes.html" class="quarto-xref"><span>Chapter 10</span></a> and <a href="visual-objects.html" class="quarto-xref"><span>Chapter 12</span></a>.</p>
 </section>
 <section id="sec-visual-focus" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="sec-visual-focus"><span class="header-section-number">2.3</span> Visual focus</h2>
@@ -355,7 +350,7 @@ Figure&nbsp;2.5: A slightly less simple diagram of the human eye. There are two 
 </figcaption>
 </figure>
 </div>
-<p>Furthermore, when we view an image, we do not simply stare at the centre and see everything. Instead, we perform a series of <strong>fixations</strong>, which are brief periods of focus on one area of the image, with <strong>saccades</strong> in between, which are rapid changes in the location of our focus. <a href="#fig-extinction" class="quarto-xref">Figure&nbsp;<span>2.6</span></a> demonstrates that where we look within an image makes a difference.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>Furthermore, when we view an image, we do not simply stare at the centre and see everything in the image. Instead, we perform a series of <strong>fixations</strong>, which are brief periods of focus on one area of the image, with <strong>saccades</strong> in between, which are rapid changes in the location of our focus. <a href="#fig-extinction" class="quarto-xref">Figure&nbsp;<span>2.6</span></a> demonstrates that where we look within an image makes a difference.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-extinction" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -406,10 +401,7 @@ Figure&nbsp;2.7: Eye tracking data (on the right) from the MASSVIS project that 
 </figcaption>
 </figure>
 </div>
-<p>This feature of our visual system provides an argument for keeping things simple. If we can only decode information from an image in a piecemeal fashion, then the fewer locations that we are required to focus on the better.</p>
-<blockquote class="blockquote">
-<p>A data visualisation will be slower to decode and require more effort to decode if it requires the viewer to constantly switch focus.</p>
-</blockquote>
+<p>This feature of our visual system provides an argument for keeping things simple. If we can only decode information from an image in a piecemeal fashion, then the fewer locations that we are required to focus on the better. A data visualisation will be slower to decode and require more effort to decode if it requires the viewer to constantly switch focus.</p>
 </section>
 <section id="sec-memory" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="sec-memory"><span class="header-section-number">2.4</span> Visual memory</h2>
@@ -801,12 +793,10 @@ Figure&nbsp;2.8: Three memory tasks. The task is to remember the colours of the 
 </figure>
 </div>
 <p>It is easier and faster to decode information from visual elements if they lie within the scope of a single visual focus. If we have to switch focus, it not only takes longer to decode information, but we may hit limits on our ability to remember visual elements from previous areas of focus.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
-<p>The limits on visual memory reflect well-known limits on working memory and those limits can also be worked around via familiar mechanisms such as chunking.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> For example, we may only be able to hold in memory a small number of basic visual features such as the colours of circles, but we can effectively hold many more basic visual features if we memorise more complex visual elements that are composed of many basic visual features. In other words, we can remember several <strong>visual shapes</strong> or <strong>visual objects</strong> even if we cannot remember all of the individual <strong>visual features</strong> within those visual shapes or visual objects (<a href="#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>). For example, we can hold in memory multiple country flags even though we cannot necessarily hold in memory all of the invidual colours on those flags.</p>
+<p>The limits on visual memory reflect well-known limits on working memory—we can only memorise a small number of visual features at once. On the other hand, those limits can also be worked around via familiar mechanisms such as chunking.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> For example, we may only be able to hold in memory a small number of basic visual features such as the colours of circles, but we can effectively hold many more basic visual features if we memorise more complex visual elements that are composed of many basic visual features. In other words, we can remember several <strong>visual shapes</strong> or <strong>visual objects</strong> even if we cannot remember all of the individual <strong>visual features</strong> within those visual shapes or visual objects (<a href="#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>). For example, we can hold in memory multiple country flags even though we cannot necessarily hold in memory all of the invidual colours on those flags.</p>
 <p>Once again, the obvious conclusion is to keep things simple, so that there is less to remember during decoding, though this is tempered by the fact that more complex visual shapes may allow more to be remembered, especially if they are recognisable visual objects.</p>
-<blockquote class="blockquote">
 <p>A data visualisation will require more effort to decode if the viewer is required to switch focus and remember visual information across multiple areas of visual focus.</p>
-</blockquote>
-<p>As an example, the image in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> is based on the same wind data as <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. However, in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> the data symbol is a circle rather than a triangle, with the wind strength encoded as the size of the circle and the wind direction encoded as the colour of the circle: southerly winds are black, westerly winds are red, easterly winds are green, and northerly winds are blue.</p>
+<p>As an example, the image in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> is based on the same wind data as <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. However, in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> the data symbol is a circle rather than a triangle, with the wind strength encoded as the size of the circle and the wind direction encoded as the colour of the circle: southerly winds are black, westerly winds are red, easterly winds are green, and northerly winds are blue. This data visualisation is problematic for several reasons, several of which relate to the demands on visual focus and visual memory.</p>
 <div id="fig-visual-model-demo-dots" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-model-demo-dots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -817,12 +807,13 @@ Figure&nbsp;2.9: A visualisation of wind strength and wind direction that is mad
 </figcaption>
 </figure>
 </div>
-<p>The encoding of wind direction in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> requires a legend. For example, there needs to be an explanation that black dots represent southerly winds. There is no natural correspondence between the colours used for the encoding and the wind directions. This means that we have to switch focus between the dots in the main image and the dots in the legend. Furthermore, we may have to switch focus repeatedly if we forget one of the encodings. Without looking at <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a>, can you recite the colour-to-wind-direction encodings yet? This requirement to switch focus and memorise encodings makes it more difficult to decode the wind information from the image in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> compared to the image in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>.</p>
-<p>By contrast, in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, there was no need for a legend because we were able to decode wind direction naturally from the angles of the triangles. We will look more at this sort of automatic decoding of information in <a href="congruence.html" class="quarto-xref"><span>Chapter 7</span></a>.</p>
+<p>As with <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, we automatically identify some features of <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> automatically. For example, we can immediately identify different regions of different colours, plus darker and lighter regions. However, if we want to decode wind information from <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> we have more work to do.</p>
+<p>In <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, we can naturally decode wind direction from the angles of the triangles, but the decoding of wind direction in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> requires a legend. For example, there needs to be an explanation that black dots represent southerly winds. There is no natural correspondence between the colours used for the encoding and the wind directions. This means that we have to switch focus between the dots in the main image and the dots in the legend. Furthermore, we may have to switch focus repeatedly if we forget one of the encodings. Without looking at <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a>, can you recite the colour-to-wind-direction encodings yet? This requirement to switch focus and memorise encodings makes it more difficult to decode the wind information from the image in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> compared to the image in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>.</p>
+<p>By contrast, in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, there was no need for a legend because we were able to decode wind direction naturally from the angles of the triangles. We will look more at this sort of natural decoding of information in <a href="congruence.html" class="quarto-xref"><span>Chapter 7</span></a>.</p>
 </section>
 <section id="sec-differences" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="sec-differences"><span class="header-section-number">2.5</span> Visual differences</h2>
-<p>The ability to gather a large amount of basic features from an image very quickly (<a href="#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>) is supplemented by rapid visual processing that combines and summarises the information. These subconscious processes extract some properties from an image without any mental effort.</p>
+<p>The ability to gather a large amount of basic features from an image very quickly (<a href="#sec-visual-processing" class="quarto-xref"><span>Section 2.2</span></a>) is supplemented by rapid visual processing that combines and summarises the information. These subconscious processes decode some information from an image without any mental effort.</p>
 <p>For example, in <a href="#fig-pop-colour-1" class="quarto-xref">Figure&nbsp;<span>2.10 (a)</span></a> we can detect the one teal dot amongst the 24 orange dots without effort. <a href="#fig-pop-colour-2" class="quarto-xref">Figure&nbsp;<span>2.10 (b)</span></a> shows that this task remains effortless even if the number of dots is much larger.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> This ability to identify an item that is different from all other items within an image also applies to other basic features like size, as shown in <a href="#fig-diff-size" class="quarto-xref">Figure&nbsp;<span>2.11</span></a>.</p>
 <div id="fig-pop-colour" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -966,24 +957,15 @@ Figure&nbsp;2.13: We have to work much harder to identify a unique item when mul
 </figcaption>
 </figure>
 </div>
-<p>This means that encoding data values as data symbols that differ only in terms of basic visual features will be effective for decoding unusual data values.</p>
-<blockquote class="blockquote">
-<p>A data visualisation will be effective for decoding unusual or unique data values if the data are encoded using differences in basic visual features, especially if everything else remains the same.</p>
-</blockquote>
+<p>This means that encoding data values as data symbols that differ only in terms of basic visual features will be effective for decoding unusual data values, especially if everything else remains the same.</p>
 <p>As an example, there is a single red triangle in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> that encodes the location of the strongest wind. This triangle is very easy to identify, even amongst more than 17,000 triangles.</p>
 </section>
 <section id="sec-attention" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="sec-attention"><span class="header-section-number">2.6</span> Visual attention</h2>
 <p>Where we focus within an image is not random. The figures from <a href="#sec-differences" class="quarto-xref"><span>Section 2.5</span></a> show that our attention is automatically drawn to the <strong>larger</strong>, <strong>brighter</strong>, and more <strong>colourful</strong> items within an image. This happens due to very early visual processing and without conscious thought.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
-<blockquote class="blockquote">
-<p>A data visualisation will be effective for decoding important data values if it uses basic visual features like colour to draw the viewer’s attention.</p>
-</blockquote>
-<p>As an example, it is not only easy to identify the single red triangle in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, it is actually quite difficult to ignore it.</p>
+<p>A data visualisation will be effective for decoding important data values if it uses basic visual features like colour to draw the viewer’s attention. As an example, it is not only easy to identify the single red triangle in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, it is actually quite difficult to ignore it.</p>
 <p>Where we focus within an image, and what information we extract, is also affected by conscious goals—what are we looking for?<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> For example, when you were looking for the larger teal dot in <a href="#fig-diff-serial" class="quarto-xref">Figure&nbsp;<span>2.13</span></a>, did you notice that there was also a single small orange dot? Now that your attention has been drawn to that task, it will be easier to find the smaller orange dot.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
-<blockquote class="blockquote">
-<p>A data visualisation will be effective for decoding important data values if it includes instructions that direct the reader’s attention.</p>
-</blockquote>
-<p>We will look more at the text labels on a data visualisation in <a href="text.html" class="quarto-xref"><span>Chapter 13</span></a>.</p>
+<p>A data visualisation will be effective for decoding important data values if it includes instructions that direct the reader’s attention. We will look more at the text labels on a data visualisation in <a href="text.html" class="quarto-xref"><span>Chapter 13</span></a>.</p>
 </section>
 <section id="sec-visual-model-groups" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="sec-visual-model-groups"><span class="header-section-number">2.7</span> Visual similarities</h2>
@@ -1036,11 +1018,7 @@ Figure&nbsp;2.16: What shapes emerge from the collection of points on the left? 
 </div>
 <p>All of this means that if we encode data values from the same group using the same position or colour, or if we connect them with lines, or if we enclose them within a border, then<br>
 the visual system will automatically decode the group information.</p>
-<blockquote class="blockquote">
-<p>One way that a data visualisation can be effective is by relying on on the automatic decoding of visual groups (proximity, similarity, etc).</p>
-</blockquote>
-<p>As an example, we automatically identify separate groups of triangles in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> (land versus sea) and separate groups of dots in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> (different wind directions), just based on the common colours of the triangles or dots. No effort is required to decode these groups.</p>
-<p>We will look more at the decoding of groups in <a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a>.</p>
+<p>One way that a data visualisation can be effective is by relying on on the automatic decoding of visual groups (proximity, similarity, etc). As an example, we automatically identify separate groups of triangles in <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> (land versus sea) and separate groups of dots in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> (different wind directions), just based on the common colours of the triangles or dots. No effort is required to decode these groups. We will look more at the decoding of groups in <a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a>.</p>
 </section>
 <section id="sec-simplicity" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="sec-simplicity"><span class="header-section-number">2.8</span> Visual simplicity</h2>
@@ -1076,10 +1054,7 @@ Figure&nbsp;2.18: We automatically perceive groups from symmetric arrangements. 
 </div>
 </div>
 <p>This is another argument for simplicity in a data visualisation, but also for regularity and orderliness. These results suggest that we should design a data visualisation so that it leads the viewer where they already want to go rather than trying to force them to decode a more complex interpretation.</p>
-<blockquote class="blockquote">
-<p>A data visualisation may be easier to decode if it is orderly and lends itself to a simple interpretation.</p>
-</blockquote>
-<p>As an example, the image in <a href="#fig-visual-model-demo-barb" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> encodes a subset of the wind data from <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> and <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a>. The data symbol in <a href="#fig-visual-model-demo-barb" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> is a <em>wind barb</em>, which represents the wind direction as the angle of a line and the wind strength as small tick marks on the tail of the line.</p>
+<p>A data visualisation may be easier to decode if it is orderly and lends itself to a simple interpretation. As an example, the image in <a href="#fig-visual-model-demo-barb" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> encodes a subset of the wind data from <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> and <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a>. The data symbol in <a href="#fig-visual-model-demo-barb" class="quarto-xref">Figure&nbsp;<span>2.19</span></a> is a <em>wind barb</em>, which represents the wind direction as the angle of a line and the wind strength as small tick marks on the tail of the line.</p>
 <div id="fig-visual-model-demo-barb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-visual-model-demo-barb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1094,7 +1069,7 @@ Figure&nbsp;2.19: A visualisation of wind strength and wind direction that is ma
 </section>
 <section id="sec-tasks" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="sec-tasks"><span class="header-section-number">2.9</span> Visual tasks</h2>
-<p>Identifying whether visual elements are the same or different (<a href="#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>) is an example of a very simple visual task. <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.20</span></a> (on the left) shows another simple visual task: judging the ratio of two different lengths. These tasks are rapid and require very little effort.</p>
+<p>Identifying whether visual elements are the same or different (<a href="#sec-differences" class="quarto-xref"><span>Section 2.5</span></a> and <a href="#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>) is an example of a very simple visual task. <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.20</span></a> (on the left) shows another simple visual task: judging the ratio of two different lengths. These tasks are rapid and require very little effort.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-visual-task" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1110,11 +1085,8 @@ Figure&nbsp;2.20: On the left is a simple visual task, to estimate the relative 
 </div>
 </div>
 <p>However, on the right of <a href="#fig-visual-task" class="quarto-xref">Figure&nbsp;<span>2.20</span></a> is an example of a task that is much more difficult. In this task, we have to identify which of the four shapes in the bottom row is <em>not</em> a rotated version of the shape at the top. This task requires much more deliberate effort and time to perform.<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></p>
-<p>The point here is that we should create data visualisations that can be decoded using simple visual tasks. That is how we can fulfil the promise of data visualisation. It is far less useful to create a data visualisation that forces us to expend significant mental effort in order to decode useful information.</p>
-<blockquote class="blockquote">
-<p>A data visualisation will be effective if it relies on automatic and rapid visual processing rather than requiring conscious mental effort.</p>
-</blockquote>
-<p>An example of a relatively simple visual task is the decoding of wind direction from <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. For example, at the right of <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, about half way up the image, we can see a region where the wind is circling around a point. By contrast, identifying that location in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> is much more difficult. The location is marked by a point where all four colours meet, but decoding that the wind is circling at that location requires decoding the four wind directions and then combining the four directions to conclude that the wind directions form a circle.</p>
+<p>The point here is that we should create data visualisations that can be decoded using simple visual tasks. That is how we can fulfil the promise of data visualisation. It is far less useful to create a data visualisation that forces us to expend significant mental effort in order to decode useful information. A data visualisation will be effective if it relies on automatic and rapid visual processing rather than requiring conscious mental effort.</p>
+<p>An example of a relatively simple visual task is the decoding of wind direction from <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. For example, at the right of <a href="#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, about half way up the image, we can see a region where the wind is circling around a point. By contrast, identifying that location in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> is much more difficult. The location in <a href="#fig-visual-model-demo-dots" class="quarto-xref">Figure&nbsp;<span>2.9</span></a> is marked by a point where all four colours meet, but decoding that the wind is circling at that location requires decoding the four wind directions and then combining the four directions to conclude that the wind directions form a circle.</p>
 </section>
 <section id="sec-illusion" class="level2" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="sec-illusion"><span class="header-section-number">2.10</span> Dangers of the visual system</h2>
@@ -1165,10 +1137,7 @@ Figure&nbsp;2.23: The image on the right is made up from the three simple parall
 </div>
 </div>
 <p>These examples demonstrate that the visual system can produce incorrect or unintended results for even very simple visual tasks based on very simple visual elements. If we encode data values in such a way that we produce a visual illusion then the decoding will be wrong and will not lead back to the orginal data values.</p>
-<blockquote class="blockquote">
-<p>Visual illusions can destroy the effectiveness of a data visualisation because they lead to an incorrect decoding of information.</p>
-</blockquote>
-<p>We will see an example of how our visual system can sometimes work against us in <a href="qualitative.html#sec-colour-relative" class="quarto-xref"><span>Section 6.3</span></a>.</p>
+<p>Visual illusions can destroy the effectiveness of a data visualisation because they lead to an incorrect decoding of information. We will see an example of how our visual system can sometimes work against us in <a href="qualitative.html#sec-colour-relative" class="quarto-xref"><span>Section 6.3</span></a>.</p>
 </section>
 <section id="summary" class="level2" data-number="2.11">
 <h2 data-number="2.11" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.11</span> Summary</h2>

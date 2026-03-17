@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-03-10)
+Version 0.9 (build 2026-03-16)
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, breakable, colframe=quarto-callout-warning-color-frame, opacityback=0, left=2mm, coltitle=black, rightrule=.15mm, colback=white, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomtitle=1mm, colbacktitle=quarto-callout-warning-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, breakable, opacityback=0, left=2mm, rightrule=.15mm, opacitybacktitle=0.6, colback=white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, toprule=.15mm, coltitle=black, arc=.35mm, leftrule=.75mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-03-10).
+2026. Version 0.9 (build 2026-03-16).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-03-10,
+@book{murrell-hdvw-2026-03-16,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-03-10)},
+    note = {Version 0.9 (build 2026-03-16)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -932,14 +932,14 @@ of encodings that we consider will have in common is that they are
 This means that the decoding of information from a data visualisation
 involves the human visual system. A good encoding will produce a data
 visualisation that the visual system is good at decoding. In this
-chapter, we look at some basic features of the visual system.\footnote{Simple
-  descriptions of the human visual system can be found in many articles
-  and books on data visualisation, for example, Cairo (2012), Franconeri
-  et al. (2021a), and Sönning (2023). See Ware (2021) for a more
-  in-depth, but still very accessible description. Wikipedia also has
-  some very helpful content (Wikipedia contributors 2025).} If we
-understand how the visual system works, we will begin to understand how
-data visualisations work.
+chapter, we look at some basic properties of the visual
+system.\footnote{Simple descriptions of the human visual system can be
+  found in many articles and books on data visualisation, for example,
+  Cairo (2012), Franconeri et al. (2021a), and Sönning (2023). See Ware
+  (2021) for a more in-depth, but still very accessible description.
+  Wikipedia also has some very helpful content (Wikipedia contributors
+  2025).} If we understand how the visual system works, we will begin to
+understand how data visualisations work.
 
 \section{The eye}\label{sec-eye}
 
@@ -949,9 +949,7 @@ the eye. Light passes through the pupil, is focused by the lens, and is
 projected onto the retina at the back of the eye. The retina contains
 around 100 million light-sensitive nerve cells and signals from those
 are combined into about 1 million nerve fibres in the optic nerve, which
-passes signals on to the brain (see Figure~\ref{fig-eye}). A very large
-amount of visual information is gathered by the eye and passed on to the
-brain.
+passes signals on to the brain (Figure~\ref{fig-eye}).
 
 \begin{figure}
 
@@ -968,14 +966,11 @@ to the brain.}
 
 \end{figure}%
 
-\begin{quote}
 One reason why data visualisation is effective is because our visual
-system gathers an enormous amount of information.
-\end{quote}
-
-For example, Figure~\ref{fig-visual-model-demo} shows an image that is
-made up of over 17,000 individual visual elements, but we can easily
-consume the image and identify features without any difficulty.
+system gathers an enormous amount of information. For example,
+Figure~\ref{fig-visual-model-demo} shows an image that is made up of
+over 17,000 individual visual elements, but we can easily consume the
+image and identify features without any difficulty.
 
 \begin{figure}
 
@@ -1066,44 +1061,43 @@ decoded from higher-level processing of low-level visual features. We
 will look more at the decoding of multiple visual features in
 Chapter~\ref{sec-summaries}.
 
-As an example, the image in Figure~\ref{fig-visual-model-demo} shows a
-data visualisation that encodes wind data values as many small
-triangles.\footnote{Figure~\ref{fig-visual-model-demo} is based on wind
-  data from the National Oceanic and Atmospheric Administration's
-  Operational Model Archive and Distribution System
+As an example, the image in Figure~\ref{fig-visual-model-demo} encodes
+wind data values as many small triangles.\footnote{Figure~\ref{fig-visual-model-demo}
+  is based on wind data from the National Oceanic and Atmospheric
+  Administration's Operational Model Archive and Distribution System
   (\href{https://nomads.ncep.noaa.gov/}{NOMADS}). The data were accessed
   on September 14 2024 and processed using the \{rNOMADS\} package
   (Bowman and Lees 2015), with raw data interpolated to a finer grid.}
 Wind direction is encoded as the angle of the triangles and wind
 strength is encoded as the length of the triangles. Colour is used to
 encode whether the location is over the sea (blue) or over the land
-(green). The visual system is able to effortlessly decode the basic
-\textbf{visual features}---angle, size, and colour---of individual
-triangles.
+(green).
 
-The visual system can also very quickly process the visual features of
-many triangles at once. There is no need to consciously focus on every
-individual triangle in the image. At a higher level of processing,
-darker and lighter \textbf{visual shapes} are identified as regions of
-different colours. For example, a band of lighter wind forms a line from
-the top-left corner down and to the right at a roughly 45-degree angle.
-At a higher level of processing again, at least for the denizens of
-Oceania, the green regions are recognised as a very familiar
-\textbf{visual object}: the outline of New Zealand.
+The visual system is able to effortlessly decode the basic
+\textbf{visual features}---angle, size, and colour---of many triangles
+at once. There is no need to consciously focus on every individual
+triangle in the image. At a higher level of processing, darker and
+lighter \textbf{visual shapes} are identified as regions of different
+colours. For example, a band of lighter wind forms a line from the
+top-left corner down and to the right at a roughly 45-degree angle. At a
+higher level of processing again, at least for the denizens of Oceania,
+the green regions are recognised as a very familiar \textbf{visual
+object}: the outline of New Zealand.
 
-\begin{quote}
+Importantly, many pieces of information, such as lighter and darker
+regions and even the shape of New Zealand, are decoded automatically. We
+do not have to deliberately search for these features and we do not have
+to be prompted by a question of interest to look for these features.
+
 Encoding data values as simple visual features is effective at conveying
 simple information because the visual system decodes visual features
 rapidly and subconsciously.
 
 The visual system also processes many visual features at once, producing
 more complex visual shapes or visual objects, which allow more complex
-information to be decoded.
-\end{quote}
-
-We will look more at the use of visual shapes and visual objects in a
-data visualisation in Chapter~\ref{sec-visual-shapes} and
-Chapter~\ref{sec-visual-objects}.
+information to be decoded. We will look more at the use of visual shapes
+and visual objects in a data visualisation in
+Chapter~\ref{sec-visual-shapes} and Chapter~\ref{sec-visual-objects}.
 
 \section{Visual focus}\label{sec-visual-focus}
 
@@ -1143,12 +1137,12 @@ towards the periphery of the retina.}
 \end{figure}%
 
 Furthermore, when we view an image, we do not simply stare at the centre
-and see everything. Instead, we perform a series of \textbf{fixations},
-which are brief periods of focus on one area of the image, with
-\textbf{saccades} in between, which are rapid changes in the location of
-our focus. Figure~\ref{fig-extinction} demonstrates that where we look
-within an image makes a difference.\footnote{This image is a
-  demonstration of the extinction illusion, which is related to the
+and see everything in the image. Instead, we perform a series of
+\textbf{fixations}, which are brief periods of focus on one area of the
+image, with \textbf{saccades} in between, which are rapid changes in the
+location of our focus. Figure~\ref{fig-extinction} demonstrates that
+where we look within an image makes a difference.\footnote{This image is
+  a demonstration of the extinction illusion, which is related to the
   better-known Hermann grid illusion (Ninio and Stevens 2000).
 
   This illusion is not explained simply by differences in foveal versus
@@ -1219,12 +1213,9 @@ thumbnail of the original image is shown on the left.}
 This feature of our visual system provides an argument for keeping
 things simple. If we can only decode information from an image in a
 piecemeal fashion, then the fewer locations that we are required to
-focus on the better.
-
-\begin{quote}
-A data visualisation will be slower to decode and require more effort to
-decode if it requires the viewer to constantly switch focus.
-\end{quote}
+focus on the better. A data visualisation will be slower to decode and
+require more effort to decode if it requires the viewer to constantly
+switch focus.
 
 \section{Visual memory}\label{sec-memory}
 
@@ -1300,16 +1291,17 @@ focus.\footnote{Tufte refers to this as drawing ``within the eyespan''
   necessarily slower and limited by both working memory and the ability
   to integrate that information.'' (Rosenholtz 2023).}
 
-The limits on visual memory reflect well-known limits on working memory
-and those limits can also be worked around via familiar mechanisms such
-as chunking.\footnote{Miller's famous paper ``The Magical Number Seven,
-  Plus or Minus Two: Some Limits on Our Capacity for Processing
-  Information'' (Miller 1956) talks about limits on working memory, but
-  also how to ``escape'' those limits, for example, by chunking
-  information.} For example, we may only be able to hold in memory a
-small number of basic visual features such as the colours of circles,
-but we can effectively hold many more basic visual features if we
-memorise more complex visual elements that are composed of many basic
+The limits on visual memory reflect well-known limits on working
+memory---we can only memorise a small number of visual features at once.
+On the other hand, those limits can also be worked around via familiar
+mechanisms such as chunking.\footnote{Miller's famous paper ``The
+  Magical Number Seven, Plus or Minus Two: Some Limits on Our Capacity
+  for Processing Information'' (Miller 1956) talks about limits on
+  working memory, but also how to ``escape'' those limits, for example,
+  by chunking information.} For example, we may only be able to hold in
+memory a small number of basic visual features such as the colours of
+circles, but we can effectively hold many more basic visual features if
+we memorise more complex visual elements that are composed of many basic
 visual features. In other words, we can remember several \textbf{visual
 shapes} or \textbf{visual objects} even if we cannot remember all of the
 individual \textbf{visual features} within those visual shapes or visual
@@ -1322,11 +1314,9 @@ there is less to remember during decoding, though this is tempered by
 the fact that more complex visual shapes may allow more to be
 remembered, especially if they are recognisable visual objects.
 
-\begin{quote}
 A data visualisation will require more effort to decode if the viewer is
 required to switch focus and remember visual information across multiple
 areas of visual focus.
-\end{quote}
 
 As an example, the image in Figure~\ref{fig-visual-model-demo-dots} is
 based on the same wind data as Figure~\ref{fig-visual-model-demo}.
@@ -1334,7 +1324,9 @@ However, in Figure~\ref{fig-visual-model-demo-dots} the data symbol is a
 circle rather than a triangle, with the wind strength encoded as the
 size of the circle and the wind direction encoded as the colour of the
 circle: southerly winds are black, westerly winds are red, easterly
-winds are green, and northerly winds are blue.
+winds are green, and northerly winds are blue. This data visualisation
+is problematic for several reasons, several of which relate to the
+demands on visual focus and visual memory.
 
 \begin{figure}
 
@@ -1350,14 +1342,22 @@ different sizes and different colours.}
 
 \end{figure}%
 
-The encoding of wind direction in
-Figure~\ref{fig-visual-model-demo-dots} requires a legend. For example,
-there needs to be an explanation that black dots represent southerly
-winds. There is no natural correspondence between the colours used for
-the encoding and the wind directions. This means that we have to switch
-focus between the dots in the main image and the dots in the legend.
-Furthermore, we may have to switch focus repeatedly if we forget one of
-the encodings. Without looking at
+As with Figure~\ref{fig-visual-model-demo}, we automatically identify
+some features of Figure~\ref{fig-visual-model-demo-dots} automatically.
+For example, we can immediately identify different regions of different
+colours, plus darker and lighter regions. However, if we want to decode
+wind information from Figure~\ref{fig-visual-model-demo-dots} we have
+more work to do.
+
+In Figure~\ref{fig-visual-model-demo}, we can naturally decode wind
+direction from the angles of the triangles, but the decoding of wind
+direction in Figure~\ref{fig-visual-model-demo-dots} requires a legend.
+For example, there needs to be an explanation that black dots represent
+southerly winds. There is no natural correspondence between the colours
+used for the encoding and the wind directions. This means that we have
+to switch focus between the dots in the main image and the dots in the
+legend. Furthermore, we may have to switch focus repeatedly if we forget
+one of the encodings. Without looking at
 Figure~\ref{fig-visual-model-demo-dots}, can you recite the
 colour-to-wind-direction encodings yet? This requirement to switch focus
 and memorise encodings makes it more difficult to decode the wind
@@ -1367,14 +1367,14 @@ compared to the image in Figure~\ref{fig-visual-model-demo}.
 By contrast, in Figure~\ref{fig-visual-model-demo}, there was no need
 for a legend because we were able to decode wind direction naturally
 from the angles of the triangles. We will look more at this sort of
-automatic decoding of information in Chapter~\ref{sec-congruence}.
+natural decoding of information in Chapter~\ref{sec-congruence}.
 
 \section{Visual differences}\label{sec-differences}
 
 The ability to gather a large amount of basic features from an image
 very quickly (Section~\ref{sec-visual-processing}) is supplemented by
 rapid visual processing that combines and summarises the information.
-These subconscious processes extract some properties from an image
+These subconscious processes decode some information from an image
 without any mental effort.
 
 For example, in Figure~\ref{fig-pop-colour-1} we can detect the one teal
@@ -1540,13 +1540,7 @@ the image.}
 
 This means that encoding data values as data symbols that differ only in
 terms of basic visual features will be effective for decoding unusual
-data values.
-
-\begin{quote}
-A data visualisation will be effective for decoding unusual or unique
-data values if the data are encoded using differences in basic visual
-features, especially if everything else remains the same.
-\end{quote}
+data values, especially if everything else remains the same.
 
 As an example, there is a single red triangle in
 Figure~\ref{fig-visual-model-demo} that encodes the location of the
@@ -1565,15 +1559,11 @@ visual processing and without conscious thought.\footnote{Saliency maps
   idea that attention is drawn to basic visual features like colour,
   angle, and size.}
 
-\begin{quote}
 A data visualisation will be effective for decoding important data
 values if it uses basic visual features like colour to draw the viewer's
-attention.
-\end{quote}
-
-As an example, it is not only easy to identify the single red triangle
-in Figure~\ref{fig-visual-model-demo}, it is actually quite difficult to
-ignore it.
+attention. As an example, it is not only easy to identify the single red
+triangle in Figure~\ref{fig-visual-model-demo}, it is actually quite
+difficult to ignore it.
 
 Where we focus within an image, and what information we extract, is also
 affected by conscious goals---what are we looking for?\footnote{Having a
@@ -1588,11 +1578,8 @@ that task, it will be easier to find the smaller orange dot.\footnote{Wolfe
   and Horowitz (2017) describe ``Bottom-up, stimulus-driven guidance''
   versus ``Top-down, user-driven guidance''.}
 
-\begin{quote}
 A data visualisation will be effective for decoding important data
 values if it includes instructions that direct the reader's attention.
-\end{quote}
-
 We will look more at the text labels on a data visualisation in
 Chapter~\ref{sec-text}.
 
@@ -1706,19 +1693,14 @@ using the same position or colour, or if we connect them with lines, or
 if we enclose them within a border, then\\
 the visual system will automatically decode the group information.
 
-\begin{quote}
 One way that a data visualisation can be effective is by relying on on
-the automatic decoding of visual groups (proximity, similarity, etc).
-\end{quote}
-
-As an example, we automatically identify separate groups of triangles in
+the automatic decoding of visual groups (proximity, similarity, etc). As
+an example, we automatically identify separate groups of triangles in
 Figure~\ref{fig-visual-model-demo} (land versus sea) and separate groups
 of dots in Figure~\ref{fig-visual-model-demo-dots} (different wind
 directions), just based on the common colours of the triangles or dots.
-No effort is required to decode these groups.
-
-We will look more at the decoding of groups in
-Section~\ref{sec-qual-features}.
+No effort is required to decode these groups. We will look more at the
+decoding of groups in Section~\ref{sec-qual-features}.
 
 \section{Visual simplicity}\label{sec-simplicity}
 
@@ -1775,14 +1757,10 @@ should design a data visualisation so that it leads the viewer where
 they already want to go rather than trying to force them to decode a
 more complex interpretation.
 
-\begin{quote}
 A data visualisation may be easier to decode if it is orderly and lends
-itself to a simple interpretation.
-\end{quote}
-
-As an example, the image in Figure~\ref{fig-visual-model-demo-barb}
-encodes a subset of the wind data from
-Figure~\ref{fig-visual-model-demo} and
+itself to a simple interpretation. As an example, the image in
+Figure~\ref{fig-visual-model-demo-barb} encodes a subset of the wind
+data from Figure~\ref{fig-visual-model-demo} and
 Figure~\ref{fig-visual-model-demo-dots}. The data symbol in
 Figure~\ref{fig-visual-model-demo-barb} is a \emph{wind barb}, which
 represents the wind direction as the angle of a line and the wind
@@ -1812,10 +1790,11 @@ barbs is a simpler decoding than any other interpretation.
 \section{Visual tasks}\label{sec-tasks}
 
 Identifying whether visual elements are the same or different
-(Section~\ref{sec-differences}) is an example of a very simple visual
-task. Figure~\ref{fig-visual-task} (on the left) shows another simple
-visual task: judging the ratio of two different lengths. These tasks are
-rapid and require very little effort.
+(Section~\ref{sec-differences} and
+Section~\ref{sec-visual-model-groups}) is an example of a very simple
+visual task. Figure~\ref{fig-visual-task} (on the left) shows another
+simple visual task: judging the ratio of two different lengths. These
+tasks are rapid and require very little effort.
 
 \begin{figure}
 
@@ -1845,12 +1824,9 @@ The point here is that we should create data visualisations that can be
 decoded using simple visual tasks. That is how we can fulfil the promise
 of data visualisation. It is far less useful to create a data
 visualisation that forces us to expend significant mental effort in
-order to decode useful information.
-
-\begin{quote}
-A data visualisation will be effective if it relies on automatic and
-rapid visual processing rather than requiring conscious mental effort.
-\end{quote}
+order to decode useful information. A data visualisation will be
+effective if it relies on automatic and rapid visual processing rather
+than requiring conscious mental effort.
 
 An example of a relatively simple visual task is the decoding of wind
 direction from Figure~\ref{fig-visual-model-demo}. For example, at the
@@ -1858,10 +1834,11 @@ right of Figure~\ref{fig-visual-model-demo}, about half way up the
 image, we can see a region where the wind is circling around a point. By
 contrast, identifying that location in
 Figure~\ref{fig-visual-model-demo-dots} is much more difficult. The
-location is marked by a point where all four colours meet, but decoding
-that the wind is circling at that location requires decoding the four
-wind directions and then combining the four directions to conclude that
-the wind directions form a circle.
+location in Figure~\ref{fig-visual-model-demo-dots} is marked by a point
+where all four colours meet, but decoding that the wind is circling at
+that location requires decoding the four wind directions and then
+combining the four directions to conclude that the wind directions form
+a circle.
 
 \section{Dangers of the visual system}\label{sec-illusion}
 
@@ -1963,13 +1940,10 @@ simple visual elements. If we encode data values in such a way that we
 produce a visual illusion then the decoding will be wrong and will not
 lead back to the orginal data values.
 
-\begin{quote}
 Visual illusions can destroy the effectiveness of a data visualisation
-because they lead to an incorrect decoding of information.
-\end{quote}
-
-We will see an example of how our visual system can sometimes work
-against us in Section~\ref{sec-colour-relative}.
+because they lead to an incorrect decoding of information. We will see
+an example of how our visual system can sometimes work against us in
+Section~\ref{sec-colour-relative}.
 
 \section{Summary}\label{summary-1}
 
