@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-03-16)
+Version 0.9 (build 2026-03-22)
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, breakable, opacityback=0, left=2mm, rightrule=.15mm, opacitybacktitle=0.6, colback=white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, toprule=.15mm, coltitle=black, arc=.35mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, breakable, arc=.35mm, colback=white, coltitle=black, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomtitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, toptitle=1mm, titlerule=0mm, rightrule=.15mm, leftrule=.75mm, left=2mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-03-16).
+2026. Version 0.9 (build 2026-03-22).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-03-16,
+@book{murrell-hdvw-2026-03-22,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-03-16)},
+    note = {Version 0.9 (build 2026-03-22)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -1342,12 +1342,12 @@ different sizes and different colours.}
 
 \end{figure}%
 
-As with Figure~\ref{fig-visual-model-demo}, we automatically identify
-some features of Figure~\ref{fig-visual-model-demo-dots} automatically.
-For example, we can immediately identify different regions of different
-colours, plus darker and lighter regions. However, if we want to decode
-wind information from Figure~\ref{fig-visual-model-demo-dots} we have
-more work to do.
+As with Figure~\ref{fig-visual-model-demo}, we identify some features of
+Figure~\ref{fig-visual-model-demo-dots} automatically. For example, we
+can immediately identify different regions of different colours, plus
+darker and lighter regions. However, if we want to decode wind
+information from Figure~\ref{fig-visual-model-demo-dots} we have more
+work to do.
 
 In Figure~\ref{fig-visual-model-demo}, we can naturally decode wind
 direction from the angles of the triangles, but the decoding of wind
@@ -6234,11 +6234,11 @@ people in 1950 to 1 in 11 by 2019''
 
 In order to comprehend the change in malnutrition rate, we are required
 to compare ``2 in 3'' to ``1 in 11''. This requires mental effort to
-calculate the ratios or fractions and then compare them. It is easier to
-compare the rates if we hold the denominator constant, comparing ``2 in
-3'' to ``2 in 22''. It is easier still if we calculate the fractions,
-comparing 0.667 to 0.091. And it is easier still to compare those
-fractions visually (Figure~\ref{fig-cog-load}).
+calculate the ratios or fractions and then compare them. It is possibly
+easier to compare the rates if we hold the numerator constant, comparing
+``2 in 3'' to ``2 in 22''. It is perhaps easier still if we calculate
+the fractions, comparing 0.667 to 0.091. However, it is certainly easier
+to compare those fractions visually (Figure~\ref{fig-cog-load}).
 
 \begin{figure}
 
@@ -6302,6 +6302,29 @@ It is possible in some cases to rely on visual summaries, but we need to
 be careful not to set a visual task that requires too much mental
 effort.
 \end{quote}
+
+\section{Case study: Visualising
+uncertainty}\label{case-study-visualising-uncertainty}
+
+The dot plot in Figure~\ref{fig-rwc-dotplot} shows the number of points
+scored by countries from the different hemispheres in Rugby World Cup
+matches. This allows us to decode the number of points scored in
+individual matches and it allows us to decode visual summaries of points
+scored in multiple matches (Section~\ref{sec-visual-summaries}). For
+example, we can see that the range of scores is higher for
+southern-hemisphere teams. We can also estimate the spread of scores for
+northern versus southern hemisphere teams, for example, what is the
+interquartile range? However, comparing the spreads of scores is a more
+difficult visual task than comparing the ranges of scores.
+
+This is an example of a situation where we can reduce the cognitive load
+by presenting the data summary directly rather than relying on a visual
+summary. For example, Figure~\ref{fig-boxplot} allows us to compare the
+interquartile ranges more easily because a boxplot encodes that
+information directly as the length of a box.
+
+\textbf{TODO} express the uncertaintly directly in a variety of ways
+dynamite plots? linear gradients?
 
 \section{Summary}\label{summary-7}
 
@@ -7470,7 +7493,7 @@ There are some familiar encodings in this data visualisation: year is
 encoded to horizontal \textbf{position}, the number of offenders is
 encoded to vertical \textbf{position}, and the ethnic group is encoded
 to \textbf{colour}. However, the \textbf{data symbols} in this data
-visualisation, the coloured lines, are different from any previous
+visualisation, the coloured lines, are different from most of the
 examples that we have seen. Although there are 44 rows of data, there
 are only 4 data symbols. Multiple rows of data are used to create each
 data symbol. Each coloured line in Figure~\ref{fig-line} represents 11
@@ -7512,7 +7535,7 @@ shapes}, that contain a larger amount of information.}
 By comparison, in Figure~\ref{fig-no-line}, which encodes each data
 value to its own data symbol, it is much harder to decode the slopes,
 curves, peaks, and valleys. Despite the colours of the data symbols, it
-is even harder to group the different sets of data symbols together; the
+is also harder to group the different sets of data symbols together; the
 connecting lines between the data values in Figure~\ref{fig-line} are a
 very strong encoding that the data values belong to the same ethnic
 group (Section~\ref{sec-visual-model-groups}).
