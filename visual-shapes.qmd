@@ -619,6 +619,65 @@ axes.[^white-space]
     to the area of the scale-line rectangle" and provides
     demonstrations (Figure 4.15 and 4.16).
 
+## Implicit visual shapes {#sec-vis-shape-implicit}
+
+In @sec-line-plots, we contrasted a line plot (@fig-line), where multiple
+data values are encoded as a single data symbol (a line),
+with a scatter plot (@fig-no-line), where each data value is encoded
+as a separate data symbol (a data point).
+We did this to emphasise that encoding multiple data values
+as a single line data symbol generates a clear visual shape.
+
+By contrast, encoding each data value to its own data point does
+not produce the same clear visual shapes.
+
+However, it is still possible to decode shapes from @fig-no-line.
+For example, there are clearly two groups of points, orange and light blue
+points on a downward slope from top-left to bottom-right
+and green and dark blue points along the bottom.
+Even when we do not *explicitly* generate a data symbol that produces a
+visual shape, *implicit* visual shapes can emerge anyway.
+And it is possible to decode data summaries from those implicit 
+visual shapes, just as we can from explicit visual shapes,
+although the data summaries may be less detailed and precise.
+
+@fig-no-line-bar shows another example of an implicit visual shape.
+In this case, we have encoded the number of offenders per year
+in different ethnic groups to the heights of bars.
+As with @fig-no-line, each data value is encoded to its own bar,
+so there is no explicit visual shape, but the collection of bars for
+each ethnic group produces an implicit visual shape that allows us
+to decode data summaries, like overall decreases or increases over time.
+
+```{r}
+#| echo: false
+#| label: fig-no-line-bar
+#| fig-cap: A bar plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
+gg <- ggplot(crimeGroup) +
+    geom_col(aes(group, count, fill=group, group=year), position="dodge",
+             colour=figbg) +
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    theme(aspect.ratio=2/3,
+          legend.position="none")
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+This is essentially the idea of **visual summaries** from 
+@sec-visual-summaries.
+When we encode data values as many simple visual features,
+in addition to being able to decode individual data values from
+individual visual features, 
+our visual system is sometimes capable of decoding data summaries
+from collections of visual features.
+
+There is also a connection to our visual system's tendency to 
+complete lines and curves and to decode simpler interpretations
+from collections of simple shapes
+(@sec-visual-model-groups and @sec-simplicity).
+
 ## Decoding visual shapes {#sec-vis-shape-decode}
 
 As we saw in @sec-vis-shape-feature, if data values are encoded

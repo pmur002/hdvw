@@ -775,9 +775,38 @@ Figure&nbsp;8.16: A bar plot comparing two fractions.
 </section>
 <section id="case-study-visualising-uncertainty" class="level2" data-number="8.10">
 <h2 data-number="8.10" class="anchored" data-anchor-id="case-study-visualising-uncertainty"><span class="header-section-number">8.10</span> Case study: Visualising uncertainty</h2>
-<p>The dot plot in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows the number of points scored by countries from the different hemispheres in Rugby World Cup matches. This allows us to decode the number of points scored in individual matches and it allows us to decode visual summaries of points scored in multiple matches (<a href="#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>). For example, we can see that the range of scores is higher for southern-hemisphere teams. We can also estimate the spread of scores for northern versus southern hemisphere teams, for example, what is the interquartile range? However, comparing the spreads of scores is a more difficult visual task than comparing the ranges of scores.</p>
-<p>This is an example of a situation where we can reduce the cognitive load by presenting the data summary directly rather than relying on a visual summary. For example, <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> allows us to compare the interquartile ranges more easily because a boxplot encodes that information directly as the length of a box.</p>
-<p><strong>TODO</strong> express the uncertaintly directly in a variety of ways dynamite plots? linear gradients?</p>
+<p>The dot plot in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows the number of points scored by countries from the different hemispheres in Rugby World Cup matches. This allows us to decode the number of points scored in individual matches and it allows us to decode visual summaries of points scored in multiple matches (<a href="#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>). For example, we can see that the range of scores is higher for southern-hemisphere teams. We can also estimate the spread of scores for northern versus southern hemisphere teams, for example, what is the interquartile range? However, comparing the spreads of scores is a more difficult visual task than comparing the ranges of scores (<a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>).</p>
+<p>This is an example of a situation where we can reduce the cognitive load by presenting the data summary directly rather than relying on a visual summary. For example, <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, which visualises the same data as <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a>, allows us to compare the interquartile ranges more easily because a boxplot encodes that information directly as the length of a box.</p>
+<p><a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.17</span></a> shows another example that requires comparing data summaries between groups. Here we have the points scored per game by Tier One nations at Rugby World Cups. If we are interested in whether one Rugby World Cup was more free-scoring than another, and we treat the Tier One matches as representative of all matches, we could attempt to summarise whether one group of points is, on average, higher than another, taking into account the spread of points in each year.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-rwc-year" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rwc-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="summaries_files/figure-html/fig-rwc-year-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rwc-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.17: A plot of the points scored in matches between Tier One nations at Rugby World Cup matches.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a> shows a direct encoding of the mean scores per year, plus error bars that encode the standard deviation of scores per year. This makes it much easier to decode differences in typical scores as well as differences in score variation between years.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-rwc-year-mean" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rwc-year-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="summaries_files/figure-html/fig-rwc-year-mean-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rwc-year-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.18: A plot of the mean points scored, plus-or-minus the standard deviations of points scored, in matches between Tier One nations at Rugby World Cup matches.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="summary" class="level2" data-number="8.11">
 <h2 data-number="8.11" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.11</span> Summary</h2>
@@ -810,7 +839,7 @@ Précis <em>(click to expand/contract)</em>
 <li><p>Visual memory is extremely limited.</p></li>
 </ul>
 <p>These features suggest that encoding data values as basic visual features and generating simple, orderly data visualisations will lead to rapid and effortless decoding of information.</p>
-<p>A simple encoding of data values to data symbols involves encoding <strong>each data value to a separate data symbol</strong>. This allows the viewer to <strong>decode</strong> and compare individual data values from the data symbols.</p>
+<p>A simple encoding of data values to data symbols involves encoding <strong>each data value</strong> to a <strong>separate data symbol</strong>. This allows the viewer to <strong>decode</strong> and compare individual data values from the data symbols.</p>
 <p>A simple encoding of data values to data symbols also involves <strong>encoding</strong> each data value as a basic <strong>visual feature</strong> of the data symbol, e.g., position, length, area, angle, colour, or pattern.</p>
 <p>Position, length, area, and angle are appropriate for encoding quantitative data because we can decode numeric values from these visual features. We can decode position and length more accurately than area and angle.</p>
 <p>Position, colour, and pattern are appropriate for encoding qualitative data because we can decode groups from these visual features. We can represent a large number of categories if we use position, but only a few categories if we use colours and patterns.</p>

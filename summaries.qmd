@@ -975,19 +975,66 @@ for southern-hemisphere teams.
 We can also estimate the spread of scores for northern versus
 southern hemisphere teams, for example, what is the interquartile range?
 However, comparing the spreads of scores is a more difficult visual task
-than comparing the ranges of scores.
+than comparing the ranges of scores (@sec-tasks).
 
 This is an example of a situation where we can reduce the cognitive
 load by presenting the data summary directly rather than
 relying on a visual summary.
-For example, @fig-boxplot allows us to compare the interquartile ranges
+For example, @fig-boxplot, which visualises the same data as
+@fig-rwc-dotplot, allows us to compare the interquartile ranges
 more easily because a boxplot encodes that information directly as the
 length of a box.
 
-**TODO**
-express the uncertaintly directly in a variety of ways
-dynamite plots?
-linear gradients?
+@fig-rwc-year shows 
+another example that requires comparing data summaries 
+between groups.
+Here we have the points scored per game by Tier One nations
+at Rugby World Cups.
+If we are interested in whether one Rugby World Cup was more
+free-scoring than another, and we treat the Tier One matches as representative
+of all matches, we could attempt to summarise whether one group of 
+points is, on average, higher than another, taking into
+account the spread of points in each year.
+
+```{r}
+#| echo: false
+#| label: fig-rwc-year
+#| fig-cap: A plot of the points scored in matches between Tier One nations at Rugby World Cup matches.
+rwcTotal <- rwcAll[!duplicated(rwcAll$match), ]
+rwcTotal$total <- rwcTotal$scored + rwcTotal$conceded
+rwcPoints <- aggregate(rwcTotal["total"], 
+                       list(year=rwcTotal$year),
+                       function(x) c(mean=mean(x), 
+                                     lower=mean(x) - sd(x),
+                                     upper=mean(x) + sd(x)))
+rwcPoints <- cbind(year=rwcPoints$year, rwcPoints$total)
+gg <- ggplot(rwcTotal) +
+    geom_point(aes(year, total), alpha=.5) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05)))
+grid.newpage()
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+@fig-rwc-year-mean shows a direct encoding of the mean scores per year,
+plus error bars that encode the standard deviation of scores per year.
+This makes it much easier to decode differences in typical scores
+as well as differences in score variation between years.
+
+```{r}
+#| echo: false
+#| label: fig-rwc-year-mean
+#| fig-cap: A plot of the mean points scored, plus-or-minus the standard deviations of points scored, in matches between Tier One nations at Rugby World Cup matches.
+gg <- ggplot(rwcPoints) +
+    geom_point(aes(year, mean), size=2) +
+    geom_errorbar(aes(year, mean, ymin=lower, ymax=upper)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05)))
+grid.newpage()
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
 
 ## Summary
 

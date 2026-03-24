@@ -9,6 +9,7 @@ NOMADS <- function(which) {
                 asp=1)
     mult <- sqrt(2)
     switch(which,
+    ## Triangles (angle = direction, length = strength)
     {
         pd <- .2
         for (i in seq_along(x0)) {
@@ -39,11 +40,19 @@ NOMADS <- function(which) {
     points(x0, y0,
            col=ifelse(onland, 4, 5),
            cex=.1*(windStr/max(windStr))),
+    ## Dots with colour based on discretized wind direction
     {
         col <- ifelse(windDir < 3/4*pi & windDir > 1/4*pi, 1, 
                       ifelse(windDir > -1/4*pi & windDir < 1/4*pi, 2,
                              ifelse(windDir < -3/4*pi | windDir > 3/4*pi, 3,
                                     4)))
+        points(x0, y0, pch=21,
+               col=col, bg=col,
+               cex=.25*(windStr/max(windStr)))
+    },
+    ## Dots with colour based on continuous wind direction
+    {
+        col <- hcl(180*windDir/pi, 70, 60)
         points(x0, y0, pch=21,
                col=col, bg=col,
                cex=.25*(windStr/max(windStr)))
@@ -62,5 +71,10 @@ legend(mean(x0), -34, xjust=.5, yjust=0,
        c("Southerly", "Westerly", "Easterly", "Northerly"),
        col=1:4, pt.bg=1:4, pch=21, pt.cex=.25, cex=.4, bty="n",
        horiz=TRUE, xpd=NA)
+dev.off()
+
+png("NOMADS-dots-cont.png", width=800, height=800, res=200)
+par(mar=c(0, 0, 1, 0), xaxs="i", yaxs="i")
+NOMADS(5)
 dev.off()
 

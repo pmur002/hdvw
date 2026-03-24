@@ -274,12 +274,13 @@ window.Quarto = {
   <li><a href="#sec-density" id="toc-sec-density" class="nav-link" data-scroll-target="#sec-density"><span class="header-section-number">10.3</span> Case study: Density plots</a></li>
   <li><a href="#sec-vis-shape-feature" id="toc-sec-vis-shape-feature" class="nav-link" data-scroll-target="#sec-vis-shape-feature"><span class="header-section-number">10.4</span> Visual features of visual shapes</a></li>
   <li><a href="#sec-aspect-ratio" id="toc-sec-aspect-ratio" class="nav-link" data-scroll-target="#sec-aspect-ratio"><span class="header-section-number">10.5</span> Aspect ratio</a></li>
-  <li><a href="#sec-vis-shape-decode" id="toc-sec-vis-shape-decode" class="nav-link" data-scroll-target="#sec-vis-shape-decode"><span class="header-section-number">10.6</span> Decoding visual shapes</a></li>
-  <li><a href="#case-study-box-plots" id="toc-case-study-box-plots" class="nav-link" data-scroll-target="#case-study-box-plots"><span class="header-section-number">10.7</span> Case study: Box plots</a></li>
-  <li><a href="#dangers-of-visual-shapes" id="toc-dangers-of-visual-shapes" class="nav-link" data-scroll-target="#dangers-of-visual-shapes"><span class="header-section-number">10.8</span> Dangers of visual shapes</a></li>
-  <li><a href="#sec-shape-non-linear" id="toc-sec-shape-non-linear" class="nav-link" data-scroll-target="#sec-shape-non-linear"><span class="header-section-number">10.9</span> Non-linear encodings</a></li>
-  <li><a href="#case-study-log-log-plots" id="toc-case-study-log-log-plots" class="nav-link" data-scroll-target="#case-study-log-log-plots"><span class="header-section-number">10.10</span> Case study: log-log plots</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.11</span> Summary</a></li>
+  <li><a href="#sec-vis-shape-implicit" id="toc-sec-vis-shape-implicit" class="nav-link" data-scroll-target="#sec-vis-shape-implicit"><span class="header-section-number">10.6</span> Implicit visual shapes</a></li>
+  <li><a href="#sec-vis-shape-decode" id="toc-sec-vis-shape-decode" class="nav-link" data-scroll-target="#sec-vis-shape-decode"><span class="header-section-number">10.7</span> Decoding visual shapes</a></li>
+  <li><a href="#case-study-box-plots" id="toc-case-study-box-plots" class="nav-link" data-scroll-target="#case-study-box-plots"><span class="header-section-number">10.8</span> Case study: Box plots</a></li>
+  <li><a href="#dangers-of-visual-shapes" id="toc-dangers-of-visual-shapes" class="nav-link" data-scroll-target="#dangers-of-visual-shapes"><span class="header-section-number">10.9</span> Dangers of visual shapes</a></li>
+  <li><a href="#sec-shape-non-linear" id="toc-sec-shape-non-linear" class="nav-link" data-scroll-target="#sec-shape-non-linear"><span class="header-section-number">10.10</span> Non-linear encodings</a></li>
+  <li><a href="#case-study-log-log-plots" id="toc-case-study-log-log-plots" class="nav-link" data-scroll-target="#case-study-log-log-plots"><span class="header-section-number">10.11</span> Case study: log-log plots</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.12</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -610,15 +611,38 @@ Figure&nbsp;10.13: A scatter plot of the number of times a team breaks through t
 </div>
 <p>A related issue is the amount of empty space around the data points in a scatter plot. IN <a href="#fig-scatter-aspect" class="quarto-xref">Figure&nbsp;<span>10.13</span></a>, the relationship appears stronger in the top-right plot compared to the top-left plot simply because the data points are clustered more densely thanks to the different ranges on the plot axes.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
 </section>
-<section id="sec-vis-shape-decode" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="sec-vis-shape-decode"><span class="header-section-number">10.6</span> Decoding visual shapes</h2>
+<section id="sec-vis-shape-implicit" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-vis-shape-implicit"><span class="header-section-number">10.6</span> Implicit visual shapes</h2>
+<p>In <a href="#sec-line-plots" class="quarto-xref"><span>Section 10.1</span></a>, we contrasted a line plot (<a href="#fig-line" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>), where multiple data values are encoded as a single data symbol (a line), with a scatter plot (<a href="#fig-no-line" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>), where each data value is encoded as a separate data symbol (a data point). We did this to emphasise that encoding multiple data values as a single line data symbol generates a clear visual shape.</p>
+<p>By contrast, encoding each data value to its own data point does not produce the same clear visual shapes.</p>
+<p>However, it is still possible to decode shapes from <a href="#fig-no-line" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>. For example, there are clearly two groups of points, orange and light blue points on a downward slope from top-left to bottom-right and green and dark blue points along the bottom. Even when we do not <em>explicitly</em> generate a data symbol that produces a visual shape, <em>implicit</em> visual shapes can emerge anyway. And it is possible to decode data summaries from those implicit visual shapes, just as we can from explicit visual shapes, although the data summaries may be less detailed and precise.</p>
+<p><a href="#fig-no-line-bar" class="quarto-xref">Figure&nbsp;<span>10.14</span></a> shows another example of an implicit visual shape. In this case, we have encoded the number of offenders per year in different ethnic groups to the heights of bars. As with <a href="#fig-no-line" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>, each data value is encoded to its own bar, so there is no explicit visual shape, but the collection of bars for each ethnic group produces an implicit visual shape that allows us to decode data summaries, like overall decreases or increases over time.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-no-line-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-no-line-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="visual-shapes_files/figure-html/fig-no-line-bar-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-no-line-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.14: A bar plot of the number of offenders per year in different ethnic groups from 2011 to 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is essentially the idea of <strong>visual summaries</strong> from <a href="summaries.html#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>. When we encode data values as many simple visual features, in addition to being able to decode individual data values from individual visual features, our visual system is sometimes capable of decoding data summaries from collections of visual features.</p>
+<p>There is also a connection to our visual system’s tendency to complete lines and curves and to decode simpler interpretations from collections of simple shapes (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a> and <a href="visual-model.html#sec-simplicity" class="quarto-xref"><span>Section 2.8</span></a>).</p>
+</section>
+<section id="sec-vis-shape-decode" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-vis-shape-decode"><span class="header-section-number">10.7</span> Decoding visual shapes</h2>
 <p>As we saw in <a href="#sec-vis-shape-feature" class="quarto-xref"><span>Section 10.4</span></a>, if data values are encoded as a single, consistent visual feature of a visual shape, for example the colour of a line, then the original data values can be decoded from the basic visual feature, as described in earlier chapters for simpler data symbols like bars.</p>
 <p>For data values that are encoded as different values of a visual feature, such as the positions that a line is drawn between, decoding from a visual shape results in data summaries (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;<span>10.5</span></a>), for example peaks and valleys. The visual system’s ability to rapidly and effortlessly identify a wide range of data summaries is part of why data visualisation is so effective. It is difficult to calculate data summaries numerically from the raw data with the same flexibility.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> On the downside, as we saw in <a href="summaries.html#sec-summary-decode" class="quarto-xref"><span>Section 8.4</span></a> and <a href="combine.html#sec-decode-combine" class="quarto-xref"><span>Section 9.6</span></a>, the huge range of possible data summaries means that less is known about how accurately we can decode any particular data summary.</p>
 <p>There is experimental support for the intuitive sense that we can perform well at decoding qualitative features from shapes, such as peaks and valleys, as well as decoding ordinal comparisons, such as steeper and shallower.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> However, as <a href="#sec-aspect-ratio" class="quarto-xref"><span>Section 10.5</span></a> demonstrated, the decoding of slopes is limited to <em>physical</em> slopes, which are dependent on the aspect ratio, rather than decoding absolute rates of change in the data.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 </section>
-<section id="case-study-box-plots" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="case-study-box-plots"><span class="header-section-number">10.7</span> Case study: Box plots</h2>
-<p><a href="#fig-box-shape" class="quarto-xref">Figure&nbsp;<span>10.14</span></a> shows box plots of the number of points scored by Tier One nations at Rugby World Cup matches. We have discussed box plots previously as examples of data visualisations that encode data summaries to data symbols (<a href="summaries.html#sec-box-plot" class="quarto-xref"><span>Section 8.1</span></a>). For example, the median points scored is encoded as the horizontal position of a thick vertical line for each team. The only raw data values that are directly encoded are the outliers, which are encoded as the horizontal position of data points for a few teams. A box plot is effective for decoding the median for each team because the median has been encoded as basic visual features of simple data symbol.</p>
+<section id="case-study-box-plots" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="case-study-box-plots"><span class="header-section-number">10.8</span> Case study: Box plots</h2>
+<p><a href="#fig-box-shape" class="quarto-xref">Figure&nbsp;<span>10.15</span></a> shows box plots of the number of points scored by Tier One nations at Rugby World Cup matches. We have discussed box plots previously as examples of data visualisations that encode data summaries to data symbols (<a href="summaries.html#sec-box-plot" class="quarto-xref"><span>Section 8.1</span></a>). For example, the median points scored is encoded as the horizontal position of a thick vertical line for each team. The only raw data values that are directly encoded are the outliers, which are encoded as the horizontal position of data points for a few teams. A box plot is effective for decoding the median for each team because the median has been encoded as basic visual features of simple data symbol.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-box-shape" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -627,7 +651,7 @@ Figure&nbsp;10.13: A scatter plot of the number of times a team breaks through t
 <img src="visual-shapes_files/figure-html/fig-box-shape-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-shape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.14: Box plots of the number of points scored by Tier One nations at Rugby World Cups.
+Figure&nbsp;10.15: Box plots of the number of points scored by Tier One nations at Rugby World Cups.
 </figcaption>
 </figure>
 </div>
@@ -635,10 +659,10 @@ Figure&nbsp;10.14: Box plots of the number of points scored by Tier One nations 
 </div>
 <p>Box plots are also examples of encoding more than one data value (or data summary) to a single data symbol. For each team, we have a complex data symbol made up of a rectangle and horizontal and vertical lines, plus possibly some data points. This creates a visual shape that allows us to decode additional data summaries. For example, some box plots, like the one for England, are symmetric, with the median line at the center of the rectangle and with horizontal lines of similar lengths to either side. Other box plots, like the one for Argentina, are asymmetric, with the median towards one end of the rectangle and a longer horizontal line to one side. In other words, we can decode information about the skewness of the data from the visual shape (<a href="#fig-data-vis-shape-decode" class="quarto-xref">Figure&nbsp;<span>10.5</span></a>).</p>
 </section>
-<section id="dangers-of-visual-shapes" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="dangers-of-visual-shapes"><span class="header-section-number">10.8</span> Dangers of visual shapes</h2>
-<p><a href="#fig-zacks" class="quarto-xref">Figure&nbsp;<span>10.15</span></a> shows two data visualisations of average heights for males and females. We have already discussed that it is easier to decode the individual average height values from the bar plot because each average height is encoded as its own visual feature—the height of one bar. We have also discussed that it is easier to decode trends from a line plot (<a href="#sec-line-plots" class="quarto-xref"><span>Section 10.1</span></a>).</p>
-<p>However, in <a href="#fig-zacks" class="quarto-xref">Figure&nbsp;<span>10.15</span></a>, the temptation to decode a trend from the line plot is in fact misleading. A line implies continuity, in this case even a linear trend. However, the data values on the x-axis are qualitative categories (biological sex), rather than a continuum. This means that decoding a trend from females to males does not actually make sense.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<section id="dangers-of-visual-shapes" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="dangers-of-visual-shapes"><span class="header-section-number">10.9</span> Dangers of visual shapes</h2>
+<p><a href="#fig-zacks" class="quarto-xref">Figure&nbsp;<span>10.16</span></a> shows two data visualisations of average heights for males and females. We have already discussed that it is easier to decode the individual average height values from the bar plot because each average height is encoded as its own visual feature—the height of one bar. We have also discussed that it is easier to decode trends from a line plot (<a href="#sec-line-plots" class="quarto-xref"><span>Section 10.1</span></a>).</p>
+<p>However, in <a href="#fig-zacks" class="quarto-xref">Figure&nbsp;<span>10.16</span></a>, the temptation to decode a trend from the line plot is in fact misleading. A line implies continuity, in this case even a linear trend. However, the data values on the x-axis are qualitative categories (biological sex), rather than a continuum. This means that decoding a trend from females to males does not actually make sense.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
 <div id="fig-zacks" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-zacks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -670,11 +694,11 @@ Figure&nbsp;10.14: Box plots of the number of points scored by Tier One nations 
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-zacks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.15: Two data visualisations of average heights of females and males.
+Figure&nbsp;10.16: Two data visualisations of average heights of females and males.
 </figcaption>
 </figure>
 </div>
-<p>A visual shape can be decoded to a data summary, but that is only useful if the data summary is appropriate and not misleading (<a href="#fig-data-vis-shape-lie" class="quarto-xref">Figure&nbsp;<span>10.16</span></a>).</p>
+<p>A visual shape can be decoded to a data summary, but that is only useful if the data summary is appropriate and not misleading (<a href="#fig-data-vis-shape-lie" class="quarto-xref">Figure&nbsp;<span>10.17</span></a>).</p>
 <div id="fig-data-vis-shape-lie" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-shape-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -685,11 +709,11 @@ Figure&nbsp;10.15: Two data visualisations of average heights of females and mal
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-shape-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.16: Encoding data values to the visual features of a complex shape may not be effective if the complex shape decodes to unhelpful or misleading information.
+Figure&nbsp;10.17: Encoding data values to the visual features of a complex shape may not be effective if the complex shape decodes to unhelpful or misleading information.
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-gap" class="quarto-xref">Figure&nbsp;<span>10.17</span></a> shows another example of an undesirable shape decoding. The two curves in <a href="#fig-gap" class="quarto-xref">Figure&nbsp;<span>10.17</span></a> are identical except that one has been shifted vertically. In other words, the vertical distance between the two lines is constant. In a data visualisation, we are typically interested in that vertical distance: what is the difference in <em>y</em> between the two lines?</p>
+<p><a href="#fig-gap" class="quarto-xref">Figure&nbsp;<span>10.18</span></a> shows another example of an undesirable shape decoding. The two curves in <a href="#fig-gap" class="quarto-xref">Figure&nbsp;<span>10.18</span></a> are identical except that one has been shifted vertically. In other words, the vertical distance between the two lines is constant. In a data visualisation, we are typically interested in that vertical distance: what is the difference in <em>y</em> between the two lines?</p>
 <p>However, the natural decoding of the distance between the lines focuses on the perpendicular distance, so the two lines appear to be converging.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> In other words, we decode the shape of the gap between the lines to be a narrowing gap.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -699,17 +723,17 @@ Figure&nbsp;10.16: Encoding data values to the visual features of a complex shap
 <img src="visual-shapes_files/figure-html/fig-gap-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.17: The two lines in this plot are just the same curve shifted vertically—the vertical distance between the lines in constant. However, we decode the visual shape between the lines as a decrease in the gap between the lines.
+Figure&nbsp;10.18: The two lines in this plot are just the same curve shifted vertically—the vertical distance between the lines in constant. However, we decode the visual shape between the lines as a decrease in the gap between the lines.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="sec-shape-non-linear" class="level2" data-number="10.9">
-<h2 data-number="10.9" class="anchored" data-anchor-id="sec-shape-non-linear"><span class="header-section-number">10.9</span> Non-linear encodings</h2>
-<p><a href="#fig-arrivals" class="quarto-xref">Figure&nbsp;<span>10.18</span></a> shows time series plots of the number of international arrivals to New Zealand over the last century.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> <a href="#fig-arrivals-1" class="quarto-xref">Figure&nbsp;<span>10.18 (a)</span></a> employs a linear scale on the y-axis and, because the amount of international travel has changed so dramatically over time, it is impossible to decode any detail from the first half of the twentieth century.</p>
-<p>We saw in <a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a> that one approach in this sort of situation is to use a non-linear scale. <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.18 (b)</span></a> uses this approach by employing a log (base 10) scale on the y-axis. The advantage of the non-linear scale is clear: it is now possible to see details in the data for the first half of the twentieth century. For example, we can now see the effect of the Second World War (1939–1945), in addition to the effect of the COVID pandemic (2020–2021), and we can see that the seasonal patterns are similar over time.</p>
+<section id="sec-shape-non-linear" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="sec-shape-non-linear"><span class="header-section-number">10.10</span> Non-linear encodings</h2>
+<p><a href="#fig-arrivals" class="quarto-xref">Figure&nbsp;<span>10.19</span></a> shows time series plots of the number of international arrivals to New Zealand over the last century.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> <a href="#fig-arrivals-1" class="quarto-xref">Figure&nbsp;<span>10.19 (a)</span></a> employs a linear scale on the y-axis and, because the amount of international travel has changed so dramatically over time, it is impossible to decode any detail from the first half of the twentieth century.</p>
+<p>We saw in <a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a> that one approach in this sort of situation is to use a non-linear scale. <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.19 (b)</span></a> uses this approach by employing a log (base 10) scale on the y-axis. The advantage of the non-linear scale is clear: it is now possible to see details in the data for the first half of the twentieth century. For example, we can now see the effect of the Second World War (1939–1945), in addition to the effect of the COVID pandemic (2020–2021), and we can see that the seasonal patterns are similar over time.</p>
 <div class="cell" data-layout-nrow="2">
 <div id="fig-arrivals" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -744,18 +768,18 @@ Figure&nbsp;10.17: The two lines in this plot are just the same curve shifted ve
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arrivals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.18: Figures reproduced from <span class="citation" data-cites="Zacks1999">Zacks and Tversky (<a href="#ref-Zacks1999" role="doc-biblioref">1999</a>)</span>
+Figure&nbsp;10.19: Figures reproduced from <span class="citation" data-cites="Zacks1999">Zacks and Tversky (<a href="#ref-Zacks1999" role="doc-biblioref">1999</a>)</span>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>An important point is that <em>all</em> of these decodings are from the visual shapes in <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.18 (b)</span></a>. We are able to decode an overall trend, local dips within the trend, and regular spikes within the overall trend.</p>
-<p>However, as we pointed out in <a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a>, the decoding of simple visual features is compromised by the use of a non-linear scale. For example, it is very difficult to decode the final value of the time series in <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.18 (b)</span></a> because the same distance between the tick marks on the y-axis does not represent the same difference in data values (as emphasised by the choice of tick mark labels). As we can see from <a href="#fig-arrivals-1" class="quarto-xref">Figure&nbsp;<span>10.18 (a)</span></a>, the final data value in the time series is <em>not</em> half-way between 100,000 and 500,000.</p>
-<p>It is <em>possible</em> to decode quantitative values from <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.18 (b)</span></a>. For example, the height of the seasonal changes remained fairly constant over time. However, that is an observation about the <em>logged</em> data, not the raw data values.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> The danger of a log scale is that our natural decoding of position and length is now incorrect. For example, (in the absence of <a href="#fig-arrivals-1" class="quarto-xref">Figure&nbsp;<span>10.18 (a)</span></a>) we might be tempted to incorrectly decode from <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.18 (b)</span></a> that the absolute seasonal change in arrivals has remained constant over time. In other words, the natural decoding of simple visual features can be misleading in the presence of a non-linear scale.</p>
+<p>An important point is that <em>all</em> of these decodings are from the visual shapes in <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.19 (b)</span></a>. We are able to decode an overall trend, local dips within the trend, and regular spikes within the overall trend.</p>
+<p>However, as we pointed out in <a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a>, the decoding of simple visual features is compromised by the use of a non-linear scale. For example, it is very difficult to decode the final value of the time series in <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.19 (b)</span></a> because the same distance between the tick marks on the y-axis does not represent the same difference in data values (as emphasised by the choice of tick mark labels). As we can see from <a href="#fig-arrivals-1" class="quarto-xref">Figure&nbsp;<span>10.19 (a)</span></a>, the final data value in the time series is <em>not</em> half-way between 100,000 and 500,000.</p>
+<p>It is <em>possible</em> to decode quantitative values from <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.19 (b)</span></a>. For example, the height of the seasonal changes remained fairly constant over time. However, that is an observation about the <em>logged</em> data, not the raw data values.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> The danger of a log scale is that our natural decoding of position and length is now incorrect. For example, (in the absence of <a href="#fig-arrivals-1" class="quarto-xref">Figure&nbsp;<span>10.19 (a)</span></a>) we might be tempted to incorrectly decode from <a href="#fig-arrivals-2" class="quarto-xref">Figure&nbsp;<span>10.19 (b)</span></a> that the absolute seasonal change in arrivals has remained constant over time. In other words, the natural decoding of simple visual features can be misleading in the presence of a non-linear scale.</p>
 </section>
-<section id="case-study-log-log-plots" class="level2" data-number="10.10">
-<h2 data-number="10.10" class="anchored" data-anchor-id="case-study-log-log-plots"><span class="header-section-number">10.10</span> Case study: log-log plots</h2>
-<p><a href="#fig-log-log-1" class="quarto-xref">Figure&nbsp;<span>10.19</span></a> shows a scatter plot of metabolic rate versus body mass for a wide range of lifeforms.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> Because of the very wide range of body mass values and metabolic rates, with the largest animals being many orders of magnitude larger than the smallest bacteria, almost all of the data is crushed into the bottom-left corner.</p>
+<section id="case-study-log-log-plots" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="case-study-log-log-plots"><span class="header-section-number">10.11</span> Case study: log-log plots</h2>
+<p><a href="#fig-log-log-1" class="quarto-xref">Figure&nbsp;<span>10.20</span></a> shows a scatter plot of metabolic rate versus body mass for a wide range of lifeforms.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> Because of the very wide range of body mass values and metabolic rates, with the largest animals being many orders of magnitude larger than the smallest bacteria, almost all of the data is crushed into the bottom-left corner.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-log-log-1" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -764,13 +788,13 @@ Figure&nbsp;10.18: Figures reproduced from <span class="citation" data-cites="Za
 <img src="visual-shapes_files/figure-html/fig-log-log-1-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-log-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.19: Body mass versus metabolic rate for a wide variety of lifeforms.
+Figure&nbsp;10.20: Body mass versus metabolic rate for a wide variety of lifeforms.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-log-log-2" class="quarto-xref">Figure&nbsp;<span>10.20</span></a> shows the same data, but this time with log (base 10) scales on both axes. While there is still considerable overlap, thanks to the large number of observations, we can now see data for the other Kingdoms beyond Animalia.</p>
+<p><a href="#fig-log-log-2" class="quarto-xref">Figure&nbsp;<span>10.21</span></a> shows the same data, but this time with log (base 10) scales on both axes. While there is still considerable overlap, thanks to the large number of observations, we can now see data for the other Kingdoms beyond Animalia.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-log-log-2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -779,19 +803,19 @@ Figure&nbsp;10.19: Body mass versus metabolic rate for a wide variety of lifefor
 <img src="visual-shapes_files/figure-html/fig-log-log-2-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-log-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.20: Body mass versus metabolic rate for a wide variety of lifeforms. Log (base 10) scales.
+Figure&nbsp;10.21: Body mass versus metabolic rate for a wide variety of lifeforms. Log (base 10) scales.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>What we can also see in <a href="#fig-log-log-2" class="quarto-xref">Figure&nbsp;<span>10.20</span></a> is a clear <strong>visual shape</strong> amongst the data symbols—a strong linear relationship. It is useful to be able to decode this linear shape from a plot with log scales because it indicates a power relationship between the two variables, in this case metabolic rate and body mass.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> It is also possible to decode ordinal information, such as the fact that animals are larger and use more energy than bacteria.</p>
+<p>What we can also see in <a href="#fig-log-log-2" class="quarto-xref">Figure&nbsp;<span>10.21</span></a> is a clear <strong>visual shape</strong> amongst the data symbols—a strong linear relationship. It is useful to be able to decode this linear shape from a plot with log scales because it indicates a power relationship between the two variables, in this case metabolic rate and body mass.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> It is also possible to decode ordinal information, such as the fact that animals are larger and use more energy than bacteria.</p>
 <p>However, decoding the basic <strong>position</strong> of data symbols from a plot with log scales is very difficult because equal steps along either axis do <em>not</em> decode to equal steps between data values (as indicated by the axis labels).<br>
 For example, we cannot easily decode <em>how much</em> bigger animals are than bacteria. There is even danger, for the uninitiated, in decoding the linear <strong>visual shape</strong> because it does <em>not</em> decode to a linear relationship between the raw data values.</p>
 <p>Once again, we have a data visualisation that can be usefully decoded in a particular way, but which also contains encodings that are difficult and potentially misleading.</p>
 </section>
-<section id="summary" class="level2" data-number="10.11">
-<h2 data-number="10.11" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.11</span> Summary</h2>
+<section id="summary" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.12</span> Summary</h2>
 <div class="oldsummary callout callout-style-default callout-note no-icon callout-titled" title="Précis *(click to expand/contract)*">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -821,7 +845,7 @@ Précis <em>(click to expand/contract)</em>
 <li><p>Visual memory is extremely limited.</p></li>
 </ul>
 <p>These features suggest that encoding data values as basic visual features and generating simple, orderly data visualisations will lead to rapid and effortless decoding of information.</p>
-<p>A simple encoding of data values to data symbols involves encoding <strong>each data value to a separate data symbol</strong>. This allows the viewer to <strong>decode</strong> and compare individual data values from the data symbols.</p>
+<p>A simple encoding of data values to data symbols involves encoding <strong>each data value</strong> to a <strong>separate data symbol</strong>. This allows the viewer to <strong>decode</strong> and compare individual data values from the data symbols.</p>
 <p>A simple encoding of data values to data symbols also involves <strong>encoding</strong> each data value as a basic <strong>visual feature</strong> of the data symbol, e.g., position, length, area, angle, colour, or pattern.</p>
 <p>Position, length, area, and angle are appropriate for encoding quantitative data because we can decode numeric values from these visual features. We can decode position and length more accurately than area and angle.</p>
 <p>Position, colour, and pattern are appropriate for encoding qualitative data because we can decode groups from these visual features. We can represent a large number of categories if we use position, but only a few categories if we use colours and patterns.</p>

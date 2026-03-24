@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-03-22)
+Version 0.9 (build 2026-03-24)
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, arc=.35mm, colback=white, coltitle=black, toprule=.15mm, opacitybacktitle=0.6, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomtitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, toptitle=1mm, titlerule=0mm, rightrule=.15mm, leftrule=.75mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toptitle=1mm, colback=white, leftrule=.75mm, coltitle=black, bottomtitle=1mm, breakable, left=2mm, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, toprule=.15mm, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-03-22).
+2026. Version 0.9 (build 2026-03-24).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-03-22,
+@book{murrell-hdvw-2026-03-24,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-03-22)},
+    note = {Version 0.9 (build 2026-03-24)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -1988,23 +1988,18 @@ rapid and effortless decoding of information.
 In Chapter~\ref{sec-intro}, we described a data visualisation as an
 \textbf{encoding} from data values to data symbols
 (Figure~\ref{fig-encodings}). In Chapter~\ref{sec-visual-system}, we
-established some basic properties of the visual system, which will help
-to explain how well the \textbf{encoding} of data values to data symbols
+established some basic properties of the visual system, which help to
+explain how well the \textbf{encoding} of data values to data symbols
 can be reversed to \textbf{decode} from data symbols back to data values
-(Figure~\ref{fig-decode}). We also identified three levels of visual
-processing: \textbf{visual features}, \textbf{visual shapes}, and
-\textbf{visual objects} (Figure~\ref{fig-visual-processing}).
+(Figure~\ref{fig-decode}). We also identified that visual processing
+begins with decoding basic \textbf{visual features}, like colour,
+position, and angle, and subsequent visual processing builds on those
+features to produce \textbf{visual shapes} and possibly \textbf{visual
+objects} (Figure~\ref{fig-visual-processing}).
 
-There are many possible ways to encode data values to data symbols. For
-example, in Section~\ref{sec-encodings}, we saw that exactly the same
-data values could be encoded in different ways to produce a line plot
-(Figure~\ref{fig-crime}) and a heatmap (Figure~\ref{fig-crime-heatmap}).
-We also saw that different data visualisations made some decodings
-easier and others more difficult. For example, it is easier to decode
-trends from the line plot than the heatmap.
-
-The remainder of this book explores different sorts of encodings and why
-they they lead to more or less effective decodings.
+There are many possible ways to encode data values to data symbols, but
+in this chapter we begin where visual processing starts, with encoding
+data values as simple visual features.
 
 \section{Bar plots}\label{sec-bar}
 
@@ -2155,12 +2150,10 @@ basic visual features of a data symbol. This is effective because basic
 visual features are identified rapidly and without conscious effort by
 our visual system.
 
-\begin{quote}
 One reason why a bar plot is an effective data visualisation is because
 it involves an encoding from data values to the basic visual features of
 data symbols---the positions and lengths of bars---and basic visual
 features are decoded rapidly and subconsciously by our visual system.
-\end{quote}
 
 Figure~\ref{fig-visual-features} shows some other examples of basic
 visual features that are commonly used to encode data values in a data
@@ -2216,10 +2209,13 @@ features are \textbf{position}, \textbf{length}, \textbf{angle},
 
 As we discussed in Chapter~\ref{sec-visual-system}, the real purpose of
 encoding data values as data symbols is to make use of the visual system
-to \textbf{decode} back to data values from the data symbols. In this
-chapter, we are considering encodings from data values to basic visual
-features, so we need to consider how well we are able to \textbf{decode}
-from \textbf{visual features} to \textbf{data values}
+to \textbf{decode} back to data values from the data symbols. We also
+know that the visual system automatically decodes basic visual features,
+so encoding data values to basic visual features will allow us to decode
+information from a data visualisation.
+
+In this chapter, we start to look at how \emph{well} we are able to
+\textbf{decode} from \textbf{visual features} to \textbf{data values}
 (Figure~\ref{fig-visual-feature-decode}).
 
 \begin{figure}
@@ -2281,7 +2277,7 @@ quantitative data values.}
 By contrast, Figure~\ref{fig-not-quant} shows that \textbf{colour} and
 \textbf{pattern} do \emph{not} allow decoding of representing
 quantitative values. For example, the colour blue is not twice the
-colour green and a circle is not 20 more than a triangle. We can tell
+colour green and a triangle is not 20 more than a circle. We can tell
 that there are three \emph{different} values, but in effect, these
 visual representations \emph{lose} information. It is not possible to
 decode the data values from the visual represenations.
@@ -2309,22 +2305,20 @@ offenders, which are quantitative data values. These quantitative values
 are encoded as the \textbf{lengths} of bars, which is a visual feature
 that allows us to decode quantitative values.
 
-\begin{quote}
 One reason why a bar plot is effective for visualising
 \textbf{quantitative data values} is because the quantitative data
 values, the counts, are encoded to a \textbf{quantitative visual
 feature}, the lengths of the bars.
-\end{quote}
 
 \section{Qualitative features}\label{sec-qual-features}
 
 \textbf{Qualitative} data consist of categorical values rather than
 numeric values. \textbf{Nominal} data consists of just group labels,
 e.g., ethnic groups, and the only information we have is that the
-categories are different from each other. \textbf{Ordinal} data consists
-of categories that are ordered, but there is no information about the
-size of differences. For example, a ``high'' crime level is more severe
-than a ``medium'' crime level, which is more severe than a ``low'' crime
+categories are the same or different. \textbf{Ordinal} data consists of
+categories that are ordered, but there is no information about the size
+of differences. For example, a ``high'' crime level is more severe than
+a ``medium'' crime level, which is more severe than a ``low'' crime
 level, but we cannot measure the size of the differences.
 
 If we have \textbf{qualitative} data values, then we are primarily
@@ -2380,17 +2374,15 @@ The bar plot in Figure~\ref{fig-bar} encodes the ethnic groups, which
 are qualitative (nominal) data values, as the \textbf{position} of bars,
 which is a qualitative visual feature.
 
-\begin{quote}
 One reason why a bar plot is effective for visualising
 \textbf{qualitative data values} is because the qualitative data values,
 the groups, are encoded to a \textbf{qualitative visual feature}, the
 positions of the bars.
-\end{quote}
 
 \section{Accuracy}\label{sec-accuracy}
 
-Another issue that impacts on how well we can \textbf{decode} the data
-values from a visual feature (Figure~\ref{fig-visual-feature-decode}) is
+Another issue that impacts on how well we can \textbf{decode} a data
+value from a visual feature (Figure~\ref{fig-visual-feature-decode}) is
 the \textbf{accuracy} with which we can perceive quantitative values
 from visual features. For example, how well can we perceive the size of
 the difference between the length of two bars?\footnote{The pioneering
@@ -2415,12 +2407,12 @@ the difference between the length of two bars?\footnote{The pioneering
 
 It is easy to demonstrate that judgements of this sort are harder for
 some visual features than others. For example,
-Figure~\ref{fig-accuracy-demo} presents a set of three bars, which
-differ by \textbf{length}, a set of three circles, which differ by
-\textbf{area}, and a set of three stars, which differ by
-\textbf{pattern} (density of hashing). Decoding the relative sizes of
-the bars is easier than decoding the relative sizes of the circles and
-decoding numeric values from the stars is extremely difficult.
+Figure~\ref{fig-accuracy-demo} presents a set of three bars that differ
+by \textbf{length}, a set of three circles that differ by \textbf{area},
+and another set of three circles that differ by \textbf{pattern}
+(density of hashing). Decoding the relative sizes of the bars is easier
+than decoding the relative sizes of the circles and decoding numeric
+values from the patterns is extremely difficult.
 
 \begin{figure}
 
@@ -2452,9 +2444,10 @@ with more accurate visual features at the top.\footnote{In William S.
   differ for other sorts of decoding (McColeman et al. 2022). There is
   also some evidence that the rankings may differ between individuals
   even for simple relative judgements (Davis et al. 2024).} A data
-visualisation that encodes data values to visual features that are near
-the top of this ranking will be more effective than one that encodes
-data values to visual features that are near the bottom.
+visualisation that encodes quantitative data values to visual features
+that are near the top of this ranking will result in more accurate
+decoding than a data visualisation that encodes data values to visual
+features that are near the bottom.
 
 \begin{figure}
 
@@ -2474,12 +2467,11 @@ offenders, which are quantitative values, as the \textbf{lengths} of
 bars, which is an \textbf{accurate} visual feature. This means that
 viewers can make accurate comparisons between the lengths of the bars.
 
-\begin{quote}
 One reason why a bar plot is effective for visualising
 \textbf{quantitative data values} is because the quantitative data
 values, counts or proportions, are encoded as a visual feature that can
-be decoded very \textbf{accurately}, the lengths of the bars.
-\end{quote}
+be decoded\\
+\textbf{accurately}, the lengths of the bars.
 
 \section{Capacity}\label{sec-capacity}
 
@@ -2487,18 +2479,22 @@ When we are visualising \textbf{qualitative} data values, we are no
 longer concerned with accurately perceiving the size of differences; all
 we are concerned with is perceiving whether two values are different or
 the same. To be slightly more precise, we are concerned with being able
-to \emph{identify} different values, for example, which colour, out of a
-set of known colours, is this one?\footnote{The question ``Which one is
-  this?'' is different from the question ``Are these two different?''.
-  The former involves ``absolute judgements'' (Miller 1956) to identify
-  a stimulus from a known set of stimuli. The latter involves relative
-  judgements and just-noticeable differences (JND), which are
-  considerably easier and something we have a much higher sensitivity
-  to. For example, we can differentiate between several million
-  different colours (Pointer and Attridge 1998), but we can only make
-  absolute judgements with up to 10 different colours.}
+to \emph{identify} different values, for example, which colour, out of
+\colorbox[HTML]{F8766D}{a} \colorbox[HTML]{A3A500}{set}
+\colorbox[HTML]{00BF7D}{of} \colorbox[HTML]{00B0F6}{known}
+\colorbox[HTML]{E76BF3}{colours}, is \colorbox[HTML]{00BF7D}{this}
+one?\footnote{The question ``Which one is this?'' is different from the
+  question ``Are these two different?''. The former involves ``absolute
+  judgements'' (Miller 1956) to identify a stimulus from a known set of
+  stimuli. The latter involves relative judgements and just-noticeable
+  differences (JND), which are considerably easier and something we have
+  a much higher sensitivity to. For example, we can differentiate
+  between several million different colours (Pointer and Attridge 1998),
+  but we can only make absolute judgements with up to 10 different
+  colours.}
 
-The issue in this scenario is the \textbf{capacity} of a visual feature:
+The issue in this scenario is the \textbf{capacity} of a visual
+feature:\footnote{Munzner (2014) calls this \emph{discriminability}.}
 how many different categories can be encoded effectively? In particular,
 how many different categories can be encoded with the viewer able to
 reliably decode each separate category?
@@ -2585,13 +2581,11 @@ The bar plot in Figure~\ref{fig-bar} encodes the ethnic group as the
 vertical \textbf{position} of bars, which makes it easy to decode the
 different ethnic groups.
 
-\begin{quote}
 One reason why a bar plot is effective for visualising
 \textbf{qualitative data values} is because the qualitative data values,
 the groups, are encoded as a visual feature that has excellent
 \textbf{capacity}, the positions of the bars, so we are able to encode,
 and decode, a large number of different groups.
-\end{quote}
 
 \section{Case study: Dot plots}\label{sec-dot-plots}
 
@@ -2668,7 +2662,7 @@ circle and again we have each data value encoding to a single data
 symbol. For example, each ethnic group is encoded as a separate wedge of
 the pie. As with bar plots and dot plots, in a pie chart the data values
 are encoded as basic visual features of these symbols. However, a pie
-chart makes use of different visual features: The number of offenders
+chart makes use of different visual features. The number of offenders
 for each ethnic group is encoded as the \textbf{angle} and/or
 \textbf{area} of a wedge and each ethnic group is encoded as the
 \textbf{colour} of a wedge.\footnote{We are assuming here, as is common,
@@ -2695,9 +2689,9 @@ Section~\ref{sec-part-to-whole} to show that all is not lost.
 \section{Summary}\label{summary-2}
 
 A simple encoding of data values to data symbols involves encoding
-\textbf{each data value to a separate data symbol}. This allows the
-viewer to \textbf{decode} and compare individual data values from the
-data symbols.
+\textbf{each data value} to a \textbf{separate data symbol}. This allows
+the viewer to \textbf{decode} and compare individual data values from
+the data symbols.
 
 A simple encoding of data values to data symbols also involves
 \textbf{encoding} each data value as a basic \textbf{visual feature} of
@@ -6315,16 +6309,55 @@ example, we can see that the range of scores is higher for
 southern-hemisphere teams. We can also estimate the spread of scores for
 northern versus southern hemisphere teams, for example, what is the
 interquartile range? However, comparing the spreads of scores is a more
-difficult visual task than comparing the ranges of scores.
+difficult visual task than comparing the ranges of scores
+(Section~\ref{sec-tasks}).
 
 This is an example of a situation where we can reduce the cognitive load
 by presenting the data summary directly rather than relying on a visual
-summary. For example, Figure~\ref{fig-boxplot} allows us to compare the
+summary. For example, Figure~\ref{fig-boxplot}, which visualises the
+same data as Figure~\ref{fig-rwc-dotplot}, allows us to compare the
 interquartile ranges more easily because a boxplot encodes that
 information directly as the length of a box.
 
-\textbf{TODO} express the uncertaintly directly in a variety of ways
-dynamite plots? linear gradients?
+Figure~\ref{fig-rwc-year} shows another example that requires comparing
+data summaries between groups. Here we have the points scored per game
+by Tier One nations at Rugby World Cups. If we are interested in whether
+one Rugby World Cup was more free-scoring than another, and we treat the
+Tier One matches as representative of all matches, we could attempt to
+summarise whether one group of points is, on average, higher than
+another, taking into account the spread of points in each year.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/summaries_files/figure-pdf/fig-rwc-year-1.pdf}
+
+}
+
+\caption{\label{fig-rwc-year}A plot of the points scored in matches
+between Tier One nations at Rugby World Cup matches.}
+
+\end{figure}%
+
+Figure~\ref{fig-rwc-year-mean} shows a direct encoding of the mean
+scores per year, plus error bars that encode the standard deviation of
+scores per year. This makes it much easier to decode differences in
+typical scores as well as differences in score variation between years.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/summaries_files/figure-pdf/fig-rwc-year-mean-1.pdf}
+
+}
+
+\caption{\label{fig-rwc-year-mean}A plot of the mean points scored,
+plus-or-minus the standard deviations of points scored, in matches
+between Tier One nations at Rugby World Cup matches.}
+
+\end{figure}%
 
 \section{Summary}\label{summary-7}
 
@@ -7996,6 +8029,62 @@ different ranges on the plot axes.\footnote{William S. Cleveland (1994)
   states that ``our estimation of correlation is strongly affected by
   the area of the data rectangle relative to the area of the scale-line
   rectangle'' and provides demonstrations (Figure 4.15 and 4.16).}
+
+\section{Implicit visual shapes}\label{sec-vis-shape-implicit}
+
+In Section~\ref{sec-line-plots}, we contrasted a line plot
+(Figure~\ref{fig-line}), where multiple data values are encoded as a
+single data symbol (a line), with a scatter plot
+(Figure~\ref{fig-no-line}), where each data value is encoded as a
+separate data symbol (a data point). We did this to emphasise that
+encoding multiple data values as a single line data symbol generates a
+clear visual shape.
+
+By contrast, encoding each data value to its own data point does not
+produce the same clear visual shapes.
+
+However, it is still possible to decode shapes from
+Figure~\ref{fig-no-line}. For example, there are clearly two groups of
+points, orange and light blue points on a downward slope from top-left
+to bottom-right and green and dark blue points along the bottom. Even
+when we do not \emph{explicitly} generate a data symbol that produces a
+visual shape, \emph{implicit} visual shapes can emerge anyway. And it is
+possible to decode data summaries from those implicit visual shapes,
+just as we can from explicit visual shapes, although the data summaries
+may be less detailed and precise.
+
+Figure~\ref{fig-no-line-bar} shows another example of an implicit visual
+shape. In this case, we have encoded the number of offenders per year in
+different ethnic groups to the heights of bars. As with
+Figure~\ref{fig-no-line}, each data value is encoded to its own bar, so
+there is no explicit visual shape, but the collection of bars for each
+ethnic group produces an implicit visual shape that allows us to decode
+data summaries, like overall decreases or increases over time.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/visual-shapes_files/figure-pdf/fig-no-line-bar-1.pdf}
+
+}
+
+\caption{\label{fig-no-line-bar}A bar plot of the number of offenders
+per year in different ethnic groups from 2011 to 2021.}
+
+\end{figure}%
+
+This is essentially the idea of \textbf{visual summaries} from
+Section~\ref{sec-visual-summaries}. When we encode data values as many
+simple visual features, in addition to being able to decode individual
+data values from individual visual features, our visual system is
+sometimes capable of decoding data summaries from collections of visual
+features.
+
+There is also a connection to our visual system's tendency to complete
+lines and curves and to decode simpler interpretations from collections
+of simple shapes (Section~\ref{sec-visual-model-groups} and
+Section~\ref{sec-simplicity}).
 
 \section{Decoding visual shapes}\label{sec-vis-shape-decode}
 

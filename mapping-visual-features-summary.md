@@ -1,5 +1,5 @@
 A simple encoding of data values to data symbols involves
-encoding **each data value to a separate data symbol**.
+encoding **each data value** to a **separate data symbol**.
 This allows the viewer to **decode** and compare individual data values from
 the data symbols.
 

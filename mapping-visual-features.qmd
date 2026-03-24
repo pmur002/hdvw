@@ -12,27 +12,20 @@ an **encoding** from data values to data symbols
 (@fig-encodings).
 In @sec-visual-system, 
 we established some basic properties of
-the visual system, which will help to explain how well the **encoding** of
+the visual system, which help to explain how well the **encoding** of
 data values to data symbols can be reversed to **decode**
 from data symbols back to data values 
 (@fig-decode).
-We also identified
-three levels of visual processing:  **visual features**, **visual shapes**,
-and **visual objects** (@fig-visual-processing).
+We also identified that visual processing begins
+with decoding basic **visual features**, like colour, position, and angle,
+and subsequent visual processing builds on those features to
+produce **visual shapes** and possibly 
+**visual objects** (@fig-visual-processing).
 
 There are many 
-possible ways to encode data values to data symbols.
-For example, in @sec-encodings, we saw that exactly 
-the same data values could be
-encoded in different ways to produce a line plot (@fig-crime)
-and a heatmap (@fig-crime-heatmap).
-We also saw that different data visualisations made some decodings
-easier and others more difficult.
-For example, it is easier to decode trends from the line plot than
-the heatmap.
-
-The remainder of this book explores different sorts of encodings
-and why they they lead to more or less effective decodings.
+possible ways to encode data values to data symbols,
+but in this chapter we begin where visual processing starts,
+with encoding data values as simple visual features.
 
 ## Bar plots {#sec-bar}
 
@@ -169,6 +162,7 @@ Each ethnic group is encoded as the vertical **position** of one rectangle
 ```{r}
 #| echo: false
 #| label: fig-position
+#| fig.keep: last
 #| fig-cap: A bar plot of number of crimes for different ethnic groups. The data values, the ethnic groups, have been encoded to the **positions** of the bars (the green dots).
 ggplot(crimeGroup2021) + 
     geom_col(aes(x=count, y=group), fill="grey") +
@@ -182,6 +176,11 @@ ggplot(crimeGroup2021) +
           axis.text=element_text(colour="grey"),
           axis.title=element_text(colour="grey"),
           aspect.ratio=1)
+grid.force()
+panel <- grid.grep("panel", grep=TRUE)
+grid.reorder("layout", panel$name, grep=TRUE, back=FALSE)
+points <- grid.grep("panel::panel::geom_point", grep=TRUE)
+grid.reorder("panel::panel", points$name, grep=TRUE, back=FALSE)
 ```
 
 **Length** and **position** are examples of basic **visual features**
@@ -191,11 +190,11 @@ data values as the basic visual features of a data symbol.
 This is effective because basic visual features are 
 identified rapidly and without conscious effort by our visual system.
 
-> One reason why a bar plot is an effective data visualisation is 
-  because it involves an encoding from data values
-  to the basic visual features of data symbols---the
-  positions and lengths of bars---and basic visual features 
-  are decoded rapidly and subconsciously by our visual system.
+One reason why a bar plot is an effective data visualisation is 
+because it involves an encoding from data values
+to the basic visual features of data symbols---the
+positions and lengths of bars---and basic visual features 
+are decoded rapidly and subconsciously by our visual system.
 
 @fig-visual-features shows some other examples of basic visual 
 features that are commonly used to encode data values in
@@ -246,10 +245,10 @@ pushViewport(viewport(width=unit(1, "snpc"),
                       layout=grid.layout(6, 2, widths=1:2), gp=gpar(cex=1.5)))
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.text("position", x=0, just="right")
-grid.segments(.2, .5, .8, .5, gp=gpar(lwd=2))
+grid.segments(.2, .5, .8, .5, gp=gpar(lty="dotted"))
 grid.segments(.2, .4, .2, .6, gp=gpar(lwd=2))
 grid.segments(.8, .4, .8, .6, gp=gpar(lwd=2))
-grid.circle(c(.3, .6), .7, r=unit(1, "mm"), gp=gpar(fill="black"))
+grid.circle(c(.3, .6), .5, r=unit(1, "mm"), gp=gpar(fill="black"))
 popViewport()
 pushViewport(viewport(layout.pos.row=2))
 grid.rect(gp=gpar(col=NA, fill="grey90"))
@@ -279,7 +278,7 @@ grid.rect(gp=gpar(col=NA, fill="grey90"))
 popViewport()
 pushViewport(viewport(layout.pos.row=6, layout.pos.col=2))
 grid.text("pattern", x=0, just="right")
-grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), pch=c(1, 8), gp=gpar(lwd=2))
+grid.points(c(.3, .7), c(.5, .5), size=unit(4, "mm"), pch=c(1, 3), gp=gpar(lwd=2))
 popViewport()
 ```
 
@@ -288,9 +287,11 @@ popViewport()
 As we discussed in @sec-visual-system, the real purpose of encoding
 data values as data symbols is to make use of the visual system
 to **decode** back to data values from the data symbols.
-In this chapter, we are considering
-encodings from data values to basic visual features, so we
-need to consider how well we are able to **decode** from 
+We also know that the visual system automatically decodes basic visual 
+features, so encoding data values to basic visual features
+will allow us to decode information from a data visualisation.
+
+In this chapter, we start to look at how *well* we are able to **decode** from 
 **visual features** to **data values** (@fig-visual-feature-decode).
 
 ::: {#fig-visual-feature-decode}
@@ -397,7 +398,7 @@ popViewport(2)
 By contrast, @fig-not-quant shows that **colour** and **pattern** do
 *not* allow decoding of representing quantitative values.  For example,
 the colour blue is not twice the colour green and
-a circle is not 20 more than a triangle.
+a triangle is not 20 more than a circle.
 We can tell that there are three *different* values, but
 in effect, these visual representations *lose* information.
 It is not possible to decode the data values from the visual represenations.
@@ -435,7 +436,7 @@ grid.text("colour", y=unit(-2, "lines"))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3),
              vp2)
-grid.points(rep(.5, 3), c(0, .5, 1), pch=c(1, 8, 5), size=unit(5, "mm"),
+grid.points(rep(.5, 3), c(0, .5, 1), pch=c(1, 3, 2), size=unit(5, "mm"),
             gp=gpar(lwd=2))
 grid.text("pattern", y=unit(-2, "lines"))
 popViewport(2)
@@ -447,17 +448,17 @@ encoded as the
 **lengths** of bars, which is a visual feature that allows us to decode
 quantitative values.
 
-> One reason why a bar plot is effective for visualising
-  **quantitative data values** is because the quantitative data values,
-  the counts,
-  are encoded to a **quantitative visual feature**, the lengths of the bars.
+One reason why a bar plot is effective for visualising
+**quantitative data values** is because the quantitative data values,
+the counts,
+are encoded to a **quantitative visual feature**, the lengths of the bars.
 
 ## Qualitative features {#sec-qual-features}
 
 **Qualitative** data consist of categorical values rather than numeric values.
 **Nominal** data consists of just group labels,
 e.g., ethnic groups, and the only information we have is that the
-categories are different from each other.
+categories are the same or different.
 **Ordinal** data consists of categories that
 are ordered, but there is no information about the size of differences.
 For example, a "high" crime level is more severe than a "medium"
@@ -503,14 +504,14 @@ grid.text("colour", y=unit(-1, "lines"))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3),
              vp2)
-grid.points(rep(.5, 3), c(.2, .5, .8), pch=2:4, size=unit(5, "mm"),
+grid.points(rep(.5, 3), c(.2, .5, .8), pch=c(1, 3, 2), size=unit(5, "mm"),
             gp=gpar(lwd=2))
 grid.text("pattern", y=unit(-1, "lines"))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=4),
              vp2)
-grid.rect(rep(.2, 3), c(.2, .5, .8), width=c(.6, .6, .6), height=.1,
-          just="left", gp=gpar(fill="black"))
+grid.points(rep(.5, 3), c(.2, .5, .8), pch=21, size=unit(5, "mm"),
+            gp=gpar(col="black", fill="black"))
 grid.text("position", y=unit(-1, "lines"))
 popViewport(2)
 ```
@@ -577,14 +578,14 @@ The bar plot in @fig-bar encodes the ethnic groups, which are
 qualitative (nominal) data values, as the **position** of bars, which is
 a qualitative visual feature.
 
-> One reason why a bar plot is effective for visualising
-  **qualitative data values** is because the qualitative data values,
-  the groups, 
-  are encoded to a **qualitative visual feature**, the positions of the bars.
+One reason why a bar plot is effective for visualising
+**qualitative data values** is because the qualitative data values,
+the groups, 
+are encoded to a **qualitative visual feature**, the positions of the bars.
 
 ## Accuracy {#sec-accuracy}
 
-Another issue that impacts on how well we can **decode** the data values from
+Another issue that impacts on how well we can **decode** a data value from
 a visual feature (@fig-visual-feature-decode)
 is the **accuracy** with which we can perceive quantitative values
 from visual features.  For example, how well can we perceive the size of the
@@ -615,12 +616,12 @@ difference between the length of two bars?[^accuracy-research]
 
 It is easy to demonstrate that judgements of this sort are harder
 for some visual features than others.
-For example, @fig-accuracy-demo presents a set of three bars, which differ
-by **length**, a set of three circles, 
-which differ by **area**, and a set of three stars, which
+For example, @fig-accuracy-demo presents a set of three bars that differ
+by **length**, a set of three circles
+that differ by **area**, and another set of three circles that
 differ by **pattern** (density of hashing).
 Decoding the relative sizes of the bars is easier than decoding the
-relative sizes of the circles and decoding numeric values from the stars is 
+relative sizes of the circles and decoding numeric values from the patterns is 
 extremely difficult.
 
 ```{r}
@@ -659,9 +660,10 @@ This issue has been studied experimentally and
 @fig-accuracy shows the established ordering of the accuracy
 of basic visual features,
 with more accurate visual features at the top.[^candm]
-A data visualisation that encodes
+A data visualisation that encodes quantitative
 data values to visual features that are near the top of this
-ranking will be more effective than one that encodes data values
+ranking will result in more accurate decoding than 
+a data visualisation that encodes data values
 to visual features that are near the bottom.
 
 [^candm]:
@@ -735,11 +737,11 @@ quantitative values, as the **lengths** of bars, which is an
 accurate comparisons between
 the lengths of the bars.
 
-> One reason why a bar plot is effective for visualising
-  **quantitative data values** is because the quantitative data values,
-  counts or proportions,
-  are encoded as a visual feature that can be decoded very 
-  **accurately**, the lengths of the bars.
+One reason why a bar plot is effective for visualising
+**quantitative data values** is because the quantitative data values,
+counts or proportions,
+are encoded as a visual feature that can be decoded  
+**accurately**, the lengths of the bars.
 
 ## Capacity {#sec-capacity}
 
@@ -749,7 +751,9 @@ all we are concerned with is perceiving whether two values are
 different or the same.
 To be slightly more precise, we are concerned with being able to
 *identify* different values, for example, which colour,
-out of a set of known colours, is this one?[^identify]
+out of [a]{bg-colour="#F8766D"} [set]{bg-colour="#A3A500"} [of]{bg-colour="#00BF7D"}
+[known]{bg-colour="#00B0F6"} [colours]{bg-colour="#E76BF3"}, 
+is [this]{bg-colour="#00BF7D"} one?[^identify]
 
 [^identify]:
     The question "Which one is this?" is different from 
@@ -763,10 +767,13 @@ out of a set of known colours, is this one?[^identify]
     but we can only make absolute judgements with up to 10 different
     colours.
 
-The issue in this scenario is the **capacity** of a visual feature:
+The issue in this scenario is the **capacity** of a visual feature:[^capacity]
 how many different categories can be encoded effectively?
 In particular, how many different categories can be encoded
 with the viewer able to reliably decode each separate category?
+
+[^capacity]:
+    @munzner2014visualization calls this *discriminability*.
 
 @fig-colour-cap shows that **colour** has a limited capacity.
 A small number of different colours are very easy to differentiate,
@@ -913,12 +920,12 @@ The bar plot in @fig-bar encodes the ethnic group as the
 vertical **position** of bars, which makes it easy to decode
 the different ethnic groups.
 
-> One reason why a bar plot is effective for visualising
-  **qualitative data values** is because the qualitative data values,
-  the groups,
-  are encoded as a visual feature that has excellent **capacity**, 
-  the positions of the bars, so we are able to encode, and decode,
-  a large number of different groups.
+One reason why a bar plot is effective for visualising
+**qualitative data values** is because the qualitative data values,
+the groups,
+are encoded as a visual feature that has excellent **capacity**, 
+the positions of the bars, so we are able to encode, and decode,
+a large number of different groups.
 
 ## Case study: Dot plots {#sec-dot-plots}
 
@@ -1012,7 +1019,7 @@ For example, each ethnic group is encoded as a separate wedge of the pie.
 As with bar plots and dot plots, in a pie chart
 the data values are encoded as basic
 visual features of these symbols.
-However, a pie chart makes use of different visual features:
+However, a pie chart makes use of different visual features.
 The number of offenders for each ethnic group
 is encoded as the **angle** and/or **area** of a wedge
 and each ethnic group
