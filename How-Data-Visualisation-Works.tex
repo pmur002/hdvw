@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-03-24)
+Version 0.9 (build 2026-03-30)
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toptitle=1mm, colback=white, leftrule=.75mm, coltitle=black, bottomtitle=1mm, breakable, left=2mm, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, toprule=.15mm, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colback=white, colframe=quarto-callout-warning-color-frame, left=2mm, coltitle=black, opacityback=0, toptitle=1mm, leftrule=.75mm, titlerule=0mm, breakable, bottomrule=.15mm, rightrule=.15mm, bottomtitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-03-24).
+2026. Version 0.9 (build 2026-03-30).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-03-24,
+@book{murrell-hdvw-2026-03-30,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-03-24)},
+    note = {Version 0.9 (build 2026-03-30)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -2777,8 +2777,13 @@ is because none of the data values are encoded using \textbf{position}.
 
 }
 
-\caption{\label{fig-no-pos}A data visualisation that does not make use
-of position.}
+\caption{\label{fig-no-pos}This data visualisation does not make use of
+position. The data symbols are four concentric circles, one per ethnic
+group, with the radii of the circles encoding the number of offenders in
+each group and the colours of the circles encoding the names of the
+ethnic groups. Because the circles are concentric, we can only see all
+of the circle for the Unknown ethnic group; all other circles are
+partially obscured by circles that are drawn on top of them.}
 
 \end{figure}%
 
@@ -2796,16 +2801,12 @@ how well we can decode a data value from the position of a data symbol.
 In Section~\ref{sec-accuracy}, we saw that \textbf{position} was the
 most accurate visual feature for decoding quantitative values
 (Figure~\ref{fig-accuracy}). However, that accuracy is for
-\emph{relative} judgements rather than absolute judgements. In other
-words, we are good at \emph{comparisons} between positions,\footnote{In
-  the experiments described in William S. Cleveland and McGill (1984),
-  which are the basis of the accuracy ranking in
-  Figure~\ref{fig-accuracy}, ``subjects were asked to judge what percent
-  the smaller is of the larger''.} which is one of the most important
-decoding tasks in data visualisation.\footnote{Amar, Eagan, and Stasko
-  (2005), in their taxonomy of visual tasks, consider a ``low-level
-  comparison as being a fundamental cognitive action'' for reading a
-  data visualisation.
+\emph{relative} judgements rather than absolute judgements. Position is
+a very important way to encode data values because making comparisons is
+one of the most important decoding tasks in data
+visualisation.\footnote{Amar, Eagan, and Stasko (2005), in their
+  taxonomy of visual tasks, consider a ``low-level comparison as being a
+  fundamental cognitive action'' for reading a data visualisation.
 
   ``The fundamental task in data analysis is to make smart comparisons -
   we're always trying to answer the question `Compared with what?'
@@ -2822,10 +2823,10 @@ decoding tasks in data visualisation.\footnote{Amar, Eagan, and Stasko
   (Ware 2021, 70)}
 
 For example, the box on the left of Figure~\ref{fig-rel-pos} shows a dot
-at a vertical positon along a dotted line. We can decode an amount from
+at a vertical positon along a dotted line. We can decode a value from
 the position of the dot, but only relative to the ends of the dotted
 line; the dot is three-quarters of the way from the bottom to the top of
-the line. We cannot decode an absolute data value from the
+the line. We cannot decode an \emph{absolute} value from the
 dot.\footnote{Even if we have encoded a \emph{proportion} data value to
   the position of the dot, we would need to know that the bottom of the
   line represents 0 and the top of the line represents 1 to be able to
@@ -2855,11 +2856,13 @@ than absolute.}
 
 \end{figure}%
 
-\begin{quote}
-A data visualisation that encodes a data value as the position of a data
-symbol is effective because we can decode \emph{relative} positions
-accurately.
-\end{quote}
+In summary, we are good at \emph{comparisons} between
+positions.\footnote{In the experiments described in William S. Cleveland
+  and McGill (1984), which are the basis of the accuracy ranking in
+  Figure~\ref{fig-accuracy}, ``subjects were asked to judge what percent
+  the smaller is of the larger''.} A data visualisation that encodes a
+data value as the position of a data symbol is effective because we can
+decode \emph{relative} positions accurately.
 
 \section{Unaligned position}\label{sec-unaligned-pos}
 
@@ -2887,31 +2890,75 @@ they are \textbf{unaligned}.}
 
 \end{figure}%
 
-Figure~\ref{fig-radial-pos} shows yet another data visualisation of the
-total number of offenders in New Zealand for different ethnic groups
-(Table~\ref{tbl-crime-group-total}). This data visualisation is similar
-to Figure~\ref{fig-dot} because it encodes the number of offenders to
-\textbf{position} along a line. However, it is harder to compare the
-number of offenders between different ethnic groups in
-Figure~\ref{fig-radial-pos} because the positions are not aligned.
+Figure~\ref{fig-unaligned-dot} shows the number of youth offenders per
+100,000 in New Zealand for different police districts. The data values
+for this map are shown in Table~\ref{tbl-map-data}.
+
+\begin{longtable}[]{@{}lr@{}}
+
+\caption{\label{tbl-map-data}The crime rate (number of offencers per
+100,000 population) in 2021 for each police district of New Zealand.}
+
+\tabularnewline
+
+\toprule\noalign{}
+district & rate \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Northland & 373 \\
+Waitematā & 171 \\
+Auckland City & 192 \\
+Counties/Manukau & 191 \\
+Waikato & 282 \\
+Bay of Plenty & 412 \\
+Eastern & 356 \\
+Central & 394 \\
+Wellington & 217 \\
+Tasman & 391 \\
+Canterbury & 191 \\
+Southern & 313 \\
+
+\end{longtable}
 
 \begin{figure}
 
 \centering{
 
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-radial-pos-1.pdf}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-unaligned-dot-1.pdf}
 
 }
 
-\caption{\label{fig-radial-pos}A data visualisation that makes use of
-\emph{unaligned} position.}
+\caption{\label{fig-unaligned-dot}A dot plot of the crime rate in each
+police district for 2021.}
 
 \end{figure}%
 
-\begin{quote}
+In this data visualisation, the crime rate is encoded as horizontal
+position. Comparisons between different police districts is easy because
+the horizontal positions all share a common baseline.
+
+By contrast, fig-unaligned-map shows the same data on a map. The crime
+rate for each district is again encoded as horizontal position, but it
+is much harder to compare crime rates between districts because the
+horizontal positions are not aligned.
+
 Decoding data values from positions is most effective when the positions
 share a common baseline.
-\end{quote}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-unaligned-map-1.pdf}
+
+}
+
+\caption{\label{fig-unaligned-map}A map-based representation of the
+crime rate in each police district for 2021.}
+
+\end{figure}%
 
 \section{Position is a scarce resource}\label{sec-pos-scarce}
 
@@ -2996,11 +3043,11 @@ Argentina & South & 7 \\
 
 \end{longtable}
 
-Figure~\ref{fig-overplot} shows a dot plot of the points scored in a
+Figure~\ref{fig-overplot} shows a dot plot of the points scored in each
 match for all teams and all matches. This data visualisation has encoded
 the number of points scored as the horizontal \textbf{position} of data
-points. In theory, that allows us to decode from data points to a number
-of points scored. For example, we can see that one team from the
+points. In theory, that should allow us to decode from data points to a
+number of points scored. For example, we can see that one team from the
 southern hemisphere scored just over 100 points in one match.
 
 \begin{figure}
@@ -3065,7 +3112,7 @@ Figure~\ref{fig-overplot}, but with the data points semi-transparent so
 that we can see that many of the points overlap. The same number of
 points was scored by multiple teams in multiple matches. This
 demonstrates one approach to resolving the problem of overplotting,
-although it is only partially effective here; We can more easily decode
+although it is only partially effective here; we can more easily decode
 points that have been scored many times, but we cannot easily decode the
 number of times the same set of points was scored. We will see several
 other approaches to resolving overplotting in later chapters.
@@ -3085,16 +3132,19 @@ Cup games by teams from the northern and southern hemispheres.}
 
 \section{Cartesian coordinates}\label{sec-cartesian}
 
-In Figure~\ref{fig-overplot}, we have encoded \emph{two} sets of data
-values using \textbf{position}. The number of points is encoded as the
-horizontal position of the data points and the hemisphere of origin for
-each team is encoded as the vertical position of the data points. This
-\emph{cartesian coordinate system} is effective because the visual
+In Figure~\ref{fig-dot}, we encoded \emph{two} sets of data values using
+\textbf{position}. The number of offenders is encoded as the horizontal
+position of data points and the ethnic group is encoded as the vertical
+position of data points. Figure~\ref{fig-dot} is effective because it
+encodes data values as position, but it is also effective because it
+encodes data values as \emph{orthogonal} positions---horizontal position
+and vertical position.
+
+This \emph{cartesian coordinate system} is effective because the visual
 system is better at decoding horizontal and vertical positions compared
-to oblique orientations like in Figure~\ref{fig-radial-pos}.\footnote{This
-  preference for horizontal and vertical orientations is known as the
-  \emph{oblique effect} (Appelle 1972; B. Li, Peterson, and Freeman
-  2003)}
+to oblique orientations.\footnote{This preference for horizontal and
+  vertical orientations is known as the \emph{oblique effect} (Appelle
+  1972; B. Li, Peterson, and Freeman 2003)}
 
 Because the horizontal and vertical positions are perpendicular,
 Cartesian coordinates also mean that we can make use of
@@ -3112,17 +3162,31 @@ scored. Put another way, any difference between the data symbols for
 northern hemisphere teams and the data symbols for southern hemisphere
 teams must reflect something about the data.
 
-A good example of a data visualisation that does not employ Cartesian
-coordinates is a pie chart, like Figure~\ref{fig-pie}, though that is
-also a case where data values are \emph{not} encoded as
-\textbf{position}.
-
-\begin{quote}
 Cartesian (perpendicular) coordinates are effective because we can
 encode data values using position \emph{twice}; we can decode data
 values from horizontal positions and we can separately decode data
 values from vertical positions.
-\end{quote}
+
+Figure~\ref{fig-radial-pos} shows an example of a data visualisation
+that does not employ a cartesian coordinate system. Like
+Figure~\ref{fig-dot}, it shows the number of offenders in different
+ethnic groups (Table~\ref{tbl-crime-group-total}), and it encodes the
+number of offenders as position along a line. However, the positions are
+not orthogonal to each other so it becomes more difficult to decode
+comparisons between the different ethnic groups.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/position_files/figure-pdf/fig-radial-pos-1.pdf}
+
+}
+
+\caption{\label{fig-radial-pos}A data visualisation that makes use of
+\emph{unaligned} position.}
+
+\end{figure}%
 
 \section{Case study: Ternary plots}\label{sec-ternary}
 
@@ -3160,14 +3224,15 @@ Figure~\ref{fig-ternary} shows a ternary plot of these data.\footnote{Ternary
   or soils is studied. (Howarth 1996) provides a history of the
   development of ternary diagrams.} In this data visualisation, there
 are three variables (three proportions that sum to 1), and the data
-values from each variable has been encoded as position. However, the
+values from each variable have been encoded as position. However, the
 positions are along axes that are not perpendicular. This means that it
 is not as easy to decode individual data values or compare data values
 because we are poorer at decoding positions that are not horizontal or
 vertical. Furthermore, because the three proportions sum to 1, a change
 in one proportion necessitates a change in at least one of the others.
-In other words, we cannot easily decode the difference between two data
-values from the difference in the positions of two data symbols.
+In other words, it is more difficult to decode the difference between
+two data values from the difference in the positions of two data
+symbols, compared to cartesian coordinates.
 
 \begin{figure}
 
@@ -3190,7 +3255,7 @@ Table~\ref{tbl-crime-type} shows the total number of youth offenders
 broken down by type of crime. We have one qualitative variable, crime
 type, and one quantitative variable, total number of offenders.
 
-\begin{longtable}[]{@{}llr@{}}
+\begin{longtable}[]{@{}lr@{}}
 
 \caption{\label{tbl-crime-type}A table of the number of youth offenders
 in New Zealand in 2021 broken down by type of crime. There are 16
@@ -3199,27 +3264,27 @@ different crime types in total, with only the first 6 shown here.}
 \tabularnewline
 
 \toprule\noalign{}
-& type & count \\
+type & count \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-161 & Homicides & 4 \\
-162 & Causing injury & 1018 \\
-163 & Sexual offences & 190 \\
-164 & Dangerous acts & 653 \\
-165 & Abductions, threats & 273 \\
-166 & Robbery, extortion & 246 \\
+Homicides & 4 \\
+Causing injury & 1018 \\
+Sexual offences & 190 \\
+Dangerous acts & 653 \\
+Abductions, threats & 273 \\
+Robbery, extortion & 246 \\
 
 \end{longtable}
 
-Figure~\ref{fig-linear} shows of dot plot of these data, with the total
+Figure~\ref{fig-linear} shows a dot plot of these data, with the total
 number of offenders encoded as the horizontal position of circles, one
 per type of crime. This plot is effective for comparing the total number
 of offenders between types of crime, both in terms of which crimes are
 more common than others and how much more common some crimes are than
-others. For example, we can decode that theft is about twice as common
-as the next most common crime type.
+others. For example, we can decode that Theft is about twice as common
+as Dangerous acts.
 
 \begin{figure}
 
@@ -3248,12 +3313,12 @@ When a small number of data values are considerably larger than the
 majority of data values, as in Figure~\ref{fig-linear}, a non-linear
 scale is sometimes employed in order to see the differences between the
 smaller values more easily. For example, Figure~\ref{fig-log} shows the
-same data and the same encodings, but with a \emph{log scale}. Rather
-than encoding the number of offenders as the position of the circles,
-the log (base 10) of the number of offenders is encoded as the position
-of the circles.\footnote{The log (base 10) of the data values is the
-  power to which we must raise 10 in order to get the data value. For
-  example, if the data value is 100, the logged data value is 2.
+same data and the same encodings, but this time with a \emph{log scale}.
+Rather than encoding the number of offenders as the position of the
+circles, the log (base 10) of the number of offenders is encoded as the
+position of the circles.\footnote{The log (base 10) of the data values
+  is the power to which we must raise 10 in order to get the data value.
+  For example, if the data value is 100, the logged data value is 2.
 
   \(10^2 = 100 \iff log_{10}(100) = 2\)}
 
@@ -3273,17 +3338,20 @@ regions of New Zealand, with a non-linear (log) scale on the x-axis.}
 Unfortunately, as a result of the non-linear horizontal scale, we lose
 the accuracy of the position encoding. We can no longer accurately
 decode from position to data values because the same horizontal distance
-means different things in terms of data values at different locations
+means different amounts, in terms of data values, at different locations
 along the x-axis. For example, it is difficult to decode the number of
-offenders for Miscellaneous crimes; the position of the circle data
-symbol is visually roughly one quarter of the distance between 10 and
-100, but the corresponding data value (18) is \emph{not} one quarter of
-the distance between 10 and 100. It is even more difficult to decode the
-size of the difference between the number of offenders for Miscellaneous
-crimes versus Homicides. Worse still, the difference between
-Miscellaneous and Homicide is visually similar to the difference between
-Miscellaneous and crimes Against justice, but the real differences
-between those data values are very different (14 versus 50).
+offenders for Miscellaneous crimes; we can decode that the position of
+the circle data symbol is roughly one quarter of the distance between 10
+and 100, but the corresponding data value (18) is \emph{not} one quarter
+of the distance between 10 and 100. It is even more difficult to decode
+the size of the difference between the number of offenders for
+Miscellaneous crimes versus Homicides. Worse still, the difference
+between Miscellaneous and Homicide is visually similar to the difference
+between Miscellaneous crimes and crimes Against justice, but the real
+differences between those data values are very different (14 versus 50).
+
+The encoding of quantitative data as the position of data symbols is
+only effective for decoding quantitative data if the encoding is linear.
 
 We can still decode simple ordinal information from
 Figure~\ref{fig-log}---which type of crimes are more common than
@@ -3328,16 +3396,11 @@ positions may still be effective. We will see more examples in later
 sections (Section~\ref{sec-col-non-linear},
 Section~\ref{sec-shape-non-linear}).
 
-\begin{quote}
-The encoding of quantitative data as the position of data symbols is
-only effective for decoding quantitative data if the encoding is linear.
-\end{quote}
-
 \section{Summary}\label{summary-3}
 
-Encoding data values as the position of data symbols allows for the
-effective decoding of both quantitative and qualitative information,
-with the following caveats:
+Encoding data values as the position of data symbols is very effective
+for decoding of both quantitative and qualitative information. However
+\ldots{}
 
 \begin{itemize}
 \item
@@ -6051,7 +6114,7 @@ data values.
 
 For example, Figure~\ref{fig-downgrade} shows the crime rate for 2021 in
 each police district of New Zealand. The data values for this map are
-shown in Table~\ref{tbl-map-data}.
+from Table~\ref{tbl-map-data}.
 
 \begin{longtable}[]{@{}lr@{}}
 
@@ -8837,7 +8900,7 @@ decoding of decreasing crime rates over time.
 
 \centering{
 
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/multiple_files/figure-pdf/fig-3d-heatmap-1.pdf}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/Images/fig-3d-heatmap-1.pdf}
 
 }
 

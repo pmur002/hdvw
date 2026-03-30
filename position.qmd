@@ -72,7 +72,7 @@ none of the data values are encoded using **position**.
 ```{r}
 #| echo: false
 #| label: fig-no-pos
-#| fig-cap: A data visualisation that does not make use of position.
+#| fig-cap: This data visualisation does not make use of position. The data symbols are four concentric circles, one per ethnic group, with the radii of the circles encoding the number of offenders in each group and the colours of the circles encoding the names of the ethnic groups.  Because the circles are concentric, we can only see all of the circle for the Unknown ethnic group;  all other circles are partially obscured by circles that are drawn on top of them.
 concData <- crimeGroupTotal
 concData <- concData[order(concData$total, decreasing=TRUE), ]
 sqrtTotal <- sqrt(concData$total)
@@ -132,14 +132,10 @@ In @sec-accuracy, we saw that **position** was the most
 accurate visual feature for decoding quantitative values (@fig-accuracy).
 However, that accuracy is for *relative* judgements rather than 
 absolute judgements.
-In other words, we are good at *comparisons* between positions,[^comparison]
-which is one of the most important decoding tasks in
+Position is a very important way to encode data values because
+making comparisons
+is one of the most important decoding tasks in
 data visualisation.[^comparisons]
-
-[^comparison]:
-    In the experiments described in @cleveland1984graphical,
-    which are the basis of the accuracy ranking in @fig-accuracy,
-    "subjects were asked to judge what percent the smaller is of the larger".
 
 [^comparisons]:
     @amar-taxonomy, in their taxonomy of visual tasks,
@@ -163,10 +159,10 @@ data visualisation.[^comparisons]
 
 For example, the box on the left of @fig-rel-pos shows a dot
 at a vertical positon along a dotted line.
-We can decode an amount from the position of the dot, but only
+We can decode a value from the position of the dot, but only
 relative to the ends of the dotted line;  the dot is three-quarters
 of the way from the bottom to the top of the line.
-We cannot decode an absolute data value from the dot.[^rel-propn]
+We cannot decode an *absolute* value from the dot.[^rel-propn]
 
 [^rel-propn]:
     Even if we have encoded a *proportion* data value to the position
@@ -197,23 +193,23 @@ pushViewport(viewport(layout.pos.col=1),
              viewport(width=.6, height=.6))
 grid.rect()
 grid.segments(1/3, 0, 1/3, 1, gp=gpar(lty="dotted"))
-grid.circle(1/3, 3/4, unit(1, "mm"), gp=gpar(fill="black"))
+grid.circle(1/3, 3/4, unit(1.5, "mm"), gp=gpar(fill="black"))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=2),
              viewport(width=.6, height=.6))
 grid.rect()
 grid.segments(1/3, 0, 1/3, 1, gp=gpar(lty="dotted"))
 grid.segments(2/3, 0, 2/3, 1, gp=gpar(lty="dotted"))
-grid.circle(1/3, 3/4, unit(1, "mm"), gp=gpar(fill="black"))
-grid.circle(2/3, 1/4, unit(1, "mm"), gp=gpar(fill="black"))
+grid.circle(1/3, 3/4, unit(1.5, "mm"), gp=gpar(fill="black"))
+grid.circle(2/3, 1/4, unit(1.5, "mm"), gp=gpar(fill="black"))
 popViewport(2)
 pushViewport(viewport(layout.pos.col=3),
              viewport(width=.6, height=.6))
 grid.rect()
 grid.segments(1/3, 0, 1/3, 1, gp=gpar(lty="dotted"))
 grid.segments(2/3, 0, 2/3, 1, gp=gpar(lty="dotted"))
-grid.circle(1/3, 3/4, unit(1, "mm"), gp=gpar(fill="black"))
-grid.circle(2/3, 1/4, unit(1, "mm"), gp=gpar(fill="black"))
+grid.circle(1/3, 3/4, unit(1.5, "mm"), gp=gpar(fill="black"))
+grid.circle(2/3, 1/4, unit(1.5, "mm"), gp=gpar(fill="black"))
 y <- seq(.25, .75, .25)
 grid.segments(1, y, unit(1, "npc") + unit(2, "mm"), y)
 grid.text(y*100, unit(1, "npc") + unit(4, "mm"), y,
@@ -221,9 +217,15 @@ grid.text(y*100, unit(1, "npc") + unit(4, "mm"), y,
 popViewport(2)
 ```
 
-> A data visualisation that encodes a data value as the position
-  of a data symbol is effective because we can decode
-  *relative* positions accurately.
+In summary, we are good at *comparisons* between positions.[^comparison]
+A data visualisation that encodes a data value as the position
+of a data symbol is effective because we can decode
+*relative* positions accurately.
+
+[^comparison]:
+    In the experiments described in @cleveland1984graphical,
+    which are the basis of the accuracy ranking in @fig-accuracy,
+    "subjects were asked to judge what percent the smaller is of the larger".
 
 ## Unaligned position {#sec-unaligned-pos}
 
@@ -244,93 +246,108 @@ of @fig-unaligned-pos than it is to compare the two positions on the right.
 grid.newpage()
 pushViewport(viewport(x=0, width=.5, just="left"))
 pushViewport(viewport(width=unit(.8, "npc")))
-grid.segments(.2, .25, .2, .35, gp=gpar(col="grey"))
-grid.segments(.7, .25, .7, .35, gp=gpar(col="grey"))
-grid.segments(.2, .65, .2, .75, gp=gpar(col="grey"))
-grid.segments(.7, .65, .7, .75, gp=gpar(col="grey"))
+grid.segments(.2, .25, .2, .35, gp=gpar(col="black"))
+grid.segments(.7, .25, .7, .35, gp=gpar(col="black"))
+grid.segments(.2, .65, .2, .75, gp=gpar(col="black"))
+grid.segments(.7, .65, .7, .75, gp=gpar(col="black"))
 grid.segments(.2, c(.3, .7), .7, c(.3, .7), gp=gpar(lty="dotted"))
-grid.circle(c(.45, .55), c(.3, .7), r=unit(2, "mm"), gp=gpar(fill="black"))
+grid.circle(c(.45, .55), c(.3, .7), r=unit(1.5, "mm"), gp=gpar(fill="black"))
 popViewport(2)
 pushViewport(viewport(x=.5, width=.5, just="left"))
 pushViewport(viewport(x=.4, width=unit(.8, "npc")))
-grid.segments(.2, .25, .2, .35, gp=gpar(col="grey"))
-grid.segments(.7, .25, .7, .35, gp=gpar(col="grey"))
-grid.segments(.3, .65, .3, .75, gp=gpar(col="grey"))
-grid.segments(.8, .65, .8, .75, gp=gpar(col="grey"))
+grid.segments(.2, .25, .2, .35, gp=gpar(col="black"))
+grid.segments(.7, .25, .7, .35, gp=gpar(col="black"))
+grid.segments(.3, .65, .3, .75, gp=gpar(col="black"))
+grid.segments(.8, .65, .8, .75, gp=gpar(col="black"))
 grid.segments(c(.2, .3), c(.3, .7), c(.7, .8), c(.3, .7), gp=gpar(lty="dotted"))
-grid.circle(c(.45, .65), c(.3, .7), r=unit(2, "mm"), gp=gpar(fill="black"))
+grid.circle(c(.45, .65), c(.3, .7), r=unit(1.5, "mm"), gp=gpar(fill="black"))
 popViewport(2)
 ```
 
-@fig-radial-pos shows yet another data visualisation 
-of the total number of
-offenders in New Zealand for different ethnic groups (@tbl-crime-group-total).
-This data visualisation is similar to 
-@fig-dot because it encodes the number of offenders to **position**
-along a line.
-However, it is harder to compare the number of offenders between
-different ethnic groups in @fig-radial-pos because the 
-positions are not aligned.
+@fig-unaligned-dot shows
+the number of youth
+offenders per 100,000
+in New Zealand for different police districts.
+The data values for this map are shown in @tbl-map-data.
 
 ```{r}
 #| echo: false
-#| label: fig-radial-pos
-#| fig-cap: A data visualisation that makes use of *unaligned* position.
-grid.newpage()
-ticks <- seq(5000, 45000, 10000) ## pretty(range(concData$total), log=FALSE)
-pushViewport(viewport(width=unit(.6, "snpc"), 
-                      height=unit(.6, "snpc"), 
-                      xscale=c(-maxTotal, maxTotal), 
-                      yscale=c(-maxTotal, maxTotal),
-                      gp=gpar(col="grey")))
-t <- c(pi/2, seq(pi/4, 7*pi/4, length.out=4))
-grid.segments(.5 + .5*min(ticks)/maxTotal*cos(t), 
-              .5 + .5*min(ticks)/maxTotal*sin(t), 
-              .5 + .5*max(ticks)/maxTotal*cos(t), 
-              .5 + .5*max(ticks)/maxTotal*sin(t),
-              gp=gpar(col="grey", lwd=2))
-for (i in 1:5) {
-    grid.points(ticks*cos(t[i]), 
-                ticks*sin(t[i]),
-                pch=16, size=unit(2, "mm"),
-                gp=gpar(col="grey"))
-}
-grid.text(ticks[-1], unit(.5, "npc") + unit(1, "mm"),
-          unit(ticks[-1], "native"), just="left",
-          gp=gpar(fontsize=8, col="grey"))
-grid.points(concData$total*cos(t[-1]),
-            concData$total*sin(t[-1]),
-            pch=16, 
-            gp=gpar(col=cols))
-lab <- function(i) {
-    pushViewport(viewport(concData$total[i]*cos(t[i + 1]), 
-                          concData$total[i]*sin(t[i + 1]), just="left",
-                          default.units="native", angle=180*t[i + 1]/pi - 90))
-    grid.text(concData$group[i], unit(2, "mm"), just="left",
-              gp=gpar(col=cols[i]))
-    popViewport()
-}
-lab <- function(i) {
-    x <- concData$total[i]*cos(t[i + 1])
-    if (x < 0) {
-        just <- "right"
-        adj <- unit(-2, "mm")
-    } else {
-        just <- "left"
-        adj <- unit(2, "mm")
-    }
-    grid.text(concData$group[i],
-              unit(x, "native") + adj, 
-              concData$total[i]*sin(t[i + 1]), just=just,
-              default.units="native", 
-              gp=gpar(col=cols[i], fontface="bold"))
-}
-for (i in 1:4) lab(i)
+#| label: tbl-map-data
+#| tbl-cap: The crime rate (number of offencers per 100,000 population) in 2021 for each police district of New Zealand.
+kable(subset(crimeDistrict, year == 2021)[c("district", "rate")], digits=0,
+      row.names=FALSE)
 ```
 
-> Decoding data values from
-  positions is most effective when the positions share a
-  common baseline.
+```{r}
+#| echo: false
+#| label: fig-unaligned-dot
+#| fig-cap: A dot plot of the crime rate in each police district for 2021.
+temp <- subset(crimeDistrict, year == 2021)
+temp$district <- reorder(temp$district, temp$rate)
+ggplot(temp) +
+    geom_point(aes(rate, district), size=3) +
+    geom_hline(aes(yintercept=district), linetype="dotted") +
+    scale_x_continuous(limits=c(0, NA), expand=expansion(c(0, .05)))
+```
+
+In this data visualisation,
+the crime rate is encoded as horizontal position.
+Comparisons between different police districts is easy because
+the horizontal positions all share a common baseline.
+
+By contrast, fig-unaligned-map shows the same data
+on a map.
+The crime rate for each district is again encoded as horizontal position,
+but it is much harder to compare crime rates between districts
+because the horizontal positions are not aligned.
+
+Decoding data values from
+positions is most effective when the positions share a
+common baseline.
+
+```{r}
+#| echo: false
+#| label: fig-unaligned-map
+#| fig-height: 6
+#| fig-cap: A map-based representation of the crime rate in each police district for 2021.
+w <- 2
+h <- 6
+strip <- function(data, coords) {
+    children <- list()
+    for (i in 1:nrow(data)) {
+        children[[i]] <- 
+            grobTree(segmentsGrob(0, 0, 0, 1),
+                     segmentsGrob(1, 0, 1, 1),
+                     segmentsGrob(0, .5, 1, .5),
+                     circleGrob(unit(h*data$height[i]/max(data$height), "mm"),
+                                .5, 
+                                unit(1, "mm"),
+                                gp=gpar(fill="black")),
+                     vp=viewport(coords$x[i], coords$y[i], 
+                                 width=unit(h, "mm"), height=unit(w, "mm")))
+    }
+    do.call(grobTree, children)
+}
+stripKey <- function(data, coords) {
+    vp <- viewport(.8, .2, width=unit(h, "mm"), height=unit(w, "mm"))
+    grobTree(segmentsGrob(0, 0, 0, 1),
+             segmentsGrob(1, 0, 1, 1),
+             segmentsGrob(0, .5, 1, .5),
+             textGrob("0", 0, unit(0, "mm"), just=c("left", "top")),
+             textGrob("400", 1, unit(0, "mm"), just=c("left", "top")),
+             textGrob("rate", 0, unit(1, "npc") + unit(2, "mm"),
+                      just=c("left", "bottom")),
+             vp=vp)
+}
+ggplot(districts) +
+    geom_sf(fill="grey", colour=figbg, linewidth=.6) +
+    grid_panel(strip, aes(X, Y, height=rate)) +
+    grid_panel(stripKey) +
+    scale_fill_continuous(name="crime rate") +
+    theme(axis.title=element_blank(),
+          axis.ticks=element_blank(),
+          axis.text=element_blank())
+```
 
 ## Position is a scarce resource {#sec-pos-scarce}
 
@@ -402,10 +419,10 @@ by Tier One nations (the top 10 rugby-playing nations).
 kable(head(rwcAll[,c("team", "hemisphere", "scored")]), digits=0)
 ```
 
-@fig-overplot shows a dot plot of the points scored in a match for all
+@fig-overplot shows a dot plot of the points scored in each match for all
 teams and all matches.  This data visualisation has encoded the number
 of points scored as the horizontal **position** of data points.
-In theory, that allows us to decode from data points to
+In theory, that should allow us to decode from data points to
 a number of points scored.
 For example, we can see that one team from the southern hemisphere
 scored just over 100 points in one match.
@@ -460,7 +477,7 @@ with the data points semi-transparent
 so that we can see that many of the points overlap.
 The same number of points was scored by multiple teams in multiple matches.
 This demonstrates one approach to resolving the problem of overplotting,
-although it is only partially effective here;  We can more easily decode
+although it is only partially effective here;  we can more easily decode
 points that have been scored many times, but we cannot easily decode
 the number of times the same set of points was scored.
 We will see several other approaches to resolving overplotting
@@ -480,16 +497,19 @@ ggplot(rwcAll) +
 
 ## Cartesian coordinates {#sec-cartesian}
 
-In @fig-overplot, we have encoded *two* sets of data values using
+In @fig-dot, we encoded *two* sets of data values using
 **position**.
-The number of points is encoded as the horizontal position of the data
-points and the hemisphere of origin for each team is encoded as the
-vertical position of the data points.
+The number of offenders is encoded as the horizontal position of data
+points and the ethnic group is encoded as the
+vertical position of data points.
+@fig-dot is effective because it encodes data values as position,
+but it is also effective because it encodes data values as
+*orthogonal* positions---horizontal position and vertical position.
+
 This *cartesian coordinate system* 
 is effective because 
 the visual system is better at decoding horizontal and vertical
-positions compared to oblique orientations like in
-@fig-radial-pos.[^oblique-effect]
+positions compared to oblique orientations.[^oblique-effect]
 
 [^oblique-effect]:
     This preference for horizontal and vertical orientations 
@@ -516,15 +536,76 @@ must reflect something about the data.
     which means that they are 
     [*independent*](https://en.wikipedia.org/wiki/Independence_(probability_theory)).
 
-A good example of a data visualisation that does not employ 
-Cartesian coordinates is a pie chart, like @fig-pie, though
-that is also a case where data values are *not* encoded as **position**.
+Cartesian (perpendicular) coordinates are effective because we can
+encode data values using position
+*twice*; we can decode data values from
+horizontal positions and we can separately decode data values from vertical
+positions.
 
-> Cartesian (perpendicular) coordinates are effective because we can
-  encode data values using position
-  *twice*; we can decode data values from
-  horizontal positions and we can separately decode data values from vertical
-  positions.
+@fig-radial-pos shows an example of a data visualisation that
+does not employ a cartesian coordinate system.
+Like @fig-dot, it shows the number of offenders in different ethnic groups
+(@tbl-crime-group-total),
+and it encodes the number of offenders as position along a line.
+However, the positions are not orthogonal to each other 
+so it becomes more difficult to decode comparisons between
+the different ethnic groups.
+
+```{r}
+#| echo: false
+#| label: fig-radial-pos
+#| fig-cap: A data visualisation that makes use of *unaligned* position.
+grid.newpage()
+ticks <- seq(5000, 45000, 10000) ## pretty(range(concData$total), log=FALSE)
+pushViewport(viewport(width=unit(.6, "snpc"), 
+                      height=unit(.6, "snpc"), 
+                      xscale=c(-maxTotal, maxTotal), 
+                      yscale=c(-maxTotal, maxTotal),
+                      gp=gpar(col="grey")))
+t <- c(pi/2, seq(pi/4, 7*pi/4, length.out=4))
+grid.segments(.5 + .5*min(ticks)/maxTotal*cos(t), 
+              .5 + .5*min(ticks)/maxTotal*sin(t), 
+              .5 + .5*max(ticks)/maxTotal*cos(t), 
+              .5 + .5*max(ticks)/maxTotal*sin(t),
+              gp=gpar(col="grey", lwd=2))
+for (i in 1:5) {
+    grid.points(ticks*cos(t[i]), 
+                ticks*sin(t[i]),
+                pch=16, size=unit(2, "mm"),
+                gp=gpar(col="grey"))
+}
+grid.text(ticks[-1], unit(.5, "npc") + unit(1, "mm"),
+          unit(ticks[-1], "native"), just="left",
+          gp=gpar(fontsize=8, col="grey"))
+grid.points(concData$total*cos(t[-1]),
+            concData$total*sin(t[-1]),
+            pch=16, 
+            gp=gpar(col=cols))
+lab <- function(i) {
+    pushViewport(viewport(concData$total[i]*cos(t[i + 1]), 
+                          concData$total[i]*sin(t[i + 1]), just="left",
+                          default.units="native", angle=180*t[i + 1]/pi - 90))
+    grid.text(concData$group[i], unit(2, "mm"), just="left",
+              gp=gpar(col=cols[i]))
+    popViewport()
+}
+lab <- function(i) {
+    x <- concData$total[i]*cos(t[i + 1])
+    if (x < 0) {
+        just <- "right"
+        adj <- unit(-2, "mm")
+    } else {
+        just <- "left"
+        adj <- unit(2, "mm")
+    }
+    grid.text(concData$group[i],
+              unit(x, "native") + adj, 
+              concData$total[i]*sin(t[i + 1]), just=just,
+              default.units="native", 
+              gp=gpar(col=cols[i], fontface="bold"))
+}
+for (i in 1:4) lab(i)
+```
 
 ## Case study: Ternary plots {#sec-ternary}
 
@@ -569,7 +650,7 @@ kable(head(crimeLevel3), digits=3)
 
 @fig-ternary shows a ternary plot of these data.[^ternary-plots]
 In this data visualisation, there are three variables (three proportions
-that sum to 1), and the data values from each variable has been 
+that sum to 1), and the data values from each variable have been 
 encoded as position.  However, the positions are along axes that
 are not perpendicular.
 This means that it is not as easy to decode individual data values
@@ -578,8 +659,10 @@ because we are poorer at decoding positions that are not horizontal or
 vertical.
 Furthermore, because the three proportions sum to 1, a change in
 one proportion necessitates a change in at least one of the others.
-In other words, we cannot easily decode the difference between two data values
-from the difference in the positions of two data symbols.
+In other words, it is more difficult to
+decode the difference between two data values
+from the difference in the positions of two data symbols,
+compared to cartesian coordinates.
 
 [^ternary-plots]:
     Ternary plots, also known as barycentric plots,
@@ -631,17 +714,17 @@ one quantitative variable, total number of offenders.
 #| message: false
 #| label: tbl-crime-type
 #| tbl-cap: A table of the number of youth offenders in New Zealand in 2021 broken down by type of crime.  There are 16 different crime types in total, with only the first 6 shown here.
-kable(head(crimeType2021[c("type", "count")]), digits=3)
+kable(head(crimeType2021[c("type", "count")]), digits=3, row.names=FALSE)
 ```
 
-@fig-linear shows of dot plot of these data, with the total number of offenders
+@fig-linear shows a dot plot of these data, with the total number of offenders
 encoded as the horizontal position of circles, one per type of crime.
 This plot is effective for comparing the total number of offenders 
 between types of crime, both in terms of
 which crimes are more common than others and
 how much more common some crimes are than others.
-For example, we can decode that theft is about twice as common as the next
-most common crime type.
+For example, we can decode that Theft is about twice as common as 
+Dangerous acts.
 
 ```{r}
 #| echo: false
@@ -653,7 +736,8 @@ ggplot(ct2) +
     geom_segment(aes(x=-Inf, xend=Inf, y=type, yend=type), 
                  linetype="dotted") +
     geom_point(aes(x=count, y=type), size=3) +
-    scale_x_continuous(name="number of offenders") +
+    scale_x_continuous(name="number of offenders", 
+                       sec.axis=dup_axis(name=NULL)) +
     theme(aspect.ratio=1)
 ```
 
@@ -675,7 +759,7 @@ When a small number of data values are considerably larger than the
 majority of data values, as in @fig-linear, a non-linear
 scale is sometimes employed in order to see the differences
 between the smaller values more easily.  For example, @fig-log shows the same
-data and the same encodings, but with a *log scale*.
+data and the same encodings, but this time with a *log scale*.
 Rather than encoding the number of offenders as the position
 of the circles, 
 the log (base 10) of the number of offenders is encoded as
@@ -697,27 +781,34 @@ ggplot(ct2) +
     geom_segment(aes(x=0, xend=Inf, y=type, yend=type), 
                  linetype="dotted") +
     geom_point(aes(x=count, y=type), size=3) +
-    scale_x_continuous(name="number of offenders", transform="log10") +
+    scale_x_continuous(name="number of offenders", transform="log10", 
+                       sec.axis=dup_axis(name=NULL)) +
     theme(aspect.ratio=1)
 ```
 
 Unfortunately, as a result of the non-linear horizontal scale,
 we lose the accuracy of the position encoding.
 We can no longer accurately decode from position to data values
-because the same horizontal distance means different things
-in terms of data values at different locations along the x-axis.
+because the same horizontal distance means different amounts,
+in terms of data values, at different locations along the x-axis.
 For example, it is difficult to decode the number of offenders
-for Miscellaneous crimes;  the position of the circle data symbol
-is visually roughly one quarter of the distance
+for Miscellaneous crimes;  we can decode that
+the position of the circle data symbol
+is roughly one quarter of the distance
 between 10 and 100, but the corresponding
 data value (18) is *not*
 one quarter of the distance between 10 and 100.  It is even more difficult
 to decode the size of the difference between the number of offenders
 for Miscellaneous crimes versus Homicides.
 Worse still, the difference between Miscellaneous and Homicide is visually
-similar to the difference between Miscellaneous and crimes Against justice,
+similar to the difference between Miscellaneous crimes 
+and crimes Against justice,
 but the real differences between those data values are very different
 (14 versus 50).
+
+The encoding of quantitative data as the position of data symbols
+is only effective for decoding quantitative data if the
+encoding is linear.
 
 We can still decode simple ordinal information from @fig-log---which 
 type of crimes
@@ -753,7 +844,8 @@ ggplot(ct2) +
     geom_segment(aes(x=-Inf, xend=Inf, y=type, yend=type), 
                  linetype="dotted") +
     geom_point(aes(x=log10(count), y=type), size=3) +
-    scale_x_continuous(name=expression(log[10]("number of offenders"))) +
+    scale_x_continuous(name=expression(log[10]("number of offenders")), 
+                       sec.axis=dup_axis(name=NULL)) +
     theme(aspect.ratio=1)
 ```
 
@@ -764,10 +856,6 @@ For example, if we are only interested in ordinal comparisons, then
 non-linear positions may still be effective.
 We will see more examples in later sections
 (@sec-col-non-linear, @sec-shape-non-linear).
-
-> The encoding of quantitative data as the position of data symbols
-  is only effective for decoding quantitative data if the
-  encoding is linear.
 
 ## Summary
 

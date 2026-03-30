@@ -1,6 +1,6 @@
-Encoding data values as the position of data symbols allows
-for the effective decoding of both quantitative and qualitative information,
-with the following caveats:
+Encoding data values as the position of data symbols is very effective
+for decoding of both quantitative and qualitative information.
+However ...
 
 * For quantitative values, 
   what we can accurately decode are *comparisons* between quantitative 

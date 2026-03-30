@@ -95,6 +95,17 @@ crimeEthnicityTotal <- group_by(crimeEthnicity, ethnicity) |>
 crimeEthnicityTotal$ethnicityFactor <- as.factor(crimeEthnicityTotal$ethnicity)
 crimeEthnicityTotal$ethnicityNumeric <- as.numeric(crimeEthnicityTotal$ethnicityFactor)
 
+districts <- 
+    st_read("Data/YouthCrime/SHP/nz-police-district-boundaries-29-april-2021.shp",
+            quiet=TRUE)
+## Drop unnecessary Z dimension from some geometries
+districts <- st_zm(districts)
+centroids <- st_coordinates(st_centroid(st_geometry(districts)))
+districts$X <- centroids[,1]
+districts$Y <- centroids[,2]
+districts <- inner_join(districts, subset(crimeDistrict, year == 2021),
+                        by=join_by(D_MACRON == district))
+
 offenders <- read.csv("Data/YouthCrime/nzpolice-offenders-2021.csv")
 offenders$Date <- as.Date(offenders$Date)
 offenders$Month <- months(offenders$Date)
@@ -121,3 +132,5 @@ offenderEthnicity <-
     read.csv("Data/YouthCrime/nzpolice-offenders-ethnicity-2021.csv")
 
 victimisations <- read.csv("Data/YouthCrime/nzpolice-victims.csv")
+
+

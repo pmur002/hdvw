@@ -312,7 +312,7 @@ window.Quarto = {
 <img src="position_files/figure-html/fig-no-pos-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-no-pos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.1: A data visualisation that does not make use of position.
+Figure&nbsp;4.1: This data visualisation does not make use of position. The data symbols are four concentric circles, one per ethnic group, with the radii of the circles encoding the number of offenders in each group and the colours of the circles encoding the names of the ethnic groups. Because the circles are concentric, we can only see all of the circle for the Unknown ethnic group; all other circles are partially obscured by circles that are drawn on top of them.
 </figcaption>
 </figure>
 </div>
@@ -321,8 +321,8 @@ Figure&nbsp;4.1: A data visualisation that does not make use of position.
 <p>However, we have already seen several data visualisations that do not encode <em>all</em> data values to position (e.g., <a href="intro.html#fig-crime" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> and <a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>), so there must be more to learn about encoding data values to basic visual features.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> In this chapter, we look more closely at the encoding of data values to the <strong>position</strong> of data symbols and how well we can decode a data value from the position of a data symbol.</p>
 <section id="sec-rel-pos" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-rel-pos"><span class="header-section-number">4.1</span> Perception is relative</h2>
-<p>In <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>, we saw that <strong>position</strong> was the most accurate visual feature for decoding quantitative values (<a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). However, that accuracy is for <em>relative</em> judgements rather than absolute judgements. In other words, we are good at <em>comparisons</em> between positions,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> which is one of the most important decoding tasks in data visualisation.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
-<p>For example, the box on the left of <a href="#fig-rel-pos" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> shows a dot at a vertical positon along a dotted line. We can decode an amount from the position of the dot, but only relative to the ends of the dotted line; the dot is three-quarters of the way from the bottom to the top of the line. We cannot decode an absolute data value from the dot.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>In <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>, we saw that <strong>position</strong> was the most accurate visual feature for decoding quantitative values (<a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). However, that accuracy is for <em>relative</em> judgements rather than absolute judgements. Position is a very important way to encode data values because making comparisons is one of the most important decoding tasks in data visualisation.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>For example, the box on the left of <a href="#fig-rel-pos" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> shows a dot at a vertical positon along a dotted line. We can decode a value from the position of the dot, but only relative to the ends of the dotted line; the dot is three-quarters of the way from the bottom to the top of the line. We cannot decode an <em>absolute</em> value from the dot.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <p>The box in the middle of <a href="#fig-rel-pos" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> shows two dots at vertical positions along two dotted lines. Again, we can only compare the positions of the two dots—the dot on the left is three times as far up its dotted line as the dot on the right.</p>
 <p>The box on the right of <a href="#fig-rel-pos" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> shows two dots again, but this time adds an axis on the right edge of the box. It is now possible to decode an absolute value for each dot (75 and 25), but that is still only possible by making comparisons. We decode the positions of the dots relative to the positions of the tick marks on the axis.</p>
 <div class="cell">
@@ -339,9 +339,7 @@ Figure&nbsp;4.2: Perception of position is relative rather than absolute.
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>A data visualisation that encodes a data value as the position of a data symbol is effective because we can decode <em>relative</em> positions accurately.</p>
-</blockquote>
+<p>In summary, we are good at <em>comparisons</em> between positions.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> A data visualisation that encodes a data value as the position of a data symbol is effective because we can decode <em>relative</em> positions accurately.</p>
 </section>
 <section id="sec-unaligned-pos" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-unaligned-pos"><span class="header-section-number">4.2</span> Unaligned position</h2>
@@ -360,24 +358,109 @@ Figure&nbsp;4.3: It is easier to compare two positions on the left because they 
 </div>
 </div>
 </div>
-<p><a href="#fig-radial-pos" class="quarto-xref">Figure&nbsp;<span>4.4</span></a> shows yet another data visualisation of the total number of offenders in New Zealand for different ethnic groups (<a href="mapping-visual-features.html#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a>). This data visualisation is similar to <a href="mapping-visual-features.html#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> because it encodes the number of offenders to <strong>position</strong> along a line. However, it is harder to compare the number of offenders between different ethnic groups in <a href="#fig-radial-pos" class="quarto-xref">Figure&nbsp;<span>4.4</span></a> because the positions are not aligned.</p>
+<p><a href="#fig-unaligned-dot" class="quarto-xref">Figure&nbsp;<span>4.4</span></a> shows the number of youth offenders per 100,000 in New Zealand for different police districts. The data values for this map are shown in <a href="summaries.html#tbl-map-data" class="quarto-xref">Table&nbsp;<span>8.3</span></a>.</p>
+<div class="cell">
+<div id="tbl-map-data" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-map-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.1: The crime rate (number of offencers per 100,000 population) in 2021 for each police district of New Zealand.
+</figcaption>
+<div aria-describedby="tbl-map-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">district</th>
+<th style="text-align: right;">rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Northland</td>
+<td style="text-align: right;">373</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Waitematā</td>
+<td style="text-align: right;">171</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Auckland City</td>
+<td style="text-align: right;">192</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Counties/Manukau</td>
+<td style="text-align: right;">191</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Waikato</td>
+<td style="text-align: right;">282</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bay of Plenty</td>
+<td style="text-align: right;">412</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Eastern</td>
+<td style="text-align: right;">356</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Central</td>
+<td style="text-align: right;">394</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wellington</td>
+<td style="text-align: right;">217</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tasman</td>
+<td style="text-align: right;">391</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Canterbury</td>
+<td style="text-align: right;">191</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Southern</td>
+<td style="text-align: right;">313</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-radial-pos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-unaligned-dot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-radial-pos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="position_files/figure-html/fig-radial-pos-1.svg" class="img-fluid figure-img" style="width:100.0%">
+<div aria-describedby="fig-unaligned-dot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="position_files/figure-html/fig-unaligned-dot-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-radial-pos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.4: A data visualisation that makes use of <em>unaligned</em> position.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unaligned-dot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: A dot plot of the crime rate in each police district for 2021.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
+<p>In this data visualisation, the crime rate is encoded as horizontal position. Comparisons between different police districts is easy because the horizontal positions all share a common baseline.</p>
+<p>By contrast, fig-unaligned-map shows the same data on a map. The crime rate for each district is again encoded as horizontal position, but it is much harder to compare crime rates between districts because the horizontal positions are not aligned.</p>
 <p>Decoding data values from positions is most effective when the positions share a common baseline.</p>
-</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-unaligned-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unaligned-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="position_files/figure-html/fig-unaligned-map-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unaligned-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: A map-based representation of the crime rate in each police district for 2021.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="sec-pos-scarce" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec-pos-scarce"><span class="header-section-number">4.3</span> Position is a scarce resource</h2>
@@ -391,12 +474,12 @@ Figure&nbsp;4.4: A data visualisation that makes use of <em>unaligned</em> posit
 </section>
 <section id="sec-overplot" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="sec-overplot"><span class="header-section-number">4.4</span> Case study: Overplotting</h2>
-<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the the number of points that were scored in every World Cup match by Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.1</span></a> shows a sample of these data.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>The Rugby World Cup is a competition that is held every four years, with the first event taking place in 1987. We have data on the the number of points that were scored in every World Cup match by Tier One nations (the top 10 rugby-playing nations). <a href="#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.2</span></a> shows a sample of these data.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
 <div class="cell">
 <div id="tbl-rwc-all" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.1: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin. Each row represents the points scored by one team in one match. There are 294 rows in total, with just the first 6 rows shown here.
+Table&nbsp;4.2: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin. Each row represents the points scored by one team in one match. There are 294 rows in total, with just the first 6 rows shown here.
 </figcaption>
 <div aria-describedby="tbl-rwc-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -446,7 +529,7 @@ Table&nbsp;4.1: A table of the number of points scored by Tier One nations in Ru
 </figure>
 </div>
 </div>
-<p><a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a> shows a dot plot of the points scored in a match for all teams and all matches. This data visualisation has encoded the number of points scored as the horizontal <strong>position</strong> of data points. In theory, that allows us to decode from data points to a number of points scored. For example, we can see that one team from the southern hemisphere scored just over 100 points in one match.</p>
+<p><a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.6</span></a> shows a dot plot of the points scored in each match for all teams and all matches. This data visualisation has encoded the number of points scored as the horizontal <strong>position</strong> of data points. In theory, that should allow us to decode from data points to a number of points scored. For example, we can see that one team from the southern hemisphere scored just over 100 points in one match.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-overplot" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -455,18 +538,18 @@ Table&nbsp;4.1: A table of the number of points scored by Tier One nations in Ru
 <img src="position_files/figure-html/fig-overplot-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.5: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
+Figure&nbsp;4.6: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>However, as <a href="#tbl-rwc-all-dup" class="quarto-xref">Table&nbsp;<span>4.2</span></a> shows, exactly the same number of points were scored by more than one team (from the same hemisphere) and/or in more than one match. This means that there are multiple data points at exactly the same position, which means that there are multiple data points drawn on top of each other, which in effect means that there are data points that we cannot see. For example, we can see that there is a dot at zero points in <a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a> (for teams from the northern hemisphere), but we cannot see that there are actually two dots at that location</p>
+<p>However, as <a href="#tbl-rwc-all-dup" class="quarto-xref">Table&nbsp;<span>4.3</span></a> shows, exactly the same number of points were scored by more than one team (from the same hemisphere) and/or in more than one match. This means that there are multiple data points at exactly the same position, which means that there are multiple data points drawn on top of each other, which in effect means that there are data points that we cannot see. For example, we can see that there is a dot at zero points in <a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.6</span></a> (for teams from the northern hemisphere), but we cannot see that there are actually two dots at that location</p>
 <div class="cell">
 <div id="tbl-rwc-all-dup" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rwc-all-dup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.2: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin. Each row represents the points scored by one team in one match. There are 294 rows in total, with just the first 6 rows shown here, ordered by the number of points scored.
+Table&nbsp;4.3: A table of the number of points scored by Tier One nations in Rugby World Cup matches, along with the global hemisphere of origin. Each row represents the points scored by one team in one match. There are 294 rows in total, with just the first 6 rows shown here, ordered by the number of points scored.
 </figcaption>
 <div aria-describedby="tbl-rwc-all-dup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -517,7 +600,7 @@ Table&nbsp;4.2: A table of the number of points scored by Tier One nations in Ru
 </div>
 </div>
 <p>Although it is still possible to decode that, for example, at least one team from the northern hemisphere scored zero points in at least one match, it is not possible to decode whether that was just one team or just one match. We cannot decode an individual data value from each data symbol.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
-<p><a href="#fig-semitrans" class="quarto-xref">Figure&nbsp;<span>4.6</span></a> shows the same data as <a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>, but with the data points semi-transparent so that we can see that many of the points overlap. The same number of points was scored by multiple teams in multiple matches. This demonstrates one approach to resolving the problem of overplotting, although it is only partially effective here; We can more easily decode points that have been scored many times, but we cannot easily decode the number of times the same set of points was scored. We will see several other approaches to resolving overplotting in later chapters.</p>
+<p><a href="#fig-semitrans" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> shows the same data as <a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>, but with the data points semi-transparent so that we can see that many of the points overlap. The same number of points was scored by multiple teams in multiple matches. This demonstrates one approach to resolving the problem of overplotting, although it is only partially effective here; we can more easily decode points that have been scored many times, but we cannot easily decode the number of times the same set of points was scored. We will see several other approaches to resolving overplotting in later chapters.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-semitrans" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -526,7 +609,7 @@ Table&nbsp;4.2: A table of the number of points scored by Tier One nations in Ru
 <img src="position_files/figure-html/fig-semitrans-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-semitrans-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.6: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
+Figure&nbsp;4.7: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
 </figcaption>
 </figure>
 </div>
@@ -535,21 +618,34 @@ Figure&nbsp;4.6: The number of points scored in Rugby World Cup games by teams f
 </section>
 <section id="sec-cartesian" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="sec-cartesian"><span class="header-section-number">4.5</span> Cartesian coordinates</h2>
-<p>In <a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>, we have encoded <em>two</em> sets of data values using <strong>position</strong>. The number of points is encoded as the horizontal position of the data points and the hemisphere of origin for each team is encoded as the vertical position of the data points. This <em>cartesian coordinate system</em> is effective because the visual system is better at decoding horizontal and vertical positions compared to oblique orientations like in <a href="#fig-radial-pos" class="quarto-xref">Figure&nbsp;<span>4.4</span></a>.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
-<p>Because the horizontal and vertical positions are perpendicular, Cartesian coordinates also mean that we can make use of <strong>position</strong> twice without the position encodings interfering with each other.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> For example, in <a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>, we can decode which hemisphere that a data symbol is from separately from decoding how many points were scored. The fact that a team is from the northern hemisphere does not <em>by itself</em> imply anything about the number of points scored. Put another way, any difference between the data symbols for northern hemisphere teams and the data symbols for southern hemisphere teams must reflect something about the data.</p>
-<p>A good example of a data visualisation that does not employ Cartesian coordinates is a pie chart, like <a href="mapping-visual-features.html#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.17</span></a>, though that is also a case where data values are <em>not</em> encoded as <strong>position</strong>.</p>
-<blockquote class="blockquote">
+<p>In <a href="mapping-visual-features.html#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a>, we encoded <em>two</em> sets of data values using <strong>position</strong>. The number of offenders is encoded as the horizontal position of data points and the ethnic group is encoded as the vertical position of data points. <a href="mapping-visual-features.html#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a> is effective because it encodes data values as position, but it is also effective because it encodes data values as <em>orthogonal</em> positions—horizontal position and vertical position.</p>
+<p>This <em>cartesian coordinate system</em> is effective because the visual system is better at decoding horizontal and vertical positions compared to oblique orientations.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>Because the horizontal and vertical positions are perpendicular, Cartesian coordinates also mean that we can make use of <strong>position</strong> twice without the position encodings interfering with each other.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> For example, in <a href="#fig-overplot" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>, we can decode which hemisphere that a data symbol is from separately from decoding how many points were scored. The fact that a team is from the northern hemisphere does not <em>by itself</em> imply anything about the number of points scored. Put another way, any difference between the data symbols for northern hemisphere teams and the data symbols for southern hemisphere teams must reflect something about the data.</p>
 <p>Cartesian (perpendicular) coordinates are effective because we can encode data values using position <em>twice</em>; we can decode data values from horizontal positions and we can separately decode data values from vertical positions.</p>
-</blockquote>
+<p><a href="#fig-radial-pos" class="quarto-xref">Figure&nbsp;<span>4.8</span></a> shows an example of a data visualisation that does not employ a cartesian coordinate system. Like <a href="mapping-visual-features.html#fig-dot" class="quarto-xref">Figure&nbsp;<span>3.16</span></a>, it shows the number of offenders in different ethnic groups (<a href="mapping-visual-features.html#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a>), and it encodes the number of offenders as position along a line. However, the positions are not orthogonal to each other so it becomes more difficult to decode comparisons between the different ethnic groups.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-radial-pos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-radial-pos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="position_files/figure-html/fig-radial-pos-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-radial-pos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.8: A data visualisation that makes use of <em>unaligned</em> position.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="sec-ternary" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="sec-ternary"><span class="header-section-number">4.6</span> Case study: Ternary plots</h2>
-<p><a href="#tbl-crime-level-tern" class="quarto-xref">Table&nbsp;<span>4.3</span></a> shows data on the severity of crimes committed by youth in New Zealand. For each year, we have the proportion of criminal offences that were low, medium, or high severity.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p><a href="#tbl-crime-level-tern" class="quarto-xref">Table&nbsp;<span>4.4</span></a> shows data on the severity of crimes committed by youth in New Zealand. For each year, we have the proportion of criminal offences that were low, medium, or high severity.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <div class="cell">
 <div id="tbl-crime-level-tern" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-crime-level-tern-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.3: A table of the proportion of crimes at different levels of severity for each year.
+Table&nbsp;4.4: A table of the proportion of crimes at different levels of severity for each year.
 </figcaption>
 <div aria-describedby="tbl-crime-level-tern-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -606,65 +702,58 @@ Table&nbsp;4.3: A table of the proportion of crimes at different levels of sever
 </figure>
 </div>
 </div>
-<p><a href="#fig-ternary" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> shows a ternary plot of these data.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> In this data visualisation, there are three variables (three proportions that sum to 1), and the data values from each variable has been encoded as position. However, the positions are along axes that are not perpendicular. This means that it is not as easy to decode individual data values or compare data values because we are poorer at decoding positions that are not horizontal or vertical. Furthermore, because the three proportions sum to 1, a change in one proportion necessitates a change in at least one of the others. In other words, we cannot easily decode the difference between two data values from the difference in the positions of two data symbols.</p>
+<p><a href="#fig-ternary" class="quarto-xref">Figure&nbsp;<span>4.9</span></a> shows a ternary plot of these data.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> In this data visualisation, there are three variables (three proportions that sum to 1), and the data values from each variable have been encoded as position. However, the positions are along axes that are not perpendicular. This means that it is not as easy to decode individual data values or compare data values because we are poorer at decoding positions that are not horizontal or vertical. Furthermore, because the three proportions sum to 1, a change in one proportion necessitates a change in at least one of the others. In other words, it is more difficult to decode the difference between two data values from the difference in the positions of two data symbols, compared to cartesian coordinates.</p>
 <div id="fig-ternary" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ternary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="ggtern/fig-ternary.svg" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ternary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.7: A ternary plot of the data in <a href="#tbl-crime-level-tern" class="quarto-xref">Table&nbsp;<span>4.3</span></a>. We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
+Figure&nbsp;4.9: A ternary plot of the data in <a href="#tbl-crime-level-tern" class="quarto-xref">Table&nbsp;<span>4.4</span></a>. We can see that for the entire decade around 60% of crimes have been of medium severity, with around 30% of low severity, and only 10% of high severity.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="sec-non-linear-pos" class="level2" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="sec-non-linear-pos"><span class="header-section-number">4.7</span> Non-linear encodings</h2>
-<p><a href="#tbl-crime-type" class="quarto-xref">Table&nbsp;<span>4.4</span></a> shows the total number of youth offenders broken down by type of crime. We have one qualitative variable, crime type, and one quantitative variable, total number of offenders.</p>
+<p><a href="#tbl-crime-type" class="quarto-xref">Table&nbsp;<span>4.5</span></a> shows the total number of youth offenders broken down by type of crime. We have one qualitative variable, crime type, and one quantitative variable, total number of offenders.</p>
 <div class="cell">
 <div id="tbl-crime-type" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-crime-type-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.4: A table of the number of youth offenders in New Zealand in 2021 broken down by type of crime. There are 16 different crime types in total, with only the first 6 shown here.
+Table&nbsp;4.5: A table of the number of youth offenders in New Zealand in 2021 broken down by type of crime. There are 16 different crime types in total, with only the first 6 shown here.
 </figcaption>
 <div aria-describedby="tbl-crime-type-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th style="text-align: left;"></th>
 <th style="text-align: left;">type</th>
 <th style="text-align: right;">count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">161</td>
 <td style="text-align: left;">Homicides</td>
 <td style="text-align: right;">4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">162</td>
 <td style="text-align: left;">Causing injury</td>
 <td style="text-align: right;">1018</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">163</td>
 <td style="text-align: left;">Sexual offences</td>
 <td style="text-align: right;">190</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">164</td>
 <td style="text-align: left;">Dangerous acts</td>
 <td style="text-align: right;">653</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">165</td>
 <td style="text-align: left;">Abductions, threats</td>
 <td style="text-align: right;">273</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">166</td>
 <td style="text-align: left;">Robbery, extortion</td>
 <td style="text-align: right;">246</td>
 </tr>
@@ -675,7 +764,7 @@ Table&nbsp;4.4: A table of the number of youth offenders in New Zealand in 2021 
 </figure>
 </div>
 </div>
-<p><a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.8</span></a> shows of dot plot of these data, with the total number of offenders encoded as the horizontal position of circles, one per type of crime. This plot is effective for comparing the total number of offenders between types of crime, both in terms of which crimes are more common than others and how much more common some crimes are than others. For example, we can decode that theft is about twice as common as the next most common crime type.</p>
+<p><a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.10</span></a> shows a dot plot of these data, with the total number of offenders encoded as the horizontal position of circles, one per type of crime. This plot is effective for comparing the total number of offenders between types of crime, both in terms of which crimes are more common than others and how much more common some crimes are than others. For example, we can decode that Theft is about twice as common as Dangerous acts.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-linear" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -684,14 +773,14 @@ Table&nbsp;4.4: A table of the number of youth offenders in New Zealand in 2021 
 <img src="position_files/figure-html/fig-linear-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.8: A dot plot of the number of offenders in New Zealand in 2021 for different types of crime.
+Figure&nbsp;4.10: A dot plot of the number of offenders in New Zealand in 2021 for different types of crime.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The effectiveness of <a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.8</span></a> comes not only from the fact that data values are encoded as the <strong>position</strong> of data symbols, but also from the fact that the encoding is <em>linear</em>. In <a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.8</span></a>, the horizontal difference between 0 offenders and 5,000 offenders is exactly the same horizontal distance as the difference between 5,000 offenders and 10,000 offenders. The effective decoding of position is dependent on this sort of linear encoding.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
-<p>When a small number of data values are considerably larger than the majority of data values, as in <a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.8</span></a>, a non-linear scale is sometimes employed in order to see the differences between the smaller values more easily. For example, <a href="#fig-log" class="quarto-xref">Figure&nbsp;<span>4.9</span></a> shows the same data and the same encodings, but with a <em>log scale</em>. Rather than encoding the number of offenders as the position of the circles, the log (base 10) of the number of offenders is encoded as the position of the circles.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
+<p>The effectiveness of <a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.10</span></a> comes not only from the fact that data values are encoded as the <strong>position</strong> of data symbols, but also from the fact that the encoding is <em>linear</em>. In <a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.10</span></a>, the horizontal difference between 0 offenders and 5,000 offenders is exactly the same horizontal distance as the difference between 5,000 offenders and 10,000 offenders. The effective decoding of position is dependent on this sort of linear encoding.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<p>When a small number of data values are considerably larger than the majority of data values, as in <a href="#fig-linear" class="quarto-xref">Figure&nbsp;<span>4.10</span></a>, a non-linear scale is sometimes employed in order to see the differences between the smaller values more easily. For example, <a href="#fig-log" class="quarto-xref">Figure&nbsp;<span>4.11</span></a> shows the same data and the same encodings, but this time with a <em>log scale</em>. Rather than encoding the number of offenders as the position of the circles, the log (base 10) of the number of offenders is encoded as the position of the circles.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-log" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -700,15 +789,16 @@ Figure&nbsp;4.8: A dot plot of the number of offenders in New Zealand in 2021 fo
 <img src="position_files/figure-html/fig-log-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.9: A dot plot of the number of crimes for different regions of New Zealand, with a non-linear (log) scale on the x-axis.
+Figure&nbsp;4.11: A dot plot of the number of crimes for different regions of New Zealand, with a non-linear (log) scale on the x-axis.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Unfortunately, as a result of the non-linear horizontal scale, we lose the accuracy of the position encoding. We can no longer accurately decode from position to data values because the same horizontal distance means different things in terms of data values at different locations along the x-axis. For example, it is difficult to decode the number of offenders for Miscellaneous crimes; the position of the circle data symbol is visually roughly one quarter of the distance between 10 and 100, but the corresponding data value (18) is <em>not</em> one quarter of the distance between 10 and 100. It is even more difficult to decode the size of the difference between the number of offenders for Miscellaneous crimes versus Homicides. Worse still, the difference between Miscellaneous and Homicide is visually similar to the difference between Miscellaneous and crimes Against justice, but the real differences between those data values are very different (14 versus 50).</p>
-<p>We can still decode simple ordinal information from <a href="#fig-log" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>—which type of crimes are more common than others—but we have lost the ability to decode quantitative information from the positions of the data symbols. We have essentially lost information.</p>
-<p><a href="#fig-log-data" class="quarto-xref">Figure&nbsp;<span>4.10</span></a> shows the logged data again, but this time with labels on the x-axis that show logged values rather than the original data values. This shows that, in terms of logged data values, the positions of the data symbols are linear. We can accurately decode from the positions of the circles in <a href="#fig-log-data" class="quarto-xref">Figure&nbsp;<span>4.10</span></a>, but only to recover logged data values. If we want to compare logged data values, this is fine, but usually what we want is to compare the original data values—we need to decode to a logged value and then raise 10 to that power. For example, the log of the number of offenders for Causing injury is approximately 3, so the number of offenders is approximately 1000. However, this mental transformation requires much more conscious effort for most people, so we effectively lose the benefit of using a data visualisation, at least for the purpose of decoding quantitative information (<a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>).</p>
+<p>Unfortunately, as a result of the non-linear horizontal scale, we lose the accuracy of the position encoding. We can no longer accurately decode from position to data values because the same horizontal distance means different amounts, in terms of data values, at different locations along the x-axis. For example, it is difficult to decode the number of offenders for Miscellaneous crimes; we can decode that the position of the circle data symbol is roughly one quarter of the distance between 10 and 100, but the corresponding data value (18) is <em>not</em> one quarter of the distance between 10 and 100. It is even more difficult to decode the size of the difference between the number of offenders for Miscellaneous crimes versus Homicides. Worse still, the difference between Miscellaneous and Homicide is visually similar to the difference between Miscellaneous crimes and crimes Against justice, but the real differences between those data values are very different (14 versus 50).</p>
+<p>The encoding of quantitative data as the position of data symbols is only effective for decoding quantitative data if the encoding is linear.</p>
+<p>We can still decode simple ordinal information from <a href="#fig-log" class="quarto-xref">Figure&nbsp;<span>4.11</span></a>—which type of crimes are more common than others—but we have lost the ability to decode quantitative information from the positions of the data symbols. We have essentially lost information.</p>
+<p><a href="#fig-log-data" class="quarto-xref">Figure&nbsp;<span>4.12</span></a> shows the logged data again, but this time with labels on the x-axis that show logged values rather than the original data values. This shows that, in terms of logged data values, the positions of the data symbols are linear. We can accurately decode from the positions of the circles in <a href="#fig-log-data" class="quarto-xref">Figure&nbsp;<span>4.12</span></a>, but only to recover logged data values. If we want to compare logged data values, this is fine, but usually what we want is to compare the original data values—we need to decode to a logged value and then raise 10 to that power. For example, the log of the number of offenders for Causing injury is approximately 3, so the number of offenders is approximately 1000. However, this mental transformation requires much more conscious effort for most people, so we effectively lose the benefit of using a data visualisation, at least for the purpose of decoding quantitative information (<a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-log-data" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -717,16 +807,13 @@ Figure&nbsp;4.9: A dot plot of the number of crimes for different regions of New
 <img src="position_files/figure-html/fig-log-data-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.10: A dot plot of the number of crimes for different regions of New Zealand, with a non-linear (log) scale on the x-axis.
+Figure&nbsp;4.12: A dot plot of the number of crimes for different regions of New Zealand, with a non-linear (log) scale on the x-axis.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Although a non-linear encoding from data values to the positions of data symbols presents problems for decoding quantitative information, there are still situations where non-linear scales can be useful. For example, if we are only interested in ordinal comparisons, then non-linear positions may still be effective. We will see more examples in later sections (<a href="qualitative.html#sec-col-non-linear" class="quarto-xref"><span>Section 6.8</span></a>, <a href="visual-shapes.html#sec-shape-non-linear" class="quarto-xref"><span>Section 10.10</span></a>).</p>
-<blockquote class="blockquote">
-<p>The encoding of quantitative data as the position of data symbols is only effective for decoding quantitative data if the encoding is linear.</p>
-</blockquote>
 </section>
 <section id="summary" class="level2" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.8</span> Summary</h2>
@@ -766,7 +853,7 @@ Précis <em>(click to expand/contract)</em>
 </div>
 </div>
 </div>
-<p>Encoding data values as the position of data symbols allows for the effective decoding of both quantitative and qualitative information, with the following caveats:</p>
+<p>Encoding data values as the position of data symbols is very effective for decoding of both quantitative and qualitative information. However …</p>
 <ul>
 <li><p>For quantitative values, what we can accurately decode are <em>comparisons</em> between quantitative values, not absolute quantitative values.</p></li>
 <li><p>The decoding is most accurate for positions that share a common baseline.</p></li>
@@ -845,13 +932,13 @@ Ziemkiewicz, Caroline, and Robert Kosara. 2009. <span>“Embedding Information V
 <p>“We process spatial properties (position and size) separately from object properties (such as shape, color, texture, etc). Furthermore, position in space and time has a dominant role in perceptual organization, as well as in memory.” <span class="citation" data-cites="meirelles2013design">(<a href="#ref-meirelles2013design" role="doc-biblioref">Meirelles 2013</a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Decoding individual data values from individual data symbols is not the only visual task that we need to perform, so it is not <em>always</em> true that we should encode data values as <strong>position</strong>. As we explore other sorts of encodings in later chapters, we will see reasons why <strong>position</strong> is not always best.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>As <span class="citation" data-cites="all-scatterplots">Bertini, Correll, and Franconeri (<a href="#ref-all-scatterplots" role="doc-biblioref">2020</a>)</span> put it: “Why Shouldn’t All Charts Be Scatter Plots?”<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>In the experiments described in <span class="citation" data-cites="cleveland1984graphical">Cleveland and McGill (<a href="#ref-cleveland1984graphical" role="doc-biblioref">1984</a>)</span>, which are the basis of the accuracy ranking in <a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>, “subjects were asked to judge what percent the smaller is of the larger”.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><span class="citation" data-cites="amar-taxonomy">Amar, Eagan, and Stasko (<a href="#ref-amar-taxonomy" role="doc-biblioref">2005</a>)</span>, in their taxonomy of visual tasks, consider a “low-level comparison as being a fundamental cognitive action” for reading a data visualisation.</p>
+<li id="fn4"><p><span class="citation" data-cites="amar-taxonomy">Amar, Eagan, and Stasko (<a href="#ref-amar-taxonomy" role="doc-biblioref">2005</a>)</span>, in their taxonomy of visual tasks, consider a “low-level comparison as being a fundamental cognitive action” for reading a data visualisation.</p>
 <p>“The fundamental task in data analysis is to make smart comparisons - we’re always trying to answer the question ‘Compared with what?’ […] It always comes down to making and showing smart comparisons.” <span class="citation" data-cites="tufte2006beautiful">(<a href="#ref-tufte2006beautiful" role="doc-biblioref">Tufte 2006, 127</a>)</span></p>
 <p>“Almost everything we do with data involves comparison” <span class="citation" data-cites="tukey-1990">(<a href="#ref-tukey-1990" role="doc-biblioref">Tukey 1990, 329</a>)</span></p>
 <p>“The lesson is that visualization is not good for representing precise absolute numerical values, but rather for displaying patterns of differences or changes over time, to which the eye and brain are extremely sensitive.”<br>
-<span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021, 70</a>)</span><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Even if we have encoded a <em>proportion</em> data value to the position of the dot, we would need to know that the bottom of the line represents 0 and the top of the line represents 1 to be able to correctly decode the proportion from the position of the dot.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<span class="citation" data-cites="ware2021information">(<a href="#ref-ware2021information" role="doc-biblioref">Ware 2021, 70</a>)</span><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Even if we have encoded a <em>proportion</em> data value to the position of the dot, we would need to know that the bottom of the line represents 0 and the top of the line represents 1 to be able to correctly decode the proportion from the position of the dot.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>In the experiments described in <span class="citation" data-cites="cleveland1984graphical">Cleveland and McGill (<a href="#ref-cleveland1984graphical" role="doc-biblioref">1984</a>)</span>, which are the basis of the accuracy ranking in <a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>, “subjects were asked to judge what percent the smaller is of the larger”.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p><span class="citation" data-cites="wilke2019fundamentals">Wilke (<a href="#ref-wilke2019fundamentals" role="doc-biblioref">2019</a>)</span> refers to this problem as the <em>principle of proportional ink</em>. The amount of ink used to represent a data value should be proportional to the magnitude of the data value.</p>
 <p>Another way to decode <a href="#fig-no-pos" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> is that there is a thin orange disc outside a light blue disk (which is outside a thin green disk, which is outside a dark blue circle). In this interpretation, we can at least see all of the data symbol, so decoding is possible, but the problem now is that the viewer is using a decoding that is different from the encoding.</p>
 <p>The concentric-circles interpretation is perhaps the most parsimonious (<a href="visual-model.html#sec-simplicity" class="quarto-xref"><span>Section 2.8</span></a>), but just the existence of an alternative interpretation is a potential source of confusion and so a cause for concern.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

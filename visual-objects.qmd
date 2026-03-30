@@ -562,16 +562,6 @@ between the regions
 #| echo: false
 #| label: fig-map
 #| fig-cap: A choropleth map of the crime rate for each police district for 2021.
-districts <- 
-    st_read("Data/YouthCrime/SHP/nz-police-district-boundaries-29-april-2021.shp",
-            quiet=TRUE)
-## Drop unnecessary Z dimension from some geometries
-districts <- st_zm(districts)
-centroids <- st_coordinates(st_centroid(st_geometry(districts)))
-districts$X <- centroids[,1]
-districts$Y <- centroids[,2]
-districts <- inner_join(districts, subset(crimeDistrict, year == 2021),
-                        by=join_by(D_MACRON == district))
 ggplot(districts) +
     geom_sf(aes(fill=rate), colour=figbg, linewidth=.6) +
     scale_fill_continuous(name="crime rate") +
