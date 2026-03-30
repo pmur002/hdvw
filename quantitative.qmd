@@ -7,13 +7,16 @@ source("common.R")
 
 # Length {#sec-quantitative}
 
-@fig-bar-district shows a bar plot of the number of offenders
-in each police district in New Zealand in 2021 (for ages 14 to 16).  
+@fig-bar-district shows a bar plot of the number of youth offenders
+in each police district in New Zealand in 2021 (@tbl-map-data).
 For the reasons outlined in @sec-encoding-visual-features
-and @sec-position),
+and @sec-position,
 this data visualisation is effective for
 decoding the number of offenders in different police districts
-and making comparisons between them.
+and making comparisons between them
+because it encodes the police districts as the
+vertical **positions** of bars and it encodes the number of offenders as the 
+**lengths* of bars.
 
 ```{r}
 #| echo: false
@@ -37,11 +40,18 @@ ggplot(crimeTemp) +
 
 @fig-bar-district-ordered shows a bar plot of the same data, but with the
 bars ordered from longest to shortest.  This data visualisation uses
-the same encodings as @fig-bar-district---police districts are encoded
-as the vertical positions of the bars and the counts
-are encoded as the lengths of the bars---which means that it is also
+the same encodings as @fig-bar-district, which means that it is also
 effective for comparing the number of offenders between 
 police districts.
+However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
+for some comparisons.  For example, it is easier to compare the Northland
+district with the Tasman district in @fig-bar-district-ordered.
+The fact that two data visualisations with the same encodings
+can have a different effectiveness suggests that there is more to know about
+how different visual features work.
+This chapter covers some more details about how well we can decode
+information when we have encoded data values
+as **length**.
 
 ```{r}
 #| echo: false
@@ -55,17 +65,6 @@ ggplot(crimeDistrict2021) +
     scale_y_discrete(name="district") +
     theme(aspect.ratio=1)
 ```
-
-However, @fig-bar-district-ordered is *more* effective than @fig-bar-district
-for some comparisons.  For example, it is easier to compare the Northland
-district with the Tasman district in @fig-bar-district-ordered.
-The fact that two data visualisations with the same encodings
-can have a different effectiveness suggests that there is more to know about
-how different visual features work.
-
-This chapter covers some more details about how well we can decode
-information when we have encoded data values
-as **length**.
 
 ## The distance effect {#sec-distance-effect}
 
@@ -86,6 +85,11 @@ the lengths of the two black bars at the top of @fig-distance-effect.
 
 This helps to explain why @fig-bar-district-ordered is more effective
 than @fig-bar-district for some comparisons (e.g., Northland versus Tasman).
+One reason for ordering the bars in a bar plot from longest to shortest 
+is because
+the ordering places bars that we want to compare closer 
+together.
+
 
 ```{r}
 #| echo: false
@@ -107,11 +111,6 @@ grid.rect(seq(.275, .725, .150), .2, .1, runif(4, .2, .8),
 grid.rect(.875, .2, .1, .55, just="bottom", gp=gpar(fill="black"))
 popViewport(2)
 ```
-
-> One reason for ordering the bars in a bar plot from longest to shortest 
-  is because
-  the ordering places bars that we want to compare closer 
-  together.
 
 ## Unaligned length {#sec-unaligned}
 
@@ -138,8 +137,8 @@ grid.rect(c(.2, .4), c(.3, .7), c(.5, .6), .2, just="left",
 popViewport(2)
 ```
 
-@fig-stacked-bar shows an alternative visualisation of the data on 
-the number of offenders in different ethnic groups.
+@fig-stacked-bar shows a visualisation of the data on 
+the number of offenders in different ethnic groups (@tbl-crime-group-total).
 The bar plot of these data that we saw in @fig-bar encoded ethnic groups
 as the **positions** of the bars so that the bars were arranged
 vertically with a common left-hand edge.
@@ -159,15 +158,18 @@ horizontally.[^stacking-as-position]
 Although the number of offenders has been encoded as the same
 visual feature in both @fig-stacked-bar and @fig-bar---in both cases,
 the number of offenders is encoded as the **lengths**
-of the bars---comparing those lengths is much harder in @fig-stacked-bar
+of bars---comparing those lengths is much harder in @fig-stacked-bar
 because the lengths are **unaligned**.
+One reason why stacked bar plots are less effective for some
+comparisons is because we are forced to compare the unaligned lengths 
+of the bars.
 
 ```{r}
 #| echo: false
 #| label: fig-stacked-bar
 #| fig-cap: A stacked bar plot of the number of offenders in each ethnic group.
 gg <- ggplot(crimeGroup2021) +
-    geom_col(aes(count, y="", fill=group), position="stack") +
+    geom_col(aes(count, y="", fill=group), position="stack", width=.5) +
     scale_x_continuous(expand=expansion(0)) +
     scale_y_discrete(name=NULL, expand=expansion(0)) +
     theme(axis.ticks.y=element_blank())
@@ -175,10 +177,6 @@ pushViewport(viewport(width=.8, height=.6))
 print(gg, newpage=FALSE)
 popViewport()
 ```
-
-> One reason why stacked bar plots are less effective for some
-  comparisons is because we are forced to compare the unaligned lengths 
-  of the bars.
 
 ## Case study:  Stacked versus side-by-side bar plots {#sec-stacked-vs-side}
 
@@ -195,14 +193,14 @@ This is a more detailed version of the data from @tbl-crime-group-total.
 #| label: tbl-crime-group-year
 #| tbl-cap: A table of the number of offenders per year aged 14 to 16 for different ethnic groups from 2011 to 2021.  There are 44 rows of data, but just the first 6 rows are shown here.
 crimeGroupTable <- subset(crimeGroup, select=c("group", "count", "year"))
-kable(head(crimeGroupTable, row.names=FALSE))
+kable(head(crimeGroupTable), row.names=FALSE)
 ```
 
 @fig-stacked-bar-year shows the number of offenders (quantitative)
 for each ethnic group (qualitative) and
 for each year from 2011 to 2021 (treated here as
-qualitative, or at least discrete).
-In this data visualisation, the number of offenders is encoded to 
+qualitative, though ordinal).
+In this data visualisation, the number of offenders is encoded as
 the lengths of the bars, the years are encoded to the horizontal
 **position** of the bars, the ethnic groups are encoded to 
 the colours of the bars, and the bars are stacked vertically.
@@ -258,11 +256,28 @@ comparing between ethnicities for a specific year.
 ```{r}
 #| echo: false
 #| label: fig-side-bar-group
+#| fig-keep: last
 #| fig-cap: A side-by-side bar plot of the number of offenders in each ethnic group for each year from 2011 to 2021. 
 ggplot(crimeGroup) +
-    geom_col(aes(group, count, fill=year, group=year), position="dodge",
+    geom_col(aes(group, count, fill=group, group=year), position="dodge",
              colour=figbg) +
-    scale_y_continuous(expand=expansion(c(0, .05)))
+    scale_y_continuous(expand=expansion(c(0, .05))) +
+    theme(axis.title=element_blank(),
+          legend.position="none")
+grid.force()
+barPath <- grid.grep("panel::geom_rect", grep=TRUE, viewports=TRUE)
+bars <- grid.get(barPath)
+downViewport(attr(barPath, "vpPath"))
+index <- which(crimeGroup$year == 2011 & crimeGroup$group == "Unknown")
+grid.text(" 2011", 
+          bars$x[index] + bars$width[index]/2, bars$y[index], 
+          just="left", rot=90,
+          gp=gpar(fontsize=8))
+index <- which(crimeGroup$year == 2021 & crimeGroup$group == "Unknown")
+grid.text(" 2021", 
+          bars$x[index] + bars$width[index]/2, bars$y[index], 
+          just="left", rot=90,
+          gp=gpar(fontsize=8))
 ```
 
 There is no single best visualisation in general for this situation because
@@ -360,7 +375,11 @@ because they are quite far apart and there are distractors in between
 to perform the comparison because we are able to compare the distances
 from the ends of the bars to the nearest grid line.  Those distances are
 much shorter than the bars so it is easier to perceive that those two
-bars are very similar.
+bars are almost identical.
+
+One reason why grid lines are effective is because they allow
+comparisons of smaller lengths or distances, which means that
+it is easier to perceive smaller changes.
 
 ```{r}
 #| echo: false
@@ -382,10 +401,6 @@ ggplot(crimeTemp) +
     theme(panel.grid.major.x=element_line(colour="black", linewidth=.1),
           aspect.ratio=1)
 ```
-
-> One reason why grid lines are effective is because they allow
-  comparisons of smaller lengths or distances, which means that
-  it is easier to perceive smaller changes.
 
 ## Summary
 

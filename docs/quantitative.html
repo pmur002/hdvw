@@ -270,8 +270,7 @@ div.csl-indent {
 </header>
 
 
-<p><a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> shows a bar plot of the number of offenders in each police district in New Zealand in 2021 (for ages 14 to 16).<br>
-For the reasons outlined in <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> and <a href="position.html" class="quarto-xref"><span>Chapter 4</span></a>), this data visualisation is effective for decoding the number of offenders in different police districts and making comparisons between them.</p>
+<p><a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> shows a bar plot of the number of youth offenders in each police district in New Zealand in 2021 (<a href="summaries.html#tbl-map-data" class="quarto-xref">Table&nbsp;<span>8.3</span></a>). For the reasons outlined in <a href="mapping-visual-features.html" class="quarto-xref"><span>Chapter 3</span></a> and <a href="position.html" class="quarto-xref"><span>Chapter 4</span></a>, this data visualisation is effective for decoding the number of offenders in different police districts and making comparisons between them because it encodes the police districts as the vertical <strong>positions</strong> of bars and it encodes the number of offenders as the **lengths* of bars.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-district" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -286,7 +285,7 @@ Figure&nbsp;5.1: A bar plot of the number of offenders for different police dist
 </div>
 </div>
 </div>
-<p><a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> shows a bar plot of the same data, but with the bars ordered from longest to shortest. This data visualisation uses the same encodings as <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>—police districts are encoded as the vertical positions of the bars and the counts are encoded as the lengths of the bars—which means that it is also effective for comparing the number of offenders between police districts.</p>
+<p><a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> shows a bar plot of the same data, but with the bars ordered from longest to shortest. This data visualisation uses the same encodings as <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>, which means that it is also effective for comparing the number of offenders between police districts. However, <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is <em>more</em> effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons. For example, it is easier to compare the Northland district with the Tasman district in <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a>. The fact that two data visualisations with the same encodings can have a different effectiveness suggests that there is more to know about how different visual features work. This chapter covers some more details about how well we can decode information when we have encoded data values as <strong>length</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-district-ordered" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -301,12 +300,10 @@ Figure&nbsp;5.2: A bar plot of the number of offenders for different police dist
 </div>
 </div>
 </div>
-<p>However, <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is <em>more</em> effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons. For example, it is easier to compare the Northland district with the Tasman district in <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a>. The fact that two data visualisations with the same encodings can have a different effectiveness suggests that there is more to know about how different visual features work.</p>
-<p>This chapter covers some more details about how well we can decode information when we have encoded data values as <strong>length</strong>.</p>
 <section id="sec-distance-effect" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-distance-effect"><span class="header-section-number">5.1</span> The distance effect</h2>
 <p>In <a href="mapping-visual-features.html#sec-accuracy" class="quarto-xref"><span>Section 3.5</span></a>, we saw that <strong>position</strong> and <strong>length</strong> were the most accurate visual features (<a href="mapping-visual-features.html#fig-accuracy" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). However, this accuracy decreases if the two visual features that are being compared are not in close proximity.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For example, it is more difficult to compare the lengths of the two black bars in the set of bars at the bottom of <a href="#fig-distance-effect" class="quarto-xref">Figure&nbsp;<span>5.3</span></a> than it is to compare the lengths of the two black bars at the top of <a href="#fig-distance-effect" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>.</p>
-<p>This helps to explain why <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is more effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons (e.g., Northland versus Tasman).</p>
+<p>This helps to explain why <a href="#fig-bar-district-ordered" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> is more effective than <a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for some comparisons (e.g., Northland versus Tasman). One reason for ordering the bars in a bar plot from longest to shortest is because the ordering places bars that we want to compare closer together.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-distance-effect" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -321,9 +318,6 @@ Figure&nbsp;5.3: Two bars are easier to compare if they are close to each other 
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>One reason for ordering the bars in a bar plot from longest to shortest is because the ordering places bars that we want to compare closer together.</p>
-</blockquote>
 </section>
 <section id="sec-unaligned" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="sec-unaligned"><span class="header-section-number">5.2</span> Unaligned length</h2>
@@ -342,8 +336,8 @@ Figure&nbsp;5.4: It is easier to compare the lengths of the two bars on the left
 </div>
 </div>
 </div>
-<p><a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> shows an alternative visualisation of the data on the number of offenders in different ethnic groups. The bar plot of these data that we saw in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> encoded ethnic groups as the <strong>positions</strong> of the bars so that the bars were arranged vertically with a common left-hand edge. In <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>, the ethnic groups are encoded as different <strong>colours</strong> and the bars are “stacked” horizontally.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Although the number of offenders has been encoded as the same visual feature in both <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> and <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>—in both cases, the number of offenders is encoded as the <strong>lengths</strong> of the bars—comparing those lengths is much harder in <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> because the lengths are <strong>unaligned</strong>.</p>
+<p><a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> shows a visualisation of the data on the number of offenders in different ethnic groups (<a href="mapping-visual-features.html#tbl-crime-group-total" class="quarto-xref">Table&nbsp;<span>3.1</span></a>). The bar plot of these data that we saw in <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> encoded ethnic groups as the <strong>positions</strong> of the bars so that the bars were arranged vertically with a common left-hand edge. In <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>, the ethnic groups are encoded as different <strong>colours</strong> and the bars are “stacked” horizontally.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Although the number of offenders has been encoded as the same visual feature in both <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> and <a href="mapping-visual-features.html#fig-bar" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>—in both cases, the number of offenders is encoded as the <strong>lengths</strong> of bars—comparing those lengths is much harder in <a href="#fig-stacked-bar" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> because the lengths are <strong>unaligned</strong>. One reason why stacked bar plots are less effective for some comparisons is because we are forced to compare the unaligned lengths of the bars.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-stacked-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -358,9 +352,6 @@ Figure&nbsp;5.5: A stacked bar plot of the number of offenders in each ethnic gr
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>One reason why stacked bar plots are less effective for some comparisons is because we are forced to compare the unaligned lengths of the bars.</p>
-</blockquote>
 </section>
 <section id="sec-stacked-vs-side" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="sec-stacked-vs-side"><span class="header-section-number">5.3</span> Case study: Stacked versus side-by-side bar plots</h2>
@@ -376,7 +367,6 @@ Table&nbsp;5.1: A table of the number of offenders per year aged 14 to 16 for di
 <table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th style="text-align: left;"></th>
 <th style="text-align: left;">group</th>
 <th style="text-align: right;">count</th>
 <th style="text-align: right;">year</th>
@@ -384,37 +374,31 @@ Table&nbsp;5.1: A table of the number of offenders per year aged 14 to 16 for di
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">1</td>
 <td style="text-align: left;">Māori</td>
 <td style="text-align: right;">5957</td>
 <td style="text-align: right;">2011</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2</td>
 <td style="text-align: left;">Pasifika</td>
 <td style="text-align: right;">1092</td>
 <td style="text-align: right;">2011</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">3</td>
 <td style="text-align: left;">European/Other</td>
 <td style="text-align: right;">5775</td>
 <td style="text-align: right;">2011</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">4</td>
 <td style="text-align: left;">Unknown</td>
 <td style="text-align: right;">194</td>
 <td style="text-align: right;">2011</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">6</td>
 <td style="text-align: left;">Māori</td>
 <td style="text-align: right;">5458</td>
 <td style="text-align: right;">2012</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">7</td>
 <td style="text-align: left;">Pasifika</td>
 <td style="text-align: right;">1040</td>
 <td style="text-align: right;">2012</td>
@@ -426,7 +410,7 @@ Table&nbsp;5.1: A table of the number of offenders per year aged 14 to 16 for di
 </figure>
 </div>
 </div>
-<p><a href="#fig-stacked-bar-year" class="quarto-xref">Figure&nbsp;<span>5.6</span></a> shows the number of offenders (quantitative) for each ethnic group (qualitative) and for each year from 2011 to 2021 (treated here as qualitative, or at least discrete). In this data visualisation, the number of offenders is encoded to the lengths of the bars, the years are encoded to the horizontal <strong>position</strong> of the bars, the ethnic groups are encoded to the colours of the bars, and the bars are stacked vertically.</p>
+<p><a href="#fig-stacked-bar-year" class="quarto-xref">Figure&nbsp;<span>5.6</span></a> shows the number of offenders (quantitative) for each ethnic group (qualitative) and for each year from 2011 to 2021 (treated here as qualitative, though ordinal). In this data visualisation, the number of offenders is encoded as the lengths of the bars, the years are encoded to the horizontal <strong>position</strong> of the bars, the ethnic groups are encoded to the colours of the bars, and the bars are stacked vertically.</p>
 <p>The problem that we face in this situation is that there are four bars to show for each year. If we simply encode the year as the horizontal position of each bar, the bars will overlap and we will have great difficulty decoding data values from the bars (<a href="position.html#sec-pos-scarce" class="quarto-xref"><span>Section 4.3</span></a>).</p>
 <p>Stacking the bars is one solution, but as we have just seen, this makes some comparisons more difficult. For example, we can easily see that the number of offenders in the unknown group increased after 2016, but it is much harder to see what has happened to the European/Other group since 2016.</p>
 <div class="cell">
@@ -507,7 +491,8 @@ Figure&nbsp;5.10: A demonstration that reference marks can make it easier to per
 </div>
 </div>
 </div>
-<p><a href="#fig-bar-district-grid" class="quarto-xref">Figure&nbsp;<span>5.11</span></a> shows a bar plot of the number of offenders in each police district (<a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>) with some grid lines added. Although it is difficult to compare the bars for Northland and Tasman because they are quite far apart and there are distractors in between (<a href="#sec-distance-effect" class="quarto-xref"><span>Section 5.1</span></a>), the addition of the grid lines makes it easier to perform the comparison because we are able to compare the distances from the ends of the bars to the nearest grid line. Those distances are much shorter than the bars so it is easier to perceive that those two bars are very similar.</p>
+<p><a href="#fig-bar-district-grid" class="quarto-xref">Figure&nbsp;<span>5.11</span></a> shows a bar plot of the number of offenders in each police district (<a href="#fig-bar-district" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>) with some grid lines added. Although it is difficult to compare the bars for Northland and Tasman because they are quite far apart and there are distractors in between (<a href="#sec-distance-effect" class="quarto-xref"><span>Section 5.1</span></a>), the addition of the grid lines makes it easier to perform the comparison because we are able to compare the distances from the ends of the bars to the nearest grid line. Those distances are much shorter than the bars so it is easier to perceive that those two bars are almost identical.</p>
+<p>One reason why grid lines are effective is because they allow comparisons of smaller lengths or distances, which means that it is easier to perceive smaller changes.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar-district-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -522,9 +507,6 @@ Figure&nbsp;5.11: A bar plot of the number of offenders for different police dis
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>One reason why grid lines are effective is because they allow comparisons of smaller lengths or distances, which means that it is easier to perceive smaller changes.</p>
-</blockquote>
 </section>
 <section id="summary" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.5</span> Summary</h2>
@@ -572,7 +554,7 @@ Précis <em>(click to expand/contract)</em>
 </div>
 </div>
 </div>
-<p>Encoding data values as the length of data symbols allows for the effective decoding of quantitative information, with the following caveats:</p>
+<p>Encoding data values as the length of data symbols is very effective for decoding quantitative information. However …</p>
 <ul>
 <li><p>Comparisons between <strong>lengths</strong> are more difficult if the lengths are far apart, especially if there are distractors in between.</p></li>
 <li><p>Comparisons between <strong>lengths</strong> are more difficult if the lengths do not have a common baseline.</p></li>

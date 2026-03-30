@@ -1,6 +1,7 @@
 
-Encoding data values as the length of data symbols allows for the effective
-decoding of quantitative information, with the following caveats:
+Encoding data values as the length of data symbols is very effective for
+decoding quantitative information.
+However ...
 
 * Comparisons between **lengths** are more difficult if
   the lengths are far apart, especially if there are distractors in between.

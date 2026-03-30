@@ -281,7 +281,7 @@
 
 Version 0.9 (build 2026-03-30)
 
-\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, colback=white, colframe=quarto-callout-warning-color-frame, left=2mm, coltitle=black, opacityback=0, toptitle=1mm, leftrule=.75mm, titlerule=0mm, breakable, bottomrule=.15mm, rightrule=.15mm, bottomtitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-warning-color!10!white, opacityback=0, toptitle=1mm, breakable, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, left=2mm, colback=white, coltitle=black, opacitybacktitle=0.6, arc=.35mm, bottomrule=.15mm, toprule=.15mm, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomtitle=1mm, leftrule=.75mm]
 
 Under construction!
 
@@ -3431,13 +3431,15 @@ for decoding of both quantitative and qualitative information. However
 
 \chapter{Length}\label{sec-quantitative}
 
-Figure~\ref{fig-bar-district} shows a bar plot of the number of
-offenders in each police district in New Zealand in 2021 (for ages 14 to
-16).\\
-For the reasons outlined in Chapter~\ref{sec-encoding-visual-features}
-and Chapter~\ref{sec-position}), this data visualisation is effective
-for decoding the number of offenders in different police districts and
-making comparisons between them.
+Figure~\ref{fig-bar-district} shows a bar plot of the number of youth
+offenders in each police district in New Zealand in 2021
+(Table~\ref{tbl-map-data}). For the reasons outlined in
+Chapter~\ref{sec-encoding-visual-features} and
+Chapter~\ref{sec-position}, this data visualisation is effective for
+decoding the number of offenders in different police districts and
+making comparisons between them because it encodes the police districts
+as the vertical \textbf{positions} of bars and it encodes the number of
+offenders as the **lengths* of bars.
 
 \begin{figure}
 
@@ -3455,11 +3457,18 @@ South.}
 
 Figure~\ref{fig-bar-district-ordered} shows a bar plot of the same data,
 but with the bars ordered from longest to shortest. This data
-visualisation uses the same encodings as
-Figure~\ref{fig-bar-district}---police districts are encoded as the
-vertical positions of the bars and the counts are encoded as the lengths
-of the bars---which means that it is also effective for comparing the
-number of offenders between police districts.
+visualisation uses the same encodings as Figure~\ref{fig-bar-district},
+which means that it is also effective for comparing the number of
+offenders between police districts. However,
+Figure~\ref{fig-bar-district-ordered} is \emph{more} effective than
+Figure~\ref{fig-bar-district} for some comparisons. For example, it is
+easier to compare the Northland district with the Tasman district in
+Figure~\ref{fig-bar-district-ordered}. The fact that two data
+visualisations with the same encodings can have a different
+effectiveness suggests that there is more to know about how different
+visual features work. This chapter covers some more details about how
+well we can decode information when we have encoded data values as
+\textbf{length}.
 
 \begin{figure}
 
@@ -3474,17 +3483,6 @@ offenders for different police districts, with the districts ordered
 from largest number of offenders to smallest.}
 
 \end{figure}%
-
-However, Figure~\ref{fig-bar-district-ordered} is \emph{more} effective
-than Figure~\ref{fig-bar-district} for some comparisons. For example, it
-is easier to compare the Northland district with the Tasman district in
-Figure~\ref{fig-bar-district-ordered}. The fact that two data
-visualisations with the same encodings can have a different
-effectiveness suggests that there is more to know about how different
-visual features work.
-
-This chapter covers some more details about how well we can decode
-information when we have encoded data values as \textbf{length}.
 
 \section{The distance effect}\label{sec-distance-effect}
 
@@ -3502,7 +3500,9 @@ the two black bars at the top of Figure~\ref{fig-distance-effect}.
 
 This helps to explain why Figure~\ref{fig-bar-district-ordered} is more
 effective than Figure~\ref{fig-bar-district} for some comparisons (e.g.,
-Northland versus Tasman).
+Northland versus Tasman). One reason for ordering the bars in a bar plot
+from longest to shortest is because the ordering places bars that we
+want to compare closer together.
 
 \begin{figure}
 
@@ -3520,12 +3520,6 @@ row, the black bar on the left is slightly higher than the black bar on
 the right.}
 
 \end{figure}%
-
-\begin{quote}
-One reason for ordering the bars in a bar plot from longest to shortest
-is because the ordering places bars that we want to compare closer
-together.
-\end{quote}
 
 \section{Unaligned length}\label{sec-unaligned}
 
@@ -3549,25 +3543,28 @@ because they are \textbf{unaligned}.}
 
 \end{figure}%
 
-Figure~\ref{fig-stacked-bar} shows an alternative visualisation of the
-data on the number of offenders in different ethnic groups. The bar plot
-of these data that we saw in Figure~\ref{fig-bar} encoded ethnic groups
-as the \textbf{positions} of the bars so that the bars were arranged
-vertically with a common left-hand edge. In
-Figure~\ref{fig-stacked-bar}, the ethnic groups are encoded as different
-\textbf{colours} and the bars are ``stacked'' horizontally.\footnote{In
-  a stacked bar plot, groups are encoded as the positions of the bars
-  and counts are encoded as the lengths of the bars, but the positions
-  are in the same dimension as the lengths (in this case, both position
-  and length are horizontal). In a side-by-side bar plot, the position
-  of the bars is in the opposite dimension to the lengths of the bars.}
+Figure~\ref{fig-stacked-bar} shows a visualisation of the data on the
+number of offenders in different ethnic groups
+(Table~\ref{tbl-crime-group-total}). The bar plot of these data that we
+saw in Figure~\ref{fig-bar} encoded ethnic groups as the
+\textbf{positions} of the bars so that the bars were arranged vertically
+with a common left-hand edge. In Figure~\ref{fig-stacked-bar}, the
+ethnic groups are encoded as different \textbf{colours} and the bars are
+``stacked'' horizontally.\footnote{In a stacked bar plot, groups are
+  encoded as the positions of the bars and counts are encoded as the
+  lengths of the bars, but the positions are in the same dimension as
+  the lengths (in this case, both position and length are horizontal).
+  In a side-by-side bar plot, the position of the bars is in the
+  opposite dimension to the lengths of the bars.}
 
 Although the number of offenders has been encoded as the same visual
 feature in both Figure~\ref{fig-stacked-bar} and
 Figure~\ref{fig-bar}---in both cases, the number of offenders is encoded
-as the \textbf{lengths} of the bars---comparing those lengths is much
-harder in Figure~\ref{fig-stacked-bar} because the lengths are
-\textbf{unaligned}.
+as the \textbf{lengths} of bars---comparing those lengths is much harder
+in Figure~\ref{fig-stacked-bar} because the lengths are
+\textbf{unaligned}. One reason why stacked bar plots are less effective
+for some comparisons is because we are forced to compare the unaligned
+lengths of the bars.
 
 \begin{figure}
 
@@ -3582,11 +3579,6 @@ offenders in each ethnic group.}
 
 \end{figure}%
 
-\begin{quote}
-One reason why stacked bar plots are less effective for some comparisons
-is because we are forced to compare the unaligned lengths of the bars.
-\end{quote}
-
 \section{Case study: Stacked versus side-by-side bar
 plots}\label{sec-stacked-vs-side}
 
@@ -3598,7 +3590,7 @@ in different ethnic groups for individual years (from 2011 to 2021).
 This is a more detailed version of the data from
 Table~\ref{tbl-crime-group-total}.
 
-\begin{longtable}[]{@{}llrr@{}}
+\begin{longtable}[]{@{}lrr@{}}
 
 \caption{\label{tbl-crime-group-year}A table of the number of offenders
 per year aged 14 to 16 for different ethnic groups from 2011 to 2021.
@@ -3607,27 +3599,27 @@ There are 44 rows of data, but just the first 6 rows are shown here.}
 \tabularnewline
 
 \toprule\noalign{}
-& group & count & year \\
+group & count & year \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-1 & Māori & 5957 & 2011 \\
-2 & Pasifika & 1092 & 2011 \\
-3 & European/Other & 5775 & 2011 \\
-4 & Unknown & 194 & 2011 \\
-6 & Māori & 5458 & 2012 \\
-7 & Pasifika & 1040 & 2012 \\
+Māori & 5957 & 2011 \\
+Pasifika & 1092 & 2011 \\
+European/Other & 5775 & 2011 \\
+Unknown & 194 & 2011 \\
+Māori & 5458 & 2012 \\
+Pasifika & 1040 & 2012 \\
 
 \end{longtable}
 
 Figure~\ref{fig-stacked-bar-year} shows the number of offenders
 (quantitative) for each ethnic group (qualitative) and for each year
-from 2011 to 2021 (treated here as qualitative, or at least discrete).
-In this data visualisation, the number of offenders is encoded to the
-lengths of the bars, the years are encoded to the horizontal
-\textbf{position} of the bars, the ethnic groups are encoded to the
-colours of the bars, and the bars are stacked vertically.
+from 2011 to 2021 (treated here as qualitative, though ordinal). In this
+data visualisation, the number of offenders is encoded as the lengths of
+the bars, the years are encoded to the horizontal \textbf{position} of
+the bars, the ethnic groups are encoded to the colours of the bars, and
+the bars are stacked vertically.
 
 The problem that we face in this situation is that there are four bars
 to show for each year. If we simply encode the year as the horizontal
@@ -3771,7 +3763,11 @@ distractors in between (Section~\ref{sec-distance-effect}), the addition
 of the grid lines makes it easier to perform the comparison because we
 are able to compare the distances from the ends of the bars to the
 nearest grid line. Those distances are much shorter than the bars so it
-is easier to perceive that those two bars are very similar.
+is easier to perceive that those two bars are almost identical.
+
+One reason why grid lines are effective is because they allow
+comparisons of smaller lengths or distances, which means that it is
+easier to perceive smaller changes.
 
 \begin{figure}
 
@@ -3788,17 +3784,10 @@ Figure~\ref{fig-bar-district}, just with some grid lines added.}
 
 \end{figure}%
 
-\begin{quote}
-One reason why grid lines are effective is because they allow
-comparisons of smaller lengths or distances, which means that it is
-easier to perceive smaller changes.
-\end{quote}
-
 \section{Summary}\label{summary-4}
 
-Encoding data values as the length of data symbols allows for the
-effective decoding of quantitative information, with the following
-caveats:
+Encoding data values as the length of data symbols is very effective for
+decoding quantitative information. However \ldots{}
 
 \begin{itemize}
 \item
