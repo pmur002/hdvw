@@ -19,7 +19,7 @@ for a particular crime level amongst the set of colours used.
 ```{r}
 #| echo: false
 #| label: fig-pie-hue
-#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime severity.  We can decode different levels of crime from the different colours of the wedges.
 ggplot(crimeLevel2021) +
     geom_col(aes(x=count, y="", fill=level)) +
     coord_polar() +
@@ -39,7 +39,7 @@ which are darker wedges, to less serious crimes, which are lighter wedges.
 ```{r}
 #| echo: false
 #| label: fig-pie-ordinal
-#| fig-cap: A data visualisation of the number of offenders for different levels of crime seriousness.
+#| fig-cap: A data visualisation of the number of offenders for different levels of crime severity.  We can decode different levels of crime from the different colours of the wedges *and* we can decode an ordering of the levels of crime from the colours of the wedges.
 ggplot(crimeLevel2021) +
     geom_col(aes(x=count, y="", fill=level), colour="black") +
     coord_polar() +
@@ -243,15 +243,15 @@ clpie(11)
 popViewport()
 ```
 
-> If we encode data values to the **hue** of data symbols,
-  then we can only decode **nominal** information from
-  the data symbols;  do the data symbols represent 
-  *different* groups or the *same* group.
+If we encode data values to the **hue** of data symbols,
+then we can only decode **nominal** information from
+the data symbols;  do the data symbols represent 
+*different* groups or the *same* group.
 
-> If we encode data values to the **chroma** and/or
-  **luminance** of data symbols, 
-  it is also possible to decode **ordinal** information
-  form the data symbols.
+If we encode data values to the **chroma** and/or
+**luminance** of data symbols, 
+it is also possible to decode **ordinal** information
+form the data symbols.
 
 ## Perception is relative {#sec-colour-relative}
 
@@ -349,6 +349,7 @@ Although it does not make the use of hue any more appropriate,
 for the purposes of demonstration,
 we can solve the colour perception problems in @fig-pie-contrast
 by adding a white border to all of the wedges
+and to the squares of colour in the legend
 (@fig-pie-contrast-solved).
 Now all of the wedges and all of the squares in the legend are
 perceived relative to a surrounding white border.
@@ -369,9 +370,12 @@ ggplot(crimeDistrict2021) +
           axis.ticks.y=element_blank())
 ```
 
-> If we encode data values as the colour of data symbols,
-  we may have difficulty decoding the colours if the same colour
-  is presented with different colours adjacent to it.
+If we encode data values as the colour of data symbols,
+we may have difficulty decoding the colours if the same colour
+is presented with different colours adjacent to it.
+This is an example where and encoding can be less effective
+because our visual system 
+does not always faithfully decode values (@sec-illusion).
 
 ## Size matters
 
@@ -385,7 +389,8 @@ greener in the bottom set.
 The right side of @fig-colour-size shows that the same colours
 may appear different when they are used as fill colours for larger regions,
 like bars, compared to when they are used for thin lines.
-In this case, the blue line appears darker than the blue bars.
+In this case, the blue line appears darker than the blue bars
+even though the two blues are exactly the same.
 
 [^stone]:
     @size-matters describes "spreading", 
@@ -393,6 +398,12 @@ In this case, the blue line appears darker than the blue bars.
     of colours over small areas *by the visual system*:
     "In designing colors for digital visualization systems, one of the most
     critical factors is the interaction between size and color appearance."
+
+If we encode data values as the colour of data symbols, 
+we may have difficulty decoding the colours if there are
+large differences in the sizes of data symbols.
+This is another example of our visual system not producing
+consistent results (@sec-illusion).
 
 ```{r}
 #| echo: false
@@ -428,10 +439,6 @@ grid.lines(x[c(FALSE, TRUE)], y[c(FALSE, TRUE)], gp=gpar(col=cols[2]))
 popViewport()
 ```
 
-> If we encode data values as the colour of data symbols, 
-  we may have difficulty decoding the colours if there are
-  large differences in the sizes of data symbols.
-
 ## Colours in space {#sec-colour-spaces}
 
 @fig-colour-spaces shows two-dimensional 
@@ -443,7 +450,7 @@ Chroma increases outwards from the centre (indicated by a white dot)
 and hue changes with angle.
 In each slice,
 we can see the familiar rainbow of colours from red, through orange, yellow,
-green, blue, indigo, and violet, back around to red.
+green, blue, indigo, violet, and back around to red.
 The top slice is for high luminance (light) colours and the bottom slice
 is for low luminance (dark) colours.
 
@@ -523,15 +530,19 @@ of colours that we can use to encode data values is much
 smaller than the range of possible colours.
 On the positive side, 
 the range of colours that we can produce is still very large.
+A more important message is that the general points about
+differences between colours still apply.
+For example, the range of possible chroma values is dependent
+on the hue and luminance of colours.
 
 [^srgb]:
     @fig-colour-spaces-srgb shows the gamut of sRGB colours 
     in CIE $L^*u^*v^*$ space (*aka* HCL space).
 
-A more important message is that the general points about
-differences between colours still apply.
-For example, the range of possible chroma values is dependent
-on the hue and luminance of colours.
+If we encode data values as the colour of data symbols, 
+the choice of hue, luminance, and chroma affects 
+the capacity of decoding---how many different colours
+can be effectively decoded.
 
 ::: {#fig-colour-spaces-srgb}
 ::: {.content-visible when-format=pdf}
@@ -544,11 +555,6 @@ on the hue and luminance of colours.
 
 Slices through the set of colours that it is possible to produce on a typical computer monitor.
 :::
-
-> If we encode data values as the colour of data symbols, 
-  the choice of hue, luminance, and chroma affects 
-  the capacity of decoding---how many different colours
-  can be effectively decoded.
 
 ## Colour harmony {#sec-harmony}
 
@@ -564,7 +570,8 @@ luminance and chroma.
 Hues that are close together on this colour wheel are decoded
 as more similar than hues that are on opposite sides of the wheel.
 For example, the top two circles on the right of @fig-colour-wheel have
-hues that are from the left side of the colour wheel so they appear similar,
+hues that are both 
+from the left side of the colour wheel so they appear similar,
 but the bottom two circles have hues from the left and the right side of the 
 colour wheel so they have a greater contrast.[^colour-theory]
 
@@ -573,6 +580,10 @@ colour wheel so they have a greater contrast.[^colour-theory]
     hues that are close together on a colour wheel are referred
     to as *analogous* and hues that are opposite each other are
     *complementary*.
+
+If we encode data values as hue, it is possible to
+decode some hues as more similar to each other
+and other hues as very different from each other.
 
 ```{r}
 #| echo: false
@@ -603,9 +614,6 @@ grid.circle(c(.4, .6), 1/4, unit(3, "mm"),
 grid.rect(height=.1, gp=gpar(col=NA, fill=figbg))
 popViewport()
 ```
-
-> If we encode data values as hue, it is possible to
-  decode some hues as quite similar and other hues as very different.
 
 ## Colour vision deficiency {#sec-CVD}
 
@@ -651,6 +659,11 @@ It is not important that a viewer with CVD perceives a different
 hue in this case because the more important difference is in the
 luminance and chroma of the colours.
 
+When we encode data values as the colour of data symbols,
+some viewers will have difficulty decoding the colours
+if we do not take into account common forms of 
+colour vision deficiency.
+
 ```{r}
 #| echo: false
 #| label: fig-pie-ordinal-cvd
@@ -664,88 +677,6 @@ ggplot(crimeLevel2021) +
           axis.ticks=element_blank())
 ```
 
-> When we encode data values as the colour of data symbols,
-  some viewers will have difficulty decoding the colours
-  if we do not take into account common forms of 
-  colour vision deficiency.
-
-## Non-linear encodings {#sec-col-non-linear}
-
-The top row of @fig-non-linear-lum shows a linear luminance encoding;
-we have a set of rectangles
-that change luminance in equal steps.  The 
-two rectangles on the left of this row appear very similar, while
-the two rectangles on the right of this row appear quite different.
-The darker rectangles appear to change more slowly and 
-the lighter rectangles appear to change more rapidly.
-In other words, the *decoding* of luminance is *not* linear.
-
-```{r}
-#| echo: false
-#| label: fig-non-linear-lum
-#| fig-height: 2
-#| fig-cap: The two rows of purple values begin and end at the same level of luminance.  The top row encodes luminance linearly, but the bottom row uses a cube-root encoding.
-grid.newpage()
-## Same start and end, but even steps vs cubed root steps
-pushViewport(viewport(width=.8, layout=grid.layout(2, 1)))
-pushViewport(viewport(layout.pos.row=1))
-grid.rect(1:7/8, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
-          gp=gpar(col="black", lwd=1,
-                  fill=hcl(highhcl[3], 20,
-                           100*seq((1/100)^(1/3), (6/8)^(1/3), length.out=7))))
-popViewport()
-pushViewport(viewport(layout.pos.row=2))
-grid.rect(y=1, width=2, height=.25/2, gp=gpar(col=NA, fill="white"))
-grid.rect(1:7/8, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
-          gp=gpar(col="black", lwd=1,
-                  fill=hcl(highhcl[3], 20,
-                           100*c(1/100, 1:6/8)^(1/3))))
-popViewport()
-```
-
-We saw in @sec-non-linear-pos that accurate decoding of data values
-from **position** relies
-on using a linear encoding. That was because the decoding of position
-is linear.  A linear encoding from data values to position, followed
-by a linear decoding from position to data values, leads to an
-accurate encoding.  And that is particularly important for 
-encoding quantitative data values.
-
-Part of the reason why it is not appropriate to encode quantitative
-data values to luminance is that the decoding of luminance is *not*
-linear.  This makes it difficult to accurately decode quantitative 
-data values from the luminance of a data symbol, even if the
-encoding of the data values to luminance was linear. 
-
-However, we can use luminance to encode ordinal data values 
-(@sec-ordinal).
-For this purpose, all that we need is to be able to identify 
-that a data symbol is lighter or darker than another data symbol.
-
-> The decoding of luminance is non-linear, 
-  which means that luminance is not accurate for
-  decoding quantitative data values.
-  However, luminance 
-  is still effective for decoding ordinal data values.
-
-The bottom row of @fig-non-linear-lum shows a luminance encoding
-that takes larger steps for darker colours and smaller steps
-for lighter colours.  In this row, the purples appear to 
-change more evenly.  We can see differences between the darker
-rectangles as well as between the lighter rectangles.
-
-In other words, a *non-linear* encoding from data values to
-luminance can be used 
-to generate a larger set of luminance levels that can be differentiated
-from each other.  A non-linear luminance encoding leads to increased
-**capacity** for decoding data values from luminance.
-
-> The decoding of luminance is non-linear, 
-  which means that the capacity of luminance is worse for darker colours
-  than it is for lighter colours.
-  However, a non-linear encoding of data values to luminance 
-  can increase the capacity for darker colours.
-
 ## Escape capacity {#sec-escape}
 
 We have previously identified that colour has a limited capacity 
@@ -758,49 +689,50 @@ for different combinations of hue, chroma, and luminance.
 One way to increase the decoding capacity of a colour encoding is to vary
 more than one of hue, chroma, and luminance at once.
 For example, the top row of @fig-escape-lum shows a set of colours
-that only vary in terms of luminance---hue and chroma are held constant
-(this is the bottom row from @fig-non-linear-lum).
+that only vary in terms of luminance---hue and chroma are held constant.
 In the second row of @fig-escape-lum, in addition to increasing luminance, 
 we have increasing *chroma*, so there are larger differences between colours,
 but still a clear ordering.
-Similarly, in the bottom row of @fig-non-linear-lum, the *hue* changes slightly
+Similarly, in the bottom row of @fig-escape-lum, the *hue* changes slightly
 as the luminance increases so that the differences are more obvious.
 
-In effect, this is another example of a non-linear encoding.
-We take a non-linear path 
+In effect, this is an example of a non-linear encoding (@sec-non-linear-pos)
+because we take a non-linear path 
 through colour space (@sec-colour-spaces). 
+When encoding ordinal data values as colour, the capacity can
+be increased by varying more than one of hue, chroma, and luminance.
 
 ```{r}
 #| echo: false
 #| label: fig-escape-lum
 #| fig-height: 3
 #| fig-cap: The top row holds hue and chroma constant and just varies luminance. It is limited to a very low chroma.  The middle row varies chroma as well as luminance, which provides a wider range of colours compared to the top row by allowing a more colourful starting point.  The bottom row varies hue and luminance, which provides a wider range of colours compared to the top row by allowing a different-hued starting point.
+hue <- 0
+chroma <- 40
+lum <- 100*seq(.3, .8, length.out=5)
 grid.newpage()
 pushViewport(viewport(width=.8, layout=grid.layout(3, 1)))
 pushViewport(viewport(layout.pos.row=1))
-grid.rect(1:7/8, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
+grid.rect(1:5/6, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
           gp=gpar(col="black", lwd=1,
-                  fill=hcl(highhcl[3], 20,
-                           100*c(1/100, 1:6/8)^(1/3))))
+                  fill=hcl(hue, chroma, lum, 
+                           fixup=FALSE)))
 popViewport()
 pushViewport(viewport(layout.pos.row=2))
 grid.rect(y=1, width=2, height=.25/3, gp=gpar(col=NA, fill="white"))
-grid.rect(1:7/8, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
+grid.rect(1:5/6, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
           gp=gpar(col="black", lwd=1,
-                  fill=hcl(highhcl[3], seq(50, 20, length.out=7),
-                           100*c(1/100, 1:6/8)^(1/3))))
+                  fill=hcl(hue, seq(65, chroma, length.out=5), lum, 
+                           fixup=FALSE)))
 popViewport()
 pushViewport(viewport(layout.pos.row=3))
 grid.rect(y=1, width=2, height=.25/3, gp=gpar(col=NA, fill="white"))
-grid.rect(1:7/8, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
+grid.rect(1:5/6, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
           gp=gpar(col="black", lwd=1,
-                  fill=hcl(seq(highhcl[3] - 50, highhcl[3], length.out=7), 20,
-                           100*c(1/100, 1:6/8)^(1/3))))
+                  fill=hcl(seq(hue - 50, hue, length.out=5), chroma, lum, 
+                           fixup=FALSE)))
 popViewport()
 ```
-
-> When encoding ordinal data values as colour, the capacity can
-  be increased by varying more than one of hue, chroma, and luminance.
 
 Another way to expand the decoding capacity of a colour encoding
 is to reduce the number of colours that need to be directly compared.
@@ -877,6 +809,10 @@ the Wellington district
 from the pink for the Eastern district because Wellington is at the end and
 Eastern is in the middle.
 
+When encoding nominal data values as colour, the capacity can
+be increased by focusing on adjacent colours rather than
+all pairs of colours.
+
 ```{r}
 #| echo: false
 #| label: fig-pie-repeat
@@ -917,10 +853,6 @@ grid.text(escape1$district,
           y=bars$y[13:24], gp=gpar(fontsize=8),
           hjust=0, vjust=1.5)
 ```
-
-> When encoding nominal data values as colour, the capacity can
-  be increased by focusing on adjacent colours rather than
-  all pairs of colours.
 
 ## Colour palettes {#sec-palettes}
 
@@ -1086,6 +1018,10 @@ all types of CVD (@fig-palettes).[^palettes]
     @RJ-2023-071 provides an overview of a large number of different
     palettes, within the context of producing data visualisations in R.
 
+Selecting a colour palette is a complex task so it is a good idea
+to make use of an existing colour palette that has been
+designed by an expert.
+
 ```{r}
 #| echo: false
 #| label: fig-palettes
@@ -1105,10 +1041,6 @@ grid.rect(1:7/8, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
                   fill=rev(scales::pal_brewer(palette="Greens")(7))))
 popViewport()
 ```
-
-> Selecting a colour palette is a complex task so it is a good idea
-  to make use of an existing colour palette that has been
-  designed by an expert.
 
 ## Case study: Diverging colour palettes {#sec-divergent}
 
@@ -1157,6 +1089,10 @@ points differentials (within each of those groups).
     and a palette for ordinal or qualitative data is called a 
     *sequential* palette.
 
+A diverging colour palette is effective because it creates two distinct
+visual features:  a nominal hue to differentiate between two groups and 
+changes in chroma and/or luminance to encode ordinal values within each group.
+
 ```{r}
 #| echo: false
 #| label: fig-neg-tile
@@ -1185,10 +1121,6 @@ ggplot(rwcAllyear) +
           aspect.ratio=1)
 ```
 
-> A diverging colour palette is effective because it creates two distinct
-  visual features:  a nominal hue to differentiate between two groups and 
-  changes in chroma and/or luminance to encode ordinal values within each group.
-
 ## Case study: The rainbow {#sec-rainbow}
 
 In some fields of research, for example medical imaging and geographic
@@ -1196,13 +1128,13 @@ imaging, a common task is to visualise numeric data values on a regular
 spatial grid.
 @fig-nomads-rainbow shows an example, where the grid is a set
 of longitudes and latitudes in the vicinity of New
-Zealand and the data values are measures of wind strength.
+Zealand and the data values are measures of wind strength
+(this is the data set that we saw in @fig-visual-model-demo).
 
 A common approach is to encode the numeric data values using 
 colour[^pseudo-color]
 and it is also common to
-use a rainbow colour palette for that encoding (the image on the
-right of @fig-nomads-rainbow).
+use a rainbow colour palette for that encoding (@fig-nomads-rainbow).
 However, there are several problems with this approach.[^rainbow]
 
 [^pseudo-color]:
@@ -1298,8 +1230,8 @@ This makes a rainbow palette a poor encoding even for showing
 the order of numeric data values.
 
 [^rainbow-non-linear]:
-    A rainbow palette is a colour encoding that is non-linear in
-    an unhelpful way (@sec-col-non-linear).
+    A rainbow palette is a colour encoding that is non-linear
+    (@sec-non-linear-pos).
 
     The representation of luminance in @fig-rainbow also shows an example
     of a 3d illusion (@sec-illusion).  The curved line combined 
@@ -1311,7 +1243,7 @@ produce bands of colours (red, yellow, green, cyan, blue, magenta).
 In other words, the spectrum appears discrete rather than continuous.
 This can result in a decoding that *adds* structure (discrete levels)
 to numeric data values that are in reality continuous.[^color-naming]
-For example, @fig-nomads-rainbow suggests three main regions--red-yellow,
+For example, @fig-nomads-rainbow suggests three main regions---red-yellow,
 green-cyan, and blue-magenta---but the underlying data values
 vary more smoothly than that.
 
@@ -1350,6 +1282,9 @@ the image on the left of @fig-nomads-viridis shows a colour palette that
 only varies in terms of luminance and we can see that it is easier to see
 some details in the more colourful viridis map, such as the variations
 in low wind strength (the yellows) over New Zealand.
+This is thanks to the changes in hue as well as luminance in the viridis
+map; the grey-scale map on the left of @fig-nomads-viridis
+varies only in terms of luminance.
 
 ::: {#fig-nomads-viridis}
 

@@ -276,13 +276,12 @@ window.Quarto = {
   <li><a href="#sec-colour-spaces" id="toc-sec-colour-spaces" class="nav-link" data-scroll-target="#sec-colour-spaces"><span class="header-section-number">6.5</span> Colours in space</a></li>
   <li><a href="#sec-harmony" id="toc-sec-harmony" class="nav-link" data-scroll-target="#sec-harmony"><span class="header-section-number">6.6</span> Colour harmony</a></li>
   <li><a href="#sec-CVD" id="toc-sec-CVD" class="nav-link" data-scroll-target="#sec-CVD"><span class="header-section-number">6.7</span> Colour vision deficiency</a></li>
-  <li><a href="#sec-col-non-linear" id="toc-sec-col-non-linear" class="nav-link" data-scroll-target="#sec-col-non-linear"><span class="header-section-number">6.8</span> Non-linear encodings</a></li>
-  <li><a href="#sec-escape" id="toc-sec-escape" class="nav-link" data-scroll-target="#sec-escape"><span class="header-section-number">6.9</span> Escape capacity</a></li>
-  <li><a href="#sec-palettes" id="toc-sec-palettes" class="nav-link" data-scroll-target="#sec-palettes"><span class="header-section-number">6.10</span> Colour palettes</a></li>
-  <li><a href="#sec-divergent" id="toc-sec-divergent" class="nav-link" data-scroll-target="#sec-divergent"><span class="header-section-number">6.11</span> Case study: Diverging colour palettes</a></li>
-  <li><a href="#sec-rainbow" id="toc-sec-rainbow" class="nav-link" data-scroll-target="#sec-rainbow"><span class="header-section-number">6.12</span> Case study: The rainbow</a></li>
-  <li><a href="#sec-viridis" id="toc-sec-viridis" class="nav-link" data-scroll-target="#sec-viridis"><span class="header-section-number">6.13</span> Case study: Viridis</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">6.14</span> Summary</a></li>
+  <li><a href="#sec-escape" id="toc-sec-escape" class="nav-link" data-scroll-target="#sec-escape"><span class="header-section-number">6.8</span> Escape capacity</a></li>
+  <li><a href="#sec-palettes" id="toc-sec-palettes" class="nav-link" data-scroll-target="#sec-palettes"><span class="header-section-number">6.9</span> Colour palettes</a></li>
+  <li><a href="#sec-divergent" id="toc-sec-divergent" class="nav-link" data-scroll-target="#sec-divergent"><span class="header-section-number">6.10</span> Case study: Diverging colour palettes</a></li>
+  <li><a href="#sec-rainbow" id="toc-sec-rainbow" class="nav-link" data-scroll-target="#sec-rainbow"><span class="header-section-number">6.11</span> Case study: The rainbow</a></li>
+  <li><a href="#sec-viridis" id="toc-sec-viridis" class="nav-link" data-scroll-target="#sec-viridis"><span class="header-section-number">6.12</span> Case study: Viridis</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">6.13</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -317,7 +316,7 @@ window.Quarto = {
 <img src="qualitative_files/figure-html/fig-pie-hue-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-hue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: A data visualisation of the number of offenders for different levels of crime seriousness.
+Figure&nbsp;6.1: A data visualisation of the number of offenders for different levels of crime severity. We can decode different levels of crime from the different colours of the wedges.
 </figcaption>
 </figure>
 </div>
@@ -332,7 +331,7 @@ Figure&nbsp;6.1: A data visualisation of the number of offenders for different l
 <img src="qualitative_files/figure-html/fig-pie-ordinal-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-ordinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.2: A data visualisation of the number of offenders for different levels of crime seriousness.
+Figure&nbsp;6.2: A data visualisation of the number of offenders for different levels of crime severity. We can decode different levels of crime from the different colours of the wedges <em>and</em> we can decode an ordering of the levels of crime from the colours of the wedges.
 </figcaption>
 </figure>
 </div>
@@ -379,12 +378,8 @@ Figure&nbsp;6.4: Encoding qualitative values to luminance and chroma works well 
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
 <p>If we encode data values to the <strong>hue</strong> of data symbols, then we can only decode <strong>nominal</strong> information from the data symbols; do the data symbols represent <em>different</em> groups or the <em>same</em> group.</p>
-</blockquote>
-<blockquote class="blockquote">
 <p>If we encode data values to the <strong>chroma</strong> and/or <strong>luminance</strong> of data symbols, it is also possible to decode <strong>ordinal</strong> information form the data symbols.</p>
-</blockquote>
 </section>
 <section id="sec-colour-relative" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sec-colour-relative"><span class="header-section-number">6.3</span> Perception is relative</h2>
@@ -420,7 +415,7 @@ Figure&nbsp;6.6: This pie chart demonstrates that the perception of hues is rela
 </div>
 </div>
 <p>The pie chart in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> is <em>not</em> an effective data visualisation because it encodes qualitative data values with many different groups as colour hue. This exceeds the <strong>capacity</strong> of the <strong>hue</strong> visual feature; it is difficult to clearly identify which wedge corresponds to which district (<a href="mapping-visual-features.html#sec-capacity" class="quarto-xref"><span>Section 3.6</span></a>). We have just used it here to demonstrate the relative perception of colours.</p>
-<p>Although it does not make the use of hue any more appropriate, for the purposes of demonstration, we can solve the colour perception problems in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> by adding a white border to all of the wedges (<a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;<span>6.7</span></a>). Now all of the wedges and all of the squares in the legend are perceived relative to a surrounding white border. This means that, not only is each wedge perceived as a solid block of constant colour, but it is easier to match the colours within the wedges with the colours in the legend.</p>
+<p>Although it does not make the use of hue any more appropriate, for the purposes of demonstration, we can solve the colour perception problems in <a href="#fig-pie-contrast" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> by adding a white border to all of the wedges and to the squares of colour in the legend (<a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;<span>6.7</span></a>). Now all of the wedges and all of the squares in the legend are perceived relative to a surrounding white border. This means that, not only is each wedge perceived as a solid block of constant colour, but it is easier to match the colours within the wedges with the colours in the legend.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie-contrast-solved" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -435,13 +430,12 @@ Figure&nbsp;6.7: The hues in this pie chart are perceived more accurately than t
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>If we encode data values as the colour of data symbols, we may have difficulty decoding the colours if the same colour is presented with different colours adjacent to it.</p>
-</blockquote>
+<p>If we encode data values as the colour of data symbols, we may have difficulty decoding the colours if the same colour is presented with different colours adjacent to it. This is an example where and encoding can be less effective because our visual system does not always faithfully decode values (<a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>).</p>
 </section>
 <section id="size-matters" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="size-matters"><span class="header-section-number">6.4</span> Size matters</h2>
-<p>The perception of colours is also affected by the size of the coloured region. In particular, small regions of colour may blend together with neighbouring colours.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> For example, on the left of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;<span>6.8</span></a>, the yellow and blue stripes are, in reality, the same colours both in the top set of wide bars and in the bottom set of narrow bars, but the blue bars appear greener in the bottom set. The right side of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;<span>6.8</span></a> shows that the same colours may appear different when they are used as fill colours for larger regions, like bars, compared to when they are used for thin lines. In this case, the blue line appears darker than the blue bars.</p>
+<p>The perception of colours is also affected by the size of the coloured region. In particular, small regions of colour may blend together with neighbouring colours.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> For example, on the left of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;<span>6.8</span></a>, the yellow and blue stripes are, in reality, the same colours both in the top set of wide bars and in the bottom set of narrow bars, but the blue bars appear greener in the bottom set. The right side of <a href="#fig-colour-size" class="quarto-xref">Figure&nbsp;<span>6.8</span></a> shows that the same colours may appear different when they are used as fill colours for larger regions, like bars, compared to when they are used for thin lines. In this case, the blue line appears darker than the blue bars even though the two blues are exactly the same.</p>
+<p>If we encode data values as the colour of data symbols, we may have difficulty decoding the colours if there are large differences in the sizes of data symbols. This is another example of our visual system not producing consistent results (<a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-colour-size" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -456,13 +450,10 @@ Figure&nbsp;6.8: The perception of colours varies based on the size of the colou
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>If we encode data values as the colour of data symbols, we may have difficulty decoding the colours if there are large differences in the sizes of data symbols.</p>
-</blockquote>
 </section>
 <section id="sec-colour-spaces" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="sec-colour-spaces"><span class="header-section-number">6.5</span> Colours in space</h2>
-<p><a href="#fig-colour-spaces" class="quarto-xref">Figure&nbsp;<span>6.9</span></a> shows two-dimensional slices of the set of visible colours arranged in three dimensions.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> The central column of three coloured regions (surrounded by white circles) show slices of colours with constant luminance. Chroma increases outwards from the centre (indicated by a white dot) and hue changes with angle. In each slice, we can see the familiar rainbow of colours from red, through orange, yellow, green, blue, indigo, and violet, back around to red. The top slice is for high luminance (light) colours and the bottom slice is for low luminance (dark) colours.</p>
+<p><a href="#fig-colour-spaces" class="quarto-xref">Figure&nbsp;<span>6.9</span></a> shows two-dimensional slices of the set of visible colours arranged in three dimensions.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> The central column of three coloured regions (surrounded by white circles) show slices of colours with constant luminance. Chroma increases outwards from the centre (indicated by a white dot) and hue changes with angle. In each slice, we can see the familiar rainbow of colours from red, through orange, yellow, green, blue, indigo, violet, and back around to red. The top slice is for high luminance (light) colours and the bottom slice is for low luminance (dark) colours.</p>
 <p>The coloured regions to the left and to the right (surrounded by white semicircles) show slices of constant hue. In these slices, Luminance increases from bottom to top and chroma increases away from the flat side of the semicircle. For example, the top-left slice shows the same green hue at different levels of luminance and chroma.</p>
 <div id="fig-colour-spaces" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -477,8 +468,8 @@ Figure&nbsp;6.9: Slices through the set of colours that are visible to humans. T
 <p><a href="#fig-colour-spaces" class="quarto-xref">Figure&nbsp;<span>6.9</span></a> provides insight into what sorts of colours are possible and what sorts of differences between colours are possible. For example, from the bottom central slice we can see that it is not possible to produce colours that have a high chroma <em>and</em> are very dark. In other words, there is no such thing as a very colourful black. This is also true for colours that are very light.</p>
 <p>We can also see that the range of possible chroma values depends on both the hue and the luminance of colours. For example, the top-right slice shows that it is possible to produce a light yellow with either a low chroma or a high chroma, but we can only produce a dark yellow with a low chroma. Equivalently, the range of possible luminance values depends on both the hue and the chroma of colours. For example, we can produce both dark and light low-chroma yellows, but we can only produce light high-chroma yellows.</p>
 <p>This means that, if we want to encode data values as the chroma of a data symbol, we can get a wider range of colours—we can get a higher decoding <strong>capacity</strong>—through careful selection of hue and luminance. For example, we can generate a wider range of light greens than dark greens (the top-left slice) and a wider range of reds that are neither too light nor too dark (the centre-right slice).</p>
-<p><a href="#fig-colour-spaces-srgb" class="quarto-xref">Figure&nbsp;<span>6.10</span></a> is similar to <a href="#fig-colour-spaces" class="quarto-xref">Figure&nbsp;<span>6.9</span></a> except that, instead of showing the range of colours that it is possible to perceive, it shows the range of colours that it is possible to <em>produce</em> using standard technology.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The simple message here is that the limits on the range of colours that we can use to encode data values is much smaller than the range of possible colours. On the positive side, the range of colours that we can produce is still very large.</p>
-<p>A more important message is that the general points about differences between colours still apply. For example, the range of possible chroma values is dependent on the hue and luminance of colours.</p>
+<p><a href="#fig-colour-spaces-srgb" class="quarto-xref">Figure&nbsp;<span>6.10</span></a> is similar to <a href="#fig-colour-spaces" class="quarto-xref">Figure&nbsp;<span>6.9</span></a> except that, instead of showing the range of colours that it is possible to perceive, it shows the range of colours that it is possible to <em>produce</em> using standard technology.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The simple message here is that the limits on the range of colours that we can use to encode data values is much smaller than the range of possible colours. On the positive side, the range of colours that we can produce is still very large. A more important message is that the general points about differences between colours still apply. For example, the range of possible chroma values is dependent on the hue and luminance of colours.</p>
+<p>If we encode data values as the colour of data symbols, the choice of hue, luminance, and chroma affects the capacity of decoding—how many different colours can be effectively decoded.</p>
 <div id="fig-colour-spaces-srgb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-colour-spaces-srgb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -489,14 +480,12 @@ Figure&nbsp;6.10: Slices through the set of colours that it is possible to produ
 </figcaption>
 </figure>
 </div>
-<blockquote class="blockquote">
-<p>If we encode data values as the colour of data symbols, the choice of hue, luminance, and chroma affects the capacity of decoding—how many different colours can be effectively decoded.</p>
-</blockquote>
 </section>
 <section id="sec-harmony" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="sec-harmony"><span class="header-section-number">6.6</span> Colour harmony</h2>
 <p>We have seen that <strong>hue</strong> is an appropriate visual feature for encoding <strong>nominal</strong> data values because we can decode differences between hues without any implied ordering between hues. For example, blue is not larger than red.</p>
-<p>However, it is not entirely true that there is no sense of <em>distance</em> between different hues. The left image in <a href="#fig-colour-wheel" class="quarto-xref">Figure&nbsp;<span>6.11</span></a> shows a colour wheel of hues for a constant luminance and chroma. Hues that are close together on this colour wheel are decoded as more similar than hues that are on opposite sides of the wheel. For example, the top two circles on the right of <a href="#fig-colour-wheel" class="quarto-xref">Figure&nbsp;<span>6.11</span></a> have hues that are from the left side of the colour wheel so they appear similar, but the bottom two circles have hues from the left and the right side of the colour wheel so they have a greater contrast.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>However, it is not entirely true that there is no sense of <em>distance</em> between different hues. The left image in <a href="#fig-colour-wheel" class="quarto-xref">Figure&nbsp;<span>6.11</span></a> shows a colour wheel of hues for a constant luminance and chroma. Hues that are close together on this colour wheel are decoded as more similar than hues that are on opposite sides of the wheel. For example, the top two circles on the right of <a href="#fig-colour-wheel" class="quarto-xref">Figure&nbsp;<span>6.11</span></a> have hues that are both from the left side of the colour wheel so they appear similar, but the bottom two circles have hues from the left and the right side of the colour wheel so they have a greater contrast.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>If we encode data values as hue, it is possible to decode some hues as more similar to each other and other hues as very different from each other.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-colour-wheel" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -511,9 +500,6 @@ Figure&nbsp;6.11: On the left, a colour wheel that shows differet hues for a con
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>If we encode data values as hue, it is possible to decode some hues as quite similar and other hues as very different.</p>
-</blockquote>
 </section>
 <section id="sec-CVD" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="sec-CVD"><span class="header-section-number">6.7</span> Colour vision deficiency</h2>
@@ -533,6 +519,7 @@ Figure&nbsp;6.12: A data visualisation of the number of offenders for different 
 </div>
 </div>
 <p>In order to avoid confusion for viewers with CVD, it may be necessary to vary luminance and/or chroma in addition to or instead of hue. For example, <a href="#fig-pie-ordinal-cvd" class="quarto-xref">Figure&nbsp;<span>6.13</span></a> shows how the shades of purple in <a href="#fig-pie-ordinal" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> would appear to a viewer with severe deuteranopia. It is not important that a viewer with CVD perceives a different hue in this case because the more important difference is in the luminance and chroma of the colours.</p>
+<p>When we encode data values as the colour of data symbols, some viewers will have difficulty decoding the colours if we do not take into account common forms of colour vision deficiency.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie-ordinal-cvd" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -547,44 +534,12 @@ Figure&nbsp;6.13: A data visualisation of the number of offenders for different 
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>When we encode data values as the colour of data symbols, some viewers will have difficulty decoding the colours if we do not take into account common forms of colour vision deficiency.</p>
-</blockquote>
 </section>
-<section id="sec-col-non-linear" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="sec-col-non-linear"><span class="header-section-number">6.8</span> Non-linear encodings</h2>
-<p>The top row of <a href="#fig-non-linear-lum" class="quarto-xref">Figure&nbsp;<span>6.14</span></a> shows a linear luminance encoding; we have a set of rectangles that change luminance in equal steps. The two rectangles on the left of this row appear very similar, while the two rectangles on the right of this row appear quite different. The darker rectangles appear to change more slowly and the lighter rectangles appear to change more rapidly. In other words, the <em>decoding</em> of luminance is <em>not</em> linear.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-non-linear-lum" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-non-linear-lum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="qualitative_files/figure-html/fig-non-linear-lum-1.svg" class="img-fluid figure-img" style="width:100.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-linear-lum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.14: The two rows of purple values begin and end at the same level of luminance. The top row encodes luminance linearly, but the bottom row uses a cube-root encoding.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>We saw in <a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a> that accurate decoding of data values from <strong>position</strong> relies on using a linear encoding. That was because the decoding of position is linear. A linear encoding from data values to position, followed by a linear decoding from position to data values, leads to an accurate encoding. And that is particularly important for encoding quantitative data values.</p>
-<p>Part of the reason why it is not appropriate to encode quantitative data values to luminance is that the decoding of luminance is <em>not</em> linear. This makes it difficult to accurately decode quantitative data values from the luminance of a data symbol, even if the encoding of the data values to luminance was linear.</p>
-<p>However, we can use luminance to encode ordinal data values (<a href="#sec-ordinal" class="quarto-xref"><span>Section 6.2</span></a>). For this purpose, all that we need is to be able to identify that a data symbol is lighter or darker than another data symbol.</p>
-<blockquote class="blockquote">
-<p>The decoding of luminance is non-linear, which means that luminance is not accurate for decoding quantitative data values. However, luminance is still effective for decoding ordinal data values.</p>
-</blockquote>
-<p>The bottom row of <a href="#fig-non-linear-lum" class="quarto-xref">Figure&nbsp;<span>6.14</span></a> shows a luminance encoding that takes larger steps for darker colours and smaller steps for lighter colours. In this row, the purples appear to change more evenly. We can see differences between the darker rectangles as well as between the lighter rectangles.</p>
-<p>In other words, a <em>non-linear</em> encoding from data values to luminance can be used to generate a larger set of luminance levels that can be differentiated from each other. A non-linear luminance encoding leads to increased <strong>capacity</strong> for decoding data values from luminance.</p>
-<blockquote class="blockquote">
-<p>The decoding of luminance is non-linear, which means that the capacity of luminance is worse for darker colours than it is for lighter colours. However, a non-linear encoding of data values to luminance can increase the capacity for darker colours.</p>
-</blockquote>
-</section>
-<section id="sec-escape" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="sec-escape"><span class="header-section-number">6.9</span> Escape capacity</h2>
+<section id="sec-escape" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="sec-escape"><span class="header-section-number">6.8</span> Escape capacity</h2>
 <p>We have previously identified that colour has a limited capacity (<a href="mapping-visual-features.html#sec-capacity" class="quarto-xref"><span>Section 3.6</span></a> and <a href="#sec-ordinal" class="quarto-xref"><span>Section 6.2</span></a>). In general, we cannot use colour to encode more than around 7 different categories. <a href="#sec-colour-spaces" class="quarto-xref"><span>Section 6.5</span></a> also demonstrated that this capacity varies for different combinations of hue, chroma, and luminance.</p>
-<p>One way to increase the decoding capacity of a colour encoding is to vary more than one of hue, chroma, and luminance at once. For example, the top row of <a href="#fig-escape-lum" class="quarto-xref">Figure&nbsp;<span>6.15</span></a> shows a set of colours that only vary in terms of luminance—hue and chroma are held constant (this is the bottom row from <a href="#fig-non-linear-lum" class="quarto-xref">Figure&nbsp;<span>6.14</span></a>). In the second row of <a href="#fig-escape-lum" class="quarto-xref">Figure&nbsp;<span>6.15</span></a>, in addition to increasing luminance, we have increasing <em>chroma</em>, so there are larger differences between colours, but still a clear ordering. Similarly, in the bottom row of <a href="#fig-non-linear-lum" class="quarto-xref">Figure&nbsp;<span>6.14</span></a>, the <em>hue</em> changes slightly as the luminance increases so that the differences are more obvious.</p>
-<p>In effect, this is another example of a non-linear encoding. We take a non-linear path through colour space (<a href="#sec-colour-spaces" class="quarto-xref"><span>Section 6.5</span></a>).</p>
+<p>One way to increase the decoding capacity of a colour encoding is to vary more than one of hue, chroma, and luminance at once. For example, the top row of <a href="#fig-escape-lum" class="quarto-xref">Figure&nbsp;<span>6.14</span></a> shows a set of colours that only vary in terms of luminance—hue and chroma are held constant. In the second row of <a href="#fig-escape-lum" class="quarto-xref">Figure&nbsp;<span>6.14</span></a>, in addition to increasing luminance, we have increasing <em>chroma</em>, so there are larger differences between colours, but still a clear ordering. Similarly, in the bottom row of <a href="#fig-escape-lum" class="quarto-xref">Figure&nbsp;<span>6.14</span></a>, the <em>hue</em> changes slightly as the luminance increases so that the differences are more obvious.</p>
+<p>In effect, this is an example of a non-linear encoding (<a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a>) because we take a non-linear path through colour space (<a href="#sec-colour-spaces" class="quarto-xref"><span>Section 6.5</span></a>). When encoding ordinal data values as colour, the capacity can be increased by varying more than one of hue, chroma, and luminance.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-escape-lum" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -593,16 +548,13 @@ Figure&nbsp;6.14: The two rows of purple values begin and end at the same level 
 <img src="qualitative_files/figure-html/fig-escape-lum-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-escape-lum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.15: The top row holds hue and chroma constant and just varies luminance. It is limited to a very low chroma. The middle row varies chroma as well as luminance, which provides a wider range of colours compared to the top row by allowing a more colourful starting point. The bottom row varies hue and luminance, which provides a wider range of colours compared to the top row by allowing a different-hued starting point.
+Figure&nbsp;6.14: The top row holds hue and chroma constant and just varies luminance. It is limited to a very low chroma. The middle row varies chroma as well as luminance, which provides a wider range of colours compared to the top row by allowing a more colourful starting point. The bottom row varies hue and luminance, which provides a wider range of colours compared to the top row by allowing a different-hued starting point.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>When encoding ordinal data values as colour, the capacity can be increased by varying more than one of hue, chroma, and luminance.</p>
-</blockquote>
-<p>Another way to expand the decoding capacity of a colour encoding is to reduce the number of colours that need to be directly compared. For example, if data symbols are arranged in a very regular pattern, like in a bar plot, comparisons between neighbouring data symbols are most important. This means that we can order the colours to maximise neighbour differences rather than maximising all pairwise differences.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> <a href="#fig-pie-order" class="quarto-xref">Figure&nbsp;<span>6.16</span></a> demonstrates this idea with a bar plot of the crime rate in different districts for both 2011 and 2021. This bar plot uses the same set of hues as <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;<span>6.7</span></a>, just in a different order so that adjacent bars have very different colours. It is very easy to distringuish between adjacent colours.</p>
+<p>Another way to expand the decoding capacity of a colour encoding is to reduce the number of colours that need to be directly compared. For example, if data symbols are arranged in a very regular pattern, like in a bar plot, comparisons between neighbouring data symbols are most important. This means that we can order the colours to maximise neighbour differences rather than maximising all pairwise differences.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> <a href="#fig-pie-order" class="quarto-xref">Figure&nbsp;<span>6.15</span></a> demonstrates this idea with a bar plot of the crime rate in different districts for both 2011 and 2021. This bar plot uses the same set of hues as <a href="#fig-pie-contrast-solved" class="quarto-xref">Figure&nbsp;<span>6.7</span></a>, just in a different order so that adjacent bars have very different colours. It is very easy to distringuish between adjacent colours.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie-order" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -611,13 +563,14 @@ Figure&nbsp;6.15: The top row holds hue and chroma constant and just varies lumi
 <img src="qualitative_files/figure-html/fig-pie-order-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.16: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
+Figure&nbsp;6.15: The hues in this pie chart are ordered so that adjacent hues are distant from each other.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A similar idea is to just reuse a smaller set of hues, which means larger differences between adjacent colours, but repeat the set. The regular arrangement of the data symbols means that we can still differentiate between repeated colours because of the bar positions (<a href="#fig-pie-repeat" class="quarto-xref">Figure&nbsp;<span>6.17</span></a>). For example, we can differentiate the pink for the Wellington district from the pink for the Eastern district because Wellington is at the end and Eastern is in the middle.</p>
+<p>A similar idea is to just reuse a smaller set of hues, which means larger differences between adjacent colours, but repeat the set. The regular arrangement of the data symbols means that we can still differentiate between repeated colours because of the bar positions (<a href="#fig-pie-repeat" class="quarto-xref">Figure&nbsp;<span>6.16</span></a>). For example, we can differentiate the pink for the Wellington district from the pink for the Eastern district because Wellington is at the end and Eastern is in the middle.</p>
+<p>When encoding nominal data values as colour, the capacity can be increased by focusing on adjacent colours rather than all pairs of colours.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-pie-repeat" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -626,23 +579,20 @@ Figure&nbsp;6.16: The hues in this pie chart are ordered so that adjacent hues a
 <img src="qualitative_files/figure-html/fig-pie-repeat-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-repeat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.17: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
+Figure&nbsp;6.16: The hues in this pie chart are repeated so that adjacent hues are more distant from each other.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>When encoding nominal data values as colour, the capacity can be increased by focusing on adjacent colours rather than all pairs of colours.</p>
-</blockquote>
 </section>
-<section id="sec-palettes" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="sec-palettes"><span class="header-section-number">6.10</span> Colour palettes</h2>
+<section id="sec-palettes" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="sec-palettes"><span class="header-section-number">6.9</span> Colour palettes</h2>
 <p>When we encode nominal or ordinal data values as colours, we have to choose a set of colours, or a <strong>colour palette</strong>. For example, in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> we have to choose a different colour to represent each level of crime.</p>
 <p>This choice is difficult because there are many different colours to choose from and often there is no obvious encoding from a data value to a particular colour. For example, what specific hue, chroma, and luminance should we choose to represent a “high crime level”? As we have seen in the preceding sections, there are also many, sometimes competing, criteria involved in selecting effective colours.</p>
 <p>As an example, we can consider the problem of selecting a set of 5 different hues to represent 5 different categorical data values, like the palette that is required to represent the difference levels of crime in <a href="#fig-pie-hue" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
-<p>We know that it is effective to encode qualitative data values as the hue of a data symbol (<a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a> and <a href="#sec-colour" class="quarto-xref"><span>Section 6.1</span></a>). In order to make the individual hues easy to identify, we can place them evenly around the colour circle. If we do not want the viewer to decode any ordering of the data values from the data symbols, then we should also hold the chroma and luminance of the data symbols constant. The top row of <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.18</span></a> shows a palette that follows that simple approach.</p>
-<p>The bottom row of <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.18</span></a> shows one big problem with this attempt: the hues are very hard to identify for viewers with CVD (<a href="#sec-CVD" class="quarto-xref"><span>Section 6.7</span></a>).</p>
+<p>We know that it is effective to encode qualitative data values as the hue of a data symbol (<a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a> and <a href="#sec-colour" class="quarto-xref"><span>Section 6.1</span></a>). In order to make the individual hues easy to identify, we can place them evenly around the colour circle. If we do not want the viewer to decode any ordering of the data values from the data symbols, then we should also hold the chroma and luminance of the data symbols constant. The top row of <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.17</span></a> shows a palette that follows that simple approach.</p>
+<p>The bottom row of <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.17</span></a> shows one big problem with this attempt: the hues are very hard to identify for viewers with CVD (<a href="#sec-CVD" class="quarto-xref"><span>Section 6.7</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-col-naive-cvd" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -651,13 +601,13 @@ Figure&nbsp;6.17: The hues in this pie chart are repeated so that adjacent hues 
 <img src="qualitative_files/figure-html/fig-col-naive-cvd-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-col-naive-cvd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.18: The top row shows a colour palette that attempts to vary hue evenly, in order to allow decoding of nominal data values, while holding chroma and luminance constant, in order to avoid decoding of ordinal data values. The bottom row shows how the palette appears to a viewer with red-green CVD.
+Figure&nbsp;6.17: The top row shows a colour palette that attempts to vary hue evenly, in order to allow decoding of nominal data values, while holding chroma and luminance constant, in order to avoid decoding of ordinal data values. The bottom row shows how the palette appears to a viewer with red-green CVD.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-col-naive-chroma" class="quarto-xref">Figure&nbsp;<span>6.19</span></a> shows another big problem with the palette in the top row of <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.18</span></a>. An attempt to hold chroma constant for a range of hues will fail on most standard computer displays because they cannot produce high chroma for all hues (<a href="#sec-colour-spaces" class="quarto-xref"><span>Section 6.5</span></a>).</p>
+<p><a href="#fig-col-naive-chroma" class="quarto-xref">Figure&nbsp;<span>6.18</span></a> shows another big problem with the palette in the top row of <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.17</span></a>. An attempt to hold chroma constant for a range of hues will fail on most standard computer displays because they cannot produce high chroma for all hues (<a href="#sec-colour-spaces" class="quarto-xref"><span>Section 6.5</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-col-naive-chroma" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -666,13 +616,14 @@ Figure&nbsp;6.18: The top row shows a colour palette that attempts to vary hue e
 <img src="qualitative_files/figure-html/fig-col-naive-chroma-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-col-naive-chroma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.19: A view of the colour palette from <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.18</span></a> relative to the range of colours that are possible on a standard computer monitor. The palette attempts to produce the same chroma for different hues, but only a much lower chroma can actually be achieved for some hues. The result is that the brown, green, and blue in the colour palette are less colourful than the purple and red.
+Figure&nbsp;6.18: A view of the colour palette from <a href="#fig-col-naive-cvd" class="quarto-xref">Figure&nbsp;<span>6.17</span></a> relative to the range of colours that are possible on a standard computer monitor. The palette attempts to produce the same chroma for different hues, but only a much lower chroma can actually be achieved for some hues. The result is that the brown, green, and blue in the colour palette are less colourful than the purple and red.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Given the difficulty of selecting an effective colour palette, there is a good argument for making use of pre-existing colour palettes that have been designed by experts. For example, the <a href="https://colorbrewer2.org/">ColorBrewer</a> web site provides tools for choosing colour palettes for nominal and ordinal encodings. Another example is the Okabe-Ito palette, which is specifically designed for encoding nominal data (up to 9 categories) using colours that allow effective decoding by viewers with all types of CVD (<a href="#fig-palettes" class="quarto-xref">Figure&nbsp;<span>6.20</span></a>).<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>Given the difficulty of selecting an effective colour palette, there is a good argument for making use of pre-existing colour palettes that have been designed by experts. For example, the <a href="https://colorbrewer2.org/">ColorBrewer</a> web site provides tools for choosing colour palettes for nominal and ordinal encodings. Another example is the Okabe-Ito palette, which is specifically designed for encoding nominal data (up to 9 categories) using colours that allow effective decoding by viewers with all types of CVD (<a href="#fig-palettes" class="quarto-xref">Figure&nbsp;<span>6.19</span></a>).<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>Selecting a colour palette is a complex task so it is a good idea to make use of an existing colour palette that has been designed by an expert.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-palettes" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -681,18 +632,15 @@ Figure&nbsp;6.19: A view of the colour palette from <a href="#fig-col-naive-cvd"
 <img src="qualitative_files/figure-html/fig-palettes-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.20: The top row shows the first 7 colours from Okabe-Ito. The bottom row is 7 sequential “Greens” from ColorBrewer.
+Figure&nbsp;6.19: The top row shows the first 7 colours from Okabe-Ito. The bottom row is 7 sequential “Greens” from ColorBrewer.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>Selecting a colour palette is a complex task so it is a good idea to make use of an existing colour palette that has been designed by an expert.</p>
-</blockquote>
 </section>
-<section id="sec-divergent" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="sec-divergent"><span class="header-section-number">6.11</span> Case study: Diverging colour palettes</h2>
+<section id="sec-divergent" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="sec-divergent"><span class="header-section-number">6.10</span> Case study: Diverging colour palettes</h2>
 <p>We have data on the total number of points that were scored and conceded in World Cup matches for Tier One nations at each World Cup. <a href="#tbl-rwc-all-year" class="quarto-xref">Table&nbsp;<span>6.1</span></a> shows a sample of these data. This an aggregated version of the data set that we saw in <a href="position.html#tbl-rwc-all" class="quarto-xref">Table&nbsp;<span>4.2</span></a>.</p>
 <div class="cell">
 <div id="tbl-rwc-all-year" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -762,8 +710,9 @@ Table&nbsp;6.1: A table of the total number of points scored and conceded by Tie
 </figure>
 </div>
 </div>
-<p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;<span>6.21</span></a> shows a heatmap of the points differential (points scored for minus points scored against) for Tier One nations at each Rugby World Cup. The data symbols are rectangles, the teams are encoded as the vertical <strong>positions</strong> of the rectangles, and the years are encoded as the horizontal <strong>positions</strong> of the rectangles. These are both effective encodings and we can easily <strong>decode</strong> to teams or years. The points differentials are encoded as the <strong>colour</strong> of the rectangles, but in a slightly complicated way. Positive data values encode to a shade of green, while negative values encode to a shade of brown. In both cases, we have a constant <strong>hue</strong>, with increasing <strong>chroma</strong> and decreasing <strong>luminance</strong> as the data values get further away from zero.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p><a href="#fig-neg-tile" class="quarto-xref">Figure&nbsp;<span>6.20</span></a> shows a heatmap of the points differential (points scored for minus points scored against) for Tier One nations at each Rugby World Cup. The data symbols are rectangles, the teams are encoded as the vertical <strong>positions</strong> of the rectangles, and the years are encoded as the horizontal <strong>positions</strong> of the rectangles. These are both effective encodings and we can easily <strong>decode</strong> to teams or years. The points differentials are encoded as the <strong>colour</strong> of the rectangles, but in a slightly complicated way. Positive data values encode to a shade of green, while negative values encode to a shade of brown. In both cases, we have a constant <strong>hue</strong>, with increasing <strong>chroma</strong> and decreasing <strong>luminance</strong> as the data values get further away from zero.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
 <p>The use of two <strong>hues</strong> creates two different groups (positive and negative values), while the changes in <strong>chroma</strong> and <strong>luminance</strong> convey changes in absolute magnitude (if only for ordinal comparisons).<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> This means that we can easily identify positive versus negative points differentials <em>and</em> we can easily decode larger or smaller points differentials (within each of those groups).</p>
+<p>A diverging colour palette is effective because it creates two distinct visual features: a nominal hue to differentiate between two groups and changes in chroma and/or luminance to encode ordinal values within each group.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-neg-tile" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -772,31 +721,28 @@ Table&nbsp;6.1: A table of the total number of points scored and conceded by Tie
 <img src="qualitative_files/figure-html/fig-neg-tile-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-neg-tile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.21: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups. South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.
+Figure&nbsp;6.20: A heatmap of the total points differentials for Tier One nations at individual Rugby World Cups. South Africa was excluded from the 1987 and 1991 tournament due to its apartheid policies.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>A diverging colour palette is effective because it creates two distinct visual features: a nominal hue to differentiate between two groups and changes in chroma and/or luminance to encode ordinal values within each group.</p>
-</blockquote>
 </section>
-<section id="sec-rainbow" class="level2" data-number="6.12">
-<h2 data-number="6.12" class="anchored" data-anchor-id="sec-rainbow"><span class="header-section-number">6.12</span> Case study: The rainbow</h2>
-<p>In some fields of research, for example medical imaging and geographic imaging, a common task is to visualise numeric data values on a regular spatial grid. <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a> shows an example, where the grid is a set of longitudes and latitudes in the vicinity of New Zealand and the data values are measures of wind strength.</p>
-<p>A common approach is to encode the numeric data values using colour<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> and it is also common to use a rainbow colour palette for that encoding (the image on the right of <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a>). However, there are several problems with this approach.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
+<section id="sec-rainbow" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="sec-rainbow"><span class="header-section-number">6.11</span> Case study: The rainbow</h2>
+<p>In some fields of research, for example medical imaging and geographic imaging, a common task is to visualise numeric data values on a regular spatial grid. <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.21</span></a> shows an example, where the grid is a set of longitudes and latitudes in the vicinity of New Zealand and the data values are measures of wind strength (this is the data set that we saw in <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
+<p>A common approach is to encode the numeric data values using colour<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> and it is also common to use a rainbow colour palette for that encoding (<a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.21</span></a>). However, there are several problems with this approach.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
 <div id="fig-nomads-rainbow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-nomads-rainbow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Data/Weather/NOMADS-rainbow.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nomads-rainbow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.22: A snapshot of wind strength in the vicinity of New Zealand on September 14 2024. This uses the same data as <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, but does not show wind direction. The image uses a rainbow colour palette (from red through green and blue to violet; see <a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.23</span></a>).
+Figure&nbsp;6.21: A snapshot of wind strength in the vicinity of New Zealand on September 14 2024. This uses the same data as <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, but does not show wind direction. The image uses a rainbow colour palette (from red through green and blue to violet; see <a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a>).
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.23</span></a> shows the spectrum of colours for rainbow palettes.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> This shows that the colours within a rainbow palette differ mostly in terms of hue and we have already established that hue is not a good visual feature for encoding quantitative data values (<a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a> and <a href="#sec-colour" class="quarto-xref"><span>Section 6.1</span></a>).</p>
+<p><a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a> shows the spectrum of colours for rainbow palettes.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> This shows that the colours within a rainbow palette differ mostly in terms of hue and we have already established that hue is not a good visual feature for encoding quantitative data values (<a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a> and <a href="#sec-colour" class="quarto-xref"><span>Section 6.1</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rainbow" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -805,20 +751,20 @@ Figure&nbsp;6.22: A snapshot of wind strength in the vicinity of New Zealand on 
 <img src="qualitative_files/figure-html/fig-rainbow-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rainbow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.23: The top row shows the spectrum of colours from which a classic <em>rainbow</em> colour palette is taken. The middle row shows the changing luminance of the colours in the rainbow spectrum. The luminance of the blue colours is considerably less than the luminance of the yellows and greens and even the reds. The bottom row shows an example rainbow palette of 6 colours taken from the rainbow spectrum.
+Figure&nbsp;6.22: The top row shows the spectrum of colours from which a classic <em>rainbow</em> colour palette is taken. The middle row shows the changing luminance of the colours in the rainbow spectrum. The luminance of the blue colours is considerably less than the luminance of the yellows and greens and even the reds. The bottom row shows an example rainbow palette of 6 colours taken from the rainbow spectrum.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>At the same time, The middle row of <a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.23</span></a> shows that the rainbow palette also varies in terms of luminance. We know that luminance can be an effective encoding for ordinal data values (<a href="#sec-ordinal" class="quarto-xref"><span>Section 6.2</span></a>), but the luminance changes in a rainbow palette are not monotonic. There are regions of almost constant luminance plus regions where luminance decreases followed by regions where luminance increases.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> This makes a rainbow palette a poor encoding even for showing the order of numeric data values.</p>
-<p>Finally, the changes in luminance and chroma within the rainbow spectrum produce bands of colours (red, yellow, green, cyan, blue, magenta). In other words, the spectrum appears discrete rather than continuous. This can result in a decoding that <em>adds</em> structure (discrete levels) to numeric data values that are in reality continuous.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> For example, <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a> suggests three main regions–red-yellow, green-cyan, and blue-magenta—but the underlying data values vary more smoothly than that.</p>
+<p>At the same time, The middle row of <a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a> shows that the rainbow palette also varies in terms of luminance. We know that luminance can be an effective encoding for ordinal data values (<a href="#sec-ordinal" class="quarto-xref"><span>Section 6.2</span></a>), but the luminance changes in a rainbow palette are not monotonic. There are regions of almost constant luminance plus regions where luminance decreases followed by regions where luminance increases.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> This makes a rainbow palette a poor encoding even for showing the order of numeric data values.</p>
+<p>Finally, the changes in luminance and chroma within the rainbow spectrum produce bands of colours (red, yellow, green, cyan, blue, magenta). In other words, the spectrum appears discrete rather than continuous. This can result in a decoding that <em>adds</em> structure (discrete levels) to numeric data values that are in reality continuous.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> For example, <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.21</span></a> suggests three main regions—red-yellow, green-cyan, and blue-magenta—but the underlying data values vary more smoothly than that.</p>
 </section>
-<section id="sec-viridis" class="level2" data-number="6.13">
-<h2 data-number="6.13" class="anchored" data-anchor-id="sec-viridis"><span class="header-section-number">6.13</span> Case study: Viridis</h2>
-<p>One of the arguments for using a rainbow colour palette is that viewers like that it is colourful. We also saw in <a href="#sec-escape" class="quarto-xref"><span>Section 6.9</span></a> that varying hue in addition to luminance can help to increase the capacity of an ordinal colour scale.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
-<p>The <strong>viridis</strong> colour palette, shown in <a href="#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.24</span></a> (on the right), is an attempt to fix the problems of the rainbow palette, while still retaining a significant range of hues. Compared to <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a>, it is much easier to decode regions of stronger winds and regions of weaker winds. This is because the regions of stronger winds are darker than the regions of weaker winds in <a href="#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.24</span></a>, rather than just being different hues in <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a>.</p>
-<p>At the same time, the image on the left of <a href="#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.24</span></a> shows a colour palette that only varies in terms of luminance and we can see that it is easier to see some details in the more colourful viridis map, such as the variations in low wind strength (the yellows) over New Zealand.</p>
+<section id="sec-viridis" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="sec-viridis"><span class="header-section-number">6.12</span> Case study: Viridis</h2>
+<p>One of the arguments for using a rainbow colour palette is that viewers like that it is colourful. We also saw in <a href="#sec-escape" class="quarto-xref"><span>Section 6.8</span></a> that varying hue in addition to luminance can help to increase the capacity of an ordinal colour scale.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
+<p>The <strong>viridis</strong> colour palette, shown in <a href="#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.23</span></a> (on the right), is an attempt to fix the problems of the rainbow palette, while still retaining a significant range of hues. Compared to <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.21</span></a>, it is much easier to decode regions of stronger winds and regions of weaker winds. This is because the regions of stronger winds are darker than the regions of weaker winds in <a href="#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.23</span></a>, rather than just being different hues in <a href="#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.21</span></a>.</p>
+<p>At the same time, the image on the left of <a href="#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.23</span></a> shows a colour palette that only varies in terms of luminance and we can see that it is easier to see some details in the more colourful viridis map, such as the variations in low wind strength (the yellows) over New Zealand. This is thanks to the changes in hue as well as luminance in the viridis map; the grey-scale map on the left of <a href="#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.23</span></a> varies only in terms of luminance.</p>
 <div id="fig-nomads-viridis" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-nomads-viridis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -832,11 +778,11 @@ Figure&nbsp;6.23: The top row shows the spectrum of colours from which a classic
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nomads-viridis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.24: A snapshot of wind strength in the vicinity of New Zealand on September 14 2024. This uses the same data as <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, but does not show wind direction. The image on the left encodes wind strength as shades of grey (darker is stronger) and the image on the right uses a viridis colour palette (<a href="#fig-viridis" class="quarto-xref">Figure&nbsp;<span>6.25</span></a>).
+Figure&nbsp;6.23: A snapshot of wind strength in the vicinity of New Zealand on September 14 2024. This uses the same data as <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, but does not show wind direction. The image on the left encodes wind strength as shades of grey (darker is stronger) and the image on the right uses a viridis colour palette (<a href="#fig-viridis" class="quarto-xref">Figure&nbsp;<span>6.24</span></a>).
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-viridis" class="quarto-xref">Figure&nbsp;<span>6.25</span></a> shows the spectrum for viridis colour palettes.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> We can see that there is still a large range of hues, but the change in luminance is now monotonic, which at least allows decoding of ordinal data values. In addition, the range of hues has been selected to be appropriate for viewers with red-green colour blindness (<a href="#sec-CVD" class="quarto-xref"><span>Section 6.7</span></a>).<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></p>
+<p><a href="#fig-viridis" class="quarto-xref">Figure&nbsp;<span>6.24</span></a> shows the spectrum for viridis colour palettes.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> We can see that there is still a large range of hues, but the change in luminance is now monotonic, which at least allows decoding of ordinal data values. In addition, the range of hues has been selected to be appropriate for viewers with red-green colour blindness (<a href="#sec-CVD" class="quarto-xref"><span>Section 6.7</span></a>).<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-viridis" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -845,15 +791,15 @@ Figure&nbsp;6.24: A snapshot of wind strength in the vicinity of New Zealand on 
 <img src="qualitative_files/figure-html/fig-viridis-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-viridis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.25: The top row shows the spectrum of colours from which a viridis colour palette is taken. The middle row shows the changing luminance of the colours in the viridis spectrum. The luminance change is monotonic. The bottom row shows an example viridis palette of 6 colours taken from the viridis spectrum.
+Figure&nbsp;6.24: The top row shows the spectrum of colours from which a viridis colour palette is taken. The middle row shows the changing luminance of the colours in the viridis spectrum. The luminance change is monotonic. The bottom row shows an example viridis palette of 6 colours taken from the viridis spectrum.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="summary" class="level2" data-number="6.14">
-<h2 data-number="6.14" class="anchored" data-anchor-id="summary"><span class="header-section-number">6.14</span> Summary</h2>
+<section id="summary" class="level2" data-number="6.13">
+<h2 data-number="6.13" class="anchored" data-anchor-id="summary"><span class="header-section-number">6.13</span> Summary</h2>
 <div class="oldsummary callout callout-style-default callout-note no-icon callout-titled" title="Précis *(click to expand/contract)*">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -991,7 +937,7 @@ Zeileis, Achim, and Paul Murrell. 2023. <span>“Coloring in r’s Blind Spot.�
 <p>The approximate figure of 10% is from <span class="citation" data-cites="ware2021information">Ware (<a href="#ref-ware2021information" role="doc-biblioref">2021</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p>This idea is described and demonstrated in <span class="citation" data-cites="ivapp25">Bartolomeo et al. (<a href="#ref-ivapp25" role="doc-biblioref">2025</a>)</span>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>The ColorBrewer tools are described in <span class="citation" data-cites="Harrower2003ColorBrewerorg">Harrower and Brewer (<a href="#ref-Harrower2003ColorBrewerorg" role="doc-biblioref">2003</a>)</span>.</p>
-<p>Okabe and Ito established the Color Universal Design organization, but the associated web site is no longer available. <span class="citation" data-cites="Okabe+Ito:2008">Okabe and Ito (<a href="#ref-Okabe+Ito:2008" role="doc-biblioref">2008</a>)</span> provides a general discussion of colour-blindness, including the palette used in <a href="#fig-palettes" class="quarto-xref">Figure&nbsp;<span>6.20</span></a>. An earlier piece of work that produced a palette of just 4 colours is described in <span class="citation" data-cites="CUD">Ichihara et al. (<a href="#ref-CUD" role="doc-biblioref">2008</a>)</span>.</p>
+<p>Okabe and Ito established the Color Universal Design organization, but the associated web site is no longer available. <span class="citation" data-cites="Okabe+Ito:2008">Okabe and Ito (<a href="#ref-Okabe+Ito:2008" role="doc-biblioref">2008</a>)</span> provides a general discussion of colour-blindness, including the palette used in <a href="#fig-palettes" class="quarto-xref">Figure&nbsp;<span>6.19</span></a>. An earlier piece of work that produced a palette of just 4 colours is described in <span class="citation" data-cites="CUD">Ichihara et al. (<a href="#ref-CUD" role="doc-biblioref">2008</a>)</span>.</p>
 <p><span class="citation" data-cites="RJ-2023-071">Zeileis and Murrell (<a href="#ref-RJ-2023-071" role="doc-biblioref">2023</a>)</span> provides an overview of a large number of different palettes, within the context of producing data visualisations in R.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12"><p>This colour palette is based on the <em>BrBG</em> diverging palette from ColorBrewer.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn13"><p>In contrast to a <em>diverging</em> colour palette, a colour palette for nominal data is often called a <em>qualitative</em> palette and a palette for ordinal or qualitative data is called a <em>sequential</em> palette.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1000,12 +946,12 @@ Zeileis, Achim, and Paul Murrell. 2023. <span>“Coloring in r’s Blind Spot.�
 <li id="fn16"><p>The rainbow palette is typically a fully-<em>saturated</em>, maximum-<em>value</em> spectrum of hues—the most colourful and brightest colours that a typical computer monitor can produce.</p>
 <p>Saturation and value are essentially less accurate versions of chroma and luminance. For example, a fully-saturated, maximum-value yellow has a higher chroma and luminance than a fully-saturated, maximum-value blue.</p>
 <p>The rainbow spectrum is basically a path along the boundary of the colours in <a href="#fig-colour-spaces-srgb" class="quarto-xref">Figure&nbsp;<span>6.10</span></a>, visiting the most extreme points for different hues. This path clearly is not going to have a simple monotonic change in either luminance or chroma.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn17"><p>A rainbow palette is a colour encoding that is non-linear in an unhelpful way (<a href="#sec-col-non-linear" class="quarto-xref"><span>Section 6.8</span></a>).</p>
-<p>The representation of luminance in <a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.23</span></a> also shows an example of a 3d illusion (<a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>). The curved line combined with the gradients of grey tempt us to see a curved wall of constant height that is receding from us.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>A rainbow palette is a colour encoding that is non-linear (<a href="position.html#sec-non-linear-pos" class="quarto-xref"><span>Section 4.7</span></a>).</p>
+<p>The representation of luminance in <a href="#fig-rainbow" class="quarto-xref">Figure&nbsp;<span>6.22</span></a> also shows an example of a 3d illusion (<a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>). The curved line combined with the gradients of grey tempt us to see a curved wall of constant height that is receding from us.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn18"><p><span class="citation" data-cites="color-naming">Heer and Stone (<a href="#ref-color-naming" role="doc-biblioref">2012</a>)</span> discuss that viewers tend to group colours by discrete colour names and that those colour groups help to explain how colour palettes are decoded.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn19"><p><span class="citation" data-cites="over-the-rainbow">Liu and Heer (<a href="#ref-over-the-rainbow" role="doc-biblioref">2018</a>)</span> provide evidence that colour palettes that vary in hue as well as luminance and/or chroma (multi-hue palettes) lead to faster and more accurate decoding than palettes with a constant hue (single-hue palettes). <span class="citation" data-cites="rainbow-not-all-bad">Ware, Stone, and Szafir (<a href="#ref-rainbow-not-all-bad" role="doc-biblioref">2023</a>)</span> make a similar argument.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn20"><p>There is no official publication that explains the development of the viridis colour spectrum, but there is a <a href="https://www.youtube.com/watch?v=xAoljeRJ3lU">video on YouTube</a> that is very good <span class="citation" data-cites="smith2015bettercolormap">(<a href="#ref-smith2015bettercolormap" role="doc-biblioref">Smith and Walt 2015</a>)</span>.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn21"><p><span class="citation" data-cites="cividis">Nuñez (<a href="#ref-cividis" role="doc-biblioref">2018</a>)</span> take things a step further with a <em>cividis</em> colour palette that provides a CVD-safe version of viridis that also has a wider and <em>linear</em> variation in luminance (in <a href="#fig-viridis" class="quarto-xref">Figure&nbsp;<span>6.25</span></a>, we can see that the changes in luminance are non-linear and do not span the full range of luminance).<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p><span class="citation" data-cites="cividis">Nuñez (<a href="#ref-cividis" role="doc-biblioref">2018</a>)</span> take things a step further with a <em>cividis</em> colour palette that provides a CVD-safe version of viridis that also has a wider and <em>linear</em> variation in luminance (in <a href="#fig-viridis" class="quarto-xref">Figure&nbsp;<span>6.24</span></a>, we can see that the changes in luminance are non-linear and do not span the full range of luminance).<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
