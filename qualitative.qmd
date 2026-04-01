@@ -706,10 +706,10 @@ be increased by varying more than one of hue, chroma, and luminance.
 #| echo: false
 #| label: fig-escape-lum
 #| fig-height: 3
-#| fig-cap: The top row holds hue and chroma constant and just varies luminance. It is limited to a very low chroma.  The middle row varies chroma as well as luminance, which provides a wider range of colours compared to the top row by allowing a more colourful starting point.  The bottom row varies hue and luminance, which provides a wider range of colours compared to the top row by allowing a different-hued starting point.
+#| fig-cap: The top row holds hue and chroma constant and just varies luminance. It is limited to a very low chroma.  The middle row varies chroma as well as luminance, which provides a wider range of colours compared to the top row.  The bottom row varies hue as well as chroma and luminance, which provides an even wider range of colours.
 hue <- 0
 chroma <- 40
-lum <- 100*seq(.3, .8, length.out=5)
+lum <- 100*seq(.2, .8, length.out=5)
 grid.newpage()
 pushViewport(viewport(width=.8, layout=grid.layout(3, 1)))
 pushViewport(viewport(layout.pos.row=1))
@@ -722,14 +722,15 @@ pushViewport(viewport(layout.pos.row=2))
 grid.rect(y=1, width=2, height=.25/3, gp=gpar(col=NA, fill="white"))
 grid.rect(1:5/6, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
           gp=gpar(col="black", lwd=1,
-                  fill=hcl(hue, seq(65, chroma, length.out=5), lum, 
+                  fill=hcl(hue, c(chroma, 55, 70, 55, chroma), lum, 
                            fixup=FALSE)))
 popViewport()
 pushViewport(viewport(layout.pos.row=3))
 grid.rect(y=1, width=2, height=.25/3, gp=gpar(col=NA, fill="white"))
 grid.rect(1:5/6, width=unit(.5, "snpc"), height=unit(.5, "snpc"),
           gp=gpar(col="black", lwd=1,
-                  fill=hcl(seq(hue - 50, hue, length.out=5), chroma, lum, 
+                  fill=hcl(seq(hue - 50, hue, length.out=5), 
+                           c(chroma, 55, 70, 55, chroma), lum, 
                            fixup=FALSE)))
 popViewport()
 ```
