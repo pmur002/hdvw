@@ -7,21 +7,26 @@ source("common.R")
 
 # Congruent Encodings {#sec-congruence}
 
-In previous chapters, we have seen that,
-part of the reason why some well-known plots, like
-bar plots, are effective is because they 
+In previous chapters, we have seen that
+some well-known plots, like
+bar plots, are effective because they 
 encode data values to the basic visual features of a data symbol.
 For example, encoding the number of youth offenders as the 
 **length** of a bar in a bar plot (@fig-bar-district).
 We have also seen that basic visual features like **length**
-are effective because we can accurately decode data values
+are effective because we can *accurately* decode *quantitative* data values
 from those visual features.
+We have also considered the *capacity* of visual features:
+how many different *qualitative* data values can we decode
+from a visual feature.
+For example, we can only identify a small number of different
+qualitative values if we encode the values using **colour**.
 
 The purpose of this chapter is to show that,
 in order to understand the effectiveness
 of a data visualisation, we need to consider more
-than just the accuracy or capacity of our encodings from 
-data values to basic visual features.
+than just the accuracy of encodings or the capacity of encodings when
+we encode data values as basic visual features.
 
 ## Implicit decodings {#sec-implicit}
 
@@ -70,11 +75,11 @@ encoded any data values.
 When an implicit decoding exists,
 we can produce a more effective encoding by building upon
 the implicit decoding.
-We can explicitly encode data values as visual features in such a way that
-the decoding is **congruent** with the implicit decoding, in the sense
-that the implicit decoding leads back to the same data values
-that we explicitly encoded
-(@fig-congruent-decode).[^congruence-lit]
+We can explicitly encode data values as visual features so that
+the decoding leads back to the same data values
+that we explicitly encoded (@fig-congruent-decode)---we 
+can explicitly encode data values so that
+the decoding is **congruent** with the implicit decoding.[^congruence-lit]
 
 [^congruence-lit]:
     @TVERSKY2002247 describe a *congruence principle*: 
@@ -85,7 +90,7 @@ that we explicitly encoded
     the "internal representation" corresponds to an implicit decoding.
 
     @all-scatterplots discuss measures of effectiveness beyond 
-    accuracy and capacity and refers to 
+    accuracy and capacity and refer to 
     the congruence principle above as well as the idea of
     *congnitive fit*: "performance on a task will be enhanced when there is a
     cognitive fit (match) between the information emphasized in the
@@ -97,9 +102,8 @@ that we explicitly encoded
 
     The idea of *cognitive affordance*,
     "the relationship between the design of an object and the 
-    knowledge that is imparted upon the object's user", 
-    (@cognitive-affordance) is also
-    related to the idea of congruence.
+    knowledge that is imparted upon the object's user", is also
+    related to the idea of congruence [@cognitive-affordance].
 
 ::: {#fig-congruent-decode}
 ::: {.content-visible when-format=pdf}
@@ -179,12 +183,12 @@ The reason why the pie chart in @fig-prop is more effective
 than a bar plot for conveying simple proportions like a quarter
 or a third or a half is because 
 the wedges in a pie chart have an implicit decoding to
-fractions of a whole.
+(simple) fractions of a whole.
 A semi-circle has a strong visual association with *half* of a circle
 and thirds and quarters are similarly evocative.
 
-> One reason why a pie chart can be effective is because 
-  segments of a pie vividly convey simple fractions of a whole.
+One reason why a pie chart can be effective is because 
+segments of a pie vividly convey simple fractions of a whole.
 
 @fig-bar-part shows that if we place a bar representing a proportion bar 
 within a reference rectangle that corresponds to a proportion of 1,
@@ -244,19 +248,23 @@ the presentation of larger data values is more abstract in a dot plot.
 #|   - Dots.
 #| layout-ncol: 2
 
-gg <- ggplot(crimeGroupTotal) + 
-    geom_col(aes(x=total, y=group)) +
+gg <- ggplot(crimeGroup2021) + 
+    geom_col(aes(x=count, y=group)) +
     scale_x_continuous(expand=expansion(c(0, .05))) +
+    xlab(NULL) +
+    ylab(NULL) +
     theme(aspect.ratio=1)
 grid.newpage()
 pushViewport(viewport(width=.9, height=.9))
 print(gg, newpage=FALSE)
 popViewport()
 
-gg <- ggplot(crimeGroupTotal) + 
+gg <- ggplot(crimeGroup2021) + 
     geom_segment(aes(x=-Inf, xend=Inf, y=group, yend=group), 
                  linetype="dotted") +
-    geom_point(aes(x=total, y=group)) +
+    geom_point(aes(x=count, y=group)) +
+    xlab(NULL) +
+    ylab(NULL) +
     scale_x_continuous(name="total") +
     theme(aspect.ratio=1)
 grid.newpage()
@@ -281,6 +289,7 @@ rwcAlltime$team <- reorder(rwcAlltime$team, rwcAlltime$diff)
 ggplot(rwcAlltime) +
     geom_col(aes(x=diff, y=team)) +
     scale_x_continuous(name="points differential") +
+    ylab(NULL) +
     theme(aspect.ratio=2/3)
 ```
 
@@ -297,11 +306,12 @@ ggplot(rwcAlltime) +
     geom_segment(aes(x=-Inf, xend=Inf, y=team, yend=team), linetype="dotted") +
     annotate("segment", x=0, xend=0, y=-Inf, yend=Inf, linetype="solid") +
     scale_x_continuous(name="points differential") +
+    ylab(NULL) +
     theme(aspect.ratio=2/3)
 ```
 
-> One reason why bar plots are effective is because larger data values are
-  represented by larger data symbols.
+One reason why bar plots are effective is because larger data values are
+represented by larger data symbols.
 
 A more subtle effect can be seen in @fig-bar-orientation,
 which shows two different bar plots of the total number
@@ -367,8 +377,8 @@ the bars are different.
 The "widths" of the bars and the **colours** of the bars remain
 the same.
 
-> Another reason why bar plots are effective is because the bars
-  differ in length, but are otherwise the same.
+Another reason why bar plots are effective is because the bars
+differ in length, but are otherwise the same.
 
 ## Dissonant encodings {#sec-dissonance}
 
@@ -558,9 +568,9 @@ ggplot(old) +
   This plot is based on a data visualisation from the New Zealand Listener 
   October 14-20 2023.
 
-> A data visualisation is *not* effective if it contains encodings
-  that are dissonant because that can cause distraction and slower and/or
-  incorrect **decoding** of data values from visual features.
+A data visualisation is *not* effective if it contains encodings
+that are dissonant because that can cause distraction and slower and/or
+incorrect **decoding** of data values from visual features.
 
 ## Case study:  Time's arrow
 
@@ -647,13 +657,9 @@ ggplot(poll) +
 
 ## Case study: Jittering {#sec-jitter}
 
-We have data on the 
-the number of points that were scored in every World Cup match
-by Tier One nations (the top 10 rugby-playing nations).
-@tbl-rwc-all shows a sample of these data.
-
 @fig-jitter shows a dot plot of the number of points scored 
-by teams from different hemispheres at Rugby World Cup matches.
+by Tier One nations from different hemispheres at Rugby World Cup matches
+(@tbl-rwc-all).
 In this data visualisation, the data symbols are dots,
 the number of points scored is encoded as the horizontal **position** of
 the dots, and the hemisphere is encoded as the vertical **position**
@@ -696,11 +702,11 @@ The randomness of the jittering may help to dilute any temptation
 to seek meaning from the artificial visual difference, but the
 addition of jittering is a potential source of confusion.
 
-> Jittering data symbols is effective because it reduces the amount of overlap
-  amongst data
-  symbols, but jittering may also 
-  reduce the effectiveness of a data visualisation because it introduces
-  visual dissonance.
+Jittering data symbols is effective because it reduces the amount of overlap
+amongst data
+symbols, but jittering may also 
+reduce the effectiveness of a data visualisation because it introduces
+visual dissonance.
 
 ## Summary
 

@@ -8,14 +8,15 @@ source("common.R")
 # Encoding Summaries {#sec-summaries}
 
 In @sec-encoding-visual-features we described a data visualisation as
-a encoding that **encodes** data values as the visual features of a data symbol
-(@fig-visual-feature).
+a **encoding** of **data values** as the **visual features** of a 
+**data symbol** (@fig-visual-feature).
 For example, a bar plot,
-like @fig-bar, encodes the total number of youth offenders to the **lengths**
+like @fig-bar, encodes the total number of youth offenders as the **lengths**
 of bars.
 
 We also emphasised the importance of the **decoding** from visual 
-features to data values.  For example, the effectiveness of the bar plot
+features to data values (@fig-visual-feature).  
+For example, the effectiveness of the bar plot
 in @fig-bar relies on our ability to accurately decode the lengths
 of the bars, particularly relative to each other.
 
@@ -112,8 +113,8 @@ Another important difference with a box plot is that it encodes
 **data summaries**, rather than raw data values,
 to visual features of the data symbol
 (@fig-stat-vis-decode).
-For example, the median values are encoded to the horizontal **positions** of 
-thick vertical lines and the interquartile ranges are encoded to the
+For example, the median values are encoded as the horizontal **positions** of 
+thick vertical lines and the interquartile ranges are encoded as the
 **lengths** of horizontal rectangles.
 
 ::: {#fig-stat-vis-decode}
@@ -176,10 +177,10 @@ is that we are encoding **data summaries** rather than raw data values
 and we are encoding 
 to the visual features of a more complicated data symbol.
 
-> A box plot is effective at conveying information about the
-  distribution of data values because it encodes **data summaries**
-  about the distribution, like the median
-  and interquartile range, to basic visual features.
+A box plot is effective at conveying information about the
+distribution of data values because it encodes **data summaries**
+about the distribution, like the median
+and interquartile range, to basic visual features.
 
 ## Visual summaries {#sec-visual-summaries}
 
@@ -189,7 +190,7 @@ This data visualisation uses the same data as @fig-boxplot, but it
 encodes raw data values rather than data summaries and it uses much simpler
 data symbols (data points).
 This data visualisation encodes the
-number of points scored encodes as the horizontal **position** of
+number of points scored as the horizontal **position** of
 a data point and it encodes the hemisphere as the vertical
 **position** of a data point.
 There is an overplotting problem (@sec-overplot), which is solved in this
@@ -234,7 +235,7 @@ popViewport()
 The fact that we can decode raw data values from a dot plot is
 not news.  That is easy because we have encoded
 raw data values as accurate visual features
-(see @sec-dot-plots).
+(@sec-dot-plots).
 However, @fig-rwc-dotplot also demonstrates that, in addition to decoding
 raw data values from visual features, 
 our visual system allows us to decode
@@ -280,10 +281,10 @@ to decode data values, but it may *also* allow us to decode
 summaries of the data, such as measures of central tendency or variability.
 :::
 
-> A dot plot is effective not just for perceiving raw data values, but
-  also for perceving 
-  data summaries like clusters and outliers, and central tendency
-  and spread.
+A dot plot is effective not just for perceiving raw data values, but
+also for perceving 
+data summaries like clusters and outliers, and central tendency
+and spread.
 
 ## Case study: Histograms
 
@@ -376,20 +377,21 @@ of data values in each interval drops more rapidly above the highest bar
 than below the highest bar.  The latter tells us about
 the spread and/or skewness of the data.
 
-> A histogram is effective at conveying information about the distribution
-  of data values because it encodes data summaries to basic visual features
-  and those data summaries can be compared to provide information about
-  the distribution of the data.
+A histogram is effective at conveying information about the distribution
+of data values because it encodes data summaries to basic visual features
+and those data summaries can be compared to provide information about
+the distribution of the data.
 
 ## Decoding summaries {#sec-summary-decode}
 
 When we encode a data summary as a visual feature, like the position
 of the median line of a boxplot (@fig-boxplot), we know from
 previous chapters how effective the decoding is going to be.
-For example, because the median is encoded as position, we should be
+For example, because the median is encoded as the horizontal
+position of a line, we should be
 able to decode the median very accurately (@sec-accuracy).
 
-However, if we rely on a visual summary to decode a data summary, for example,
+However, if we rely on a *visual* summary to decode a data summary, for example,
 comparing the 
 average points scored by teams from different hemispheres based on
 a collection of data points for each hemisphere (@fig-rwc-dotplot),
@@ -446,16 +448,18 @@ of multiple data symbols can also be effective.[^visual-average]
 For more qualitative summaries, such as identifying clusters
 and outliers, we know that performance will be good because
 these decodings rely on fundamental properties of our visual system
-that identify unusual items (@sec-differences) and identify groups of items 
+that identify unusual items (@sec-differences) and 
+on fundamental properties of our visual system that identify groups of items 
 (@sec-visual-model-groups).
 
 ## Dangers of summaries {#sec-summary-caveats}
 
 The benefit of a data visualisation that encodes
 **data summaries** as visual features is that it allows us to decode
-data summaries very easily.  For example, although we can perceive
+data summaries very easily and accurately.
+For example, although we can perceive
 a general idea of central tendency from the dots in @fig-rwc-dotplot
-(see @sec-visual-summaries),
+(@sec-visual-summaries),
 it is much easier and more accurate to perceive
 median values from the thick vertical lines in @fig-boxplot.
 
@@ -467,9 +471,9 @@ For example, we cannot see from the box plot in
 this is clear from @fig-rwc-dotplot because the dot plot does encode
 the raw data values to data symbols.
 
-> Box plots and 
-  histograms are *not* effective at conveying raw data values because they
-  do not encode raw data values to data symbols.
+Box plots and 
+histograms are *not* effective at conveying raw data values because they
+do not encode raw data values to data symbols.
 
 Another point to consider with a data visualisation that is based on
 data summaries is
@@ -525,12 +529,11 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-> A data visualisation that is based on data summaries
-  can only be effective if the data summaries are sensible
-  summaries of the data.
-
-> A box plot is *not* effective if a five-number summary is not a 
-  sensible summary of the data values.
+A data visualisation that is based on data summaries
+can only be effective if the data summaries are sensible
+summaries of the data.
+A box plot is *not* effective if a five-number summary is not a 
+sensible summary of the data values.
 
 A further complication arises with histograms because we have to
 *choose* the intervals that are used to calculate the data summaries
@@ -601,8 +604,9 @@ leads to an extreme exaggeration of the difference between the two
 top tax rates.
 
 [^bars-at-zero]: 
-    This is a reproduction of a chart from Alberto Cairo's "How Charts Lie"
-    (p12-13), which itself was a reproduction of a chart shown by Fox News.
+    This data visualisation is based on a chart 
+    from Alberto Cairo's "How Charts Lie"
+    (p12-13), which itself was based on a chart shown by Fox News.
 
 ```{r}
 #| echo: false
@@ -634,6 +638,7 @@ ggplot(tax) +
     scale_y_continuous(expand=expansion(0)) +
     theme_minimal() +
     theme(plot.margin=unit(c(2, 0, 1, 0), "lines"),
+          plot.background=element_blank(),
           panel.grid=element_blank(),
           title=element_blank(),
           axis.text.y=element_blank(),
@@ -772,13 +777,13 @@ may not be that important.[^ordinal-comparison]
     @all-scatterplots argue that ordinal comparisons are 
     more commonly useful in practice than quantitative comparisons.
 
+    @graphic-comparisons has this to say:
+
     "1. Graphics are for the qualitative/descriptive---conceivably the
     semiquantitative---never for the carefully quantitative."
 
     "2. Graphics are for comparison-comparison of one kind or another - not for
     access to individual amounts."
-
-    @graphic-comparisons
 
 For comparison, @fig-no-downgrade shows a simple bar plot of the same
 crime rates.  In this data visualisation, although we can decode
@@ -853,8 +858,11 @@ decode the colours of individual rectangles (@sec-colour-relative).
 
 In the case of a heatmap, ordinal comparisons are typically what
 is of most importance.  The aim is *not* to be able to decode
-individual quantitative data values
-and this moderates the damage that is done by relative perception
+individual quantitative data values.
+Furthermore, we gain from being able to 
+decode visual summaries, such as *regions* of darker and lighter
+rectangles.
+These positives moderate the damage that is done by relative perception
 of the heatmap rectangles.
 
 ## Cognitive load
@@ -958,9 +966,9 @@ of the data and encoding data summaries as visual features,
 rather than encoding raw data values and asking the viewer
 to perform visual summaries.
 
-> It is possible in some cases to rely on visual summaries, but 
-  we need to be careful
-  not to set a visual task that requires too much mental effort.
+It is possible in some cases to rely on visual summaries, but 
+we need to be careful
+not to set a visual task that requires too much mental effort.
 
 ## Case study:  Visualising uncertainty
 
@@ -1028,7 +1036,7 @@ as well as differences in score variation between years.
 #| fig-cap: A plot of the mean points scored, plus-or-minus the standard deviations of points scored, in matches between Tier One nations at Rugby World Cup matches.
 gg <- ggplot(rwcPoints) +
     geom_point(aes(year, mean), size=2) +
-    geom_errorbar(aes(year, mean, ymin=lower, ymax=upper)) +
+    geom_errorbar(aes(year, mean, ymin=lower, ymax=upper), width=2) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05)))
 grid.newpage()
 pushViewport(viewport(width=.8, height=.8))

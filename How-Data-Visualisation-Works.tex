@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-04-01)
+Version 0.9 (build 2026-04-20)
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, arc=.35mm, rightrule=.15mm, titlerule=0mm, toprule=.15mm, bottomtitle=1mm, left=2mm, colframe=quarto-callout-warning-color-frame, breakable, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white, toptitle=1mm, leftrule=.75mm, colback=white]
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, bottomrule=.15mm, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, breakable, rightrule=.15mm, bottomtitle=1mm, toptitle=1mm, opacitybacktitle=0.6, colback=white, titlerule=0mm, colframe=quarto-callout-warning-color-frame, arc=.35mm, toprule=.15mm, leftrule=.75mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-04-01).
+2026. Version 0.9 (build 2026-04-20).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-04-01,
+@book{murrell-hdvw-2026-04-20,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-04-01)},
+    note = {Version 0.9 (build 2026-04-20)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -4824,18 +4824,23 @@ problems.
 
 \chapter{Congruent Encodings}\label{sec-congruence}
 
-In previous chapters, we have seen that, part of the reason why some
-well-known plots, like bar plots, are effective is because they encode
-data values to the basic visual features of a data symbol. For example,
-encoding the number of youth offenders as the \textbf{length} of a bar
-in a bar plot (Figure~\ref{fig-bar-district}). We have also seen that
-basic visual features like \textbf{length} are effective because we can
-accurately decode data values from those visual features.
+In previous chapters, we have seen that some well-known plots, like bar
+plots, are effective because they encode data values to the basic visual
+features of a data symbol. For example, encoding the number of youth
+offenders as the \textbf{length} of a bar in a bar plot
+(Figure~\ref{fig-bar-district}). We have also seen that basic visual
+features like \textbf{length} are effective because we can
+\emph{accurately} decode \emph{quantitative} data values from those
+visual features. We have also considered the \emph{capacity} of visual
+features: how many different \emph{qualitative} data values can we
+decode from a visual feature. For example, we can only identify a small
+number of different qualitative values if we encode the values using
+\textbf{colour}.
 
 The purpose of this chapter is to show that, in order to understand the
 effectiveness of a data visualisation, we need to consider more than
-just the accuracy or capacity of our encodings from data values to basic
-visual features.
+just the accuracy of encodings or the capacity of encodings when we
+encode data values as basic visual features.
 
 \section{Implicit decodings}\label{sec-implicit}
 
@@ -4881,31 +4886,32 @@ features without having explicitly encoded any data values.}
 
 When an implicit decoding exists, we can produce a more effective
 encoding by building upon the implicit decoding. We can explicitly
-encode data values as visual features in such a way that the decoding is
-\textbf{congruent} with the implicit decoding, in the sense that the
-implicit decoding leads back to the same data values that we explicitly
-encoded (Figure~\ref{fig-congruent-decode}).\footnote{Tversky, Morrison,
-  and Betrancourt (2002) describe a \emph{congruence principle}: ``the
-  structure and content of the external representation should correspond
-  to the desired structure and content of the internal representation,''
-  where the ``external representation'' is a data visualisation and the
-  ``internal representation'' corresponds to an implicit decoding.
+encode data values as visual features so that the decoding leads back to
+the same data values that we explicitly encoded
+(Figure~\ref{fig-congruent-decode})---we can explicitly encode data
+values so that the decoding is \textbf{congruent} with the implicit
+decoding.\footnote{Tversky, Morrison, and Betrancourt (2002) describe a
+  \emph{congruence principle}: ``the structure and content of the
+  external representation should correspond to the desired structure and
+  content of the internal representation,'' where the ``external
+  representation'' is a data visualisation and the ``internal
+  representation'' corresponds to an implicit decoding.
 
   Bertini, Correll, and Franconeri (2020) discuss measures of
-  effectiveness beyond accuracy and capacity and refers to the
-  congruence principle above as well as the idea of \emph{congnitive
-  fit}: ``performance on a task will be enhanced when there is a
-  cognitive fit (match) between the information emphasized in the
-  representation type and that required by the task type'' (Vessey
-  1991). The latter was focused on a comparison of plots versus tables
-  (plots for spatial comparisons and tables for more complex cognitive
-  tasks involving symbolic reasoning), but it is analogous to the idea
-  of congruent encodings.
+  effectiveness beyond accuracy and capacity and refer to the congruence
+  principle above as well as the idea of \emph{congnitive fit}:
+  ``performance on a task will be enhanced when there is a cognitive fit
+  (match) between the information emphasized in the representation type
+  and that required by the task type'' (Vessey 1991). The latter was
+  focused on a comparison of plots versus tables (plots for spatial
+  comparisons and tables for more complex cognitive tasks involving
+  symbolic reasoning), but it is analogous to the idea of congruent
+  encodings.
 
   The idea of \emph{cognitive affordance}, ``the relationship between
   the design of an object and the knowledge that is imparted upon the
-  object's user'', (Fygenson, Padilla, and Bertini (2025)) is also
-  related to the idea of congruence.}
+  object's user'', is also related to the idea of congruence (Fygenson,
+  Padilla, and Bertini 2025).}
 
 \begin{figure}
 
@@ -4981,14 +4987,12 @@ offenders from different ethnic groups.}
 The reason why the pie chart in Figure~\ref{fig-prop} is more effective
 than a bar plot for conveying simple proportions like a quarter or a
 third or a half is because the wedges in a pie chart have an implicit
-decoding to fractions of a whole. A semi-circle has a strong visual
-association with \emph{half} of a circle and thirds and quarters are
-similarly evocative.
+decoding to (simple) fractions of a whole. A semi-circle has a strong
+visual association with \emph{half} of a circle and thirds and quarters
+are similarly evocative.
 
-\begin{quote}
 One reason why a pie chart can be effective is because segments of a pie
 vividly convey simple fractions of a whole.
-\end{quote}
 
 Figure~\ref{fig-bar-part} shows that if we place a bar representing a
 proportion bar within a reference rectangle that corresponds to a
@@ -5101,10 +5105,8 @@ for Tier One nations at Rugby World Cups.}
 
 \end{figure}%
 
-\begin{quote}
 One reason why bar plots are effective is because larger data values are
 represented by larger data symbols.
-\end{quote}
 
 A more subtle effect can be seen in Figure~\ref{fig-bar-orientation},
 which shows two different bar plots of the total number of offenders in
@@ -5167,10 +5169,8 @@ are bars and only the \textbf{lengths} of the bars and the vertical
 \textbf{positions} of the bars are different. The ``widths'' of the bars
 and the \textbf{colours} of the bars remain the same.
 
-\begin{quote}
 Another reason why bar plots are effective is because the bars differ in
 length, but are otherwise the same.
-\end{quote}
 
 \section{Dissonant encodings}\label{sec-dissonance}
 
@@ -5278,11 +5278,9 @@ females aged over 100 relative to the number of makes aged over 100.}
 
 \end{figure}%
 
-\begin{quote}
 A data visualisation is \emph{not} effective if it contains encodings
 that are dissonant because that can cause distraction and slower and/or
 incorrect \textbf{decoding} of data values from visual features.
-\end{quote}
 
 \section{Case study: Time's arrow}\label{case-study-times-arrow}
 
@@ -5338,18 +5336,15 @@ policies over time.}
 
 \section{Case study: Jittering}\label{sec-jitter}
 
-We have data on the the number of points that were scored in every World
-Cup match by Tier One nations (the top 10 rugby-playing nations).
-Table~\ref{tbl-rwc-all} shows a sample of these data.
-
 Figure~\ref{fig-jitter} shows a dot plot of the number of points scored
-by teams from different hemispheres at Rugby World Cup matches. In this
-data visualisation, the data symbols are dots, the number of points
-scored is encoded as the horizontal \textbf{position} of the dots, and
-the hemisphere is encoded as the vertical \textbf{position} of the dots.
-We saw a similar visualisation of these data in
-Figure~\ref{fig-overplot}, which demonstrated the problem of
-overplotting of points that share the same data value.
+by Tier One nations from different hemispheres at Rugby World Cup
+matches (Table~\ref{tbl-rwc-all}). In this data visualisation, the data
+symbols are dots, the number of points scored is encoded as the
+horizontal \textbf{position} of the dots, and the hemisphere is encoded
+as the vertical \textbf{position} of the dots. We saw a similar
+visualisation of these data in Figure~\ref{fig-overplot}, which
+demonstrated the problem of overplotting of points that share the same
+data value.
 
 In Figure~\ref{fig-jitter}, to ameliorate the overlapping of data
 points, a random amount of ``jitter'' has been added the vertical
@@ -5387,17 +5382,20 @@ visually different. The randomness of the jittering may help to dilute
 any temptation to seek meaning from the artificial visual difference,
 but the addition of jittering is a potential source of confusion.
 
-\begin{quote}
 Jittering data symbols is effective because it reduces the amount of
 overlap amongst data symbols, but jittering may also reduce the
 effectiveness of a data visualisation because it introduces visual
 dissonance.
-\end{quote}
 
 \section{Summary}\label{summary-6}
 
 The effectiveness of a data visualisation may depend on more than just
 the accuracy and capacity of visual features.
+
+Some visual features have an \emph{implicit} decoding---we can decode
+information from the visual feature without any explicit encoding of
+information---for example, we can implicitly decode a ratio of 2 from
+two lines where one is twice the length of another.
 
 A \textbf{congruent} encoding is one where data values are
 \emph{explicitly} encoded in a way that is consistent with an
@@ -5423,15 +5421,17 @@ dissonant.
 \chapter{Encoding Summaries}\label{sec-summaries}
 
 In Chapter~\ref{sec-encoding-visual-features} we described a data
-visualisation as a encoding that \textbf{encodes} data values as the
-visual features of a data symbol (Figure~\ref{fig-visual-feature}). For
-example, a bar plot, like Figure~\ref{fig-bar}, encodes the total number
-of youth offenders to the \textbf{lengths} of bars.
+visualisation as a \textbf{encoding} of \textbf{data values} as the
+\textbf{visual features} of a \textbf{data symbol}
+(Figure~\ref{fig-visual-feature}). For example, a bar plot, like
+Figure~\ref{fig-bar}, encodes the total number of youth offenders as the
+\textbf{lengths} of bars.
 
 We also emphasised the importance of the \textbf{decoding} from visual
-features to data values. For example, the effectiveness of the bar plot
-in Figure~\ref{fig-bar} relies on our ability to accurately decode the
-lengths of the bars, particularly relative to each other.
+features to data values (Figure~\ref{fig-visual-feature}).\\
+For example, the effectiveness of the bar plot in Figure~\ref{fig-bar}
+relies on our ability to accurately decode the lengths of the bars,
+particularly relative to each other.
 
 In the simple scenario of a bar plot, the data values are counts
 (Table~\ref{tbl-crime-group-total}), which are encoded as the lengths of
@@ -5508,8 +5508,8 @@ the quartiles.
 Another important difference with a box plot is that it encodes
 \textbf{data summaries}, rather than raw data values, to visual features
 of the data symbol (Figure~\ref{fig-stat-vis-decode}). For example, the
-median values are encoded to the horizontal \textbf{positions} of thick
-vertical lines and the interquartile ranges are encoded to the
+median values are encoded as the horizontal \textbf{positions} of thick
+vertical lines and the interquartile ranges are encoded as the
 \textbf{lengths} of horizontal rectangles.
 
 \begin{figure}
@@ -5575,12 +5575,10 @@ The only differences from previous sections is that we are encoding
 \textbf{data summaries} rather than raw data values and we are encoding
 to the visual features of a more complicated data symbol.
 
-\begin{quote}
 A box plot is effective at conveying information about the distribution
 of data values because it encodes \textbf{data summaries} about the
 distribution, like the median and interquartile range, to basic visual
 features.
-\end{quote}
 
 \section{Visual summaries}\label{sec-visual-summaries}
 
@@ -5594,8 +5592,8 @@ matches.\footnote{The general idea of arranging overlapping dots so that
 the same data as Figure~\ref{fig-boxplot}, but it encodes raw data
 values rather than data summaries and it uses much simpler data symbols
 (data points). This data visualisation encodes the number of points
-scored encodes as the horizontal \textbf{position} of a data point and
-it encodes the hemisphere as the vertical \textbf{position} of a data
+scored as the horizontal \textbf{position} of a data point and it
+encodes the hemisphere as the vertical \textbf{position} of a data
 point. There is an overplotting problem (Section~\ref{sec-overplot}),
 which is solved in this case by offsetting data symbols vertically for
 repeated data values.
@@ -5623,7 +5621,7 @@ scored by Tier One nations at Rugby World Cup matches.}
 
 The fact that we can decode raw data values from a dot plot is not news.
 That is easy because we have encoded raw data values as accurate visual
-features (see Section~\ref{sec-dot-plots}). However,
+features (Section~\ref{sec-dot-plots}). However,
 Figure~\ref{fig-rwc-dotplot} also demonstrates that, in addition to
 decoding raw data values from visual features, our visual system allows
 us to decode \textbf{data summaries} from visual features.
@@ -5664,11 +5662,9 @@ measures of central tendency or variability.}
 
 \end{figure}%
 
-\begin{quote}
 A dot plot is effective not just for perceiving raw data values, but
 also for perceving data summaries like clusters and outliers, and
 central tendency and spread.
-\end{quote}
 
 \section{Case study: Histograms}\label{case-study-histograms}
 
@@ -5761,23 +5757,22 @@ values in each interval drops more rapidly above the highest bar than
 below the highest bar. The latter tells us about the spread and/or
 skewness of the data.
 
-\begin{quote}
 A histogram is effective at conveying information about the distribution
 of data values because it encodes data summaries to basic visual
 features and those data summaries can be compared to provide information
 about the distribution of the data.
-\end{quote}
 
 \section{Decoding summaries}\label{sec-summary-decode}
 
 When we encode a data summary as a visual feature, like the position of
 the median line of a boxplot (Figure~\ref{fig-boxplot}), we know from
 previous chapters how effective the decoding is going to be. For
-example, because the median is encoded as position, we should be able to
-decode the median very accurately (Section~\ref{sec-accuracy}).
+example, because the median is encoded as the horizontal position of a
+line, we should be able to decode the median very accurately
+(Section~\ref{sec-accuracy}).
 
-However, if we rely on a visual summary to decode a data summary, for
-example, comparing the average points scored by teams from different
+However, if we rely on a \emph{visual} summary to decode a data summary,
+for example, comparing the average points scored by teams from different
 hemispheres based on a collection of data points for each hemisphere
 (Figure~\ref{fig-rwc-dotplot}), we are no longer dealing with just the
 decoding of a single visual feature. How well can we decode the average
@@ -5826,17 +5821,18 @@ multiple data symbols can also be effective.\footnote{Gleicher et al.
 For more qualitative summaries, such as identifying clusters and
 outliers, we know that performance will be good because these decodings
 rely on fundamental properties of our visual system that identify
-unusual items (Section~\ref{sec-differences}) and identify groups of
-items (Section~\ref{sec-visual-model-groups}).
+unusual items (Section~\ref{sec-differences}) and on fundamental
+properties of our visual system that identify groups of items
+(Section~\ref{sec-visual-model-groups}).
 
 \section{Dangers of summaries}\label{sec-summary-caveats}
 
 The benefit of a data visualisation that encodes \textbf{data summaries}
 as visual features is that it allows us to decode data summaries very
-easily. For example, although we can perceive a general idea of central
-tendency from the dots in Figure~\ref{fig-rwc-dotplot} (see
-Section~\ref{sec-visual-summaries}), it is much easier and more accurate
-to perceive median values from the thick vertical lines in
+easily and accurately. For example, although we can perceive a general
+idea of central tendency from the dots in Figure~\ref{fig-rwc-dotplot}
+(Section~\ref{sec-visual-summaries}), it is much easier and more
+accurate to perceive median values from the thick vertical lines in
 Figure~\ref{fig-boxplot}.
 
 The flipside is that a data visualisation that encodes \textbf{data
@@ -5846,10 +5842,8 @@ Figure~\ref{fig-boxplot} that the scores 1, 2, 4, and 5 never occurred,
 while this is clear from Figure~\ref{fig-rwc-dotplot} because the dot
 plot does encode the raw data values to data symbols.
 
-\begin{quote}
 Box plots and histograms are \emph{not} effective at conveying raw data
 values because they do not encode raw data values to data symbols.
-\end{quote}
 
 Another point to consider with a data visualisation that is based on
 data summaries is whether the data summaries provide reasonable
@@ -5897,15 +5891,10 @@ of points conceded by Tier One nations at Rugby World Cup matches.}
 
 \end{figure}%
 
-\begin{quote}
 A data visualisation that is based on data summaries can only be
-effective if the data summaries are sensible summaries of the data.
-\end{quote}
-
-\begin{quote}
-A box plot is \emph{not} effective if a five-number summary is not a
+effective if the data summaries are sensible summaries of the data. A
+box plot is \emph{not} effective if a five-number summary is not a
 sensible summary of the data values.
-\end{quote}
 
 A further complication arises with histograms because we have to
 \emph{choose} the intervals that are used to calculate the data
@@ -5961,15 +5950,15 @@ summaries.
 
 For example, Figure~\ref{fig-bars-at-zero} shows a bar plot of the
 predicted impact on the top tax rate in the United States from President
-George W. Bush to President Barack Obama.\footnote{This is a
-  reproduction of a chart from Alberto Cairo's ``How Charts Lie''
-  (p12-13), which itself was a reproduction of a chart shown by Fox
-  News.} One problem with this data visualisation is that it does not
-encode raw data values---the actual predicted top tax rates are 35 and
-39.6. Instead, a ``data summary'' of the tax rate \emph{minus 34} (the
-values 1 and 5.6) are encoded as the lengths of the two bars. We are
-unable to decode the raw data from this bar plot---we can only decode
-the data values that have been encoded---and this leads to an extreme
+George W. Bush to President Barack Obama.\footnote{This data
+  visualisation is based on a chart from Alberto Cairo's ``How Charts
+  Lie'' (p12-13), which itself was based on a chart shown by Fox News.}
+One problem with this data visualisation is that it does not encode raw
+data values---the actual predicted top tax rates are 35 and 39.6.
+Instead, a ``data summary'' of the tax rate \emph{minus 34} (the values
+1 and 5.6) are encoded as the lengths of the two bars. We are unable to
+decode the raw data from this bar plot---we can only decode the data
+values that have been encoded---and this leads to an extreme
 exaggeration of the difference between the two top tax rates.
 
 \begin{figure}
@@ -6113,13 +6102,13 @@ important decodings, so the loss may not be that important.\footnote{Bertini,
   Correll, and Franconeri (2020) argue that ordinal comparisons are more
   commonly useful in practice than quantitative comparisons.
 
+  Tukey (1993) has this to say:
+
   ``1. Graphics are for the qualitative/descriptive---conceivably the
   semiquantitative---never for the carefully quantitative.''
 
   ``2. Graphics are for comparison-comparison of one kind or another -
-  not for access to individual amounts.''
-
-  Tukey (1993)}
+  not for access to individual amounts.''}
 
 For comparison, Figure~\ref{fig-no-downgrade} shows a simple bar plot of
 the same crime rates. In this data visualisation, although we can decode
@@ -6188,8 +6177,10 @@ decode the colours of individual rectangles
 
 In the case of a heatmap, ordinal comparisons are typically what is of
 most importance. The aim is \emph{not} to be able to decode individual
-quantitative data values and this moderates the damage that is done by
-relative perception of the heatmap rectangles.
+quantitative data values. Furthermore, we gain from being able to decode
+visual summaries, such as \emph{regions} of darker and lighter
+rectangles. These positives moderate the damage that is done by relative
+perception of the heatmap rectangles.
 
 \section{Cognitive load}\label{cognitive-load}
 
@@ -6264,11 +6255,9 @@ calculating summaries of the data and encoding data summaries as visual
 features, rather than encoding raw data values and asking the viewer to
 perform visual summaries.
 
-\begin{quote}
 It is possible in some cases to rely on visual summaries, but we need to
 be careful not to set a visual task that requires too much mental
 effort.
-\end{quote}
 
 \section{Case study: Visualising
 uncertainty}\label{case-study-visualising-uncertainty}
