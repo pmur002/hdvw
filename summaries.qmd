@@ -1018,6 +1018,7 @@ rwcPoints <- aggregate(rwcTotal["total"],
 rwcPoints <- cbind(year=rwcPoints$year, rwcPoints$total)
 gg <- ggplot(rwcTotal) +
     geom_point(aes(year, total), alpha=.5) +
+    scale_x_continuous(breaks=seq(1987, 2023, 4)) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05)))
 grid.newpage()
 pushViewport(viewport(width=.8, height=.8))
@@ -1037,12 +1038,85 @@ as well as differences in score variation between years.
 gg <- ggplot(rwcPoints) +
     geom_point(aes(year, mean), size=2) +
     geom_errorbar(aes(year, mean, ymin=lower, ymax=upper), width=2) +
+    scale_x_continuous(breaks=seq(1987, 2023, 4)) +
     scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05)))
 grid.newpage()
 pushViewport(viewport(width=.8, height=.8))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+## Case study: Dynamite plots
+
+@fig-dynamite shows a *dynamite plot* of the data from 
+@fig-rwc-year and @fig-rwc-year-mean.
+Like @fig-rwc-year-mean, we have encoded the means 
+and standard deviations of scores for each year.
+However,
+the means are encoded as the lengths of bars, rather than
+the positions of dots, and the standard deviation is only encoded
+as a line above the mean, rather than above and below.
+
+```{r}
+#| echo: false
+#| label: fig-dynamite
+#| fig-cap: A dynamite plot of the mean points scored in matches between Tier One nations at Rugby World Cup matches.  The error bar at the top represents the standard deviations of points scored.
+gg <- ggplot(rwcPoints) +
+    geom_errorbar(aes(year, mean, ymin=lower, ymax=upper), width=2) +
+    geom_col(aes(year, mean)) +
+    scale_x_continuous(breaks=seq(1987, 2023, 4)) +
+    scale_y_continuous(limits=c(0, NA), expand=expansion(c(0, .05)))
+grid.newpage()
+pushViewport(viewport(width=.8, height=.8))
+print(gg, newpage=FALSE)
+popViewport()
+```
+
+This sort of plot has been heavily criticised[^dynamite]
+for hiding details of the data and making strong assumptions
+about the shape of the data distribution (unimodal and symmetric).
+These are the acknowledged dangers of encoding data summaries rather than
+raw data values (@sec-summary-caveats). 
+
+[^dynamite]:
+    Dynamite plots have received a lot of criticism,
+    for a long time [@Tobias1998Dynamite], but remain
+    popular in some fields of research.
+
+However, if the purpose is to compare the typical value and spread between
+groups, i.e., to compare the data summaries, then it is reasonable 
+to encode those data summaries directly rather than forcing the viewer
+to perform visual summaries from encodings of the raw data, as in @fig-rwc-year.
+
+Nevertheless, there are still some weaknesses apparent in the encodings
+used in @fig-dynamite.
+On one hand, encoding the means as lengths makes sense because the
+means are quantitative values (@sec-quant-features).
+However, the means are point estimates as opposed to, for example, counts.
+Comparisons of interest are between different mean locations rather
+than the distance of a mean from zero.
+This makes the position of a data point (as in @fig-rwc-year-mean) a more
+**congruent** encoding than the length of a bar (@sec-congruence).
+In other words, the encoding of means as bar length is somewhat
+**dissonant** (@sec-dissonance).
+
+Another problem is that the standard deviation is only encoded
+as the length of a line above the mean.
+If the purpose is to decode the spread of data values to either
+side of the mean, then a dynamite plot forces the viewer to 
+perform a cognitive inversion of the line above the mean.
+In other words, decoding the required information
+involves a difficult visual task 
+(@sec-tasks).
+By comparison, decoding the spread to either side of the
+mean is a much simpler visual task in @fig-rwc-year-mean.
+
+Finally, there is the issue of eponymism.
+Dynamite plots are so-called because the data symbols resemble 
+a plunger that is used to detonate dynamite.
+Unless the data relates to mining, this is a superfluous, if not
+distracting association.  This sort of problem is discussed further
+in (@sec-learned-danger).
 
 ## Summary
 

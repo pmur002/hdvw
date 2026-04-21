@@ -252,7 +252,8 @@ div.csl-indent {
   <li><a href="#case-study-heatmaps" id="toc-case-study-heatmaps" class="nav-link" data-scroll-target="#case-study-heatmaps"><span class="header-section-number">8.8</span> Case study: Heatmaps</a></li>
   <li><a href="#cognitive-load" id="toc-cognitive-load" class="nav-link" data-scroll-target="#cognitive-load"><span class="header-section-number">8.9</span> Cognitive load</a></li>
   <li><a href="#case-study-visualising-uncertainty" id="toc-case-study-visualising-uncertainty" class="nav-link" data-scroll-target="#case-study-visualising-uncertainty"><span class="header-section-number">8.10</span> Case study: Visualising uncertainty</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.11</span> Summary</a></li>
+  <li><a href="#case-study-dynamite-plots" id="toc-case-study-dynamite-plots" class="nav-link" data-scroll-target="#case-study-dynamite-plots"><span class="header-section-number">8.11</span> Case study: Dynamite plots</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.12</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -794,8 +795,31 @@ Figure&nbsp;8.18: A plot of the mean points scored, plus-or-minus the standard d
 </div>
 </div>
 </section>
-<section id="summary" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.11</span> Summary</h2>
+<section id="case-study-dynamite-plots" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="case-study-dynamite-plots"><span class="header-section-number">8.11</span> Case study: Dynamite plots</h2>
+<p><a href="#fig-dynamite" class="quarto-xref">Figure&nbsp;<span>8.19</span></a> shows a <em>dynamite plot</em> of the data from <a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.17</span></a> and <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>. Like <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>, we have encoded the means and standard deviations of scores for each year. However, the means are encoded as the lengths of bars, rather than the positions of dots, and the standard deviation is only encoded as a line above the mean, rather than above and below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-dynamite" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dynamite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="summaries_files/figure-html/fig-dynamite-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dynamite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.19: A dynamite plot of the mean points scored in matches between Tier One nations at Rugby World Cup matches. The error bar at the top represents the standard deviations of points scored.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This sort of plot has been heavily criticised<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> for hiding details of the data and making strong assumptions about the shape of the data distribution (unimodal and symmetric). These are the acknowledged dangers of encoding data summaries rather than raw data values (<a href="#sec-summary-caveats" class="quarto-xref"><span>Section 8.5</span></a>).</p>
+<p>However, if the purpose is to compare the typical value and spread between groups, i.e., to compare the data summaries, then it is reasonable to encode those data summaries directly rather than forcing the viewer to perform visual summaries from encodings of the raw data, as in <a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.17</span></a>.</p>
+<p>Nevertheless, there are still some weaknesses apparent in the encodings used in <a href="#fig-dynamite" class="quarto-xref">Figure&nbsp;<span>8.19</span></a>. On one hand, encoding the means as lengths makes sense because the means are quantitative values (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). However, the means are point estimates as opposed to, for example, counts. Comparisons of interest are between different mean locations rather than the distance of a mean from zero. This makes the position of a data point (as in <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>) a more <strong>congruent</strong> encoding than the length of a bar (<a href="congruence.html" class="quarto-xref"><span>Chapter 7</span></a>). In other words, the encoding of means as bar length is somewhat <strong>dissonant</strong> (<a href="congruence.html#sec-dissonance" class="quarto-xref"><span>Section 7.5</span></a>).</p>
+<p>Another problem is that the standard deviation is only encoded as the length of a line above the mean. If the purpose is to decode the spread of data values to either side of the mean, then a dynamite plot forces the viewer to perform a cognitive inversion of the line above the mean. In other words, decoding the required information involves a difficult visual task (<a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>). By comparison, decoding the spread to either side of the mean is a much simpler visual task in <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>.</p>
+<p>Finally, there is the issue of eponymism. Dynamite plots are so-called because the data symbols resemble a plunger that is used to detonate dynamite. Unless the data relates to mining, this is a superfluous, if not distracting association. This sort of problem is discussed further in (<a href="visual-objects.html#sec-learned-danger" class="quarto-xref"><span>Section 12.8</span></a>).</p>
+</section>
+<section id="summary" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.12</span> Summary</h2>
 <div class="oldsummary callout callout-style-default callout-note no-icon callout-titled" title="Précis *(click to expand/contract)*">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -862,11 +886,12 @@ Précis <em>(click to expand/contract)</em>
 </div>
 </div>
 </div>
-<p>Data summaries, such as measures of central tendency, measures of variability, and tables of counts, provide information about the distribution of a set of data values.</p>
-<p>Some data visualisations, like box plots and histograms, are effective because they encode <strong>data summaries</strong> to visual features. This makes it easy to decode and compare data summaries.</p>
-<p>Care must be taken to use data summaries that appropriately summarise the data values.</p>
-<p>When we encode raw data values to visual features, like in a dot plot, the encoding to individual visual features allows us to decode and compare raw data values, but, in addition, <strong>visual summaries</strong> of <em>collections</em> of visual features allow us to decode and compare data summaries.</p>
+<p>A data summary transforms raw data values to descriptive statistics such as measures of central tendency, measures of variability, or simple tables of counts.</p>
+<p>Some data visualisations, like box plots and histograms, are effective because they encode <strong>data summaries</strong> to visual features, rather than encoding raw data values to visual features.</p>
+<p>Encoding data summaries makes it easy to decode and compare data summaries.</p>
+<p>It is also sometimes possible to perform <strong>visual summaries</strong>. In this case, we encode raw data values to visual features, but our visual system allows us to decode data summaries, for example, the average position of many individual data points.</p>
 <p>A box plot that encodes data summaries to visual features is more effective for perceiving data summaries than a dot plot that relies on visual summaries. However, a dot plot is more effective for perceiving raw data values.</p>
+<p>When encoding data summaries, care must be taken to use data summaries that appropriately summarise the data values.</p>
 <hr>
 
 
@@ -915,6 +940,9 @@ Smil, Vaclav. 2022. <em>How the World Really Works: The Science Behind How We Go
 </div>
 <div id="ref-ensemble-scatter" class="csl-entry" role="listitem">
 Szafir, Danielle Albers, Steve Haroz, Michael Gleicher, and Steven Franconeri. 2016. <span>“Four Types of Ensemble Coding in Data Visualizations.”</span> <em>Journal of Vision</em> 16 (5): 11–11. <a href="https://doi.org/10.1167/16.5.11">https://doi.org/10.1167/16.5.11</a>.
+</div>
+<div id="ref-Tobias1998Dynamite" class="csl-entry" role="listitem">
+Tobias, A. 1998. <span>“Dynamite Plunger Plots Should Not Be Used.”</span> <em>Occupational and Environmental Medicine</em> 55 (5): 361–62. <a href="https://doi.org/10.1136/oem.55.5.361b">https://doi.org/10.1136/oem.55.5.361b</a>.
 </div>
 <div id="ref-tukey1977eda" class="csl-entry" role="listitem">
 Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Reading, MA: Addison-Wesley.
@@ -969,6 +997,7 @@ Ziemkiewicz, Caroline, and Robert Kosara. 2009. <span>“Embedding Information V
 <li id="fn13"><p><span class="citation" data-cites="correll-heatmap-ensemble">Correll et al. (<a href="#ref-correll-heatmap-ensemble" role="doc-biblioref">2012</a>)</span> provide evidence for superior ensemble perception of “high” regions within a time series from “colour fields” (heatmaps) compared to traditional time series line plots.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p><span class="citation" data-cites="smil2022how">(<a href="#ref-smil2022how" role="doc-biblioref">Smil 2022, 46</a>)</span><a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn15"><p>The 10 data visualisation tasks in <span class="citation" data-cites="amar-taxonomy">Amar, Eagan, and Stasko (<a href="#ref-amar-taxonomy" role="doc-biblioref">2005</a>)</span> all correspond to some sort of numerical summary of the data. We can choose to perform the numerical summary and then visualise the result, or we can choose to present the raw data and ask the viewer to perform a visual summary. We should choose whichever will be easier for the viewer.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>Dynamite plots have received a lot of criticism, for a long time <span class="citation" data-cites="Tobias1998Dynamite">(<a href="#ref-Tobias1998Dynamite" role="doc-biblioref">Tobias 1998</a>)</span>, but remain popular in some fields of research.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

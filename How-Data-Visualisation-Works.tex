@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-04-20)
+Version 0.9 (build 2026-04-21)
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, bottomrule=.15mm, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, breakable, rightrule=.15mm, bottomtitle=1mm, toptitle=1mm, opacitybacktitle=0.6, colback=white, titlerule=0mm, colframe=quarto-callout-warning-color-frame, arc=.35mm, toprule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, opacityback=0, breakable, colback=white, bottomtitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, toptitle=1mm, coltitle=black, left=2mm, opacitybacktitle=0.6, leftrule=.75mm, colframe=quarto-callout-warning-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, rightrule=.15mm, toprule=.15mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-04-20).
+2026. Version 0.9 (build 2026-04-21).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-04-20,
+@book{murrell-hdvw-2026-04-21,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-04-20)},
+    note = {Version 0.9 (build 2026-04-21)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -6321,29 +6321,97 @@ between Tier One nations at Rugby World Cup matches.}
 
 \end{figure}%
 
+\section{Case study: Dynamite plots}\label{case-study-dynamite-plots}
+
+Figure~\ref{fig-dynamite} shows a \emph{dynamite plot} of the data from
+Figure~\ref{fig-rwc-year} and Figure~\ref{fig-rwc-year-mean}. Like
+Figure~\ref{fig-rwc-year-mean}, we have encoded the means and standard
+deviations of scores for each year. However, the means are encoded as
+the lengths of bars, rather than the positions of dots, and the standard
+deviation is only encoded as a line above the mean, rather than above
+and below.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/summaries_files/figure-pdf/fig-dynamite-1.pdf}
+
+}
+
+\caption{\label{fig-dynamite}A dynamite plot of the mean points scored
+in matches between Tier One nations at Rugby World Cup matches. The
+error bar at the top represents the standard deviations of points
+scored.}
+
+\end{figure}%
+
+This sort of plot has been heavily criticised\footnote{Dynamite plots
+  have received a lot of criticism, for a long time (Tobias 1998), but
+  remain popular in some fields of research.} for hiding details of the
+data and making strong assumptions about the shape of the data
+distribution (unimodal and symmetric). These are the acknowledged
+dangers of encoding data summaries rather than raw data values
+(Section~\ref{sec-summary-caveats}).
+
+However, if the purpose is to compare the typical value and spread
+between groups, i.e., to compare the data summaries, then it is
+reasonable to encode those data summaries directly rather than forcing
+the viewer to perform visual summaries from encodings of the raw data,
+as in Figure~\ref{fig-rwc-year}.
+
+Nevertheless, there are still some weaknesses apparent in the encodings
+used in Figure~\ref{fig-dynamite}. On one hand, encoding the means as
+lengths makes sense because the means are quantitative values
+(Section~\ref{sec-quant-features}). However, the means are point
+estimates as opposed to, for example, counts. Comparisons of interest
+are between different mean locations rather than the distance of a mean
+from zero. This makes the position of a data point (as in
+Figure~\ref{fig-rwc-year-mean}) a more \textbf{congruent} encoding than
+the length of a bar (Chapter~\ref{sec-congruence}). In other words, the
+encoding of means as bar length is somewhat \textbf{dissonant}
+(Section~\ref{sec-dissonance}).
+
+Another problem is that the standard deviation is only encoded as the
+length of a line above the mean. If the purpose is to decode the spread
+of data values to either side of the mean, then a dynamite plot forces
+the viewer to perform a cognitive inversion of the line above the mean.
+In other words, decoding the required information involves a difficult
+visual task (Section~\ref{sec-tasks}). By comparison, decoding the
+spread to either side of the mean is a much simpler visual task in
+Figure~\ref{fig-rwc-year-mean}.
+
+Finally, there is the issue of eponymism. Dynamite plots are so-called
+because the data symbols resemble a plunger that is used to detonate
+dynamite. Unless the data relates to mining, this is a superfluous, if
+not distracting association. This sort of problem is discussed further
+in (Section~\ref{sec-learned-danger}).
+
 \section{Summary}\label{summary-7}
 
-Data summaries, such as measures of central tendency, measures of
-variability, and tables of counts, provide information about the
-distribution of a set of data values.
+A data summary transforms raw data values to descriptive statistics such
+as measures of central tendency, measures of variability, or simple
+tables of counts.
 
 Some data visualisations, like box plots and histograms, are effective
-because they encode \textbf{data summaries} to visual features. This
-makes it easy to decode and compare data summaries.
+because they encode \textbf{data summaries} to visual features, rather
+than encoding raw data values to visual features.
 
-Care must be taken to use data summaries that appropriately summarise
-the data values.
+Encoding data summaries makes it easy to decode and compare data
+summaries.
 
-When we encode raw data values to visual features, like in a dot plot,
-the encoding to individual visual features allows us to decode and
-compare raw data values, but, in addition, \textbf{visual summaries} of
-\emph{collections} of visual features allow us to decode and compare
-data summaries.
+It is also sometimes possible to perform \textbf{visual summaries}. In
+this case, we encode raw data values to visual features, but our visual
+system allows us to decode data summaries, for example, the average
+position of many individual data points.
 
 A box plot that encodes data summaries to visual features is more
 effective for perceiving data summaries than a dot plot that relies on
 visual summaries. However, a dot plot is more effective for perceiving
 raw data values.
+
+When encoding data summaries, care must be taken to use data summaries
+that appropriately summarise the data values.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -13948,6 +14016,11 @@ of Print.''} \emph{Journal of Educational Psychology} 47 (6): 358--63.
 Titchener, Edward Bradford. 1916. \emph{Experimental Psychology: A
 Manual of Laboratory Practice. Vol 1. Qualitative Experiments. Part i:
 Student's Manual.} New York, NY : Macmillan Publishing,.
+
+\bibitem[\citeproctext]{ref-Tobias1998Dynamite}
+Tobias, A. 1998. {``Dynamite Plunger Plots Should Not Be Used.''}
+\emph{Occupational and Environmental Medicine} 55 (5): 361--62.
+\url{https://doi.org/10.1136/oem.55.5.361b}.
 
 \bibitem[\citeproctext]{ref-Todorovic:2008}
 Todorovic, D. 2008. {``{G}estalt Principles.''} \emph{Scholarpedia} 3
