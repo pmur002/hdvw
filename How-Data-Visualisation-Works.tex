@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-04-21)
+Version 0.9 (build 2026-04-27)
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, breakable, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6, bottomtitle=1mm, colback=white, leftrule=.75mm, toptitle=1mm, rightrule=.15mm, arc=.35mm, toprule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, titlerule=0mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, opacitybacktitle=0.6, opacityback=0, toprule=.15mm, bottomtitle=1mm, bottomrule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, leftrule=.75mm, toptitle=1mm, colback=white, coltitle=black, breakable, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, rightrule=.15mm, left=2mm, arc=.35mm, titlerule=0mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-04-21).
+2026. Version 0.9 (build 2026-04-27).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-04-21,
+@book{murrell-hdvw-2026-04-27,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-04-21)},
+    note = {Version 0.9 (build 2026-04-27)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -6303,9 +6303,10 @@ between Tier One nations at Rugby World Cup matches.}
 \end{figure}%
 
 Figure~\ref{fig-rwc-year-mean} shows a direct encoding of the mean
-scores per year, plus error bars that encode the standard deviation of
-scores per year. This makes it much easier to decode differences in
-typical scores as well as differences in score variation between years.
+scores per year, plus error bars that directly encode the standard
+deviation of scores per year. This makes it much easier to decode
+differences in typical scores as well as differences in score variation
+between years.
 
 \begin{figure}
 
@@ -6440,7 +6441,7 @@ offenders and the total number of female offenders in New Zealand from
 
 \end{figure}%
 
-In Figure~\ref{fig-bar-gender}, each data value is encoded to a
+In Figure~\ref{fig-bar-gender}, each data value is encoded as a
 \textbf{visual feature} of a data symbol
 (Figure~\ref{fig-visual-feature}). For example, the gender is encoded as
 the horizontal \textbf{position} of the bars and the count of offenders
@@ -6449,10 +6450,12 @@ is encoded as the \textbf{length} of the bars.
 We have so far only looked at encodings from data values to visual
 features in isolation. For example, we know that the encoding from
 gender to position is effective because position is appropriate for
-qualitative data and position has sufficient capacity to differentiate
-between two genders. We also know that encoding the count of offenders
-to length is effective because length is appropriate for quantitative
-data and length provides an accurate decoding.
+qualitative data (Section~\ref{sec-qual-features}) and position has
+sufficient capacity to differentiate between two genders
+(Section~\ref{sec-capacity}). We also know that encoding the count of
+offenders to length is effective because length is appropriate for
+quantitative data (Section~\ref{sec-quant-features}) and length provides
+an accurate decoding (Section~\ref{sec-accuracy}).
 
 In this chapter, we begin to consider what happens when encodings are
 used in combination. For a start, we will just extend our thinking to
@@ -6484,7 +6487,9 @@ produces a single bar.
 encodes \textbf{two} data values to \textbf{two} visual features to
 create a data symbol. Each pair of data values (\texttt{x} and
 \texttt{y}) is encoded to two visual features (\texttt{a} and
-\texttt{b}) of a \textbf{single} data symbol.}
+\texttt{b}) of a \textbf{single} data symbol. For example, if there are
+four pairs of data values, we end up with four data symbols, each of
+which encodes a single pair of data values.}
 
 \end{figure}%
 
@@ -6506,19 +6511,20 @@ visual features act independently.\footnote{Independent visual features
   which are combinations that interact, but still allow decoding of the
   individual visual features (Carswell and Wickens 1990).
 
-  These ideas can be traced back to the much less readable Garner
-  (1974).} Our perception of the horizontal \textbf{length} of the bars
-is not affected by the vertical \textbf{position} of the
-bars.\footnote{To be honest, there is an interaction between position
-  and length because lengths that are further apart from each other
-  vertically are harder to compare (Section~\ref{sec-distance-effect}).
-  However, compared to visual features that strongly interact, length
-  and position are relatively independent.}
+  These ideas can be traced back to the much more general, if much less
+  readable Garner (1974).} Our perception of the horizontal
+\textbf{length} of the bars is not affected by the vertical
+\textbf{position} of the bars.\footnote{To be honest, there is an
+  interaction between position and length because lengths that are
+  further apart from each other vertically are harder to compare
+  (Section~\ref{sec-distance-effect}). However, compared to visual
+  features that strongly interact, length and position are relatively
+  independent.}
 
 Figure~\ref{fig-bar-colour} demonstrates that we can also add
 \textbf{colour} to the mix without creating any interactions between
-visual features. The fact that the bottom two bars are blue and red does
-not affect our ability to perceive that they have different lengths.
+visual features. The fact that the two bars are blue and red does not
+affect our ability to perceive that they have different lengths.
 
 \begin{figure}
 
@@ -6536,10 +6542,8 @@ lengths of the bars.}
 
 \end{figure}%
 
-\begin{quote}
 One reason why a bar plot is effective is because data values are
 encoded as visual features that can be decoded independently.
-\end{quote}
 
 \section{Scatter plots}\label{sec-integral}
 
@@ -6547,7 +6551,7 @@ Table~\ref{tbl-rwc-2023} shows data gathered on the performance of all
 twenty teams at the 2023 Rugby World Cup. Most measures are positive,
 for example, more \textbf{points} is better, but there are also a couple
 of negative measures: more \textbf{tackles} may just mean that the team
-was weak and was always being attacked; and more disciplinary
+was weak and was always having to defend; and more disciplinary
 \textbf{cards} (either \textbf{y}ellow or \textbf{r}ed) is definitely a
 bad sign.
 
@@ -6691,17 +6695,14 @@ original visual features.}
 
 \end{figure}%
 
-\begin{quote}
 One reason why a scatter plot is effective at conveying relationships
 between variables is because the encodings of data values to visual
 features---horizontal position and vertical position---interact to
 produce an additional visual feature: position in space.
-\end{quote}
 
 Furthermore, our visual system allows us to decode \textbf{visual
-summaries} (see Section~\ref{sec-visual-summaries}) from
-\textbf{position in space} (see
-Figure~\ref{fig-visual-corr}).\footnote{The ability to decode
+summaries} (Section~\ref{sec-visual-summaries}) from \textbf{position in
+space} (Figure~\ref{fig-visual-corr}).\footnote{The ability to decode
   correlations from scatter plots is another example of \emph{ensemble}
   perception (Szafir et al. 2016; Rensink 2017).} For example, in
 Figure~\ref{fig-scatter} we can easily see a positive
@@ -6735,11 +6736,20 @@ summaries.}
 
 \end{figure}%
 
-\begin{quote}
 One reason why a scatter plot is effective at conveying relationships
 between variables is because we are able to decode visual summaries from
-a collection of positions in space.
-\end{quote}
+a collection of positions in space.\footnote{The idea that combining
+  visual features that interact is more appropriate for decoding data
+  summaries (and vice versa) is similar to the \emph{proximity
+  compatibility principle} (Wickens and Carswell 1995).
+
+  Shah and Hoeffner (2002a) use the following nice quote from earlier
+  work (Carswell and Wickens 1987):
+
+  ``Integrated, object-like displays (e.g., a line graph) are better for
+  integrative tasks, whereas more separable formats (e.g., bar graphs)
+  are better for less integrative or synthetic tasks such as point
+  reading.''}
 
 Although a scatter plot is similar to a bar plot because they both
 involve two encodings---position and length for a bar plot and
@@ -6767,13 +6777,13 @@ can be combined independently with every other visual feature, except
 itself (Section~\ref{sec-integral}), even when we vary both visual
 features at once.
 
-For other combinations, we have an array of data symbols, with one
-visual feature changing down rows and another visual feature changing
-across columns. If the visual features are independent, we should be
-able to decode one visual feature from the rows and one visual feature
-from the columns. For example, for the combination of \textbf{hue} and
-\textbf{pattern}, we can clearly see columns of the same hue and rows of
-the same pattern.
+For other combinations, Figure~\ref{fig-separable} shows an array of
+data symbols, with one visual feature changing down rows and another
+visual feature changing across columns. If the visual features are
+independent, we should be able to decode one visual feature from the
+rows and one visual feature from the columns. For example, for the
+combination of \textbf{hue} and \textbf{pattern}, we can clearly see
+columns with the same hue and rows with the same pattern.
 
 If the visual features interact, we should not be able decode separate
 visual features. For example, for the combination of \textbf{chroma} and
@@ -6784,18 +6794,20 @@ luminance.
 There are also combinations that are not fully independent and have weak
 interactions between visual features. For example, the decoding of hue,
 chroma, and luminance is somewhat affected by the area of the data
-symbol. Stone (2012) provides a clearer demonstration of this effect.
-Another weak interaction is between hue and luminance; this still allows
-for diverging colour palettes (Section~\ref{sec-divergent}).
+symbol (see the row for **area* in
+Figure~\ref{fig-separable}).\footnote{Stone (2012) provides a clearer
+  demonstration of this effect.} Another weak interaction is between hue
+and luminance; the partial independence of theses visual features still
+allows for diverging colour palettes (Section~\ref{sec-divergent}).
 
 One clear message from Figure~\ref{fig-separable} is that all visual
 features interact with themselves. If we try to encode two separate data
-variables as the same visual feature, it will be difficult to decode the
-individual data variables. We can also see that combinations of length,
-angle, area, and pattern produce interations, as do combinations of
-area, hue, chroma, and luminance. However, combinations of one of hue,
-chroma, or luminance with any of position, length, angle, area, or
-pattern are independent.
+variables as the \emph{same} visual feature, it may be difficult to
+decode the individual data variables. We can also see that combinations
+of length, angle, area, and pattern produce interactions, as do
+combinations of area, hue, chroma, and luminance. However, combinations
+of one of hue, chroma, or luminance with any of position, length, angle,
+area, or pattern are independent.
 
 \begin{figure}
 
@@ -6868,16 +6880,20 @@ involve male offenders and result in court action.
 
 }
 
-\caption{\label{fig-spine}A spine plot.}
+\caption{\label{fig-spine}A mosaic plot based on a table of counts of
+the number of offenders broken down by sex of the offender and the type
+of action taken against the offender. Because this is only a two-way
+table, this can also be called a spine plot.}
 
 \end{figure}%
 
 A mosaic plot is another example of a data visualisation that encodes
-\textbf{data summaries} to data symbols rather than raw data. The data
-symbols are rectangles, the proportions of male versus female offenders
-are encoded as the widths of the rectangles, and the proportions of
-different actions taken, within males and females, are encoded as the
-heights of the rectangles (see Table~\ref{tbl-offenders-summary}).
+\textbf{data summaries} to data symbols rather than raw data
+(sec-summaries). The data symbols are rectangles, the proportions of
+male versus female offenders are encoded as the widths of the
+rectangles, and the proportions of different actions taken, within males
+and females, are encoded as the heights of the rectangles (see
+Table~\ref{tbl-offenders-summary}).
 
 \begin{table}
 
@@ -6923,34 +6939,30 @@ Not Proceeded With & 0.02 & 0.02\\
 
 \end{table}%
 
-\begin{quote}
-One reason why a mosaic plot is effective is because it encodes
-proportions and conditional proportions, rather than raw counts, to the
-visual features of rectangles.
-\end{quote}
+One reason why a mosaic plot is effective for decoding proportions and
+conditional proportions is because it encodes proportions and
+conditional proportions, rather than raw counts, to the visual features
+of rectangles.
 
-A mosaic plot is also an example of a data visualisation that encodes to
-visual features that \textbf{interact}. The explicit encodings involve
-encoding proportions as the widths and heights of the rectangles and we
-know from Section~\ref{sec-quant-features} that this will allow accurate
-decoding from lengths to proportions.
+The explicit encodings in a mosaic plot involve encoding proportions as
+the widths and heights of the rectangles and we know from
+Section~\ref{sec-quant-features} that this will allow accurate decoding
+from lengths to proportions.
 
-\begin{quote}
 One reason why a mosaic plot is effective is because it encodes
 proportions to lengths.
-\end{quote}
 
-However, the interaction of these encodings produces an \textbf{emergent
-feature}, which is the \textbf{area} of the rectangles
-(Figure~\ref{fig-interact}). Importantly, these areas correspond to
-additional data summaries, in this case, the overall proportion of
-offences in each combination of sex and action taken.
+However, a mosaic plot is also an example of a data visualisation that
+encodes data values to visual features that \textbf{interact}. The
+interaction of the encoded rectangle widths and rectangle heights
+produces an \textbf{emergent feature}, which is the \textbf{area} of the
+rectangles (Figure~\ref{fig-interact}). Importantly, these areas
+correspond to additional data summaries, in this case, the overall
+proportion of offences in each combination of sex and action taken.
 
-\begin{quote}
 One reason why a mosaic plot is effective is because the encodings\\
 to length and height interact to produce area, which represents overall
 proportions.
-\end{quote}
 
 One weakness of mosaic plots is that area is not the most accurate
 visual feature (Section~\ref{sec-accuracy}), so we are not able to
@@ -6973,8 +6985,8 @@ that the pink rectangles do not have a common vertical baseline. As a
 side note, we are also hampered in that case by the distance and
 distractors between the rectangles (Section~\ref{sec-distance-effect});
 the ordering of the variables and the ordering of categories can have an
-impact on the effectiveness of a mosaic plot just like ordering the bars
-of a bar plot.
+impact on the effectiveness of a mosaic plot just like the ordering the
+bars in a bar plot.
 
 \begin{figure}
 
@@ -6984,7 +6996,10 @@ of a bar plot.
 
 }
 
-\caption{\label{fig-spine-weak}A spine plot with problems}
+\caption{\label{fig-spine-weak}A mosaic plot of offender age group
+versus action taken against the offender. The larger number of
+categories on each axis makes it harder to compare heights of rectangles
+between different types of action taken.}
 
 \end{figure}%
 
@@ -7006,7 +7021,9 @@ rectangles, and distractors.
 
 }
 
-\caption{\label{fig-mosaic}A mosaic plot of three variables}
+\caption{\label{fig-mosaic}A mosaic plot of the number of offenders
+broken down by sex, then by age band, then by action taken against the
+offender.}
 
 \end{figure}%
 
@@ -7029,7 +7046,7 @@ differences in the data when in reality no difference exists.
 }
 
 \caption{\label{fig-area-shape}Three different rectangles that all have
-the same area.}
+the same area, but have very different shapes.}
 
 \end{figure}%
 
@@ -7103,22 +7120,28 @@ lines.
 In addition, the explicit encodings generate an \textbf{emergent
 feature}: the \textbf{angle} of the lines. Furthermore, the angle of the
 lines allow us to decode a \textbf{data summary}: the \emph{change} in
-the number of offenders between 2011 and 2021 (see
-Figure~\ref{fig-visual-corr}).
+the number of offenders between 2011 and 2021
+(Figure~\ref{fig-visual-corr}).
 
-\begin{quote}
 An interaction plot is effective because it allows us to decode changes
 in the data values from the angles of the lines.
-\end{quote}
 
-It is more difficult to decode and compare the \emph{change} in the
-number of offenders for each ethnic group in a bar plot like the one
-shown in Figure~\ref{fig-interaction-bar}. Partly this is because we
-have to decode the lengths of two bars for each ethnic group rather than
-the slope of a single line.\footnote{Pinker1990GraphComprehension
-  (p.~111) discusses the problem of extracting different sorts of
+By comparison, it is more difficult to decode and compare the
+\emph{change} in the number of offenders for each ethnic group in a bar
+plot like the one shown in Figure~\ref{fig-interaction-bar}. Partly this
+is because we have to decode the lengths of two bars for each ethnic
+group rather than the slope of a single line.\footnote{(Pinker 1990,
+  111) discusses the problem of extracting different sorts of
   information from different data symbols, in particular bars versus
   lines.}
+
+On the other hand, individual data values, such as the number of
+offenders in a single ethnic group for a single year, are easier to
+decode from the bar plot in Figure~\ref{fig-interaction-bar} than from
+the lines in Figure~\ref{fig-interaction}. This is an example of the
+emergent feature (slope) partially obscuring the explicit encodings
+(horizontal and vertical position) in Figure~\ref{fig-interaction}. We
+will discuss this more in Chapter~\ref{sec-visual-shapes}.
 
 \begin{figure}
 
@@ -7205,14 +7228,14 @@ strength of a linear relationship from a scatter plot.\footnote{Examples
 Figure~\ref{fig-nz-doctor-bar} shows a plot of changes in health
 spending by successive New Zealand governments.\footnote{Figure~\ref{fig-nz-doctor-bar}
   is based on Figure 2 from Huskinson (2024).} In this data
-visualisation, the average change in health spending over a government's
-entire term is encoded as the \textbf{height} of a bar, with the
-duration of that government's term encoded as the \textbf{width} of the
-bar. Because height and width are visual features that interact, the
-result is an \textbf{area} for each government's term. However, that
-area has no sensible interpretation; what does a percent multiplied by a
-number of years mean? The areas of the bars do not correspond to any
-property of the data values.
+visualisation, the average percent change in health spending over a
+government's entire term is encoded as the \textbf{height} of a bar,
+with the duration of that government's term encoded as the
+\textbf{width} of the bar. Because height and width are visual features
+that interact, the result is an \textbf{area} for each government's
+term. However, that area has no sensible interpretation; what does a
+percent multiplied by a number of years mean? The areas of the bars do
+not correspond to any property of the data values.
 
 \begin{figure}
 
@@ -7233,18 +7256,7 @@ produces an emergent feature that can be decoded to properties of the
 data (as in a scatter plot, or mosaic plot, or interaction plot).
 However, it is possible to create a poor data visualisation if we
 produce an emergent feature that has no correspondence with data values
-(Figure~\ref{fig-data-vis-vis-lie}).\footnote{The idea that combining
-  visual features that interact is more appropriate for decoding data
-  summaries (and vice versa) is similar to the \emph{proximity
-  compatibility principle} (Wickens and Carswell 1995).
-
-  Shah and Hoeffner (2002a) use the following nice quote from earlier
-  work (Carswell and Wickens 1987):
-
-  ``Integrated, object-like displays (e.g., a line graph) are better for
-  integrative tasks, whereas more separable formats (e.g., bar graphs)
-  are better for less integrative or synthetic tasks such as point
-  reading.''}
+(Figure~\ref{fig-data-vis-vis-lie}).
 
 \begin{figure}
 
@@ -7267,18 +7279,17 @@ decoding may lead to unhelpful and misleading interpretations.}
 
 \end{figure}%
 
-\begin{quote}
 A data visualisation can be misleading if we encode data values using a
 combination of visual features that have a strong interaction, but the
 values that we decode from the resulting emergent feature do not
 correspond to any meaningful summary of the data.
-\end{quote}
 
 Figure~\ref{fig-nz-doctor-line} shows a different representation of the
-data. In this case, the average change in health spending is encoded as
-the (vertical) \textbf{position} of a line and the duration is encoded
-as the \textbf{length} of the line. These visual features do not
-interact, so we no longer have a misleading emergent visual feature.
+data from Figure~\ref{fig-nz-doctor-bar}. In this case, the average
+percent change in health spending is encoded as the (vertical)
+\textbf{position} of a line and the duration is encoded as the
+\textbf{length} of the line. These visual features do not interact, so
+we no longer have a misleading emergent visual feature.
 
 \begin{figure}
 

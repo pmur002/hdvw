@@ -96,7 +96,7 @@ grid.rect(rep(1:4/5, 4), rep(4:1/5, each=4) - max(l)/2, w, h,
 popViewport(3)
 pushViewport(viewport(layout.pos.col=3, layout.pos.row=2),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white"))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.8, height=.8))
 l <- seq(.05, .15, length.out=4)
 for (j in 1:4) {
@@ -110,7 +110,7 @@ for (j in 1:4) {
 popViewport(3)
 pushViewport(viewport(layout.pos.col=4, layout.pos.row=2),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white"))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.9, height=.9))
 l <- seq(.05, .15, length.out=4)
 for (j in 1:4) {
@@ -283,7 +283,7 @@ for (j in 1:4) {
 popViewport(3)
 pushViewport(viewport(layout.pos.col=5, layout.pos.row=4),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white", lwd=1))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.9, height=.9))
 w <- seq(1, 2, length.out=4)
 grid.points(rep(1:4/5, 4), rep(4:1/5, each=4), size=rep(unit(w, "mm"), 4),
@@ -329,7 +329,7 @@ grid.rect(rep(1:4/5, 4), rep(4:1/5, each=4), w2, w2,
 popViewport(3)
 pushViewport(viewport(layout.pos.col=6, layout.pos.row=5),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white", lwd=1))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.9, height=.9))
 cols <- rep(hcl(hues, 50, 70), 4)
 w <- rep(seq(.05, .15, length.out=4), each=4)
@@ -338,7 +338,7 @@ grid.rect(rep(1:4/5, 4), rep(4:1/5, each=4), w, w,
 popViewport(3)
 pushViewport(viewport(layout.pos.col=7, layout.pos.row=5),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white", lwd=1))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.9, height=.9))
 cols <- rep(hcl(0, 4:1/5*100, 70), 4)
 w <- rep(seq(.05, .15, length.out=4), each=4)
@@ -347,7 +347,7 @@ grid.rect(rep(1:4/5, 4), rep(4:1/5, each=4), w, w,
 popViewport(3)
 pushViewport(viewport(layout.pos.col=8, layout.pos.row=5),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white", lwd=1))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.9, height=.9))
 cols <- hcl(0, 50, rep(4:1/5*100, 4))
 w <- rep(seq(.05, .15, length.out=4), each=4)
@@ -377,7 +377,7 @@ grid.circle(rep(1:4/5, 4), rep(4:1/5, each=4), unit(1, "mm"),
 popViewport(3)
 pushViewport(viewport(layout.pos.col=7, layout.pos.row=6),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white", lwd=1))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.9, height=.9))
 cols <- hcl(rep(hues, each=4), rep(4:1/5*100, 4), 70)
 grid.circle(rep(1:4/5, 4), rep(4:1/5, each=4), unit(1, "mm"),
@@ -385,7 +385,7 @@ grid.circle(rep(1:4/5, 4), rep(4:1/5, each=4), unit(1, "mm"),
 popViewport(3)
 pushViewport(viewport(layout.pos.col=8, layout.pos.row=6),
              viewport(width=.8, height=.8))
-grid.rect(gp=gpar(fill="white", lwd=1))
+grid.rect(gp=gpar(fill="white", lty="dotted"))
 pushViewport(viewport(width=.9, height=.9))
 cols <- hcl(rep(hues, each=4), 50, rep(4:1/5*100, 4))
 grid.circle(rep(1:4/5, 4), rep(4:1/5, each=4), unit(1, "mm"),
