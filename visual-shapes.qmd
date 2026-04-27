@@ -8,7 +8,7 @@ source("common.R")
 # Visual Shapes {#sec-visual-shapes}
 
 All of the data visualisations that we have considered so far
-have encoded a **single data value** from one or more variables
+have encoded a **single data value** from one or two variables
 to a **single data symbol** (@fig-multivariate-symbol-a).
 For example, a bar plot like @fig-bar encodes the number of offenders
 for one ethnic group to one
@@ -198,23 +198,25 @@ and decreases in data values.[^line-trends]
 For example, it is very natural to decode a downward trend from the
 lines in a line plot like
 @fig-crime.  While it is also possible to decode trends from the
-coloured rectangles in a heatmap like @fig-crime-heatmap, the 
+coloured rectangles in a heatmap of the same data,
+like @fig-crime-heatmap, the 
 decoding is less immediately obvious.
 
 [^line-trends]:
     According to @Zacks1999
-    people use *trend words* (increasing/decreasing) versus *discrete words*
-    (higher/lower than) *and* are faster to judge absolute values from bars
-    but angle from line graphs.
+    people use *trend words* (increasing/decreasing) to describe lines
+    versus *discrete words*
+    (higher/lower than) to describe bars.
 
-> One reason why line plots are effective is because they encode multiple
-  data values into a complex data symbol that creates a visual shape,
-  from which we are able to decode data summaries.
+One reason why line plots are effective is because they encode multiple
+data values into a complex data symbol that creates a visual shape,
+from which we are able to decode data summaries.
 
 On the other hand, the more complex data symbols in a line plot,
 where each data symbol
-contains multiple data values, are less effective at encoding
-the *individual* raw data values. 
+contains multiple data values, are *less* effective at encoding
+the *individual* raw data values, compared to the simpler data symbols
+in a bar plot. 
 The coloured lines in @fig-line are not simple shapes
 from which it is easy to decode basic **visual features**.
 This means that, although we may be able to decode data summaries,
@@ -267,9 +269,9 @@ individual data values lose their individual identity.[^non-injective]
     completely impossible to decode the two data values from the 
     single bar.
 
-> One reason why a line plot is *less* effective for decoding
-  raw data values is because each raw data value is not encoded to its
-  own data symbol.
+One reason why a line plot is *less* effective for decoding
+raw data values is because each raw data value is not encoded to its
+own data symbol.
 
 The creation of visual shapes from multiple data values
 bears some similarity to the creation of emergent features by
@@ -294,6 +296,7 @@ There is also a similarity between visual shapes and visual summaries
 data summaries from collections of data values.
 The difference is that, with visual summaries, we are summarising
 many simple data symbols that each represent individual data values, 
+like points in a scatter plot,
 whereas with a visual shape we decode the
 data summary from a single data symbol that obscures the individual data values.
 In the case of a visual summary, the individual data values can still be 
@@ -404,8 +407,8 @@ A density plot encodes data summaries to visual features to create a visual
 shape from which we can decode **summaries** of the data summaries.
 :::
 
-> A density plot is effective because it conveys high-level features of
-  density estimates of the raw data.
+A density plot is effective because it conveys high-level features of
+density estimates of the raw data.
 
 Another commonality between density plots and histograms is that we get to
 choose how the data summaries are calculated from the raw data values.
@@ -515,8 +518,8 @@ visual feature of the visual shape (@fig-visual-feature-decode).
 is much shorter than it is wide).
 
 @fig-aspect shows that the aspect ratio of the plot has a large
-effect on the visual shapes of the data symbols, 
-which means that the aspect ratio has
+effect on the visual shapes of the data symbols. 
+This means that the aspect ratio has
 a large effect on the data summaries that we decode from the visual 
 shapes.  For example, in @fig-aspect, we can still see a general downward
 trend in three of the lines, with one line increasing.
@@ -547,15 +550,15 @@ it is possible to decode the features of interest.
 [^banking]:
     The *median-absolute-slope criterion* suggests choosing 
     an aspect ratio such that the median absolute slope of the line segments
-    between points is $45^{\circ}$
-    (also known as the *45 degree banking rule*)
+    between points is $45^{\circ}$,
+    also known as the *45 degree banking rule*
     [@Cleveland-banking].
-    This is shown to produce the most accurate decoding of slopes.    
+    This has been shown to produce the most accurate decoding of slopes.
 
 @fig-scatter-aspect demonstrates that a similar problem exists for
 decoding data summaries from scatter plots (@sec-integral).
-These plots encode the number of offloads (a fancy pass under
-pressure in rugby) as the horizontal position of data points and
+These plots encode the number of offloads (a fancy pass, under
+pressure, in rugby) as the horizontal position of data points and
 the number of tries (scoring actions) as the vertical position.
 The correlation between the two measures can be decoded from the
 emergent position in space of the data points.
@@ -607,7 +610,7 @@ popViewport()
 ```
 
 A related issue is the amount of empty space around the data points in
-a scatter plot.  IN @fig-scatter-aspect, 
+a scatter plot.  In @fig-scatter-aspect, 
 the relationship appears stronger in the top-right
 plot compared to the top-left plot simply because the data points
 are clustered more densely thanks to the different ranges on the plot 
@@ -647,7 +650,9 @@ in different ethnic groups to the heights of bars.
 As with @fig-no-line, each data value is encoded to its own bar,
 so there is no explicit visual shape, but the collection of bars for
 each ethnic group produces an implicit visual shape that allows us
-to decode data summaries, like overall decreases or increases over time.
+to decode data summaries, like overall decreases or increases over time,
+without having to explicitly decode and compare the heights of every individual
+bar.
 
 ```{r}
 #| echo: false
@@ -665,14 +670,13 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-This is essentially the idea of **visual summaries** from 
+This is very similar to the idea of **visual summaries** from 
 @sec-visual-summaries.
 When we encode data values as many simple visual features,
 in addition to being able to decode individual data values from
 individual visual features, 
 our visual system is sometimes capable of decoding data summaries
 from collections of visual features.
-
 There is also a connection to our visual system's tendency to 
 complete lines and curves and to decode simpler interpretations
 from collections of simple shapes
@@ -720,7 +724,7 @@ decoding absolute rates of change in the data.[^slope-accuracy]
     @proma2025visualstenographyfeaturerecreation showed that
     people are good at reproducing (therefore identifying) trends, 
     peaks, and valleys, if less so at reproducing 
-    periodicity, noise/variability.
+    periodicity or noise/variability.
         
     @regression-by-eye showed that decoding of trends from line plots
     (and scatter plots) is quite accurate, at least
@@ -803,7 +807,7 @@ does not actually make sense.[^zacks]
 #| fig-cap: Two data visualisations of average heights of females and males.
 #| fig-subcap:
 #|   - A bar plot supports decoding individual values.
-#|   - A line plot supports decoding trends.
+#|   - A line plot supports decoding trends, which is not helpful in this case.
 zacks <- data.frame(sex=c("Female", "Male"), height=c(45, 55))
 gg <- ggplot(zacks, aes(sex, height)) +
     scale_y_continuous(name="Height (inches)", limits=c(0, 60),
@@ -907,7 +911,7 @@ over time.
 #| label: fig-arrivals
 #| layout-nrow: 2
 #| fig-height: 3
-#| fig-cap: Figures reproduced from @Zacks1999
+#| fig-cap: The number of international arrivals to New Zealand over the last century.
 #| fig-subcap:
 #|   - linear y-axis scale
 #|   - log (base 10) y-axis scale
@@ -942,16 +946,21 @@ An important point is that
 We are able to decode an overall trend, local dips within the trend, and
 regular spikes within the overall trend.
 
-However, as we pointed out in @sec-non-linear-pos, the decoding of 
-simple visual features is compromised by the use of a non-linear scale.
-For example, it is very difficult to decode the final value of the 
-time series in @fig-arrivals-2 because the same distance between
+However, although it is more difficult to decode individual data values
+from a visual shape (@fig-data-vis-shape-decode),
+it is not impossible, and, 
+as we pointed out in @sec-non-linear-pos, the decoding of 
+simple visual features is compromised when we use a non-linear scale.
+For example, it is harder, but not impossible to decode
+the final value of the 
+time series from the line in @fig-arrivals-2,
+but the decoding is compromised because the same distance between
 the tick marks on the y-axis does not represent the same difference in
 data values (as emphasised by the choice of tick mark labels).
 As we can see from @fig-arrivals-1, the final data value in the time
 series is *not* half-way between 100,000 and 500,000.
 
-It is *possible* to decode quantitative values from @fig-arrivals-2.
+It is also *possible* to decode quantitative differences from @fig-arrivals-2.
 For example, the height of the seasonal changes remained fairly constant
 over time.
 However, that is an observation about the *logged* data, not the raw data 
@@ -974,7 +983,6 @@ misleading in the presence of a non-linear scale.
     sub-conscious decoding of visual features; it requires a more sophisticated
     mental effort and a self-discipline to ignore the more naive
     decoding.
-
 
 ## Case study:  log-log plots
 
@@ -1078,7 +1086,7 @@ from a plot with log scales because it indicates a
 power relationship between the two variables, in this case
 metabolic rate and body mass.[^kleibers-law]
 It is also possible to decode ordinal information, such as the fact that
-animals are larger and use more energy than bacteria.
+animalia are both larger and use more energy than bacteria.
 
 [^kleibers-law]:
     This power relationship between metabolic rate and body mass
@@ -1087,7 +1095,7 @@ animals are larger and use more energy than bacteria.
 However, decoding the basic **position** of data symbols from a plot
 with log scales is very difficult because equal steps
 along either axis do *not* decode to equal steps between data values
-(as indicated by the axis labels).  
+(as indicated by the axis labels).
 For example, we cannot easily decode *how much* bigger animals are than 
 bacteria.
 There is even danger, for the

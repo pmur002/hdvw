@@ -186,7 +186,7 @@ arrows <- function(hr) {
         pushViewport(viewport(layout.pos.row=2*i - 1))
         grid.line.to(unit(0, "npc") - unit(5, "mm"), .5,
                      arrow=arrow(angle=20, length=unit(3, "mm"), type="closed"),
-                     gp=gpar(fill="black"))
+                     gp=gpar(col="grey", fill="grey"))
         popViewport()
         upViewport(3)
     }
