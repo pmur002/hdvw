@@ -680,7 +680,8 @@ so that we can see where some points still overlap.
 #| label: fig-jitter
 #| fig-cap: The number of points scored in Rugby World Cup games by teams from the northern and southern hemispheres.
 ggplot(rwcAll) +
-    geom_jitter(aes(x=scored, y=hemisphere), height=.2, width=0, alpha=.5) +
+    geom_point(aes(x=scored, y=hemisphere), alpha=.5,
+               position=position_jitter(height=.2, width=0, seed=123)) +
     scale_x_continuous(name="points scored")
 ```
 

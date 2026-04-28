@@ -63,6 +63,11 @@ RUN apt-get update && apt-get install -y \
     libudunits2-dev \
     libabsl-dev \
     libgdal-dev
+
+# For gdiff regression testing (pdftools dependency)
+RUN apt-get update && apt-get install -y \
+    libpoppler-cpp-dev
+
 # Use {renv} to restore from local renv.lock
 RUN Rscript -e 'install.packages("renv", repos="https://cran.rstudio.com/")'
 COPY renv.lock .

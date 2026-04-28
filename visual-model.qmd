@@ -694,7 +694,7 @@ dots <- function(n, different=1, cols2=colsnpg, spread=FALSE, mix=FALSE, r2) {
         xy <- spread(n)
         wh <- .9
     } else {
-        xy <-grid(n)
+        xy <- grid(n)
         wh <- .8
     }
     draw <- function(xy, cols2, r2) {
@@ -788,6 +788,8 @@ lines <- function(n, col=FALSE, diffm=1, diffc=1, cols2=colsnpg, spread=FALSE) {
 #|   - One teal dot amongst 99 orange dots.
 colsnpg <- pal_npg()(2)
 
+set.seed(123)
+
 grid.newpage()
 dots(5)
 
@@ -805,6 +807,8 @@ dots(10)
 #|   - One larger dot amongst 24 smaller dots.
 #|   - One larger dot amongst 99 smaller dots.
 colssame <- rep("black", 2)
+
+set.seed(1234)
 
 grid.newpage()
 dots(5, cols2=colssame, r2=c(3, 5))
@@ -831,6 +835,8 @@ of basic **visual features**.
 #col1 <- coords(as(sRGB(t(col2rgb(colsnpg[1])/255)), "polarLUV"))
 #colssimilar <- hcl(c(col1[3], col1[3] + 10), col1[2], c(col1[1], col1[1] - 10))
 colssimilar <- c(colsnpg[1], darken(colsnpg[1]))
+
+set.seed(12345)
 
 grid.newpage()
 dots(5, cols2=colsnpg, r2=c(3, 5))
