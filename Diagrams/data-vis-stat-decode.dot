@@ -5,8 +5,12 @@ digraph {
   stat [ label="data\nsummaries"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#31A354" ]
   vis [ label="visual\nfeatures"; shape=box;
      style="rounded"; color="#006D2C"; fontcolor="#006D2C" ]
+  sum [ label="visual\nsummaries"; shape=box;
+     style="rounded"; color="#31A354"; fontcolor="#31A354" ]
   data -> vis [ style="bold"; penwidth=1; color="#006D2C" ]
   vis:sw -> data:se [ style="dashed", color="#006D2C" ]
-  vis:s -> stat:se [ style="dashed", color="#006D2C;0.1:#057330;0.1:#0B7935;0.1:#107F39;0.1:#16853E;0.1:#1B8B42;0.1:#219147;0.1:#26974B;0.1:#2C9D50;0.1:#31A354;0.1" ]
+  vis -> sum [ style="solid", color="#006D2C" ]
+  sum:s -> stat:se [ style="dashed", color="#31A354" ]
 { rank=same; data, stat }
+{ rank=same; vis, sum }
 }

@@ -1,0 +1,16 @@
+digraph {
+  graph [ rankdir=LR; margin=.2; nodesep=.5 ];
+  node [ fontsize=20; fontname="sans bold"; margin=.2 ];
+  data [ label="data\nvalues"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#006D2C" ]
+  lie [ label="garbage\nand lies"; shape=box; style="filled, rounded"; penwidth=0; fontcolor=white; fillcolor="#969696" ]
+  vis [ label="visual\nfeatures"; shape=box;
+     style="rounded"; color="#006D2C"; fontcolor="#006D2C" ]
+  sum [ label="visual\nsummaries"; shape=box;
+     style="rounded"; color="#31A354"; fontcolor="#31A354" ]
+  data -> vis [ style="bold"; penwidth=1; color="#006D2C" ]
+  vis:sw -> data:se [ style="dashed", color="#006D2C" ]
+  vis -> sum [ style="solid", color="#006D2C" ]
+  sum:s -> lie:se [ style="dashed", color="#31A354;0.1:#379C56;0.1:#3C9557;0.1:#428E59;0.1:#47875B;0.1:#4D7F5C;0.1:#52785E;0.1:#587160;0.1:#5D6A61;0.1:#636363;0.1" ]
+{ rank=same; data, lie }
+{ rank=same; vis, sum }
+}

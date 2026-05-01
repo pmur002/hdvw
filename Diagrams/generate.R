@@ -229,7 +229,10 @@ addLieEdge <- backEdge("add:s", "lie:se", grad=grad(2, 5, level1=2, level2=1))
 visShapeEdge <- procEdge("vis", "shape", level1=1, level2=2)
 shapeObjEdge <- procEdge("shape", "obj", level1=2, level2=3)
 visObjEdge <- procEdge("vis", "obj", level1=1, level2=3)
-sumStatEdge <- backEdge("sum:s", "stat:se")
+sumStatEdge <- backEdge("sum:s", "stat:se",
+                        grad=grad(2, 2, level1=2, level2=2))
+sumLieEdge <- backEdge("sum:s", "lie:se",
+                        grad=grad(2, 5, level1=2, level2=2))
 shapeStatEdge <- backEdge("shape:s", "stat:se",
                           grad=grad(2, 2, level1=2, level2=2))
 shapeLieEdge <- backEdge("shape:s", "lie:se",
@@ -355,11 +358,26 @@ graph(data,
 graph(data,
       stat,
       vis,
+      sum,
       dataVisEdge,
       visDataEdge3,
-      visStatEdge,
+      visSumEdge,
+      sumStatEdge,
       dataStatSame,
+      visSumSame,
       file="data-vis-stat-decode.dot")
+
+graph(data,
+      lie,
+      vis,
+      sum,
+      dataVisEdge,
+      visDataEdge3,
+      visSumEdge,
+      sumLieEdge,
+      dataLieSame,
+      visSumSame,
+      file="data-vis-stat-lie.dot")
 
 graph(data,
       stat,

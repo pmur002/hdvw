@@ -246,14 +246,15 @@ div.csl-indent {
   <li><a href="#sec-visual-summaries" id="toc-sec-visual-summaries" class="nav-link" data-scroll-target="#sec-visual-summaries"><span class="header-section-number">8.2</span> Visual summaries</a></li>
   <li><a href="#case-study-histograms" id="toc-case-study-histograms" class="nav-link" data-scroll-target="#case-study-histograms"><span class="header-section-number">8.3</span> Case study: Histograms</a></li>
   <li><a href="#sec-summary-decode" id="toc-sec-summary-decode" class="nav-link" data-scroll-target="#sec-summary-decode"><span class="header-section-number">8.4</span> Decoding summaries</a></li>
-  <li><a href="#sec-summary-caveats" id="toc-sec-summary-caveats" class="nav-link" data-scroll-target="#sec-summary-caveats"><span class="header-section-number">8.5</span> Dangers of summaries</a></li>
-  <li><a href="#case-study-how-charts-lie" id="toc-case-study-how-charts-lie" class="nav-link" data-scroll-target="#case-study-how-charts-lie"><span class="header-section-number">8.6</span> Case study: How charts lie</a></li>
-  <li><a href="#sec-downgrade" id="toc-sec-downgrade" class="nav-link" data-scroll-target="#sec-downgrade"><span class="header-section-number">8.7</span> Visual downgrades</a></li>
-  <li><a href="#case-study-heatmaps" id="toc-case-study-heatmaps" class="nav-link" data-scroll-target="#case-study-heatmaps"><span class="header-section-number">8.8</span> Case study: Heatmaps</a></li>
-  <li><a href="#cognitive-load" id="toc-cognitive-load" class="nav-link" data-scroll-target="#cognitive-load"><span class="header-section-number">8.9</span> Cognitive load</a></li>
-  <li><a href="#case-study-visualising-variability" id="toc-case-study-visualising-variability" class="nav-link" data-scroll-target="#case-study-visualising-variability"><span class="header-section-number">8.10</span> Case study: Visualising variability</a></li>
-  <li><a href="#case-study-dynamite-plots" id="toc-case-study-dynamite-plots" class="nav-link" data-scroll-target="#case-study-dynamite-plots"><span class="header-section-number">8.11</span> Case study: Dynamite plots</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.12</span> Summary</a></li>
+  <li><a href="#sec-summary-caveats" id="toc-sec-summary-caveats" class="nav-link" data-scroll-target="#sec-summary-caveats"><span class="header-section-number">8.5</span> Dangers of data summaries</a></li>
+  <li><a href="#sec-summary-vis-caveats" id="toc-sec-summary-vis-caveats" class="nav-link" data-scroll-target="#sec-summary-vis-caveats"><span class="header-section-number">8.6</span> Dangers of visual summaries</a></li>
+  <li><a href="#case-study-how-charts-lie" id="toc-case-study-how-charts-lie" class="nav-link" data-scroll-target="#case-study-how-charts-lie"><span class="header-section-number">8.7</span> Case study: How charts lie</a></li>
+  <li><a href="#sec-downgrade" id="toc-sec-downgrade" class="nav-link" data-scroll-target="#sec-downgrade"><span class="header-section-number">8.8</span> Visual downgrades</a></li>
+  <li><a href="#case-study-heatmaps" id="toc-case-study-heatmaps" class="nav-link" data-scroll-target="#case-study-heatmaps"><span class="header-section-number">8.9</span> Case study: Heatmaps</a></li>
+  <li><a href="#cognitive-load" id="toc-cognitive-load" class="nav-link" data-scroll-target="#cognitive-load"><span class="header-section-number">8.10</span> Cognitive load</a></li>
+  <li><a href="#case-study-visualising-variability" id="toc-case-study-visualising-variability" class="nav-link" data-scroll-target="#case-study-visualising-variability"><span class="header-section-number">8.11</span> Case study: Visualising variability</a></li>
+  <li><a href="#case-study-dynamite-plots" id="toc-case-study-dynamite-plots" class="nav-link" data-scroll-target="#case-study-dynamite-plots"><span class="header-section-number">8.12</span> Case study: Dynamite plots</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.13</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -494,7 +495,7 @@ Table&nbsp;8.2: A table of intervals that cover the range of the number of point
 <p>For more qualitative summaries, such as identifying clusters and outliers, we know that performance will be good because these decodings rely on fundamental properties of our visual system that identify unusual items (<a href="visual-model.html#sec-differences" class="quarto-xref"><span>Section 2.5</span></a>) and on fundamental properties of our visual system that identify groups of items (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
 </section>
 <section id="sec-summary-caveats" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="sec-summary-caveats"><span class="header-section-number">8.5</span> Dangers of summaries</h2>
+<h2 data-number="8.5" class="anchored" data-anchor-id="sec-summary-caveats"><span class="header-section-number">8.5</span> Dangers of data summaries</h2>
 <p>The benefit of a data visualisation that encodes <strong>data summaries</strong> as visual features is that it allows us to decode data summaries very easily and accurately. For example, although we can perceive a general idea of central tendency from the dots in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> (<a href="#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>), it is much easier and more accurate to perceive median values from the thick vertical lines in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.</p>
 <p>The flipside is that a data visualisation that encodes <strong>data summaries</strong> as visual features is <em>not</em> effective for decoding raw data values. For example, we cannot see from the box plot in <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> that the scores 1, 2, 4, and 5 never occurred, while this is clear from <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> because the dot plot does encode the raw data values to data symbols.</p>
 <p>Box plots and histograms are <em>not</em> effective at conveying raw data values because they do not encode raw data values to data symbols.</p>
@@ -547,10 +548,41 @@ Figure&nbsp;8.8: A histogram of the points scored per game by Tier One nations a
 </div>
 </div>
 </section>
-<section id="case-study-how-charts-lie" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="case-study-how-charts-lie"><span class="header-section-number">8.6</span> Case study: How charts lie</h2>
+<section id="sec-summary-vis-caveats" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="sec-summary-vis-caveats"><span class="header-section-number">8.6</span> Dangers of visual summaries</h2>
+<p>In <a href="#fig-rwc-dotplot-concede" class="quarto-xref">Figure&nbsp;<span>8.7</span></a> we saw an example of being able to decode <strong>visual summaries</strong> from multiple visual features, in that case from multiple <strong>positions</strong> of data points. The visual summaries from <a href="#fig-rwc-dotplot-concede" class="quarto-xref">Figure&nbsp;<span>8.7</span></a> allow us to decode <strong>data summaries</strong>. For example, we can decode that the average number of points conceded by teams from the Northern Hemisphere is higher than the average number of points conceded by teams from the Southern Hemisphere.</p>
+<p>That decoding of a data summary from multiple visual features relies on two stages: we perceive a visual summary and then we decode information from that visual summary. Ideally, the information decoded from the visual summary corresponds to a valid data summary (<a href="#fig-data-vis-stat-decode" class="quarto-xref">Figure&nbsp;<span>8.4</span></a>). However, there is no guarantee that that will be the case.</p>
+<p>For example, <a href="#fig-dot-log" class="quarto-xref">Figure&nbsp;<span>8.9</span></a> shows a dot plot of the number of points conceded by Tier One nations in Rugby World Cups. This differs from <a href="#fig-rwc-dotplot-concede" class="quarto-xref">Figure&nbsp;<span>8.7</span></a> because the x-axis has a log (base 10) scale. The values that are encoded as the horizontal positions of the points are the <em>log</em> of the number of points conceded. We can still perceive visual summaries of the horizontal positions of the data points. For example, we can estimate the average horizontal position of the points for Northern Hemisphere teams. However, that visual summary no longer corresponds to a useful data summary. In particular, the visual average of the horizontal positions does not correspond to the average of the number of points conceded.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-dot-log" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dot-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="summaries_files/figure-html/fig-dot-log-1.svg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dot-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.9: Stacked dotplots of the number of points conceded by Tier One nations at Rugby World Cup matches, with a log scale on the x-axis. Two zero values for Southern Hemisphere teams have been discarded.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We must take care to avoid encoding data values to visual features that the visual system is capable of visually summarising if the visual summary does not correspond to a useful data summary (<a href="#fig-data-vis-stat-lie" class="quarto-xref">Figure&nbsp;<span>8.10</span></a>).</p>
+<div id="fig-data-vis-stat-lie" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-vis-stat-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="Diagrams/data-vis-stat-lie.png" class="img-fluid figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-stat-lie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.10: A data visualisation may encode raw data to visual features that the visual system is cabable of summarising. However, the information that we can decode from the visual summary does not necessarily have to correspond to a valid or useful summary of the data.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="case-study-how-charts-lie" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="case-study-how-charts-lie"><span class="header-section-number">8.7</span> Case study: How charts lie</h2>
 <p>In this book, we assume that the purpose of a data visualisation is to faithfully and honestly encode data values and the goal is to produce a data visualisation that provides the most effective decoding. Nevertheless, even less honest representations of data can also be thought of in terms of encodings, particularly encodings of data summaries.</p>
-<p>For example, <a href="#fig-bars-at-zero" class="quarto-xref">Figure&nbsp;<span>8.9</span></a> shows a bar plot of the predicted impact on the top tax rate in the United States from President George W. Bush to President Barack Obama.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> One problem with this data visualisation is that it does not encode raw data values—the actual predicted top tax rates are 35 and 39.6. Instead, a “data summary” of the tax rate <em>minus 34</em> (the values 1 and 5.6) are encoded as the lengths of the two bars. We are unable to decode the raw data from this bar plot—we can only decode the data values that have been encoded—and this leads to an extreme exaggeration of the difference between the two top tax rates.</p>
+<p>For example, <a href="#fig-bars-at-zero" class="quarto-xref">Figure&nbsp;<span>8.11</span></a> shows a bar plot of the predicted impact on the top tax rate in the United States from President George W. Bush to President Barack Obama.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> One problem with this data visualisation is that it does not encode raw data values—the actual predicted top tax rates are 35 and 39.6. Instead, a “data summary” of the tax rate <em>minus 34</em> (the values 1 and 5.6) are encoded as the lengths of the two bars. We are unable to decode the raw data from this bar plot—we can only decode the data values that have been encoded—and this leads to an extreme exaggeration of the difference between the two top tax rates.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bars-at-zero" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -559,30 +591,30 @@ Figure&nbsp;8.8: A histogram of the points scored per game by Tier One nations a
 <img src="summaries_files/figure-html/fig-bars-at-zero-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bars-at-zero-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.9: A bar plot of the increase in the top tax rate in the United States of America from President George W. Bush to President Barack Obama.
+Figure&nbsp;8.11: A bar plot of the increase in the top tax rate in the United States of America from President George W. Bush to President Barack Obama.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A data visualisation that encodes a data summary that is a distortion of the data or an inappropriate subset of the data is encoding unhelpful information to visual features. It is only then possible to decode unhelpful information from the data visualisation (<a href="#fig-lie-vis-decode" class="quarto-xref">Figure&nbsp;<span>8.10</span></a>).</p>
+<p>A data visualisation that encodes a data summary that is a distortion of the data or an inappropriate subset of the data is encoding unhelpful information to visual features. It is only then possible to decode unhelpful information from the data visualisation (<a href="#fig-lie-vis-decode" class="quarto-xref">Figure&nbsp;<span>8.12</span></a>).</p>
 <div id="fig-lie-vis-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lie-vis-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Diagrams/lie-vis-decode.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lie-vis-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.10: A data visualisation may encode an unrepresentative or “cooked” version of the data, rather than the raw data, to visual features. Visual decoding leads back to the lies rather than the real data.
+Figure&nbsp;8.12: A data visualisation may encode an unrepresentative or “cooked” version of the data, rather than the raw data, to visual features. Visual decoding leads back to the lies rather than the real data.
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="sec-downgrade" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="sec-downgrade"><span class="header-section-number">8.7</span> Visual downgrades</h2>
+<section id="sec-downgrade" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="sec-downgrade"><span class="header-section-number">8.8</span> Visual downgrades</h2>
 <p>We have seen that a downside to encoding data summaries, rather than raw data values, is that we lose the ability to decode raw data values from data symbols. However, we pay this price in order to improve our ability to decode data summaries from the data symbols. For example, a boxplot makes it easier to decode the median of a set of data values.</p>
 <p>By encoding data summaries, we deliberately lose the ability to decode raw data values in order to gain the ability to decode data summaries.</p>
 <p>Another way that we may deliberately lose information is by selecting a visual feature that does not allow complete decoding of the original data values.</p>
-<p>For example, <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.11</span></a> shows the crime rate for 2021 in each police district of New Zealand. The data values for this map are from <a href="#tbl-map-data" class="quarto-xref">Table&nbsp;<span>8.3</span></a>.</p>
+<p>For example, <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.13</span></a> shows the crime rate for 2021 in each police district of New Zealand. The data values for this map are from <a href="#tbl-map-data" class="quarto-xref">Table&nbsp;<span>8.3</span></a>.</p>
 <div class="cell">
 <div id="tbl-map-data" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -654,7 +686,7 @@ Table&nbsp;8.3: The average crime rate over the period 2011 to 2021 for each pol
 </figure>
 </div>
 </div>
-<p>The data symbols in <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.11</span></a> are circles with the geographic location of the (centre of the) police district encoded to the position of the circles and the crime rate encoded to the (fill) colour, particularly the luminance, of the circles. Darker circles represent higher crime rates.</p>
+<p>The data symbols in <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.13</span></a> are circles with the geographic location of the (centre of the) police district encoded to the position of the circles and the crime rate encoded to the (fill) colour, particularly the luminance, of the circles. Darker circles represent higher crime rates.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-downgrade" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -663,7 +695,7 @@ Table&nbsp;8.3: The average crime rate over the period 2011 to 2021 for each pol
 <img src="summaries_files/figure-html/fig-downgrade-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-downgrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.11: A map of New Zealand with .
+Figure&nbsp;8.13: A map of New Zealand with .
 </figcaption>
 </figure>
 </div>
@@ -671,19 +703,19 @@ Figure&nbsp;8.11: A map of New Zealand with .
 </div>
 <p>We know that encoding the crime rate as luminance is not an appropriate encoding for quantitative data values (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). The best we can decode is ordinal data values from the luminance of the circles (<a href="mapping-visual-features.html#sec-qual-features" class="quarto-xref"><span>Section 3.4</span></a>).</p>
 <p>However, we may accept this loss of information in order to gain the ability to decode the geographic position of the police districts. For example, although we cannot decode exact crime rates, we are able to see that the higher crime rates correspond to more rural areas; the lighter circles appear in the urban regions that include New Zealand’s largest cities: Auckland, Wellington, and Christchurch.</p>
-<p>In <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.11</span></a>, we can only decode to <strong>data summaries</strong> of the crime rate because we an only decode the <strong>ranking</strong> of the crime rates, not individual numeric crime rates and not numeric differences between crime rates (<a href="#fig-data-vis-stat" class="quarto-xref">Figure&nbsp;<span>8.12</span></a>).</p>
+<p>In <a href="#fig-downgrade" class="quarto-xref">Figure&nbsp;<span>8.13</span></a>, we can only decode to <strong>data summaries</strong> of the crime rate because we an only decode the <strong>ranking</strong> of the crime rates, not individual numeric crime rates and not numeric differences between crime rates (<a href="#fig-data-vis-stat" class="quarto-xref">Figure&nbsp;<span>8.14</span></a>).</p>
 <div id="fig-data-vis-stat" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-vis-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Diagrams/data-vis-stat.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-vis-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.12: A data visualisation may encode data values as a visual feature that does not allow decoding back to the original data values. Instead, it is only possible to decode summaries of the data.
+Figure&nbsp;8.14: A data visualisation may encode data values as a visual feature that does not allow decoding back to the original data values. Instead, it is only possible to decode summaries of the data.
 </figcaption>
 </figure>
 </div>
 <p>On the other hand, this loss of information is acceptable if the decoding still allows us to make useful comparisons. Put more strongly, the numeric comparisons that we lose access to may not be the most important decodings, so the loss may not be that important.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
-<p>For comparison, <a href="#fig-no-downgrade" class="quarto-xref">Figure&nbsp;<span>8.13</span></a> shows a simple bar plot of the same crime rates. In this data visualisation, although we can decode and compare the numeric crime rates much more accurately, the rural/urban comparison is much more difficult.</p>
+<p>For comparison, <a href="#fig-no-downgrade" class="quarto-xref">Figure&nbsp;<span>8.15</span></a> shows a simple bar plot of the same crime rates. In this data visualisation, although we can decode and compare the numeric crime rates much more accurately, the rural/urban comparison is much more difficult.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-no-downgrade" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -692,39 +724,39 @@ Figure&nbsp;8.12: A data visualisation may encode data values as a visual featur
 <img src="summaries_files/figure-html/fig-no-downgrade-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-no-downgrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.13: A bar plot of the crime rate for 2021 in each police district of New Zealand.
+Figure&nbsp;8.15: A bar plot of the crime rate for 2021 in each police district of New Zealand.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="case-study-heatmaps" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="case-study-heatmaps"><span class="header-section-number">8.8</span> Case study: Heatmaps</h2>
+<section id="case-study-heatmaps" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="case-study-heatmaps"><span class="header-section-number">8.9</span> Case study: Heatmaps</h2>
 <p>Heatmaps are a common way of representing three-dimensional data where two of the data variables are either qualitative or have been measured on a regular grid and the third variable is <strong>quantitative</strong>. The first two variables naturally encode to horizontal and vertical <strong>position</strong> to produce an array of rectangles, while the third variable encodes to <strong>colour</strong>.</p>
-<p>We saw an example of a heatmap in <a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> and <a href="#fig-nomads-purple" class="quarto-xref">Figure&nbsp;<span>8.14</span></a> shows another example that is a variation on <a href="qualitative.html#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.21</span></a> and <a href="qualitative.html#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.23</span></a>.</p>
+<p>We saw an example of a heatmap in <a href="intro.html#fig-crime-heatmap" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> and <a href="#fig-nomads-purple" class="quarto-xref">Figure&nbsp;<span>8.16</span></a> shows another example that is a variation on <a href="qualitative.html#fig-nomads-rainbow" class="quarto-xref">Figure&nbsp;<span>6.21</span></a> and <a href="qualitative.html#fig-nomads-viridis" class="quarto-xref">Figure&nbsp;<span>6.23</span></a>.</p>
 <div id="fig-nomads-purple" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-nomads-purple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Data/Weather/NOMADS-purple.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nomads-purple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.14: A snapshot of wind strength in the vicinity of New Zealand on September 14 2024. This uses the same data as <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, but does not show wind direction.
+Figure&nbsp;8.16: A snapshot of wind strength in the vicinity of New Zealand on September 14 2024. This uses the same data as <a href="visual-model.html#fig-visual-model-demo" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>, but does not show wind direction.
 </figcaption>
 </figure>
 </div>
-<p>The use of colour to encode quantitative data values is not optimal for accuracy (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). However, as we saw in <a href="#sec-downgrade" class="quarto-xref"><span>Section 8.7</span></a>, as long as the colour scheme has monotonic luminance and/or chroma changes, it is still possible to decode ordinal values.</p>
+<p>The use of colour to encode quantitative data values is not optimal for accuracy (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). However, as we saw in <a href="#sec-downgrade" class="quarto-xref"><span>Section 8.8</span></a>, as long as the colour scheme has monotonic luminance and/or chroma changes, it is still possible to decode ordinal values.</p>
 <p>Furthermore, we are able to decode useful visual summaries from the multiple rectangle data symbols on a heatmap (<a href="#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>). For example, we can identify regions of darker or lighter colours, not just individual dark or light rectangles.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
 <p>On the downside, because each rectangle in a heatmap is surrounded by other rectangles of differing colours, it is difficult to accurately decode the colours of individual rectangles (<a href="qualitative.html#sec-colour-relative" class="quarto-xref"><span>Section 6.3</span></a>).</p>
 <p>In the case of a heatmap, ordinal comparisons are typically what is of most importance. The aim is <em>not</em> to be able to decode individual quantitative data values. Furthermore, we gain from being able to decode visual summaries, such as <em>regions</em> of darker and lighter rectangles. These positives moderate the damage that is done by relative perception of the heatmap rectangles.</p>
 </section>
-<section id="cognitive-load" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="cognitive-load"><span class="header-section-number">8.9</span> Cognitive load</h2>
+<section id="cognitive-load" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="cognitive-load"><span class="header-section-number">8.10</span> Cognitive load</h2>
 <p>Consider the following sentence about changes in global malnutrition rates:<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
 <div class="actual-quote">
 <p>“rising food production reduced the malnutrition rate from 2 in 3 people in 1950 to 1 in 11 by 2019”</p>
 </div>
-<p>In order to comprehend the change in malnutrition rate, we are required to compare “2 in 3” to “1 in 11”. This requires mental effort to calculate the ratios or fractions and then compare them. It is possibly easier to compare the rates if we hold the numerator constant, comparing “2 in 3” to “2 in 22”. It is perhaps easier still if we calculate the fractions, comparing 0.667 to 0.091. However, it is certainly easier to compare those fractions visually (<a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.15</span></a>).</p>
+<p>In order to comprehend the change in malnutrition rate, we are required to compare “2 in 3” to “1 in 11”. This requires mental effort to calculate the ratios or fractions and then compare them. It is possibly easier to compare the rates if we hold the numerator constant, comparing “2 in 3” to “2 in 22”. It is perhaps easier still if we calculate the fractions, comparing 0.667 to 0.091. However, it is certainly easier to compare those fractions visually (<a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.17</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cog-load" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -733,7 +765,7 @@ Figure&nbsp;8.14: A snapshot of wind strength in the vicinity of New Zealand on 
 <img src="summaries_files/figure-html/fig-cog-load-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cog-load-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.15: A bar plot comparing two fractions.
+Figure&nbsp;8.17: A bar plot comparing two fractions.
 </figcaption>
 </figure>
 </div>
@@ -741,7 +773,7 @@ Figure&nbsp;8.15: A bar plot comparing two fractions.
 </div>
 <p>The point is that we can reduce the cognitive load that is required of the viewer if we make the mental calculations that are required easier. We can reduce the cognitive load further if we present the results of the calculation directly and even further if we encode the results of the calculation as simple visual features.</p>
 <p>In other words, we can calculate <strong>data summaries</strong> or we can force the viewer to perform <strong>visual summaries</strong>.</p>
-<p>Conversely, we can add to the cognitive load if we make the visual calculations harder. For example, <a href="#fig-cog-load-hi" class="quarto-xref">Figure&nbsp;<span>8.16</span></a> shows a bar plot of the original “2 in 3” versus “1 in 11” data values. We now need to perceive the proportion of blue bars relative to red bars and compare those proportions, which is clearly more work than just comparing the two bars in <a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.15</span></a>.</p>
+<p>Conversely, we can add to the cognitive load if we make the visual calculations harder. For example, <a href="#fig-cog-load-hi" class="quarto-xref">Figure&nbsp;<span>8.18</span></a> shows a bar plot of the original “2 in 3” versus “1 in 11” data values. We now need to perceive the proportion of blue bars relative to red bars and compare those proportions, which is clearly more work than just comparing the two bars in <a href="#fig-cog-load" class="quarto-xref">Figure&nbsp;<span>8.17</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cog-load-hi" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -750,7 +782,7 @@ Figure&nbsp;8.15: A bar plot comparing two fractions.
 <img src="summaries_files/figure-html/fig-cog-load-hi-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cog-load-hi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.16: A bar plot comparing two fractions.
+Figure&nbsp;8.18: A bar plot comparing two fractions.
 </figcaption>
 </figure>
 </div>
@@ -760,11 +792,11 @@ Figure&nbsp;8.16: A bar plot comparing two fractions.
 <p>The best data visualisation will be different for different questions of interest, but if the question of interest involves comparing data summaries, then one way that we can make the viewer’s life easier is by calculating summaries of the data and encoding data summaries as visual features, rather than encoding raw data values and asking the viewer to perform visual summaries.</p>
 <p>It is possible in some cases to rely on visual summaries, but we need to be careful not to set a visual task that requires too much mental effort.</p>
 </section>
-<section id="case-study-visualising-variability" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="case-study-visualising-variability"><span class="header-section-number">8.10</span> Case study: Visualising variability</h2>
+<section id="case-study-visualising-variability" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="case-study-visualising-variability"><span class="header-section-number">8.11</span> Case study: Visualising variability</h2>
 <p>The dot plot in <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows the number of points scored by countries from the different hemispheres in Rugby World Cup matches. This allows us to decode the number of points scored in individual matches and it allows us to decode visual summaries of points scored in multiple matches (<a href="#sec-visual-summaries" class="quarto-xref"><span>Section 8.2</span></a>). For example, we can see that the range of scores is higher for southern-hemisphere teams. We can also estimate the spread of scores for northern versus southern hemisphere teams, for example, what is the interquartile range? However, comparing the spreads of scores is a more difficult visual task than comparing the ranges of scores (<a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>).</p>
 <p>This is an example of a situation where we can reduce the cognitive load by presenting the data summary directly rather than relying on a visual summary. For example, <a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, which visualises the same data as <a href="#fig-rwc-dotplot" class="quarto-xref">Figure&nbsp;<span>8.3</span></a>, allows us to compare the interquartile ranges more easily because a boxplot encodes that information directly as the length of a box.</p>
-<p><a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.17</span></a> shows another example that requires comparing data summaries between groups. Here we have the points scored per game by Tier One nations at Rugby World Cups. If we are interested in whether one Rugby World Cup was more free-scoring than another, and we treat the Tier One matches as representative of all matches, we could attempt to summarise whether one group of points is, on average, higher than another, taking into account the spread of points in each year.</p>
+<p><a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.19</span></a> shows another example that requires comparing data summaries between groups. Here we have the points scored per game by Tier One nations at Rugby World Cups. If we are interested in whether one Rugby World Cup was more free-scoring than another, and we treat the Tier One matches as representative of all matches, we could attempt to summarise whether one group of points is, on average, higher than another, taking into account the spread of points in each year.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rwc-year" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -773,13 +805,13 @@ Figure&nbsp;8.16: A bar plot comparing two fractions.
 <img src="summaries_files/figure-html/fig-rwc-year-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rwc-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.17: A plot of the points scored in matches between Tier One nations at Rugby World Cup matches.
+Figure&nbsp;8.19: A plot of the points scored in matches between Tier One nations at Rugby World Cup matches.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a> shows a direct encoding of the mean scores per year, plus error bars that directly encode the standard deviation of scores per year. This makes it much easier to decode differences in typical scores as well as differences in score variation between years.</p>
+<p><a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.20</span></a> shows a direct encoding of the mean scores per year, plus error bars that directly encode the standard deviation of scores per year. This makes it much easier to decode differences in typical scores as well as differences in score variation between years.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rwc-year-mean" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -788,16 +820,16 @@ Figure&nbsp;8.17: A plot of the points scored in matches between Tier One nation
 <img src="summaries_files/figure-html/fig-rwc-year-mean-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rwc-year-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.18: A plot of the mean points scored, plus-or-minus the standard deviations of points scored, in matches between Tier One nations at Rugby World Cup matches.
+Figure&nbsp;8.20: A plot of the mean points scored, plus-or-minus the standard deviations of points scored, in matches between Tier One nations at Rugby World Cup matches.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="case-study-dynamite-plots" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="case-study-dynamite-plots"><span class="header-section-number">8.11</span> Case study: Dynamite plots</h2>
-<p><a href="#fig-dynamite" class="quarto-xref">Figure&nbsp;<span>8.19</span></a> shows a <em>dynamite plot</em> of the data from <a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.17</span></a> and <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>. Like <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>, we have encoded the means and standard deviations of scores for each year. However, the means are encoded as the lengths of bars, rather than the positions of dots, and the standard deviation is only encoded as a line above the mean, rather than above and below.</p>
+<section id="case-study-dynamite-plots" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="case-study-dynamite-plots"><span class="header-section-number">8.12</span> Case study: Dynamite plots</h2>
+<p><a href="#fig-dynamite" class="quarto-xref">Figure&nbsp;<span>8.21</span></a> shows a <em>dynamite plot</em> of the data from <a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.19</span></a> and <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.20</span></a>. Like <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.20</span></a>, we have encoded the means and standard deviations of scores for each year. However, the means are encoded as the lengths of bars, rather than the positions of dots, and the standard deviation is only encoded as a line above the mean, rather than above and below.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-dynamite" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -806,20 +838,20 @@ Figure&nbsp;8.18: A plot of the mean points scored, plus-or-minus the standard d
 <img src="summaries_files/figure-html/fig-dynamite-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dynamite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.19: A dynamite plot of the mean points scored in matches between Tier One nations at Rugby World Cup matches. The error bar at the top represents the standard deviations of points scored.
+Figure&nbsp;8.21: A dynamite plot of the mean points scored in matches between Tier One nations at Rugby World Cup matches. The error bar at the top represents the standard deviations of points scored.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>This sort of plot has been heavily criticised<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> for hiding details of the data and making strong assumptions about the shape of the data distribution (unimodal and symmetric). These are the acknowledged dangers of encoding data summaries rather than raw data values (<a href="#sec-summary-caveats" class="quarto-xref"><span>Section 8.5</span></a>).</p>
-<p>However, if the purpose is to compare the typical value and spread between groups, i.e., to compare the data summaries, then it is reasonable to encode those data summaries directly rather than forcing the viewer to perform visual summaries from encodings of the raw data, as in <a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.17</span></a>.</p>
-<p>Nevertheless, there are still some weaknesses apparent in the encodings used in <a href="#fig-dynamite" class="quarto-xref">Figure&nbsp;<span>8.19</span></a>. On one hand, encoding the means as lengths makes sense because the means are quantitative values (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). However, the means are point estimates as opposed to, for example, counts. Comparisons of interest are between different mean locations rather than the distance of a mean from zero. This makes the position of a data point (as in <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>) a more <strong>congruent</strong> encoding than the length of a bar (<a href="congruence.html" class="quarto-xref"><span>Chapter 7</span></a>). In other words, the encoding of means as bar length is somewhat <strong>dissonant</strong> (<a href="congruence.html#sec-dissonance" class="quarto-xref"><span>Section 7.5</span></a>).</p>
-<p>Another problem is that the standard deviation is only encoded as the length of a line above the mean. If the purpose is to decode the spread of data values to either side of the mean, then a dynamite plot forces the viewer to perform a cognitive inversion of the line above the mean. In other words, decoding the required information involves a difficult visual task (<a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>). By comparison, decoding the spread to either side of the mean is a much simpler visual task in <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.18</span></a>.</p>
+<p>However, if the purpose is to compare the typical value and spread between groups, i.e., to compare the data summaries, then it is reasonable to encode those data summaries directly rather than forcing the viewer to perform visual summaries from encodings of the raw data, as in <a href="#fig-rwc-year" class="quarto-xref">Figure&nbsp;<span>8.19</span></a>.</p>
+<p>Nevertheless, there are still some weaknesses apparent in the encodings used in <a href="#fig-dynamite" class="quarto-xref">Figure&nbsp;<span>8.21</span></a>. On one hand, encoding the means as lengths makes sense because the means are quantitative values (<a href="mapping-visual-features.html#sec-quant-features" class="quarto-xref"><span>Section 3.3</span></a>). However, the means are point estimates as opposed to, for example, counts. Comparisons of interest are between different mean locations rather than the distance of a mean from zero. This makes the position of a data point (as in <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.20</span></a>) a more <strong>congruent</strong> encoding than the length of a bar (<a href="congruence.html" class="quarto-xref"><span>Chapter 7</span></a>). In other words, the encoding of means as bar length is somewhat <strong>dissonant</strong> (<a href="congruence.html#sec-dissonance" class="quarto-xref"><span>Section 7.5</span></a>).</p>
+<p>Another problem is that the standard deviation is only encoded as the length of a line above the mean. If the purpose is to decode the spread of data values to either side of the mean, then a dynamite plot forces the viewer to perform a cognitive inversion of the line above the mean. In other words, decoding the required information involves a difficult visual task (<a href="visual-model.html#sec-tasks" class="quarto-xref"><span>Section 2.9</span></a>). By comparison, decoding the spread to either side of the mean is a much simpler visual task in <a href="#fig-rwc-year-mean" class="quarto-xref">Figure&nbsp;<span>8.20</span></a>.</p>
 <p>Finally, there is the issue of eponymism. Dynamite plots are so-called because the data symbols resemble a plunger that is used to detonate dynamite. Unless the data relates to mining, this is a superfluous, if not distracting association. This sort of problem is discussed further in (<a href="visual-objects.html#sec-learned-danger" class="quarto-xref"><span>Section 12.8</span></a>).</p>
 </section>
-<section id="summary" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.12</span> Summary</h2>
+<section id="summary" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.13</span> Summary</h2>
 <div class="oldsummary callout callout-style-default callout-note no-icon callout-titled" title="Précis *(click to expand/contract)*">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">

@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-04-28)
+Version 0.9 (build 2026-05-01)
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, opacitybacktitle=0.6, colback=white, left=2mm, leftrule=.75mm, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, opacityback=0, bottomtitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, breakable, toptitle=1mm, arc=.35mm, toprule=.15mm, rightrule=.15mm, titlerule=0mm, bottomrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, toptitle=1mm, opacityback=0, toprule=.15mm, opacitybacktitle=0.6, colback=white, colframe=quarto-callout-warning-color-frame, bottomtitle=1mm, breakable, colbacktitle=quarto-callout-warning-color!10!white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, bottomrule=.15mm, leftrule=.75mm, left=2mm, coltitle=black]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-04-28).
+2026. Version 0.9 (build 2026-05-01).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-04-28,
+@book{murrell-hdvw-2026-05-01,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-04-28)},
+    note = {Version 0.9 (build 2026-05-01)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -5825,7 +5825,7 @@ unusual items (Section~\ref{sec-differences}) and on fundamental
 properties of our visual system that identify groups of items
 (Section~\ref{sec-visual-model-groups}).
 
-\section{Dangers of summaries}\label{sec-summary-caveats}
+\section{Dangers of data summaries}\label{sec-summary-caveats}
 
 The benefit of a data visualisation that encodes \textbf{data summaries}
 as visual features is that it allows us to decode data summaries very
@@ -5936,6 +5936,72 @@ important details.
 by Tier One nations at Rugby World Cups. This histogram uses the same
 data as Figure~\ref{fig-hist}, but bins the data using narrower
 intervals.}
+
+\end{figure}%
+
+\section{Dangers of visual summaries}\label{sec-summary-vis-caveats}
+
+In Figure~\ref{fig-rwc-dotplot-concede} we saw an example of being able
+to decode \textbf{visual summaries} from multiple visual features, in
+that case from multiple \textbf{positions} of data points. The visual
+summaries from Figure~\ref{fig-rwc-dotplot-concede} allow us to decode
+\textbf{data summaries}. For example, we can decode that the average
+number of points conceded by teams from the Northern Hemisphere is
+higher than the average number of points conceded by teams from the
+Southern Hemisphere.
+
+That decoding of a data summary from multiple visual features relies on
+two stages: we perceive a visual summary and then we decode information
+from that visual summary. Ideally, the information decoded from the
+visual summary corresponds to a valid data summary
+(Figure~\ref{fig-data-vis-stat-decode}). However, there is no guarantee
+that that will be the case.
+
+For example, Figure~\ref{fig-dot-log} shows a dot plot of the number of
+points conceded by Tier One nations in Rugby World Cups. This differs
+from Figure~\ref{fig-rwc-dotplot-concede} because the x-axis has a log
+(base 10) scale. The values that are encoded as the horizontal positions
+of the points are the \emph{log} of the number of points conceded. We
+can still perceive visual summaries of the horizontal positions of the
+data points. For example, we can estimate the average horizontal
+position of the points for Northern Hemisphere teams. However, that
+visual summary no longer corresponds to a useful data summary. In
+particular, the visual average of the horizontal positions does not
+correspond to the average of the number of points conceded.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/summaries_files/figure-pdf/fig-dot-log-1.pdf}
+
+}
+
+\caption{\label{fig-dot-log}Stacked dotplots of the number of points
+conceded by Tier One nations at Rugby World Cup matches, with a log
+scale on the x-axis. Two zero values for Southern Hemisphere teams have
+been discarded.}
+
+\end{figure}%
+
+We must take care to avoid encoding data values to visual features that
+the visual system is capable of visually summarising if the visual
+summary does not correspond to a useful data summary
+(Figure~\ref{fig-data-vis-stat-lie}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[scale=0.5]{Diagrams/data-vis-stat-lie.png}
+
+}
+
+\caption{\label{fig-data-vis-stat-lie}A data visualisation may encode
+raw data to visual features that the visual system is cabable of
+summarising. However, the information that we can decode from the visual
+summary does not necessarily have to correspond to a valid or useful
+summary of the data.}
 
 \end{figure}%
 
