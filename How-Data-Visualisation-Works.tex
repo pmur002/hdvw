@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-05-01)
+Version 0.9 (build 2026-05-02)
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, titlerule=0mm, toptitle=1mm, opacityback=0, toprule=.15mm, opacitybacktitle=0.6, colback=white, colframe=quarto-callout-warning-color-frame, bottomtitle=1mm, breakable, colbacktitle=quarto-callout-warning-color!10!white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, bottomrule=.15mm, leftrule=.75mm, left=2mm, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, toptitle=1mm, breakable, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomtitle=1mm, titlerule=0mm, colback=white, colbacktitle=quarto-callout-warning-color!10!white, left=2mm, coltitle=black, arc=.35mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-05-01).
+2026. Version 0.9 (build 2026-05-02).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-05-01,
+@book{murrell-hdvw-2026-05-02,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-05-01)},
+    note = {Version 0.9 (build 2026-05-02)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -2796,7 +2796,7 @@ about encoding data values to basic visual features.\footnote{As
 the encoding of data values to the \textbf{position} of data symbols and
 how well we can decode a data value from the position of a data symbol.
 
-\section{Perception is relative}\label{sec-rel-pos}
+\section{Decoding position is relative}\label{sec-rel-pos}
 
 In Section~\ref{sec-accuracy}, we saw that \textbf{position} was the
 most accurate visual feature for decoding quantitative values
@@ -3694,7 +3694,7 @@ one data visualisation might stand out, but there is also the option of
 providing more than one data visualisation in order to cover more
 comparisons.
 
-\section{Perception is relative}\label{sec-perception-relative}
+\section{Decoding length is relative}\label{sec-perception-relative}
 
 Figure~\ref{fig-relative} shows that the perception of differences
 between the lengths of bars is relative; it is easier to detect smaller
@@ -3976,7 +3976,7 @@ If we encode data values to the \textbf{chroma} and/or
 \textbf{luminance} of data symbols, it is also possible to decode
 \textbf{ordinal} information form the data symbols.
 
-\section{Perception is relative}\label{sec-colour-relative}
+\section{Decoding colour is relative}\label{sec-colour-relative}
 
 We saw in Section~\ref{sec-perception-relative} that perception of
 \textbf{lengths} is relative. For example, small differences in length
@@ -10395,6 +10395,14 @@ visualisation.\footnote{And how well a data visualisation can be
   Figure~\ref{fig-fixations-text} in order to comply with terms of use
   of the MASSVIS data set.}
 
+This chapter looks at the role that text plays in making data
+visualisations work.\footnote{Brath (2020) provides a very thorough
+  treatment of the use of text in data visualisation and is the source
+  of many ideas in this chapter.
+
+  Murrell (2025) provides an more in-depth version of much of this
+  chapter.}
+
 \begin{figure}
 
 \begin{minipage}{0.50\linewidth}
@@ -10420,14 +10428,6 @@ project that shows fixations (circles) and saccades (lines between
 circles) for one person viewing an image for 10 seconds.}
 
 \end{figure}%
-
-This chapter looks at the role that text plays in making data
-visualisations work.\footnote{Brath (2020) provides a very thorough
-  treatment of the use of text in data visualisation and is the source
-  of many ideas in this chapter.
-
-  Murrell (2025) provides an more in-depth version of much of this
-  chapter.}
 
 \section{Visual features of text}\label{sec-features-text}
 
@@ -10771,6 +10771,27 @@ Figure~\ref{fig-text-not-summary}.
 rate in New Zealand from 2011 to 2021.}
 
 \end{figure}%
+
+\section{Decoding text pattern is
+absolute}\label{decoding-text-pattern-is-absolute}
+
+One particular aspect of decoding text is worth emphasising again: we
+are able to decode \textbf{absolute} data values from a \textbf{text
+pattern}. For example, in Figure~\ref{fig-bar-text}, we can decode the
+exact data value one thousand five hundred and eighty-nine from the text
+pattern ``1589''.
+
+This is in sharp contrast to visual features like position
+(Section~\ref{sec-rel-pos}), length
+(Section~\ref{sec-perception-relative}), and colour
+(Section~\ref{sec-colour-relative}), which only allow us to decode
+relative values. For example, in Figure~\ref{fig-no-text}, we can decode
+from the colours that the lines represent different groups, but it is
+not possible to decode the names of those groups from the colours.
+
+This property is fundamental to the role of text in a data
+visualisation, particularly axes and legends, as we will see in
+Section~\ref{sec-guides}.
 
 \section{Case study: Text angle}\label{sec-text-angle}
 

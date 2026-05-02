@@ -50,17 +50,6 @@ the other elements of a data visualisation.[^memorability]
     Only a thumbnail version of the original image is shown in 
     @fig-fixations-text in order to comply
     with terms of use of the MASSVIS data set.
- 
-::: {#fig-fixations-text layout-ncol=2 layout-valign="bottom"}  
-
-![A thumbnail of the original data visualisation.](MASSVIS/economist_daily_chart_75-thumb.png){#fig-fixations-text-1 fig-align="left"}
-
-![Fixations and saccades from eye tracking data.](MASSVIS/economist_daily_chart_75-track.svg){#fig-fixations-text-2 fig-align="left"}
-
-Eye tracking data from the MASSVIS project that shows fixations (circles) and 
-saccades (lines between circles) for one person viewing an image for 
-10 seconds.
-:::
 
 This chapter looks at the role that 
 text plays in making data visualisations work.[^brath]
@@ -72,6 +61,17 @@ text plays in making data visualisations work.[^brath]
 
     @murrell2025dataverbalisationtextdoing provides an more
     in-depth version of much of this chapter.
+ 
+::: {#fig-fixations-text layout-ncol=2 layout-valign="bottom"}  
+
+![A thumbnail of the original data visualisation.](MASSVIS/economist_daily_chart_75-thumb.png){#fig-fixations-text-1 fig-align="left"}
+
+![Fixations and saccades from eye tracking data.](MASSVIS/economist_daily_chart_75-track.svg){#fig-fixations-text-2 fig-align="left"}
+
+Eye tracking data from the MASSVIS project that shows fixations (circles) and 
+saccades (lines between circles) for one person viewing an image for 
+10 seconds.
+:::
 
 ## Visual features of text {#sec-features-text}
 
@@ -472,6 +472,23 @@ pushViewport(viewport(width=.9, height=.9))
 print(gg, newpage=FALSE)
 popViewport()
 ```
+
+## Decoding text pattern is absolute
+
+One particular aspect of decoding text is worth emphasising again: 
+we are able to decode **absolute** data values from a **text pattern**.
+For example, in @fig-bar-text, we can decode the exact data value
+one thousand five hundred and eighty-nine from the text pattern "1589".
+
+This is in sharp contrast to visual features like position (@sec-rel-pos),
+length (@sec-perception-relative), and colour (@sec-colour-relative),
+which only allow us to decode relative values.
+For example, in @fig-no-text, we can decode from the colours that
+the lines represent different groups, but it is not possible to decode
+the names of those groups from the colours.
+
+This property is fundamental to the role of text in a data visualisation,
+particularly axes and legends, as we will see in @sec-guides.
 
 ## Case study:  Text angle {#sec-text-angle}
 
