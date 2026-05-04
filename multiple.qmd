@@ -178,16 +178,18 @@ ggplot(all, aes(x = x, y = y, color = sphere)) +
     geom_point() +
     scale_x_continuous(expand=expansion(.2)) +
     scale_y_continuous(expand=expansion(.2)) +
+    scale_colour_discrete(name="hemisphere", guide=guide_legend(reverse=TRUE)) +
     facet_grid(variable_y ~ variable_x, scales="free") +
     theme(axis.title=element_blank(),
           aspect.ratio=1,
           strip.background=element_blank(),
           strip.text=element_blank())
 grid.force()
+labels <- c("runs\nmade", "clean\nbreaks", "tries\nscored", "points\nscored")
 for (i in 1:4) {
     downViewport(grid.grep(paste0("panel-", i, "-", i), 
                            grep=TRUE, viewports=TRUE))
-    grid.text(quants[i])
+    grid.text(labels[i])
     upViewport(0)
 }
 ```
@@ -217,10 +219,10 @@ requires significant cognitive effort (@sec-tasks).
 A scatter plot matrix is not particularly effective at allowing
 us to *effortlessly* decode multivariate relationships.
 
-> A scatter plot matrix is effective for decoding individual data values
-  from multiple variables at once, plus pairwise correlations.
-  However, scatter plot matrices are less effective for 
-  decoding multivariate relationships.
+A scatter plot matrix is effective for decoding individual data values
+from multiple variables at once, plus pairwise correlations.
+However, scatter plot matrices are less effective for 
+decoding multivariate relationships.
 
 ## Facetting {#sec-facetting}
 
@@ -259,7 +261,7 @@ ggplot(crimeDistrict) +
     theme(aspect.ratio=1)
 ```
 
-@fig-facet-after shows a solution---a **facetted plot**---that, like
+@fig-facet-after shows a solution---a **facetted plot**---which, like
 a scatter plot matrix, 
 reuses position to encode additional variables.[^facetting]
 In @fig-facet-after, each district is encoded as a **position in space**
@@ -390,7 +392,7 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-## Non-cartesian encodings {#sec-non-cartesian}
+## Beyond cartesian encodings {#sec-non-cartesian}
 
 Another way to encode more variables using **position** is to
 abandon the standard cartesian coordinate system (@sec-cartesian).
@@ -409,7 +411,7 @@ in 3D space (not just in a 2D plane, as we saw in @fig-scatter).
 [^3d-interactive]:
     This visual shape is more apparent if we are able to animate 
     the image.  In the online version of this book it should be possible
-    to click and drag the mouse to rotate the image in space.
+    to click and drag the mouse to rotate the image in 3D space.
 
 ```{r}
 #| echo: false
@@ -500,10 +502,10 @@ notrun <- function() {
 }
 ```
 
-> A 3D plot is not effective for decoding raw data values, but
-  it may be effective because the data symbols generate visual shapes
-  in space, which can decode to three-dimensional data summaries,
-  such as clusters, trends, and multivariate correlations.
+A 3D plot is not effective for decoding raw data values, but
+it may be effective because the data symbols generate visual shapes
+in space, which can decode to three-dimensional data summaries,
+such as clusters, trends, and multivariate correlations.
 
 A significant limitation of 3D plots is that they can only encode
 three variables using position.  Although it is possible to
@@ -525,7 +527,7 @@ three dimensions.[^projection]
 
 @fig-parallel shows 
 a parallel coordinates plot of the data from @fig-multiple.
-This is another example of a non-cartesian coordinate system.
+This is an example of a non-cartesian coordinate system.
 In @fig-parallel, all of the quantitative variables have been
 encoded as **position**, but those positions are along a series
 of vertical parallel axes, rather than just the normal two perpendicular
@@ -560,7 +562,7 @@ gg <- ggparcoord(RWCperGame,
     scale_colour_discrete(guide=guide_legend(reverse=TRUE),
                           name="hemisphere") +
     theme(axis.title=element_blank(),
-          panel.grid.major.x=element_line())
+          panel.grid.major.x=element_line(colour="grey90"))
 grid.newpage()
 pushViewport(viewport(width=.9, height=.8))
 print(gg, newpage=FALSE)
@@ -617,7 +619,8 @@ are encoded are not the raw data values
 (@fig-stat-vis-decode), so a parallel coordinates plot
 is not effective for decoding raw data values from the positions of the lines.
 Furthermore, the data symbols are lines, so each data symbol encodes
-multiple data values (@sec-line-plots), which makes it difficult to decode
+multiple data values (@sec-line-plots), which makes it 
+somewhat difficult to decode
 even individual data summary values from the lines.
 
 The effectiveness of a parallel coordinates plot comes from the visual
@@ -643,10 +646,10 @@ A parallel coordinates plot can also cope with a larger number
 of variables;  we just add another vertical axis rather than
 having to add an entire new row and column to a scatter plot matrix.
 
-> A parallel coordinates plot can be effective at identifying 
-  high-dimensional groups or correlations
-  because it encodes multiple data values from different variables
-  to a single visual shape.
+A parallel coordinates plot can be effective at identifying 
+high-dimensional groups or correlations
+because it encodes multiple data values from different variables
+to a single visual shape.
 
 One major issue with a parallel coordinates plot is that the
 visual shapes created by the lines are extremely dependent on
@@ -654,7 +657,7 @@ the order of the variables along the x-axis.
 For example, @fig-parallel-order shows exactly the same
 data as @fig-parallel, but with a different ordering of the
 variables.
-It is now much harder to identify a group of four teams at the top
+It is now harder to identify a group of four teams at the top
 and a group of three teams at the bottom.
 There is also now no clear decoding of parallel lines between variables,
 so no sense of correlation between variables
@@ -761,21 +764,21 @@ approach to visualising the same data, called
 a profile plot.[^small-multiples]  Similar to a parallel coordinates plot, 
 a visual shape is drawn for each country, but each shape
 is drawn at its own position in space and
-the shape a filled polygon, effectively the lines
+the shape a is filled polygon, effectively the lines
 in @fig-parallel with the area below them filled in.
 
 [^small-multiples]:
     The idea of drawing lots of small repeated plots,
     with a consistent scale and style is referred to by
     @tufte1983visual as *small multiples*.
-    This corresponds strongly with the idea of facetting (@sec-facetting).
+    This corresponds strongly to the idea of facetting (@sec-facetting).
 
 Like the parallel coordinates plot, this sort of data visualisation 
 can be effective because of the overall shapes.
 For example, we can see a group of
 four shapes that are larger than the others.
-We can also see that Argentina and Fiji appear
-very similar, which was not easily apparent in previous plots.
+We can also see that the "skyline" for Argentina and Fiji appear
+very similar, a similarity that was not easily apparent in previous plots.
 
 ```{r}
 #| echo: false
@@ -785,10 +788,12 @@ gg <- ggplot(long) +
     geom_area(aes(as.numeric(variable), value, fill=sphere)) +
     scale_x_continuous(expand=expansion(0)) +
     scale_y_continuous(expand=expansion(0)) +
+    scale_fill_discrete(name="hemisphere", guide=guide_legend(reverse=TRUE)) +
     coord_cartesian(clip="off") +
     facet_wrap(vars(country), strip.position="bottom") +
     theme(panel.border=element_blank(),
           strip.background=element_blank(),
+          strip.clip="off",
           axis.title=element_blank(),
           axis.text=element_blank(),
           axis.ticks=element_blank(),
@@ -806,7 +811,8 @@ are encoded as vertical **position** and hemisphere is encoded to
 are encoded to a single data symbol, in this case a polygon.
 
 The difference in @fig-profile is that, rather than having all of the
-data symbols on the same plot, each data symbol is drawn in its
+data symbols on the same plot (at the same position in space), 
+each data symbol is drawn in its
 own **position in space**.  This makes it easy to view each distinct
 data symbol.
 
@@ -837,7 +843,8 @@ The alternatives that provide better decoding of multivariate data summaries,
 like 3D plots and parallel coordinate plots, rely on visual shapes that can
 be decoded to data summaries, but sacrifice the ability to accurately decode
 individual data values.
-One danger is that there is still a temptation to
+One danger with these sorts of plots
+is that there is still a temptation to
 decode individual data values, which can result in erroneous or
 misleading conclusions.
 

@@ -10,11 +10,11 @@ just two variables, for example, to create a scatter plot matrix
 or a facetted plot.
 This at least allows us to accurately decode individual variables.
 
-Another alternative is to use non-cartesian coordinates, for
+Another alternative is to use 3D coordinates or non-cartesian coordinates, for
 example 3D plots or parallel coordinates plots.
 These generate visual shapes that allow us to decode multivariate
 data summaries, like multivariate clusters and multivariate correlations.
-However, in order to gain multivariate data summaries,
+However, in order to gain these multivariate data summaries,
 we typically have to sacrifice the ability to accurately decode individual
 data values.
 

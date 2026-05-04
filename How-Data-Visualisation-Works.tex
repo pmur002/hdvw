@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-05-02)
+Version 0.9 (build 2026-05-04)
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, toptitle=1mm, breakable, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomtitle=1mm, titlerule=0mm, colback=white, colbacktitle=quarto-callout-warning-color!10!white, left=2mm, coltitle=black, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-warning-color!10!white, left=2mm, opacitybacktitle=0.6, opacityback=0, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, leftrule=.75mm, bottomtitle=1mm, titlerule=0mm, coltitle=black, rightrule=.15mm, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, breakable, colback=white, toprule=.15mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-05-02).
+2026. Version 0.9 (build 2026-05-04).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-05-02,
+@book{murrell-hdvw-2026-05-04,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-05-02)},
+    note = {Version 0.9 (build 2026-05-04)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -8716,12 +8716,10 @@ relationships requires significant cognitive effort
 effective at allowing us to \emph{effortlessly} decode multivariate
 relationships.
 
-\begin{quote}
 A scatter plot matrix is effective for decoding individual data values
 from multiple variables at once, plus pairwise correlations. However,
 scatter plot matrices are less effective for decoding multivariate
 relationships.
-\end{quote}
 
 \section{Facetting}\label{sec-facetting}
 
@@ -8761,7 +8759,7 @@ offenders per year in different Police Districts of New Zealand, from
 \end{figure}%
 
 Figure~\ref{fig-facet-after} shows a solution---a \textbf{facetted
-plot}---that, like a scatter plot matrix, reuses position to encode
+plot}---which, like a scatter plot matrix, reuses position to encode
 additional variables.\footnote{This method of producing a sub-plot for
   each level of a qualitative variable (or for each combination of
   levels for multiple qualitative variables) is called \emph{facetting}
@@ -8868,7 +8866,7 @@ in each age group over time.}
 
 \end{figure}%
 
-\section{Non-cartesian encodings}\label{sec-non-cartesian}
+\section{Beyond cartesian encodings}\label{sec-non-cartesian}
 
 Another way to encode more variables using \textbf{position} is to
 abandon the standard cartesian coordinate system
@@ -8883,9 +8881,9 @@ in Figure~\ref{fig-3d-scatter} appear to lie roughly along a line in
 space and this decodes to a multivariate correlation between the three
 variables.\footnote{This visual shape is more apparent if we are able to
   animate the image. In the online version of this book it should be
-  possible to click and drag the mouse to rotate the image in space.} It
-is also possible to see that there are four teams somewhat separate in
-3D space (not just in a 2D plane, as we saw in
+  possible to click and drag the mouse to rotate the image in 3D space.}
+It is also possible to see that there are four teams somewhat separate
+in 3D space (not just in a 2D plane, as we saw in
 Figure~\ref{fig-scatter}).
 
 \begin{figure}
@@ -8951,12 +8949,10 @@ age}
 
 \end{figure}%
 
-\begin{quote}
 A 3D plot is not effective for decoding raw data values, but it may be
 effective because the data symbols generate visual shapes in space,
 which can decode to three-dimensional data summaries, such as clusters,
 trends, and multivariate correlations.
-\end{quote}
 
 A significant limitation of 3D plots is that they can only encode three
 variables using position. Although it is possible to produce views of
@@ -8972,17 +8968,17 @@ of visual shapes is limited to three dimensions.\footnote{A 3D plot is
 \section{Case study: Parallel coordinates plots}\label{sec-parallel}
 
 Figure~\ref{fig-parallel} shows a parallel coordinates plot of the data
-from Figure~\ref{fig-multiple}. This is another example of a
-non-cartesian coordinate system. In Figure~\ref{fig-parallel}, all of
-the quantitative variables have been encoded as \textbf{position}, but
-those positions are along a series of vertical parallel axes, rather
-than just the normal two perpendicular axes.\footnote{At a deeper level,
-  a parallel coordinates plot represents a single \emph{point} in
-  \(n\)-dimensional space with a \emph{line} through \(n\) vertices on
-  the parallel coordinates plot and several points that lie on the same
-  line in \(n\)-dimensional space translate to several lines that meet
-  at the same point on a parallel coordinate plot (or a set of lines
-  that are parallel).
+from Figure~\ref{fig-multiple}. This is an example of a non-cartesian
+coordinate system. In Figure~\ref{fig-parallel}, all of the quantitative
+variables have been encoded as \textbf{position}, but those positions
+are along a series of vertical parallel axes, rather than just the
+normal two perpendicular axes.\footnote{At a deeper level, a parallel
+  coordinates plot represents a single \emph{point} in \(n\)-dimensional
+  space with a \emph{line} through \(n\) vertices on the parallel
+  coordinates plot and several points that lie on the same line in
+  \(n\)-dimensional space translate to several lines that meet at the
+  same point on a parallel coordinate plot (or a set of lines that are
+  parallel).
 
   Wegman (1990) provides a discussion from the point of view of
   statistical analysis.
@@ -9058,8 +9054,8 @@ the raw data values (Figure~\ref{fig-stat-vis-decode}), so a parallel
 coordinates plot is not effective for decoding raw data values from the
 positions of the lines. Furthermore, the data symbols are lines, so each
 data symbol encodes multiple data values (Section~\ref{sec-line-plots}),
-which makes it difficult to decode even individual data summary values
-from the lines.
+which makes it somewhat difficult to decode even individual data summary
+values from the lines.
 
 The effectiveness of a parallel coordinates plot comes from the visual
 shapes of the line data symbols, which allow us to decode data
@@ -9083,17 +9079,15 @@ cope with a larger number of variables; we just add another vertical
 axis rather than having to add an entire new row and column to a scatter
 plot matrix.
 
-\begin{quote}
 A parallel coordinates plot can be effective at identifying
 high-dimensional groups or correlations because it encodes multiple data
 values from different variables to a single visual shape.
-\end{quote}
 
 One major issue with a parallel coordinates plot is that the visual
 shapes created by the lines are extremely dependent on the order of the
 variables along the x-axis. For example, Figure~\ref{fig-parallel-order}
 shows exactly the same data as Figure~\ref{fig-parallel}, but with a
-different ordering of the variables. It is now much harder to identify a
+different ordering of the variables. It is now harder to identify a
 group of four teams at the top and a group of three teams at the bottom.
 There is also now no clear decoding of parallel lines between variables,
 so no sense of correlation between variables (all neighbouring pairs of
@@ -9174,18 +9168,18 @@ visual shapes. Figure~\ref{fig-profile} shows an alternative approach to
 visualising the same data, called a profile plot.\footnote{The idea of
   drawing lots of small repeated plots, with a consistent scale and
   style is referred to by Tufte (1983) as \emph{small multiples}. This
-  corresponds strongly with the idea of facetting
+  corresponds strongly to the idea of facetting
   (Section~\ref{sec-facetting}).} Similar to a parallel coordinates
 plot, a visual shape is drawn for each country, but each shape is drawn
-at its own position in space and the shape a filled polygon, effectively
-the lines in Figure~\ref{fig-parallel} with the area below them filled
-in.
+at its own position in space and the shape a is filled polygon,
+effectively the lines in Figure~\ref{fig-parallel} with the area below
+them filled in.
 
 Like the parallel coordinates plot, this sort of data visualisation can
 be effective because of the overall shapes. For example, we can see a
 group of four shapes that are larger than the others. We can also see
-that Argentina and Fiji appear very similar, which was not easily
-apparent in previous plots.
+that the ``skyline'' for Argentina and Fiji appear very similar, a
+similarity that was not easily apparent in previous plots.
 
 \begin{figure}
 
@@ -9209,9 +9203,9 @@ The data symbol is also similar: multiple data values are encoded to a
 single data symbol, in this case a polygon.
 
 The difference in Figure~\ref{fig-profile} is that, rather than having
-all of the data symbols on the same plot, each data symbol is drawn in
-its own \textbf{position in space}. This makes it easy to view each
-distinct data symbol.
+all of the data symbols on the same plot (at the same position in
+space), each data symbol is drawn in its own \textbf{position in space}.
+This makes it easy to view each distinct data symbol.
 
 The cluster of four larger shapes in Figure~\ref{fig-profile} is also
 easier to see because the countries have been ordered by the number of
@@ -9241,9 +9235,9 @@ decoding of multivariate data summaries, like correlation and clusters.
 The alternatives that provide better decoding of multivariate data
 summaries, like 3D plots and parallel coordinate plots, rely on visual
 shapes that can be decoded to data summaries, but sacrifice the ability
-to accurately decode individual data values. One danger is that there is
-still a temptation to decode individual data values, which can result in
-erroneous or misleading conclusions.
+to accurately decode individual data values. One danger with these sorts
+of plots is that there is still a temptation to decode individual data
+values, which can result in erroneous or misleading conclusions.
 
 For example, in Figure~\ref{fig-3d-scatter}, we may be tempted to decode
 and compare the number of clean breaks for different teams based on the
@@ -9318,12 +9312,13 @@ more than just two variables, for example, to create a scatter plot
 matrix or a facetted plot. This at least allows us to accurately decode
 individual variables.
 
-Another alternative is to use non-cartesian coordinates, for example 3D
-plots or parallel coordinates plots. These generate visual shapes that
-allow us to decode multivariate data summaries, like multivariate
-clusters and multivariate correlations. However, in order to gain
-multivariate data summaries, we typically have to sacrifice the ability
-to accurately decode individual data values.
+Another alternative is to use 3D coordinates or non-cartesian
+coordinates, for example 3D plots or parallel coordinates plots. These
+generate visual shapes that allow us to decode multivariate data
+summaries, like multivariate clusters and multivariate correlations.
+However, in order to gain these multivariate data summaries, we
+typically have to sacrifice the ability to accurately decode individual
+data values.
 
 No matter which approach we use, there is still a limit to how much
 information can effectively be displayed at once within a static data
