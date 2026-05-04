@@ -281,7 +281,7 @@
 
 Version 0.9 (build 2026-05-04)
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-warning-color!10!white, left=2mm, opacitybacktitle=0.6, opacityback=0, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm, leftrule=.75mm, bottomtitle=1mm, titlerule=0mm, coltitle=black, rightrule=.15mm, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, breakable, colback=white, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, leftrule=.75mm, titlerule=0mm, colbacktitle=quarto-callout-warning-color!10!white, coltitle=black, colback=white, left=2mm, toprule=.15mm, breakable, rightrule=.15mm, opacitybacktitle=0.6, arc=.35mm, bottomtitle=1mm, colframe=quarto-callout-warning-color-frame, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomrule=.15mm]
 
 Under construction!
 
@@ -9379,12 +9379,12 @@ decode from the pattern of each data symbol to the relevant country.
 The difference between the data symbols in
 Figure~\ref{fig-scatter-country} and the data symbols on
 Figure~\ref{fig-flags} is that the flags are not only more complicated
-data symbols, but they are familiar symbols. We can decode that the
-flags are different, but we can also decode country names from the
+data symbols, but they are \emph{familiar} symbols. We can decode that
+the flags are different, but we can also decode country names from the
 flags. In the terms of Section~\ref{sec-visual-processing}, the flags
 are \textbf{visual objects} because they represent visual information
 that is combined with prior knowledge at a higher level of visual
-processing.
+processing to decode more complex or abstract information.
 
 Rather than encoding the country name as the \textbf{pattern} of a
 simple data symbol (Figure~\ref{fig-scatter-country}), in
@@ -9432,9 +9432,9 @@ implicit encoding (Figure~\ref{fig-learned-decode}).\footnote{Schloss et
   emotions is implicit or learned or some combination.
 
   The idea of \emph{cognitive affordance} (Fygenson, Padilla, and
-  Bertini (2025)) also relates to learned encodings because it takes
-  into account an individual's knowledge and experience in determining
-  how well information is communicated.}
+  Bertini 2025) also relates to learned encodings because it takes into
+  account an individual's knowledge and experience in determining how
+  well information is communicated.}
 
 \begin{figure}
 
@@ -9455,8 +9455,8 @@ similar to the idea of implicit encoding
 For example, Figure~\ref{fig-learned} shows three coloured circles.
 Without any explicit encoding, we can decode the red circle as ``stop'',
 the orange circle as ``slow'', and the green circle as ``go''. This is
-not a decoding that we are born with; it is a decoding that we learn
-through experience.
+not a decoding that we are born with; it is a decoding that we
+\emph{learn}.
 
 \begin{figure}
 
@@ -9553,10 +9553,8 @@ different data symbol pattern per country}
 
 \end{figure}%
 
-\begin{quote}
 A plot that uses visual objects as data symbols can be effective because
 the visual objects can convey information based on learned decodings.
-\end{quote}
 
 Figure~\ref{fig-flags-direct} also demonstrates a weakness of
 \textbf{visual objects}. The flags work well for identifying the country
@@ -9564,10 +9562,8 @@ names \emph{only if} we are familiar with all of the different flags.
 For example, it may only be Australians and New Zealanders who can
 reliably identify the difference between their two flags.
 
-\begin{quote}
 A plot that uses visual objects as data symbols may \emph{not} be
 effective if the learned decodings have not been learned by the viewer.
-\end{quote}
 
 Another significant problem is that the data symbols in
 Figure~\ref{fig-flags-direct} are relatively complex. One of the reasons
@@ -9576,16 +9572,15 @@ bars in a bar plot or data points in a scatter plot, is because changes
 in the data are encoded as simple changes to visual features in the data
 symbols, like a change in the length of a bar
 (Section~\ref{sec-differences}). The flags in
-Figure~\ref{fig-flags-direct} contain many different visual features,
-like different colours, within the data symbol itself \emph{and} differ
+Figure~\ref{fig-flags-direct} contain many different visual
+features---multiple different colours and multiple different
+patterns---within the data symbol itself \emph{and} the flags differ
 from each other on many visual features at once, like differences in
-colours, patterns, and so on.
+colours and patterns.
 
-\begin{quote}
 A plot that uses visual objects as data symbols may \emph{not} be
 effective if the data symbols contain many different visual features
 that all change at once.
-\end{quote}
 
 \section{Case study: Chernoff faces}\label{case-study-chernoff-faces}
 
@@ -9595,8 +9590,7 @@ Figure~\ref{fig-chernoff} visualises the 2023 Rugby World Cup data
   high-dimensional data (Chernoff 1973).} The data symbol in this
 visualisation is a little unusual; each country is represented by a
 combination of circles, curves, and lines that together produce a
-\textbf{visual object} that resembles a face
-(Figure~\ref{fig-data-vis-obj-stat-decode}). The encodings in this
+\textbf{visual object} that resembles a face. The encodings in this
 visualisation are also a little unusual. The number of points scored is
 encoded as the \textbf{curvature} of the smile, the number of tries is
 encoded as the \textbf{angle} of the eye brows, and the number of clean
@@ -9614,6 +9608,24 @@ breaks is encoded as the horizontal \textbf{position} of the eyes.
 
 \end{figure}%
 
+The encodings in a Chernoff face are \emph{not} very accurate
+(Section~\ref{sec-accuracy}; \textbf{curvature} is ranked \emph{below}
+colour in terms of accuracy),\footnote{William S. Cleveland and McGill
+  (1984) ranked curvature below area, but above colour in terms of
+  accuracy for decoding quantitative data values
+  (Figure~\ref{fig-accuracy}).} so Cheroff faces are \emph{not} very
+effective for decoding raw data values.
+
+However, the familiarity of Chernoff faces means that we are easily able
+to decode common combinations of the facial features. For example, we
+can see several sad, worried faces at the top-left of
+Figure~\ref{fig-chernoff} and several happy, perhaps even smug, faces at
+the bottom-right. We can decode clusters of countries that share similar
+combinations of performance measures. In other words, we can decode data
+summaries from the visual objects, for example, multivariate
+correlations and multi-dimensional groupings in the data
+(Figure~\ref{fig-data-vis-obj-stat-decode}).
+
 \begin{figure}
 
 \centering{
@@ -9628,36 +9640,18 @@ visual objects.}
 
 \end{figure}%
 
-The encodings in a Chernoff face are \emph{not} very accurate (see
-Section~\ref{sec-accuracy}; \textbf{curvature} is ranked \emph{below}
-colour in terms of accuracy),\footnote{William S. Cleveland and McGill
-  (1984) ranked curvature below area, but above colour in terms of
-  accuracy for decoding quantitative data values
-  (Figure~\ref{fig-accuracy}).} so Cheroff faces are \emph{not} very
-effective for decoding raw data values.
-
-However, the familiarity of Chernoff faces means that we are easily able
-to decode common combinations of the facial features. For example, we
-can see several sad, worried faces at the top-left of
-Figure~\ref{fig-chernoff} and several happy, perhaps even smug, faces at
-the bottom-right. We can decode clusters of countries that share similar
-combinations of performance measures. In other words, we can decode
-multivariate correlations and multi-dimensional groupings in the data.
-
 In this case, the happier faces have been arranged to correspond to the
 more successful teams and the teams have been ordered from least points
 scored to most points scored (Section~\ref{sec-distance-effect}). The
 resulting proximity helps with perceiving groups of similar faces.
 
-\begin{quote}
 A Chernoff face is effective at conveying multi-dimensional
 relationships because the data symbol is a familiar visual object from
 which we can easily decode simple human emotions.
-\end{quote}
 
 On the downside, Chernoff faces suffer from the same problem as profile
 plots (Figure~\ref{fig-profile}): they are only effective for a small
-amount of data. Furthermore, the faces that result is highly dependent
+amount of data. Furthermore, the faces that result are highly dependent
 on which variables are encoded as which features. This is similar to the
 problem that we saw with selecting the order and direction of axes in
 parallel coordinate plots (Section~\ref{sec-parallel}).
@@ -9665,9 +9659,9 @@ parallel coordinate plots (Section~\ref{sec-parallel}).
 \section{Visual features of visual
 objects}\label{sec-vis-object-feature}
 
-Figure~\ref{fig-chernoff-colour} shows a variation of
-Figure~\ref{fig-chernoff}. In this plot, the hemisphere of each country
-is encoded as the \textbf{colour} of the flag (large or small).
+Figure~\ref{fig-chernoff-colour} shows a variation of the Chernoff faces
+in Figure~\ref{fig-chernoff}. In this plot, the hemisphere of each
+country is encoded as the \textbf{colour} of the face.
 Figure~\ref{fig-chernoff-colour} shows that visual objects, although
 they are complex data symbols, can still have basic visual features,
 like \textbf{colour}.
@@ -9786,10 +9780,8 @@ police district for 2021.}
 
 \end{figure}%
 
-\begin{quote}
 A choropleth map is effective because it encodes geographic regions to
 familiar visual objects that resemble the real world regions.
-\end{quote}
 
 A weakness of Figure~\ref{fig-map} is that it encodes the
 \textbf{quantitative} crime rate as colour (chroma and/or luminance).
@@ -9799,11 +9791,9 @@ crime rate occurs in the Bay of Plenty (the darkest region), but it is
 difficult to decode how much higher that crime rate is compared to the
 next highest crime rate.
 
-\begin{quote}
 A choropleth map is \emph{only} effective for making ordinal comparisons
 between geographic regions because it encodes quantitative values as
 colour.
-\end{quote}
 
 Figure~\ref{fig-district-bar} shows a bar plot of the same data, which
 demonstrates the advantages and disadvantages of the choropleth map in
@@ -9917,9 +9907,9 @@ They (crudely) convey the concepts of crime and criminals. However, they
 are \emph{not} \textbf{data symbols} because there is no encoding from
 the raw data to the cartoon villians. Their position is unrelated to the
 data, their colour is unrelated to the data, and their size is unrelated
-to the data. No information has been encoded in the visual objects, so
-no useful information can be decoded (Figure~\ref{fig-vis-clutter}). The
-best that can be said is that they relate to the \textbf{metadata}, the
+to the data. No data values have been encoded in the visual objects, so
+no data values can be decoded (Figure~\ref{fig-vis-clutter}). The best
+that can be said is that they relate to the \textbf{metadata}, the
 general topic of the data visualisation.
 
 \begin{figure}
@@ -9944,12 +9934,10 @@ villians are relatively large, complex, and colourful and bear no
 connection to the raw data, so there is a good chance that they will
 distract from the visual features that do convey data values.
 
-\begin{quote}
 Chart junk is \emph{not} effective because it is impossible to decode
 data values from chart junk (no data values have been encoded) and
 because chart junk distracts from the visual elements that do represent
 data values.
-\end{quote}
 
 However, it is important to point out that not all \textbf{visual
 objects} are chart junk. For example, the data symbols in
@@ -9989,13 +9977,11 @@ annotations improve the memorability of a data visualisation.\footnote{The
   accuracy when cognitive load was higher (when the task was recall of a
   plot \emph{prior} to the last observed plot).}
 
-\begin{quote}
 Visual objects that are not directly related to the data can still be
 effective because they can have a greater emotional impact and they can
 be more memorable.
-\end{quote}
 
-Overall, visual objects that are not related to data values are
+However, visual objects that are not related to data values are
 \emph{not} effective for decoding data values, so any other benefits
 have to be weighed against that cost.
 
@@ -10018,9 +10004,9 @@ resemble physical objects, in this case, cats and dogs.
 Unfortunately, because the cat and dog images are not simple shapes, it
 is harder to accurately decode the heights of the images, so it is
 harder to decode the number of cats and dogs. Even worse, we are likely
-to decode the the size, or \textbf{area}, of the images. The dog image
-is wider than the cat image so the number of dogs is visually
-over-emphasised.
+to decode the the size, or \textbf{area}, of the images rather than just
+their heights. The dog image is wider than the cat image so the number
+of dogs is visually over-emphasised.
 
 \begin{figure}
 
@@ -10093,7 +10079,7 @@ Figure~\ref{fig-pic-icon-2} is a standard bar plot, but with each bar
 broken into chunks.\\
 We need the labels ``cat'' and ``dog'' to replace the icons, but it is
 possible to count the bar chunks in a similar way to counting the icons
-in Figure~\ref{fig-pic-icon-1}, as well as decode the overall bar
+in Figure~\ref{fig-pic-icon-1}, plus we can decode the overall bar
 height, which we know is effective for decoding the number of pets.
 
 \begin{figure}
@@ -10233,10 +10219,8 @@ not cause any problem because there is no learned decoding to conflict
 with. We only get the problem if we swap flags in Figure~\ref{fig-flags}
 because of the conflict with learned decodings.
 
-\begin{quote}
 Employing a learned decoding incorrectly can at best weaken and at worst
 destroy the effectiveness of a data visualisation.
-\end{quote}
 
 \section{Dangers of visual objects}\label{sec-object-danger}
 
@@ -10246,7 +10230,7 @@ the viewer does not have the knowledge required to decode a visual
 object, then the data visualisation will fail
 (Figure~\ref{fig-not-learned-decode}). We saw an example of this in
 Figure~\ref{fig-flags-direct}, where the familiarity of different
-country flags will vary with nationality and age, for example.
+country flags will vary with nationality and age.
 
 \begin{figure}
 
@@ -10286,8 +10270,8 @@ data symbol, similar to a parallel coordinates plot. However, the line
 for an Andrews curve is a more complex data summary and one that has no
 simple interpretation. In other words, it is not possible to decode even
 the individual data summaries from the data symbols on an Andrews curve.
-The x-axis and y-axis on an Andrews curve are of no real value, which is
-why they have not been labelled on Figure~\ref{fig-andrews}.
+The x-axis and y-axis on an Andrews curve are of no real value (which is
+why they have not been labelled on Figure~\ref{fig-andrews}).
 
 The value of an Andrews curve lies in the visual shapes that are
 produced by each line. If two rows of data are similar, then they will
@@ -10318,8 +10302,8 @@ for teams in the 2023 Rugby World Cup.}
 An andrews curve plot like Figure~\ref{fig-andrews} is an example of a
 data visualisation that is difficult to decode without having learned
 how to decode the plot. Even if the decoding of similar lines as
-clusters of data rows is fairly intuitive, ignoring the position and
-height of peaks and valleys is not.
+clusters of data rows is fairly intuitive, ignoring the horizontal and
+vertical position of peaks and valleys is not intuitive.
 
 Parallel coordinates plots (Section~\ref{sec-parallel}) are another
 example of a data visualisation that requires learning in order to
