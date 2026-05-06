@@ -392,10 +392,10 @@ print(gg, newpage=FALSE)
 popViewport()
 ```
 
-## Beyond cartesian encodings {#sec-non-cartesian}
+## Beyond 2D {#sec-non-cartesian}
 
 Another way to encode more variables using **position** is to
-abandon the standard cartesian coordinate system (@sec-cartesian).
+abandon the standard 2D cartesian coordinate system (@sec-cartesian).
 For example, @fig-3d-scatter shows a 3D scatter plot of three of 
 the performance measures for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
 
@@ -458,7 +458,9 @@ too many bars, we do not require much accuracy to decode year and age.
 
 The decoding of the bar heights is also inaccurate, again because 
 of non-linear and unaligned scales, but also because many bars
-are partially obscured.[^3d-obscure] 
+are partially obscured---the problem of overplotting that arises from
+encoding data values as position only gets worse if we attempt
+to draw 3D positions on a 2D page.[^3d-obscure] 
 This means that
 we cannot accurately decode the ratio of the highest bar to the heights
 of other bars;  we are limited to ordinal comparisons at best.
