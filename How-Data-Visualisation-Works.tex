@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-05-05)
+Version 0.9 (build 2026-05-07)
 
-\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, toptitle=1mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white, titlerule=0mm, left=2mm, colback=white, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, toprule=.15mm, rightrule=.15mm, coltitle=black, opacityback=0, breakable, bottomtitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, arc=.35mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, breakable, titlerule=0mm, colframe=quarto-callout-warning-color-frame, colback=white, arc=.35mm, left=2mm, rightrule=.15mm, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, coltitle=black]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-05-05).
+2026. Version 0.9 (build 2026-05-07).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-05-05,
+@book{murrell-hdvw-2026-05-07,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-05-05)},
+    note = {Version 0.9 (build 2026-05-07)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -8649,7 +8649,7 @@ to \textbf{position}.\footnote{The reuse of position is handled in a
   variety of ways within data visualisation frameworks. For example, the
   Grammar of Graphics (Wilkinson 2005) allows for \emph{collision
   modifiers} to solve overlapping and separately allows for
-  \emph{facets}. GoFish (J. P. A. A. Satyanarayan 2026) introduces the
+  \emph{facets}. GoFish (Pollock and Satyanarayan 2026) introduces the
   idea of \emph{geometric operators}, such as stacking, to the
   visualisation grammar.
 
@@ -8869,7 +8869,7 @@ in each age group over time.}
 \section{Beyond 2D}\label{sec-non-cartesian}
 
 Another way to encode more variables using \textbf{position} is to
-abandon the standard cartesian coordinate system
+abandon the standard 2D cartesian coordinate system
 (Section~\ref{sec-cartesian}). For example, Figure~\ref{fig-3d-scatter}
 shows a 3D scatter plot of three of the performance measures for teams
 in the 2023 Rugby World Cup (Table~\ref{tbl-rwc-2023}).
@@ -8922,16 +8922,18 @@ accuracy to decode year and age.
 
 The decoding of the bar heights is also inaccurate, again because of
 non-linear and unaligned scales, but also because many bars are
-partially obscured.\footnote{The problem of elements being obscured is a
-  significant one. The angle of view for Figure~\ref{fig-3d-heatmap} and
-  the placement of the plot elements was carefully chosen. As with the
-  3D scatter plot, this problem can be removed by allowing the 3D scene
-  to be rotated interactively.} This means that we cannot accurately
-decode the ratio of the highest bar to the heights of other bars; we are
-limited to ordinal comparisons at best. However, data summaries can be
-decoded from the overall visual shapes. For example, the general
-downward trend for all ages over time is much clearer in
-Figure~\ref{fig-3d-heatmap} than it was in
+partially obscured---the problem of overplotting that arises from
+encoding data values as position only gets worse if we attempt to draw
+3D positions on a 2D page.\footnote{The problem of elements being
+  obscured is a significant one. The angle of view for
+  Figure~\ref{fig-3d-heatmap} and the placement of the plot elements was
+  carefully chosen. As with the 3D scatter plot, this problem can be
+  removed by allowing the 3D scene to be rotated interactively.} This
+means that we cannot accurately decode the ratio of the highest bar to
+the heights of other bars; we are limited to ordinal comparisons at
+best. However, data summaries can be decoded from the overall visual
+shapes. For example, the general downward trend for all ages over time
+is much clearer in Figure~\ref{fig-3d-heatmap} than it was in
 Figure~\ref{fig-crime-heatmap}. The implicit visual congruence with a
 descending stairway (Section~\ref{sec-implicit}) strongly supports the
 decoding of decreasing crime rates over time.
@@ -10377,10 +10379,7 @@ visualisation.\footnote{And how well a data visualisation can be
 This chapter looks at the role that text plays in making data
 visualisations work.\footnote{Brath (2020) provides a very thorough
   treatment of the use of text in data visualisation and is the source
-  of many ideas in this chapter.
-
-  Murrell (2025) provides an more in-depth version of much of this
-  chapter.}
+  of many ideas in this chapter.}
 
 \begin{figure}
 
@@ -11181,7 +11180,8 @@ seen so far have contained axes and legends, but we have largely ignored
 them and concentrated just on the data symbols within a data
 visualisation. In this section, we look at the work that axes and
 legends, particularly the text elements of axes and legends, are doing
-within a data visualisation.
+within a data visualisation.\footnote{Murrell (2026) provides a more
+  detailed exploration of the role of text in axes and legends.}
 
 \begin{figure}
 
@@ -11716,8 +11716,7 @@ correlations, and include the main message of the visualisation,
 including causal explanations and wider implications.\footnote{There are
   many guidelines to assist with generating useful alt text, from the
   very practical (World Wide Web Consortium (W3C) Web Accessibility
-  Initiative (WAI) 2025) to the more theoretical (A. L. A. A.
-  Satyanarayan 2022).}
+  Initiative (WAI) 2025) to the more theoretical (Satyanarayan 2022).}
 
 In terms of the framework of this book, alt text is a purely text-based
 encoding. However, more important than that is the fact that alt text is
@@ -13851,9 +13850,10 @@ Press.
 Murrell, Paul. 2019. \emph{R Graphics}. 3rd ed. Boca Raton, FL: Chapman;
 Hall/CRC.
 
-\bibitem[\citeproctext]{ref-murrell2025dataverbalisationtextdoing}
----------. 2025. {``Data Verbalisation: What Is Text Doing in a Data
-Visualisation?''} \url{https://arxiv.org/abs/2506.15129}.
+\bibitem[\citeproctext]{ref-Murrell_2026}
+---------. 2026. {``What Is Text Doing in a Data Visualisation?''}
+\emph{Journal of Data Science, Statistics, and Visualisation} 6 (3).
+\url{https://doi.org/10.52933/jdssv.v6i3.172}.
 
 \bibitem[\citeproctext]{ref-doi:10.1068ux2fp2985}
 Ninio, Jacques, and Kent A Stevens. 2000. {``Variations on the Hermann
@@ -13896,6 +13896,11 @@ Freedle, 73--126. Hillsdale, NJ, US: Lawrence Erlbaum Associates, Inc.
 Pointer, M. R., and G. G. Attridge. 1998. {``The Number of Discernible
 Colours.''} \emph{Color Research \& Application} 23 (1): 52--54.
 \url{https://doi.org/10.1002/(SICI)1520-6378(199802)23:1\%3C52::AID-COL8\%3E3.0.CO;2-2}.
+
+\bibitem[\citeproctext]{ref-2026-gofish}
+Pollock, Josh, and Arvind Satyanarayan. 2026. {``{GoFish: A Grammar of
+More Graphics!}''} \emph{IEEE Transactions on Visualization \& Computer
+Graphics (Proc. IEEE VIS)}. \url{https://vis.csail.mit.edu/pubs/gofish}.
 
 \bibitem[\citeproctext]{ref-slope-dependent-parallel}
 Pomerenke, David, Frederik L. Dennig, Daniel A. Keim, Johannes Fuchs,
@@ -13964,11 +13969,6 @@ Visualization via Natural Language Descriptions: A Four-Level Model of
 Semantic Content}.''} \emph{IEEE Transactions on Visualization \&
 Computer Graphics (Proc. IEEE VIS)}.
 \url{https://doi.org/10.1109/TVCG.2021.3114770}.
-
-\bibitem[\citeproctext]{ref-2026-gofish}
-Satyanarayan, Josh Pollock AND Arvind. 2026. {``{GoFish: A Grammar of
-More Graphics!}''} \emph{IEEE Transactions on Visualization \& Computer
-Graphics (Proc. IEEE VIS)}. \url{https://vis.csail.mit.edu/pubs/gofish}.
 
 \bibitem[\citeproctext]{ref-Schloss2023MoreOfWhat}
 Schloss, Karen B. et al. 2023. {``More of What? Dissociating Effects of
