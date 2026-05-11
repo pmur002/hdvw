@@ -452,6 +452,40 @@ might again appear obvious, but it is not always true.
 For example, the data symbols in @fig-corr-mat
 are circles, but the legend is a rectangular colour gradient.
 
+@fig-corr-mat shows a correlation matrix 
+of seven performance measures
+for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
+Variable names are encoded as the horizontal and vertical positions
+of circles and the correlations between variables are encoded as the
+colour of the circles.
+We can see that many measures have quite a strong positive correlation
+(dark red circles), but one measure (the number of tackles per game)
+is negatively correlated with all other measures (though often only very
+weakly).
+
+```{r}
+#| echo: false
+#| label: fig-corr-mat
+#| fig-keep: last
+#| fig-cap: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
+corr <- pair_cor(RWCperGame[-(1:4)])
+plot(corr) + 
+    theme(panel.background=element_blank())
+grid.force()
+grid.edit("polygon", gp=gpar(col="black"), grep=TRUE, global=TRUE)
+## Clean up circles
+polygons <- grid.grep("polygon", grep=TRUE, global=TRUE)
+for (i in seq_along(polygons)) {
+        temp <- grid.get(polygons[[i]])
+        remove <- which(as.numeric(temp$x) == .5)
+        grid.edit(polygons[[i]],
+                  x=temp$x[-remove],
+                  y=temp$y[-remove],
+                  id=NULL, redraw=FALSE)
+}
+grid.refresh()
+```
+
 @fig-corr-mat-legend shows a variation of @fig-corr-mat with 
 a legend that not only shares the same colour encoding, but
 also shares the same data symbol.

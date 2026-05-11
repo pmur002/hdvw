@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-05-07)
+Version 0.9 (build 2026-05-11)
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, breakable, titlerule=0mm, colframe=quarto-callout-warning-color-frame, colback=white, arc=.35mm, left=2mm, rightrule=.15mm, bottomtitle=1mm, toptitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, breakable, bottomtitle=1mm, toptitle=1mm, bottomrule=.15mm, arc=.35mm, colback=white, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, left=2mm, colbacktitle=quarto-callout-warning-color!10!white, coltitle=black, leftrule=.75mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, toprule=.15mm, opacitybacktitle=0.6, opacityback=0]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-05-07).
+2026. Version 0.9 (build 2026-05-11).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-05-07,
+@book{murrell-hdvw-2026-05-11,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-05-07)},
+    note = {Version 0.9 (build 2026-05-11)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -10343,7 +10343,7 @@ incorrect decoding of the data symbols.
 
 Figure~\ref{fig-no-text} is a version of Figure~\ref{fig-crime} with one
 significant modification: all of the text has been removed. Although we
-can see that some values, or rather three sets of values, haved
+can see that some values, or rather three sets of values, have
 decreased, we cannot tell what the values are or by how much they have
 decreased. If there was ever any doubt, Figure~\ref{fig-no-text} makes
 it clear that text is doing a lot of important work in a data
@@ -10370,7 +10370,7 @@ that contain text than anywhere else. There is also evidence that text
 elements are more memorable than the other elements of a data
 visualisation.\footnote{And how well a data visualisation can be
   recalled is another way to measure its effectiveness: ``a memorable
-  visualization is often also an effective one.'' Borkin et al. (2016).
+  visualization is often also an effective one'' Borkin et al. (2016).
 
   Only a thumbnail version of the original image is shown in
   Figure~\ref{fig-fixations-text} in order to comply with terms of use
@@ -10379,7 +10379,7 @@ visualisation.\footnote{And how well a data visualisation can be
 This chapter looks at the role that text plays in making data
 visualisations work.\footnote{Brath (2020) provides a very thorough
   treatment of the use of text in data visualisation and is the source
-  of many ideas in this chapter.}
+  of many of the ideas in this chapter.}
 
 \begin{figure}
 
@@ -10440,11 +10440,11 @@ the \textbf{length} of the bars \emph{and} as the horizontal
 \textbf{position} of (the right edge of) the white text.
 
 There is also a very important encoding of data values to the
-\textbf{pattern} visual feature of the white text. The data values for
-the number of offenders in each ethnic group are encoded as the
-\textbf{pattern} of the white text---the letters and digits that make up
-the text. Each white text data symbol has a different pattern because it
-is composed of a different set of digits.
+\textbf{pattern} visual feature of the white text---the letters and
+digits that make up the text. The data values for the number of
+offenders in each ethnic group are encoded as the \textbf{pattern} of
+the white text. Each white text data symbol has a different pattern
+because it is composed of a different set of digits.
 
 Just as we can decode data values from the visual features of the bars
 in Figure~\ref{fig-bar-text}, we can decode data values from the visual
@@ -10460,11 +10460,9 @@ values, that some counts are (much) larger than others.\footnote{This is
 text pattern, without reading the text values, that the counts are
 different. Every white text label has a different pattern.
 
-\begin{quote}
 Encoding data values as the position, colour, and pattern of text data
 symbols is effective for the same reasons that these visual features are
 effective for other types of data symbols.
-\end{quote}
 
 However, the unique power of text comes from \textbf{decoding} the
 \textbf{pattern} of the text. Text is the ultimate example of a
@@ -10484,19 +10482,17 @@ text ``2869''.
 
 }
 
-\caption{\label{fig-text-decode}Some visual objects have learned
-decodings, which means that we can decode values from the visual objects
-without having explicitly encoded values as visual features. This is
-similar to the idea of implicit encoding
-(Figure~\ref{fig-implicit-decode}).}
+\caption{\label{fig-text-decode}The pattern of a text label has a
+learned decoding, which means that we can decode values from the text
+label without having explicitly encoded a value as a text pattern. This
+is similar to the learned decoding of a visual object
+(Figure~\ref{fig-learned-decode}).}
 
 \end{figure}%
 
-\begin{quote}
 Encoding data values as the pattern of text is uniquely effective thanks
 to the learned decoding of information from specific combinations of
 digits and letters.
-\end{quote}
 
 Figure~\ref{fig-scatter-text} shows another example of text being used
 as data symbols. This scatter plot includes both data point data
@@ -10545,7 +10541,7 @@ there are some visual features that are specific to text data symbols.
 For example, Figure~\ref{fig-text-feature} shows a variation on
 Figure~\ref{fig-scatter-text} where the hemisphere for each of the
 top-four teams is encoded as the weight and style of the text symbol:
-teams from the southern hemisphere are bold and italic. Another examples
+teams from the southern hemisphere are bold and italic. Another example
 of a text-specific visual feature is the font family, for example, Arial
 versus Times Roman.\footnote{Brath and Banissi (2016) provides a much
   longer list of text-specific visual features.}
@@ -10571,8 +10567,8 @@ typically larger and bolder than the main text in a report. The
 \href{exec.html}{Executive Summary} in this book makes use of colour and
 angle to create visual connections between associated terms within a
 bullet-point list. These are examples of encoding qualitative groups,
-such as headings versus normal text, using just the visual features of
-text.
+such as headings versus normal text, using the visual features of text
+\emph{other than} the text pattern.
 
 \section{Decoding text}\label{sec-learned-text}
 
@@ -10585,12 +10581,12 @@ There are text-specific visual features, like font weight, font style,
 and font family and these are most useful for encoding and decoding
 qualitative information. Font family is a nominal feature, like hue, and
 it has a similarly limited capacity. Font weight and font style (or
-slope) in theory allows for the encoding of numerical values, but
-similar to area and angle, the relatively low accuracy means that we can
-only really decode ordinal data values.\footnote{These assessments, and
-  more, can also be found in Figure 14 of Brath and Banissi (2016),
-  though the information there is largely speculative and by analogy,
-  rather than being based on experimental evidence.}
+slope) in theory allow for the encoding of numerical values, but similar
+to area and angle, their relatively low accuracy means that we can only
+really decode ordinal data values.\footnote{These assessments, and more,
+  can also be found in Figure 14 of Brath and Banissi (2016), though the
+  information there is largely speculative and by analogy, rather than
+  being based on experimental evidence.}
 
 However, the most important decoding of text symbols is the learned
 decoding of text patterns---reading numbers and words from text symbols.
@@ -10604,11 +10600,9 @@ encoding both \textbf{quantitative} and \textbf{qualitative} data
 values. Finally, text patterns have a very large \textbf{capacity}; we
 are able to distinguish between many different words and numbers.
 
-\begin{quote}
 Encoding data values as the pattern of text is very effective because
 text patterns can be used to represent any sort of data and text
 patterns allow a very accurate decoding of data values.
-\end{quote}
 
 The pattern of text is also almost unique in permitting decoding of
 \emph{absolute} data values. In Section~\ref{sec-rel-pos}, we saw that
@@ -10621,10 +10615,8 @@ much more limited extent than text (Section~\ref{sec-object-danger}). We
 will talk more about this important decoding of text in
 Section~\ref{sec-guides}.
 
-\begin{quote}
 We can decode absolute data values from a text pattern because there is
 a pre-existing, learned decoding of words and numbers.
-\end{quote}
 
 Compared to much simpler data symbols like the bars in a bar plot, text
 data symbols are much more complex shapes. In terms of the visual
@@ -10645,9 +10637,7 @@ summary} as a text pattern. For example, we can use text to describe the
 size of the difference between two groups or the degree of correlation
 between two variables.
 
-\begin{quote}
-We can decode complex information from text patterns.
-\end{quote}
+We can decode arbitrarily complex information from text patterns.
 
 On the other hand, one weakness of text data symbols is that it requires
 more cognitive effort to compare data values from text patterns than it
@@ -10658,11 +10648,9 @@ Māori from the lengths of the bars. Those comparisons are slower and
 take more conscious effort if we try to use the white text data symbols
 in Figure~\ref{fig-bar-text}.
 
-\begin{quote}
 It is harder to compare data values that are encoded as text patterns
 because it requires more effort to decode data values and to perform
 mental calculations.
-\end{quote}
 
 Another point is that encoding data values as a text pattern is
 \emph{not} \textbf{congruent}. Although there is a learned decoding of
@@ -10679,7 +10667,9 @@ crime rate for males."
 \end{verbatim}
 
 The text above does not have the same instant impact as the bars in
-Figure~\ref{fig-text-not-congruent}.
+Figure~\ref{fig-text-not-congruent}. That is not to say that encoding
+data values as a text pattern is a \emph{dissonant} encoding; it is just
+\emph{not} a \emph{congruent} encoding.
 
 \begin{figure}
 
@@ -10693,10 +10683,6 @@ Figure~\ref{fig-text-not-congruent}.
 New Zealand in 2021 for males and female offenders.}
 
 \end{figure}%
-
-This is not to say that encoding data values as a text pattern is a
-\emph{dissonant} encoding, it is just \emph{not} a \emph{congruent}
-encoding.
 
 In addition, our visual system cannot generate \textbf{visual summaries}
 of large amounts of text (Section~\ref{sec-visual-summaries}). This is
@@ -10716,10 +10702,8 @@ perceiving groups of values or trends in values.\footnote{Ware (2021)
   fixations, identifying 1000 visual objects, and then interpreting
   their combined meaning.}
 
-\begin{quote}
 Large numbers of text data symbols are \emph{not} effective because the
 visual system cannot decode visual summaries from the text.
-\end{quote}
 
 It is possible to encode a \textbf{data summary} as a text pattern, but
 again we encounter a lack of congruence. For example,
@@ -10777,8 +10761,8 @@ Figure~\ref{fig-text-angle} shows a bar plot of the total number of
 offenders aged 14 to 16 in New Zealand in 2021, for different ethnic
 groups. This demonstrates some very common approaches to saving space in
 a plot. The title on the y-axis is rotated 90 degrees because if it had
-the normal horizontal orientation, it would produce a lot of empty space
-to the left of the plot. The tick labels on the x-axis are rotated 45
+the normal horizontal orientation, it would take up a lot of space to
+the left of the plot. The tick labels on the x-axis are rotated 45
 degrees because if they had the normal horizontal orientation they would
 overlap with each other.
 
@@ -10805,7 +10789,7 @@ interaction---the decoding of text shape is most effective when text
 angle is zero. This provides a strong argument for keeping text
 horizontal, which is why many of the figures in this book encode
 qualitative data values as vertical position. This allows room for long
-group labels to be drawn horizontally.
+group labels to be drawn horizontally without overlapping each other.
 
 \section{Case study: Word clouds}\label{sec-word-cloud}
 
@@ -10830,17 +10814,17 @@ the Wikipedia page for the Rugby World Cup.}
 \end{figure}%
 
 This data visualisation is unusual because it consists entirely of text
-\textbf{data symbols}. The encodings in Figure~\ref{fig-wordcloud}
-include encoding each word as the \textbf{pattern} of a text data symbol
-and encoding frequency as the \textbf{size} of a text data symbol. There
-is no need for a guide for the encoding from words to text pattern
+\textbf{data symbols}. In Figure~\ref{fig-wordcloud} each word is
+encoded as the \textbf{pattern} of a text data symbol and the frequency
+of each word is encoded as the \textbf{size} of a text data symbol.
+There is no need for a legend to decode from words to text pattern
 because there is a learned decoding (Figure~\ref{fig-learned-decode});
 we can decode each text data symbol into a word data value because that
 decoding has already been learned.
 
-There is no guide for the encoding from word frequency to text size, so
-we cannot decode exact word frequencies. Table~\ref{tbl-wiki-rwc} shows
-the six most frequent words. However, the visualisation is still
+There is no legend for the encoding from word frequency to text size, so
+we cannot decode exact word frequencies (Table~\ref{tbl-wiki-rwc} shows
+the six most frequent words). However, the visualisation is still
 effective at conveying the \emph{relative} frequencies. The larger words
 occurred more frequently. For example, we can see the names of the teams
 that were most successful at the tournament, like New Zealand and South
@@ -10872,9 +10856,9 @@ zealand & 38 \\
 
 The encoding of frequencies as the \textbf{size} of the words does not
 provide the best \textbf{accuracy} for decoding frequencies
-(Section~\ref{sec-accuracy}) and this made worse by the fact that longer
-words become even larger. This means that we cannot identify the exact
-frequency of any one word, we cannot identify the quantitative
+(Section~\ref{sec-accuracy}) and this is made worse by the fact that
+longer words become even larger. This means that we cannot identify the
+exact frequency of any one word, we cannot identify the quantitative
 difference in frequency between pairs of words, and we cannot easily
 perceive the distribution of frequencies across words. A word cloud is
 only effective for approximate ordinal comparisons of word frequencies
@@ -10885,12 +10869,10 @@ frequent words placed towards the centre of the word cloud. This is an
 example of redundant encoding; more frequent words are both larger
 \emph{and} more central (Section~\ref{sec-redundant}).
 
-\begin{quote}
 A word cloud is effective for conveying words because it encodes words
 to text data symbols. It is also partially effective for conveying
 relative frequencies of words because it encodes word frequency to both
 size and position in space.
-\end{quote}
 
 Another benefit of encoding frequency as position in space is the
 efficient use of space. For example, Figure~\ref{fig-wordcloud-bar}
@@ -10916,13 +10898,11 @@ One weakness of the word cloud is that the \textbf{angle} of words
 changes with no corresponding change in the data values. This is an
 example of a \textbf{dissonant} encoding, which can cause confusion
 (Section~\ref{sec-dissonance}). The viewer will notice the differences
-in angle and attempt to decode that difference to a difference in data
-values that does not exist.
+in angle and may attempt to decode that difference to a difference in
+data values that does not exist.
 
-\begin{quote}
 The different angles of text in a word cloud is not effective because it
 does not encode any differences in the data.
-\end{quote}
 
 \section{Case study: Tables}\label{sec-tables}
 
@@ -10986,8 +10966,8 @@ provided by right-alignment means that the text \textbf{length} of the
 numbers (the number of digits in each number) provides a crude encoding
 of the size of the number, particularly in the column showing the number
 of clean breaks. However, it is worth noting that some of the
-\textbf{accuracy} of the text has been sacrificed in order to make some
-of these gains.
+\textbf{accuracy} of the text has been sacrificed (because we have
+rounded some of the data values) in order to make some of these gains.
 
 \begin{longtable}[]{@{}llrrrr@{}}
 
@@ -11042,16 +11022,16 @@ for the top 8 teams at the 2023 Rugby World Cup.}
 \section{Case study: Stem-and-leaf
 plots}\label{case-study-stem-and-leaf-plots}
 
-Figure Figure~\ref{fig-tries-hist} shows a histogram of the number of
-tries scored by teams in the 2023 Rugby World Cup. The data symbols in
+Figure~\ref{fig-tries-hist} shows a histogram of the number of tries
+scored by teams in the 2023 Rugby World Cup. The data symbols in
 Figure~\ref{fig-tries-hist} are bars. The raw data values are the
 average number of tries per game for each team, but the lengths of the
 bars encode \textbf{data summaries}: the number of teams with an average
 number of tries within each range: 0 to 1, 1 to 2, and so on.
 
-Because the borders of the bars are not drawn, we get an emergent shape
-from the combined bars (similar to a density plot;
-Section~\ref{sec-density}).
+Because the borders of the bars are not drawn, we get an implicit visual
+shape shape from the combined bars
+(Section~\ref{sec-vis-shape-implicit}).
 
 This histogram allows us to see features of the data summaries, such as
 a suggestion that there is a small subset of teams that score a higher
@@ -11073,8 +11053,8 @@ stem-and-leaf plot.}
 
 \end{figure}%
 
-Figure Figure~\ref{fig-tries-stem} shows a stem-and-leaf diagram of the
-same data (with tries scored rounded to one decimal place).\footnote{The
+Figure~\ref{fig-tries-stem} shows a stem-and-leaf diagram of the same
+data (with tries scored rounded to one decimal place).\footnote{The
   invention of stem-and-leaf plots is attributed to Tukey (1977).} The
 data symbol in this case is a text digit. Every team is encoded as a
 digit from 0 to 7, which represents the first decimal place for the
@@ -11091,17 +11071,17 @@ by the number of digits. Another way to look at it is that the data
 symbol is a piece of text consisting of several digits and the number of
 teams is encoded as the \textbf{length} of the piece of text.
 
-As with the histogram in Figure~\ref{fig-tries-hist}, there are emergent
-shapes with two distinct humps visible, one taller than the other.
-However, in Figure~\ref{fig-tries-stem} we are \emph{also} able to
-decode the raw data values as well. Furthermore, because the data
-symbols are text digits, we are able to decode individual data values
-very accurately.
+As with the histogram in Figure~\ref{fig-tries-hist}, there are implicit
+visual shapes with two distinct humps visible, one taller than the
+other. However, in Figure~\ref{fig-tries-stem} we are \emph{also} able
+to decode the raw data values. Furthermore, because the data symbols are
+text digits, we are able to decode individual data values very
+accurately.
 
 In summary, Figure~\ref{fig-tries-stem} combines standard decodings
 (\textbf{length}) with \textbf{learned decodings} (text pattern) to
 provide access to both high-level features of data summaries \emph{and}
-raw data values.
+access to raw data values.
 
 \begin{figure}
 
@@ -11158,14 +11138,9 @@ Stem-and-leaf plots might be seen as an archaic form of data
 visualisation, but we can see that they are effective in many
 ways.\footnote{``If we are going to make a mark, it may as well be a
   meaningful one. The simplest - and most useful - meaningful mark is a
-  digit'' (Tufte 1983).}
-
-Unfortunately, despite all of their advantages, stem-and-leaf plots have
-a limited usefulness because they can only accommodate very small data
-sets. There is a similarity between a stem-and-leaf plot and the stacked
-icon plot in Figure~\ref{fig-pic-icon-1}. However, whereas an icon can
-easily be used to represent some multiple of objects, that option is not
-available for text digits.
+  digit'' (Tufte 1983).} Unfortunately, despite all of their advantages,
+stem-and-leaf plots have a limited usefulness because they can only
+accommodate very small data sets.
 
 \section{Encoding encodings}\label{sec-guides}
 
@@ -11196,8 +11171,8 @@ scored by Tier One nations at Rugby World Cup matches.}
 
 \end{figure}%
 
-There are very familiar encodings of data values to data symbols in
-Figure~\ref{fig-legend}. The number of points is encoded as the
+There are very familiar encodings of data values as circle data symbols
+in Figure~\ref{fig-legend}. The number of points is encoded as the
 horizontal position of the circles, The different teams are encoded as
 the vertical position of the circles, and the hemisphere of each team is
 encoded as the colour of the circles.
@@ -11247,10 +11222,8 @@ mark to the tick label means that we group the tick label, and the
 decoded value four hundred, with the tick mark.
 (Section~\ref{sec-visual-model-groups}).
 
-\begin{quote}
 Text on axes and legends are similar to data symbols because we use them
 to encode and decode information.
-\end{quote}
 
 The tick label ``400'' on the x-axis is even more important because it
 is the \emph{only} way to decode the number 400 from
@@ -11264,10 +11237,8 @@ circle for Ireland \emph{relative} to the position of the tick label
 ``400''. There is no way to decode the number four hundred from the
 horizontal position of the circle for Ireland \emph{on its own}.
 
-\begin{quote}
 Text on axes and legends are essential because they are often the only
 way to decode absolute data values from a data visualisation.
-\end{quote}
 
 Similarly, although with a little more work, we can establish that New
 Zealand has scored approximately eight hundred more points than
@@ -11298,28 +11269,29 @@ way to decode the hemisphere values. The colours of the circles, and the
 proximity of the circles to the text labels, allow us to decode a
 hemisphere from a colour and the fact that the same colour encoding is
 used for the circle data symbols in the plot allow us to decode a
-hemisphere from a data symbol.
+hemisphere from a data symbol (Section~\ref{sec-visual-model-groups}).
 
 Although the circles in the legend are not usually considered data
 symbols, they do look a lot like the data symbols in the plot. This
 makes it even clearer that axes and legends are just another example of
-encoding and decoding information.
+encoding and decoding information as the visual features of visual
+elements within a plot.
 
 Another point to note about the text on axes and legends is that there
 tends to be a small number of tick labels and legend labels, whereas the
 number of data symbols can be quite large. This makes sense from what we
 know about how well decoding works from text
 (Section~\ref{sec-learned-text}). The purpose of tick labels and legend
-labels is to allow the decoding of absolute values with great accuracy.
-This is the situation where text excels.
+labels is to allow the decoding of a small number of absolute values
+with great accuracy. This is the situation where text excels.
 
 A further point is that tick labels tend to be regularly spaced and they
 tend to encode ``nice'' numbers, for example, multiples of ten. As we
 saw earlier, if we want to decode the difference between tick labels, in
 addition to decoding individual tick labels, we are also required to
-perform mental to obtain the difference between the decoded values. The
-regular sequence of ``nice'' values makes that mental arithmetic much
-easier.
+perform mental arithmetic to obtain the difference between the decoded
+values. The regular sequence of ``nice'' values makes that mental
+arithmetic much easier (Section~\ref{sec-tasks}).
 
 \section{Case study: Direct
 Labelling}\label{case-study-direct-labelling}
@@ -11343,19 +11315,19 @@ technique sometimes described as \emph{direct labelling}.
 \end{figure}%
 
 As we saw in Section~\ref{sec-guides}, the decoding of a legend requires
-several steps of indirection: from text label in the legend to coloured
-data symbol in the legend to coloured data symbol in the plot. The
-direct labelling in Figure~\ref{fig-direct-label} reduces the number of
-steps. The text label can be decoded to give the ethnic group, then the
-proximity of the label to a line, plus the common colour encoding,
-visually groups the line with the label
+several steps of indirection: from a text label in the legend to a
+coloured data symbol in the legend to a coloured data symbol in the
+plot. The direct labelling in Figure~\ref{fig-direct-label} reduces the
+number of steps. The text label can be decoded to give the ethnic group,
+then the proximity of the label to a line, plus the common colour
+encoding, visually groups the line with the label
 (Section~\ref{sec-visual-model-groups}).
 
 This technique reduces the amount of cognition required and also reduces
 the memory load because information has to be rembered between each
 step. Furthermore, the proximity of labels to data symbols reduces the
 number of fixations required to perform the decoding
-(Section~\ref{sec-visual-focus}), which again reduces the memory
+(Section~\ref{sec-visual-focus}), which further reduces the memory
 load.\footnote{Shah and Hoeffner (2002b) include the following advice
   for legends: ``reduce the difficulty viewers face in keeping track of
   graphic referents because of the demands imposed on working memory.''
@@ -11481,10 +11453,8 @@ different ethnic groups.}
 
 \end{figure}%
 
-\begin{quote}
 Text is the only way to encode the type of complex and abstract
 information that is required for titles and axis labels.
-\end{quote}
 
 Another use of text in a data visualisation is to label specific points
 of interest.\footnote{These sorts of text labels are often referred to
@@ -11527,7 +11497,7 @@ Figure~\ref{fig-text-danger} shows a data visualisation of the number of
 gun deaths in Florida between 1990 and 2012, covering the enactment of
 Florida's ``stand your ground'' law that loosened the constraints on an
 individual's rights to use deadly force.\footnote{Figure~\ref{fig-text-danger}
-  is based on a
+  is inspired by a
   \href{https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2}{Business
   Insider} data visualisation, using data from
   \href{https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/}{USA
@@ -11552,7 +11522,7 @@ message from the data symbols is actually quite different.}
 However, if we look closely at the plot itself, we can see that the
 y-axis scale is inverted. A downward trend is actually an
 \emph{increase} in gun deaths, so the data shows that gun deaths
-actually increased after the law was enacted.
+actually \emph{increased} after the law was enacted.
 
 The point of this example is to demonstrate that the text within a data
 visualisation is not only given a lot of attention, but it can have a
@@ -11575,7 +11545,7 @@ labels.
 
 Figure~\ref{fig-unclear} shows that we are also responsible at a more
 fundamental level for making sure that text labels are legible and easy
-to understand.\footnote{This plot is based on a plot in the November
+to understand.\footnote{This plot is inspired by a plot in the November
   15-21 edition of the New Zealand Listener.} Figure~\ref{fig-unclear}
 shows data on the fortunes of New Zealand political parties since the
 2023 election. The title is not misleading in this case, but it is not
@@ -11611,37 +11581,23 @@ and it is quite easy to generate a garbled or confusing piece of
 text.\footnote{The text of this book no doubt provides multiple examples
   in support of this claim.} Just because it is \emph{possible} to
 encode complex information as text labels does not mean that it will
-always be easy to decode complex information from a text label.
+always be \emph{easy} to decode the correct information from a text
+label.
 
 \section{Case study: Linear pairwise
 plots}\label{case-study-linear-pairwise-plots}
 
-Figure~\ref{fig-corr-mat} shows a correlation matrix of seven
-performance measures for teams in the 2023 Rugby World Cup
-(Table~\ref{tbl-rwc-2023}). We can see that many measures have quite a
-strong positive correlation (dark red circles), but one measure (the
-number of tackles per game) is negatively correlated with all other
-measures (though often only very weakly).
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/text_files/figure-pdf/fig-corr-mat-1.pdf}
-
-}
-
-\caption{\label{fig-corr-mat}Correlations between pairs of measures of
-performance for teams in the 2023 Rugby World Cup.}
-
-\end{figure}%
-
-When the number of variables becomes large, a correlation matrix becomes
-an inefficient use of space.\footnote{The plots in this case study, and
-  the idea of \emph{linear} pairwise plots, come from version 1.0.1 of
-  the \{bullseye\} package for R (Chinwan and Hurley 2025).} An
-alternative is to produce a \emph{linear} plot of pairwise correlations,
-as shown in Figure~\ref{fig-corr-linear}.
+Figure~\ref{fig-corr-linear} shows a \emph{linear} plot of pairwise
+correlations of seven performance measures for teams in the 2023 Rugby
+World Cup (Table~\ref{tbl-rwc-2023}).\footnote{The plots in this case
+  study, and the idea of \emph{linear} pairwise plots, come from version
+  1.0.1 of the \{bullseye\} package for R (Chinwan and Hurley 2025).}
+The data symbols in Figure~\ref{fig-corr-linear} are data points. The
+correlation between a pair of measures is encoded as the horizontal
+position of the circles and the vertical position encodes for different
+pairs of measures. We can see that many pairs of measures have quite a
+strong positive correlation, but some pairs of measures are negatively
+correlated (though often only very weakly).
 
 \begin{figure}
 
@@ -11656,15 +11612,10 @@ of performance for teams in the 2023 Rugby World Cup.}
 
 \end{figure}%
 
-The data symbols in Figure~\ref{fig-corr-linear} are circular data
-points. The correlation between a pair of measures is encoded as the
-horizontal position of the circles and the vertical position encodes for
-different pairs of measures.
-
-The different pairs of measures are also encoded as the pattern of the
-tick labels on the y-axis. This encoding of the tick labels is an
-essential encoding because we cannot decode the pairs of measures from
-the vertical position of the circles alone.
+The different pairs of measures are encoded as the pattern of the tick
+labels on the y-axis. This encoding of the tick labels is an essential
+encoding because we cannot decode the pairs of measures from the
+vertical position of the data points alone.
 
 However, the encoding of the pairs of measures is an example of a poor
 text encoding because it is difficult to decode the variable names from
@@ -11673,9 +11624,12 @@ separated by a colon. That makes a piece of text that is not a
 recognisable word, or a recognisable expression, so it is more difficult
 for our learned decoding to extract the information about the measures.
 
-Figure~\ref{fig-corr-linear-fix} shows improved tick labels. The
-formatting in these labels makes it easier to decode individual measure
-names for each pair of measures.
+Figure~\ref{fig-corr-linear-fix} shows improved tick labels. The pattern
+in these labels makes it easier to decode individual measure names for
+each pair of measures, both because a more visible separator has been
+used (a bullet point) and because the bullet points have been aligned.
+Now we can more easily decode recognisable patterns from the text labels
+on the y-axis.
 
 \begin{figure}
 
@@ -11692,7 +11646,7 @@ measures of performance for teams in the 2023 Rugby World Cup.}
 
 \section{Case study: Alt text}\label{case-study-alt-text}
 
-A data visualisation as a conversion of information into a visual
+A data visualisation is a conversion of information into a visual
 representation (Section~\ref{sec-encodings}). We saw in
 Section~\ref{sec-CVD} that a data visualisation that makes use of a
 colour encoding can take into account red-green colour blindness, but
@@ -11711,12 +11665,13 @@ even mandated in many public service organisations.\footnote{For
   Web Content Accessibility Guidelines (World Wide Web Consortium (W3C)
   2025).} The alt text for a data visualisation will ideally describe
 what variables are being displayed and how they are encoded (what sort
-of plot is it), data summaries like trends, clusters, outliers, and
-correlations, and include the main message of the visualisation,
-including causal explanations and wider implications.\footnote{There are
-  many guidelines to assist with generating useful alt text, from the
-  very practical (World Wide Web Consortium (W3C) Web Accessibility
-  Initiative (WAI) 2025) to the more theoretical (Satyanarayan 2022).}
+of plot is it?), it will describe any data summaries like trends,
+clusters, outliers, and correlations, and it will describe the main
+message of the visualisation, including causal explanations and wider
+implications.\footnote{There are many guidelines to assist with
+  generating useful alt text, from the very practical (World Wide Web
+  Consortium (W3C) Web Accessibility Initiative (WAI) 2025) to the more
+  theoretical (Satyanarayan 2022).}
 
 In terms of the framework of this book, alt text is a purely text-based
 encoding. However, more important than that is the fact that alt text is
@@ -11746,12 +11701,12 @@ large number of different categories, and we can decode individual data
 values from text extremely accurately.
 
 On the other hand, decoding a large number of data values from text is
-very slow and we cannot generate visual summaries from text.
+very slow and we cannot decode visual summaries from text.
 
 The text elements within axes and legends are essential components of a
 data visualisation because they provide the only precise decoding of
-exact data values. This is what allows the decoding of the main data
-symbols within a data visualisation.
+absolute data values. This is what allows the relative decoding of the
+main data symbols within a data visualisation.
 
 Titles and annotations are very important components of a data
 visualisation because they are the only way to encode complex and
@@ -12101,6 +12056,28 @@ cases. That consistency, like the use of consistent colours, might again
 appear obvious, but it is not always true. For example, the data symbols
 in Figure~\ref{fig-corr-mat} are circles, but the legend is a
 rectangular colour gradient.
+
+Figure~\ref{fig-corr-mat} shows a correlation matrix of seven
+performance measures for teams in the 2023 Rugby World Cup
+(Table~\ref{tbl-rwc-2023}). Variable names are encoded as the horizontal
+and vertical positions of circles and the correlations between variables
+are encoded as the colour of the circles. We can see that many measures
+have quite a strong positive correlation (dark red circles), but one
+measure (the number of tackles per game) is negatively correlated with
+all other measures (though often only very weakly).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-corr-mat-1.pdf}
+
+}
+
+\caption{\label{fig-corr-mat}Correlations between pairs of measures of
+performance for teams in the 2023 Rugby World Cup.}
+
+\end{figure}%
 
 Figure~\ref{fig-corr-mat-legend} shows a variation of
 Figure~\ref{fig-corr-mat} with a legend that not only shares the same

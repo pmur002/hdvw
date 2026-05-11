@@ -10,12 +10,12 @@ we can represent a very large number of different categories,
 and we can decode individual data values from text extremely accurately.
 
 On the other hand, decoding a large number of data values
-from text is very slow and we cannot generate visual summaries from text.
+from text is very slow and we cannot decode visual summaries from text.
 
 The text elements within axes and legends are essential 
 components of a data visualisation because they provide the
-only precise decoding of exact data values.  This is what allows the
-decoding of the main data symbols within a data visualisation.
+only precise decoding of absolute data values.  This is what allows the
+relative decoding of the main data symbols within a data visualisation.
 
 Titles and annotations are very important components of a data
 visualisation because they are the only way to encode complex
