@@ -1531,7 +1531,7 @@ after the law was enacted, which is perhaps surprising given that
 use of deadly force was less constrained after the introduction of the law.
 
 [^florida-deaths]:
-    @fig-text-danger is inspired by a 
+    @fig-text-danger was inspired by a 
     [Business Insider](https://www.businessinsider.com/gun-deaths-in-florida-increased-with-stand-your-ground-2014-2) data visualisation, using data from
     [USA Facts](https://usafacts.org/data/topics/security-safety/crime-and-justice/firearms/firearm-deaths/).
 
@@ -1559,9 +1559,9 @@ labelbg <- function(data, coords) {
                     just=c("left", "bottom"),
                     gp=gpar(fontsize=20, fontface="bold", col="white",
                             lineheight=1))
-    rectGrob(grobX(lab, "west") - unit(1, "cm"),
+    rectGrob(grobX(lab, "west") - unit(5, "mm"),
              grobY(lab, "south"),
-             1,
+             grobWidth(lab) + unit(10, "mm"),
              grobHeight(lab),
              just=c("left", "bottom"),
              gp=gpar(col=NA, fill=figbg))
