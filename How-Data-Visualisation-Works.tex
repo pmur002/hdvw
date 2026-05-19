@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-05-12)
+Version 0.9 (build 2026-05-19)
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toptitle=1mm, rightrule=.15mm, opacitybacktitle=0.6, arc=.35mm, colframe=quarto-callout-warning-color-frame, titlerule=0mm, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, leftrule=.75mm, left=2mm, coltitle=black, bottomtitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, opacityback=0, bottomrule=.15mm, colback=white]
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, left=2mm, titlerule=0mm, colbacktitle=quarto-callout-warning-color!10!white, breakable, opacityback=0, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, coltitle=black, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, arc=.35mm, toptitle=1mm, rightrule=.15mm, opacitybacktitle=0.6, colback=white]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-05-12).
+2026. Version 0.9 (build 2026-05-19).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-05-12,
+@book{murrell-hdvw-2026-05-19,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-05-12)},
+    note = {Version 0.9 (build 2026-05-19)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -11728,7 +11728,7 @@ is not appropriate for representing a large number of raw data values.
 Figure~\ref{fig-yji} shows a line plot of the rate of youth crime in New
 Zealand for different ethnic groups and a pie chart showing the
 proportions of different types of crime.\footnote{This data
-  visualisation was based on figures from the
+  visualisation was inspired by figures from the
   \href{https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/}{Youth
   Justice Indicators Report from 2021}.} There is a problem with this
 figure because the line plot and the pie chart share the same colour
@@ -11745,13 +11745,18 @@ encoded as an orange colour, in this case the colour of a wedge.
 
 }
 
-\caption{\label{fig-yji}}
+\caption{\label{fig-yji}A line plot of number of offenders over time for
+different ethnic groups, plus a pie chart of the proportions of
+different types of crime. Although each plot contains sensible encodings
+by itself, the overall figure is confusing because the same colours are
+used to encode different values in the different plots.}
 
 \end{figure}%
 
 The conflicting encodings in Figure~\ref{fig-yji} create a confusing
 data visualisation because the same visual feature decodes to multiple
-data values (Figure~\ref{fig-conflict-decode}). There is nothing wrong
+data values (Figure~\ref{fig-conflict-decode}). The colour orange
+decodes to \emph{both} Eurpean/Other and Theft. There is nothing invalid
 with the encodings in the line plot by itself or with the encodings in
 the pie chart by itself, but the overall combination of elements within
 Figure~\ref{fig-yji} is ineffective.
@@ -11788,13 +11793,14 @@ Figure~\ref{fig-scatter}, but with an additional encoding of the
 hemisphere for each country as the colour of the data points.
 
 The legend in Figure~\ref{fig-rep-guide} encodes the colour encoding:
-which colour is used to encode each hemisphere. In
-Section~\ref{sec-guides}, we described how the proximity of the labels
-``South'' and ``North'' to the coloured points in the legend allow us to
-associate the colours with the different hemispheres. The different
-values of hemisphere are encoded as the vertical positions of the points
-and the text labels; both the orange point and the label ``South'' have
-the same vertical position.
+which colour is used to encode each hemisphere
+(Section~\ref{sec-guides}). In Section~\ref{sec-guides}, we described
+how the proximity of the labels ``South'' and ``North'' to the coloured
+points in the legend allow us to associate the colours with the
+different hemispheres and the different values of hemisphere are encoded
+as the vertical positions of the points and the text labels in the
+legend; both the orange point and the label ``South'' have the same
+vertical position.
 
 \begin{figure}
 
@@ -11814,7 +11820,7 @@ World Cup.}
 What about the horizontal position of the points and the text in the
 legend? These do not encode hemisphere values because they are the same
 for both North and South. What about the position of the legend title,
-``hemisphere''?
+the text ``hemisphere''?
 
 All of the elements of the legend are positioned together and to the
 right of the main plot. Their proximity to each other (and separation
@@ -11828,11 +11834,12 @@ comprehend the different elements of the plot.\footnote{Cabouat et al.
 which is split into paragraphs and sections with headings to help the
 reader navigate the text.
 
-One way to express this is that the \textbf{position} of the elements of
-the legend \textbf{encode} the \textbf{organisation} of the overall data
-visualisation (Figure~\ref{fig-org-vis-decode}). Our visual system
-\textbf{decodes} the legend as a separate element based on the proximity
-of the text and points in the legend.
+One way to express this arrangement of the legend is that the
+\textbf{position} of the elements of the legend \textbf{encode} the
+\textbf{structure} of the overall data visualisation
+(Figure~\ref{fig-org-vis-decode}). Our visual system \textbf{decodes}
+the legend as a separate element based on the proximity of the text and
+points in the legend.
 
 \begin{figure}
 
@@ -11848,34 +11855,33 @@ structure are close to each other.}
 
 \end{figure}%
 
-\begin{quote}
 One way in which a data visualisation can be effective is if it provides
-information about how to read the plot as well as information about the
-data itself.
-\end{quote}
+information about how to read the plot as a whole as well as information
+about the data values.
 
-Another way to say it is that each element of the data visualisation in
-Figure~\ref{fig-rep-guide} belongs to one of two groups: the main plot
-or the legend. There is a \textbf{qualitative} value---plot or
-legend---associated with each element of the data visualisation. These
-qualitative values are encoded as the \textbf{position} of the elements
-within the data visualisation: the plot is on the left and the legend is
-on the right.
+Another way to think about it is that each element of the data
+visualisation in Figure~\ref{fig-rep-guide} belongs to one of two
+groups: the main plot or the legend. There is a \textbf{qualitative}
+value---plot or legend---associated with each element of the data
+visualisation. These qualitative values are encoded as the
+\textbf{position} of the elements within the data visualisation: the
+plot is on the left and the legend is on the right.
 
 Although we are no longer talking about encoding data values as data
 symbols, we are still talking about encoding. We are just encoding and
-decoding a different sort of information---the organisation of a data
-visualisation.
+decoding a different sort of information---the structure or organisation
+of a data visualisation.
 
 Figure~\ref{fig-align} shows a variation of Figure~\ref{fig-rep-guide},
-with exactly the same plot elements, but in a different arrangement.
-There is greater separation of the legend from the main plot. The legend
-has also been moved so that its top is aligned with the top of the main
-plot. Similarly, the axis titles have been moved so that they align with
-the top and right sides of the plot, and the y-axis label has been
-rotated to horizontal. More subtly, the right edge of the y-axis label
-is aligned with the right edge of the y-axis tick labels and the points
-in the legend are aligned with the left edge of the legend title.
+with exactly the same plot elements, but in a slightly different
+arrangement. There is greater separation of the legend from the main
+plot. The legend has also been moved so that its top is aligned with the
+top of the main plot. Similarly, the axis titles have been moved so that
+they align with the top and right sides of the plot, and the y-axis
+label has been rotated to horizontal. More subtly, the right edge of the
+y-axis label is aligned with the right edge of the y-axis tick labels
+and the points in the legend are aligned with the left edge of the
+legend title.
 
 \begin{figure}
 
@@ -11918,10 +11924,10 @@ elements within a data visualisation using \textbf{position}---elements
 that are positioned close together and/or aligned with each other form
 visual groups.
 
-Another way to say this is that the we decode the differences in the
+Another way to say this is that we can decode the differences in the
 positions of different elements to identify distinct groups of elements.
 
-Yet another way to say this is that we decode visual differences
+Yet another way to say this is that we can decode visual differences
 regardless of whether they reflect differences in data values.
 
 In other words, all visual differences in a data visualisation matter.
@@ -11929,35 +11935,42 @@ In other words, all visual differences in a data visualisation matter.
 For example, consider the x-axis title in Figure~\ref{fig-rep-guide}.
 Although it has a similar horizontal position to the rest of the x-axis,
 it has a unique vertical position within the data visualisation.
-Similarly, the horizontal position of the x-axis title is unique, as are
+Similarly, the horizontal position of the y-axis title is unique, as are
 the horizontal and vertical positions of the legend. Because these
 positions are unique, we are tempted to decode those differences---we
 seek the information that is encoded in those differences. Put simply,
-the differences make the data visualisation more complex.
+the unique positions of certain elements of the plot make the data
+visualisation more complex.
 
 Figure~\ref{fig-align} is a more orderly version of
 Figure~\ref{fig-rep-guide} and, as a consequence, there are fewer visual
 differences, so there is less to decode. The data visualisation is less
 complex.
 
+Although we may notice the differences in the unique placement of axis
+titles in Figure~\ref{fig-rep-guide} and therefore attempt to decode
+information from them, the differences do not \emph{deliberately} encode
+information. These differences are \textbf{unintentional encodings}.
+
 Figure~\ref{fig-text-angle} provides another simple example of
 unintentional encoding. In this bar plot there are text labels at
 different angles---the y-axis title is rotated 90 degrees and the x-axis
 tick labels are rotated 45 degrees, but these differences in angle do
 not reflect any differences in the data. Keeping all text in a data
-visualisation horizontal removes this source of distraction.
+visualisation horizontal, as in Figure~\ref{fig-align}, removes this
+source of distraction.
 
 Figure~\ref{fig-smoking} shows a more problematic example.\footnote{Figure~\ref{fig-smoking}
-  is based on a data visualisation in the New Zealand Listener January
-  11-17 2025.} This bar plot shows the number of ex-smokers in New
-Zealand over time, with each bar resembling a cigarette that is slowly
-burning down (the grey area represents ash at the end of the cigarette).
-The number of ex-smokers is encoded as the full height of each bar, so
-we can decode the number of ex-smokers. However, the grey area and the
-white area on each bar also changes each year and those changes are not
-associated with any data value. In other words, there are differences
-that we decode as a change in something, but nothing is really changing.
-This is at best confusing and could even lead to
+  was inspired by a data visualisation in the New Zealand Listener
+  January 11-17 2025.} This bar plot shows the number of ex-smokers in
+New Zealand over time, with each bar resembling a cigarette that is
+slowly burning down (the grey area represents ash at the end of the
+cigarette). The number of ex-smokers is encoded as the full height of
+each bar, so we can decode the number of ex-smokers. However, the grey
+area and the white area on each bar also changes each year and those
+changes are not associated with any data value. In other words, there
+are differences that we decode as a change in something, but nothing is
+really changing. This is at best confusing and could even lead to
 misinterpretation.\footnote{There is a connection between
   \emph{unintentional encodings} and \emph{chart junk}
   (Section~\ref{sec-junk}).
@@ -11995,44 +12008,26 @@ provides a distracting decoding of region size.
 
 \section{Consistent encodings}\label{sec-repetition}
 
-Figure~\ref{fig-rep-none} shows a variation on
-Figure~\ref{fig-rep-guide} with a modification to the legend. In this
-plot, the hemisphere of a country is encoded using orange and green
-within the main plot, but then hemisphere is encoded using light blue
-and brown in the legend. This is clearly an ineffective data
-visualisation. It is possible to decode that there are two groups of
-data symbols in the plot, but it is impossible to decode which of those
-two groups is North and which is South.\footnote{This
-  \emph{inconsistent} encoding could also be described as a
-  \emph{dissonant} encoding (Section~\ref{sec-dissonance}).} The point
-of Figure~\ref{fig-rep-none} is merely to highlight the critical
-importance of maintaining consistent encodings between different
-elements of a plot.\footnote{A consistent encoding aligns with the CRAP
-  design principle of \emph{repetition} (Williams 2014).}
+In Figure~\ref{fig-rep-guide}, the legend explains the encoding of the
+different hemispheres, North versus South, as different colours. This is
+achieved by drawing coloured data points in the legend just like the
+data points in the main plot, plus, crucially, using the same encoding
+in the main plot and in the legend. The green dots in the main plot
+correspond to North and the green dot in the legend corresponds to
+North. The encoding in the main plot is \textbf{consistent} with the
+encoding in the legend.\footnote{A consistent encoding aligns with the
+  CRAP design principle of \emph{repetition} (Williams 2014).}
 
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{index_files/mediabag/design_files/figure-pdf/fig-rep-none-1.pdf}
-
-}
-
-\caption{\label{fig-rep-none}A scatter plot of the number of times a
-team breaks through the opposition defence and the number of tries that
-a team scores (both are per-game averages) for teams at the 2023 Rugby
-World Cup.}
-
-\end{figure}%
-
-Figure~\ref{fig-rep-double} demonstrates that we can harness consistent
-encodings to actually improve upon the original
-Figure~\ref{fig-rep-guide}. In Figure~\ref{fig-rep-double}, the encoding
-of hemisphere as the colour of points is not only consistent between the
-main plot and the legend, but it has been extended to the colour of the
-legend text as well. The visual grouping of elements that relate to the
-same hemisphere is now stronger both within the legend and across the
-entire data visualisation (Section~\ref{sec-visual-model-groups}).
+Although it may seem obvious to have a consistent encoding of colour in
+both the main plot and the legend, Figure~\ref{fig-rep-double}
+demonstrates that we can harness consistent encodings to actually
+improve upon the original Figure~\ref{fig-rep-guide}. In
+Figure~\ref{fig-rep-double}, the encoding of hemisphere as the colour of
+points is not only consistent between the main plot and the legend, but
+it has been extended to the colour of the legend text as well. The
+visual grouping of elements that relate to the same hemisphere is now
+stronger both within the legend and across the entire data visualisation
+(Section~\ref{sec-visual-model-groups}).
 
 \begin{figure}
 
@@ -12061,7 +12056,7 @@ Figure~\ref{fig-corr-mat} shows a correlation matrix of seven
 performance measures for teams in the 2023 Rugby World Cup
 (Table~\ref{tbl-rwc-2023}). Variable names are encoded as the horizontal
 and vertical positions of circles and the correlations between variables
-are encoded as the colour of the circles. We can see that many measures
+are encoded as the colours of the circles. We can see that many measures
 have quite a strong positive correlation (dark red circles), but one
 measure (the number of tackles per game) is negatively correlated with
 all other measures (though often only very weakly).
@@ -12082,8 +12077,9 @@ performance for teams in the 2023 Rugby World Cup.}
 Figure~\ref{fig-corr-mat-legend} shows a variation of
 Figure~\ref{fig-corr-mat} with a legend that not only shares the same
 colour encoding, but also shares the same data symbol. It is much easier
-to compare the colour of one of the circular data symbols with the
-colours of the circles in the legend because they are all circles.
+to compare the colour of one of the data symbol circles in the main plot
+with the colours of the circles in the legend because they are all
+circles.
 
 \begin{figure}
 
@@ -12108,7 +12104,7 @@ the bars in the main plot.
 
 Figure~\ref{fig-trump-bill} shows a bar plot of the impact of a proposed
 tax bill during the second Trump administration.\footnote{This data
-  visualisation is based on a plot from the
+  visualisation was inspired by a plot from the
   \href{https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful}{Popular
   Information} web site by Judd Legum. The data are from the
   \href{https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15}{Penn
@@ -12152,12 +12148,12 @@ for the highest income bracket.\footnote{This is precisely the mistake
   (\textasciitilde6:00)}.}
 
 Just as it makes no sense to change the encoding of data values within a
-data visualisation (Figure~\ref{fig-rep-none}) or across multiple data
-visualisations within the same document (Figure~\ref{fig-yji}), it makes
-no sense to change the encoding of \emph{structure} within a data
-visualisation. In this case, all labels above the bars should belong to
-the same group of labels (changes in income) and all labels below the
-bars should belong to the same group of labels (income brackets).
+data visualisation or across multiple data visualisations within the
+same document (Figure~\ref{fig-yji}), it makes no sense to change the
+encoding of \emph{structure} within a data visualisation. In this case,
+all labels above the bars should belong to the same group of labels
+(changes in income) and all labels below the bars should belong to the
+same group of labels (income brackets).
 
 \section{Encoding importance}\label{encoding-importance}
 
@@ -12171,7 +12167,7 @@ elements first (Section~\ref{sec-attention}), with the other elements in
 the background, which we can focus on if we need the additional
 information.\footnote{The idea of making a clear visual distinction
   between different elements of a data visualisation mirrors the CRAP
-  design principle of \emph{contrast}.}
+  design principle of \emph{contrast} (Williams 2014).}
 
 \begin{figure}
 
@@ -12193,8 +12189,10 @@ impact from all elements of the plot, so it is less clear where to look
 first. All of the elements of the data visualisation compete for our
 attention. Figure~\ref{fig-distract} emphasises this point by making all
 axis and legend text black and adding black grid lines. The data symbols
-are now lost amongst the non-data elements of the plot.\footnote{This
-  also relates to Tukey's \emph{data-ink ratio} (Tufte 1983).}
+are now lost amongst the non-data elements of the plot.\footnote{This is
+  like a more subtle for of Tukey's \emph{data-ink ratio} (Tufte 1983).
+  Instead of removing any drawing that we do not want to distract the
+  viewer, we make less important information less visible.}
 
 \begin{figure}
 
@@ -12236,7 +12234,7 @@ Figure~\ref{fig-highlight} shows a similar application of importance. In
 this case, we are highlighting two data points (New Zealand and South
 Africa). The distinct colour and larger size of the two points encodes
 the importance of those points and draws attention to those points, with
-everything else as background context.
+the other data points de-emphasised.
 
 \begin{figure}
 
@@ -12260,12 +12258,15 @@ visual system to draw attention to specific elements of a plot
 (Section~\ref{sec-attention}). As we saw in Section~\ref{sec-illusion},
 those basic properties of the visual system can also work against us.
 Our attention will be drawn to large and bright elements of a data
-visualisation automatically.
+visualisation automatically. For example, in Figure~\ref{fig-tiger}, our
+eye is drawn to the tiger's eye, which distracts us from the more
+important heights of the bars. There are clear overlaps here with the
+ideas of clutter and chart junk (Section~\ref{sec-junk}).
 
-For example, in Figure~\ref{fig-tiger}, our eye is drawn to the tiger's
-eye, which distracts us from the more important heights of the bars.
-There are clear overlaps here with the ideas of clutter and chart junk
-(Section~\ref{sec-junk}).
+As with many of the most effective approaches to encoding information,
+we have a lot to gain by aligning our encodings with the natural
+decodings that our visual system provides, but we have a lot to lose if
+our encodings are misaligned with our desired goals.
 
 \begin{figure}
 

@@ -1,6 +1,7 @@
 
 # Base image
-FROM rocker/r-ver:4.5.3
+FROM posit/r-base:4.5.3-jammy
+
 MAINTAINER Paul Murrell <paul@stat.auckland.ac.nz>
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -77,7 +78,7 @@ RUN Rscript -e 'renv::restore()'
 COPY google-chrome-stable_143.0.7499.192_amd64.deb /tmp/
 RUN apt-get update && apt-get install -y \
     fonts-liberation \
-    libasound2t64 \
+    libasound2 \
     libvulkan1
 RUN dpkg -i /tmp/google-chrome-stable_143.0.7499.192_amd64.deb
 ENV RGL_USE_NULL=true

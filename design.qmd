@@ -21,12 +21,13 @@ orange colour, in this case the colour of a wedge.
 
 [^yji]:        
     This data visualisation was 
-    based on figures from the 
+    inspired by figures from the 
     [Youth Justice Indicators Report from 2021](https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/).
 
 ```{r}
 #| echo: false
 #| label: fig-yji
+#| fig-cap: A line plot of number of offenders over time for different ethnic groups, plus a pie chart of the proportions of different types of crime.  Although each plot contains sensible encodings by itself, the overall figure is confusing because the same colours are used to encode different values in the different plots.
 youthCols <- c("#bf0000", "#2b4689", "#e1b728", "#8fbb22",
                "#0087c0", "#bdaa7c", "#f15a22")
 youthCols <- pal_npg()(7)
@@ -71,7 +72,8 @@ popViewport()
 The conflicting encodings in @fig-yji
 create a confusing data visualisation because the same visual feature
 decodes to multiple data values (@fig-conflict-decode).
-There is nothing wrong with the encodings in the line plot by itself
+The colour orange decodes to *both* Eurpean/Other and Theft.
+There is nothing invalid with the encodings in the line plot by itself
 or with the encodings in the pie chart by itself, but the overall combination of
 elements within @fig-yji is ineffective.
 
@@ -112,12 +114,12 @@ additional encoding of the hemisphere for each country as the colour
 of the data points.
 
 The legend in @fig-rep-guide encodes the colour
-encoding:  which colour is used to encode each hemisphere.
+encoding:  which colour is used to encode each hemisphere (@sec-guides).
 In @sec-guides, we described how the proximity of the labels "South"
 and "North" to the coloured points in the legend allow us to
-associate the colours with the different hemispheres.
-The different values of hemisphere are encoded as the vertical
-positions of the points and the text labels;
+associate the colours with the different hemispheres and
+the different values of hemisphere are encoded as the vertical
+positions of the points and the text labels in the legend;
 both the orange point and the label "South" have the same
 vertical position.
  
@@ -144,7 +146,7 @@ popViewport()
 What about the horizontal position of the points and the text in
 the legend?  These do not encode hemisphere values because they
 are the same for both North and South.
-What about the position of the legend title, "hemisphere"?
+What about the position of the legend title, the text "hemisphere"?
 
 All of the elements of the legend are positioned together
 and to the right of the main plot.
@@ -164,8 +166,9 @@ navigate the text.
     they felt it required less
     mental effort to parse relevant information from it for learning."
 
-One way to express this is that the **position** of the elements of the legend 
-**encode** the **organisation** of the overall data visualisation
+One way to express this arrangement of the legend 
+is that the **position** of the elements of the legend 
+**encode** the **structure** of the overall data visualisation
 (@fig-org-vis-decode).
 Our visual system **decodes** the legend as a separate element
 based on the proximity of the text and points in the legend.
@@ -184,11 +187,13 @@ so that elements that are part of the same structure are close to each other.
 
 :::
 
-> One way in which a data visualisation can be effective is if it
-  provides information about
-  how to read the plot as well as information about the data itself.
+One way in which a data visualisation can be effective is if it
+provides information about
+how to read the plot as a whole
+as well as information about the data values.
 
-Another way to say it is that each element of the data visualisation in 
+Another way to think about it
+is that each element of the data visualisation in 
 @fig-rep-guide belongs to one of two groups:  the main plot or the legend.
 There is a **qualitative** value---plot or legend---associated with
 each element of the data visualisation.
@@ -199,10 +204,10 @@ and the legend is on the right.
 Although we are no longer talking about encoding data values as
 data symbols, we are still talking about encoding.
 We are just encoding and decoding a different sort of information---the
-organisation of a data visualisation.
+structure or organisation of a data visualisation.
 
 @fig-align shows a variation of @fig-rep-guide, with exactly 
-the same plot elements, but in a different arrangement.
+the same plot elements, but in a slightly different arrangement.
 There is greater separation of the legend from the main
 plot.
 The legend has also been moved so that its top is aligned
@@ -275,11 +280,11 @@ of elements within a data visualisation using **position**---elements
 that are positioned close together and/or aligned with each other
 form visual groups.
 
-Another way to say this is that the we decode the 
+Another way to say this is that we can decode the 
 differences in the positions of different
 elements to identify distinct groups of elements.
 
-Yet another way to say this is that we decode visual differences
+Yet another way to say this is that we can decode visual differences
 regardless of whether they reflect differences in data values.
 
 In other words, all visual differences in a data visualisation matter.
@@ -287,16 +292,25 @@ In other words, all visual differences in a data visualisation matter.
 For example, consider the x-axis title 
 in @fig-rep-guide. Although it has a similar horizontal position to the
 rest of the x-axis, it has a unique vertical position within the 
-data visualisation.  Similarly, the horizontal position of the x-axis title
+data visualisation.  Similarly, the horizontal position of the y-axis title
 is unique, as are the horizontal and vertical positions of the legend.
 Because these positions are unique, we are tempted to decode
 those differences---we seek the information that is encoded in those
 differences.
-Put simply, the differences make the data visualisation more complex.
+Put simply, the unique positions of certain elements of the plot
+make the data visualisation more complex.
 
 @fig-align is a more orderly version of @fig-rep-guide and,
 as a consequence, there are fewer visual differences,
 so there is less to decode.  The data visualisation is less complex.
+
+Although we may notice the differences 
+in the unique placement of axis titles 
+in @fig-rep-guide
+and therefore attempt to
+decode information from them,
+the differences do not *deliberately* encode information.
+These differences are **unintentional encodings**.
 
 @fig-text-angle provides another simple example of unintentional
 encoding.
@@ -304,7 +318,7 @@ In this bar plot there are text labels at different angles---the y-axis
 title is rotated 90 degrees and the x-axis tick labels are rotated 45 degrees, 
 but these differences in angle do not reflect any differences in the data.
 Keeping all text in a data visualisation
-horizontal removes this source of distraction.
+horizontal, as in @fig-align, removes this source of distraction.
 
 @fig-smoking shows a more problematic example.[^listener-smoking]
 This bar plot shows the number of ex-smokers in New Zealand over time,
@@ -319,7 +333,8 @@ in something, but nothing is really changing.
 This is at best confusing and could even lead to misinterpretation.[^bonus]
 
 [^listener-smoking]: 
-    @fig-smoking is based on a data visualisation in the New Zealand Listener
+    @fig-smoking was inspired by
+    a data visualisation in the New Zealand Listener
     January 11-17 2025.
 
 [^bonus]:
@@ -367,50 +382,23 @@ or it is a problem if it provides a distracting decoding of region size.
 
 ## Consistent encodings {#sec-repetition}
 
-@fig-rep-none shows a variation on @fig-rep-guide with a modification to the
-legend.  In this plot, the hemisphere of a country is encoded using
-orange and green within the main plot, but then hemisphere is encoded
-using light blue and brown in the legend.
-This is clearly an ineffective data visualisation.
-It is possible to decode that there are two groups of data symbols in the
-plot, but it is impossible to decode which of those two groups is North and
-which is South.[^inconsistent-dissonant]
-The point of @fig-rep-none is merely to
-highlight the critical importance of maintaining consistent encodings between
-different elements of a plot.[^CRAP-rep]
-
-[^inconsistent-dissonant]:
-    This *inconsistent* encoding could also be described as a 
-    *dissonant* encoding (@sec-dissonance).
+In @fig-rep-guide, the legend explains the encoding of the different
+hemispheres, North versus South, as different colours.
+This is achieved by drawing coloured data points in the legend
+just like the data points in the main plot, plus, crucially, 
+using the same encoding in the main plot and in the legend.
+The green dots in the main plot correspond to North and the
+green dot in the legend corresponds to North.
+The encoding in the main plot is **consistent** with the
+encoding in the legend.[^CRAP-rep]
 
 [^CRAP-rep]:
     A consistent encoding aligns with 
     the CRAP design principle of *repetition*
     [@williams2014nondesigners].
 
-```{r}
-#| echo: false
-#| label: fig-rep-none
-#| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
-#| fig-keep: last
-gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere)) +
-    scale_colour_manual(values=repcols[c(1, 3)], name="hemisphere",
-                        guide=guide_legend(reverse=TRUE)) +
-    scale_x_continuous(name="clean breaks") +
-    scale_y_continuous(name="tries scored") +
-    theme(aspect.ratio=1,
-          legend.key.size=unit(2, "mm"),
-          legend.key.spacing.y=unit(2, "mm"))
-pushViewport(viewport(height=.8))
-print(gg, newpage=FALSE)
-popViewport()
-grid.force()
-keyPoint <- grid.grep("key::gTree::points", grep=TRUE, global=TRUE)
-grid.edit(keyPoint[[1]], gp=gpar(col=repcols[2]))
-grid.edit(keyPoint[[2]], gp=gpar(col=repcols[4]))
-```
-
+Although it may seem obvious to have a consistent encoding
+of colour in both the main plot and the legend, 
 @fig-rep-double demonstrates that we can harness consistent
 encodings to actually improve upon the original @fig-rep-guide.
 In @fig-rep-double, the encoding of hemisphere as the colour of points
@@ -457,7 +445,7 @@ of seven performance measures
 for teams in the 2023 Rugby World Cup (@tbl-rwc-2023).
 Variable names are encoded as the horizontal and vertical positions
 of circles and the correlations between variables are encoded as the
-colour of the circles.
+colours of the circles.
 We can see that many measures have quite a strong positive correlation
 (dark red circles), but one measure (the number of tackles per game)
 is negatively correlated with all other measures (though often only very
@@ -489,7 +477,8 @@ grid.refresh()
 @fig-corr-mat-legend shows a variation of @fig-corr-mat with 
 a legend that not only shares the same colour encoding, but
 also shares the same data symbol.
-It is much easier to compare the colour of one of the circular data symbols
+It is much easier to compare the colour of one of the data symbol circles
+in the main plot
 with the colours of the circles in the legend because they are all circles.
 
 ```{r}
@@ -561,7 +550,7 @@ bars, but for the two leftmost bars the labels for the income brackets
 are placed above the bars.
 
 [^trump-bill]:
-    This data visualisation is based on a plot from the 
+    This data visualisation was inspired by a plot from the 
     [Popular Information](https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful)
     web site by Judd Legum.
     The data are from the 
@@ -630,7 +619,7 @@ is the change in income for the highest income bracket.[^TMR]
   [The Majority Report (~6:00)](https://www.youtube.com/watch?v=AQiukyzB6x0).  
 
 Just as it makes no sense to change the encoding of data values
-within a data visualisation (@fig-rep-none) or across multiple
+within a data visualisation or across multiple
 data visualisations within the same document (@fig-yji),
 it makes no sense to change the encoding of *structure* within a
 data visualisation.
@@ -654,7 +643,8 @@ which we can focus on if we need the additional information.[^contrast]
 [^contrast]: 
     The idea of making a clear visual distinction between
     different elements of a data visualisation mirrors
-    the CRAP design principle of *contrast*.
+    the CRAP design principle of *contrast*
+    [@williams2014nondesigners].
 
 ```{r}
 #| echo: false
@@ -693,8 +683,10 @@ legend text black and adding black grid lines.  The data symbols are
 now lost amongst the non-data elements of the plot.[^data-ink-ratio]
 
 [^data-ink-ratio]:
-    This also relates to Tukey's *data-ink ratio*
-    [@tufte1983visual].
+    This is like a more subtle for of Tukey's *data-ink ratio*
+    [@tufte1983visual].  Instead of removing any drawing that we do
+    not want to distract the viewer, we make less important information
+    less visible.
 
 ```{r}
 #| echo: false
@@ -745,17 +737,17 @@ In this case, we are highlighting two data points (New Zealand
 and South Africa).
 The distinct colour and larger size of the two points encodes the 
 importance of those points and
-draws attention to those points, with everything else as background
-context.
+draws attention to those points, with the other data points 
+de-emphasised.
 
 ```{r}
 #| echo: false
 #| label: fig-highlight
 #| fig-cap: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
 #| fig-keep: last
-dimcols <- lighten(repcols[c(1, 3)], .7)
+dimcols <- lighten(repcols[c(1, 3)], 0)
 gg <- ggplot(RWCperGame) +
-    geom_point(aes(breaks, tries, colour=sphere),
+    geom_point(aes(breaks, tries, colour=sphere), shape=1,
                data=subset(RWCperGame, 
                            !country %in% c("New Zealand", "South Africa"))) +
     geom_point(aes(breaks, tries), colour=repcols[1], size=3,
@@ -792,11 +784,16 @@ As we saw in @sec-illusion, those basic properties of the visual
 system can also work against us.
 Our attention will be drawn to large and bright elements of a data
 visualisation automatically.
-
 For example, in @fig-tiger, our eye is drawn to the tiger's eye,
 which distracts us from the more important heights of the
 bars.  There are clear overlaps here with the ideas of clutter and
 chart junk (@sec-junk).
+
+As with many of the most effective approaches to encoding
+information, we have a lot to gain by aligning our encodings
+with the natural decodings that our visual system provides, but
+we have a lot to lose if our encodings are misaligned with our desired
+goals.
 
 ```{r}
 #| echo: false

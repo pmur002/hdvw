@@ -275,19 +275,19 @@ div.csl-indent {
 <p><a href="#fig-yji" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> shows a line plot of the rate of youth crime in New Zealand for different ethnic groups and a pie chart showing the proportions of different types of crime.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> There is a problem with this figure because the line plot and the pie chart share the same colour palette even though they are visualising different variables (ethnicity and crime type). For example, the ethnic group European/Other is encoded as the orange colour of a line <em>and</em> the crime type Theft is also encoded as an orange colour, in this case the colour of a wedge.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-yji" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<div id="fig-yji" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-yji-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="design_files/figure-html/fig-yji-1.svg" id="fig-yji" class="img-fluid figure-img" style="width:100.0%">
+<img src="design_files/figure-html/fig-yji-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-yji-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.1
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-yji-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.1: A line plot of number of offenders over time for different ethnic groups, plus a pie chart of the proportions of different types of crime. Although each plot contains sensible encodings by itself, the overall figure is confusing because the same colours are used to encode different values in the different plots.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The conflicting encodings in <a href="#fig-yji" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> create a confusing data visualisation because the same visual feature decodes to multiple data values (<a href="#fig-conflict-decode" class="quarto-xref">Figure&nbsp;<span>14.2</span></a>). There is nothing wrong with the encodings in the line plot by itself or with the encodings in the pie chart by itself, but the overall combination of elements within <a href="#fig-yji" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> is ineffective.</p>
+<p>The conflicting encodings in <a href="#fig-yji" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> create a confusing data visualisation because the same visual feature decodes to multiple data values (<a href="#fig-conflict-decode" class="quarto-xref">Figure&nbsp;<span>14.2</span></a>). The colour orange decodes to <em>both</em> Eurpean/Other and Theft. There is nothing invalid with the encodings in the line plot by itself or with the encodings in the pie chart by itself, but the overall combination of elements within <a href="#fig-yji" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> is ineffective.</p>
 <div id="fig-conflict-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-conflict-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -302,7 +302,7 @@ Figure&nbsp;14.2: If we encode more than one data value to the same visual featu
 <section id="sec-map-org" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="sec-map-org"><span class="header-section-number">14.1</span> Encoding structure</h2>
 <p><a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> shows a scatter plot of the number of clean breaks and the number of tries for countries at the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>). This data visualisation is similar to <a href="combine.html#fig-scatter" class="quarto-xref">Figure&nbsp;<span>9.4</span></a>, but with an additional encoding of the hemisphere for each country as the colour of the data points.</p>
-<p>The legend in <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> encodes the colour encoding: which colour is used to encode each hemisphere. In <a href="text.html#sec-guides" class="quarto-xref"><span>Section 13.9</span></a>, we described how the proximity of the labels “South” and “North” to the coloured points in the legend allow us to associate the colours with the different hemispheres. The different values of hemisphere are encoded as the vertical positions of the points and the text labels; both the orange point and the label “South” have the same vertical position.</p>
+<p>The legend in <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> encodes the colour encoding: which colour is used to encode each hemisphere (<a href="text.html#sec-guides" class="quarto-xref"><span>Section 13.9</span></a>). In <a href="text.html#sec-guides" class="quarto-xref"><span>Section 13.9</span></a>, we described how the proximity of the labels “South” and “North” to the coloured points in the legend allow us to associate the colours with the different hemispheres and the different values of hemisphere are encoded as the vertical positions of the points and the text labels in the legend; both the orange point and the label “South” have the same vertical position.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rep-guide" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -317,9 +317,9 @@ Figure&nbsp;14.3: A scatter plot of the number of times a team breaks through th
 </div>
 </div>
 </div>
-<p>What about the horizontal position of the points and the text in the legend? These do not encode hemisphere values because they are the same for both North and South. What about the position of the legend title, “hemisphere”?</p>
+<p>What about the horizontal position of the points and the text in the legend? These do not encode hemisphere values because they are the same for both North and South. What about the position of the legend title, the text “hemisphere”?</p>
 <p>All of the elements of the legend are positioned together and to the right of the main plot. Their proximity to each other (and separation from the main plot) mean that we see the legend as a separate group (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>). This creates a visual organisation for the plot, which helps the viewer to navigate and comprehend the different elements of the plot.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> This is analogous to reading a body of text, which is split into paragraphs and sections with headings to help the reader navigate the text.</p>
-<p>One way to express this is that the <strong>position</strong> of the elements of the legend <strong>encode</strong> the <strong>organisation</strong> of the overall data visualisation (<a href="#fig-org-vis-decode" class="quarto-xref">Figure&nbsp;<span>14.4</span></a>). Our visual system <strong>decodes</strong> the legend as a separate element based on the proximity of the text and points in the legend.</p>
+<p>One way to express this arrangement of the legend is that the <strong>position</strong> of the elements of the legend <strong>encode</strong> the <strong>structure</strong> of the overall data visualisation (<a href="#fig-org-vis-decode" class="quarto-xref">Figure&nbsp;<span>14.4</span></a>). Our visual system <strong>decodes</strong> the legend as a separate element based on the proximity of the text and points in the legend.</p>
 <div id="fig-org-vis-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-org-vis-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -330,12 +330,10 @@ Figure&nbsp;14.4: We can encode the structure of a data visualisation as positio
 </figcaption>
 </figure>
 </div>
-<blockquote class="blockquote">
-<p>One way in which a data visualisation can be effective is if it provides information about how to read the plot as well as information about the data itself.</p>
-</blockquote>
-<p>Another way to say it is that each element of the data visualisation in <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> belongs to one of two groups: the main plot or the legend. There is a <strong>qualitative</strong> value—plot or legend—associated with each element of the data visualisation. These qualitative values are encoded as the <strong>position</strong> of the elements within the data visualisation: the plot is on the left and the legend is on the right.</p>
-<p>Although we are no longer talking about encoding data values as data symbols, we are still talking about encoding. We are just encoding and decoding a different sort of information—the organisation of a data visualisation.</p>
-<p><a href="#fig-align" class="quarto-xref">Figure&nbsp;<span>14.5</span></a> shows a variation of <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>, with exactly the same plot elements, but in a different arrangement. There is greater separation of the legend from the main plot. The legend has also been moved so that its top is aligned with the top of the main plot. Similarly, the axis titles have been moved so that they align with the top and right sides of the plot, and the y-axis label has been rotated to horizontal. More subtly, the right edge of the y-axis label is aligned with the right edge of the y-axis tick labels and the points in the legend are aligned with the left edge of the legend title.</p>
+<p>One way in which a data visualisation can be effective is if it provides information about how to read the plot as a whole as well as information about the data values.</p>
+<p>Another way to think about it is that each element of the data visualisation in <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> belongs to one of two groups: the main plot or the legend. There is a <strong>qualitative</strong> value—plot or legend—associated with each element of the data visualisation. These qualitative values are encoded as the <strong>position</strong> of the elements within the data visualisation: the plot is on the left and the legend is on the right.</p>
+<p>Although we are no longer talking about encoding data values as data symbols, we are still talking about encoding. We are just encoding and decoding a different sort of information—the structure or organisation of a data visualisation.</p>
+<p><a href="#fig-align" class="quarto-xref">Figure&nbsp;<span>14.5</span></a> shows a variation of <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>, with exactly the same plot elements, but in a slightly different arrangement. There is greater separation of the legend from the main plot. The legend has also been moved so that its top is aligned with the top of the main plot. Similarly, the axis titles have been moved so that they align with the top and right sides of the plot, and the y-axis label has been rotated to horizontal. More subtly, the right edge of the y-axis label is aligned with the right edge of the y-axis tick labels and the points in the legend are aligned with the left edge of the legend title.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-align" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -356,12 +354,13 @@ Figure&nbsp;14.5: A scatter plot of the number of times a team breaks through th
 <section id="sec-unintentional" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="sec-unintentional"><span class="header-section-number">14.2</span> Unintentional encodings</h2>
 <p>One important idea in this chapter is that we can encode more than just data values or data summaries as visual representations. For example, the previous section showed that we can encode different groups of elements within a data visualisation using <strong>position</strong>—elements that are positioned close together and/or aligned with each other form visual groups.</p>
-<p>Another way to say this is that the we decode the differences in the positions of different elements to identify distinct groups of elements.</p>
-<p>Yet another way to say this is that we decode visual differences regardless of whether they reflect differences in data values.</p>
+<p>Another way to say this is that we can decode the differences in the positions of different elements to identify distinct groups of elements.</p>
+<p>Yet another way to say this is that we can decode visual differences regardless of whether they reflect differences in data values.</p>
 <p>In other words, all visual differences in a data visualisation matter.</p>
-<p>For example, consider the x-axis title in <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>. Although it has a similar horizontal position to the rest of the x-axis, it has a unique vertical position within the data visualisation. Similarly, the horizontal position of the x-axis title is unique, as are the horizontal and vertical positions of the legend. Because these positions are unique, we are tempted to decode those differences—we seek the information that is encoded in those differences. Put simply, the differences make the data visualisation more complex.</p>
+<p>For example, consider the x-axis title in <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>. Although it has a similar horizontal position to the rest of the x-axis, it has a unique vertical position within the data visualisation. Similarly, the horizontal position of the y-axis title is unique, as are the horizontal and vertical positions of the legend. Because these positions are unique, we are tempted to decode those differences—we seek the information that is encoded in those differences. Put simply, the unique positions of certain elements of the plot make the data visualisation more complex.</p>
 <p><a href="#fig-align" class="quarto-xref">Figure&nbsp;<span>14.5</span></a> is a more orderly version of <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> and, as a consequence, there are fewer visual differences, so there is less to decode. The data visualisation is less complex.</p>
-<p><a href="text.html#fig-text-angle" class="quarto-xref">Figure&nbsp;<span>13.9</span></a> provides another simple example of unintentional encoding. In this bar plot there are text labels at different angles—the y-axis title is rotated 90 degrees and the x-axis tick labels are rotated 45 degrees, but these differences in angle do not reflect any differences in the data. Keeping all text in a data visualisation horizontal removes this source of distraction.</p>
+<p>Although we may notice the differences in the unique placement of axis titles in <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> and therefore attempt to decode information from them, the differences do not <em>deliberately</em> encode information. These differences are <strong>unintentional encodings</strong>.</p>
+<p><a href="text.html#fig-text-angle" class="quarto-xref">Figure&nbsp;<span>13.9</span></a> provides another simple example of unintentional encoding. In this bar plot there are text labels at different angles—the y-axis title is rotated 90 degrees and the x-axis tick labels are rotated 45 degrees, but these differences in angle do not reflect any differences in the data. Keeping all text in a data visualisation horizontal, as in <a href="#fig-align" class="quarto-xref">Figure&nbsp;<span>14.5</span></a>, removes this source of distraction.</p>
 <p><a href="#fig-smoking" class="quarto-xref">Figure&nbsp;<span>14.6</span></a> shows a more problematic example.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> This bar plot shows the number of ex-smokers in New Zealand over time, with each bar resembling a cigarette that is slowly burning down (the grey area represents ash at the end of the cigarette). The number of ex-smokers is encoded as the full height of each bar, so we can decode the number of ex-smokers. However, the grey area and the white area on each bar also changes each year and those changes are not associated with any data value. In other words, there are differences that we decode as a change in something, but nothing is really changing. This is at best confusing and could even lead to misinterpretation.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -381,22 +380,8 @@ Figure&nbsp;14.6: A bar plot of the number of ex-smokers in New Zealand over tim
 </section>
 <section id="sec-repetition" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="sec-repetition"><span class="header-section-number">14.3</span> Consistent encodings</h2>
-<p><a href="#fig-rep-none" class="quarto-xref">Figure&nbsp;<span>14.7</span></a> shows a variation on <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a> with a modification to the legend. In this plot, the hemisphere of a country is encoded using orange and green within the main plot, but then hemisphere is encoded using light blue and brown in the legend. This is clearly an ineffective data visualisation. It is possible to decode that there are two groups of data symbols in the plot, but it is impossible to decode which of those two groups is North and which is South.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The point of <a href="#fig-rep-none" class="quarto-xref">Figure&nbsp;<span>14.7</span></a> is merely to highlight the critical importance of maintaining consistent encodings between different elements of a plot.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-rep-none" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-rep-none-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="design_files/figure-html/fig-rep-none-1.svg" class="img-fluid figure-img" style="width:100.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rep-none-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.7: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.8</span></a> demonstrates that we can harness consistent encodings to actually improve upon the original <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>. In <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.8</span></a>, the encoding of hemisphere as the colour of points is not only consistent between the main plot and the legend, but it has been extended to the colour of the legend text as well. The visual grouping of elements that relate to the same hemisphere is now stronger both within the legend and across the entire data visualisation (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
+<p>In <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>, the legend explains the encoding of the different hemispheres, North versus South, as different colours. This is achieved by drawing coloured data points in the legend just like the data points in the main plot, plus, crucially, using the same encoding in the main plot and in the legend. The green dots in the main plot correspond to North and the green dot in the legend corresponds to North. The encoding in the main plot is <strong>consistent</strong> with the encoding in the legend.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>Although it may seem obvious to have a consistent encoding of colour in both the main plot and the legend, <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.7</span></a> demonstrates that we can harness consistent encodings to actually improve upon the original <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>. In <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.7</span></a>, the encoding of hemisphere as the colour of points is not only consistent between the main plot and the legend, but it has been extended to the colour of the legend text as well. The visual grouping of elements that relate to the same hemisphere is now stronger both within the legend and across the entire data visualisation (<a href="visual-model.html#sec-visual-model-groups" class="quarto-xref"><span>Section 2.7</span></a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rep-double" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -405,14 +390,14 @@ Figure&nbsp;14.7: A scatter plot of the number of times a team breaks through th
 <img src="design_files/figure-html/fig-rep-double-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rep-double-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.8: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+Figure&nbsp;14.7: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Another consistency in <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.8</span></a> (and the original <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>) is the use of the same data symbol in both the main plot and the legend. Circular data symbols are used in both cases. That consistency, like the use of consistent colours, might again appear obvious, but it is not always true. For example, the data symbols in <a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>14.9</span></a> are circles, but the legend is a rectangular colour gradient.</p>
-<p><a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>14.9</span></a> shows a correlation matrix of seven performance measures for teams in the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>). Variable names are encoded as the horizontal and vertical positions of circles and the correlations between variables are encoded as the colour of the circles. We can see that many measures have quite a strong positive correlation (dark red circles), but one measure (the number of tackles per game) is negatively correlated with all other measures (though often only very weakly).</p>
+<p>Another consistency in <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.7</span></a> (and the original <a href="#fig-rep-guide" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>) is the use of the same data symbol in both the main plot and the legend. Circular data symbols are used in both cases. That consistency, like the use of consistent colours, might again appear obvious, but it is not always true. For example, the data symbols in <a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>14.8</span></a> are circles, but the legend is a rectangular colour gradient.</p>
+<p><a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>14.8</span></a> shows a correlation matrix of seven performance measures for teams in the 2023 Rugby World Cup (<a href="combine.html#tbl-rwc-2023" class="quarto-xref">Table&nbsp;<span>9.1</span></a>). Variable names are encoded as the horizontal and vertical positions of circles and the correlations between variables are encoded as the colours of the circles. We can see that many measures have quite a strong positive correlation (dark red circles), but one measure (the number of tackles per game) is negatively correlated with all other measures (though often only very weakly).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-corr-mat" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -421,13 +406,13 @@ Figure&nbsp;14.8: A scatter plot of the number of times a team breaks through th
 <img src="design_files/figure-html/fig-corr-mat-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.9: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
+Figure&nbsp;14.8: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-corr-mat-legend" class="quarto-xref">Figure&nbsp;<span>14.10</span></a> shows a variation of <a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>14.9</span></a> with a legend that not only shares the same colour encoding, but also shares the same data symbol. It is much easier to compare the colour of one of the circular data symbols with the colours of the circles in the legend because they are all circles.</p>
+<p><a href="#fig-corr-mat-legend" class="quarto-xref">Figure&nbsp;<span>14.9</span></a> shows a variation of <a href="#fig-corr-mat" class="quarto-xref">Figure&nbsp;<span>14.8</span></a> with a legend that not only shares the same colour encoding, but also shares the same data symbol. It is much easier to compare the colour of one of the data symbol circles in the main plot with the colours of the circles in the legend because they are all circles.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-corr-mat-legend" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -436,7 +421,7 @@ Figure&nbsp;14.9: Correlations between pairs of measures of performance for team
 <img src="design_files/figure-html/fig-corr-mat-legend-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-mat-legend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.10: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
+Figure&nbsp;14.9: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
@@ -446,7 +431,7 @@ Figure&nbsp;14.10: Correlations between pairs of measures of performance for tea
 </section>
 <section id="inconsistent-encodings" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="inconsistent-encodings"><span class="header-section-number">14.4</span> Inconsistent encodings</h2>
-<p><a href="#fig-trump-bill" class="quarto-xref">Figure&nbsp;<span>14.11</span></a> shows a bar plot of the impact of a proposed tax bill during the second Trump administration.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Each bar represents the predicted change in annual income for a particular income bracket. Lower incomes are to the left and higher incomes are to the right. There are labels to describe each income bracket and there are labels that describe each change in income. Where the change in income is large, the label for change in income is written within the bar (at the top of the bar), but for smaller changes in income, the bar is too small to fit the label, so the label is placed just above the bar. For the two leftmost bars, the change in income is actually negative and the change in income label is placed <em>below</em> the bar. The labels that describe the income brackets are mostly below the bars, but for the two leftmost bars the labels for the income brackets are placed above the bars.</p>
+<p><a href="#fig-trump-bill" class="quarto-xref">Figure&nbsp;<span>14.10</span></a> shows a bar plot of the impact of a proposed tax bill during the second Trump administration.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Each bar represents the predicted change in annual income for a particular income bracket. Lower incomes are to the left and higher incomes are to the right. There are labels to describe each income bracket and there are labels that describe each change in income. Where the change in income is large, the label for change in income is written within the bar (at the top of the bar), but for smaller changes in income, the bar is too small to fit the label, so the label is placed just above the bar. For the two leftmost bars, the change in income is actually negative and the change in income label is placed <em>below</em> the bar. The labels that describe the income brackets are mostly below the bars, but for the two leftmost bars the labels for the income brackets are placed above the bars.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-trump-bill" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -455,18 +440,18 @@ Figure&nbsp;14.10: Correlations between pairs of measures of performance for tea
 <img src="design_files/figure-html/fig-trump-bill-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trump-bill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.11: A bar plot of the distributional effects of Trump’s “Big, Beautiful Bill”.
+Figure&nbsp;14.10: A bar plot of the distributional effects of Trump’s “Big, Beautiful Bill”.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In summary, there are two labels for each bar, one below the bar and one above (or at the top of) the bar. This consistent positioning of the labels encourages the viewer to decode two groups of labels: one group above the bars and one group below the bars. However, this will mislead us into comparing, for example, “-1K” (a change in income) for the leftmost bar with “4.3M” (an income bracket) for the rightmost bar. The correct comparison is between “-1K”, which is the change in for the lowest income bracket, and “389.3K”, which is the change in income for the highest income bracket.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
-<p>Just as it makes no sense to change the encoding of data values within a data visualisation (<a href="#fig-rep-none" class="quarto-xref">Figure&nbsp;<span>14.7</span></a>) or across multiple data visualisations within the same document (<a href="#fig-yji" class="quarto-xref">Figure&nbsp;<span>14.1</span></a>), it makes no sense to change the encoding of <em>structure</em> within a data visualisation. In this case, all labels above the bars should belong to the same group of labels (changes in income) and all labels below the bars should belong to the same group of labels (income brackets).</p>
+<p>In summary, there are two labels for each bar, one below the bar and one above (or at the top of) the bar. This consistent positioning of the labels encourages the viewer to decode two groups of labels: one group above the bars and one group below the bars. However, this will mislead us into comparing, for example, “-1K” (a change in income) for the leftmost bar with “4.3M” (an income bracket) for the rightmost bar. The correct comparison is between “-1K”, which is the change in for the lowest income bracket, and “389.3K”, which is the change in income for the highest income bracket.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p>Just as it makes no sense to change the encoding of data values within a data visualisation or across multiple data visualisations within the same document (<a href="#fig-yji" class="quarto-xref">Figure&nbsp;<span>14.1</span></a>), it makes no sense to change the encoding of <em>structure</em> within a data visualisation. In this case, all labels above the bars should belong to the same group of labels (changes in income) and all labels below the bars should belong to the same group of labels (income brackets).</p>
 </section>
 <section id="encoding-importance" class="level2" data-number="14.5">
 <h2 data-number="14.5" class="anchored" data-anchor-id="encoding-importance"><span class="header-section-number">14.5</span> Encoding importance</h2>
-<p><a href="#fig-contrast" class="quarto-xref">Figure&nbsp;<span>14.12</span></a> shows a variation on <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.8</span></a> with many elements of the plot drawn in light grey. The effect of this change is to create two visual groups, one lighter and less saturated than the other. This emphasises the main data symbols in the main plot and in the legend, and de-emphasises the axes and labels. Our attention is drawn to the darker and more saturated elements first (<a href="visual-model.html#sec-attention" class="quarto-xref"><span>Section 2.6</span></a>), with the other elements in the background, which we can focus on if we need the additional information.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p><a href="#fig-contrast" class="quarto-xref">Figure&nbsp;<span>14.11</span></a> shows a variation on <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.7</span></a> with many elements of the plot drawn in light grey. The effect of this change is to create two visual groups, one lighter and less saturated than the other. This emphasises the main data symbols in the main plot and in the legend, and de-emphasises the axes and labels. Our attention is drawn to the darker and more saturated elements first (<a href="visual-model.html#sec-attention" class="quarto-xref"><span>Section 2.6</span></a>), with the other elements in the background, which we can focus on if we need the additional information.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-contrast" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -475,13 +460,13 @@ Figure&nbsp;14.11: A bar plot of the distributional effects of Trump’s “Big,
 <img src="design_files/figure-html/fig-contrast-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-contrast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.12: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+Figure&nbsp;14.11: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>By comparison, in <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.8</span></a> there is a similar visual impact from all elements of the plot, so it is less clear where to look first. All of the elements of the data visualisation compete for our attention. <a href="#fig-distract" class="quarto-xref">Figure&nbsp;<span>14.13</span></a> emphasises this point by making all axis and legend text black and adding black grid lines. The data symbols are now lost amongst the non-data elements of the plot.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p>By comparison, in <a href="#fig-rep-double" class="quarto-xref">Figure&nbsp;<span>14.7</span></a> there is a similar visual impact from all elements of the plot, so it is less clear where to look first. All of the elements of the data visualisation compete for our attention. <a href="#fig-distract" class="quarto-xref">Figure&nbsp;<span>14.12</span></a> emphasises this point by making all axis and legend text black and adding black grid lines. The data symbols are now lost amongst the non-data elements of the plot.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-distract" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -490,24 +475,24 @@ Figure&nbsp;14.12: A scatter plot of the number of times a team breaks through t
 <img src="design_files/figure-html/fig-distract-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.13: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+Figure&nbsp;14.12: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The use of colour in <a href="#fig-contrast" class="quarto-xref">Figure&nbsp;<span>14.12</span></a> is another example of encoding (qualitative) non-data values as visual features. In this case, we are encoding the <strong>importance</strong> of different visual elements as visual features (<a href="#fig-imp-vis-decode" class="quarto-xref">Figure&nbsp;<span>14.14</span></a>). We decode the differences in colour to a more important group of elements and a less important group of elements.</p>
+<p>The use of colour in <a href="#fig-contrast" class="quarto-xref">Figure&nbsp;<span>14.11</span></a> is another example of encoding (qualitative) non-data values as visual features. In this case, we are encoding the <strong>importance</strong> of different visual elements as visual features (<a href="#fig-imp-vis-decode" class="quarto-xref">Figure&nbsp;<span>14.13</span></a>). We decode the differences in colour to a more important group of elements and a less important group of elements.</p>
 <div id="fig-imp-vis-decode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-imp-vis-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><img src="Diagrams/imp-vis-decode.png" class="img-fluid figure-img"></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imp-vis-decode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.14: We can encode the importance of elements within a data visualisation as visual features so that elements that are more important are more visible.
+Figure&nbsp;14.13: We can encode the importance of elements within a data visualisation as visual features so that elements that are more important are more visible.
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-highlight" class="quarto-xref">Figure&nbsp;<span>14.15</span></a> shows a similar application of importance. In this case, we are highlighting two data points (New Zealand and South Africa). The distinct colour and larger size of the two points encodes the importance of those points and draws attention to those points, with everything else as background context.</p>
+<p><a href="#fig-highlight" class="quarto-xref">Figure&nbsp;<span>14.14</span></a> shows a similar application of importance. In this case, we are highlighting two data points (New Zealand and South Africa). The distinct colour and larger size of the two points encodes the importance of those points and draws attention to those points, with the other data points de-emphasised.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-highlight" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -516,7 +501,7 @@ Figure&nbsp;14.14: We can encode the importance of elements within a data visual
 <img src="design_files/figure-html/fig-highlight-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-highlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.15: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
+Figure&nbsp;14.14: A scatter plot of the number of times a team breaks through the opposition defence and the number of tries that a team scores (both are per-game averages) for teams at the 2023 Rugby World Cup.
 </figcaption>
 </figure>
 </div>
@@ -525,8 +510,8 @@ Figure&nbsp;14.15: A scatter plot of the number of times a team breaks through t
 </section>
 <section id="unimportant-encodings" class="level2" data-number="14.6">
 <h2 data-number="14.6" class="anchored" data-anchor-id="unimportant-encodings"><span class="header-section-number">14.6</span> Unimportant encodings</h2>
-<p>When we encode importance, we are relying on basic properties of the visual system to draw attention to specific elements of a plot (<a href="visual-model.html#sec-attention" class="quarto-xref"><span>Section 2.6</span></a>). As we saw in <a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>, those basic properties of the visual system can also work against us. Our attention will be drawn to large and bright elements of a data visualisation automatically.</p>
-<p>For example, in <a href="#fig-tiger" class="quarto-xref">Figure&nbsp;<span>14.16</span></a>, our eye is drawn to the tiger’s eye, which distracts us from the more important heights of the bars. There are clear overlaps here with the ideas of clutter and chart junk (<a href="visual-objects.html#sec-junk" class="quarto-xref"><span>Section 12.6</span></a>).</p>
+<p>When we encode importance, we are relying on basic properties of the visual system to draw attention to specific elements of a plot (<a href="visual-model.html#sec-attention" class="quarto-xref"><span>Section 2.6</span></a>). As we saw in <a href="visual-model.html#sec-illusion" class="quarto-xref"><span>Section 2.10</span></a>, those basic properties of the visual system can also work against us. Our attention will be drawn to large and bright elements of a data visualisation automatically. For example, in <a href="#fig-tiger" class="quarto-xref">Figure&nbsp;<span>14.15</span></a>, our eye is drawn to the tiger’s eye, which distracts us from the more important heights of the bars. There are clear overlaps here with the ideas of clutter and chart junk (<a href="visual-objects.html#sec-junk" class="quarto-xref"><span>Section 12.6</span></a>).</p>
+<p>As with many of the most effective approaches to encoding information, we have a lot to gain by aligning our encodings with the natural decodings that our visual system provides, but we have a lot to lose if our encodings are misaligned with our desired goals.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-tiger" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -535,7 +520,7 @@ Figure&nbsp;14.15: A scatter plot of the number of times a team breaks through t
 <img src="design_files/figure-html/fig-tiger-1.svg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tiger-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.16: A bar plot of the estimated population of Bengal Tigers in Bhutan. The background image in this plot distracts attention from the most important data symbols.
+Figure&nbsp;14.15: A bar plot of the estimated population of Bengal Tigers in Bhutan. The background image in this plot distracts attention from the most important data symbols.
 </figcaption>
 </figure>
 </div>
@@ -661,19 +646,18 @@ Williams, Robin. 2014. <em>The Non-Designer’s Design Book</em>. 4th ed. Berkel
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>This data visualisation was based on figures from the <a href="https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/">Youth Justice Indicators Report from 2021</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>This data visualisation was inspired by figures from the <a href="https://www.justice.govt.nz/justice-sector-policy/research-data/justice-statistics/youth-justice-indicators/">Youth Justice Indicators Report from 2021</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>We might describe the topic of this chapter as the overall <em>design</em> of a data visualisation. Much of what we discuss will have a basis in the properties of the visual system, but much will also echo the basic design principles espoused in Robin Willams’ CRAP design principles <span class="citation" data-cites="williams2014nondesigners">(<a href="#ref-williams2014nondesigners" role="doc-biblioref">Williams 2014</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p><span class="citation" data-cites="cog-load">Cabouat et al. (<a href="#ref-cog-load" role="doc-biblioref">2025</a>)</span> report that “if a learner found a visualization more readable, they felt it required less mental effort to parse relevant information from it for learning.”<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p><em>Alignment</em> is also one of the CRAP design principles <span class="citation" data-cites="williams2014nondesigners">(<a href="#ref-williams2014nondesigners" role="doc-biblioref">Williams 2014</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="#fig-smoking" class="quarto-xref">Figure&nbsp;<span>14.6</span></a> is based on a data visualisation in the New Zealand Listener January 11-17 2025.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="#fig-smoking" class="quarto-xref">Figure&nbsp;<span>14.6</span></a> was inspired by a data visualisation in the New Zealand Listener January 11-17 2025.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>There is a connection between <em>unintentional encodings</em> and <em>chart junk</em> (<a href="visual-objects.html#sec-junk" class="quarto-xref"><span>Section 12.6</span></a>).</p>
 <p><a href="#fig-smoking" class="quarto-xref">Figure&nbsp;<span>14.6</span></a> also contains a little easter-egg bonus problem: the x-axis is uneven, with a 7-year jump followed by two five-year jumps.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>This <em>inconsistent</em> encoding could also be described as a <em>dissonant</em> encoding (<a href="congruence.html#sec-dissonance" class="quarto-xref"><span>Section 7.5</span></a>).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>A consistent encoding aligns with the CRAP design principle of <em>repetition</em> <span class="citation" data-cites="williams2014nondesigners">(<a href="#ref-williams2014nondesigners" role="doc-biblioref">Williams 2014</a>)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>This data visualisation is based on a plot from the <a href="https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful">Popular Information</a> web site by Judd Legum. The data are from the <a href="https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15">Penn Wharton Budget Model</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>This is precisely the mistake that was made when this data visualisation was discussed on <a href="https://www.youtube.com/watch?v=AQiukyzB6x0">The Majority Report (~6:00)</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>The idea of making a clear visual distinction between different elements of a data visualisation mirrors the CRAP design principle of <em>contrast</em>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12"><p>This also relates to Tukey’s <em>data-ink ratio</em> <span class="citation" data-cites="tufte1983visual">(<a href="#ref-tufte1983visual" role="doc-biblioref">Tufte 1983</a>)</span>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>A consistent encoding aligns with the CRAP design principle of <em>repetition</em> <span class="citation" data-cites="williams2014nondesigners">(<a href="#ref-williams2014nondesigners" role="doc-biblioref">Williams 2014</a>)</span>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>This data visualisation was inspired by a plot from the <a href="https://popular.info/p/the-ugly-truth-about-trumps-big-beautiful">Popular Information</a> web site by Judd Legum. The data are from the <a href="https://budgetmodel.wharton.upenn.edu/estimates/2025/5/16/distributional-effects-of-house-budget-reconciliation-as-of-thursday-may-15">Penn Wharton Budget Model</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>This is precisely the mistake that was made when this data visualisation was discussed on <a href="https://www.youtube.com/watch?v=AQiukyzB6x0">The Majority Report (~6:00)</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>The idea of making a clear visual distinction between different elements of a data visualisation mirrors the CRAP design principle of <em>contrast</em> <span class="citation" data-cites="williams2014nondesigners">(<a href="#ref-williams2014nondesigners" role="doc-biblioref">Williams 2014</a>)</span>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>This is like a more subtle for of Tukey’s <em>data-ink ratio</em> <span class="citation" data-cites="tufte1983visual">(<a href="#ref-tufte1983visual" role="doc-biblioref">Tufte 1983</a>)</span>. Instead of removing any drawing that we do not want to distract the viewer, we make less important information less visible.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
