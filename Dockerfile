@@ -1,23 +1,12 @@
 
 # Base image
-FROM ubuntu:22.04
+FROM rocker/r-ver:4.5.3
 MAINTAINER Paul Murrell <paul@stat.auckland.ac.nz>
 
-# Install R 
-# https://cran.stat.auckland.ac.nz/bin/linux/ubuntu
-# update indices
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
 RUN apt update -qq
-# install helper packages we need
-RUN apt install -y --no-install-recommends software-properties-common dirmngr
-RUN apt install -y --no-install-recommends wget
-# add the signing key (by Michael Rutter) for these repos
-# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc 
-# Fingerprint: E298A3A825C0D65DFD57CBB651716619E084DAB9
-RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-# add the repo from CRAN -- lsb_release adjusts to 'noble' or 'jammy' or ... as needed
-RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
-# install R itself
-RUN apt install -y --no-install-recommends r-base
 
 # For building packages from source
 RUN apt install -y --no-install-recommends build-essential \
@@ -44,6 +33,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y \
     bibtex2html \
     w3m
+RUN apt install -y --no-install-recommends wget
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-amd64.deb
 RUN dpkg -i quarto-1.7.32-linux-amd64.deb
 RUN Rscript -e 'install.packages("quarto", repos="https://cran.rstudio.com/")'
@@ -64,6 +54,10 @@ RUN apt-get update && apt-get install -y \
     libabsl-dev \
     libgdal-dev
 
+# For {renv} to download packages
+RUN apt-get update && apt-get install -y \
+    curl
+
 # For gdiff regression testing (pdftools dependency)
 RUN apt-get update && apt-get install -y \
     libpoppler-cpp-dev
@@ -83,7 +77,7 @@ RUN Rscript -e 'renv::restore()'
 COPY google-chrome-stable_143.0.7499.192_amd64.deb /tmp/
 RUN apt-get update && apt-get install -y \
     fonts-liberation \
-    libasound2 \
+    libasound2t64 \
     libvulkan1
 RUN dpkg -i /tmp/google-chrome-stable_143.0.7499.192_amd64.deb
 ENV RGL_USE_NULL=true
