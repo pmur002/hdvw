@@ -8,8 +8,8 @@ source("common.R")
 # Review {#sec-review}
 
 In this book, we have focused on the different ways that information
-can be encoded to create a data visualisaiton and how well information
-can be decoded from a data visualisation.
+can be *encoded* to create a data visualisaiton and how well information
+can be *decoded* from a data visualisation.
 
 This information is helpful in understanding why
 a data visualisation works well and
@@ -61,7 +61,8 @@ For each data value or summary and its encoding, we must then ask:
 <!-- -->
 
 * Does each data value or summary have its own data symbol? *or*
-* Are multiple data values or summaries encoded as a single data symbol?
+* Are multiple data values or summaries encoded as a single data symbol
+  or visual shape?
 
 <!-- -->
 
@@ -71,7 +72,7 @@ Looking beyond the data symbols, we should also identify all text elements
 and consider the overall design:
 
 * Can we decode absolute data values or data summaries from the text? *and*
-* Can we decode the overall context from the text? *and*
+* Can we decode what variables have been measured from the text? *and*
 * Can we decode the main message of the data visualisation from the text?
 
 <!-- -->
@@ -198,9 +199,16 @@ and so on.
 
 We will use the framework that we have developed
 in this book to analyse the data visualisation
-in @fig-lv-default.  We will break @fig-lv-default down into 
-the encodings that are being used and evaluate
-the effectiveness of those encodings.
+in @fig-lv-default.  
+
+Encoded information
+: The letter-value plot in @fig-lv-default contains data summaries
+  of flight taxi times (for each airline). 
+  These data summaries provide information
+  about the spread of data values (for each airline), so we are
+  encoding information that is relevant to our question of interest---the 
+  distribution of taxi values (for each airline)---especially if the
+  distribution is unimodal.
 
 Data symbols
 : There are two types of data symbol in a letter-value plot:
@@ -242,7 +250,7 @@ Encoding visual features
   showing individual points for outliers) is based on the amount of data values,
   so there are fewer rectangles for airlines with fewer tax times.
   For example, airline HA has fewer taxi times than airline AA, so ten
-  letter values are displayed for airline HA, but thirteen letter values 
+  letter values are displayed for airline HA, whereas thirteen letter values 
   are displayed for airline AA.[^cutoff]
   
   [^cutoff]:
@@ -297,7 +305,7 @@ Encoding visual features
   In addition, the **hue**/**chroma** of a rectangle encodes a categorisation 
   of the letter values (yet another data summary):
   every fourth letter value is orange, while all the other letter values
-  are grey.
+  are shades of grey.
 
   The luminance encoding of data
   density only allows us to decode ordinal information
@@ -488,7 +496,7 @@ Encoding encodings
   as the vertical position of the tops (or bottoms) of rectangles.
   This creates the usual problems when it comes to encoding this
   non-linear scale
-  as tick marks and text labels.
+  as tick marks and text labels (@sec-non-linear-pos).
   For example, the square-root taxi time of 
   10 is encoded as a position about two-thirds
   of the way up the y-axis,
@@ -519,11 +527,11 @@ Encoding encodings
   the tick marks helps to form a strong visual grouping of data symbols
   with their respective labels (@sec-visual-model-groups).
   
-  However, the encoding of airlines to text is missing a learned encoding
+  However, the encoding of airlines to text is missing a learned decoding
   (@sec-learned-text),
   at least for infrequent travellers internal to the United States of America.
   For example, not all viewers will immediately decode the text "MQ" to
-  the name "Envoy Air".
+  the airline name "Envoy Air".
   In effect, the x-axis tick labels only involve an encoding of airline 
   as the **pattern** of the text.  We can only tell that
   there are different airlines because they use different combinations of 
@@ -854,10 +862,13 @@ which show more detail about the tails of the distribution.
 In addition, thanks to linear scales and improved axes and legends,
 the decoding and comparison of individual taxi times is also more
 effective.
-@fig-lv-zoom is not perfect, but it demonstrates that
-the framework that we have developed allows us not only to deconstruct 
-and identify issues with an existing data visualisation, it also 
-allows us to think of ways that we can make improvements.
+
+@fig-lv-zoom is not perfect, but it provides a demonstration
+of how we can apply the framework that we have developed.
+The frameword allows us not only to deconstruct 
+and identify issues with an existing data visualisation, but also 
+to think of ways that we can make improvements
+to the data visualisations that we create.
 
 ---
 

@@ -279,9 +279,9 @@
 
 \markboth{Preface}{Preface}
 
-Version 0.9 (build 2026-05-19)
+Version 0.9 (build 2026-05-24)
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, left=2mm, titlerule=0mm, colbacktitle=quarto-callout-warning-color!10!white, breakable, opacityback=0, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, coltitle=black, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, arc=.35mm, toptitle=1mm, rightrule=.15mm, opacitybacktitle=0.6, colback=white]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, colback=white, colframe=quarto-callout-warning-color-frame, breakable, bottomtitle=1mm, toprule=.15mm, toptitle=1mm, arc=.35mm]
 
 Under construction!
 
@@ -562,14 +562,14 @@ make sense to you, it is probably thanks to Julia.
 Please use the following citation:
 
 Paul Murrell. How Data Visualisation Works. The University of Auckland,
-2026. Version 0.9 (build 2026-05-19).
+2026. Version 0.9 (build 2026-05-24).
 
 \begin{verbatim}
 
-@book{murrell-hdvw-2026-05-19,
+@book{murrell-hdvw-2026-05-24,
     title = {How Data Visualisation Works},
     author = {Murrell, Paul},
-    note = {Version 0.9 (build 2026-05-19)},
+    note = {Version 0.9 (build 2026-05-24)},
     year = 2026,
     publisher = {The University of Auckland}
 }
@@ -12306,8 +12306,8 @@ information from the data symbols within a data visualisation.
 \chapter{Review}\label{sec-review}
 
 In this book, we have focused on the different ways that information can
-be encoded to create a data visualisaiton and how well information can
-be decoded from a data visualisation.
+be \emph{encoded} to create a data visualisaiton and how well
+information can be \emph{decoded} from a data visualisation.
 
 This information is helpful in understanding why a data visualisation
 works well and it is even more helpful in understanding why a data
@@ -12388,7 +12388,8 @@ For each data value or summary and its encoding, we must then ask:
 \item
   Does each data value or summary have its own data symbol? \emph{or}
 \item
-  Are multiple data values or summaries encoded as a single data symbol?
+  Are multiple data values or summaries encoded as a single data symbol
+  or visual shape?
 \end{itemize}
 
 \begin{itemize}
@@ -12406,7 +12407,8 @@ elements and consider the overall design:
   Can we decode absolute data values or data summaries from the text?
   \emph{and}
 \item
-  Can we decode the overall context from the text? \emph{and}
+  Can we decode what variables have been measured from the text?
+  \emph{and}
 \item
   Can we decode the main message of the data visualisation from the
   text?
@@ -12533,12 +12535,17 @@ so on.
 \subsection{Tearing down}\label{tearing-down}
 
 We will use the framework that we have developed in this book to analyse
-the data visualisation in Figure~\ref{fig-lv-default}. We will break
-Figure~\ref{fig-lv-default} down into the encodings that are being used
-and evaluate the effectiveness of those encodings.
+the data visualisation in Figure~\ref{fig-lv-default}.
 
 \begin{description}
 \tightlist
+\item[Encoded information]
+The letter-value plot in Figure~\ref{fig-lv-default} contains data
+summaries of flight taxi times (for each airline). These data summaries
+provide information about the spread of data values (for each airline),
+so we are encoding information that is relevant to our question of
+interest---the distribution of taxi values (for each
+airline)---especially if the distribution is unimodal.
 \item[Data symbols]
 There are two types of data symbol in a letter-value plot: complex data
 symbols consisting of multiple rectangles, which we will call
@@ -12573,12 +12580,12 @@ The number of letter values that are displayed (before resorting to
 showing individual points for outliers) is based on the amount of data
 values, so there are fewer rectangles for airlines with fewer tax times.
 For example, airline HA has fewer taxi times than airline AA, so ten
-letter values are displayed for airline HA, but thirteen letter values
-are displayed for airline AA.\footnote{The calculation of the number of
-  letter values to display is based on the uncertainty in the estimate
-  of the letter values (assuming Gaussian data). We stop once a 95\%
-  confidence interval for a letter value overlaps with the neighbouring
-  letter value.
+letter values are displayed for airline HA, whereas thirteen letter
+values are displayed for airline AA.\footnote{The calculation of the
+  number of letter values to display is based on the uncertainty in the
+  estimate of the letter values (assuming Gaussian data). We stop once a
+  95\% confidence interval for a letter value overlaps with the
+  neighbouring letter value.
 
   This calculation is relevant only for the default letter-value plot.
   Variations of the letter-value plot design allow for different
@@ -12620,7 +12627,7 @@ median and the upper quartile) to lightest for lowest density
 extreme letter values). In addition, the \textbf{hue}/\textbf{chroma} of
 a rectangle encodes a categorisation of the letter values (yet another
 data summary): every fourth letter value is orange, while all the other
-letter values are grey.
+letter values are shades of grey.
 
 The luminance encoding of data density only allows us to decode ordinal
 information about the data density between letter values. Like the
@@ -12831,11 +12838,12 @@ We have already discussed that the y-axis scale is non-linear. The
 square root of taxi times, rather then the raw taxi times, are encoded
 as the vertical position of the tops (or bottoms) of rectangles. This
 creates the usual problems when it comes to encoding this non-linear
-scale as tick marks and text labels. For example, the square-root taxi
-time of 10 is encoded as a position about two-thirds of the way up the
-y-axis, which accurately reflects the fact that 10 is approximately
-two-thirds of the range of square-root taxi times. However, this value
-of 10 is also encoded as the text ``100''.
+scale as tick marks and text labels (Section~\ref{sec-non-linear-pos}).
+For example, the square-root taxi time of 10 is encoded as a position
+about two-thirds of the way up the y-axis, which accurately reflects the
+fact that 10 is approximately two-thirds of the range of square-root
+taxi times. However, this value of 10 is also encoded as the text
+``100''.
 \end{description}
 
 On one hand, this is a valuable encoding of the value 10 because it
@@ -12858,13 +12866,14 @@ line connecting the letter-value data symbols and the tick marks helps
 to form a strong visual grouping of data symbols with their respective
 labels (Section~\ref{sec-visual-model-groups}).
 
-However, the encoding of airlines to text is missing a learned encoding
+However, the encoding of airlines to text is missing a learned decoding
 (Section~\ref{sec-learned-text}), at least for infrequent travellers
 internal to the United States of America. For example, not all viewers
-will immediately decode the text ``MQ'' to the name ``Envoy Air''. In
-effect, the x-axis tick labels only involve an encoding of airline as
-the \textbf{pattern} of the text. We can only tell that there are
-different airlines because they use different combinations of letters.
+will immediately decode the text ``MQ'' to the airline name ``Envoy
+Air''. In effect, the x-axis tick labels only involve an encoding of
+airline as the \textbf{pattern} of the text. We can only tell that there
+are different airlines because they use different combinations of
+letters.
 
 The legend on the right of Figure~\ref{fig-lv-default} provides
 information about the colour encoding of the data density between letter
@@ -13101,11 +13110,13 @@ decoding while not being misleading. This is supplemented by the
 coloured rectangles, which show more detail about the tails of the
 distribution. In addition, thanks to linear scales and improved axes and
 legends, the decoding and comparison of individual taxi times is also
-more effective. Figure~\ref{fig-lv-zoom} is not perfect, but it
-demonstrates that the framework that we have developed allows us not
-only to deconstruct and identify issues with an existing data
-visualisation, it also allows us to think of ways that we can make
-improvements.
+more effective.
+
+Figure~\ref{fig-lv-zoom} is not perfect, but it provides a demonstration
+of how we can apply the framework that we have developed. The frameword
+allows us not only to deconstruct and identify issues with an existing
+data visualisation, but also to think of ways that we can make
+improvements to the data visualisations that we create.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
