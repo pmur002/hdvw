@@ -41,7 +41,7 @@
 
   AND make use of {renv} package cache ...
 
-  R_LIBS=/home/pmur002/.cache/R/renv/cache/v5/linux-ubuntu-jammy/R-4.5/x86_64-pc-linux-gnu R --no-init-file
+  R_LIBS=$(Rscript --no-init-file -e 'cat(renv::paths$cache())') R --no-init-file
 
 
 + To make image available on DockerHub ...
