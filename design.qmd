@@ -5,7 +5,7 @@
 source("common.R")
 ```
 
-# Composing Encodings {#sec-design}
+# Encoding Composition {#sec-design}
 
 @fig-yji shows a line plot of the rate of youth crime in New Zealand
 for different ethnic groups
@@ -457,8 +457,12 @@ weakly).
 #| fig-keep: last
 #| fig-cap: Correlations between pairs of measures of performance for teams in the 2023 Rugby World Cup.
 corr <- pair_cor(RWCperGame[-(1:4)])
-plot(corr) + 
+gg <- plot(corr) + 
     theme(panel.background=element_blank())
+grid.newpage()
+pushViewport(viewport(height=.9))
+print(gg, newpage=FALSE)
+popViewport()
 grid.force()
 grid.edit("polygon", gp=gpar(col="black"), grep=TRUE, global=TRUE)
 ## Clean up circles
@@ -491,6 +495,7 @@ gg <- plot(corr) +
     theme(panel.background=element_blank(),
           legend.position="none")
 grid.newpage()
+pushViewport(viewport(height=.9))
 pushViewport(viewport(y=1/8, height=7/8, 
                       width=unit(7/8, "snpc"), just="bottom"))
 print(gg, newpage=FALSE)
@@ -507,7 +512,7 @@ for (i in seq_along(polygons)) {
                   id=NULL, redraw=FALSE)
 }
 grid.refresh()
-grid.segments(0, 0, 1, 0)
+grid.rect(gp=gpar(fill=NA))
 pushViewport(viewport(y=0, height=(1/8)/(7/8), just="top", width=1,
                       layout=grid.layout(1, 7)))
 cols <- hcl.colors(7, "Blue-Red 3")
@@ -671,8 +676,8 @@ print(gg, newpage=FALSE)
 popViewport()
 grid.force()
 keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=repcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=repcols[3], fontface="bold"))
+grid.edit(keyText[[1]], gp=gpar(col=repcols[3], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=repcols[1], fontface="bold"))
 ```
 
 By comparison, in @fig-rep-double there is a similar visual impact
@@ -710,13 +715,13 @@ popViewport()
 ```
 
 The use of colour in @fig-contrast
-is another example of encoding (qualitative) non-data values as visual 
+is another example of encoding (qualitative) *non-data values* as visual 
 features.
 In this case, we are encoding the **importance** of different
 visual elements as visual features
 (@fig-imp-vis-decode).
-We decode the differences in colour to a more important group of elements
-and a less important group of elements.
+We decode the differences in colour to a group of more important elements
+and a group of less important elements.
 
 ::: {#fig-imp-vis-decode}
 ::: {.content-visible when-format=pdf}
@@ -757,7 +762,8 @@ gg <- ggplot(RWCperGame) +
               fontface="bold", colour=repcols[1], size=3,
               data=subset(RWCperGame, 
                           country %in% c("New Zealand", "South Africa"))) +
-    scale_colour_manual(values=dimcols, name="hemisphere") +
+    scale_colour_manual(values=dimcols, name="hemisphere",
+                        guide=guide_legend(reverse=TRUE)) +
     scale_x_continuous(name="clean breaks") +
     scale_y_continuous(name="tries scored") +
     theme(aspect.ratio=1,
@@ -771,8 +777,8 @@ print(gg, newpage=FALSE)
 popViewport()
 grid.force()
 keyText <- grid.grep("label::text", grep=TRUE, global=TRUE)
-grid.edit(keyText[[1]], gp=gpar(col=dimcols[1], fontface="bold"))
-grid.edit(keyText[[2]], gp=gpar(col=dimcols[2], fontface="bold"))
+grid.edit(keyText[[1]], gp=gpar(col=dimcols[2], fontface="bold"))
+grid.edit(keyText[[2]], gp=gpar(col=dimcols[1], fontface="bold"))
 ```
 
 ## Unimportant encodings

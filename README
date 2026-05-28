@@ -25,8 +25,9 @@
   + Subsequently supplement with install.packages() (auto captured by {renv})
     + Going forward, new packages should be auto captured
   + Use renv::snapshot(type="all") to capture packages and versions in renv.lock
-    + Re-run after new package install to update renv.lock
-      BUT ONLY after checking local build produces right result
+    + Use renv::snapshot(library="package-name") to update renv.lock
+      after installing new package (locally)
+      BUT ONLY after checking docker build produces right result
   + Base Dockerfile on renv.lock with call to renv::restore()
     + Updates to renv.lock should trigger docker image rebuild
       (quite hefty because it will install ALL packages all over again)
